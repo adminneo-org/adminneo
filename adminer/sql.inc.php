@@ -249,6 +249,7 @@ if (!isset($_GET["import"])) {
 	echo lang('Limit rows') . ": <input type='number' name='limit' class='size' value='" . h($_POST ? $_POST["limit"] : $_GET["limit"]) . "'>\n";
 
 } else {
+	echo "<div class='field-sets'>\n";
 	echo "<fieldset><legend>" . lang('File upload') . "</legend><div>";
 	$gz = (extension_loaded("zlib") ? "[.gz]" : "");
 	echo (ini_bool("file_uploads")
@@ -263,6 +264,7 @@ if (!isset($_GET["import"])) {
 		echo ' <input type="submit" name="webfile" value="' . lang('Run file') . '">';
 		echo "</div></fieldset>\n";
 	}
+	echo "</div>\n";
 	echo "<p>";
 }
 
@@ -271,6 +273,7 @@ echo checkbox("only_errors", 1, ($_POST ? $_POST["only_errors"] : isset($_GET["i
 echo "<input type='hidden' name='token' value='$token'>\n";
 
 if (!isset($_GET["import"]) && $history) {
+	echo "<div class='field-sets'>\n";
 	print_fieldset("history", lang('History'), $_GET["history"] != "");
 	for ($val = end($history); $val; $val = prev($history)) { // not array_reverse() to save memory
 		$key = key($history);
@@ -285,6 +288,7 @@ if (!isset($_GET["import"]) && $history) {
 	echo "<input type='submit' name='clear' value='" . lang('Clear') . "'>\n";
 	echo "<a href='" . h(ME . "sql=&history=all") . "'>" . lang('Edit all') . "</a>\n";
 	echo "</div></fieldset>\n";
+	echo "</div>\n";
 }
 ?>
 </form>
