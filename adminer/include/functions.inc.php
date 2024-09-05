@@ -440,7 +440,7 @@ function escape_key($key) {
 * @param array
 * @return string
 */
-function where($where, $fields = array()) {
+function where($where, $fields = []) {
 	global $connection, $jush;
 
 	$conditions = [];
@@ -448,7 +448,7 @@ function where($where, $fields = array()) {
 	foreach ((array) $where["where"] as $key => $val) {
 		$key = bracket_escape($key, 1); // 1 - back
 		$column = escape_key($key);
-		$field_type = $fields[$key]["type"];
+		$field_type = $fields[$key]["type"] ?? null;
 
 		if ($jush == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
@@ -459,7 +459,7 @@ function where($where, $fields = array()) {
 			// LIKE because of text. But it does not work with datetime, datetime2 and smalldatetime.
 			$conditions[] = "$column LIKE " . q(preg_replace('~[_%[]~', '[\0]', $val));
 		} else {
-			$conditions[] = "$column = " . unconvert_field($fields[$key], q($val));
+			$conditions[] = "$column = " . ($fields ? unconvert_field($fields[$key], q($val)) : q($val));
 		}
 
 		// Not just [a-z] to catch non-ASCII characters.
@@ -989,7 +989,9 @@ function input($field, $value, $function) {
 			echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
 		} else {
 			// int(3) is only a display hint
-			$maxlength = (!preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match) ? ((preg_match("~binary~", $field["type"]) ? 2 : 1) * $match[1] + ($match[3] ? 1 : 0) + ($match[2] && !$field["unsigned"] ? 1 : 0)) : ($types[$field["type"]] ? $types[$field["type"]] + ($field["unsigned"] ? 0 : 1) : 0));
+			$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)
+				? ((preg_match("~binary~", $field["type"]) ? 2 : 1) * $match[1] + ($match[3] ? 1 : 0) + ($match[2] && !$field["unsigned"] ? 1 : 0))
+				: ($types && $types[$field["type"]] ? $types[$field["type"]] + ($field["unsigned"] ? 0 : 1) : 0);
 			if ($jush == 'sql' && min_version(5.6) && preg_match('~time~', $field["type"])) {
 				$maxlength += 7; // microtime
 			}
@@ -1027,7 +1029,7 @@ function process_input($field) {
 	}
 
 	$idf = bracket_escape($field["field"]);
-	$function = $_POST["function"][$idf];
+	$function = $_POST["function"][$idf] ?? "";
 	$value = $_POST["fields"][$idf];
 	if ($field["type"] == "enum") {
 		if ($value == -1) {
@@ -1510,7 +1512,7 @@ function edit_form($table, $fields, $row, $update) {
 		$first = 0;
 		foreach ($fields as $name => $field) {
 			echo "<tr><th>" . $adminer->fieldName($field);
-			$default = $_GET["set"][bracket_escape($name)];
+			$default = $_GET["set"][bracket_escape($name)] ?? null;
 			if ($default === null) {
 				$default = $field["default"];
 				if ($field["type"] == "bit" && preg_match("~^b'([01]*)'\$~", $default, $regs)) {
@@ -1534,7 +1536,7 @@ function edit_form($table, $fields, $row, $update) {
 				$value = $adminer->editVal($value, $field);
 			}
 			$function = ($_POST["save"]
-				? (string) $_POST["function"][$name]
+				? $_POST["function"][$name] ?? ""
 				: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
 					? "now"
 					: ($value === false ? null : ($value !== null ? '' : 'NULL'))
