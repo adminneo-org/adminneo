@@ -1,4 +1,9 @@
 <?php
+
+namespace Adminer;
+
+use stdClass;
+
 /**
 * @author Jakub Cernohuby
 * @author Vladimir Stastka
@@ -414,7 +419,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function drop_databases($databases) {
-		return queries("DROP DATABASE " . implode(", ", array_map('idf_escape', $databases)));
+		return queries("DROP DATABASE " . implode(", ", array_map('Adminer\idf_escape', $databases)));
 	}
 
 	function rename_database($name, $collation) {
@@ -544,11 +549,11 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function drop_views($views) {
-		return queries("DROP VIEW " . implode(", ", array_map('table', $views)));
+		return queries("DROP VIEW " . implode(", ", array_map('Adminer\table', $views)));
 	}
 
 	function drop_tables($tables) {
-		return queries("DROP TABLE " . implode(", ", array_map('table', $tables)));
+		return queries("DROP TABLE " . implode(", ", array_map('Adminer\table', $tables)));
 	}
 
 	function move_tables($tables, $views, $target) {
