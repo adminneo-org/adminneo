@@ -524,7 +524,7 @@ function selectSearchSearch() {
 // Sorting.
 (function() {
 	let placeholderRow = null, nextRow = null, dragHelper = null;
-	let startScrollY, startY, minY, maxY, lastPointerY;
+	let startScrollY, startY, minY, maxY, lastPointerY, rowHeight;
 
 	/**
 	 * Initializes sortable list of DIV elements.
@@ -573,6 +573,11 @@ function selectSearchSearch() {
 		placeholderRow = row.cloneNode(true);
 		placeholderRow.classList.add("placeholder");
 		parent.insertBefore(placeholderRow, row);
+
+		rowHeight = placeholderRow.offsetHeight;
+		if (row.tagName !== "TR") {
+			rowHeight += parseFloat(window.getComputedStyle(placeholderRow).marginBottom);
+		}
 
 		nextRow = row.nextElementSibling;
 
@@ -646,14 +651,14 @@ function selectSearchSearch() {
 
 		let testingRow = placeholderRow;
 		do {
-			if (top > testingRow.offsetTop + testingRow.offsetHeight / 2 + 1) {
+			if (top > testingRow.offsetTop + rowHeight / 2 + 1) {
 				if (!nextRow.classList.contains("no-sort")) {
 					testingRow = nextRow;
 					nextRow = nextRow.nextElementSibling;
 				} else {
 					break;
 				}
-			} else if (top + testingRow.offsetHeight < testingRow.offsetTop + testingRow.offsetHeight / 2 - 1) {
+			} else if (top + rowHeight < testingRow.offsetTop + rowHeight / 2 - 1) {
 				nextRow = testingRow = testingRow.previousElementSibling;
 			} else {
 				break;
@@ -1019,7 +1024,7 @@ function selectClick(event, text, warning) {
 
 	let pos = event.rangeOffset;
 	let value = (td.firstChild && td.firstChild.alt) || td.textContent || td.innerText;
-	const tdStyle = window.getComputedStyle(td, null);
+	const tdStyle = window.getComputedStyle(td);
 
 	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), 20) + 'px';
 
