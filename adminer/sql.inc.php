@@ -13,7 +13,7 @@ restart_session();
 $history_all = &get_session("queries");
 $history = &$history_all[DB];
 if (!$error && $_POST["clear"]) {
-	$history = array();
+	$history = [];
 	redirect(remove_from_uri("history"));
 }
 
@@ -50,7 +50,7 @@ if (!$error && $_POST) {
 			$last_record = $history ? end($history) : false;
 			if (!$history || ($last_record && reset($last_record) != $q)) { // no repeated queries
 				restart_session();
-				$history[] = array($q, time()); //! add elapsed time
+				$history[] = [$q, time()]; //! add elapsed time
 				set_session("queries", $history_all); // required because reference is unlinked by stop_session()
 				stop_session();
 			}
@@ -68,7 +68,7 @@ if (!$error && $_POST) {
 			}
 		}
 		$commands = 0;
-		$errors = array();
+		$errors = [];
 		$parse = '[\'"' . ($jush == "sql" ? '`#' : ($jush == "sqlite" ? '`[' : ($jush == "mssql" ? '[' : ''))) . ']|/\*|-- |$' . ($jush == "pgsql" ? '|\$[^$]*\$' : '');
 		$total_start = microtime(true);
 		parse_str($_COOKIE["adminer_export"], $adminer_export);
@@ -167,7 +167,7 @@ if (!$error && $_POST) {
 									$explain_id = "explain-$commands";
 									if (is_object($result)) {
 										$limit = $_POST["limit"];
-										$orgtables = select($result, $connection2, array(), $limit);
+										$orgtables = select($result, $connection2, [], $limit);
 										if (!$_POST["only_errors"]) {
 											echo "<form action='' method='post'>\n";
 											$num_rows = $result->num_rows;
