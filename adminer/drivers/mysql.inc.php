@@ -1092,6 +1092,7 @@ if (isset($_GET["mysql"])) {
 					"char|text" => "concat",
 				]
 			],
+			"system_databases" => ["mysql", "information_schema", "performance_schema", "sys"],
 		];
 	}
 }
