@@ -45,7 +45,7 @@ class Adminer extends AdminerBase
 	* @return string HTML code
 	*/
 	function name() {
-		return "<a id='h1' href='" . h(HOME_URL) . "'><svg role='img' class='logo'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
 	/** Get SSL connection options
@@ -135,7 +135,7 @@ class Adminer extends AdminerBase
 	*/
 	function loginForm() {
 		global $drivers;
-		echo "<table class='layout'>\n";
+		echo "<table class='box'>\n";
 		echo $this->loginFormField('driver', '<tr><th>' . lang('System') . '<td>', html_select("auth[driver]", $drivers, DRIVER) . script("initLoginDriver(qsl('select'));"));
 		echo $this->loginFormField('server', '<tr><th>' . lang('Server') . '<td>', '<input class="input" name="auth[server]" value="' . h(SERVER) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">' . "\n");
 		echo $this->loginFormField('username', '<tr><th>' . lang('Username') . '<td>', '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
@@ -434,7 +434,7 @@ class Adminer extends AdminerBase
 	function selectColumnsPrint(array $select, array $columns) {
 		global $functions, $grouping;
 
-		print_fieldset("select", lang('Select'), $select, true);
+		print_fieldset_start("select", lang('Select'), "columns", (bool)$select, true);
 
 		$_GET["columns"][""] = [];
 		$i = 0;
@@ -470,7 +470,7 @@ class Adminer extends AdminerBase
 			$i++;
 		}
 
-		echo "</div>", script("initSortable('#fieldset-select');"), "</fieldset>\n";
+		print_fieldset_end("select", true);
 	}
 
 	/**
@@ -480,7 +480,7 @@ class Adminer extends AdminerBase
 	 * @param array $columns selectable columns
 	 */
 	function selectSearchPrint(array $where, array $columns, array $indexes) {
-		print_fieldset("search", lang('Search'), $where);
+		print_fieldset_start("search", lang('Search'), "search", (bool)$where);
 
 		foreach ($indexes as $i => $index) {
 			if ($index["type"] == "FULLTEXT") {
@@ -512,7 +512,7 @@ class Adminer extends AdminerBase
 			}
 		}
 
-		echo "</div></fieldset>\n";
+		print_fieldset_end("search");
 	}
 
 	/**
@@ -522,7 +522,7 @@ class Adminer extends AdminerBase
 	 * @param array $columns selectable columns
 	 */
 	function selectOrderPrint(array $order, array $columns, array $indexes) {
-		print_fieldset("sort", lang('Sort'), $order, true);
+		print_fieldset_start("sort", lang('Sort'), "sort", (bool)$order, true);
 
 		$_GET["order"][""] = "";
 		$i = 0;
@@ -541,7 +541,7 @@ class Adminer extends AdminerBase
 			$i++;
 		}
 
-		echo "</div>", script("initSortable('#fieldset-sort');"), "</fieldset>\n";
+		print_fieldset_end("sort", true);
 	}
 
 	/**
@@ -550,7 +550,7 @@ class Adminer extends AdminerBase
 	 */
 	public function selectLimitPrint(?int $limit): void
 	{
-		echo "<fieldset><legend>" . lang('Limit') . "</legend><div>", // <div> for easy styling
+		echo "<fieldset><legend>" . lang('Limit') . "</legend><div class='fieldset-content'>", // <div> for easy styling
 			"<input type='number' name='limit' class='input size' value='" . h($limit) . "'>",
 			script("qsl('input').oninput = selectFieldChange;", ""),
 			"</div></fieldset>\n";
@@ -562,7 +562,7 @@ class Adminer extends AdminerBase
 	*/
 	function selectLengthPrint($text_length) {
 		if ($text_length !== null) {
-			echo "<fieldset><legend>" . lang('Text length') . "</legend><div>";
+			echo "<fieldset><legend>" . lang('Text length') . "</legend><div class='fieldset-content'>";
 			echo "<input type='number' name='text_length' class='input size' value='" . h($text_length) . "'>";
 			echo "</div></fieldset>\n";
 		}
@@ -573,7 +573,7 @@ class Adminer extends AdminerBase
 	* @return null
 	*/
 	function selectActionPrint($indexes) {
-		echo "<fieldset><legend>" . lang('Action') . "</legend><div>";
+		echo "<fieldset><legend>" . lang('Action') . "</legend><div class='fieldset-content'>";
 		echo "<input type='submit' class='button' value='" . lang('Select') . "'>";
 		echo " <span id='noindex' title='" . lang('Full table scan') . "'></span>";
 		echo "<script" . nonce() . ">\n";
@@ -1114,13 +1114,13 @@ class Adminer extends AdminerBase
 		$last_version = $_COOKIE["adminer_version"] ?? null;
 ?>
 
-<h1>
+<div class="header">
 	<?= $this->name(); ?>
 
 	<?php if ($missing != "auth"): ?>
 		<span class="version">
 			<?= h($VERSION); ?>
-			<a id="version" href="https://github.com/adminneo-org/adminneo/releases"<?= target_blank(); ?> title="<?= h($last_version); ?>">
+			<a id="version" class="version-badge" href="https://github.com/adminneo-org/adminneo/releases"<?= target_blank(); ?> title="<?= h($last_version); ?>">
 				<?= ($this->config->isVersionVerificationEnabled() && $last_version && version_compare($VERSION, $last_version) < 0 ? icon_solo("asterisk") : ""); ?>
 			</a>
 		</span>
@@ -1130,7 +1130,7 @@ class Adminer extends AdminerBase
 		}
 		?>
     <?php endif; ?>
-</h1>
+</div>
 
 <?php
 		if ($missing == "auth") {
@@ -1235,7 +1235,7 @@ class Adminer extends AdminerBase
 			array_unshift($databases, DB);
 		}
 
-		echo "<form action=''><p id='dbs'>";
+		echo "<div class='db-selector'><form action=''>";
 		hidden_fields_get();
 
 		if ($databases) {
@@ -1244,7 +1244,7 @@ class Adminer extends AdminerBase
 		} else {
 			echo "<input id='database-select' class='input' name='db' value='" . h(DB) . "' autocapitalize='off'>\n";
 		}
-		echo "<input type='submit' value='" . lang('Use') . "'" . ($databases ? " class='button hidden'" : "") . ">\n";
+		echo "<input type='submit' value='" . lang('Use') . "' class='button " . ($databases ? "hidden" : "") . "'>\n";
 
 		if (support("scheme") && $missing != "db" && DB != "" && $connection->select_db(DB)) {
 			echo "<br><select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $adminer->schemas(), $_GET["ns"]) . "</select>"
@@ -1262,7 +1262,7 @@ class Adminer extends AdminerBase
 			}
 		}
 
-		echo "</p></form>\n";
+		echo "</form></div>\n";
 
 		return null;
 	}
@@ -1289,31 +1289,32 @@ class Adminer extends AdminerBase
 			$active = in_array($table, [$_GET["table"], $_GET["select"], $_GET["create"], $_GET["indexes"], $_GET["foreign"], $_GET["trigger"]]);
 			$class = "primary" . (is_view($status) ? " view" : "");
 			$supportStructure = support("table") || support("indexes");
-			$title =  $this->config->isNavigationDual() ? "title='$name'" : "";
+			$selectUrl = h(ME) . "select=" . urlencode($table);
+			$tableUrl = h(ME) . "table=" . urlencode($table);
 
 			if ($this->config->isSelectionPreferred()) {
 				if ($this->config->isNavigationReversed() && $supportStructure) {
-					echo " <a href='", h(ME), "table=", urlencode($table), "' title='", lang('Show structure'), "' class='secondary'>", icon("structure"), "</a>";
+					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon("structure"), "</a>";
 				}
 
-				echo "<a href='", h(ME), 'select=', urlencode($table), "'", bold($active, $class), " data-primary='true' $title>$name</a>";
+				echo "<a href='$selectUrl'", bold($active, $class), " data-primary='true' title='$name'>$name</a>";
 
 				if ($this->config->isNavigationDual() && $supportStructure) {
-					echo " <a href='", h(ME), "table=", urlencode($table), "' title='", lang('Show structure'), "' class='secondary'>", icon_solo("structure"), "</a>";
+					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon_solo("structure"), "</a>";
 				}
 			} else {
 				if ($this->config->isNavigationReversed()) {
-					echo " <a href='", h(ME), "select=", urlencode($table), "' title='", lang('Select data'), "' class='secondary'>", icon("data"), "</a>";
+					echo " <a href='$selectUrl' title='", lang('Select data'), "' class='secondary'>", icon("data"), "</a>";
 				}
 
 				if ($supportStructure) {
-					echo "<a href='", h(ME), 'table=', urlencode($table), "'", bold($active, $class), " data-primary='true' $title>$name</a>";
+					echo "<a href='$tableUrl'", bold($active, $class), " data-primary='true' title='$name'>$name</a>";
 				} else {
 					echo "<span data-primary='true'", bold($active, $class), ">$name</span>";
 				}
 
 				if ($this->config->isNavigationDual()) {
-					echo " <a href='", h(ME), "select=", urlencode($table), "' title='", lang('Select data'), "' class='secondary'>", icon_solo("data"), "</a>";
+					echo " <a href='$selectUrl' title='", lang('Select data'), "' class='secondary'>", icon_solo("data"), "</a>";
 				}
 			}
 
