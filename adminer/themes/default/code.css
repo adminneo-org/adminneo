@@ -1,0 +1,58 @@
+code {
+	background: var(--code-bg);
+	border: 1px solid var(--code-border);
+	padding: 2px 3px;
+	border-radius: var(--input-border-radius);
+}
+
+code {
+	font-family: var(--font-family-mono);
+	font-size: calc(var(--font-size-mono) * 100% / 14);
+	font-variant-ligatures: none;
+}
+
+pre {
+	margin: 20px;
+	overflow-x: auto;
+
+	/* Show SQL code block over next message in multi SQL results. */
+	position: relative;
+	z-index: 1;
+}
+
+pre > code {
+	display: block;
+	padding: 10px 15px;
+	overflow-x: auto;
+	border-left: 7px solid var(--code-border);
+	border-radius: var(--box-border-radius);
+}
+
+pre + .links {
+	margin-top: -15px;
+	margin-bottom: 20px;
+}
+
+pre + .message {
+	margin-top: calc(-20px - var(--box-border-radius));
+	border-top-color: var(--message-ok-bg);
+	border-top-width: var(--box-border-radius);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+pre.comment {
+	white-space: pre-wrap;
+}
+
+p pre {
+	margin: 0;
+}
+
+.rtl pre, .rtl code {
+	direction: ltr;
+}
+
+.rtl pre.comment {
+	width: fit-content;
+}
