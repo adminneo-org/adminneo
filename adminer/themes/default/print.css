@@ -1,0 +1,9 @@
+@media print {
+	.navigation-panel, .footer {
+		display: none;
+	}
+
+	#content {
+		margin-inline-start: 0;
+	}
+}
