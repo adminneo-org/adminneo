@@ -1004,7 +1004,7 @@ function ajaxForm(form, message, button) {
 		if (window.jush) {
 			jush.highlight_tag(qsa('code', gid('ajaxstatus')), 0);
 		}
-		messagesPrint(gid('ajaxstatus'));
+		initToggles(gid('ajaxstatus'));
 	}, data, message);
 }
 
