@@ -934,11 +934,11 @@ function input($field, $value, $function) {
 
 	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
 	$attrs = " name='fields[$name]' $disabled";
-	if ($jush == "pgsql" && in_array($field["type"], (array) $structured_types[lang('User types')])) {
-		$enums = get_vals("SELECT enumlabel FROM pg_enum WHERE enumtypid = " . $types[$field["type"]] . " ORDER BY enumsortorder");
+	if (in_array($field["type"], (array) $structured_types[lang('User types')])) {
+		$enums = type_values($types[$field["type"]]);
 		if ($enums) {
 			$field["type"] = "enum";
-			$field["length"] = "'" . implode("','", array_map('addslashes', $enums)) . "'";
+			$field["length"] = $enums;
 		}
 	}
 
