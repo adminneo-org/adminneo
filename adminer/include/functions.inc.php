@@ -184,6 +184,11 @@ function icon_chevron_down(): string
 	return icon("chevron-down", "chevron");
 }
 
+function icon_chevron_right(): string
+{
+	return icon("chevron-down", "chevron-right");
+}
+
 function icon(string $id, ?string $class = null): string
 {
 	$id = h($id);
@@ -1601,6 +1606,7 @@ function edit_form($table, $fields, $row, $update) {
 			;
 		}
 		echo "</table>\n";
+		echo script("initToggles(gid('form'));");
 	}
 	echo "<p>\n";
 	if ($fields) {
