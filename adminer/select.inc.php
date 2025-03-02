@@ -496,6 +496,7 @@ if (!$columns && support("table")) {
 			}
 
 			echo "</table>\n";
+			echo script("initToggles(gid('table'));");
 			echo "</div>\n";
 		}
 
