@@ -11,7 +11,7 @@ class AdminerLoginServers {
 	var $servers;
 
 	/** Set supported servers
-	* @param array [$description => array("server" => , "driver" => "mysql|pgsql|sqlite|...")]
+	* @param array [$description => ["server" => , "driver" => "mysql|pgsql|sqlite|..."]]
 	*/
 	function __construct($servers) {
 		$this->servers = $servers;
