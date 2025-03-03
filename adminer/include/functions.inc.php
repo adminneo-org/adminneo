@@ -1499,6 +1499,7 @@ function edit_form($table, $fields, $row, $update) {
 	} else {
 		echo "<table cellspacing='0' class='layout'>" . script("qsl('table').onkeydown = editingKeydown;");
 
+		$first = 0;
 		foreach ($fields as $name => $field) {
 			echo "<tr><th>" . $adminer->fieldName($field);
 			$default = $_GET["set"][bracket_escape($name)];
@@ -1539,6 +1540,9 @@ function edit_form($table, $fields, $row, $update) {
 				$value = "";
 				$function = "uuid";
 			}
+			if ($field["auto_increment"] || $function == "now" || $function == "uuid") {
+				$first++;
+			}
 			input($field, $value, $function);
 			echo "\n";
 		}
@@ -1565,7 +1569,7 @@ function edit_form($table, $fields, $row, $update) {
 		}
 	}
 	echo ($update ? "<input type='submit' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n"
-		: ($_POST || !$fields ? "" : script("qsa('td', gid('form'))[1].firstChild.focus();"))
+		: ($_POST || !$fields ? "" : script("qsa('td', gid('form'))[2*$first+1].firstChild.focus();"))
 	);
 	if (isset($_GET["select"])) {
 		hidden_fields(array("check" => (array) $_POST["check"], "clone" => $_POST["clone"], "all" => $_POST["all"]));
