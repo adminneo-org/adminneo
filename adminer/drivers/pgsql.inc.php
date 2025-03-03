@@ -476,7 +476,7 @@ ORDER BY conkey, conname") as $row) {
 	}
 
 	function information_schema($db) {
-		return ($db == "information_schema");
+		return get_schema() == "information_schema";
 	}
 
 	function error() {
