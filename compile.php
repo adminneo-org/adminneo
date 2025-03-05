@@ -486,7 +486,7 @@ if ($single_driver) {
 	// Remove source code for unsupported features.
 	foreach ($features as $feature) {
 		if (!support($feature)) {
-			$file = preg_replace("((\t*)" . preg_quote('if (support("' . $feature . '")') . ".*\n\\1\\})sU", '', $file);
+			$file = preg_replace("((\t*)" . preg_quote('if (support("' . $feature . '")') . ".*?\n\\1\\}( else)?)s", '', $file);
 		}
 	}
 
