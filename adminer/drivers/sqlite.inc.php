@@ -172,7 +172,12 @@ if (isset($_GET["sqlite"]) || isset($_GET["sqlite2"])) {
 			var $extension = "PDO_SQLite";
 
 			function __construct($filename) {
+				parent::__construct();
 				$this->dsn(DRIVER . ":$filename", "", "");
+			}
+
+			function select_db($db) {
+				return false;
 			}
 		}
 
