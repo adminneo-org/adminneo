@@ -17,7 +17,7 @@ function email_header($header) {
 * @return bool
 */
 function send_mail($email, $subject, $message, $from = "", $files = array()) {
-	$eol = "\r\n";
+	$eol = PHP_EOL;
 	$message = str_replace("\n", $eol, wordwrap(str_replace("\r", "", "$message\n")));
 	$boundary = uniqid("boundary");
 	$attachments = "";
