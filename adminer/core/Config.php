@@ -11,9 +11,19 @@ class Config
 	/** @var array */
 	private $config;
 
+	/** @var Server[] */
+	private $servers = [];
+
 	public function __construct(array $config)
 	{
 		$this->config = $config; // !compile: custom config
+
+		if (isset($this->config["servers"])) {
+			foreach ($this->config["servers"] as $server) {
+				$serverObj = new Server($server);
+				$this->servers[$serverObj->getKey()] = $serverObj;
+			}
+		}
 	}
 
 	public function getTheme(): string
@@ -125,5 +135,43 @@ class Config
 	public function getSslTrustServerCertificate(): ?bool
 	{
 		return $this->config["sslTrustServerCertificate"] ?? null;
+	}
+
+	public function hasServers(): bool
+	{
+		return isset($this->config["servers"]);
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getServerPairs(array $drivers): array
+	{
+		$serverPairs = [];
+
+		foreach ($this->servers as $key => $server) {
+			if (isset($drivers[$server->getDriver()])) {
+				$serverName = $server->getName();
+
+				$serverPairs[$key] = $drivers[$server->getDriver()] . ($serverName != "" ? " - $serverName" : "");
+			}
+		}
+
+		return $serverPairs;
+	}
+
+	public function getServer(string $serverKey): ?Server
+	{
+		return $this->servers[$serverKey] ?? null;
+	}
+
+	public function applyServer(string $server): void
+	{
+		$server = $this->getServer($server);
+		if (!$server) {
+			return;
+		}
+
+		$this->config = array_merge($this->config, $server->getConfigParams());
 	}
 }
