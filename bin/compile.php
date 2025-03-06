@@ -571,8 +571,8 @@ $file = preg_replace('~link_files\("([^"]+)", \[([^]]+)]\)~', 'link_files("$1", 
 // Custom configuration.
 if ($custom_config) {
 	$file = str_replace(
-		'$this->config = $config; // !compile: custom config',
-		'$this->config = array_merge(' . var_export($custom_config, true) . ', $config);',
+		'$this->params = $params; // !compile: custom config',
+		'$this->params = array_merge(' . var_export($custom_config, true) . ', $params);',
 		$file
 	);
 }
