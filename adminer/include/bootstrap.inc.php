@@ -1,10 +1,9 @@
 <?php
-function adminer_errors($errno, $errstr) {
-	return (bool)preg_match('~^(Trying to access array offset on( value of type)? null|Undefined array key)~', $errstr);
-}
 
 error_reporting(6135); // errors and warnings
-set_error_handler('adminer_errors', E_WARNING);
+set_error_handler(function ($errno, $errstr) {
+	return (bool)preg_match('~^(Trying to access array offset on( value of type)? null|Undefined array key)~', $errstr);
+}, E_WARNING);
 
 include "../adminer/include/debug.inc.php";
 include "../adminer/include/coverage.inc.php";
