@@ -1,6 +1,7 @@
 <?php
 
-namespace Adminer;
+use Adminer\Adminer;
+use function Adminer\h;
 
 function create_adminer(): Adminer
 {
