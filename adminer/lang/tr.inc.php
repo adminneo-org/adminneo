@@ -16,7 +16,6 @@ $translations = [
 	'Logout successful.' => 'Oturum başarıyla sonlandı.',
 	'Invalid server or credentials.' => null,
 	'Too many unsuccessful logins, try again in %d minute(s).' => ['Çok fazla oturum açma denemesi yapıldı.', '%d Dakika sonra tekrar deneyiniz.'],
-	'Master password expired. <a href="https://www.adminer.org/en/extension/"%s>Implement</a> %s method to make it permanent.' => 'Ana şifrenin süresi doldu. Kalıcı olması için <a href="https://www.adminer.org/en/extension/"%s>%s medodunu</a> kullanın.',
 	'Language' => 'Dil',
 	'Invalid CSRF token. Send the form again.' => 'Geçersiz (CSRF) jetonu. Formu tekrar yolla.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Bu isteği AdminNeo\'den göndermediyseniz bu sayfayı kapatın.',
@@ -89,7 +88,6 @@ $translations = [
 	'Database' => 'Veri Tabanı',
 	'DB' => 'DB',
 	'Use' => 'Kullan',
-	'Select database' => 'Veri tabanı seç',
 	'Invalid database.' => 'Geçersiz veri tabanı.',
 	'Database has been dropped.' => 'Veri tabanı silindi.',
 	'Databases have been dropped.' => 'Veritabanları silindi.',
@@ -301,8 +299,6 @@ $translations = [
 	'Network' => 'Ağ',
 	'Geometry' => 'Geometri',
 	'Relations' => 'İlişkiler',
-
-	// 'Editor' => 'Düzenleyici',
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$6.$4.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
@@ -367,4 +363,5 @@ $translations = [
 	'Alter check' => null,
 	'Create check' => null,
 	'Checks' => null,
+	'Invalid permanent login, please login again.' => null,
 ];
