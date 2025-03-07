@@ -18,6 +18,9 @@ abstract class Driver
 	/** @var string[] List of number variants. */
 	protected $unsigned = [];
 
+	/** @var string[] */
+	protected $generated = [];
+
 	/** @var string[] Operators used in select. */
 	protected $operators = [];
 
@@ -114,6 +117,22 @@ abstract class Driver
 	/**
 	 * @return string[]
 	 */
+	public function getUnsigned(): array
+	{
+		return $this->unsigned;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getGenerated(): array
+	{
+		return $this->generated;
+	}
+
+	/**
+	 * @return string[]
+	 */
 	public function getOperators(): array
 	{
 		return $this->operators;
@@ -167,14 +186,6 @@ abstract class Driver
 	public function getEditFunctions(): array
 	{
 		return $this->editFunctions;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getUnsigned(): array
-	{
-		return $this->unsigned;
 	}
 
 	/**

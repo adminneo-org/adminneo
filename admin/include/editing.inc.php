@@ -302,6 +302,11 @@ function default_value($field) {
 	$default = $field["default"];
 	if ($default === null) return "";
 
+	$generated = $field["generated"];
+	if (in_array($generated, Driver::get()->getGenerated())) {
+		return " GENERATED ALWAYS AS ($default) $generated";
+	}
+
 	if (stripos($default, "GENERATED ") === 0) {
 		return " $default";
 	}
@@ -413,10 +418,14 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 			$checked = $field["auto_increment"] ? "checked" : "";
 			echo "<td><label class='block'><input type='radio' name='auto_increment_col' value='$i' $checked aria-labelledby='label-ai'></label></td>\n";
 
-			echo "<td>",
-				checkbox("fields[$i][has_default]", 1, $field["has_default"], "", "", "", "label-default"),
-				"<input class='input' name='fields[$i][default]' value='", h($field["default"]), "' aria-labelledby='label-default'>",
-				"</td>\n";
+			echo "<td class='default-value'>";
+			if (Driver::get()->getGenerated()) {
+				echo "<select name='fields[$i][generated]'>" . optionlist(array_merge(["", "DEFAULT"], Driver::get()->getGenerated()), $field["generated"]) . "</select>";
+			} else {
+				echo checkbox("fields[$i][generated]", 1, $field["generated"], "", "", "", "label-default");
+			}
+			echo "<input class='input' name='fields[$i][default]' value='", h($field["default"]), "' aria-labelledby='label-default'>";
+			echo "</td>\n";
 
 			if (support("comment")) {
 				$max_length = min_version(5.5) ? 1024 : 255;

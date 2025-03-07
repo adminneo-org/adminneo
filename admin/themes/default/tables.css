@@ -134,6 +134,10 @@ td.options select {
 	width: 20ex;
 }
 
+td.default-value select + .input {
+	margin-inline-start: 5px;
+}
+
 tr .actions input[type="checkbox"] {
 	vertical-align: middle;
 }

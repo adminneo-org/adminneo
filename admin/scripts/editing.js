@@ -265,8 +265,13 @@ function selectFieldChange() {
 		field = qs('[name$="[default]"]', row);
 		if (field) {
 			field.addEventListener("input", (event) => {
-				// Check checkbox for the default value.
-				event.target.previousSibling.checked = true;
+				// Set usage of the default value Previous element can be checkbox or select.
+				const element = event.target.previousElementSibling;
+
+				element.checked = true;
+				if (!element.selectedIndex) {
+					element.selectedIndex = 1;
+				}
 			});
 		}
 
@@ -428,8 +433,9 @@ function selectFieldChange() {
 				el.dispatchEvent(new Event("input"));
 			}
 
-			if (lastType === 'timestamp' && el.name === name + '[has_default]' && /timestamp/i.test(type.form.elements[name + '[default]'].value)) {
+			if (lastType === 'timestamp' && el.name === name + '[generated]' && /timestamp/i.test(type.form.elements[name + '[default]'].value)) {
 				el.checked = false;
+				el.selectedIndex = 0;
 			}
 
 			if (el.name === name + '[collation]') {
@@ -470,7 +476,7 @@ function selectFieldChange() {
 			newInputs[i].name = inputs[i].name.replace(/[0-9.]+/, newIndex);
 
 			if (newInputs[i].tagName === "SELECT") {
-				newInputs[i].selectedIndex = inputs[i].selectedIndex;
+				newInputs[i].selectedIndex = /\[(generated)/.test(inputs[i].name) ? 0 : inputs[i].selectedIndex;
 			}
 		}
 
@@ -487,7 +493,7 @@ function selectFieldChange() {
 				newInputs[i].value = '';
 			}
 
-			if (/\[(has_default)/.test(inputs[i].name)) {
+			if (/\[(generated)/.test(inputs[i].name)) {
 				newInputs[i].checked = false;
 			}
 		}
