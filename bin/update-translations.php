@@ -66,7 +66,7 @@ foreach ($languages as $language => $dummy) {
 
 	$old_content = str_replace("\r", "", file_get_contents($file_path));
 
-	preg_match_all("~^(\\s*(?:// [^'].*\\s+)?)(?:// )?(('(?:[^\\\\']+|\\\\.)*') => .*[^,\n]),?~m", $old_content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+	preg_match_all("~^(\\s*(?:// [^'].*\\s+)?)(?:// )?(('(?:[^\\\\']+|\\\\.)*') => (.*[^,\n])),?~m", $old_content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
 	// Keep current messages.
 	$new_content = "";
@@ -75,6 +75,7 @@ foreach ($languages as $language => $dummy) {
 		$line = $match[2][0];
 		$offset = $match[2][1];
 		$en = $match[3][0];
+		$translation = $match[4][0];
 
 		if (isset($messages[$en])) {
 			$new_content .= "$indent$line,\n";
@@ -83,6 +84,11 @@ foreach ($languages as $language => $dummy) {
 			// Check mismatched periods.
 			if ($en != "','" && $period && !preg_match('~(null|\[])$~', $line) && (substr($en, -2, 1) == "." xor preg_match("~$period']?$~", $line))) {
 				echo "⚠️ $filename:" . (substr_count($old_content, "\n", 0, $offset) + 1) . " | Not matching period: $line\n";
+			}
+
+			// Check mismatched placeholders.
+			if (preg_match('~%~', $en) xor preg_match('~%~', $translation)) {
+				echo "⚠️ $filename:" . (substr_count($old_content, "\n", 0, $offset) + 1) . " | Not matching placeholder.\n";
 			}
 		}
 	}

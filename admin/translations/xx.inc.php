@@ -30,6 +30,7 @@ $translations = [
 	'No driver' => 'Xx',
 	'Database driver not found.' => 'Xx.',
 	'No extension' => 'Xx',
+	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'None of the supported PHP extensions (%s) are available.' => 'Xx (%s).',
 	'Connecting to privileged ports is not allowed.' => 'Xx.',
 	'Session support must be enabled.' => 'Xx.',
@@ -278,7 +279,7 @@ $translations = [
 	'Ctrl+click on a value to modify it.' => 'Xx.',
 	'Use edit link to modify this value.' => 'Xx.',
 
-	// %s can contain auto-increment value
+	// %s can contain auto-increment value, e.g. ' 123'
 	'Item%s has been inserted.' => 'Xx%s.',
 	'Item has been deleted.' => 'Xx.',
 	'Item has been updated.' => 'Xx.',

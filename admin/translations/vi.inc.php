@@ -62,7 +62,7 @@ $translations = [
 
 	'File upload' => 'Tải tệp lên',
 	'From server' => 'Dùng tệp trên máy chủ',
-	'Webserver file %s' => 'Tệp trên máy chủ',
+	'Webserver file %s' => 'Tệp trên máy chủ %s',
 	'Run file' => 'Chạy tệp',
 	'File does not exist.' => 'Tệp không tồn tại.',
 	'File uploads are disabled.' => 'Chức năng tải tệp lên đã bị cấm.',
