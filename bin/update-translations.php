@@ -60,7 +60,7 @@ foreach ($languages as $language => $dummy) {
 	$file_path = __DIR__ . "/../admin/translations/$language.inc.php";
 	$filename = basename($file_path);
 	$lang = basename($filename, ".inc.php");
-	$period = ($lang == "bn" ? '।' : (substr($lang, 0, 2) == 'zh' ? '。' : ($lang == 'he' || $lang == 'ja' ? '' : '\.')));
+	$period = ($lang == "bn" || $lang == 'hi' ? '।' : (preg_match('~^(ja|zh)~', $lang) ? '。' : ($lang == 'he' ? '' : '\.')));
 
 	$messages = $all_messages;
 
@@ -81,28 +81,39 @@ foreach ($languages as $language => $dummy) {
 			$new_content .= "$indent$line,\n";
 			unset($messages[$en]);
 
-			// Check mismatched periods.
-			if ($en != "','" && $period && !preg_match('~(null|\[])$~', $line) && (substr($en, -2, 1) == "." xor preg_match("~$period']?$~", $line))) {
-				echo "⚠️ $filename:" . (substr_count($old_content, "\n", 0, $offset) + 1) . " | Not matching period: $line\n";
+			// Do not check untranslated texts and thousands separator.
+			if (preg_match('~(null|\[])$~', $translation) || $en == "','") {
+				continue;
+			}
+
+			// Check forbidden periods.
+			if (!$period && preg_match("~\.']?$~", $translation)) {
+				print_warning($filename, $old_content, $offset, $line, "Period is forbidden");
+			}
+
+			// Check mismatched periods. Period is optional in 'ja'.
+			// TODO Check in array.
+			if ($period && $lang != "ja" && ((substr($en, -2, 1) == ".") xor preg_match("~$period']?$~", $translation))) {
+				print_warning($filename, $old_content, $offset, $line, "Not matching period");
 			}
 
 			// Check mismatched placeholders.
 			if (preg_match('~%~', $en) xor preg_match('~%~', $translation)) {
-				echo "⚠️ $filename:" . (substr_count($old_content, "\n", 0, $offset) + 1) . " | Not matching placeholder.\n";
+				print_warning($filename, $old_content, $offset, $line, "Not matching placeholder");
 			}
 		}
 	}
 
 	// Add new messages.
 	if ($messages) {
-		if ($filename != "en.inc.php") {
+		if ($lang != "en") {
 			$new_content .= "\n";
 		}
 
 		foreach ($messages as $id => $text) {
 			if ($text == "," && strpos($id, "%d")) {
 				$new_content .= "\t$id => [],\n";
-			} elseif ($filename != "en.inc.php") {
+			} elseif ($lang != "en") {
 				$new_content .= "\t$id => null,\n";
 			}
 		}
@@ -115,4 +126,9 @@ foreach ($languages as $language => $dummy) {
 
 		echo "$filename updated\n";
 	}
+}
+
+function print_warning(string $filename, string $content, int $offset, string $line, string $message): void
+{
+	echo "⚠️ $filename:" . (substr_count($content, "\n", 0, $offset) + 1) . " | $message: $line\n";
 }
