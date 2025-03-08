@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 $translations = [
-	'%s must return an array.' => '%s musí vracet pole.</a>',
+	'%s must return an array.' => '%s musí vracet pole.',
 	'%s and %s must return an object created by %s method.' => '%s a %s musí vracet objekt vytvořený pomocí metody %s.',
 	'More information.' => 'Více informací.',
 

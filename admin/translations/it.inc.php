@@ -261,7 +261,7 @@ $translations = [
 	'HH:MM:SS' => 'HH:MM:SS',
 
 	'Drop %s?' => 'Scartare %s?',
-	'Tables have been optimized.' => 'Le tabelle sono state ottimizzate',
+	'Tables have been optimized.' => 'Le tabelle sono state ottimizzate.',
 	'Materialized view' => 'Vista materializzata',
 	'Vacuum' => 'Aspira',
 	'Selected' => 'Selezionato',
@@ -289,7 +289,7 @@ $translations = [
 	'You are offline.' => 'Sei disconnesso.',
 	'You have no privileges to update this table.' => 'Non hai i privilegi per aggiornare questa tabella.',
 	'Saving' => 'Salvataggio',
-	'Unknown error.' => 'Errore sconosciuto',
+	'Unknown error.' => 'Errore sconosciuto.',
 	'Database does not support password.' => 'Il database non supporta password.',
 	'yes' => 'si',
 	'no' => 'no',

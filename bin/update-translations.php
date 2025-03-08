@@ -2,6 +2,7 @@
 
 use function AdminNeo\find_available_languages;
 
+include __DIR__ . "/../admin/include/debug.inc.php";
 include __DIR__ . "/../admin/include/available.inc.php";
 
 $languages = find_available_languages();
@@ -58,18 +59,31 @@ foreach ($file_paths as $file_path) {
 foreach ($languages as $language => $dummy) {
 	$file_path = __DIR__ . "/../admin/translations/$language.inc.php";
 	$filename = basename($file_path);
+	$lang = basename($filename, ".inc.php");
+	$period = ($lang == "bn" ? '।' : (substr($lang, 0, 2) == 'zh' ? '。' : ($lang == 'he' || $lang == 'ja' ? '' : '\.')));
+
 	$messages = $all_messages;
 
 	$old_content = str_replace("\r", "", file_get_contents($file_path));
 
-	preg_match_all("~^(\\s*(?:// [^'].*\\s+)?)(?:// )?(('(?:[^\\\\']+|\\\\.)*') => .*[^,\n]),?~m", $old_content, $matches, PREG_SET_ORDER);
+	preg_match_all("~^(\\s*(?:// [^'].*\\s+)?)(?:// )?(('(?:[^\\\\']+|\\\\.)*') => .*[^,\n]),?~m", $old_content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
 	// Keep current messages.
 	$new_content = "";
 	foreach ($matches as $match) {
-		if (isset($messages[$match[3]])) {
-			$new_content .= "$match[1]$match[2],\n";
-			unset($messages[$match[3]]);
+		$indent = $match[1][0];
+		$line = $match[2][0];
+		$offset = $match[2][1];
+		$en = $match[3][0];
+
+		if (isset($messages[$en])) {
+			$new_content .= "$indent$line,\n";
+			unset($messages[$en]);
+
+			// Check mismatched periods.
+			if ($en != "','" && $period && !preg_match('~(null|\[])$~', $line) && (substr($en, -2, 1) == "." xor preg_match("~$period']?$~", $line))) {
+				echo "⚠️ $filename:" . (substr_count($old_content, "\n", 0, $offset) + 1) . " | Not matching period: $line\n";
+			}
 		}
 	}
 

@@ -16,7 +16,7 @@ $translations = [
 	'Logout successful.' => '成功登出。',
 	'Invalid server or credentials.' => null,
 	'There is a space in the input password which might be the cause.' => '您输入的密码中有一个空格，这可能是导致问题的原因。',
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo默认不支持访问没有密码的数据库，<a href="https://www.adminneo.org/password"%s>详情见这里</a>.',
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo默认不支持访问没有密码的数据库，<a href="https://www.adminneo.org/password"%s>详情见这里</a>。',
 	'Database does not support password.' => '数据库不支持密码。',
 	'Too many unsuccessful logins, try again in %d minute(s).' => '登录失败次数过多，请 %d 分钟后重试。',
 	'Language' => '语言',
@@ -46,7 +46,7 @@ $translations = [
 	'Revoke' => '废除',
 
 	'Process list' => '进程列表',
-	'%d process(es) have been killed.' => '%d 个进程被终止',
+	'%d process(es) have been killed.' => '%d 个进程被终止。',
 	'Kill' => '终止',
 
 	'Variables' => '变量',

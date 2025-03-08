@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 $translations = [
-	'%s must return an array.' => '%s xx.</a>',
+	'%s must return an array.' => '%s xx.',
 	'%s and %s must return an object created by %s method.' => '%s xx %s xx %s.',
 	'More information.' => 'Xx.',
 
@@ -23,7 +23,7 @@ $translations = [
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Xx, <a href="https://www.adminneo.org/password"%s>xx</a>.',
 	'Database does not support password.' => 'Xx.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => ['Xx %d.', 'Xx %d.'],
-	'Invalid permanent login, please login again.' => 'Xx',
+	'Invalid permanent login, please login again.' => 'Xx.',
 	'Language' => 'Xx',
 	'Invalid CSRF token. Send the form again.' => 'Xx.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Xx.',
@@ -61,6 +61,7 @@ $translations = [
 	'Status' => 'Xx',
 
 	'SQL command' => 'Xx',
+	'HTTP request' => 'Xx',
 	'%d query(s) executed OK.' => ['%d xx.', '%d xx.'],
 	'Query executed OK, %d row(s) affected.' => ['Xx, %d.', 'Xx, %d.'],
 	'No commands to execute.' => 'Xx.',

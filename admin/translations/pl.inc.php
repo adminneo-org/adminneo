@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 $translations = [
-	'%s must return an array.' => '%s musi zwrócić tablicę.</a>',
+	'%s must return an array.' => '%s musi zwrócić tablicę.',
 	'More information.' => 'Więcej informacji.',
 
 	// label for database system selection (MySQL, SQLite, ...)

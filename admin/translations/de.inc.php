@@ -3,8 +3,8 @@
 namespace AdminNeo;
 
 $translations = [
-	'%s must return an array.' => '%s muss ein Array zurückgeben.</a>',
-	'%s and %s must return an object created by %s method.' => "%s und %s müssen ein mit der Methode %s erstelltes Objekt zurückgeben.",
+	'%s must return an array.' => '%s muss ein Array zurückgeben.',
+	'%s and %s must return an object created by %s method.' => '%s und %s müssen ein mit der Methode %s erstelltes Objekt zurückgeben.',
 	'More information.' => 'Weitere Informationen.',
 
 	'Home' => 'Startseite',
@@ -298,9 +298,9 @@ $translations = [
 	'Unknown error.' => 'Unbekannter Fehler.',
 	'Database does not support password.' => 'Die Datenbank unterstützt kein Passwort.',
 	'One Time Password' => 'Einmal-Passwort',
-	'Enter OTP code.' => 'OTP-Code eingeben',
+	'Enter OTP code.' => 'OTP-Code eingeben.',
 	'Invalid OTP code.' => 'Ungültiger OTP-Code.',
-	'Access denied.' => 'Zugang verweigert',
+	'Access denied.' => 'Zugang verweigert.',
 
 	'Schemas' => 'Schemata',
 	'No schemas.' => 'Keine Schemata.',
@@ -309,8 +309,8 @@ $translations = [
 	'Database driver not found.' => 'Datenbanktreiber nicht gefunden.',
 
 	'Check has been dropped.' => 'Check wurde abgebrochen.',
-	'Check has been altered.' => 'Check wurde geändert',
-	'Check has been created.' => 'Check wurde erstellt',
+	'Check has been altered.' => 'Check wurde geändert.',
+	'Check has been created.' => 'Check wurde erstellt.',
 	'Alter check' => 'Check ändern',
 	'Create check' => 'Check erstellen',
 	'Checks' => 'Checks',

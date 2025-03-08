@@ -16,7 +16,7 @@ $translations = [
 	'Logout successful.' => '成功登出。',
 	'Invalid server or credentials.' => null,
 	'There is a space in the input password which might be the cause.' => '您輸入的密碼中有一個空格，這可能是導致問題的原因。',
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo預設不支援訪問沒有密碼的資料庫，<a href="https://www.adminneo.org/password"%s>詳情見這裡</a>.',
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo預設不支援訪問沒有密碼的資料庫，<a href="https://www.adminneo.org/password"%s>詳情見這裡</a>。',
 	'Database does not support password.' => '資料庫不支援密碼。',
 	'Too many unsuccessful logins, try again in %d minute(s).' => '登錄失敗次數過多，請 %d 分鐘後重試。',
 	'Language' => '語言',
@@ -46,7 +46,7 @@ $translations = [
 	'Revoke' => '廢除',
 
 	'Process list' => '處理程序列表',
-	'%d process(es) have been killed.' => '%d 個 Process(es) 被終止',
+	'%d process(es) have been killed.' => '%d 個 Process(es) 被終止。',
 	'Kill' => '終止',
 
 	'Variables' => '變數',
@@ -73,10 +73,10 @@ $translations = [
 	'From server' => '從伺服器',
 	'Webserver file %s' => '網頁伺服器檔案 %s',
 	'Run file' => '執行檔案',
-	'File does not exist.' => '檔案不存在',
+	'File does not exist.' => '檔案不存在。',
 	'File uploads are disabled.' => '檔案上傳已經被停用。',
 	'Unable to upload a file.' => '無法上傳檔案。',
-	'Maximum allowed file size is %sB.' => '允許的檔案上限大小為 %sB',
+	'Maximum allowed file size is %sB.' => '允許的檔案上限大小為 %sB。',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST 資料太大。減少資料或者增加 %s 的設定值。',
 	'You can upload a big SQL file via FTP and import it from server.' => '您可以通過FTP上傳大型SQL檔並從伺服器導入。',
 	'You are offline.' => '您離線了。',
@@ -126,11 +126,11 @@ $translations = [
 	'Move' => '轉移',
 	'Tables have been moved.' => '已轉移資料表。',
 	'Copy' => '複製',
-	'Tables have been copied.' => '資料表已經複製',
+	'Tables have been copied.' => '資料表已經複製。',
 	'overwrite' => '覆蓋',
 
 	'Routines' => '程序',
-	'Routine has been called, %d row(s) affected.' => '程序已被執行，%d 行被影響',
+	'Routine has been called, %d row(s) affected.' => '程序已被執行，%d 行被影響。',
 	'Call' => '呼叫',
 	'Parameter name' => '參數名稱',
 	'Create procedure' => '建立預存程序',
@@ -271,7 +271,7 @@ $translations = [
 
 	// %s can contain auto-increment value
 	'Item%s has been inserted.' => '已新增項目 %s。',
-	'Item has been deleted.' => '該項目已被刪除',
+	'Item has been deleted.' => '該項目已被刪除。',
 	'Item has been updated.' => '已更新項目。',
 	'%d item(s) have been affected.' => '%d 個項目受到影響。',
 	'New item' => '新增項目',
