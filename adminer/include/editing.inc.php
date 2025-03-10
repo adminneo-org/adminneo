@@ -704,15 +704,6 @@ function doc_link(array $paths, $text = "<sup>?</sup>") {
 	return "<a href='" . h($urls[$jush] . $paths[$jush] . ($jush == 'mssql' ? "?view=sql-server-ver$version" : "")) . "'" . target_blank() . ">$text</a>";
 }
 
-/** Wrap gzencode() for usage in ob_start()
-* @param string
-* @return string
-*/
-function ob_gzencode($string) {
-	// ob_start() callback receives an optional parameter $phase but gzencode() accepts optional parameter $level
-	return gzencode($string);
-}
-
 /** Compute size of database
 * @param string
 * @return string formatted
