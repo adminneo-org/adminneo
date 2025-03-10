@@ -379,7 +379,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 						$name = idf_escape($name);
 
 						if ($col != "" && $field["type"] == "enum") {
-							$conds[] = (in_array(0, $val) ? "$name IS NULL OR " : "") . "$name IN (" . implode(", ", array_map('intval', $val)) . ")";
+							$conds[] = (in_array(0, $val) ? "$name IS NULL OR " : "") . "$name IN (" . implode(", ", array_map('AdminNeo\q', $val)) . ")";
 						} else {
 							$text_type = preg_match('~char|text|enum|set~', $field["type"]);
 							$value = $this->processInput($field, (!$op && $text_type && preg_match('~^[^%]+$~', $val) ? "%$val%" : $val));

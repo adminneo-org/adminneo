@@ -22,22 +22,16 @@ class EnumOptionPlugin {
 			}
 			if ($field["null"]) {
 				$options[""] = "NULL";
-				if ($value === null && !isset($_GET["select"])) {
+				if ($selected === null) {
 					$selected = "";
 				}
 			}
-			if (!is_strict_mode()) {
-				$options[0] = lang('empty');
-			}
 			preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
-			foreach ($matches[1] as $i => $val) {
+			foreach ($matches[1] as $val) {
 				$val = stripcslashes(str_replace("''", "'", $val));
-				$options[$i + 1] = admin()->formatFieldValue($val, $field);
-				if ($value === $val) {
-					$selected = $i + 1;
-				}
+				$options[$val] = admin()->formatFieldValue($val, $field);
 			}
-			return "<select$attrs>" . optionlist($options, (string) $selected, 1) . "</select>"; // 1 - use keys
+			return "<select$attrs>" . optionlist($options, $selected, 1) . "</select>"; // 1 - use keys
 		}
 
 		return null;

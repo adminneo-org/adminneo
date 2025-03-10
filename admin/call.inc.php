@@ -79,11 +79,8 @@ if ($in) {
 		echo "<tr><th>" . $admin->getFieldName($field);
 		$value = $_POST["fields"][$name] ?? "";
 		if ($value != "") {
-			if ($field["type"] == "enum") {
-				$value = +$value;
-			}
 			if ($field["type"] == "set") {
-				$value = array_sum($value);
+				$value = implode(",", $value);
 			}
 		}
 		input($field, $value, (string) ($_POST["function"][$name] ?? "")); // param name can be empty
