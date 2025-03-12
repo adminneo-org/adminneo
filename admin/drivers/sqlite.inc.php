@@ -388,8 +388,8 @@ if (isset($_GET["sqlite"])) {
 			return false;
 		}
 		$link->query('PRAGMA encoding = "UTF-8"');
-		$link->query('CREATE TABLE adminer (i)'); // otherwise creates empty file
-		$link->query('DROP TABLE adminer');
+		$link->query('CREATE TABLE adminneo (i)'); // otherwise creates empty file
+		$link->query('DROP TABLE adminneo');
 		return true;
 	}
 
@@ -568,7 +568,7 @@ if (isset($_GET["sqlite"])) {
 		if ($add_check) {
 			$fields[] = "  CHECK ($add_check)";
 		}
-		$temp_name = ($table == $name ? "adminer_$name" : $name);
+		$temp_name = ($table == $name ? "adminneo_$name" : $name);
 		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $fields) . "\n)")) {
 			// implicit ROLLBACK to not overwrite $connection->error
 			return false;
