@@ -396,7 +396,7 @@ if ($arguments && preg_match('~\.json$~i', $arguments[0])) {
 
 if ($arguments) {
 	echo "Usage: php compile.php [editor] [drivers] [languages] [themes] [config-file.json]\n";
-	echo "Purpose: Compile adminer[-driver][-lang].php or editor[-driver][-lang].php.\n";
+	echo "Purpose: Compile adminneo[-driver][-lang].php or editorneo[-driver][-lang].php.\n";
 	exit(1);
 }
 
@@ -589,7 +589,7 @@ $file = php_shrink($file);
 
 // Save file to export directory.
 @mkdir(__DIR__ . "/../export", 0777, true);
-$filename = __DIR__ . "/../export/$project"
+$filename = __DIR__ . "/../export/{$project}neo"
 	. (is_dev_version() ? "" : "-$VERSION")
 	. ($single_driver ? "-$single_driver" : "")
 	. ($single_language ? "-$single_language" : "")

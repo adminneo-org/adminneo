@@ -128,7 +128,7 @@ function create_adminer(): Admin
 }
 
 // Include AdminNeo file.
-include "adminer.php";
+include "adminneo.php";
 ```
 
 Available configuration parameters:
@@ -174,7 +174,7 @@ File structure will be:
     - tinymce.php
     - file-upload.php
     - ...
-- adminer.php
+- adminneo.php
 - index.php
 ```
 
@@ -212,7 +212,7 @@ function create_adminer(): Pluginer
 }
 
 // Include AdminNeo or EditorNeo.
-include "adminer.php";
+include "adminneo.php";
 ```
 
 [Available plugins](plugins).
