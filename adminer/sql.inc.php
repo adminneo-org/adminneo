@@ -44,7 +44,7 @@ if (!$error && $_POST) {
 
 		if ($query != "" && strlen($query) < 1e6) { // don't add big queries
 			$q = $query . (preg_match("~;[ \t\r\n]*\$~", $query) ? "" : ";"); //! doesn't work with DELIMITER |
-			$last_record = end($history);
+			$last_record = $history ? end($history) : $last_record = [];
 			if (!$history || ($last_record && reset($last_record) != $q)) { // no repeated queries
 				restart_session();
 				$history[] = array($q, time()); //! add elapsed time
