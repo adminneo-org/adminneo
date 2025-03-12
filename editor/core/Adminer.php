@@ -71,7 +71,7 @@ class Adminer extends AdminerBase
 
 		echo "<p>";
 		echo "<input type='submit' class='button default' value='" . lang('Login') . "'>";
-		echo checkbox("auth[permanent]", 1, $_COOKIE["adminer_permanent"], lang('Permanent login'));
+		echo checkbox("auth[permanent]", 1, $_COOKIE["neo_permanent"], lang('Permanent login'));
 		echo "</p>\n";
 	}
 
@@ -338,7 +338,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		print_fieldset_start("email", lang('E-mail'), "email", (bool)$_POST["email_append"]);
 
 		echo script("qsl('div').onkeydown = partialArg(bodyKeydown, 'email');");
-		echo "<p>" . lang('From') . ": <input class='input' name='email_from' value='" . h($_POST ? $_POST["email_from"] : $_COOKIE["adminer_email"]) . "'>\n";
+		echo "<p>" . lang('From') . ": <input class='input' name='email_from' value='" . h($_POST ? $_POST["email_from"] : $_COOKIE["neo_email"]) . "'>\n";
 		echo lang('Subject') . ": <input class='input' name='email_subject' value='" . h($_POST["email_subject"]) . "'>\n";
 		echo "<p><textarea name='email_message' rows='15' cols='75'>" . h($_POST["email_message"] . ($_POST["email_append"] ? '{$' . "$_POST[email_addition]}" : "")) . "</textarea>\n";
 		echo "<p>" . script("qsl('p').onkeydown = partialArg(bodyKeydown, 'email_append');", "") . html_select("email_addition", $columns, $_POST["email_addition"]) . "<input type='submit' class='button' name='email_append' value='" . lang('Insert') . "'>\n"; //! JavaScript
@@ -456,7 +456,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 					}
 				}
 			}
-			cookie("adminer_email", $_POST["email_from"]);
+			cookie("neo_email", $_POST["email_from"]);
 			redirect(remove_from_uri(), lang('%d e-mail(s) have been sent.', $sent));
 		}
 		return false;
@@ -599,7 +599,7 @@ qsl('div').onclick = whisperClick;", "")
 	function navigation($missing) {
 		global $VERSION;
 
-		$last_version = $_COOKIE["adminer_version"] ?? null;
+		$last_version = $_COOKIE["neo_version"] ?? null;
 ?>
 
 <div class="header">

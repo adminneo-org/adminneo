@@ -133,7 +133,7 @@ class Adminer extends AdminerBase
 
 		echo "<p>";
 		echo "<input type='submit' class='button default' value='" . lang('Login') . "'>";
-		echo checkbox("auth[permanent]", 1, $_COOKIE["adminer_permanent"], lang('Permanent login'));
+		echo checkbox("auth[permanent]", 1, $_COOKIE["neo_permanent"], lang('Permanent login'));
 		echo "</p>\n";
 	}
 
@@ -1099,7 +1099,7 @@ class Adminer extends AdminerBase
 	function navigation($missing) {
 		global $VERSION, $jush, $drivers, $connection;
 
-		$last_version = $_COOKIE["adminer_version"] ?? null;
+		$last_version = $_COOKIE["neo_version"] ?? null;
 ?>
 
 <div class="header">

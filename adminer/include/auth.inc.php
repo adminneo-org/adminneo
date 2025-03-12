@@ -15,8 +15,8 @@ if (!$has_token) {
 $token = get_token(); ///< @var string CSRF protection
 
 $permanent = [];
-if ($_COOKIE["adminer_permanent"]) {
-	foreach (explode(" ", $_COOKIE["adminer_permanent"]) as $val) {
+if ($_COOKIE["neo_permanent"]) {
+	foreach (explode(" ", $_COOKIE["neo_permanent"]) as $val) {
 		list($key) = explode(":", $val);
 		$permanent[$key] = $val;
 	}
@@ -176,7 +176,7 @@ if ($auth) {
 		$private = $admin->permanentLogin(true);
 		$encrypted_password = $private ? encrypt_string($password, $private) : false;
 		$permanent[$key] = "$key:" . base64_encode($encrypted_password ?: "");
-		cookie("adminer_permanent", implode(" ", $permanent));
+		cookie("neo_permanent", implode(" ", $permanent));
 	}
 
 	if (count($_POST) == 1 // 1 - auth
@@ -214,7 +214,7 @@ function unset_permanent() {
 			unset($permanent[$key]);
 		}
 	}
-	cookie("adminer_permanent", implode(" ", $permanent));
+	cookie("neo_permanent", implode(" ", $permanent));
 }
 
 /** Renders an error message and a login form
@@ -246,7 +246,7 @@ function auth_error($error) {
 		$error = lang('Session support must be enabled.');
 	}
 	$params = session_get_cookie_params();
-	cookie("adminer_key", ($_COOKIE["adminer_key"] ?: get_random_string()), $params["lifetime"]);
+	cookie("neo_key", ($_COOKIE["neo_key"] ?: get_random_string()), $params["lifetime"]);
 
 	page_header(lang('Login'), $error, null, "auth");
 	echo "<form action='' method='post'>\n";

@@ -72,7 +72,7 @@ if (!$error && $_POST) {
 		$errors = [];
 		$parse = '[\'"' . ($jush == "sql" ? '`#' : ($jush == "sqlite" ? '`[' : ($jush == "mssql" ? '[' : ''))) . ']|/\*|-- |$' . ($jush == "pgsql" ? '|\$[^$]*\$' : '');
 		$total_start = microtime(true);
-		parse_str($_COOKIE["adminer_export"], $adminer_export);
+		parse_str($_COOKIE["neo_export"], $admin_export);
 		$dump_format = $admin->dumpFormat();
 		unset($dump_format["sql"]);
 
@@ -221,8 +221,8 @@ if (!$error && $_POST) {
 
 									if ($export) {
 										echo "<form id='$export_id' action='' method='post' class='hidden'><p>\n";
-										echo html_select("output", $admin->dumpOutput(), $adminer_export["output"]) . " ";
-										echo html_select("format", $dump_format, $adminer_export["format"]);
+										echo html_select("output", $admin->dumpOutput(), $admin_export["output"]) . " ";
+										echo html_select("format", $dump_format, $admin_export["format"]);
 										echo "<input type='hidden' name='query' value='", h($q), "'>";
 										echo "<input type='hidden' name='token' value='$token'>";
 										echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>";

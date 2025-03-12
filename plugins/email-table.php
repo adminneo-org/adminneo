@@ -32,7 +32,7 @@ class AdminerEmailTable {
 			print_fieldset_start("email", ('E-mail'), "email");
 			echo "<div>\n";
 			echo script("qsl('div').onkeydown = partial(bodyKeydown, 'email');");
-			echo "<p>" . ('From') . ": <input class='input' name='email_from' value='" . h($_POST ? $_POST["email_from"] : $_COOKIE["adminer_email"]) . "'>\n";
+			echo "<p>" . ('From') . ": <input class='input' name='email_from' value='" . h($_POST ? $_POST["email_from"] : $_COOKIE["neo_email"]) . "'>\n";
 			echo ('Subject') . ": <select name='email_id'><option>" . optionlist(get_key_vals("SELECT $this->id, $this->title FROM $this->table ORDER BY $this->title"), $_POST["email_id"], true) . "</select>\n";
 			echo "<p>" . ('Attachments') . ": <input type='file' name='email_files[]'>";
 			echo script("qsl('input').onchange = function () {

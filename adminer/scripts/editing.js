@@ -767,7 +767,7 @@ function schemaMouseup(event, db) {
 		s = encodeURIComponent(s.substr(1));
 		var link = gid('schema-link');
 		link.href = link.href.replace(/[^=]+$/, '') + s;
-		cookie('adminer_schema-' + db + '=' + s, 30); //! special chars in db
+		cookie('neo_schema-' + db + '=' + s, 30); //! special chars in db
 	}
 }
 

@@ -3,7 +3,7 @@
 $lang = $argv[1] ?? null;
 if ($lang) {
 	// Modify session and cookie to skip processing in language detection.
-	unset($_COOKIE["adminer_lang"]);
+	unset($_COOKIE["neo_lang"]);
 	$_SESSION["lang"] = $lang;
 
 	include __DIR__ . "/../adminer/include/lang.inc.php";

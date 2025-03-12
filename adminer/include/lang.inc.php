@@ -151,7 +151,7 @@ function language_select()
 }
 
 if (isset($_POST["lang"]) && verify_token()) { // $error not yet available
-	cookie("adminer_lang", $_POST["lang"]);
+	cookie("neo_lang", $_POST["lang"]);
 
 	$_SESSION["lang"] = $_POST["lang"]; // cookies may be disabled
 	$_SESSION["translations"] = []; // used in compiled version
@@ -162,9 +162,9 @@ if (isset($_POST["lang"]) && verify_token()) { // $error not yet available
 $available_languages = get_available_languages();
 $LANG = array_keys($available_languages)[0];
 
-if (isset($_COOKIE["adminer_lang"]) && isset($available_languages[$_COOKIE["adminer_lang"]])) {
-	cookie("adminer_lang", $_COOKIE["adminer_lang"]);
-	$LANG = $_COOKIE["adminer_lang"];
+if (isset($_COOKIE["neo_lang"]) && isset($available_languages[$_COOKIE["neo_lang"]])) {
+	cookie("neo_lang", $_COOKIE["neo_lang"]);
+	$LANG = $_COOKIE["neo_lang"];
 } elseif (isset($available_languages[$_SESSION["lang"]])) {
 	$LANG = $_SESSION["lang"];
 } elseif (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
