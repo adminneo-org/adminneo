@@ -27,13 +27,13 @@ function create_adminneo(): Admin
 
 		function database()
 		{
-			// will be escaped by Adminer
+			// will be escaped by Admin
 			return 'adminneo_test';
 		}
 
 		function tableName($tableStatus)
 		{
-			// tables without comments would return empty string and will be ignored by Adminer
+			// tables without comments would return empty string and will be ignored by Admin
 			return h($tableStatus["Comment"]);
 		}
 
