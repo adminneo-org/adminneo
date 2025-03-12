@@ -1,7 +1,7 @@
 Configuration
 =============
 
-You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminer()`
+You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminneo()`
 method that returns configured Admin instance.
 
 ```php
@@ -9,7 +9,7 @@ method that returns configured Admin instance.
 
 use AdminNeo\Admin;
 
-function create_adminer(): Admin 
+function create_adminneo(): Admin 
 {
     // Define configuration.
     $config = [

@@ -109,7 +109,7 @@ JSON configuration file example:
 Configuration
 -------------
 
-You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminer()` 
+You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminneo()` 
 method that returns configured `Admin` instance.
 
 ```php
@@ -117,7 +117,7 @@ method that returns configured `Admin` instance.
 
 use AdminNeo\Admin;
 
-function create_adminer(): Admin 
+function create_adminneo(): Admin 
 {
     // Define configuration.
     $config = [
@@ -163,7 +163,7 @@ Plugins
 AdminNeo functions can be changed or extended by plugins. Plugins are managed by `Pluginer` customization class. 
 
 * Download `Pluginer.php` and plugins you want and place them into the `plugins` folder.
-* Create `index.php` file implementing `create_adminer()` method that returns Pluginer instance.
+* Create `index.php` file implementing `create_adminneo()` method that returns Pluginer instance.
 
 File structure will be:
 
@@ -185,7 +185,7 @@ Index.php:
 
 use AdminNeo\Pluginer;
 
-function create_adminer(): Pluginer
+function create_adminneo(): Pluginer
 {
     // Required to run any plugin.
     include "plugins/Pluginer.php";

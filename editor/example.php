@@ -3,7 +3,7 @@
 use AdminNeo\Admin;
 use function AdminNeo\h;
 
-function create_adminer(): Admin
+function create_adminneo(): Admin
 {
 	class CdsEditor extends Admin
 	{
