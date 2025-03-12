@@ -2,7 +2,7 @@
 
 use AdminNeo\Admin;
 
-function create_adminer(): Admin
+function create_adminneo(): Admin
 {
 	include "../plugins/Pluginer.php";
 
