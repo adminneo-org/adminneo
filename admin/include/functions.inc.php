@@ -12,10 +12,10 @@ function connection() {
 	return $connection;
 }
 
-/** Get Adminer object
+/** Get Admin object
 * @return Admin
 */
-function adminer() {
+function admin() {
 	global $admin;
 	return $admin;
 }

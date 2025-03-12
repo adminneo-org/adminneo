@@ -170,7 +170,7 @@ if (isset($_GET["elastic"])) {
 			$search = $this->_conn->rootQuery($query, $data);
 
 			if ($print) {
-				echo adminer()->selectQuery("$query: " . json_encode($data), $start, !$search);
+				echo admin()->selectQuery("$query: " . json_encode($data), $start, !$search);
 			}
 			if (empty($search)) {
 				return false;
@@ -308,7 +308,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function logged_user() {
-		$credentials = adminer()->getCredentials();
+		$credentials = admin()->getCredentials();
 
 		return $credentials[1];
 	}

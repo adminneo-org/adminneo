@@ -29,7 +29,7 @@ class SqlLogPlugin {
 
 	function _log($query) {
 		if ($this->filename == "") {
-			$admin = adminer();
+			$admin = admin();
 			$this->filename = $admin->database() . ".sql"; // no database goes to ".sql" to avoid collisions
 		}
 		$fp = fopen($this->filename, "a");
