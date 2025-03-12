@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Show comments of sql structure in more places (mainly where you edit things)
  * @link https://www.adminer.org/plugins/#use

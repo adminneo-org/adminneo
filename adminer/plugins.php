@@ -1,18 +1,18 @@
 <?php
 
-use Adminer\AdminerDumpAlter;
-use Adminer\AdminerDumpBz2;
-use Adminer\AdminerDumpJson;
-use Adminer\AdminerDumpXml;
-use Adminer\AdminerDumpZip;
-use Adminer\AdminerEditForeign;
-use Adminer\AdminerEnumOption;
-use Adminer\AdminerFileUpload;
-use Adminer\AdminerForeignSystem;
-use Adminer\AdminerJsonPreview;
-use Adminer\AdminerSlugify;
-use Adminer\AdminerTranslation;
-use Adminer\Pluginer;
+use AdminNeo\AdminerDumpAlter;
+use AdminNeo\AdminerDumpBz2;
+use AdminNeo\AdminerDumpJson;
+use AdminNeo\AdminerDumpXml;
+use AdminNeo\AdminerDumpZip;
+use AdminNeo\AdminerEditForeign;
+use AdminNeo\AdminerEnumOption;
+use AdminNeo\AdminerFileUpload;
+use AdminNeo\AdminerForeignSystem;
+use AdminNeo\AdminerJsonPreview;
+use AdminNeo\AdminerSlugify;
+use AdminNeo\AdminerTranslation;
+use AdminNeo\Pluginer;
 
 function create_adminer(): Pluginer
 {

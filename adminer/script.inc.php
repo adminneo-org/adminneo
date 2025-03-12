@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 header("Content-Type: text/javascript; charset=utf-8");
 

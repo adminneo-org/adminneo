@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 add_driver("oracle", "Oracle (beta)");
 

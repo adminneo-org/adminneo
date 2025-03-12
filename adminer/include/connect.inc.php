@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 if (isset($_GET["status"])) {
 	$_GET["variables"] = $_GET["status"];

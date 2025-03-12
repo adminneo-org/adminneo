@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Dump to JSON format
 * @link https://www.adminer.org/plugins/#use

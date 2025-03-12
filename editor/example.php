@@ -1,7 +1,7 @@
 <?php
 
-use Adminer\Adminer;
-use function Adminer\h;
+use AdminNeo\Adminer;
+use function AdminNeo\h;
 
 function create_adminer(): Adminer
 {

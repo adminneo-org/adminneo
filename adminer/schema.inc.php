@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $title2 = h(": " . DB . ($_GET["ns"] ? ".$_GET[ns]" : ""));
 page_header(lang('Database schema') . $title2, "", [lang('Database schema')]);

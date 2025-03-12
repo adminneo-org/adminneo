@@ -7,7 +7,7 @@ method that returns configured Adminer instance.
 ```php
 <?php
 
-use Adminer\Adminer;
+use AdminNeo\Adminer;
 
 function create_adminer(): Adminer 
 {

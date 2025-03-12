@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Require One-Time Password at login
  * @link https://www.adminer.org/plugins/otp/

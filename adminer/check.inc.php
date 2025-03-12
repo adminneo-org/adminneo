@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $TABLE = $_GET["check"];
 $name = $_GET["name"];

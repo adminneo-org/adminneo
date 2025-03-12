@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 if (support("kill")) {
 	if ($_POST && !$error) {

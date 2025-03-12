@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Dump to XML format in structure <database name=""><table name=""><column name="">value
 * @link https://www.adminer.org/plugins/#use

@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Use <textarea> for char and varchar
 * @link https://www.adminer.org/plugins/#use

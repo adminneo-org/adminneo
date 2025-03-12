@@ -1,6 +1,6 @@
 <?php
 
-use Adminer\Adminer;
+use AdminNeo\Adminer;
 
 function create_adminer(): Adminer
 {

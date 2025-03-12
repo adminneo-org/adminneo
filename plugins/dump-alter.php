@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Exports one database (e.g. development) so that it can be synced with other database (e.g. production)
 * @link https://www.adminer.org/plugins/#use

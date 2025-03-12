@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $translations = [
 	// label for database system selection (MySQL, SQLite, ...)

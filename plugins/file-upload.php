@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Edit fields ending with "_path" by <input type="file"> and link to the uploaded files from select
 * @link https://www.adminer.org/plugins/#use

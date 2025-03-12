@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $TABLE = $_GET["view"];
 $row = $_POST;

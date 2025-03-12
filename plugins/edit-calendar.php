@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Display jQuery UI Timepicker for each date and datetime field
 * @link https://www.adminer.org/plugins/#use

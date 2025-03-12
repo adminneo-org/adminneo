@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 if (isset($_GET["file"])) {
 	load_compiled_file($_GET["file"]);

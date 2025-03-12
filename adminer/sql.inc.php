@@ -1,5 +1,5 @@
 <?php
-namespace Adminer;
+namespace AdminNeo;
 
 
 if (!$error && $_POST["export"]) {

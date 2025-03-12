@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 set_error_handler(function ($errno, $errstr) {
@@ -118,7 +118,7 @@ include __DIR__ . "/../drivers/simpledb.inc.php";
 
 if (function_exists('\create_adminer')) {
 	$adminer = \create_adminer();
-} elseif (function_exists('Adminer\create_adminer')) {
+} elseif (function_exists('AdminNeo\create_adminer')) {
 	$adminer = create_adminer();
 } else {
 	$adminer = new Adminer();

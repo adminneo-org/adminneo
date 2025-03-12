@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Dump to Bzip2 format
 * @link https://www.adminer.org/plugins/#use

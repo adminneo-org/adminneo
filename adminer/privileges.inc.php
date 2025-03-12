@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $title2 = DB != "" ? h(": " . DB) : "";
 page_header(lang('Privileges') . $title2, "", [lang('Privileges')]);

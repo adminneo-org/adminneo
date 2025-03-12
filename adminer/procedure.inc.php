@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $PROCEDURE = ($_GET["name"] ? $_GET["name"] : $_GET["procedure"]);
 $routine = (isset($_GET["function"]) ? "FUNCTION" : "PROCEDURE");

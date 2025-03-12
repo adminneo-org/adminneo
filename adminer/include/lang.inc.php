@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 // TODO: Extract list of available languages to separated file.
 // Then it can be included into the update-translations.php without running unwanted code.

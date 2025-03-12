@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 use stdClass;
 
@@ -427,7 +427,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function drop_databases($databases) {
-		return queries("DROP DATABASE " . implode(", ", array_map('Adminer\idf_escape', $databases)));
+		return queries("DROP DATABASE " . implode(", ", array_map('AdminNeo\idf_escape', $databases)));
 	}
 
 	function rename_database($name, $collation) {
@@ -557,11 +557,11 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function drop_views($views) {
-		return queries("DROP VIEW " . implode(", ", array_map('Adminer\table', $views)));
+		return queries("DROP VIEW " . implode(", ", array_map('AdminNeo\table', $views)));
 	}
 
 	function drop_tables($tables) {
-		return queries("DROP TABLE " . implode(", ", array_map('Adminer\table', $tables)));
+		return queries("DROP TABLE " . implode(", ", array_map('AdminNeo\table', $tables)));
 	}
 
 	function move_tables($tables, $views, $target) {

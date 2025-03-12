@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Expanded table structure output
 * @link https://www.adminer.org/plugins/#use

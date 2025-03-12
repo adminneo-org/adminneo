@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Prefill field containing "_slug" with slugified value of a previous field (JavaScript)
 * @link https://www.adminer.org/plugins/#use

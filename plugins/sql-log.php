@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Log all queries to SQL file (manual queries through SQL command are not logged)
 * @link https://www.adminer.org/plugins/#use

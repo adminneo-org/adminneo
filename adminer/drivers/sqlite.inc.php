@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 use Exception;
 use SQLite3;
@@ -101,7 +101,7 @@ if (isset($_GET["sqlite"])) {
 
 	}
 
-	if (class_exists("Adminer\\Min_SQLite")) {
+	if (class_exists("AdminNeo\\Min_SQLite")) {
 		class Min_DB extends Min_SQLite {
 
 			function __construct() {
@@ -575,7 +575,7 @@ if (isset($_GET["sqlite"])) {
 		}
 
 		if ($table != "") {
-			if ($originals && !queries("INSERT INTO " . table($temp_name) . " (" . implode(", ", $originals) . ") SELECT " . implode(", ", array_map('Adminer\idf_escape', array_keys($originals))) . " FROM " . table($table))) {
+			if ($originals && !queries("INSERT INTO " . table($temp_name) . " (" . implode(", ", $originals) . ") SELECT " . implode(", ", array_map('AdminNeo\idf_escape', array_keys($originals))) . " FROM " . table($table))) {
 				return false;
 			}
 
@@ -722,7 +722,7 @@ if (isset($_GET["sqlite"])) {
 				continue;
 			}
 
-			$return .= ";\n\n" . index_sql($table, $index['type'], $name, "(" . implode(", ", array_map('Adminer\idf_escape', $index['columns'])) . ")");
+			$return .= ";\n\n" . index_sql($table, $index['type'], $name, "(" . implode(", ", array_map('AdminNeo\idf_escape', $index['columns'])) . ")");
 		}
 
 		return $return;

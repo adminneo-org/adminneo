@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 set_error_handler(function ($errno, $errstr) {
@@ -455,7 +455,7 @@ if ($single_driver) {
 }
 
 // Compile files included into the index.php.
-$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]*)";~', 'Adminer\put_file', $file);
+$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]*)";~', 'AdminNeo\put_file', $file);
 
 // Remove including devel files.
 $file = str_replace('include __DIR__ . "/debug.inc.php"', '', $file);
@@ -493,8 +493,8 @@ if ($single_driver) {
 }
 
 // Compile language files.
-$file = preg_replace_callback("~lang\\('((?:[^\\\\']+|\\\\.)*)'([,)])~s", 'Adminer\replace_lang', $file);
-$file = preg_replace_callback('~\binclude __DIR__ \. "([^"]*\$LANG.inc.php)";~', 'Adminer\put_file_lang', $file);
+$file = preg_replace_callback("~lang\\('((?:[^\\\\']+|\\\\.)*)'([,)])~s", 'AdminNeo\replace_lang', $file);
+$file = preg_replace_callback('~\binclude __DIR__ \. "([^"]*\$LANG.inc.php)";~', 'AdminNeo\put_file_lang', $file);
 
 $file = str_replace("\r", "", $file);
 
@@ -503,8 +503,8 @@ preg_match_all('~^use ([^; ]+);~m', $file, $matches);
 $file = preg_replace('~^use ([^; ]+);~m', "", $file);
 $usages = implode("\n", array_combine($matches[1], $matches[0]));
 
-$pos = strpos($file, "namespace Adminer;\n") + strlen("namespace Adminer;\n");
-$file = substr($file, 0, $pos) . $usages . str_replace("namespace Adminer;\n", "", substr($file, $pos));
+$pos = strpos($file, "namespace AdminNeo;\n") + strlen("namespace AdminNeo;\n");
+$file = substr($file, 0, $pos) . $usages . str_replace("namespace AdminNeo;\n", "", substr($file, $pos));
 
 // Integrate static files.
 preg_match_all('~link_files\("([^"]+)", \[([^]]+)]\)~', $file, $matches);

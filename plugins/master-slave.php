@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Execute writes on master and reads on slave
 * @link https://www.adminer.org/plugins/#use

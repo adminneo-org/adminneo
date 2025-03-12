@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $status = isset($_GET["status"]);
 $title = $status ? lang('Status') : lang('Variables');
