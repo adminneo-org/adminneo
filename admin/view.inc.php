@@ -21,7 +21,7 @@ if ($_POST && !$error) {
 	if (!$_POST["drop"] && $TABLE == $name && $jush != "sqlite" && $type == "VIEW" && $orig_type == "VIEW") {
 		query_redirect(($jush == "mssql" ? "ALTER" : "CREATE OR REPLACE") . " VIEW " . table($name) . $as, $location, $message);
 	} else {
-		$temp_name = $name . "_adminer_" . uniqid();
+		$temp_name = $name . "_adminneo_" . uniqid();
 		drop_create(
 			"DROP $orig_type " . table($TABLE),
 			"CREATE $type " . table($name) . $as,
