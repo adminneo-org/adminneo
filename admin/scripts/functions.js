@@ -97,7 +97,7 @@ function cookie(assign, days) {
 }
 
 /**
- * Verifies current Adminer version.
+ * Verifies current AdminNeo version.
  *
  * @param baseUrl string
  * @param token string

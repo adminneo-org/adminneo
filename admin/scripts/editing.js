@@ -1,4 +1,4 @@
-// Adminer specific functions
+// Admin specific functions
 
 /**
  * Loads syntax highlighting.

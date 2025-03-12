@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-/** Get e-mail subject and message from database (Adminer Editor)
+/** Get e-mail subject and message from database (EditorNeo)
 * @link https://www.adminer.org/plugins/#use
 * @author Jakub Vrana, https://www.vrana.cz/
 * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0

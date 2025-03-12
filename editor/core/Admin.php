@@ -742,7 +742,7 @@ qsl('div').onclick = whisperClick;", "")
 			$beginning = "--$boundary$eol$headers$eol$eol";
 			$headers = "Content-Type: multipart/mixed; boundary=\"$boundary\"";
 		}
-		$headers .= $eol . "MIME-Version: 1.0$eol" . "X-Mailer: Adminer Editor"
+		$headers .= $eol . "MIME-Version: 1.0$eol" . "X-Mailer: EditorNeo"
 			. ($from ? $eol . "From: " . str_replace("\n", "", $from) : ""); //! should escape display name
 
 		// iconv_mime_encode requires iconv, imap_8bit requires IMAP extension

@@ -292,7 +292,7 @@ if (isset($_GET["pgsql"])) {
 		}
 
 		if (min_version(9, 0, $connection)) {
-			$connection->query("SET application_name = 'Adminer'");
+			$connection->query("SET application_name = 'AdminNeo'");
 
 			if (min_version(9.2, 0, $connection)) {
 				$structured_types[lang('Strings')][] = "json";
