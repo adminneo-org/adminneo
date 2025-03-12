@@ -7,9 +7,9 @@ set_error_handler(function ($errno, $errstr) {
 	return (bool)preg_match('~^Undefined array key~', $errstr);
 }, E_WARNING);
 
-include __DIR__ . "/../adminer/include/version.inc.php";
-include __DIR__ . "/../adminer/include/debug.inc.php";
-include __DIR__ . "/../adminer/include/compile.inc.php";
+include __DIR__ . "/../admin/include/version.inc.php";
+include __DIR__ . "/../admin/include/debug.inc.php";
+include __DIR__ . "/../admin/include/compile.inc.php";
 
 function is_dev_version(): bool
 {
@@ -109,7 +109,7 @@ function put_file_lang(): string
 	$languages = array_map(function ($filename) {
 		preg_match('~/([^/.]+)\.inc\.php$~', $filename, $matches);
 		return $matches[1];
-	}, glob(__DIR__ . "/../adminer/lang/*.inc.php"));
+	}, glob(__DIR__ . "/../admin/lang/*.inc.php"));
 
 	$cases = "";
 	$plurals_map = [];
@@ -123,7 +123,7 @@ function put_file_lang(): string
 
 		// Assign $translations
 		$translations = [];
-		include __DIR__ . "/../adminer/lang/$language.inc.php";
+		include __DIR__ . "/../admin/lang/$language.inc.php";
 
 		$translation_ids = array_flip($lang_ids); // default translation
 		foreach ($translations as $key => $val) {
@@ -323,7 +323,7 @@ function ini_bool(): bool {
 $arguments = $argv;
 array_shift($arguments);
 
-$project = "adminer";
+$project = "admin";
 if ($arguments[0] == "editor") {
 	$project = "editor";
 	array_shift($arguments);
@@ -333,7 +333,7 @@ $selected_drivers = [];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
-	if (file_exists(__DIR__ . "/../adminer/drivers/" . $params[0] . ".inc.php")) {
+	if (file_exists(__DIR__ . "/../admin/drivers/" . $params[0] . ".inc.php")) {
 		$selected_drivers = $params;
 		array_shift($arguments);
 	}
@@ -347,7 +347,7 @@ $selected_languages = [];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
-	if (file_exists(__DIR__ . "/../adminer/lang/" . $params[0] . ".inc.php")) {
+	if (file_exists(__DIR__ . "/../admin/lang/" . $params[0] . ".inc.php")) {
 		$selected_languages = $params;
 		array_shift($arguments);
 	}
@@ -359,11 +359,11 @@ if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
 	$base_name = str_replace("+", "", $params[0]);
-	if ($base_name == "default" || file_exists(__DIR__ . "/../adminer/themes/$base_name.css")) {
+	if ($base_name == "default" || file_exists(__DIR__ . "/../admin/themes/$base_name.css")) {
 		foreach ($params as $theme) {
 			// Expand names with wildcards.
 			if (strpos($theme, "+") !== false) {
-				foreach (glob(__DIR__ . "/../adminer/themes/" . str_replace("+", "*", $theme)) as $filename) {
+				foreach (glob(__DIR__ . "/../admin/themes/" . str_replace("+", "*", $theme)) as $filename) {
 					$selected_themes[] = str_replace(".css", "", basename($filename));
 				};
 			} else {
@@ -402,14 +402,14 @@ if ($arguments) {
 
 // Check function definition in drivers.
 /* Disabled for now because it reports too many warnings.
-$file = file_get_contents(__DIR__ . "/../adminer/drivers/mysql.inc.php");
+$file = file_get_contents(__DIR__ . "/../admin/drivers/mysql.inc.php");
 $file = preg_replace('~class Min_Driver.*\n\t}~sU', '', $file);
 preg_match_all('~\bfunction ([^(]+)~', $file, $matches); //! respect context (extension, class)
 $functions = array_combine($matches[1], $matches[0]);
 //! do not warn about functions without declared support()
 unset($functions["__construct"], $functions["__destruct"], $functions["set_charset"]);
 
-foreach (glob(__DIR__ . "/../adminer/drivers/*.inc.php") as $filename) {
+foreach (glob(__DIR__ . "/../admin/drivers/*.inc.php") as $filename) {
 	preg_match('~/([^/.]+)\.inc\.php$~', $filename, $matches);
 	if ($matches[1] == "mysql" || ($selected_drivers && !in_array($matches[1], $selected_drivers))) {
 		continue;
@@ -424,8 +424,8 @@ foreach (glob(__DIR__ . "/../adminer/drivers/*.inc.php") as $filename) {
 }
 */
 
-include __DIR__ . "/../adminer/include/pdo.inc.php";
-include __DIR__ . "/../adminer/include/driver.inc.php";
+include __DIR__ . "/../admin/include/pdo.inc.php";
+include __DIR__ . "/../admin/include/driver.inc.php";
 
 $features = ["check", "call" => "routine", "dump", "event", "privileges", "procedure" => "routine", "processlist", "routine", "scheme", "sequence", "status", "trigger", "type", "user" => "privileges", "variables", "view"];
 $lang_ids = []; // global variable simplifies usage in a callback functions
@@ -439,7 +439,7 @@ $file = file_get_contents(__DIR__ . "/../$project/index.php");
 // Remove including source code for unsupported features in single-driver file.
 if ($single_driver) {
 	$_GET[$single_driver] = true; // to load the driver
-	include __DIR__ . "/../adminer/drivers/$single_driver.inc.php";
+	include __DIR__ . "/../admin/drivers/$single_driver.inc.php";
 
 	foreach ($features as $key => $feature) {
 		if (!support($feature)) {
@@ -467,9 +467,9 @@ $file = preg_replace_callback('~\binclude __DIR__ \. "/../drivers/([^.]+).*\n~',
 	return in_array($match[1], $selected_drivers) ? $match[0] : "";
 }, $file);
 
-// Compile files included into the /adminer/include/bootstrap.inc.php.
+// Compile files included into the /admin/include/bootstrap.inc.php.
 $file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]*)";~', function ($match) {
-	return put_file($match, "../adminer/include");
+	return put_file($match, "../admin/include");
 }, $file);
 
 if ($single_driver) {
