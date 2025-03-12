@@ -142,7 +142,7 @@ Available configuration parameters:
 | `navigationMode`            | simple        | Main navigation mode that affects the left menu with the list of tables and top links: `simple`, `dual`, `reversed`.                                |
 | `preferSelection`           | false         | Whether data selection is the primary action for all table links.                                                                                   |
 | `recordsPerPage`            | 50            | Number of selected records per one page.                                                                                                            |
-| `versionVerification`       | true          | Whether verification of the new Adminer's version is enabled.                                                                                       |
+| `versionVerification`       | true          | Whether verification of the new AdminNeo's version is enabled.                                                                                      |
 | `hiddenDatabases`           | []            | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
 | `hiddenSchemas`             | []            | List of schemas to hide from the UI. Value `__system` will be expanded to all system schemas. Access to these schemas will be not restricted.       |
 | `visibleCollations`         | []            | List of collations to keep in select boxes while editing databases or tables.                                                                       |

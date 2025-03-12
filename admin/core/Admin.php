@@ -1092,7 +1092,7 @@ class Admin extends AdminBase
 		return true;
 	}
 
-	/** Prints navigation after Adminer title
+	/** Prints navigation
 	* @param string can be "auth" if there is no database connection, "db" if there is no database selected, "ns" with invalid schema
 	* @return null
 	*/
