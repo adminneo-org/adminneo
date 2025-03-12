@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Include current date and time in export filename
 * @link https://www.adminer.org/plugins/#use

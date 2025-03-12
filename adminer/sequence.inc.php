@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $SEQUENCE = $_GET["sequence"];
 $row = $_POST;

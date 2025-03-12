@@ -14,7 +14,7 @@
  * @license GNU General Public License, version 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-namespace Adminer;
+namespace AdminNeo;
 
 include "../adminer/core/AdminerBase.php";
 include "core/Adminer.php";

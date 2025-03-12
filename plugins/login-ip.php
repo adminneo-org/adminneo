@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Check IP address and allow empty password
 * @link https://www.adminer.org/plugins/#use

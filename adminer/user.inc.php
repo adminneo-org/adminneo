@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $USER = $_GET["user"];
 $privileges = ["" => ["All privileges" => ""]];
