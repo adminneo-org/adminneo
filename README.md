@@ -63,7 +63,7 @@ Where:
   If not specified, only the default theme without color variants will be included. The `+` character can be used as 
   a wildcard in the theme name.
 - `config-file.json` is a path to the custom JSON configuration file. It contains a class with [the same parameters](#configuration) 
-  that can be configured in Adminer constructor.
+  that can be configured in Admin constructor.
 
 If the theme name contains a postfix with one of the supported color variants (-green, -red), the corresponding favicons
 will be included automatically.
@@ -110,21 +110,21 @@ Configuration
 -------------
 
 You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminer()` 
-method that returns configured `Adminer` instance.
+method that returns configured `Admin` instance.
 
 ```php
 <?php
 
-use AdminNeo\Adminer;
+use AdminNeo\Admin;
 
-function create_adminer(): Adminer 
+function create_adminer(): Admin 
 {
     // Define configuration.
     $config = [
         "colorVariant" => "green",
     ];
 	
-    return new Adminer($config);
+    return new Admin($config);
 }
 
 // Include AdminNeo file.

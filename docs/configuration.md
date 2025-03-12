@@ -2,21 +2,21 @@ Configuration
 =============
 
 You can define a configuration as a constructor parameter. Create `index.php` file implementing `create_adminer()`
-method that returns configured Adminer instance.
+method that returns configured Admin instance.
 
 ```php
 <?php
 
-use AdminNeo\Adminer;
+use AdminNeo\Admin;
 
-function create_adminer(): Adminer 
+function create_adminer(): Admin 
 {
     // Define configuration.
     $config = [
         "colorVariant" => "green",
     ];
 	
-    return new Adminer($config);
+    return new Admin($config);
 }
 
 // Include original Adminer.

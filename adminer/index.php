@@ -16,8 +16,8 @@
 
 namespace AdminNeo;
 
-include "core/AdminerBase.php";
-include "core/Adminer.php";
+include "core/AdminBase.php";
+include "core/Admin.php";
 include "core/TmpFile.php";
 
 include "include/editing.inc.php";

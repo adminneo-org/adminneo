@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-abstract class AdminerBase
+abstract class AdminBase
 {
 	/** @var Config */
 	protected $config;

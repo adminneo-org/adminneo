@@ -16,8 +16,8 @@
 
 namespace AdminNeo;
 
-include "../adminer/core/AdminerBase.php";
-include "core/Adminer.php";
+include "../adminer/core/AdminBase.php";
+include "core/Admin.php";
 
 include "../adminer/include/bootstrap.inc.php";
 include "include/connect.inc.php";
