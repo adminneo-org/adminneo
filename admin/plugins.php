@@ -14,7 +14,7 @@ use AdminNeo\TranslationPlugin;
 use AdminNeo\XmlDumpPlugin;
 use AdminNeo\ZipDumpPlugin;
 
-function create_adminer(): Pluginer
+function create_adminneo(): Pluginer
 {
 	foreach (glob("../plugins/*.php") as $filename) {
 		include $filename;

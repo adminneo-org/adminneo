@@ -116,10 +116,10 @@ include __DIR__ . "/../drivers/clickhouse.inc.php";
 include __DIR__ . "/../drivers/firebird.inc.php";
 include __DIR__ . "/../drivers/simpledb.inc.php";
 
-if (function_exists('\create_adminer')) {
-	$admin = \create_adminer();
-} elseif (function_exists('AdminNeo\create_adminer')) {
-	$admin = create_adminer();
+if (function_exists('\create_adminneo')) {
+	$admin = \create_adminneo();
+} elseif (function_exists('AdminNeo\create_adminneo')) {
+	$admin = create_adminneo();
 } else {
 	$admin = new Admin();
 }
