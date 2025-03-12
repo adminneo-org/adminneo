@@ -33,11 +33,11 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 	// Load Adminer version from file if cookie is missing.
 	if ($admin->getConfig()->isVersionVerificationEnabled()) {
 		$filename = get_temp_dir() . "/adminer.version";
-		if (!isset($_COOKIE["adminer_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds
+		if (!isset($_COOKIE["neo_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds
 			$data = unserialize(file_get_contents($filename));
 
-			$_COOKIE["adminer_version"] = $data["version"];
-			cookie("adminer_version", $data["version"], $lifetime); // Sync expiration with the file.
+			$_COOKIE["neo_version"] = $data["version"];
+			cookie("neo_version", $data["version"], $lifetime); // Sync expiration with the file.
 		}
 	}
 	?>
