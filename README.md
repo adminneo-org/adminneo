@@ -55,11 +55,11 @@ php bin/compile.php editor [drivers] [languages] [themes] [config-file.json]
 ```
 
 Where:
-- `drivers` is a comma-separated list of [database drivers](adminer/drivers).
+- `drivers` is a comma-separated list of [database drivers](admin/drivers).
   The default set is: mysql, pgsql, mssql, sqlite.
-- `languages` is a comma-separated list of [languages](adminer/lang).
+- `languages` is a comma-separated list of [languages](admin/lang).
   If not specified, all languages will be included.
-- `themes` is a comma-separated list of [themes](adminer/themes).
+- `themes` is a comma-separated list of [themes](admin/themes).
   If not specified, only the default theme without color variants will be included. The `+` character can be used as 
   a wildcard in the theme name.
 - `config-file.json` is a path to the custom JSON configuration file. It contains a class with [the same parameters](#configuration) 
@@ -220,11 +220,11 @@ include "adminer.php";
 Main project files
 ------------------
 
-- adminer/index.php - Run development version of AdminNeo.
+- admin/index.php - Run development version of AdminNeo.
 - editor/index.php - Run development version of EditorNeo.
 - editor/example.php - Example Editor customization.
-- adminer/plugins.php - Plugins demo.
-- adminer/sqlite.php - Development version of AdminNeo with SQLite allowed.
+- admin/plugins.php - Plugins demo.
+- admin/sqlite.php - Development version of AdminNeo with SQLite allowed.
 - editor/sqlite.php - Development version of Editor with SQLite allowed.
 - bin/compile.php - Create a single file version.
 - bin/update-languages.php - Update language files.

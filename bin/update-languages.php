@@ -6,20 +6,20 @@ if ($lang) {
 	unset($_COOKIE["neo_lang"]);
 	$_SESSION["lang"] = $lang;
 
-	include __DIR__ . "/../adminer/include/lang.inc.php";
+	include __DIR__ . "/../admin/include/lang.inc.php";
 
 	if (isset($argv[2]) || (!isset($languages[$lang]) && $lang != "xx")) {
-		echo "Usage: php update-translations.php [lang]\nPurpose: Update adminer/lang/*.inc.php from source code messages.\n";
+		echo "Usage: php update-translations.php [lang]\nPurpose: Update admin/lang/*.inc.php from source code messages.\n";
 		exit(1);
 	}
 }
 
 // Get all texts from the source code.
 $file_paths = array_merge(
-	glob(__DIR__ . "/../adminer/*.php"),
-	glob(__DIR__ . "/../adminer/core/*.php"),
-	glob(__DIR__ . "/../adminer/include/*.php"),
-	glob(__DIR__ . "/../adminer/drivers/*.php"),
+	glob(__DIR__ . "/../admin/*.php"),
+	glob(__DIR__ . "/../admin/core/*.php"),
+	glob(__DIR__ . "/../admin/include/*.php"),
+	glob(__DIR__ . "/../admin/drivers/*.php"),
 	glob(__DIR__ . "/../editor/*.php"),
 	glob(__DIR__ . "/../editor/core/*.php"),
 	glob(__DIR__ . "/../editor/include/*.php"),
@@ -36,7 +36,7 @@ foreach ($file_paths as $file_path) {
 }
 
 // Generate language file.
-foreach (glob(__DIR__ . "/../adminer/lang/" . ($_SESSION["lang"] ?? "*") . ".inc.php") as $file_path) {
+foreach (glob(__DIR__ . "/../admin/lang/" . ($_SESSION["lang"] ?? "*") . ".inc.php") as $file_path) {
 	$filename = basename($file_path);
 	$messages = $all_messages;
 

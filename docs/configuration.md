@@ -183,7 +183,7 @@ List of predefined server connections. Each server connection has parameters:
 
 | Parameter  | Required | Description                                                                                              |
 |------------|----------|----------------------------------------------------------------------------------------------------------|
-| `driver`   | YES      | Driver code: `mysql`, `pgsql`, `elastic`, etc. ([available drivers](adminer/drivers))                    |
+| `driver`   | YES      | Driver code: `mysql`, `pgsql`, `elastic`, etc. ([available drivers](/admin/drivers))                     |
 | `server`   | no       | Server address.                                                                                          |
 | `database` | no       | Database name, or file path to SQLite file.                                                              |
 | `name`     | no       | Custom server name.                                                                                      |

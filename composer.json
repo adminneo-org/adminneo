@@ -21,7 +21,7 @@
     ],
     "autoload": {
         "exclude-from-classmap": [
-            "adminer/drivers/"
+            "admin/drivers/"
         ],
         "classmap": [
             "plugins/"
