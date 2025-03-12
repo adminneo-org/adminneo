@@ -1,11 +1,11 @@
 <?php
 
-use AdminNeo\Adminer;
+use AdminNeo\Admin;
 use function AdminNeo\h;
 
-function create_adminer(): Adminer
+function create_adminer(): Admin
 {
-	class CdsEditor extends Adminer
+	class CdsEditor extends Admin
 	{
 		function name()
 		{

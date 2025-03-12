@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-class Adminer extends AdminerBase
+class Admin extends AdminBase
 {
 	private $values = [];
 

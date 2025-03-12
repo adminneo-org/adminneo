@@ -13,7 +13,7 @@ function connection() {
 }
 
 /** Get Adminer object
-* @return Adminer
+* @return Admin
 */
 function adminer() {
 	global $admin;
