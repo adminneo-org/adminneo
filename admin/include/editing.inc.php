@@ -125,7 +125,7 @@ function referencable_primary($self) {
 /** Get settings stored in a cookie
 * @return array
 */
-function adminer_settings() {
+function get_settings() {
 	parse_str($_COOKIE["neo_settings"], $settings);
 	return $settings;
 }
@@ -134,8 +134,8 @@ function adminer_settings() {
 * @param string
 * @return array
 */
-function adminer_setting($key) {
-	$settings = adminer_settings();
+function get_setting($key) {
+	$settings = get_settings();
 	return $settings[$key];
 }
 
@@ -143,8 +143,8 @@ function adminer_setting($key) {
 * @param array
 * @return bool
 */
-function set_adminer_settings($settings) {
-	return cookie("neo_settings", http_build_query($settings + adminer_settings()));
+function save_settings($settings) {
+	return cookie("neo_settings", http_build_query($settings + get_settings()));
 }
 
 /** Print SQL <textarea> tag
@@ -353,7 +353,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 	global $inout;
 
 	$fields = array_values($fields);
-	$comment_class = ($_POST ? $_POST["comments"] : adminer_setting("comments")) ? "" : "class='hidden'";
+	$comment_class = ($_POST ? $_POST["comments"] : get_setting("comments")) ? "" : "class='hidden'";
 	?>
 
 <thead><tr>
