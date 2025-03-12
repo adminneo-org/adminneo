@@ -30,6 +30,6 @@ HTML;
 				$value = json_encode($json);
 			}
 		}
-		return adminer()->callParent('processInput', [$field, $value, $function]);
+		return admin()->callParent('processInput', [$field, $value, $function]);
 	}
 }
