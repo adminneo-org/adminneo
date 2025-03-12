@@ -68,7 +68,7 @@ foreach (glob(__DIR__ . "/../adminer/lang/" . ($_SESSION["lang"] ?? "*") . ".inc
 		}
 	}
 
-	$new_content = "<?php\n\nnamespace Adminer;\n\n\$translations = [\n$new_content];\n";
+	$new_content = "<?php\n\nnamespace AdminNeo;\n\n\$translations = [\n$new_content];\n";
 
 	if ($new_content != $old_content) {
 		file_put_contents($file_path, $new_content);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Link system tables (in mysql and information_schema databases) by foreign keys
 * @link https://www.adminer.org/plugins/#use

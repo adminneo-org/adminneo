@@ -5,7 +5,7 @@ Migrating to 5.0
 ----------------
 
 - Minimum required PHP version is 7.1.
-- TODO: Adminer namespace
+- TODO: AdminNeo namespace
 - TODO: adminer_object -> create_adminer
 - TODO: AdminerPlugin -> Pluginer
 - TODO: removed autoload of plugins based on class name

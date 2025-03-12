@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Dump to PHP format
 * @author Martin Zeman (Zemistr), http://www.zemistr.eu/

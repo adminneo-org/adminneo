@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /**
  * Adminer/Editor customization allowing usage of plugins.

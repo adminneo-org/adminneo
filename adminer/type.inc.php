@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $TYPE = $_GET["type"];
 $row = $_POST;

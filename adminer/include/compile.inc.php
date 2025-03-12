@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 include __DIR__ . "/../../vendor/vrana/jsshrink/jsShrink.php";
 
@@ -69,10 +69,10 @@ function compile_file(string $name, array $file_paths): ?string
 {
 	switch (pathinfo($name, PATHINFO_EXTENSION)) {
 		case "css":
-			$shrink_function = "Adminer\\minify_css";
+			$shrink_function = "AdminNeo\\minify_css";
 			break;
 		case "js":
-			$shrink_function = "Adminer\\minify_js";
+			$shrink_function = "AdminNeo\\minify_js";
 			break;
 		default:
 			$shrink_function = null;
