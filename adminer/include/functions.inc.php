@@ -347,8 +347,8 @@ function sid() {
 * @return null
 */
 function set_password($vendor, $server, $username, $password) {
-	$_SESSION["pwds"][$vendor][$server][$username] = ($_COOKIE["adminer_key"] && is_string($password)
-		? [encrypt_string($password, $_COOKIE["adminer_key"])]
+	$_SESSION["pwds"][$vendor][$server][$username] = ($_COOKIE["neo_key"] && is_string($password)
+		? [encrypt_string($password, $_COOKIE["neo_key"])]
 		: $password
 	);
 }
@@ -359,8 +359,8 @@ function set_password($vendor, $server, $username, $password) {
 function get_password() {
 	$return = get_session("pwds");
 	if (is_array($return)) {
-		$return = ($_COOKIE["adminer_key"]
-			? decrypt_string($return[0], $_COOKIE["adminer_key"])
+		$return = ($_COOKIE["neo_key"]
+			? decrypt_string($return[0], $_COOKIE["neo_key"])
 			: false
 		);
 	}

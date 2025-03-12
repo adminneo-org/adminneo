@@ -59,7 +59,7 @@ $HTTPS = ($_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "off")) || ini_bool
 @ini_set("session.use_trans_sid", false); // protect links in export @ - may be disabled
 if (!defined("SID")) {
 	session_cache_limiter(""); // to allow restarting session
-	session_name("adminer_sid");
+	session_name("neo_sid");
 	session_set_cookie_params(0, preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"]), "", $HTTPS, true);
 	session_start();
 }

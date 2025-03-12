@@ -126,7 +126,7 @@ function referencable_primary($self) {
 * @return array
 */
 function adminer_settings() {
-	parse_str($_COOKIE["adminer_settings"], $settings);
+	parse_str($_COOKIE["neo_settings"], $settings);
 	return $settings;
 }
 
@@ -144,7 +144,7 @@ function adminer_setting($key) {
 * @return bool
 */
 function set_adminer_settings($settings) {
-	return cookie("adminer_settings", http_build_query($settings + adminer_settings()));
+	return cookie("neo_settings", http_build_query($settings + adminer_settings()));
 }
 
 /** Print SQL <textarea> tag

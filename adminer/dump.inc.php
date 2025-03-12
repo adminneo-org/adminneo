@@ -9,7 +9,7 @@ if ($_POST && !$error) {
 	foreach (["output", "format", "db_style", "types", "routines", "events", "table_style", "auto_increment", "triggers", "data_style"] as $key) {
 		$cookie .= "&$key=" . urlencode($_POST[$key]);
 	}
-	cookie("adminer_export", substr($cookie, 1));
+	cookie("neo_export", substr($cookie, 1));
 	$tables = array_flip((array) $_POST["tables"]) + array_flip((array) $_POST["data"]);
 	$ext = dump_headers(
 		(count($tables) == 1 ? key($tables) : DB),
@@ -158,7 +158,7 @@ $data_style = ['', 'TRUNCATE+INSERT', 'INSERT'];
 if ($jush == "sql") { //! use insertUpdate() in all drivers
 	$data_style[] = 'INSERT+UPDATE';
 }
-parse_str($_COOKIE["adminer_export"], $row);
+parse_str($_COOKIE["neo_export"], $row);
 if (!$row) {
 	$row = ["output" => "file", "format" => "sql", "db_style" => (DB != "" ? "" : "CREATE"), "table_style" => "DROP+CREATE", "data_style" => "INSERT"];
 }
