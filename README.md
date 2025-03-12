@@ -197,9 +197,9 @@ function create_adminer(): Pluginer
     
     // Enable plugins.
     $plugins = [
-        new AdminerDumpXml(),
-        new AdminerTinymce(),
-        new AdminerFileUpload("data/"),
+        new XmlDumpPlugin(),
+        new TinyMcePlugin(),
+        new FileUploadPlugin("data/"),
         // ...
     ];
     

@@ -4,7 +4,7 @@ namespace AdminNeo;
 
 /** Pretty print JSON values in edit
 */
-class AdminerPrettyJsonColumn {
+class PrettyJsonEditPlugin {
 	private function _testJson($value) {
 		if ((substr($value, 0, 1) == '{' || substr($value, 0, 1) == '[') && ($json = json_decode($value, true))) {
 			return $json;
