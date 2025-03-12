@@ -1217,7 +1217,7 @@ class Adminer extends AdminerBase
 	 * @return null
 	 */
 	function databasesPrint($missing) {
-		global $adminer, $connection;
+		global $admin, $connection;
 
 		$databases = $this->databases();
 		if (DB && $databases && !in_array(DB, $databases)) {
@@ -1236,7 +1236,7 @@ class Adminer extends AdminerBase
 		echo "<input type='submit' value='" . lang('Use') . "' class='button " . ($databases ? "hidden" : "") . "'>\n";
 
 		if (support("scheme") && $missing != "db" && DB != "" && $connection->select_db(DB)) {
-			echo "<br><select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $adminer->schemas(), $_GET["ns"]) . "</select>"
+			echo "<br><select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $admin->schemas(), $_GET["ns"]) . "</select>"
 				. script("mixin(gid('scheme-select'), {onmousedown: dbMouseDown, onchange: dbChange});");
 
 			if ($_GET["ns"] != "") {

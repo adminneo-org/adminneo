@@ -88,7 +88,7 @@ function build_http_url($server, $username, $password, $defaultServer, $defaultP
 }
 
 function add_invalid_login() {
-	global $adminer;
+	global $admin;
 	$file = open_file_with_lock(get_temp_dir() . "/adminer.invalid");
 	if (!$file) {
 		return;
@@ -102,7 +102,7 @@ function add_invalid_login() {
 			}
 		}
 	}
-	$invalid = &$invalids[$adminer->bruteForceKey()];
+	$invalid = &$invalids[$admin->bruteForceKey()];
 	if (!$invalid) {
 		$invalid = [$time + 30*60, 0]; // active for 30 minutes
 	}
@@ -111,11 +111,11 @@ function add_invalid_login() {
 }
 
 function check_invalid_login() {
-	global $adminer;
+	global $admin;
 
 	$filename = get_temp_dir() . "/adminer.invalid";
 	$invalids = file_exists($filename) ? unserialize(file_get_contents($filename)) : [];
-	$invalid = ($invalids ? $invalids[$adminer->bruteForceKey()] : []);
+	$invalid = ($invalids ? $invalids[$admin->bruteForceKey()] : []);
 
 	$next_attempt = ($invalid && $invalid[1] > 29 ? $invalid[0] - time() : 0); // allow 30 invalid attempts
 	if ($next_attempt > 0) { //! do the same with permanent login
@@ -125,14 +125,14 @@ function check_invalid_login() {
 
 function connect_to_db(): Min_DB
 {
-	global $adminer;
+	global $admin;
 
-	if ($adminer->getConfig()->hasServers() && !$adminer->getConfig()->getServer(SERVER)) {
+	if ($admin->getConfig()->hasServers() && !$admin->getConfig()->getServer(SERVER)) {
 		auth_error(lang('Invalid server or credentials.'));
 	}
 
 	$connection = connect();
-	$authenticated = $connection instanceof Min_DB ? $adminer->authenticate($_GET["username"], get_password()) : false;
+	$authenticated = $connection instanceof Min_DB ? $admin->authenticate($_GET["username"], get_password()) : false;
 
 	if (!($connection instanceof Min_DB) || $authenticated !== true) {
 		if (is_string($connection)) {
@@ -158,9 +158,9 @@ if ($auth) {
 	// Defense against session fixation.
 	session_regenerate_id();
 
-	/** @var Adminer $adminer */
+	/** @var Adminer $admin */
 	$server = $auth["server"] ?? "";
-	$server_obj = $adminer->getConfig()->getServer($server);
+	$server_obj = $admin->getConfig()->getServer($server);
 
 	$driver = $server_obj ? $server_obj->getDriver() : ($auth["driver"] ?? "");
 	$server = $server_obj ? $server : trim($server);
@@ -173,7 +173,7 @@ if ($auth) {
 
 	if ($auth["permanent"]) {
 		$key = base64_encode($driver) . "-" . base64_encode($server) . "-" . base64_encode($username) . "-" . base64_encode($db);
-		$private = $adminer->permanentLogin(true);
+		$private = $admin->permanentLogin(true);
 		$encrypted_password = $private ? encrypt_string($password, $private) : false;
 		$permanent[$key] = "$key:" . base64_encode($encrypted_password ?: "");
 		cookie("adminer_permanent", implode(" ", $permanent));
@@ -197,7 +197,7 @@ if ($auth) {
 
 } elseif ($permanent && !$_SESSION["pwds"]) {
 	session_regenerate_id();
-	$private = $adminer->permanentLogin();
+	$private = $admin->permanentLogin();
 	foreach ($permanent as $key => $val) {
 		list(, $cipher) = explode(":", $val);
 		list($driver, $server, $username, $db) = array_map('base64_decode', explode("-", $key));
@@ -223,7 +223,7 @@ function unset_permanent() {
  * @throws \Random\RandomException
  */
 function auth_error($error) {
-	global $adminer, $has_token;
+	global $admin, $has_token;
 	$session_name = session_name();
 	if (isset($_GET["username"])) {
 		header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
@@ -255,7 +255,7 @@ function auth_error($error) {
 		echo "<p class='message'>" . lang('The action will be performed after successful login with the same credentials.') . "\n";
 	}
 	echo "</div>\n";
-	$adminer->loginForm();
+	$admin->loginForm();
 	echo "</form>\n";
 	page_footer();
 	exit;
@@ -284,7 +284,7 @@ if (!isset($_GET["username"]) || get_password() === null) {
 validate_server_input();
 check_invalid_login();
 
-$adminer->getConfig()->applyServer(SERVER);
+$admin->getConfig()->applyServer(SERVER);
 
 $connection = connect_to_db();
 $driver = new Min_Driver($connection);

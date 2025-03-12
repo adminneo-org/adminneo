@@ -60,7 +60,7 @@ if ($_POST) {
 	}
 }
 
-$collations = $adminer->collations($row["collation"] ? [$row["collation"]] : []);
+$collations = $admin->collations($row["collation"] ? [$row["collation"]] : []);
 
 ?>
 

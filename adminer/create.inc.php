@@ -181,7 +181,7 @@ foreach ($row["fields"] as $field) {
 	}
 }
 
-$collations = $adminer->collations(array_keys($keep_collations));
+$collations = $admin->collations(array_keys($keep_collations));
 
 $engines = engines();
 // case of engine may differ

@@ -31,7 +31,7 @@ foreach (table_status('', true) as $table => $table_status) {
 		$schema[$table]["fields"][$name] = $field;
 	}
 	$schema[$table]["pos"] = ($table_pos[$table] ?? [$top, 0]);
-	foreach ($adminer->foreignKeys($table) as $val) {
+	foreach ($admin->foreignKeys($table) as $val) {
 		if (!$val["db"]) {
 			$left = $base_left;
 			if (($table_pos[$table][1] ?? 0) || ($table_pos[$val["table"]][1] ?? 0)) {

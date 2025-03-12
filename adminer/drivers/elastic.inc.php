@@ -284,14 +284,14 @@ if (isset($_GET["elastic"])) {
 	 */
 	function connect()
 	{
-		global $adminer;
+		global $admin;
 
 		$connection = new Min_DB();
 
-		list($server, $username, $password) = $adminer->getCredentials();
+		list($server, $username, $password) = $admin->getCredentials();
 
 		if ($password != "" && $connection->connect($server, $username, "")) {
-			$result = $adminer->verifyDefaultPassword($password);
+			$result = $admin->verifyDefaultPassword($password);
 
 			return $result === true ? $connection : $result;
 		}

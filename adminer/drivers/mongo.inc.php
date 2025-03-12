@@ -298,7 +298,7 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function where_to_query($whereAnd = [], $whereOr = []) {
-			global $adminer;
+			global $admin;
 			$data = [];
 			foreach (['and' => $whereAnd, 'or' => $whereOr] as $type => $where) {
 				if (is_array($where)) {
@@ -308,7 +308,7 @@ if (isset($_GET["mongo"])) {
 							list(, $class, $val) = $match;
 							$val = new $class($val);
 						}
-						if (!in_array($op, $adminer->getOperators())) {
+						if (!in_array($op, $admin->getOperators())) {
 							continue;
 						}
 						if (preg_match('~^\(f\)(.+)~', $op, $match)) {
@@ -394,8 +394,8 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function logged_user() {
-		global $adminer;
-		$credentials = $adminer->getCredentials();
+		global $admin;
+		$credentials = $admin->getCredentials();
 		return $credentials[1];
 	}
 
@@ -404,10 +404,10 @@ if (isset($_GET["mongo"])) {
 	 */
 	function connect()
 	{
-		global $adminer;
+		global $admin;
 
 		$connection = new Min_DB();
-		list($server, $username, $password) = $adminer->getCredentials();
+		list($server, $username, $password) = $admin->getCredentials();
 
 		if ($server == "") {
 			$server = "localhost:27017";
@@ -419,7 +419,7 @@ if (isset($_GET["mongo"])) {
 			$options["password"] = $password;
 		}
 
-		$db = $adminer->database();
+		$db = $admin->database();
 		if ($db != "") {
 			$options["db"] = $db;
 		}

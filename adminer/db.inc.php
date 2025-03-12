@@ -59,10 +59,10 @@ if ($_GET["ns"] == "") {
 	page_header(lang('Schema') . ": " . h($_GET["ns"]), $error, true);
 }
 
-if ($adminer->homepage()) {
+if ($admin->homepage()) {
 	if ($_GET["ns"] === "") {
 		echo "<h2 id='schemas'>" . lang('Schemas') . "</h2>\n";
-		$schemas = $adminer->schemas();
+		$schemas = $admin->schemas();
 		if (!$schemas) {
 			echo "<p class='message'>" . lang('No schemas.') . "\n";
 		} else {
@@ -92,13 +92,13 @@ if ($adminer->homepage()) {
 				echo "<input type='search' class='input' name='query' value='" . h($_POST["query"]) . "'>";
 				echo script("qsl('input').onkeydown = partialArg(bodyKeydown, 'search');", "");
 				echo " <input type='submit' class='button' name='search' value='" . lang('Search') . "'>\n";
-				if ($adminer->getRegexpOperator()) {
+				if ($admin->getRegexpOperator()) {
 					echo "<p><label><input type='checkbox' name='regexp' value='1'" . (empty($_POST['regexp']) ? '' : ' checked') . '>' . lang('as a regular expression') . '</label>';
 					echo doc_link(['sql' => 'regexp.html', 'pgsql' => 'functions-matching.html#FUNCTIONS-POSIX-REGEXP', 'elastic' => "regexp-syntax.html"]) . "</p>\n";
 				}
 				echo "</div></fieldset>\n";
 				if ($_POST["search"] && $_POST["query"] != "") {
-					$_GET["where"][0]["op"] = $adminer->getRegexpOperator() && !empty($_POST['regexp']) ? $adminer->getRegexpOperator() : $adminer->getLikeOperator();
+					$_GET["where"][0]["op"] = $admin->getRegexpOperator() && !empty($_POST['regexp']) ? $admin->getRegexpOperator() : $admin->getLikeOperator();
 					search_tables();
 				}
 				echo "</div>\n";
@@ -128,7 +128,7 @@ if ($adminer->homepage()) {
 
 				echo '<tr><td class="actions">' . checkbox(($view ? "views[]" : "tables[]"), $name, in_array($name, $tables_views, true), "", "", "", $id);
 
-				if (!$adminer->getConfig()->isSelectionPreferred() && (support("table") || support("indexes"))) {
+				if (!$admin->getConfig()->isSelectionPreferred() && (support("table") || support("indexes"))) {
 					$action = "table";
 				} else {
 					$action = "select";
@@ -190,7 +190,7 @@ if ($adminer->homepage()) {
 				: "")))
 				. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script($jush == "sqlite" ? "DELETE" : ("TRUNCATE" . ($jush == "pgsql" ? "" : " TABLE"))) . confirm()
 				. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
-				$databases = (support("scheme") ? $adminer->schemas() : $adminer->databases());
+				$databases = (support("scheme") ? $admin->schemas() : $admin->databases());
 				if (count($databases) != 1 && $jush != "sqlite") {
 					$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
 					echo "<p>" . lang('Move to other database') . ": ";

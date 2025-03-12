@@ -16,8 +16,8 @@ function connection() {
 * @return Adminer
 */
 function adminer() {
-	global $adminer;
-	return $adminer;
+	global $admin;
+	return $admin;
 }
 
 /** Get Adminer version
@@ -664,7 +664,7 @@ function redirect($location, $message = null) {
 * @return bool
 */
 function query_redirect($query, $location, $message, $redirect = true, $execute = true, $failed = false, $time = "") {
-	global $connection, $error, $adminer;
+	global $connection, $error, $admin;
 	if ($execute) {
 		$start = microtime(true);
 		$failed = !$connection->query($query);
@@ -672,7 +672,7 @@ function query_redirect($query, $location, $message, $redirect = true, $execute 
 	}
 	$sql = "";
 	if ($query) {
-		$sql = $adminer->messageQuery($query, $time, $failed);
+		$sql = $admin->messageQuery($query, $time, $failed);
 	}
 	if ($failed) {
 		$error = error() . $sql . script("initToggles();");
@@ -920,9 +920,9 @@ function table_status1($table, $fast = false) {
 * @return array [$col => []]
 */
 function column_foreign_keys($table) {
-	global $adminer;
+	global $admin;
 	$return = [];
-	foreach ($adminer->foreignKeys($table) as $foreign_key) {
+	foreach ($admin->foreignKeys($table) as $foreign_key) {
 		foreach ($foreign_key["source"] as $val) {
 			$return[$val][] = $foreign_key;
 		}
@@ -939,7 +939,7 @@ function column_foreign_keys($table) {
 * @return null
 */
 function enum_input($type, $attrs, $field, $value, $empty = null) {
-	global $adminer, $jush;
+	global $admin, $jush;
 
 	$return = ($empty !== null && !is_strict_mode() ? "<label><input type='$type'$attrs value='$empty'" . ((is_array($value) ? in_array($empty, $value) : $value === 0) ? " checked" : "") . "><i>" . lang('empty') . "</i></label>" : "");
 
@@ -947,7 +947,7 @@ function enum_input($type, $attrs, $field, $value, $empty = null) {
 	foreach ($matches[1] as $i => $val) {
 		$val = stripcslashes(str_replace("''", "'", $val));
 		$checked = (is_int($value) ? $value == $i+1 : (is_array($value) ? in_array($i+1, $value) : $value === $val));
-		$return .= " <label><input type='$type'$attrs value='" . ($jush == "sql" ? $i+1 : h($val)) . "'" . ($checked ? ' checked' : '') . '>' . h($adminer->editVal($val, $field)) . '</label>';
+		$return .= " <label><input type='$type'$attrs value='" . ($jush == "sql" ? $i+1 : h($val)) . "'" . ($checked ? ' checked' : '') . '>' . h($admin->editVal($val, $field)) . '</label>';
 	}
 
 	return $return;
@@ -960,7 +960,7 @@ function enum_input($type, $attrs, $field, $value, $empty = null) {
 * @return null
 */
 function input($field, $value, $function) {
-	global $types, $structured_types, $adminer, $jush;
+	global $types, $structured_types, $admin, $jush;
 
 	$name = h(bracket_escape($field["field"]));
 
@@ -972,7 +972,7 @@ function input($field, $value, $function) {
 	if ($reset && !$_POST["save"]) {
 		$function = null;
 	}
-	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + $adminer->editFunctions($field);
+	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + $admin->editFunctions($field);
 
 	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
 	$attrs = " name='fields[$name]' $disabled";
@@ -987,7 +987,7 @@ function input($field, $value, $function) {
 	echo "<td class='function'>";
 
 	if ($field["type"] == "enum") {
-		echo h($functions[""]) . "<td>" . $adminer->editInput($_GET["edit"], $field, $attrs, $value, $function);
+		echo h($functions[""]) . "<td>" . $admin->editInput($_GET["edit"], $field, $attrs, $value, $function);
 	} else {
 		$has_function = (in_array($function, $functions) || isset($functions[$function]));
 		echo (count($functions) > 1
@@ -996,7 +996,7 @@ function input($field, $value, $function) {
 				. script("qsl('select').onchange = functionChange;", "")
 			: h(reset($functions))
 		) . '<td>';
-		$input = $adminer->editInput($_GET["edit"], $field, $attrs, $value, $function); // usage in call is without a table
+		$input = $admin->editInput($_GET["edit"], $field, $attrs, $value, $function); // usage in call is without a table
 		if ($input != "") {
 			echo $input;
 		} elseif (preg_match('~bool~', $field["type"])) {
@@ -1007,7 +1007,7 @@ function input($field, $value, $function) {
 			foreach ($matches[1] as $i => $val) {
 				$val = stripcslashes(str_replace("''", "'", $val));
 				$checked = (is_int($value) ? ($value >> $i) & 1 : in_array($val, explode(",", $value), true));
-				echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . (1 << $i) . "'" . ($checked ? ' checked' : '') . ">" . h($adminer->editVal($val, $field)) . '</label>';
+				echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . (1 << $i) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->editVal($val, $field)) . '</label>';
 			}
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
 			echo "<input type='file' name='fields-$name'>";
@@ -1038,7 +1038,7 @@ function input($field, $value, $function) {
 				. "$attrs>"
 			;
 		}
-		echo $adminer->editHint($_GET["edit"], $field, $value);
+		echo $admin->editHint($_GET["edit"], $field, $value);
 		// skip 'original'
 		$first = 0;
 		foreach ($functions as $key => $val) {
@@ -1056,7 +1056,7 @@ function input($field, $value, $function) {
 * @return string or false to leave the original value
 */
 function process_input($field) {
-	global $adminer, $driver;
+	global $admin, $driver;
 
 	if (stripos($field["default"], "GENERATED ALWAYS AS ") === 0) {
 		return null;
@@ -1101,7 +1101,7 @@ function process_input($field) {
 		}
 		return $driver->quoteBinary($file);
 	}
-	return $adminer->processInput($field, $value, $function);
+	return $admin->processInput($field, $value, $function);
 }
 
 /** Compute fields() from $_POST edit data
@@ -1135,13 +1135,13 @@ function fields_from_edit() {
 * @return null
 */
 function search_tables() {
-	global $adminer, $connection;
+	global $admin, $connection;
 	$_GET["where"][0]["val"] = $_POST["query"];
 	$sep = "<ul>\n";
 	foreach (table_status('', true) as $table => $table_status) {
-		$name = $adminer->tableName($table_status);
+		$name = $admin->tableName($table_status);
 		if (isset($table_status["Engine"]) && $name != "" && (!$_POST["tables"] || in_array($table, $_POST["tables"]))) {
-			$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", $adminer->selectSearchProcess(fields($table), [])), 1));
+			$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", $admin->selectSearchProcess(fields($table), [])), 1));
 			if (!$result || $result->fetch_row()) {
 				$print = "<a href='" . h(ME . "select=" . urlencode($table) . "&where[0][op]=" . urlencode($_GET["where"][0]["op"]) . "&where[0][val]=" . urlencode($_GET["where"][0]["val"])) . "'>$name</a>";
 				echo "$sep<li>" . ($result ? $print : "<p class='error'>$print: " . error()) . "\n";
@@ -1158,11 +1158,11 @@ function search_tables() {
 * @return string extension
 */
 function dump_headers($identifier, $multi_table = false) {
-	global $adminer;
-	$return = $adminer->dumpHeaders($identifier, $multi_table);
+	global $admin;
+	$return = $admin->dumpHeaders($identifier, $multi_table);
 	$output = $_POST["output"];
 	if ($output != "text") {
-		header("Content-Disposition: attachment; filename=" . $adminer->dumpFilename($identifier) . ".$return" . ($output != "file" && preg_match('~^[0-9a-z]+$~', $output) ? ".$output" : ""));
+		header("Content-Disposition: attachment; filename=" . $admin->dumpFilename($identifier) . ".$return" . ($output != "file" && preg_match('~^[0-9a-z]+$~', $output) ? ".$output" : ""));
 	}
 	session_write_close();
 	ob_flush();
@@ -1314,7 +1314,7 @@ function get_random_string($binary = false)
 * @return string HTML
 */
 function select_value($val, $link, $field, $text_length) {
-	global $adminer;
+	global $admin;
 	if (is_array($val)) {
 		$return = "";
 		foreach ($val as $k => $v) {
@@ -1326,7 +1326,7 @@ function select_value($val, $link, $field, $text_length) {
 		return "<table>$return</table>";
 	}
 	if (!$link) {
-		$link = $adminer->selectLink($val, $field);
+		$link = $admin->selectLink($val, $field);
 	}
 	if ($link === null) {
 		if (is_mail($val)) {
@@ -1336,7 +1336,7 @@ function select_value($val, $link, $field, $text_length) {
 			$link = $val; // IE 11 and all modern browsers hide referrer
 		}
 	}
-	$return = $adminer->editVal($val, $field);
+	$return = $admin->editVal($val, $field);
 	if ($return !== null) {
 		if (!is_utf8($return)) {
 			$return = "\0"; // htmlspecialchars of binary data returns an empty string
@@ -1346,7 +1346,7 @@ function select_value($val, $link, $field, $text_length) {
 			$return = h($return);
 		}
 	}
-	return $adminer->selectVal($return, $link, $field, $val);
+	return $admin->selectVal($return, $link, $field, $val);
 }
 
 /** Check whether the string is e-mail address
@@ -1410,9 +1410,9 @@ function count_rows($table, $where, $is_group, $group) {
 * @return array of strings
 */
 function slow_query($query) {
-	global $adminer, $token, $driver;
-	$db = $adminer->database();
-	$timeout = $adminer->queryTimeout();
+	global $admin, $token, $driver;
+	$db = $admin->database();
+	$timeout = $admin->queryTimeout();
 	$slow_query = $driver->slowQuery($query, $timeout);
 	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->select_db($db))) {
 		$kill = $connection2->result(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
@@ -1530,12 +1530,12 @@ function help_script_command($command, $side = false)
 * @return null
 */
 function edit_form($table, $fields, $row, $update) {
-	global $adminer, $jush, $token, $error;
-	$table_name = $adminer->tableName(table_status1($table, true));
+	global $admin, $jush, $token, $error;
+	$table_name = $admin->tableName(table_status1($table, true));
 	$title = $update ? lang('Edit') : lang('Insert');
 
 	page_header("$title: $table_name", $error, ["select" => [$table, $table_name], $title]);
-	$adminer->editRowPrint($table, $fields, $row, $update);
+	$admin->editRowPrint($table, $fields, $row, $update);
 	if ($row === false) {
 		echo "<p class='error'>" . lang('No rows.') . "\n";
 		return;
@@ -1550,7 +1550,7 @@ function edit_form($table, $fields, $row, $update) {
 
 		$first = 0;
 		foreach ($fields as $name => $field) {
-			echo "<tr><th>" . $adminer->fieldName($field);
+			echo "<tr><th>" . $admin->fieldName($field);
 			$default = $_GET["set"][bracket_escape($name)] ?? null;
 			if ($default === null) {
 				$default = $field["default"];
@@ -1572,7 +1572,7 @@ function edit_form($table, $fields, $row, $update) {
 				)
 			);
 			if (!$_POST["save"] && is_string($value)) {
-				$value = $adminer->editVal($value, $field);
+				$value = $admin->editVal($value, $field);
 			}
 			$function = ($_POST["save"]
 				? $_POST["function"][$name] ?? ""
@@ -1602,7 +1602,7 @@ function edit_form($table, $fields, $row, $update) {
 			echo "<tr>"
 				. "<th><input class='input' name='field_keys[]'>"
 				. script("qsl('input').oninput = fieldChange;")
-				. "<td class='function'>" . html_select("field_funs[]", $adminer->editFunctions(["null" => isset($_GET["select"])]))
+				. "<td class='function'>" . html_select("field_funs[]", $admin->editFunctions(["null" => isset($_GET["select"])]))
 				. "<td><input class='input' name='field_vals[]'>"
 				. "\n"
 			;

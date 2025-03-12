@@ -22,7 +22,7 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 			queries_redirect(substr(ME, 0, -1), lang('Databases have been dropped.'), drop_databases($_POST["db"]));
 		}
 
-		$server_name = $adminer->getServerName(SERVER);
+		$server_name = $admin->getServerName(SERVER);
 		$title = h($drivers[DRIVER]) . ": " . ($server_name != "" ? h($server_name) : lang('Server'));
 
 		page_header($title, $error, false, "db");
@@ -41,7 +41,7 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 		}
 		echo "<p>" . lang('%s version: %s through PHP extension %s', $drivers[DRIVER], "<b>" . h($connection->server_info) . "</b>", "<b>$connection->extension</b>") . "\n";
 		echo "<p>" . lang('Logged as: %s', "<b>" . h(logged_user()) . "</b>") . "\n";
-		$databases = $adminer->databases();
+		$databases = $admin->databases();
 		if ($databases) {
 			$scheme = support("scheme");
 			$all_collations = collations();

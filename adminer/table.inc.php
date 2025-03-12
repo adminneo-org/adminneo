@@ -8,7 +8,7 @@ if (!$fields) {
 	$error = error();
 }
 $table_status = table_status1($TABLE, true);
-$name = $adminer->tableName($table_status);
+$name = $admin->tableName($table_status);
 
 $rights = [];
 foreach ($fields as $key => $field) {
@@ -23,7 +23,7 @@ $set = null;
 if (isset($rights["insert"]) || !support("table")) {
 	$set = "";
 }
-$adminer->selectLinks($table_status, $set);
+$admin->selectLinks($table_status, $set);
 
 $comment = $table_status["Comment"];
 if ($comment != "") {
@@ -31,7 +31,7 @@ if ($comment != "") {
 }
 
 if ($fields) {
-	$adminer->tableStructurePrint($fields);
+	$admin->tableStructurePrint($fields);
 
 	if (is_view($table_status)) {
 		$editLink = '<p class="links"><a href="' . h(ME) . 'view=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter view') . "</a>\n";
@@ -44,7 +44,7 @@ if ($fields) {
 		echo "<h2 id='partition-by'>" . lang('Partition by') . "</h2>\n";
 
 		$partitions_info = get_partitions_info($TABLE);
-		$adminer->tablePartitionsPrint($partitions_info);
+		$admin->tablePartitionsPrint($partitions_info);
 
 		echo $editLink;
 	}
@@ -55,7 +55,7 @@ if (!is_view($table_status)) {
 		echo "<h2 id='indexes'>" . lang('Indexes') . "</h2>\n";
 		$indexes = indexes($TABLE);
 		if ($indexes) {
-			$adminer->tableIndexesPrint($indexes);
+			$admin->tableIndexesPrint($indexes);
 		}
 		echo '<p class="links"><a href="' . h(ME) . 'indexes=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter indexes') . "</a>\n";
 	}
