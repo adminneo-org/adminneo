@@ -42,7 +42,7 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including Adminer inside a function.
-/** @var Adminer|Pluginer $admin */
+/** @var Admin|Pluginer $admin */
 global $admin, $connection, $driver, $drivers, $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
@@ -121,7 +121,7 @@ if (function_exists('\create_adminer')) {
 } elseif (function_exists('AdminNeo\create_adminer')) {
 	$admin = create_adminer();
 } else {
-	$admin = new Adminer();
+	$admin = new Admin();
 }
 
 if (defined("DRIVER")) {

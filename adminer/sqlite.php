@@ -1,8 +1,8 @@
 <?php
 
-use AdminNeo\Adminer;
+use AdminNeo\Admin;
 
-function create_adminer(): Adminer
+function create_adminer(): Admin
 {
 	include "../plugins/Pluginer.php";
 
@@ -16,7 +16,7 @@ function create_adminer(): Adminer
 //		"defaultPasswordHash" => password_hash("YOUR_PASSWORD_HERE", PASSWORD_DEFAULT),
 	];
 
-	return new Adminer($config);
+	return new Admin($config);
 }
 
 include "index.php";

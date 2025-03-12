@@ -1,12 +1,12 @@
 <?php
 
-use AdminNeo\Adminer;
+use AdminNeo\Admin;
 
-function create_adminer(): Adminer
+function create_adminer(): Admin
 {
 	include "../plugins/Pluginer.php";
 
-	class CustomAdminer extends Adminer
+	class CustomAdmin extends Admin
 	{
 		function composeLoginFormRow(string $fieldName, string $heading, string $field): string
 		{
@@ -25,7 +25,7 @@ function create_adminer(): Adminer
 		"defaultPasswordHash" => password_hash("YOUR_PASSWORD_HERE", PASSWORD_DEFAULT),
 	];
 
-	return new CustomAdminer($config);
+	return new CustomAdmin($config);
 }
 
 include "index.php";

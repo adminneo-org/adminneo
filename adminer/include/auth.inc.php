@@ -158,7 +158,7 @@ if ($auth) {
 	// Defense against session fixation.
 	session_regenerate_id();
 
-	/** @var Adminer $admin */
+	/** @var Admin $admin */
 	$server = $auth["server"] ?? "";
 	$server_obj = $admin->getConfig()->getServer($server);
 
