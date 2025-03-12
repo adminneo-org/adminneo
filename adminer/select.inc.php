@@ -8,7 +8,7 @@ $indexes = indexes($TABLE);
 $fields = fields($TABLE);
 $foreign_keys = column_foreign_keys($TABLE);
 $oid = $table_status["Oid"];
-parse_str($_COOKIE["adminer_import"], $adminer_import);
+parse_str($_COOKIE["neo_import"], $import_settings);
 
 $rights = []; // privilege => 0
 $columns = []; // selectable columns
@@ -83,7 +83,7 @@ if ($_POST && !$error) {
 	}
 	$where_check = ($where_check ? "\nWHERE " . implode(" AND ", $where_check) : "");
 	if ($_POST["export"]) {
-		cookie("adminer_import", "output=" . urlencode($_POST["output"]) . "&format=" . urlencode($_POST["format"]));
+		cookie("neo_import", "output=" . urlencode($_POST["output"]) . "&format=" . urlencode($_POST["format"]));
 		dump_headers($TABLE);
 		$admin->dumpTable($TABLE, "");
 		$from = ($select ? implode(", ", $select) : "*")
@@ -195,7 +195,7 @@ if ($_POST && !$error) {
 		} elseif (!preg_match('~~u', $file)) {
 			$error = lang('File must be in UTF-8 encoding.');
 		} else {
-			cookie("adminer_import", "output=" . urlencode($adminer_import["output"]) . "&format=" . urlencode($_POST["separator"]));
+			cookie("neo_import", "output=" . urlencode($import_settings["output"]) . "&format=" . urlencode($_POST["separator"]));
 			$result = true;
 			$cols = array_keys($fields);
 			preg_match_all('~(?>"[^"]*"|[^"\r\n]+)+~', $file, $matches);
@@ -618,9 +618,9 @@ if (!$columns && support("table")) {
 				}
 				if ($format) {
 					print_fieldset_start("export", lang('Export') . " <span id='selected2'></span>", "export");
-					echo html_select("format", $format, $adminer_import["format"]);
+					echo html_select("format", $format, $import_settings["format"]);
 					$output = $admin->dumpOutput();
-					echo ($output ? " " . html_select("output", $output, $adminer_import["output"]) : "");
+					echo ($output ? " " . html_select("output", $output, $import_settings["output"]) : "");
 					echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>\n";
 					print_fieldset_end("export");
 				}
@@ -637,7 +637,7 @@ if (!$columns && support("table")) {
 				echo "</p>";
 				echo "<p id='import'" . ($_POST["import"] ? "" : " class='hidden'") . ">";
 				echo "<input type='file' name='csv_file'> ";
-				echo html_select("separator", ["csv" => "CSV,", "csv;" => "CSV;", "tsv" => "TSV"], $adminer_import["format"]);
+				echo html_select("separator", ["csv" => "CSV,", "csv;" => "CSV;", "tsv" => "TSV"], $import_settings["format"]);
 				echo " <input type='submit' class='button default' name='import' value='" . lang('Import') . "'>";
 				echo "</p>";
 			}

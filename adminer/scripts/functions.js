@@ -105,7 +105,7 @@ function cookie(assign, days) {
 function verifyVersion(baseUrl, token) {
 	document.addEventListener("DOMContentLoaded", () => {
 		// Dummy value to prevent repeated verifications after AJAX failure.
-		cookie('adminer_version=0', 1);
+		cookie('neo_version=0', 1);
 
 		ajax('https://api.github.com/repos/adminneo-org/adminneo/releases/latest', (request) => {
 			const response = JSON.parse(request.responseText);
@@ -113,7 +113,7 @@ function verifyVersion(baseUrl, token) {
 			const version = response.tag_name.replace(/^\D*/, '');
 			if (!version) return;
 
-			cookie('adminer_version=' + version, 1);
+			cookie('neo_version=' + version, 1);
 
 			const data = 'version=' + version + '&token=' + token;
 			ajax(baseUrl + 'script=version', null, data);
@@ -372,14 +372,14 @@ let tablesFilterValue = '';
 function initTablesFilter(dbName) {
 	if (sessionStorage) {
 		document.addEventListener('DOMContentLoaded', function () {
-			if (dbName === sessionStorage.getItem('adminer_tables_filter_db') && sessionStorage.getItem('adminer_tables_filter')) {
-				gid('tables-filter').value = sessionStorage.getItem('adminer_tables_filter');
+			if (dbName === sessionStorage.getItem('neo_tables_filter_db') && sessionStorage.getItem('neo_tables_filter')) {
+				gid('tables-filter').value = sessionStorage.getItem('neo_tables_filter');
 				filterTables();
 			} else {
-				sessionStorage.removeItem('adminer_tables_filter');
+				sessionStorage.removeItem('neo_tables_filter');
 			}
 
-			sessionStorage.setItem('adminer_tables_filter_db', dbName);
+			sessionStorage.setItem('neo_tables_filter_db', dbName);
 		});
 	}
 
@@ -413,7 +413,7 @@ function filterTables() {
 	}
 
 	if (sessionStorage) {
-		sessionStorage.setItem('adminer_tables_filter', value);
+		sessionStorage.setItem('neo_tables_filter', value);
 	}
 
 	const tables = qsa('#tables li');
