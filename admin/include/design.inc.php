@@ -51,29 +51,29 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 	<title><?= $title_page; ?></title>
 <?php
 	echo "<link rel='stylesheet' type='text/css' href='", link_files("default.css", [
-		"../adminer/themes/default/variables.css",
-		"../adminer/themes/default/common.css",
-		"../adminer/themes/default/forms.css",
-		"../adminer/themes/default/code.css",
-		"../adminer/themes/default/messages.css",
-		"../adminer/themes/default/links.css",
-		"../adminer/themes/default/fieldSets.css",
-		"../adminer/themes/default/tables.css",
-		"../adminer/themes/default/dragging.css",
-		"../adminer/themes/default/header.css",
-		"../adminer/themes/default/navigationPanel.css",
-		"../adminer/themes/default/print.css",
+		"../admin/themes/default/variables.css",
+		"../admin/themes/default/common.css",
+		"../admin/themes/default/forms.css",
+		"../admin/themes/default/code.css",
+		"../admin/themes/default/messages.css",
+		"../admin/themes/default/links.css",
+		"../admin/themes/default/fieldSets.css",
+		"../admin/themes/default/tables.css",
+		"../admin/themes/default/dragging.css",
+		"../admin/themes/default/header.css",
+		"../admin/themes/default/navigationPanel.css",
+		"../admin/themes/default/print.css",
 	]), "'>\n";
 
 	$theme = $admin->getConfig()->getTheme();
 	if ($theme != "default") {
-		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme.css", ["../adminer/themes/$theme.css"]) . "'>\n";
+		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme.css", ["../admin/themes/$theme.css"]) . "'>\n";
 	}
 	if ($variant = $admin->getConfig()->getColorVariant()) {
-		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme-$variant.css", ["../adminer/themes/$theme-$variant.css"]) . "'>\n";
+		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme-$variant.css", ["../admin/themes/$theme-$variant.css"]) . "'>\n";
 	}
 
-	echo script_src(link_files("main.js", ["../adminer/scripts/functions.js", "scripts/editing.js"]));
+	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
 
 	if ($admin->head()) {
 		$variant = $admin->getConfig()->getColorVariant();
@@ -81,9 +81,9 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 		// https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
 		// Converting PNG to ICO: https://redketchup.io/icon-converter
-		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon$postfix.ico", ["../adminer/images/variants/favicon$postfix.ico"]), "' sizes='32x32'>\n";
-		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon$postfix.svg", ["../adminer/images/variants/favicon$postfix.svg"]), "'>\n";
-		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon$postfix.png", ["../adminer/images/variants/apple-touch-icon$postfix.png"]), "'>\n";
+		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon$postfix.ico", ["../admin/images/variants/favicon$postfix.ico"]), "' sizes='32x32'>\n";
+		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon$postfix.svg", ["../admin/images/variants/favicon$postfix.svg"]), "'>\n";
+		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon$postfix.png", ["../admin/images/variants/apple-touch-icon$postfix.png"]), "'>\n";
 
 		foreach ($admin->getCssUrls() as $url) {
 			echo "<link rel='stylesheet' type='text/css' href='", h($url), "'>\n";

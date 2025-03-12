@@ -16,10 +16,10 @@
 
 namespace AdminNeo;
 
-include "../adminer/core/AdminBase.php";
+include "../admin/core/AdminBase.php";
 include "core/Admin.php";
 
-include "../adminer/include/bootstrap.inc.php";
+include "../admin/include/bootstrap.inc.php";
 include "include/connect.inc.php";
 
 $drivers[DRIVER] = lang('Login');
@@ -29,11 +29,11 @@ if (isset($_GET["select"]) && ($_POST["edit"] || $_POST["clone"]) && !$_POST["sa
 }
 
 if (isset($_GET["download"])) {
-	include "../adminer/download.inc.php";
+	include "../admin/download.inc.php";
 } elseif (isset($_GET["edit"])) {
-	include "../adminer/edit.inc.php";
+	include "../admin/edit.inc.php";
 } elseif (isset($_GET["select"])) {
-	include "../adminer/select.inc.php";
+	include "../admin/select.inc.php";
 } elseif (isset($_GET["script"])) {
 	include "script.inc.php";
 } else {
