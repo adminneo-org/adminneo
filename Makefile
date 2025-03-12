@@ -33,7 +33,7 @@ clean:
 	rm \
 	  --recursive \
 	  --force \
-	  $(ROOT_DIRECTORY)/adminer.php
+	  $(ROOT_DIRECTORY)/adminneo.php
 
 .PHONY: clean.all
 clean.all: clean

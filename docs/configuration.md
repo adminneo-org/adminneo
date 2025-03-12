@@ -19,8 +19,8 @@ function create_adminer(): Admin
     return new Admin($config);
 }
 
-// Include original Adminer.
-include "adminer.php";
+// Include original AdminNeo.
+include "adminneo.php";
 ```
 
 Options
