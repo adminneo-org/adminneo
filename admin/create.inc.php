@@ -31,7 +31,7 @@ if ($row["auto_increment_col"]) {
 }
 
 if ($_POST) {
-	set_adminer_settings(["comments" => $_POST["comments"], "defaults" => $_POST["defaults"]]);
+	save_settings(["comments" => $_POST["comments"], "defaults" => $_POST["defaults"]]);
 }
 
 if ($_POST && !process_fields($row["fields"]) && !$error) {
@@ -226,7 +226,7 @@ edit_fields($row["fields"], $collations, "TABLE", $foreign_keys);
 <p>
 <?php echo lang('Auto Increment'); ?>: <input type="number" class="input size" name="Auto_increment" size="6" value="<?php echo h($row["Auto_increment"]); ?>">
 <?php
-$comments = ($_POST ? $_POST["comments"] : adminer_setting("comments"));
+$comments = ($_POST ? $_POST["comments"] : get_setting("comments"));
 echo (support("comment")
 	? checkbox("comments", 1, $comments, lang('Comment'), "editingCommentsClick(this, true);", "jsonly")
 		. ' ' . (preg_match('~\n~', $row["Comment"])
