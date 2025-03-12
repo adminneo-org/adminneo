@@ -1227,7 +1227,7 @@ Adminer 2.2.0 (2009-10-20)
 - Optional year in date (Editor)
 - Search operators (Editor)
 - Align numbers to right in select (Editor)
-- Move `<h1>` to $adminer->navigation (customization)
+- Move `<h1>` to $admin->navigation (customization)
 - Rename get_dbh to connection (customization)
 
 Adminer 2.1.0 (2009-09-12)

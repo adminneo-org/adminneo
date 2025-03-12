@@ -172,13 +172,13 @@ if (isset($_GET["sqlite"])) {
 	 */
 	function connect()
 	{
-		global $adminer;
+		global $admin;
 
 		$connection = new Min_DB();
 
-		$password = $adminer->getCredentials()[2];
+		$password = $admin->getCredentials()[2];
 		if ($password != "") {
-			$result = $adminer->verifyDefaultPassword($password);
+			$result = $admin->verifyDefaultPassword($password);
 			if ($result !== true) {
 				return $result;
 			}

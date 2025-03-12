@@ -133,11 +133,11 @@ if (isset($_GET["firebird"])) {
 	 */
 	function connect()
 	{
-		global $adminer;
+		global $admin;
 
 		$connection = new Min_DB();
 
-		$credentials = $adminer->getCredentials();
+		$credentials = $admin->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
 			return $connection->error;
 		}
@@ -169,8 +169,8 @@ if (isset($_GET["firebird"])) {
 	}
 
 	function logged_user() {
-		global $adminer;
-		$credentials = $adminer->getCredentials();
+		global $admin;
+		$credentials = $admin->getCredentials();
 		return $credentials[1];
 	}
 

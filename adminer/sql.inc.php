@@ -4,8 +4,8 @@ namespace AdminNeo;
 
 if (!$error && $_POST["export"]) {
 	dump_headers("sql");
-	$adminer->dumpTable("", "");
-	$adminer->dumpData("", "table", $_POST["query"]);
+	$admin->dumpTable("", "");
+	$admin->dumpData("", "table", $_POST["query"]);
 	exit;
 }
 
@@ -25,7 +25,7 @@ if (!$error && $_POST) {
 	if (!isset($_GET["import"])) {
 		$query = $_POST["query"];
 	} elseif ($_POST["webfile"]) {
-		$import_file_path = $adminer->importServerPath();
+		$import_file_path = $admin->importServerPath();
 		if (!$import_file_path) {
 			$fp = false;
 		} elseif (file_exists($import_file_path)) {
@@ -73,7 +73,7 @@ if (!$error && $_POST) {
 		$parse = '[\'"' . ($jush == "sql" ? '`#' : ($jush == "sqlite" ? '`[' : ($jush == "mssql" ? '[' : ''))) . ']|/\*|-- |$' . ($jush == "pgsql" ? '|\$[^$]*\$' : '');
 		$total_start = microtime(true);
 		parse_str($_COOKIE["adminer_export"], $adminer_export);
-		$dump_format = $adminer->dumpFormat();
+		$dump_format = $admin->dumpFormat();
 		unset($dump_format["sql"]);
 
 		while ($query != "") {
@@ -122,7 +122,7 @@ if (!$error && $_POST) {
 						$empty = false;
 						$q = substr($query, 0, $pos);
 						$commands++;
-						$print = "<pre id='sql-$commands'><code class='jush-$jush'>" . $adminer->sqlCommandQuery($q) . "</code></pre>\n";
+						$print = "<pre id='sql-$commands'><code class='jush-$jush'>" . $admin->sqlCommandQuery($q) . "</code></pre>\n";
 						if ($jush == "sqlite" && preg_match("~^$space*+ATTACH\\b~i", $q, $match)) {
 							// PHP doesn't support setting SQLITE_LIMIT_ATTACHED
 							echo $print;
@@ -221,7 +221,7 @@ if (!$error && $_POST) {
 
 									if ($export) {
 										echo "<form id='$export_id' action='' method='post' class='hidden'><p>\n";
-										echo html_select("output", $adminer->dumpOutput(), $adminer_export["output"]) . " ";
+										echo html_select("output", $admin->dumpOutput(), $adminer_export["output"]) . " ";
 										echo html_select("format", $dump_format, $adminer_export["format"]);
 										echo "<input type='hidden' name='query' value='", h($q), "'>";
 										echo "<input type='hidden' name='token' value='$token'>";
@@ -290,7 +290,7 @@ if (!isset($_GET["import"])) {
 	}
 	echo "</div></fieldset>\n";
 
-	$import_file_path = $adminer->importServerPath();
+	$import_file_path = $admin->importServerPath();
 	if ($import_file_path) {
 		echo "<fieldset><legend>" . lang('From server') . "</legend><div class='fieldset-content'>";
 		echo lang('Webserver file %s', "<code>" . h($import_file_path) . "$gz</code>");
