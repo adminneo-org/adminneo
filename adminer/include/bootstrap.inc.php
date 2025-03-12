@@ -34,7 +34,7 @@ include __DIR__ . "/compile.inc.php";
 include __DIR__ . "/../file.inc.php";
 
 if ($_GET["script"] == "version") {
-	$file = open_file_with_lock(get_temp_dir() . "/adminer.version");
+	$file = open_file_with_lock(get_temp_dir() . "/adminneo.version");
 	if ($file) {
 		write_and_unlock_file($file, serialize(["version" => $_POST["version"]]));
 	}

@@ -89,7 +89,7 @@ function build_http_url($server, $username, $password, $defaultServer, $defaultP
 
 function add_invalid_login() {
 	global $admin;
-	$file = open_file_with_lock(get_temp_dir() . "/adminer.invalid");
+	$file = open_file_with_lock(get_temp_dir() . "/adminneo.invalid");
 	if (!$file) {
 		return;
 	}
@@ -113,7 +113,7 @@ function add_invalid_login() {
 function check_invalid_login() {
 	global $admin;
 
-	$filename = get_temp_dir() . "/adminer.invalid";
+	$filename = get_temp_dir() . "/adminneo.invalid";
 	$invalids = file_exists($filename) ? unserialize(file_get_contents($filename)) : [];
 	$invalid = ($invalids ? $invalids[$admin->bruteForceKey()] : []);
 
