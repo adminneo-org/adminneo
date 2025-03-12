@@ -60,7 +60,7 @@
     },
     "scripts": {
         "compile": "sh bin/compile-set.sh",
-        "clean": "rm -f export/adminer*.php export/editor*.php"
+        "clean": "rm -f export/admin*.php export/editor*.php"
     },
     "repositories": [
         {
