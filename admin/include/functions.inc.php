@@ -1,5 +1,5 @@
 <?php
-// This file is used both in Adminer and Adminer Editor.
+// This file is used in both Admin and Editor.
 
 namespace AdminNeo;
 
@@ -20,7 +20,7 @@ function admin() {
 	return $admin;
 }
 
-/** Get Adminer version
+/** Get AdminNeo version
 * @return string
 */
 function version() {

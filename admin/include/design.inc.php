@@ -30,7 +30,7 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
 
-	// Load Adminer version from file if cookie is missing.
+	// Load AdminNeo version from file if cookie is missing.
 	if ($admin->getConfig()->isVersionVerificationEnabled()) {
 		$filename = get_temp_dir() . "/adminneo.version";
 		if (!isset($_COOKIE["neo_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds

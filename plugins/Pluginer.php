@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 /**
- * Adminer/Editor customization allowing usage of plugins.
+ * Admin/Editor customization allowing usage of plugins.
  *
  * @author Jakub Vrana, https://www.vrana.cz/
  * @author Peter Knut
