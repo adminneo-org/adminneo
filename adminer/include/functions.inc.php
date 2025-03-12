@@ -1262,7 +1262,7 @@ function unlock_file($file)
 }
 
 /**
- * Reads password from file adminer.key in temporary directory or create one.
+ * Reads password from file adminneo.key in temporary directory or create one.
  *
  * @param $create bool
  * @return string|false Returns false if the file can not be created.
@@ -1270,7 +1270,7 @@ function unlock_file($file)
  */
 function get_private_key($create)
 {
-	$filename = get_temp_dir() . "/adminer.key";
+	$filename = get_temp_dir() . "/adminneo.key";
 
 	if (!$create && !file_exists($filename)) {
 		return false;

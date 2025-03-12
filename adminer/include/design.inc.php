@@ -32,7 +32,7 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 	// Load Adminer version from file if cookie is missing.
 	if ($admin->getConfig()->isVersionVerificationEnabled()) {
-		$filename = get_temp_dir() . "/adminer.version";
+		$filename = get_temp_dir() . "/adminneo.version";
 		if (!isset($_COOKIE["neo_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds
 			$data = unserialize(file_get_contents($filename));
 
