@@ -35,17 +35,17 @@ abstract class Min_SQL {
 
 	/** Select data from table
 	* @param string
-	* @param array result of $adminer->selectColumnsProcess()[0]
-	* @param array result of $adminer->selectSearchProcess()
-	* @param array result of $adminer->selectColumnsProcess()[1]
-	* @param array result of $adminer->selectOrderProcess()
-	* @param ?int result of $adminer->selectLimitProcess()
+	* @param array result of $admin->selectColumnsProcess()[0]
+	* @param array result of $admin->selectSearchProcess()
+	* @param array result of $admin->selectColumnsProcess()[1]
+	* @param array result of $admin->selectOrderProcess()
+	* @param ?int result of $admin->selectLimitProcess()
 	* @param int index of page starting at zero
 	* @param bool whether to print the query
 	* @return Min_Result
 	*/
 	function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
-		global $adminer, $jush;
+		global $admin, $jush;
 		$is_group = (count($group) < count($select));
 
 		$query = "SELECT" . limit(
@@ -59,7 +59,7 @@ abstract class Min_SQL {
 		$start = microtime(true);
 		$return = $this->_conn->query($query);
 		if ($print) {
-			echo $adminer->selectQuery($query, $start, !$return);
+			echo $admin->selectQuery($query, $start, !$return);
 		}
 		return $return;
 	}

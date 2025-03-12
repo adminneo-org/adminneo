@@ -42,8 +42,8 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including Adminer inside a function.
-/** @var Adminer|Pluginer $adminer */
-global $adminer, $connection, $driver, $drivers, $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
+/** @var Adminer|Pluginer $admin */
+global $admin, $connection, $driver, $drivers, $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
@@ -117,11 +117,11 @@ include __DIR__ . "/../drivers/firebird.inc.php";
 include __DIR__ . "/../drivers/simpledb.inc.php";
 
 if (function_exists('\create_adminer')) {
-	$adminer = \create_adminer();
+	$admin = \create_adminer();
 } elseif (function_exists('AdminNeo\create_adminer')) {
-	$adminer = create_adminer();
+	$admin = create_adminer();
 } else {
-	$adminer = new Adminer();
+	$admin = new Adminer();
 }
 
 if (defined("DRIVER")) {
@@ -139,8 +139,8 @@ if (defined("DRIVER")) {
 	$grouping = $config['grouping'];
 	$edit_functions = $config['edit_functions'];
 
-	$adminer->setOperators($operators, $operator_like, $operator_regexp);
-	$adminer->setSystemObjects($config["system_databases"] ?? [], $config["system_schemas"] ?? []);
+	$admin->setOperators($operators, $operator_like, $operator_regexp);
+	$admin->setSystemObjects($config["system_databases"] ?? [], $config["system_schemas"] ?? []);
 } else {
 	define("DRIVER", null);
 }

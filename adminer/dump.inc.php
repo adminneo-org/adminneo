@@ -40,7 +40,7 @@ SET foreign_key_checks = 0;
 	}
 
 	foreach ((array) $databases as $db) {
-		$adminer->dumpDatabase($db);
+		$admin->dumpDatabase($db);
 		if ($connection->select_db($db)) {
 			if ($is_sql && preg_match('~CREATE~', $style) && ($create = $connection->result("SHOW CREATE DATABASE " . idf_escape($db), 1))) {
 				set_utf8mb4($create);
@@ -99,12 +99,12 @@ SET foreign_key_checks = 0;
 							ob_start([$tmp_file, 'write'], 1e5);
 						}
 
-						$adminer->dumpTable($name, ($table ? $_POST["table_style"] : ""), (is_view($table_status) ? 2 : 0));
+						$admin->dumpTable($name, ($table ? $_POST["table_style"] : ""), (is_view($table_status) ? 2 : 0));
 						if (is_view($table_status)) {
 							$views[] = $name;
 						} elseif ($data) {
 							$fields = fields($name);
-							$adminer->dumpData($name, $_POST["data_style"], "SELECT *" . convert_fields($fields, $fields) . " FROM " . table($name));
+							$admin->dumpData($name, $_POST["data_style"], "SELECT *" . convert_fields($fields, $fields) . " FROM " . table($name));
 						}
 						if ($is_sql && $_POST["triggers"] && $table && ($triggers = trigger_sql($name))) {
 							echo "\nDELIMITER ;;\n$triggers\nDELIMITER ;\n";
@@ -130,7 +130,7 @@ SET foreign_key_checks = 0;
 				}
 
 				foreach ($views as $view) {
-					$adminer->dumpTable($view, $_POST["table_style"], 1);
+					$admin->dumpTable($view, $_POST["table_style"], 1);
 				}
 
 				if ($ext == "tar") {
@@ -167,7 +167,7 @@ if (!isset($row["events"])) { // backwards compatibility
 	$row["triggers"] = $row["table_style"];
 }
 
-echo "<tr><th>" . lang('Format') . "<td>" . html_select("format", $adminer->dumpFormat(), $row["format"], false) . "\n"; // false = radio
+echo "<tr><th>" . lang('Format') . "<td>" . html_select("format", $admin->dumpFormat(), $row["format"], false) . "\n"; // false = radio
 
 echo ($jush == "sqlite" ? "" : "<tr><th>" . lang('Database') . "<td>" . html_select('db_style', $db_style, $row["db_style"])
 	. (support("type") ? checkbox("types", 1, $row["types"], lang('User types')) : "")
@@ -182,7 +182,7 @@ echo "<tr><th>" . lang('Tables') . "<td>" . html_select('table_style', $table_st
 
 echo "<tr><th>" . lang('Data') . "<td>" . html_select('data_style', $data_style, $row["data_style"]);
 
-echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $adminer->dumpOutput(), $row["output"], false) . "\n"; // false = radio
+echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $admin->dumpOutput(), $row["output"], false) . "\n"; // false = radio
 
 ?>
 </table>
@@ -224,7 +224,7 @@ if (DB != "") {
 	echo "<label class='block'><input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . ">" . lang('Database') . "</label>";
 	echo script("gid('check-databases').onclick = partial(formCheck, /^databases\\[/);", "");
 	echo "</thead>\n";
-	$databases = $adminer->databases();
+	$databases = $admin->databases();
 	if ($databases) {
 		foreach ($databases as $db) {
 			if (!information_schema($db)) {

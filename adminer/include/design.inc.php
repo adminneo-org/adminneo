@@ -16,7 +16,7 @@ if (!ob_get_level()) {
  */
 function page_header(string $title, string $error = "", $breadcrumb = [], ?string $missing = null): void
 {
-	global $LANG, $adminer, $jush, $token;
+	global $LANG, $admin, $jush, $token;
 
 	page_headers();
 	if (is_ajax() && $error) {
@@ -25,13 +25,13 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 	}
 
 	$title = strip_tags($title);
-	$server_part = $breadcrumb !== false && $breadcrumb !== null && SERVER != "" ? " - " . h($adminer->getServerName(SERVER)) : "";
-	$service_title = strip_tags($adminer->name());
+	$server_part = $breadcrumb !== false && $breadcrumb !== null && SERVER != "" ? " - " . h($admin->getServerName(SERVER)) : "";
+	$service_title = strip_tags($admin->name());
 
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
 
 	// Load Adminer version from file if cookie is missing.
-	if ($adminer->getConfig()->isVersionVerificationEnabled()) {
+	if ($admin->getConfig()->isVersionVerificationEnabled()) {
 		$filename = get_temp_dir() . "/adminer.version";
 		if (!isset($_COOKIE["adminer_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds
 			$data = unserialize(file_get_contents($filename));
@@ -65,18 +65,18 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 		"../adminer/themes/default/print.css",
 	]), "'>\n";
 
-	$theme = $adminer->getConfig()->getTheme();
+	$theme = $admin->getConfig()->getTheme();
 	if ($theme != "default") {
 		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme.css", ["../adminer/themes/$theme.css"]) . "'>\n";
 	}
-	if ($variant = $adminer->getConfig()->getColorVariant()) {
+	if ($variant = $admin->getConfig()->getColorVariant()) {
 		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme-$variant.css", ["../adminer/themes/$theme-$variant.css"]) . "'>\n";
 	}
 
 	echo script_src(link_files("main.js", ["../adminer/scripts/functions.js", "scripts/editing.js"]));
 
-	if ($adminer->head()) {
-		$variant = $adminer->getConfig()->getColorVariant();
+	if ($admin->head()) {
+		$variant = $admin->getConfig()->getColorVariant();
 		$postfix = $variant ? "-$variant" : "";
 
 		// https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
@@ -85,11 +85,11 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon$postfix.svg", ["../adminer/images/variants/favicon$postfix.svg"]), "'>\n";
 		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon$postfix.png", ["../adminer/images/variants/apple-touch-icon$postfix.png"]), "'>\n";
 
-		foreach ($adminer->getCssUrls() as $url) {
+		foreach ($admin->getCssUrls() as $url) {
 			echo "<link rel='stylesheet' type='text/css' href='", h($url), "'>\n";
 		}
 
-		foreach ($adminer->getJsUrls() as $url) {
+		foreach ($admin->getJsUrls() as $url) {
 			echo script_src($url);
 		}
 	}
@@ -115,7 +115,7 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 	echo "<button id='navigation-button' class='button light navigation-button'>", icon_solo("menu"), icon_solo("close"), "</button>";
     echo "<div id='navigation-panel' class='navigation-panel'>\n";
-	$adminer->navigation($missing);
+	$admin->navigation($missing);
 
 	echo "<div class='footer'>\n";
 	language_select();
@@ -145,7 +145,7 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 		echo '<li><a href="' . h(HOME_URL) . '" title="', lang('Home'), '">', icon_solo("home"), '</a></li>';
 
-		$server_name = $adminer->getServerName(SERVER);
+		$server_name = $admin->getServerName(SERVER);
 		$server_name = $server_name != "" ? h($server_name) : lang('Server');
 
 		if ($breadcrumb === false) {
@@ -205,21 +205,21 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 * @return null
 */
 function page_headers() {
-	global $adminer;
+	global $admin;
 	header("Content-Type: text/html; charset=utf-8");
 	header("Cache-Control: no-cache");
 	header("X-Frame-Options: deny"); // ClickJacking protection in IE8, Safari 4, Chrome 2, Firefox 3.6.9
 	header("X-XSS-Protection: 0"); // prevents introducing XSS in IE8 by removing safe parts of the page
 	header("X-Content-Type-Options: nosniff");
 	header("Referrer-Policy: origin-when-cross-origin");
-	foreach ($adminer->csp() as $csp) {
+	foreach ($admin->csp() as $csp) {
 		$header = [];
 		foreach ($csp as $key => $val) {
 			$header[] = "$key $val";
 		}
 		header("Content-Security-Policy: " . implode("; ", $header));
 	}
-	$adminer->headers();
+	$admin->headers();
 }
 
 /**
