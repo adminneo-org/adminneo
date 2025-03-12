@@ -20,7 +20,7 @@ class AlterDumpPlugin {
 		// drop old tables
 		$query = "SELECT TABLE_NAME, ENGINE, TABLE_COLLATION, TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE()";
 		echo "DELIMITER ;;
-CREATE PROCEDURE adminer_alter (INOUT alter_command text) BEGIN
+CREATE PROCEDURE adminneo_alter (INOUT alter_command text) BEGIN
 	DECLARE _table_name, _engine, _table_collation varchar(64);
 	DECLARE _table_comment varchar(64);
 	DECLARE done bool DEFAULT 0;
@@ -48,10 +48,10 @@ CREATE PROCEDURE adminer_alter (INOUT alter_command text) BEGIN
 	CLOSE tables;
 END;;
 DELIMITER ;
-CALL adminer_alter(@adminer_alter);
-DROP PROCEDURE adminer_alter;
+CALL adminneo_alter(@adminneo_alter);
+DROP PROCEDURE adminneo_alter;
 
-SELECT @adminer_alter;
+SELECT @adminneo_alter;
 ";
 	}
 
@@ -60,7 +60,7 @@ SELECT @adminer_alter;
 		if ($_POST["format"] == "sql_alter") {
 			if ($first) {
 				$first = false;
-				echo "SET @adminer_alter = '';\n\n";
+				echo "SET @adminneo_alter = '';\n\n";
 				register_shutdown_function([$this, '_database']);
 			} else {
 				$this->_database();
@@ -79,7 +79,7 @@ SELECT @adminer_alter;
 				// create procedure which iterates over original columns and adds new and removes old
 				$query = "SELECT COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, COLLATION_NAME, COLUMN_TYPE, EXTRA, COLUMN_COMMENT FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = " . q($table) . " ORDER BY ORDINAL_POSITION";
 				echo "DELIMITER ;;
-CREATE PROCEDURE adminer_alter (INOUT alter_command text) BEGIN
+CREATE PROCEDURE adminneo_alter (INOUT alter_command text) BEGIN
 	DECLARE _column_name, _collation_name, after varchar(64) DEFAULT '';
 	DECLARE _column_type, _column_default text;
 	DECLARE _is_nullable char(3);
@@ -139,8 +139,8 @@ CREATE PROCEDURE adminer_alter (INOUT alter_command text) BEGIN
 	END IF;
 END;;
 DELIMITER ;
-CALL adminer_alter(@adminer_alter);
-DROP PROCEDURE adminer_alter;
+CALL adminneo_alter(@adminneo_alter);
+DROP PROCEDURE adminneo_alter;
 
 ";
 				//! indexes
