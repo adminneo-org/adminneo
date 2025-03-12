@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /** Get e-mail subject and message from database (Adminer Editor)
 * @link https://www.adminer.org/plugins/#use

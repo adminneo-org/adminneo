@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 class Config
 {

@@ -1,5 +1,5 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 $connection->select_db($adminer->database());

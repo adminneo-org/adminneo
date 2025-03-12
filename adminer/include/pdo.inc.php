@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 // PDO can be used in several database drivers
 use Exception;

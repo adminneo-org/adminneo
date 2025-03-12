@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminer;
+namespace AdminNeo;
 
 /**
  * Encrypts a string using AES-256-CBC.
