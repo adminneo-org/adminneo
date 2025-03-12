@@ -28,7 +28,7 @@ function create_adminneo(): Admin
 		function database()
 		{
 			// will be escaped by Adminer
-			return 'adminer_test';
+			return 'adminneo_test';
 		}
 
 		function tableName($tableStatus)
