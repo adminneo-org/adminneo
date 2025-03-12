@@ -9,7 +9,7 @@ $row["fields"] = (array) $row["fields"];
 
 if ($_POST && !process_fields($row["fields"]) && !$error) {
 	$orig = routine($_GET["procedure"], $routine);
-	$temp_name = "$row[name]_adminer_" . uniqid();
+	$temp_name = "$row[name]_adminneo_" . uniqid();
 	drop_create(
 		"DROP $routine " . routine_id($PROCEDURE, $orig),
 		create_routine($routine, $row),
