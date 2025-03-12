@@ -17,7 +17,7 @@ Migrating to 5.0
 - TODO: removed plugin `AdminerDatabaseHide`, config options `hiddenDatabases`, `hiddenSchemas`
 - TODO: removed plugin `AdminerDotJs`, config option `jsUrls`
 - TODO: removed plugin `AdminerLoginSsl`, config options `ssl*`
-- TODO: removed plugin `AdminerDotJs`, adminer.js is autoloaded
+- TODO: removed plugin `AdminerDotJs`, adminneo.js is autoloaded
 - TODO: removed plugin `AdminerJsonColumn`, new `AdminerJsonPreview` plugin
 - TODO: config option `visibleCollations` as a replacement for the plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations)
 - TODO: plugin interface

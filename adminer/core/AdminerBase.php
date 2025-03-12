@@ -190,7 +190,7 @@ abstract class AdminerBase
 	public abstract function head();
 
 	/**
-	 * Returns configured URLs of the CSS files together with autoloaded adminer.css if exists.
+	 * Returns configured URLs of the CSS files together with autoloaded adminneo.css if exists.
 	 *
 	 * @return string[]
 	 */
@@ -198,7 +198,7 @@ abstract class AdminerBase
 	{
 		$urls = $this->config->getCssUrls();
 
-		$filename = "adminer.css";
+		$filename = "adminneo.css";
 		if (file_exists($filename)) {
 			$urls[] = "$filename?v=" . filemtime($filename);
 		}
@@ -207,7 +207,7 @@ abstract class AdminerBase
 	}
 
 	/**
-	 * Returns configured URLs of the JS files together with autoloaded adminer.js if exists.
+	 * Returns configured URLs of the JS files together with autoloaded adminneo.js if exists.
 	 *
 	 * @return string[]
 	 */
@@ -215,7 +215,7 @@ abstract class AdminerBase
 	{
 		$urls = $this->config->getJsUrls();
 
-		$filename = "adminer.js";
+		$filename = "adminneo.js";
 		if (file_exists($filename)) {
 			$urls[] = "$filename?v=" . filemtime($filename);
 		}

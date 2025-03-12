@@ -82,7 +82,7 @@ class Adminer extends AdminerBase
 	}
 
 	/** Print HTML code inside <head>
-	* @return bool true to link favicon.ico and adminer.css if exists
+	* @return bool true to link favicon.ico and adminneo.css if exists
 	*/
 	function head() {
 		?>
@@ -1061,7 +1061,7 @@ class Adminer extends AdminerBase
 	 * @return string Path of the sql import file.
 	 */
 	function importServerPath() {
-		return "adminer.sql";
+		return "adminneo.sql";
 	}
 
 	/**
