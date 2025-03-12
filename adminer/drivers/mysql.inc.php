@@ -19,13 +19,13 @@ if (isset($_GET["mysql"])) {
 			}
 
 			function connect($server = "", $username = "", $password = "", $database = null, $port = null, $socket = null) {
-				global $adminer;
+				global $admin;
 				mysqli_report(MYSQLI_REPORT_OFF);
 				list($host, $port) = explode(":", $server, 2); // part after : is used for port or socket
 
-				$key = $adminer->getConfig()->getSslKey();
-				$certificate = $adminer->getConfig()->getSslCertificate();
-				$ca_certificate = $adminer->getConfig()->getSslCaCertificate();
+				$key = $admin->getConfig()->getSslKey();
+				$certificate = $admin->getConfig()->getSslCertificate();
+				$ca_certificate = $admin->getConfig()->getSslCaCertificate();
 				$ssl_defined = $key || $certificate || $ca_certificate;
 
 				if ($ssl_defined) {
@@ -73,23 +73,23 @@ if (isset($_GET["mysql"])) {
 			var $extension = "PDO_MySQL";
 
 			function connect($server, $username, $password) {
-				global $adminer;
+				global $admin;
 
 				$dsn = "mysql:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server));
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
 
-				$key = $adminer->getConfig()->getSslKey();
+				$key = $admin->getConfig()->getSslKey();
 				if ($key) {
 					$options[PDO::MYSQL_ATTR_SSL_KEY] = $key;
 				}
 
-				$certificate = $adminer->getConfig()->getSslCertificate();
+				$certificate = $admin->getConfig()->getSslCertificate();
 				if ($certificate) {
 					$options[PDO::MYSQL_ATTR_SSL_CERT] = $certificate;
 				}
 
-				$ca_certificate = $adminer->getConfig()->getSslCaCertificate();
+				$ca_certificate = $admin->getConfig()->getSslCaCertificate();
 				if ($ca_certificate) {
 					$options[PDO::MYSQL_ATTR_SSL_CA] = $ca_certificate;
 				}
@@ -221,11 +221,11 @@ if (isset($_GET["mysql"])) {
 	 */
 	function connect()
 	{
-		global $adminer, $types, $structured_types, $edit_functions;
+		global $admin, $types, $structured_types, $edit_functions;
 
 		$connection = new Min_DB();
 
-		$credentials = $adminer->getCredentials();
+		$credentials = $admin->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
 			$error = $connection->error;
 

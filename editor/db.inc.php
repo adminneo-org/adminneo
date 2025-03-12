@@ -4,7 +4,7 @@ namespace AdminNeo;
 
 page_header(lang('Server'), "", false);
 
-if ($adminer->homepage()) {
+if ($admin->homepage()) {
 	echo "<form action='' method='post'>\n";
 	echo "<p>" . lang('Search data in tables') . ": <input type='search' class='input' name='query' value='" . h($_POST["query"]) . "'> <input type='submit' class='button' value='" . lang('Search') . "'>\n";
 	if ($_POST["query"] != "") {
@@ -22,7 +22,7 @@ if ($adminer->homepage()) {
 	echo "</thead>\n";
 
 	foreach (table_status() as $table => $row) {
-		$name = $adminer->tableName($row);
+		$name = $admin->tableName($row);
 		if (isset($row["Engine"]) && $name != "") {
 			echo '<tr><td class="actions">' . checkbox("tables[]", $table, in_array($table, (array) $_POST["tables"], true));
 			echo "<th><a href='" . h(ME) . 'select=' . urlencode($table) . "'>$name</a>";
