@@ -10,9 +10,9 @@ Supported database drivers:
 
 AdminNeo is based on the [Adminer](https://www.adminer.org/) project by Jakub Vrána.
 
-| <img src="docs/images/screenshot-select.webp" alt="Screenshot - Select data"/> | <img src="docs/images/screenshot-structure.webp" alt="Screenshot - Table structure"/> |
-|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| <img src="docs/images/screenshot-alter.webp" alt="Screenshot - Alter table"/>  | <img src="docs/images/screenshot-database.webp" alt="Screenshot - Database"/>         |
+| <img src="/docs/images/screenshot-select.webp" alt="Screenshot - Select data"/> | <img src="/docs/images/screenshot-structure.webp" alt="Screenshot - Table structure"/> |
+|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| <img src="/docs/images/screenshot-alter.webp" alt="Screenshot - Alter table"/>  | <img src="/docs/images/screenshot-database.webp" alt="Screenshot - Database"/>         |
 
 Requirements
 ------------
@@ -33,7 +33,7 @@ Migration from older versions
 Version 5 has been significantly redesigned and refactored. Unfortunately, this has resulted in many changes that break
 backward compatibility.
 
-A complete list of changes can be found in the [Upgrade Guide](docs/upgrade.md).
+A complete list of changes can be found in the [Upgrade Guide](/docs/upgrade.md).
 
 Usage
 -----
@@ -55,11 +55,11 @@ php bin/compile.php editor [drivers] [languages] [themes] [config-file.json]
 ```
 
 Where:
-- `drivers` is a comma-separated list of [database drivers](admin/drivers).
+- `drivers` is a comma-separated list of [database drivers](/admin/drivers).
   The default set is: mysql, pgsql, mssql, sqlite.
-- `languages` is a comma-separated list of [languages](admin/lang).
+- `languages` is a comma-separated list of [languages](/admin/lang).
   If not specified, all languages will be included.
-- `themes` is a comma-separated list of [themes](admin/themes).
+- `themes` is a comma-separated list of [themes](/admin/themes).
   If not specified, only the default theme without color variants will be included. The `+` character can be used as 
   a wildcard in the theme name.
 - `config-file.json` is a path to the custom JSON configuration file. It contains a class with [the same parameters](#configuration) 
@@ -155,7 +155,7 @@ Available configuration parameters:
 | `sslTrustServerCertificate` | null          | MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).     |
 | `servers`                   | []            | List of predefined server connections.                                                                                                              |
 
-For detailed information see [Configuration documentation](docs/configuration.md).
+For detailed information see [Configuration documentation](/docs/configuration.md).
 
 Plugins
 -------
