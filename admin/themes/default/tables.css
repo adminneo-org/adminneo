@@ -55,7 +55,11 @@ tbody th, tbody td {
 	vertical-align: top;
 }
 
-table.nowrap td, table.nowrap th {
+table.nowrap th, table.nowrap thead td {
+	white-space: nowrap;
+}
+
+table.nowrap tbody td {
 	white-space: pre;
 }
 
@@ -107,6 +111,10 @@ td img {
 
 td pre {
 	margin: 0;
+}
+
+td.actions input[type="checkbox"] {
+	vertical-align: middle;
 }
 
 td.actions input:last-of-type {
