@@ -37,7 +37,7 @@ class Admin extends AdminBase
 	* @return string HTML code
 	*/
 	function name() {
-		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
 	/** Get SSL connection options
