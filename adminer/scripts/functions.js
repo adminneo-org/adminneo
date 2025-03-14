@@ -612,7 +612,7 @@ function selectSearchSearch() {
 			}
 
 			dragHelper = document.createElement("table");
-			dragHelper.appendChild(row);
+			dragHelper.appendChild(document.createElement("tbody")).appendChild(row);
 		} else {
 			dragHelper = row;
 		}
@@ -692,9 +692,12 @@ function selectSearchSearch() {
 		dragHelper.style.left = null;
 		dragHelper.style.width = null;
 
-		placeholderRow.parentNode.insertBefore(dragHelper.tagName === "TABLE" ? dragHelper.firstChild : dragHelper, placeholderRow);
+		placeholderRow.parentNode.insertBefore(
+			dragHelper.tagName === "TABLE" ? dragHelper.firstChild.firstChild : dragHelper, placeholderRow
+		);
 		placeholderRow.remove();
 
+		document.body.removeChild(dragHelper);
 		placeholderRow = nextRow = dragHelper = null;
 
 		window.removeEventListener("mousemove", updateSorting);

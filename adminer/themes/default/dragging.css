@@ -29,5 +29,6 @@
 }
 
 table.dragging {
-	background: var(--panel-bg);
+	border-left: none;
+	border-right: none;
 }
