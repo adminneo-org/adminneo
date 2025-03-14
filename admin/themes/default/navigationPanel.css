@@ -76,9 +76,8 @@
 }
 
 .logo {
-	margin-top: 0.05rem;
-	height: 1.2rem;
-	width: calc(1.2rem * 139 / 26);
+	height: 1.4rem;
+	width: auto;
 	vertical-align: top;
 }
 
