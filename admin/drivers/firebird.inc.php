@@ -9,7 +9,7 @@ namespace AdminNeo;
 add_driver("firebird", "Firebird (alpha)");
 
 if (isset($_GET["firebird"])) {
-	define("DRIVER", "firebird");
+	define("AdminNeo\DRIVER", "firebird");
 
 	if (extension_loaded("interbase") ) {
 		class Min_DB {

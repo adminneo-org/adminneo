@@ -13,7 +13,7 @@ use stdClass;
 add_driver("mssql", "MS SQL");
 
 if (isset($_GET["mssql"])) {
-	define("DRIVER", "mssql");
+	define("AdminNeo\DRIVER", "mssql");
 	if (extension_loaded("sqlsrv")) {
 		class Min_DB {
 			var $extension = "sqlsrv", $_link, $_result, $server_info, $affected_rows, $errno, $error;

@@ -8,7 +8,7 @@ use SQLite3;
 add_driver("sqlite", "SQLite");
 
 if (isset($_GET["sqlite"])) {
-	define("DRIVER", "sqlite");
+	define("AdminNeo\DRIVER", "sqlite");
 
 	if (class_exists("SQLite3")) {
 		class Min_SQLite {
