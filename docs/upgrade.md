@@ -5,42 +5,128 @@ Migrating to 5.0
 ----------------
 
 - Minimum required PHP version is 7.1.
-- TODO: AdminNeo namespace
-- TODO: adminer_object -> create_adminneo
-- TODO: AdminerPlugin -> Pluginer
-- TODO: removed autoload of plugins based on class name
-- TODO: removed all designs, new configurable theme and color variants
-- TODO: removed driver `elastic5`, all drivers can be compiled
-- TODO: removed plugin `AdminerLoginServers`, config options `servers`
-- TODO: removed plugin `AdminerLoginPasswordLess`, config options `defaultPasswordHash`
-- TODO: removed plugin `AdminerVersionNoverify`, config option `versionVerification`
-- TODO: removed plugin `AdminerDatabaseHide`, config options `hiddenDatabases`, `hiddenSchemas`
-- TODO: removed plugin `AdminerDotJs`, config option `jsUrls`
-- TODO: removed plugin `AdminerLoginSsl`, config options `ssl*`
-- TODO: removed plugin `AdminerDotJs`, adminneo.js is autoloaded
-- TODO: removed plugin `AdminerJsonColumn`, new `JsonPreviewPlugin` plugin
-- TODO: config option `visibleCollations` as a replacement for the plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations)
-- TODO: renamed all plugins
-- TODO: plugin interface
-    - credentials() -> getCredentials()
-    - login() -> authenticate()
-    - serverName() -> getServerName()
-    - loginFormField() -> composeLoginFormRow()
-- TODO: removed customizable css() method, config option `cssUrls`
-- TODO: removed unused selectQueryBuild() customization method
-- TODO: set `navigationMode` as a replacement for [AdminerSimpleMenu](https://github.com/pematon/adminer-plugins?tab=readme-ov-file#adminersimplemenu)
-    - Set to `reversed` for original-like menu
+
+- Compiled file was renamed to `adminneo.php` for database Admin and `editorneo.php` for Editor. Update your include
+  statement if you use custom AdminNeo configuration.
+
+```php
+// Include AdminNeo file.
+include "adminneo.php";
+```
+
+- Function for creating Admin instance was renamed form `adminer_object` to `create_adminneo`.
+
+- Core classes has been renamed: `Adminer` -> `Admin`, `AdminerPlugin` -> `Pluginer`.
+
+- Project's code and official plugins are in `AdminNeo` namespace now. Update your index.php and custom plugins by
+  using this new namespace. Simple index.php will look like this:
+
+```php
+<?php
+
+use AdminNeo\Admin;
+
+function create_adminneo(): Admin 
+{
+    return new Admin();
+}
+
+include "adminneo.php";
+```
+
+- AdminNeo has a brand-new default design that is incompatible with the previous one. All alternative designs was
+  removed. If you use custom `adminer.css` file, you can delete it. If you use
+  [Adminer theme](https://github.com/pematon/adminer-theme) by Pematon, delete all related files. New default theme 
+  supports dark mode and color variants. See [Configuration options](/docs/configuration.md) for more information.
+
+- Default theme can be modified by custom `adminneo.css` file that is auto-included in the same way as previous
+  `adminer.css`.
+
+- Driver `elastic5` was removed, only Elasticsearch 7+ is supported in `elastic` driver.
+
+- Autoloading of plugins based on the class name was removed. All plugins have to be created in custom index.php file.
+
+### Plugins
+
+- Plugin `AdminerLoginServers` (login-servers.php) was removed. Preconfigured server connections can be defined by
+  `servers` configuration option. See [Configuration options](/docs/configuration.md) for more information. This option
+  is also replacement for [AdminerLoginServers](https://github.com/pematon/adminer-plugins) by Pematon.
+
+- Plugin `AdminerLoginPasswordLess` (login-password-less.php) was removed. Default password can be defined by
+  `defaultPasswordHash` configuration option. See [Configuration options](/docs/configuration.md) for more information.
+
+- Plugin `AdminerVersionNoverify` (version-noverify.php) was removed. Version verification can be disabled by
+  `versionVerification` configuration option. See [Configuration options](/docs/configuration.md) for more information.
+
+- Plugin `AdminerDatabaseHide` (database-hide.php) was removed. Selected databases and schemas can be hidden by
+  `hiddenDatabases` and `hiddenSchemas` configuration options. See [Configuration options](/docs/configuration.md) for
+  more information.
+
+- Plugin `AdminerDotJs` (adminer.js.php) was removed. File `adminneo.js` is autoloaded by default.
+
+- Plugin `AdminerLoginSsl` (login-ssl.php) was removed. SSL options can be defined by `ssl*` configuration options.
+  See [Configuration options](/docs/configuration.md) for more information.
+
+- Plugins `AdminerJsonColumn` (json-column.php) and [AdminerJsonPreview](https://github.com/pematon/adminer-plugins) by
+  Pematon were replaced by new `JsonPreviewPlugin`.
+
+- Plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations) by Pematon is replaced by
+  `visibleCollations` configuration option. See [Configuration options](/docs/configuration.md) for more information.
+
+- Plugin [AdminerSimpleMenu](https://github.com/pematon/adminer-plugins#adminersimplemenu) by Pematon can be removed.
+  Main menu is simplified by default and can be modified by `navigationMode` configuration option. Set it to `reversed`
+  for original-like menu layout. See [Configuration options](/docs/configuration.md) for more information.
+
+- All remaining plugins were renamed:
+    - `AdminerDumpAlter` to `AlterDumpPlugin`
+    - `AdminerDumpBz2` to `Bz2DumpPlugin`
+    - `AdminerDumpDate` to `DateDumpPlugin`
+    - `AdminerDumpJson` to `JsonDumpPlugin`
+    - `AdminerDumpPhp` to `PhpDumpPlugin`
+    - `AdminerDumpXml` to `XmlDumpPlugin`
+    - `AdminerDumpZip` to `ZipDumpPlugin`
+    - `AdminerEditCalendar` to `EditCalendarPlugin`
+    - `AdminerEditForeign` to `EditForeignPlugin`
+    - `AdminerEditTextarea` to `EditTextareaPlugin`
+    - `AdminerEmailTable` to `EmailTablePlugin`
+    - `AdminerEnumOption` to `EnumOptionPlugin`
+    - `AdminerFileUpload` to `FileUploadPlugin`
+    - `AdminerForeignSystem` to `SystemForeignKeysPlugin`
+    - `AdminerFrames` to `FrameSupportPlugin`
+    - `AdminerLoginIp` to `IpLoginPlugin`
+    - `AdminerLoginOtp` to `OtpLoginPlugin`
+    - `AdminerLoginTable` to `TableLoginPlugin`
+    - `AdminerMasterSlave` to `MasterSlavePlugin`
+    - `AdminerPrettyJsonColumn` to `PrettyJsonEditPlugin`
+    - `AdminerSlugify` to `SlugifyPlugin`
+    - `AdminerSqlLog` to `SqlLogPlugin`
+    - `AdminerStructComments` to `StructureCommentsPlugin`
+    - `AdminerTableIndexesStructure` to `ExpandedTableIndexesPlugin`
+    - `AdminerTableStructure` to `ExpandedTableStructurePlugin`
+    - `AdminerTinymce` to `TinyMcePlugin`
+    - `AdminerTranslation` to `TranslationPlugin`
+    - `AdminerWymeditor` to `WymEditorPlugin`
+
+### Customizable functions
+
+- Function `selectQueryBuild()` was removed.
+- Function `css()` was removed. CSS files can be defined by `cssUrls` configuration option. See
+  [Configuration options](/docs/configuration.md) for more information.
+- Many customizable functions was renamed:
+    - `credentials()` to `getCredentials()`
+    - `login()` -> `authenticate()`
+    - `serverName()` -> `getServerName()`
+    - `loginFormField()` -> `composeLoginFormRow()`
 
 Migrating to 4.17
 -----------------
 
-- Plugin enum-types.php was integrated into the base code, so it can be removed.
+- Remove the `AdminerEnumTypes` plugin (enum-types.php). Its functionality was integrated into the base code.
 
 Migrating to 4.10
 -----------------
 
-- Remove plugin AdminerTablesFilter (plugins/tables-filter.php) if you use it. Its functionality was integrated into the
-  base code.
+- Remove the `AdminerTablesFilter` plugin (tables-filter.php). Its functionality was integrated into the base code.
 - If you use complex custom theme, you will probably need to adjust a thing or two.
 
 Migrating to 4.9
