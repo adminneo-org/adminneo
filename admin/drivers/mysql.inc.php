@@ -8,7 +8,7 @@ use PDO;
 add_driver("mysql", "MySQL");
 
 if (isset($_GET["mysql"])) {
-	define("DRIVER", "mysql");
+	define("AdminNeo\DRIVER", "mysql");
 	// MySQLi supports everything, PDO_MySQL doesn't support orgtable
 	if (extension_loaded("mysqli")) {
 		class Min_DB extends MySQLi {

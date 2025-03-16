@@ -198,7 +198,7 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 		$databases = null;
 	}
 	stop_session();
-	define("PAGE_HEADER", 1);
+	define("AdminNeo\PAGE_HEADER", 1);
 }
 
 /** Send HTTP headers

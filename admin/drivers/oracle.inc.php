@@ -5,7 +5,7 @@ namespace AdminNeo;
 add_driver("oracle", "Oracle (beta)");
 
 if (isset($_GET["oracle"])) {
-	define("DRIVER", "oracle");
+	define("AdminNeo\DRIVER", "oracle");
 	if (extension_loaded("oci8")) {
 		class Min_DB {
 			var $extension = "oci8", $_link, $_result, $server_info, $affected_rows, $errno, $error;

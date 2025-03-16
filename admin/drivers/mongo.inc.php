@@ -10,7 +10,7 @@ use MongoDB\Driver;
 add_driver("mongo", "MongoDB (alpha)");
 
 if (isset($_GET["mongo"])) {
-	define("DRIVER", "mongo");
+	define("AdminNeo\DRIVER", "mongo");
 
 	if (class_exists('MongoDB\Driver\Manager')) {
 		class Min_DB {

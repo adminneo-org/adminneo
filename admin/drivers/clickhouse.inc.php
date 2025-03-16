@@ -5,7 +5,7 @@ namespace AdminNeo;
 add_driver("clickhouse", "ClickHouse (alpha)");
 
 if (isset($_GET["clickhouse"])) {
-	define("DRIVER", "clickhouse");
+	define("AdminNeo\DRIVER", "clickhouse");
 
 	class Min_DB {
 		var $extension = "JSON", $server_info, $errno, $_result, $error, $_url;

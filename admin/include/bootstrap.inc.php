@@ -124,7 +124,7 @@ if (function_exists('\create_adminneo')) {
 	$admin = new Admin();
 }
 
-if (defined("DRIVER")) {
+if (defined("AdminNeo\DRIVER")) {
 	$on_actions = "RESTRICT|NO ACTION|CASCADE|SET NULL|SET DEFAULT"; ///< @var string used in foreign_keys()
 	$config = driver_config();
 	$possible_drivers = $config['possible_drivers'];
@@ -142,19 +142,19 @@ if (defined("DRIVER")) {
 	$admin->setOperators($operators, $operator_like, $operator_regexp);
 	$admin->setSystemObjects($config["system_databases"] ?? [], $config["system_schemas"] ?? []);
 } else {
-	define("DRIVER", null);
+	define("AdminNeo\DRIVER", null);
 }
 
-define("SERVER", DRIVER ? $_GET[DRIVER] : null); // read from pgsql=localhost
-define("DB", $_GET["db"]); // for the sake of speed and size
-define("BASE_URL", preg_replace('~\?.*~', '', relative_uri()));
-define("ME", BASE_URL . '?'
+define("AdminNeo\SERVER", DRIVER ? $_GET[DRIVER] : null); // read from pgsql=localhost
+define("AdminNeo\DB", $_GET["db"]); // for the sake of speed and size
+define("AdminNeo\BASE_URL", preg_replace('~\?.*~', '', relative_uri()));
+define("AdminNeo\ME", BASE_URL . '?'
 	. (sid() ? session_name() . "=" . urlencode(session_id()) . '&' : '')
 	. (SERVER !== null ? DRIVER . "=" . urlencode(SERVER) . '&' : '')
 	. (isset($_GET["username"]) ? "username=" . urlencode($_GET["username"]) . '&' : '')
 	. (DB != "" ? 'db=' . urlencode(DB) . '&' . (isset($_GET["ns"]) ? "ns=" . urlencode($_GET["ns"]) . "&" : "") : '')
 );
-define("HOME_URL", substr(preg_replace('~\b(username|db|ns)=[^&]*&~', '', ME), 0, -1) ?: ".");
+define("AdminNeo\HOME_URL", substr(preg_replace('~\b(username|db|ns)=[^&]*&~', '', ME), 0, -1) ?: ".");
 
 include __DIR__ . "/version.inc.php";
 include __DIR__ . "/design.inc.php";
