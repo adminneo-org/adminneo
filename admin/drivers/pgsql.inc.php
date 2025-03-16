@@ -5,7 +5,7 @@ namespace AdminNeo;
 add_driver("pgsql", "PostgreSQL");
 
 if (isset($_GET["pgsql"])) {
-	define("DRIVER", "pgsql");
+	define("AdminNeo\DRIVER", "pgsql");
 	if (extension_loaded("pgsql")) {
 		class Min_DB {
 			var $extension = "PgSQL", $_link, $_result, $_string, $_database = true, $server_info, $affected_rows, $error, $timeout;

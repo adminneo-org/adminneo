@@ -5,10 +5,10 @@ namespace AdminNeo;
 add_driver("elastic", "Elasticsearch 7 (beta)");
 
 if (isset($_GET["elastic"])) {
-	define("DRIVER", "elastic");
+	define("AdminNeo\DRIVER", "elastic");
 
 	if (ini_bool('allow_url_fopen')) {
-		define("ELASTIC_DB_NAME", "elastic");
+		define("AdminNeo\ELASTIC_DB_NAME", "elastic");
 
 		class Min_DB {
 			var $extension = "JSON", $server_info, $errno, $error, $_url;
