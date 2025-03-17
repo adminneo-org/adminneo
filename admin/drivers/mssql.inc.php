@@ -678,7 +678,8 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		;
 	}
 
-	function last_id() {
+	function last_id($result)
+	{
 		return Connection::get()->getValue("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
 	}
 

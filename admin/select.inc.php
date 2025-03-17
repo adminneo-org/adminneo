@@ -160,7 +160,7 @@ if ($_POST) {
 		}
 		$message = lang('%d item(s) have been affected.', $affected);
 		if ($_POST["clone"] && $result && $affected == 1) {
-			$last_id = last_id();
+			$last_id = last_id($result);
 			if ($last_id) {
 				$message = lang('Item%s has been inserted.', " $last_id");
 			}
