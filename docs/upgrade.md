@@ -80,6 +80,8 @@ include "adminneo.php";
   Main menu is simplified by default and can be modified by `navigationMode` configuration option. Set it to `reversed`
   for original-like menu layout. See [Configuration options](/docs/configuration.md) for more information.
 
+- Plugin `AdminerEditTextarea` (edit-textarea.php) was removed without a replacement.
+
 - All remaining plugins were renamed:
     - `AdminerDumpAlter` to `AlterDumpPlugin`
     - `AdminerDumpBz2` to `Bz2DumpPlugin`
