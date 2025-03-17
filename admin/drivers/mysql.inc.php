@@ -1119,10 +1119,15 @@ if (isset($_GET["mysql"])) {
 		return idf_escape($name);
 	}
 
-	/** Get last auto increment ID
-	* @return string
-	*/
-	function last_id() {
+	/**
+	 * Returns last auto-increment ID.
+	 *
+	 * @param $result Result|bool
+	 *
+	 * @return string|int|false
+	 */
+	function last_id($result)
+	{
 		return Connection::get()->getValue("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
 	}
 
