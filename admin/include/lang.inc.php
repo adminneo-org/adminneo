@@ -58,7 +58,7 @@ function language_select(): void
 	echo "<form action='' method='post'>\n";
 	echo html_select("lang", $options, Locale::get()->getLanguage(), "this.form.submit();");
 	echo "<input type='submit' value='" . lang('Use'), "' class='button hidden'>\n";
-	echo "<input type='hidden' name='token' value='", get_token(), "'>\n";
+	echo input_token();
 	echo "</form>\n";
 }
 

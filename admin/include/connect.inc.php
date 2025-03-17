@@ -96,7 +96,7 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 
 			echo "</div>\n"; // table-footer-parent
 
-			echo "<input type='hidden' name='token' value='", get_token(), "'>\n";
+			echo input_token();
 			echo "</form>\n";
 			echo script("tableCheck();");
 		}
