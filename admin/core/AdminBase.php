@@ -185,7 +185,29 @@ abstract class AdminBase
 
 	public abstract function headers();
 
-	public abstract function csp();
+	/**
+	 * Returns lists of directives for Content-Security-Policy HTTP header.
+	 *
+	 * @return string[] [directive name => allowed sources].
+	 * @throws \Random\RandomException
+	 */
+	public function getCspHeader(): array
+	{
+		$frameAncestors = array_map(function ($source) {
+			return $source == Config::SelfSource ? "'self'" : $source;
+		}, $this->config->getFrameAncestors());
+
+		return [
+			// 'self' is a fallback for browsers not supporting 'strict-dynamic', 'unsafe-inline' is a fallback for browsers not supporting 'nonce-'
+			"script-src" => "'self' 'unsafe-inline' 'nonce-" . get_nonce() . "' 'strict-dynamic'",
+			"connect-src" => "'self' https://api.github.com/repos/adminneo-org/adminneo/releases/latest",
+			"frame-src" => "'self'",
+			"object-src" => "'none'",
+			"base-uri" => "'none'",
+			"form-action" => "'self'",
+			"frame-ancestors" => $frameAncestors ? implode(" ", $frameAncestors) : "'none'",
+		];
+	}
 
 	public abstract function head();
 
