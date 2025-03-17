@@ -181,13 +181,13 @@ Default value: `[]`
 
 List of predefined server connections. Each server connection has parameters:
 
-| Parameter  | Required | Description                                                                                              |
-|------------|----------|----------------------------------------------------------------------------------------------------------|
-| `driver`   | YES      | Driver code: `mysql`, `pgsql`, `elastic`, etc. ([available drivers](/admin/drivers))                     |
-| `server`   | no       | Server address.                                                                                          |
-| `database` | no       | Database name, or file path to SQLite file.                                                              |
-| `name`     | no       | Custom server name.                                                                                      |
-| `config`   | no       | Configuration parameters that overrides global config.<br>All parameters are available except `servers`. |
+| Parameter  | Required | Description                                                                          |
+|------------|----------|--------------------------------------------------------------------------------------|
+| `driver`   | YES      | Driver code: `mysql`, `pgsql`, `elastic`, etc. ([available drivers](/admin/drivers)) |
+| `server`   | no       | Server address.                                                                      |
+| `database` | no       | Database name, or file path to SQLite file.                                          |
+| `name`     | no       | Custom server name.                                                                  |
+| `config`   | no       | Configuration parameters that overrides global config.                               |
 
 For example:
 ```php
@@ -197,5 +197,27 @@ $config = [
         ["driver" => "pgsql", "server" => "localhost:5432", "database" => "postgres"],
         ["driver" => "sqlite", "database" => "/projects/my-service/test.db", "config" => ["defaultPasswordHash" => ""]],
     ],
+];
+```
+
+Global parameters that can't be overridden by server connection: `servers`, `frameAncestors`.
+
+### frameAncestors
+
+Default value: `[]`
+
+Allows using AdminNeo inside a frame by modifying `X-Frame-Options` and `Content-Security-Policy` HTTP headers. List can 
+contain sources that are allowed to embed AdminNeo as defined in [frame-ancestors directive specification](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).
+Value `self` can be used to allow all ancestor frames from the same origin. Empty list will disallow AdminNeo to be used 
+in a frame at all (clickjacking prevention).   
+
+For example:
+```php
+$config = [
+    "frameAncestors" => ["self"],
+];
+
+$config = [
+    "frameAncestors" => ["self", "https://adminneo.example.org"],
 ];
 ```

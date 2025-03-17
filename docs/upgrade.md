@@ -67,6 +67,9 @@ include "adminneo.php";
 - Plugin `AdminerLoginSsl` (login-ssl.php) was removed. SSL options can be defined by `ssl*` configuration options.
   See [Configuration options](/docs/configuration.md) for more information.
 
+- Plugin `AdminerFrames` (frames.php) was removed. Frames can be allowed by `frameAncestors` configuration option. 
+  See [Configuration options](/docs/configuration.md) for more information.
+
 - Plugins `AdminerJsonColumn` (json-column.php) and [AdminerJsonPreview](https://github.com/pematon/adminer-plugins) by
   Pematon were replaced by new `JsonPreviewPlugin`.
 
@@ -92,7 +95,6 @@ include "adminneo.php";
     - `AdminerEnumOption` to `EnumOptionPlugin`
     - `AdminerFileUpload` to `FileUploadPlugin`
     - `AdminerForeignSystem` to `SystemForeignKeysPlugin`
-    - `AdminerFrames` to `FrameSupportPlugin`
     - `AdminerLoginIp` to `IpLoginPlugin`
     - `AdminerLoginOtp` to `OtpLoginPlugin`
     - `AdminerLoginTable` to `TableLoginPlugin`
@@ -112,6 +114,8 @@ include "adminneo.php";
 - Function `selectQueryBuild()` was removed.
 - Function `css()` was removed. CSS files can be defined by `cssUrls` configuration option. See
   [Configuration options](/docs/configuration.md) for more information.
+- Function `csp()` was replaced by `getCspHeader()` that allows to redefine CSP directives of just one 
+  Content-Security-Policy HTTP header.
 - Many customizable functions was renamed:
     - `credentials()` to `getCredentials()`
     - `login()` -> `authenticate()`
