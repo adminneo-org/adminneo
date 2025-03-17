@@ -83,6 +83,7 @@ if (DB != "") {
 } elseif (!$_POST["add_x"] && $_GET["db"] == "") {
 	echo "<button name='add_x' value='1' title='", h(lang('Add next')), "' class='button light'>", icon_solo("add"), "</button>\n";
 }
+
+echo input_token();
 ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
 </form>

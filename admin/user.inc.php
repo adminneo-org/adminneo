@@ -241,5 +241,5 @@ echo "</table></div>\n";
 <p>
 <input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
 <?php if (isset($_GET["host"])) { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', "$USER@$_GET[host]")); ?><?php } ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
+<?php echo input_token(); ?>
 </form>

@@ -279,6 +279,7 @@ foreach ($row["partition_names"] as $key => $val) {
 	print_fieldset_end("partition");
 	echo "</div>\n";
 }
+
+echo input_token();
 ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
 </form>
