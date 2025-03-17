@@ -483,7 +483,8 @@ if (isset($_GET["clickhouse"])) {
 		return '';
 	}
 
-	function last_id() {
+	function last_id($result)
+	{
 		return 0; // ClickHouse doesn't have it
 	}
 
