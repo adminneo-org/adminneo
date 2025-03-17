@@ -83,11 +83,11 @@ if ($in) {
 	echo "</table>\n";
 }
 
-echo "<p>",
-	"<input type='submit' class='button' value='", lang('Call'), "'>",
-	"<input type='hidden' name='token' value='", get_token(), "'>",
-	"</p>\n",
-	"</form>\n";
+echo "<p>\n";
+echo "<input type='submit' class='button' value='", lang('Call'), "'>\n";
+echo input_token();
+echo "</p>\n";
+echo "</form>\n";
 
 $comment = $routine["comment"];
 if ($comment !== null && $comment !== "") {

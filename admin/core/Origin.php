@@ -424,7 +424,7 @@ abstract class Origin extends Plugin
 		echo "<form action='' method='post'>\n";
 		echo h($_GET["username"]);
 		echo "<input type='submit' class='button' name='logout' value='", lang('Logout'), "' id='logout'>";
-		echo "<input type='hidden' name='token' value='", get_token(), "'>\n";
+		echo input_token();
 		echo "</form>";
 		echo "</div>\n";
 	}
