@@ -135,7 +135,7 @@ if ($_POST) {
 				$result = ($_POST["delete"]
 					? Driver::get()->delete($TABLE, $where_check)
 					: ($_POST["clone"]
-						? queries("INSERT $query$where_check")
+						? queries("INSERT $query$where_check" . Driver::get()->getInsertReturningSql($TABLE))
 						: Driver::get()->update($TABLE, $set, $where_check)
 					)
 				);

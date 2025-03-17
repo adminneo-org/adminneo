@@ -361,6 +361,15 @@ if (isset($_GET["pgsql"])) {
 			$this->systemSchemas = ["information_schema", "pg_catalog", "pg_toast", "pg_temp_*", "pg_toast_temp_*"];
 		}
 
+		public function getInsertReturningSql(string $table): string
+		{
+			$autoIncrement = array_filter(fields($table), function ($field) {
+				return $field['auto_increment'];
+			});
+
+			return count($autoIncrement) == 1 ? " RETURNING " . idf_escape(key($autoIncrement)) : "";
+		}
+
 		public function insertUpdate(string $table, array $records, array $primary): bool
 		{
 			foreach ($records as $record) {
@@ -906,7 +915,9 @@ ORDER BY conkey, conname") as $row) {
 
 	function last_id($result)
 	{
-		return 0; // there can be several sequences
+		$row = $result instanceof Result ? $result->fetchRow() : [];
+
+		return $row ? $row[0] : 0;
 	}
 
 	function explain(Connection $connection, string $query)

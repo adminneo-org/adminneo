@@ -7,6 +7,7 @@ AdminNeo 5.2.0
 ### Changes
 
 - Update Spanish translation (by @rexwithluv)
+- PostgreSQL: Display auto_increment of inserted rows (by @vrana)
 
 ### Bugfixes
 
