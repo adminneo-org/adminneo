@@ -298,10 +298,22 @@ abstract class Driver
 	 */
 	public function insert(string $table, array $record)
 	{
-		return queries("INSERT INTO " . table($table) . ($record
-			? " (" . implode(", ", array_keys($record)) . ")\nVALUES (" . implode(", ", $record) . ")"
-			: " DEFAULT VALUES"
-		));
+		return queries($this->insertSql($table, $record));
+	}
+
+	/**
+	 * Returns SQL query to insert data into a table.
+	 *
+	 * @param string $table Table name.
+	 * @param array $record Escaped columns in keys, quoted data in values.
+	 */
+	protected function insertSql(string $table, array $record): string
+	{
+		return "INSERT INTO " . table($table) . (
+			$record ?
+			" (" . implode(", ", array_keys($record)) . ")\nVALUES (" . implode(", ", $record) . ")" :
+			" DEFAULT VALUES"
+		);
 	}
 
 	/**
