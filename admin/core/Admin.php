@@ -74,13 +74,6 @@ class Admin extends AdminBase
 	function headers() {
 	}
 
-	/** Get Content Security Policy headers
-	* @return array of arrays with directive name in key, allowed sources in value
-	*/
-	function csp() {
-		return csp();
-	}
-
 	/** Print HTML code inside <head>
 	* @return bool true to link favicon.ico and adminneo.css if exists
 	*/

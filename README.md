@@ -154,6 +154,7 @@ Available configuration parameters:
 | `sslEncrypt`                | null          | MS SQL: Value for [Encrypt connection option](https://learn.microsoft.com/en-us/sql/connect/php/connection-options).                                |
 | `sslTrustServerCertificate` | null          | MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).     |
 | `servers`                   | []            | List of predefined server connections.                                                                                                              |
+| `frameAncestors`            | []            | Allows using AdminNeo inside a frame.                                                                                                               |
 
 For detailed information see [Configuration documentation](/docs/configuration.md).
 

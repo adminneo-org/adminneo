@@ -8,6 +8,8 @@ class Config
 	public const NavigationDual = "dual";
 	public const NavigationReversed = "reversed";
 
+	public const SelfSource = "self";
+
 	/** @var array */
 	private $params;
 
@@ -135,6 +137,11 @@ class Config
 	public function getSslTrustServerCertificate(): ?bool
 	{
 		return $this->params["sslTrustServerCertificate"] ?? null;
+	}
+
+	public function getFrameAncestors(): array
+	{
+		return $this->params["frameAncestors"] ?? [];
 	}
 
 	public function hasServers(): bool

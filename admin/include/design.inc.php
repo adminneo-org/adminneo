@@ -201,45 +201,29 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 	define("AdminNeo\PAGE_HEADER", 1);
 }
 
-/** Send HTTP headers
-* @return null
-*/
-function page_headers() {
+/**
+ * Sends HTTP headers.
+ */
+function page_headers(): void
+{
 	global $admin;
+
 	header("Content-Type: text/html; charset=utf-8");
 	header("Cache-Control: no-cache");
-	header("X-Frame-Options: deny"); // ClickJacking protection in IE8, Safari 4, Chrome 2, Firefox 3.6.9
 	header("X-XSS-Protection: 0"); // prevents introducing XSS in IE8 by removing safe parts of the page
 	header("X-Content-Type-Options: nosniff");
 	header("Referrer-Policy: origin-when-cross-origin");
-	foreach ($admin->csp() as $csp) {
-		$header = [];
-		foreach ($csp as $key => $val) {
-			$header[] = "$key $val";
-		}
-		header("Content-Security-Policy: " . implode("; ", $header));
-	}
-	$admin->headers();
-}
 
-/**
- * Gets Content Security Policy headers.
- *
- * @return array of arrays with directive name in key, allowed sources in value
- * @throws \Random\RandomException
- */
-function csp() {
-	return [
-		[
-			// 'self' is a fallback for browsers not supporting 'strict-dynamic', 'unsafe-inline' is a fallback for browsers not supporting 'nonce-'
-			"script-src" => "'self' 'unsafe-inline' 'nonce-" . get_nonce() . "' 'strict-dynamic'",
-			"connect-src" => "'self' https://api.github.com/repos/adminneo-org/adminneo/releases/latest",
-			"frame-src" => "'self'",
-			"object-src" => "'none'",
-			"base-uri" => "'none'",
-			"form-action" => "'self'",
-		],
-	];
+	// Clickjacking prevention for older browsers that do not support CSP2.
+	header("X-Frame-Options: " . (in_array(Config::SelfSource, $admin->getConfig()->getFrameAncestors()) ? "SAMEORIGIN" : "DENY"));
+
+	$directives = [];
+	foreach ($admin->getCspHeader() as $directive => $sources) {
+		$directives[] = "$directive $sources";
+	}
+	header("Content-Security-Policy: " . implode("; ", $directives));
+
+	$admin->headers();
 }
 
 /**

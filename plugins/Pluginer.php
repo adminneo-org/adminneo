@@ -117,7 +117,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function csp()
+	public function getCspHeader(): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

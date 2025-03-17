@@ -55,10 +55,6 @@ class Admin extends AdminBase
 	function headers() {
 	}
 
-	function csp() {
-		return csp();
-	}
-
 	function head() {
 		return true;
 	}

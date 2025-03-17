@@ -41,8 +41,11 @@ class Server
 	{
 		$params = $this->params["config"] ?? [];
 
-		if (isset($params["servers"])) {
-			unset($params["servers"]);
+		$globalOnlyParams = ["servers", "frameAncestors"];
+		foreach ($globalOnlyParams as $param) {
+			if (isset($params[$param])) {
+				unset($params[$param]);
+			}
 		}
 
 		return $params;
