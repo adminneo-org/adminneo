@@ -46,5 +46,5 @@ echo doc_link([
 <p><?php textarea("clause", $row["clause"]); ?>
 <p><input type="submit" class='button default' value="<?php echo lang('Save'); ?>">
 <?php if ($name != "") { ?><input type="submit" class='button' name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $name)); ?><?php } ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
+<?php echo input_token(); ?>
 </form>

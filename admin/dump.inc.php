@@ -212,7 +212,7 @@ echo "<tr><th>", lang('Output'), "</th><td>", html_radios("output", Admin::get()
 </table>
 
 <p><input type="submit" class="button default" value="<?php echo lang('Export'); ?>">
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
+<?php echo input_token(); ?>
 
 <table>
 <?php

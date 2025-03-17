@@ -37,6 +37,7 @@ if (!$row) {
 if ($SEQUENCE != "") {
 	echo "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm(lang('Drop %s?', $SEQUENCE)) . "\n";
 }
+
+echo input_token();
 ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
 </form>
