@@ -58,7 +58,8 @@ if (support("kill")) {
 	echo ($i + 1) . "/" . lang('%d in total', max_connections());
 	echo "<p><input type='submit' class='button' value='" . lang('Kill') . "'>\n";
 }
+
+echo input_token();
 ?>
-<input type="hidden" name="token" value="<?php echo get_token(); ?>">
 </form>
 <?php echo script("tableCheck();"); ?>

@@ -37,7 +37,7 @@ foreach ($settingsRows as $row) {
 echo "</table>\n";
 
 echo "<p><input type='submit' value='" . lang('Save'), "' class='button default hidden'>\n";
-echo "<input type='hidden' name='token' value='", get_token(), "'></p>\n";
+echo input_token();
 echo "</form>\n";
 echo script("initSettingsForm();");
 
