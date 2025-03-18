@@ -306,10 +306,6 @@ if (isset($_GET["sqlite"])) {
 		return Connection::get()->getValue("PRAGMA encoding"); // there is no database list so $db == DB
 	}
 
-	function engines() {
-		return [];
-	}
-
 	function logged_user() {
 		return get_current_user(); // should return effective user
 	}

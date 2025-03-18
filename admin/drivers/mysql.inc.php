@@ -431,6 +431,18 @@ if (isset($_GET["mysql"])) {
 			return $c_style;
 		}
 
+		public function engines(): array
+		{
+			$engines = [];
+
+			foreach (get_rows("SHOW ENGINES") as $row) {
+				if (preg_match("~YES|DEFAULT~", $row["Support"])) {
+					$engines[] = $row["Engine"];
+				}
+			}
+
+			return $engines;
+		}
 	}
 
 
@@ -540,19 +552,6 @@ if (isset($_GET["mysql"])) {
 		} elseif (preg_match('~ CHARACTER SET ([^ ]+)~', $create, $match)) {
 			// default collation
 			$return = $collations[$match[1]][-1];
-		}
-		return $return;
-	}
-
-	/** Get supported engines
-	* @return array
-	*/
-	function engines() {
-		$return = [];
-		foreach (get_rows("SHOW ENGINES") as $row) {
-			if (preg_match("~YES|DEFAULT~", $row["Support"])) {
-				$return[] = $row["Engine"];
-			}
 		}
 		return $return;
 	}
