@@ -7,6 +7,7 @@ AdminNeo 5.2.0
 ### Changes
 
 - PostgreSQL: Display auto_increment of inserted rows (by @vrana)
+- PostgreSQL: Display description of system variables (by @vrana)
 
 ### Bugfixes
 

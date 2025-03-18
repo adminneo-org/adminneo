@@ -12,10 +12,13 @@ if (!$variables) {
 	echo "<p class='message'>" . lang('No rows.') . "\n";
 } else {
 	echo "<div class='scrollable'><table>\n";
-	foreach ($variables as $key => $val) {
+	foreach ($variables as $row) {
 		echo "<tr>";
+		$key = array_shift($row);
 		echo "<th><code class='jush-" . DIALECT . ($status ? "status" : "set") . "'>" . h($key) . "</code>";
-		echo "<td>" . nl2br(h($val));
+		foreach ($row as $val) {
+			echo "<td>" . nl2br(h($val));
+		}
 	}
 	echo "</table></div>\n";
 }

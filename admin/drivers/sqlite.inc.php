@@ -835,8 +835,9 @@ if (isset($_GET["sqlite"])) {
 		foreach (get_rows("PRAGMA pragma_list") as $row) {
 			$name = $row["name"];
 			if ($name != "pragma_list" && $name != "compile_options") {
-				foreach (get_rows("PRAGMA $name") as $row) {
-					$return[$name] .= implode(", ", $row) . "\n";
+				$return[$name] = [$name, ''];
+				foreach (get_rows("PRAGMA $name") as $row2) {
+					$return[$name][1] .= implode(", ", $row2) . "\n";
 				}
 			}
 		}
@@ -846,8 +847,7 @@ if (isset($_GET["sqlite"])) {
 	function show_status() {
 		$return = [];
 		foreach (get_vals("PRAGMA compile_options") as $option) {
-			list($key, $val) = explode("=", $option, 2);
-			$return[$key] = $val;
+			$return[] = explode("=", $option, 2);
 		}
 		return $return;
 	}
