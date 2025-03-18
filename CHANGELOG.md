@@ -8,6 +8,7 @@ AdminNeo 5.2.0
 
 - Update Spanish translation (by @rexwithluv)
 - PostgreSQL: Display auto_increment of inserted rows (by @vrana)
+- PostgreSQL: Display description of system variables (by @vrana)
 
 ### Bugfixes
 

@@ -627,7 +627,16 @@ AND c_src.TABLE_NAME = " . q($table);
 	}
 
 	function show_variables() {
-		return get_key_vals('SELECT name, display_value FROM v$parameter');
+		return get_rows('SELECT name, display_value FROM v$parameter');
+	}
+
+	function show_status() {
+		$return = [];
+		$rows = get_rows('SELECT * FROM v$instance');
+		foreach (reset($rows) as $key => $val) {
+			$return[] = [$key, $val];
+		}
+		return $return;
 	}
 
 	function process_list() {
@@ -637,11 +646,6 @@ ON sql.sql_id = sess.sql_id
 WHERE sess.type = \'USER\'
 ORDER BY PROCESS
 ');
-	}
-
-	function show_status() {
-		$rows = get_rows('SELECT * FROM v$instance');
-		return reset($rows);
 	}
 
 	function convert_field($field) {
