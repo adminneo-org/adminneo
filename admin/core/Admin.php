@@ -79,8 +79,14 @@ class Admin extends AdminBase
 	*/
 	function head() {
 		?>
-		<link rel="stylesheet" type="text/css" href="<?= link_files("jush.css", ["../vendor/vrana/jush/jush.css"]); ?>">
 		<?php
+		echo "<link rel='stylesheet' href='", link_files("jush.css", ["../vendor/vrana/jush/jush.css"]), "'>";
+
+		if (!$this->isLightModeForced()) {
+			echo "<link rel='stylesheet' " . (!$this->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
+			echo link_files("jush-dark.css", ["../vendor/vrana/jush/jush-dark.css"]);
+			echo "'>\n";
+		}
 
 		echo script_src(link_files("jush.js", [
 			"../vendor/vrana/jush/modules/jush.js",
