@@ -858,6 +858,20 @@ function truncate_utf8(string $string, int $length = 80): string
 	return h($match[1]) . (isset($match[2]) ? "" : "<i>…</i>");
 }
 
+if (!function_exists("str_starts_with")) {
+	function str_starts_with(string $haystack, string $needle): bool
+	{
+		return strpos($haystack, $needle) === 0;
+	}
+}
+
+if (!function_exists("str_contains")) {
+	function str_contains(string $haystack, string $needle): bool
+	{
+		return strpos($haystack, $needle) !== false;
+	}
+}
+
 /** Format decimal number
 * @param int
 * @return string

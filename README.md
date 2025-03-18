@@ -60,7 +60,7 @@ Where:
 - `languages` is a comma-separated list of [languages](/admin/lang).
   If not specified, all languages will be included.
 - `themes` is a comma-separated list of [themes](/admin/themes).
-  If not specified, only the default theme without color variants will be included. The `+` character can be used as 
+  If not specified, only the default theme with blue color variant will be included. The `+` character can be used as 
   a wildcard in the theme name.
 - `config-file.json` is a path to the custom JSON configuration file. It contains a class with [the same parameters](#configuration) 
   that can be configured in Admin constructor.
@@ -80,7 +80,6 @@ php bin/compile.php pgsql en
 php bin/compile.php mysql,pgsql en,de,cs,sk
 
 # Default set of drivers, all languages, green and red color variants of the default theme.
-# Note that it is not necessary to explicitly enter the default theme.
 php bin/compile.php default-green,default-red
 
 # Default theme together with all color variants.
@@ -136,7 +135,7 @@ Available configuration parameters:
 | Parameter                   | Default value | Description                                                                                                                                         |
 |-----------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `theme`                     | default       | Theme code. Available themes are: `default`.                                                                                                        |
-| `colorVariant`              | null          | Theme color variant. Available variants are: `green`, `red`.                                                                                        |
+| `colorVariant`              | blue          | Theme color variant. Available variants are: `blue`, `green`, `red`.                                                                                |
 | `cssUrls`                   | []            | List of custom CSS files.                                                                                                                           |
 | `jsUrls`                    | []            | List of custom Javascript files.                                                                                                                    |
 | `navigationMode`            | simple        | Main navigation mode that affects the left menu with the list of tables and top links: `simple`, `dual`, `reversed`.                                |
@@ -217,6 +216,16 @@ include "adminneo.php";
 ```
 
 [Available plugins](plugins).
+
+Custom CSS and Javascript
+-------------------------
+
+It is possible to modify the appearance and functionality by creating a custom CSS or Javasrtipt file. AdminNeo will
+automatically include files **adminneo.css**, **adminneo-light.css**, **adminneo-dark.css** and **adminneo.js** that are
+placed in the AdminNeo's current working directory (typically next to the index.php).
+
+Custom adminneo.css should be compatible with automatic switching to dark mode. File adminneo-light.css will force 
+AdminNeo to use only light mode, file adminneo-dark.css will force dark mode.
 
 Main project files
 ------------------

@@ -1,0 +1,19 @@
+:root {
+	--link-text: hsl(220, 60%, 45%);
+	--link-text-hover: hsl(220, 60%, 30%);
+	--selection-bg: hsla(220, 80%, 50%, 12%);
+
+	--list-active: hsla(220, 80%, 45%, 7%);
+	--list-active-hover: hsla(220, 80%, 45%, 12%);
+
+	--button-bg-hover: hsla(220, 80%, 45%, 7%);
+	--button-border: hsl(220, 60%, 45%);
+	--button-border-hover: hsl(220, 60%, 30%);
+	--button-text: hsl(220, 60%, 45%);
+	--button-text-hover: hsl(220, 60%, 30%);
+
+	--button-default-bg: hsl(220, 60%, 45%);
+	--button-default-bg-hover: hsl(220, 60%, 30%);
+	--button-default-border: hsl(220, 60%, 45%);
+	--button-default-border-hover: hsl(220, 60%, 30%);
+}
