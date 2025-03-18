@@ -253,6 +253,11 @@ if (isset($_GET["clickhouse"])) {
 			$query = $separator . implode(",$separator", $values);
 			return queries("ALTER TABLE " . table($table) . " UPDATE $query$queryWhere");
 		}
+
+		public function engines(): array
+		{
+			return ['MergeTree'];
+		}
 	}
 
 
@@ -375,10 +380,6 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function db_collation($db, $collations) {
-	}
-
-	function engines() {
-		return ['MergeTree'];
 	}
 
 	function logged_user() {

@@ -430,6 +430,16 @@ abstract class Driver
 	}
 
 	/**
+	 * Returns supported engines.
+	 *
+	 * @return string[]
+	 */
+	public function engines(): array
+	{
+		return [];
+	}
+
+	/**
 	 * Returns defined check constraints.
 	 *
 	 * @param string $table Table name.
