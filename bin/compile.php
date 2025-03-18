@@ -329,7 +329,9 @@ if ($arguments[0] == "editor") {
 	array_shift($arguments);
 }
 
-$selected_drivers = [];
+echo "project:   $project\n";
+
+$selected_drivers = ["mysql", "pgsql", "mssql", "sqlite"];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
@@ -338,10 +340,9 @@ if ($arguments) {
 		array_shift($arguments);
 	}
 }
-if (!$selected_drivers) {
-	$selected_drivers = ["mysql", "pgsql", "mssql", "sqlite"];
-}
 $single_driver = count($selected_drivers) == 1 ? $selected_drivers[0] : null;
+
+echo "drivers:   " . ($selected_drivers ? implode(", ", $selected_drivers) : "all") . "\n";
 
 $selected_languages = [];
 if ($arguments) {
@@ -354,26 +355,46 @@ if ($arguments) {
 }
 $single_language = count($selected_languages) == 1 ? $selected_languages[0] : null;
 
-$selected_themes = [];
+echo "languages: " . ($selected_languages ? implode(", ", $selected_languages) : "all") . "\n";
+
+$selected_themes = ["default-blue"];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
 	$base_name = str_replace("+", "", $params[0]);
-	if ($base_name == "default" || file_exists(__DIR__ . "/../admin/themes/$base_name.css")) {
+	if (file_exists(__DIR__ . "/../admin/themes/$base_name")) {
+		$themes_map = [];
 		foreach ($params as $theme) {
 			// Expand names with wildcards.
 			if (strpos($theme, "+") !== false) {
-				foreach (glob(__DIR__ . "/../admin/themes/" . str_replace("+", "*", $theme)) as $filename) {
-					$selected_themes[] = str_replace(".css", "", basename($filename));
-				};
+				$dirNames = glob(__DIR__ . "/../admin/themes/" . str_replace("+", "*", $theme));
 			} else {
-				$selected_themes[] = $theme;
+				$dirNames = [$theme];
+			}
+
+			// Collect unique themes, ensure to use a color variant and include default color variant for every theme.
+			foreach ($dirNames as $dirName) {
+				$dirname = basename($dirName);
+
+				if (preg_match('~-(blue|green|red)$~', $dirname, $matches)) {
+					$color_variant = $matches[1];
+				} else {
+					$dirname .= "-blue";
+					$color_variant = "blue";
+				}
+
+				$themes_map["default-$color_variant"] = true;
+				$themes_map[$dirname] = true;
 			}
 		}
+
+		$selected_themes = array_keys($themes_map);
 
 		array_shift($arguments);
 	}
 }
+
+echo "themes:    " . implode(", ", $selected_themes) . "\n";
 
 $custom_config = [];
 if ($arguments && preg_match('~\.json$~i', $arguments[0])) {
@@ -393,6 +414,8 @@ if ($arguments && preg_match('~\.json$~i', $arguments[0])) {
 
 	array_shift($arguments);
 }
+
+echo "config:    " . ($custom_config ? "yes" : "no") . "\n";
 
 if ($arguments) {
 	echo "Usage: php compile.php [editor] [drivers] [languages] [themes] [config-file.json]\n";
@@ -515,40 +538,46 @@ for ($i = 0; $i < count($matches[0]); $i++) {
 	$name = $matches[1][$i];
 	$files = trim($matches[2][$i], " \n\r\t\",");
 
-	if ($name == '$theme-$variant.css') {
-		continue;
-	}
-
-	// Selected themes.
-	if ($name == '$theme.css') {
+	// Default theme.
+	if (str_starts_with($name, 'default-$color_variant')) {
 		foreach ($selected_themes as $theme) {
-			if ($theme == "default") continue;
+			if (str_starts_with($theme, "default-")) {
+				$name2 = str_replace('default-$color_variant', $theme, $name);
+				$files2 = str_replace('default-$color_variant', $theme, $files);
 
-			$name2 = str_replace('$theme', $theme, $name);
-			$files2 = str_replace('$theme', $theme, $files);
-
-			append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
+				append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
+			}
 		}
 
 		continue;
 	}
 
-	// Favicon color variants.
-	if (preg_match('~icon\$postfix\.~', $name)) {
-		$name2 = str_replace('$postfix', "", $name);
-		$files2 = str_replace('$postfix', "", $files);
-
-		append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
-
+	// Non-default themes.
+	if (str_starts_with($name, '$theme-$color_variant')) {
 		foreach ($selected_themes as $theme) {
-			if (!preg_match('~-(green|red)$~', $theme, $theme_matches)) {
-				continue;
+			if (!str_starts_with($theme, "default-")) {
+				preg_match('~^(.*)-(blue|green|red)$~', $theme, $matches2);
+
+				$name2 = str_replace('$theme-$color_variant', $theme, $name);
+				$files2 = str_replace('$theme-$color_variant', $theme, $files);
+				$files2 = str_replace('$theme', $matches2[1], $files2);
+
+				append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
 			}
+		}
 
-			$name2 = str_replace('$postfix', "-$theme_matches[1]", $name);
-			$files2 = str_replace('$postfix', "-$theme_matches[1]", $files);
+		continue;
+	}
 
-			append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
+	// Favicons.
+	if (str_contains($name, 'icon-$color_variant.')) {
+		foreach ($selected_themes as $theme) {
+			if (preg_match('~^default-(blue|green|red)$~', $theme, $matches2)) {
+				$name2 = str_replace('$color_variant', $matches2[1], $name);
+				$files2 = str_replace('$color_variant', $matches2[1], $files);
+
+				append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
+			}
 		}
 
 		continue;
@@ -597,4 +626,4 @@ $filename = __DIR__ . "/../export/{$project}neo"
 
 file_put_contents($filename, $file);
 
-echo "export/" . basename($filename) . " created (" . strlen($file) . " B).\n";
+echo "output:    export/" . basename($filename) . " (" . strlen($file) . " B)\n";

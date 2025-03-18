@@ -34,10 +34,10 @@ Theme code. Available themes are: `default`. Please, be sure that the theme is c
 
 ### colorVariant
 
-Default value: `null`
+Default value: `blue`
 
-Theme color code. Available variants are: `green`, `red`. Please, be sure that the color variant is compiled into the 
-final single file together with selected theme.
+Theme color code. Available variants are: `blue`, `green`, `red`. Please, be sure that the color variant is compiled 
+into the final single file together with selected theme.
 
 ### cssUrls
 

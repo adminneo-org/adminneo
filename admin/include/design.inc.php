@@ -50,8 +50,12 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 
 	<title><?= $title_page; ?></title>
 <?php
-	echo "<link rel='stylesheet' type='text/css' href='", link_files("default.css", [
+	$theme = $admin->getConfig()->getTheme();
+	$color_variant = $admin->getConfig()->getColorVariant();
+
+	echo "<link rel='stylesheet' href='", link_files("default-$color_variant.css", [
 		"../admin/themes/default/variables.css",
+		"../admin/themes/default-$color_variant/variables.css",
 		"../admin/themes/default/common.css",
 		"../admin/themes/default/forms.css",
 		"../admin/themes/default/code.css",
@@ -65,28 +69,46 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 		"../admin/themes/default/print.css",
 	]), "'>\n";
 
-	$theme = $admin->getConfig()->getTheme();
-	if ($theme != "default") {
-		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme.css", ["../admin/themes/$theme.css"]) . "'>\n";
+	if (!$admin->isLightModeForced()) {
+		echo "<link rel='stylesheet' " . (!$admin->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
+		echo link_files("default-$color_variant-dark.css", [
+			"../admin/themes/default/variables-dark.css",
+			"../admin/themes/default-$color_variant/variables-dark.css",
+		]);
+		echo "'>\n";
 	}
-	if ($variant = $admin->getConfig()->getColorVariant()) {
-		echo "<link rel='stylesheet' type='text/css' href='" . link_files("$theme-$variant.css", ["../admin/themes/$theme-$variant.css"]) . "'>\n";
+
+	if ($theme != "default") {
+		echo "<link rel='stylesheet' href='", link_files("$theme-$color_variant.css", [
+			"../admin/themes/$theme/main.css",
+			"../admin/themes/$theme-$color_variant/main.css",
+		]), "'>\n";
+
+		if (!$admin->isLightModeForced()) {
+			echo "<link rel='stylesheet' " . (!$admin->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
+			echo link_files("$theme-$color_variant-dark.css", [
+				"../admin/themes/$theme/main-dark.css",
+				"../admin/themes/$theme-$color_variant/main-dark.css",
+			]);
+			echo "'>\n";
+		}
 	}
 
 	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
 
 	if ($admin->head()) {
-		$variant = $admin->getConfig()->getColorVariant();
-		$postfix = $variant ? "-$variant" : "";
-
 		// https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
 		// Converting PNG to ICO: https://redketchup.io/icon-converter
-		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon$postfix.ico", ["../admin/images/variants/favicon$postfix.ico"]), "' sizes='32x32'>\n";
-		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon$postfix.svg", ["../admin/images/variants/favicon$postfix.svg"]), "'>\n";
-		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon$postfix.png", ["../admin/images/variants/apple-touch-icon$postfix.png"]), "'>\n";
+		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon-$color_variant.ico", ["../admin/images/variants/favicon-$color_variant.ico"]), "' sizes='32x32'>\n";
+		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon-$color_variant.svg", ["../admin/images/variants/favicon-$color_variant.svg"]), "'>\n";
+		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon-$color_variant.png", ["../admin/images/variants/apple-touch-icon-$color_variant.png"]), "'>\n";
 
 		foreach ($admin->getCssUrls() as $url) {
-			echo "<link rel='stylesheet' type='text/css' href='", h($url), "'>\n";
+			if (strpos($url, "adminneo-dark.css") === 0 && !$admin->isDarkModeForced()) {
+				echo "<link rel='stylesheet' media='(prefers-color-scheme: dark)' href='", h($url), "'>\n";
+			} else {
+				echo "<link rel='stylesheet' href='", h($url), "'>\n";
+			}
 		}
 
 		foreach ($admin->getJsUrls() as $url) {

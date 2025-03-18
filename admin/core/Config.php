@@ -33,9 +33,9 @@ class Config
 		return $this->params["theme"] ?? "default";
 	}
 
-	public function getColorVariant(): ?string
+	public function getColorVariant(): string
 	{
-		return $this->params["colorVariant"] ?? null;
+		return $this->params["colorVariant"] ?? "blue";
 	}
 
 	/**

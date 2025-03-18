@@ -216,16 +216,27 @@ abstract class AdminBase
 	 *
 	 * @return string[]
 	 */
-	function getCssUrls(): array
+	public function getCssUrls(): array
 	{
 		$urls = $this->config->getCssUrls();
 
-		$filename = "adminneo.css";
-		if (file_exists($filename)) {
-			$urls[] = "$filename?v=" . filemtime($filename);
+		foreach (["adminneo.css", "adminneo-light.css", "adminneo-dark.css"] as $filename) {
+			if (file_exists($filename)) {
+				$urls[] = "$filename?v=" . filemtime($filename);
+			}
 		}
 
 		return $urls;
+	}
+
+	public function isLightModeForced(): bool
+	{
+		return file_exists("adminneo-light.css") && !file_exists("adminneo-dark.css");
+	}
+
+	public function isDarkModeForced(): bool
+	{
+		return file_exists("adminneo-dark.css") && !file_exists("adminneo-light.css");
 	}
 
 	/**
@@ -233,7 +244,7 @@ abstract class AdminBase
 	 *
 	 * @return string[]
 	 */
-	function getJsUrls(): array
+	public function getJsUrls(): array
 	{
 		$urls = $this->config->getJsUrls();
 
