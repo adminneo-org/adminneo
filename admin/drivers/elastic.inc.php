@@ -446,10 +446,6 @@ if (isset($_GET["elastic"])) {
 		//
 	}
 
-	function engines() {
-		return [];
-	}
-
 	function count_tables($databases) {
 		$return = Connection::get()->rootQuery('_aliases');
 		if (empty($return)) {

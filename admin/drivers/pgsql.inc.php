@@ -507,10 +507,6 @@ ORDER BY datname");
 		return Connection::get()->getValue("SELECT datcollate FROM pg_database WHERE datname = " . q($db));
 	}
 
-	function engines() {
-		return [];
-	}
-
 	function logged_user() {
 		return Connection::get()->getValue("SELECT user");
 	}

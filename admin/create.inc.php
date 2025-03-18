@@ -188,7 +188,7 @@ foreach ($row["fields"] as $field) {
 
 $collations = Admin::get()->getCollations(array_keys($keep_collations));
 
-$engines = engines();
+$engines = Driver::get()->engines();
 // case of engine may differ
 foreach ($engines as $engine) {
 	if (!strcasecmp($engine, $row["Engine"])) {

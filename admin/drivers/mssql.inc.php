@@ -457,10 +457,6 @@ if (isset($_GET["mssql"])) {
 		return Connection::get()->getValue("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
 	}
 
-	function engines() {
-		return [];
-	}
-
 	function logged_user() {
 		return Connection::get()->getValue("SELECT SUSER_NAME()");
 	}

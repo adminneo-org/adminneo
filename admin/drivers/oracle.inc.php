@@ -365,10 +365,6 @@ ORDER BY 1"
 		return Connection::get()->getValue("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
 	}
 
-	function engines() {
-		return [];
-	}
-
 	function logged_user() {
 		return Connection::get()->getValue("SELECT USER FROM DUAL");
 	}
