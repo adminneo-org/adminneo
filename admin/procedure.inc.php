@@ -10,6 +10,11 @@ $row["fields"] = (array) $row["fields"];
 if ($_POST && !process_fields($row["fields"])) {
 	$orig = routine($_GET["procedure"], $routine);
 	$temp_name = "$row[name]_adminneo_" . uniqid();
+	foreach ($row["fields"] as $key => $field) {
+		if ($field["field"] == "") {
+			unset($row["fields"][$key]);
+		}
+	}
 	drop_create(
 		"DROP $routine " . routine_id($PROCEDURE, $orig),
 		create_routine($routine, $row),

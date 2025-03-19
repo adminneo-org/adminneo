@@ -904,7 +904,8 @@ ORDER BY conkey, conname") as $row) {
 	function routine_id($name, $row) {
 		$return = [];
 		foreach ($row["fields"] as $field) {
-			$return[] = $field["type"];
+			$length = $field["length"];
+			$return[] = $field["type"] . ($length ? "($length)" : "");
 		}
 		return idf_escape($name) . "(" . implode(", ", $return) . ")";
 	}
