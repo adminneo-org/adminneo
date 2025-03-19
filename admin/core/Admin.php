@@ -1213,7 +1213,8 @@ class Admin extends Origin
 				echo "</script>\n";
 			}
 
-			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" . Connection::get()->getVersion() . "', " . (Connection::get()->isMariaDB() ? "true" : "false") . ", autocompletion); });");
+			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" .
+				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion); });");
 		}
 	}
 

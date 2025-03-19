@@ -677,7 +677,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 	$urls = [
 		'sql' => "https://dev.mysql.com/doc/refman/$version/en/",
 		'sqlite' => "https://www.sqlite.org/",
-		'pgsql' => "https://www.postgresql.org/docs/$version/",
+		'pgsql' => "https://www.postgresql.org/docs/" . (Connection::get()->isCockroachDB() ? "current" : $version) . "/",
 		'mssql' => "https://learn.microsoft.com/en-us/sql/",
 		'oracle' => "https://www.oracle.com/pls/topic/lookup?ctx=db" . str_replace(".", "", $version) . "&id=",
 		'elastic' => "https://www.elastic.co/guide/en/elasticsearch/reference/$version/",

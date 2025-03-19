@@ -4,10 +4,10 @@
  * Loads syntax highlighting.
  *
  * @param {string} version First three characters of database system version.
- * @param {boolean} maria
+ * @param {string|null} vendor
  * @param {object} autocompletion
  */
-function initSyntaxHighlighting(version, maria, autocompletion) {
+function initSyntaxHighlighting(version, vendor, autocompletion) {
 	if (!window.jush) {
 		return;
 	}
@@ -20,7 +20,7 @@ function initSyntaxHighlighting(version, maria, autocompletion) {
 			if (typeof obj[key] != 'string') {
 				obj = obj[key];
 				key = 0;
-				if (maria) {
+				if (vendor === 'mariadb') {
 					for (let i = 1; i < obj.length; i++) {
 						obj[i] = obj[i]
 							.replace('.html', '/')
@@ -36,10 +36,12 @@ function initSyntaxHighlighting(version, maria, autocompletion) {
 				}
 			}
 
-			obj[key] = (maria ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
+			obj[key] = (vendor === "mariadb" ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
 				.replace('/doc/mysql', '/doc/refman/' + version) // MySQL
-				.replace('/docs/current', '/docs/' + version) // PostgreSQL
 			;
+			if (vendor !== 'cockroach') {
+				obj[key] = obj[key].replace('/docs/current', '/docs/' + version); // PostgreSQL
+			}
 		}
 	}
 
