@@ -55,7 +55,7 @@ php bin/compile.php editor [drivers] [languages] [themes] [config-file.json]
 ```
 
 Where:
-- `drivers` is a comma-separated list of [database drivers](/admin/drivers).
+- `drivers` is a comma-separated list of [database drivers](/admin/drivers) or the value `all-drivers`.
   The default set is: mysql, pgsql, mssql, sqlite.
 - `languages` is a comma-separated list of [languages](/admin/lang).
   If not specified, all languages will be included.
