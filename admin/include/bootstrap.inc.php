@@ -86,16 +86,6 @@ if (isset($_GET["username"])) {
 	if (!$driver_params) {
 		$_GET["mysql"] = "";
 	}
-
-	// Migrate session data.
-	if (isset($_SESSION["pwds"]["server"])) {
-		foreach (["pwds", "db", "dbs", "queries"] as $key) {
-			if (isset($_SESSION[$key]["server"])) {
-				$_SESSION[$key]["mysql"] = $_SESSION[$key]["server"];
-				unset($_SESSION[$key]["server"]);
-			}
-		}
-	}
 }
 
 include __DIR__ . "/lang.inc.php";
