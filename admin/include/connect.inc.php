@@ -26,7 +26,6 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 		$title = h($drivers[DRIVER]) . ": " . ($server_name != "" ? h($server_name) : lang('Server'));
 
 		page_header($title, $error, false, "db");
-		echo "<p id='top-links' class='links'>\n";
 
 		$links = [
 			'privileges' => [lang('Privileges'), "users"],
@@ -34,11 +33,16 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 			'variables' => [lang('Variables'), "variable"],
 			'status' => [lang('Status'), "status"],
 		];
+		$links_html = "";
 		foreach ($links as $key => $val) {
 			if (support($key)) {
-				echo "<a href='" . h(ME) . "$key='>", icon($val[1]), "$val[0]</a>\n";
+				$links_html .= "<a href='" . h(ME) . "$key='>" . icon($val[1]) . "$val[0]</a>";
 			}
 		}
+		if ($links_html) {
+			echo "<p id='top-links' class='links'>$links_html</p>\n";
+		}
+
 		echo "<p>" . lang('%s version: %s through PHP extension %s', $drivers[DRIVER], "<b>" . h($connection->server_info) . "</b>", "<b>$connection->extension</b>") . "\n";
 		echo "<p>" . lang('Logged as: %s', "<b>" . h(logged_user()) . "</b>") . "\n";
 		$databases = $admin->databases();
