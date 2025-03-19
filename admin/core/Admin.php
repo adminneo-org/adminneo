@@ -1128,7 +1128,7 @@ class Admin extends AdminBase
 						if ($password !== null) {
 							$dbs = $_SESSION["db"][$vendor][$server][$username];
 							foreach (($dbs ? array_keys($dbs) : [""]) as $db) {
-								$server_name = $server != "" ? $this->getServerName($server) : "";
+								$server_name = $this->getServerName($server);
 								$title = h($drivers[$vendor])
 									. ($username != "" || $server_name != "" ? " - " : "")
 									. h($username)
