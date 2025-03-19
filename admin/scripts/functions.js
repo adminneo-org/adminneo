@@ -88,7 +88,6 @@ function toggle(id) {
 /** Set permanent cookie
 * @param string
 * @param number
-* @param string optional
 */
 function cookie(assign, days) {
 	var date = new Date();
