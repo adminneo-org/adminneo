@@ -335,7 +335,13 @@ $selected_drivers = ["mysql", "pgsql", "mssql", "sqlite"];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
 
-	if (file_exists(__DIR__ . "/../admin/drivers/" . $params[0] . ".inc.php")) {
+	if ($params[0] == "all-drivers") {
+		$selected_drivers = array_map(function (string $filePath): string {
+			return str_replace(".inc.php", "", basename($filePath));
+		}, glob(__DIR__ . "/../admin/drivers/*"));
+
+		array_shift($arguments);
+	} elseif (file_exists(__DIR__ . "/../admin/drivers/" . $params[0] . ".inc.php")) {
 		$selected_drivers = $params;
 		array_shift($arguments);
 	}
