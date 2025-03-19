@@ -108,6 +108,10 @@ abstract class AdminBase
 	 */
 	function getServerName(string $server): string
 	{
+		if ($server == "") {
+			return "";
+		}
+
 		$serverObj = $this->config->getServer($server);
 
 		return $serverObj ? $serverObj->getName() : $server;
