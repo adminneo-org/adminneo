@@ -38,9 +38,13 @@ if ($PROCEDURE != "") {
 	page_header($title, [$title]);
 }
 
-if (!$_POST && $PROCEDURE != "") {
-	$row = routine($_GET["procedure"], $routine);
-	$row["name"] = $PROCEDURE;
+if (!$_POST) {
+	if ($PROCEDURE == "") {
+		$row["language"] = "sql";
+	} else {
+		$row = routine($_GET["procedure"], $routine);
+		$row["name"] = $PROCEDURE;
+	}
 }
 
 $charsets = get_vals("SHOW CHARACTER SET");
