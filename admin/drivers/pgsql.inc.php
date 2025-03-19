@@ -1106,6 +1106,8 @@ AND typelem = 0"
 			return !Connection::get()->isCockroachDB();
 		} elseif ($feature == "materializedview") {
 			return Connection::get()->isMinVersion("9.3");
+		} elseif ($feature == "procedure") {
+			return Connection::get()->isMinVersion("11");
 		}
 
 		return preg_match('~^(check|database|table|columns|sql|indexes|descidx|comment|view|scheme|routine|sequence|trigger|type|variables|drop_col|kill|dump)$~', $feature);
