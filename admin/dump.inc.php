@@ -10,12 +10,19 @@ if ($_POST && !$error) {
 		$cookie .= "&$key=" . urlencode($_POST[$key]);
 	}
 	cookie("neo_export", substr($cookie, 1));
-	$tables = array_flip((array) $_POST["tables"]) + array_flip((array) $_POST["data"]);
-	$ext = dump_headers(
-		(count($tables) == 1 ? key($tables) : DB),
-		(DB == "" || count($tables) > 1));
-	$is_sql = preg_match('~sql~', $_POST["format"]);
 
+	$subjects = array_flip($_POST["databases"] ?? []) + array_flip($_POST["tables"] ?? []) + array_flip($_POST["data"] ?? []);
+	if (count($subjects) == 1) {
+		$identifier = key($subjects);
+	} elseif (DB !== null) {
+		$identifier = DB;
+	} else {
+		$identifier = SERVER != "" ? $admin->getServerName(SERVER) : "localhost";
+	}
+
+	$ext = dump_headers($identifier, DB == null || count($subjects) > 1);
+
+	$is_sql = preg_match('~sql~', $_POST["format"]);
 	if ($is_sql) {
 		echo "-- AdminNeo $VERSION " . $drivers[DRIVER] . " " . str_replace("\n", " ", $connection->server_info) . " dump\n\n";
 		if ($jush == "sql") {
@@ -146,7 +153,8 @@ SET foreign_key_checks = 0;
 	exit;
 }
 
-page_header(lang('Export') . ": " . h(DB), $error, ($_GET["export"] != "" ? ["table" => $_GET["export"]] : [lang('Export')]));
+$name = DB !== null ? h(DB) : (SERVER != "" ? h($admin->getServerName(SERVER)) : lang('Server'));
+page_header(lang('Export') . ": $name", $error, ($_GET["export"] != "" ? ["table" => $_GET["export"]] : [lang('Export')]));
 ?>
 
 <form action="" method="post">
@@ -167,7 +175,7 @@ if (!isset($row["events"])) { // backwards compatibility
 	$row["triggers"] = $row["table_style"];
 }
 
-echo "<tr><th>" . lang('Format') . "<td>" . html_select("format", $admin->dumpFormat(), $row["format"], false) . "\n"; // false = radio
+echo "<tr><th>" . lang('Format') . "<td>" . html_select("format", $admin->getDumpFormats(), $row["format"], false) . "\n"; // false = radio
 
 echo ($jush == "sqlite" ? "" : "<tr><th>" . lang('Database') . "<td>" . html_select('db_style', $db_style, $row["db_style"])
 	. (support("type") ? checkbox("types", 1, $row["types"], lang('User types')) : "")
@@ -182,7 +190,7 @@ echo "<tr><th>" . lang('Tables') . "<td>" . html_select('table_style', $table_st
 
 echo "<tr><th>" . lang('Data') . "<td>" . html_select('data_style', $data_style, $row["data_style"]);
 
-echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $admin->dumpOutput(), $row["output"], false) . "\n"; // false = radio
+echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $admin->getDumpOutputs(), $row["output"], false) . "\n"; // false = radio
 
 ?>
 </table>

@@ -40,8 +40,9 @@
     },
     "suggest": {
         "ext-openssl": "Allows secure encryption of login information",
-        "ext-zlib": "Allows to export databases in compressed gzip (.gz) files",
-        "ext-bz2": "Allows to export databases in compressed bzip2 (.bz2) files",
+        "ext-zlib": "Allows gzip compression of data export",
+        "ext-bz2": "Allows bzip2 compression of data export",
+        "ext-zip": "Allows ZIP compression of data export",
         "ext-suhosin": "Enhace CSRF protection",
         "ext-mysqli": "Allows access to MySQL database",
         "ext-mysql": "Allows access to MySQL database (old driver)",

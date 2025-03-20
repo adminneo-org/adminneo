@@ -356,19 +356,23 @@ abstract class AdminBase
 
 	public abstract function processInput(?array $field, $value, $function = "");
 
-	public abstract function dumpOutput();
+	public abstract function getDumpOutputs(): array;
 
-	public abstract function dumpFormat();
+	public abstract function getDumpFormats(): array;
 
-	public abstract function dumpDatabase($db);
+	public abstract function sendDumpHeaders(string $identifier, bool $multiTable = false): string;
 
-	public abstract function dumpTable($table, $style, $is_view = 0);
+	/**
+	 * Exports database structure.
+	 */
+	public function dumpDatabase(string $database): void
+	{
+		//
+	}
 
-	public abstract function dumpData($table, $style, $query);
+	public abstract function dumpTable(string $table, string $style, int $viewType = 0): void;
 
-	public abstract function dumpFilename($identifier);
-
-	public abstract function dumpHeaders($identifier, $multi_table = false);
+	public abstract function dumpData(string $table, string $style, string $query): void;
 
 	public abstract function importServerPath();
 

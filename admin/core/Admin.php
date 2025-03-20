@@ -869,46 +869,79 @@ class Admin extends AdminBase
 		return unconvert_field($field, $return);
 	}
 
-	/** Returns export output options
-	* @return array
-	*/
-	function dumpOutput() {
-		$return = ['file' => lang('save'), 'text' => lang('open')];
+	/**
+	 * Returns export output options.
+	 *
+	 * @return string[]
+	 */
+	public function getDumpOutputs(): array
+	{
+		$outputs = [
+			'file' => lang('save'),
+			'text' => lang('open'),
+		];
+
 		if (function_exists('gzencode')) {
-			$return['gz'] = 'gzip';
+			$outputs['gz'] = 'gzip';
 		}
 
-		return $return;
+		return $outputs;
 	}
 
-	/** Returns export format options
-	* @return array empty to disable export
-	*/
-	function dumpFormat() {
+	/**
+	 * Returns export format options.
+	 *
+	 * @return string[] Empty to disable export.
+	 */
+	public function getDumpFormats(): array
+	{
 		return (support("dump") ? ['sql' => 'SQL'] : []) + ['csv' => 'CSV,', 'csv;' => 'CSV;', 'tsv' => 'TSV'];
 	}
 
-	/** Export database structure
-	* @param string
-	* @return null prints data
-	*/
-	function dumpDatabase($db) {
+	/**
+	 * Sends headers for export.
+	 *
+	 * @return string File extension.
+	 */
+	public function sendDumpHeaders(string $identifier, bool $multiTable = false): string
+	{
+		$output = $_POST["output"];
+
+		// Multiple CSVs are packed to TAR.
+		$extension = (str_contains($_POST["format"], "sql") ? "sql" : ($multiTable ? "tar" : "csv"));
+
+		if ($output == "gz") {
+			header("Content-Type: application/x-gzip");
+
+			ob_start(function (string $string): string {
+				// ob_start() callback receives an optional parameter $phase but gzencode() accepts optional parameter $level
+				return gzencode($string);
+			}, 1e6);
+		} elseif ($extension == "tar") {
+			header("Content-Type: application/x-tar");
+		} elseif ($extension == "sql") {
+			header("Content-Type: text/plain; charset=utf-8");
+		} else {
+			header("Content-Type: text/csv; charset=utf-8");
+		}
+
+		return $extension;
 	}
 
-	/** Export table structure
-	* @param string
-	* @param string
-	* @param int 0 table, 1 view, 2 temporary view table
-	* @return null prints data
-	*/
-	function dumpTable($table, $style, $is_view = 0) {
+	/**
+	 * Exports table structure.
+	 *
+	 * @param int $viewType 0 table, 1 view, 2 temporary view table.
+	 */
+	public function dumpTable(string $table, string $style, int $viewType = 0): void
+	{
 		if ($_POST["format"] != "sql") {
 			echo "\xef\xbb\xbf"; // UTF-8 byte order mark
 			if ($style) {
 				dump_csv(array_keys(fields($table)));
 			}
 		} else {
-			if ($is_view == 2) {
+			if ($viewType == 2) {
 				$fields = [];
 				foreach (fields($table) as $name => $field) {
 					$fields[] = idf_escape($name) . " $field[full_type]";
@@ -917,36 +950,41 @@ class Admin extends AdminBase
 			} else {
 				$create = create_sql($table, $_POST["auto_increment"], $style);
 			}
+
 			set_utf8mb4($create);
+
 			if ($style && $create) {
-				if ($style == "DROP+CREATE" || $is_view == 1) {
-					echo "DROP " . ($is_view == 2 ? "VIEW" : "TABLE") . " IF EXISTS " . table($table) . ";\n";
+				if ($style == "DROP+CREATE" || $viewType == 1) {
+					echo "DROP " . ($viewType == 2 ? "VIEW" : "TABLE") . " IF EXISTS " . table($table) . ";\n";
 				}
-				if ($is_view == 1) {
+				if ($viewType == 1) {
 					$create = remove_definer($create);
 				}
+
 				echo "$create;\n\n";
 			}
 		}
 	}
 
-	/** Export table data
-	* @param string
-	* @param string
-	* @param string
-	* @return null prints data
-	*/
-	function dumpData($table, $style, $query) {
+	/**
+	 * Exports table data.
+	 */
+	public function dumpData(string $table, string $style, string $query): void
+	{
 		global $connection, $jush;
+
 		if ($style) {
 			$max_packet = ($jush == "sqlite" ? 0 : 1048576); // default, minimum is 1024
 			$fields = [];
 			$identity_insert = false;
+
 			if ($_POST["format"] == "sql") {
 				if ($style == "TRUNCATE+INSERT") {
 					echo truncate_sql($table) . ";\n";
 				}
+
 				$fields = fields($table);
+
 				if ($jush == "mssql") {
 					foreach ($fields as $field) {
 						if ($field["auto_increment"]) {
@@ -957,6 +995,7 @@ class Admin extends AdminBase
 					}
 				}
 			}
+
 			$result = $connection->query($query, 1); // 1 - MYSQLI_USE_RESULT //! enum and set as numbers
 			if ($result) {
 				$insert = "";
@@ -965,9 +1004,11 @@ class Admin extends AdminBase
 				$generatedKeys = [];
 				$suffix = "";
 				$fetch_function = ($table != '' ? 'fetch_assoc' : 'fetch_row');
+
 				while ($row = $result->$fetch_function()) {
 					if (!$keys) {
 						$values = [];
+
 						foreach ($row as $val) {
 							$field = $result->fetch_field();
 							if (!empty($fields[$field->name]['generated'])) {
@@ -978,30 +1019,37 @@ class Admin extends AdminBase
 							$key = idf_escape($field->name);
 							$values[] = "$key = VALUES($key)";
 						}
+
 						$suffix = ($style == "INSERT+UPDATE" ? "\nON DUPLICATE KEY UPDATE " . implode(", ", $values) : "") . ";\n";
 					}
+
 					if ($_POST["format"] != "sql") {
 						if ($style == "table") {
 							dump_csv($keys);
 							$style = "INSERT";
 						}
+
 						dump_csv($row);
 					} else {
 						if (!$insert) {
 							$insert = "INSERT INTO " . table($table) . " (" . implode(", ", array_map('AdminNeo\idf_escape', $keys)) . ") VALUES";
 						}
+
 						foreach ($row as $key => $val) {
 							if (isset($generatedKeys[$key])) {
 								unset($row[$key]);
 								continue;
                             }
+
 							$field = $fields[$key];
 							$row[$key] = ($val !== null
 								? unconvert_field($field, preg_match(number_type(), $field["type"]) && !preg_match('~\[~', $field["full_type"]) && is_numeric($val) ? $val : q(($val === false ? 0 : $val)))
 								: "NULL"
 							);
 						}
+
 						$s = ($max_packet ? "\n" : " ") . "(" . implode(",\t", $row) . ")";
+
 						if (!$buffer) {
 							$buffer = $insert . $s;
 						} elseif (strlen($buffer) + 4 + strlen($s) + strlen($suffix) < $max_packet) { // 4 - length specification
@@ -1018,40 +1066,11 @@ class Admin extends AdminBase
 			} elseif ($_POST["format"] == "sql") {
 				echo "-- " . str_replace("\n", " ", $connection->error) . "\n";
 			}
+
 			if ($identity_insert) {
 				echo "SET IDENTITY_INSERT " . table($table) . " OFF;\n";
 			}
 		}
-	}
-
-	/** Set export filename
-	* @param string
-	* @return string filename without extension
-	*/
-	function dumpFilename($identifier) {
-		return friendly_url($identifier != "" ? $identifier : (SERVER != "" ? SERVER : "localhost"));
-	}
-
-	/** Send headers for export
-	* @param string
-	* @param bool
-	* @return string extension
-	*/
-	function dumpHeaders($identifier, $multi_table = false) {
-		$output = $_POST["output"];
-		$ext = (preg_match('~sql~', $_POST["format"]) ? "sql" : ($multi_table ? "tar" : "csv")); // multiple CSV packed to TAR
-		header("Content-Type: " .
-			($output == "gz" ? "application/x-gzip" :
-			($ext == "tar" ? "application/x-tar" :
-			($ext == "sql" || $output != "file" ? "text/plain" : "text/csv") . "; charset=utf-8"
-		)));
-		if ($output == "gz") {
-			ob_start(function ($string) {
-				// ob_start() callback receives an optional parameter $phase but gzencode() accepts optional parameter $level
-				return gzencode($string);
-			}, 1e6);
-		}
-		return $ext;
 	}
 
 	/**

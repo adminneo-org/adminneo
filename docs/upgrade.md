@@ -81,15 +81,15 @@ include "adminneo.php";
   for original-like menu layout. See [Configuration options](/docs/configuration.md) for more information.
 
 - Plugin `AdminerEditTextarea` (edit-textarea.php) was removed without a replacement.
+- Plugin `AdminerDumpPhp` (dump-php.php) was removed without a replacement.
+- Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
+- Plugin `AdminerDumpDate` (dump-date.php) was removed. Datetime is part of the filename by default.
 
 - All remaining plugins were renamed:
-    - `AdminerDumpAlter` to `AlterDumpPlugin`
-    - `AdminerDumpBz2` to `Bz2DumpPlugin`
-    - `AdminerDumpDate` to `DateDumpPlugin`
+    - `AdminerDumpBz2` to `Bz2OutputPlugin`
+    - `AdminerDumpZip` to `ZipOutputPlugin`
     - `AdminerDumpJson` to `JsonDumpPlugin`
-    - `AdminerDumpPhp` to `PhpDumpPlugin`
     - `AdminerDumpXml` to `XmlDumpPlugin`
-    - `AdminerDumpZip` to `ZipDumpPlugin`
     - `AdminerEditCalendar` to `EditCalendarPlugin`
     - `AdminerEditForeign` to `EditForeignPlugin`
     - `AdminerEditTextarea` to `EditTextareaPlugin`
@@ -118,11 +118,15 @@ include "adminneo.php";
   [Configuration options](/docs/configuration.md) for more information.
 - Function `csp()` was replaced by `getCspHeader()` that allows to redefine CSP directives of just one 
   Content-Security-Policy HTTP header.
+- Function `dumpFilename()` was removed.
 - Many customizable functions was renamed:
     - `credentials()` to `getCredentials()`
     - `login()` -> `authenticate()`
     - `serverName()` -> `getServerName()`
     - `loginFormField()` -> `composeLoginFormRow()`
+    - `dumpOutput()` -> `getDumpOutputs()`
+    - `dumpFormat()` -> `getDumpFormats()`
+    - `dumpHeaders()` -> `sendDumpHeaders()`
 
 Migrating to 4.17
 -----------------
