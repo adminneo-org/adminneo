@@ -1166,22 +1166,29 @@ function search_tables() {
 	echo ($sep ? "<p class='message'>" . lang('No tables.') : "</ul>") . "\n";
 }
 
-/** Send headers for export
-* @param string
-* @param bool
-* @return string extension
-*/
-function dump_headers($identifier, $multi_table = false) {
+/**
+ * Sends headers for export.
+ *
+ * @return string Extension.
+ */
+function dump_headers(string $identifier, bool $multi_table = false): string
+{
 	global $admin;
-	$return = $admin->dumpHeaders($identifier, $multi_table);
+
+	$identifier = friendly_url($identifier) . date("-Ymd-His");
+
+	$extension = $admin->sendDumpHeaders($identifier, $multi_table);
+
 	$output = $_POST["output"];
 	if ($output != "text") {
-		header("Content-Disposition: attachment; filename=" . $admin->dumpFilename($identifier) . ".$return" . ($output != "file" && preg_match('~^[0-9a-z]+$~', $output) ? ".$output" : ""));
+		header("Content-Disposition: attachment; filename=$identifier.$extension" . ($output != "file" && preg_match('~^[0-9a-z]+$~', $output) ? ".$output" : ""));
 	}
+
 	session_write_close();
 	ob_flush();
 	flush();
-	return $return;
+
+	return $extension;
 }
 
 /** Print CSV row
