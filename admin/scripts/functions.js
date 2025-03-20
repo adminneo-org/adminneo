@@ -1169,7 +1169,7 @@ function selectClick(event, text, warning) {
 	}
 
 	const tdStyle = window.getComputedStyle(td);
-	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), 20) + 'px';
+	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), (text ? 200 : 20)) + 'px';
 
 	if (text) {
 		let rows = 1;
