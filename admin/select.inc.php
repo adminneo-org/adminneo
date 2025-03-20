@@ -609,7 +609,7 @@ if (!$columns && support("table")) {
 <?php
 				}
 
-				$format = $admin->dumpFormat();
+				$format = $admin->getDumpFormats();
 				foreach ((array) $_GET["columns"] as $column) {
 					if ($column["fun"]) {
 						unset($format['sql']);
@@ -619,7 +619,7 @@ if (!$columns && support("table")) {
 				if ($format) {
 					print_fieldset_start("export", lang('Export') . " <span id='selected2'></span>", "export");
 					echo html_select("format", $format, $import_settings["format"]);
-					$output = $admin->dumpOutput();
+					$output = $admin->getDumpOutputs();
 					echo ($output ? " " . html_select("output", $output, $import_settings["output"]) : "");
 					echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>\n";
 					print_fieldset_end("export");

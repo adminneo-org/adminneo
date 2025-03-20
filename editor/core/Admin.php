@@ -545,43 +545,45 @@ qsl('div').onclick = whisperClick;", "")
 		return unconvert_field($field, $return);
 	}
 
-	function dumpOutput() {
+	public function getDumpOutputs(): array
+	{
 		return [];
 	}
 
-	function dumpFormat() {
+	public function getDumpFormats(): array
+	{
 		return ['csv' => 'CSV,', 'csv;' => 'CSV;', 'tsv' => 'TSV'];
 	}
 
-	function dumpDatabase($db) {
+	public function sendDumpHeaders(string $identifier, bool $multiTable = false): string
+	{
+		header("Content-Type: text/csv; charset=utf-8");
+
+		return "csv";
 	}
 
-	function dumpTable($table, $style, $is_view = 0) {
+	public function dumpTable(string $table, string $style, int $viewType = 0): void
+	{
 		echo "\xef\xbb\xbf"; // UTF-8 byte order mark
 	}
 
-	function dumpData($table, $style, $query) {
+	public function dumpData(string $table, string $style, string $query): void
+	{
 		global $connection;
+
 		$result = $connection->query($query, 1); // 1 - MYSQLI_USE_RESULT
-		if ($result) {
-			while ($row = $result->fetch_assoc()) {
-				if ($style == "table") {
-					dump_csv(array_keys($row));
-					$style = "INSERT";
-				}
-				dump_csv($row);
-			}
+		if (!$result) {
+			return;
 		}
-	}
 
-	function dumpFilename($identifier) {
-		return friendly_url($identifier);
-	}
+		while ($row = $result->fetch_assoc()) {
+			if ($style == "table") {
+				dump_csv(array_keys($row));
+				$style = "INSERT";
+			}
 
-	function dumpHeaders($identifier, $multi_table = false) {
-		$ext = "csv";
-		header("Content-Type: text/csv; charset=utf-8");
-		return $ext;
+			dump_csv($row);
+		}
 	}
 
 	function importServerPath() {

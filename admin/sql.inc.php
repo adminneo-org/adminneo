@@ -73,7 +73,7 @@ if (!$error && $_POST) {
 		$parse = '[\'"' . ($jush == "sql" ? '`#' : ($jush == "sqlite" ? '`[' : ($jush == "mssql" ? '[' : ''))) . ']|/\*|-- |$' . ($jush == "pgsql" ? '|\$[^$]*\$' : '');
 		$total_start = microtime(true);
 		parse_str($_COOKIE["neo_export"], $admin_export);
-		$dump_format = $admin->dumpFormat();
+		$dump_format = $admin->getDumpFormats();
 		unset($dump_format["sql"]);
 
 		while ($query != "") {
@@ -221,7 +221,7 @@ if (!$error && $_POST) {
 
 									if ($export) {
 										echo "<form id='$export_id' action='' method='post' class='hidden'><p>\n";
-										echo html_select("output", $admin->dumpOutput(), $admin_export["output"]) . " ";
+										echo html_select("output", $admin->getDumpOutputs(), $admin_export["output"]) . " ";
 										echo html_select("format", $dump_format, $admin_export["format"]);
 										echo "<input type='hidden' name='query' value='", h($q), "'>";
 										echo "<input type='hidden' name='token' value='$token'>";

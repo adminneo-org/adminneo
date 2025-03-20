@@ -30,16 +30,6 @@ class Pluginer extends Admin
 
 	// appendPlugin
 
-	public function dumpFormat()
-	{
-		return $this->appendPlugin(__FUNCTION__, func_get_args());
-	}
-
-	public function dumpOutput()
-	{
-		return $this->appendPlugin(__FUNCTION__, func_get_args());
-	}
-
 	public function editRowPrint($table, $fields, $row, $update)
 	{
 		return $this->appendPlugin(__FUNCTION__, func_get_args());
@@ -312,29 +302,34 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function dumpDatabase($db)
+	public function getDumpOutputs(): array
+	{
+		return $this->appendPlugin(__FUNCTION__, func_get_args());
+	}
+
+	public function getDumpFormats(): array
+	{
+		return $this->appendPlugin(__FUNCTION__, func_get_args());
+	}
+
+	public function sendDumpHeaders(string $identifier, bool $multiTable = false): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function dumpTable($table, $style, $is_view = 0)
+	public function dumpDatabase(string $database): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function dumpData($table, $style, $query)
+	public function dumpTable(string $table, string $style, int $viewType = 0): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function dumpFilename($identifier)
+	public function dumpData(string $table, string $style, string $query): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
-	}
-
-	public function dumpHeaders($identifier, $multi_table = false)
-	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function importServerPath()
