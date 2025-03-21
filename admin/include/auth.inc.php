@@ -216,7 +216,7 @@ if ($auth) {
 		set_session($key, null);
 	}
 	unset_permanent();
-	redirect(HOME_URL, lang('Logout successful.'));
+	redirect(SERVER_HOME_URL, lang('Logout successful.'));
 
 } elseif ($permanent && !$_SESSION["pwds"]) {
 	session_regenerate_id();
