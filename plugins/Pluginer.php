@@ -122,7 +122,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function composeLoginFormRow(string $fieldName, string $heading, string $field): string
+	public function composeLoginFormRow(string $fieldName, string $label, string $field): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

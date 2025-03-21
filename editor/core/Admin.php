@@ -61,8 +61,9 @@ class Admin extends AdminBase
 
 	function loginForm() {
 		echo "<table class='box'>\n";
-		echo $this->composeLoginFormRow('username', '<tr><th>' . lang('Username') . '<td>', '<input type="hidden" name="auth[driver]" value="mysql"><input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
-		echo $this->composeLoginFormRow('password', '<tr><th>' . lang('Password') . '<td>', '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
+		echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="mysql">');
+		echo $this->composeLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
+		echo $this->composeLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 		echo "</table>\n";
 
 		echo "<p>";
