@@ -265,9 +265,13 @@ abstract class AdminBase
 	/**
 	 * Returns composed row for login form field.
 	 */
-	public function composeLoginFormRow(string $fieldName, string $heading, string $field): string
+	public function composeLoginFormRow(string $fieldName, string $label, string $field): string
 	{
-		return "$heading$field\n";
+		if ($label) {
+			return "<tr><th>$label</th><td>$field</td></tr>\n";
+		} else {
+			return "$field\n";
+		}
 	}
 
 	public abstract function tableName($tableStatus);
