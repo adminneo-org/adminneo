@@ -276,7 +276,13 @@ abstract class AdminBase
 
 	public abstract function selectLinks($tableStatus, $set = "");
 
-	public abstract function foreignKeys($table);
+	/**
+	 * Returns foreign keys for table.
+	 */
+	public function getForeignKeys(string $table): array
+	{
+		return foreign_keys($table);
+	}
 
 	public abstract function backwardKeys($table, $tableName);
 

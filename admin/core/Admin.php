@@ -200,14 +200,6 @@ class Admin extends AdminBase
 		echo "\n";
 	}
 
-	/** Get foreign keys for table
-	* @param string
-	* @return array same format as foreign_keys()
-	*/
-	function foreignKeys($table) {
-		return foreign_keys($table);
-	}
-
 	/** Find backward keys for table
 	* @param string
 	* @param string
