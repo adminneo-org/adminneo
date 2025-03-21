@@ -2,9 +2,13 @@
 
 namespace AdminNeo;
 
-/** Require One-Time Password at login
+/**
+ * Require One-Time Password at login.
+ *
  * @link https://www.adminer.org/plugins/otp/
+ *
  * @author Jakub Vrana, https://www.vrana.cz/
+ *
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
  */
@@ -16,7 +20,8 @@ class OtpLoginPlugin
 	/**
 	 * @param string $secret Decoded secret, e.g. base64_decode("ENCODED_SECRET").
 	 */
-	public function __construct($secret) {
+	public function __construct(string $secret)
+	{
 		$this->secret = $secret;
 
 		if (isset($_POST["auth"])) {
@@ -24,20 +29,24 @@ class OtpLoginPlugin
 		}
 	}
 
-	function composeLoginFormRow(string $fieldName, string $heading, string $field): ?string
+	public function composeLoginFormRow(string $fieldName, string $heading, string $field): ?string
 	{
 		if ($fieldName != "password") return null;
 
 		return "$heading$field\n" .
-			"<tr><th><abbr title='" . lang('One Time Password') . "' lang='en'>OTP</abbr></th>" .
+			"<tr><th><abbr title='" . lang('One Time Password') . "'>OTP</abbr></th>" .
 			"<td><input class='input' name='auth[otp]' value='" . h($_SESSION["otp"]) . "' " .
 			"size='6' autocomplete='one-time-code' inputmode='numeric' maxlength='6' pattern='\d{6}'/></td>" .
 			"</tr>\n";
 	}
 
-	public function authenticate(string $username, string $password)
+	public function authenticate(string $username, string $password): ?string
 	{
 		if (!isset($_SESSION["otp"])) return null;
+
+		if ($_SESSION["otp"] == "") {
+			return lang('Enter OTP code.');
+		}
 
 		$timeSlot = floor(time() / 30);
 
@@ -54,12 +63,8 @@ class OtpLoginPlugin
 		return lang('Invalid OTP code.');
 	}
 
-	/**
-	 * @param int $timeSlot
-	 *
-	 * @return int
-	 */
-	private function getOtp($timeSlot) {
+	private function getOtp(int $timeSlot): int
+	{
 		$data = str_pad(pack("N", $timeSlot), 8, "\0", STR_PAD_LEFT);
 		$hash = hash_hmac("sha1", $data, $this->secret, true);
 		$offset = ord(substr($hash, -1)) & 0xF;
