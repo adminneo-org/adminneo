@@ -86,10 +86,6 @@ class Admin extends AdminBase
 		}
 	}
 
-	function foreignKeys($table) {
-		return foreign_keys($table);
-	}
-
 	function backwardKeys($table, $tableName) {
 		$return = [];
 		foreach (get_rows("SELECT TABLE_NAME, CONSTRAINT_NAME, COLUMN_NAME, REFERENCED_COLUMN_NAME
