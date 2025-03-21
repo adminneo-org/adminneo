@@ -8,7 +8,7 @@ function create_adminneo(): Admin
 
 	class CustomAdmin extends Admin
 	{
-		function composeLoginFormRow(string $fieldName, string $heading, string $field): string
+		public function composeLoginFormRow(string $fieldName, string $heading, string $field): string
 		{
 			return parent::composeLoginFormRow($fieldName, $heading, str_replace('value="mysql"', 'value="sqlite"', $field));
 		}
