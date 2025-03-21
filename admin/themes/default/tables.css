@@ -187,6 +187,15 @@ td.options select {
 	width: fit-content;
 }
 
+/* Spacing in multi SQL results. */
+.scrollable + .scrollable, .scrollable + .message {
+	margin-top: 40px;
+}
+
+.table-result {
+	margin-bottom: 40px;
+}
+
 @media (hover: none) {
 	/* Turn off sticky header on touch screens. It does not work on mobile Safari at all. */
 	thead {
@@ -201,5 +210,9 @@ td.options select {
 		width: auto;
 		overflow-x: auto;
 		margin: -15px 0;
+	}
+
+	.scrollable + .scrollable {
+		margin-top: 25px;
 	}
 }
