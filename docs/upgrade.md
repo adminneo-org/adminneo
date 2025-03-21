@@ -73,6 +73,12 @@ include "adminneo.php";
 - Plugins `AdminerJsonColumn` (json-column.php) and [AdminerJsonPreview](https://github.com/pematon/adminer-plugins) by
   Pematon were replaced by new `JsonPreviewPlugin`.
 
+- Plugin `AdminerLoginIp` (login-ip.php) does not allow empty passwords. Use configuration option `defaultPasswordHash`
+  for that.
+
+- Plugin `AdminerLoginTable` (login-table.php) uses different table to authenticate users and password_hash() method for
+  stored passwords.
+
 - Plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations) by Pematon is replaced by
   `visibleCollations` configuration option. See [Configuration options](/docs/configuration.md) for more information.
 

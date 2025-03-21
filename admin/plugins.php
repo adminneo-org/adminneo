@@ -20,6 +20,7 @@ function create_adminneo(): Pluginer
 	}
 
 	$plugins = [
+		//new OtpLoginPlugin(base64_decode('RXiwXQLdoq7jVQ==')),
 		new Bz2OutputPlugin(),
 		new ZipOutputPlugin(),
 		new JsonDumpPlugin(),
