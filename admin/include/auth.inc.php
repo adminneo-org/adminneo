@@ -123,6 +123,9 @@ function check_invalid_login() {
 	}
 }
 
+/**
+ * @throws \Random\RandomException
+ */
 function connect_to_db(): Min_DB
 {
 	global $admin;
@@ -132,25 +135,45 @@ function connect_to_db(): Min_DB
 	}
 
 	$connection = connect();
-	$authenticated = $connection instanceof Min_DB ? $admin->authenticate($_GET["username"], get_password()) : false;
-
-	if (!($connection instanceof Min_DB) || $authenticated !== true) {
-		if (is_string($connection)) {
-			$error = nl2br(h($connection));
-		} elseif (is_string($authenticated)) {
-			$error = $authenticated;
-		} else {
-			$error = lang('Invalid server or credentials.');
-		}
-
-		if (preg_match('~^ +| +$~', get_password())) {
-			$error .= "<br>" . lang('There is a space in the input password which might be the cause.');
-		}
-
-		auth_error($error);
+	if (!($connection instanceof Min_DB)) {
+		connection_error($connection);
 	}
 
 	return $connection;
+}
+
+/**
+ * @throws \Random\RandomException
+ */
+function authenticate(): void
+{
+	global $admin;
+
+	// Note: $admin->authenticate() method can use global $connection
+	// That's why authentication has to be called after successful connection to the database.
+
+	$result = $admin->authenticate($_GET["username"], get_password());
+	if ($result !== true) {
+		connection_error($result);
+	}
+}
+
+/**
+ * @throws \Random\RandomException
+ */
+function connection_error($result): void
+{
+	if (is_string($result)) {
+		$error = $result;
+	} else {
+		$error = lang('Invalid server or credentials.');
+	}
+
+	if (preg_match('~^ +| +$~', get_password())) {
+		$error .= "<br>" . lang('There is a space in the input password which might be the cause.');
+	}
+
+	auth_error($error);
 }
 
 $auth = $_POST["auth"] ?? null;
@@ -287,6 +310,7 @@ check_invalid_login();
 $admin->getConfig()->applyServer(SERVER);
 
 $connection = connect_to_db();
+authenticate();
 $driver = new Min_Driver($connection);
 
 if ($_POST["logout"] && $has_token && !verify_token()) {
