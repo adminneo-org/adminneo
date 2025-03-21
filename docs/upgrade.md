@@ -124,6 +124,7 @@ include "adminneo.php";
     - `login()` -> `authenticate()`
     - `serverName()` -> `getServerName()`
     - `loginFormField()` -> `composeLoginFormRow()`
+    - `foreignKeys()` -> `getForeignKeys()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`

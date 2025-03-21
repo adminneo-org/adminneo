@@ -142,7 +142,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function foreignKeys($table)
+	public function getForeignKeys(string $table): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

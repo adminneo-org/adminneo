@@ -936,7 +936,7 @@ function table_status1($table, $fast = false) {
 function column_foreign_keys($table) {
 	global $admin;
 	$return = [];
-	foreach ($admin->foreignKeys($table) as $foreign_key) {
+	foreach ($admin->getForeignKeys($table) as $foreign_key) {
 		foreach ($foreign_key["source"] as $val) {
 			$return[$val][] = $foreign_key;
 		}
