@@ -145,6 +145,7 @@ Available configuration parameters:
 | `hiddenDatabases`           | []            | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
 | `hiddenSchemas`             | []            | List of schemas to hide from the UI. Value `__system` will be expanded to all system schemas. Access to these schemas will be not restricted.       |
 | `visibleCollations`         | []            | List of collations to keep in select boxes while editing databases or tables.                                                                       |
+| `defaultDriver `            | null          | Default driver for login form.                                                                                                                      |
 | `defaultPasswordHash`       | null          | Hash of the default password for authentication to password-less databases. Set to an empty string to allow connection without password.            |
 | `sslKey`                    | null          | MySQL: The path name to the SSL key file.                                                                                                           |
 | `sslCertificate`            | null          | MySQL: The path name to the certificate file.                                                                                                       |

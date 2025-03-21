@@ -114,11 +114,14 @@ class Admin extends AdminBase
 		if ($serverPairs) {
 			echo $this->composeLoginFormRow('server', lang('Server'), "<select name='auth[server]'>" . optionlist($serverPairs, SERVER, true) . "</select>");
 		} else {
+			$driver = DRIVER ?: $this->getConfig()->getDefaultDriver($drivers);
+
 			if (count($drivers) > 1) {
-				echo $this->composeLoginFormRow('driver', lang('System'), html_select("auth[driver]", $drivers, DRIVER) . script("initLoginDriver(qsl('select'));", ""));
+				echo $this->composeLoginFormRow('driver', lang('System'), html_select("auth[driver]", $drivers, $driver) . script("initLoginDriver(qsl('select'));", ""));
 			} else {
-				echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . array_keys($drivers)[0] . '">');
+				echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . h($driver) . '">');
 			}
+
 			echo $this->composeLoginFormRow('server', lang('Server'), '<input class="input" name="auth[server]" value="' . h(SERVER) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">');
 		}
 

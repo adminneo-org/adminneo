@@ -104,6 +104,13 @@ class Config
 		return $this->params["visibleCollations"] ?? [];
 	}
 
+	public function getDefaultDriver(array $drivers): string
+	{
+		$driver = $this->params["defaultDriver"] ?? null;
+
+		return $driver && isset($drivers[$driver]) ? $driver : key($drivers);
+	}
+
 	public function getDefaultPasswordHash(): ?string
 	{
 		return $this->params["defaultPasswordHash"] ?? null;
