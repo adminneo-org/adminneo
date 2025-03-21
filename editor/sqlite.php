@@ -8,9 +8,13 @@ function create_adminneo(): Admin
 
 	class CustomAdmin extends Admin
 	{
-		public function composeLoginFormRow(string $fieldName, string $heading, string $field): string
+		public function composeLoginFormRow(string $fieldName, string $label, string $field): string
 		{
-			return parent::composeLoginFormRow($fieldName, $heading, str_replace('value="mysql"', 'value="sqlite"', $field));
+			if ($fieldName == "driver") {
+				return parent::composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="sqlite">');
+			} else {
+				return parent::composeLoginFormRow($fieldName, $label, $field);
+			}
 		}
 
 		function database()

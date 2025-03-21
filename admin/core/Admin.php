@@ -112,21 +112,21 @@ class Admin extends AdminBase
 
 		echo "<table class='box'>\n";
 		if ($serverPairs) {
-			echo $this->composeLoginFormRow('server', '<tr><th>' . lang('Server') . '<td>', "<select name='auth[server]'>" . optionlist($serverPairs, SERVER, true) . "</select>");
+			echo $this->composeLoginFormRow('server', lang('Server'), "<select name='auth[server]'>" . optionlist($serverPairs, SERVER, true) . "</select>");
 		} else {
 			if (count($drivers) > 1) {
-				echo $this->composeLoginFormRow('driver', '<tr><th>' . lang('System') . '<td>', html_select("auth[driver]", $drivers, DRIVER) . script("initLoginDriver(qsl('select'));", ""));
+				echo $this->composeLoginFormRow('driver', lang('System'), html_select("auth[driver]", $drivers, DRIVER) . script("initLoginDriver(qsl('select'));", ""));
 			} else {
 				echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . array_keys($drivers)[0] . '">');
 			}
-			echo $this->composeLoginFormRow('server', '<tr><th>' . lang('Server') . '<td>', '<input class="input" name="auth[server]" value="' . h(SERVER) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">');
+			echo $this->composeLoginFormRow('server', lang('Server'), '<input class="input" name="auth[server]" value="' . h(SERVER) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">');
 		}
 
-		echo $this->composeLoginFormRow('username', '<tr><th>' . lang('Username') . '<td>', '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
-		echo $this->composeLoginFormRow('password', '<tr><th>' . lang('Password') . '<td>', '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
+		echo $this->composeLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
+		echo $this->composeLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 
 		if (!$serverPairs) {
-			echo $this->composeLoginFormRow('db', '<tr><th>' . lang('Database') . '<td>', '<input class="input" name="auth[db]" value="' . h($_GET["db"]) . '" autocapitalize="off">');
+			echo $this->composeLoginFormRow('db', lang('Database'), '<input class="input" name="auth[db]" value="' . h($_GET["db"]) . '" autocapitalize="off">');
 		}
 		echo "</table>\n";
 

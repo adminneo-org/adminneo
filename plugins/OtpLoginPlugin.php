@@ -29,11 +29,11 @@ class OtpLoginPlugin
 		}
 	}
 
-	public function composeLoginFormRow(string $fieldName, string $heading, string $field): ?string
+	public function composeLoginFormRow(string $fieldName, string $label, string $field): ?string
 	{
 		if ($fieldName != "password") return null;
 
-		return "$heading$field\n" .
+		return "<tr><th>$label</th><td>$field</td></tr>\n" .
 			"<tr><th><abbr title='" . lang('One Time Password') . "'>OTP</abbr></th>" .
 			"<td><input class='input' name='auth[otp]' value='" . h($_SESSION["otp"]) . "' " .
 			"size='6' autocomplete='one-time-code' inputmode='numeric' maxlength='6' pattern='\d{6}'/></td>" .
