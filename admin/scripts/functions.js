@@ -1183,17 +1183,9 @@ function selectClick(event, text, warning) {
 		value = '';
 	}
 
-	let pos = event.rangeOffset;
-	if (document.selection) {
-		const range = document.selection.createRange();
-		range.moveToPoint(event.clientX, event.clientY);
-
-		const range2 = range.duplicate();
-		range2.moveToElementText(td);
-		range2.setEndPoint('EndToEnd', range);
-
-		pos = range2.text.length;
-	}
+	// Firefox: event.rangeOffset is defined, anchorOffset is related to the whole TR not the inner text node.
+	// Chrome/Safari: event.rangeOffset is not defined, anchorOffset is related to the inner text node.
+	const pos = event.rangeOffset !== undefined ? event.rangeOffset : getSelection().anchorOffset;
 
 	td.dataset.editing = "true";
 	td.innerHTML = '';
@@ -1213,12 +1205,6 @@ function selectClick(event, text, warning) {
 	input.name = td.id;
 	input.selectionStart = pos;
 	input.selectionEnd = pos;
-
-	if (document.selection) {
-		const range = document.selection.createRange();
-		range.moveEnd('character', -input.value.length + pos);
-		range.select();
-	}
 
 	return true;
 }
