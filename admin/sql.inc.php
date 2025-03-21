@@ -169,6 +169,10 @@ if (!$error && $_POST) {
 									$export_id = "export-$commands";
 
 									if (is_object($result)) {
+										if (!$_POST["only_errors"]) {
+											echo "<div class='table-result'>\n";
+										}
+
 										$limit = $_POST["limit"];
 										$orgtables = select($result, $connection2, [], $limit);
 
@@ -207,7 +211,9 @@ if (!$error && $_POST) {
 										}
 									}
 
-									echo script("initToggles(qsl('p'));");
+									if (!$_POST["only_errors"]) {
+										echo script("initToggles(qsl('p'));");
+									}
 
 									if ($warnings) {
 										echo "<div id='$warnings_id' class='hidden'>\n$warnings</div>\n";
@@ -227,6 +233,10 @@ if (!$error && $_POST) {
 										echo "<input type='hidden' name='token' value='$token'>";
 										echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>";
 										echo "</p></form>\n";
+									}
+
+									if (is_object($result) && !$_POST["only_errors"]) {
+										echo "</div>\n";
 									}
 								}
 
