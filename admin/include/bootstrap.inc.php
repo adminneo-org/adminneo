@@ -144,7 +144,8 @@ define("AdminNeo\ME", BASE_URL . '?'
 	. (isset($_GET["username"]) ? "username=" . urlencode($_GET["username"]) . '&' : '')
 	. (DB != "" ? 'db=' . urlencode(DB) . '&' . (isset($_GET["ns"]) ? "ns=" . urlencode($_GET["ns"]) . "&" : "") : '')
 );
-define("AdminNeo\HOME_URL", substr(preg_replace('~\b(username|db|ns)=[^&]*&~', '', ME), 0, -1) ?: ".");
+define("AdminNeo\HOME_URL", BASE_URL ?: ".");
+define("AdminNeo\SERVER_HOME_URL", substr(preg_replace('~\b(username|db|ns)=[^&]*&~', '', ME), 0, -1) ?: ".");
 
 include __DIR__ . "/version.inc.php";
 include __DIR__ . "/design.inc.php";
