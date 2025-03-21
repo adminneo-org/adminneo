@@ -127,6 +127,13 @@ $config = [
 
 Note: Access to other collations will be not restricted.
 
+### defaultDriver
+
+Default value: `null`
+
+Default driver for login form. Given value is validated against available drivers. If driver is not set or not invalid,
+the first available driver will be used.
+
 ### defaultPasswordHash
 
 Default value: `null`
