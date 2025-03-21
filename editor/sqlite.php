@@ -8,15 +8,6 @@ function create_adminneo(): Admin
 
 	class CustomAdmin extends Admin
 	{
-		public function composeLoginFormRow(string $fieldName, string $label, string $field): string
-		{
-			if ($fieldName == "driver") {
-				return parent::composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="sqlite">');
-			} else {
-				return parent::composeLoginFormRow($fieldName, $label, $field);
-			}
-		}
-
 		function database()
 		{
 			return "PATH_TO_YOUR_SQLITE_HERE";
@@ -25,6 +16,7 @@ function create_adminneo(): Admin
 
 	$config = [
 		"colorVariant" => "green",
+		"defaultDriver" => "sqlite",
 		// Warning! Inline the result of password_hash() so that the password is not visible in the source code.
 		"defaultPasswordHash" => password_hash("YOUR_PASSWORD_HERE", PASSWORD_DEFAULT),
 	];

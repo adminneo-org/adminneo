@@ -60,8 +60,12 @@ class Admin extends AdminBase
 	}
 
 	function loginForm() {
+		global $drivers;
+
+		$driver = $this->getConfig()->getDefaultDriver($drivers);
+
 		echo "<table class='box'>\n";
-		echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="mysql">');
+		echo $this->composeLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . h($driver) . '">');
 		echo $this->composeLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
 		echo $this->composeLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 		echo "</table>\n";
