@@ -90,6 +90,7 @@ include "adminneo.php";
 - Plugin `AdminerDumpPhp` (dump-php.php) was removed without a replacement.
 - Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
 - Plugin `AdminerDumpDate` (dump-date.php) was removed. Datetime is part of the filename by default.
+- Plugin `AdminerWymeditor` (wymeditor.php) was removed without a replacement.
 
 - All remaining plugins were renamed:
     - `AdminerDumpBz2` to `Bz2OutputPlugin`
@@ -115,7 +116,6 @@ include "adminneo.php";
     - `AdminerTableStructure` to `ExpandedTableStructurePlugin`
     - `AdminerTinymce` to `TinyMcePlugin`
     - `AdminerTranslation` to `TranslationPlugin`
-    - `AdminerWymeditor` to `WymEditorPlugin`
 
 ### Customizable functions
 
