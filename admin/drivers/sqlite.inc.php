@@ -12,7 +12,7 @@ if (isset($_GET["sqlite"])) {
 	define("AdminNeo\DRIVER", "sqlite");
 	define("AdminNeo\DIALECT", "sqlite");
 
-	if (class_exists("SQLite3")) {
+	if (class_exists("SQLite3") && $_GET["ext"] != "pdo") {
 		define("AdminNeo\DRIVER_EXTENSION", "SQLite3");
 
 		abstract class SqLiteConnectionBase extends Connection

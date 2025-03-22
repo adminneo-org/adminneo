@@ -8,7 +8,7 @@ if (isset($_GET["oracle"])) {
 	define("AdminNeo\DRIVER", "oracle");
 	define("AdminNeo\DIALECT", "oracle");
 
-	if (extension_loaded("oci8")) {
+	if (extension_loaded("oci8") && $_GET["ext"] != "pdo") {
 		define("AdminNeo\DRIVER_EXTENSION", "oci8");
 
 		class OracleConnection extends Connection

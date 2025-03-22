@@ -14,7 +14,7 @@ if (isset($_GET["mssql"])) {
 	define("AdminNeo\DRIVER", "mssql");
 	define("AdminNeo\DIALECT", "mssql");
 
-	if (extension_loaded("sqlsrv")) {
+	if (extension_loaded("sqlsrv") && $_GET["ext"] != "pdo") {
 		define("AdminNeo\DRIVER_EXTENSION", "sqlsrv");
 
 		class MsSqlConnection extends Connection
