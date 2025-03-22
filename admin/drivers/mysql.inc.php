@@ -29,6 +29,7 @@ if (isset($_GET["mysql"])) {
 				$this->mysqli->init();
 			}
 
+			/** @see https://php.net/mysqli.construct */
 			public function open(string $server, string $username, string $password, $database = null, $port = null, $socket = null): bool
 			{
 				mysqli_report(MYSQLI_REPORT_OFF);
