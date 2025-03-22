@@ -13,7 +13,7 @@ if (isset($_GET["mysql"])) {
 	define("AdminNeo\DIALECT", "sql");
 
 	// MySQLi supports everything, PDO_MySQL doesn't support orgtable
-	if (extension_loaded("mysqli")) {
+	if (extension_loaded("mysqli") && $_GET["ext"] != "pdo") {
 		define("AdminNeo\DRIVER_EXTENSION", "MySQLi");
 
 		class MySqlConnection extends Connection

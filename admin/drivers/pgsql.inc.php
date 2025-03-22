@@ -8,7 +8,7 @@ if (isset($_GET["pgsql"])) {
 	define("AdminNeo\DRIVER", "pgsql");
 	define("AdminNeo\DIALECT", "pgsql");
 
-	if (extension_loaded("pgsql")) {
+	if (extension_loaded("pgsql") && $_GET["ext"] != "pdo") {
 		define("AdminNeo\DRIVER_EXTENSION", "PgSQL");
 
 		class PgSqlConnection extends Connection
