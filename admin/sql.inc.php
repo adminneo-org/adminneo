@@ -295,6 +295,7 @@ if (!isset($_GET["import"])) {
 	textarea("query", $q, 20);
 	echo script(($_POST ? "" : "qs('textarea').focus();\n") . "gid('form').onsubmit = partial(sqlSubmit, gid('form'), '" . js_escape(remove_from_uri("sql|limit|error_stops|only_errors|history")) . "');");
 	echo "</p>";
+	Admin::get()->printAfterSqlCommand();
 	echo "<p><input type='submit' class='button default' value='" . lang('Execute') . "' title='Ctrl+Enter'>";
 	echo lang('Limit rows') . ": <input type='number' name='limit' class='input size' value='" . h($_POST ? $_POST["limit"] : $_GET["limit"]) . "'>\n";
 
