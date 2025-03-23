@@ -5,6 +5,10 @@ namespace AdminNeo;
 /**
  * Displays JSON preview as a table.
  *
+ * JSON previews can be displayed in selection table and/or in edit form. Preview will be displayed for columns with
+ * native JSON data type and for values that are automatically detected as JSON objects or arrays if
+ * `jsonValuesDetection` configuration option is enabled.
+ *
  * @author Peter Knut
  *
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
@@ -13,7 +17,7 @@ namespace AdminNeo;
 class JsonPreviewPlugin
 {
 	/** @var bool */
-	private $inTable;
+	private $inSelection;
 
 	/** @var bool */
 	private $inEdit;
@@ -28,14 +32,14 @@ class JsonPreviewPlugin
 	private $counter = 1;
 
 	/**
-	 * @param bool $inTable Whether apply JSON preview in selection table.
+	 * @param bool $inSelection Whether apply JSON preview in selection table.
 	 * @param bool $inEdit Whether apply JSON preview in edit form.
 	 * @param int $maxLevel Max. level in recursion.
 	 * @param int $maxTextLength Maximal length of string values. Longer texts will be truncated with ellipsis sign '…'.
 	 */
-	public function __construct(bool $inTable = true, bool $inEdit = true, int $maxLevel = 5, int $maxTextLength = 100)
+	public function __construct(bool $inSelection = true, bool $inEdit = true, int $maxLevel = 5, int $maxTextLength = 100)
 	{
-		$this->inTable = $inTable;
+		$this->inSelection = $inSelection;
 		$this->inEdit = $inEdit;
 		$this->maxLevel = $maxLevel;
 		$this->maxTextLength = $maxTextLength;
@@ -93,18 +97,21 @@ class JsonPreviewPlugin
 		<?php
 	}
 
-	public function selectVal(&$val, $link, array $field, $original)
+	public function selectVal(&$val, $link, ?array $field, $original)
 	{
-		if (!$this->inTable) {
+		if (!$field || !$this->inSelection) {
 			return null;
 		}
 
-		if ($this->isJson($field, $original) && ($json = json_decode($original, true)) !== null && is_array($json)) {
-			$val = "<a class='toggle jsonly' href='#json-code-$this->counter' title='JSON'>" . icon_chevron_right() . "</a> " . $val;
-			$val .= $this->buildTable($json, 1, $this->counter++);
+		$json = $this->decodeJson($field, $original);
+		if ($json === null) {
+			return null;
 		}
 
-		return null;
+		return "<a class='toggle jsonly' href='#json-code-$this->counter' title='JSON' data-value='" . h($val) . "'>" . icon_chevron_right() . "</a>" .
+			" <code class='jush-js'>$val</code>" .
+			$this->buildTable($json, 1, $this->counter++);
+
 	}
 
 	public function editInput($table, array $field, $attrs, $value)
@@ -113,17 +120,35 @@ class JsonPreviewPlugin
 			return null;
 		}
 
-		if ($this->isJson($field, $value) && ($json = json_decode($value, true)) !== null && is_array($json)) {
-			echo "<div class='jsonly'><a class='toggle' href='#json-code-$this->counter'>JSON" . icon_chevron_down() . "</a></div>";
-			echo $this->buildTable($json, 1, $this->counter++);
+		$json = $this->decodeJson($field, $value);
+		if ($json === null) {
+			return null;
+		}
+
+		return "<div class='jsonly'><a class='toggle' href='#json-code-$this->counter'>JSON" . icon_chevron_down() . "</a></div>" .
+			$this->buildTable($json, 1, $this->counter++) .
+			"<textarea $attrs cols='50' rows='12' class='jush-js'>" . h($value) . "</textarea>";
+
+	}
+
+	private function decodeJson(array $field, $value): ?array
+	{
+		if (
+			preg_match('~json~', $field["type"]) ||
+			(
+				admin()->getConfig()->isJsonValuesDetection() &&
+				preg_match('~varchar|text|character varying|String~', $field["type"]) &&
+				is_string($value) &&
+				in_array(substr($value, 0, 1), ['{', '['])
+			)
+		) {
+			$json = json_decode($value, true);
+
+			return is_array($json) ? $json : null;
 		}
 
 		return null;
-	}
 
-	private function isJson(array $field, $value): bool
-	{
-		return $field["type"] == "json" || (is_string($value) && in_array(substr($value, 0, 1), ['{', '[']));
 	}
 
 	private function buildTable(array $json, int $level = 1, int $id = 0): string

@@ -71,7 +71,7 @@ include "adminneo.php";
   See [Configuration options](/docs/configuration.md) for more information.
 
 - Plugins `AdminerJsonColumn` (json-column.php) and [AdminerJsonPreview](https://github.com/pematon/adminer-plugins) by
-  Pematon were replaced by new `JsonPreviewPlugin`.
+  Pematon were replaced by new `JsonPreviewPlugin`. New plugin respects `jsonValuesDetection` configuration option.
 
 - Plugin `AdminerLoginIp` (login-ip.php) does not allow empty passwords. Use configuration option `defaultPasswordHash`
   for that.
