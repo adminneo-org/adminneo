@@ -51,12 +51,18 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 
 	jush.highlight_tag('code', 0);
 
-	const tags = qsa('textarea');
-	for (let i = 0; i < tags.length; i++) {
-		if (tags[i].className.match(/(^|\s)jush-/)) {
-			jush.textarea(tags[i], autocompletion, {
+	for (const textarea of qsa('textarea')) {
+		if (textarea.className.match(/(^|\s)jush-/)) {
+			const pre = jush.textarea(textarea, autocompletion, {
 				silentStart: true
 			});
+
+			if (pre) {
+				textarea.onchange = () => {
+					pre.textContent = textarea.value;
+					pre.oninput();
+				};
+			}
 		}
 	}
 }

@@ -5,6 +5,7 @@ use AdminNeo\Bz2OutputPlugin;
 use AdminNeo\FileUploadPlugin;
 use AdminNeo\ForeignEditPlugin;
 use AdminNeo\FrameSupportPlugin;
+use AdminNeo\GeminiSqlPlugin;
 use AdminNeo\JsonDumpPlugin;
 use AdminNeo\JsonPreviewPlugin;
 use AdminNeo\SlugifyEditPlugin;
@@ -58,6 +59,7 @@ function adminneo_instance()
 		new ForeignEditPlugin(),
 		new SlugifyEditPlugin(),
 		new FrameSupportPlugin(),
+		new GeminiSqlPlugin(),
 	];
 
 	return PluginsAdmin::create($config, $plugins);

@@ -473,6 +473,14 @@ abstract class Origin extends Plugin
 
 	public abstract function formatSqlCommandQuery(string $query): string;
 
+	/**
+	 * Prints HTML code just before the Execute button in SQL command.
+	 */
+	public function printAfterSqlCommand(): void
+	{
+		//
+	}
+
 	public abstract function getTableDescriptionFieldName(string $table): string;
 
 	public abstract function fillForeignDescriptions(array $rows, array $foreignKeys): array;

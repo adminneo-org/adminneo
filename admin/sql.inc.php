@@ -295,9 +295,9 @@ if (!isset($_GET["import"])) {
 	textarea("query", $q, 20);
 	echo script(($_POST ? "" : "qs('textarea').focus();\n") . "gid('form').onsubmit = partial(sqlSubmit, gid('form'), '" . js_escape(remove_from_uri("sql|limit|error_stops|only_errors|history")) . "');");
 	echo "</p>";
+
 	echo "<p><input type='submit' class='button default' value='" . lang('Execute') . "' title='Ctrl+Enter'>";
 	echo lang('Limit rows') . ": <input type='number' name='limit' class='input size' value='" . h($_POST ? $_POST["limit"] : $_GET["limit"]) . "'>\n";
-
 } else {
 	echo "<div class='field-sets'>\n";
 	echo "<fieldset><legend>" . lang('File upload') . "</legend><div class='fieldset-content'>";
@@ -327,6 +327,10 @@ echo checkbox("error_stops", 1, ($_POST ? $_POST["error_stops"] : isset($_GET["i
 echo checkbox("only_errors", 1, ($_POST ? $_POST["only_errors"] : isset($_GET["import"]) || $_GET["only_errors"]), lang('Show only errors'));
 echo input_token();
 echo "</p>\n";
+
+if (!isset($_GET["import"])) {
+	Admin::get()->printAfterSqlCommand();
+}
 
 if (!isset($_GET["import"]) && $history) {
 	echo "<div class='field-sets'>\n";
