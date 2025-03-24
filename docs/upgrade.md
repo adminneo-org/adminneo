@@ -91,6 +91,7 @@ include "adminneo.php";
 - Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
 - Plugin `AdminerDumpDate` (dump-date.php) was removed. Datetime is part of the filename by default.
 - Plugin `AdminerWymeditor` (wymeditor.php) was removed without a replacement.
+- Plugin `AdminerMasterSlave` (master-slave.php) was removed without a replacement.
 
 - All remaining plugins were renamed:
     - `AdminerDumpBz2` to `Bz2OutputPlugin`
@@ -107,7 +108,6 @@ include "adminneo.php";
     - `AdminerLoginIp` to `IpLoginPlugin`
     - `AdminerLoginOtp` to `OtpLoginPlugin`
     - `AdminerLoginTable` to `TableLoginPlugin`
-    - `AdminerMasterSlave` to `MasterSlavePlugin`
     - `AdminerPrettyJsonColumn` to `PrettyJsonEditPlugin`
     - `AdminerSlugify` to `SlugifyPlugin`
     - `AdminerSqlLog` to `SqlLogPlugin`
