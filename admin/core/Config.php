@@ -84,6 +84,11 @@ class Config
 		return $this->params["jsonValuesDetection"] ?? false;
 	}
 
+	public function isJsonValuesAutoFormat(): bool
+	{
+		return $this->params["jsonValuesAutoFormat"] ?? false;
+	}
+
 	public function getRecordsPerPage(): int
 	{
 		return (int)($this->params["recordsPerPage"] ?? 50);

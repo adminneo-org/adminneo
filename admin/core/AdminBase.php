@@ -366,9 +366,30 @@ abstract class AdminBase
 
 	public abstract function processInput(?array $field, $value, $function = "");
 
-	public function isJson(string $fieldType, $value): bool
+	/**
+	 * Detect JSON field or value and optionally reformat the value.
+	 *
+	 * @param string $fieldType
+	 * @param mixed $value
+	 * @param bool|null $pretty True to pretty format, false to compact format, null to skip formatting.
+	 *
+	 * @return bool Whether field or value are detected as JSON.
+	 */
+	public function detectJson(string $fieldType, &$value, ?bool $pretty = null): bool
 	{
+		if (is_array($value)) {
+			$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ($this->getConfig()->isJsonValuesAutoFormat() ? JSON_PRETTY_PRINT : 0);
+			$value = json_encode($value, $flags);
+			return true;
+		}
+
+		$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ($pretty ? JSON_PRETTY_PRINT : 0);
+
 		if (str_contains($fieldType, "json")) {
+			if ($pretty !== null && $this->getConfig()->isJsonValuesAutoFormat()) {
+				$value = json_encode(json_decode($value), $flags);
+			}
+
 			return true;
 		}
 
@@ -376,7 +397,20 @@ abstract class AdminBase
 			return false;
 		}
 
-		return $value != "" && preg_match('~varchar|text|character varying|String~', $fieldType) && ($value[0] == "{" || $value[0] == "[") && json_decode($value);
+		if (
+			$value != "" &&
+			preg_match('~varchar|text|character varying|String~', $fieldType) &&
+			($value[0] == "{" || $value[0] == "[") &&
+			($json = json_decode($value))
+		) {
+			if ($pretty !== null && $this->getConfig()->isJsonValuesAutoFormat()) {
+				$value = json_encode($json, $flags);
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public abstract function getDumpOutputs(): array;

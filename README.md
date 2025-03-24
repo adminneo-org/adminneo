@@ -141,6 +141,7 @@ Available configuration parameters:
 | `navigationMode`            | simple        | Main navigation mode that affects the left menu with the list of tables and top links: `simple`, `dual`, `reversed`.                                |
 | `preferSelection`           | false         | Whether data selection is the primary action for all table links.                                                                                   |
 | `jsonValuesDetection`       | false         | Whether to detect JSON objects and arrays in text columns.                                                                                          |
+| `jsonValuesAutoFormat`      | false         | Whether to automatically format JSON values while editing.                                                                                          |
 | `recordsPerPage`            | 50            | Number of selected records per one page.                                                                                                            |
 | `versionVerification`       | true          | Whether verification of the new AdminNeo's version is enabled.                                                                                      |
 | `hiddenDatabases`           | []            | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
