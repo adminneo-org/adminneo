@@ -304,7 +304,7 @@ class Admin extends AdminBase
 			$text = "<code>$val</code>";
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
-		} elseif ($this->isJson($field["type"], $original)) {
+		} elseif ($this->detectJson($field["type"], $original)) {
 			$text = "<code class='jush-js'>$val</code>";
 		} else {
 			$text = $val;
@@ -846,6 +846,8 @@ class Admin extends AdminBase
 			return q($value);
 		}
 
+		$this->detectJson($field["type"], $value, false);
+
 		$name = $field["field"];
 		$return = q($value);
 		if (preg_match('~^(now|getdate|uuid)$~', $function)) {
@@ -861,6 +863,7 @@ class Admin extends AdminBase
 		} elseif (preg_match('~^(md5|sha1|password|encrypt)$~', $function)) {
 			$return = "$function($return)";
 		}
+
 		return unconvert_field($field, $return);
 	}
 

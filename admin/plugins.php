@@ -48,6 +48,7 @@ function create_adminneo(): Pluginer
 		"navigationMode" => "dual",
 		"preferSelection" => true,
 		"jsonValuesDetection" => true,
+		"jsonValuesAutoFormat" => true,
 		"recordsPerPage" => 30,
 		"hiddenDatabases" => ["__system"],
 		"hiddenSchemas" => ["__system"],

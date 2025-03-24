@@ -978,12 +978,7 @@ function input($field, $value, $function) {
 
 	$name = h(bracket_escape($field["field"]));
 
-	if (is_array($value) && !$function) {
-		$value = json_encode($value, JSON_PRETTY_PRINT);
-		$function = "json";
-	} elseif ($admin->isJson($field["type"], $value)) {
-		$function = "json";
-	}
+	$json_type = $admin->detectJson($field["type"], $value, true);
 
 	$reset = ($jush == "mssql" && $field["auto_increment"]);
 	if ($reset && !$_POST["save"]) {
@@ -1029,7 +1024,7 @@ function input($field, $value, $function) {
 			}
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
 			echo "<input type='file' name='fields-$name'>";
-		} elseif ($function == "json") {
+		} elseif ($json_type) {
 			echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
 		} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
 			if ($text && $jush != "sqlite") {
@@ -1070,8 +1065,8 @@ function input($field, $value, $function) {
 }
 
 /** Process edit input field
-* @param one field from fields()
-* @return string or false to leave the original value
+* @param array $field one field from fields()
+* @return string|array|false False to leave the original value
 */
 function process_input($field) {
 	global $admin, $driver;
@@ -1105,7 +1100,6 @@ function process_input($field) {
 		return array_sum((array) $value);
 	}
 	if ($function == "json") {
-		$function = "";
 		$value = json_decode($value, true);
 		if (!is_array($value)) {
 			return false; //! report errors

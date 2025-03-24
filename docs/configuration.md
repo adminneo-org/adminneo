@@ -74,6 +74,13 @@ Default value: `false`
 Whether to detect JSON objects and arrays in text columns. Detected JSON values will be displayed with syntax 
 highlighting.
 
+### jsonValuesAutoFormat
+
+Default value: `false`
+
+Whether to automatically format JSON values while editing. JSON values will be pretty-formatted in edit fields and
+minified before writing to database.
+
 ### recordsPerPage
 
 Default value: `50`

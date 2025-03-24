@@ -70,6 +70,9 @@ include "adminneo.php";
 - Plugin `AdminerFrames` (frames.php) was removed. Frames can be allowed by `frameAncestors` configuration option. 
   See [Configuration options](/docs/configuration.md) for more information.
 
+- Plugin `AdminerPrettyJsonColumn` (pretty-json-column.php) was removed. JSON values can be formatted automatically by
+  `jsonValuesAutoFormat` configuration option. See [Configuration options](/docs/configuration.md) for more information.
+
 - Plugins `AdminerJsonColumn` (json-column.php) and [AdminerJsonPreview](https://github.com/pematon/adminer-plugins) by
   Pematon were replaced by new `JsonPreviewPlugin`. New plugin respects `jsonValuesDetection` configuration option.
 
@@ -108,7 +111,6 @@ include "adminneo.php";
     - `AdminerLoginIp` to `IpLoginPlugin`
     - `AdminerLoginOtp` to `OtpLoginPlugin`
     - `AdminerLoginTable` to `TableLoginPlugin`
-    - `AdminerPrettyJsonColumn` to `PrettyJsonEditPlugin`
     - `AdminerSlugify` to `SlugifyPlugin`
     - `AdminerSqlLog` to `SqlLogPlugin`
     - `AdminerStructComments` to `StructureCommentsPlugin`
