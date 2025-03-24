@@ -981,11 +981,15 @@ function input($field, $value, $function) {
 	if (is_array($value) && !$function) {
 		$value = json_encode($value, JSON_PRETTY_PRINT);
 		$function = "json";
+	} elseif ($admin->isJson($field["type"], $value)) {
+		$function = "json";
 	}
+
 	$reset = ($jush == "mssql" && $field["auto_increment"]);
 	if ($reset && !$_POST["save"]) {
 		$function = null;
 	}
+
 	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + $admin->editFunctions($field);
 
 	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
@@ -1025,6 +1029,8 @@ function input($field, $value, $function) {
 			}
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
 			echo "<input type='file' name='fields-$name'>";
+		} elseif ($function == "json") {
+			echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
 		} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
 			if ($text && $jush != "sqlite") {
 				$attrs .= " cols='50' rows='12'";
@@ -1033,8 +1039,6 @@ function input($field, $value, $function) {
 				$attrs .= " cols='30' rows='$rows'";
 			}
 			echo "<textarea$attrs>" . h($value) . '</textarea>';
-		} elseif ($function == "json" || preg_match('~json~', $field["type"])) {
-			echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
 		} else {
 			// int(3) is only a display hint
 			$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)

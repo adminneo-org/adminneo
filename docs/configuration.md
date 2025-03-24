@@ -67,6 +67,13 @@ Default value: `false`
 
 Whether data selection is the primary action for all table links.
 
+### jsonValuesDetection
+
+Default value: `false`
+
+Whether to detect JSON objects and arrays in text columns. Detected JSON values will be displayed with syntax 
+highlighting.
+
 ### recordsPerPage
 
 Default value: `50`
