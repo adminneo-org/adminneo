@@ -79,6 +79,11 @@ class Config
 		return $this->params["preferSelection"] ?? false;
 	}
 
+	public function isJsonValuesDetection(): bool
+	{
+		return $this->params["jsonValuesDetection"] ?? false;
+	}
+
 	public function getRecordsPerPage(): int
 	{
 		return (int)($this->params["recordsPerPage"] ?? 50);

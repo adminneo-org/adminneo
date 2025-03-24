@@ -366,6 +366,19 @@ abstract class AdminBase
 
 	public abstract function processInput(?array $field, $value, $function = "");
 
+	public function isJson(string $fieldType, $value): bool
+	{
+		if (str_contains($fieldType, "json")) {
+			return true;
+		}
+
+		if (!$this->config->isJsonValuesDetection()) {
+			return false;
+		}
+
+		return $value != "" && preg_match('~varchar|text|character varying|String~', $fieldType) && ($value[0] == "{" || $value[0] == "[") && json_decode($value);
+	}
+
 	public abstract function getDumpOutputs(): array;
 
 	public abstract function getDumpFormats(): array;

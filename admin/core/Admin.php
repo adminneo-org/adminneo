@@ -304,7 +304,7 @@ class Admin extends AdminBase
 			$text = "<code>$val</code>";
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
-		} elseif (preg_match('~json~', $field["type"])) {
+		} elseif ($this->isJson($field["type"], $original)) {
 			$text = "<code class='jush-js'>$val</code>";
 		} else {
 			$text = $val;

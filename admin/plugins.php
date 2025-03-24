@@ -47,6 +47,7 @@ function create_adminneo(): Pluginer
 		"colorVariant" => "green",
 		"navigationMode" => "dual",
 		"preferSelection" => true,
+		"jsonValuesDetection" => true,
 		"recordsPerPage" => 30,
 		"hiddenDatabases" => ["__system"],
 		"hiddenSchemas" => ["__system"],
