@@ -1010,63 +1010,89 @@ function ajaxForm(form, message, button) {
 
 
 
-/** Display edit field
-* @param MouseEvent
-* @param number display textarea instead of input, 2 - load long text
-* @param [string] warning to display
-* @return boolean
-* @this HTMLElement
-*/
+/**
+ * Displays inline edit field.
+ *
+ * @param {MouseEvent} event
+ * @param {number} text Display textarea instead of input, 2 - load long text.
+ * @param {string|null} warning Warning text if editing is disabled.
+ *
+ * @this {HTMLElement}
+ *
+ * @return boolean|XMLHttpRequest
+ */
 function selectClick(event, text, warning) {
-	var td = this;
-	var target = event.target;
-	if (!isCtrl(event) || isTag(td.firstChild, 'input|textarea') || isTag(target, 'a')) {
+	const td = this;
+	const target = event.target;
+
+	if (!isCtrl(event) || td.dataset.editing || isTag(target, 'a')) {
 		return;
 	}
+
 	if (warning) {
 		alert(warning);
 		return true;
 	}
-	var original = td.innerHTML;
+
+	const original = td.innerHTML;
 	text = text || /\n/.test(original);
-	var input = document.createElement(text ? 'textarea' : 'input');
-	input.classList.add("input");
+
+	const input = document.createElement(text ? 'textarea' : 'input');
+	if (!text) {
+		input.classList.add("input");
+	}
+
 	input.onkeydown = function (event) {
 		if (!event) {
 			event = window.event;
 		}
 		if (event.keyCode === 27 && !event.shiftKey && !event.altKey && !isCtrl(event)) { // 27 - Esc
+			td.dataset.editing = "";
 			td.innerHTML = original;
+			initToggles(td);
 		}
 	};
 
-	let pos = event.rangeOffset;
-	let value = (td.firstChild && td.firstChild.alt) || td.textContent || td.innerText;
-	const tdStyle = window.getComputedStyle(td);
+	const dataset = td.firstChild ? (td.firstChild.dataset || {}) : {};
+	let value;
+	if (dataset.value !== undefined) {
+		value = (new DOMParser().parseFromString(dataset.value, "text/html")).documentElement.innerText;
+	} else {
+		value = td.innerText;
+	}
 
+	const tdStyle = window.getComputedStyle(td);
 	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), 20) + 'px';
 
 	if (text) {
-		var rows = 1;
+		let rows = 1;
 		value.replace(/\n/g, function () {
 			rows++;
 		});
 		input.rows = rows;
 	}
+
 	if (qsa('i', td).length) { // <i> - NULL
 		value = '';
 	}
+
+	let pos = event.rangeOffset;
 	if (document.selection) {
-		var range = document.selection.createRange();
+		const range = document.selection.createRange();
 		range.moveToPoint(event.clientX, event.clientY);
-		var range2 = range.duplicate();
+
+		const range2 = range.duplicate();
 		range2.moveToElementText(td);
 		range2.setEndPoint('EndToEnd', range);
+
 		pos = range2.text.length;
 	}
+
+	td.dataset.editing = "true";
 	td.innerHTML = '';
 	td.appendChild(input);
 	input.focus();
+
 	if (text === 2) { // long text
 		return ajax(location.href + '&' + encodeURIComponent(td.id) + '=', function (request) {
 			if (request.responseText) {
@@ -1075,15 +1101,18 @@ function selectClick(event, text, warning) {
 			}
 		});
 	}
+
 	input.value = value;
 	input.name = td.id;
 	input.selectionStart = pos;
 	input.selectionEnd = pos;
+
 	if (document.selection) {
-		var range = document.selection.createRange();
+		const range = document.selection.createRange();
 		range.moveEnd('character', -input.value.length + pos);
 		range.select();
 	}
+
 	return true;
 }
 
