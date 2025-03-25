@@ -63,8 +63,7 @@ if (isset($_GET["mssql"])) {
 			}
 
 			function quote($string) {
-				$unicode = strlen($string) != strlen(utf8_decode($string));
-				return ($unicode ? "N" : "") . "'" . str_replace("'", "''", $string) . "'";
+				return (contains_unicode($string) ? "N" : "") . "'" . str_replace("'", "''", $string) . "'";
 			}
 
 			function select_db($database) {
@@ -181,6 +180,10 @@ if (isset($_GET["mssql"])) {
 				// database selection is separated from the connection so dbname in DSN can't be used
 				return $this->query(use_sql($database));
 			}
+
+			function quote($string) {
+				return (contains_unicode($string) ? "N" : "") . parent::quote($string);
+			}
 		}
 
 	} elseif (extension_loaded("pdo_dblib")) {
@@ -194,6 +197,10 @@ if (isset($_GET["mssql"])) {
 
 			function select_db($database) {
 				return $this->query(use_sql($database));
+			}
+
+			function quote($string) {
+				return (contains_unicode($string) ? "N" : "") . parent::quote($string);
 			}
 		}
 	}
@@ -256,7 +263,14 @@ if (isset($_GET["mssql"])) {
 
 	}
 
-
+	/**
+	 * @param string $string
+	 * @return bool
+	 */
+	function contains_unicode(string $string): bool
+	{
+		return strlen($string) != strlen(utf8_decode($string));
+	}
 
 	function idf_escape($idf) {
 		return "[" . str_replace("]", "]]", $idf) . "]";
