@@ -8,6 +8,7 @@ if (!$fields) {
 	$error = error();
 }
 $table_status = table_status1($TABLE, true);
+/** @var Admin $admin */
 $name = $admin->tableName($table_status);
 
 $rights = [];
@@ -31,7 +32,7 @@ if ($comment != "") {
 }
 
 if ($fields) {
-	$admin->tableStructurePrint($fields);
+	$admin->printTableStructure($fields);
 
 	if (is_view($table_status)) {
 		$editLink = '<p class="links"><a href="' . h(ME) . 'view=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter view') . "</a>\n";

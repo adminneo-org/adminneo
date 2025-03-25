@@ -136,6 +136,7 @@ include "adminneo.php";
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`
+    - `tableStructurePrint()` -> `printTableStructure()`
 
 Migrating to 4.17
 -----------------

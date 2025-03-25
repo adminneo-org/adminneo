@@ -306,7 +306,7 @@ abstract class AdminBase
 
 	public abstract function editVal($val, $field);
 
-	public abstract function tableStructurePrint($fields);
+	public abstract function printTableStructure(array $fields): void;
 
 	public abstract function tablePartitionsPrint($partition_info);
 
