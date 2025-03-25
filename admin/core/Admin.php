@@ -343,7 +343,7 @@ class Admin extends AdminBase
 		echo "<div class='scrollable'>\n";
 		echo "<table class='nowrap'>\n";
 
-		echo "<thead><tr><th>", lang('Column'), "</th><td>", lang('Type'), "</td>",
+		echo "<thead><tr><th>", lang('Column'), "</th><td>", lang('Type'), "</td><td>", lang('Collation'), "</td>",
 			(support("comment") ? "<td>" . lang('Comment') . "</td>" : ""), "</thead>\n";
 
 		foreach ($fields as $field) {
@@ -373,6 +373,8 @@ class Admin extends AdminBase
 			}
 
 			echo "</td>";
+
+			echo "<td>", h($field["collation"]), "</td>";
 
 			if (support("comment")) {
 				echo "<td>", h($field["comment"]), "</td>";
