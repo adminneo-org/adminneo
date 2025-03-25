@@ -331,29 +331,56 @@ class Admin extends AdminBase
 		return $val;
 	}
 
-	/** Print table structure in tabular format
-	* @param array data about individual fields
-	* @return null
-	*/
-	function tableStructurePrint($fields) {
+	/**
+	 * Prints table structure in tabular format.
+	 *
+	 * @param array $fields Data about individual fields.
+	 */
+	public function printTableStructure(array $fields): void
+	{
 		global $structured_types, $jush;
+
 		echo "<div class='scrollable'>\n";
 		echo "<table class='nowrap'>\n";
-		echo "<thead><tr><th>" . lang('Column') . "<td>" . lang('Type') . (support("comment") ? "<td>" . lang('Comment') : "") . "</thead>\n";
+
+		echo "<thead><tr><th>", lang('Column'), "</th><td>", lang('Type'), "</td>",
+			(support("comment") ? "<td>" . lang('Comment') . "</td>" : ""), "</thead>\n";
+
 		foreach ($fields as $field) {
-			echo "<tr><th>" . h($field["field"]);
+			echo "<tr>";
+			echo "<th>", h($field["field"]), "</th>";
+			echo "<td>";
+
 			$type = h($field["full_type"]);
-			echo "<td><span title='" . h($field["collation"]) . "'>"
-				. (in_array($type, (array) $structured_types[lang('User types')]) ? "<a href='" . h(ME . 'type=' . urlencode($type)) . "'>$type</a>" : $type)
-				. "</span>"
-			;
-			echo ($field["null"] ? " <i>NULL</i>" : "");
-			echo ($field["auto_increment"] ? " <i>" . lang('Auto Increment') . "</i>" : "");
+			if (in_array($type, (array) $structured_types[lang('User types')])) {
+				echo "<a href='" . h(ME . 'type=' . urlencode($type)) . "'>$type</a>";
+			} else {
+				echo $type;
+			}
+
+			if ($field["null"]) {
+				echo " <i>NULL</i>";
+			}
+			if ($field["auto_increment"]) {
+				echo " <i>" . lang('Auto Increment') . "</i>";
+			}
+
 			$default = h($field["default"]);
-			echo (isset($field["default"]) ? " <span title='" . lang('Default value') . "'>[<b>" . ($field["generated"] ? "<code class='jush-$jush'>$default</code>" : $default) . "</b>]</span>" : "");
-			echo (support("comment") ? "<td>" . h($field["comment"]) : "");
+			if (isset($field["default"])) {
+				echo " <span title='" . lang('Default value') . "'>[<b>";
+				echo $field["generated"] ? "<code class='jush-$jush'>$default</code>" : $default;
+				echo "</b>]</span>";
+			}
+
+			echo "</td>";
+
+			if (support("comment")) {
+				echo "<td>", h($field["comment"]), "</td>";
+			}
+
 			echo "\n";
 		}
+
 		echo "</table>\n";
 		echo "</div>\n";
 	}

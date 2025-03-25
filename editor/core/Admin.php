@@ -208,7 +208,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return $val;
 	}
 
-	public function tableStructurePrint($fields)
+	public function printTableStructure(array $fields): void
 	{
 	}
 

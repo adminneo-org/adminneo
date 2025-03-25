@@ -192,9 +192,9 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	function tableStructurePrint($fields)
+	public function printTableStructure(array $fields): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function tablePartitionsPrint($partition_info)
