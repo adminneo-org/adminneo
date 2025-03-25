@@ -130,35 +130,38 @@ function create_adminneo(): Admin
 include "adminneo.php";
 ```
 
-Available configuration parameters:
+### Configuration parameters
 
-| Parameter                   | Default value | Description                                                                                                                                         |
-|-----------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `theme`                     | default       | Theme code. Available themes are: `default`.                                                                                                        |
-| `colorVariant`              | blue          | Theme color variant. Available variants are: `blue`, `green`, `red`.                                                                                |
-| `cssUrls`                   | []            | List of custom CSS files.                                                                                                                           |
-| `jsUrls`                    | []            | List of custom Javascript files.                                                                                                                    |
-| `navigationMode`            | simple        | Main navigation mode that affects the left menu with the list of tables and top links: `simple`, `dual`, `reversed`.                                |
-| `preferSelection`           | false         | Whether data selection is the primary action for all table links.                                                                                   |
-| `jsonValuesDetection`       | false         | Whether to detect JSON objects and arrays in text columns.                                                                                          |
-| `jsonValuesAutoFormat`      | false         | Whether to automatically format JSON values while editing.                                                                                          |
-| `recordsPerPage`            | 50            | Number of selected records per one page.                                                                                                            |
-| `versionVerification`       | true          | Whether verification of the new AdminNeo's version is enabled.                                                                                      |
-| `hiddenDatabases`           | []            | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
-| `hiddenSchemas`             | []            | List of schemas to hide from the UI. Value `__system` will be expanded to all system schemas. Access to these schemas will be not restricted.       |
-| `visibleCollations`         | []            | List of collations to keep in select boxes while editing databases or tables.                                                                       |
-| `defaultDriver `            | null          | Default driver for login form.                                                                                                                      |
-| `defaultPasswordHash`       | null          | Hash of the default password for authentication to password-less databases. Set to an empty string to allow connection without password.            |
-| `sslKey`                    | null          | MySQL: The path name to the SSL key file.                                                                                                           |
-| `sslCertificate`            | null          | MySQL: The path name to the certificate file.                                                                                                       |
-| `sslCaCertificate`          | null          | MySQL: The path name to the certificate authority file.                                                                                             |
-| `sslMode`                   | null          | PostgreSQL: Value for [sslmode connection parameter](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).             |
-| `sslEncrypt`                | null          | MS SQL: Value for [Encrypt connection option](https://learn.microsoft.com/en-us/sql/connect/php/connection-options).                                |
-| `sslTrustServerCertificate` | null          | MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).     |
-| `servers`                   | []            | List of predefined server connections.                                                                                                              |
-| `frameAncestors`            | []            | Allows using AdminNeo inside a frame.                                                                                                               |
+All parameters available in AdminNeo are listed in the following table. Parameters available in EditorNeo are labeled in
+Editor column.
 
 For detailed information see [Configuration documentation](/docs/configuration.md).
+
+| Parameter                   | Default   | Editor | Description                                                                                                                                         |
+|-----------------------------|-----------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `theme`                     | `default` | YES    | Theme code. Available themes are: `default`.                                                                                                        |
+| `colorVariant`              | `blue`    | YES    | Theme color variant. Available variants are: `blue`, `green`, `red`.                                                                                |
+| `cssUrls`                   | `[]`      | YES    | List of custom CSS files.                                                                                                                           |
+| `jsUrls`                    | `[]`      | YES    | List of custom Javascript files.                                                                                                                    |
+| `navigationMode`            | `simple`  | no     | Main navigation mode that affects the left menu with the list of tables and top links: `simple`, `dual`, `reversed`.                                |
+| `preferSelection`           | `false`   | no     | Whether data selection is the primary action for all table links.                                                                                   |
+| `jsonValuesDetection`       | `false`   | no     | Whether to detect JSON objects and arrays in text columns.                                                                                          |
+| `jsonValuesAutoFormat`      | `false`   | no     | Whether to automatically format JSON values while editing.                                                                                          |
+| `recordsPerPage`            | `50`      | YES    | Number of selected records per one page.                                                                                                            |
+| `versionVerification`       | `true`    | YES    | Whether verification of the new AdminNeo's version is enabled.                                                                                      |
+| `hiddenDatabases`           | `[]`      | no     | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
+| `hiddenSchemas`             | `[]`      | no     | List of schemas to hide from the UI. Value `__system` will be expanded to all system schemas. Access to these schemas will be not restricted.       |
+| `visibleCollations`         | `[]`      | no     | List of collations to keep in select boxes while editing databases or tables.                                                                       |
+| `defaultDriver `            | `null`    | YES    | Default driver for login form.                                                                                                                      |
+| `defaultPasswordHash`       | `null`    | YES    | Hash of the default password for authentication to password-less databases. Set to an empty string to allow connection without password.            |
+| `sslKey`                    | `null`    | YES    | MySQL: The path name to the SSL key file.                                                                                                           |
+| `sslCertificate`            | `null`    | YES    | MySQL: The path name to the certificate file.                                                                                                       |
+| `sslCaCertificate`          | `null`    | YES    | MySQL: The path name to the certificate authority file.                                                                                             |
+| `sslMode`                   | `null`    | YES    | PostgreSQL: Value for [sslmode connection parameter](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).             |
+| `sslEncrypt`                | `null`    | YES    | MS SQL: Value for [Encrypt connection option](https://learn.microsoft.com/en-us/sql/connect/php/connection-options).                                |
+| `sslTrustServerCertificate` | `null`    | YES    | MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).     |
+| `servers`                   | `[]`      | no     | List of predefined server connections.                                                                                                              |
+| `frameAncestors`            | `[]`      | YES    | Allows using AdminNeo or EditorNeo inside a frame.                                                                                                  |
 
 Plugins
 -------

@@ -28,32 +28,37 @@ Options
 
 ### theme
 
-Default value: `default`
+- Default value: `default`
+- Available in EditorNeo: YES
 
 Theme code. Available themes are: `default`. Please, be sure that the theme is compiled into the final single file.
 
 ### colorVariant
 
-Default value: `blue`
+- Default value: `blue`
+- Available in EditorNeo: YES
 
 Theme color code. Available variants are: `blue`, `green`, `red`. Please, be sure that the color variant is compiled 
 into the final single file together with selected theme.
 
 ### cssUrls
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: YES
 
 List of custom CSS files.
 
 ### jsUrls
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: YES
 
 List of custom Javascript files.
 
 ### navigationMode
 
-Default value: `simple`
+- Default value: `simple`
+- Available in EditorNeo: no
 
 Main navigation mode that affects the left menu with the list of tables and top links.
 
@@ -63,39 +68,45 @@ Main navigation mode that affects the left menu with the list of tables and top 
 
 ### preferSelection
 
-Default value: `false`
+- Default value: `false`
+- Available in EditorNeo: no
 
 Whether data selection is the primary action for all table links.
 
 ### jsonValuesDetection
 
-Default value: `false`
+- Default value: `false`
+- Available in EditorNeo: no
 
 Whether to detect JSON objects and arrays in text columns. Detected JSON values will be displayed with syntax 
 highlighting.
 
 ### jsonValuesAutoFormat
 
-Default value: `false`
+- Default value: `false`
+- Available in EditorNeo: no
 
 Whether to automatically format JSON values while editing. JSON values will be pretty-formatted in edit fields and
 minified before writing to database.
 
 ### recordsPerPage
 
-Default value: `50`
+- Default value: `50`
+- Available in EditorNeo: YES
 
 Number of selected records per one page.
 
 ### versionVerification
 
-Default value: `true`
+- Default value: `true`
+- Available in EditorNeo: YES
 
 Whether verification of the new Adminer's version is enabled.
 
 ### hiddenDatabases
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: no
 
 List of databases to hide from the UI. Value `__system` will be expanded to all system databases for the current driver.
 The `*` character can be used as a wildcard.
@@ -111,7 +122,8 @@ $config = [
 
 ### hiddenSchemas
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: no
 
 List of schemas to hide from the UI. Value `__system` will be expanded to all system schemas for the current driver.
 The `*` character can be used as a wildcard.
@@ -127,7 +139,8 @@ $config = [
 
 ### visibleCollations
 
-Default value: `[]` (no filtering is applied)
+- Default value: `[]` (no filtering is applied)
+- Available in EditorNeo: no
 
 List of collations to keep in the select box when editing databases or tables. The `*` character can be used as a 
 wildcard. If an existing table or row uses a different collation, it will also be preserved in the select box.
@@ -143,14 +156,16 @@ Note: Access to other collations will be not restricted.
 
 ### defaultDriver
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 Default driver for login form. Given value is validated against available drivers. If driver is not set or not invalid,
 the first available driver will be used.
 
 ### defaultPasswordHash
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 By default, AdminNeo does not allow access to a database without a password. This affects password-less databases such 
 as SQLite, SimpleDB or Elasticsearch. In this parameter, you can specify a hash of the default password to enable 
@@ -162,43 +177,50 @@ Set to an empty string to allow connection without a password.
 
 ### sslKey
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 MySQL: The path name to the SSL key file.
 
 ### sslCertificate
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 MySQL: The path name to the certificate file.
 
 ### sslCaCertificate
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 MySQL: The path name to the certificate authority file.
 
 ### sslMode
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 PostgreSQL: Value for [sslmode connection parameter](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).
 
 ### sslEncrypt
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 MS SQL: Value for [Encrypt connection option](https://learn.microsoft.com/en-us/sql/connect/php/connection-options).
 
 ### sslTrustServerCertificate
 
-Default value: `null`
+- Default value: `null`
+- Available in EditorNeo: YES
 
 MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).
 
 ### servers
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: no
 
 List of predefined server connections. Each server connection has parameters:
 
@@ -225,7 +247,8 @@ Global parameters that can't be overridden by server connection: `servers`, `fra
 
 ### frameAncestors
 
-Default value: `[]`
+- Default value: `[]`
+- Available in EditorNeo: YES
 
 Allows using AdminNeo inside a frame by modifying `X-Frame-Options` and `Content-Security-Policy` HTTP headers. List can 
 contain sources that are allowed to embed AdminNeo as defined in [frame-ancestors directive specification](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).
