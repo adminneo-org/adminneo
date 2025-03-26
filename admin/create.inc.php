@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $TABLE = $_GET["create"];
 $partition_by = [];
 foreach (['HASH', 'LINEAR HASH', 'KEY', 'LINEAR KEY', 'RANGE', 'LIST'] as $key) {

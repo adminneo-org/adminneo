@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $TABLE = $_GET["indexes"];
 $index_types = ["PRIMARY", "UNIQUE", "INDEX"];
 $table_status = table_status($TABLE, true);

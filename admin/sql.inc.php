@@ -1,6 +1,11 @@
 <?php
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
 
 if (!$error && $_POST["export"]) {
 	dump_headers("sql");

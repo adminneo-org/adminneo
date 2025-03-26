@@ -2,13 +2,18 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $TABLE = $_GET["table"];
 $fields = fields($TABLE);
 if (!$fields) {
 	$error = error();
 }
 $table_status = table_status1($TABLE, true);
-/** @var Admin $admin */
 $name = $admin->tableName($table_status);
 
 $rights = [];

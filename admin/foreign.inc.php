@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $TABLE = $_GET["foreign"];
 $name = $_GET["name"];
 $row = $_POST;

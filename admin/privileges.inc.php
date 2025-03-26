@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $title2 = DB != "" ? h(": " . DB) : "";
 page_header(lang('Privileges') . $title2, "", [lang('Privileges')]);
 echo '<p id="top-links" class="links"><a href="', h(ME), 'user=">', icon("user-add"), lang('Create user'), "</a>";
