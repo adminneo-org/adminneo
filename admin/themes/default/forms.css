@@ -80,6 +80,12 @@ textarea {
 	line-height: 1.4;
 }
 
+/* Compensation for textarea bottom margin, required on Firefox. */
+textarea + .input-hint {
+	margin-top: -2px;
+	margin-bottom: 5px;
+}
+
 select {
 	-webkit-appearance: none;
 	appearance: none;
@@ -124,6 +130,16 @@ pre.jush {
 
 .sqlarea {
 	width: 100%;
+}
+
+.input-hint {
+	display: block;
+	margin-top: 3px;
+	color: var(--note-text);
+}
+
+.input-hint:before {
+	content: "↳ ";
 }
 
 .button:focus-visible, .input:focus-visible, select:focus-visible, textarea:focus-visible, pre.jush:focus-visible {

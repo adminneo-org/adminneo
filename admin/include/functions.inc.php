@@ -1051,7 +1051,11 @@ function input($field, $value, $function) {
 				. "$attrs>"
 			;
 		}
-		echo $admin->editHint($_GET["edit"], $field, $value);
+		$hint = $admin->editHint($_GET["edit"], $field, $value);
+		if ($hint != "") {
+			echo " <span class='input-hint'>$hint</span>";
+		}
+
 		// skip 'original'
 		$first = 0;
 		foreach ($functions as $key => $val) {

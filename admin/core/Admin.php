@@ -858,7 +858,7 @@ class Admin extends AdminBase
 	* @return string
 	*/
 	function editHint($table, $field, $value) {
-		return "";
+		return h($field["comment"]);
 	}
 
 	/** Process sent input
