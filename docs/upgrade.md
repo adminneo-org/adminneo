@@ -90,6 +90,7 @@ include "adminneo.php";
   for original-like menu layout. See [Configuration options](/docs/configuration.md) for more information.
 
 - Plugin `AdminerTableStructure` (table-structure.php) was removed without a replacement.
+- Plugin `AdminerTableIndexesStructure` (table-indexes-structure.php) was removed without a replacement.
 - Plugin `AdminerEditTextarea` (edit-textarea.php) was removed without a replacement.
 - Plugin `AdminerDumpPhp` (dump-php.php) was removed without a replacement.
 - Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
@@ -115,7 +116,6 @@ include "adminneo.php";
     - `AdminerSlugify` to `SlugifyPlugin`
     - `AdminerSqlLog` to `SqlLogPlugin`
     - `AdminerStructComments` to `StructureCommentsPlugin`
-    - `AdminerTableIndexesStructure` to `ExpandedTableIndexesPlugin`
     - `AdminerTinymce` to `TinyMcePlugin`
     - `AdminerTranslation` to `TranslationPlugin`
 
