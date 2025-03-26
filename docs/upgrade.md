@@ -89,7 +89,7 @@ include "adminneo.php";
   Main menu is simplified by default and can be modified by `navigationMode` configuration option. Set it to `reversed`
   for original-like menu layout. See [Configuration options](/docs/configuration.md) for more information.
 
-- Plugin `ExpandedTableStructurePlugin` (table-structure.php) was removed without a replacement.
+- Plugin `AdminerTableStructure` (table-structure.php) was removed without a replacement.
 - Plugin `AdminerEditTextarea` (edit-textarea.php) was removed without a replacement.
 - Plugin `AdminerDumpPhp` (dump-php.php) was removed without a replacement.
 - Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
