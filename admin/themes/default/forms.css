@@ -125,6 +125,16 @@ pre.jush {
 	width: 100%;
 }
 
+.input-hint {
+	display: block;
+	margin-top: 3px;
+	color: var(--note-text);
+}
+
+.input-hint:before {
+	content: "↳ ";
+}
+
 .button:focus-visible, .input:focus-visible, select:focus-visible, textarea:focus-visible, pre.jush:focus-visible {
 	outline-width: 1px;
 	border-color: var(--link-text) !important;

@@ -4,6 +4,7 @@
 	--body-bg: #111;
 	--body-text: #ccc;
 	--note-text: #666;
+	--note-text: rgba(255, 255, 255, 40%);
 
 	--logo-text: #888;
 	--panel-bg: #222;

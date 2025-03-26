@@ -9,7 +9,7 @@
 
 	--body-bg: #fff;
 	--body-text: #333;
-	--note-text: #ccc;
+	--note-text: rgba(0, 0, 0, 40%);
 
 	--logo-text: #a0a0a0;
 	--panel-bg: #fcfcfc;
