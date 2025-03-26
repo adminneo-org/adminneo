@@ -42,29 +42,32 @@ if ($info) {
 	echo "<p>", implode(", ", $info), "</p>";
 }
 
+if ($fields) {
+	$admin->printTableStructure($fields);
+}
+
 $comment = $table_status["Comment"];
 if ($comment != "") {
 	echo "<p class='keep-lines'>", lang('Comment'), ": ", h($comment), "</p>\n";
 }
 
-if ($fields) {
-	$admin->printTableStructure($fields);
+if (is_view($table_status)) {
+	$editLink = '<p class="links"><a href="' . h(ME) . 'view=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter view') . "</a>\n";
+} else {
+	$editLink = '<p class="links"><a href="' . h(ME) . 'create=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter table') . "</a>\n";
+}
 
-	if (is_view($table_status)) {
-		$editLink = '<p class="links"><a href="' . h(ME) . 'view=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter view') . "</a>\n";
-	} else {
-		$editLink = '<p class="links"><a href="' . h(ME) . 'create=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter table') . "</a>\n";
-	}
+if ($info || $fields || $comment != "") {
 	echo $editLink;
+}
 
-	if (support("partitioning") && preg_match("~partitioned~", $table_status["Create_options"])) {
-		echo "<h2 id='partition-by'>" . lang('Partition by') . "</h2>\n";
+if (support("partitioning") && preg_match("~partitioned~", $table_status["Create_options"])) {
+	echo "<h2 id='partition-by'>" . lang('Partition by') . "</h2>\n";
 
-		$partitions_info = get_partitions_info($TABLE);
-		$admin->tablePartitionsPrint($partitions_info);
+	$partitions_info = get_partitions_info($TABLE);
+	$admin->tablePartitionsPrint($partitions_info);
 
-		echo $editLink;
-	}
+	echo $editLink;
 }
 
 if (!is_view($table_status)) {
