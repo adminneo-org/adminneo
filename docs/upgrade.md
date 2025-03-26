@@ -70,6 +70,8 @@ include "adminneo.php";
 - Plugin `AdminerFrames` (frames.php) was removed. Frames can be allowed by `frameAncestors` configuration option. 
   See [Configuration options](/docs/configuration.md) for more information.
 
+- Plugin `AdminerStructComments` (struct-comments.php) was removed. Comments are displayed on more places by default.
+
 - Plugin `AdminerPrettyJsonColumn` (pretty-json-column.php) was removed. JSON values can be formatted automatically by
   `jsonValuesAutoFormat` configuration option. See [Configuration options](/docs/configuration.md) for more information.
 
@@ -115,7 +117,6 @@ include "adminneo.php";
     - `AdminerLoginTable` to `TableLoginPlugin`
     - `AdminerSlugify` to `SlugifyPlugin`
     - `AdminerSqlLog` to `SqlLogPlugin`
-    - `AdminerStructComments` to `StructureCommentsPlugin`
     - `AdminerTinymce` to `TinyMcePlugin`
     - `AdminerTranslation` to `TranslationPlugin`
 
