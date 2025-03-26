@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 if (isset($_GET["status"])) {
 	$_GET["variables"] = $_GET["status"];
 }

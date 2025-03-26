@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 header("Content-Type: text/javascript; charset=utf-8");
 
 if ($_GET["script"] == "db") {

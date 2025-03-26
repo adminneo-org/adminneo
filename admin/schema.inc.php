@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $title2 = h(": " . DB . ($_GET["ns"] ? ".$_GET[ns]" : ""));
 page_header(lang('Database schema') . $title2, "", [lang('Database schema')]);
 
@@ -31,7 +37,7 @@ foreach (table_status('', true) as $table => $table_status) {
 		$schema[$table]["fields"][$name] = $field;
 	}
 	$schema[$table]["pos"] = ($table_pos[$table] ?? [$top, 0]);
-	/* @var Admin $admin */
+
 	foreach ($admin->getForeignKeys($table) as $val) {
 		if (!$val["db"]) {
 			$left = $base_left;

@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $USER = $_GET["user"];
 $privileges = ["" => ["All privileges" => ""]];
 foreach (get_rows("SHOW PRIVILEGES") as $row) {

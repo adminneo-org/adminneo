@@ -2,6 +2,12 @@
 
 namespace AdminNeo;
 
+/**
+ * @var Admin $admin
+ * @var ?Min_DB $connection
+ * @var ?Min_Driver $driver
+ */
+
 $tables_views = array_merge((array) $_POST["tables"], (array) $_POST["views"]);
 
 if ($tables_views && !$error && !$_POST["search"]) {
