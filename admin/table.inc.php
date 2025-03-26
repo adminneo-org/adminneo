@@ -26,9 +26,20 @@ if (isset($rights["insert"]) || !support("table")) {
 }
 $admin->selectLinks($table_status, $set);
 
+$info = [];
+if (!preg_match("~sqlite|mssql|pgsql~", $jush) && isset($table_status["Engine"])) {
+	$info[] = lang('Engine') . ": " . h($table_status["Engine"]);
+}
+if (isset($table_status["Collation"])) {
+	$info[] = lang('Collation') . ": " . h($table_status["Collation"]);
+}
+if ($info) {
+	echo "<p>", implode(", ", $info), "</p>";
+}
+
 $comment = $table_status["Comment"];
 if ($comment != "") {
-	echo "<p class='nowrap'>" . lang('Comment') . ": " . h($comment) . "\n";
+	echo "<p class='keep-lines'>", lang('Comment'), ": ", h($comment), "</p>\n";
 }
 
 if ($fields) {
