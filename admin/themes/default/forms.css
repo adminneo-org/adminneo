@@ -71,6 +71,10 @@ input::placeholder {
 }
 
 textarea {
+	position: relative;
+	/* We have to use top, because baseline alignment does not work on Chrome as expected. */
+	vertical-align: top;
+	margin-top: -5px;
 	font-family: var(--font-family);
 	line-height: 1.4;
 }
@@ -82,10 +86,6 @@ select {
 	background: var(--input-bg) var(--select-arrow) right center no-repeat;
 	background-size: 16px;
 	cursor: pointer;
-}
-
-textarea {
-	vertical-align: baseline;
 }
 
 .rtl select {

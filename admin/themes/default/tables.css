@@ -17,6 +17,11 @@ td, th {
 	padding: 4px 10px 2px;
 }
 
+/* Compensation for textarea top margin. */
+td:has(textarea:first-child) {
+	padding-top: 9px;
+}
+
 th {
 	background: var(--panel-bg);
 	text-align: left;
@@ -91,14 +96,23 @@ table.box > tbody > tr:first-child > th, table.box > tbody > tr:first-child > td
 	padding-top: 10px;
 }
 
+/* Compensation for textarea top margin. */
+table.box > tbody > tr:first-child > td:has(textarea:first-child) {
+	padding-top: 15px;
+}
+
 table.box > tbody > tr:last-child > th, table.box > tbody > tr:last-child > td {
 	padding-bottom: 10px;
 }
 
 table.box > tbody > tr > th, table.box > tbody > tr > td {
-	vertical-align: middle;
+	vertical-align: baseline;
 	height: 34px;
 	border-bottom: none;
+}
+
+table.box > tbody > tr > td + td {
+	padding-left: 0;
 }
 
 td table {
