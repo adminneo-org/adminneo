@@ -96,9 +96,13 @@ table.box > tbody > tr:last-child > th, table.box > tbody > tr:last-child > td {
 }
 
 table.box > tbody > tr > th, table.box > tbody > tr > td {
-	vertical-align: middle;
+	vertical-align: baseline;
 	height: 34px;
 	border-bottom: none;
+}
+
+table.box > tbody > tr > td + td {
+	padding-left: 0;
 }
 
 td table {
