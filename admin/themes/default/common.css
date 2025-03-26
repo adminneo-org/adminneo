@@ -101,7 +101,7 @@ ol, ul {
 	white-space: nowrap;
 }
 
-p.nowrap {
+.keep-lines {
 	white-space: pre;
 }
 
