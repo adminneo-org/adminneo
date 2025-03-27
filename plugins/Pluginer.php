@@ -367,7 +367,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function callParent(string $function, array $args)
+	public function callParent(string $function, array $args = [])
 	{
 		return call_user_func_array([parent::class, $function], $args);
 	}

@@ -156,11 +156,6 @@ class Config
 		return $this->params["sslTrustServerCertificate"] ?? null;
 	}
 
-	public function getFrameAncestors(): array
-	{
-		return $this->params["frameAncestors"] ?? [];
-	}
-
 	public function hasServers(): bool
 	{
 		return isset($this->params["servers"]);

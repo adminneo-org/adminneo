@@ -67,9 +67,6 @@ include "adminneo.php";
 - Plugin `AdminerLoginSsl` (login-ssl.php) was removed. SSL options can be defined by `ssl*` configuration options.
   See [Configuration options](/docs/configuration.md) for more information.
 
-- Plugin `AdminerFrames` (frames.php) was removed. Frames can be allowed by `frameAncestors` configuration option. 
-  See [Configuration options](/docs/configuration.md) for more information.
-
 - Plugin `AdminerStructComments` (struct-comments.php) was removed. Comments are displayed on more places by default.
 
 - Plugin `AdminerPrettyJsonColumn` (pretty-json-column.php) was removed. JSON values can be formatted automatically by
@@ -81,8 +78,11 @@ include "adminneo.php";
 - Plugin `AdminerLoginIp` (login-ip.php) does not allow empty passwords. Use configuration option `defaultPasswordHash`
   for that.
 
-- Plugin `AdminerLoginTable` (login-table.php) uses different table to authenticate users and password_hash() method for
-  stored passwords.
+- Plugin `AdminerLoginTable` (login-table.php) (renamed to `TableLoginPlugin`) uses different table to authenticate 
+  users and password_hash() method for stored passwords.
+
+- Plugin `AdminerFrames` (frames.php) (renamed to `FrameSupportPlugin`) now accepts the list of allowed sources for 
+  `Content-Security-Policy` HTTP header.
 
 - Plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations) by Pematon is replaced by
   `visibleCollations` configuration option. See [Configuration options](/docs/configuration.md) for more information.
@@ -112,6 +112,7 @@ include "adminneo.php";
     - `AdminerEnumOption` to `EnumOptionPlugin`
     - `AdminerFileUpload` to `FileUploadPlugin`
     - `AdminerForeignSystem` to `SystemForeignKeysPlugin`
+    - `AdminerFrames` to `FrameSupportPlugin`
     - `AdminerLoginIp` to `IpLoginPlugin`
     - `AdminerLoginOtp` to `OtpLoginPlugin`
     - `AdminerLoginTable` to `TableLoginPlugin`
