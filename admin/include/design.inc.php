@@ -236,8 +236,8 @@ function page_headers(): void
 	header("X-Content-Type-Options: nosniff");
 	header("Referrer-Policy: origin-when-cross-origin");
 
-	// Clickjacking prevention for older browsers that do not support CSP2.
-	header("X-Frame-Options: " . (in_array(Config::SelfSource, $admin->getConfig()->getFrameAncestors()) ? "SAMEORIGIN" : "DENY"));
+	// Basic Clickjacking prevention that works also in old browsers without CSP2 support.
+	header("X-Frame-Options: DENY");
 
 	$directives = [];
 	foreach ($admin->getCspHeader() as $directive => $sources) {

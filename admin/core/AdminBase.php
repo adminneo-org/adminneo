@@ -197,10 +197,6 @@ abstract class AdminBase
 	 */
 	public function getCspHeader(): array
 	{
-		$frameAncestors = array_map(function ($source) {
-			return $source == Config::SelfSource ? "'self'" : $source;
-		}, $this->config->getFrameAncestors());
-
 		return [
 			// 'self' is a fallback for browsers not supporting 'strict-dynamic', 'unsafe-inline' is a fallback for browsers not supporting 'nonce-'
 			"script-src" => "'self' 'unsafe-inline' 'nonce-" . get_nonce() . "' 'strict-dynamic'",
@@ -209,7 +205,6 @@ abstract class AdminBase
 			"object-src" => "'none'",
 			"base-uri" => "'none'",
 			"form-action" => "'self'",
-			"frame-ancestors" => $frameAncestors ? implode(" ", $frameAncestors) : "'none'",
 		];
 	}
 

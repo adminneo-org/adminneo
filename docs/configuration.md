@@ -243,25 +243,4 @@ $config = [
 ];
 ```
 
-Global parameters that can't be overridden by server connection: `servers`, `frameAncestors`.
-
-### frameAncestors
-
-- Default value: `[]`
-- Available in EditorNeo: YES
-
-Allows using AdminNeo inside a frame by modifying `X-Frame-Options` and `Content-Security-Policy` HTTP headers. List can 
-contain sources that are allowed to embed AdminNeo as defined in [frame-ancestors directive specification](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).
-Value `self` can be used to allow all ancestor frames from the same origin. Empty list will disallow AdminNeo to be used 
-in a frame at all (clickjacking prevention).   
-
-For example:
-```php
-$config = [
-    "frameAncestors" => ["self"],
-];
-
-$config = [
-    "frameAncestors" => ["self", "https://adminneo.example.org"],
-];
-```
+Global parameters that can't be overridden by server connection: `servers`.

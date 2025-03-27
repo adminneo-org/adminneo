@@ -4,6 +4,7 @@ use AdminNeo\Bz2OutputPlugin;
 use AdminNeo\EditForeignPlugin;
 use AdminNeo\EnumOptionPlugin;
 use AdminNeo\FileUploadPlugin;
+use AdminNeo\FrameSupportPlugin;
 use AdminNeo\JsonDumpPlugin;
 use AdminNeo\JsonPreviewPlugin;
 use AdminNeo\Pluginer;
@@ -35,6 +36,7 @@ function create_adminneo(): Pluginer
 		new SystemForeignKeysPlugin(),
 		new EnumOptionPlugin(),
 		new EditForeignPlugin(),
+		new FrameSupportPlugin(),
 	];
 
 	$servers = [

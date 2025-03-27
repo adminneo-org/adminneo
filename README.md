@@ -161,7 +161,6 @@ For detailed information see [Configuration documentation](/docs/configuration.m
 | `sslEncrypt`                | `null`    | YES    | MS SQL: Value for [Encrypt connection option](https://learn.microsoft.com/en-us/sql/connect/php/connection-options).                                |
 | `sslTrustServerCertificate` | `null`    | YES    | MS SQL: Value for [TrustServerCertificate connection option](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE).     |
 | `servers`                   | `[]`      | no     | List of predefined server connections.                                                                                                              |
-| `frameAncestors`            | `[]`      | YES    | Allows using AdminNeo or EditorNeo inside a frame.                                                                                                  |
 
 Plugins
 -------
