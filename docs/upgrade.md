@@ -84,6 +84,9 @@ include "adminneo.php";
 - Plugin `AdminerFrames` (frames.php) (renamed to `FrameSupportPlugin`) now accepts the list of allowed sources for 
   `Content-Security-Policy` HTTP header.
 
+- Plugin `AdminerEditForeign` (edit-foreign.php) (renamed to `ForeignEditPlugin`) can not display unlimited number of
+  foreign values. The default limit is 200, now.
+
 - Plugin [AdminerCollations](https://github.com/pematon/adminer-plugins#adminercollations) by Pematon is replaced by
   `visibleCollations` configuration option. See [Configuration options](/docs/configuration.md) for more information.
 
@@ -106,7 +109,7 @@ include "adminneo.php";
     - `AdminerDumpZip` to `ZipOutputPlugin`
     - `AdminerDumpJson` to `JsonDumpPlugin`
     - `AdminerDumpXml` to `XmlDumpPlugin`
-    - `AdminerEditForeign` to `EditForeignPlugin`
+    - `AdminerEditForeign` to `ForeignEditPlugin`
     - `AdminerEditTextarea` to `EditTextareaPlugin`
     - `AdminerEmailTable` to `EmailTablePlugin`
     - `AdminerEnumOption` to `EnumOptionPlugin`

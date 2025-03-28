@@ -3,23 +3,28 @@
 namespace AdminNeo;
 
 /**
- * Select foreign key in edit form.
+ * Displays values selection for fields with a foreign key in edit form.
+ *
+ * Selection will be displayed only if the number of foreign values will not exceed the given limit.
  *
  * @link https://www.adminer.org/plugins/#use
+ *
  * @author Jakub Vrana, https://www.vrana.cz/
+ * @author Peter Knut
+ *
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
  */
-class EditForeignPlugin
+class ForeignEditPlugin
 {
 	private $limit;
 	private $foreignTables = [];
 	private $foreignOptions = [];
 
 	/**
-	 * @param int $limit
+	 * @param int $limit Max. number of foreign values.
 	 */
-	function __construct($limit = 0)
+	public function __construct(int $limit = 200)
 	{
 		$this->limit = $limit;
 	}
@@ -32,14 +37,14 @@ class EditForeignPlugin
 	 *
 	 * @return ?string
 	 */
-	function editInput($table, array $field, $attrs, $value)
+	public function editInput($table, array $field, $attrs, $value)
 	{
 		if (!isset($this->foreignTables[$table])) {
 			$this->foreignTables[$table] = column_foreign_keys($table);
 		}
 		$foreignKeys = $this->foreignTables[$table];
 
-		if (empty($foreignKeys[$field["field"]])) {
+		if (!isset($foreignKeys[$field["field"]])) {
 			return null;
 		}
 
@@ -57,17 +62,17 @@ class EditForeignPlugin
 					$column = "HEX($column)";
 				}
 
-				$values = get_vals("SELECT $column FROM " . table($target) . " ORDER BY 1" .
-					($this->limit ? " LIMIT " . ($this->limit + 1) : ""));
+				$values = get_vals("SELECT $column FROM " . table($target) . " ORDER BY 1 LIMIT " . ($this->limit + 1));
 
-				if ($this->limit && count($values) > $this->limit) {
+				if (count($values) > $this->limit) {
 					$this->foreignOptions[$target][$id] = false;
 				} else {
 					$this->foreignOptions[$target][$id] = ["" => ""] + $values;
 				}
 			}
+
 			if ($options = $this->foreignOptions[$target][$id]) {
-				return "<select$attrs>" . optionlist($options, $value) . "</select>";
+				return "<select $attrs>" . optionlist($options, $value) . "</select>";
 			} else {
 				return null;
 			}
