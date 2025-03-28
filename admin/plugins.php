@@ -8,7 +8,7 @@ use AdminNeo\FrameSupportPlugin;
 use AdminNeo\JsonDumpPlugin;
 use AdminNeo\JsonPreviewPlugin;
 use AdminNeo\Pluginer;
-use AdminNeo\SlugifyPlugin;
+use AdminNeo\SlugifyEditPlugin;
 use AdminNeo\SystemForeignKeysPlugin;
 use AdminNeo\TranslationPlugin;
 use AdminNeo\XmlDumpPlugin;
@@ -30,11 +30,11 @@ function create_adminneo(): Pluginer
 		// new TinyMcePlugin("../externals/tinymce/tinymce.min.js"),
 		new FileUploadPlugin(""),
 		new JsonPreviewPlugin(),
-		new SlugifyPlugin(),
 		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
 		new EnumOptionPlugin(),
 		new ForeignEditPlugin(),
+		new SlugifyEditPlugin(),
 		new FrameSupportPlugin(),
 	];
 
