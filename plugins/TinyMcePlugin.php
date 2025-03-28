@@ -25,13 +25,13 @@ class TinyMcePlugin
 	/** @var string */
 	private $licenseKey;
 
-	function __construct(string $path = "tinymce/tinymce.min.js", string $licenseKey = "gpl")
+	public function __construct(string $path = "tinymce/tinymce.min.js", string $licenseKey = "gpl")
 	{
 		$this->path = $path;
 		$this->licenseKey = $licenseKey;
 	}
 
-	function head()
+	public function head()
 	{
 		$lang = get_lang();
 		$lang = ($lang == "zh" ? "zh-CN" : ($lang == "zh-tw" ? "zh-TW" : $lang));
@@ -56,7 +56,7 @@ class TinyMcePlugin
 		<?php
 	}
 
-	function editInput($table, $field, $attrs, $value)
+	public function editInput($table, $field, $attrs, $value)
 	{
 		if (str_contains($field["type"], "text") && str_contains($field["field"], "_html")) {
 			return "<textarea $attrs cols='50' rows='12' data-editor='tinymce' style='width: 800px; height: 600px;'>" . h($value) . "</textarea>";
