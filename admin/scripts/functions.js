@@ -1051,7 +1051,7 @@ function selectClick(event, text, warning) {
 		}
 	};
 
-	const dataset = td.firstChild.dataset || {};
+	const dataset = td.firstChild ? (td.firstChild.dataset || {}) : {};
 	let value;
 	if (dataset.value !== undefined) {
 		value = (new DOMParser().parseFromString(dataset.value, "text/html")).documentElement.innerText;
