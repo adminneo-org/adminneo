@@ -1,9 +1,9 @@
 <?php
 
 use AdminNeo\Bz2OutputPlugin;
-use AdminNeo\EditForeignPlugin;
 use AdminNeo\EnumOptionPlugin;
 use AdminNeo\FileUploadPlugin;
+use AdminNeo\ForeignEditPlugin;
 use AdminNeo\FrameSupportPlugin;
 use AdminNeo\JsonDumpPlugin;
 use AdminNeo\JsonPreviewPlugin;
@@ -34,7 +34,7 @@ function create_adminneo(): Pluginer
 		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
 		new EnumOptionPlugin(),
-		new EditForeignPlugin(),
+		new ForeignEditPlugin(),
 		new FrameSupportPlugin(),
 	];
 
