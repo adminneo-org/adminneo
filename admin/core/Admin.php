@@ -687,7 +687,8 @@ class Admin extends AdminBase
 				}
 
 				if ($col != "") {
-					$return[] = $prefix . $driver->convertSearch(idf_escape($col), $where, $fields[$col]) . $cond;
+					$search = isset($fields[$col]) ? $driver->convertSearch(idf_escape($col), $where, $fields[$col]) : idf_escape($col);
+					$return[] = $prefix . $search . $cond;
 				} else {
 					// find anywhere
 					$cols = [];
