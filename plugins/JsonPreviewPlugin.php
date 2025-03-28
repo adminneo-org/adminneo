@@ -5,6 +5,10 @@ namespace AdminNeo;
 /**
  * Displays JSON preview as a table.
  *
+ * JSON previews can be displayed in selection table and/or in edit form. Preview will be displayed for columns with
+ * native JSON data type and for values that are automatically detected as JSON objects or arrays if
+ * `jsonValuesDetection` configuration option is enabled.
+ *
  * @author Peter Knut
  *
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
