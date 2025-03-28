@@ -119,7 +119,7 @@ include "adminneo.php";
     - `AdminerLoginIp` to `IpLoginPlugin`
     - `AdminerLoginOtp` to `OtpLoginPlugin`
     - `AdminerLoginTable` to `TableLoginPlugin`
-    - `AdminerSlugify` to `SlugifyPlugin`
+    - `AdminerSlugify` to `SlugifyEditPlugin`
     - `AdminerSqlLog` to `SqlLogPlugin`
     - `AdminerTinymce` to `TinyMcePlugin`
     - `AdminerTranslation` to `TranslationPlugin`
