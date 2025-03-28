@@ -94,6 +94,7 @@ include "adminneo.php";
 - Plugin `AdminerTableStructure` (table-structure.php) was removed without a replacement.
 - Plugin `AdminerTableIndexesStructure` (table-indexes-structure.php) was removed without a replacement.
 - Plugin `AdminerEditTextarea` (edit-textarea.php) was removed without a replacement.
+- Plugin `AdminerEditCalendar` (edit-calendar.php) was removed without a replacement.
 - Plugin `AdminerDumpPhp` (dump-php.php) was removed without a replacement.
 - Plugin `AdminerDumpAlter` (dump-alter.php) was removed without a replacement.
 - Plugin `AdminerDumpDate` (dump-date.php) was removed. Datetime is part of the filename by default.
@@ -105,7 +106,6 @@ include "adminneo.php";
     - `AdminerDumpZip` to `ZipOutputPlugin`
     - `AdminerDumpJson` to `JsonDumpPlugin`
     - `AdminerDumpXml` to `XmlDumpPlugin`
-    - `AdminerEditCalendar` to `EditCalendarPlugin`
     - `AdminerEditForeign` to `EditForeignPlugin`
     - `AdminerEditTextarea` to `EditTextareaPlugin`
     - `AdminerEmailTable` to `EmailTablePlugin`
