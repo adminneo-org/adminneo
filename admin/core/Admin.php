@@ -325,7 +325,11 @@ class Admin extends AdminBase
 	 */
 	public function formatSqlCommandQuery(string $query): string
 	{
-		return truncate_utf8(trim($query), 1000);
+		if (preg_match('~^DELIMITER\s~i', $query)) {
+			return "";
+		}
+
+		return truncate_utf8($query, 1000);
 	}
 
 	/** Description of a row in a table

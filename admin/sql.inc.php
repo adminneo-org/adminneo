@@ -84,9 +84,16 @@ if (!$error && $_POST) {
 		while ($query != "") {
 			if (!$offset && preg_match("~^$space*+DELIMITER\\s+(\\S+)~i", $query, $match)) {
 				$delimiter = $match[1];
+
+				$formatted_query = $admin->formatSqlCommandQuery(trim($match[0]));
+				if ($formatted_query != "") {
+					echo "<pre><code class='jush-$jush'>$formatted_query</code></pre>\n";
+				}
+
 				$query = substr($query, strlen($match[0]));
 			} else {
 				preg_match('(' . preg_quote($delimiter) . "\\s*|$parse)", $query, $match, PREG_OFFSET_CAPTURE, $offset); // should always match
+				/** @var int $pos */
 				list($found, $pos) = $match[0];
 				if (!$found && $fp && !feof($fp)) {
 					$query .= fread($fp, 1e5);
@@ -125,9 +132,9 @@ if (!$error && $_POST) {
 
 					} else { // end of a query
 						$empty = false;
-						$q = substr($query, 0, $pos);
+						$q = substr($query, 0, $pos + strlen($delimiter));
 						$commands++;
-						$print = "<pre id='sql-$commands'><code class='jush-$jush'>" . $admin->formatSqlCommandQuery($q) . "</code></pre>\n";
+						$print = "<pre id='sql-$commands'><code class='jush-$jush'>" . $admin->formatSqlCommandQuery(trim($q)) . "</code></pre>\n";
 						if ($jush == "sqlite" && preg_match("~^$space*+ATTACH\\b~i", $q, $match)) {
 							// PHP doesn't support setting SQLITE_LIMIT_ATTACHED
 							echo $print;
