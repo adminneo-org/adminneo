@@ -672,7 +672,7 @@ function query_redirect($query, $location, $message, $redirect = true, $execute 
 	}
 	$sql = "";
 	if ($query) {
-		$sql = $admin->messageQuery($query, $time, $failed);
+		$sql = $admin->formatMessageQuery($query, $time, $failed);
 	}
 	if ($failed) {
 		$error = error() . $sql . script("initToggles();");

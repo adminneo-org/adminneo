@@ -287,9 +287,11 @@ abstract class AdminBase
 
 	public abstract function backwardKeysPrint($backwardKeys, $row);
 
-	public abstract function selectQuery($query, $start, $failed = false);
+	public abstract function formatSelectQuery(string $query, float $start, bool $failed = false): string;
 
-	public abstract function sqlCommandQuery($query);
+	public abstract function formatMessageQuery(string $query, string $time, bool $failed = false): string;
+
+	public abstract function formatSqlCommandQuery(string $query): string;
 
 	public abstract function rowDescription($table);
 
@@ -348,8 +350,6 @@ abstract class AdminBase
 	public abstract function selectLengthProcess();
 
 	public abstract function selectEmailProcess($where, $foreignKeys);
-
-	public abstract function messageQuery($query, $time, $failed = false);
 
 	public abstract function editRowPrint($table, $fields, $row, $update);
 

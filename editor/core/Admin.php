@@ -132,12 +132,19 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		}
 	}
 
-	function selectQuery($query, $start, $failed = false) {
+	public function formatSelectQuery(string $query, float $start, bool $failed = false): string
+	{
 		return "<!--\n" . str_replace("--", "--><!-- ", $query) . "\n(" . format_time($start) . ")\n-->\n";
 	}
 
-	public function sqlCommandQuery($query)
+	public function formatMessageQuery(string $query, string $time, bool $failed = false): string
 	{
+		return " <span class='time'>" . @date("H:i:s") . "</span><!--\n" . str_replace("--", "--><!-- ", $query) . "\n" . ($time ? "($time)\n" : "") . "-->";
+	}
+
+	public function formatSqlCommandQuery(string $query): string
+	{
+		return "";
 	}
 
 	function rowDescription($table) {
@@ -457,10 +464,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			redirect(remove_from_uri(), lang('%d e-mail(s) have been sent.', $sent));
 		}
 		return false;
-	}
-
-	function messageQuery($query, $time, $failed = false) {
-		return " <span class='time'>" . @date("H:i:s") . "</span><!--\n" . str_replace("--", "--><!-- ", $query) . "\n" . ($time ? "($time)\n" : "") . "-->";
 	}
 
 	function editRowPrint($table, $fields, $row, $update) {

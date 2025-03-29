@@ -42,7 +42,7 @@ if (!$error && $_POST) {
 	$start = microtime(true);
 	$result = $connection->multi_query($query);
 	$affected = $connection->affected_rows; // getting warnings overwrites this
-	echo $admin->selectQuery($query, $start, !$result);
+	echo $admin->formatSelectQuery($query, $start, !$result);
 
 	if (!$result) {
 		echo "<p class='error'>" . error() . "\n";

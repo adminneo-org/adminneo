@@ -221,14 +221,17 @@ class Admin extends AdminBase
 	}
 
 	/**
+     * Returns formatted query that will be printed in "Select data" page before its execution.
      * Query printed in select before execution.
      *
-	 * @param $query string query to be executed
-	 * @param $start float start time of the query
-	 * @param $failed bool
-	 * @return string
+	 * @param string $query Query to be executed.
+	 * @param float $start Start time.
+	 * @param bool $failed Whether the execution failed.
+	 *
+ 	 * @return string HTML to be printed.
 	 */
-	function selectQuery($query, $start, $failed = false) {
+	public function formatSelectQuery(string $query, float $start, bool $failed = false): string
+	{
 		global $jush, $driver;
 
 		$supportSql = support("sql");
@@ -254,11 +257,73 @@ class Admin extends AdminBase
 		return $return;
 	}
 
-	/** Query printed in SQL command before execution
-	* @param string query to be executed
-	* @return string escaped query to be printed
-	*/
-	function sqlCommandQuery($query)
+	/**
+	 * Returns formatted query that will be printed in message after its execution.
+	 *
+	 * @param string $query Query to be executed.
+	 * @param string $time Formatted elapsed time.
+	 * @param bool $failed Whether the execution failed.
+	 *
+	 * @return string HTML to be printed.
+	 */
+	public function formatMessageQuery(string $query, string $time, bool $failed = false): string
+	{
+		global $jush, $driver;
+
+		restart_session();
+
+		$history = &get_session("queries");
+		if (!isset($history[$_GET["db"]])) {
+			$history[$_GET["db"]] = [];
+		}
+
+		if (strlen($query) > 1e6) {
+			$query = preg_replace('~[\x80-\xFF]+$~', '', substr($query, 0, 1e6)) . "\n…"; // [\x80-\xFF] - valid UTF-8, \n - can end by one-line comment
+		}
+
+		$history[$_GET["db"]][] = [$query, time(), $time]; // not DB - $_GET["db"] is changed in database.inc.php //! respect $_GET["ns"]
+
+		$supportSql = support("sql");
+		$warnings = !$failed ? $driver->warnings() : null;
+
+		$sqlId = "sql-" . count($history[$_GET["db"]]);
+		$warningsId = "warnings-" . count($history[$_GET["db"]]);
+
+		$return = " ";
+		if ($warnings) {
+			$return .= "<a href='#$warningsId' class='toggle'>" . lang('Warnings') . icon_chevron_down() . "</a>, ";
+		}
+		$return .= "<a href='#$sqlId' class='toggle'>" . lang('SQL command') . icon_chevron_down() . "</a>";
+		$return .= " <span class='time'>" . @date("H:i:s") . "</span>\n"; // @ - time zone may be not set
+
+		if ($warnings) {
+			$return .= "<div id='$warningsId' class='warnings hidden'>\n$warnings</div>\n";
+		}
+
+		$return .= "<div id='$sqlId' class='hidden'>\n";
+		$return .= "<pre><code class='jush-$jush'>" . truncate_utf8($query, 1000) . "</code></pre>\n";
+
+		$return .= "<p class='links'>";
+		if ($supportSql) {
+			$return .= "<a href='" . h(str_replace("db=" . urlencode(DB), "db=" . urlencode($_GET["db"]), ME) . 'sql=&history=' . (count($history[$_GET["db"]]) - 1)) . "'>" . icon("edit") . lang('Edit') . "</a>";
+		}
+		if ($time) {
+			$return .= " <span class='time'>($time)</span>";
+		}
+		$return .= "</p>\n";
+		$return .= "</div>\n";
+
+		return $return;
+	}
+
+	/**
+	 * Returns formatted query that will be printed in "SQL command" page before its execution.
+	 *
+	 * @param string $query Query to be executed.
+	 *
+	 * @returns string HTML to be printed.
+	 */
+	public function formatSqlCommandQuery(string $query): string
 	{
 		return truncate_utf8(trim($query), 1000);
 	}
@@ -742,61 +807,6 @@ class Admin extends AdminBase
 	*/
 	function selectEmailProcess($where, $foreignKeys) {
 		return false;
-	}
-
-	/** Query printed after execution in the message
-	* @param string executed query
-	* @param string elapsed time
-	* @param bool
-	* @return string
-	*/
-	function messageQuery($query, $time, $failed = false) {
-		global $jush, $driver;
-
-		restart_session();
-
-		$history = &get_session("queries");
-		if (!isset($history[$_GET["db"]])) {
-			$history[$_GET["db"]] = [];
-		}
-
-		if (strlen($query) > 1e6) {
-			$query = preg_replace('~[\x80-\xFF]+$~', '', substr($query, 0, 1e6)) . "\n…"; // [\x80-\xFF] - valid UTF-8, \n - can end by one-line comment
-		}
-
-		$history[$_GET["db"]][] = [$query, time(), $time]; // not DB - $_GET["db"] is changed in database.inc.php //! respect $_GET["ns"]
-
-		$supportSql = support("sql");
-		$warnings = !$failed ? $driver->warnings() : null;
-
-        $sqlId = "sql-" . count($history[$_GET["db"]]);
-		$warningsId = "warnings-" . count($history[$_GET["db"]]);
-
-		$return = " ";
-		if ($warnings) {
-			$return .= "<a href='#$warningsId' class='toggle'>" . lang('Warnings') . icon_chevron_down() . "</a>, ";
-		}
-		$return .= "<a href='#$sqlId' class='toggle'>" . lang('SQL command') . icon_chevron_down() . "</a>";
-		$return .= " <span class='time'>" . @date("H:i:s") . "</span>\n"; // @ - time zone may be not set
-
-		if ($warnings) {
-			$return .= "<div id='$warningsId' class='warnings hidden'>\n$warnings</div>\n";
-		}
-
-		$return .= "<div id='$sqlId' class='hidden'>\n";
-        $return .= "<pre><code class='jush-$jush'>" . truncate_utf8($query, 1000) . "</code></pre>\n";
-
-        $return .= "<p class='links'>";
-		if ($supportSql) {
-			$return .= "<a href='" . h(str_replace("db=" . urlencode(DB), "db=" . urlencode($_GET["db"]), ME) . 'sql=&history=' . (count($history[$_GET["db"]]) - 1)) . "'>" . icon("edit") . lang('Edit') . "</a>";
-		}
-		if ($time) {
-			$return .= " <span class='time'>($time)</span>";
-		}
-        $return .= "</p>\n";
-		$return .= "</div>\n";
-
-        return $return;
 	}
 
 	/** Print before edit form

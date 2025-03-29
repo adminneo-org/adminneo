@@ -170,7 +170,7 @@ if (isset($_GET["elastic"])) {
 			$search = $this->_conn->rootQuery($query, $data);
 
 			if ($print) {
-				echo admin()->selectQuery("$query: " . json_encode($data), $start, !$search);
+				echo admin()->formatSelectQuery("$query: " . json_encode($data), $start, !$search);
 			}
 			if (empty($search)) {
 				return false;

@@ -26,7 +26,7 @@ function create_adminneo(): Pluginer
 		new ZipOutputPlugin(),
 		new JsonDumpPlugin(),
 		new XmlDumpPlugin(),
-		// new SqlLogPlugin("past-" . rtrim(`git describe --tags --abbrev=0`) . ".sql"),
+		// new SqlLogPlugin(),
 		// new TinyMcePlugin("../externals/tinymce/tinymce.min.js"),
 		new FileUploadPlugin(""),
 		new JsonPreviewPlugin(),

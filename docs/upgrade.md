@@ -142,6 +142,9 @@ include "adminneo.php";
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`
     - `tableStructurePrint()` -> `printTableStructure()`
+    - `selectQuery()` -> `formatSelectQuery()`
+    - `messageQuery()` -> `formatMessageQuery()`
+    - `sqlCommandQuery()` -> `formatSqlCommandQuery()`
 
 Migrating to 4.17
 -----------------

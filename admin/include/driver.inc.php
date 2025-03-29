@@ -59,7 +59,7 @@ abstract class Min_SQL {
 		$start = microtime(true);
 		$return = $this->_conn->query($query);
 		if ($print) {
-			echo $admin->selectQuery($query, $start, !$return);
+			echo $admin->formatSelectQuery($query, $start, !$return);
 		}
 		return $return;
 	}

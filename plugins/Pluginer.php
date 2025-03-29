@@ -157,12 +157,17 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function selectQuery($query, $start, $failed = false)
+	public function formatSelectQuery(string $query, float $start, bool $failed = false): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function sqlCommandQuery($query)
+	public function formatMessageQuery(string $query, string $time, bool $failed = false): string
+	{
+		return $this->applyPlugin(__FUNCTION__, func_get_args());
+	}
+
+	public function formatSqlCommandQuery(string $query): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
@@ -278,11 +283,6 @@ class Pluginer extends Admin
 	}
 
 	public function selectEmailProcess($where, $foreignKeys)
-	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
-	}
-
-	public function messageQuery($query, $time, $failed = false)
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
