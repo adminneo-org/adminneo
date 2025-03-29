@@ -4,23 +4,24 @@ namespace AdminNeo;
 
 $drivers = [];
 
-/** Add a driver
-* @param string
-* @param string
-* @return null
-*/
-function add_driver($id, $name) {
+/**
+ * Adds a driver.
+ */
+function add_driver(string $id, string $name): void
+{
 	global $drivers;
+
 	$drivers[$id] = $name;
 }
 
-/** Get driver name
-* @param string
-* @return string
-*/
-function get_driver($id) {
+/**
+ * Returns driver name.
+ */
+function get_driver_name(string $id): ?string
+{
 	global $drivers;
-	return $drivers[$id];
+
+	return $drivers[$id] ?? null;
 }
 
 abstract class Min_SQL {
