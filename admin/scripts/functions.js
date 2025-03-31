@@ -845,17 +845,18 @@ function editingKeydown(event) {
  */
 function functionChange() {
 	const input = this.form[this.name.replace(/^function/, 'fields')];
-	const value = selectValue(this);
+	const func = selectValue(this);
 
 	// Undefined with the set data type.
 	if (!input) {
 		return;
 	}
 
-	if (value && input.type !== "file") {
+	// Switch to the text field if function is selected.
+	if (func && input.type !== "file") {
 		if (input.origType === undefined) {
 			input.origType = input.type;
-			input.origMaxLength = input.getAttribute('data-maxlength');
+			input.origMaxLength = input.dataset.maxlength;
 		}
 
 		input.removeAttribute('data-maxlength');
@@ -868,13 +869,13 @@ function functionChange() {
 	}
 
 	// Hide input value if it will be not used by selected function.
-	if (value === "NULL" || value === "now") {
+	if (func === "NULL" || func === "now") {
 		if (input.value !== "") {
-			input.dataset.lastValue = input.value;
+			input.lastValue = input.value;
 			input.value = "";
 		}
-	} else if (input.dataset.lastValue) {
-		input.value = input.dataset.lastValue;
+	} else if (input.lastValue) {
+		input.value = input.lastValue;
 	}
 
 	oninput({target: input});
