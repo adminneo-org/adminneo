@@ -28,7 +28,7 @@ function create_adminneo(): Pluginer
 		new XmlDumpPlugin(),
 		// new SqlLogPlugin(),
 		// new TinyMcePlugin("../externals/tinymce/tinymce.min.js"),
-		new FileUploadPlugin(""),
+		new FileUploadPlugin("../export/upload"),
 		new JsonPreviewPlugin(),
 		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
