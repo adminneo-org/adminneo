@@ -852,7 +852,7 @@ function functionChange() {
 		return;
 	}
 
-	if (value) {
+	if (value && input.type !== "file") {
 		if (input.origType === undefined) {
 			input.origType = input.type;
 			input.origMaxLength = input.getAttribute('data-maxlength');
