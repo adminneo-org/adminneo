@@ -1155,7 +1155,7 @@ function search_tables() {
 	$_GET["where"][0]["val"] = $_POST["query"];
 	$sep = "<ul>\n";
 	foreach (table_status('', true) as $table => $table_status) {
-		$name = $admin->tableName($table_status);
+		$name = $admin->getTableName($table_status);
 		if (isset($table_status["Engine"]) && $name != "" && (!$_POST["tables"] || in_array($table, $_POST["tables"]))) {
 			$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", $admin->selectSearchProcess(fields($table), [])), 1));
 			if (!$result || $result->fetch_row()) {
@@ -1554,7 +1554,7 @@ function help_script_command($command, $side = false)
 */
 function edit_form($table, $fields, $row, $update) {
 	global $admin, $jush, $token, $error;
-	$table_name = $admin->tableName(table_status1($table, true));
+	$table_name = $admin->getTableName(table_status1($table, true));
 	$title = $update ? lang('Edit') : lang('Insert');
 
 	page_header("$title: $table_name", $error, ["select" => [$table, $table_name], $title]);
@@ -1573,7 +1573,7 @@ function edit_form($table, $fields, $row, $update) {
 
 		$first = 0;
 		foreach ($fields as $name => $field) {
-			echo "<tr><th>" . $admin->fieldName($field);
+			echo "<tr><th>" . $admin->getFieldName($field);
 			$default = $_GET["set"][bracket_escape($name)] ?? null;
 			if ($default === null) {
 				$default = $field["default"];

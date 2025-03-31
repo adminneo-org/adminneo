@@ -76,12 +76,9 @@ class Admin extends AdminBase
 		echo "</p>\n";
 	}
 
-	function tableName($tableStatus) {
-		return h($tableStatus["Comment"] != "" ? $tableStatus["Comment"] : $tableStatus["Name"]);
-	}
-
-	function fieldName($field, $order = 0) {
-		return h(preg_replace('~\s+\[.*\]$~', '', ($field["comment"] != "" ? $field["comment"] : $field["field"])));
+	public function getFieldName(array $field, int $order = 0): string
+	{
+		return h($field["field"]);
 	}
 
 	function selectLinks($tableStatus, $set = "") {
@@ -102,7 +99,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			$return[$row["TABLE_NAME"]]["keys"][$row["CONSTRAINT_NAME"]][$row["COLUMN_NAME"]] = $row["REFERENCED_COLUMN_NAME"];
 		}
 		foreach ($return as $key => $val) {
-			$name = $this->tableName(table_status($key, true));
+			$name = $this->getTableName(table_status($key, true));
 			if ($name != "") {
 				$search = preg_quote($tableName);
 				$separator = "(:|\\s*-)?\\s+";
@@ -661,7 +658,7 @@ qsl('div').onclick = whisperClick;", "")
 
 		foreach ($tables as $row) {
 			// Skip views and tables without a name.
-			if (!isset($row["Engine"]) || ($name = $this->tableName($row)) == "") {
+			if (!isset($row["Engine"]) || ($name = $this->getTableName($row)) == "") {
 				continue;
 			}
 

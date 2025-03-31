@@ -46,6 +46,9 @@ include "adminneo.php";
 
 - Autoloading of plugins based on the class name was removed. All plugins have to be created in custom index.php file.
 
+- EditorNeo no longer use comments instead of table and field names. Plugin `TranslationPlugin` can be used to display
+  custom localised names.
+
 ### Plugins
 
 - Plugin `AdminerLoginServers` (login-servers.php) was removed. Preconfigured server connections can be defined by
@@ -148,6 +151,8 @@ include "adminneo.php";
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`
+    - `tableName()` -> `getTableName()`
+    - `fieldName()` -> `getFieldName()`
     - `tableStructurePrint()` -> `printTableStructure()`
     - `selectQuery()` -> `formatSelectQuery()`
     - `messageQuery()` -> `formatMessageQuery()`

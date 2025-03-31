@@ -14,7 +14,7 @@ if (!$fields) {
 	$error = error();
 }
 $table_status = table_status1($TABLE, true);
-$name = $admin->tableName($table_status);
+$name = $admin->getTableName($table_status);
 
 $rights = [];
 foreach ($fields as $key => $field) {

@@ -76,7 +76,7 @@ if ($in) {
 	foreach ($in as $key) {
 		$field = $routine["fields"][$key];
 		$name = $field["field"];
-		echo "<tr><th>" . $admin->fieldName($field);
+		echo "<tr><th>" . $admin->getFieldName($field);
 		$value = $_POST["fields"][$name] ?? "";
 		if ($value != "") {
 			if ($field["type"] == "enum") {

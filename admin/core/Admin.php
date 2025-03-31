@@ -139,20 +139,16 @@ class Admin extends AdminBase
 		echo "</p>\n";
 	}
 
-	/** Table caption used in navigation and headings
-	* @param array result of SHOW TABLE STATUS
-	* @return string HTML code, "" to ignore table
-	*/
-	function tableName($tableStatus) {
-		return h($tableStatus["Name"]);
-	}
-
-	/** Field caption used in select and edit
-	* @param array single field returned from fields()
-	* @param int order of column in select
-	* @return string HTML code, "" to ignore field
-	*/
-	function fieldName($field, $order = 0) {
+	/**
+	 * Returns field name used in select and edit.
+	 *
+	 * @param array $field Single field returned from fields().
+	 * @param int $order Order of column in select.
+	 *
+	 * @return string HTML code, "" to ignore field.
+	 */
+	public function getFieldName(array $field, int $order = 0): string
+	{
 		return '<span title="' . h($field["full_type"]) . '">' . h($field["field"]) . '</span>';
 	}
 
@@ -206,7 +202,7 @@ class Admin extends AdminBase
 	/** Find backward keys for table
 	* @param string
 	* @param string
-	* @return array $return[$target_table]["keys"][$key_name][$target_column] = $source_column; $return[$target_table]["name"] = $this->tableName($target_table);
+	* @return array $return[$target_table]["keys"][$key_name][$target_column] = $source_column; $return[$target_table]["name"] = $this->getTableName($target_table);
 	*/
 	function backwardKeys($table, $tableName) {
 		return [];
@@ -1328,7 +1324,7 @@ class Admin extends AdminBase
 		echo "<nav id='tables'><menu $menuClass>";
 
 		foreach ($tables as $table => $status) {
-			$name = $this->tableName($status);
+			$name = $this->getTableName($status);
 			if ($name == "") {
 				continue;
 			}

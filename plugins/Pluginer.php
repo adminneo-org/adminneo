@@ -127,12 +127,12 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function tableName($tableStatus)
+	public function getTableName(array $tableStatus): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function fieldName($field, $order = 0)
+	public function getFieldName(array $field, int $order = 0): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

@@ -22,7 +22,7 @@ $search_columns = []; // searchable columns
 $order_columns = []; // searchable columns
 $text_length = null;
 foreach ($fields as $key => $field) {
-	$name = $admin->fieldName($field);
+	$name = $admin->getFieldName($field);
 	if (isset($field["privileges"]["select"]) && $name != "") {
 		$columns[$key] = html_entity_decode(strip_tags($name), ENT_QUOTES);
 		if (is_shortable($field)) {
@@ -234,7 +234,7 @@ if ($_POST && !$error) {
 	}
 }
 
-$table_name = $admin->tableName($table_status);
+$table_name = $admin->getTableName($table_status);
 if (is_ajax()) {
 	page_headers();
 	ob_start();
@@ -354,7 +354,7 @@ if (!$columns && support("table")) {
 				if (!isset($unselected[$key])) {
 					$val = $_GET["columns"][key($select)] ?? null;
 					$field = $fields[$select ? ($val ? $val["col"] : current($select)) : $key];
-					$name = ($field ? $admin->fieldName($field, $rank) : (isset($val["fun"]) ? "*" : h($key)));
+					$name = ($field ? $admin->getFieldName($field, $rank) : (isset($val["fun"]) ? "*" : h($key)));
 					if ($name != "") {
 						$rank++;
 						$names[$key] = $name;

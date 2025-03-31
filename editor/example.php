@@ -31,26 +31,27 @@ function create_adminneo(): Admin
 			return 'adminneo_test';
 		}
 
-		function tableName($tableStatus)
+		public function getTableName(array $tableStatus): string
 		{
-			// tables without comments would return empty string and will be ignored by Admin
-			return h($tableStatus["Comment"]);
+			// Tables without comments would return empty string and will be ignored by Editor.
+			return $tableStatus["Comment"] ? h($tableStatus["Name"]) : "";
 		}
 
-		function fieldName($field, $order = 0)
+		public function getFieldName(array $field, int $order = 0): string
 		{
+			// Hide hashes in select.
 			if ($order && preg_match('~_(md5|sha1)$~', $field["field"])) {
-				return ""; // hide hashes in select
+				return "";
 			}
 
-			// display only column with comments, first five of them plus searched columns
+			// Display only column with comments, first five of them plus searched columns.
 			if ($order < 5) {
-				return h($field["comment"]);
+				return h($field["field"]);
 			}
 
 			foreach ((array)$_GET["where"] as $key => $where) {
 				if ($where["col"] == $field["field"] && ($key >= 0 || $where["val"] != "")) {
-					return h($field["comment"]);
+					return h($field["field"]);
 				}
 			}
 

@@ -47,12 +47,12 @@ class TranslationPlugin
 		$this->maxLength = $maxLength;
 	}
 
-	public function tableName($tableStatus)
+	public function getTableName(array $tableStatus): ?string
 	{
 		return h($this->translate($tableStatus["Name"]));
 	}
 
-	public function fieldName($field, $order = 0)
+	public function getFieldName(array $field, int $order = 0): ?string
 	{
 		return h($this->translate($field["field"]));
 	}

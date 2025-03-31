@@ -269,9 +269,19 @@ abstract class AdminBase
 		}
 	}
 
-	public abstract function tableName($tableStatus);
+	/**
+	 * Returns table name used in navigation and headings.
+	 *
+	 * @param array $tableStatus The result of SHOW TABLE STATUS.
+	 *
+	 * @return string HTML code, "" to ignore table
+	 */
+	public function getTableName(array $tableStatus): string
+	{
+		return h($tableStatus["Name"]);
+	}
 
-	public abstract function fieldName($field, $order = 0);
+	public abstract function getFieldName(array $field, int $order = 0): string;
 
 	public abstract function selectLinks($tableStatus, $set = "");
 

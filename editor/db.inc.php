@@ -22,7 +22,7 @@ if ($admin->homepage()) {
 	echo "</thead>\n";
 
 	foreach (table_status() as $table => $row) {
-		$name = $admin->tableName($row);
+		$name = $admin->getTableName($row);
 		if (isset($row["Engine"]) && $name != "") {
 			echo '<tr><td class="actions">' . checkbox("tables[]", $table, in_array($table, (array) $_POST["tables"], true));
 			echo "<th><a href='" . h(ME) . 'select=' . urlencode($table) . "'>$name</a>";
