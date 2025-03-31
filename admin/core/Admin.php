@@ -317,7 +317,7 @@ class Admin extends AdminBase
 	 *
 	 * @param string $query Query to be executed.
 	 *
-	 * @returns string HTML to be printed.
+	 * @return string HTML to be printed.
 	 */
 	public function formatSqlCommandQuery(string $query): string
 	{
@@ -442,7 +442,7 @@ class Admin extends AdminBase
 			echo "<td>", h($field["collation"]), "</td>";
 
 			if (support("comment")) {
-				echo "<td>", h($field["comment"]), "</td>";
+				echo "<td>", $this->formatComment($field["comment"]), "</td>";
 			}
 
 			echo "\n";
@@ -860,16 +860,6 @@ class Admin extends AdminBase
 			;
 		}
 		return "";
-	}
-
-	/** Get hint for edit field
-	* @param string table name
-	* @param array single field from fields()
-	* @param string
-	* @return string
-	*/
-	function editHint($table, $field, $value) {
-		return h($field["comment"]);
 	}
 
 	/** Process sent input

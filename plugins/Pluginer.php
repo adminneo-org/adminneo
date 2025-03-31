@@ -137,6 +137,11 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
+	public function formatComment(?string $comment): string
+	{
+		return $this->applyPlugin(__FUNCTION__, func_get_args());
+	}
+
 	public function selectLinks($tableStatus, $set = "")
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
@@ -292,7 +297,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function editHint($table, $field, $value)
+	public function getEditHint(string $table, array $field, ?string $value): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

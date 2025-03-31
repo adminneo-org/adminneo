@@ -57,6 +57,11 @@ class TranslationPlugin
 		return h($this->translate($field["field"]));
 	}
 
+	public function formatComment(?string $comment): ?string
+	{
+		return $comment != "" ? h($this->translate($comment)) : "";
+	}
+
 	public function editVal($val, $field)
 	{
 		if ($field["type"] == "enum") {

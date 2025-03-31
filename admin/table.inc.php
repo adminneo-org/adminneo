@@ -48,7 +48,7 @@ if ($fields) {
 
 $comment = $table_status["Comment"];
 if ($comment != "") {
-	echo "<p class='keep-lines'>", lang('Comment'), ": ", h($comment), "</p>\n";
+	echo "<p class='keep-lines'>", lang('Comment'), ": ", $admin->formatComment($comment), "</p>\n";
 }
 
 if (is_view($table_status)) {

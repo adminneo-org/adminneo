@@ -283,6 +283,16 @@ abstract class AdminBase
 
 	public abstract function getFieldName(array $field, int $order = 0): string;
 
+	/**
+	 * Returns formatted comment.
+	 *
+	 * @return string HTML to be printed.
+	 */
+	public function formatComment(?string $comment): string
+	{
+		return h($comment);
+	}
+
 	public abstract function selectLinks($tableStatus, $set = "");
 
 	/**
@@ -367,7 +377,19 @@ abstract class AdminBase
 
 	public abstract function editInput($table, $field, $attrs, $value, $function);
 
-	public abstract function editHint($table, $field, $value);
+	/**
+	 * Returns hint for edit field.
+	 *
+	 * @param string $table Table name.
+	 * @param array $field Single field from fields().
+	 * @param string $value Field value.
+	 *
+	 * @return string HTML code.
+	 */
+	public function getEditHint(string $table, array $field, ?string $value): string
+	{
+		return support("comment") ? $this->formatComment($field["comment"]) : "";
+	}
 
 	public abstract function processInput(?array $field, $value, $function = "");
 

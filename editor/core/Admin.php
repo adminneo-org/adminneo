@@ -520,10 +520,6 @@ qsl('div').onclick = whisperClick;", "")
 		return '';
 	}
 
-	function editHint($table, $field, $value) {
-		return (preg_match('~\s+(\[.*\])$~', ($field["comment"] != "" ? $field["comment"] : $field["field"]), $match) ? h(" $match[1]") : '');
-	}
-
 	function processInput(?array $field, $value, $function = "") {
 		if (!$field) {
 			return q($value);
