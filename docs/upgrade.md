@@ -87,6 +87,9 @@ include "adminneo.php";
 - Plugin `AdminerEditForeign` (edit-foreign.php) (renamed to `ForeignEditPlugin`) can not display unlimited number of
   foreign values. The default limit is 200, now.
 
+- Plugin `AdminerTranslation` (translation.php) (renamed to `TranslationPlugin`) uses different table to store
+  translations. It now translates also table names and field names.
+
 - Plugin `AdminerFileUpload` (file-upload.php) (renamed to `FileUploadPlugin`) uses different directory structure for
   uploaded files. It now contains also the database name: "$uploadPath/db_name/table_name". The target directory is 
   created automatically.
