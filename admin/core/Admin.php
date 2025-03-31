@@ -357,7 +357,7 @@ class Admin extends AdminBase
 	* @param string HTML-escaped value to print
 	* @param string link to foreign key
 	* @param array single field returned from fields()
-	* @param array original value before applying editVal() and escaping
+	* @param array original value before applying formatFieldValue() and escaping
 	* @return string
 	*/
 	function selectVal($val, $link, $field, $original) {
@@ -382,18 +382,22 @@ class Admin extends AdminBase
 		return $text;
 	}
 
-	/** Value conversion used in select and edit
-	* @param string
-	* @param array single field returned from fields()
-	* @return string
-	*/
-	function editVal($val, $field) {
+	/**
+	 * Formats field value for select table and edit form.
+	 *
+	 * @param string|bool|null $value Field value.
+	 * @param array $field Single field returned from fields().
+	 *
+	 * @return ?string
+	 */
+	public function formatFieldValue($value, array $field): ?string
+	{
 		// Format Elasticsearch boolean value, but do not touch PostgreSQL boolean that use string value 't' or 'f'.
-		if ($field && $field["type"] == "boolean" && is_bool($val)) {
-			return $val ? "true" : "false";
+		if ($field && $field["type"] == "boolean" && is_bool($value)) {
+			return $value ? "true" : "false";
 		}
 
-		return $val;
+		return $value;
 	}
 
 	/**

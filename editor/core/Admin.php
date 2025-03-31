@@ -205,11 +205,13 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return $return;
 	}
 
-	function editVal($val, $field) {
-		if (preg_match('~date|timestamp~', $field["type"]) && $val !== null) {
-			return preg_replace('~^(\d{2}(\d+))-(0?(\d+))-(0?(\d+))~', lang('$1-$3-$5'), $val);
+	public function formatFieldValue($value, array $field): ?string
+	{
+		if (preg_match('~date|timestamp~', $field["type"]) && $value !== null) {
+			return preg_replace('~^(\d{2}(\d+))-(0?(\d+))-(0?(\d+))~', lang('$1-$3-$5'), $value);
 		}
-		return $val;
+
+		return $value;
 	}
 
 	public function printTableStructure(array $fields): void
@@ -449,7 +451,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				foreach ($this->rowDescriptions($rows, $foreignKeys) as $row) {
 					$replace = ['{\\' => '{']; // allow literal {$name}
 					foreach ($matches[1] as $val) {
-						$replace['{$' . "$val}"] = $this->editVal($row[$val], $fields[$val]);
+						$replace['{$' . "$val}"] = $this->formatFieldValue($row[$val], $fields[$val]);
 					}
 					$email = $row[$_POST["email_field"]];
 					if (is_mail($email) && $this->sendEmail($email, strtr($subject, $replace), strtr($message, $replace), $_POST["email_from"], $_FILES["email_files"])) {

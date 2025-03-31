@@ -321,7 +321,7 @@ abstract class AdminBase
 
 	public abstract function selectVal($val, $link, $field, $original);
 
-	public abstract function editVal($val, $field);
+	public abstract function formatFieldValue($value, array $field): ?string;
 
 	public abstract function printTableStructure(array $fields): void;
 

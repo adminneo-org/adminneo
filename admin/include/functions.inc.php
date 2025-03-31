@@ -961,7 +961,7 @@ function enum_input($type, $attrs, $field, $value, $empty = null) {
 	foreach ($matches[1] as $i => $val) {
 		$val = stripcslashes(str_replace("''", "'", $val));
 		$checked = (is_int($value) ? $value == $i+1 : (is_array($value) ? in_array($i+1, $value) : $value === $val));
-		$return .= " <label><input type='$type'$attrs value='" . ($jush == "sql" ? $i+1 : h($val)) . "'" . ($checked ? ' checked' : '') . '>' . h($admin->editVal($val, $field)) . '</label>';
+		$return .= " <label><input type='$type'$attrs value='" . ($jush == "sql" ? $i+1 : h($val)) . "'" . ($checked ? ' checked' : '') . '>' . h($admin->formatFieldValue($val, $field)) . '</label>';
 	}
 
 	return $return;
@@ -1020,7 +1020,7 @@ function input($field, $value, $function) {
 			foreach ($matches[1] as $i => $val) {
 				$val = stripcslashes(str_replace("''", "'", $val));
 				$checked = (is_int($value) ? ($value >> $i) & 1 : in_array($val, explode(",", $value), true));
-				echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . (1 << $i) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->editVal($val, $field)) . '</label>';
+				echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . (1 << $i) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->formatFieldValue($val, $field)) . '</label>';
 			}
 		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
 			echo "<input type='file' name='fields-$name'>";
@@ -1332,7 +1332,7 @@ function get_random_string($binary = false)
 /** Format value to use in select
 * @param string
 * @param string
-* @param array
+* @param ?array
 * @param int
 * @return string HTML
 */
@@ -1359,7 +1359,7 @@ function select_value($val, $link, $field, $text_length) {
 			$link = $val; // IE 11 and all modern browsers hide referrer
 		}
 	}
-	$return = $admin->editVal($val, $field);
+	$return = $field ? $admin->formatFieldValue($val, $field) : $val;
 	if ($return !== null) {
 		if (!is_utf8($return)) {
 			$return = "\0"; // htmlspecialchars of binary data returns an empty string
@@ -1595,7 +1595,7 @@ function edit_form($table, $fields, $row, $update) {
 				)
 			);
 			if (!$_POST["save"] && is_string($value)) {
-				$value = $admin->editVal($value, $field);
+				$value = $admin->formatFieldValue($value, $field);
 			}
 			$function = ($_POST["save"]
 				? $_POST["function"][$name] ?? ""
