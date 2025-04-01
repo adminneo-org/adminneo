@@ -499,7 +499,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			}
 
 			if (!$value && !isset($_GET["select"])) {
-				$value = 0;
+				$value = "";
 			}
 
 			$result .= enum_input("radio", $attrs, $field, $value, $field["null"] ? "" : null);

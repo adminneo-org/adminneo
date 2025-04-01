@@ -944,27 +944,41 @@ function column_foreign_keys($table) {
 	return $return;
 }
 
-/** Print enum input field
-* @param string "radio"|"checkbox"
-* @param string
-* @param array
-* @param mixed int|string|array
-* @param string
-* @return null
-*/
-function enum_input($type, $attrs, $field, $value, $empty = null) {
+/**
+ * Returns input options for enum values.
+ *
+ * @param string $type "radio" or "checkbox"
+ * @param int|string|array $value
+ * @param string|int|null $empty
+ */
+function enum_input(string $type, string $attrs, array $field, $value, $empty = null): string
+{
 	global $admin, $jush;
 
-	$return = ($empty !== null && !is_strict_mode() ? "<label><input type='$type'$attrs value='$empty'" . ((is_array($value) ? in_array($empty, $value) : $value === 0) ? " checked" : "") . "><i>" . lang('empty') . "</i></label>" : "");
+	$result = "";
+	if ($empty !== null) {
+		$checked = (is_array($value) ? in_array($empty, $value) : $value === 0) ? "checked" : "";
+		$result .= "<label><input type='$type' $attrs value='$empty' $checked><i>" . lang('empty') . "</i></label>";
+	}
 
 	preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
 	foreach ($matches[1] as $i => $val) {
 		$val = stripcslashes(str_replace("''", "'", $val));
-		$checked = (is_int($value) ? $value == $i+1 : (is_array($value) ? in_array($i+1, $value) : $value === $val));
-		$return .= " <label><input type='$type'$attrs value='" . ($jush == "sql" ? $i+1 : h($val)) . "'" . ($checked ? ' checked' : '') . '>' . h($admin->formatFieldValue($val, $field)) . '</label>';
+
+		if (is_int($value)) {
+			$checked = $value == $i + 1;
+		} elseif (is_array($value)) {
+			$checked = in_array($i + 1, $value);
+		} else {
+			$checked = $value === $val;
+		}
+
+		$checked = $checked ? "checked" : "";
+
+		$result .= " <label><input type='$type' $attrs value='" . ($jush == "sql" ? $i + 1 : h($val)) . "' $checked>" . h($admin->formatFieldValue($val, $field)) . '</label>';
 	}
 
-	return $return;
+	return $result;
 }
 
 /** Print edit input field
