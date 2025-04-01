@@ -194,7 +194,7 @@ echo "<tr><th>" . lang('Tables') . "<td>" . html_select('table_style', $table_st
 	. (support("trigger") ? checkbox("triggers", 1, $row["triggers"], lang('Triggers')) : "")
 ;
 
-echo "<tr><th>" . lang('Data') . "<td>" . html_select('data_style', $data_style, $row["data_style"]);
+echo " <tr><th>" . lang('Data') . "<td>" . html_select('data_style', $data_style, $row["data_style"]);
 
 echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $admin->getDumpOutputs(), $row["output"], false) . "\n"; // false = radio
 

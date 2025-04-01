@@ -245,10 +245,15 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				$key = $keys[$name];
 				$i--;
 				echo "<div>" . h($desc) . "<input type='hidden' name='where[$i][col]' value='" . h($name) . "'>:";
-				echo ($this->looksLikeBool($field)
-					? " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>"
-					: enum_input("checkbox", " name='where[$i][val][]'", $field, (array) ($where[$key]["val"] ?? []), ($field["null"] ? 0 : null))
-				);
+
+				if ($this->looksLikeBool($field)) {
+					echo " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>";
+				} else {
+					echo " <div class='labels'>";
+					echo enum_input("checkbox", " name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null));
+					echo "</div>";
+				}
+
 				echo "</div>\n";
 				unset($columns[$name]);
 			} elseif (is_array($options = $this->foreignKeyOptions($_GET["select"], $name))) {
@@ -486,9 +491,15 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	function editInput($table, $field, $attrs, $value, $function) {
 		if ($field["type"] == "enum") {
-			return (isset($_GET["select"]) ? "<label><input type='radio'$attrs value='-1' checked><i>" . lang('original') . "</i></label> " : "")
+			$result = "<div class='labels'>";
+
+			$result .= (isset($_GET["select"]) ? "<label><input type='radio'$attrs value='-1' checked><i>" . lang('original') . "</i></label> " : "")
 				. enum_input("radio", $attrs, $field, ($value || isset($_GET["select"]) ? $value : 0), ($field["null"] ? "" : null))
 			;
+
+			$result .= "</div>";
+
+			return $result;
 		}
 		$options = $this->foreignKeyOptions($table, $field["field"], $value);
 		if ($options !== null) {

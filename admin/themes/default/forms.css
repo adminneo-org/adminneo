@@ -95,19 +95,24 @@ select {
 label {
 	display: inline-block;
 	padding: 5px 0 3px;
-	margin-left: 10px;
 	cursor: pointer;
 	/* Firefox tuning to make labels height the same as buttons/inputs. */
 	line-height: 1.357;
 }
 
-label:first-child {
-	margin-left: 0;
-}
-
 label input[type="checkbox"], label input[type="radio"] {
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+.labels {
+	display: inline-flex;
+	flex-wrap: wrap;
+	column-gap: 0.5rem;
+}
+
+* + .labels, *:not(label) + label {
+	margin-inline-start: 0.3rem;
 }
 
 /* Note: pre.jush is used also as an input field for JSON column type. */
