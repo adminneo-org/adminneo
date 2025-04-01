@@ -1000,7 +1000,7 @@ function input($field, $value, $function) {
 	echo "<td class='function'>";
 
 	if ($field["type"] == "enum") {
-		echo h($functions[""]) . "<td>" . $admin->editInput($_GET["edit"], $field, $attrs, $value, $function);
+		echo h($functions[""]) . "<td>" . $admin->getFieldInput($_GET["edit"], $field, $attrs, $value, $function);
 	} else {
 		$has_function = (in_array($function, $functions) || isset($functions[$function]));
 		echo (count($functions) > 1
@@ -1009,7 +1009,7 @@ function input($field, $value, $function) {
 				. script("qsl('select').onchange = functionChange;", "")
 			: h(reset($functions))
 		) . '<td>';
-		$input = $admin->editInput($_GET["edit"], $field, $attrs, $value, $function); // usage in call is without a table
+		$input = $admin->getFieldInput($_GET["edit"], $field, $attrs, $value, $function); // usage in call is without a table
 		if ($input != "") {
 			echo $input;
 		} elseif (preg_match('~bool~', $field["type"])) {

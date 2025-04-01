@@ -849,26 +849,38 @@ class Admin extends AdminBase
 		return explode("/", $return);
 	}
 
-	/** Get options to display edit field
-	* @param string table name
-	* @param array single field from fields()
-	* @param string attributes to use inside the tag
-	* @param string
-	* @return string custom input field or empty string for default
-	*/
-	function editInput($table, $field, $attrs, $value, $function) {
+	/**
+	 * Customize input field.
+	 *
+	 * @param string $table Table name.
+	 * @param array $field Single field from fields().
+	 * @param string $attrs Attributes to use inside the tag.
+	 * @param string|bool|null $value Field value.
+	 * @param ?string $function Value modification function.
+	 *
+	 * @return string Custom input field or empty string for default.
+	 */
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string
+	{
 		if ($field["type"] == "enum") {
-			$result = "<div class='labels'>";
+			$result = "<span class='labels'>";
 
-			$result .=  (isset($_GET["select"]) ? "<label><input type='radio'$attrs value='-1' checked><i>" . lang('original') . "</i></label> " : "")
-				. ($field["null"] ? "<label><input type='radio'$attrs value=''" . ($value !== null || isset($_GET["select"]) ? "" : " checked") . "><i>NULL</i></label> " : "")
-				. enum_input("radio", $attrs, $field, $value, $value === 0 ? 0 : null) // 0 - empty value
-			;
+			if (isset($_GET["select"])) {
+				$result .= "<label><input type='radio' $attrs value='-1' checked><i>" . lang('original') . "</i></label> ";
+			}
+			if ($field["null"]) {
+				$checked = $value === null && !isset($_GET["select"]) ? "checked" : "";
 
-			$result .= "</div>";
+				$result .= "<label><input type='radio' $attrs value='' $checked><i>NULL</i></label> ";
+			}
+
+			// 0 - empty value
+			$result .= enum_input("radio", $attrs, $field, $value, $value === 0 ? 0 : null);
+			$result .= "</span>";
 
 			return $result;
 		}
+
 		return "";
 	}
 

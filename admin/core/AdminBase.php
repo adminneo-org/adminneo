@@ -375,7 +375,7 @@ abstract class AdminBase
 
 	public abstract function editFunctions($field);
 
-	public abstract function editInput($table, $field, $attrs, $value, $function);
+	public abstract function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string;
 
 	/**
 	 * Returns hint for edit field.

@@ -131,6 +131,8 @@ pre.jush {
 }
 
 .input-hint {
+	position: relative;
+	padding-left: 1.3em;
 	display: block;
 	margin-top: 3px;
 	color: var(--note-text);
@@ -138,6 +140,8 @@ pre.jush {
 
 .input-hint:before {
 	content: "↳ ";
+	position: absolute;
+	left: 0;
 }
 
 .button:focus-visible, .input:focus-visible, select:focus-visible, textarea:focus-visible, pre.jush:focus-visible {

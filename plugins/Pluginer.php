@@ -292,7 +292,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function editInput($table, $field, $attrs, $value, $function)
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

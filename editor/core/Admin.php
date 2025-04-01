@@ -249,9 +249,9 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				if ($this->looksLikeBool($field)) {
 					echo " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>";
 				} else {
-					echo " <div class='labels'>";
-					echo enum_input("checkbox", " name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null));
-					echo "</div>";
+					echo " <span class='labels'>";
+					echo enum_input("checkbox", "name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null));
+					echo "</span>";
 				}
 
 				echo "</div>\n";
@@ -489,48 +489,72 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return $return;
 	}
 
-	function editInput($table, $field, $attrs, $value, $function) {
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string
+	{
 		if ($field["type"] == "enum") {
-			$result = "<div class='labels'>";
+			$result = "<span class='labels'>";
 
-			$result .= (isset($_GET["select"]) ? "<label><input type='radio'$attrs value='-1' checked><i>" . lang('original') . "</i></label> " : "")
-				. enum_input("radio", $attrs, $field, ($value || isset($_GET["select"]) ? $value : 0), ($field["null"] ? "" : null))
-			;
+			if (isset($_GET["select"])) {
+				$result .= "<label><input type='radio' $attrs value='-1' checked><i>" . lang('original') . "</i></label> ";
+			}
 
-			$result .= "</div>";
+			if (!$value && !isset($_GET["select"])) {
+				$value = 0;
+			}
+
+			$result .= enum_input("radio", $attrs, $field, $value, $field["null"] ? "" : null);
+			$result .= "</span>";
 
 			return $result;
 		}
+
 		$options = $this->foreignKeyOptions($table, $field["field"], $value);
 		if ($options !== null) {
-			return (is_array($options)
-				? "<select$attrs>" . optionlist($options, $value, true) . "</select>"
-				: "<input value='" . h($value) . "'$attrs class='input hidden'>"
+			if (is_array($options)) {
+				$result = "<select $attrs>" . optionlist($options, $value, true) . "</select>";
+			} else {
+				$result = "<input $attrs value='" . h($value) . "' class='input hidden'>"
 					. "<input value='" . h($options) . "' class='input jsonly'>"
 					. "<div></div>"
-					. script("qsl('input').oninput = partial(whisper, '" . ME . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
-qsl('div').onclick = whisperClick;", "")
-			);
+					. script("
+						qsl('input').oninput = partial(whisper, '" . ME . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
+						qsl('div').onclick = whisperClick;
+					", "");
+			}
+
+			return $result;
 		}
+
 		if ($this->looksLikeBool($field)) {
-			return '<input type="checkbox" value="1"' . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? ' checked' : '') . "$attrs>";
+			$checked = preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? "checked" : "";
+
+			return "<input type='checkbox' $attrs value='1' $checked>";
 		}
-		$hint = "";
+
+		if (preg_match('~_(md5|sha1)$~i', $field["field"])) {
+			return "<input type='password' class='input' value='" . h($value) . "' $attrs>";
+		}
+
+		return "";
+	}
+
+	public function getEditHint(string $table, array $field, ?string $value): string
+	{
+		$hint =  parent::getEditHint($table, $field, $value);
+
+		$format = "";
 		if (preg_match('~time~', $field["type"])) {
-			$hint = lang('HH:MM:SS');
+			$format = lang('HH:MM:SS');
 		}
 		if (preg_match('~date|timestamp~', $field["type"])) {
-			$hint = lang('[yyyy]-mm-dd') . ($hint ? " [$hint]" : "");
+			$format = lang('YYYY-MM-DD') . ($format ? " [$format]" : "");
 		}
-		if ($hint) {
-			return "<input"
-				. ($function != "now" ? " value='" . h($value) . "'" : " data-last-value='" . h($value) . "'")
-				. "$attrs> ($hint)"; //! maxlength
+
+		if ($format) {
+			$hint .= ($hint != "" ? "<br>" : "") . $this->formatComment($format);
 		}
-		if (preg_match('~_(md5|sha1)$~i', $field["field"])) {
-			return "<input type='password' class='input' value='" . h($value) . "'$attrs>";
-		}
-		return '';
+
+		return $hint;
 	}
 
 	function processInput(?array $field, $value, $function = "") {

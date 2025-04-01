@@ -56,7 +56,7 @@ class TinyMcePlugin
 		<?php
 	}
 
-	public function editInput($table, $field, $attrs, $value)
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): ?string
 	{
 		if (str_contains($field["type"], "text") && str_contains($field["field"], "_html")) {
 			return "<textarea $attrs cols='50' rows='12' data-editor='tinymce' style='width: 800px; height: 600px;'>" . h($value) . "</textarea>";

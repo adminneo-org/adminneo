@@ -114,7 +114,7 @@ class JsonPreviewPlugin
 
 	}
 
-	public function editInput($table, array $field, $attrs, $value)
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): ?string
 	{
 		if (!$this->inEdit) {
 			return null;

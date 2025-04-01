@@ -9,8 +9,8 @@ namespace AdminNeo;
 * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
 */
 class EnumOptionPlugin {
-
-	function editInput($table, $field, $attrs, $value) {
+	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): ?string
+	{
 		if ($field["type"] == "enum") {
 			$options = [];
 			$selected = $value;
@@ -32,13 +32,15 @@ class EnumOptionPlugin {
 			preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
 			foreach ($matches[1] as $i => $val) {
 				$val = stripcslashes(str_replace("''", "'", $val));
-				$options[$i + 1] = $val;
+				$options[$i + 1] = admin()->formatFieldValue($val, $field);
 				if ($value === $val) {
 					$selected = $i + 1;
 				}
 			}
 			return "<select$attrs>" . optionlist($options, (string) $selected, 1) . "</select>"; // 1 - use keys
 		}
+
+		return null;
 	}
 
 }
