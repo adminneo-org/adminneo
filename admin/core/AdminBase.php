@@ -386,7 +386,7 @@ abstract class AdminBase
 	 *
 	 * @return string HTML code.
 	 */
-	public function getEditHint(string $table, array $field, ?string $value): string
+	public function getFieldInputHint(string $table, array $field, ?string $value): string
 	{
 		return support("comment") ? $this->formatComment($field["comment"]) : "";
 	}

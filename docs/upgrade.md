@@ -155,8 +155,8 @@ include "adminneo.php";
     - `fieldName()` -> `getFieldName()`
     - `tableStructurePrint()` -> `printTableStructure()`
     - `editInput()` -> `getFieldInput()`
+    - `editHint()` -> `getFieldInputHint()`
     - `editVal()` -> `formatFieldValue()`
-    - `editHint()` -> `getEditHint()`
     - `selectQuery()` -> `formatSelectQuery()`
     - `messageQuery()` -> `formatMessageQuery()`
     - `sqlCommandQuery()` -> `formatSqlCommandQuery()`

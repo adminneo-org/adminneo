@@ -538,9 +538,9 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return "";
 	}
 
-	public function getEditHint(string $table, array $field, ?string $value): string
+	public function getFieldInputHint(string $table, array $field, ?string $value): string
 	{
-		$hint =  parent::getEditHint($table, $field, $value);
+		$hint =  parent::getFieldInputHint($table, $field, $value);
 
 		$format = "";
 		if (preg_match('~time~', $field["type"])) {
