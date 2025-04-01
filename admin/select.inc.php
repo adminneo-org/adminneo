@@ -116,7 +116,8 @@ if ($_POST && !$error) {
 			$affected = 0;
 			$set = [];
 			if (!$_POST["delete"]) {
-				foreach ($_POST["fields"] as $name => $val) {
+				$sent_fields = array_keys($_POST["fields"] + $_POST["function"]);
+				foreach ($sent_fields as $name) {
 					$val = process_input($fields[$name]);
 					if ($val !== null && ($_POST["clone"] || $val !== false)) {
 						$set[idf_escape($name)] = ($val !== false ? $val : idf_escape($name));

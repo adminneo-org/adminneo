@@ -853,7 +853,7 @@ function functionChange() {
 	}
 
 	// Switch to the text field if function is selected.
-	if (func && input.type !== "file") {
+	if (func && func !== "NULL" && input.type !== "file") {
 		if (input.origType === undefined) {
 			input.origType = input.type;
 			input.origMaxLength = input.dataset.maxlength;
@@ -870,15 +870,23 @@ function functionChange() {
 
 	// Hide input value if it will be not used by selected function.
 	if (func === "NULL" || func === "now") {
-		if (input.value !== "") {
-			input.lastValue = input.value;
+		input.lastValue = input.value;
+
+		if (input.length) {
+			// Uncheck every single radio instead of input.value = "", because enum can contain empty string as a value.
+			for (let radio of input) {
+				radio.checked = false;
+			}
+		} else {
 			input.value = "";
 		}
 	} else if (input.lastValue) {
 		input.value = input.lastValue;
 	}
 
-	oninput({target: input});
+	if (!input.length) {
+		oninput({target: input});
+	}
 }
 
 /**
@@ -889,6 +897,10 @@ function functionChange() {
  */
 function skipOriginal(first) {
 	const fnSelect = this.previousSibling.firstChild;
+	if (!fnSelect) {
+		return;
+	}
+
 	const value = selectValue(fnSelect);
 
 	if (fnSelect.selectedIndex < first || value === "NULL" || value === "now") {

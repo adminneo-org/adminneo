@@ -14,18 +14,6 @@ class EnumOptionPlugin {
 		if ($field["type"] == "enum") {
 			$options = [];
 			$selected = $value;
-			if (isset($_GET["select"])) {
-				$options[-1] = lang('original');
-				if ($selected === null) {
-					$selected = -1;
-				}
-			}
-			if ($field["null"]) {
-				$options[""] = "NULL";
-				if ($selected === null) {
-					$selected = "";
-				}
-			}
 			preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
 			foreach ($matches[1] as $val) {
 				$val = stripcslashes(str_replace("''", "'", $val));

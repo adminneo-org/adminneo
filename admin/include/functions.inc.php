@@ -961,13 +961,21 @@ function enum_input(string $type, string $attrs, array $field, $value, ?string $
 	}
 
 	preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
+
 	foreach ($matches[1] as $val) {
+		// Do not display empty value from enum if additional empty option is set by $empty. This can happen in Editor
+		// because it uses value "" for nullable enum.
+		if ($empty === "" && $val === "") {
+			continue;
+		}
+
 		$val = stripcslashes(str_replace("''", "'", $val));
 
 		$checked = is_array($value) ? in_array($val, $value) : $value === $val;
 		$checked = $checked ? "checked" : "";
+		$formatted_value = $val === "" ? ("<i>" . lang('empty') . "</i>") : h($admin->formatFieldValue($val, $field));
 
-		$result .= " <label><input type='$type' $attrs value='" . h($val) . "' $checked>" . h($admin->formatFieldValue($val, $field)) . '</label>';
+		$result .= " <label><input type='$type' $attrs value='" . h($val) . "' $checked>$formatted_value</label>";
 	}
 
 	return $result;
@@ -991,10 +999,6 @@ function input($field, $value, $function) {
 		$function = null;
 	}
 
-	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + $admin->editFunctions($field);
-
-	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
-	$attrs = " name='fields[$name]' $disabled";
 	if (in_array($field["type"], (array) $structured_types[lang('User types')])) {
 		$enums = type_values($types[$field["type"]]);
 		if ($enums) {
@@ -1003,80 +1007,94 @@ function input($field, $value, $function) {
 		}
 	}
 
+	// Attributes.
+	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
+	$attrs = " name='fields[$name]' $disabled";
+
+	// Function list.
+	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + $admin->editFunctions($field);
+	$has_function = (in_array($function, $functions) || isset($functions[$function]));
+
 	echo "<td class='function'>";
 
-	if ($field["type"] == "enum") {
-		echo h($functions[""]) . "<td>" . $admin->getFieldInput($_GET["edit"], $field, $attrs, $value, $function);
-	} else {
-		$has_function = (in_array($function, $functions) || isset($functions[$function]));
-		echo (count($functions) > 1
-			? "<select name='function[$name]' $disabled>" . optionlist($functions, $function === null || $has_function ? $function : "") . "</select>"
-				. help_script_command("value.replace(/^SQL\$/, '')", true)
-				. script("qsl('select').onchange = functionChange;", "")
-			: h(reset($functions))
-		) . '<td>';
-		$input = $admin->getFieldInput($_GET["edit"], $field, $attrs, $value, $function); // usage in call is without a table
-		if ($input != "") {
-			echo $input;
-		} elseif (preg_match('~bool~', $field["type"])) {
-			echo "<input type='hidden'$attrs value='0'>" .
-				"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
-		} elseif ($field["type"] == "set") {
-			preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
-			foreach ($matches[1] as $i => $val) {
-				$val = stripcslashes(str_replace("''", "'", $val));
-				$checked = in_array($val, explode(",", $value), true);
-				echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . h($val) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->formatFieldValue($val, $field)) . '</label>';
-			}
-		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
-			echo "<input type='file' name='fields-$name'>";
-		} elseif ($json_type) {
-			echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
-		} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
-			if ($text && $jush != "sqlite") {
-				$attrs .= " cols='50' rows='12'";
-			} else {
-				$rows = min(12, substr_count($value, "\n") + 1);
-				$attrs .= " cols='30' rows='$rows'";
-			}
-			echo "<textarea$attrs>" . h($value) . '</textarea>';
-		} else {
-			// int(3) is only a display hint
-			$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)
-				? ((preg_match("~binary~", $field["type"]) ? 2 : 1) * $match[1] + ($match[3] ? 1 : 0) + ($match[2] && !$field["unsigned"] ? 1 : 0))
-				: ($types && $types[$field["type"]] ? $types[$field["type"]] + ($field["unsigned"] ? 0 : 1) : 0);
-			if ($jush == 'sql' && min_version(5.6) && preg_match('~time~', $field["type"])) {
-				$maxlength += 7; // microtime
-			}
-			// type='date' and type='time' display localized value which may be confusing, type='datetime' uses 'T' as date and time separator
-			echo "<input class='input'"
-				. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[\]~', $field["full_type"]) ? " type='number'" : "")
-				. ($function != "now" ? " value='" . h($value) . "'" : " data-last-value='" . h($value) . "'")
-				. ($maxlength ? " data-maxlength='$maxlength'" : "")
-				. (preg_match('~char|binary~', $field["type"]) && $maxlength > 20 ? " size='40'" : "")
-				. "$attrs>"
-			;
-		}
-		$hint = $admin->getFieldInputHint($_GET["edit"], $field, $value);
-		if ($hint != "") {
-			echo " <span class='input-hint'>$hint</span>";
-		}
+	if (count($functions) > 1) {
+		$selected = $function === null || $has_function ? $function : "";
+		echo "<select name='function[$name]' $disabled>" . optionlist($functions, $selected) . "</select>";
 
-		// skip 'original'
-		$first = 0;
-		foreach ($functions as $key => $val) {
-			if ($key === "" || !$val) {
-				break;
-			}
-			$first++;
-		}
-		echo script("mixin(qsl('td'), {onchange: partial(skipOriginal, $first), oninput: function () { this.onchange(); }});");
+		echo help_script_command("value.replace(/^SQL\$/, '')", true);
+		echo script("qsl('select').onchange = functionChange;", "");
+	} else {
+		echo h(reset($functions));
 	}
+
+	echo "</td><td>";
+
+	// Input field.
+	$input = $admin->getFieldInput($_GET["edit"], $field, $attrs, $value, $function);
+
+	if ($input != "") {
+		echo $input;
+	} elseif (preg_match('~bool~', $field["type"])) {
+		echo "<input type='hidden'$attrs value='0'>" .
+			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
+	} elseif ($field["type"] == "set") {
+		preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
+		foreach ($matches[1] as $i => $val) {
+			$val = stripcslashes(str_replace("''", "'", $val));
+			$checked = in_array($val, explode(",", $value), true);
+			echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . h($val) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->formatFieldValue($val, $field)) . '</label>';
+		}
+	} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
+		echo "<input type='file' name='fields-$name'>";
+	} elseif ($json_type) {
+		echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
+	} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
+		if ($text && $jush != "sqlite") {
+			$attrs .= " cols='50' rows='12'";
+		} else {
+			$rows = min(12, substr_count($value, "\n") + 1);
+			$attrs .= " cols='30' rows='$rows'";
+		}
+		echo "<textarea$attrs>" . h($value) . '</textarea>';
+	} else {
+		// int(3) is only a display hint
+		$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)
+			? ((preg_match("~binary~", $field["type"]) ? 2 : 1) * $match[1] + ($match[3] ? 1 : 0) + ($match[2] && !$field["unsigned"] ? 1 : 0))
+			: ($types && $types[$field["type"]] ? $types[$field["type"]] + ($field["unsigned"] ? 0 : 1) : 0);
+		if ($jush == 'sql' && min_version(5.6) && preg_match('~time~', $field["type"])) {
+			$maxlength += 7; // microtime
+		}
+		// type='date' and type='time' display localized value which may be confusing, type='datetime' uses 'T' as date and time separator
+		echo "<input class='input'"
+			. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[\]~', $field["full_type"]) ? " type='number'" : "")
+			. ($function != "now" ? " value='" . h($value) . "'" : " data-last-value='" . h($value) . "'")
+			. ($maxlength ? " data-maxlength='$maxlength'" : "")
+			. (preg_match('~char|binary~', $field["type"]) && $maxlength > 20 ? " size='40'" : "")
+			. "$attrs>"
+		;
+	}
+
+	// Hint.
+	$hint = $admin->getFieldInputHint($_GET["edit"], $field, $value);
+	if ($hint != "") {
+		echo " <span class='input-hint'>$hint</span>";
+	}
+
+	// Change scripts.
+	$first_function = 0;
+	foreach ($functions as $key => $val) {
+		if ($key === "" || !$val) {
+			break;
+		}
+		$first_function++;
+	}
+
+	echo script("mixin(qsl('td'), {onchange: partial(skipOriginal, $first_function), oninput: function () { this.onchange(); }});");
 }
 
 /** Process edit input field
 * @param array $field one field from fields()
-* @return string|array|false False to leave the original value
+* @return string|array|false|null False to leave the original value (copy original while cloning), null to skip the column
 */
 function process_input($field) {
 	global $admin, $driver;
@@ -1087,15 +1105,9 @@ function process_input($field) {
 
 	$idf = bracket_escape($field["field"]);
 	$function = $_POST["function"][$idf] ?? "";
-	$value = $_POST["fields"][$idf];
-	if ($field["type"] == "enum") {
-		if ($value == -1) {
-			return false;
-		}
-		if ($value == "") {
-			return "NULL";
-		}
-	}
+	// Value can miss if strict mode is turned off and enum field has no value.
+	$value = $_POST["fields"][$idf] ?? "";
+
 	if ($field["auto_increment"] && $value == "") {
 		return null;
 	}

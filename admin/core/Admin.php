@@ -839,7 +839,7 @@ class Admin extends AdminBase
 					}
 				}
 			}
-			if ($key && !preg_match('~set|blob|bytea|raw|file|bool~', $field["type"])) {
+			if ($key && !preg_match('~enum|set|blob|bytea|raw|file|bool~', $field["type"])) {
 				$return .= "/SQL";
 			}
 		}
@@ -864,16 +864,6 @@ class Admin extends AdminBase
 	{
 		if ($field["type"] == "enum") {
 			$result = "<span class='labels'>";
-
-			if (isset($_GET["select"])) {
-				$result .= "<label><input type='radio' $attrs value='-1' checked><i>" . lang('original') . "</i></label> ";
-			}
-			if ($field["null"]) {
-				$checked = $value === null && !isset($_GET["select"]) ? "checked" : "";
-
-				$result .= "<label><input type='radio' $attrs value='' $checked><i>NULL</i></label> ";
-			}
-
 			// 0 - empty value
 			$result .= enum_input("radio", $attrs, $field, $value, $value === 0 ? 0 : null);
 			$result .= "</span>";

@@ -494,10 +494,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		if ($field["type"] == "enum") {
 			$result = "<span class='labels'>";
 
-			if (isset($_GET["select"])) {
-				$result .= "<label><input type='radio' $attrs value='-1' checked><i>" . lang('original') . "</i></label> ";
-			}
-
 			if (!$value && !isset($_GET["select"])) {
 				$value = "";
 			}
