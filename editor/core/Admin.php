@@ -531,10 +531,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			return "<input type='checkbox' $attrs value='1' $checked>";
 		}
 
-		if (preg_match('~_(md5|sha1)$~i', $field["field"])) {
-			return "<input type='password' class='input' value='" . h($value) . "' $attrs>";
-		}
-
 		return "";
 	}
 
