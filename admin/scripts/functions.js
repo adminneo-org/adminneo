@@ -844,13 +844,10 @@ function editingKeydown(event) {
  * @this HTMLSelectElement
  */
 function functionChange() {
-	const input = this.form[this.name.replace(/^function/, 'fields')];
 	const func = selectValue(this);
 
-	// Undefined with the set data type.
-	if (!input) {
-		return;
-	}
+	const inputName = this.name.replace(/^function/, 'fields');
+	const input = this.form[inputName] || this.form[`${inputName}[]`];
 
 	// Switch to the text field if function is selected.
 	if (func && func !== "NULL" && input.type !== "file") {
@@ -870,18 +867,35 @@ function functionChange() {
 
 	// Hide input value if it will be not used by selected function.
 	if (func === "NULL" || func === "now") {
-		input.lastValue = input.value;
-
 		if (input.length) {
-			// Uncheck every single radio instead of input.value = "", because enum can contain empty string as a value.
-			for (let radio of input) {
+			// Uncheck every single radio/checkbox.
+			let checkedList = [];
+			for (let i = 0; i < input.length; i++) {
+				const radio = input[i];
+
+				if (!radio.checked) continue;
+
+				checkedList.push(i);
 				radio.checked = false;
+
+				if (radio.type === "radio") {
+					break;
+				}
 			}
+
+			input.lastValue = checkedList;
 		} else {
+			input.lastValue = input.value;
 			input.value = "";
 		}
 	} else if (input.lastValue) {
-		input.value = input.lastValue;
+		if (input.length) {
+			for (let index of input.lastValue) {
+				input[index].checked = true;
+			}
+		} else {
+			input.value = input.lastValue;
+		}
 	}
 
 	if (!input.length) {

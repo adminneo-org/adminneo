@@ -1039,11 +1039,19 @@ function input($field, $value, $function) {
 			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
 	} elseif ($field["type"] == "set") {
 		preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
-		foreach ($matches[1] as $i => $val) {
+
+		echo "<span class='labels'>";
+
+		foreach ($matches[1] as $val) {
 			$val = stripcslashes(str_replace("''", "'", $val));
-			$checked = in_array($val, explode(",", $value), true);
-			echo " <label><input type='checkbox' name='fields[$name][$i]' value='" . h($val) . "'" . ($checked ? ' checked' : '') . ">" . h($admin->formatFieldValue($val, $field)) . '</label>';
+			$checked = $value !== null && in_array($val, explode(",", $value), true);
+			$checked = $checked ? "checked" : "";
+			$formatted_value = $val === "" ? ("<i>" . lang('empty') . "</i>") : h($admin->formatFieldValue($val, $field));
+
+			echo " <label><input type='checkbox' name='fields[$name][]' value='" . h($val) . "' $checked>$formatted_value</label>";
 		}
+
+		echo "</span>";
 	} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
 		echo "<input type='file' name='fields-$name'>";
 	} elseif ($json_type) {
