@@ -695,13 +695,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return $return;
 	}
 
-	/**
-	 * @return bool
-	 */
-	function is_strict_mode() {
-		return false;
-	}
-
 	function convert_field($field) {
 	}
 

@@ -752,13 +752,6 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	/**
-	 * @return bool
-	 */
-	function is_strict_mode() {
-		return false;
-	}
-
 	function show_status() {
 		$return = [];
 		foreach (get_vals("PRAGMA compile_options") as $option) {

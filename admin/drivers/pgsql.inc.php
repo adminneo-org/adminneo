@@ -920,13 +920,6 @@ AND typelem = 0"
 		return get_key_vals("SHOW ALL");
 	}
 
-	/**
-	 * @return bool
-	 */
-	function is_strict_mode() {
-		return false;
-	}
-
 	function process_list() {
 		return get_rows("SELECT * FROM pg_stat_activity ORDER BY " . (min_version(9.2) ? "pid" : "procpid"));
 	}

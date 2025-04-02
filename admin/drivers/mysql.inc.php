@@ -959,19 +959,6 @@ if (isset($_GET["mysql"])) {
 		return get_key_vals("SHOW VARIABLES");
 	}
 
-	/**
-	 * @return bool
-	 */
-	function is_strict_mode() {
-		static $strictMode = null;
-
-		if ($strictMode === null) {
-			$strictMode = (bool)preg_match('~STRICT_(TRANS|ALL)_TABLES~', get_key_vals("SHOW VARIABLES LIKE 'sql_mode'")["sql_mode"]);
-		}
-
-		return $strictMode;
-	}
-
 	/** Get process list
 	* @return array [$row]
 	*/
