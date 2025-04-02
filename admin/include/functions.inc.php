@@ -947,22 +947,38 @@ function column_foreign_keys($table) {
 /**
  * Returns input options for enum values.
  *
- * @param string $type "radio" or "checkbox"
  * @param string|array $value
  */
-function enum_input(string $type, string $attrs, array $field, $value, ?string $empty = null): string
+function enum_input(string $attrs, array $field, $value, ?string $empty = null, bool $checkboxes = false): string
 {
 	global $admin;
 
-	$result = "";
-	if ($empty !== null) {
-		$checked = (is_array($value) ? in_array($empty, $value) : $value === $empty) ? "checked" : "";
-		$result .= "<label><input type='$type' $attrs value='$empty' $checked><i>" . lang('empty') . "</i></label>";
+	preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
+	$values = $matches[1];
+
+	$threshold = $admin->getConfig()->getEnumAsSelectThreshold();
+	$select = !$checkboxes && $threshold !== null && count($values) > $threshold;
+	$type = $checkboxes ? "checkbox" : "radio";
+	$active_param = $select ? "selected" : "checked";
+
+	$result = $select ? "<select $attrs>" : "<span class='labels'>";
+
+	if ($select && $field["null"] && $empty !== "") {
+		$checked = $value === null ? $active_param : "";
+		$result .= "<option value='__adminneo_empty__' disabled $checked></option>";
 	}
 
-	preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
+	if ($empty !== null) {
+		$checked = (is_array($value) ? in_array($empty, $value) : $value === $empty) ? $active_param : "";
 
-	foreach ($matches[1] as $val) {
+		if ($select) {
+			$result .= "<option value='$empty' $checked>" . lang('empty') . "</option>";
+		} else {
+			$result .= "<label><input type='$type' $attrs value='$empty' $checked><i>" . lang('empty') . "</i></label>";
+		}
+	}
+
+	foreach ($values as $val) {
 		// Do not display empty value from enum if additional empty option is set by $empty. This can happen in Editor
 		// because it uses value "" for nullable enum.
 		if ($empty === "" && $val === "") {
@@ -972,11 +988,17 @@ function enum_input(string $type, string $attrs, array $field, $value, ?string $
 		$val = stripcslashes(str_replace("''", "'", $val));
 
 		$checked = is_array($value) ? in_array($val, $value) : $value === $val;
-		$checked = $checked ? "checked" : "";
+		$checked = $checked ? $active_param : "";
 		$formatted_value = $val === "" ? ("<i>" . lang('empty') . "</i>") : h($admin->formatFieldValue($val, $field));
 
-		$result .= " <label><input type='$type' $attrs value='" . h($val) . "' $checked>$formatted_value</label>";
+		if ($select) {
+			$result .= "<option value='" . h($val) . "' $checked>$formatted_value</option>";
+		} else {
+			$result .= " <label><input type='$type' $attrs value='" . h($val) . "' $checked>$formatted_value</label>";
+		}
 	}
+
+	$result .= $select ? "</select>" : "</span>";
 
 	return $result;
 }
@@ -1037,6 +1059,8 @@ function input($field, $value, $function) {
 	} elseif (preg_match('~bool~', $field["type"])) {
 		echo "<input type='hidden'$attrs value='0'>" .
 			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
+	} elseif ($field["type"] == "enum") {
+		echo enum_input($attrs, $field, $value);
 	} elseif ($field["type"] == "set") {
 		preg_match_all("~'((?:[^']|'')*)'~", $field["length"], $matches);
 

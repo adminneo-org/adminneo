@@ -862,15 +862,6 @@ class Admin extends AdminBase
 	 */
 	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string
 	{
-		if ($field["type"] == "enum") {
-			$result = "<span class='labels'>";
-			// 0 - empty value
-			$result .= enum_input("radio", $attrs, $field, $value, $value === 0 ? 0 : null);
-			$result .= "</span>";
-
-			return $result;
-		}
-
 		return "";
 	}
 

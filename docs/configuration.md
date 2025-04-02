@@ -89,6 +89,14 @@ highlighting.
 Whether to automatically format JSON values while editing. JSON values will be pretty-formatted in edit fields and
 minified before writing to database.
 
+### enumAsSelectThreshold
+
+- Default value: `5`
+- Available in EditorNeo: YES
+
+Threshold for displaying `<select>` for `enum` fields instead of radio list in edit form. If number of enum values is 
+greater than this threshold, select will be used. Set `null` to disable the threshold.
+
 ### recordsPerPage
 
 - Default value: `50`

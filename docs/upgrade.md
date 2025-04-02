@@ -70,6 +70,9 @@ include "adminneo.php";
 - Plugin `AdminerLoginSsl` (login-ssl.php) was removed. SSL options can be defined by `ssl*` configuration options.
   See [Configuration options](/docs/configuration.md) for more information.
 
+- Plugins `AdminerEnumOption` (enum-option.php) was removed. Displaying `<select>` for enum fields can be set by
+  `enumAsSelectThreshold` configuration option.
+
 - Plugin `AdminerStructComments` (struct-comments.php) was removed. Comments are displayed on more places by default.
 
 - Plugin `AdminerPrettyJsonColumn` (pretty-json-column.php) was removed. JSON values can be formatted automatically by
@@ -122,7 +125,6 @@ include "adminneo.php";
     - `AdminerEditForeign` to `ForeignEditPlugin`
     - `AdminerEditTextarea` to `EditTextareaPlugin`
     - `AdminerEmailTable` to `EmailTablePlugin`
-    - `AdminerEnumOption` to `EnumOptionPlugin`
     - `AdminerFileUpload` to `FileUploadPlugin`
     - `AdminerForeignSystem` to `SystemForeignKeysPlugin`
     - `AdminerFrames` to `FrameSupportPlugin`

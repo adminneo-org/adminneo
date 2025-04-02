@@ -865,9 +865,12 @@ function functionChange() {
 		}
 	}
 
-	// Hide input value if it will be not used by selected function.
 	if (func === "NULL" || func === "now") {
-		if (input.length) {
+		// Hide input value if it will be not used by selected function.
+		if (input.type === "select-one") {
+			input.lastValue = input.value;
+			input.value = "__adminneo_empty__";
+		} else if (input.length) {
 			// Uncheck every single radio/checkbox.
 			let checkedList = [];
 			for (let i = 0; i < input.length; i++) {
@@ -889,12 +892,22 @@ function functionChange() {
 			input.value = "";
 		}
 	} else if (input.lastValue) {
-		if (input.length) {
+		// Restore last value.
+		if (input.type !== "select-one" && input.length) {
 			for (let index of input.lastValue) {
 				input[index].checked = true;
 			}
 		} else {
 			input.value = input.lastValue;
+		}
+	} else {
+		// Set the first available value.
+		if (input.type === "select-one") {
+			if (input.options[0].value === "__adminneo_empty__") {
+				input.value = input.options[1].value;
+			}
+		} else if (input.length && input[0].type === "radio") {
+			input[0].checked = true;
 		}
 	}
 

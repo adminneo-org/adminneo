@@ -249,9 +249,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				if ($this->looksLikeBool($field)) {
 					echo " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>";
 				} else {
-					echo " <span class='labels'>";
-					echo enum_input("checkbox", "name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null));
-					echo "</span>";
+					echo " ", enum_input("name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null), true);
 				}
 
 				echo "</div>\n";
@@ -492,16 +490,11 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): string
 	{
 		if ($field["type"] == "enum") {
-			$result = "<span class='labels'>";
-
 			if (!$value && !isset($_GET["select"])) {
 				$value = "";
 			}
 
-			$result .= enum_input("radio", $attrs, $field, $value, $field["null"] ? "" : null);
-			$result .= "</span>";
-
-			return $result;
+			return enum_input($attrs, $field, $value, $field["null"] ? "" : null);
 		}
 
 		$options = $this->foreignKeyOptions($table, $field["field"], $value);

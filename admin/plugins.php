@@ -1,7 +1,6 @@
 <?php
 
 use AdminNeo\Bz2OutputPlugin;
-use AdminNeo\EnumOptionPlugin;
 use AdminNeo\FileUploadPlugin;
 use AdminNeo\ForeignEditPlugin;
 use AdminNeo\FrameSupportPlugin;
@@ -32,7 +31,6 @@ function create_adminneo(): Pluginer
 		new JsonPreviewPlugin(),
 		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
-		new EnumOptionPlugin(),
 		new ForeignEditPlugin(),
 		new SlugifyEditPlugin(),
 		new FrameSupportPlugin(),

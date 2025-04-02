@@ -147,6 +147,7 @@ For detailed information see [Configuration documentation](/docs/configuration.m
 | `preferSelection`           | `false`   | no     | Whether data selection is the primary action for all table links.                                                                                   |
 | `jsonValuesDetection`       | `false`   | no     | Whether to detect JSON objects and arrays in text columns.                                                                                          |
 | `jsonValuesAutoFormat`      | `false`   | no     | Whether to automatically format JSON values while editing.                                                                                          |
+| `enumAsSelectThreshold`     | `5`       | YES    | Threshold for displaying `<select>` for `enum` fields instead of radio list in edit form.                                                           |
 | `recordsPerPage`            | `50`      | YES    | Number of selected records per one page.                                                                                                            |
 | `versionVerification`       | `true`    | YES    | Whether verification of the new AdminNeo's version is enabled.                                                                                      |
 | `hiddenDatabases`           | `[]`      | no     | List of databases to hide from the UI. Value `__system` will be expanded to all system databases. Access to these databases will be not restricted. |
