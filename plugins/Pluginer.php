@@ -187,7 +187,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function selectLink($val, $field)
+	public function getFieldValueLink($val, ?array $field): ?string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

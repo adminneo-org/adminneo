@@ -153,9 +153,10 @@ include "adminneo.php";
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`
+    - `tableStructurePrint()` -> `printTableStructure()`
     - `tableName()` -> `getTableName()`
     - `fieldName()` -> `getFieldName()`
-    - `tableStructurePrint()` -> `printTableStructure()`
+    - `selectLink()` -> `getFieldValueLink()`
     - `editInput()` -> `getFieldInput()`
     - `editHint()` -> `getFieldInputHint()`
     - `editVal()` -> `formatFieldValue()`

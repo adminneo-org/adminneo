@@ -317,7 +317,23 @@ abstract class AdminBase
 
 	public abstract function rowDescriptions($rows, $foreignKeys);
 
-	public abstract function selectLink($val, $field);
+	/**
+	 * Returns a link to use in select table.
+	 *
+	 * @param string|int|null $val Raw value of the field.
+	 * @param ?array $field Single field returned from fields(). Null for aggregated field.
+	 */
+	public function getFieldValueLink($val, ?array $field): ?string
+	{
+		if (is_mail($val)) {
+			return "mailto:$val";
+		}
+		if (is_web_url($val)) {
+			return $val;
+		}
+
+		return null;
+	}
 
 	public abstract function selectVal($val, $link, $field, $original);
 

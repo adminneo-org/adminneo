@@ -1398,15 +1398,7 @@ function select_value($val, $link, $field, $text_length) {
 		return "<table>$return</table>";
 	}
 	if (!$link) {
-		$link = $admin->selectLink($val, $field);
-	}
-	if ($link === null) {
-		if (is_mail($val)) {
-			$link = "mailto:$val";
-		}
-		if (is_web_url($val)) {
-			$link = $val; // IE 11 and all modern browsers hide referrer
-		}
+		$link = $admin->getFieldValueLink($val, $field);
 	}
 	$return = $field ? $admin->formatFieldValue($val, $field) : $val;
 	if ($return !== null) {

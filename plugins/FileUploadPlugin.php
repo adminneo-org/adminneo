@@ -40,9 +40,9 @@ class FileUploadPlugin
 		$this->extensions = $extensions;
 	}
 
-	public function selectLink($val, $field)
+	public function getFieldValueLink($val, ?array $field): ?string
 	{
-		if ($val == "" || !($shortFieldName = $this->matchField($field))) {
+		if ($val == "" || !$field || !($shortFieldName = $this->matchField($field))) {
 			return null;
 		}
 
