@@ -76,7 +76,7 @@ img {
 }
 
 ol, ul {
-	margin: 0;
+	margin: 15px 20px;
 	padding: 0;
 	list-style: none;
 }

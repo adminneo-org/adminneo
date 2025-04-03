@@ -6,6 +6,10 @@
 	column-gap: 20px;
 }
 
+ul.links {
+	flex-direction: column;
+}
+
 .links a {
 	padding: 0;
 	white-space: nowrap;

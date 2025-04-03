@@ -103,11 +103,12 @@ if ($admin->homepage()) {
 					echo doc_link(['sql' => 'regexp.html', 'pgsql' => 'functions-matching.html#FUNCTIONS-POSIX-REGEXP', 'elastic' => "regexp-syntax.html"]) . "</p>\n";
 				}
 				echo "</div></fieldset>\n";
+				echo "</div>\n";
+
 				if ($_POST["search"] && $_POST["query"] != "") {
 					$_GET["where"][0]["op"] = $admin->getRegexpOperator() && !empty($_POST['regexp']) ? $admin->getRegexpOperator() : $admin->getLikeOperator();
 					search_tables();
 				}
-				echo "</div>\n";
 			}
 
 			echo "<div class='scrollable'>\n";

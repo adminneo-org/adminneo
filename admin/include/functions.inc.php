@@ -1194,27 +1194,49 @@ function fields_from_edit() {
 	return $return;
 }
 
-/** Print results of search in all tables
-* @uses $_GET["where"][0]
-* @uses $_POST["tables"]
-* @return null
-*/
-function search_tables() {
+/**
+ * Search in tables and prints links to tables containing searched expression.
+ *
+ * @uses $_GET["where"][0]
+ * @uses $_POST["tables"]
+ */
+function search_tables(): void
+{
 	global $admin, $connection;
+
 	$_GET["where"][0]["val"] = $_POST["query"];
-	$sep = "<ul>\n";
-	foreach (table_status('', true) as $table => $table_status) {
-		$name = $admin->getTableName($table_status);
-		if (isset($table_status["Engine"]) && $name != "" && (!$_POST["tables"] || in_array($table, $_POST["tables"]))) {
-			$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", $admin->selectSearchProcess(fields($table), [])), 1));
-			if (!$result || $result->fetch_row()) {
-				$print = "<a href='" . h(ME . "select=" . urlencode($table) . "&where[0][op]=" . urlencode($_GET["where"][0]["op"]) . "&where[0][val]=" . urlencode($_GET["where"][0]["val"])) . "'>$name</a>";
-				echo "$sep<li>" . ($result ? $print : "<p class='error'>$print: " . error()) . "\n";
-				$sep = "";
-			}
+
+	$results = $errors = [];
+
+	foreach (table_status("", true) as $table => $table_status) {
+		$table_name = $admin->getTableName($table_status);
+
+		if (!isset($table_status["Engine"]) || $table_name == "" || ($_POST["tables"] && !in_array($table, $_POST["tables"]))) {
+			continue;
+		}
+
+		$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", $admin->selectSearchProcess(fields($table), [])), 1));
+		if ($result && !$result->fetch_row()) {
+			continue;
+		}
+
+		$link = h(ME . "select=" . urlencode($table) . "&where[0][op]=" . urlencode($_GET["where"][0]["op"]) . "&where[0][val]=" . urlencode($_GET["where"][0]["val"]));
+		if ($result) {
+			$results[] = "<li><a href='$link'>" . icon("search") . "$table_name</a></li>";
+		} else {
+			$errors[] = "<div class='error'><a href='$link'>$table_name</a>: " . error() . "</div>";
 		}
 	}
-	echo ($sep ? "<p class='message'>" . lang('No tables.') : "</ul>") . "\n";
+
+	if ($results) {
+		echo "<ul class='links'>\n", implode("\n", $results), "</ul>\n";
+	}
+	if ($errors) {
+		echo implode("\n", $errors), "\n";
+	}
+	if (!$results && !$errors) {
+		echo "<p class='message'>" . lang('No tables.') . "</p>\n";
+	}
 }
 
 /**
