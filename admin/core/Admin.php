@@ -67,6 +67,7 @@ class Admin extends Origin
 
 		echo script_src(link_files("jush.js", [
 			"../vendor/vrana/jush/modules/jush.js",
+			"../vendor/vrana/jush/modules/jush-autocomplete-sql.js",
 			"../vendor/vrana/jush/modules/jush-textarea.js",
 			"../vendor/vrana/jush/modules/jush-sql.js",
 			"../vendor/vrana/jush/modules/jush-pgsql.js",
@@ -1181,24 +1182,32 @@ class Admin extends Origin
 
 			// Syntax highlighting.
 			if (support("sql") || DIALECT == "elastic") {
-				?>
-				<script<?php echo nonce(); ?>>
-					<?php
-					if (support("sql") && $tables) {
-						$links = [];
-						foreach ($tables as $table => $type) {
-							$links[] = preg_quote($table, '/');
-						}
-						echo "var jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
-						foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
-							echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
+				echo "<script" . nonce() . ">\n";
+				if (support("sql") && $tables) {
+					$links = [];
+					foreach ($tables as $table => $type) {
+						$links[] = preg_quote($table, '/');
+					}
+					echo "var jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
+						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
+					}
+				}
+
+				if (DIALECT != "elastic" && (isset($_GET["sql"]) || isset($_GET["trigger"]) || isset($_GET["check"]))) {
+					$tablesColumns = array_fill_keys(array_keys($tables), []);
+					foreach (Driver::get()->getAllFields() as $table => $fields) {
+						foreach ($fields as $field) {
+							$tablesColumns[$table][] = $field["field"];
 						}
 					}
-					?>
-					initSyntaxHighlighting('<?php echo preg_replace('~^(\d\.?\d).*~s', '\1', Connection::get()->getServerInfo()); ?>'<?php echo(Connection::get()->isMariaDB() ? ", true" : ""); ?>);
-				</script>
-				<?php
+					echo "autocompleter = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . ");\n";
+				}
+
+				echo "</script>\n";
 			}
+
+			echo script("initSyntaxHighlighting('" . preg_replace('~^(\d\.?\d).*~s', '\1', Connection::get()->getServerInfo()) . "'" . (Connection::get()->isMariaDB() ? ", true" : "") . ");");
 		}
 	}
 
