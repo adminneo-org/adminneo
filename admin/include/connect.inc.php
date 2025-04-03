@@ -46,7 +46,7 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 			}
 		}
 		if ($links_html) {
-			echo "<p id='top-links' class='links'>$links_html</p>\n";
+			echo "<p class='links top-links'>$links_html</p>\n";
 		}
 
 		echo "<p>" . lang('%s version: %s through PHP extension %s', $drivers[DRIVER], "<b>" . h($connection->server_info) . "</b>", "<b>$connection->extension</b>") . "\n";

@@ -84,7 +84,7 @@ class Admin extends AdminBase
 	function selectLinks($tableStatus, $set = "") {
 		$TABLE = $tableStatus["Name"];
 		if ($set !== null) {
-			echo '<p class="tabs"><a href="', h(ME . 'edit=' . urlencode($TABLE) . $set), '">', icon("item-add"), lang('New item'), "</a>\n";
+			echo '<p class="links top-links"><a href="', h(ME . 'edit=' . urlencode($TABLE) . $set), '">', icon("item-add"), lang('New item'), "</a>\n";
 		}
 	}
 

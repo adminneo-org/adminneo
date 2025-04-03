@@ -159,7 +159,7 @@ class Admin extends AdminBase
 	function selectLinks($tableStatus, $set = "") {
 		global $jush, $driver;
 
-		echo '<p id="top-links" class="links">';
+		echo '<p class="links top-tabs">';
 
 		$links = [];
 
@@ -1094,7 +1094,7 @@ class Admin extends AdminBase
 	 * @return bool Whether to print default homepage.
 	 */
 	function homepage() {
-		echo "<p id='top-links' class='links'>\n";
+		echo "<p class='links top-links'>\n";
 
 		$ns = $_GET["ns"] ?? null;
 
