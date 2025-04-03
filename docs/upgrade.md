@@ -47,7 +47,9 @@ include "adminneo.php";
 - Autoloading of plugins based on the class name was removed. All plugins have to be created in custom index.php file.
 
 - EditorNeo no longer use comments instead of table and field names. Plugin `TranslationPlugin` can be used to display
-  custom localised names.
+  custom localized names.
+
+- EditorNeo no longer support sending mass e-mails. 
 
 ### Plugins
 
@@ -116,6 +118,7 @@ include "adminneo.php";
 - Plugin `AdminerDumpDate` (dump-date.php) was removed. Datetime is part of the filename by default.
 - Plugin `AdminerWymeditor` (wymeditor.php) was removed without a replacement.
 - Plugin `AdminerMasterSlave` (master-slave.php) was removed without a replacement.
+- Plugin `AdminerEmailTable` (email-table.php) was removed without a replacement.
 
 - All remaining plugins were renamed:
     - `AdminerDumpBz2` to `Bz2OutputPlugin`
@@ -124,7 +127,6 @@ include "adminneo.php";
     - `AdminerDumpXml` to `XmlDumpPlugin`
     - `AdminerEditForeign` to `ForeignEditPlugin`
     - `AdminerEditTextarea` to `EditTextareaPlugin`
-    - `AdminerEmailTable` to `EmailTablePlugin`
     - `AdminerFileUpload` to `FileUploadPlugin`
     - `AdminerForeignSystem` to `SystemForeignKeysPlugin`
     - `AdminerFrames` to `FrameSupportPlugin`
@@ -143,8 +145,11 @@ include "adminneo.php";
   [Configuration options](/docs/configuration.md) for more information.
 - Function `csp()` was replaced by `getCspHeader()` that allows to redefine CSP directives of just one 
   Content-Security-Policy HTTP header.
-- Function `dumpFilename()` was removed.
-- Many customizable functions was renamed:
+- Removed customizable functions:
+    - `dumpFilename()`
+    - `selectEmailPrint()`
+    - `selectEmailProcess()`
+- Renamed customizable functions:
     - `credentials()` to `getCredentials()`
     - `login()` -> `authenticate()`
     - `serverName()` -> `getServerName()`

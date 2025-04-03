@@ -257,11 +257,6 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function selectEmailPrint($emailFields, $columns)
-	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
-	}
-
 	public function selectColumnsProcess($columns, $indexes)
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
@@ -283,11 +278,6 @@ class Pluginer extends Admin
 	}
 
 	public function selectLengthProcess()
-	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
-	}
-
-	public function selectEmailProcess($where, $foreignKeys)
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

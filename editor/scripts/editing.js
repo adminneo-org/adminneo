@@ -51,13 +51,3 @@ function whisperClick(event) {
 		return false;
 	}
 }
-
-/** Add new attachment field
-* @this HTMLInputElement
-*/
-function emailFileChange() {
-	var el = this.cloneNode(true);
-	this.onchange = function () { };
-	el.value = '';
-	this.parentNode.appendChild(el);
-}

@@ -361,8 +361,6 @@ abstract class AdminBase
 
 	public abstract function selectImportPrint();
 
-	public abstract function selectEmailPrint($emailFields, $columns);
-
 	public abstract function selectColumnsProcess($columns, $indexes);
 
 	public abstract function selectSearchProcess($fields, $indexes);
@@ -384,8 +382,6 @@ abstract class AdminBase
 	}
 
 	public abstract function selectLengthProcess();
-
-	public abstract function selectEmailProcess($where, $foreignKeys);
 
 	public abstract function editRowPrint($table, $fields, $row, $update);
 

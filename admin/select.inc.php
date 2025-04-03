@@ -110,128 +110,125 @@ if ($_POST && !$error) {
 		exit;
 	}
 
-	if (!$admin->selectEmailProcess($where, $foreign_keys)) {
-		if ($_POST["save"] || $_POST["delete"]) { // edit
-			$result = true;
-			$affected = 0;
-			$set = [];
-			if (!$_POST["delete"]) {
-				$sent_fields = array_keys($_POST["fields"] + $_POST["function"]);
-				foreach ($sent_fields as $name) {
-					$val = process_input($fields[$name]);
-					if ($val !== null && ($_POST["clone"] || $val !== false)) {
-						$set[idf_escape($name)] = ($val !== false ? $val : idf_escape($name));
-					}
+	if ($_POST["save"] || $_POST["delete"]) { // edit
+		$result = true;
+		$affected = 0;
+		$set = [];
+		if (!$_POST["delete"]) {
+			$sent_fields = array_keys($_POST["fields"] + $_POST["function"]);
+			foreach ($sent_fields as $name) {
+				$val = process_input($fields[$name]);
+				if ($val !== null && ($_POST["clone"] || $val !== false)) {
+					$set[idf_escape($name)] = ($val !== false ? $val : idf_escape($name));
 				}
 			}
-			if ($_POST["delete"] || $set) {
-				if ($_POST["clone"]) {
-					$query = "INTO " . table($TABLE) . " (" . implode(", ", array_keys($set)) . ")\nSELECT " . implode(", ", $set) . "\nFROM " . table($TABLE);
-				}
-				if ($_POST["all"] || ($primary && is_array($_POST["check"])) || $is_group) {
-					$result = ($_POST["delete"]
-						? $driver->delete($TABLE, $where_check)
-						: ($_POST["clone"]
-							? queries("INSERT $query$where_check")
-							: $driver->update($TABLE, $set, $where_check)
-						)
-					);
-					$affected = $connection->affected_rows;
-				} else {
-					foreach ((array) $_POST["check"] as $val) {
-						// where is not unique so OR can't be used
-						$where2 = "\nWHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($val, $fields);
-						$result = ($_POST["delete"]
-							? $driver->delete($TABLE, $where2, 1)
-							: ($_POST["clone"]
-								? queries("INSERT" . limit1($TABLE, $query, $where2))
-								: $driver->update($TABLE, $set, $where2, 1)
-							)
-						);
-						if (!$result) {
-							break;
-						}
-						$affected += $connection->affected_rows;
-					}
-				}
+		}
+		if ($_POST["delete"] || $set) {
+			if ($_POST["clone"]) {
+				$query = "INTO " . table($TABLE) . " (" . implode(", ", array_keys($set)) . ")\nSELECT " . implode(", ", $set) . "\nFROM " . table($TABLE);
 			}
-			$message = lang('%d item(s) have been affected.', $affected);
-			if ($_POST["clone"] && $result && $affected == 1) {
-				$last_id = last_id();
-				if ($last_id) {
-					$message = lang('Item%s has been inserted.', " $last_id");
-				}
-			}
-			queries_redirect(remove_from_uri($_POST["all"] && $_POST["delete"] ? "page" : ""), $message, $result);
-			if (!$_POST["delete"]) {
-				$post_fields = (array) $_POST["fields"];
-				edit_form($TABLE, array_intersect_key($fields, $post_fields), $post_fields, !$_POST["clone"]);
-				page_footer();
-				exit;
-			}
-
-		} elseif (!$_POST["import"]) { // modify
-			if (!$_POST["val"]) {
-				$error = lang('Ctrl+click on a value to modify it.');
+			if ($_POST["all"] || ($primary && is_array($_POST["check"])) || $is_group) {
+				$result = ($_POST["delete"]
+					? $driver->delete($TABLE, $where_check)
+					: ($_POST["clone"]
+						? queries("INSERT $query$where_check")
+						: $driver->update($TABLE, $set, $where_check)
+					)
+				);
+				$affected = $connection->affected_rows;
 			} else {
-				$result = true;
-				$affected = 0;
-				foreach ($_POST["val"] as $unique_idf => $row) {
-					$set = [];
-					foreach ($row as $key => $val) {
-						$key = bracket_escape($key, 1); // 1 - back
-						$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? $admin->processInput($fields[$key], $val) : "NULL");
-					}
-					$result = $driver->update(
-						$TABLE,
-						$set,
-						" WHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($unique_idf, $fields),
-						!$is_group && !$primary,
-						" "
+				foreach ((array) $_POST["check"] as $val) {
+					// where is not unique so OR can't be used
+					$where2 = "\nWHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($val, $fields);
+					$result = ($_POST["delete"]
+						? $driver->delete($TABLE, $where2, 1)
+						: ($_POST["clone"]
+							? queries("INSERT" . limit1($TABLE, $query, $where2))
+							: $driver->update($TABLE, $set, $where2, 1)
+						)
 					);
 					if (!$result) {
 						break;
 					}
 					$affected += $connection->affected_rows;
 				}
-				queries_redirect(remove_from_uri(), lang('%d item(s) have been affected.', $affected), $result);
 			}
-
-		} elseif (!is_string($file = get_file("csv_file", true))) {
-			$error = upload_error($file);
-		} elseif (!preg_match('~~u', $file)) {
-			$error = lang('File must be in UTF-8 encoding.');
-		} else {
-			cookie("neo_import", "output=" . urlencode($import_settings["output"]) . "&format=" . urlencode($_POST["separator"]));
-			$result = true;
-			$cols = array_keys($fields);
-			preg_match_all('~(?>"[^"]*"|[^"\r\n]+)+~', $file, $matches);
-			$affected = count($matches[0]);
-			$driver->begin();
-			$separator = ($_POST["separator"] == "csv" ? "," : ($_POST["separator"] == "tsv" ? "\t" : ";"));
-			$rows = [];
-			foreach ($matches[0] as $key => $val) {
-				preg_match_all("~((?>\"[^\"]*\")+|[^$separator]*)$separator~", $val . $separator, $matches2);
-				if (!$key && !array_diff($matches2[1], $cols)) { //! doesn't work with column names containing ",\n
-					// first row corresponds to column names - use it for table structure
-					$cols = $matches2[1];
-					$affected--;
-				} else {
-					$set = [];
-					foreach ($matches2[1] as $i => $col) {
-						$set[idf_escape($cols[$i])] = ($col == "" && $fields[$cols[$i]]["null"] ? "NULL" : q(preg_match('~^".*"$~s', $col) ? str_replace('""', '"', substr($col, 1, -1)) : $col));
-					}
-					$rows[] = $set;
-				}
-			}
-			$result = (!$rows || $driver->insertUpdate($TABLE, $rows, $primary));
-			if ($result) {
-				$driver->commit();
-			}
-			queries_redirect(remove_from_uri("page"), lang('%d row(s) have been imported.', $affected), $result);
-			$driver->rollback(); // after queries_redirect() to not overwrite error
-
 		}
+		$message = lang('%d item(s) have been affected.', $affected);
+		if ($_POST["clone"] && $result && $affected == 1) {
+			$last_id = last_id();
+			if ($last_id) {
+				$message = lang('Item%s has been inserted.', " $last_id");
+			}
+		}
+		queries_redirect(remove_from_uri($_POST["all"] && $_POST["delete"] ? "page" : ""), $message, $result);
+		if (!$_POST["delete"]) {
+			$post_fields = (array) $_POST["fields"];
+			edit_form($TABLE, array_intersect_key($fields, $post_fields), $post_fields, !$_POST["clone"]);
+			page_footer();
+			exit;
+		}
+
+	} elseif (!$_POST["import"]) { // modify
+		if (!$_POST["val"]) {
+			$error = lang('Ctrl+click on a value to modify it.');
+		} else {
+			$result = true;
+			$affected = 0;
+			foreach ($_POST["val"] as $unique_idf => $row) {
+				$set = [];
+				foreach ($row as $key => $val) {
+					$key = bracket_escape($key, 1); // 1 - back
+					$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? $admin->processInput($fields[$key], $val) : "NULL");
+				}
+				$result = $driver->update(
+					$TABLE,
+					$set,
+					" WHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($unique_idf, $fields),
+					!$is_group && !$primary,
+					" "
+				);
+				if (!$result) {
+					break;
+				}
+				$affected += $connection->affected_rows;
+			}
+			queries_redirect(remove_from_uri(), lang('%d item(s) have been affected.', $affected), $result);
+		}
+
+	} elseif (!is_string($file = get_file("csv_file", true))) {
+		$error = upload_error($file);
+	} elseif (!preg_match('~~u', $file)) {
+		$error = lang('File must be in UTF-8 encoding.');
+	} else {
+		cookie("neo_import", "output=" . urlencode($import_settings["output"]) . "&format=" . urlencode($_POST["separator"]));
+		$result = true;
+		$cols = array_keys($fields);
+		preg_match_all('~(?>"[^"]*"|[^"\r\n]+)+~', $file, $matches);
+		$affected = count($matches[0]);
+		$driver->begin();
+		$separator = ($_POST["separator"] == "csv" ? "," : ($_POST["separator"] == "tsv" ? "\t" : ";"));
+		$rows = [];
+		foreach ($matches[0] as $key => $val) {
+			preg_match_all("~((?>\"[^\"]*\")+|[^$separator]*)$separator~", $val . $separator, $matches2);
+			if (!$key && !array_diff($matches2[1], $cols)) { //! doesn't work with column names containing ",\n
+				// first row corresponds to column names - use it for table structure
+				$cols = $matches2[1];
+				$affected--;
+			} else {
+				$set = [];
+				foreach ($matches2[1] as $i => $col) {
+					$set[idf_escape($cols[$i])] = ($col == "" && $fields[$cols[$i]]["null"] ? "NULL" : q(preg_match('~^".*"$~s', $col) ? str_replace('""', '"', substr($col, 1, -1)) : $col));
+				}
+				$rows[] = $set;
+			}
+		}
+		$result = (!$rows || $driver->insertUpdate($TABLE, $rows, $primary));
+		if ($result) {
+			$driver->commit();
+		}
+		queries_redirect(remove_from_uri("page"), lang('%d row(s) have been imported.', $affected), $result);
+		$driver->rollback(); // after queries_redirect() to not overwrite error
 	}
 }
 
@@ -316,7 +313,6 @@ if (!$columns && support("table")) {
 		if ($jush == "mssql" && $page) {
 			$result->seek($limit * $page);
 		}
-		$email_fields = [];
 		echo "<form class='table-footer-parent' action='' method='post' enctype='multipart/form-data'>\n";
 		$rows = [];
 		while ($row = $result->fetch_assoc()) {
@@ -434,9 +430,6 @@ if (!$columns && support("table")) {
 					if (isset($names[$key])) {
 						$field = $fields[$key];
 						$val = $driver->value($val, $field);
-						if ($val != "" && (!isset($email_fields[$key]) || $email_fields[$key] != "")) {
-							$email_fields[$key] = (is_mail($val) ? $names[$key] : ""); //! filled e-mails can be contained on other pages
-						}
 
 						$link = "";
 						if ($field && preg_match('~blob|bytea|raw|file~', $field["type"]) && $val != "") {
@@ -631,8 +624,6 @@ if (!$columns && support("table")) {
 					echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>\n";
 					print_fieldset_end("export");
 				}
-
-				$admin->selectEmailPrint(array_filter($email_fields, 'strlen'), $columns);
 
 			    echo "</div></div>\n";
 			}

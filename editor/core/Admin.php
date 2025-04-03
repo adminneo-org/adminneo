@@ -333,25 +333,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return true;
 	}
 
-	function selectEmailPrint($emailFields, $columns) {
-		if (!$emailFields) {
-			return;
-		}
-
-		print_fieldset_start("email", lang('E-mail'), "email", (bool)$_POST["email_append"]);
-
-		echo script("qsl('div').onkeydown = partialArg(bodyKeydown, 'email');");
-		echo "<p>" . lang('From') . ": <input class='input' name='email_from' value='" . h($_POST ? $_POST["email_from"] : $_COOKIE["neo_email"]) . "'>\n";
-		echo lang('Subject') . ": <input class='input' name='email_subject' value='" . h($_POST["email_subject"]) . "'>\n";
-		echo "<p><textarea name='email_message' rows='15' cols='75'>" . h($_POST["email_message"] . ($_POST["email_append"] ? '{$' . "$_POST[email_addition]}" : "")) . "</textarea>\n";
-		echo "<p>" . script("qsl('p').onkeydown = partialArg(bodyKeydown, 'email_append');", "") . html_select("email_addition", $columns, $_POST["email_addition"]) . "<input type='submit' class='button' name='email_append' value='" . lang('Insert') . "'>\n"; //! JavaScript
-		echo "<p>" . lang('Attachments') . ": <input type='file' name='email_files[]'>" . script("qsl('input').onchange = emailFileChange;");
-		echo "<p>" . (count($emailFields) == 1 ? '<input type="hidden" name="email_field" value="' . h(key($emailFields)) . '">' : html_select("email_field", $emailFields));
-		echo "<input type='submit' class='button' name='email' value='" . lang('Send') . "'>" . confirm();
-
-		print_fieldset_end("email");
-	}
-
 	function selectColumnsProcess($columns, $indexes) {
 		return [[], []];
 	}
@@ -429,40 +410,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	function selectLengthProcess() {
 		return "100";
-	}
-
-	function selectEmailProcess($where, $foreignKeys) {
-		if ($_POST["email_append"]) {
-			return true;
-		}
-		if ($_POST["email"]) {
-			$sent = 0;
-			if ($_POST["all"] || $_POST["check"]) {
-				$field = idf_escape($_POST["email_field"]);
-				$subject = $_POST["email_subject"];
-				$message = $_POST["email_message"];
-				preg_match_all('~\{\$([a-z0-9_]+)\}~i', "$subject.$message", $matches); // allows {$name} in subject or message
-				$rows = get_rows("SELECT DISTINCT $field" . ($matches[1] ? ", " . implode(", ", array_map('AdminNeo\idf_escape', array_unique($matches[1]))) : "") . " FROM " . table($_GET["select"])
-					. " WHERE $field IS NOT NULL AND $field != ''"
-					. ($where ? " AND " . implode(" AND ", $where) : "")
-					. ($_POST["all"] ? "" : " AND ((" . implode(") OR (", array_map('AdminNeo\where_check', (array) $_POST["check"])) . "))")
-				);
-				$fields = fields($_GET["select"]);
-				foreach ($this->rowDescriptions($rows, $foreignKeys) as $row) {
-					$replace = ['{\\' => '{']; // allow literal {$name}
-					foreach ($matches[1] as $val) {
-						$replace['{$' . "$val}"] = $this->formatFieldValue($row[$val], $fields[$val]);
-					}
-					$email = $row[$_POST["email_field"]];
-					if (is_mail($email) && $this->sendEmail($email, strtr($subject, $replace), strtr($message, $replace), $_POST["email_from"], $_FILES["email_files"])) {
-						$sent++;
-					}
-				}
-			}
-			cookie("neo_email", $_POST["email_from"]);
-			redirect(remove_from_uri(), lang('%d e-mail(s) have been sent.', $sent));
-		}
-		return false;
 	}
 
 	function editRowPrint($table, $fields, $row, $update) {
@@ -725,43 +672,5 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	protected function looksLikeBool(array $field): bool
 	{
 		return preg_match("~bool|(tinyint|bit)\\(1\\)~", $field["full_type"]);
-	}
-
-	/**
-	 * Sends e-mail in UTF-8.
-	 */
-	protected function sendEmail(string $email, string $subject, string $message, string $from = "", array $files = []):bool
-	{
-		$eol = "\r\n";
-		$message = str_replace("\n", $eol, wordwrap(str_replace("\r", "", "$message\n")));
-		$boundary = uniqid("boundary");
-		$attachments = "";
-
-		foreach ((array) $files["error"] as $key => $val) {
-			if ($val) {
-				continue;
-			}
-
-			$attachments .= "--$boundary$eol"
-				. "Content-Type: " . str_replace("\n", "", $files["type"][$key]) . $eol
-				. "Content-Disposition: attachment; filename=\"" . preg_replace('~["\n]~', '', $files["name"][$key]) . "\"$eol"
-				. "Content-Transfer-Encoding: base64$eol$eol"
-				. chunk_split(base64_encode(file_get_contents($files["tmp_name"][$key])), 76, $eol) . $eol;
-		}
-
-		$beginning = "";
-		$headers = "Content-Type: text/plain; charset=utf-8$eol" . "Content-Transfer-Encoding: 8bit";
-		if ($attachments) {
-			$attachments .= "--$boundary--$eol";
-			$beginning = "--$boundary$eol$headers$eol$eol";
-			$headers = "Content-Type: multipart/mixed; boundary=\"$boundary\"";
-		}
-		$headers .= $eol . "MIME-Version: 1.0$eol" . "X-Mailer: EditorNeo"
-			. ($from ? $eol . "From: " . str_replace("\n", "", $from) : ""); //! should escape display name
-
-		// iconv_mime_encode requires iconv, imap_8bit requires IMAP extension
-		$subject = "=?UTF-8?B?" . base64_encode($subject) . "?="; //! split long lines
-
-		return mail($email, $subject, $beginning . $message . $attachments, $headers);
 	}
 }

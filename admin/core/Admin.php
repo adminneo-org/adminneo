@@ -678,14 +678,6 @@ class Admin extends AdminBase
 		return !information_schema(DB);
 	}
 
-	/** Print extra text in the end of a select form
-	* @param array fields holding e-mails
-	* @param array selectable columns
-	* @return null
-	*/
-	function selectEmailPrint($emailFields, $columns) {
-	}
-
 	/** Process columns box in select
 	* @param array selectable columns
 	* @param array
@@ -794,15 +786,6 @@ class Admin extends AdminBase
 	*/
 	function selectLengthProcess() {
 		return (isset($_GET["text_length"]) ? $_GET["text_length"] : "100");
-	}
-
-	/** Process extras in select form
-	* @param array AND conditions
-	* @param array
-	* @return bool true if processed, false to process other parts of form
-	*/
-	function selectEmailProcess($where, $foreignKeys) {
-		return false;
 	}
 
 	/** Print before edit form
