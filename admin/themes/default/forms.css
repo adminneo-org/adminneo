@@ -82,13 +82,16 @@ textarea {
 select {
 	-webkit-appearance: none;
 	appearance: none;
-	padding-inline-end: 18px;
-	background: var(--input-bg) var(--select-arrow) right center no-repeat;
-	background-size: 16px;
 	cursor: pointer;
 }
 
-.rtl select {
+select:not([size]) {
+	padding-inline-end: 18px;
+	background: var(--input-bg) var(--select-arrow) right center no-repeat;
+	background-size: 16px;
+}
+
+.rtl select:not([size]) {
 	background-position: left center;
 }
 
@@ -133,6 +136,7 @@ pre.jush {
 }
 
 .sqlarea {
+	position: inherit;
 	width: 100%;
 }
 

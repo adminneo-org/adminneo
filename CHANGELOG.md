@@ -20,6 +20,7 @@ AdminNeo 5.1.0
 - Optimize retrieving columns for schema (by @vrana)
 - Shorten queries saved from SQL command to URL (by @vrana)
 - Remember export setting at SQL command
+- Autocomplete SQL commands (by @vrana)
 - SQL textarea: Open help and links to tables on Ctrl+click
 - Refine and standardize Japanese translation (by @yama)
 - Update German translation (by @wintstar)
