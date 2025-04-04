@@ -197,7 +197,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	function selectVal($val, $link, $field, $original)
+	public function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

@@ -177,27 +177,34 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return $return;
 	}
 
-	function selectVal($val, $link, $field, $original) {
-		$return = $val;
+	public function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): string
+	{
 		$link = h($link);
-		if (preg_match('~blob|bytea~', $field["type"]) && !is_utf8($val)) {
-			$return = lang('%d byte(s)', strlen($original));
+
+		if ($val === null) {
+			$text = "";
+		} elseif (preg_match('~blob|bytea~', $field["type"]) && !is_utf8($val)) {
+			$text = lang('%d byte(s)', strlen($original));
 			if (preg_match("~^(GIF|\xFF\xD8\xFF|\x89PNG\x0D\x0A\x1A\x0A)~", $original)) { // GIF|JPG|PNG, getimagetype() works with filename
-				$return = "<img src='$link' alt='$return'>";
+				$text = "<img src='$link' alt='$text'>";
 			}
+		} elseif ($this->looksLikeBool($field) && $text != "") { // bool
+			$text = (preg_match('~^(1|t|true|y|yes|on)$~i', $val) ? lang('yes') : lang('no'));
+		} else {
+			$text = $val;
 		}
-		if ($this->looksLikeBool($field) && $return != "") { // bool
-			$return = (preg_match('~^(1|t|true|y|yes|on)$~i', $val) ? lang('yes') : lang('no'));
-		}
+
 		if ($link) {
-			$return = "<a href='$link'" . (is_web_url($link) ? target_blank() : "") . ">$return</a>";
+			$text = "<a href='$link'" . (is_web_url($link) ? target_blank() : "") . ">$text</a>";
 		}
+
 		if (!$link && !$this->looksLikeBool($field) && preg_match(number_type(), $field["type"])) {
-			$return = "<div class='number'>$return</div>"; // Firefox doesn't support <colgroup>
+			$text = "<div class='number'>$text</div>"; // Firefox doesn't support <colgroup>
 		} elseif (preg_match('~date~', $field["type"])) {
-			$return = "<div class='datetime'>$return</div>";
+			$text = "<div class='datetime'>$text</div>";
 		}
-		return $return;
+
+		return $text;
 	}
 
 	public function formatFieldValue($value, array $field): ?string

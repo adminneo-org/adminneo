@@ -98,7 +98,7 @@ class JsonPreviewPlugin
 		return null;
 	}
 
-	public function selectVal(&$val, $link, ?array $field, $original)
+	public function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): ?string
 	{
 		if (!$field || !$this->inSelection) {
 			return null;

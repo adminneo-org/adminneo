@@ -163,10 +163,11 @@ include "adminneo.php";
     - `tableStructurePrint()` -> `printTableStructure()`
     - `tableName()` -> `getTableName()`
     - `fieldName()` -> `getFieldName()`
+    - `editVal()` -> `formatFieldValue()`
     - `selectLink()` -> `getFieldValueLink()`
+    - `selectVal()` -> `formatSelectionValue()`
     - `editInput()` -> `getFieldInput()`
     - `editHint()` -> `getFieldInputHint()`
-    - `editVal()` -> `formatFieldValue()`
     - `processInput()` -> `processFieldInput()`
     - `selectQuery()` -> `formatSelectQuery()`
     - `messageQuery()` -> `formatMessageQuery()`

@@ -344,7 +344,7 @@ abstract class AdminBase
 		return null;
 	}
 
-	public abstract function selectVal($val, $link, $field, $original);
+	public abstract function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): string;
 
 	public abstract function formatFieldValue($value, array $field): ?string;
 

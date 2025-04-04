@@ -1435,7 +1435,7 @@ function select_value($val, $link, $field, $text_length) {
 			$return = h($return);
 		}
 	}
-	return $admin->selectVal($return, $link, $field, $val);
+	return $admin->formatSelectionValue($return, $link, $field, $val);
 }
 
 /** Check whether the string is e-mail address

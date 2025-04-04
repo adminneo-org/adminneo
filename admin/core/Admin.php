@@ -336,14 +336,16 @@ class Admin extends AdminBase
 		return $rows;
 	}
 
-	/** Value printed in select table
-	* @param string HTML-escaped value to print
-	* @param string link to foreign key
-	* @param array single field returned from fields()
-	* @param array original value before applying formatFieldValue() and escaping
-	* @return string
-	*/
-	function selectVal($val, $link, $field, $original) {
+	/**
+	 * Formats field value for select table.
+	 *
+	 * @param ?string $val HTML-escaped value to print.
+	 * @param ?string $link Link to foreign key.
+	 * @param ?array $field Single field returned from fields().
+	 * @param ?string $original Original value before applying formatFieldValue() and escaping.
+	 */
+	public function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): string
+	{
 		if ($val === null) {
 			$text = "<i>NULL</i>";
 		} elseif (!$field) {
