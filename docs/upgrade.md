@@ -143,6 +143,7 @@ include "adminneo.php";
 - Function `selectQueryBuild()` was removed.
 - Function `css()` was removed. CSS files can be defined by `cssUrls` configuration option. See
   [Configuration options](/docs/configuration.md) for more information.
+- Function `head()` was replaced by two functions: `printFavicons()` and `printToHead()`.
 - Function `csp()` was replaced by `getCspHeader()` that allows to redefine CSP directives of just one 
   Content-Security-Policy HTTP header.
 - Removed customizable functions:
@@ -150,7 +151,8 @@ include "adminneo.php";
     - `selectEmailPrint()`
     - `selectEmailProcess()`
 - Renamed customizable functions:
-    - `credentials()` to `getCredentials()`
+    - `headers()` -> `sendHeaders()`
+    - `credentials()` -> `getCredentials()`
     - `login()` -> `authenticate()`
     - `serverName()` -> `getServerName()`
     - `loginFormField()` -> `composeLoginFormRow()`

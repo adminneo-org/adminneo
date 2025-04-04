@@ -31,7 +31,7 @@ class TinyMcePlugin
 		$this->licenseKey = $licenseKey;
 	}
 
-	public function head()
+	public function printToHead(): ?bool
 	{
 		$lang = get_lang();
 		$lang = ($lang == "zh" ? "zh-CN" : ($lang == "zh-tw" ? "zh-TW" : $lang));
@@ -41,7 +41,8 @@ class TinyMcePlugin
 
 		echo script_src($this->path);
 		?>
-		<script<?php echo nonce(); ?>>
+
+		<script <?= nonce(); ?>>
 			tinyMCE.init({
 				license_key: '<?= js_escape($this->licenseKey); ?>',
 				selector: 'textarea[data-editor="tinymce"]',
@@ -53,7 +54,9 @@ class TinyMcePlugin
 				toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | link image'
 			});
 		</script>
+
 		<?php
+		return null;
 	}
 
 	public function getFieldInput(string $table, array $field, string $attrs, $value, ?string $function): ?string

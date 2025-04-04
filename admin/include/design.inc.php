@@ -49,7 +49,8 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 	<title><?= $title_page; ?></title>
-<?php
+
+	<?php
 	$theme = $admin->getConfig()->getTheme();
 	$color_variant = $admin->getConfig()->getColorVariant();
 
@@ -94,28 +95,23 @@ function page_header(string $title, string $error = "", $breadcrumb = [], ?strin
 		}
 	}
 
-	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
-
-	if ($admin->head()) {
-		// https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
-		// Converting PNG to ICO: https://redketchup.io/icon-converter
-		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon-$color_variant.ico", ["../admin/images/variants/favicon-$color_variant.ico"]), "' sizes='32x32'>\n";
-		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon-$color_variant.svg", ["../admin/images/variants/favicon-$color_variant.svg"]), "'>\n";
-		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon-$color_variant.png", ["../admin/images/variants/apple-touch-icon-$color_variant.png"]), "'>\n";
-
-		foreach ($admin->getCssUrls() as $url) {
-			if (strpos($url, "adminneo-dark.css") === 0 && !$admin->isDarkModeForced()) {
-				echo "<link rel='stylesheet' media='(prefers-color-scheme: dark)' href='", h($url), "'>\n";
-			} else {
-				echo "<link rel='stylesheet' href='", h($url), "'>\n";
-			}
-		}
-
-		foreach ($admin->getJsUrls() as $url) {
-			echo script_src($url);
+	foreach ($admin->getCssUrls() as $url) {
+		if (strpos($url, "adminneo-dark.css") === 0 && !$admin->isDarkModeForced()) {
+			echo "<link rel='stylesheet' media='(prefers-color-scheme: dark)' href='", h($url), "'>\n";
+		} else {
+			echo "<link rel='stylesheet' href='", h($url), "'>\n";
 		}
 	}
-?>
+
+	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
+
+	foreach ($admin->getJsUrls() as $url) {
+		echo script_src($url);
+	}
+
+	$admin->printFavicons();
+	$admin->printToHead();
+	?>
 </head>
 <body class="<?php echo lang('ltr'); ?> nojs">
 <script<?php echo nonce(); ?>>
@@ -245,7 +241,7 @@ function page_headers(): void
 	}
 	header("Content-Security-Policy: " . implode("; ", $directives));
 
-	$admin->headers();
+	$admin->sendHeaders();
 }
 
 /**

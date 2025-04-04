@@ -68,18 +68,11 @@ class Admin extends AdminBase
 		return 2;
 	}
 
-	/** Headers to send before HTML output
-	* @return null
-	*/
-	function headers() {
-	}
-
-	/** Print HTML code inside <head>
-	* @return bool true to link favicon.ico and adminneo.css if exists
-	*/
-	function head() {
-		?>
-		<?php
+	/**
+	 * Prints additional HTML code at the end of the <head>.
+	 */
+	public function printToHead(): void
+	{
 		echo "<link rel='stylesheet' href='", link_files("jush.css", ["../vendor/vrana/jush/jush.css"]), "'>";
 
 		if (!$this->isLightModeForced()) {
@@ -98,8 +91,6 @@ class Admin extends AdminBase
 			"../vendor/vrana/jush/modules/jush-simpledb.js",
 			"../vendor/vrana/jush/modules/jush-js.js",
 		]));
-
-		return true;
 	}
 
 	/**

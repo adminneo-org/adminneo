@@ -102,9 +102,9 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function headers()
+	public function sendHeaders(): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function getCspHeader(): array
@@ -112,9 +112,14 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function head()
+	public function printFavicons(): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
+	}
+
+	public function printToHead(): void
+	{
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function loginForm()

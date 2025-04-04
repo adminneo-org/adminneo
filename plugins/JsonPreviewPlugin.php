@@ -48,7 +48,7 @@ class JsonPreviewPlugin
 	/**
 	 * Prints HTML code inside <head>.
 	 */
-	public function head()
+	public function printToHead(): ?bool
 	{
 		?>
 
@@ -95,6 +95,7 @@ class JsonPreviewPlugin
 		</style>
 
 		<?php
+		return null;
 	}
 
 	public function selectVal(&$val, $link, ?array $field, $original)

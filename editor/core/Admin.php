@@ -52,11 +52,9 @@ class Admin extends AdminBase
 		return 5;
 	}
 
-	function headers() {
-	}
-
-	function head() {
-		return true;
+	public function printToHead(): void
+	{
+		//
 	}
 
 	function loginForm() {

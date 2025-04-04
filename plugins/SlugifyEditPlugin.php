@@ -20,12 +20,11 @@ class SlugifyEditPlugin
 	/** @var string[] */
 	private $slugifyFields;
 
-	public function head(): ?bool
+	public function printToHead(): ?bool
 	{
-		$nonce = nonce();
+		?>
 
-		echo "
-		<script $nonce>
+		<script <?= nonce(); ?>>
 			function initSlugField(input, slugField, maxLenght) {
 				input.oninput = function () {
 					const target = this.form[`fields[\${slugField}]`];
@@ -46,8 +45,8 @@ class SlugifyEditPlugin
 					.replace(/^-|-$/g, ''); // trim
 			}
 		</script>
-		";
 
+		<?php
 		return null;
 	}
 
