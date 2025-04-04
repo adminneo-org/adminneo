@@ -198,20 +198,11 @@ abstract class AdminBase
 	/**
 	 * Returns lists of directives for Content-Security-Policy HTTP header.
 	 *
-	 * @return string[] [directive name => allowed sources].
-	 * @throws \Random\RandomException
+	 * @var string[] $csp [directive name => allowed sources].
 	 */
-	public function getCspHeader(): array
+	public function updateCspHeader(array &$csp): void
 	{
-		return [
-			// 'self' is a fallback for browsers not supporting 'strict-dynamic', 'unsafe-inline' is a fallback for browsers not supporting 'nonce-'
-			"script-src" => "'self' 'unsafe-inline' 'nonce-" . get_nonce() . "' 'strict-dynamic'",
-			"connect-src" => "'self' https://api.github.com/repos/adminneo-org/adminneo/releases/latest",
-			"frame-src" => "'self'",
-			"object-src" => "'none'",
-			"base-uri" => "'none'",
-			"form-action" => "'self'",
-		];
+		//
 	}
 
 	public function printFavicons(): void

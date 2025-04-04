@@ -144,7 +144,7 @@ include "adminneo.php";
 - Function `css()` was removed. CSS files can be defined by `cssUrls` configuration option. See
   [Configuration options](/docs/configuration.md) for more information.
 - Function `head()` was replaced by two functions: `printFavicons()` and `printToHead()`.
-- Function `csp()` was replaced by `getCspHeader()` that allows to redefine CSP directives of just one 
+- Function `csp()` was replaced by `updateCspHeader()` that allows to redefine CSP directives of just one 
   Content-Security-Policy HTTP header.
 - Removed customizable functions:
     - `dumpFilename()`

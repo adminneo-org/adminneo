@@ -235,8 +235,19 @@ function page_headers(): void
 	// Basic Clickjacking prevention that works also in old browsers without CSP2 support.
 	header("X-Frame-Options: DENY");
 
+	$csp = [
+		// 'self' is a fallback for browsers not supporting 'strict-dynamic', 'unsafe-inline' is a fallback for browsers not supporting 'nonce-'
+		"script-src" => "'self' 'unsafe-inline' 'nonce-" . get_nonce() . "' 'strict-dynamic'",
+		"connect-src" => "'self' https://api.github.com/repos/adminneo-org/adminneo/releases/latest",
+		"frame-src" => "'self'",
+		"object-src" => "'none'",
+		"base-uri" => "'none'",
+		"form-action" => "'self'",
+	];
+	$admin->updateCspHeader($csp);
+
 	$directives = [];
-	foreach ($admin->getCspHeader() as $directive => $sources) {
+	foreach ($csp as $directive => $sources) {
 		$directives[] = "$directive $sources";
 	}
 	header("Content-Security-Policy: " . implode("; ", $directives));

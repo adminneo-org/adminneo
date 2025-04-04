@@ -49,16 +49,14 @@ class FrameSupportPlugin
 		return null;
 	}
 
-	public function getCspHeader(): ?array
+	public function updateCspHeader(array &$csp): ?bool
 	{
-		if (!$this->frameAncestors) {
-			return null;
+		if ($this->frameAncestors) {
+			$current = isset($csp["frame-ancestors"]) ? $csp["frame-ancestors"] . " " : "";
+			$csp["frame-ancestors"] = $current . implode(" ", $this->frameAncestors);
 		}
 
-		$csp = admin()->callParent(__FUNCTION__);
-		$csp["frame-ancestors"] = implode(" ", $this->frameAncestors);
-
-		return $csp;
+		return null;
 	}
 
 	public function printToHead(): ?bool
