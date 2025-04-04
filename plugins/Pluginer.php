@@ -57,7 +57,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function permanentLogin(bool $create = false)
+	public function getPrivateKey(bool $create = false)
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

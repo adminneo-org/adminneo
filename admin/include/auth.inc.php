@@ -196,7 +196,7 @@ if ($auth) {
 
 	if ($auth["permanent"]) {
 		$key = base64_encode($driver) . "-" . base64_encode($server) . "-" . base64_encode($username) . "-" . base64_encode($db);
-		$private = $admin->permanentLogin(true);
+		$private = $admin->getPrivateKey(true);
 		$encrypted_password = $private ? encrypt_string($password, $private) : false;
 		$permanent[$key] = "$key:" . base64_encode($encrypted_password ?: "");
 		cookie("neo_permanent", implode(" ", $permanent));
@@ -220,7 +220,7 @@ if ($auth) {
 
 } elseif ($permanent && !$_SESSION["pwds"]) {
 	session_regenerate_id();
-	$private = $admin->permanentLogin();
+	$private = $admin->getPrivateKey();
 	foreach ($permanent as $key => $val) {
 		list(, $cipher) = explode(":", $val);
 		list($driver, $server, $username, $db) = array_map('base64_decode', explode("-", $key));

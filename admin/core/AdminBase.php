@@ -89,12 +89,12 @@ abstract class AdminBase
 	}
 
 	/**
-	 * Gets a private key used for permanent login.
+	 * Returns a private key used for permanent login.
 	 *
 	 * @return string|false Cryptic string which gets combined with password or false in case of an error.
 	 * @throws \Random\RandomException
 	 */
-	public function permanentLogin(bool $create = false)
+	public function getPrivateKey(bool $create = false)
 	{
 		return get_private_key($create);
 	}
