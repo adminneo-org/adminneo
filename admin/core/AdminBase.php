@@ -99,12 +99,19 @@ abstract class AdminBase
 		return get_private_key($create);
 	}
 
-	public abstract function bruteForceKey();
+	/**
+	 * Returns key used to group brute force attacks.
+	 * Behind a reverse proxy, you want to return the last part of X-Forwarded-For.
+	 */
+	public function getBruteForceKey(): string
+	{
+		return $_SERVER["REMOTE_ADDR"];
+	}
 
 	/**
 	 * Returns server name displayed in breadcrumbs. Can be empty string.
 	 */
-	function getServerName(string $server): string
+	public function getServerName(string $server): string
 	{
 		if ($server == "") {
 			return "";

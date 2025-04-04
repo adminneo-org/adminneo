@@ -102,7 +102,7 @@ function add_invalid_login() {
 			}
 		}
 	}
-	$invalid = &$invalids[$admin->bruteForceKey()];
+	$invalid = &$invalids[$admin->getBruteForceKey()];
 	if (!$invalid) {
 		$invalid = [$time + 30*60, 0]; // active for 30 minutes
 	}
@@ -115,7 +115,7 @@ function check_invalid_login() {
 
 	$filename = get_temp_dir() . "/adminneo.invalid";
 	$invalids = file_exists($filename) ? unserialize(file_get_contents($filename)) : [];
-	$invalid = ($invalids ? $invalids[$admin->bruteForceKey()] : []);
+	$invalid = ($invalids ? $invalids[$admin->getBruteForceKey()] : []);
 
 	$next_attempt = ($invalid && $invalid[1] > 29 ? $invalid[0] - time() : 0); // allow 30 invalid attempts
 	if ($next_attempt > 0) { //! do the same with permanent login

@@ -62,7 +62,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function bruteForceKey()
+	public function getBruteForceKey(): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

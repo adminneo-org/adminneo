@@ -30,10 +30,6 @@ class Admin extends AdminBase
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='130' height='28'><desc>EditorNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
-	function bruteForceKey() {
-		return $_SERVER["REMOTE_ADDR"];
-	}
-
 	function database() {
 		global $connection;
 		if ($connection) {

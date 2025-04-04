@@ -40,13 +40,6 @@ class Admin extends AdminBase
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
-	/** Return key used to group brute force attacks; behind a reverse proxy, you want to return the last part of X-Forwarded-For
-	* @return string
-	*/
-	function bruteForceKey() {
-		return $_SERVER["REMOTE_ADDR"];
-	}
-
 	/** Identifier of selected database
 	* @return string
 	*/

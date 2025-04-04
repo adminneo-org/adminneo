@@ -157,6 +157,7 @@ include "adminneo.php";
     - `credentials()` -> `getCredentials()`
     - `login()` -> `authenticate()`
     - `permanentLogin()` -> `getPrivateKey()`
+    - `bruteForceKey()` -> `getBruteForceKey()`
     - `serverName()` -> `getServerName()`
     - `loginFormField()` -> `composeLoginFormRow()`
     - `foreignKeys()` -> `getForeignKeys()`
