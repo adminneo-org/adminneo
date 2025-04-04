@@ -260,11 +260,14 @@ function html_select($name, $options, $value = "", $onchange = true, $labelled_b
 			. (is_string($onchange) ? script("qsl('select').onchange = function () { $onchange };", "") : "")
 		;
 	}
-	$return = "";
+
+	$result = "<span class='labels'>";
 	foreach ($options as $key => $val) {
-		$return .= "<label><input type='radio' name='" . h($name) . "' value='" . h($key) . "'" . ($key == $value ? " checked" : "") . ">" . h($val) . "</label>";
+		$result .= "<label><input type='radio' name='" . h($name) . "' value='" . h($key) . "'" . ($key == $value ? " checked" : "") . ">" . h($val) . "</label>";
 	}
-	return $return;
+	$result .= "</span>";
+
+	return $result;
 }
 
 /** Get onclick confirmation

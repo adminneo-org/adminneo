@@ -181,25 +181,42 @@ if (!isset($row["events"])) { // backwards compatibility
 	$row["triggers"] = $row["table_style"];
 }
 
-echo "<tr><th>" . lang('Format') . "<td>" . html_select("format", $admin->getDumpFormats(), $row["format"], false) . "\n"; // false = radio
+echo "<tr><th>", lang('Format'), "</th><td>", html_select("format", $admin->getDumpFormats(), $row["format"], false), "</td></tr>\n"; // false = radio
 
-echo ($jush == "sqlite" ? "" : "<tr><th>" . lang('Database') . "<td>" . html_select('db_style', $db_style, $row["db_style"])
-	. (support("type") ? checkbox("types", 1, $row["types"], lang('User types')) : "")
-	. (support("routine") ? checkbox("routines", 1, $row["routines"], lang('Routines')) : "")
-	. (support("event") ? checkbox("events", 1, $row["events"], lang('Events')) : "")
-);
+if ($jush != "sqlite") {
+	echo "<tr><th>", lang('Database'), "</th>";
+	echo "<td>", html_select('db_style', $db_style, $row["db_style"]);
 
-echo "<tr><th>" . lang('Tables') . "<td>" . html_select('table_style', $table_style, $row["table_style"])
-	. checkbox("auto_increment", 1, $row["auto_increment"], lang('Auto Increment'))
-	. (support("trigger") ? checkbox("triggers", 1, $row["triggers"], lang('Triggers')) : "")
-;
+	echo "<span class='labels'>";
+	if (support("type")) {
+		echo checkbox("types", 1, $row["types"], lang('User types'));
+	}
+	if (support("routine")) {
+		echo checkbox("routines", 1, $row["routines"], lang('Routines'));
+	}
+	if (support("event")) {
+		echo checkbox("events", 1, $row["events"], lang('Events'));
+	}
+	echo "</span></td></tr>";
+}
 
-echo " <tr><th>" . lang('Data') . "<td>" . html_select('data_style', $data_style, $row["data_style"]);
+echo "<tr><th>", lang('Tables'), "</th><td>";
+echo html_select('table_style', $table_style, $row["table_style"]);
 
-echo "<tr><th>" . lang('Output') . "<td>" . html_select("output", $admin->getDumpOutputs(), $row["output"], false) . "\n"; // false = radio
+echo " <span class='labels'>";
+echo checkbox("auto_increment", 1, $row["auto_increment"], lang('Auto Increment'));
+if (support("trigger")) {
+	echo checkbox("triggers", 1, $row["triggers"], lang('Triggers'));
+}
+echo "</span></td></tr>";
+
+echo "<tr><th>", lang('Data'), "</th><td>", html_select('data_style', $data_style, $row["data_style"]), "</td></tr>";
+
+echo "<tr><th>", lang('Output'), "</th><td>", html_select("output", $admin->getDumpOutputs(), $row["output"], false), "</td></tr>\n"; // false = radio
 
 ?>
 </table>
+
 <p><input type="submit" class="button default" value="<?php echo lang('Export'); ?>">
 <input type="hidden" name="token" value="<?php echo $token; ?>">
 
@@ -255,10 +272,14 @@ if (DB != "") {
 </table>
 </form>
 <?php
-$first = true;
+$links = [];
 foreach ($prefixes as $key => $val) {
 	if ($key != "" && $val > 1) {
-		echo ($first ? "<p>" : " ") . "<a href='" . h(ME) . "dump=" . urlencode("$key%") . "'>" . h($key) . "</a>";
-		$first = false;
+		$links[] = "<a href='" . h(ME) . "dump=" . urlencode("$key%") . "'>" . icon("check") . h($key) . "*</a>";
 	}
+}
+if ($links) {
+	echo "<p class='links'>";
+	echo implode("", $links);
+	echo "</p>\n";
 }
