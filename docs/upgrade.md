@@ -143,6 +143,8 @@ include "adminneo.php";
 - Function `selectQueryBuild()` was removed.
 - Function `css()` was removed. CSS files can be defined by `cssUrls` configuration option. See
   [Configuration options](/docs/configuration.md) for more information.
+- Function `connectSsl()` was removed. SSL options can be defined by `ssl*` configuration options.
+  See [Configuration options](/docs/configuration.md) for more information.
 - Function `head()` was replaced by two functions: `printFavicons()` and `printToHead()`.
 - Function `csp()` was replaced by `updateCspHeader()` that allows to redefine CSP directives of just one 
   Content-Security-Policy HTTP header.

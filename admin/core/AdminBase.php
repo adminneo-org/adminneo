@@ -88,8 +88,6 @@ abstract class AdminBase
 		return true;
 	}
 
-	public abstract function connectSsl();
-
 	/**
 	 * Gets a private key used for permanent login.
 	 *

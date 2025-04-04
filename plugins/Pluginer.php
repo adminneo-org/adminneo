@@ -57,11 +57,6 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function connectSsl()
-	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
-	}
-
 	public function permanentLogin(bool $create = false)
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
