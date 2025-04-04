@@ -311,6 +311,6 @@ $translations = [
 
 	'Invalid permanent login, please login again.' => 'Ungültige permanente Anmeldung, bitte melden Sie sich erneut an.',
 
-	'Access denied.' => null,
-	'Enter OTP code.' => null,
+	'Access denied.' => 'Zugang verweigert',
+	'Enter OTP code.' => 'OTP-Code eingeben',
 ];
