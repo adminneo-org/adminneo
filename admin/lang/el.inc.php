@@ -277,13 +277,6 @@ $translations = [
 	'Delete' => 'Διαγραφή',
 	'You have no privileges to update this table.' => 'Δεν έχετε δικαίωμα να τροποποιήσετε αυτό τον πίνακα.',
 
-	'E-mail' => 'E-mail',
-	'From' => 'Από',
-	'Subject' => 'Θέμα',
-	'Attachments' => 'Συνημμένα',
-	'Send' => 'Αποστολή',
-	'%d e-mail(s) have been sent.' => ['%d e-mail απεστάλη.', '%d e-mail απεστάλησαν.'],
-
 	// data type descriptions
 	'Numbers' => 'Αριθμοί',
 	'Date and time' => 'Ημερομηνία και ώρα',
@@ -296,7 +289,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$5/$3/$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'ηη/μμ/[εεεε]',
+	'YYYY-MM-DD' => 'ΗΗ/ΜΜ/ΕΕΕΕ',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'ΩΩ:ΛΛ:ΔΔ',
 	'now' => 'τώρα',
@@ -342,12 +335,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => null,
 	'Unknown error.' => null,
 	'Database does not support password.' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => null,
-	'No' => null,
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -364,4 +351,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

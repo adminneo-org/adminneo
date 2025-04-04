@@ -279,13 +279,6 @@ $translations = [
 	'Delete' => 'Изтриване',
 	'You have no privileges to update this table.' => 'Нямате праве за обновяване на таблицата.',
 
-	'E-mail' => 'E-mail',
-	'From' => 'От',
-	'Subject' => 'Тема',
-	'Attachments' => 'Прикачени',
-	'Send' => 'Изпращане',
-	'%d e-mail(s) have been sent.' => ['%d писмо беше изпратено.', '%d писма бяха изпратени.'],
-
 	// data type descriptions
 	'Numbers' => 'Числа',
 	'Date and time' => 'Дата и час',
@@ -298,7 +291,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$1-$3-$5',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => '[гггг]-мм-дд',
+	'YYYY-MM-DD' => 'ГГГГ-ММ-ДД',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'ЧЧ:ММ:СС',
 	'now' => 'сега',
@@ -347,12 +340,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => null,
 	'Unknown error.' => null,
 	'Database does not support password.' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Да',
-	'No' => 'Не',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -363,4 +350,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

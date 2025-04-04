@@ -199,7 +199,7 @@ $translations = [
 	'Stop on error' => 'Bei Fehler anhalten',
 	'%.3f s' => '%.3f s',
 	'$1-$3-$5' => '$6.$4.$1',
-	'[yyyy]-mm-dd' => 't.m.[jjjj]',
+	'YYYY-MM-DD' => 'T.M.JJJJ',
 	'History' => 'History',
 	'Variables' => 'Variablen',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Quell- und Zielspalten müssen vom gleichen Datentyp sein, es muss unter den Zielspalten ein Index existieren und die referenzierten Daten müssen existieren.',
@@ -212,11 +212,6 @@ $translations = [
 	'Strings' => 'Zeichenketten',
 	'Binary' => 'Binär',
 	'Lists' => 'Listen',
-	'E-mail' => 'E-Mail',
-	'From' => 'Von',
-	'Subject' => 'Betreff',
-	'Send' => 'Abschicken',
-	'%d e-mail(s) have been sent.' => ['%d E-Mail abgeschickt.', '%d E-Mails abgeschickt.'],
 	'Webserver file %s' => 'Webserver Datei %s',
 	'File does not exist.' => 'Datei existiert nicht.',
 	'%d in total' => '%d insgesamt',
@@ -252,7 +247,6 @@ $translations = [
 	'Network' => 'Netzwerk',
 	'Geometry' => 'Geometrie',
 	'File exists.' => 'Datei existiert schon.',
-	'Attachments' => 'Anhänge',
 	'%d query(s) executed OK.' => ['SQL-Abfrage erfolgreich ausgeführt.', '%d SQL-Abfragen erfolgreich ausgeführt.'],
 	'Show only errors' => 'Nur Fehler anzeigen',
 	'Refresh' => 'Aktualisieren',
@@ -299,12 +293,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => 'Es gibt ein Leerzeichen im Eingabepasswort, das die Ursache sein könnte.',
 	'Unknown error.' => 'Unbekannter Fehler.',
 	'Database does not support password.' => 'Die Datenbank unterstützt kein Passwort.',
-
-	'Columns' => 'Spalten',
-	'Nullable' => 'Nullbar',
-	'Default' => 'Standard',
-	'Yes' => 'Ja',
-	'No' => 'Nein',
 	'One Time Password' => 'Einmal-Passwort',
 	'Invalid OTP code.' => 'Ungültiger OTP-Code.',
 
@@ -322,4 +310,7 @@ $translations = [
 	'Checks' => 'Checks',
 
 	'Invalid permanent login, please login again.' => 'Ungültige permanente Anmeldung, bitte melden Sie sich erneut an.',
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

@@ -288,13 +288,6 @@ $translations = [
 	'Delete' => 'Ta bort',
 	'You have no privileges to update this table.' => 'Du har inga privilegier för att uppdatera den här tabellen.',
 
-	'E-mail' => 'Email',
-	'From' => 'Från',
-	'Subject' => 'Ämne',
-	'Attachments' => 'Bilagor',
-	'Send' => 'Skicka',
-	'%d e-mail(s) have been sent.' => ['%d email har blivit skickat.', '%d email har blivit skickade.'],
-
 	// data type descriptions
 	'Numbers' => 'Nummer',
 	'Date and time' => 'Datum och tid',
@@ -307,7 +300,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$1-$3-$5',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'yyyy-mm-dd',
+	'YYYY-MM-DD' => 'YYYY-MM-DD',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => 'nu',
@@ -341,12 +334,6 @@ $translations = [
 	'Type has been dropped.' => 'Typ har, typ, tagits bort.',
 	'Type has been created.' => 'Typ har skapats.',
 	'Alter type' => 'Ändra typ',
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Ja',
-	'No' => 'Nej',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -363,4 +350,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

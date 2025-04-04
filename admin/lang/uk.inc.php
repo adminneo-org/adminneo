@@ -258,13 +258,6 @@ $translations = [
 	'Clone' => 'Клонувати',
 	'Delete' => 'Видалити',
 
-	'E-mail' => 'E-mail',
-	'From' => 'Від',
-	'Subject' => 'Заголовок',
-	'Attachments' => 'Додатки',
-	'Send' => 'Надіслати',
-	'%d e-mail(s) have been sent.' => ['Було надіслано %d повідомлення.', 'Було надіслано %d повідомлення.', 'Було надіслано %d повідомлень.'],
-
 	// data type descriptions
 	'Numbers' => 'Числа',
 	'Date and time' => 'Дата і час',
@@ -277,7 +270,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$5.$3.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'дд.мм.[рррр]',
+	'YYYY-MM-DD' => 'ДД.ММ.РРРР',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'ГГ:ХХ:СС',
 	'now' => 'зараз',
@@ -342,12 +335,6 @@ $translations = [
 
 	'Vacuum' => null,
 	'%d / ' => [],
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Так',
-	'No' => 'Ні',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -364,4 +351,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

@@ -287,13 +287,6 @@ $translations = [
 	'Delete' => '删除',
 	'You have no privileges to update this table.' => '您没有权限更新这个表。',
 
-	'E-mail' => '电子邮件',
-	'From' => '来自',
-	'Subject' => '主题',
-	'Attachments' => '附件',
-	'Send' => '发送',
-	'%d e-mail(s) have been sent.' => '%d 封邮件已发送。',
-
 	// data type descriptions
 	'Numbers' => '数字',
 	'Date and time' => '日期时间',
@@ -306,7 +299,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$1.$3.$5',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => '[yyyy].mm.dd',
+	'YYYY-MM-DD' => 'YYYY.MM.DD',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => '现在',
@@ -340,12 +333,6 @@ $translations = [
 	'Type has been dropped.' => '已删除类型。',
 	'Type has been created.' => '已创建类型。',
 	'Alter type' => '修改类型',
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => null,
-	'No' => null,
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -363,4 +350,7 @@ $translations = [
 	'length' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

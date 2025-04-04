@@ -291,13 +291,6 @@ $translations = [
 	'Delete' => 'Xx',
 	'You have no privileges to update this table.' => 'Xx.',
 
-	'E-mail' => 'Xx',
-	'From' => 'Xx',
-	'Subject' => 'Xx',
-	'Attachments' => 'Xx',
-	'Send' => 'Xx',
-	'%d e-mail(s) have been sent.' => ['%d xx.', '%d xx.'],
-
 	// data type descriptions
 	'Numbers' => 'Xx',
 	'Date and time' => 'Xx',
@@ -310,9 +303,9 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => 'xx',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'xx',
+	'YYYY-MM-DD' => 'XX',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'Xx',
+	'HH:MM:SS' => 'XX',
 	'now' => 'xx',
 	'yes' => 'xx',
 	'no' => 'xx',
@@ -355,13 +348,9 @@ $translations = [
 	'Check has been created.' => 'Xx.',
 	'Check has been altered.' => 'Xx.',
 	'Check has been dropped.' => 'Xx.',
-
-	// Plugins
-	'Columns' => 'Xx',
-	'Nullable' => 'Xx',
-	'Default' => 'Xx',
-	'Yes' => 'Xx',
-	'No' => 'Xx',
 	'One Time Password' => 'Xx',
 	'Invalid OTP code.' => 'Xx.',
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

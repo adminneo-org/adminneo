@@ -197,7 +197,7 @@ $translations = [
 	'anywhere' => 'ნებისმიერ ადგილას',
 	'%.3f s' => '%.3f s',
 	'$1-$3-$5' => '$5.$3.$1',
-	'[yyyy]-mm-dd' => 'დდ.თთ.[წწწწ]',
+	'YYYY-MM-DD' => 'ᲓᲓ.ᲗᲗ.ᲬᲬᲬᲬ',
 	'History' => 'ისტორია',
 	'Variables' => 'ცვლადები',
 	'Relations' => 'ურთიერთობა',
@@ -208,11 +208,6 @@ $translations = [
 	'Date and time' => 'დრო და თარიღი',
 	'Binary' => 'ორობითი',
 	'Lists' => 'სია',
-	'E-mail' => 'ელ. ფოსტა',
-	'From' => 'ავტორი:',
-	'Subject' => 'თემა',
-	'Send' => 'გაგზავნა',
-	'%d e-mail(s) have been sent.' => 'გაიგზავნა %d წერილი.',
 	'Webserver file %s' => 'ფაილი %s ვებსერვერზე',
 	'File does not exist.' => 'ასეთი ფაილი არ არსებობს.',
 	'%d in total' => 'სულ %d',
@@ -248,7 +243,6 @@ $translations = [
 	'Network' => 'ქსელი',
 	'Geometry' => 'გეომეტრია',
 	'File exists.' => 'ფაილი უკვე არსებობს.',
-	'Attachments' => 'მიმაგრებული ფაილები',
 	'%d query(s) executed OK.' => '%d მოთხოვნა შესრულდა.',
 	'Show only errors' => 'მხოლოდ შეცდომები',
 	'Refresh' => 'განახლება',
@@ -299,12 +293,6 @@ $translations = [
 	'Database does not support password.' => 'ბაზაში არაა მხარდაჭერილი პაროლი.',
 
 	'overwrite' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => null,
-	'No' => null,
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -321,4 +309,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

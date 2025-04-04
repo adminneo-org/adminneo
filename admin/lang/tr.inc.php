@@ -283,13 +283,6 @@ $translations = [
 	'Delete' => 'Sil',
 	'You have no privileges to update this table.' => 'Bu tabloyu güncellemek için yetkiniz yok.',
 
-	'E-mail' => 'E-posta',
-	'From' => 'Gönderen',
-	'Subject' => 'Konu',
-	'Attachments' => 'Ekler',
-	'Send' => 'Gönder',
-	'%d e-mail(s) have been sent.' => ['%d e-posta gönderildi.', '%d adet e-posta gönderildi.'],
-
 	// data type descriptions
 	'Numbers' => 'Sayılar',
 	'Date and time' => 'Tarih ve zaman',
@@ -302,7 +295,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$6.$4.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => '[yyyy]-aa-gg',
+	'YYYY-MM-DD' => 'YYYY-AA-GG',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'SS:DD:ss',
 	'now' => 'şimdi',
@@ -342,12 +335,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => null,
 	'Unknown error.' => null,
 	'Database does not support password.' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Evet',
-	'No' => 'Hayır',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -364,4 +351,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

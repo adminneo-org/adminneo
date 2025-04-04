@@ -291,13 +291,6 @@ $translations = [
 	'Delete' => 'Smazat',
 	'You have no privileges to update this table.' => 'Nemáte oprávnění editovat tuto tabulku.',
 
-	'E-mail' => 'E-mail',
-	'From' => 'Odesílatel',
-	'Subject' => 'Předmět',
-	'Attachments' => 'Přílohy',
-	'Send' => 'Odeslat',
-	'%d e-mail(s) have been sent.' => ['Byl odeslán %d e-mail.', 'Byly odeslány %d e-maily.', 'Bylo odesláno %d e-mailů.'],
-
 	// data type descriptions
 	'Numbers' => 'Čísla',
 	'Date and time' => 'Datum a čas',
@@ -310,7 +303,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$6.$4.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'd.m.[rrrr]',
+	'YYYY-MM-DD' => 'D.M.RRRR',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => 'teď',
@@ -355,13 +348,9 @@ $translations = [
 	'Check has been created.' => 'Kontrola byla vytvořena.',
 	'Check has been altered.' => 'Kontrola byla změněna.',
 	'Check has been dropped.' => 'Kontrola byla odstraněna.',
-
-	// Plugins
-	'Columns' => 'Sloupce',
-	'Nullable' => 'Povoleno null',
-	'Default' => 'Výchozí',
-	'Yes' => 'Ano',
-	'No' => 'Ne',
 	'One Time Password' => 'Jednorázové heslo',
 	'Invalid OTP code.' => 'Neplatný kód OTP.',
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

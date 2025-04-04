@@ -280,13 +280,6 @@ $translations = [
 	'Delete' => 'Padam',
 	'You have no privileges to update this table.' => 'Anda tidak mempunyai keistimewaan untuk mengemaskini jadual ini.',
 
-	'E-mail' => 'Emel',
-	'From' => 'Dari',
-	'Subject' => 'Subjek',
-	'Attachments' => 'Lampiran',
-	'Send' => 'Hantar',
-	'%d e-mail(s) have been sent.' => '%d emel telah dihantar.',
-
 	// data type descriptions
 	'Numbers' => 'Nombor',
 	'Date and time' => 'Tarikh dan masa',
@@ -299,7 +292,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$1-$3-$5',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => '[yyyy]-mm-dd',
+	'YYYY-MM-DD' => 'YYYY-MM-DD',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => 'sekarang',
@@ -342,12 +335,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => null,
 	'Unknown error.' => null,
 	'Database does not support password.' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Ya',
-	'No' => 'Tidak',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -364,4 +351,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

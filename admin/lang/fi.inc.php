@@ -277,13 +277,6 @@ $translations = [
 	'Delete' => 'Poista',
 	'You have no privileges to update this table.' => 'Sinulla ei ole oikeutta päivittää tätä taulua.',
 
-	'E-mail' => 'S-posti',
-	'From' => 'Lähettäjä',
-	'Subject' => 'Aihe',
-	'Attachments' => 'Liitteet',
-	'Send' => 'Lähetä',
-	'%d e-mail(s) have been sent.' => ['% sähköpostiviestiä lähetetty.', '% sähköpostiviestiä lähetetty.'],
-
 	// data type descriptions
 	'Numbers' => 'Numerot',
 	'Date and time' => 'Päiväys ja aika',
@@ -296,7 +289,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$5.$3.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'pp.kk.[vvvv]',
+	'YYYY-MM-DD' => 'PP.KK.VVVV',
 	// hint for time format - use language equivalents for hour, minute and second shortcuts
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => 'nyt',
@@ -342,12 +335,6 @@ $translations = [
 	'There is a space in the input password which might be the cause.' => 'Syynä voi olla syötetyssä salasanassa oleva välilyönti.',
 	'Unknown error.' => 'Tuntematon virhe.',
 	'Database does not support password.' => 'Tietokanta ei tue salasanaa.',
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Kyllä',
-	'No' => 'Ei',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -364,4 +351,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

@@ -253,13 +253,6 @@ $translations = [
 	'Clone' => 'Kloniraj',
 	'Delete' => 'Izbriši',
 
-	'E-mail' => 'E-mail',
-	'From' => 'Od',
-	'Subject' => 'Zadeva',
-	'Attachments' => 'Priponke',
-	'Send' => 'Pošlji',
-	'%d e-mail(s) have been sent.' => ['Poslan je %d e-mail.', 'Poslana sta %d e-maila.', 'Poslani so %d e-maili.', 'Poslanih je %d e-mailov.'],
-
 	// data type descriptions
 	'Numbers' => 'Števila',
 	'Date and time' => 'Datum in čas',
@@ -272,7 +265,7 @@ $translations = [
 	// date format in Editor: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'$1-$3-$5' => '$6.$4.$1',
 	// hint for date format - use language equivalents for day, month and year shortcuts
-	'[yyyy]-mm-dd' => 'd.m.[rrrr]',
+	'YYYY-MM-DD' => 'D.M.RRRR',
 	'now' => 'zdaj',
 
 	// general SQLite error in create, drop or rename database
@@ -339,12 +332,6 @@ $translations = [
 	'yes' => null,
 	'no' => null,
 	'HH:MM:SS' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => null,
-	'No' => null,
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -361,4 +348,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];

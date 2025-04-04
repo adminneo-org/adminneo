@@ -237,12 +237,6 @@ $translations = [
 	'Clone' => 'Klon',
 	'Delete' => 'Slet',
 	'You have no privileges to update this table.' => 'Du mangler rettigheder til at ændre denne tabellen.',
-	'E-mail' => 'E-mail',
-	'From' => 'Fra',
-	'Subject' => 'Titel',
-	'Attachments' => 'Vedhæft',
-	'Send' => 'Send',
-	'%d e-mail(s) have been sent.' => ['%d email sendt.', '%d emails sendt.'],
 	'Numbers' => 'Nummer',
 	'Date and time' => 'Dato og tid',
 	'Strings' => 'Strenge',
@@ -252,7 +246,7 @@ $translations = [
 	'Geometry' => 'Geometri',
 	'Relations' => 'Relationer',
 	'$1-$3-$5' => '$6/$4 $1',
-	'[yyyy]-mm-dd' => 'd/m [åååå]',
+	'YYYY-MM-DD' => 'D/M ÅÅÅÅ',
 	'HH:MM:SS' => 'HH:MM:SS',
 	'now' => 'nu',
 	'yes' => 'ja',
@@ -299,12 +293,6 @@ $translations = [
 	'You are offline.' => null,
 	'Unknown error.' => null,
 	'Database does not support password.' => null,
-
-	'Columns' => null,
-	'Nullable' => null,
-	'Default' => null,
-	'Yes' => 'Ja',
-	'No' => 'Nej',
 	'One Time Password' => null,
 	'Invalid OTP code.' => null,
 
@@ -321,4 +309,7 @@ $translations = [
 	'Create check' => null,
 	'Checks' => null,
 	'Invalid permanent login, please login again.' => null,
+
+	'Access denied.' => null,
+	'Enter OTP code.' => null,
 ];
