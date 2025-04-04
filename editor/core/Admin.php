@@ -356,7 +356,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 							$conds[] = (in_array(0, $val) ? "$name IS NULL OR " : "") . "$name IN (" . implode(", ", array_map('AdminNeo\q', $val)) . ")";
 						} else {
 							$text_type = preg_match('~char|text|enum|set~', $field["type"]);
-							$value = $this->processInput($field, (!$op && $text_type && preg_match('~^[^%]+$~', $val) ? "%$val%" : $val));
+							$value = $this->processFieldInput($field, (!$op && $text_type && preg_match('~^[^%]+$~', $val) ? "%$val%" : $val));
 
 							$conds[] = $driver->convertSearch($name, $where, $field) . ($value == "NULL" ? " IS" . ($op == ">=" ? " NOT" : "") . " $value"
 								: (in_array($op, $this->getOperators()) || $op == "=" ? " $op $value"
@@ -484,7 +484,8 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return $hint;
 	}
 
-	function processInput(?array $field, $value, $function = "") {
+	public function processFieldInput(?array $field, string $value, string $function = ""): string
+	{
 		if (!$field) {
 			return q($value);
 		}

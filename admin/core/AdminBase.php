@@ -412,13 +412,13 @@ abstract class AdminBase
 		return support("comment") ? $this->formatComment($field["comment"]) : "";
 	}
 
-	public abstract function processInput(?array $field, $value, $function = "");
+	public abstract function processFieldInput(?array $field, string $value, string $function = ""): string;
 
 	/**
 	 * Detect JSON field or value and optionally reformat the value.
 	 *
 	 * @param string $fieldType
-	 * @param mixed $value
+	 * @param string|array $value
 	 * @param bool|null $pretty True to pretty format, false to compact format, null to skip formatting.
 	 *
 	 * @return bool Whether field or value are detected as JSON.

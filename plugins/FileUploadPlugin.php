@@ -60,7 +60,7 @@ class FileUploadPlugin
 		return "<input type='file'$attrs>";
 	}
 
-	public function processInput(?array $field, $value, $function = "")
+	public function processFieldInput(?array $field, string $value, string $function = ""): ?string
 	{
 		if (!$field || !($shortFieldName = $this->matchField($field))) {
 			return null;

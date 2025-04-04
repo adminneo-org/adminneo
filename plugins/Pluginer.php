@@ -297,7 +297,7 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function processInput(?array $field, $value, $function = "")
+	public function processFieldInput(?array $field, string $value, string $function = ""): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

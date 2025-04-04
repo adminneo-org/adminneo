@@ -1169,7 +1169,7 @@ function process_input($field) {
 		}
 		return $driver->quoteBinary($file);
 	}
-	return $admin->processInput($field, $value, $function);
+	return $admin->processFieldInput($field, $value, $function);
 }
 
 /** Compute fields() from $_POST edit data

@@ -720,14 +720,14 @@ class Admin extends AdminBase
 				} elseif ($op == "SQL") {
 					$cond = " $val"; // SQL injection
 				} elseif ($op == "LIKE %%") {
-					$cond = " LIKE " . $this->processInput($fields[$col] ?? null, "%$val%");
+					$cond = " LIKE " . $this->processFieldInput($fields[$col] ?? null, "%$val%");
 				} elseif ($op == "ILIKE %%") {
-					$cond = " ILIKE " . $this->processInput($fields[$col] ?? null, "%$val%");
+					$cond = " ILIKE " . $this->processFieldInput($fields[$col] ?? null, "%$val%");
 				} elseif ($op == "FIND_IN_SET") {
 					$prefix = "$op(" . q($val) . ", ";
 					$cond = ")";
 				} elseif (!preg_match('~NULL$~', $op)) {
-					$cond .= " " . $this->processInput($fields[$col] ?? null, $val);
+					$cond .= " " . $this->processFieldInput($fields[$col] ?? null, $val);
 				}
 
 				if ($col != "") {
@@ -831,13 +831,15 @@ class Admin extends AdminBase
 		return "";
 	}
 
-	/** Process sent input
-	* @param ?array single field from fields()
-	* @param string
-	* @param string
-	* @return string expression to use in a query
-	*/
-	function processInput(?array $field, $value, $function = "") {
+	/**
+	 * Processes sent input.
+	 *
+	 * @param ?array $field Single field from fields().
+	 *
+	 * @return string Expression to use in a query.
+	 */
+	public function processFieldInput(?array $field, string $value, string $function = ""): string
+	{
 		if ($function == "SQL") {
 			return $value; //! SQL injection
 		}

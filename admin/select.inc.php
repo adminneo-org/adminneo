@@ -179,7 +179,7 @@ if ($_POST && !$error) {
 				$set = [];
 				foreach ($row as $key => $val) {
 					$key = bracket_escape($key, 1); // 1 - back
-					$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? $admin->processInput($fields[$key], $val) : "NULL");
+					$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? $admin->processFieldInput($fields[$key], $val) : "NULL");
 				}
 				$result = $driver->update(
 					$TABLE,
