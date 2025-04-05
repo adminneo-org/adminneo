@@ -53,7 +53,7 @@ function linked_filename(string $name, array $file_paths): ?string
 		if (file_exists($full_path)) {
 			$version .= $file_path . filemtime($full_path);
 		} elseif (PHP_SAPI == "cli") {
-			echo "⚠️ File does not exists: $file_path\n";
+			echo "⚠️ File does not exist: $file_path\n";
 		}
 	}
 	if (!$version) {
@@ -86,7 +86,7 @@ function compile_file(string $name, array $file_paths): ?string
 		if (file_exists($full_path)) {
 			$file .= file_get_contents(getcwd() . "/$file_path");
 		} elseif (PHP_SAPI == "cli") {
-			echo "⚠️ File does not exists: $full_path\n";
+			echo "⚠️ File does not exist: $full_path\n";
 		}
 	}
 	if (!$file) {
