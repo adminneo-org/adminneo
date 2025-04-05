@@ -168,6 +168,8 @@ include "adminneo.php";
     - `loginFormField()` -> `getLoginFormRow()`
     - `selectLinks()` -> `printTableMenu()`
     - `foreignKeys()` -> `getForeignKeys()`
+    - `backwardKeys()` -> `getBackwardKeys()`
+    - `backwardKeysPrint()` -> `printBackwardKeys()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`

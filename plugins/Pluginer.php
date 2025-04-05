@@ -152,14 +152,14 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function backwardKeys($table, $tableName)
+	public function getBackwardKeys(string $table, string $tableName): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function backwardKeysPrint($backwardKeys, $row)
+	public function printBackwardKeys(array $backwardKeys, array $row): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function formatSelectQuery(string $query, float $start, bool $failed = false): string

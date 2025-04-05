@@ -327,9 +327,9 @@ abstract class AdminBase
 		return foreign_keys($table);
 	}
 
-	public abstract function backwardKeys($table, $tableName);
+	public abstract function getBackwardKeys(string $table, string $tableName): array;
 
-	public abstract function backwardKeysPrint($backwardKeys, $row);
+	public abstract function printBackwardKeys(array $backwardKeys, array $row): void;
 
 	public abstract function formatSelectQuery(string $query, float $start, bool $failed = false): string;
 

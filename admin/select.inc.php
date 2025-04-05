@@ -330,7 +330,7 @@ if (!$columns && support("table")) {
 		if (!$rows) {
 			echo "<p class='message'>" . lang('No rows.') . "\n";
 		} else {
-			$backward_keys = $admin->backwardKeys($TABLE, $table_name);
+			$backward_keys = $admin->getBackwardKeys($TABLE, $table_name);
 
 			echo "<div class='scrollable'>\n";
 			echo "<table id='table' class='nowrap checkable'>\n";
@@ -487,7 +487,7 @@ if (!$columns && support("table")) {
 				if ($backward_keys) {
 					echo "<td>";
 				}
-				$admin->backwardKeysPrint($backward_keys, $rows[$n]);
+				$admin->printBackwardKeys($backward_keys, $rows[$n]);
 				echo "</tr>\n"; // close to allow white-space: pre
 			}
 

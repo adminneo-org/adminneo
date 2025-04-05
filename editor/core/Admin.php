@@ -88,30 +88,35 @@ class Admin extends AdminBase
 		}
 	}
 
-	function backwardKeys($table, $tableName) {
-		$return = [];
+	public function getBackwardKeys(string $table, string $tableName): array
+	{
+		$keys = [];
+
 		foreach (get_rows("SELECT TABLE_NAME, CONSTRAINT_NAME, COLUMN_NAME, REFERENCED_COLUMN_NAME
 FROM information_schema.KEY_COLUMN_USAGE
 WHERE TABLE_SCHEMA = " . q($this->getDatabase()) . "
 AND REFERENCED_TABLE_SCHEMA = " . q($this->getDatabase()) . "
 AND REFERENCED_TABLE_NAME = " . q($table) . "
 ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
-			$return[$row["TABLE_NAME"]]["keys"][$row["CONSTRAINT_NAME"]][$row["COLUMN_NAME"]] = $row["REFERENCED_COLUMN_NAME"];
+			$keys[$row["TABLE_NAME"]]["keys"][$row["CONSTRAINT_NAME"]][$row["COLUMN_NAME"]] = $row["REFERENCED_COLUMN_NAME"];
 		}
-		foreach ($return as $key => $val) {
+
+		foreach ($keys as $key => $val) {
 			$name = $this->getTableName(table_status($key, true));
 			if ($name != "") {
 				$search = preg_quote($tableName);
 				$separator = "(:|\\s*-)?\\s+";
-				$return[$key]["name"] = (preg_match("(^$search$separator(.+)|^(.+?)$separator$search\$)iu", $name, $match) ? $match[2] . $match[3] : $name);
+				$keys[$key]["name"] = (preg_match("(^$search$separator(.+)|^(.+?)$separator$search\$)iu", $name, $match) ? $match[2] . $match[3] : $name);
 			} else {
-				unset($return[$key]);
+				unset($keys[$key]);
 			}
 		}
-		return $return;
+
+		return $keys;
 	}
 
-	function backwardKeysPrint($backwardKeys, $row) {
+	public function printBackwardKeys(array $backwardKeys, array $row): void
+	{
 		foreach ($backwardKeys as $table => $backwardKey) {
 			foreach ($backwardKey["keys"] as $cols) {
 				$link = ME . 'select=' . urlencode($table);
