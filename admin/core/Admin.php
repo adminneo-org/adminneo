@@ -50,10 +50,13 @@ class Admin extends AdminBase
 		return DB;
 	}
 
-	/** Specify limit for waiting on some slow queries like DB list
-	* @return float number of seconds
-	*/
-	function queryTimeout() {
+	/**
+	 * Specifies the limit for waiting on some slow queries like DB list.
+	 *
+	 * @return int Number of seconds.
+	 */
+	public function getQueryTimeout(): int
+	{
 		return 2;
 	}
 

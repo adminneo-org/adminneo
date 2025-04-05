@@ -1501,7 +1501,7 @@ function count_rows($table, $where, $is_group, $group) {
 function slow_query($query) {
 	global $admin, $token, $driver;
 	$db = $admin->getDatabase();
-	$timeout = $admin->queryTimeout();
+	$timeout = $admin->getQueryTimeout();
 	$slow_query = $driver->slowQuery($query, $timeout);
 	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->select_db($db))) {
 		$kill = $connection2->result(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
@@ -1518,7 +1518,7 @@ var timeout = setTimeout(function () {
 	}
 	ob_flush();
 	flush();
-	$return = @get_key_vals(($slow_query ? $slow_query : $query), $connection2, false); // @ - may be killed
+	$return = @get_key_vals(($slow_query ?: $query), $connection2, false); // @ - may be killed
 	if ($connection2) {
 		echo script("clearTimeout(timeout);");
 		ob_flush();

@@ -201,7 +201,7 @@ abstract class AdminBase
 		return $result;
 	}
 
-	public abstract function queryTimeout();
+	public abstract function getQueryTimeout(): int;
 
 	/**
 	 * Sends additional HTTP headers.

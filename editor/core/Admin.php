@@ -47,7 +47,8 @@ class Admin extends AdminBase
 		}
 	}
 
-	function queryTimeout() {
+	public function getQueryTimeout(): int
+	{
 		return 5;
 	}
 
