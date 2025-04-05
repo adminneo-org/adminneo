@@ -365,9 +365,9 @@ abstract class AdminBase
 
 	public abstract function printTableStructure(array $fields): void;
 
-	public abstract function tablePartitionsPrint($partition_info);
+	public abstract function printTablePartitions(array $partitionInfo): void;
 
-	public abstract function tableIndexesPrint($indexes);
+	public abstract function printTableIndexes(array $indexes): void;
 
 	public abstract function selectColumnsPrint(array $select, array $columns);
 

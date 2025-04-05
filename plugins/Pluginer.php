@@ -207,14 +207,14 @@ class Pluginer extends Admin
 		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function tablePartitionsPrint($partition_info)
+	public function printTablePartitions(array $partitionInfo): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function tableIndexesPrint($indexes)
+	public function printTableIndexes(array $indexes): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function selectColumnsPrint(array $select, array $columns)

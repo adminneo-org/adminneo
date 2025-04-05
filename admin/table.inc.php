@@ -65,7 +65,7 @@ if (support("partitioning") && preg_match("~partitioned~", $table_status["Create
 	echo "<h2 id='partition-by'>" . lang('Partition by') . "</h2>\n";
 
 	$partitions_info = get_partitions_info($TABLE);
-	$admin->tablePartitionsPrint($partitions_info);
+	$admin->printTablePartitions($partitions_info);
 
 	echo $editLink;
 }
@@ -75,7 +75,7 @@ if (!is_view($table_status)) {
 		echo "<h2 id='indexes'>" . lang('Indexes') . "</h2>\n";
 		$indexes = indexes($TABLE);
 		if ($indexes) {
-			$admin->tableIndexesPrint($indexes);
+			$admin->printTableIndexes($indexes);
 		}
 		echo '<p class="links"><a href="' . h(ME) . 'indexes=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter indexes') . "</a>\n";
 	}

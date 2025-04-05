@@ -227,14 +227,17 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	public function printTableStructure(array $fields): void
 	{
+		//
 	}
 
-	public function tablePartitionsPrint($partition_info)
+	public function printTablePartitions(array $partitionInfo): void
 	{
+		//
 	}
 
-	public function tableIndexesPrint($indexes)
+	public function printTableIndexes(array $indexes): void
 	{
+		//
 	}
 
 	function selectColumnsPrint(array $select, array $columns) {

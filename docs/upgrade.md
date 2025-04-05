@@ -172,10 +172,12 @@ include "adminneo.php";
     - `backwardKeysPrint()` -> `printBackwardKeys()`
     - `rowDescription()` -> `getTableDescriptionFieldName()`
     - `rowDescriptions()` -> `fillForeignDescriptions()`
+    - `tableStructurePrint()` -> `printTableStructure()`
+    - `tablePartitionsPrint()` -> `printTablePartitions()`
+    - `tableIndexesPrint()` -> `printTableIndexes()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`
-    - `tableStructurePrint()` -> `printTableStructure()`
     - `tableName()` -> `getTableName()`
     - `fieldName()` -> `getFieldName()`
     - `editVal()` -> `formatFieldValue()`

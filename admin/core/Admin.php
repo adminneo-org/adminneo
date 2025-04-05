@@ -447,13 +447,14 @@ class Admin extends AdminBase
 		echo "</div>\n";
 	}
 
-	function tablePartitionsPrint($partition_info) {
-		$showList = $partition_info["partition_by"] == "RANGE" || $partition_info["partition_by"] == "LIST";
+	public function printTablePartitions(array $partitionInfo): void
+	{
+		$showList = $partitionInfo["partition_by"] == "RANGE" || $partitionInfo["partition_by"] == "LIST";
 
 		echo "<p>";
-		echo "<code>{$partition_info["partition_by"]} ({$partition_info["partition"]})</code>";
+		echo "<code>{$partitionInfo["partition_by"]} ({$partitionInfo["partition"]})</code>";
 		if (!$showList) {
-			echo " " . lang('Partitions') . ": " . h($partition_info["partitions"]);
+			echo " " . lang('Partitions') . ": " . h($partitionInfo["partitions"]);
 		}
 		echo "</p>";
 
@@ -461,19 +462,21 @@ class Admin extends AdminBase
 			echo "<table>\n";
 			echo "<thead><tr><th>" . lang('Partition') . "</th><td>" . lang('Values') . "</td></tr></thead>\n";
 
-			foreach ($partition_info["partition_names"] as $key => $name) {
-				echo "<tr><th>" . h($name) . "</th><td>" . h($partition_info["partition_values"][$key]) . "\n";
+			foreach ($partitionInfo["partition_names"] as $key => $name) {
+				echo "<tr><th>" . h($name) . "</th><td>" . h($partitionInfo["partition_values"][$key]) . "\n";
 			}
 
 			echo "</table>\n";
 		}
 	}
 
-	/** Print list of indexes on table in tabular format
-	* @param array data about all indexes on a table
-	* @return null
-	*/
-	function tableIndexesPrint($indexes) {
+	/**
+	 * Prints the list of table indexes.
+	 *
+	 * @param array $indexes Data about all indexes on a table.
+	 */
+	public function printTableIndexes(array $indexes): void
+	{
 		echo "<table>\n";
 		echo "<thead><tr><th>" . lang('Type') . "</th><td>" . lang('Column') . " (" . lang('length') . ")</td></tr></thead>\n";
 
