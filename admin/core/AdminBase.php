@@ -317,7 +317,7 @@ abstract class AdminBase
 		return h($comment);
 	}
 
-	public abstract function selectLinks($tableStatus, $set = "");
+	public abstract function printTableMenu(array $tableStatus, string $set = ""): void;
 
 	/**
 	 * Returns foreign keys for table.

@@ -80,10 +80,11 @@ class Admin extends AdminBase
 		return h($field["field"]);
 	}
 
-	function selectLinks($tableStatus, $set = "") {
-		$TABLE = $tableStatus["Name"];
+	public function printTableMenu(array $tableStatus, string $set = ""): void
+	{
 		if ($set !== null) {
-			echo '<p class="links top-links"><a href="', h(ME . 'edit=' . urlencode($TABLE) . $set), '">', icon("item-add"), lang('New item'), "</a>\n";
+			$table = $tableStatus["Name"];
+			echo '<p class="links top-links"><a href="', h(ME . 'edit=' . urlencode($table) . $set), '">', icon("item-add"), lang('New item'), "</a>\n";
 		}
 	}
 

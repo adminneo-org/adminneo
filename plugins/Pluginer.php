@@ -142,9 +142,9 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function selectLinks($tableStatus, $set = "")
+	public function printTableMenu(array $tableStatus, string $set = ""): void
 	{
-		return $this->applyPlugin(__FUNCTION__, func_get_args());
+		$this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
 	public function getForeignKeys(string $table): array

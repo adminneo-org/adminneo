@@ -29,7 +29,7 @@ $set = null;
 if (isset($rights["insert"]) || !support("table")) {
 	$set = "";
 }
-$admin->selectLinks($table_status, $set);
+$admin->printTableMenu($table_status, $set);
 
 $info = [];
 if (!preg_match("~sqlite|mssql|pgsql~", $jush) && isset($table_status["Engine"])) {

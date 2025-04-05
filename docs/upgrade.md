@@ -166,6 +166,7 @@ include "adminneo.php";
     - `queryTimeout()` -> `getQueryTimeout()`
     - `loginForm()` -> `printLoginForm()`
     - `loginFormField()` -> `getLoginFormRow()`
+    - `selectLinks()` -> `printTableMenu()`
     - `foreignKeys()` -> `getForeignKeys()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`

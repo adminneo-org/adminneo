@@ -253,7 +253,7 @@ if (isset($rights["insert"]) || !support("table")) {
 
 	$set = $params ? "&" . http_build_query($params) : "";
 }
-$admin->selectLinks($table_status, $set);
+$admin->printTableMenu($table_status, $set);
 
 if (!$columns && support("table")) {
 	echo "<p class='error'>" . lang('Unable to select the table') . ($fields ? "." : ": " . error()) . "\n";

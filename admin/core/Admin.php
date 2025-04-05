@@ -136,11 +136,14 @@ class Admin extends AdminBase
 		return '<span title="' . h($field["full_type"]) . '">' . h($field["field"]) . '</span>';
 	}
 
-	/** Print links after select heading
-	* @param array result of SHOW TABLE STATUS
-	* @param string new item options, NULL for no new item
-	*/
-	function selectLinks($tableStatus, $set = "") {
+	/**
+	 * Prints top menu for table selection and structure page.
+	 *
+	 * @param array $tableStatus The result of SHOW TABLE STATUS.
+	 * @param string $set New item options, NULL for no new item.
+	 */
+	public function printTableMenu(array $tableStatus, string $set = ""): void
+	{
 		global $jush, $driver;
 
 		echo '<p class="links top-tabs">';
@@ -171,15 +174,17 @@ class Admin extends AdminBase
 				$links["create"] = [lang('Alter table'), "edit"];
 			}
 		}
+
 		if ($set !== null) {
 			$links["edit"] = [lang('New item'), "item-add"];
 		}
-		$name = $tableStatus["Name"];
+
+		$table = $tableStatus["Name"];
 		foreach ($links as $key => $val) {
-			echo " <a href='", h(ME), "$key=", urlencode($name), ($key == "edit" ? $set : ""), "'", bold(isset($_GET[$key])), ">", icon($val[1]), "$val[0]</a>";
+			echo " <a href='", h(ME), "$key=", urlencode($table), ($key == "edit" ? $set : ""), "'", bold(isset($_GET[$key])), ">", icon($val[1]), "$val[0]</a>";
 		}
 
-		echo doc_link([$jush => $driver->tableHelp($name, $is_view)], "?");
+		echo doc_link([$jush => $driver->tableHelp($table, $is_view)], "?");
 		echo "\n";
 	}
 
