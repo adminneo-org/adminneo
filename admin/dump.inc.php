@@ -255,7 +255,7 @@ if (DB != "") {
 	echo "<label class='block'><input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . ">" . lang('Database') . "</label>";
 	echo script("gid('check-databases').onclick = partial(formCheck, /^databases\\[/);", "");
 	echo "</thead>\n";
-	$databases = $admin->databases();
+	$databases = $admin->getDatabases();
 	if ($databases) {
 		foreach ($databases as $db) {
 			if (!information_schema($db)) {

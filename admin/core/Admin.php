@@ -40,11 +40,13 @@ class Admin extends AdminBase
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
-	/** Identifier of selected database
-	* @return string
-	*/
-	function database() {
-		// should be used everywhere instead of DB
+	/**
+	 * Returns the name of selected database.
+	 *
+	 * @return string
+	 */
+	public function getDatabase(): ?string
+	{
 		return DB;
 	}
 
@@ -1225,7 +1227,7 @@ class Admin extends AdminBase
 	function databasesPrint($missing) {
 		global $admin, $connection;
 
-		$databases = $this->databases();
+		$databases = $this->getDatabases();
 		if (DB && $databases && !in_array(DB, $databases)) {
 			array_unshift($databases, DB);
 		}
@@ -1242,7 +1244,7 @@ class Admin extends AdminBase
 		echo "<input type='submit' value='" . lang('Use') . "' class='button " . ($databases ? "hidden" : "") . "'>\n";
 
 		if (support("scheme") && $missing != "db" && DB != "" && $connection->select_db(DB)) {
-			echo "<br><select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $admin->schemas(), $_GET["ns"]) . "</select>"
+			echo "<br><select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $admin->getSchemas(), $_GET["ns"]) . "</select>"
 				. script("mixin(gid('scheme-select'), {onmousedown: dbMouseDown, onchange: dbChange});");
 
 			if ($_GET["ns"] != "") {

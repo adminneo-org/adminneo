@@ -30,14 +30,20 @@ class Admin extends AdminBase
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='130' height='28'><desc>EditorNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
-	function database() {
+	public function getDatabase(): ?string
+	{
 		global $connection;
-		if ($connection) {
-			$databases = $this->databases(false);
-			return (!$databases
-				? $connection->result("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)") // username without the database list
-				: $databases[(information_schema($databases[0]) ? 1 : 0)] // first available database
-			);
+
+		if (!$connection) {
+			return null;
+		}
+
+		// Returns the first available database.
+		$databases = $this->getDatabases(false);
+		if ($databases) {
+			return $databases[(information_schema($databases[0]) ? 1 : 0)];
+		} else {
+			return $connection->result("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)");
 		}
 	}
 
@@ -83,8 +89,8 @@ class Admin extends AdminBase
 		$return = [];
 		foreach (get_rows("SELECT TABLE_NAME, CONSTRAINT_NAME, COLUMN_NAME, REFERENCED_COLUMN_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE TABLE_SCHEMA = " . q($this->database()) . "
-AND REFERENCED_TABLE_SCHEMA = " . q($this->database()) . "
+WHERE TABLE_SCHEMA = " . q($this->getDatabase()) . "
+AND REFERENCED_TABLE_SCHEMA = " . q($this->getDatabase()) . "
 AND REFERENCED_TABLE_NAME = " . q($table) . "
 ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			$return[$row["TABLE_NAME"]]["keys"][$row["CONSTRAINT_NAME"]][$row["COLUMN_NAME"]] = $row["REFERENCED_COLUMN_NAME"];

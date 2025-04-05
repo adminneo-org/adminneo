@@ -68,7 +68,7 @@ if ($_GET["ns"] == "") {
 if ($admin->homepage()) {
 	if ($_GET["ns"] === "") {
 		echo "<h2 id='schemas'>" . lang('Schemas') . "</h2>\n";
-		$schemas = $admin->schemas();
+		$schemas = $admin->getSchemas();
 		if (!$schemas) {
 			echo "<p class='message'>" . lang('No schemas.') . "\n";
 		} else {
@@ -197,7 +197,7 @@ if ($admin->homepage()) {
 				: "")))
 				. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script($jush == "sqlite" ? "DELETE" : ("TRUNCATE" . ($jush == "pgsql" ? "" : " TABLE"))) . confirm()
 				. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
-				$databases = (support("scheme") ? $admin->schemas() : $admin->databases());
+				$databases = (support("scheme") ? $admin->getSchemas() : $admin->getDatabases());
 				if (count($databases) != 1 && $jush != "sqlite") {
 					$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
 					echo "<p>" . lang('Move to other database') . ": ";

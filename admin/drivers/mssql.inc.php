@@ -46,7 +46,7 @@ if (isset($_GET["mssql"])) {
 					$connection_info["TrustServerCertificate"] = $trust;
 				}
 
-				$db = $admin->database();
+				$db = $admin->getDatabase();
 				if ($db != "") {
 					$connection_info["Database"] = $db;
 				}

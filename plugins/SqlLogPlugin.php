@@ -42,7 +42,7 @@ class SqlLogPlugin
 	private function log(string $query): void
 	{
 		if ($this->filename == "") {
-			$dbName = admin()->database();
+			$dbName = admin()->getDatabase();
 			$this->filename = $dbName . ($dbName ? "-" : "") . "log.sql";
 		}
 

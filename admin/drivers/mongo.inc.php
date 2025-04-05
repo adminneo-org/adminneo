@@ -419,7 +419,7 @@ if (isset($_GET["mongo"])) {
 			$options["password"] = $password;
 		}
 
-		$db = $admin->database();
+		$db = $admin->getDatabase();
 		if ($db != "") {
 			$options["db"] = $db;
 		}

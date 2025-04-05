@@ -122,25 +122,36 @@ abstract class AdminBase
 		return $serverObj ? $serverObj->getName() : $server;
 	}
 
-	public abstract function database();
+	public abstract function getDatabase(): ?string;
 
 	/**
 	 * Returns cached list of databases.
+	 *
+	 * @return string[]
 	 */
-	public function databases($flush = true): array
+	public function getDatabases($flush = true): array
 	{
 		return $this->filterListWithWildcards(get_databases($flush), $this->config->getHiddenDatabases(), false, $this->systemDatabases);
 	}
 
 	/**
-	 * Returns list of schemas.
+	 * Returns the list of schemas.
+	 *
+	 * @return string[]
 	 */
-	public function schemas(): array
+	public function getSchemas(): array
 	{
 		return $this->filterListWithWildcards(schemas(), $this->config->getHiddenSchemas(), false, $this->systemSchemas);
 	}
 
-	public function collations(array $keepValues = []): array
+	/**
+	 * Returns the list of collations.
+	 *
+	 * @param string[] $keepValues List of collations that can not be removed by filtering.
+	 *
+	 * @return string[][]
+	 */
+	public function getCollations(array $keepValues = []): array
 	{
 		$visibleCollations = $this->config->getVisibleCollations();
 		$filterList = $visibleCollations ? array_merge($visibleCollations, $keepValues) : [];
@@ -496,7 +507,7 @@ abstract class AdminBase
 	{
 		echo "<div class='tables-filter jsonly'>"
 			. "<input id='tables-filter' type='search' class='input' autocomplete='off' placeholder='" . lang('Table') . "'>"
-			. script("initTablesFilter(" . json_encode($this->database()) . ");")
+			. script("initTablesFilter(" . json_encode($this->getDatabase()) . ");")
 			. "</div>\n";
 	}
 

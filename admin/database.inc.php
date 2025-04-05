@@ -66,7 +66,7 @@ if ($_POST) {
 	}
 }
 
-$collations = $admin->collations($row["collation"] ? [$row["collation"]] : []);
+$collations = $admin->getCollations($row["collation"] ? [$row["collation"]] : []);
 
 ?>
 

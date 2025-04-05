@@ -25,7 +25,7 @@ function create_adminneo(): Admin
 			return ($username == 'admin');
 		}
 
-		function database()
+		public function getDatabase(): ?string
 		{
 			// will be escaped by Admin
 			return 'adminneo_test';

@@ -20,7 +20,7 @@ if (isset($_GET["pgsql"])) {
 
 			function connect($server, $username, $password) {
 				global $admin;
-				$db = $admin->database();
+				$db = $admin->getDatabase();
 				set_error_handler([$this, '_error']);
 
 				$this->_string = "host='" . str_replace(":", "' port='", addcslashes($server, "'\\")) . "' user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
@@ -55,7 +55,7 @@ if (isset($_GET["pgsql"])) {
 
 			function select_db($database) {
 				global $admin;
-				if ($database == $admin->database()) {
+				if ($database == $admin->getDatabase()) {
 					return $this->_database;
 				}
 				$return = @pg_connect("$this->_string dbname='" . addcslashes($database, "'\\") . "'", PGSQL_CONNECT_FORCE_NEW);
@@ -160,7 +160,7 @@ if (isset($_GET["pgsql"])) {
 			function connect($server, $username, $password) {
 				global $admin;
 
-				$db = $admin->database();
+				$db = $admin->getDatabase();
 
 				//! client_encoding is supported since 9.1, but we can't yet use min_version here
 				$dsn = "pgsql:host='" . str_replace(":", "' port='", addcslashes($server, "'\\")) . "' client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
@@ -177,7 +177,7 @@ if (isset($_GET["pgsql"])) {
 
 			function select_db($database) {
 				global $admin;
-				return ($admin->database() == $database);
+				return ($admin->getDatabase() == $database);
 			}
 
 			function query($query, $unbuffered = false) {

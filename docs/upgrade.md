@@ -159,6 +159,10 @@ include "adminneo.php";
     - `permanentLogin()` -> `getPrivateKey()`
     - `bruteForceKey()` -> `getBruteForceKey()`
     - `serverName()` -> `getServerName()`
+    - `database()` -> `getDatabase()`
+    - `databases()` -> `getDatabases()`
+    - `schemas()` -> `getSchemas()`
+    - `collations()` -> `getCollations()`
     - `loginFormField()` -> `composeLoginFormRow()`
     - `foreignKeys()` -> `getForeignKeys()`
     - `dumpOutput()` -> `getDumpOutputs()`

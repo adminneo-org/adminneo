@@ -8,7 +8,7 @@ function create_adminneo(): Admin
 
 	class CustomAdmin extends Admin
 	{
-		function database()
+		public function getDatabase(): ?string
 		{
 			return "PATH_TO_YOUR_SQLITE_HERE";
 		}

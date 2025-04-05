@@ -72,22 +72,22 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function database()
+	public function getDatabase(): ?string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function schemas(): array
+	public function getDatabases($flush = true): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function databases($flush = true): array
+	public function getSchemas(): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function collations(array $keepValues = []): array
+	public function getCollations(array $keepValues = []): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}

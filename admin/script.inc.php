@@ -46,7 +46,7 @@ if ($_GET["script"] == "db") {
 	$connection->query("KILL " . number($_POST["kill"]));
 
 } else { // connect
-	foreach (count_tables($admin->databases()) as $db => $val) {
+	foreach (count_tables($admin->getDatabases()) as $db => $val) {
 		json_row("tables-$db", $val);
 		json_row("size-$db", db_size($db));
 	}

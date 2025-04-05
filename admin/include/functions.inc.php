@@ -1500,7 +1500,7 @@ function count_rows($table, $where, $is_group, $group) {
 */
 function slow_query($query) {
 	global $admin, $token, $driver;
-	$db = $admin->database();
+	$db = $admin->getDatabase();
 	$timeout = $admin->queryTimeout();
 	$slow_query = $driver->slowQuery($query, $timeout);
 	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->select_db($db))) {
