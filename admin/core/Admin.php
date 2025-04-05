@@ -320,20 +320,25 @@ class Admin extends AdminBase
 		return truncate_utf8($query, 1000);
 	}
 
-	/** Description of a row in a table
-	* @param string
-	* @return string SQL expression, empty string for no description
-	*/
-	function rowDescription($table) {
+	/**
+	 * Returns field name that will be used for getting a foreign key description.
+	 *
+	 * @return string SQL expression, empty string for no description.
+	 */
+	public function getTableDescriptionFieldName(string $table): string
+	{
 		return "";
 	}
 
-	/** Get descriptions of selected data
-	* @param array all data to print
-	* @param array
-	* @return array
-	*/
-	function rowDescriptions($rows, $foreignKeys) {
+	/**
+	 * Fill descriptions of the foreign keys for the whole selection data.
+	 *
+	 * @param array $rows All selection data to print.
+	 *
+	 * @return array Updated selection data.
+	 */
+	public function fillForeignDescriptions(array $rows, array $foreignKeys): array
+	{
 		return $rows;
 	}
 

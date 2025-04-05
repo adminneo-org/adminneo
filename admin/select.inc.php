@@ -397,7 +397,7 @@ if (!$columns && support("table")) {
 				ob_end_clean();
 			}
 
-			foreach ($admin->rowDescriptions($rows, $foreign_keys) as $n => $row) {
+			foreach ($admin->fillForeignDescriptions($rows, $foreign_keys) as $n => $row) {
 				$unique_array = unique_array($rows[$n], $indexes);
 				if (!$unique_array) {
 					$unique_array = [];

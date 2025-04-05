@@ -337,9 +337,9 @@ abstract class AdminBase
 
 	public abstract function formatSqlCommandQuery(string $query): string;
 
-	public abstract function rowDescription($table);
+	public abstract function getTableDescriptionFieldName(string $table): string;
 
-	public abstract function rowDescriptions($rows, $foreignKeys);
+	public abstract function fillForeignDescriptions(array $rows, array $foreignKeys): array;
 
 	/**
 	 * Returns a link to use in select table.

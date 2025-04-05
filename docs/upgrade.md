@@ -170,6 +170,8 @@ include "adminneo.php";
     - `foreignKeys()` -> `getForeignKeys()`
     - `backwardKeys()` -> `getBackwardKeys()`
     - `backwardKeysPrint()` -> `printBackwardKeys()`
+    - `rowDescription()` -> `getTableDescriptionFieldName()`
+    - `rowDescriptions()` -> `fillForeignDescriptions()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`
     - `dumpHeaders()` -> `sendDumpHeaders()`

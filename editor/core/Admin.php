@@ -149,7 +149,8 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return "";
 	}
 
-	function rowDescription($table) {
+	public function getTableDescriptionFieldName(string $table): string
+	{
 		// first varchar column
 		foreach (fields($table) as $field) {
 			if (preg_match("~varchar|character varying~", $field["type"])) {
@@ -159,7 +160,8 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 		return "";
 	}
 
-	function rowDescriptions($rows, $foreignKeys) {
+	public function fillForeignDescriptions(array $rows, array $foreignKeys): array
+	{
 		$return = $rows;
 		foreach ($rows[0] as $key => $val) {
 			if (list($table, $id, $name) = $this->foreignColumn($foreignKeys, $key)) {
@@ -651,7 +653,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	public function foreignColumn($foreignKeys, $column): ?array {
 		foreach ((array) $foreignKeys[$column] as $foreignKey) {
 			if (count($foreignKey["source"]) == 1) {
-				$name = $this->rowDescription($foreignKey["table"]);
+				$name = $this->getTableDescriptionFieldName($foreignKey["table"]);
 				if ($name != "") {
 					$id = idf_escape($foreignKey["target"][0]);
 					return [$foreignKey["table"], $id, $name];

@@ -177,12 +177,12 @@ class Pluginer extends Admin
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function rowDescription($table)
+	public function getTableDescriptionFieldName(string $table): string
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
 
-	public function rowDescriptions($rows, $foreignKeys)
+	public function fillForeignDescriptions(array $rows, array $foreignKeys): array
 	{
 		return $this->applyPlugin(__FUNCTION__, func_get_args());
 	}
