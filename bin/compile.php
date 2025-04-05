@@ -576,11 +576,11 @@ for ($i = 0; $i < count($matches[0]); $i++) {
 	}
 
 	// Favicons.
-	if (str_contains($name, 'icon-$color_variant.')) {
+	if (str_contains($name, 'icon-$colorVariant.')) {
 		foreach ($selected_themes as $theme) {
 			if (preg_match('~^default-(blue|green|red)$~', $theme, $matches2)) {
-				$name2 = str_replace('$color_variant', $matches2[1], $name);
-				$files2 = str_replace('$color_variant', $matches2[1], $files);
+				$name2 = str_replace('$colorVariant', $matches2[1], $name);
+				$files2 = str_replace('$colorVariant', $matches2[1], $files);
 
 				append_linked_files_cases($name2, $files2, $name_cases, $data_cases);
 			}
