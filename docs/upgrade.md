@@ -164,7 +164,8 @@ include "adminneo.php";
     - `schemas()` -> `getSchemas()`
     - `collations()` -> `getCollations()`
     - `queryTimeout()` -> `getQueryTimeout()`
-    - `loginFormField()` -> `composeLoginFormRow()`
+    - `loginForm()` -> `printLoginForm()`
+    - `loginFormField()` -> `getLoginFormRow()`
     - `foreignKeys()` -> `getForeignKeys()`
     - `dumpOutput()` -> `getDumpOutputs()`
     - `dumpFormat()` -> `getDumpFormats()`

@@ -29,7 +29,7 @@ class OtpLoginPlugin
 		}
 	}
 
-	public function composeLoginFormRow(string $fieldName, string $label, string $field): ?string
+	public function getLoginFormRow(string $fieldName, string $label, string $field): ?string
 	{
 		if ($fieldName != "password") return null;
 

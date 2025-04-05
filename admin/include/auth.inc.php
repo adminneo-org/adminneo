@@ -278,7 +278,7 @@ function auth_error($error) {
 		echo "<p class='message'>" . lang('The action will be performed after successful login with the same credentials.') . "\n";
 	}
 	echo "</div>\n";
-	$admin->loginForm();
+	$admin->printLoginForm();
 	echo "</form>\n";
 	page_footer();
 	exit;

@@ -232,7 +232,6 @@ abstract class AdminBase
 		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon-$colorVariant.png", ["../admin/images/variants/apple-touch-icon-$colorVariant.png"]), "'>\n";
 	}
 
-
 	public abstract function printToHead(): void;
 
 	/**
@@ -280,12 +279,12 @@ abstract class AdminBase
 		return $urls;
 	}
 
-	public abstract function loginForm();
+	public abstract function printLoginForm(): void;
 
 	/**
 	 * Returns composed row for login form field.
 	 */
-	public function composeLoginFormRow(string $fieldName, string $label, string $field): string
+	public function getLoginFormRow(string $fieldName, string $label, string $field): string
 	{
 		if ($label) {
 			return "<tr><th>$label</th><td>$field</td></tr>\n";
