@@ -271,3 +271,8 @@ color variants for production/devel environment. All current designs will be rem
 - **Plugins** - Integrate several basic plugins, enable them by simple optional configuration.
 - **Codebase** - Prefer code readability before minimalism, use PER coding style, add a namespace.
 - **Compilation** - Allow to export selected drivers, themes, languages and plugins into a single PHP file.
+
+### Version 5.0...1
+
+- **Docker** - Published at https://hub.docker.com/r/avmesquita/admineo as avmesquita/admineo.
+
