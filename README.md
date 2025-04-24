@@ -9,9 +9,9 @@ Supported database drivers:
 
 AdminNeo is based on the [Adminer](https://www.adminer.org/) project by Jakub Vrána.
 
-| <img src="/docs/images/screenshot-select.webp?raw=true" alt="Screenshot - Select data"/> | <img src="/docs/images/screenshot-structure.webp?raw=true" alt="Screenshot - Table structure"/> |
+| <img src="https://github.com/adminneo-org/adminneo/blob/main/docs/images/screenshot-select.webp?raw=true" alt="Screenshot - Select data"/> | <img src="https://github.com/adminneo-org/adminneo/blob/main//docs/images/screenshot-structure.webp?raw=true" alt="Screenshot - Table structure"/> |
 |------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| <img src="/docs/images/screenshot-alter.webp?raw=true" alt="Screenshot - Alter table"/>  | <img src="/docs/images/screenshot-database.webp?raw=true" alt="Screenshot - Database"/>         |
+| <img src="https://github.com/adminneo-org/adminneo/blob/main//docs/images/screenshot-alter.webp?raw=true" alt="Screenshot - Alter table"/>  | <img src="https://github.com/adminneo-org/adminneo/blob/main//docs/images/screenshot-database.webp?raw=true" alt="Screenshot - Database"/>         |
 
 Requirements
 ------------
