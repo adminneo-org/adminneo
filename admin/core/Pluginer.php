@@ -42,7 +42,7 @@ class Pluginer
 		$this->plugins = $plugins;
 
 		// Find plugins for all public methods.
-		foreach (get_class_methods(Origin::class) as $method) {
+		foreach (get_class_methods('\AdminNeo\Origin') as $method) {
 			$this->hooks[$method] = [];
 
 			if (!(self::InternalMethods[$method] ?? false)) {

@@ -524,6 +524,9 @@ if ($custom_config) {
 // Remove superfluous PHP tags.
 $file = preg_replace("~<\\?php\\s*\\?>\n?|\\?>\n?<\\?php~", '', $file);
 
+// PHP 5.6 compatibility.
+$file = downgrade_php($file);
+
 // Shrink final file.
 $file = phpShrink($file);
 

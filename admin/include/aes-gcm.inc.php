@@ -4,8 +4,10 @@ namespace AdminNeo;
 
 use Exception;
 
-const ENCRYPTION_ALGO = 'aes-256-gcm';
+const ENCRYPTION_GCM = 'aes-256-gcm';
+const ENCRYPTION_CBC = 'aes-256-cbc';
 const ENCRYPTION_TAG_LENGTH = 16;
+const ENCRYPTION_HMAC_LENGTH = 64;
 
 /**
  * Generates a secure IV compatible with PHP 5 and PHP 7+.
@@ -49,11 +51,19 @@ function hash_key(string $key): string
  */
 function aes_encrypt_string(string $plaintext, string $key)
 {
+	$php71 = version_compare(PHP_VERSION, "7.1.0") >= 0;
+	$method = $php71 ? ENCRYPTION_GCM : ENCRYPTION_CBC;
 	$key = hash_key($key);
-	$iv = generate_iv(openssl_cipher_iv_length(ENCRYPTION_ALGO) ?: 16);
+	$iv = generate_iv(openssl_cipher_iv_length($method) ?: 16);
 
-	// Encrypts the text using AES-256-CBC.
-	$ciphertext = openssl_encrypt($plaintext, ENCRYPTION_ALGO, $key, OPENSSL_RAW_DATA, $iv, $tag, "", ENCRYPTION_TAG_LENGTH);
+	// Encrypts the text.
+	if ($php71) {
+		$ciphertext = openssl_encrypt($plaintext, $method, $key, OPENSSL_RAW_DATA, $iv, $tag, "", ENCRYPTION_TAG_LENGTH);
+	} else {
+		$ciphertext = openssl_encrypt($plaintext, $method, $key, OPENSSL_RAW_DATA, $iv);
+		$tag = hash_hmac("sha512", $iv . $ciphertext, $key, true);
+	}
+
 	if ($ciphertext === false) {
 		return false;
 	}
@@ -71,10 +81,13 @@ function aes_encrypt_string(string $plaintext, string $key)
  */
 function aes_decrypt_string(string $data, string $key)
 {
-	$iv_length = openssl_cipher_iv_length(ENCRYPTION_ALGO) ?: 16;
+	$php71 = version_compare(PHP_VERSION, "7.1.0") >= 0;
+	$method = $php71 ? ENCRYPTION_GCM : ENCRYPTION_CBC;
+	$iv_length = openssl_cipher_iv_length($method) ?: 16;
+	$tag_length = $php71 ? ENCRYPTION_TAG_LENGTH : ENCRYPTION_HMAC_LENGTH;
 
 	// IV (16) + TAG (16) minimum
-	if ($data === false || strlen($data) < $iv_length + ENCRYPTION_TAG_LENGTH) {
+	if (strlen($data) < $iv_length + $tag_length) {
 		return false;
 	}
 
@@ -82,13 +95,24 @@ function aes_decrypt_string(string $data, string $key)
 
 	// Extracts IV (16 bytes), HMAC (64 bytes), and encrypted text.
 	$iv = substr($data, 0, $iv_length);
-	$tag = substr($data, $iv_length, ENCRYPTION_TAG_LENGTH);
-	$ciphertext = substr($data, $iv_length + ENCRYPTION_TAG_LENGTH);
+	$tag = substr($data, $iv_length, $tag_length);
+	$ciphertext = substr($data, $iv_length + $tag_length);
 
 	if ($iv === false || $tag === false || $ciphertext === false) {
 		return false;
 	}
 
-	// Decrypts the text.
-	return openssl_decrypt($ciphertext, ENCRYPTION_ALGO, $key, OPENSSL_RAW_DATA, $iv, $tag);
+	if ($php71) {
+		// Decrypts the text.
+		return openssl_decrypt($ciphertext, $method, $key, OPENSSL_RAW_DATA, $iv, $tag);
+	} else {
+		// Verifies the integrity.
+		$hmac = hash_hmac('sha512', $iv . $ciphertext, $key, true);
+		if (!hash_equals($tag, $hmac)) {
+			return false;
+		}
+
+		// Decrypts the text.
+		return openssl_decrypt($ciphertext, $method, $key, OPENSSL_RAW_DATA, $iv);
+	}
 }

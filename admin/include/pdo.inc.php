@@ -13,7 +13,7 @@ if (extension_loaded('pdo')) {
 
 		function dsn($dsn, $username, $password, $options = []) {
 			$options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
-			$options[PDO::ATTR_STATEMENT_CLASS] = [Min_PDOStatement::class];
+			$options[PDO::ATTR_STATEMENT_CLASS] = ['\AdminNeo\Min_PDOStatement'];
 			try {
 				$this->pdo = new PDO($dsn, $username, $password, $options);
 			} catch (Exception $ex) {

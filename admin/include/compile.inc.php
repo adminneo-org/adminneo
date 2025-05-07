@@ -28,7 +28,7 @@ function generate_linked_file(string $name, array $file_paths): ?string
 		return $links[$name] = null;
 	}
 
-	$temp_dir = get_temp_dir(). "/adminneo";
+	$temp_dir = get_temp_dir() . "/adminneo";
 	if (!file_exists($temp_dir)) {
 		mkdir($temp_dir);
 	}
@@ -159,4 +159,43 @@ function lzw_compress(string $string): string
 	}
 
 	return $return . ($rest_length ? chr($rest << (8 - $rest_length)) : "");
+}
+
+function downgrade_php(string $code): string
+{
+	// Type declarations.
+	$code = stripTypes($code);
+
+	// Null coalescing - variables and constants.
+	$coalescing = '\s?\?\?';
+
+	$array_key = '[^](]+';
+	$array_key2 = $array_key . '\[' . $array_key . ']' . '[^](]*';
+
+	$code = preg_replace(
+		'~((\$|\$this->|self::\$|self::)\w+' // name
+		. '(\[(' . $array_key . '|' . $array_key2 . ')])*)' // array, max 2 levels
+		. $coalescing
+		. '~', 'isset(\1) ? \1 :', $code
+	);
+
+	// Null coalescing - function calls.
+	$code = preg_replace(
+		'~((\$this->|self::)?\w+' // name
+		. '\([^)]*\))' // parameters
+		. $coalescing
+		. '~', '($_result = \1) !== null ? $_result :', $code);
+
+	// Constants.
+	if (preg_match_all('~(public|private|protected)\sconst\s+(\w+)\s?=\s?~', $code, $matches)) {
+		foreach ($matches[2] as $name) {
+			$code = preg_replace("~const\s+($name)\b~", 'static $\1', $code);
+			$code = preg_replace("~::($name)\b~", '::$\1', $code);
+		}
+	}
+
+	// Arrays unpacking.
+	$code = preg_replace('~(^|\s|\()\[(.+?)]\s*=~', '\1list(\2) =', $code);
+
+	return $code;
 }

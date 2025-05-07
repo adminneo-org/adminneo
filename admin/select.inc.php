@@ -355,7 +355,8 @@ if (!$columns && support("table")) {
 			$rank = 1;
 			foreach ($rows[0] as $key => $val) {
 				if (!isset($unselected[$key])) {
-					$val = $_GET["columns"][key($select)] ?? null;
+					$select_key = key($select);
+					$val = $_GET["columns"][$select_key] ?? null;
 					$field = $fields[$select ? ($val ? $val["col"] : current($select)) : $key];
 					$name = ($field ? Admin::get()->getFieldName($field, $rank) : (isset($val["fun"]) ? "*" : h($key)));
 					if ($name != "") {
@@ -472,8 +473,9 @@ if (!$columns && support("table")) {
 						}
 
 						$val = select_value($val, $link, $field, $text_length);
-						$id = h("val[$unique_idf][" . bracket_escape($key) . "]");
-						$value = $_POST["val"][$unique_idf][bracket_escape($key)] ?? null;
+						$escaped_key = bracket_escape($key);
+						$id = h("val[$unique_idf][$escaped_key]");
+						$value = $_POST["val"][$unique_idf][$escaped_key] ?? null;
 						$editable = !is_array($row[$key]) && is_utf8($val) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
 						$text = $field && preg_match('~text|json|lob~', $field["type"]);
 						echo "<td id='$id'";

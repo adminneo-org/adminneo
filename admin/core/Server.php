@@ -38,7 +38,7 @@ class Server
 
 	public function getName(): string
 	{
-		return $this->params["name"] ?? $this->params["server"] ?? "";
+		return $this->params["name"] ?? ($this->params["server"] ?? "");
 	}
 
 	public function getUsername(): string
