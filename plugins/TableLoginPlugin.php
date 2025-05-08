@@ -18,6 +18,8 @@ namespace AdminNeo;
  * );
  * </pre>
  *
+ * The minimum required PHP version is 5.5.
+ *
  * @link https://www.adminer.org/plugins/#use
  *
  * @author Jakub Vrana, https://www.vrana.cz/
@@ -67,6 +69,6 @@ class TableLoginPlugin extends Plugin
 			"SELECT password FROM $dbPrefix" . idf_escape($this->table) . " WHERE username = " . q($username)
 		);
 
-		return $hash && password_verify($password, $hash);
+		return $hash && function_exists("password_verify") && password_verify($password, $hash);
 	}
 }

@@ -541,3 +541,16 @@ $filename = __DIR__ . "/../export/{$project}neo"
 file_put_contents($filename, $file);
 
 echo "output:    export/" . basename($filename) . " (" . strlen($file) . " B)\n";
+
+// Compile plugins.
+$directory = __DIR__ . "/../export/adminneo-plugins";
+@mkdir($directory);
+
+foreach (glob(__DIR__ . "/../plugins/*") as $file_path) {
+	$file = file_get_contents($file_path);
+
+	$file = downgrade_php($file);
+
+	$filename = "$directory/" . basename($file_path);
+	file_put_contents($filename, $file);
+}
