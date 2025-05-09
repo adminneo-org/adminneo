@@ -16,7 +16,7 @@ AdminNeo is based on the [Adminer](https://www.adminer.org/) project by Jakub Vr
 Requirements
 ------------
 
-- PHP 7.1+ with enabled sessions, modern web browser.
+- PHP 5.4+ with enabled sessions, modern web browser.
 
 It is also recommended to install [OpenSSL PHP extension](https://www.php.net/manual/en/book.openssl.php) for improved
 security of stored login information.
@@ -365,7 +365,6 @@ UI improvements have been introduced.
 
 Bridges are burned 🔥🔥🔥. Our goals are:
 
-- **Requirements** - Bump minimal PHP to 7.1. 
 - **Themes** – Brand-new default theme based on our old [Adminer theme](https://github.com/pematon/adminer-theme). It will support dark mode and configurable 
 color variants for production/devel environment. All current designs will be removed. 
 - **Plugins** - Integrate several basic plugins, enable them by simple optional configuration.

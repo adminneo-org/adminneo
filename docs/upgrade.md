@@ -4,7 +4,11 @@ Upgrade guide
 Migrating to 5.0
 ----------------
 
-- Minimum required PHP version is 7.1.
+- Running AdminNeo and EditorNeo from the sources requires PHP 7.1. The compiled version supports PHP 5.4+.
+
+- Compilation to a single file requires PHP 7.1.
+
+- MongoDB driver requires PHP 7.0.
 
 - Compiled file was renamed to `adminneo.php` for database Admin and `editorneo.php` for Editor. Update your include
   statement if you use custom AdminNeo configuration.

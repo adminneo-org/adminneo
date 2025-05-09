@@ -11,7 +11,6 @@ upgrade your AdminNeo installation.
 
 ### Changes
 
-- Minimal supported PHP version is 7.1
 - Add AdminNeo namespace
 - Rename core classes to Admin and Pluginer
 - Rename public customizable functions in Admin class
@@ -52,6 +51,7 @@ upgrade your AdminNeo installation.
 - Elasticsearch: Display called request in a flash message after altering a record
 - Elasticsearch: Refresh index immediately after altering a record
 - Firebird: Remove the whole driver
+- Running AdminNeo and EditorNeo from the sources requires PHP 7.1
 
 ### Bugfixes
 

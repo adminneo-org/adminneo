@@ -186,6 +186,8 @@ Set to an empty string to allow connection without a password.
 
 ⚠️ Warning: Use disabling default password on your own risk and put other sufficient safety measures in place.
 
+Custom password verification requires PHP 5.5. With PHP 5.4, it is only possible to disable the password.
+
 ### sslKey
 
 - Default value: `null`
