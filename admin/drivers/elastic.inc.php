@@ -138,7 +138,7 @@ if (isset($_GET["elastic"])) {
 		}
 	}
 
-	class Min_Driver extends Min_SQL {
+	class ElasticDriver extends Driver {
 
 		function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
 			$data = [];
@@ -331,6 +331,13 @@ if (isset($_GET["elastic"])) {
 
 			return $this->_conn->affected_rows;
 		}
+	}
+
+
+
+	function create_driver(Database $connection): Driver
+	{
+		return new ElasticDriver($connection, Admin::get());
 	}
 
 	/**

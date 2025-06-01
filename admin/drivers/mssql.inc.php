@@ -219,7 +219,7 @@ if (isset($_GET["mssql"])) {
 	}
 
 
-	class Min_Driver extends Min_SQL {
+	class MsSqlDriver extends Driver {
 
 		function insertUpdate($table, $rows, $primary) {
 			$fields = fields($table);
@@ -275,6 +275,13 @@ if (isset($_GET["mssql"])) {
 			}
 		}
 
+	}
+
+
+
+	function create_driver(Database $connection): Driver
+	{
+		return new MsSqlDriver($connection, Admin::get());
 	}
 
 	/**

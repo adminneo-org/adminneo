@@ -131,7 +131,7 @@ if (isset($_GET["sqlite"])) {
 
 
 
-	class Min_Driver extends Min_SQL {
+	class SqliteDriver extends Driver {
 
 		function insertUpdate($table, $rows, $primary) {
 			$values = [];
@@ -158,6 +158,11 @@ if (isset($_GET["sqlite"])) {
 	}
 
 
+
+	function create_driver(Database $connection): Driver
+	{
+		return new SqliteDriver($connection, Admin::get());
+	}
 
 	function idf_escape($idf) {
 		return '"' . str_replace('"', '""', $idf) . '"';

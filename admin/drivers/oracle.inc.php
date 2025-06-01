@@ -141,7 +141,7 @@ if (isset($_GET["oracle"])) {
 
 
 
-	class Min_Driver extends Min_SQL {
+	class OracleDriver extends Driver {
 
 		//! support empty $set in insert()
 
@@ -173,6 +173,13 @@ if (isset($_GET["oracle"])) {
 			return true;
 		}
 
+	}
+
+
+
+	function create_driver(Database $connection): Driver
+	{
+		return new OracleDriver($connection, Admin::get());
 	}
 
 	/**

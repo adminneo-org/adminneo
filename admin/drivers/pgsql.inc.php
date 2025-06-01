@@ -196,7 +196,7 @@ if (isset($_GET["pgsql"])) {
 
 
 
-	class Min_Driver extends Min_SQL {
+	class PgSqlDriver extends Driver {
 
 		function insertUpdate($table, $rows, $primary) {
 			global $connection;
@@ -263,6 +263,11 @@ if (isset($_GET["pgsql"])) {
 	}
 
 
+
+	function create_driver(Database $connection): Driver
+	{
+		return new PgSqlDriver($connection, Admin::get());
+	}
 
 	function idf_escape($idf) {
 		return '"' . str_replace('"', '""', $idf) . '"';

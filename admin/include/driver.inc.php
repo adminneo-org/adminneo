@@ -35,7 +35,7 @@ function get_driver_name(string $id): ?string
 	return $drivers[$id] ?? null;
 }
 
-abstract class Min_SQL {
+abstract class Driver {
 	protected $_conn;
 
 	/** @var Origin|Pluginer */

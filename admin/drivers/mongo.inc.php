@@ -120,7 +120,7 @@ if (isset($_GET["mongo"])) {
 		}
 
 
-		class Min_Driver extends Min_SQL {
+		class MongoDriver extends Driver {
 			public $primary = "_id";
 
 			function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
@@ -190,6 +190,13 @@ if (isset($_GET["mongo"])) {
 				$bulk->insert($set);
 				return $connection->executeBulkWrite("$db.$table", $bulk, 'getInsertedCount');
 			}
+		}
+
+
+
+		function create_driver(Database $connection): Driver
+		{
+			return new MongoDriver($connection, Admin::get());
 		}
 
 		function get_databases($flush) {

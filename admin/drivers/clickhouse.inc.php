@@ -163,7 +163,7 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 
-	class Min_Driver extends Min_SQL {
+	class ClickHouseDriver extends Driver {
 		function delete($table, $queryWhere, $limit = 0) {
 			if ($queryWhere === '') {
 				$queryWhere = 'WHERE 1=1';
@@ -179,6 +179,13 @@ if (isset($_GET["clickhouse"])) {
 			$query = $separator . implode(",$separator", $values);
 			return queries("ALTER TABLE " . table($table) . " UPDATE $query$queryWhere");
 		}
+	}
+
+
+
+	function create_driver(Database $connection): Driver
+	{
+		return new ClickHouseDriver($connection, Admin::get());
 	}
 
 	function idf_escape($idf) {

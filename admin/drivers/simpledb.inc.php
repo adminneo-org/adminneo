@@ -152,7 +152,7 @@ if (isset($_GET["simpledb"])) {
 
 
 
-	class Min_Driver extends Min_SQL {
+	class SimpleDbDriver extends Driver {
 		public $primary = "itemName()";
 
 		function _chunkRequest($ids, $action, $params, $expand = []) {
@@ -277,6 +277,13 @@ if (isset($_GET["simpledb"])) {
 			return $query;
 		}
 
+	}
+
+
+
+	function create_driver(Database $connection): Driver
+	{
+		return new SimpleDbDriver($connection, Admin::get());
 	}
 
 	/**

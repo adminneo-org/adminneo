@@ -4,7 +4,7 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Min_Driver $driver
+ * @var ?Driver $driver
  */
 
 $TABLE = $_GET["edit"];

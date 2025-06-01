@@ -130,7 +130,7 @@ if (isset($_GET["mysql"])) {
 
 
 
-	class Min_Driver extends Min_SQL {
+	class MySqlDriver extends Driver {
 
 		function insert($table, $set) {
 			return ($set ? parent::insert($table, $set) : queries("INSERT INTO " . table($table) . " ()\nVALUES ()"));
@@ -209,6 +209,11 @@ if (isset($_GET["mysql"])) {
 	}
 
 
+
+	function create_driver(Database $connection): Driver
+	{
+		return new MySqlDriver($connection, Admin::get());
+	}
 
 	/** Escape database identifier
 	* @param string
