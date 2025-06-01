@@ -315,4 +315,6 @@ $translations = [
 	'One Time Password' => 'ワンタイムパスワード(OTP)',
 	'Enter OTP code.' => 'OTPコードを入力してください。',
 	'Invalid OTP code.' => '無効なOTPコードです。',
+
+	'HTTP request' => 'HTTP リクエスト',
 ];
