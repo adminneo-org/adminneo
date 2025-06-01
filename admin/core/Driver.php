@@ -2,39 +2,6 @@
 
 namespace AdminNeo;
 
-$drivers = [];
-
-/**
- * Adds a driver.
- */
-function add_driver(string $id, string $name): void
-{
-	global $drivers;
-
-	$drivers[$id] = $name;
-}
-
-/**
- * Returns the list of available drivers.
- *
- * @return string[]
- */
-function get_drivers(): array
-{
-	global $drivers;
-	return $drivers;
-}
-
-/**
- * Returns driver name.
- */
-function get_driver_name(string $id): ?string
-{
-	global $drivers;
-
-	return $drivers[$id] ?? null;
-}
-
 abstract class Driver
 {
 	/** @var Database */

@@ -611,8 +611,7 @@ function set_session($key, $val) {
 * @return string
 */
 function auth_url($vendor, $server, $username, $db = null) {
-	global $drivers;
-	preg_match('~([^?]*)\??(.*)~', remove_from_uri(implode("|", array_keys($drivers)) . "|username|" . ($db !== null ? "db|" : "") . session_name()), $match);
+	preg_match('~([^?]*)\??(.*)~', remove_from_uri(implode("|", array_keys(Drivers::getList())) . "|username|" . ($db !== null ? "db|" : "") . session_name()), $match);
 	return "$match[1]?"
 		. (sid() ? session_name() . "=" . urlencode(session_id()) . "&" : "")
 		. urlencode($vendor) . "=" . urlencode($server) . "&"

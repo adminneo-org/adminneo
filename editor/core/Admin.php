@@ -60,9 +60,7 @@ class Admin extends Origin
 
 	public function printLoginForm(): void
 	{
-		global $drivers;
-
-		$driver = $this->config->getDefaultDriver($drivers);
+		$driver = $this->config->getDefaultDriver(Drivers::getList());
 		$server = $this->config->getDefaultServer();
 
 		echo "<table class='box'>\n";

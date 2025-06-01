@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-add_driver("pgsql", "PostgreSQL");
+Drivers::add("pgsql", "PostgreSQL");
 
 if (isset($_GET["pgsql"])) {
 	define("AdminNeo\DRIVER", "pgsql");

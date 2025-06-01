@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-add_driver("clickhouse", "ClickHouse (alpha)");
+Drivers::add("clickhouse", "ClickHouse (alpha)");
 
 if (isset($_GET["clickhouse"])) {
 	define("AdminNeo\DRIVER", "clickhouse");

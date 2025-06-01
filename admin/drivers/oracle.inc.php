@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-add_driver("oracle", "Oracle (beta)");
+Drivers::add("oracle", "Oracle (beta)");
 
 if (isset($_GET["oracle"])) {
 	define("AdminNeo\DRIVER", "oracle");

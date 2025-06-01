@@ -44,7 +44,7 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including AdminNeo inside a function.
-global $connection, $driver, $drivers, $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
+global $connection, $driver, $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
@@ -76,7 +76,8 @@ include __DIR__ . "/lang.inc.php";
 include __DIR__ . "/../translations/$LANG.inc.php";
 
 include __DIR__ . "/pdo.inc.php";
-include __DIR__ . "/driver.inc.php";
+include __DIR__ . "/../core/Drivers.php";
+include __DIR__ . "/../core/Driver.php";
 
 include __DIR__ . "/../drivers/mysql.inc.php";
 include __DIR__ . "/../drivers/pgsql.inc.php";

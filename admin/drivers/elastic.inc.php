@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-add_driver("elastic", "Elasticsearch 7 (beta)");
+Drivers::add("elastic", "Elasticsearch 7 (beta)");
 
 if (isset($_GET["elastic"])) {
 	define("AdminNeo\DRIVER", "elastic");

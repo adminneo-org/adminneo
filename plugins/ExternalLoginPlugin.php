@@ -37,7 +37,7 @@ class ExternalLoginPlugin extends Plugin
 
 	public function init(): ?bool
 	{
-		$servers = $this->config->getServerPairs(get_drivers());
+		$servers = $this->config->getServerPairs(Drivers::getList());
 
 		$this->hasServers = count($servers) > 0;
 		$this->autologin = count($servers) == 1;

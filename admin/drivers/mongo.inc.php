@@ -10,7 +10,7 @@ use MongoDB\Driver\Command;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 
-add_driver("mongo", "MongoDB (alpha)");
+Drivers::add("mongo", "MongoDB (alpha)");
 
 if (isset($_GET["mongo"])) {
 	define("AdminNeo\DRIVER", "mongo");

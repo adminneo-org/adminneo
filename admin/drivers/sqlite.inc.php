@@ -5,7 +5,7 @@ namespace AdminNeo;
 use Exception;
 use SQLite3;
 
-add_driver("sqlite", "SQLite");
+Drivers::add("sqlite", "SQLite");
 
 if (isset($_GET["sqlite"])) {
 	define("AdminNeo\DRIVER", "sqlite");

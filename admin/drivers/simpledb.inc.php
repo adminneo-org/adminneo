@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-add_driver("simpledb", "SimpleDB");
+Drivers::add("simpledb", "SimpleDB");
 
 if (isset($_GET["simpledb"])) {
 	define("AdminNeo\DRIVER", "simpledb");

@@ -92,8 +92,7 @@ class Admin extends Origin
 	 */
 	public function printLoginForm(): void
 	{
-		global $drivers;
-
+		$drivers = Drivers::getList();
 		$serverPairs = $this->config->getServerPairs($drivers);
 		$server = SERVER ?: $this->config->getDefaultServer();
 
@@ -1127,7 +1126,7 @@ class Admin extends Origin
 	 */
 	public function printNavigation(?string $missing): void
 	{
-		global $jush, $drivers, $connection;
+		global $jush, $connection;
 
 		parent::printNavigation($missing);
 
@@ -1140,7 +1139,7 @@ class Admin extends Origin
 							$dbs = $_SESSION["db"][$vendor][$server][$username];
 							foreach (($dbs ? array_keys($dbs) : [""]) as $db) {
 								$server_name = $this->admin->getServerName($server);
-								$title = h($drivers[$vendor])
+								$title = h(Drivers::get($vendor))
 									. ($username != "" || $server_name != "" ? " - " : "")
 									. h($username)
 									. ($username != "" && $server_name != "" ? "@" : "")

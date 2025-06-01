@@ -28,7 +28,7 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 		}
 
 		$server_name = Admin::get()->getServerName(SERVER);
-		$title = h($drivers[DRIVER]) . ": " . ($server_name != "" ? h($server_name) : lang('Server'));
+		$title = h(Drivers::get(DRIVER)) . ": " . ($server_name != "" ? h($server_name) : lang('Server'));
 
 		page_header($title, $error, false);
 
@@ -48,7 +48,7 @@ if (!(DB != "" ? $connection->select_db(DB) : isset($_GET["sql"]) || isset($_GET
 			echo "<p class='links top-links'>$links_html</p>\n";
 		}
 
-		echo "<p>" . lang('%s version: %s through PHP extension %s', $drivers[DRIVER], "<b>" . h($connection->server_info) . "</b>", "<b>$connection->extension</b>") . "\n";
+		echo "<p>" . lang('%s version: %s through PHP extension %s', Drivers::get(DRIVER), "<b>" . h($connection->server_info) . "</b>", "<b>$connection->extension</b>") . "\n";
 		echo "<p>" . lang('Logged as: %s', "<b>" . h(logged_user()) . "</b>") . "\n";
 		$databases = Admin::get()->getDatabases();
 		if ($databases) {

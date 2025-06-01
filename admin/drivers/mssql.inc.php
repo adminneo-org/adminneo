@@ -10,7 +10,7 @@ use stdClass;
 * @author Jakub Vrana
 */
 
-add_driver("mssql", "MS SQL");
+Drivers::add("mssql", "MS SQL");
 
 if (isset($_GET["mssql"])) {
 	define("AdminNeo\DRIVER", "mssql");

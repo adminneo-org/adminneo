@@ -5,7 +5,7 @@ namespace AdminNeo;
 use mysqli;
 use PDO;
 
-add_driver("mysql", "MySQL");
+Drivers::add("mysql", "MySQL");
 
 if (isset($_GET["mysql"])) {
 	define("AdminNeo\DRIVER", "mysql");
