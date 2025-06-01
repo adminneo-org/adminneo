@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-/** @var ?Min_DB $connection */
+/** @var ?Database $connection */
 $connection = null;
 
 /** @var ?Min_Driver $driver */
@@ -146,14 +146,14 @@ function check_invalid_login() {
 /**
  * @throws \Random\RandomException
  */
-function connect_to_db(): Min_DB
+function connect_to_db(): Database
 {
 	if (Admin::get()->getConfig()->hasServers() && !Admin::get()->getConfig()->getServer(SERVER)) {
 		auth_error(lang('Invalid server or credentials.'));
 	}
 
 	$connection = connect();
-	if (!($connection instanceof Min_DB)) {
+	if (!($connection instanceof Database)) {
 		connection_error($connection);
 	}
 
@@ -322,7 +322,7 @@ if (isset($_GET["username"]) && !DRIVER) {
 	exit;
 }
 
-if (isset($_GET["username"]) && !class_exists("AdminNeo\\Min_DB")) {
+if (isset($_GET["username"]) && !class_exists("AdminNeo\\Database")) {
 	unset($_SESSION["pwds"][DRIVER]);
 	unset_permanent();
 	page_header(lang('No extension'), lang('None of the supported PHP extensions (%s) are available.', implode(", ", $possible_drivers)), false);

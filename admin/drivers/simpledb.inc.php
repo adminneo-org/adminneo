@@ -8,7 +8,7 @@ if (isset($_GET["simpledb"])) {
 	define("AdminNeo\DRIVER", "simpledb");
 
 	if (class_exists('SimpleXMLElement') && ini_bool('allow_url_fopen')) {
-		class Min_DB {
+		class Database {
 			var $extension = "SimpleXML", $server_info = '2009-04-15', $error, $timeout, $next, $affected_rows, $_url, $_result;
 
 			function connect(string $server): bool
@@ -32,7 +32,7 @@ if (isset($_GET["simpledb"])) {
 				return (bool) $this->workaroundLoginRequest('ListDomains', ['MaxNumberOfDomains' => 1]);
 			}
 
-			// FIXME: This is so wrong :-( Move sdb_request to Min_DB!
+			// FIXME: This is so wrong :-( Move sdb_request to Database!
 			private function workaroundLoginRequest($action, $params = []) {
 				global $connection;
 
@@ -67,7 +67,7 @@ if (isset($_GET["simpledb"])) {
 						'Value' => $sum,
 					]]]];
 				}
-				return new Min_Result($result);
+				return new Result($result);
 			}
 
 			function multi_query($query) {
@@ -88,7 +88,7 @@ if (isset($_GET["simpledb"])) {
 
 		}
 
-		class Min_Result {
+		class Result {
 			var $num_rows, $_rows = [], $_offset = 0;
 
 			function __construct($result) {
@@ -289,11 +289,11 @@ if (isset($_GET["simpledb"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		list($server, , $password) = Admin::get()->getCredentials();
 		if ($password != "") {

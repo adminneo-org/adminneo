@@ -7,7 +7,7 @@ add_driver("oracle", "Oracle (beta)");
 if (isset($_GET["oracle"])) {
 	define("AdminNeo\DRIVER", "oracle");
 	if (extension_loaded("oci8")) {
-		class Min_DB {
+		class Database {
 			var $extension = "oci8", $_link, $_result, $server_info, $affected_rows, $errno, $error;
 			var $_current_db;
 
@@ -53,7 +53,7 @@ if (isset($_GET["oracle"])) {
 				restore_error_handler();
 				if ($return) {
 					if (oci_num_fields($result)) {
-						return new Min_Result($result);
+						return new Result($result);
 					}
 					$this->affected_rows = oci_num_rows($result);
 					oci_free_statement($result);
@@ -82,7 +82,7 @@ if (isset($_GET["oracle"])) {
 			}
 		}
 
-		class Min_Result {
+		class Result {
 			var $_result, $_offset = 1, $num_rows;
 
 			function __construct($result) {
@@ -122,7 +122,7 @@ if (isset($_GET["oracle"])) {
 		}
 
 	} elseif (extension_loaded("pdo_oci")) {
-		class Min_DB extends Min_PDO {
+		class Database extends Min_PDO {
 			var $extension = "PDO_OCI";
 			var $_current_db;
 
@@ -193,11 +193,11 @@ if (isset($_GET["oracle"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {

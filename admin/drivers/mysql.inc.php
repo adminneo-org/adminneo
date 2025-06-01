@@ -12,7 +12,7 @@ if (isset($_GET["mysql"])) {
 
 	// MySQLi supports everything, PDO_MySQL doesn't support orgtable
 	if (extension_loaded("mysqli")) {
-		class Min_DB extends MySQLi {
+		class Database extends MySQLi {
 			var $extension = "MySQLi";
 
 			function __construct() {
@@ -77,7 +77,7 @@ if (isset($_GET["mysql"])) {
 		}
 
 	} elseif (extension_loaded("pdo_mysql")) {
-		class Min_DB extends Min_PDO {
+		class Database extends Min_PDO {
 			var $extension = "PDO_MySQL";
 
 			function connect($server, $username, $password) {
@@ -229,13 +229,13 @@ if (isset($_GET["mysql"])) {
 	/**
 	 * Connects to the database with given credentials.
 	 *
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
 		global $types, $structured_types, $edit_functions;
 
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
@@ -485,7 +485,7 @@ if (isset($_GET["mysql"])) {
 
 	/** Get table indexes
 	* @param string
-	* @param string Min_DB to use
+	* @param string Database to use
 	* @return array [$key_name => ["type" => , "columns" => [], "lengths" => [], "descs" => []]]
 	*/
 	function indexes($table, $connection2 = null) {
@@ -904,9 +904,9 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/** Explain select
-	* @param Min_DB
+	* @param Database
 	* @param string
-	* @return Min_Result
+	* @return Result
 	*/
 	function explain($connection, $query) {
 		return $connection->query("EXPLAIN " . (min_version(5.1) && !min_version(5.7) ? "PARTITIONS " : "") . $query);

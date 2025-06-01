@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 /**
- * @var ?Min_DB $connection
+ * @var ?Database $connection
  * @var ?Min_Driver $driver
  */
 

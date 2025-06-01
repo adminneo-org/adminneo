@@ -15,7 +15,7 @@ add_driver("mssql", "MS SQL");
 if (isset($_GET["mssql"])) {
 	define("AdminNeo\DRIVER", "mssql");
 	if (extension_loaded("sqlsrv")) {
-		class Min_DB {
+		class Database {
 			var $extension = "sqlsrv", $_link, $_result, $server_info, $affected_rows, $errno, $error;
 
 			function _get_error() {
@@ -96,7 +96,7 @@ if (isset($_GET["mssql"])) {
 					return false;
 				}
 				if (sqlsrv_field_metadata($result)) {
-					return new Min_Result($result);
+					return new Result($result);
 				}
 				$this->affected_rows = sqlsrv_rows_affected($result);
 				return true;
@@ -116,7 +116,7 @@ if (isset($_GET["mssql"])) {
 			}
 		}
 
-		class Min_Result {
+		class Result {
 			var $_result, $_offset = 0, $_fields, $num_rows;
 
 			function __construct($result) {
@@ -166,7 +166,7 @@ if (isset($_GET["mssql"])) {
 		}
 
 	} elseif (extension_loaded("pdo_sqlsrv")) {
-		class Min_DB extends Min_PDO {
+		class Database extends Min_PDO {
 			var $extension = "PDO_SQLSRV";
 
 			function connect($server, $username, $password) {
@@ -200,7 +200,7 @@ if (isset($_GET["mssql"])) {
 		}
 
 	} elseif (extension_loaded("pdo_dblib")) {
-		class Min_DB extends Min_PDO {
+		class Database extends Min_PDO {
 			var $extension = "PDO_DBLIB";
 
 			function connect($server, $username, $password) {
@@ -295,11 +295,11 @@ if (isset($_GET["mssql"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		$credentials = Admin::get()->getCredentials();
 		if ($credentials[0] == "") {

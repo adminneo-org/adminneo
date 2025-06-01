@@ -42,7 +42,7 @@ abstract class Min_SQL {
 	protected $admin;
 
 	/**
-	 * @param Min_DB $connection
+	 * @param Database $connection
 	 * @param Origin|Pluginer $admin
 	 */
 	function __construct($connection, $admin) {
@@ -59,7 +59,7 @@ abstract class Min_SQL {
 	* @param ?int result of Admin::get()->processSelectionLimit()
 	* @param int index of page starting at zero
 	* @param bool whether to print the query
-	* @return Min_Result
+	* @return Result
 	*/
 	function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
 		global $jush;

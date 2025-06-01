@@ -13,7 +13,7 @@ if (isset($_GET["mongo"])) {
 	define("AdminNeo\DRIVER", "mongo");
 
 	if (class_exists('MongoDB\Driver\Manager')) {
-		class Min_DB {
+		class Database {
 			var $extension = "MongoDB", $server_info = MONGODB_VERSION, $affected_rows, $error, $last_id;
 			/** @var Driver\Manager */
 			var $_link;
@@ -58,7 +58,7 @@ if (isset($_GET["mongo"])) {
 			}
 		}
 
-		class Min_Result {
+		class Result {
 			var $num_rows, $_rows = [], $_offset = 0, $_charset = [];
 
 			function __construct($result) {
@@ -141,7 +141,7 @@ if (isset($_GET["mongo"])) {
 				$limit = min(200, max(1, (int) $limit));
 				$skip = $page * $limit;
 				try {
-					return new Min_Result($connection->_link->executeQuery("$connection->_db_name.$table", new Driver\Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort])));
+					return new Result($connection->_link->executeQuery("$connection->_db_name.$table", new Driver\Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort])));
 				} catch (Exception $e) {
 					$connection->error = $e->getMessage();
 					return false;
@@ -398,11 +398,11 @@ if (isset($_GET["mongo"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
 		if ($server == "") {

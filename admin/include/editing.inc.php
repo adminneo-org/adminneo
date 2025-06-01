@@ -4,8 +4,8 @@
 namespace AdminNeo;
 
 /** Print select result
-* @param Min_Result
-* @param Min_DB connection to examine indexes
+* @param Result
+* @param Database connection to examine indexes
 * @param array
 * @param int
 * @return array $orgtables

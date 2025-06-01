@@ -7,14 +7,15 @@ add_driver("clickhouse", "ClickHouse (alpha)");
 if (isset($_GET["clickhouse"])) {
 	define("AdminNeo\DRIVER", "clickhouse");
 
-	class Min_DB {
+	class Database {
 		var $extension = "JSON", $server_info, $errno, $_result, $error, $_url;
 		var $_db = 'default';
 
 		/**
 		 * @param string $db
 		 * @param string $query
-		 * @return Min_Result|bool
+		 *
+		 * @return Result|bool
 		 */
 		function rootQuery($db, $query) {
 			$file = @file_get_contents("$this->_url/?database=$db", false, stream_context_create(['http' => [
@@ -58,7 +59,7 @@ if (isset($_GET["clickhouse"])) {
 				return false;
 			}
 
-			return new Min_Result($return['rows'], $return['data'], $return['meta']);
+			return new Result($return['rows'], $return['data'], $return['meta']);
 		}
 
 		function isQuerySelectLike($query) {
@@ -67,7 +68,8 @@ if (isset($_GET["clickhouse"])) {
 
 		/**
 		 * @param string $query
-		 * @return bool|Min_Result
+		 *
+		 * @return Result|bool
 		 */
 		function query($query) {
 			return $this->rootQuery($this->_db, $query);
@@ -113,7 +115,7 @@ if (isset($_GET["clickhouse"])) {
 		}
 	}
 
-	class Min_Result {
+	class Result {
 		var $num_rows, $_rows, $columns, $meta, $_offset = 0;
 
 		/**
@@ -258,11 +260,11 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {

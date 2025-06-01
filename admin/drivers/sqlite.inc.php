@@ -28,7 +28,7 @@ if (isset($_GET["sqlite"])) {
 					$this->error = $this->_link->lastErrorMsg();
 					return false;
 				} elseif ($result->numColumns()) {
-					return new Min_Result($result);
+					return new Result($result);
 				}
 				$this->affected_rows = $this->_link->changes();
 				return true;
@@ -55,7 +55,7 @@ if (isset($_GET["sqlite"])) {
 			}
 		}
 
-		class Min_Result {
+		class Result {
 			var $_result, $_offset = 0, $num_rows;
 
 			function __construct($result) {
@@ -102,7 +102,7 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	if (class_exists("AdminNeo\\Min_SQLite")) {
-		class Min_DB extends Min_SQLite {
+		class Database extends Min_SQLite {
 
 			function __construct() {
 				parent::__construct(":memory:");
@@ -168,11 +168,11 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		$password = Admin::get()->getCredentials()[2];
 		if ($password != "") {

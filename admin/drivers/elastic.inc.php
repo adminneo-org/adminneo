@@ -10,7 +10,7 @@ if (isset($_GET["elastic"])) {
 	if (ini_bool('allow_url_fopen')) {
 		define("AdminNeo\ELASTIC_DB_NAME", "elastic");
 
-		class Min_DB {
+		class Database {
 			var $extension = "JSON", $server_info, $errno, $error, $_url;
 
 			/**
@@ -113,7 +113,7 @@ if (isset($_GET["elastic"])) {
 			}
 		}
 
-		class Min_Result {
+		class Result {
 			var $num_rows, $_rows;
 
 			function __construct($rows) {
@@ -212,7 +212,7 @@ if (isset($_GET["elastic"])) {
 				$return[] = $row;
 			}
 
-			return new Min_Result($return);
+			return new Result($return);
 		}
 
 		private  function addQueryCondition($val, &$data)
@@ -334,11 +334,11 @@ if (isset($_GET["elastic"])) {
 	}
 
 	/**
-	 * @return Min_DB|string
+	 * @return Database|string
 	 */
 	function connect()
 	{
-		$connection = new Min_DB();
+		$connection = new Database();
 
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
