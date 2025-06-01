@@ -133,25 +133,30 @@ if (isset($_GET["sqlite"])) {
 
 	class SqliteDriver extends Driver {
 
-		function insertUpdate($table, $rows, $primary) {
+		public function insertUpdate(string $table, array $records, array $primary)
+		{
 			$values = [];
-			foreach ($rows as $set) {
-				$values[] = "(" . implode(", ", $set) . ")";
+			foreach ($records as $record) {
+				$values[] = "(" . implode(", ", $record) . ")";
 			}
-			return queries("REPLACE INTO " . table($table) . " (" . implode(", ", array_keys(reset($rows))) . ") VALUES\n" . implode(",\n", $values));
+			return queries("REPLACE INTO " . table($table) . " (" . implode(", ", array_keys(reset($records))) . ") VALUES\n" . implode(",\n", $values));
 		}
 
-		function tableHelp($name, $is_view = false) {
+		public function tableHelp(string $name, bool $isView = false): ?string
+		{
 			if ($name == "sqlite_sequence") {
 				return "fileformat2.html#seqtab";
 			}
 			if ($name == "sqlite_master") {
 				return "fileformat2.html#$name";
 			}
+
+			return null;
 		}
 
-		function checkConstraints($table) {
-			preg_match_all('~ CHECK *(\( *(((?>[^()]*[^() ])|(?1))*) *\))~', $this->_conn->result("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)), $matches); //! could be inside a comment
+		public function checkConstraints(string $table): array
+		{
+			preg_match_all('~ CHECK *(\( *(((?>[^()]*[^() ])|(?1))*) *\))~', $this->database->result("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)), $matches); //! could be inside a comment
 			return array_combine($matches[2], $matches[2]);
 		}
 

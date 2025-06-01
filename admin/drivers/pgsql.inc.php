@@ -112,8 +112,11 @@ if (isset($_GET["pgsql"])) {
 				return pg_fetch_result($result->_result, 0, $field);
 			}
 
-			function warnings() {
-				return h(pg_last_notice($this->_link)); // second parameter is available since PHP 7.1.0
+			function warnings(): ?string
+			{
+				$result = pg_last_notice($this->_link);
+
+				return $result ? h($result) : null;
 			}
 		}
 
@@ -184,8 +187,9 @@ if (isset($_GET["pgsql"])) {
 				return $return;
 			}
 
-			function warnings() {
-				return ''; // not implemented in PDO_PgSQL as of PHP 7.2.1
+			function warnings(): ?string
+			{
+				return null; // not implemented in PDO_PgSQL as of PHP 7.2.1
 			}
 
 			function close() {
@@ -198,19 +202,20 @@ if (isset($_GET["pgsql"])) {
 
 	class PgSqlDriver extends Driver {
 
-		function insertUpdate($table, $rows, $primary) {
+		public function insertUpdate(string $table, array $records, array $primary): bool
+		{
 			global $connection;
-			foreach ($rows as $set) {
+			foreach ($records as $record) {
 				$update = [];
 				$where = [];
-				foreach ($set as $key => $val) {
+				foreach ($record as $key => $val) {
 					$update[] = "$key = $val";
 					if (isset($primary[idf_unescape($key)])) {
 						$where[] = "$key = $val";
 					}
 				}
 				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && $connection->affected_rows)
-					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($set)) . ") VALUES (" . implode(", ", $set) . ")")
+					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
 				}
@@ -218,13 +223,16 @@ if (isset($_GET["pgsql"])) {
 			return true;
 		}
 
-		function slowQuery($query, $timeout) {
-			$this->_conn->query("SET statement_timeout = " . (1000 * $timeout));
-			$this->_conn->timeout = 1000 * $timeout;
+		public function slowQuery(string $query, int $timeout): ?string
+		{
+			$this->database->query("SET statement_timeout = " . (1000 * $timeout));
+			$this->database->timeout = 1000 * $timeout;
+
 			return $query;
 		}
 
-		function convertSearch($idf, array $where, array $field) {
+		public function convertSearch(string $idf, array $where, array $field): string
+		{
 			$textTypes = "char|text";
 			if (strpos($where["op"], "LIKE") === false) {
 				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|" . number_type();
@@ -233,29 +241,35 @@ if (isset($_GET["pgsql"])) {
 			return (preg_match("~$textTypes~", $field["type"]) ? $idf : "CAST($idf AS text)");
 		}
 
-		function quoteBinary($s) {
-			return "'\\x" . bin2hex($s) . "'"; // available since PostgreSQL 8.1
+		public function quoteBinary(string $string): string
+		{
+			return "'\\x" . bin2hex($string) . "'"; // available since PostgreSQL 8.1
 		}
 
-		function warnings() {
-			return $this->_conn->warnings();
+		public function warnings(): ?string
+		{
+			return $this->database->warnings();
 		}
 
-		function tableHelp($name, $is_view = false) {
+		public function tableHelp(string $name, bool $isView = false): ?string
+		{
 			$links = [
 				"information_schema" => "infoschema",
-				"pg_catalog" => ($is_view ? "view" : "catalog"),
+				"pg_catalog" => ($isView ? "view" : "catalog"),
 			];
 			$link = $links[$_GET["ns"]];
 			if ($link) {
 				return "$link-" . str_replace("_", "-", $name) . ".html";
 			}
+
+			return null;
 		}
 
-		function hasCStyleEscapes() {
+		public function hasCStyleEscapes(): bool
+		{
 			static $c_style;
 			if ($c_style === null) {
-				$c_style = ($this->_conn->result("SHOW standard_conforming_strings") == "off");
+				$c_style = ($this->database->result("SHOW standard_conforming_strings") == "off");
 			}
 			return $c_style;
 		}

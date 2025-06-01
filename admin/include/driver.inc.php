@@ -35,33 +35,39 @@ function get_driver_name(string $id): ?string
 	return $drivers[$id] ?? null;
 }
 
-abstract class Driver {
-	protected $_conn;
+abstract class Driver
+{
+	/** @var Database */
+	protected $database;
 
 	/** @var Origin|Pluginer */
 	protected $admin;
 
 	/**
-	 * @param Database $connection
 	 * @param Origin|Pluginer $admin
 	 */
-	function __construct($connection, $admin) {
-		$this->_conn = $connection;
+	public function __construct(Database $database, $admin)
+	{
+		$this->database = $database;
 		$this->admin = $admin;
 	}
 
-	/** Select data from table
-	* @param string
-	* @param array result of Admin::get()->processSelectionColumns()[0]
-	* @param array result of Admin::get()->processSelectionSearch()
-	* @param array result of Admin::get()->processSelectionColumns()[1]
-	* @param array result of Admin::get()->processSelectionOrder()
-	* @param ?int result of Admin::get()->processSelectionLimit()
-	* @param int index of page starting at zero
-	* @param bool whether to print the query
-	* @return Result
-	*/
-	function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
+	/**
+	 * Selects data from a table.
+	 *
+	 * @param string $table Table name.
+	 * @param array $select The result of Admin::get()->processSelectionColumns()[0].
+	 * @param array $where The result of Admin::get()->processSelectionSearch().
+	 * @param array $group The result of Admin::get()->processSelectionColumns()[1].
+	 * @param array $order The result of Admin::get()->processSelectionOrder().
+	 * @param ?int $limit The result of Admin::get()->processSelectionLimit().
+	 * @param int $page Index of page starting at zero.
+	 * @param bool $print Whether to print the query.
+	 *
+	 * @return Result|false
+	 */
+	public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
+	{
 		global $jush;
 		$is_group = (count($group) < count($select));
 
@@ -74,156 +80,202 @@ abstract class Driver {
 		);
 
 		$start = microtime(true);
-		$return = $this->_conn->query($query);
+		$return = $this->database->query($query);
+
 		if ($print) {
 			echo Admin::get()->formatSelectQuery($query, $start, !$return);
 		}
+
 		return $return;
 	}
 
-	/** Delete data from table
-	* @param string
-	* @param string " WHERE ..."
-	* @param int 0 or 1
-	* @return bool
-	*/
-	function delete($table, $queryWhere, $limit = 0) {
+	/**
+	 * Deletes data from a table.
+	 *
+	 * @param string $table Table name.
+	 * @param string $queryWhere Where condition " WHERE ...".
+	 * @param int $limit 0 or 1.
+	 *
+	 * @return Result|bool
+	 */
+	public function delete(string $table, string $queryWhere, int $limit = 0)
+	{
 		$query = "FROM " . table($table);
+
 		return queries("DELETE" . ($limit ? limit1($table, $query, $queryWhere) : " $query$queryWhere"));
 	}
 
-	/** Update data in table
-	* @param string
-	* @param array escaped columns in keys, quoted data in values
-	* @param string " WHERE ..."
-	* @param int 0 or 1
-	* @param string
-	* @return bool
-	*/
-	function update($table, $set, $queryWhere, $limit = 0, $separator = "\n") {
+	/**
+	 * Updates data in a table.
+	 *
+	 * @param string $table Table name.
+	 * @param array $record Escaped columns in keys, quoted data in values.
+	 * @param string $queryWhere Where condition " WHERE ...".
+	 * @param int $limit 0 or 1.
+	 * @param string $separator Separator between parts of the query.
+	 *
+	 * @return Result|bool
+	 */
+	public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
+	{
 		$values = [];
-		foreach ($set as $key => $val) {
+		foreach ($record as $key => $val) {
 			$values[] = "$key = $val";
 		}
 		$query = table($table) . " SET$separator" . implode(",$separator", $values);
+
 		return queries("UPDATE" . ($limit ? limit1($table, $query, $queryWhere, $separator) : " $query$queryWhere"));
 	}
 
-	/** Insert data into table
-	* @param string
-	* @param array escaped columns in keys, quoted data in values
-	* @return bool
-	*/
-	function insert($table, $set) {
-		return queries("INSERT INTO " . table($table) . ($set
-			? " (" . implode(", ", array_keys($set)) . ")\nVALUES (" . implode(", ", $set) . ")"
+	/**
+	 * Inserts data into a table.
+	 *
+	 * @param string $table Table name.
+	 * @param array $record Escaped columns in keys, quoted data in values.
+	 *
+	 * @return Result|bool
+	 */
+	public function insert(string $table, array $record)
+	{
+		return queries("INSERT INTO " . table($table) . ($record
+			? " (" . implode(", ", array_keys($record)) . ")\nVALUES (" . implode(", ", $record) . ")"
 			: " DEFAULT VALUES"
 		));
 	}
 
-	/** Insert or update data in table
-	* @param string
-	* @param array
-	* @param array of arrays with escaped columns in keys and quoted data in values
-	* @return bool
-	*/
-	function insertUpdate($table, $rows, $primary) {
+	/**
+	 * Inserts or updates data in a table.
+	 *
+	 * @param string $table Table name.
+	 * @param array $records List of records.
+	 * @param array[] $primary Array of arrays with escaped columns in keys and quoted data in values.
+	 *
+	 * @return Result|bool
+	 */
+	public function insertUpdate(string $table, array $records, array $primary)
+	{
 		return false;
 	}
 
-	/** Begin transaction
-	* @return bool
-	*/
-	function begin() {
+	/**
+	 * Begins new transaction.
+	 *
+	 * @return Result|bool
+	 */
+	public function begin()
+	{
 		return queries("BEGIN");
 	}
 
-	/** Commit transaction
-	* @return bool
-	*/
-	function commit() {
+	/**
+	 * Commits transaction.
+	 *
+	 * @return Result|bool
+	 */
+	public function commit()
+	{
 		return queries("COMMIT");
 	}
 
-	/** Rollback transaction
-	* @return bool
-	*/
-	function rollback() {
+	/**
+	 * Rollback transaction.
+	 *
+	 * @return Result|bool
+	 */
+	public function rollback()
+	{
 		return queries("ROLLBACK");
 	}
 
-	/** Return query with a timeout
-	* @param string
-	* @param int seconds
-	* @return string or null if the driver doesn't support query timeouts
-	*/
-	function slowQuery($query, $timeout) {
+	/**
+	 * Returns query with a timeout.
+	 *
+	 * @return ?string Null if the driver doesn't support query timeouts.
+	 */
+	public function slowQuery(string $query, int $timeout): ?string
+	{
+		return null;
 	}
 
-	/** Convert column to be searchable
-	* @param string escaped column name
-	* @param array ["op" => , "val" => ]
-	* @param array
-	* @return string
-	*/
-	function convertSearch($idf, array $where, array $field) {
+	/**
+	 * Converts column to be searchable.
+	 *
+	 * @param string $idf Escaped column name.
+	 * @param array $where ["op" => , "val" => ]
+	 * @param array $field Single field returned from fields().
+	 */
+	public function convertSearch(string $idf, array $where, array $field): string
+	{
 		return $idf;
 	}
 
-	/** Convert value returned by database to actual value
-	* @param string
-	* @param array
-	* @return string
-	*/
-	function value($val, $field) {
-		return (method_exists($this->_conn, 'value')
-			? $this->_conn->value($val, $field)
+	/**
+	 * Converts value returned by database to actual value.
+	 *
+	 * @param ?string $val Value.
+	 * @param array $field Single field returned from fields().
+	 */
+	public function value(?string $val, array $field): ?string
+	{
+		return (method_exists($this->database, 'value')
+			? $this->database->value($val, $field)
 			: (is_resource($val) ? stream_get_contents($val) : $val)
 		);
 	}
 
-	/** Quote binary string
-	* @param string
-	* @return string
-	*/
-	function quoteBinary($s) {
-		return q($s);
+	/**
+	 * Quotes binary string.
+	 */
+	public function quoteBinary(string $string): string
+	{
+		return q($string);
 	}
 
-	/** Get warnings about the last command
-	* @return string HTML
-	*/
-	function warnings() {
-		return '';
+	/**
+	 * Returns warnings about the last command.
+	 *
+	 * @return string HTML
+	 */
+	public function warnings(): ?string
+	{
+		return null;
 	}
 
-	/** Get help link for table
-	* @param string
-	* @param bool
-	* @return string relative URL or null
-	*/
-	function tableHelp($name, $is_view = false) {
+	/**
+	 * Returns help link for a table.
+	 *
+	 * @param string $name Table name.
+	 *
+	 * @return ?string Relative URL or null.
+	 */
+	public function tableHelp(string $name, bool $isView = false): ?string
+	{
+		return null;
 	}
 
-	/** Check if C-style escapes are supported
-	* @return bool
-	*/
-	function hasCStyleEscapes() {
+	/**
+	 * Checks if C-style escapes are supported.
+	 */
+	public function hasCStyleEscapes(): bool
+	{
 		return false;
 	}
 
-	/** Get defined check constraints
-	* @param string
-	* @return array [$name => $clause]
-	*/
-	function checkConstraints($table) {
-		// MariaDB contains CHECK_CONSTRAINTS.TABLE_NAME, MySQL and PostrgreSQL not
+	/**
+	 * Returns defined check constraints.
+	 *
+	 * @param string $table Table name.
+	 *
+	 * @return array [$name => $clause]
+	 */
+	public function checkConstraints(string $table): array
+	{
+		// MariaDB contains CHECK_CONSTRAINTS.TABLE_NAME, MySQL and PostgreSQL not.
 		return get_key_vals("SELECT c.CONSTRAINT_NAME, CHECK_CLAUSE
 FROM INFORMATION_SCHEMA.CHECK_CONSTRAINTS c
 JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS t ON c.CONSTRAINT_SCHEMA = t.CONSTRAINT_SCHEMA AND c.CONSTRAINT_NAME = t.CONSTRAINT_NAME
 WHERE c.CONSTRAINT_SCHEMA = " . q($_GET["ns"] != "" ? $_GET["ns"] : DB) . "
 AND t.TABLE_NAME = " . q($table) . "
-AND CHECK_CLAUSE NOT LIKE '% IS NOT NULL'"); // ignore default IS NOT NULL checks in PostrgreSQL
+AND CHECK_CLAUSE NOT LIKE '% IS NOT NULL'"); // ignore default IS NOT NULL checks in PostgreSQL
 	}
-
 }

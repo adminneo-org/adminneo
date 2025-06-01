@@ -155,7 +155,7 @@ if (isset($_GET["simpledb"])) {
 	class SimpleDbDriver extends Driver {
 		public $primary = "itemName()";
 
-		function _chunkRequest($ids, $action, $params, $expand = []) {
+		private function chunkRequest($ids, $action, $params, $expand = []) {
 			global $connection;
 			foreach (array_chunk($ids, 25) as $chunk) {
 				$params2 = $params;
@@ -173,7 +173,7 @@ if (isset($_GET["simpledb"])) {
 			return true;
 		}
 
-		function _extractIds($table, $queryWhere, $limit) {
+		private function extractIds($table, $queryWhere, $limit) {
 			$return = [];
 			if (preg_match_all("~itemName\(\) = (('[^']*+')+)~", $queryWhere, $matches)) {
 				$return = array_map('AdminNeo\idf_unescape', $matches[1]);
@@ -185,7 +185,8 @@ if (isset($_GET["simpledb"])) {
 			return $return;
 		}
 
-		function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
+		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
+		{
 			global $connection;
 			$connection->next = $_GET["next"];
 			$return = parent::select($table, $select, $where, $group, $order, $limit, $page, $print);
@@ -193,22 +194,24 @@ if (isset($_GET["simpledb"])) {
 			return $return;
 		}
 
-		function delete($table, $queryWhere, $limit = 0) {
-			return $this->_chunkRequest(
-				$this->_extractIds($table, $queryWhere, $limit),
+		public function delete(string $table, string $queryWhere, int $limit = 0): bool
+		{
+			return $this->chunkRequest(
+				$this->extractIds($table, $queryWhere, $limit),
 				'BatchDeleteAttributes',
 				['DomainName' => $table]
 			);
 		}
 
-		function update($table, $set, $queryWhere, $limit = 0, $separator = "\n") {
+		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n"): bool
+		{
 			$delete = [];
 			$insert = [];
 			$i = 0;
-			$ids = $this->_extractIds($table, $queryWhere, $limit);
-			$id = idf_unescape($set["`itemName()`"]);
-			unset($set["`itemName()`"]);
-			foreach ($set as $key => $val) {
+			$ids = $this->extractIds($table, $queryWhere, $limit);
+			$id = idf_unescape($record["`itemName()`"]);
+			unset($record["`itemName()`"]);
+			foreach ($record as $key => $val) {
 				$key = idf_unescape($key);
 				if ($val == "NULL" || ($id != "" && [$id] != $ids)) {
 					$delete["Attribute." . count($delete) . ".Name"] = $key;
@@ -225,15 +228,16 @@ if (isset($_GET["simpledb"])) {
 				}
 			}
 			$params = ['DomainName' => $table];
-			return (!$insert || $this->_chunkRequest(($id != "" ? [$id] : $ids), 'BatchPutAttributes', $params, $insert))
-				&& (!$delete || $this->_chunkRequest($ids, 'BatchDeleteAttributes', $params, $delete))
+			return (!$insert || $this->chunkRequest(($id != "" ? [$id] : $ids), 'BatchPutAttributes', $params, $insert))
+				&& (!$delete || $this->chunkRequest($ids, 'BatchDeleteAttributes', $params, $delete))
 			;
 		}
 
-		function insert($table, $set) {
+		public function insert(string $table, array $record)
+		{
 			$params = ["DomainName" => $table];
 			$i = 0;
-			foreach ($set as $name => $value) {
+			foreach ($record as $name => $value) {
 				if ($value != "NULL") {
 					$name = idf_unescape($name);
 					if ($name == "itemName()") {
@@ -250,30 +254,37 @@ if (isset($_GET["simpledb"])) {
 			return sdb_request('PutAttributes', $params);
 		}
 
-		function insertUpdate($table, $rows, $primary) {
+		public function insertUpdate(string $table, array $records, array $primary): bool
+		{
 			//! use one batch request
-			foreach ($rows as $set) {
-				if (!$this->update($table, $set, "WHERE `itemName()` = " . q($set["`itemName()`"]))) {
+			foreach ($records as $record) {
+				if (!$this->update($table, $record, "WHERE `itemName()` = " . q($record["`itemName()`"]))) {
 					return false;
 				}
 			}
+
 			return true;
 		}
 
-		function begin() {
+		public function begin(): bool
+		{
 			return false;
 		}
 
-		function commit() {
+		public function commit(): bool
+		{
 			return false;
 		}
 
-		function rollback() {
+		public function rollback(): bool
+		{
 			return false;
 		}
 
-		function slowQuery($query, $timeout) {
-			$this->_conn->timeout = $timeout;
+		public function slowQuery(string $query, int $timeout): ?string
+		{
+			$this->database->timeout = $timeout;
+
 			return $query;
 		}
 

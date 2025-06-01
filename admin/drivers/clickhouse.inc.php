@@ -164,16 +164,18 @@ if (isset($_GET["clickhouse"])) {
 
 
 	class ClickHouseDriver extends Driver {
-		function delete($table, $queryWhere, $limit = 0) {
+		public function delete(string $table, string $queryWhere, int $limit = 0)
+        {
 			if ($queryWhere === '') {
 				$queryWhere = 'WHERE 1=1';
 			}
 			return queries("ALTER TABLE " . table($table) . " DELETE $queryWhere");
 		}
 
-		function update($table, $set, $queryWhere, $limit = 0, $separator = "\n") {
+		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
+        {
 			$values = [];
-			foreach ($set as $key => $val) {
+			foreach ($record as $key => $val) {
 				$values[] = "$key = $val";
 			}
 			$query = $separator . implode(",$separator", $values);

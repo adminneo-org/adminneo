@@ -145,23 +145,25 @@ if (isset($_GET["oracle"])) {
 
 		//! support empty $set in insert()
 
-		function begin() {
+		public function begin(): bool
+		{
 			return true; // automatic start
 		}
 
-		function insertUpdate($table, $rows, $primary) {
+		public function insertUpdate(string $table, array $records, array $primary): bool
+		{
 			global $connection;
-			foreach ($rows as $set) {
+			foreach ($records as $record) {
 				$update = [];
 				$where = [];
-				foreach ($set as $key => $val) {
+				foreach ($record as $key => $val) {
 					$update[] = "$key = $val";
 					if (isset($primary[idf_unescape($key)])) {
 						$where[] = "$key = $val";
 					}
 				}
 				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && $connection->affected_rows)
-					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($set)) . ") VALUES (" . implode(", ", $set) . ")")
+					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
 				}
@@ -169,7 +171,8 @@ if (isset($_GET["oracle"])) {
 			return true;
 		}
 
-		function hasCStyleEscapes() {
+		public function hasCStyleEscapes(): bool
+		{
 			return true;
 		}
 

@@ -132,12 +132,14 @@ if (isset($_GET["mysql"])) {
 
 	class MySqlDriver extends Driver {
 
-		function insert($table, $set) {
-			return ($set ? parent::insert($table, $set) : queries("INSERT INTO " . table($table) . " ()\nVALUES ()"));
+		public function insert(string $table, array $record)
+        {
+			return ($record ? parent::insert($table, $record) : queries("INSERT INTO " . table($table) . " ()\nVALUES ()"));
 		}
 
-		function insertUpdate($table, $rows, $primary) {
-			$columns = array_keys(reset($rows));
+		public function insertUpdate(string $table, array $records, array $primary)
+        {
+			$columns = array_keys(reset($records));
 			$prefix = "INSERT INTO " . table($table) . " (" . implode(", ", $columns) . ") VALUES\n";
 			$values = [];
 			foreach ($columns as $key) {
@@ -146,8 +148,8 @@ if (isset($_GET["mysql"])) {
 			$suffix = "\nON DUPLICATE KEY UPDATE " . implode(", ", $values);
 			$values = [];
 			$length = 0;
-			foreach ($rows as $set) {
-				$value = "(" . implode(", ", $set) . ")";
+			foreach ($records as $record) {
+				$value = "(" . implode(", ", $record) . ")";
 				if ($values && (strlen($prefix) + $length + strlen($value) + strlen($suffix) > 1e6)) { // 1e6 - default max_allowed_packet
 					if (!queries($prefix . implode(",\n", $values) . $suffix)) {
 						return false;
@@ -161,46 +163,57 @@ if (isset($_GET["mysql"])) {
 			return queries($prefix . implode(",\n", $values) . $suffix);
 		}
 
-		function slowQuery($query, $timeout) {
+		public function slowQuery(string $query, int $timeout): ?string
+        {
 			if (min_version('5.7.8', '10.1.2')) {
-				if (preg_match('~MariaDB~', $this->_conn->server_info)) {
+				if (preg_match('~MariaDB~', $this->database->server_info)) {
 					return "SET STATEMENT max_statement_time=$timeout FOR $query";
 				} elseif (preg_match('~^(SELECT\b)(.+)~is', $query, $match)) {
 					return "$match[1] /*+ MAX_EXECUTION_TIME(" . ($timeout * 1000) . ") */ $match[2]";
 				}
 			}
+
+            return null;
 		}
 
-		function convertSearch($idf, array $where, array $field) {
+		public function convertSearch(string $idf, array $where, array $field): string
+        {
 			return (preg_match('~char|text|enum|set~', $field["type"]) && !preg_match("~^utf8~", $field["collation"]) && preg_match('~[\x80-\xFF]~', $where['val'])
-				? "CONVERT($idf USING " . charset($this->_conn) . ")"
+				? "CONVERT($idf USING " . charset($this->database) . ")"
 				: $idf
 			);
 		}
 
-		function warnings() {
-			$result = $this->_conn->query("SHOW WARNINGS");
+		public function warnings(): ?string
+        {
+			$result = $this->database->query("SHOW WARNINGS");
 			if ($result && $result->num_rows) {
 				ob_start();
 				select($result); // select() usually needs to print a big table progressively
 				return ob_get_clean();
 			}
+
+            return null;
 		}
 
-		function tableHelp($name, $is_view = false) {
-			$maria = preg_match('~MariaDB~', $this->_conn->server_info);
+		public function tableHelp(string $name, bool $isView = false): ?string
+        {
+			$maria = preg_match('~MariaDB~', $this->database->server_info);
 			if (information_schema(DB)) {
 				return strtolower("information-schema-" . ($maria ? "$name-table/" : str_replace("_", "-", $name) . "-table.html"));
 			}
 			if (DB == "mysql") {
 				return ($maria ? "mysql$name-table/" : "system-schema.html"); //! more precise link
 			}
+
+            return null;
 		}
 
-		function hasCStyleEscapes() {
+		public function hasCStyleEscapes(): bool
+        {
 			static $c_style;
 			if ($c_style === null) {
-				$sql_mode = $this->_conn->result("SHOW VARIABLES LIKE 'sql_mode'", 1);
+				$sql_mode = $this->database->result("SHOW VARIABLES LIKE 'sql_mode'", 1);
 				$c_style = (strpos($sql_mode, 'NO_BACKSLASH_ESCAPES') === false);
 			}
 			return $c_style;

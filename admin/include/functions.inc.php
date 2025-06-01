@@ -681,7 +681,7 @@ function query_redirect($query, $location, $message, $redirect = true, $execute 
 
 /** Execute and remember query
 * @param string or null to return remembered queries, end with ';' to use DELIMITER
-* @return Result|array or [$queries, $time] if $query = null
+* @return Result|array|bool or [$queries, $time] if $query = null
 */
 function queries($query) {
 	global $connection;

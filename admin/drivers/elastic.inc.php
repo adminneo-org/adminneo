@@ -75,7 +75,7 @@ if (isset($_GET["elastic"])) {
 
 					$where = explode(" AND ", $matches[2]);
 
-					return $driver->select($matches[1], ["*"], $where, null, [], $matches[3]);
+					return Driver::get()->select($matches[1], ["*"], $where, [], [], $matches[3]);
 				}
 
 				return $this->rootQuery($path, $content, $method);
@@ -140,7 +140,8 @@ if (isset($_GET["elastic"])) {
 
 	class ElasticDriver extends Driver {
 
-		function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
+		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
+		{
 			$data = [];
 			if ($select != ["*"]) {
 				$data["fields"] = array_values($select);
@@ -176,7 +177,7 @@ if (isset($_GET["elastic"])) {
 
 			$query = "$table/_search";
 			$start = microtime(true);
-			$search = $this->_conn->rootQuery($query, $data);
+			$search = $this->database->rootQuery($query, $data);
 
 			if ($print) {
 				echo $this->admin->formatSelectQuery("\"GET $query\": " . json_encode($data), $start, !$search);
@@ -215,7 +216,7 @@ if (isset($_GET["elastic"])) {
 			return new Result($return);
 		}
 
-		private  function addQueryCondition($val, &$data)
+		private function addQueryCondition($val, &$data)
 		{
 			list($col, $op, $val) = explode(" ", $val, 3);
 
@@ -249,7 +250,8 @@ if (isset($_GET["elastic"])) {
 			}
 		}
 
-		function update($type, $record, $queryWhere, $limit = 0, $separator = "\n") {
+		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
+		{
 			//! use $limit
 			$parts = preg_split('~ *= *~', $queryWhere);
 			if (count($parts) != 2) {
@@ -257,21 +259,22 @@ if (isset($_GET["elastic"])) {
 			}
 
 			$id = trim($parts[1]);
-			$query = "$type/_doc/$id";
+			$query = "$table/_doc/$id";
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " . json_encode($record));
 
-			$response = $this->_conn->query($query, $record, 'POST');
+			$response = $this->database->query($query, $record, 'POST');
 			if ($response) {
-				$this->_conn->query("$type/_refresh");
+				$this->database->query("$table/_refresh");
 			}
 
 			return $response;
 		}
 
-		function insert($type, $record) {
-			$query = "$type/_doc/";
+		public function insert(string $table, array $record)
+		{
+			$query = "$table/_doc/";
 
 			if (isset($record["_id"]) && $record["_id"] != "NULL") {
 				$query .= $record["_id"];
@@ -287,18 +290,19 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " .json_encode($record));
 
-			$response = $this->_conn->query($query, $record, 'POST');
+			$response = $this->database->query($query, $record, 'POST');
 			if (!$response) {
 				return false;
 			}
 
-			$this->_conn->query("$type/_refresh");
-			$this->_conn->last_id = $response['_id'];
+			$this->database->query("$table/_refresh");
+			$this->database->last_id = $response['_id'];
 
 			return $response['result'];
 		}
 
-		function delete($table, $queryWhere, $limit = 0) {
+		public function delete(string $table, string $queryWhere, int $limit = 0)
+		{
 			//! use $limit
 			$ids = [];
 			if ($_GET["where"]["_id"] ?? null) {
@@ -313,7 +317,7 @@ if (isset($_GET["elastic"])) {
 				}
 			}
 
-			$this->_conn->affected_rows = 0;
+			$this->database->affected_rows = 0;
 
 			foreach ($ids as $id) {
 				$query = "$table/_doc/$id";
@@ -321,15 +325,15 @@ if (isset($_GET["elastic"])) {
 				// Save the query for later use in a flesh message. TODO: This is so ugly.
 				queries("\"DELETE $query\"");
 
-				$response = $this->_conn->query($query, null, 'DELETE');
+				$response = $this->database->query($query, null, 'DELETE');
 				if (isset($response['result']) && $response['result'] == 'deleted') {
-					$this->_conn->affected_rows++;
+					$this->database->affected_rows++;
 				}
 			}
 
-			$this->_conn->query("$table/_refresh");
+			$this->database->query("$table/_refresh");
 
-			return $this->_conn->affected_rows;
+			return $this->database->affected_rows;
 		}
 	}
 

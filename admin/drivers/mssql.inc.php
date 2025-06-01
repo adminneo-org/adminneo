@@ -221,15 +221,16 @@ if (isset($_GET["mssql"])) {
 
 	class MsSqlDriver extends Driver {
 
-		function insertUpdate($table, $rows, $primary) {
+		public function insertUpdate(string $table, array $records, array $primary)
+        {
 			$fields = fields($table);
 			$update = [];
 			$where = [];
-			$set = reset($rows);
-			$columns = "c" . implode(", c", range(1, count($set)));
+			$record = reset($records);
+			$columns = "c" . implode(", c", range(1, count($record)));
 			$c = 0;
 			$insert = array();
-			foreach ($set as $key => $val) {
+			foreach ($record as $key => $val) {
 				$c++;
 				$name = idf_unescape($key);
 				if (!$fields[$name]["auto_increment"]) {
@@ -242,29 +243,31 @@ if (isset($_GET["mssql"])) {
 				}
 			}
 			$values = [];
-			foreach ($rows as $set) {
-				$values[] = "(" . implode(", ", $set) . ")";
+			foreach ($records as $record) {
+				$values[] = "(" . implode(", ", $record) . ")";
 			}
 			if ($where) {
 				$identity = queries("SET IDENTITY_INSERT " . table($table) . " ON");
 				$return = queries("MERGE " . table($table) . " USING (VALUES\n\t" . implode(",\n\t", $values) . "\n) AS source ($columns) ON " . implode(" AND ", $where) //! source, c1 - possible conflict
 					. ($update ? "\nWHEN MATCHED THEN UPDATE SET " . implode(", ", $update) : "")
-					. "\nWHEN NOT MATCHED THEN INSERT (" . implode(", ", array_keys($identity ? $set : $insert)) . ") VALUES (" . ($identity ? $columns : implode(", ", $insert)) . ");" // ; is mandatory
+					. "\nWHEN NOT MATCHED THEN INSERT (" . implode(", ", array_keys($identity ? $record : $insert)) . ") VALUES (" . ($identity ? $columns : implode(", ", $insert)) . ");" // ; is mandatory
 				);
 				if ($identity) {
 					queries("SET IDENTITY_INSERT " . table($table) . " OFF");
 				}
 			} else {
-				$return = queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($set)) . ") VALUES\n" . implode(",\n", $values));
+				$return = queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES\n" . implode(",\n", $values));
 			}
 			return $return;
 		}
 
-		function begin() {
+		public function begin()
+        {
 			return queries("BEGIN TRANSACTION");
 		}
 
-		function tableHelp($name, $is_view = false) {
+		public function tableHelp(string $name, bool $isView = false): ?string
+        {
 			$links = array(
 				"sys" => "catalog-views/sys-",
 				"INFORMATION_SCHEMA" => "information-schema-views/",
@@ -273,6 +276,8 @@ if (isset($_GET["mssql"])) {
 			if ($link) {
 				return "relational-databases/system-$link" . preg_replace('~_~', '-', strtolower($name)) . "-transact-sql";
 			}
+
+            return null;
 		}
 
 	}

@@ -5,7 +5,10 @@ namespace AdminNeo;
 use DateTime;
 use Exception;
 use MongoDB\BSON;
-use MongoDB\Driver;
+use MongoDB\Driver\BulkWrite;
+use MongoDB\Driver\Command;
+use MongoDB\Driver\Manager;
+use MongoDB\Driver\Query;
 
 add_driver("mongo", "MongoDB (alpha)");
 
@@ -15,18 +18,18 @@ if (isset($_GET["mongo"])) {
 	if (class_exists('MongoDB\Driver\Manager')) {
 		class Database {
 			var $extension = "MongoDB", $server_info = MONGODB_VERSION, $affected_rows, $error, $last_id;
-			/** @var Driver\Manager */
+			/** @var Manager */
 			var $_link;
 			var $_db, $_db_name;
 
 			function connect($uri, $options) {
-				$this->_link = new Driver\Manager($uri, $options);
+				$this->_link = new Manager($uri, $options);
 				$this->executeCommand($options["db"], ['ping' => 1]);
 			}
 
 			function executeCommand($db, $command) {
 				try {
-					return $this->_link->executeCommand($db, new Driver\Command($command));
+					return $this->_link->executeCommand($db, new Command($command));
 				} catch (Exception $e) {
 					$this->error = $e->getMessage();
 					return [];
@@ -123,7 +126,8 @@ if (isset($_GET["mongo"])) {
 		class MongoDriver extends Driver {
 			public $primary = "_id";
 
-			function select($table, $select, $where, $group, $order = [], ?int $limit = 1, $page = 0, $print = false) {
+			public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
+			{
 				global $connection;
 				$select = ($select == ["*"]
 					? []
@@ -141,29 +145,30 @@ if (isset($_GET["mongo"])) {
 				$limit = min(200, max(1, (int) $limit));
 				$skip = $page * $limit;
 				try {
-					return new Result($connection->_link->executeQuery("$connection->_db_name.$table", new Driver\Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort])));
+					return new Result($connection->_link->executeQuery("$connection->_db_name.$table", new Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort])));
 				} catch (Exception $e) {
 					$connection->error = $e->getMessage();
 					return false;
 				}
 			}
 
-			function update($table, $set, $queryWhere, $limit = 0, $separator = "\n") {
+			public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
+			{
 				global $connection;
 				$db = $connection->_db_name;
 				$where = sql_query_where_parser($queryWhere);
-				$bulk = new Driver\BulkWrite([]);
-				if (isset($set['_id'])) {
-					unset($set['_id']);
+				$bulk = new BulkWrite([]);
+				if (isset($record['_id'])) {
+					unset($record['_id']);
 				}
 				$removeFields = [];
-				foreach ($set as $key => $value) {
+				foreach ($record as $key => $value) {
 					if ($value == 'NULL') {
 						$removeFields[$key] = 1;
-						unset($set[$key]);
+						unset($record[$key]);
 					}
 				}
-				$update = ['$set' => $set];
+				$update = ['$set' => $record];
 				if (count($removeFields)) {
 					$update['$unset'] = $removeFields;
 				}
@@ -171,23 +176,25 @@ if (isset($_GET["mongo"])) {
 				return $connection->executeBulkWrite("$db.$table", $bulk, 'getModifiedCount');
 			}
 
-			function delete($table, $queryWhere, $limit = 0) {
+			public function delete(string $table, string $queryWhere, int $limit = 0)
+			{
 				global $connection;
 				$db = $connection->_db_name;
 				$where = sql_query_where_parser($queryWhere);
-				$bulk = new Driver\BulkWrite([]);
+				$bulk = new BulkWrite([]);
 				$bulk->delete($where, ['limit' => $limit]);
 				return $connection->executeBulkWrite("$db.$table", $bulk, 'getDeletedCount');
 			}
 
-			function insert($table, $set) {
+			public function insert(string $table, array $record)
+			{
 				global $connection;
 				$db = $connection->_db_name;
-				$bulk = new Driver\BulkWrite([]);
-				if ($set['_id'] == '') {
-					unset($set['_id']);
+				$bulk = new BulkWrite([]);
+				if ($record['_id'] == '') {
+					unset($record['_id']);
 				}
-				$bulk->insert($set);
+				$bulk->insert($record);
 				return $connection->executeBulkWrite("$db.$table", $bulk, 'getInsertedCount');
 			}
 		}
@@ -252,7 +259,7 @@ if (isset($_GET["mongo"])) {
 			global $driver;
 			$fields = fields_from_edit();
 			if (!$fields) {
-				$result = $driver->select($table, ["*"], null, null, [], 10);
+				$result = Driver::get()->select($table, ["*"], [], [], [], 10);
 				if ($result) {
 					while ($row = $result->fetch_assoc()) {
 						foreach ($row as $key => $val) {
