@@ -10,10 +10,34 @@ abstract class Driver
 	/** @var Origin|Pluginer */
 	protected $admin;
 
+	/** @var ?Driver */
+	private static $instance = null;
+
 	/**
 	 * @param Origin|Pluginer $admin
 	 */
-	public function __construct(Database $database, $admin)
+	public static function create(Database $connection, $admin): Driver
+	{
+		if (self::$instance) {
+			die(__CLASS__ . " instance already exists.\n");
+		}
+
+		return self::$instance = new static($connection, $admin);
+	}
+
+	public static function get(): Driver
+	{
+		if (!self::$instance) {
+			exit(__CLASS__ . " instance not found.\n");
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * @param Origin|Pluginer $admin
+	 */
+	protected function __construct(Database $database, $admin)
 	{
 		$this->database = $database;
 		$this->admin = $admin;

@@ -280,7 +280,7 @@ if (isset($_GET["pgsql"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new PgSqlDriver($connection, Admin::get());
+		return PgSqlDriver::create($connection, Admin::get());
 	}
 
 	function idf_escape($idf) {
@@ -834,7 +834,6 @@ AND typelem = 0"
 	}
 
 	function create_sql($table, $auto_increment, $style) {
-		global $driver;
 		$return_parts = [];
 		$sequences = [];
 
@@ -887,7 +886,7 @@ AND typelem = 0"
 			}
 		}
 
-		foreach ($driver->checkConstraints($table) as $conname => $consrc) {
+		foreach (Driver::get()->checkConstraints($table) as $conname => $consrc) {
 			$return_parts[] = "CONSTRAINT " . idf_escape($conname) . " CHECK $consrc";
 		}
 

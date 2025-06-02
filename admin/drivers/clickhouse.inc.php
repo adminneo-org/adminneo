@@ -187,7 +187,7 @@ if (isset($_GET["clickhouse"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new ClickHouseDriver($connection, Admin::get());
+		return ClickHouseDriver::create($connection, Admin::get());
 	}
 
 	function idf_escape($idf) {

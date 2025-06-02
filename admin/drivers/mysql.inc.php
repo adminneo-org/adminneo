@@ -225,7 +225,7 @@ if (isset($_GET["mysql"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new MySqlDriver($connection, Admin::get());
+		return MySqlDriver::create($connection, Admin::get());
 	}
 
 	/** Escape database identifier

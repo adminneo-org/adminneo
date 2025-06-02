@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $EVENT = $_GET["event"];

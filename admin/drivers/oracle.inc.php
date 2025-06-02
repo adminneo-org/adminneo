@@ -182,7 +182,7 @@ if (isset($_GET["oracle"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new OracleDriver($connection, Admin::get());
+		return OracleDriver::create($connection, Admin::get());
 	}
 
 	/**

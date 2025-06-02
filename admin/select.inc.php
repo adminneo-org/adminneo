@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $TABLE = $_GET["select"];
@@ -55,7 +54,7 @@ if ($_GET["val"] && is_ajax()) {
 		$as = convert_field($fields[key($row)]);
 		$select = [$as ?: idf_escape(key($row))];
 		$where[] = where_check($unique_idf, $fields);
-		$return = $driver->select($TABLE, $select, $where, $select);
+		$return = Driver::get()->select($TABLE, $select, $where, $select);
 		if ($return) {
 			echo reset($return->fetch_row());
 		}
@@ -132,10 +131,10 @@ if ($_POST && !$error) {
 			}
 			if ($_POST["all"] || ($primary && is_array($_POST["check"])) || $is_group) {
 				$result = ($_POST["delete"]
-					? $driver->delete($TABLE, $where_check)
+					? Driver::get()->delete($TABLE, $where_check)
 					: ($_POST["clone"]
 						? queries("INSERT $query$where_check")
-						: $driver->update($TABLE, $set, $where_check)
+						: Driver::get()->update($TABLE, $set, $where_check)
 					)
 				);
 				$affected = $connection->affected_rows;
@@ -144,10 +143,10 @@ if ($_POST && !$error) {
 					// where is not unique so OR can't be used
 					$where2 = "\nWHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($val, $fields);
 					$result = ($_POST["delete"]
-						? $driver->delete($TABLE, $where2, 1)
+						? Driver::get()->delete($TABLE, $where2, 1)
 						: ($_POST["clone"]
 							? queries("INSERT" . limit1($TABLE, $query, $where2))
-							: $driver->update($TABLE, $set, $where2, 1)
+							: Driver::get()->update($TABLE, $set, $where2, 1)
 						)
 					);
 					if (!$result) {
@@ -184,7 +183,7 @@ if ($_POST && !$error) {
 					$key = bracket_escape($key, 1); // 1 - back
 					$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? Admin::get()->processFieldInput($fields[$key], $val) : "NULL");
 				}
-				$result = $driver->update(
+				$result = Driver::get()->update(
 					$TABLE,
 					$set,
 					" WHERE " . ($where ? implode(" AND ", $where) . " AND " : "") . where_check($unique_idf, $fields),
@@ -205,11 +204,11 @@ if ($_POST && !$error) {
 		$error = lang('File must be in UTF-8 encoding.');
 	} else {
 		cookie("neo_import", "output=" . urlencode($import_settings["output"]) . "&format=" . urlencode($_POST["separator"]));
-		$result = true;
+
 		$cols = array_keys($fields);
 		preg_match_all('~(?>"[^"]*"|[^"\r\n]+)+~', $file, $matches);
 		$affected = count($matches[0]);
-		$driver->begin();
+		Driver::get()->begin();
 		$separator = ($_POST["separator"] == "csv" ? "," : ($_POST["separator"] == "tsv" ? "\t" : ";"));
 		$rows = [];
 		foreach ($matches[0] as $key => $val) {
@@ -226,12 +225,12 @@ if ($_POST && !$error) {
 				$rows[] = $set;
 			}
 		}
-		$result = (!$rows || $driver->insertUpdate($TABLE, $rows, $primary));
+		$result = (!$rows || Driver::get()->insertUpdate($TABLE, $rows, $primary));
 		if ($result) {
-			$driver->commit();
+			Driver::get()->commit();
 		}
 		queries_redirect(remove_from_uri("page"), lang('%d row(s) have been imported.', $affected), $result);
-		$driver->rollback(); // after queries_redirect() to not overwrite error
+		Driver::get()->rollback(); // after queries_redirect() to not overwrite error
 	}
 }
 
@@ -309,7 +308,7 @@ if (!$columns && support("table")) {
 			}
 		}
 	}
-	$result = $driver->select($TABLE, $select2, $where, $group2, $order, $limit, $page, true);
+	$result = Driver::get()->select($TABLE, $select2, $where, $group2, $order, $limit, $page, true);
 
 	if (!$result) {
 		echo "<p class='error'>" . error() . "\n";
@@ -437,7 +436,7 @@ if (!$columns && support("table")) {
 				foreach ($row as $key => $val) {
 					if (isset($names[$key])) {
 						$field = $fields[$key];
-						$val = $driver->value($val, $field);
+						$val = Driver::get()->value($val, $field);
 
 						$link = "";
 						if ($field && preg_match('~blob|bytea|raw|file~', $field["type"]) && $val != "") {

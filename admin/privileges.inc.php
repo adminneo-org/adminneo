@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $title2 = DB != "" ? h(": " . DB) : "";

@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $tables_views = array_merge((array) $_POST["tables"], (array) $_POST["views"]);

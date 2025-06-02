@@ -3,7 +3,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 if (!$error && $_POST["export"]) {
@@ -101,7 +100,7 @@ if (!$error && $_POST) {
 					$offset = $pos + strlen($found);
 
 					if ($found && rtrim($found) != $delimiter) { // find matching quote or comment end
-						$c_style_escapes = $driver->hasCStyleEscapes() || ($jush == "pgsql" && ($pos > 0 && strtolower($query[$pos - 1]) == "e"));
+						$c_style_escapes = Driver::get()->hasCStyleEscapes() || ($jush == "pgsql" && ($pos > 0 && strtolower($query[$pos - 1]) == "e"));
 
 						$pattern = '(';
 						if ($found == '/*') {
@@ -168,7 +167,7 @@ if (!$error && $_POST) {
 									$edit_link = (strlen($q) < 1000 ? " <a href='" . h(ME) . "sql=" . urlencode(trim($q)) . "'>" . icon("edit") . lang('Edit') . "</a>" : ""); // 1000 - maximum length of encoded URL in IE is 2083 characters
 									$affected = $connection->affected_rows; // getting warnings overwrites this
 
-									$warnings = ($_POST["only_errors"] ? null : $driver->warnings());
+									$warnings = ($_POST["only_errors"] ? null : Driver::get()->warnings());
 									$warnings_id = "warnings-$commands";
 									$warnings_link = $warnings ? "<a href='#$warnings_id' class='toggle'>" . lang('Warnings') . icon_chevron_down() . "</a>" : null;
 

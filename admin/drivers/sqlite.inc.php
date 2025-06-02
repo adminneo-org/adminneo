@@ -166,7 +166,7 @@ if (isset($_GET["sqlite"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new SqliteDriver($connection, Admin::get());
+		return SqliteDriver::create($connection, Admin::get());
 	}
 
 	function idf_escape($idf) {
@@ -492,7 +492,7 @@ if (isset($_GET["sqlite"])) {
 	* @return bool
 	*/
 	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = 0, $indexes = [], $drop_check = "", $add_check = "") {
-		global $connection, $driver;
+		global $connection;
 		if ($table != "") {
 			if (!$fields) {
 				foreach (fields($table) as $key => $field) {
@@ -568,7 +568,7 @@ if (isset($_GET["sqlite"])) {
 		}
 
 		$fields = array_merge($fields, array_filter($foreign));
-		foreach ($driver->checkConstraints($table) as $check) {
+		foreach (Driver::get()->checkConstraints($table) as $check) {
 			if ($check != $drop_check) {
 				$fields[] = "  CHECK ($check)";
 			}

@@ -294,7 +294,7 @@ if (isset($_GET["simpledb"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new SimpleDbDriver($connection, Admin::get());
+		return SimpleDbDriver::create($connection, Admin::get());
 	}
 
 	/**

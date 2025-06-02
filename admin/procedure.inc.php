@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $PROCEDURE = ($_GET["name"] ? $_GET["name"] : $_GET["procedure"]);

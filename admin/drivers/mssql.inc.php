@@ -286,7 +286,7 @@ if (isset($_GET["mssql"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new MsSqlDriver($connection, Admin::get());
+		return MsSqlDriver::create($connection, Admin::get());
 	}
 
 	/**
@@ -665,7 +665,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 	}
 
 	function create_sql($table, $auto_increment, $style) {
-		global $driver;
 		if (is_view(table_status($table))) {
 			$view = view($table);
 			return "CREATE VIEW " . table($table) . " AS $view[select]";
@@ -689,7 +688,7 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 				$fields[] = ($index["type"] == "INDEX" ? "INDEX $name" : "CONSTRAINT $name " . ($index["type"] == "UNIQUE" ? "UNIQUE" : "PRIMARY KEY")) . " (" . implode(", ", $columns) . ")";
 			}
 		}
-		foreach ($driver->checkConstraints($table) as $name => $check) {
+		foreach (Driver::get()->checkConstraints($table) as $name => $check) {
 			$fields[] = "CONSTRAINT " . idf_escape($name) . " CHECK ($check)";
 		}
 		return "CREATE TABLE " . table($table) . " (\n\t" . implode(",\n\t", $fields) . "\n)";

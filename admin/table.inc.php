@@ -4,7 +4,6 @@ namespace AdminNeo;
 
 /**
  * @var ?Database $connection
- * @var ?Driver $driver
  */
 
 $TABLE = $_GET["table"];
@@ -107,7 +106,7 @@ if (!is_view($table_status)) {
 
 	if (support("check")) {
 		echo "<h2 id='checks'>" . lang('Checks') . "</h2>\n";
-		$check_constraints = $driver->checkConstraints($TABLE);
+		$check_constraints = Driver::get()->checkConstraints($TABLE);
 		if ($check_constraints) {
 			echo "<table cellspacing='0'>\n";
 			foreach ($check_constraints as $key => $val) {

@@ -71,8 +71,6 @@ if (isset($_GET["elastic"])) {
 			function query($path, ?array $content = null, $method = 'GET') {
 				// Support for global search through all tables
 				if ($path != "" && $path[0] == "S" && preg_match('/SELECT 1 FROM ([^ ]+) WHERE (.+) LIMIT ([0-9]+)/', $path, $matches)) {
-					global $driver;
-
 					$where = explode(" AND ", $matches[2]);
 
 					return Driver::get()->select($matches[1], ["*"], $where, [], [], $matches[3]);
@@ -341,7 +339,7 @@ if (isset($_GET["elastic"])) {
 
 	function create_driver(Database $connection): Driver
 	{
-		return new ElasticDriver($connection, Admin::get());
+		return ElasticDriver::create($connection, Admin::get());
 	}
 
 	/**

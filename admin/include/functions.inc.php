@@ -1113,8 +1113,6 @@ function input($field, $value, $function) {
 * @return string|array|false|null False to leave the original value (copy original while cloning), null to skip the column
 */
 function process_input($field) {
-	global $driver;
-
 	if (stripos($field["default"], "GENERATED ALWAYS AS ") === 0) {
 		return null;
 	}
@@ -1148,7 +1146,7 @@ function process_input($field) {
 		if (!is_string($file)) {
 			return false; //! report errors
 		}
-		return $driver->quoteBinary($file);
+		return Driver::get()->quoteBinary($file);
 	}
 	return Admin::get()->processFieldInput($field, $value, $function);
 }
@@ -1157,7 +1155,6 @@ function process_input($field) {
 * @return array
 */
 function fields_from_edit() {
-	global $driver;
 	$return = [];
 	foreach ((array) $_POST["field_keys"] as $key => $val) {
 		if ($val != "") {
@@ -1172,7 +1169,7 @@ function fields_from_edit() {
 			"field" => $name,
 			"privileges" => ["insert" => 1, "update" => 1, "where" => 1, "order" => 1],
 			"null" => 1,
-			"auto_increment" => ($key == $driver->primary),
+			"auto_increment" => ($key == Driver::get()->primary),
 		];
 	}
 	return $return;
@@ -1475,10 +1472,10 @@ function count_rows($table, $where, $is_group, $group) {
 * @return array of strings
 */
 function slow_query($query) {
-	global $token, $driver;
+	global $token;
 	$db = Admin::get()->getDatabase();
 	$timeout = Admin::get()->getQueryTimeout();
-	$slow_query = $driver->slowQuery($query, $timeout);
+	$slow_query = Driver::get()->slowQuery($query, $timeout);
 	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->select_db($db))) {
 		$kill = $connection2->result(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
 		?>

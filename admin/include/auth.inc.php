@@ -5,9 +5,6 @@ namespace AdminNeo;
 /** @var ?Database $connection */
 $connection = null;
 
-/** @var ?Driver $driver */
-$driver = null;
-
 $has_token = $_SESSION["token"];
 if (!$has_token) {
 	$_SESSION["token"] = rand(1, 1e6); // defense against cross-site request forgery
@@ -343,7 +340,7 @@ Admin::get()->getConfig()->applyServer(SERVER);
 
 $connection = connect_to_db();
 authenticate();
-$driver = create_driver($connection);
+create_driver($connection);
 
 if ($_POST["logout"] && $has_token && !verify_token()) {
 	page_header(lang('Logout'), lang('Invalid CSRF token. Send the form again.'));

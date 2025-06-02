@@ -203,7 +203,7 @@ if (isset($_GET["mongo"])) {
 
 		function create_driver(Database $connection): Driver
 		{
-			return new MongoDriver($connection, Admin::get());
+			return MongoDriver::create($connection, Admin::get());
 		}
 
 		function get_databases($flush) {
@@ -256,7 +256,6 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function fields($table) {
-			global $driver;
 			$fields = fields_from_edit();
 			if (!$fields) {
 				$result = Driver::get()->select($table, ["*"], [], [], [], 10);
@@ -267,8 +266,8 @@ if (isset($_GET["mongo"])) {
 							$fields[$key] = [
 								"field" => $key,
 								"type" => "string",
-								"null" => ($key != $driver->primary),
-								"auto_increment" => ($key == $driver->primary),
+								"null" => ($key != Driver::get()->primary),
+								"auto_increment" => ($key == Driver::get()->primary),
 								"privileges" => [
 									"insert" => 1,
 									"select" => 1,

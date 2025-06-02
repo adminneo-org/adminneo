@@ -147,7 +147,7 @@ class Admin extends Origin
 	 */
 	public function printTableMenu(array $tableStatus, ?string $set = ""): void
 	{
-		global $jush, $driver;
+		global $jush;
 
 		echo '<p class="links top-tabs">';
 
@@ -187,7 +187,7 @@ class Admin extends Origin
 			echo " <a href='", h(ME), "$key=", urlencode($table), ($key == "edit" ? $set : ""), "'", bold(isset($_GET[$key])), ">", icon($val[1]), "$val[0]</a>";
 		}
 
-		echo doc_link([$jush => $driver->tableHelp($table, $is_view)], icon("help") . lang('Info'));
+		echo doc_link([$jush => Driver::get()->tableHelp($table, $is_view)], icon("help") . lang('Info'));
 
 		echo "\n";
 	}
@@ -224,10 +224,10 @@ class Admin extends Origin
 	 */
 	public function formatSelectQuery(string $query, float $start, bool $failed = false): string
 	{
-		global $jush, $driver;
+		global $jush;
 
 		$supportSql = support("sql");
-		$warnings = !$failed ? $driver->warnings() : null;
+		$warnings = !$failed ? Driver::get()->warnings() : null;
 
 		if ($supportSql) {
 			$query .= ";";
@@ -265,7 +265,7 @@ class Admin extends Origin
 	 */
 	public function formatMessageQuery(string $query, string $time, bool $failed = false): string
 	{
-		global $jush, $driver;
+		global $jush;
 
 		restart_session();
 
@@ -281,7 +281,7 @@ class Admin extends Origin
 		$history[$_GET["db"]][] = [$query, time(), $time]; // not DB - $_GET["db"] is changed in database.inc.php //! respect $_GET["ns"]
 
 		$supportSql = support("sql");
-		$warnings = !$failed ? $driver->warnings() : null;
+		$warnings = !$failed ? Driver::get()->warnings() : null;
 
 		$sqlId = "sql-" . count($history[$_GET["db"]]);
 		$warningsId = "warnings-" . count($history[$_GET["db"]]);
@@ -707,8 +707,6 @@ class Admin extends Origin
 	 */
 	public function processSelectionSearch(array $fields, array $indexes): array
 	{
-		global $driver;
-
 		$return = [];
 
 		foreach ($indexes as $i => $index) {
@@ -743,7 +741,7 @@ class Admin extends Origin
 				}
 
 				if ($col != "") {
-					$search = isset($fields[$col]) ? $driver->convertSearch(idf_escape($col), $where, $fields[$col]) : idf_escape($col);
+					$search = isset($fields[$col]) ? Driver::get()->convertSearch(idf_escape($col), $where, $fields[$col]) : idf_escape($col);
 					$return[] = $prefix . $search . $cond;
 				} else {
 					// find anywhere
@@ -756,7 +754,7 @@ class Admin extends Origin
 							&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val)) // Elasticsearch needs boolean value properly formatted.
 							&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"])) // Elasticsearch can use regexp only on text and keyword fields.
 						) {
-							$cols[] = $prefix . $driver->convertSearch(idf_escape($name), $where, $field) . $cond;
+							$cols[] = $prefix . Driver::get()->convertSearch(idf_escape($name), $where, $field) . $cond;
 						}
 					}
 					$return[] = ($cols ? "(" . implode(" OR ", $cols) . ")" : "1 = 0");
