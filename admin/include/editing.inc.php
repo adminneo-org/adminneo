@@ -685,7 +685,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 		return "";
 	}
 
-	$server_info = $connection->server_info;
+	$server_info = $connection->getServerInfo();
 	$version = preg_replace('~^(\d\.?\d).*~s', '\1', $server_info); // two most significant digits
 
 	$urls = [
@@ -711,7 +711,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 */
 function db_size($db) {
 	global $connection;
-	if (!$connection->select_db($db)) {
+	if (!$connection->selectDatabase($db)) {
 		return "?";
 	}
 	$return = 0;

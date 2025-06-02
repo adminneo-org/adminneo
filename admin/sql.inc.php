@@ -64,7 +64,7 @@ if (!$error && $_POST) {
 		$empty = true;
 		$connection2 = connect(); // connection for exploring indexes and EXPLAIN (to not replace FOUND_ROWS()) //! PDO - silent error
 		if (is_object($connection2) && DB != "") {
-			$connection2->select_db(DB);
+			$connection2->selectDatabase(DB);
 			if ($_GET["ns"] != "") {
 				set_schema($_GET["ns"], $connection2);
 			}
@@ -147,16 +147,16 @@ if (!$error && $_POST) {
 							}
 							$start = microtime(true);
 							//! don't allow changing of character_set_results, convert encoding of displayed query
-							if ($connection->multi_query($q) && is_object($connection2) && preg_match("~^$space*+USE\\b~i", $q)) {
+							if ($connection->multiQuery($q) && is_object($connection2) && preg_match("~^$space*+USE\\b~i", $q)) {
 								$connection2->query($q);
 							}
 
 							do {
-								$result = $connection->store_result();
+								$result = $connection->storeResult();
 
-								if ($connection->error) {
+								if ($connection->getError()) {
 									echo ($_POST["only_errors"] ? $print : "");
-									echo "<p class='error'>", lang('Error in query'), (!empty($connection->errno) ? " ($connection->errno)" : ""), ": ", error() . "</p>\n";
+									echo "<p class='error'>", lang('Error in query'), (!empty($connection->getErrno()) ? " (" . $connection->getErrno() . ")" : ""), ": ", error() . "</p>\n";
 
 									$errors[] = " <a href='#sql-$commands'>$commands</a>";
 									if ($_POST["error_stops"]) {
@@ -165,7 +165,7 @@ if (!$error && $_POST) {
 								} else {
 									$time = " <span class='time'>(" . format_time($start) . ")</span>";
 									$edit_link = (strlen($q) < 1000 ? " <a href='" . h(ME) . "sql=" . urlencode(trim($q)) . "'>" . icon("edit") . lang('Edit') . "</a>" : ""); // 1000 - maximum length of encoded URL in IE is 2083 characters
-									$affected = $connection->affected_rows; // getting warnings overwrites this
+									$affected = $connection->getAffectedRows(); // getting warnings overwrites this
 
 									$warnings = ($_POST["only_errors"] ? null : Driver::get()->warnings());
 									$warnings_id = "warnings-$commands";
@@ -249,7 +249,7 @@ if (!$error && $_POST) {
 								}
 
 								$start = microtime(true);
-							} while ($connection->next_result());
+							} while ($connection->nextResult());
 						}
 
 						$query = substr($query, $offset);

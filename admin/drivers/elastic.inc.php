@@ -9,17 +9,18 @@ if (isset($_GET["elastic"])) {
 
 	if (ini_bool('allow_url_fopen')) {
 		define("AdminNeo\ELASTIC_DB_NAME", "elastic");
+		define("AdminNeo\DRIVER_EXTENSION", "JSON");
 
-		class Database {
-			var $extension = "JSON", $server_info, $errno, $error, $_url;
+		class ElasticDatabase extends Database
+		{
+			/** @var string */
+			private $serviceUrl;
 
 			/**
-			 * @param string $path
-			 * @param array|null $content
-			 * @param string $method
 			 * @return array|false
 			 */
-			function rootQuery($path, ?array $content = null, $method = 'GET') {
+			public function rootQuery(string $path, ?array $content = null, string $method = 'GET')
+			{
 				$options = [
 					'http' => [
 						'method' => $method,
@@ -36,7 +37,7 @@ if (isset($_GET["elastic"])) {
 					$options["ssl"] = ["verify_peer" => false];
 				}
 
-				$file = @file_get_contents("$this->_url/" . ltrim($path, '/'), false, stream_context_create($options));
+				$file = @file_get_contents("$this->serviceUrl/" . ltrim($path, '/'), false, stream_context_create($options));
 
 				if ($file === false) {
 					$this->error = lang('Invalid server or credentials.');
@@ -62,13 +63,18 @@ if (isset($_GET["elastic"])) {
 				return $return;
 			}
 
-			/** Performs query relative to actual selected DB
-			 * @param string $path
-			 * @param array|null $content
-			 * @param string $method
+			public function query(string $query, bool $unbuffered = false): bool
+			{
+				return false;
+			}
+
+			/**
+			 * Performs query relative to actual selected DB.
+			 *
 			 * @return array|false
 			 */
-			function query($path, ?array $content = null, $method = 'GET') {
+			public function sendRequest(string $path, ?array $content = null, string $method = 'GET')
+			{
 				// Support for global search through all tables
 				if ($path != "" && $path[0] == "S" && preg_match('/SELECT 1 FROM ([^ ]+) WHERE (.+) LIMIT ([0-9]+)/', $path, $matches)) {
 					$where = explode(" AND ", $matches[2]);
@@ -79,16 +85,11 @@ if (isset($_GET["elastic"])) {
 				return $this->rootQuery($path, $content, $method);
 			}
 
-			/**
-			 * @param string $server
-			 * @param string $username
-			 * @param string $password
-			 * @return bool
-			 */
-			function connect($server, $username, $password) {
-				$this->_url = build_http_url($server, $username, $password, "localhost", 9200);
+			public function connect(string $server, string $username, string $password): bool
+			{
+				$this->serviceUrl = build_http_url($server, $username, $password, "localhost", 9200);
 
-				$return = $this->query('');
+				$return = $this->sendRequest('');
 				if (!$return) {
 					return false;
 				}
@@ -102,11 +103,13 @@ if (isset($_GET["elastic"])) {
 				return true;
 			}
 
-			function select_db($database) {
+			public function selectDatabase(string $name): bool
+			{
 				return true;
 			}
 
-			function quote($string) {
+			public function quote(string $string): string
+			{
 				return $string;
 			}
 		}
@@ -262,9 +265,9 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " . json_encode($record));
 
-			$response = $this->database->query($query, $record, 'POST');
+			$response = $this->database->sendRequest($query, $record, 'POST');
 			if ($response) {
-				$this->database->query("$table/_refresh");
+				$this->database->sendRequest("$table/_refresh");
 			}
 
 			return $response;
@@ -288,12 +291,12 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " .json_encode($record));
 
-			$response = $this->database->query($query, $record, 'POST');
+			$response = $this->database->sendRequest($query, $record, 'POST');
 			if (!$response) {
 				return false;
 			}
 
-			$this->database->query("$table/_refresh");
+			$this->database->sendRequest("$table/_refresh");
 			$this->database->last_id = $response['_id'];
 
 			return $response['result'];
@@ -315,7 +318,7 @@ if (isset($_GET["elastic"])) {
 				}
 			}
 
-			$this->database->affected_rows = 0;
+			$affected_rows = 0;
 
 			foreach ($ids as $id) {
 				$query = "$table/_doc/$id";
@@ -323,15 +326,17 @@ if (isset($_GET["elastic"])) {
 				// Save the query for later use in a flesh message. TODO: This is so ugly.
 				queries("\"DELETE $query\"");
 
-				$response = $this->database->query($query, null, 'DELETE');
+				$response = $this->database->sendRequest($query, null, 'DELETE');
 				if (isset($response['result']) && $response['result'] == 'deleted') {
-					$this->database->affected_rows++;
+					$affected_rows++;
 				}
 			}
 
-			$this->database->query("$table/_refresh");
+			$this->database->sendRequest("$table/_refresh");
 
-			return $this->database->affected_rows;
+			$this->database->setAffectedRows($affected_rows);
+
+			return $affected_rows;
 		}
 	}
 
@@ -347,7 +352,7 @@ if (isset($_GET["elastic"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new ElasticDatabase();
 
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
@@ -358,7 +363,7 @@ if (isset($_GET["elastic"])) {
 		}
 
 		if (!$connection->connect($server, $username, $password)) {
-			return $connection->error;
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -497,7 +502,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function error() {
-		return h(connection()->error);
+		return h(connection()->getError());
 	}
 
 	function information_schema() {
@@ -634,7 +639,7 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"DELETE $table\"");
 
-			$return = $return && connection()->query($table, null, 'DELETE');
+			$return = $return && connection()->sendRequest($table, null, 'DELETE');
 		}
 
 		return $return;

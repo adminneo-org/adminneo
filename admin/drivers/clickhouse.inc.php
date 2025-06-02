@@ -6,19 +6,22 @@ Drivers::add("clickhouse", "ClickHouse (alpha)");
 
 if (isset($_GET["clickhouse"])) {
 	define("AdminNeo\DRIVER", "clickhouse");
+	define("AdminNeo\DRIVER_EXTENSION", "JSON");
 
-	class Database {
-		var $extension = "JSON", $server_info, $errno, $_result, $error, $_url;
-		var $_db = 'default';
+	class ClickHouseDatabase extends Database
+	{
+		/** @var string */
+		private $serviceUrl;
+
+		/** @var string */
+		private $dbName = 'default';
 
 		/**
-		 * @param string $db
-		 * @param string $query
-		 *
 		 * @return Result|bool
 		 */
-		function rootQuery($db, $query) {
-			$file = @file_get_contents("$this->_url/?database=$db", false, stream_context_create(['http' => [
+		function rootQuery(string $db, string $query)
+		{
+			$file = @file_get_contents("$this->serviceUrl/?database=$db", false, stream_context_create(['http' => [
 				'method' => 'POST',
 				'content' => $this->isQuerySelectLike($query) ? "$query FORMAT JSONCompact" : $query,
 				'header' => 'Content-type: application/x-www-form-urlencoded',
@@ -62,55 +65,45 @@ if (isset($_GET["clickhouse"])) {
 			return new Result($return['rows'], $return['data'], $return['meta']);
 		}
 
-		function isQuerySelectLike($query) {
+		private function isQuerySelectLike($query): bool
+		{
 			return (bool) preg_match('~^(select|show)~i', $query);
 		}
 
-		/**
-		 * @param string $query
-		 *
-		 * @return Result|bool
-		 */
-		function query($query) {
-			return $this->rootQuery($this->_db, $query);
+		function query(string $query, bool $unbuffered = false)
+		{
+			return $this->rootQuery($this->dbName, $query);
 		}
 
-		/**
-		 * @param string $server
-		 * @param string $username
-		 * @param string $password
-		 * @return bool
-		 */
-		function connect($server, $username, $password) {
-			$this->_url = build_http_url($server, $username, $password, "localhost", 8123);
+		public function connect(string $server, string $username, string $password): bool
+		{
+			$this->serviceUrl = build_http_url($server, $username, $password, "localhost", 8123);
 
 			$return = $this->query('SELECT 1');
 			return (bool) $return;
 		}
 
-		function select_db($database) {
-			$this->_db = $database;
+		public function selectDatabase(string $name): bool
+		{
+			$this->dbName = $name;
+
 			return true;
 		}
 
-		function quote($string) {
+		public function getDbName(): string
+		{
+			return $this->dbName;
+		}
+
+		public function quote(string $string): string
+		{
 			return "'" . addcslashes($string, "\\'") . "'";
 		}
 
-		function multi_query($query) {
-			return $this->_result = $this->query($query);
-		}
-
-		function store_result() {
-			return $this->_result;
-		}
-
-		function next_result() {
-			return false;
-		}
-
-		function result($query, $field = 0) {
+		public function getResult(string $query, int $field = 0)
+		{
 			$result = $this->query($query);
+
 			return $result['data'];
 		}
 	}
@@ -273,11 +266,11 @@ if (isset($_GET["clickhouse"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new ClickHouseDatabase();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
-			return $connection->error;
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -333,7 +326,7 @@ if (isset($_GET["clickhouse"])) {
 	function table_status($name = "", $fast = false) {
 		global $connection;
 		$return = [];
-		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q($connection->_db));
+		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q($connection->getDbName()));
 		foreach ($tables as $table) {
 			$return[$table['name']] = [
 				'Name' => $table['name'],
@@ -402,7 +395,7 @@ if (isset($_GET["clickhouse"])) {
 
 	function error() {
 		global $connection;
-		return h($connection->error);
+		return h($connection->getError());
 	}
 
 	function types() {

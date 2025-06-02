@@ -6,78 +6,97 @@ Drivers::add("oracle", "Oracle (beta)");
 
 if (isset($_GET["oracle"])) {
 	define("AdminNeo\DRIVER", "oracle");
+
 	if (extension_loaded("oci8")) {
-		class Database {
-			var $extension = "oci8", $_link, $_result, $server_info, $affected_rows, $errno, $error;
-			var $_current_db;
+		define("AdminNeo\DRIVER_EXTENSION", "oci8");
 
-			function _error($errno, $error) {
-				if (ini_bool("html_errors")) {
-					$error = html_entity_decode(strip_tags($error));
-				}
-				$error = preg_replace('~^[^:]*: ~', '', $error);
-				$this->error = $error;
-			}
+		class OracleDatabase extends Database
+		{
+			/** @var resource|false */
+			private $connection;
 
-			function connect($server, $username, $password) {
-				$this->_link = @oci_new_connect($username, $password, $server, "AL32UTF8");
-				if ($this->_link) {
-					$this->server_info = oci_server_version($this->_link);
+			/** @var ?string */
+			private $dbName = null;
+
+			public function connect(string $server, string $username, string $password): bool
+			{
+				$this->connection = @oci_new_connect($username, $password, $server, "AL32UTF8");
+				if ($this->connection) {
+					$this->server_info = oci_server_version($this->connection);
+
 					return true;
 				}
+
 				$error = oci_error();
 				$this->error = $error["message"];
+
 				return false;
 			}
 
-			function quote($string) {
+			public function quote(string $string): string
+			{
 				return "'" . str_replace("'", "''", $string) . "'";
 			}
 
-			function select_db($database) {
-				$this->_current_db = $database;
+			public function selectDatabase(string $name): bool
+			{
+				$this->dbName = $name;
+
 				return true;
 			}
 
-			function query($query, $unbuffered = false) {
-				$result = oci_parse($this->_link, $query);
+			public function getAndClearDbName(): ?string
+			{
+				$name = $this->dbName ?: DB;
+				$this->dbName = null;
+
+				return $name;
+			}
+
+			function query(string $query, bool $unbuffered = false)
+			{
+				$result = oci_parse($this->connection, $query);
 				$this->error = "";
+
 				if (!$result) {
-					$error = oci_error($this->_link);
+					$error = oci_error($this->connection);
 					$this->errno = $error["code"];
 					$this->error = $error["message"];
+
 					return false;
 				}
-				set_error_handler([$this, '_error']);
+
+				set_error_handler(function($errno, $error) {
+					if (ini_bool("html_errors")) {
+						$error = html_entity_decode(strip_tags($error));
+					}
+
+					$error = preg_replace('~^[^:]*: ~', '', $error);
+					$this->error = $error;
+				});
+
 				$return = @oci_execute($result);
 				restore_error_handler();
+
 				if ($return) {
 					if (oci_num_fields($result)) {
 						return new Result($result);
 					}
+
 					$this->affected_rows = oci_num_rows($result);
 					oci_free_statement($result);
 				}
+
 				return $return;
 			}
 
-			function multi_query($query) {
-				return $this->_result = $this->query($query);
-			}
-
-			function store_result() {
-				return $this->_result;
-			}
-
-			function next_result() {
-				return false;
-			}
-
-			function result($query, $field = 0) {
+			public function getResult(string $query, int $field = 0)
+			{
 				$result = $this->query($query);
 				if (!is_object($result) || !oci_fetch($result->_result)) {
 					return false;
 				}
+
 				return oci_result($result->_result, $field + 1);
 			}
 		}
@@ -122,21 +141,35 @@ if (isset($_GET["oracle"])) {
 		}
 
 	} elseif (extension_loaded("pdo_oci")) {
-		class Database extends Min_PDO {
-			var $extension = "PDO_OCI";
-			var $_current_db;
+		define("AdminNeo\DRIVER_EXTENSION", "PDO_OCI");
 
-			function connect($server, $username, $password) {
+		class OracleDatabase extends PdoDatabase
+		{
+			/** @var ?string */
+			private $dbName = null;
+
+			public function connect(string $server, string $username, string $password): bool
+			{
 				$this->dsn("oci:dbname=//$server;charset=AL32UTF8", $username, $password);
+
 				return true;
 			}
 
-			function select_db($database) {
-				$this->_current_db = $database;
+			public function selectDatabase(string $name): bool
+			{
+				$this->dbName = $name;
+
 				return true;
+			}
+
+			public function getAndClearDbName(): ?string
+			{
+				$name = $this->dbName ?: DB;
+				$this->dbName = null;
+
+				return $name;
 			}
 		}
-
 	}
 
 
@@ -162,7 +195,7 @@ if (isset($_GET["oracle"])) {
 						$where[] = "$key = $val";
 					}
 				}
-				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && $connection->affected_rows)
+				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && $connection->getAffectedRows())
 					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
@@ -207,11 +240,11 @@ if (isset($_GET["oracle"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new OracleDatabase();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
-			return $connection->error;
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -239,7 +272,7 @@ ORDER BY 1"
 
 	function db_collation($db, $collations) {
 		global $connection;
-		return $connection->result("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
+		return $connection->getResult("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
 	}
 
 	function engines() {
@@ -248,14 +281,7 @@ ORDER BY 1"
 
 	function logged_user() {
 		global $connection;
-		return $connection->result("SELECT USER FROM DUAL");
-	}
-
-	function get_current_db() {
-		global $connection;
-		$db = $connection->_current_db ? $connection->_current_db : DB;
-		unset($connection->_current_db);
-		return $db;
+		return $connection->getResult("SELECT USER FROM DUAL");
 	}
 
 	function where_owner($prefix, $owner = "owner") {
@@ -283,15 +309,17 @@ ORDER BY 1"
 		global $connection;
 		$return = [];
 		foreach ($databases as $db) {
-			$return[$db] = $connection->result("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
+			$return[$db] = $connection->getResult("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
 		}
 		return $return;
 	}
 
 	function table_status($name = "") {
+		global $connection;
+
 		$return = [];
 		$search = q($name);
-		$db = get_current_db();
+		$db = $connection->getAndClearDbName();
 		$view = views_table("view_name");
 		$owner = where_owner(" AND ");
 		foreach (get_rows('SELECT table_name "Name", \'table\' "Engine", avg_row_len * num_rows "Data_length", num_rows "Rows" FROM all_tables WHERE tablespace_name = ' . q($db) . $owner . ($name != "" ? " AND table_name = $search" : "") . "
@@ -376,7 +404,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection2) as $row) {
 
 	function error() {
 		global $connection;
-		return h($connection->error); //! highlight sqltext from offset
+		return h($connection->getError()); //! highlight sqltext from offset
 	}
 
 	function explain($connection, $query) {
@@ -499,7 +527,7 @@ AND c_src.TABLE_NAME = " . q($table);
 
 	function get_schema() {
 		global $connection;
-		return $connection->result("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
+		return $connection->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
 	}
 
 	function set_schema($scheme, $connection2 = null) {

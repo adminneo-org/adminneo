@@ -38,8 +38,8 @@ if (!$error && $_POST) {
 
 	$query = (isset($_GET["callf"]) ? "SELECT" : "CALL") . " " . table($PROCEDURE) . "(" . implode(", ", $call) . ")";
 	$start = microtime(true);
-	$result = $connection->multi_query($query);
-	$affected = $connection->affected_rows; // getting warnings overwrites this
+	$result = $connection->multiQuery($query);
+	$affected = $connection->getAffectedRows(); // getting warnings overwrites this
 	echo Admin::get()->formatSelectQuery($query, $start, !$result);
 
 	if (!$result) {
@@ -47,11 +47,11 @@ if (!$error && $_POST) {
 	} else {
 		$connection2 = connect();
 		if (is_object($connection2)) {
-			$connection2->select_db(DB);
+			$connection2->selectDatabase(DB);
 		}
 
 		do {
-			$result = $connection->store_result();
+			$result = $connection->storeResult();
 			if (is_object($result)) {
 				select($result, $connection2);
 			} else {
@@ -59,7 +59,7 @@ if (!$error && $_POST) {
 					. " <span class='time'>" . @date("H:i:s") . "</span>\n" // @ - time zone may be not set
 				;
 			}
-		} while ($connection->next_result());
+		} while ($connection->nextResult());
 
 		if ($out) {
 			select($connection->query("SELECT " . implode(", ", $out)));

@@ -98,7 +98,7 @@ function min_version($version, $maria_db = "", $connection2 = null) {
 	if (!$connection2) {
 		$connection2 = $connection;
 	}
-	$server_info = $connection2->server_info;
+	$server_info = $connection2->getServerInfo();
 	if ($maria_db && preg_match('~([\d.]+)-MariaDB~', $server_info, $match)) {
 		$server_info = $match[1];
 		$version = $maria_db;
@@ -1476,8 +1476,8 @@ function slow_query($query) {
 	$db = Admin::get()->getDatabase();
 	$timeout = Admin::get()->getQueryTimeout();
 	$slow_query = Driver::get()->slowQuery($query, $timeout);
-	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->select_db($db))) {
-		$kill = $connection2->result(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
+	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->selectDatabase($db))) {
+		$kill = $connection2->getResult(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
 		?>
 <script<?php echo nonce(); ?>>
 var timeout = setTimeout(function () {

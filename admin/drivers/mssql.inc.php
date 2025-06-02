@@ -14,21 +14,21 @@ Drivers::add("mssql", "MS SQL");
 
 if (isset($_GET["mssql"])) {
 	define("AdminNeo\DRIVER", "mssql");
+
 	if (extension_loaded("sqlsrv")) {
-		class Database {
-			var $extension = "sqlsrv", $_link, $_result, $server_info, $affected_rows, $errno, $error;
+		define("AdminNeo\DRIVER_EXTENSION", "sqlsrv");
 
-			function _get_error() {
-				$this->error = "";
-				foreach (sqlsrv_errors() as $error) {
-					$this->errno = $error["code"];
-					$this->error .= "$error[message]\n";
-				}
-				$this->error = rtrim($this->error);
-			}
+		class MsSqlDatabase extends Database
+		{
+			/** @var resource|false */
+			private $connection;
 
-			function connect($server, $username, $password) {
-				$connection_info = [
+			/** @var resource|false */
+			protected $multiResult;
+
+			public function connect(string $server, string $username, string $password): bool
+			{
+				$connectionInfo = [
 					"UID" => $username,
 					"PWD" => $password,
 					"CharacterSet" => "UTF-8",
@@ -36,83 +36,100 @@ if (isset($_GET["mssql"])) {
 
 				$encrypt = Admin::get()->getConfig()->getSslEncrypt();
 				if ($encrypt !== null) {
-					$connection_info["Encrypt"] = $encrypt;
+					$connectionInfo["Encrypt"] = $encrypt;
 				}
 
 				$trust = Admin::get()->getConfig()->getSslTrustServerCertificate();
 				if ($trust !== null) {
-					$connection_info["TrustServerCertificate"] = $trust;
+					$connectionInfo["TrustServerCertificate"] = $trust;
 				}
 
 				$db = Admin::get()->getDatabase();
 				if ($db != "") {
-					$connection_info["Database"] = $db;
+					$connectionInfo["Database"] = $db;
 				}
 
-				$this->_link = @sqlsrv_connect(preg_replace('~:~', ',', $server), $connection_info);
-				if ($this->_link) {
-					$info = sqlsrv_server_info($this->_link);
+				$this->connection = @sqlsrv_connect(preg_replace('~:~', ',', $server), $connectionInfo);
+				if ($this->connection) {
+					$info = sqlsrv_server_info($this->connection);
 					$this->server_info = $info['SQLServerVersion'];
 				} else {
-					$this->_get_error();
+					$this->resolveError();
 				}
 
-				return (bool) $this->_link;
+				return (bool) $this->connection;
 			}
 
-			function quote($string) {
+			private function resolveError() {
+				$this->error = "";
+
+				foreach (sqlsrv_errors() as $error) {
+					$this->errno = $error["code"];
+					$this->error .= "$error[message]\n";
+				}
+
+				$this->error = rtrim($this->error);
+			}
+
+			public function quote(string $string): string
+			{
 				return (contains_unicode($string) ? "N" : "") . "'" . str_replace("'", "''", $string) . "'";
 			}
 
-			function select_db($database) {
-				return $this->query(use_sql($database));
+			public function selectDatabase(string $name): bool
+			{
+				return $this->query(use_sql($name));
 			}
 
-			function query($query, $unbuffered = false) {
-				$result = sqlsrv_query($this->_link, $query); //! , [], ($unbuffered ? [] : ["Scrollable" => "keyset"])
+			function query(string $query, bool $unbuffered = false)
+			{
+				$result = sqlsrv_query($this->connection, $query); //! , [], ($unbuffered ? [] : ["Scrollable" => "keyset"])
 				$this->error = "";
+
 				if (!$result) {
-					$this->_get_error();
+					$this->resolveError();
+
 					return false;
 				}
-				return $this->store_result($result);
+
+				return $this->storeResult($result);
 			}
 
-			function multi_query($query) {
-				$this->_result = sqlsrv_query($this->_link, $query);
+			public function multiQuery(string $query): bool
+			{
+				$this->multiResult = sqlsrv_query($this->connection, $query);
 				$this->error = "";
-				if (!$this->_result) {
-					$this->_get_error();
+
+				if (!$this->multiResult) {
+					$this->resolveError();
+
 					return false;
 				}
+
 				return true;
 			}
 
-			function store_result($result = null) {
+			public function storeResult($result = null)
+			{
 				if (!$result) {
-					$result = $this->_result;
+					$result = $this->multiResult;
 				}
 				if (!$result) {
 					return false;
 				}
+
 				if (sqlsrv_field_metadata($result)) {
 					return new Result($result);
 				}
+
 				$this->affected_rows = sqlsrv_rows_affected($result);
+
 				return true;
 			}
 
-			function next_result() {
-				return $this->_result ? sqlsrv_next_result($this->_result) : null;
-			}
-
-			function result($query, $field = 0) {
-				$result = $this->query($query);
-				if (!is_object($result)) {
-					return false;
-				}
-				$row = $result->fetch_row();
-				return $row[$field];
+			public function nextResult(): bool
+			{
+				return $this->multiResult && sqlsrv_next_result($this->multiResult);
 			}
 		}
 
@@ -166,10 +183,12 @@ if (isset($_GET["mssql"])) {
 		}
 
 	} elseif (extension_loaded("pdo_sqlsrv")) {
-		class Database extends Min_PDO {
-			var $extension = "PDO_SQLSRV";
+		define("AdminNeo\DRIVER_EXTENSION", "PDO_SQLSRV");
 
-			function connect($server, $username, $password) {
+		class MsSqlDatabase extends PdoDatabase
+		{
+			public function connect(string $server, string $username, string $password): bool
+			{
 				$options = [];
 
 				$encrypt = Admin::get()->getConfig()->getSslEncrypt();
@@ -177,9 +196,9 @@ if (isset($_GET["mssql"])) {
 					$options[] = "Encrypt=$encrypt";
 				}
 
-				$trustServerCertificate = Admin::get()->getConfig()->getSslTrustServerCertificate();
-				if ($trustServerCertificate !== null) {
-					$options[] = "TrustServerCertificate=$trustServerCertificate";
+				$trust = Admin::get()->getConfig()->getSslTrustServerCertificate();
+				if ($trust !== null) {
+					$options[] = "TrustServerCertificate=$trust";
 				}
 
 				$optionsString = $options ? (";" . implode(";", $options)) : "";
@@ -189,30 +208,37 @@ if (isset($_GET["mssql"])) {
 				return true;
 			}
 
-			function select_db($database) {
+			public function selectDatabase(string $name): bool
+			{
 				// database selection is separated from the connection so dbname in DSN can't be used
-				return $this->query(use_sql($database));
+				return $this->query(use_sql($name));
 			}
 
-			function quote($string) {
+			function quote(string $string): string
+			{
 				return (contains_unicode($string) ? "N" : "") . parent::quote($string);
 			}
 		}
 
 	} elseif (extension_loaded("pdo_dblib")) {
-		class Database extends Min_PDO {
-			var $extension = "PDO_DBLIB";
+		define("AdminNeo\DRIVER_EXTENSION", "PDO_DBLIB");
 
-			function connect($server, $username, $password) {
+		class MsSqlDatabase extends PdoDatabase
+		{
+			public function connect(string $server, string $username, string $password): bool
+			{
 				$this->dsn("dblib:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server)), $username, $password);
+
 				return true;
 			}
 
-			function select_db($database) {
-				return $this->query(use_sql($database));
+			public function selectDatabase(string $name): bool
+			{
+				return $this->query(use_sql($name));
 			}
 
-			function quote($string) {
+			function quote(string $string): string
+			{
 				return (contains_unicode($string) ? "N" : "") . parent::quote($string);
 			}
 		}
@@ -311,7 +337,7 @@ if (isset($_GET["mssql"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new MsSqlDatabase();
 
 		$credentials = Admin::get()->getCredentials();
 		if ($credentials[0] == "") {
@@ -319,7 +345,7 @@ if (isset($_GET["mssql"])) {
 		}
 
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
-			return $connection->error;
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -339,7 +365,7 @@ if (isset($_GET["mssql"])) {
 
 	function db_collation($db, $collations) {
 		global $connection;
-		return $connection->result("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
+		return $connection->getResult("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
 	}
 
 	function engines() {
@@ -348,7 +374,7 @@ if (isset($_GET["mssql"])) {
 
 	function logged_user() {
 		global $connection;
-		return $connection->result("SELECT SUSER_NAME()");
+		return $connection->getResult("SELECT SUSER_NAME()");
 	}
 
 	function tables_list() {
@@ -359,8 +385,8 @@ if (isset($_GET["mssql"])) {
 		global $connection;
 		$return = [];
 		foreach ($databases as $db) {
-			$connection->select_db($db);
-			$return[$db] = $connection->result("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES");
+			$connection->selectDatabase($db);
+			$return[$db] = $connection->getResult("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES");
 		}
 		return $return;
 	}
@@ -440,7 +466,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 
 	function view($name) {
 		global $connection;
-		return ["select" => preg_replace('~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU', '', $connection->result("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA = SCHEMA_NAME() AND TABLE_NAME = " . q($name)))];
+		return ["select" => preg_replace('~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU', '', $connection->getResult("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA = SCHEMA_NAME() AND TABLE_NAME = " . q($name)))];
 	}
 
 	function collations() {
@@ -457,7 +483,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 
 	function error() {
 		global $connection;
-		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', $connection->error)));
+		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', $connection->getError())));
 	}
 
 	function create_database($db, $collation) {
@@ -561,7 +587,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 
 	function last_id() {
 		global $connection;
-		return $connection->result("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
+		return $connection->getResult("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
 	}
 
 	function explain($connection, $query) {
@@ -656,7 +682,7 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		if ($_GET["ns"] != "") {
 			return $_GET["ns"];
 		}
-		return $connection->result("SELECT SCHEMA_NAME()");
+		return $connection->getResult("SELECT SCHEMA_NAME()");
 	}
 
 	function set_schema($schema) {

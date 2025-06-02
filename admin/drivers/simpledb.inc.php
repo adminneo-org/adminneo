@@ -8,10 +8,19 @@ if (isset($_GET["simpledb"])) {
 	define("AdminNeo\DRIVER", "simpledb");
 
 	if (class_exists('SimpleXMLElement') && ini_bool('allow_url_fopen')) {
-		class Database {
-			var $extension = "SimpleXML", $server_info = '2009-04-15', $error, $timeout, $next, $affected_rows, $_url, $_result;
+		define("AdminNeo\DRIVER_EXTENSION", "SimpleXML");
 
-			function connect(string $server): bool
+		class SimpleDbDatabase extends Database
+		{
+			/** @var string */
+			private $serviceUrl;
+
+			/** @var int */
+			public $timeout = 0;
+
+			public $next;
+
+			public function connect(string $server, string $username, string $password): bool
 			{
 				if ($server == '') {
 					$this->error = lang('Invalid server or credentials.');
@@ -27,13 +36,15 @@ if (isset($_GET["simpledb"])) {
 					return false;
 				}
 
-				$this->_url = build_http_url($server, '', '', '');
+				$this->serviceUrl = build_http_url($server, '', '', '');
+				$this->server_info = '2009-04-15';
 
 				return (bool) $this->workaroundLoginRequest('ListDomains', ['MaxNumberOfDomains' => 1]);
 			}
 
 			// FIXME: This is so wrong :-( Move sdb_request to Database!
-			private function workaroundLoginRequest($action, $params = []) {
+			private function workaroundLoginRequest(string $action, array $params = [])
+			{
 				global $connection;
 
 				$connection = $this;
@@ -43,20 +54,30 @@ if (isset($_GET["simpledb"])) {
 				return $result;
 			}
 
-			function select_db($database) {
-				return ($database == "domain");
+			public function getServiceUrl(): string
+			{
+				return $this->serviceUrl;
 			}
 
-			function query($query) {
+			public function selectDatabase(string $name): bool
+			{
+				return $name == "domain";
+			}
+
+			public function query(string $query, bool $unbuffered = false)
+			{
 				$params = ['SelectExpression' => $query, 'ConsistentRead' => 'true'];
 				if ($this->next) {
 					$params['NextToken'] = $this->next;
 				}
+
 				$result = sdb_request_all('Select', 'Item', $params, $this->timeout); //! respect $unbuffered
+
 				$this->timeout = 0;
 				if ($result === false) {
-					return $result;
+					return false;
 				}
+
 				if (preg_match('~^\s*SELECT\s+COUNT\(~i', $query)) {
 					$sum = 0;
 					foreach ($result as $item) {
@@ -67,22 +88,12 @@ if (isset($_GET["simpledb"])) {
 						'Value' => $sum,
 					]]]];
 				}
+
 				return new Result($result);
 			}
 
-			function multi_query($query) {
-				return $this->_result = $this->query($query);
-			}
-
-			function store_result() {
-				return $this->_result;
-			}
-
-			function next_result() {
-				return false;
-			}
-
-			function quote($string) {
+			public function quote(string $string): string
+			{
 				return "'" . str_replace("'", "''", $string) . "'";
 			}
 
@@ -169,7 +180,7 @@ if (isset($_GET["simpledb"])) {
 					return false;
 				}
 			}
-			$connection->affected_rows = count($ids);
+			$connection->setAffectedRows(count($ids));
 			return true;
 		}
 
@@ -311,7 +322,7 @@ if (isset($_GET["simpledb"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new SimpleDbDatabase();
 
 		list($server, , $password) = Admin::get()->getCredentials();
 		if ($password != "") {
@@ -321,8 +332,8 @@ if (isset($_GET["simpledb"])) {
 			}
 		}
 
-		if (!$connection->connect($server)) {
-			return $connection->error;
+		if (!$connection->connect($server, "", "")) {
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -354,7 +365,7 @@ if (isset($_GET["simpledb"])) {
 		foreach (sdb_request_all('ListDomains', 'DomainName') as $table) {
 			$return[(string) $table] = 'table';
 		}
-		if ($connection->error && defined("AdminNeo\PAGE_HEADER")) {
+		if ($connection->getError() && defined("AdminNeo\PAGE_HEADER")) {
 			echo "<p class='error'>" . error() . "\n";
 		}
 		return $return;
@@ -390,7 +401,7 @@ if (isset($_GET["simpledb"])) {
 
 	function error() {
 		global $connection;
-		return h($connection->error);
+		return h($connection->getError());
 	}
 
 	function information_schema() {
@@ -475,7 +486,7 @@ if (isset($_GET["simpledb"])) {
 		$query = str_replace('%7E', '~', substr($query, 1));
 		$query .= "&Signature=" . urlencode(base64_encode(hash_hmac('sha1', "POST\n" . preg_replace('~^https?://~', '', $host) . "\n/\n$query", $secret, true)));
 
-		$file = @file_get_contents($connection->_url, false, stream_context_create(['http' => [
+		$file = @file_get_contents($connection->getServiceUrl(), false, stream_context_create(['http' => [
 			'method' => 'POST', // may not fit in URL with GET
 			'content' => $query,
 			'ignore_errors' => 1,
@@ -483,7 +494,7 @@ if (isset($_GET["simpledb"])) {
 			'max_redirects' => 0,
 		]]));
 		if (!$file) {
-			$connection->error = error_get_last()['message'];
+			$connection->setError(error_get_last()['message']);
 			return false;
 		}
 		libxml_use_internal_errors(true);
@@ -491,15 +502,15 @@ if (isset($_GET["simpledb"])) {
 		$xml = simplexml_load_string($file);
 		if (!$xml) {
 			$error = libxml_get_last_error();
-			$connection->error = $error->message;
+			$connection->setError($error->message);
 			return false;
 		}
 		if ($xml->Errors) {
 			$error = $xml->Errors->Error;
-			$connection->error = "$error->Message ($error->Code)";
+			$connection->setError("$error->Message ($error->Code)");
 			return false;
 		}
-		$connection->error = '';
+		$connection->setError('');
 		$tag = $action . "Result";
 		return ($xml->$tag ? $xml->$tag : true);
 	}

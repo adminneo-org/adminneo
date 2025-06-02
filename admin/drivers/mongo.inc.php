@@ -7,6 +7,7 @@ use Exception;
 use MongoDB\BSON;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Command;
+use MongoDB\Driver\Cursor;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 
@@ -16,47 +17,103 @@ if (isset($_GET["mongo"])) {
 	define("AdminNeo\DRIVER", "mongo");
 
 	if (class_exists('MongoDB\Driver\Manager')) {
-		class Database {
-			var $extension = "MongoDB", $server_info = MONGODB_VERSION, $affected_rows, $error, $last_id;
-			/** @var Manager */
-			var $_link;
-			var $_db, $_db_name;
+		define("AdminNeo\DRIVER_EXTENSION", "MongoDB");
 
-			function connect($uri, $options) {
-				$this->_link = new Manager($uri, $options);
-				$this->executeCommand($options["db"], ['ping' => 1]);
+		class MongoDatabase extends Database
+		{
+			/** @var Manager */
+			private $manager;
+
+			/** @var string */
+			private $dbName;
+
+			public function connect(string $server, string $username, string $password, string $dbName = "", ?string $authSource = null): bool
+			{
+				$this->server_info = MONGODB_VERSION;
+
+				$options = [];
+				if ($username . $password != "") {
+					$options["username"] = $username;
+					$options["password"] = $password;
+				}
+
+				if ($dbName != "") {
+					$options["db"] = $dbName;
+				}
+
+				if ($authSource) {
+					$options["authSource"] = $authSource;
+				}
+
+				$this->manager = new Manager($server, $options);
+				$this->dbName = $dbName;
+
+				$this->executeCommand(['ping' => 1]);
+
+				return true;
 			}
 
-			function executeCommand($db, $command) {
+			/**
+			 * @return Cursor|array
+			 */
+			public function executeCommand(array $command)
+			{
 				try {
-					return $this->_link->executeCommand($db, new Command($command));
-				} catch (Exception $e) {
-					$this->error = $e->getMessage();
+					return $this->manager->executeCommand($this->dbName, new Command($command));
+				} catch (\MongoDB\Driver\Exception\Exception $exception) {
+					$this->error = $exception->getMessage();
+
 					return [];
 				}
 			}
 
-			function executeBulkWrite($namespace, $bulk, $counter) {
+			/**
+			 * @return Cursor|array
+			 */
+			public function executeQuery(string $namespace, Query $query, ?array $options = null)
+			{
 				try {
-					$results = $this->_link->executeBulkWrite($namespace, $bulk);
+					return $this->manager->executeQuery($namespace, $query, $options);
+				} catch (\MongoDB\Driver\Exception\Exception $exception) {
+					$this->error = $exception->getMessage();
+
+					return [];
+				}
+			}
+
+			public function executeBulkWrite(string $namespace, BulkWrite $bulk, string $counter): bool
+			{
+				try {
+					$results = $this->manager->executeBulkWrite($namespace, $bulk);
 					$this->affected_rows = $results->$counter();
+
 					return true;
 				} catch (Exception $e) {
 					$this->error = $e->getMessage();
+
 					return false;
 				}
 			}
 
-			function query($query) {
+			public function query(string $query, bool $unbuffered = false): bool
+			{
 				return false;
 			}
 
-			function select_db($database) {
-				$this->_db_name = $database;
+			public function selectDatabase(string $name): bool
+			{
+				$this->dbName = $name;
+
 				return true;
 			}
 
-			function quote($string) {
+			public function getDbName(): string
+			{
+				return $this->dbName;
+			}
+
+			public function quote(string $string): string
+			{
 				return $string;
 			}
 		}
@@ -129,6 +186,7 @@ if (isset($_GET["mongo"])) {
 			public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 			{
 				global $connection;
+
 				$select = ($select == ["*"]
 					? []
 					: array_fill_keys($select, 1)
@@ -136,18 +194,23 @@ if (isset($_GET["mongo"])) {
 				if (count($select) && !isset($select['_id'])) {
 					$select['_id'] = 0;
 				}
+
 				$where = where_to_query($where);
 				$sort = [];
 				foreach ($order as $val) {
 					$val = preg_replace('~ DESC$~', '', $val, 1, $count);
 					$sort[$val] = ($count ? -1 : 1);
 				}
+
 				$limit = min(200, max(1, (int) $limit));
 				$skip = $page * $limit;
+
+				$query = new Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort]);
+
 				try {
-					return new Result($connection->_link->executeQuery("$connection->_db_name.$table", new Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort])));
+					return new Result($connection->executeQuery($connection->getDbName() . ".$table", $query));
 				} catch (Exception $e) {
-					$connection->error = $e->getMessage();
+					$connection->setError($e->getMessage());
 					return false;
 				}
 			}
@@ -155,7 +218,7 @@ if (isset($_GET["mongo"])) {
 			public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 			{
 				global $connection;
-				$db = $connection->_db_name;
+				$db = $connection->getDbName();
 				$where = sql_query_where_parser($queryWhere);
 				$bulk = new BulkWrite([]);
 				if (isset($record['_id'])) {
@@ -173,29 +236,32 @@ if (isset($_GET["mongo"])) {
 					$update['$unset'] = $removeFields;
 				}
 				$bulk->update($where, $update, ['upsert' => false]);
+
 				return $connection->executeBulkWrite("$db.$table", $bulk, 'getModifiedCount');
 			}
 
 			public function delete(string $table, string $queryWhere, int $limit = 0)
 			{
 				global $connection;
-				$db = $connection->_db_name;
-				$where = sql_query_where_parser($queryWhere);
+
 				$bulk = new BulkWrite([]);
-				$bulk->delete($where, ['limit' => $limit]);
-				return $connection->executeBulkWrite("$db.$table", $bulk, 'getDeletedCount');
+				$bulk->delete(sql_query_where_parser($queryWhere), ['limit' => $limit]);
+
+				return $connection->executeBulkWrite($connection->getDbName() . ".$table", $bulk, 'getDeletedCount');
 			}
 
 			public function insert(string $table, array $record)
 			{
 				global $connection;
-				$db = $connection->_db_name;
-				$bulk = new BulkWrite([]);
+
 				if ($record['_id'] == '') {
 					unset($record['_id']);
 				}
+
+				$bulk = new BulkWrite([]);
 				$bulk->insert($record);
-				return $connection->executeBulkWrite("$db.$table", $bulk, 'getInsertedCount');
+
+				return $connection->executeBulkWrite($connection->getDbName() . "$table", $bulk, 'getInsertedCount');
 			}
 		}
 
@@ -209,7 +275,7 @@ if (isset($_GET["mongo"])) {
 		function get_databases($flush) {
 			global $connection;
 			$return = [];
-			foreach ($connection->executeCommand($connection->_db_name, ['listDatabases' => 1]) as $dbs) {
+			foreach ($connection->executeCommand(['listDatabases' => 1]) as $dbs) {
 				foreach ($dbs->databases as $db) {
 					$return[] = $db->name;
 				}
@@ -225,7 +291,7 @@ if (isset($_GET["mongo"])) {
 		function tables_list() {
 			global $connection;
 			$collections = [];
-			foreach ($connection->executeCommand($connection->_db_name, ['listCollections' => 1]) as $result) {
+			foreach ($connection->executeCommand(['listCollections' => 1]) as $result) {
 				$collections[$result->name] = 'table';
 			}
 			return $collections;
@@ -238,7 +304,7 @@ if (isset($_GET["mongo"])) {
 		function indexes($table, $connection2 = null) {
 			global $connection;
 			$return = [];
-			foreach ($connection->executeCommand($connection->_db_name, ['listIndexes' => $table]) as $index) {
+			foreach ($connection->executeCommand(['listIndexes' => $table]) as $index) {
 				$descs = [];
 				$columns = [];
 				foreach (get_object_vars($index->key) as $column => $type) {
@@ -286,7 +352,7 @@ if (isset($_GET["mongo"])) {
 		function found_rows($table_status, $where) {
 			global $connection;
 			$where = where_to_query($where);
-			$toArray = $connection->executeCommand($connection->_db_name, ['count' => $table_status['Name'], 'query' => $where])->toArray();
+			$toArray = $connection->executeCommand(['count' => $table_status['Name'], 'query' => $where])->toArray();
 			return $toArray[0]->n;
 		}
 
@@ -392,13 +458,12 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function last_id() {
-		global $connection;
-		return $connection->last_id;
+		return 0;
 	}
 
 	function error() {
 		global $connection;
-		return h($connection->error);
+		return h($connection->getError());
 	}
 
 	function collations() {
@@ -415,31 +480,19 @@ if (isset($_GET["mongo"])) {
 	 */
 	function connect()
 	{
-		$connection = new Database();
+		$connection = new MongoDatabase();
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
 		if ($server == "") {
 			$server = "localhost:27017";
 		}
 
-		$options = [];
-		if ($username . $password != "") {
-			$options["username"] = $username;
-			$options["password"] = $password;
-		}
+		$dbName = Admin::get()->getDatabase();
+		$authSource = getenv("MONGO_AUTH_SOURCE") ?: null;
 
-		$db = Admin::get()->getDatabase();
-		if ($db != "") {
-			$options["db"] = $db;
-		}
-
-		if (($auth_source = getenv("MONGO_AUTH_SOURCE"))) {
-			$options["authSource"] = $auth_source;
-		}
-
-		$connection->connect("mongodb://$server", $options);
-		if ($connection->error) {
-			return $connection->error;
+		$connection->connect("mongodb://$server", $username, $password, $dbName, $authSource);
+		if ($connection->getError()) {
+			return $connection->getError();
 		}
 
 		return $connection;
@@ -464,7 +517,7 @@ if (isset($_GET["mongo"])) {
 				]);
 			}
 			if ($return['errmsg']) {
-				$connection->error = $return['errmsg'];
+				$connection->setError($return['errmsg']);
 				return false;
 			}
 		}

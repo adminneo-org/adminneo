@@ -1073,7 +1073,7 @@ class Admin extends Origin
 					echo $buffer . $suffix;
 				}
 			} elseif ($_POST["format"] == "sql") {
-				echo "-- " . str_replace("\n", " ", $connection->error) . "\n";
+				echo "-- " . str_replace("\n", " ", $connection->getError()) . "\n";
 			}
 
 			if ($identity_insert) {
@@ -1180,7 +1180,7 @@ class Admin extends Origin
 			// Tables.
 			$tables = [];
 			if ($_GET["ns"] !== "" && !$missing && DB != "") {
-				$connection->select_db(DB);
+				$connection->selectDatabase(DB);
 				$tables = table_status('', true);
 			}
 
@@ -1208,7 +1208,7 @@ class Admin extends Origin
 							echo "jushLinks.$val = jushLinks.$jush;\n";
 						}
 					}
-					$server_info = $connection->server_info;
+					$server_info = $connection->getServerInfo();
 					?>
 					initSyntaxHighlighting('<?php echo (is_object($connection) ? preg_replace('~^(\d\.?\d).*~s', '\1', $server_info) : ""); ?>'<?php echo (preg_match('~MariaDB~', $server_info) ? ", true" : ""); ?>);
 				</script>
@@ -1242,7 +1242,7 @@ class Admin extends Origin
 		echo "<input type='submit' value='" . lang('Use') . "' class='button " . ($databases ? "hidden" : "") . "'>\n";
 		echo "</div>";
 
-		if (support("scheme") && $missing != "db" && DB != "" && $connection->select_db(DB)) {
+		if (support("scheme") && $missing != "db" && DB != "" && $connection->selectDatabase(DB)) {
 			echo "<div>";
 			echo "<select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $this->admin->getSchemas(), $_GET["ns"]) . "</select>"
 				. script("mixin(gid('scheme-select'), {onmousedown: dbMouseDown, onchange: dbChange});");

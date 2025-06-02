@@ -12,14 +12,20 @@ if (isset($_GET["mysql"])) {
 
 	// MySQLi supports everything, PDO_MySQL doesn't support orgtable
 	if (extension_loaded("mysqli")) {
-		class Database extends MySQLi {
-			var $extension = "MySQLi";
+		define("AdminNeo\DRIVER_EXTENSION", "MySQLi");
+
+		class MySqlDatabase extends Database
+		{
+			/** @var mysqli */
+			private $mysqli;
 
 			function __construct() {
-				parent::init();
+				$this->mysqli = new mysqli();
+				$this->mysqli->init();
 			}
 
-			function connect($server = "", $username = "", $password = "", $database = null, $port = null, $socket = null) {
+			public function connect(string $server, string $username, string $password, $database = null, $port = null, $socket = null): bool
+			{
 				mysqli_report(MYSQLI_REPORT_OFF);
 				list($host, $port) = explode(":", $server, 2); // part after : is used for port or socket
 
@@ -29,13 +35,13 @@ if (isset($_GET["mysql"])) {
 				$ssl_defined = $key || $certificate || $ca_certificate;
 
 				if ($ssl_defined) {
-					$this->ssl_set($key, $certificate, $ca_certificate, null, null);
+					$this->mysqli->ssl_set($key, $certificate, $ca_certificate, null, null);
 					$flags = Admin::get()->getConfig()->getSslTrustServerCertificate() ? MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT : MYSQLI_CLIENT_SSL;
 				} else {
 					$flags = 0;
 				}
 
-				$return = @$this->real_connect(
+				$return = @$this->mysqli->real_connect(
 					($server != "" ? $host : ini_get("mysqli.default_host")),
 					($server . $username != "" ? $username : ini_get("mysqli.default_user")),
 					($server . $username . $password != "" ? $password : ini_get("mysqli.default_pw")),
@@ -44,43 +50,85 @@ if (isset($_GET["mysql"])) {
 					(!is_numeric($port) ? $port : $socket),
 					$flags
 				);
-				$this->options(MYSQLI_OPT_LOCAL_INFILE, false);
+
+				$this->mysqli->options(MYSQLI_OPT_LOCAL_INFILE, false);
+
 				return $return;
 			}
 
-			function set_charset($charset) {
-				if (parent::set_charset($charset)) {
+			public function getServerInfo(): string
+			{
+				return $this->mysqli->get_server_info();
+			}
+
+			/**
+			 * @return int
+			 */
+			public function getAffectedRows(): int
+			{
+				return $this->mysqli->affected_rows;
+			}
+
+			public function getErrno(): int
+			{
+				return $this->mysqli->errno;
+			}
+
+			public function getError(): string
+			{
+				return $this->mysqli->error;
+			}
+
+			public function selectDatabase(string $name): bool
+			{
+				return $this->mysqli->select_db($name);
+			}
+
+			public function setCharset(string $charset): bool
+			{
+				if ($this->mysqli->set_charset($charset)) {
 					return true;
 				}
-				// the client library may not support utf8mb4
-				parent::set_charset('utf8');
-				return $this->query("SET NAMES $charset");
+
+				// The client library may not support utf8mb4.
+				$this->mysqli->set_charset('utf8');
+
+				return (bool)$this->query("SET NAMES $charset");
 			}
 
-			function result($query, $field = 0) {
-				$result = $this->query($query);
-				if (!$result) {
-					return false;
-				}
-				$row = $result->fetch_array();
-				return $row[$field];
-			}
-
-			function quote($string) {
-				return "'" . $this->escape_string($string) . "'";
-			}
-
-			public function next_result()
+			public function quote(string $string): string
 			{
-				return parent::more_results() && parent::next_result();
+				return "'" . $this->mysqli->escape_string($string) . "'";
+			}
+
+			public function query(string $query, bool $unbuffered = false)
+			{
+				return $this->mysqli->query($query);
+			}
+
+			public function multiQuery(string $query)
+			{
+				return $this->mysqli->multi_query($query);
+			}
+
+			public function storeResult($result = null)
+			{
+				return $this->mysqli->store_result();
+			}
+
+			public function nextResult(): bool
+			{
+				return $this->mysqli->more_results() && $this->mysqli->next_result();
 			}
 		}
 
 	} elseif (extension_loaded("pdo_mysql")) {
-		class Database extends Min_PDO {
-			var $extension = "PDO_MySQL";
+		define("AdminNeo\DRIVER_EXTENSION", "PDO_MySQL");
 
-			function connect($server, $username, $password) {
+		class MySqlDatabase extends PdoDatabase
+		{
+			public function connect(string $server, string $username, string $password): bool
+			{
 				$dsn = "mysql:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server));
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
@@ -111,21 +159,24 @@ if (isset($_GET["mysql"])) {
 				return true;
 			}
 
-			function set_charset($charset) {
-				$this->query("SET NAMES $charset");
+			public function setCharset(string $charset): bool
+			{
+				return (bool)$this->query("SET NAMES $charset");
 			}
 
-			function select_db($database) {
+			public function selectDatabase(string $name): bool
+			{
 				// database selection is separated from the connection so dbname in DSN can't be used
-				return $this->query("USE " . idf_escape($database));
+				return (bool)$this->query("USE " . idf_escape($name));
 			}
 
-			function query($query, $unbuffered = false) {
+			public function query(string $query, bool $unbuffered = false)
+			{
 				$this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, !$unbuffered);
+
 				return parent::query($query, $unbuffered);
 			}
 		}
-
 	}
 
 
@@ -166,7 +217,7 @@ if (isset($_GET["mysql"])) {
 		public function slowQuery(string $query, int $timeout): ?string
         {
 			if (min_version('5.7.8', '10.1.2')) {
-				if (preg_match('~MariaDB~', $this->database->server_info)) {
+				if (preg_match('~MariaDB~', $this->database->getServerInfo())) {
 					return "SET STATEMENT max_statement_time=$timeout FOR $query";
 				} elseif (preg_match('~^(SELECT\b)(.+)~is', $query, $match)) {
 					return "$match[1] /*+ MAX_EXECUTION_TIME(" . ($timeout * 1000) . ") */ $match[2]";
@@ -198,7 +249,7 @@ if (isset($_GET["mysql"])) {
 
 		public function tableHelp(string $name, bool $isView = false): ?string
         {
-			$maria = preg_match('~MariaDB~', $this->database->server_info);
+			$maria = preg_match('~MariaDB~', $this->database->getServerInfo());
 			if (information_schema(DB)) {
 				return strtolower("information-schema-" . ($maria ? "$name-table/" : str_replace("_", "-", $name) . "-table.html"));
 			}
@@ -213,7 +264,7 @@ if (isset($_GET["mysql"])) {
         {
 			static $c_style;
 			if ($c_style === null) {
-				$sql_mode = $this->database->result("SHOW VARIABLES LIKE 'sql_mode'", 1);
+				$sql_mode = $this->database->getResult("SHOW VARIABLES LIKE 'sql_mode'", 1);
 				$c_style = (strpos($sql_mode, 'NO_BACKSLASH_ESCAPES') === false);
 			}
 			return $c_style;
@@ -253,11 +304,11 @@ if (isset($_GET["mysql"])) {
 	{
 		global $types, $structured_types, $edit_functions;
 
-		$connection = new Database();
+		$connection = new MySqlDatabase();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
-			$error = $connection->error;
+			$error = $connection->getError();
 
 			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1250", "utf-8", $error)) > strlen($error)) { // windows-1250 - most common Windows encoding
 				$error = $s;
@@ -266,7 +317,7 @@ if (isset($_GET["mysql"])) {
 			return $error;
 		}
 
-		$connection->set_charset(charset($connection));
+		$connection->setCharset(charset($connection));
 		$connection->query("SET sql_quote_show_create = 1, autocommit = 1");
 
 		if (min_version('5.7.8', '10.2', $connection)) {
@@ -340,7 +391,7 @@ if (isset($_GET["mysql"])) {
 	function db_collation($db, $collations) {
 		global $connection;
 		$return = null;
-		$create = $connection->result("SHOW CREATE DATABASE " . idf_escape($db), 1);
+		$create = $connection->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1);
 		if (preg_match('~ COLLATE ([^ ]+)~', $create, $match)) {
 			$return = $match[1];
 		} elseif (preg_match('~ CHARACTER SET ([^ ]+)~', $create, $match)) {
@@ -368,7 +419,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function logged_user() {
 		global $connection;
-		return $connection->result("SELECT USER()");
+		return $connection->getResult("SELECT USER()");
 	}
 
 	/** Get tables list
@@ -447,7 +498,7 @@ if (isset($_GET["mysql"])) {
 	function fields($table) {
 		global $connection;
 
-		$maria = preg_match('~MariaDB~', $connection->server_info);
+		$maria = preg_match('~MariaDB~', $connection->getServerInfo());
 
 		$return = [];
 		foreach (get_rows("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = " . q($table) . " ORDER BY ORDINAL_POSITION") as $row) {
@@ -526,7 +577,7 @@ if (isset($_GET["mysql"])) {
 		global $connection, $on_actions;
 		static $pattern = '(?:`(?:[^`]|``)+`|"(?:[^"]|"")+")';
 		$return = [];
-		$create_table = $connection->result("SHOW CREATE TABLE " . table($table), 1);
+		$create_table = $connection->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if ($create_table) {
 			preg_match_all("~CONSTRAINT ($pattern) FOREIGN KEY ?\\(((?:$pattern,? ?)+)\\) REFERENCES ($pattern)(?:\\.($pattern))? \\(((?:$pattern,? ?)+)\\)(?: ON DELETE ($on_actions))?(?: ON UPDATE ($on_actions))?~", $create_table, $matches, PREG_SET_ORDER);
 			foreach ($matches as $match) {
@@ -551,7 +602,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function view($name) {
 		global $connection;
-		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', $connection->result("SHOW CREATE VIEW " . table($name), 1))];
+		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', $connection->getResult("SHOW CREATE VIEW " . table($name), 1))];
 	}
 
 	/** Get sorted grouped list of collations
@@ -598,7 +649,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function error() {
 		global $connection;
-		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", $connection->error));
+		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", $connection->getError()));
 	}
 
 	/** Create database
@@ -758,7 +809,7 @@ if (isset($_GET["mysql"])) {
 			foreach ($views as $table) {
 				$definitions[table($table)] = view($table);
 			}
-			$connection->select_db($target);
+			$connection->selectDatabase($target);
 			$db = idf_escape(DB);
 			foreach ($definitions as $name => $view) {
 				if (!queries("CREATE VIEW $name AS " . str_replace(" $db.", " ", $view["select"])) || !queries("DROP VIEW $db.$name")) {
@@ -857,7 +908,7 @@ if (isset($_GET["mysql"])) {
 		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|-- )[^\n]*\n?|--\r?\n)";
 		$type_pattern = "((" . implode("|", array_merge(array_keys($types), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enum_length)++)\\))?\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?";
 		$pattern = "$space*(" . ($type == "FUNCTION" ? "" : $inout) . ")?\\s*(?:`((?:[^`]|``)*)`\\s*|\\b(\\S+)\\s+)$type_pattern";
-		$create = $connection->result("SHOW CREATE $type " . idf_escape($name), 2);
+		$create = $connection->getResult("SHOW CREATE $type " . idf_escape($name), 2);
 		preg_match("~\\(((?:$pattern\\s*,?)*)\\)\\s*" . ($type == "FUNCTION" ? "RETURNS\\s+$type_pattern\\s+" : "") . "(.*)~is", $create, $match);
 		$fields = [];
 		preg_match_all("~$pattern\\s*,?~is", $match[1], $matches, PREG_SET_ORDER);
@@ -918,7 +969,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function last_id() {
 		global $connection;
-		return $connection->result("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
+		return $connection->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
 	}
 
 	/** Explain select
@@ -947,7 +998,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function create_sql($table, $auto_increment, $style) {
 		global $connection;
-		$return = $connection->result("SHOW CREATE TABLE " . table($table), 1);
+		$return = $connection->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if (!$auto_increment) {
 			$return = preg_replace('~ AUTO_INCREMENT=\d+~', '', $return); //! skip comments
 		}
@@ -1067,7 +1118,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function max_connections() {
 		global $connection;
-		return $connection->result("SELECT @@max_connections");
+		return $connection->getResult("SELECT @@max_connections");
 	}
 
 	/** Get driver config

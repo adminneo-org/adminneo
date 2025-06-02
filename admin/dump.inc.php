@@ -28,7 +28,7 @@ if ($_POST && !$error) {
 
 	$is_sql = preg_match('~sql~', $_POST["format"]);
 	if ($is_sql) {
-		echo "-- AdminNeo $VERSION " . Drivers::get(DRIVER) . " " . str_replace("\n", " ", $connection->server_info) . " dump\n\n";
+		echo "-- AdminNeo $VERSION " . Drivers::get(DRIVER) . " " . str_replace("\n", " ", $connection->getServerInfo()) . " dump\n\n";
 		if ($jush == "sql") {
 			echo "SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -52,8 +52,8 @@ SET foreign_key_checks = 0;
 
 	foreach ((array) $databases as $db) {
 		Admin::get()->dumpDatabase($db);
-		if ($connection->select_db($db)) {
-			if ($is_sql && preg_match('~CREATE~', $style) && ($create = $connection->result("SHOW CREATE DATABASE " . idf_escape($db), 1))) {
+		if ($connection->selectDatabase($db)) {
+			if ($is_sql && preg_match('~CREATE~', $style) && ($create = $connection->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1))) {
 				set_utf8mb4($create);
 				if ($style == "DROP+CREATE") {
 					echo "DROP DATABASE IF EXISTS " . idf_escape($db) . ";\n";
@@ -90,7 +90,7 @@ SET foreign_key_checks = 0;
 
 				if ($_POST["events"]) {
 					foreach (get_rows("SHOW EVENTS", null, "-- ") as $row) {
-						$create = remove_definer($connection->result("SHOW CREATE EVENT " . idf_escape($row["Name"]), 3));
+						$create = remove_definer($connection->getResult("SHOW CREATE EVENT " . idf_escape($row["Name"]), 3));
 						set_utf8mb4($create);
 						$out .= ($style != 'DROP+CREATE' ? "DROP EVENT IF EXISTS " . idf_escape($row["Name"]) . ";;\n" : "") . "$create;;\n\n";
 					}

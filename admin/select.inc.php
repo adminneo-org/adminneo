@@ -137,7 +137,7 @@ if ($_POST && !$error) {
 						: Driver::get()->update($TABLE, $set, $where_check)
 					)
 				);
-				$affected = $connection->affected_rows;
+				$affected = $connection->getAffectedRows();
 			} else {
 				foreach ((array) $_POST["check"] as $val) {
 					// where is not unique so OR can't be used
@@ -152,7 +152,7 @@ if ($_POST && !$error) {
 					if (!$result) {
 						break;
 					}
-					$affected += $connection->affected_rows;
+					$affected += $connection->getAffectedRows();
 				}
 			}
 		}
@@ -193,7 +193,7 @@ if ($_POST && !$error) {
 				if (!$result) {
 					break;
 				}
-				$affected += $connection->affected_rows;
+				$affected += $connection->getAffectedRows();
 			}
 			queries_redirect(remove_from_uri(), lang('%d item(s) have been affected.', $affected), $result);
 		}
@@ -278,7 +278,7 @@ if (!$columns && support("table")) {
 
 	$page = $_GET["page"] ?? null;
 	if ($page == "last") {
-		$found_rows = $connection->result(count_rows($TABLE, $where, $is_group, $group));
+		$found_rows = $connection->getResult(count_rows($TABLE, $where, $is_group, $group));
 		$page = (int)floor(max(0, $found_rows - 1) / $limit);
 	} else {
 		$found_rows = false;
@@ -328,7 +328,7 @@ if (!$columns && support("table")) {
 
 		// use count($rows) without LIMIT, COUNT(*) without grouping, FOUND_ROWS otherwise (slowest)
 		if ($_GET["page"] != "last" && $limit !== null && $group && $is_group && $jush == "sql") {
-			$found_rows = $connection->result(" SELECT FOUND_ROWS()"); // space to allow mysql.trace_mode
+			$found_rows = $connection->getResult(" SELECT FOUND_ROWS()"); // space to allow mysql.trace_mode
 		}
 
 		if (!$rows) {
