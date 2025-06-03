@@ -89,8 +89,7 @@ class TranslationPlugin extends Plugin
 		}
 
 		if (!array_key_exists($text, $this->translations)) {
-			$connection = connection();
-			$connection->query(
+			Database::get()->query(
 				"INSERT INTO " . idf_escape($this->table) . " (language, text)
 				VALUES (" . q($this->language) . ", " . $this->sanitizeText($text) . ")"
 			);

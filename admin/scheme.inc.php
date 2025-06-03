@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $row = $_POST;
 
 if ($_POST && !$error) {

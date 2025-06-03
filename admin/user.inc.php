@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $USER = $_GET["user"];
 $privileges = ["" => ["All privileges" => ""]];
 foreach (get_rows("SHOW PRIVILEGES") as $row) {
@@ -34,7 +30,7 @@ if ($_POST) {
 $grants = [];
 $old_pass = "";
 
-if (isset($_GET["host"]) && ($result = $connection->query("SHOW GRANTS FOR " . q($USER) . "@" . q($_GET["host"])))) { //! use information_schema for MySQL 5 - column names in column privileges are not escaped
+if (isset($_GET["host"]) && ($result = Database::get()->query("SHOW GRANTS FOR " . q($USER) . "@" . q($_GET["host"])))) { //! use information_schema for MySQL 5 - column names in column privileges are not escaped
 	while ($row = $result->fetch_row()) {
 		if (preg_match('~GRANT (.*) ON (.*) TO ~', $row[0], $match) && preg_match_all('~ *([^(,]*[^ ,(])( *\([^)]+\))?~', $match[1], $matches, PREG_SET_ORDER)) { //! escape the part between ON and TO
 			foreach ($matches as $val) {
@@ -61,7 +57,7 @@ if ($_POST && !$error) {
 		$pass = $_POST["pass"];
 		if ($pass != '' && !$_POST["hashed"] && !min_version(8)) {
 			// compute hash in a separate query so that plain text password is not saved to history
-			$pass = $connection->getResult("SELECT PASSWORD(" . q($pass) . ")");
+			$pass = Database::get()->getResult("SELECT PASSWORD(" . q($pass) . ")");
 			$error = !$pass;
 		}
 
@@ -117,7 +113,7 @@ if ($_POST && !$error) {
 
 		if ($created) {
 			// delete new user in case of an error
-			$connection->query("DROP USER $new_user");
+			Database::get()->query("DROP USER $new_user");
 		}
 	}
 }
@@ -130,7 +126,7 @@ if ($_POST) {
 	$row = $_POST;
 	$grants = $new_grants;
 } else {
-	$row = $_GET + ["host" => $connection->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', -1)")]; // create user on the same domain by default
+	$row = $_GET + ["host" =>  Database::get()->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', -1)")]; // create user on the same domain by default
 	$row["pass"] = $old_pass;
 	if ($old_pass != "") {
 		$row["hashed"] = true;

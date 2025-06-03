@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["table"];
 $fields = fields($TABLE);
 if (!$fields) {

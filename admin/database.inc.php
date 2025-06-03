@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $row = $_POST;
 
 if ($_POST && !$error && !isset($_POST["add_x"])) { // add is an image and PHP changes add.x to add_x

@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["foreign"];
 $name = $_GET["name"];
 $row = $_POST;
@@ -63,7 +59,7 @@ if ($_POST) {
 <?php
 $source = array_keys(fields($TABLE)); //! no text and blob
 if ($row["db"] != "") {
-	$connection->selectDatabase($row["db"]);
+	Database::get()->selectDatabase($row["db"]);
 }
 if ($row["ns"] != "") {
 	$orig_schema = get_schema();

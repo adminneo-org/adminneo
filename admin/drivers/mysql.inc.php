@@ -19,7 +19,10 @@ if (isset($_GET["mysql"])) {
 			/** @var mysqli */
 			private $mysqli;
 
-			function __construct() {
+			protected function __construct()
+			{
+				parent::__construct();
+
 				$this->mysqli = new mysqli();
 				$this->mysqli->init();
 			}
@@ -300,11 +303,11 @@ if (isset($_GET["mysql"])) {
 	 *
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
 		global $types, $structured_types, $edit_functions;
 
-		$connection = new MySqlDatabase();
+		$connection = $primary ? MySqlDatabase::create() : MySqlDatabase::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
@@ -389,9 +392,8 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function db_collation($db, $collations) {
-		global $connection;
 		$return = null;
-		$create = $connection->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1);
+		$create = Database::get()->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1);
 		if (preg_match('~ COLLATE ([^ ]+)~', $create, $match)) {
 			$return = $match[1];
 		} elseif (preg_match('~ CHARACTER SET ([^ ]+)~', $create, $match)) {
@@ -418,8 +420,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function logged_user() {
-		global $connection;
-		return $connection->getResult("SELECT USER()");
+		return Database::get()->getResult("SELECT USER()");
 	}
 
 	/** Get tables list
@@ -496,9 +497,7 @@ if (isset($_GET["mysql"])) {
 	* @return array [$name => ["field" => , "full_type" => , "type" => , "length" => , "unsigned" => , "default" => , "null" => , "auto_increment" => , "on_update" => , "collation" => , "privileges" => , "comment" => , "primary" => , "generated" => ]]
 	*/
 	function fields($table) {
-		global $connection;
-
-		$maria = preg_match('~MariaDB~', $connection->getServerInfo());
+		$maria = preg_match('~MariaDB~', Database::get()->getServerInfo());
 
 		$return = [];
 		foreach (get_rows("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = " . q($table) . " ORDER BY ORDINAL_POSITION") as $row) {
@@ -574,10 +573,10 @@ if (isset($_GET["mysql"])) {
 	* @return array [$name => ["db" => , "ns" => , "table" => , "source" => [], "target" => [], "on_delete" => , "on_update" => ]]
 	*/
 	function foreign_keys($table) {
-		global $connection, $on_actions;
+		global $on_actions;
 		static $pattern = '(?:`(?:[^`]|``)+`|"(?:[^"]|"")+")';
 		$return = [];
-		$create_table = $connection->getResult("SHOW CREATE TABLE " . table($table), 1);
+		$create_table = Database::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if ($create_table) {
 			preg_match_all("~CONSTRAINT ($pattern) FOREIGN KEY ?\\(((?:$pattern,? ?)+)\\) REFERENCES ($pattern)(?:\\.($pattern))? \\(((?:$pattern,? ?)+)\\)(?: ON DELETE ($on_actions))?(?: ON UPDATE ($on_actions))?~", $create_table, $matches, PREG_SET_ORDER);
 			foreach ($matches as $match) {
@@ -601,21 +600,18 @@ if (isset($_GET["mysql"])) {
 	* @return array ["select" => ]
 	*/
 	function view($name) {
-		global $connection;
-		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', $connection->getResult("SHOW CREATE VIEW " . table($name), 1))];
+		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', Database::get()->getResult("SHOW CREATE VIEW " . table($name), 1))];
 	}
 
 	/** Get sorted grouped list of collations
 	* @return array
 	*/
 	function collations() {
-		global $connection;
-
 		$return = [];
 
 		// Since MariaDB 10.10, one collation can be compatible with more character sets, so collations no longer have unique IDs.
 		// All combinations can be selected from information_schema.COLLATION_CHARACTER_SET_APPLICABILITY table.
-		$query = min_version('', '10.10', $connection) ?
+		$query = min_version('', '10.10', Database::get()) ?
 			"SELECT CHARACTER_SET_NAME AS Charset, FULL_COLLATION_NAME AS Collation, IS_DEFAULT AS `Default` FROM information_schema.COLLATION_CHARACTER_SET_APPLICABILITY" :
 			"SHOW COLLATION";
 
@@ -648,8 +644,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function error() {
-		global $connection;
-		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", $connection->getError()));
+		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", Database::get()->getError()));
 	}
 
 	/** Create database
@@ -799,7 +794,6 @@ if (isset($_GET["mysql"])) {
 	* @return bool
 	*/
 	function move_tables($tables, $views, $target) {
-		global $connection;
 		$rename = [];
 		foreach ($tables as $table) {
 			$rename[] = table($table) . " TO " . idf_escape($target) . "." . table($table);
@@ -809,7 +803,7 @@ if (isset($_GET["mysql"])) {
 			foreach ($views as $table) {
 				$definitions[table($table)] = view($table);
 			}
-			$connection->selectDatabase($target);
+			Database::get()->selectDatabase($target);
 			$db = idf_escape(DB);
 			foreach ($definitions as $name => $view) {
 				if (!queries("CREATE VIEW $name AS " . str_replace(" $db.", " ", $view["select"])) || !queries("DROP VIEW $db.$name")) {
@@ -900,7 +894,7 @@ if (isset($_GET["mysql"])) {
 	 * @return array ["fields" => ["field" => , "type" => , "length" => , "unsigned" => , "inout" => , "collation" => ], "returns" => , "definition" => , "language" => ]
 	 */
 	function routine($name, $type) {
-		global $connection, $enum_length, $inout, $types;
+		global $enum_length, $inout, $types;
 
 		$info = get_rows("SELECT ROUTINE_BODY, ROUTINE_COMMENT FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = " . q(DB) . " AND ROUTINE_NAME = " . q($name))[0];
 
@@ -908,7 +902,7 @@ if (isset($_GET["mysql"])) {
 		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|-- )[^\n]*\n?|--\r?\n)";
 		$type_pattern = "((" . implode("|", array_merge(array_keys($types), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enum_length)++)\\))?\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?";
 		$pattern = "$space*(" . ($type == "FUNCTION" ? "" : $inout) . ")?\\s*(?:`((?:[^`]|``)*)`\\s*|\\b(\\S+)\\s+)$type_pattern";
-		$create = $connection->getResult("SHOW CREATE $type " . idf_escape($name), 2);
+		$create = Database::get()->getResult("SHOW CREATE $type " . idf_escape($name), 2);
 		preg_match("~\\(((?:$pattern\\s*,?)*)\\)\\s*" . ($type == "FUNCTION" ? "RETURNS\\s+$type_pattern\\s+" : "") . "(.*)~is", $create, $match);
 		$fields = [];
 		preg_match_all("~$pattern\\s*,?~is", $match[1], $matches, PREG_SET_ORDER);
@@ -968,8 +962,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function last_id() {
-		global $connection;
-		return $connection->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
+		return Database::get()->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
 	}
 
 	/** Explain select
@@ -997,8 +990,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function create_sql($table, $auto_increment, $style) {
-		global $connection;
-		$return = $connection->getResult("SHOW CREATE TABLE " . table($table), 1);
+		$return = Database::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if (!$auto_increment) {
 			$return = preg_replace('~ AUTO_INCREMENT=\d+~', '', $return); //! skip comments
 		}
@@ -1117,8 +1109,7 @@ if (isset($_GET["mysql"])) {
 	* @return int
 	*/
 	function max_connections() {
-		global $connection;
-		return $connection->getResult("SELECT @@max_connections");
+		return Database::get()->getResult("SELECT @@max_connections");
 	}
 
 	/** Get driver config

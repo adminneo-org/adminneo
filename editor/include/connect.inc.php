@@ -2,4 +2,4 @@
 
 namespace AdminNeo;
 
-$connection->selectDatabase(Admin::get()->getDatabase());
+Database::get()->selectDatabase(Admin::get()->getDatabase());

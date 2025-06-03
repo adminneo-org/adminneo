@@ -3,15 +3,6 @@
 
 namespace AdminNeo;
 
-/** Get database connection
-* @return Database
-*/
-function connection() {
-	// can be used in customization, $connection is minified
-	global $connection;
-	return $connection;
-}
-
 /** Get AdminNeo version
 * @return string
 */
@@ -94,9 +85,8 @@ function bracket_escape($idf, $back = false) {
 * @return bool
 */
 function min_version($version, $maria_db = "", $connection2 = null) {
-	global $connection;
 	if (!$connection2) {
-		$connection2 = $connection;
+		$connection2 = Database::get();
 	}
 	$server_info = $connection2->getServerInfo();
 	if ($maria_db && preg_match('~([\d.]+)-MariaDB~', $server_info, $match)) {
@@ -362,13 +352,12 @@ function get_password() {
 	return $return;
 }
 
-/** Shortcut for $connection->quote($string)
+/** Shortcut for Database::get()->quote($string)
 * @param string
 * @return string
 */
 function q($string) {
-	global $connection;
-	return $connection->quote($string);
+	return Database::get()->quote($string);
 }
 
 /** Get list of values from database
@@ -377,9 +366,8 @@ function q($string) {
 * @return array
 */
 function get_vals($query, $column = 0) {
-	global $connection;
 	$return = [];
-	$result = $connection->query($query);
+	$result = Database::get()->query($query);
 	if (is_object($result)) {
 		while ($row = $result->fetch_row()) {
 			$return[] = $row[$column];
@@ -395,9 +383,8 @@ function get_vals($query, $column = 0) {
 * @return array
 */
 function get_key_vals($query, $connection2 = null, $set_keys = true) {
-	global $connection;
 	if (!is_object($connection2)) {
-		$connection2 = $connection;
+		$connection2 = Database::get();
 	}
 	$return = [];
 	$result = $connection2->query($query);
@@ -420,8 +407,7 @@ function get_key_vals($query, $connection2 = null, $set_keys = true) {
 * @return array of associative arrays
 */
 function get_rows($query, $connection2 = null, $error = "<p class='error'>") {
-	global $connection;
-	$conn = (is_object($connection2) ? $connection2 : $connection);
+	$conn = (is_object($connection2) ? $connection2 : Database::get());
 	$return = [];
 	$result = $conn->query($query);
 	if (is_object($result)) { // can return true
@@ -471,7 +457,7 @@ function escape_key($key) {
 * @return string
 */
 function where($where, $fields = []) {
-	global $connection, $jush;
+	global $jush;
 
 	$conditions = [];
 
@@ -494,7 +480,7 @@ function where($where, $fields = []) {
 
 		// Not just [a-z] to catch non-ASCII characters.
 		if ($jush == "sql" && preg_match('~char|text~', $field_type) && preg_match("~[^ -@]~", $val)) {
-			$conditions[] = "$column = " . q($val) . " COLLATE " . charset($connection) . "_bin";
+			$conditions[] = "$column = " . q($val) . " COLLATE " . charset(Database::get()) . "_bin";
 		}
 	}
 
@@ -658,10 +644,10 @@ function redirect($location, $message = null) {
 * @return bool
 */
 function query_redirect($query, $location, $message, $redirect = true, $execute = true, $failed = false, $time = "") {
-	global $connection, $error;
+	global $error;
 	if ($execute) {
 		$start = microtime(true);
-		$failed = !$connection->query($query);
+		$failed = !Database::get()->query($query);
 		$time = format_time($start);
 	}
 	$sql = "";
@@ -683,7 +669,6 @@ function query_redirect($query, $location, $message, $redirect = true, $execute 
 * @return Result|array|bool or [$queries, $time] if $query = null
 */
 function queries($query) {
-	global $connection;
 	static $queries = [];
 	static $start;
 	if (!$start) {
@@ -696,7 +681,7 @@ function queries($query) {
 
 	if (support("sql")) {
 		$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
-		return $connection->query($query);
+		return Database::get()->query($query);
 	} else {
 		// Save the query for later use in a flesh message. TODO: This is so ugly.
 		$queries[] = $query;
@@ -1183,8 +1168,6 @@ function fields_from_edit() {
  */
 function search_tables(): void
 {
-	global $connection;
-
 	$_GET["where"][0]["val"] = $_POST["query"];
 
 	$results = $errors = [];
@@ -1196,7 +1179,7 @@ function search_tables(): void
 			continue;
 		}
 
-		$result = $connection->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", Admin::get()->processSelectionSearch(fields($table), [])), 1));
+		$result = Database::get()->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", Admin::get()->processSelectionSearch(fields($table), [])), 1));
 		if ($result && !$result->fetch_row()) {
 			continue;
 		}

@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TYPE = $_GET["type"];
 $row = $_POST;
 

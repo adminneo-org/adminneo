@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["view"];
 $row = $_POST;
 $orig_type = "VIEW";

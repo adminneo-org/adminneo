@@ -234,11 +234,9 @@ echo optionlist(array_merge($extra_types, $structured_types), $type);
  * @return array
  */
 function get_partitions_info($table) {
-	global $connection;
-
 	$from = "FROM information_schema.PARTITIONS WHERE TABLE_SCHEMA = " . q(DB) . " AND TABLE_NAME = " . q($table);
 
-	$result = $connection->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1");
+	$result = Database::get()->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1");
 
 	$info = [];
 	list($info["partition_by"], $info["partition"],  $info["partitions"]) = $result->fetch_row();
@@ -679,13 +677,13 @@ function ini_bytes($ini) {
  */
 function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 {
-	global $jush, $connection;
+	global $jush;
 
 	if (!($paths[$jush] ?? null)) {
 		return "";
 	}
 
-	$server_info = $connection->getServerInfo();
+	$server_info = Database::get()->getServerInfo();
 	$version = preg_replace('~^(\d\.?\d).*~s', '\1', $server_info); // two most significant digits
 
 	$urls = [
@@ -710,8 +708,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 * @return string formatted
 */
 function db_size($db) {
-	global $connection;
-	if (!$connection->selectDatabase($db)) {
+	if (!Database::get()->selectDatabase($db)) {
 		return "?";
 	}
 	$return = 0;
@@ -726,10 +723,9 @@ function db_size($db) {
 * @return null
 */
 function set_utf8mb4($create) {
-	global $connection;
 	static $set = false;
 	if (!$set && preg_match('~\butf8mb4~i', $create)) { // possible false positive
 		$set = true;
-		echo "SET NAMES " . charset($connection) . ";\n\n";
+		echo "SET NAMES " . charset(Database::get()) . ";\n\n";
 	}
 }

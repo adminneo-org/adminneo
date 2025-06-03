@@ -19,6 +19,37 @@ abstract class Database
 	/** @var Result|false */
 	protected $multiResult;
 
+	/** @var ?Database */
+	private static $instance = null;
+
+	public static function create(): Database
+	{
+		if (self::$instance) {
+			die(__CLASS__ . " instance already exists.\n");
+		}
+
+		return self::$instance = new static();
+	}
+
+	public static function createSecondary(): Database
+	{
+		return new static();
+	}
+
+	public static function get(): Database
+	{
+		if (!self::$instance) {
+			exit(__CLASS__ . " instance not found.\n");
+		}
+
+		return self::$instance;
+	}
+
+	protected function __construct()
+	{
+		//
+	}
+
 	public abstract function connect(string $server, string $username, string $password): bool;
 
 	public function getServerInfo(): string

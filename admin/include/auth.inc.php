@@ -2,9 +2,6 @@
 
 namespace AdminNeo;
 
-/** @var ?Database $connection */
-$connection = null;
-
 $has_token = $_SESSION["token"];
 if (!$has_token) {
 	$_SESSION["token"] = rand(1, 1e6); // defense against cross-site request forgery
@@ -149,7 +146,7 @@ function connect_to_db(): Database
 		auth_error(lang('Invalid server or credentials.'));
 	}
 
-	$connection = connect();
+	$connection = connect(true);
 	if (!($connection instanceof Database)) {
 		connection_error($connection);
 	}
@@ -162,7 +159,7 @@ function connect_to_db(): Database
  */
 function authenticate(): void
 {
-	// Note: Admin::get()->authenticate() method can use global $connection
+	// Note: Admin::get()->authenticate() method can use primary Database connection.
 	// That's why authentication has to be called after successful connection to the database.
 
 	$result = Admin::get()->authenticate($_GET["username"], get_password());

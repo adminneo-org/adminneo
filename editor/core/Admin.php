@@ -33,9 +33,7 @@ class Admin extends Origin
 
 	public function getDatabase(): ?string
 	{
-		global $connection;
-
-		if (!$connection) {
+		if (!Database::get()) {
 			return null;
 		}
 
@@ -44,7 +42,7 @@ class Admin extends Origin
 		if ($databases) {
 			return $databases[(information_schema($databases[0]) ? 1 : 0)];
 		} else {
-			return $connection->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)");
+			return Database::get()->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)");
 		}
 	}
 
@@ -549,9 +547,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	public function dumpData(string $table, string $style, string $query): void
 	{
-		global $connection;
-
-		$result = $connection->query($query, 1); // 1 - MYSQLI_USE_RESULT
+		$result = Database::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT
 		if (!$result) {
 			return;
 		}
@@ -652,7 +648,6 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	}
 
 	private function foreignKeyOptions($table, $column, $value = null) {
-		global $connection;
 		if (list($target, $id, $name) = $this->admin->getForeignColumnInfo(column_foreign_keys($table), $column)) {
 			$return = &$this->values[$target];
 			if ($return === null) {
@@ -660,7 +655,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				$return = ($table_status["Rows"] > 1000 ? "" : ["" => ""] + get_key_vals("SELECT $id, $name FROM " . table($target) . " ORDER BY 2"));
 			}
 			if (!$return && $value !== null) {
-				return $connection->getResult("SELECT $name FROM " . table($target) . " WHERE $id = " . q($value));
+				return Database::get()->getResult("SELECT $name FROM " . table($target) . " WHERE $id = " . q($value));
 			}
 			return $return;
 		}

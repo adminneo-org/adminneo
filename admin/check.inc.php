@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["check"];
 $name = $_GET["name"];
 $row = $_POST;

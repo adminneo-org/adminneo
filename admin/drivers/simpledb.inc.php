@@ -39,19 +39,7 @@ if (isset($_GET["simpledb"])) {
 				$this->serviceUrl = build_http_url($server, '', '', '');
 				$this->server_info = '2009-04-15';
 
-				return (bool) $this->workaroundLoginRequest('ListDomains', ['MaxNumberOfDomains' => 1]);
-			}
-
-			// FIXME: This is so wrong :-( Move sdb_request to Database!
-			private function workaroundLoginRequest(string $action, array $params = [])
-			{
-				global $connection;
-
-				$connection = $this;
-				$result = sdb_request($action, $params);
-				$connection = null;
-
-				return $result;
+				return (bool) sdb_request('ListDomains', ['MaxNumberOfDomains' => 1], $this);
 			}
 
 			public function getServiceUrl(): string
@@ -167,7 +155,6 @@ if (isset($_GET["simpledb"])) {
 		public $primary = "itemName()";
 
 		private function chunkRequest($ids, $action, $params, $expand = []) {
-			global $connection;
 			foreach (array_chunk($ids, 25) as $chunk) {
 				$params2 = $params;
 				foreach ($chunk as $i => $id) {
@@ -180,7 +167,7 @@ if (isset($_GET["simpledb"])) {
 					return false;
 				}
 			}
-			$connection->setAffectedRows(count($ids));
+			Database::get()->setAffectedRows(count($ids));
 			return true;
 		}
 
@@ -198,10 +185,9 @@ if (isset($_GET["simpledb"])) {
 
 		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 		{
-			global $connection;
-			$connection->next = $_GET["next"];
+			Database::get()->next = $_GET["next"];
 			$return = parent::select($table, $select, $where, $group, $order, $limit, $page, $print);
-			$connection->next = 0;
+			Database::get()->next = 0;
 			return $return;
 		}
 
@@ -320,9 +306,9 @@ if (isset($_GET["simpledb"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new SimpleDbDatabase();
+		$connection = $primary ? SimpleDbDatabase::create() : SimpleDbDatabase::createSecondary();
 
 		list($server, , $password) = Admin::get()->getCredentials();
 		if ($password != "") {
@@ -360,12 +346,11 @@ if (isset($_GET["simpledb"])) {
 	}
 
 	function tables_list() {
-		global $connection;
 		$return = [];
 		foreach (sdb_request_all('ListDomains', 'DomainName') as $table) {
 			$return[(string) $table] = 'table';
 		}
-		if ($connection->getError() && defined("AdminNeo\PAGE_HEADER")) {
+		if (Database::get()->getError() && defined("AdminNeo\PAGE_HEADER")) {
 			echo "<p class='error'>" . error() . "\n";
 		}
 		return $return;
@@ -400,8 +385,7 @@ if (isset($_GET["simpledb"])) {
 	}
 
 	function error() {
-		global $connection;
-		return h($connection->getError());
+		return h(Database::get()->getError());
 	}
 
 	function information_schema() {
@@ -470,8 +454,11 @@ if (isset($_GET["simpledb"])) {
 	function last_id() {
 	}
 
-	function sdb_request($action, $params = []) {
-		global $connection;
+	function sdb_request($action, $params = [], ?Database $connection = null) {
+		if (!$connection) {
+			$connection = Database::get();
+		}
+
 		list($host, $params['AWSAccessKeyId'], $secret) = Admin::get()->getCredentials();
 		$params['Action'] = $action;
 		$params['Timestamp'] = gmdate('Y-m-d\TH:i:s+00:00');

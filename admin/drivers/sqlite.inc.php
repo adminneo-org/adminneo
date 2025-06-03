@@ -108,6 +108,8 @@ if (isset($_GET["sqlite"])) {
 		{
 			protected function __construct()
 			{
+				parent::__construct();
+
 				$this->connect(":memory:", "", "");
 			}
 
@@ -190,9 +192,9 @@ if (isset($_GET["sqlite"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new SqLiteDatabase();
+		$connection = $primary ? SqLiteDatabase::create() : SqLiteDatabase::createSecondary();
 
 		$password = Admin::get()->getCredentials()[2];
 		if ($password != "") {
@@ -214,16 +216,14 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function limit1($table, $query, $where, $separator = "\n") {
-		global $connection;
-		return (preg_match('~^INTO~', $query) || $connection->getResult("SELECT sqlite_compileoption_used('ENABLE_UPDATE_DELETE_LIMIT')")
+		return (preg_match('~^INTO~', $query) || Database::get()->getResult("SELECT sqlite_compileoption_used('ENABLE_UPDATE_DELETE_LIMIT')")
 			? limit($query, $where, 1, 0, $separator)
 			: " $query WHERE rowid = (SELECT rowid FROM " . table($table) . $where . $separator . "LIMIT 1)" //! use primary key in tables with WITHOUT rowid
 		);
 	}
 
 	function db_collation($db, $collations) {
-		global $connection;
-		return $connection->getResult("PRAGMA encoding"); // there is no database list so $db == DB
+		return Database::get()->getResult("PRAGMA encoding"); // there is no database list so $db == DB
 	}
 
 	function engines() {
@@ -243,10 +243,9 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function table_status($name = "") {
-		global $connection;
 		$return = [];
 		foreach (get_rows("SELECT name AS Name, type AS Engine, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
-			$row["Rows"] = $connection->getResult("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
+			$row["Rows"] = Database::get()->getResult("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
 			$return[$row["Name"]] = $row;
 		}
 		foreach (get_rows("SELECT * FROM sqlite_sequence", null, "") as $row) {
@@ -260,12 +259,10 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function fk_support($table_status) {
-		global $connection;
-		return !$connection->getResult("SELECT sqlite_compileoption_used('OMIT_FOREIGN_KEY')");
+		return !Database::get()->getResult("SELECT sqlite_compileoption_used('OMIT_FOREIGN_KEY')");
 	}
 
 	function fields($table) {
-		global $connection;
 		$return = [];
 		$primary = "";
 		foreach (get_rows("PRAGMA table_info(" . table($table) . ")") as $row) {
@@ -290,7 +287,7 @@ if (isset($_GET["sqlite"])) {
 				$primary = $name;
 			}
 		}
-		$sql = $connection->getResult("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
+		$sql = Database::get()->getResult("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		preg_match_all('~(("[^"]*+")+|[a-z0-9_]+)\s+text\s+COLLATE\s+(\'[^\']+\'|\S+)~i', $sql, $matches, PREG_SET_ORDER);
 		foreach ($matches as $match) {
 			$name = str_replace('""', '"', preg_replace('~^"|"$~', '', $match[1]));
@@ -302,9 +299,8 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function indexes($table, $connection2 = null) {
-		global $connection;
 		if (!is_object($connection2)) {
-			$connection2 = $connection;
+			$connection2 = Database::get();
 		}
 		$return = [];
 		$sql = $connection2->getResult("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
@@ -362,8 +358,7 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function view($name) {
-		global $connection;
-		return ["select" => preg_replace('~^(?:[^`"[]+|`[^`]*`|"[^"]*")* AS\s+~iU', '', $connection->getResult("SELECT sql FROM sqlite_master WHERE type = 'view' AND name = " . q($name)))]; //! identifiers may be inside []
+		return ["select" => preg_replace('~^(?:[^`"[]+|`[^`]*`|"[^"]*")* AS\s+~iU', '', Database::get()->getResult("SELECT sql FROM sqlite_master WHERE type = 'view' AND name = " . q($name)))]; //! identifiers may be inside []
 	}
 
 	function collations() {
@@ -375,35 +370,32 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function error() {
-		global $connection;
-		return h($connection->getError());
+		return h(Database::get()->getError());
 	}
 
 	function check_sqlite_name($name) {
 		// avoid creating PHP files on unsecured servers
-		global $connection;
 		$extensions = "db|sdb|sqlite";
 		if (!preg_match("~^[^\\0]*\\.($extensions)\$~", $name)) {
-			$connection->setError(lang('Please use one of the extensions %s.', str_replace("|", ", ", $extensions)));
+			Database::get()->setError(lang('Please use one of the extensions %s.', str_replace("|", ", ", $extensions)));
 			return false;
 		}
 		return true;
 	}
 
 	function create_database($db, $collation) {
-		global $connection;
 		if (file_exists($db)) {
-			$connection->setError(lang('File exists.'));
+			Database::get()->setError(lang('File exists.'));
 			return false;
 		}
 		if (!check_sqlite_name($db)) {
 			return false;
 		}
 		try {
-			$link = new SqLiteDatabase();
+			$link = SqLiteDatabase::createSecondary();
 			$link->connect($db, "", "");
 		} catch (Exception $ex) {
-			$connection->setError($ex->getMessage());
+			Database::get()->setError($ex->getMessage());
 			return false;
 		}
 		$link->query('PRAGMA encoding = "UTF-8"');
@@ -413,11 +405,10 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function drop_databases($databases) {
-		global $connection;
-		$connection->close(); // to unlock file, doesn't work in PDO on Windows
+		Database::get()->close(); // to unlock file, doesn't work in PDO on Windows
 		foreach ($databases as $db) {
 			if (!@unlink($db)) {
-				$connection->setError(lang('File exists.'));
+				Database::get()->setError(lang('File exists.'));
 				return false;
 			}
 		}
@@ -425,12 +416,11 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function rename_database($name, $collation) {
-		global $connection;
 		if (!check_sqlite_name($name)) {
 			return false;
 		}
-		$connection->close();
-		$connection->setError(lang('File exists.'));
+		Database::get()->close();
+		Database::get()->setError(lang('File exists.'));
 		return @rename(DB, $name);
 	}
 
@@ -439,8 +429,6 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning) {
-		global $connection;
-
 		$use_all_fields = ($table == "" || $foreign);
 		foreach ($fields as $field) {
 			if ($field[0] != "" || !$field[1] || $field[2]) {
@@ -480,7 +468,7 @@ if (isset($_GET["sqlite"])) {
 			queries("BEGIN");
 			queries("UPDATE sqlite_sequence SET seq = $auto_increment WHERE name = " . q($name)); // ignores error
 
-			if (!$connection->getAffectedRows()) {
+			if (!Database::get()->getAffectedRows()) {
 				queries("INSERT INTO sqlite_sequence (name, seq) VALUES (" . q($name) . ", $auto_increment)");
 			}
 
@@ -503,7 +491,6 @@ if (isset($_GET["sqlite"])) {
 	* @return bool
 	*/
 	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = 0, $indexes = [], $drop_check = "", $add_check = "") {
-		global $connection;
 		if ($table != "") {
 			if (!$fields) {
 				foreach (fields($table) as $key => $field) {
@@ -604,7 +591,7 @@ if (isset($_GET["sqlite"])) {
 				$triggers[] = "CREATE TRIGGER " . idf_escape($trigger_name) . " " . implode(" ", $timing_event) . " ON " . table($name) . "\n$trigger[Statement]";
 			}
 
-			$auto_increment = $auto_increment ? 0 : $connection->getResult("SELECT seq FROM sqlite_sequence WHERE name = " . q($table)); // if $auto_increment is set then it will be updated later
+			$auto_increment = $auto_increment ? 0 : Database::get()->getResult("SELECT seq FROM sqlite_sequence WHERE name = " . q($table)); // if $auto_increment is set then it will be updated later
 			if (!queries("DROP TABLE " . table($table)) // drop before creating indexes and triggers to allow using old names
 				|| ($table == $name && !queries("ALTER TABLE " . table($temp_name) . " RENAME TO " . table($name)))
 				|| !alter_indexes($name, $indexes)
@@ -672,7 +659,6 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function trigger($name) {
-		global $connection;
 		if ($name == "") {
 			return ["Statement" => "BEGIN\n\t;\nEND"];
 		}
@@ -680,7 +666,7 @@ if (isset($_GET["sqlite"])) {
 		$trigger_options = trigger_options();
 		preg_match(
 			"~^CREATE\\s+TRIGGER\\s*$idf\\s*(" . implode("|", $trigger_options["Timing"]) . ")\\s+([a-z]+)(?:\\s+OF\\s+($idf))?\\s+ON\\s*$idf\\s*(?:FOR\\s+EACH\\s+ROW\\s)?(.*)~is",
-			$connection->getResult("SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name = " . q($name)),
+			Database::get()->getResult("SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name = " . q($name)),
 			$match
 		);
 		$of = $match[3];
@@ -716,8 +702,7 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function last_id() {
-		global $connection;
-		return $connection->getResult("SELECT LAST_INSERT_ROWID()");
+		return Database::get()->getResult("SELECT LAST_INSERT_ROWID()");
 	}
 
 	function explain($connection, $query) {
@@ -732,9 +717,7 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function create_sql($table, $auto_increment, $style) {
-		global $connection;
-
-		$return = $connection->getResult("SELECT sql FROM sqlite_master WHERE type IN ('table', 'view') AND name = " . q($table));
+		$return = Database::get()->getResult("SELECT sql FROM sqlite_master WHERE type IN ('table', 'view') AND name = " . q($table));
 		foreach (indexes($table) as $name => $index) {
 			// Skip primary key and internal indexes.
 			if ($name == '' || strpos($name, "sqlite_") === 0) {

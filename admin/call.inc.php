@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $PROCEDURE = $_GET["name"] ?: $_GET["call"];
 page_header(lang('Call') . ": " . h($PROCEDURE), $error, [lang('Call')]);
 
@@ -30,7 +26,7 @@ if (!$error && $_POST) {
 				$val = "''";
 			}
 			if (isset($out[$key])) {
-				$connection->query("SET @" . idf_escape($field["field"]) . " = $val");
+				Database::get()->query("SET @" . idf_escape($field["field"]) . " = $val");
 			}
 		}
 		$call[] = (isset($out[$key]) ? "@" . idf_escape($field["field"]) : $val);
@@ -38,8 +34,8 @@ if (!$error && $_POST) {
 
 	$query = (isset($_GET["callf"]) ? "SELECT" : "CALL") . " " . table($PROCEDURE) . "(" . implode(", ", $call) . ")";
 	$start = microtime(true);
-	$result = $connection->multiQuery($query);
-	$affected = $connection->getAffectedRows(); // getting warnings overwrites this
+	$result = Database::get()->multiQuery($query);
+	$affected = Database::get()->getAffectedRows(); // getting warnings overwrites this
 	echo Admin::get()->formatSelectQuery($query, $start, !$result);
 
 	if (!$result) {
@@ -51,7 +47,7 @@ if (!$error && $_POST) {
 		}
 
 		do {
-			$result = $connection->storeResult();
+			$result = Database::get()->storeResult();
 			if (is_object($result)) {
 				select($result, $connection2);
 			} else {
@@ -59,10 +55,10 @@ if (!$error && $_POST) {
 					. " <span class='time'>" . @date("H:i:s") . "</span>\n" // @ - time zone may be not set
 				;
 			}
-		} while ($connection->nextResult());
+		} while (Database::get()->nextResult());
 
 		if ($out) {
-			select($connection->query("SELECT " . implode(", ", $out)));
+			select(Database::get()->query("SELECT " . implode(", ", $out)));
 		}
 	}
 }

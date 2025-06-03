@@ -57,9 +57,7 @@ class XmlDumpPlugin extends Plugin
 			});
 		}
 
-		$connection = connection();
-
-		$result = $connection->query($query, 1);
+		$result = Database::get()->query($query, 1);
 		if ($result) {
 			while ($row = $result->fetch_assoc()) {
 				echo "\t<table name='" . h($table) . "'>\n";

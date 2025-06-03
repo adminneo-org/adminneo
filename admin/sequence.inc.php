@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $SEQUENCE = $_GET["sequence"];
 $row = $_POST;
 

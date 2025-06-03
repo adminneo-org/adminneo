@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["download"];
 $fields = fields($TABLE);
 header("Content-Type: application/octet-stream");

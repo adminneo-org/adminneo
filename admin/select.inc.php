@@ -2,10 +2,6 @@
 
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 $TABLE = $_GET["select"];
 $table_status = table_status1($TABLE);
 $indexes = indexes($TABLE);
@@ -137,7 +133,7 @@ if ($_POST && !$error) {
 						: Driver::get()->update($TABLE, $set, $where_check)
 					)
 				);
-				$affected = $connection->getAffectedRows();
+				$affected = Database::get()->getAffectedRows();
 			} else {
 				foreach ((array) $_POST["check"] as $val) {
 					// where is not unique so OR can't be used
@@ -152,7 +148,7 @@ if ($_POST && !$error) {
 					if (!$result) {
 						break;
 					}
-					$affected += $connection->getAffectedRows();
+					$affected += Database::get()->getAffectedRows();
 				}
 			}
 		}
@@ -193,7 +189,7 @@ if ($_POST && !$error) {
 				if (!$result) {
 					break;
 				}
-				$affected += $connection->getAffectedRows();
+				$affected += Database::get()->getAffectedRows();
 			}
 			queries_redirect(remove_from_uri(), lang('%d item(s) have been affected.', $affected), $result);
 		}
@@ -278,7 +274,7 @@ if (!$columns && support("table")) {
 
 	$page = $_GET["page"] ?? null;
 	if ($page == "last") {
-		$found_rows = $connection->getResult(count_rows($TABLE, $where, $is_group, $group));
+		$found_rows = Database::get()->getResult(count_rows($TABLE, $where, $is_group, $group));
 		$page = (int)floor(max(0, $found_rows - 1) / $limit);
 	} else {
 		$found_rows = false;
@@ -328,7 +324,7 @@ if (!$columns && support("table")) {
 
 		// use count($rows) without LIMIT, COUNT(*) without grouping, FOUND_ROWS otherwise (slowest)
 		if ($_GET["page"] != "last" && $limit !== null && $group && $is_group && $jush == "sql") {
-			$found_rows = $connection->getResult(" SELECT FOUND_ROWS()"); // space to allow mysql.trace_mode
+			$found_rows = Database::get()->getResult(" SELECT FOUND_ROWS()"); // space to allow mysql.trace_mode
 		}
 
 		if (!$rows) {
@@ -418,7 +414,7 @@ if (!$columns && support("table")) {
 				foreach ($unique_array as $key => $val) {
 					if (($jush == "sql" || $jush == "pgsql") && preg_match('~char|text|enum|set~', $fields[$key]["type"]) && strlen($val) > 64) {
 						$key = (strpos($key, '(') ? $key : idf_escape($key)); //! columns looking like functions
-						$key = "MD5(" . ($jush != 'sql' || preg_match("~^utf8~", $fields[$key]["collation"] ?? "") ? $key : "CONVERT($key USING " . charset($connection) . ")") . ")";
+						$key = "MD5(" . ($jush != 'sql' || preg_match("~^utf8~", $fields[$key]["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Database::get()) . ")") . ")";
 						$val = md5($val);
 					}
 					$unique_idf .= "&" . ($val !== null ? urlencode("where[" . bracket_escape($key) . "]") . "=" . urlencode($val === false ? "f" : $val) : "null%5B%5D=" . urlencode($key));

@@ -185,7 +185,6 @@ if (isset($_GET["oracle"])) {
 
 		public function insertUpdate(string $table, array $records, array $primary): bool
 		{
-			global $connection;
 			foreach ($records as $record) {
 				$update = [];
 				$where = [];
@@ -195,7 +194,7 @@ if (isset($_GET["oracle"])) {
 						$where[] = "$key = $val";
 					}
 				}
-				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && $connection->getAffectedRows())
+				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && Database::get()->getAffectedRows())
 					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
@@ -238,9 +237,9 @@ if (isset($_GET["oracle"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new OracleDatabase();
+		$connection = $primary ? OracleDatabase::create() : OracleDatabase::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
@@ -271,8 +270,7 @@ ORDER BY 1"
 	}
 
 	function db_collation($db, $collations) {
-		global $connection;
-		return $connection->getResult("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
+		return Database::get()->getResult("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
 	}
 
 	function engines() {
@@ -280,8 +278,7 @@ ORDER BY 1"
 	}
 
 	function logged_user() {
-		global $connection;
-		return $connection->getResult("SELECT USER FROM DUAL");
+		return Database::get()->getResult("SELECT USER FROM DUAL");
 	}
 
 	function where_owner($prefix, $owner = "owner") {
@@ -306,20 +303,17 @@ ORDER BY 1"
 	}
 
 	function count_tables($databases) {
-		global $connection;
 		$return = [];
 		foreach ($databases as $db) {
-			$return[$db] = $connection->getResult("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
+			$return[$db] = Database::get()->getResult("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
 		}
 		return $return;
 	}
 
 	function table_status($name = "") {
-		global $connection;
-
 		$return = [];
 		$search = q($name);
-		$db = $connection->getAndClearDbName();
+		$db = Database::get()->getAndClearDbName();
 		$view = views_table("view_name");
 		$owner = where_owner(" AND ");
 		foreach (get_rows('SELECT table_name "Name", \'table\' "Engine", avg_row_len * num_rows "Data_length", num_rows "Rows" FROM all_tables WHERE tablespace_name = ' . q($db) . $owner . ($name != "" ? " AND table_name = $search" : "") . "
@@ -403,8 +397,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection2) as $row) {
 	}
 
 	function error() {
-		global $connection;
-		return h($connection->getError()); //! highlight sqltext from offset
+		return h(Database::get()->getError()); //! highlight sqltext from offset
 	}
 
 	function explain($connection, $query) {
@@ -526,14 +519,12 @@ AND c_src.TABLE_NAME = " . q($table);
 	}
 
 	function get_schema() {
-		global $connection;
-		return $connection->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
+		return Database::get()->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
 	}
 
 	function set_schema($scheme, $connection2 = null) {
-		global $connection;
 		if (!$connection2) {
-			$connection2 = $connection;
+			$connection2 = Database::get();
 		}
 		return $connection2->query("ALTER SESSION SET CURRENT_SCHEMA = " . idf_escape($scheme));
 	}

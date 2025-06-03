@@ -59,9 +59,7 @@ class JsonDumpPlugin extends Plugin
 			});
 		}
 
-		$connection = connection();
-
-		$result = $connection->query($query, 1);
+		$result = Database::get()->query($query, 1);
 		if ($result) {
 			echo '"' . addcslashes($table, "\r\n\"\\") . "\": [\n";
 

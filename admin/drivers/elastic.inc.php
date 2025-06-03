@@ -350,9 +350,9 @@ if (isset($_GET["elastic"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new ElasticDatabase();
+		$connection = $primary ? ElasticDatabase::create() : ElasticDatabase::createSecondary();
 
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
@@ -400,7 +400,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function count_tables($databases) {
-		$return = connection()->rootQuery('_aliases');
+		$return = Database::get()->rootQuery('_aliases');
 		if (empty($return)) {
 			return [
 				ELASTIC_DB_NAME => 0
@@ -413,7 +413,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function tables_list() {
-		$aliases = connection()->rootQuery('_aliases');
+		$aliases = Database::get()->rootQuery('_aliases');
 		if (empty($aliases)) {
 			return [];
 		}
@@ -436,8 +436,8 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function table_status($name = "", $fast = false) {
-		$stats = connection()->rootQuery('_stats');
-		$aliases = connection()->rootQuery('_aliases');
+		$stats = Database::get()->rootQuery('_stats');
+		$aliases = Database::get()->rootQuery('_aliases');
 
 		if (empty($stats) || empty($aliases)) {
 			return [];
@@ -502,7 +502,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function error() {
-		return h(connection()->getError());
+		return h(Database::get()->getError());
 	}
 
 	function information_schema() {
@@ -516,10 +516,10 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function fields($table) {
-		$mapping = connection()->rootQuery("_mapping");
+		$mapping = Database::get()->rootQuery("_mapping");
 
 		if (!isset($mapping[$table])) {
-			$aliases = connection()->rootQuery('_aliases');
+			$aliases = Database::get()->rootQuery('_aliases');
 
 			foreach ($aliases as $index_name => $index) {
 				foreach ($index["aliases"] as $alias_name => $alias) {
@@ -616,14 +616,14 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $name/_mapping\": " . json_encode($mappings));
 
-			return connection()->rootQuery("$name/_mapping", $mappings, "POST");
+			return Database::get()->rootQuery("$name/_mapping", $mappings, "POST");
 		} else {
 			$content = ["mappings" => $mappings];
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"PUT $name\": " . json_encode($content));
 
-			return connection()->rootQuery($name, $content, "PUT");
+			return Database::get()->rootQuery($name, $content, "PUT");
 		}
 	}
 
@@ -639,14 +639,14 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"DELETE $table\"");
 
-			$return = $return && connection()->sendRequest($table, null, 'DELETE');
+			$return = $return && Database::get()->sendRequest($table, null, 'DELETE');
 		}
 
 		return $return;
 	}
 
 	function last_id() {
-		return connection()->last_id;
+		return Database::get()->last_id;
 	}
 
 	function driver_config() {

@@ -185,8 +185,6 @@ if (isset($_GET["mongo"])) {
 
 			public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 			{
-				global $connection;
-
 				$select = ($select == ["*"]
 					? []
 					: array_fill_keys($select, 1)
@@ -208,17 +206,16 @@ if (isset($_GET["mongo"])) {
 				$query = new Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort]);
 
 				try {
-					return new Result($connection->executeQuery($connection->getDbName() . ".$table", $query));
+					return new Result(Database::get()->executeQuery(Database::get()->getDbName() . ".$table", $query));
 				} catch (Exception $e) {
-					$connection->setError($e->getMessage());
+					Database::get()->setError($e->getMessage());
 					return false;
 				}
 			}
 
 			public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 			{
-				global $connection;
-				$db = $connection->getDbName();
+				$db = Database::get()->getDbName();
 				$where = sql_query_where_parser($queryWhere);
 				$bulk = new BulkWrite([]);
 				if (isset($record['_id'])) {
@@ -237,23 +234,19 @@ if (isset($_GET["mongo"])) {
 				}
 				$bulk->update($where, $update, ['upsert' => false]);
 
-				return $connection->executeBulkWrite("$db.$table", $bulk, 'getModifiedCount');
+				return Database::get()->executeBulkWrite("$db.$table", $bulk, 'getModifiedCount');
 			}
 
 			public function delete(string $table, string $queryWhere, int $limit = 0)
 			{
-				global $connection;
-
 				$bulk = new BulkWrite([]);
 				$bulk->delete(sql_query_where_parser($queryWhere), ['limit' => $limit]);
 
-				return $connection->executeBulkWrite($connection->getDbName() . ".$table", $bulk, 'getDeletedCount');
+				return Database::get()->executeBulkWrite(Database::get()->getDbName() . ".$table", $bulk, 'getDeletedCount');
 			}
 
 			public function insert(string $table, array $record)
 			{
-				global $connection;
-
 				if ($record['_id'] == '') {
 					unset($record['_id']);
 				}
@@ -261,7 +254,7 @@ if (isset($_GET["mongo"])) {
 				$bulk = new BulkWrite([]);
 				$bulk->insert($record);
 
-				return $connection->executeBulkWrite($connection->getDbName() . "$table", $bulk, 'getInsertedCount');
+				return Database::get()->executeBulkWrite(Database::get()->getDbName() . "$table", $bulk, 'getInsertedCount');
 			}
 		}
 
@@ -273,9 +266,8 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function get_databases($flush) {
-			global $connection;
 			$return = [];
-			foreach ($connection->executeCommand(['listDatabases' => 1]) as $dbs) {
+			foreach (Database::get()->executeCommand(['listDatabases' => 1]) as $dbs) {
 				foreach ($dbs->databases as $db) {
 					$return[] = $db->name;
 				}
@@ -289,9 +281,8 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function tables_list() {
-			global $connection;
 			$collections = [];
-			foreach ($connection->executeCommand(['listCollections' => 1]) as $result) {
+			foreach (Database::get()->executeCommand(['listCollections' => 1]) as $result) {
 				$collections[$result->name] = 'table';
 			}
 			return $collections;
@@ -302,9 +293,8 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function indexes($table, $connection2 = null) {
-			global $connection;
 			$return = [];
-			foreach ($connection->executeCommand(['listIndexes' => $table]) as $index) {
+			foreach (Database::get()->executeCommand(['listIndexes' => $table]) as $index) {
 				$descs = [];
 				$columns = [];
 				foreach (get_object_vars($index->key) as $column => $type) {
@@ -350,9 +340,8 @@ if (isset($_GET["mongo"])) {
 		}
 
 		function found_rows($table_status, $where) {
-			global $connection;
 			$where = where_to_query($where);
-			$toArray = $connection->executeCommand(['count' => $table_status['Name'], 'query' => $where])->toArray();
+			$toArray = Database::get()->executeCommand(['count' => $table_status['Name'], 'query' => $where])->toArray();
 			return $toArray[0]->n;
 		}
 
@@ -462,8 +451,7 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function error() {
-		global $connection;
-		return h($connection->getError());
+		return h(Database::get()->getError());
 	}
 
 	function collations() {
@@ -478,9 +466,10 @@ if (isset($_GET["mongo"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new MongoDatabase();
+		$connection = $primary ? MongoDatabase::create() : MongoDatabase::createSecondary();
+
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
 		if ($server == "") {
@@ -499,25 +488,24 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function alter_indexes($table, $alter) {
-		global $connection;
 		foreach ($alter as $val) {
 			list($type, $name, $set) = $val;
 			if ($set == "DROP") {
-				$return = $connection->executeCommand(["deleteIndexes" => $table, "index" => $name]);
+				$return =  Database::get()->executeCommand(["deleteIndexes" => $table, "index" => $name]);
 			} else {
 				$columns = [];
 				foreach ($set as $column) {
 					$column = preg_replace('~ DESC$~', '', $column, 1, $count);
 					$columns[$column] = ($count ? -1 : 1);
 				}
-				$return = $connection->_db->selectCollection($table)->ensureIndex($columns, [
+				$return =  Database::get()->_db->selectCollection($table)->ensureIndex($columns, [
 					"unique" => ($type == "UNIQUE"),
 					"name" => $name,
 					//! "sparse"
 				]);
 			}
 			if ($return['errmsg']) {
-				$connection->setError($return['errmsg']);
+				Database::get()->setError($return['errmsg']);
 				return false;
 			}
 		}
@@ -556,17 +544,15 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning) {
-		global $connection;
 		if ($table == "") {
-			$connection->_db->createCollection($name);
+			Database::get()->_db->createCollection($name);
 			return true;
 		}
 	}
 
 	function drop_tables($tables) {
-		global $connection;
 		foreach ($tables as $table) {
-			$response = $connection->_db->selectCollection($table)->drop();
+			$response = Database::get()->_db->selectCollection($table)->drop();
 			if (!$response['ok']) {
 				return false;
 			}
@@ -575,9 +561,8 @@ if (isset($_GET["mongo"])) {
 	}
 
 	function truncate_tables($tables) {
-		global $connection;
 		foreach ($tables as $table) {
-			$response = $connection->_db->selectCollection($table)->remove();
+			$response =  Database::get()->_db->selectCollection($table)->remove();
 			if (!$response['ok']) {
 				return false;
 			}

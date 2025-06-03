@@ -264,9 +264,9 @@ if (isset($_GET["clickhouse"])) {
 	/**
 	 * @return Database|string
 	 */
-	function connect()
+	function connect(bool $primary = false)
 	{
-		$connection = new ClickHouseDatabase();
+		$connection = $primary ? ClickHouseDatabase::create() : ClickHouseDatabase::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
 		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
@@ -277,7 +277,6 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function get_databases($flush) {
-		global $connection;
 		$result = get_rows('SHOW DATABASES');
 
 		$return = [];
@@ -324,9 +323,8 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function table_status($name = "", $fast = false) {
-		global $connection;
 		$return = [];
-		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q($connection->getDbName()));
+		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Database::get()->getDbName()));
 		foreach ($tables as $table) {
 			$return[$table['name']] = [
 				'Name' => $table['name'],
@@ -394,8 +392,7 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function error() {
-		global $connection;
-		return h($connection->getError());
+		return h(Database::get()->getError());
 	}
 
 	function types() {

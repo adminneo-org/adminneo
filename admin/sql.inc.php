@@ -1,10 +1,6 @@
 <?php
 namespace AdminNeo;
 
-/**
- * @var ?Database $connection
- */
-
 if (!$error && $_POST["export"]) {
 	dump_headers("sql");
 	Admin::get()->dumpTable("", "");
@@ -147,16 +143,16 @@ if (!$error && $_POST) {
 							}
 							$start = microtime(true);
 							//! don't allow changing of character_set_results, convert encoding of displayed query
-							if ($connection->multiQuery($q) && is_object($connection2) && preg_match("~^$space*+USE\\b~i", $q)) {
+							if (Database::get()->multiQuery($q) && is_object($connection2) && preg_match("~^$space*+USE\\b~i", $q)) {
 								$connection2->query($q);
 							}
 
 							do {
-								$result = $connection->storeResult();
+								$result = Database::get()->storeResult();
 
-								if ($connection->getError()) {
+								if (Database::get()->getError()) {
 									echo ($_POST["only_errors"] ? $print : "");
-									echo "<p class='error'>", lang('Error in query'), (!empty($connection->getErrno()) ? " (" . $connection->getErrno() . ")" : ""), ": ", error() . "</p>\n";
+									echo "<p class='error'>", lang('Error in query'), (!empty(Database::get()->getErrno()) ? " (" . Database::get()->getErrno() . ")" : ""), ": ", error() . "</p>\n";
 
 									$errors[] = " <a href='#sql-$commands'>$commands</a>";
 									if ($_POST["error_stops"]) {
@@ -165,7 +161,7 @@ if (!$error && $_POST) {
 								} else {
 									$time = " <span class='time'>(" . format_time($start) . ")</span>";
 									$edit_link = (strlen($q) < 1000 ? " <a href='" . h(ME) . "sql=" . urlencode(trim($q)) . "'>" . icon("edit") . lang('Edit') . "</a>" : ""); // 1000 - maximum length of encoded URL in IE is 2083 characters
-									$affected = $connection->getAffectedRows(); // getting warnings overwrites this
+									$affected = Database::get()->getAffectedRows(); // getting warnings overwrites this
 
 									$warnings = ($_POST["only_errors"] ? null : Driver::get()->warnings());
 									$warnings_id = "warnings-$commands";
@@ -209,7 +205,7 @@ if (!$error && $_POST) {
 										}
 
 										if (!$_POST["only_errors"]) {
-											$title = isset($connection->info) ? "title='" . h($connection->info) . "'" : "";
+											$title = isset(Database::get()->info) ? "title='" . h(Database::get()->info) . "'" : "";
 											echo "<p class='message' $title>", lang('Query executed OK, %d row(s) affected.', $affected);
 											echo "$time $edit_link";
 											if ($warnings_link) {
@@ -249,7 +245,7 @@ if (!$error && $_POST) {
 								}
 
 								$start = microtime(true);
-							} while ($connection->nextResult());
+							} while (Database::get()->nextResult());
 						}
 
 						$query = substr($query, $offset);
