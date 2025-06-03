@@ -13,8 +13,8 @@ abstract class Origin extends Plugin
 	/** @var string[] */
 	private $errors;
 
-	/** @var static|Pluginer */
-	private static $instance;
+	/** @var static|Pluginer|null */
+	private static $instance = null;
 
 	/**
 	 * @param array $config Configuration array.
@@ -24,7 +24,7 @@ abstract class Origin extends Plugin
 	 */
 	public static function create(array $config = [], array $plugins = [], array $errors = [])
 	{
-		if (isset(self::$instance)) {
+		if (self::$instance) {
 			die("Admin instance already exists.\n");
 		}
 
@@ -67,7 +67,7 @@ abstract class Origin extends Plugin
 	 */
 	public static function get()
 	{
-		if (!isset(self::$instance)) {
+		if (!self::$instance) {
 			die("Admin instance not found. Create instance by Admin::create() method at first.\n");
 		}
 
