@@ -82,15 +82,15 @@ function bracket_escape($idf, $back = false) {
 *
 * @param string required version
 * @param string required MariaDB version
-* @param Connection defaults to $connection
+* @param ?Connection defaults to $connection
 *
 * @return bool
 */
-function min_version($version, $maria_db = "", $connection2 = null) {
-	if (!$connection2) {
-		$connection2 = Connection::get();
+function min_version($version, $maria_db = "", ?Connection $connection = null) {
+	if (!$connection) {
+		$connection = Connection::get();
 	}
-	$server_info = $connection2->getServerInfo();
+	$server_info = $connection->getServerInfo();
 	if ($maria_db && preg_match('~([\d.]+)-MariaDB~', $server_info, $match)) {
 		$server_info = $match[1];
 		$version = $maria_db;
@@ -101,14 +101,13 @@ function min_version($version, $maria_db = "", $connection2 = null) {
 	return (version_compare($server_info, $version) >= 0);
 }
 
-/** Get connection charset
-*
-* @param Connection
-*
-* @return string
-*/
-function charset($connection) {
-	return (min_version("5.5.3", 0, $connection) ? "utf8mb4" : "utf8"); // SHOW CHARSET would require an extra query
+/**
+ * Returns connection charset.
+ */
+function charset(Connection $connection): string
+{
+	// Note: SHOW CHARSET would require an extra query
+	return (min_version("5.5.3", 0, $connection) ? "utf8mb4" : "utf8");
 }
 
 /** Return <script> element
@@ -383,17 +382,17 @@ function get_vals($query, $column = 0) {
 /** Get keys from first column and values from second
 *
 * @param string
- * @param Connection
+* @param ?Connection
 * @param bool
 *
 * @return array
 */
-function get_key_vals($query, $connection2 = null, $set_keys = true) {
-	if (!is_object($connection2)) {
-		$connection2 = Connection::get();
+function get_key_vals($query, ?Connection $connection = null, $set_keys = true) {
+	if (!$connection) {
+		$connection = Connection::get();
 	}
 	$return = [];
-	$result = $connection2->query($query);
+	$result = $connection->query($query);
 	if (is_object($result)) {
 		while ($row = $result->fetch_row()) {
 			if ($set_keys) {
@@ -414,15 +413,17 @@ function get_key_vals($query, $connection2 = null, $set_keys = true) {
 *
 * @return array of associative arrays
 */
-function get_rows($query, $connection2 = null, $error = "<p class='error'>") {
-	$conn = (is_object($connection2) ? $connection2 : Connection::get());
+function get_rows($query, ?Connection $connection = null, $error = "<p class='error'>") {
+	if (!$connection) {
+		$connection = Connection::get();
+	}
 	$return = [];
-	$result = $conn->query($query);
+	$result = $connection->query($query);
 	if (is_object($result)) { // can return true
 		while ($row = $result->fetch_assoc()) {
 			$return[] = $row;
 		}
-	} elseif (!$result && !is_object($connection2) && $error && (defined("AdminNeo\PAGE_HEADER") || $error == "-- ")) {
+	} elseif (!$result && !is_object($connection) && $error && (defined("AdminNeo\PAGE_HEADER") || $error == "-- ")) {
 		echo $error . error() . "\n";
 	}
 	return $return;
@@ -1468,8 +1469,8 @@ function slow_query($query) {
 	$db = Admin::get()->getDatabase();
 	$timeout = Admin::get()->getQueryTimeout();
 	$slow_query = Driver::get()->slowQuery($query, $timeout);
-	if (!$slow_query && support("kill") && is_object($connection2 = connect()) && ($db == "" || $connection2->selectDatabase($db))) {
-		$kill = $connection2->getResult(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
+	if (!$slow_query && support("kill") && ($connection = connect()) && ($db == "" || $connection->selectDatabase($db))) {
+		$kill = $connection->getResult(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
 		?>
 <script<?php echo nonce(); ?>>
 var timeout = setTimeout(function () {
@@ -1479,12 +1480,12 @@ var timeout = setTimeout(function () {
 </script>
 <?php
 	} else {
-		$connection2 = null;
+		$connection = null;
 	}
 	ob_flush();
 	flush();
-	$return = @get_key_vals(($slow_query ?: $query), $connection2, false); // @ - may be killed
-	if ($connection2) {
+	$return = @get_key_vals(($slow_query ?: $query), $connection, false); // @ - may be killed
+	if ($connection) {
 		echo script("clearTimeout(timeout);");
 		ob_flush();
 		flush();

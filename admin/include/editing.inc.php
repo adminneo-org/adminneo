@@ -6,13 +6,13 @@ namespace AdminNeo;
 /** Print select result
 *
 * @param Result
-* @param Connection connection to examine indexes
+* @param ?Connection connection to examine indexes
 * @param array
 * @param int
 *
 * @return array $orgtables
 */
-function select($result, $connection2 = null, $orgtables = [], $limit = 0) {
+function select($result, ?Connection $connection = null, $orgtables = [], $limit = 0) {
 	global $jush;
 
 	$links = []; // colno => orgtable - create links from these columns
@@ -39,7 +39,7 @@ function select($result, $connection2 = null, $orgtables = [], $limit = 0) {
 					if (!isset($indexes[$orgtable])) {
 						// find primary key in each table
 						$indexes[$orgtable] = [];
-						foreach (indexes($orgtable, $connection2) as $index) {
+						foreach (indexes($orgtable, $connection) as $index) {
 							if ($index["type"] == "PRIMARY") {
 								$indexes[$orgtable] = array_flip($index["columns"]);
 								break;
