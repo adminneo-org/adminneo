@@ -4,8 +4,8 @@ namespace AdminNeo;
 
 abstract class Driver
 {
-	/** @var Database */
-	protected $database;
+	/** @var Connection */
+	protected $connection;
 
 	/** @var Origin|Pluginer */
 	protected $admin;
@@ -16,7 +16,7 @@ abstract class Driver
 	/**
 	 * @param Origin|Pluginer $admin
 	 */
-	public static function create(Database $connection, $admin): Driver
+	public static function create(Connection $connection, $admin): Driver
 	{
 		if (self::$instance) {
 			die(__CLASS__ . " instance already exists.\n");
@@ -37,9 +37,9 @@ abstract class Driver
 	/**
 	 * @param Origin|Pluginer $admin
 	 */
-	protected function __construct(Database $database, $admin)
+	protected function __construct(Connection $connection, $admin)
 	{
-		$this->database = $database;
+		$this->connection = $connection;
 		$this->admin = $admin;
 	}
 
@@ -71,7 +71,7 @@ abstract class Driver
 		);
 
 		$start = microtime(true);
-		$return = $this->database->query($query);
+		$return = $this->connection->query($query);
 
 		if ($print) {
 			echo Admin::get()->formatSelectQuery($query, $start, !$return);
@@ -208,8 +208,8 @@ abstract class Driver
 	 */
 	public function value(?string $val, array $field): ?string
 	{
-		return (method_exists($this->database, 'value')
-			? $this->database->value($val, $field)
+		return (method_exists($this->connection, 'value')
+			? $this->connection->value($val, $field)
 			: (is_resource($val) ? stream_get_contents($val) : $val)
 		);
 	}

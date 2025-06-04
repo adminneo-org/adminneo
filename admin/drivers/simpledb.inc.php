@@ -10,7 +10,7 @@ if (isset($_GET["simpledb"])) {
 	if (class_exists('SimpleXMLElement') && ini_bool('allow_url_fopen')) {
 		define("AdminNeo\DRIVER_EXTENSION", "SimpleXML");
 
-		class SimpleDbDatabase extends Database
+		class SimpleDbConnection extends Connection
 		{
 			/** @var string */
 			private $serviceUrl;
@@ -20,7 +20,7 @@ if (isset($_GET["simpledb"])) {
 
 			public $next;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				if ($server == '') {
 					$this->error = lang('Invalid server or credentials.');
@@ -167,7 +167,7 @@ if (isset($_GET["simpledb"])) {
 					return false;
 				}
 			}
-			Database::get()->setAffectedRows(count($ids));
+			Connection::get()->setAffectedRows(count($ids));
 			return true;
 		}
 
@@ -185,9 +185,9 @@ if (isset($_GET["simpledb"])) {
 
 		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 		{
-			Database::get()->next = $_GET["next"];
+			Connection::get()->next = $_GET["next"];
 			$return = parent::select($table, $select, $where, $group, $order, $limit, $page, $print);
-			Database::get()->next = 0;
+			Connection::get()->next = 0;
 			return $return;
 		}
 
@@ -280,7 +280,7 @@ if (isset($_GET["simpledb"])) {
 
 		public function slowQuery(string $query, int $timeout): ?string
 		{
-			$this->database->timeout = $timeout;
+			$this->connection->timeout = $timeout;
 
 			return $query;
 		}
@@ -289,7 +289,7 @@ if (isset($_GET["simpledb"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return SimpleDbDriver::create($connection, Admin::get());
 	}
@@ -304,11 +304,11 @@ if (isset($_GET["simpledb"])) {
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
-		$connection = $primary ? SimpleDbDatabase::create() : SimpleDbDatabase::createSecondary();
+		$connection = $primary ? SimpleDbConnection::create() : SimpleDbConnection::createSecondary();
 
 		list($server, , $password) = Admin::get()->getCredentials();
 		if ($password != "") {
@@ -318,7 +318,7 @@ if (isset($_GET["simpledb"])) {
 			}
 		}
 
-		if (!$connection->connect($server, "", "")) {
+		if (!$connection->open($server, "", "")) {
 			return $connection->getError();
 		}
 
@@ -350,7 +350,7 @@ if (isset($_GET["simpledb"])) {
 		foreach (sdb_request_all('ListDomains', 'DomainName') as $table) {
 			$return[(string) $table] = 'table';
 		}
-		if (Database::get()->getError() && defined("AdminNeo\PAGE_HEADER")) {
+		if (Connection::get()->getError() && defined("AdminNeo\PAGE_HEADER")) {
 			echo "<p class='error'>" . error() . "\n";
 		}
 		return $return;
@@ -385,7 +385,7 @@ if (isset($_GET["simpledb"])) {
 	}
 
 	function error() {
-		return h(Database::get()->getError());
+		return h(Connection::get()->getError());
 	}
 
 	function information_schema() {
@@ -454,9 +454,9 @@ if (isset($_GET["simpledb"])) {
 	function last_id() {
 	}
 
-	function sdb_request($action, $params = [], ?Database $connection = null) {
+	function sdb_request($action, $params = [], ?Connection $connection = null) {
 		if (!$connection) {
-			$connection = Database::get();
+			$connection = Connection::get();
 		}
 
 		list($host, $params['AWSAccessKeyId'], $secret) = Admin::get()->getCredentials();

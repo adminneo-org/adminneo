@@ -8,7 +8,7 @@ use PDO;
 use PDOStatement;
 
 if (extension_loaded('pdo')) {
-	abstract class PdoDatabase extends Database
+	abstract class PdoConnection extends Connection
 	{
 		/** @var PDO */
 		protected $pdo;

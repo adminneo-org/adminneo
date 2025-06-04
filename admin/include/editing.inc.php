@@ -4,10 +4,12 @@
 namespace AdminNeo;
 
 /** Print select result
+*
 * @param Result
-* @param Database connection to examine indexes
+* @param Connection connection to examine indexes
 * @param array
 * @param int
+*
 * @return array $orgtables
 */
 function select($result, $connection2 = null, $orgtables = [], $limit = 0) {
@@ -236,7 +238,7 @@ echo optionlist(array_merge($extra_types, $structured_types), $type);
 function get_partitions_info($table) {
 	$from = "FROM information_schema.PARTITIONS WHERE TABLE_SCHEMA = " . q(DB) . " AND TABLE_NAME = " . q($table);
 
-	$result = Database::get()->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1");
+	$result = Connection::get()->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1");
 
 	$info = [];
 	list($info["partition_by"], $info["partition"],  $info["partitions"]) = $result->fetch_row();
@@ -683,7 +685,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 		return "";
 	}
 
-	$server_info = Database::get()->getServerInfo();
+	$server_info = Connection::get()->getServerInfo();
 	$version = preg_replace('~^(\d\.?\d).*~s', '\1', $server_info); // two most significant digits
 
 	$urls = [
@@ -708,7 +710,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 * @return string formatted
 */
 function db_size($db) {
-	if (!Database::get()->selectDatabase($db)) {
+	if (!Connection::get()->selectDatabase($db)) {
 		return "?";
 	}
 	$return = 0;
@@ -726,6 +728,6 @@ function set_utf8mb4($create) {
 	static $set = false;
 	if (!$set && preg_match('~\butf8mb4~i', $create)) { // possible false positive
 		$set = true;
-		echo "SET NAMES " . charset(Database::get()) . ";\n\n";
+		echo "SET NAMES " . charset(Connection::get()) . ";\n\n";
 	}
 }

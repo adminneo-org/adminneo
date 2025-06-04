@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-abstract class Database
+abstract class Connection
 {
 	/** @var string */
 	protected $server_info;
@@ -19,10 +19,10 @@ abstract class Database
 	/** @var Result|false */
 	protected $multiResult;
 
-	/** @var ?Database */
+	/** @var ?Connection */
 	private static $instance = null;
 
-	public static function create(): Database
+	public static function create(): Connection
 	{
 		if (self::$instance) {
 			die(__CLASS__ . " instance already exists.\n");
@@ -31,12 +31,12 @@ abstract class Database
 		return self::$instance = new static();
 	}
 
-	public static function createSecondary(): Database
+	public static function createSecondary(): Connection
 	{
 		return new static();
 	}
 
-	public static function get(): Database
+	public static function get(): Connection
 	{
 		if (!self::$instance) {
 			exit(__CLASS__ . " instance not found.\n");
@@ -50,7 +50,7 @@ abstract class Database
 		//
 	}
 
-	public abstract function connect(string $server, string $username, string $password): bool;
+	public abstract function open(string $server, string $username, string $password): bool;
 
 	public function getServerInfo(): string
 	{

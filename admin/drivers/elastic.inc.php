@@ -11,7 +11,7 @@ if (isset($_GET["elastic"])) {
 		define("AdminNeo\ELASTIC_DB_NAME", "elastic");
 		define("AdminNeo\DRIVER_EXTENSION", "JSON");
 
-		class ElasticDatabase extends Database
+		class ElasticConnection extends Connection
 		{
 			/** @var string */
 			private $serviceUrl;
@@ -85,7 +85,7 @@ if (isset($_GET["elastic"])) {
 				return $this->rootQuery($path, $content, $method);
 			}
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$this->serviceUrl = build_http_url($server, $username, $password, "localhost", 9200);
 
@@ -178,7 +178,7 @@ if (isset($_GET["elastic"])) {
 
 			$query = "$table/_search";
 			$start = microtime(true);
-			$search = $this->database->rootQuery($query, $data);
+			$search = $this->connection->rootQuery($query, $data);
 
 			if ($print) {
 				echo $this->admin->formatSelectQuery("\"GET $query\": " . json_encode($data), $start, !$search);
@@ -265,9 +265,9 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " . json_encode($record));
 
-			$response = $this->database->sendRequest($query, $record, 'POST');
+			$response = $this->connection->sendRequest($query, $record, 'POST');
 			if ($response) {
-				$this->database->sendRequest("$table/_refresh");
+				$this->connection->sendRequest("$table/_refresh");
 			}
 
 			return $response;
@@ -291,13 +291,13 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $query\": " .json_encode($record));
 
-			$response = $this->database->sendRequest($query, $record, 'POST');
+			$response = $this->connection->sendRequest($query, $record, 'POST');
 			if (!$response) {
 				return false;
 			}
 
-			$this->database->sendRequest("$table/_refresh");
-			$this->database->last_id = $response['_id'];
+			$this->connection->sendRequest("$table/_refresh");
+			$this->connection->last_id = $response['_id'];
 
 			return $response['result'];
 		}
@@ -326,15 +326,15 @@ if (isset($_GET["elastic"])) {
 				// Save the query for later use in a flesh message. TODO: This is so ugly.
 				queries("\"DELETE $query\"");
 
-				$response = $this->database->sendRequest($query, null, 'DELETE');
+				$response = $this->connection->sendRequest($query, null, 'DELETE');
 				if (isset($response['result']) && $response['result'] == 'deleted') {
 					$affected_rows++;
 				}
 			}
 
-			$this->database->sendRequest("$table/_refresh");
+			$this->connection->sendRequest("$table/_refresh");
 
-			$this->database->setAffectedRows($affected_rows);
+			$this->connection->setAffectedRows($affected_rows);
 
 			return $affected_rows;
 		}
@@ -342,27 +342,27 @@ if (isset($_GET["elastic"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return ElasticDriver::create($connection, Admin::get());
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
-		$connection = $primary ? ElasticDatabase::create() : ElasticDatabase::createSecondary();
+		$connection = $primary ? ElasticConnection::create() : ElasticConnection::createSecondary();
 
 		list($server, $username, $password) = Admin::get()->getCredentials();
 
-		if ($password != "" && $connection->connect($server, $username, "")) {
+		if ($password != "" && $connection->open($server, $username, "")) {
 			$result = Admin::get()->verifyDefaultPassword($password);
 
 			return $result === true ? $connection : $result;
 		}
 
-		if (!$connection->connect($server, $username, $password)) {
+		if (!$connection->open($server, $username, $password)) {
 			return $connection->getError();
 		}
 
@@ -400,7 +400,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function count_tables($databases) {
-		$return = Database::get()->rootQuery('_aliases');
+		$return = Connection::get()->rootQuery('_aliases');
 		if (empty($return)) {
 			return [
 				ELASTIC_DB_NAME => 0
@@ -413,7 +413,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function tables_list() {
-		$aliases = Database::get()->rootQuery('_aliases');
+		$aliases = Connection::get()->rootQuery('_aliases');
 		if (empty($aliases)) {
 			return [];
 		}
@@ -436,8 +436,8 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function table_status($name = "", $fast = false) {
-		$stats = Database::get()->rootQuery('_stats');
-		$aliases = Database::get()->rootQuery('_aliases');
+		$stats = Connection::get()->rootQuery('_stats');
+		$aliases = Connection::get()->rootQuery('_aliases');
 
 		if (empty($stats) || empty($aliases)) {
 			return [];
@@ -502,7 +502,7 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function error() {
-		return h(Database::get()->getError());
+		return h(Connection::get()->getError());
 	}
 
 	function information_schema() {
@@ -516,10 +516,10 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function fields($table) {
-		$mapping = Database::get()->rootQuery("_mapping");
+		$mapping = Connection::get()->rootQuery("_mapping");
 
 		if (!isset($mapping[$table])) {
-			$aliases = Database::get()->rootQuery('_aliases');
+			$aliases = Connection::get()->rootQuery('_aliases');
 
 			foreach ($aliases as $index_name => $index) {
 				foreach ($index["aliases"] as $alias_name => $alias) {
@@ -616,14 +616,14 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"POST $name/_mapping\": " . json_encode($mappings));
 
-			return Database::get()->rootQuery("$name/_mapping", $mappings, "POST");
+			return Connection::get()->rootQuery("$name/_mapping", $mappings, "POST");
 		} else {
 			$content = ["mappings" => $mappings];
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"PUT $name\": " . json_encode($content));
 
-			return Database::get()->rootQuery($name, $content, "PUT");
+			return Connection::get()->rootQuery($name, $content, "PUT");
 		}
 	}
 
@@ -639,14 +639,14 @@ if (isset($_GET["elastic"])) {
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries("\"DELETE $table\"");
 
-			$return = $return && Database::get()->sendRequest($table, null, 'DELETE');
+			$return = $return && Connection::get()->sendRequest($table, null, 'DELETE');
 		}
 
 		return $return;
 	}
 
 	function last_id() {
-		return Database::get()->last_id;
+		return Connection::get()->last_id;
 	}
 
 	function driver_config() {

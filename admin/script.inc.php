@@ -37,7 +37,7 @@ if ($_GET["script"] == "db") {
 	json_row("");
 
 } elseif ($_GET["script"] == "kill") {
-	Database::get()->query("KILL " . number($_POST["kill"]));
+	Connection::get()->query("KILL " . number($_POST["kill"]));
 
 } else { // connect
 	foreach (count_tables(Admin::get()->getDatabases()) as $db => $val) {

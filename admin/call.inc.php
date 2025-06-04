@@ -26,7 +26,7 @@ if (!$error && $_POST) {
 				$val = "''";
 			}
 			if (isset($out[$key])) {
-				Database::get()->query("SET @" . idf_escape($field["field"]) . " = $val");
+				Connection::get()->query("SET @" . idf_escape($field["field"]) . " = $val");
 			}
 		}
 		$call[] = (isset($out[$key]) ? "@" . idf_escape($field["field"]) : $val);
@@ -34,8 +34,8 @@ if (!$error && $_POST) {
 
 	$query = (isset($_GET["callf"]) ? "SELECT" : "CALL") . " " . table($PROCEDURE) . "(" . implode(", ", $call) . ")";
 	$start = microtime(true);
-	$result = Database::get()->multiQuery($query);
-	$affected = Database::get()->getAffectedRows(); // getting warnings overwrites this
+	$result = Connection::get()->multiQuery($query);
+	$affected = Connection::get()->getAffectedRows(); // getting warnings overwrites this
 	echo Admin::get()->formatSelectQuery($query, $start, !$result);
 
 	if (!$result) {
@@ -47,7 +47,7 @@ if (!$error && $_POST) {
 		}
 
 		do {
-			$result = Database::get()->storeResult();
+			$result = Connection::get()->storeResult();
 			if (is_object($result)) {
 				select($result, $connection2);
 			} else {
@@ -55,10 +55,10 @@ if (!$error && $_POST) {
 					. " <span class='time'>" . @date("H:i:s") . "</span>\n" // @ - time zone may be not set
 				;
 			}
-		} while (Database::get()->nextResult());
+		} while (Connection::get()->nextResult());
 
 		if ($out) {
-			select(Database::get()->query("SELECT " . implode(", ", $out)));
+			select(Connection::get()->query("SELECT " . implode(", ", $out)));
 		}
 	}
 }

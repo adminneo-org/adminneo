@@ -75,7 +75,7 @@ remove_slashes([&$_GET, &$_POST, &$_COOKIE], $filter);
 include __DIR__ . "/lang.inc.php";
 include __DIR__ . "/../translations/$LANG.inc.php";
 
-include __DIR__ . "/../core/Database.php";
+include __DIR__ . "/../core/Connection.php";
 include __DIR__ . "/pdo.inc.php";
 include __DIR__ . "/../core/Drivers.php";
 include __DIR__ . "/../core/Driver.php";

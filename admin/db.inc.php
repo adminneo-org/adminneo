@@ -166,7 +166,7 @@ if ($_GET["ns"] === "") {
 
 		echo "<tfoot><tr>";
 		echo "<td><th>" . lang('%d in total', count($tables_list));
-		echo "<td>" . h($jush == "sql" ? Database::get()->getResult("SELECT @@default_storage_engine") : "");
+		echo "<td>" . h($jush == "sql" ? Connection::get()->getResult("SELECT @@default_storage_engine") : "");
 		echo "<td>" . h(db_collation(DB, collations()));
 		foreach (["Data_length", "Index_length", "Data_free"] as $key) {
 			echo "<td align='right' id='sum-$key'>";
@@ -315,7 +315,7 @@ if ($_GET["ns"] === "") {
 				echo '<td><a href="' . h(ME) . 'event=' . urlencode($row["Name"]) . '">' . lang('Alter') . '</a>';
 			}
 			echo "</table>\n";
-			$event_scheduler = Database::get()->getResult("SELECT @@event_scheduler");
+			$event_scheduler = Connection::get()->getResult("SELECT @@event_scheduler");
 			if ($event_scheduler && $event_scheduler != "ON") {
 				echo "<p class='error'><code class='jush-sqlset'>event_scheduler</code>: " . h($event_scheduler) . "\n";
 			}

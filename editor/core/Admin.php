@@ -33,7 +33,7 @@ class Admin extends Origin
 
 	public function getDatabase(): ?string
 	{
-		if (!Database::get()) {
+		if (!Connection::get()) {
 			return null;
 		}
 
@@ -42,7 +42,7 @@ class Admin extends Origin
 		if ($databases) {
 			return $databases[(information_schema($databases[0]) ? 1 : 0)];
 		} else {
-			return Database::get()->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)");
+			return Connection::get()->getResult("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1)");
 		}
 	}
 
@@ -547,7 +547,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	public function dumpData(string $table, string $style, string $query): void
 	{
-		$result = Database::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT
+		$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT
 		if (!$result) {
 			return;
 		}
@@ -655,7 +655,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				$return = ($table_status["Rows"] > 1000 ? "" : ["" => ""] + get_key_vals("SELECT $id, $name FROM " . table($target) . " ORDER BY 2"));
 			}
 			if (!$return && $value !== null) {
-				return Database::get()->getResult("SELECT $name FROM " . table($target) . " WHERE $id = " . q($value));
+				return Connection::get()->getResult("SELECT $name FROM " . table($target) . " WHERE $id = " . q($value));
 			}
 			return $return;
 		}

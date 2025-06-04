@@ -18,7 +18,7 @@ if (isset($_GET["mssql"])) {
 	if (extension_loaded("sqlsrv")) {
 		define("AdminNeo\DRIVER_EXTENSION", "sqlsrv");
 
-		class MsSqlDatabase extends Database
+		class MsSqlConnection extends Connection
 		{
 			/** @var resource|false */
 			private $connection;
@@ -26,7 +26,7 @@ if (isset($_GET["mssql"])) {
 			/** @var resource|false */
 			protected $multiResult;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$connectionInfo = [
 					"UID" => $username,
@@ -185,9 +185,9 @@ if (isset($_GET["mssql"])) {
 	} elseif (extension_loaded("pdo_sqlsrv")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PDO_SQLSRV");
 
-		class MsSqlDatabase extends PdoDatabase
+		class MsSqlConnection extends PdoConnection
 		{
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$options = [];
 
@@ -223,9 +223,9 @@ if (isset($_GET["mssql"])) {
 	} elseif (extension_loaded("pdo_dblib")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PDO_DBLIB");
 
-		class MsSqlDatabase extends PdoDatabase
+		class MsSqlConnection extends PdoConnection
 		{
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$this->dsn("dblib:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server)), $username, $password);
 
@@ -310,7 +310,7 @@ if (isset($_GET["mssql"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return MsSqlDriver::create($connection, Admin::get());
 	}
@@ -333,18 +333,18 @@ if (isset($_GET["mssql"])) {
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
-		$connection = $primary ? MsSqlDatabase::create() : MsSqlDatabase::createSecondary();
+		$connection = $primary ? MsSqlConnection::create() : MsSqlConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
 		if ($credentials[0] == "") {
 			$credentials[0] = "localhost:1433";
 		}
 
-		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			return $connection->getError();
 		}
 
@@ -364,7 +364,7 @@ if (isset($_GET["mssql"])) {
 	}
 
 	function db_collation($db, $collations) {
-		return Database::get()->getResult("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
+		return Connection::get()->getResult("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
 	}
 
 	function engines() {
@@ -372,7 +372,7 @@ if (isset($_GET["mssql"])) {
 	}
 
 	function logged_user() {
-		return Database::get()->getResult("SELECT SUSER_NAME()");
+		return Connection::get()->getResult("SELECT SUSER_NAME()");
 	}
 
 	function tables_list() {
@@ -382,8 +382,8 @@ if (isset($_GET["mssql"])) {
 	function count_tables($databases) {
 		$return = [];
 		foreach ($databases as $db) {
-			Database::get()->selectDatabase($db);
-			$return[$db] = Database::get()->getResult("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES");
+			Connection::get()->selectDatabase($db);
+			$return[$db] = Connection::get()->getResult("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES");
 		}
 		return $return;
 	}
@@ -462,7 +462,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function view($name) {
-		return ["select" => preg_replace('~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU', '', Database::get()->getResult("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA = SCHEMA_NAME() AND TABLE_NAME = " . q($name)))];
+		return ["select" => preg_replace('~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU', '', Connection::get()->getResult("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA = SCHEMA_NAME() AND TABLE_NAME = " . q($name)))];
 	}
 
 	function collations() {
@@ -478,7 +478,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function error() {
-		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', Database::get()->getError())));
+		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', Connection::get()->getError())));
 	}
 
 	function create_database($db, $collation) {
@@ -581,7 +581,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 	}
 
 	function last_id() {
-		return Database::get()->getResult("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
+		return Connection::get()->getResult("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
 	}
 
 	function explain($connection, $query) {
@@ -675,7 +675,7 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		if ($_GET["ns"] != "") {
 			return $_GET["ns"];
 		}
-		return Database::get()->getResult("SELECT SCHEMA_NAME()");
+		return Connection::get()->getResult("SELECT SCHEMA_NAME()");
 	}
 
 	function set_schema($schema) {

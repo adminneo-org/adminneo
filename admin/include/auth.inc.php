@@ -140,14 +140,14 @@ function check_invalid_login() {
 /**
  * @throws \Random\RandomException
  */
-function connect_to_db(): Database
+function connect_to_db(): Connection
 {
 	if (Admin::get()->getConfig()->hasServers() && !Admin::get()->getConfig()->getServer(SERVER)) {
 		auth_error(lang('Invalid server or credentials.'));
 	}
 
 	$connection = connect(true);
-	if (!($connection instanceof Database)) {
+	if (!($connection instanceof Connection)) {
 		connection_error($connection);
 	}
 

@@ -10,7 +10,7 @@ if (isset($_GET["oracle"])) {
 	if (extension_loaded("oci8")) {
 		define("AdminNeo\DRIVER_EXTENSION", "oci8");
 
-		class OracleDatabase extends Database
+		class OracleConnection extends Connection
 		{
 			/** @var resource|false */
 			private $connection;
@@ -18,7 +18,7 @@ if (isset($_GET["oracle"])) {
 			/** @var ?string */
 			private $dbName = null;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$this->connection = @oci_new_connect($username, $password, $server, "AL32UTF8");
 				if ($this->connection) {
@@ -143,12 +143,12 @@ if (isset($_GET["oracle"])) {
 	} elseif (extension_loaded("pdo_oci")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PDO_OCI");
 
-		class OracleDatabase extends PdoDatabase
+		class OracleConnection extends PdoConnection
 		{
 			/** @var ?string */
 			private $dbName = null;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$this->dsn("oci:dbname=//$server;charset=AL32UTF8", $username, $password);
 
@@ -194,7 +194,7 @@ if (isset($_GET["oracle"])) {
 						$where[] = "$key = $val";
 					}
 				}
-				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && Database::get()->getAffectedRows())
+				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && Connection::get()->getAffectedRows())
 					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
@@ -212,7 +212,7 @@ if (isset($_GET["oracle"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return OracleDriver::create($connection, Admin::get());
 	}
@@ -235,14 +235,14 @@ if (isset($_GET["oracle"])) {
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
-		$connection = $primary ? OracleDatabase::create() : OracleDatabase::createSecondary();
+		$connection = $primary ? OracleConnection::create() : OracleConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
-		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			return $connection->getError();
 		}
 
@@ -270,7 +270,7 @@ ORDER BY 1"
 	}
 
 	function db_collation($db, $collations) {
-		return Database::get()->getResult("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
+		return Connection::get()->getResult("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
 	}
 
 	function engines() {
@@ -278,7 +278,7 @@ ORDER BY 1"
 	}
 
 	function logged_user() {
-		return Database::get()->getResult("SELECT USER FROM DUAL");
+		return Connection::get()->getResult("SELECT USER FROM DUAL");
 	}
 
 	function where_owner($prefix, $owner = "owner") {
@@ -305,7 +305,7 @@ ORDER BY 1"
 	function count_tables($databases) {
 		$return = [];
 		foreach ($databases as $db) {
-			$return[$db] = Database::get()->getResult("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
+			$return[$db] = Connection::get()->getResult("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
 		}
 		return $return;
 	}
@@ -313,7 +313,7 @@ ORDER BY 1"
 	function table_status($name = "") {
 		$return = [];
 		$search = q($name);
-		$db = Database::get()->getAndClearDbName();
+		$db = Connection::get()->getAndClearDbName();
 		$view = views_table("view_name");
 		$owner = where_owner(" AND ");
 		foreach (get_rows('SELECT table_name "Name", \'table\' "Engine", avg_row_len * num_rows "Data_length", num_rows "Rows" FROM all_tables WHERE tablespace_name = ' . q($db) . $owner . ($name != "" ? " AND table_name = $search" : "") . "
@@ -397,7 +397,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection2) as $row) {
 	}
 
 	function error() {
-		return h(Database::get()->getError()); //! highlight sqltext from offset
+		return h(Connection::get()->getError()); //! highlight sqltext from offset
 	}
 
 	function explain($connection, $query) {
@@ -519,12 +519,12 @@ AND c_src.TABLE_NAME = " . q($table);
 	}
 
 	function get_schema() {
-		return Database::get()->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
+		return Connection::get()->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
 	}
 
 	function set_schema($scheme, $connection2 = null) {
 		if (!$connection2) {
-			$connection2 = Database::get();
+			$connection2 = Connection::get();
 		}
 		return $connection2->query("ALTER SESSION SET CURRENT_SCHEMA = " . idf_escape($scheme));
 	}

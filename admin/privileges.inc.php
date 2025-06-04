@@ -6,11 +6,11 @@ $title2 = DB != "" ? h(": " . DB) : "";
 page_header(lang('Privileges') . $title2, "", [lang('Privileges')]);
 echo '<p class="links top-links"><a href="', h(ME), 'user=">', icon("user-add"), lang('Create user'), "</a>";
 
-$result =  Database::get()->query("SELECT User, Host FROM mysql." . (DB == "" ? "user" : "db WHERE " . q(DB) . " LIKE Db") . " ORDER BY Host, User");
+$result =  Connection::get()->query("SELECT User, Host FROM mysql." . (DB == "" ? "user" : "db WHERE " . q(DB) . " LIKE Db") . " ORDER BY Host, User");
 $grant = $result;
 if (!$result) {
 	// list logged user, information_schema.USER_PRIVILEGES lists just the current user too
-	$result =  Database::get()->query("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1) AS User, SUBSTRING_INDEX(CURRENT_USER, '@', -1) AS Host");
+	$result =  Connection::get()->query("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1) AS User, SUBSTRING_INDEX(CURRENT_USER, '@', -1) AS Host");
 }
 
 echo "<form action=''><p>\n";

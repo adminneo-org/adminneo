@@ -79,14 +79,16 @@ function bracket_escape($idf, $back = false) {
 }
 
 /** Check if connection has at least the given version
+*
 * @param string required version
 * @param string required MariaDB version
-* @param Database defaults to $connection
+* @param Connection defaults to $connection
+*
 * @return bool
 */
 function min_version($version, $maria_db = "", $connection2 = null) {
 	if (!$connection2) {
-		$connection2 = Database::get();
+		$connection2 = Connection::get();
 	}
 	$server_info = $connection2->getServerInfo();
 	if ($maria_db && preg_match('~([\d.]+)-MariaDB~', $server_info, $match)) {
@@ -100,7 +102,9 @@ function min_version($version, $maria_db = "", $connection2 = null) {
 }
 
 /** Get connection charset
-* @param Database
+*
+* @param Connection
+*
 * @return string
 */
 function charset($connection) {
@@ -357,7 +361,7 @@ function get_password() {
 * @return string
 */
 function q($string) {
-	return Database::get()->quote($string);
+	return Connection::get()->quote($string);
 }
 
 /** Get list of values from database
@@ -367,7 +371,7 @@ function q($string) {
 */
 function get_vals($query, $column = 0) {
 	$return = [];
-	$result = Database::get()->query($query);
+	$result = Connection::get()->query($query);
 	if (is_object($result)) {
 		while ($row = $result->fetch_row()) {
 			$return[] = $row[$column];
@@ -377,14 +381,16 @@ function get_vals($query, $column = 0) {
 }
 
 /** Get keys from first column and values from second
+*
 * @param string
-* @param Database
+ * @param Connection
 * @param bool
+*
 * @return array
 */
 function get_key_vals($query, $connection2 = null, $set_keys = true) {
 	if (!is_object($connection2)) {
-		$connection2 = Database::get();
+		$connection2 = Connection::get();
 	}
 	$return = [];
 	$result = $connection2->query($query);
@@ -401,13 +407,15 @@ function get_key_vals($query, $connection2 = null, $set_keys = true) {
 }
 
 /** Get all rows of result
+*
 * @param string
-* @param Database
+ * @param Connection
 * @param string
+*
 * @return array of associative arrays
 */
 function get_rows($query, $connection2 = null, $error = "<p class='error'>") {
-	$conn = (is_object($connection2) ? $connection2 : Database::get());
+	$conn = (is_object($connection2) ? $connection2 : Connection::get());
 	$return = [];
 	$result = $conn->query($query);
 	if (is_object($result)) { // can return true
@@ -480,7 +488,7 @@ function where($where, $fields = []) {
 
 		// Not just [a-z] to catch non-ASCII characters.
 		if ($jush == "sql" && preg_match('~char|text~', $field_type) && preg_match("~[^ -@]~", $val)) {
-			$conditions[] = "$column = " . q($val) . " COLLATE " . charset(Database::get()) . "_bin";
+			$conditions[] = "$column = " . q($val) . " COLLATE " . charset(Connection::get()) . "_bin";
 		}
 	}
 
@@ -647,7 +655,7 @@ function query_redirect($query, $location, $message, $redirect = true, $execute 
 	global $error;
 	if ($execute) {
 		$start = microtime(true);
-		$failed = !Database::get()->query($query);
+		$failed = !Connection::get()->query($query);
 		$time = format_time($start);
 	}
 	$sql = "";
@@ -681,7 +689,8 @@ function queries($query) {
 
 	if (support("sql")) {
 		$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
-		return Database::get()->query($query);
+
+		return Connection::get()->query($query);
 	} else {
 		// Save the query for later use in a flesh message. TODO: This is so ugly.
 		$queries[] = $query;
@@ -1179,7 +1188,7 @@ function search_tables(): void
 			continue;
 		}
 
-		$result = Database::get()->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", Admin::get()->processSelectionSearch(fields($table), [])), 1));
+		$result = Connection::get()->query("SELECT" . limit("1 FROM " . table($table), " WHERE " . implode(" AND ", Admin::get()->processSelectionSearch(fields($table), [])), 1));
 		if ($result && !$result->fetch_row()) {
 			continue;
 		}

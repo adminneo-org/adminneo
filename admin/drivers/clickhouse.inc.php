@@ -8,7 +8,7 @@ if (isset($_GET["clickhouse"])) {
 	define("AdminNeo\DRIVER", "clickhouse");
 	define("AdminNeo\DRIVER_EXTENSION", "JSON");
 
-	class ClickHouseDatabase extends Database
+	class ClickHouseConnection extends Connection
 	{
 		/** @var string */
 		private $serviceUrl;
@@ -75,7 +75,7 @@ if (isset($_GET["clickhouse"])) {
 			return $this->rootQuery($this->dbName, $query);
 		}
 
-		public function connect(string $server, string $username, string $password): bool
+		public function open(string $server, string $username, string $password): bool
 		{
 			$this->serviceUrl = build_http_url($server, $username, $password, "localhost", 8123);
 
@@ -178,7 +178,7 @@ if (isset($_GET["clickhouse"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return ClickHouseDriver::create($connection, Admin::get());
 	}
@@ -262,14 +262,14 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
-		$connection = $primary ? ClickHouseDatabase::create() : ClickHouseDatabase::createSecondary();
+		$connection = $primary ? ClickHouseConnection::create() : ClickHouseConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
-		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			return $connection->getError();
 		}
 
@@ -324,7 +324,7 @@ if (isset($_GET["clickhouse"])) {
 
 	function table_status($name = "", $fast = false) {
 		$return = [];
-		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Database::get()->getDbName()));
+		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()));
 		foreach ($tables as $table) {
 			$return[$table['name']] = [
 				'Name' => $table['name'],
@@ -392,7 +392,7 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function error() {
-		return h(Database::get()->getError());
+		return h(Connection::get()->getError());
 	}
 
 	function types() {

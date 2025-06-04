@@ -14,7 +14,7 @@ if (isset($_GET["mysql"])) {
 	if (extension_loaded("mysqli")) {
 		define("AdminNeo\DRIVER_EXTENSION", "MySQLi");
 
-		class MySqlDatabase extends Database
+		class MySqlConnection extends Connection
 		{
 			/** @var mysqli */
 			private $mysqli;
@@ -27,7 +27,7 @@ if (isset($_GET["mysql"])) {
 				$this->mysqli->init();
 			}
 
-			public function connect(string $server, string $username, string $password, $database = null, $port = null, $socket = null): bool
+			public function open(string $server, string $username, string $password, $database = null, $port = null, $socket = null): bool
 			{
 				mysqli_report(MYSQLI_REPORT_OFF);
 				list($host, $port) = explode(":", $server, 2); // part after : is used for port or socket
@@ -128,9 +128,9 @@ if (isset($_GET["mysql"])) {
 	} elseif (extension_loaded("pdo_mysql")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PDO_MySQL");
 
-		class MySqlDatabase extends PdoDatabase
+		class MySqlConnection extends PdoConnection
 		{
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$dsn = "mysql:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server));
 
@@ -220,7 +220,7 @@ if (isset($_GET["mysql"])) {
 		public function slowQuery(string $query, int $timeout): ?string
         {
 			if (min_version('5.7.8', '10.1.2')) {
-				if (preg_match('~MariaDB~', $this->database->getServerInfo())) {
+				if (preg_match('~MariaDB~', $this->connection->getServerInfo())) {
 					return "SET STATEMENT max_statement_time=$timeout FOR $query";
 				} elseif (preg_match('~^(SELECT\b)(.+)~is', $query, $match)) {
 					return "$match[1] /*+ MAX_EXECUTION_TIME(" . ($timeout * 1000) . ") */ $match[2]";
@@ -233,14 +233,14 @@ if (isset($_GET["mysql"])) {
 		public function convertSearch(string $idf, array $where, array $field): string
         {
 			return (preg_match('~char|text|enum|set~', $field["type"]) && !preg_match("~^utf8~", $field["collation"]) && preg_match('~[\x80-\xFF]~', $where['val'])
-				? "CONVERT($idf USING " . charset($this->database) . ")"
+				? "CONVERT($idf USING " . charset($this->connection) . ")"
 				: $idf
 			);
 		}
 
 		public function warnings(): ?string
         {
-			$result = $this->database->query("SHOW WARNINGS");
+			$result = $this->connection->query("SHOW WARNINGS");
 			if ($result && $result->num_rows) {
 				ob_start();
 				select($result); // select() usually needs to print a big table progressively
@@ -252,7 +252,7 @@ if (isset($_GET["mysql"])) {
 
 		public function tableHelp(string $name, bool $isView = false): ?string
         {
-			$maria = preg_match('~MariaDB~', $this->database->getServerInfo());
+			$maria = preg_match('~MariaDB~', $this->connection->getServerInfo());
 			if (information_schema(DB)) {
 				return strtolower("information-schema-" . ($maria ? "$name-table/" : str_replace("_", "-", $name) . "-table.html"));
 			}
@@ -267,7 +267,7 @@ if (isset($_GET["mysql"])) {
         {
 			static $c_style;
 			if ($c_style === null) {
-				$sql_mode = $this->database->getResult("SHOW VARIABLES LIKE 'sql_mode'", 1);
+				$sql_mode = $this->connection->getResult("SHOW VARIABLES LIKE 'sql_mode'", 1);
 				$c_style = (strpos($sql_mode, 'NO_BACKSLASH_ESCAPES') === false);
 			}
 			return $c_style;
@@ -277,7 +277,7 @@ if (isset($_GET["mysql"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return MySqlDriver::create($connection, Admin::get());
 	}
@@ -301,16 +301,16 @@ if (isset($_GET["mysql"])) {
 	/**
 	 * Connects to the database with given credentials.
 	 *
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
 		global $types, $structured_types, $edit_functions;
 
-		$connection = $primary ? MySqlDatabase::create() : MySqlDatabase::createSecondary();
+		$connection = $primary ? MySqlConnection::create() : MySqlConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
-		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			$error = $connection->getError();
 
 			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1250", "utf-8", $error)) > strlen($error)) { // windows-1250 - most common Windows encoding
@@ -393,7 +393,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function db_collation($db, $collations) {
 		$return = null;
-		$create = Database::get()->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1);
+		$create = Connection::get()->getResult("SHOW CREATE DATABASE " . idf_escape($db), 1);
 		if (preg_match('~ COLLATE ([^ ]+)~', $create, $match)) {
 			$return = $match[1];
 		} elseif (preg_match('~ CHARACTER SET ([^ ]+)~', $create, $match)) {
@@ -420,7 +420,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function logged_user() {
-		return Database::get()->getResult("SELECT USER()");
+		return Connection::get()->getResult("SELECT USER()");
 	}
 
 	/** Get tables list
@@ -497,7 +497,7 @@ if (isset($_GET["mysql"])) {
 	* @return array [$name => ["field" => , "full_type" => , "type" => , "length" => , "unsigned" => , "default" => , "null" => , "auto_increment" => , "on_update" => , "collation" => , "privileges" => , "comment" => , "primary" => , "generated" => ]]
 	*/
 	function fields($table) {
-		$maria = preg_match('~MariaDB~', Database::get()->getServerInfo());
+		$maria = preg_match('~MariaDB~', Connection::get()->getServerInfo());
 
 		$return = [];
 		foreach (get_rows("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = " . q($table) . " ORDER BY ORDINAL_POSITION") as $row) {
@@ -576,7 +576,7 @@ if (isset($_GET["mysql"])) {
 		global $on_actions;
 		static $pattern = '(?:`(?:[^`]|``)+`|"(?:[^"]|"")+")';
 		$return = [];
-		$create_table = Database::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
+		$create_table = Connection::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if ($create_table) {
 			preg_match_all("~CONSTRAINT ($pattern) FOREIGN KEY ?\\(((?:$pattern,? ?)+)\\) REFERENCES ($pattern)(?:\\.($pattern))? \\(((?:$pattern,? ?)+)\\)(?: ON DELETE ($on_actions))?(?: ON UPDATE ($on_actions))?~", $create_table, $matches, PREG_SET_ORDER);
 			foreach ($matches as $match) {
@@ -600,7 +600,7 @@ if (isset($_GET["mysql"])) {
 	* @return array ["select" => ]
 	*/
 	function view($name) {
-		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', Database::get()->getResult("SHOW CREATE VIEW " . table($name), 1))];
+		return ["select" => preg_replace('~^(?:[^`]|`[^`]*`)*\s+AS\s+~isU', '', Connection::get()->getResult("SHOW CREATE VIEW " . table($name), 1))];
 	}
 
 	/** Get sorted grouped list of collations
@@ -611,7 +611,7 @@ if (isset($_GET["mysql"])) {
 
 		// Since MariaDB 10.10, one collation can be compatible with more character sets, so collations no longer have unique IDs.
 		// All combinations can be selected from information_schema.COLLATION_CHARACTER_SET_APPLICABILITY table.
-		$query = min_version('', '10.10', Database::get()) ?
+		$query = min_version('', '10.10', Connection::get()) ?
 			"SELECT CHARACTER_SET_NAME AS Charset, FULL_COLLATION_NAME AS Collation, IS_DEFAULT AS `Default` FROM information_schema.COLLATION_CHARACTER_SET_APPLICABILITY" :
 			"SHOW COLLATION";
 
@@ -644,7 +644,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function error() {
-		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", Database::get()->getError()));
+		return h(preg_replace('~^You have an error.*syntax to use~U', "Syntax error", Connection::get()->getError()));
 	}
 
 	/** Create database
@@ -803,7 +803,7 @@ if (isset($_GET["mysql"])) {
 			foreach ($views as $table) {
 				$definitions[table($table)] = view($table);
 			}
-			Database::get()->selectDatabase($target);
+			Connection::get()->selectDatabase($target);
 			$db = idf_escape(DB);
 			foreach ($definitions as $name => $view) {
 				if (!queries("CREATE VIEW $name AS " . str_replace(" $db.", " ", $view["select"])) || !queries("DROP VIEW $db.$name")) {
@@ -902,7 +902,7 @@ if (isset($_GET["mysql"])) {
 		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|-- )[^\n]*\n?|--\r?\n)";
 		$type_pattern = "((" . implode("|", array_merge(array_keys($types), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enum_length)++)\\))?\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?";
 		$pattern = "$space*(" . ($type == "FUNCTION" ? "" : $inout) . ")?\\s*(?:`((?:[^`]|``)*)`\\s*|\\b(\\S+)\\s+)$type_pattern";
-		$create = Database::get()->getResult("SHOW CREATE $type " . idf_escape($name), 2);
+		$create = Connection::get()->getResult("SHOW CREATE $type " . idf_escape($name), 2);
 		preg_match("~\\(((?:$pattern\\s*,?)*)\\)\\s*" . ($type == "FUNCTION" ? "RETURNS\\s+$type_pattern\\s+" : "") . "(.*)~is", $create, $match);
 		$fields = [];
 		preg_match_all("~$pattern\\s*,?~is", $match[1], $matches, PREG_SET_ORDER);
@@ -962,12 +962,14 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function last_id() {
-		return Database::get()->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
+		return Connection::get()->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
 	}
 
 	/** Explain select
-	* @param Database
-	* @param string
+	*
+	* @param Connection
+	 * @param string
+	*
 	* @return Result
 	*/
 	function explain($connection, $query) {
@@ -990,7 +992,7 @@ if (isset($_GET["mysql"])) {
 	* @return string
 	*/
 	function create_sql($table, $auto_increment, $style) {
-		$return = Database::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
+		$return = Connection::get()->getResult("SHOW CREATE TABLE " . table($table), 1);
 		if (!$auto_increment) {
 			$return = preg_replace('~ AUTO_INCREMENT=\d+~', '', $return); //! skip comments
 		}
@@ -1109,7 +1111,7 @@ if (isset($_GET["mysql"])) {
 	* @return int
 	*/
 	function max_connections() {
-		return Database::get()->getResult("SELECT @@max_connections");
+		return Connection::get()->getResult("SELECT @@max_connections");
 	}
 
 	/** Get driver config

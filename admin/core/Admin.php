@@ -1005,7 +1005,7 @@ class Admin extends Origin
 				}
 			}
 
-			$result = Database::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT //! enum and set as numbers
+			$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT //! enum and set as numbers
 			if ($result) {
 				$insert = "";
 				$buffer = "";
@@ -1073,7 +1073,7 @@ class Admin extends Origin
 					echo $buffer . $suffix;
 				}
 			} elseif ($_POST["format"] == "sql") {
-				echo "-- " . str_replace("\n", " ", Database::get()->getError()) . "\n";
+				echo "-- " . str_replace("\n", " ", Connection::get()->getError()) . "\n";
 			}
 
 			if ($identity_insert) {
@@ -1180,7 +1180,7 @@ class Admin extends Origin
 			// Tables.
 			$tables = [];
 			if ($_GET["ns"] !== "" && !$missing && DB != "") {
-				Database::get()->selectDatabase(DB);
+				Connection::get()->selectDatabase(DB);
 				$tables = table_status('', true);
 			}
 
@@ -1208,7 +1208,7 @@ class Admin extends Origin
 							echo "jushLinks.$val = jushLinks.$jush;\n";
 						}
 					}
-					$server_info = Database::get()->getServerInfo();
+					$server_info = Connection::get()->getServerInfo();
 					?>
 					initSyntaxHighlighting('<?php echo preg_replace('~^(\d\.?\d).*~s', '\1', $server_info); ?>'<?php echo (preg_match('~MariaDB~', $server_info) ? ", true" : ""); ?>);
 				</script>
@@ -1242,7 +1242,7 @@ class Admin extends Origin
 		echo "<input type='submit' value='" . lang('Use') . "' class='button " . ($databases ? "hidden" : "") . "'>\n";
 		echo "</div>";
 
-		if (support("scheme") && $missing != "db" && DB != "" && Database::get()->selectDatabase(DB)) {
+		if (support("scheme") && $missing != "db" && DB != "" && Connection::get()->selectDatabase(DB)) {
 			echo "<div>";
 			echo "<select id='scheme-select' name='ns'>" . optionlist(["" => lang('Schema')] + $this->admin->getSchemas(), $_GET["ns"]) . "</select>"
 				. script("mixin(gid('scheme-select'), {onmousedown: dbMouseDown, onchange: dbChange});");

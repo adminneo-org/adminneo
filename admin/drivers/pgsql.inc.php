@@ -10,7 +10,7 @@ if (isset($_GET["pgsql"])) {
 	if (extension_loaded("pgsql")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PgSQL");
 
-		class PgSqlDatabase extends Database
+		class PgSqlConnection extends Connection
 		{
 			/** @var int */
 			public $timeout = 0;
@@ -24,7 +24,7 @@ if (isset($_GET["pgsql"])) {
 			/** @var bool */
 			private $hasDefaultDatabase = true;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$db = Admin::get()->getDatabase();
 				set_error_handler(function($errno, $error) {
@@ -173,11 +173,11 @@ if (isset($_GET["pgsql"])) {
 	} elseif (extension_loaded("pdo_pgsql")) {
 		define("AdminNeo\DRIVER_EXTENSION", "PDO_PgSQL");
 
-		class PgSqlDatabase extends PdoDatabase
+		class PgSqlConnection extends PdoConnection
 		{
 			public $timeout = 0;
 
-			public function connect(string $server, string $username, string $password): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				$db = Admin::get()->getDatabase();
 
@@ -238,7 +238,7 @@ if (isset($_GET["pgsql"])) {
 						$where[] = "$key = $val";
 					}
 				}
-				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && Database::get()->getAffectedRows())
+				if (!(($where && queries("UPDATE " . table($table) . " SET " . implode(", ", $update) . " WHERE " . implode(" AND ", $where)) && Connection::get()->getAffectedRows())
 					|| queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES (" . implode(", ", $record) . ")")
 				)) {
 					return false;
@@ -249,8 +249,8 @@ if (isset($_GET["pgsql"])) {
 
 		public function slowQuery(string $query, int $timeout): ?string
 		{
-			$this->database->query("SET statement_timeout = " . (1000 * $timeout));
-			$this->database->timeout = 1000 * $timeout;
+			$this->connection->query("SET statement_timeout = " . (1000 * $timeout));
+			$this->connection->timeout = 1000 * $timeout;
 
 			return $query;
 		}
@@ -272,7 +272,7 @@ if (isset($_GET["pgsql"])) {
 
 		public function warnings(): ?string
 		{
-			return $this->database->warnings();
+			return $this->connection->warnings();
 		}
 
 		public function tableHelp(string $name, bool $isView = false): ?string
@@ -293,7 +293,7 @@ if (isset($_GET["pgsql"])) {
 		{
 			static $c_style;
 			if ($c_style === null) {
-				$c_style = ($this->database->getResult("SHOW standard_conforming_strings") == "off");
+				$c_style = ($this->connection->getResult("SHOW standard_conforming_strings") == "off");
 			}
 			return $c_style;
 		}
@@ -302,7 +302,7 @@ if (isset($_GET["pgsql"])) {
 
 
 
-	function create_driver(Database $connection): Driver
+	function create_driver(Connection $connection): Driver
 	{
 		return PgSqlDriver::create($connection, Admin::get());
 	}
@@ -316,16 +316,16 @@ if (isset($_GET["pgsql"])) {
 	}
 
 	/**
-	 * @return Database|string
+	 * @return Connection|string
 	 */
 	function connect(bool $primary = false)
 	{
 		global $types, $structured_types;
 
-		$connection = $primary ? PgSqlDatabase::create() : PgSqlDatabase::createSecondary();
+		$connection = $primary ? PgSqlConnection::create() : PgSqlConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
-		if (!$connection->connect($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			return $connection->getError();
 		}
 
@@ -364,7 +364,7 @@ ORDER BY datname");
 	}
 
 	function db_collation($db, $collations) {
-		return Database::get()->getResult("SELECT datcollate FROM pg_database WHERE datname = " . q($db));
+		return Connection::get()->getResult("SELECT datcollate FROM pg_database WHERE datname = " . q($db));
 	}
 
 	function engines() {
@@ -372,7 +372,7 @@ ORDER BY datname");
 	}
 
 	function logged_user() {
-		return Database::get()->getResult("SELECT user");
+		return Connection::get()->getResult("SELECT user");
 	}
 
 	function tables_list() {
@@ -392,7 +392,7 @@ ORDER BY 1";
 	function count_tables($databases) {
 		$return = [];
 		foreach ($databases as $db) {
-			if (Database::get()->selectDatabase($db)) {
+			if (Connection::get()->selectDatabase($db)) {
 				$return[$db] = count(tables_list());
 			}
 		}
@@ -402,7 +402,7 @@ ORDER BY 1";
 	function table_status($name = "") {
 		static $has_size;
 		if ($has_size === null) {
-			$has_size = Database::get()->getResult("SELECT 'pg_table_size'::regproc");
+			$has_size = Connection::get()->getResult("SELECT 'pg_table_size'::regproc");
 		}
 		$return = [];
 		foreach (
@@ -479,7 +479,7 @@ ORDER BY a.attnum"
 
 	function indexes($table, $connection2 = null) {
 		if (!is_object($connection2)) {
-			$connection2 = Database::get();
+			$connection2 = Connection::get();
 		}
 		$return = [];
 		$table_oid = $connection2->getResult("SELECT oid FROM pg_class WHERE relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_schema()) AND relname = " . q($table));
@@ -526,7 +526,7 @@ ORDER BY conkey, conname") as $row) {
 	}
 
 	function view($name) {
-		return ["select" => trim(Database::get()->getResult("SELECT pg_get_viewdef(" . Database::get()->getResult("SELECT oid FROM pg_class WHERE relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_schema()) AND relname = " . q($name)) . ")"))];
+		return ["select" => trim(Connection::get()->getResult("SELECT pg_get_viewdef(" . Connection::get()->getResult("SELECT oid FROM pg_class WHERE relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_schema()) AND relname = " . q($name)) . ")"))];
 	}
 
 	function collations() {
@@ -539,7 +539,7 @@ ORDER BY conkey, conname") as $row) {
 	}
 
 	function error() {
-		$return = h(Database::get()->getError());
+		$return = h(Connection::get()->getError());
 		if (preg_match('~^(.*\n)?([^\n]*)\n( *)\^(\n.*)?$~s', $return, $match)) {
 			$return = $match[1] . preg_replace('~((?:[^&]|&[^;]*;){' . strlen($match[3]) . '})(.*)~', '\1<b>\2</b>', $match[2]) . $match[4];
 		}
@@ -551,13 +551,13 @@ ORDER BY conkey, conname") as $row) {
 	}
 
 	function drop_databases($databases) {
-		Database::get()->close();
+		Connection::get()->close();
 
 		return apply_queries("DROP DATABASE", $databases, 'AdminNeo\idf_escape');
 	}
 
 	function rename_database($name, $collation) {
-		Database::get()->close();
+		Connection::get()->close();
 
 		return queries("ALTER DATABASE " . idf_escape(DB) . " RENAME TO " . idf_escape($name));
 	}
@@ -781,7 +781,7 @@ ORDER BY conkey, conname") as $row) {
 	function found_rows($table_status, $where) {
 		if (preg_match(
 			"~ rows=([0-9]+)~",
-			Database::get()->getResult("EXPLAIN SELECT * FROM " . idf_escape($table_status["Name"]) . ($where ? " WHERE " . implode(" AND ", $where) : "")),
+			Connection::get()->getResult("EXPLAIN SELECT * FROM " . idf_escape($table_status["Name"]) . ($where ? " WHERE " . implode(" AND ", $where) : "")),
 			$regs
 		)) {
 			return $regs[1];
@@ -809,13 +809,13 @@ AND typelem = 0"
 	}
 
 	function get_schema() {
-		return Database::get()->getResult("SELECT current_schema()");
+		return Connection::get()->getResult("SELECT current_schema()");
 	}
 
 	function set_schema($schema, $connection2 = null) {
 		global $types, $structured_types;
 		if (!$connection2) {
-			$connection2 = Database::get();
+			$connection2 = Connection::get();
 		}
 		$return = $connection2->query("SET search_path TO " . idf_escape($schema));
 		foreach (types() as $key => $type) { //! get types from current_schemas('t')
@@ -968,7 +968,7 @@ AND typelem = 0"
 	}
 
 	function max_connections() {
-		return Database::get()->getResult("SHOW max_connections");
+		return Connection::get()->getResult("SHOW max_connections");
 	}
 
 	function driver_config() {
