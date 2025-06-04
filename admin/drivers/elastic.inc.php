@@ -509,7 +509,8 @@ if (isset($_GET["elastic"])) {
 		//
 	}
 
-	function indexes($table, $connection2 = null) {
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		return [
 			["type" => "PRIMARY", "columns" => ["_id"]],
 		];

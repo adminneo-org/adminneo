@@ -477,14 +477,15 @@ ORDER BY a.attnum"
 		return $return;
 	}
 
-	function indexes($table, $connection2 = null) {
-		if (!is_object($connection2)) {
-			$connection2 = Connection::get();
+	function indexes(string $table, ?Connection $connection = null): array
+	{
+		if (!is_object($connection)) {
+			$connection = Connection::get();
 		}
 		$return = [];
-		$table_oid = $connection2->getResult("SELECT oid FROM pg_class WHERE relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_schema()) AND relname = " . q($table));
-		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection2);
-		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, (indpred IS NOT NULL)::int as indispartial FROM pg_index i, pg_class ci WHERE i.indrelid = $table_oid AND ci.oid = i.indexrelid ORDER BY indisprimary DESC, indisunique DESC", $connection2) as $row) {
+		$table_oid = $connection->getResult("SELECT oid FROM pg_class WHERE relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_schema()) AND relname = " . q($table));
+		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection);
+		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, (indpred IS NOT NULL)::int as indispartial FROM pg_index i, pg_class ci WHERE i.indrelid = $table_oid AND ci.oid = i.indexrelid ORDER BY indisprimary DESC, indisunique DESC", $connection) as $row) {
 			$relname = $row["relname"];
 			$return[$relname]["type"] = ($row["indispartial"] ? "INDEX" : ($row["indisprimary"] ? "PRIMARY" : ($row["indisunique"] ? "UNIQUE" : "INDEX")));
 			$return[$relname]["columns"] = [];
@@ -774,7 +775,8 @@ ORDER BY conkey, conname") as $row) {
 		return 0; // there can be several sequences
 	}
 
-	function explain($connection, $query) {
+	function explain(Connection $connection, string $query)
+	{
 		return $connection->query("EXPLAIN $query");
 	}
 
@@ -804,27 +806,34 @@ AND typelem = 0"
 		return ($enums ? "'" . implode("', '", array_map('addslashes', $enums)) . "'" : "");
 	}
 
-	function schemas() {
+	function schemas(): array
+	{
 		return get_vals("SELECT nspname FROM pg_namespace ORDER BY nspname");
 	}
 
-	function get_schema() {
+	function get_schema(): string
+	{
 		return Connection::get()->getResult("SELECT current_schema()");
 	}
 
-	function set_schema($schema, $connection2 = null) {
+	function set_schema(string $schema, ?Connection $connection = null): bool
+	{
 		global $types, $structured_types;
-		if (!$connection2) {
-			$connection2 = Connection::get();
+
+		if (!$connection) {
+			$connection = Connection::get();
 		}
-		$return = $connection2->query("SET search_path TO " . idf_escape($schema));
+
+		$result = (bool)$connection->query("SET search_path TO " . idf_escape($schema));
+
 		foreach (types() as $key => $type) { //! get types from current_schemas('t')
 			if (!isset($types[$type])) {
 				$types[$type] = $key;
 				$structured_types[lang('User types')][] = $type;
 			}
 		}
-		return $return;
+
+		return $result;
 	}
 
 	// create_sql() produces CREATE TABLE without FK CONSTRAINTs

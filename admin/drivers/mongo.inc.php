@@ -292,7 +292,8 @@ if (isset($_GET["mongo"])) {
 			return false;
 		}
 
-		function indexes($table, $connection2 = null) {
+		function indexes(string $table, ?Connection $connection = null): array
+		{
 			$return = [];
 			foreach (Connection::get()->executeCommand(['listIndexes' => $table]) as $index) {
 				$descs = [];

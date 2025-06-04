@@ -191,8 +191,9 @@ if (isset($_GET["clickhouse"])) {
 		return idf_escape($idf);
 	}
 
-	function explain($connection, $query) {
-		return '';
+	function explain(Connection $connection, string $query): bool
+	{
+		return false;
 	}
 
 	function found_rows($table_status, $where) {
@@ -375,7 +376,8 @@ if (isset($_GET["clickhouse"])) {
 		return $return;
 	}
 
-	function indexes($table, $connection2 = null) {
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		return [];
 	}
 

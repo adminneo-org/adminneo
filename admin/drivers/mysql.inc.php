@@ -551,14 +551,15 @@ if (isset($_GET["mysql"])) {
 		return $return;
 	}
 
-	/** Get table indexes
-	* @param string
-	* @param string Database to use
-	* @return array [$key_name => ["type" => , "columns" => [], "lengths" => [], "descs" => []]]
-	*/
-	function indexes($table, $connection2 = null) {
+	/**
+	 * Returns table indexes.
+	 *
+	 * @return array [$key_name => ["type" => , "columns" => [], "lengths" => [], "descs" => []]]
+	 */
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		$return = [];
-		foreach (get_rows("SHOW INDEX FROM " . table($table), $connection2) as $row) {
+		foreach (get_rows("SHOW INDEX FROM " . table($table), $connection) as $row) {
 			$name = $row["Key_name"];
 			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" : ($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" : ($row["Non_unique"] ? ($row["Index_type"] == "SPATIAL" ? "SPATIAL" : "INDEX") : "UNIQUE")));
 			$return[$name]["columns"][] = $row["Column_name"];
@@ -965,14 +966,13 @@ if (isset($_GET["mysql"])) {
 		return Connection::get()->getResult("SELECT LAST_INSERT_ID()"); // mysql_insert_id() truncates bigint
 	}
 
-	/** Explain select
-	*
-	* @param Connection
-	 * @param string
-	*
-	* @return Result
-	*/
-	function explain($connection, $query) {
+	/**
+	 * Explains select query.
+	 *
+	 * @return Result|bool
+	 */
+	function explain(Connection $connection, string $query)
+	{
 		return $connection->query("EXPLAIN " . (min_version(5.1) && !min_version(5.7) ? "PARTITIONS " : "") . $query);
 	}
 

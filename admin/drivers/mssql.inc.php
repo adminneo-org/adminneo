@@ -443,7 +443,8 @@ WHERE o.schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND o.type IN ('S', 'U', 
 		return $return;
 	}
 
-	function indexes($table, $connection2 = null) {
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		$return = [];
 		// sp_statistics doesn't return information about primary key
 		foreach (get_rows("SELECT i.name, key_ordinal, is_unique, is_primary_key, c.name AS column_name, is_descending_key
@@ -451,7 +452,7 @@ FROM sys.indexes i
 INNER JOIN sys.index_columns ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id
 INNER JOIN sys.columns c ON ic.object_id = c.object_id AND ic.column_id = c.column_id
 WHERE OBJECT_NAME(i.object_id) = " . q($table)
-		, $connection2) as $row) {
+		, $connection) as $row) {
 			$name = $row["name"];
 			$return[$name]["type"] = ($row["is_primary_key"] ? "PRIMARY" : ($row["is_unique"] ? "UNIQUE" : "INDEX"));
 			$return[$name]["lengths"] = [];
@@ -584,10 +585,12 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return Connection::get()->getResult("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
 	}
 
-	function explain($connection, $query) {
+	function explain(Connection $connection, string $query)
+	{
 		$connection->query("SET SHOWPLAN_ALL ON");
 		$return = $connection->query($query);
 		$connection->query("SET SHOWPLAN_ALL OFF"); // connection is used also for indexes
+
 		return $return;
 	}
 
@@ -667,19 +670,23 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		];
 	}
 
-	function schemas() {
+	function schemas(): array
+	{
 		return get_vals("SELECT name FROM sys.schemas");
 	}
 
-	function get_schema() {
+	function get_schema(): string
+	{
 		if ($_GET["ns"] != "") {
 			return $_GET["ns"];
 		}
 		return Connection::get()->getResult("SELECT SCHEMA_NAME()");
 	}
 
-	function set_schema($schema) {
+	function set_schema(string $schema, ?Connection $connection = null): bool
+	{
 		$_GET["ns"] = $schema;
+
 		return true; // ALTER USER is permanent
 	}
 

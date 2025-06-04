@@ -381,7 +381,9 @@ if (isset($_GET["simpledb"])) {
 		return $return;
 	}
 
-	function explain($connection, $query) {
+	function explain(Connection $connection, string $query): bool
+	{
+		return false;
 	}
 
 	function error() {
@@ -391,7 +393,8 @@ if (isset($_GET["simpledb"])) {
 	function information_schema() {
 	}
 
-	function indexes($table, $connection2 = null) {
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		return [
 			["type" => "PRIMARY", "columns" => ["itemName()"]],
 		];

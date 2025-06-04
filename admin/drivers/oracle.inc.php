@@ -362,7 +362,8 @@ ORDER BY 1"
 		return $return;
 	}
 
-	function indexes($table, $connection2 = null) {
+	function indexes(string $table, ?Connection $connection = null): array
+	{
 		$return = [];
 		$owner = where_owner(" AND ", "aic.table_owner");
 		foreach (get_rows("SELECT aic.*, ac.constraint_type, atc.data_default
@@ -370,7 +371,7 @@ FROM all_ind_columns aic
 LEFT JOIN all_constraints ac ON aic.index_name = ac.constraint_name AND aic.table_name = ac.table_name AND aic.index_owner = ac.owner
 LEFT JOIN all_tab_cols atc ON aic.column_name = atc.column_name AND aic.table_name = atc.table_name AND aic.index_owner = atc.owner
 WHERE aic.table_name = " . q($table) . "$owner
-ORDER BY ac.constraint_type, aic.column_position", $connection2) as $row) {
+ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 			$index_name = $row["INDEX_NAME"];
 			$column_name = $row["DATA_DEFAULT"];
 			$column_name = ($column_name ? trim($column_name, '"') : $row["COLUMN_NAME"]); // trim - possibly wrapped in quotes but never contains quotes inside
@@ -400,8 +401,10 @@ ORDER BY ac.constraint_type, aic.column_position", $connection2) as $row) {
 		return h(Connection::get()->getError()); //! highlight sqltext from offset
 	}
 
-	function explain($connection, $query) {
+	function explain(Connection $connection, string $query)
+	{
 		$connection->query("EXPLAIN PLAN FOR $query");
+
 		return $connection->query("SELECT * FROM plan_table");
 	}
 
@@ -513,20 +516,25 @@ AND c_src.TABLE_NAME = " . q($table);
 		return 0; //!
 	}
 
-	function schemas() {
+	function schemas(): array
+	{
 		$return = get_vals("SELECT DISTINCT owner FROM dba_segments WHERE owner IN (SELECT username FROM dba_users WHERE default_tablespace NOT IN ('SYSTEM','SYSAUX')) ORDER BY 1");
-		return ($return ? $return : get_vals("SELECT DISTINCT owner FROM all_tables WHERE tablespace_name = " . q(DB) . " ORDER BY 1"));
+
+		return $return ?: get_vals("SELECT DISTINCT owner FROM all_tables WHERE tablespace_name = " . q(DB) . " ORDER BY 1");
 	}
 
-	function get_schema() {
+	function get_schema(): string
+	{
 		return Connection::get()->getResult("SELECT sys_context('USERENV', 'SESSION_USER') FROM dual");
 	}
 
-	function set_schema($scheme, $connection2 = null) {
-		if (!$connection2) {
-			$connection2 = Connection::get();
+	function set_schema(string $schema, ?Connection $connection = null): bool
+	{
+		if (!$connection) {
+			$connection = Connection::get();
 		}
-		return $connection2->query("ALTER SESSION SET CURRENT_SCHEMA = " . idf_escape($scheme));
+
+		return (bool)$connection->query("ALTER SESSION SET CURRENT_SCHEMA = " . idf_escape($schema));
 	}
 
 	function show_variables() {

@@ -298,12 +298,13 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function indexes($table, $connection2 = null) {
-		if (!is_object($connection2)) {
-			$connection2 = Connection::get();
+	function indexes(string $table, ?Connection $connection = null): array
+	{
+		if (!is_object($connection)) {
+			$connection = Connection::get();
 		}
 		$return = [];
-		$sql = $connection2->getResult("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
+		$sql = $connection->getResult("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		if (preg_match('~\bPRIMARY\s+KEY\s*\((([^)"]+|"[^"]*"|`[^`]*`)++)~i', $sql, $match)) {
 			$return[""] = ["type" => "PRIMARY", "columns" => [], "lengths" => [], "descs" => []];
 			preg_match_all('~((("[^"]*+")+|(?:`[^`]*+`)+)|(\S+))(\s+(ASC|DESC))?(,\s*|$)~i', $match[1], $matches, PREG_SET_ORDER);
@@ -319,13 +320,13 @@ if (isset($_GET["sqlite"])) {
 				}
 			}
 		}
-		$sqls = get_key_vals("SELECT name, sql FROM sqlite_master WHERE type = 'index' AND tbl_name = " . q($table), $connection2);
-		foreach (get_rows("PRAGMA index_list(" . table($table) . ")", $connection2) as $row) {
+		$sqls = get_key_vals("SELECT name, sql FROM sqlite_master WHERE type = 'index' AND tbl_name = " . q($table), $connection);
+		foreach (get_rows("PRAGMA index_list(" . table($table) . ")", $connection) as $row) {
 			$name = $row["name"];
 			$index = ["type" => ($row["unique"] ? "UNIQUE" : "INDEX")];
 			$index["lengths"] = [];
 			$index["descs"] = [];
-			foreach (get_rows("PRAGMA index_info(" . idf_escape($name) . ")", $connection2) as $row1) {
+			foreach (get_rows("PRAGMA index_info(" . idf_escape($name) . ")", $connection) as $row1) {
 				$index["columns"][] = $row1["name"];
 				$index["descs"][] = null;
 			}
@@ -705,7 +706,8 @@ if (isset($_GET["sqlite"])) {
 		return Connection::get()->getResult("SELECT LAST_INSERT_ROWID()");
 	}
 
-	function explain($connection, $query) {
+	function explain(Connection $connection, string $query)
+	{
 		return $connection->query("EXPLAIN QUERY PLAN $query");
 	}
 
