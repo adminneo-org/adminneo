@@ -382,7 +382,7 @@ if (!$columns && support("table")) {
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || $fun;
 						if ($sortable) {
-							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key || (!$order && $is_group && $group[0] == $column) ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
+							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
 						} else {
 							echo $fun;
 						}

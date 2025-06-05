@@ -7,6 +7,7 @@ AdminNeo 5.5.0
 ### Changes
 
 - Check max_file_uploads in SQL import form
+- Do not order descending in GROUP BY select (by @vrana)
 
 ### Bugfixes
 
