@@ -3,8 +3,8 @@
 namespace AdminNeo;
 
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-set_error_handler(function ($errno, $errstr) {
-	return (bool)preg_match('~^Undefined array key~', $errstr);
+set_error_handler(function($errno, $error) {
+	return (bool)preg_match('~^Undefined array key~', $error);
 }, E_WARNING);
 
 include __DIR__ . "/debug.inc.php";
