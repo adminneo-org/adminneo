@@ -145,6 +145,8 @@ if ($TABLE != "") {
 }
 
 if (!$_POST) {
+	$types = Driver::get()->getTypes();
+
 	$row = [
 		"Engine" => $_COOKIE["neo_engine"],
 		"fields" => [["field" => "", "type" => (isset($types["int"]) ? "int" : (isset($types["integer"]) ? "integer" : "")), "on_update" => ""]],

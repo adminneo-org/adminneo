@@ -989,10 +989,11 @@ function enum_input(string $attrs, array $field, $value, ?string $empty = null, 
 * @return null
 */
 function input($field, $value, $function) {
-	global $types, $structured_types, $jush;
+	global $jush;
 
 	$name = h(bracket_escape($field["field"]));
 
+	$types = Driver::get()->getTypes();
 	$json_type = Admin::get()->detectJson($field["type"], $value, true);
 
 	$reset = ($jush == "mssql" && $field["auto_increment"]);
@@ -1000,7 +1001,7 @@ function input($field, $value, $function) {
 		$function = null;
 	}
 
-	if (in_array($field["type"], (array) $structured_types[lang('User types')])) {
+	if (in_array($field["type"], Driver::get()->getUserTypes())) {
 		$enums = type_values($types[$field["type"]]);
 		if ($enums) {
 			$field["type"] = "enum";

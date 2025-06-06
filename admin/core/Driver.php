@@ -10,6 +10,9 @@ abstract class Driver
 	/** @var Origin|Pluginer */
 	protected $admin;
 
+	/** @var array [$description => [$type => $maximum_unsigned_length, ...], ...] */
+	protected $types = [];
+
 	/** @var ?Driver */
 	private static $instance = null;
 
@@ -41,6 +44,36 @@ abstract class Driver
 	{
 		$this->connection = $connection;
 		$this->admin = $admin;
+	}
+
+	/**
+	 * Returns the list of all types.
+	 *
+	 * @return array [$type => $maximum_unsigned_length, ...]
+	 */
+	public function getTypes(): array
+	{
+		return call_user_func_array("array_merge", array_values($this->types));
+	}
+
+	/**
+	 * Returns structured types.
+	 *
+	 * @return array [$description => [$type, ...], ...]
+	 */
+	public function getStructuredTypes(): array
+	{
+		return array_map("array_keys", $this->types);
+	}
+
+	public function setUserTypes(array $types): void
+	{
+		$this->types[lang('User types')] = array_flip($types);
+	}
+
+	public function getUserTypes(): array
+	{
+		return array_keys($this->types[lang('User types')] ?? []);
 	}
 
 	/**

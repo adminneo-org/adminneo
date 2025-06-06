@@ -184,7 +184,50 @@ if (isset($_GET["mysql"])) {
 
 
 
-	class MySqlDriver extends Driver {
+	class MySqlDriver extends Driver
+	{
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			$this->types = [
+				lang('Numbers') => [
+					"tinyint" => 3, "smallint" => 5, "mediumint" => 8, "int" => 10, "bigint" => 20,
+					"decimal" => 66, "float" => 12, "double" => 21,
+				],
+				lang('Date and time') => [
+					"date" => 10, "datetime" => 19, "timestamp" => 19, "time" => 10, "year" => 4,
+				],
+				lang('Strings') => [
+					"char" => 255, "varchar" => 65535,
+					"tinytext" => 255, "text" => 65535, "mediumtext" => 16777215, "longtext" => 4294967295,
+				],
+				lang('Lists') => [
+					"enum" => 65535, "set" => 64,
+				],
+				lang('Binary') => [
+					"bit" => 20, "binary" => 255, "varbinary" => 65535,
+					"tinyblob" => 255, "blob" => 65535, "mediumblob" => 16777215, "longblob" => 4294967295,
+				],
+				lang('Geometry') => [
+					"geometry" => 0, "point" => 0, "linestring" => 0, "polygon" => 0,
+					"multipoint" => 0, "multilinestring" => 0, "multipolygon" => 0, "geometrycollection" => 0,
+				],
+			];
+
+			if (min_version('5.7.8', '10.2', $connection)) {
+				$this->types[lang('Strings')]["json"] = 4294967295;
+			}
+
+			// UUID data type for Mariadb >= 10.7
+			if (min_version('', '10.7', $connection)) {
+				$this->types[lang('Strings')]["uuid"] = 128;
+			}
+
+			if (min_version('9', '', $connection)) {
+				$this->types[lang('Numbers')]["vector"] = 16383;
+			}
+		}
 
 		public function insert(string $table, array $record)
         {
@@ -305,7 +348,7 @@ if (isset($_GET["mysql"])) {
 	 */
 	function connect(bool $primary = false)
 	{
-		global $types, $structured_types, $edit_functions;
+		global $edit_functions;
 
 		$connection = $primary ? MySqlConnection::create() : MySqlConnection::createSecondary();
 
@@ -323,23 +366,12 @@ if (isset($_GET["mysql"])) {
 		$connection->setCharset(charset($connection));
 		$connection->query("SET sql_quote_show_create = 1, autocommit = 1");
 
-		if (min_version('5.7.8', '10.2', $connection)) {
-			$structured_types[lang('Strings')][] = "json";
-			$types["json"] = 4294967295;
-		}
-
 		// UUID data type for Mariadb >= 10.7
 		if (min_version('', '10.7', $connection)) {
-			$structured_types[lang('Strings')][] = "uuid";
-			$types["uuid"] = 128;
-
-			// insert/update function
 			$edit_functions[0]['uuid'] = 'uuid';
 		}
 
-		if (min_version(9, '', $connection)) {
-			$structured_types[lang('Numbers')][] = "vector";
-			$types["vector"] = 16383;
+		if (min_version('9', '', $connection)) {
 			$edit_functions[0]['vector'] = 'string_to_vector';
 		}
 
@@ -895,13 +927,13 @@ if (isset($_GET["mysql"])) {
 	 * @return array ["fields" => ["field" => , "type" => , "length" => , "unsigned" => , "inout" => , "collation" => ], "returns" => , "definition" => , "language" => ]
 	 */
 	function routine($name, $type) {
-		global $enum_length, $inout, $types;
+		global $enum_length, $inout;
 
 		$info = get_rows("SELECT ROUTINE_BODY, ROUTINE_COMMENT FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = " . q(DB) . " AND ROUTINE_NAME = " . q($name))[0];
 
 		$aliases = ["bool", "boolean", "integer", "double precision", "real", "dec", "numeric", "fixed", "national char", "national varchar"];
 		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|-- )[^\n]*\n?|--\r?\n)";
-		$type_pattern = "((" . implode("|", array_merge(array_keys($types), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enum_length)++)\\))?\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?";
+		$type_pattern = "((" . implode("|", array_merge(array_keys(Driver::get()->getTypes()), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enum_length)++)\\))?\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?";
 		$pattern = "$space*(" . ($type == "FUNCTION" ? "" : $inout) . ")?\\s*(?:`((?:[^`]|``)*)`\\s*|\\b(\\S+)\\s+)$type_pattern";
 		$create = Connection::get()->getResult("SHOW CREATE $type " . idf_escape($name), 2);
 		preg_match("~\\(((?:$pattern\\s*,?)*)\\)\\s*" . ($type == "FUNCTION" ? "RETURNS\\s+$type_pattern\\s+" : "") . "(.*)~is", $create, $match);
@@ -1115,27 +1147,12 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/** Get driver config
-	* @return array ['possible_drivers' => , 'jush' => , 'types' => , 'structured_types' => , 'unsigned' => , 'operators' => , 'functions' => , 'grouping' => , 'edit_functions' => ]
+	* @return array ['possible_drivers' => , 'jush' => , 'unsigned' => , 'operators' => , 'functions' => , 'grouping' => , 'edit_functions' => ]
 	*/
 	function driver_config() {
-		$types = []; ///< @var array [$type => $maximum_unsigned_length, ...]
-		$structured_types = []; ///< @var array [$description => [$type, ...], ...]
-		foreach ([
-			lang('Numbers') => ["tinyint" => 3, "smallint" => 5, "mediumint" => 8, "int" => 10, "bigint" => 20, "decimal" => 66, "float" => 12, "double" => 21],
-			lang('Date and time') => ["date" => 10, "datetime" => 19, "timestamp" => 19, "time" => 10, "year" => 4],
-			lang('Strings') => ["char" => 255, "varchar" => 65535, "tinytext" => 255, "text" => 65535, "mediumtext" => 16777215, "longtext" => 4294967295],
-			lang('Lists') => ["enum" => 65535, "set" => 64],
-			lang('Binary') => ["bit" => 20, "binary" => 255, "varbinary" => 65535, "tinyblob" => 255, "blob" => 65535, "mediumblob" => 16777215, "longblob" => 4294967295],
-			lang('Geometry') => ["geometry" => 0, "point" => 0, "linestring" => 0, "polygon" => 0, "multipoint" => 0, "multilinestring" => 0, "multipolygon" => 0, "geometrycollection" => 0],
-		] as $key => $val) {
-			$types += $val;
-			$structured_types[$key] = array_keys($val);
-		}
 		return [
 			'possible_drivers' => ["MySQLi", "MySQL", "PDO_MySQL"],
 			'jush' => "sql", ///< @var string JUSH identifier
-			'types' => $types,
-			'structured_types' => $structured_types,
 			'unsigned' => ["unsigned", "zerofill", "unsigned zerofill"], ///< @var array number variants
 			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "REGEXP", "IN", "FIND_IN_SET", "IS NULL", "NOT LIKE", "NOT REGEXP", "NOT IN", "IS NOT NULL", "SQL"], ///< @var array operators used in select
 			'operator_like' => "LIKE %%",

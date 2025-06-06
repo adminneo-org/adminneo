@@ -174,7 +174,30 @@ if (isset($_GET["oracle"])) {
 
 
 
-	class OracleDriver extends Driver {
+	class OracleDriver extends Driver
+	{
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			$this->types = [
+				lang('Numbers') => [
+					"number" => 38, "binary_float" => 12, "binary_double" => 21,
+				],
+				lang('Date and time') => [
+					"date" => 10, "timestamp" => 29, "interval year" => 12, "interval day" => 28, //! year(), day() to second()
+				],
+				lang('Strings') => [
+					"char" => 2000, "varchar2" => 4000,
+					"nchar" => 2000, "nvarchar2" => 4000,
+					"clob" => 4294967295, "nclob" => 4294967295,
+				],
+				lang('Binary') => [
+					"raw" => 2000, "long raw" => 2147483648,
+					"blob" => 4294967295, "bfile" => 4294967296,
+				],
+			];
+		}
 
 		//! support empty $set in insert()
 
@@ -567,22 +590,9 @@ ORDER BY PROCESS
 	}
 
 	function driver_config() {
-		$types = [];
-		$structured_types = [];
-		foreach ([
-			lang('Numbers') => ["number" => 38, "binary_float" => 12, "binary_double" => 21],
-			lang('Date and time') => ["date" => 10, "timestamp" => 29, "interval year" => 12, "interval day" => 28], //! year(), day() to second()
-			lang('Strings') => ["char" => 2000, "varchar2" => 4000, "nchar" => 2000, "nvarchar2" => 4000, "clob" => 4294967295, "nclob" => 4294967295],
-			lang('Binary') => ["raw" => 2000, "long raw" => 2147483648, "blob" => 4294967295, "bfile" => 4294967296],
-		] as $key => $val) {
-			$types += $val;
-			$structured_types[$key] = array_keys($val);
-		}
 		return [
 			'possible_drivers' => ["OCI8", "PDO_OCI"],
 			'jush' => "oracle",
-			'types' => $types,
-			'structured_types' => $structured_types,
 			'unsigned' => [],
 			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL", "SQL"],
 			'operator_like' => "LIKE %%",

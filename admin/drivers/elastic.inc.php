@@ -139,7 +139,29 @@ if (isset($_GET["elastic"])) {
 		}
 	}
 
-	class ElasticDriver extends Driver {
+	class ElasticDriver extends Driver
+	{
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			$this->types = [
+				lang('Numbers') => [
+					"long" => 3, "integer" => 5, "short" => 8, "byte" => 10,
+					"double" => 20, "float" => 66, "half_float" => 12, "scaled_float" => 21,
+					"boolean" => 1,
+				],
+				lang('Date and time') => [
+					"date" => 10,
+				],
+				lang('Strings') => [
+					"string" => 65535, "text" => 65535, "keyword" => 65535,
+				],
+				lang('Binary') => [
+					"binary" => 255,
+				],
+			];
+		}
 
 		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 		{
@@ -651,19 +673,6 @@ if (isset($_GET["elastic"])) {
 	}
 
 	function driver_config() {
-		$types = [];
-		$structured_types = [];
-
-		foreach ([
-			lang('Numbers') => ["long" => 3, "integer" => 5, "short" => 8, "byte" => 10, "double" => 20, "float" => 66, "half_float" => 12, "scaled_float" => 21, "boolean" => 1],
-			lang('Date and time') => ["date" => 10],
-			lang('Strings') => ["string" => 65535, "text" => 65535, "keyword" => 65535],
-			lang('Binary') => ["binary" => 255],
-		] as $key => $val) {
-			$types += $val;
-			$structured_types[$key] = array_keys($val);
-		}
-
 		return [
 			'possible_drivers' => ["json + allow_url_fopen"],
 			'jush' => "elastic",
@@ -677,8 +686,6 @@ if (isset($_GET["elastic"])) {
 			'functions' => [],
 			'grouping' => [],
 			'edit_functions' => [["json"]],
-			'types' => $types,
-			'structured_types' => $structured_types,
 		];
 	}
 }

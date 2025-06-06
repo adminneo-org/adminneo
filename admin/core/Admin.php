@@ -405,7 +405,7 @@ class Admin extends Origin
 	 */
 	public function printTableStructure(array $fields): void
 	{
-		global $structured_types, $jush;
+		global $jush;
 
 		echo "<div class='scrollable'>\n";
 		echo "<table class='nowrap'>\n";
@@ -413,13 +413,15 @@ class Admin extends Origin
 		echo "<thead><tr><th>", lang('Column'), "</th><td>", lang('Type'), "</td><td>", lang('Collation'), "</td>",
 			(support("comment") ? "<td>" . lang('Comment') . "</td>" : ""), "</thead>\n";
 
+		$user_types = Driver::get()->getUserTypes();
+
 		foreach ($fields as $field) {
 			echo "<tr>";
 			echo "<th>", h($field["field"]), "</th>";
 			echo "<td>";
 
 			$type = h($field["full_type"]);
-			if (in_array($type, (array) $structured_types[lang('User types')])) {
+			if (in_array($type, $user_types)) {
 				echo "<a href='" . h(ME . 'type=' . urlencode($type)) . "'>$type</a>";
 			} else {
 				echo $type;

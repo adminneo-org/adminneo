@@ -44,7 +44,7 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including AdminNeo inside a function.
-global $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $structured_types, $has_token, $token, $translations, $types, $unsigned, $VERSION;
+global $edit_functions, $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $has_token, $token, $translations, $unsigned, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
@@ -127,8 +127,6 @@ if (defined("AdminNeo\DRIVER")) {
 	$config = driver_config();
 	$possible_drivers = $config['possible_drivers'];
 	$jush = $config['jush'];
-	$types = $config['types'];
-	$structured_types = $config['structured_types'];
 	$unsigned = $config['unsigned'];
 	$operators = $config['operators'];
 	$operator_like = $config['operator_like'];

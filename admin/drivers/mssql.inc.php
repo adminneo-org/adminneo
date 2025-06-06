@@ -245,7 +245,32 @@ if (isset($_GET["mssql"])) {
 	}
 
 
-	class MsSqlDriver extends Driver {
+	class MsSqlDriver extends Driver
+	{
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			//! use sys.types
+			$this->types = [
+				lang('Numbers') => [
+					"tinyint" => 3, "smallint" => 5, "int" => 10, "bigint" => 20,
+					"bit" => 1, "decimal" => 0, "real" => 12, "float" => 53,
+					"smallmoney" => 10, "money" => 20,
+				],
+				lang('Date and time') => [
+					"date" => 10, "smalldatetime" => 19, "datetime" => 19, "datetime2" => 19, "time" => 8,
+					"datetimeoffset" => 10,
+				],
+				lang('Strings') => [
+					"char" => 8000, "varchar" => 8000, "text" => 2147483647,
+					"nchar" => 4000, "nvarchar" => 4000, "ntext" => 1073741823,
+				],
+				lang('Binary') => [
+					"binary" => 8000, "varbinary" => 8000, "image" => 2147483647,
+				],
+			];
+		}
 
 		public function insertUpdate(string $table, array $records, array $primary)
         {
@@ -758,22 +783,10 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 	function driver_config() {
 		global $on_actions;
 		$on_actions = str_replace('RESTRICT|', '', $on_actions);
-		$types = [];
-		$structured_types = [];
-		foreach ([ //! use sys.types
-			lang('Numbers') => ["tinyint" => 3, "smallint" => 5, "int" => 10, "bigint" => 20, "bit" => 1, "decimal" => 0, "real" => 12, "float" => 53, "smallmoney" => 10, "money" => 20],
-			lang('Date and time') => ["date" => 10, "smalldatetime" => 19, "datetime" => 19, "datetime2" => 19, "time" => 8, "datetimeoffset" => 10],
-			lang('Strings') => ["char" => 8000, "varchar" => 8000, "text" => 2147483647, "nchar" => 4000, "nvarchar" => 4000, "ntext" => 1073741823],
-			lang('Binary') => ["binary" => 8000, "varbinary" => 8000, "image" => 2147483647],
-		] as $key => $val) {
-			$types += $val;
-			$structured_types[$key] = array_keys($val);
-		}
+
 		return [
 			'possible_drivers' => ["SQLSRV", "MSSQL", "PDO_SQLSRV", "PDO_DBLIB"],
 			'jush' => "mssql",
-			'types' => $types,
-			'structured_types' => $structured_types,
 			'unsigned' => [],
 			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL"],
 			'operator_like' => "LIKE %%",

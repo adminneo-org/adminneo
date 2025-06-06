@@ -225,7 +225,51 @@ if (isset($_GET["pgsql"])) {
 
 
 
-	class PgSqlDriver extends Driver {
+	class PgSqlDriver extends Driver
+	{
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			//! arrays
+			$this->types = [
+				lang('Numbers') => [
+					"smallint" => 5, "integer" => 10, "bigint" => 19,
+					"boolean" => 1, "numeric" => 0,
+					"real" => 7, "double precision" => 16, "money" => 20,
+				],
+				lang('Date and time') => [
+					"date" => 13, "time" => 17, "timestamp" => 20, "timestamptz" => 21,
+					"interval" => 0,
+				],
+				lang('Strings') => [
+					"character" => 0, "character varying" => 0, "text" => 0,
+					"tsquery" => 0, "tsvector" => 0,
+					"uuid" => 0, "xml" => 0,
+				],
+				lang('Binary') => [
+					"bit" => 0, "bit varying" => 0, "bytea" => 0,
+				],
+				lang('Network') => [
+					"cidr" => 43, "inet" => 43,
+					"macaddr" => 17, "macaddr8" => 23,
+					"txid_snapshot" => 0,
+				],
+				lang('Geometry') => [
+					"box" => 0, "circle" => 0, "line" => 0,
+					"lseg" => 0, "path" => 0,
+					"point" => 0, "polygon" => 0,
+				],
+			];
+
+			if (min_version('9.2', '0', $connection)) {
+				$this->types[lang('Strings')]["json"] = 4294967295;
+
+				if (min_version('9.4', '0', $connection)) {
+					$this->types[lang('Strings')]["jsonb"] = 4294967295;
+				}
+			}
+		}
 
 		public function insertUpdate(string $table, array $records, array $primary): bool
 		{
@@ -320,8 +364,6 @@ if (isset($_GET["pgsql"])) {
 	 */
 	function connect(bool $primary = false)
 	{
-		global $types, $structured_types;
-
 		$connection = $primary ? PgSqlConnection::create() : PgSqlConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
@@ -331,16 +373,6 @@ if (isset($_GET["pgsql"])) {
 
 		if (min_version(9, 0, $connection)) {
 			$connection->query("SET application_name = 'AdminNeo'");
-
-			if (min_version(9.2, 0, $connection)) {
-				$structured_types[lang('Strings')][] = "json";
-				$types["json"] = 4294967295;
-
-				if (min_version(9.4, 0, $connection)) {
-					$structured_types[lang('Strings')][] = "jsonb";
-					$types["jsonb"] = 4294967295;
-				}
-			}
 		}
 
 		return $connection;
@@ -818,20 +850,14 @@ AND typelem = 0"
 
 	function set_schema(string $schema, ?Connection $connection = null): bool
 	{
-		global $types, $structured_types;
-
 		if (!$connection) {
 			$connection = Connection::get();
 		}
 
 		$result = (bool)$connection->query("SET search_path TO " . idf_escape($schema));
 
-		foreach (types() as $key => $type) { //! get types from current_schemas('t')
-			if (!isset($types[$type])) {
-				$types[$type] = $key;
-				$structured_types[lang('User types')][] = $type;
-			}
-		}
+		//! get types from current_schemas('t')
+		Driver::get()->setUserTypes(types());
 
 		return $result;
 	}
@@ -981,24 +1007,9 @@ AND typelem = 0"
 	}
 
 	function driver_config() {
-		$types = [];
-		$structured_types = [];
-		foreach ([ //! arrays
-			lang('Numbers') => ["smallint" => 5, "integer" => 10, "bigint" => 19, "boolean" => 1, "numeric" => 0, "real" => 7, "double precision" => 16, "money" => 20],
-			lang('Date and time') => ["date" => 13, "time" => 17, "timestamp" => 20, "timestamptz" => 21, "interval" => 0],
-			lang('Strings') => ["character" => 0, "character varying" => 0, "text" => 0, "tsquery" => 0, "tsvector" => 0, "uuid" => 0, "xml" => 0],
-			lang('Binary') => ["bit" => 0, "bit varying" => 0, "bytea" => 0],
-			lang('Network') => ["cidr" => 43, "inet" => 43, "macaddr" => 17, "macaddr8" => 23, "txid_snapshot" => 0],
-			lang('Geometry') => ["box" => 0, "circle" => 0, "line" => 0, "lseg" => 0, "path" => 0, "point" => 0, "polygon" => 0],
-		] as $key => $val) { //! can be retrieved from pg_type
-			$types += $val;
-			$structured_types[$key] = array_keys($val);
-		}
 		return [
 			'possible_drivers' => ["PgSQL", "PDO_PgSQL"],
 			'jush' => "pgsql",
-			'types' => $types,
-			'structured_types' => $structured_types,
 			'unsigned' => [],
 			'operators' => ["=", "<", ">", "<=", ">=", "!=", "~", "~*", "!~", "!~*", "LIKE", "LIKE %%", "ILIKE", "ILIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL"], // no "SQL" to avoid CSRF
 			'operator_like' => "LIKE %%",

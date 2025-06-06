@@ -31,6 +31,7 @@ if (!$row) {
 <p>
 <?php
 if ($TYPE != "") {
+	$types = Driver::get()->getTypes();
 	$enums = type_values($types[$TYPE]);
 	if ($enums) {
 		echo "<code class='jush-$jush'>ENUM (" . h($enums) . ")</code>\n<p>";
