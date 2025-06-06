@@ -378,6 +378,7 @@ if (isset($_GET["pgsql"])) {
 				"ILIKE", "ILIKE %%", "NOT ILIKE",
 				"IN", "NOT IN",
 				"IS NULL", "IS NOT NULL",
+				"SQL", // TODO same-site CSRF
 			];
 
 			$this->functions = [
