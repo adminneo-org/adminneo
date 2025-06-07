@@ -128,8 +128,6 @@ if (defined("AdminNeo\DRIVER")) {
 	$possible_drivers = $config['possible_drivers'];
 	$jush = $config['jush'];
 	$unsigned = $config['unsigned'];
-
-	Admin::get()->setSystemObjects($config["system_databases"] ?? [], $config["system_schemas"] ?? []);
 } else {
 	define("AdminNeo\DRIVER", null);
 }

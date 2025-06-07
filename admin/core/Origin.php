@@ -4,12 +4,6 @@ namespace AdminNeo;
 
 abstract class Origin extends Plugin
 {
-	/** @var array */
-	private $systemDatabases;
-
-	/** @var array */
-	private $systemSchemas;
-
 	/** @var string[] */
 	private $errors;
 
@@ -95,12 +89,6 @@ abstract class Origin extends Plugin
 	public abstract function getLikeOperator(): ?string;
 
 	public abstract function getRegexpOperator(): ?string;
-
-	public function setSystemObjects(array $databases, array $schemas): void
-	{
-		$this->systemDatabases = $databases;
-		$this->systemSchemas = $schemas;
-	}
 
 	/**
 	 * Initializes the Admin. This method is called right before the authentication process.
@@ -214,7 +202,9 @@ abstract class Origin extends Plugin
 	 */
 	public function getDatabases($flush = true): array
 	{
-		return $this->filterListWithWildcards(get_databases($flush), $this->config->getHiddenDatabases(), false, $this->systemDatabases);
+		return $this->filterListWithWildcards(
+			get_databases($flush), $this->config->getHiddenDatabases(), false, Driver::get()->getSystemDatabases()
+		);
 	}
 
 	/**
@@ -224,7 +214,9 @@ abstract class Origin extends Plugin
 	 */
 	public function getSchemas(): array
 	{
-		return $this->filterListWithWildcards(schemas(), $this->config->getHiddenSchemas(), false, $this->systemSchemas);
+		return $this->filterListWithWildcards(
+			schemas(), $this->config->getHiddenSchemas(), false, Driver::get()->getSystemSchemas()
+		);
 	}
 
 	/**

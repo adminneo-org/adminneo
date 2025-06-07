@@ -31,6 +31,12 @@ abstract class Driver
 	/** @var array Array of ["$type|$type2" => "$function/$function2"] functions used in editing, [0] - edit and insert, [1] - edit only */
 	protected $editFunctions = [];
 
+	/** @var array Array of internal system databases. */
+	protected $systemDatabases = [];
+
+	/** @var array Array of internal system schemas. */
+	protected $systemSchemas = [];
+
 	/** @var ?Driver */
 	private static $instance = null;
 
@@ -122,6 +128,16 @@ abstract class Driver
 	public function getEditFunctions(): array
 	{
 		return $this->editFunctions;
+	}
+
+	public function getSystemDatabases(): array
+	{
+		return $this->systemDatabases;
+	}
+
+	public function getSystemSchemas(): array
+	{
+		return $this->systemSchemas;
 	}
 
 	/**

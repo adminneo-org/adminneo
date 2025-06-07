@@ -196,6 +196,8 @@ if (isset($_GET["clickhouse"])) {
 				"sum", "min", "max", "avg",
 				"count", "count distinct",
 			];
+
+			$this->systemDatabases = ["INFORMATION_SCHEMA", "information_schema", "system"];
 		}
 
 		public function delete(string $table, string $queryWhere, int $limit = 0)
@@ -458,7 +460,6 @@ if (isset($_GET["clickhouse"])) {
 		return [
 			'jush' => "clickhouse",
 			'unsigned' => [],
-			"system_databases" => ["INFORMATION_SCHEMA", "information_schema", "system"],
 		];
 	}
 }

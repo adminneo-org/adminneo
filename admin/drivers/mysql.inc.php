@@ -267,6 +267,8 @@ if (isset($_GET["mysql"])) {
 				$this->types[lang('Numbers')]["vector"] = 16383;
 				$this->editFunctions[0]['vector'] = 'string_to_vector';
 			}
+
+			$this->systemDatabases = ["mysql", "information_schema", "performance_schema", "sys"];
 		}
 
 		public function insert(string $table, array $record)
@@ -1183,7 +1185,6 @@ if (isset($_GET["mysql"])) {
 			'possible_drivers' => ["MySQLi", "MySQL", "PDO_MySQL"],
 			'jush' => "sql", ///< @var string JUSH identifier
 			'unsigned' => ["unsigned", "zerofill", "unsigned zerofill"], ///< @var array number variants
-			"system_databases" => ["mysql", "information_schema", "performance_schema", "sys"],
 		];
 	}
 }

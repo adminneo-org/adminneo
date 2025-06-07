@@ -298,6 +298,8 @@ if (isset($_GET["mssql"])) {
 					"char|text" => "+",
 				]
 			];
+
+			$this->systemDatabases = ["INFORMATION_SCHEMA", "guest", "sys", "db_*"];
 		}
 
 		public function insertUpdate(string $table, array $records, array $primary)
@@ -816,7 +818,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 			'possible_drivers' => ["SQLSRV", "MSSQL", "PDO_SQLSRV", "PDO_DBLIB"],
 			'jush' => "mssql",
 			'unsigned' => [],
-			"system_schemas" => ["INFORMATION_SCHEMA", "guest", "sys", "db_*"],
 		];
 	}
 }
