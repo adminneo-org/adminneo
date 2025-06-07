@@ -802,10 +802,9 @@ class Admin extends Origin
 	 */
 	public function getFieldFunctions(array $field): array
 	{
-		global $edit_functions;
 		$return = ($field["null"] ? "NULL/" : "");
 		$update = isset($_GET["select"]) || where($_GET);
-		foreach ($edit_functions as $key => $functions) {
+		foreach (Driver::get()->getEditFunctions() as $key => $functions) {
 			if (!$key || (!isset($_GET["call"]) && $update)) { // relative functions
 				foreach ($functions as $pattern => $val) {
 					if (!$pattern || preg_match("~$pattern~", $field["type"])) {

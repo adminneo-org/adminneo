@@ -446,7 +446,6 @@ if (isset($_GET["clickhouse"])) {
 			'operator_like' => "LIKE %%",
 			'functions' => [],
 			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
-			'edit_functions' => [],
 			"system_databases" => ["INFORMATION_SCHEMA", "information_schema", "system"],
 		];
 	}

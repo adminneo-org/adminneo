@@ -215,6 +215,19 @@ if (isset($_GET["mysql"])) {
 				],
 			];
 
+			$this->editFunctions = [
+				[
+					"char" => "md5/sha1/password/encrypt/uuid",
+					"binary" => "md5/sha1",
+					"date|time" => "now",
+				], [
+					number_type() => "+/-",
+					"date" => "+ interval/- interval",
+					"time" => "addtime/subtime",
+					"char|text" => "concat",
+				]
+			];
+
 			if (min_version('5.7.8', '10.2', $connection)) {
 				$this->types[lang('Strings')]["json"] = 4294967295;
 			}
@@ -222,10 +235,12 @@ if (isset($_GET["mysql"])) {
 			// UUID data type for Mariadb >= 10.7
 			if (min_version('', '10.7', $connection)) {
 				$this->types[lang('Strings')]["uuid"] = 128;
+				$this->editFunctions[0]['uuid'] = 'uuid';
 			}
 
 			if (min_version('9', '', $connection)) {
 				$this->types[lang('Numbers')]["vector"] = 16383;
+				$this->editFunctions[0]['vector'] = 'string_to_vector';
 			}
 		}
 
@@ -348,8 +363,6 @@ if (isset($_GET["mysql"])) {
 	 */
 	function connect(bool $primary = false)
 	{
-		global $edit_functions;
-
 		$connection = $primary ? MySqlConnection::create() : MySqlConnection::createSecondary();
 
 		$credentials = Admin::get()->getCredentials();
@@ -365,15 +378,6 @@ if (isset($_GET["mysql"])) {
 
 		$connection->setCharset(charset($connection));
 		$connection->query("SET sql_quote_show_create = 1, autocommit = 1");
-
-		// UUID data type for Mariadb >= 10.7
-		if (min_version('', '10.7', $connection)) {
-			$edit_functions[0]['uuid'] = 'uuid';
-		}
-
-		if (min_version('9', '', $connection)) {
-			$edit_functions[0]['vector'] = 'string_to_vector';
-		}
 
 		return $connection;
 	}
@@ -1147,7 +1151,7 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/** Get driver config
-	* @return array ['possible_drivers' => , 'jush' => , 'unsigned' => , 'operators' => , 'functions' => , 'grouping' => , 'edit_functions' => ]
+	* @return array ['possible_drivers' => , 'jush' => , 'unsigned' => , 'operators' => , 'functions' => , 'grouping' => ]
 	*/
 	function driver_config() {
 		return [
@@ -1159,18 +1163,6 @@ if (isset($_GET["mysql"])) {
 			'operator_regexp' => 'REGEXP',
 			'functions' => ["char_length", "date", "from_unixtime", "unix_timestamp", "lower", "round", "floor", "ceil", "sec_to_time", "time_to_sec", "upper"], ///< @var array functions used in select
 			'grouping' => ["avg", "count", "count distinct", "group_concat", "max", "min", "sum"], ///< @var array grouping functions used in select
-			'edit_functions' => [ ///< @var array of array("$type|$type2" => "$function/$function2") functions used in editing, [0] - edit and insert, [1] - edit only
-				[
-					"char" => "md5/sha1/password/encrypt/uuid",
-					"binary" => "md5/sha1",
-					"date|time" => "now",
-				], [
-					number_type() => "+/-",
-					"date" => "+ interval/- interval",
-					"time" => "addtime/subtime",
-					"char|text" => "concat",
-				]
-			],
 			"system_databases" => ["mysql", "information_schema", "performance_schema", "sys"],
 		];
 	}

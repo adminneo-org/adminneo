@@ -180,8 +180,16 @@ if (isset($_GET["mongo"])) {
 		}
 
 
-		class MongoDriver extends Driver {
+		class MongoDriver extends Driver
+		{
 			public $primary = "_id";
+
+			protected function __construct(Connection $connection, $admin)
+			{
+				parent::__construct($connection, $admin);
+
+				$this->editFunctions = [["json"]];
+			}
 
 			public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
 			{
@@ -600,7 +608,6 @@ if (isset($_GET["mongo"])) {
 			'operator_regexp' => 'regex',
 			'functions' => [],
 			'grouping' => [],
-			'edit_functions' => [["json"]],
 		];
 	}
 }

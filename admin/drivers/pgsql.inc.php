@@ -269,6 +269,17 @@ if (isset($_GET["pgsql"])) {
 					$this->types[lang('Strings')]["jsonb"] = 4294967295;
 				}
 			}
+
+			$this->editFunctions = [
+				[
+					"char" => "md5",
+					"date|time" => "now",
+				], [
+					number_type() => "+/-",
+					"date|time" => "+ interval/- interval", //! escape
+					"char|text" => "||",
+				]
+			];
 		}
 
 		public function insertUpdate(string $table, array $records, array $primary): bool
@@ -1016,16 +1027,6 @@ AND typelem = 0"
 			'operator_regexp' => '~*',
 			'functions' => ["char_length", "lower", "round", "to_hex", "to_timestamp", "upper"],
 			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
-			'edit_functions' => [
-				[
-					"char" => "md5",
-					"date|time" => "now",
-				], [
-					number_type() => "+/-",
-					"date|time" => "+ interval/- interval", //! escape
-					"char|text" => "||",
-				]
-			],
 			'c_style_escapes' => true,
 			"system_databases" => ["template1"],
 			"system_schemas" => ["information_schema", "pg_catalog", "pg_toast", "pg_temp_*", "pg_toast_temp_*"],

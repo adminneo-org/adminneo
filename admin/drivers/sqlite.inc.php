@@ -155,6 +155,16 @@ if (isset($_GET["sqlite"])) {
 					"text" => 0, "blob" => 0,
 				]
 			];
+
+			$this->editFunctions = [
+				[
+					// "text" => "date('now')/time('now')/datetime('now')",
+				], [
+					"integer|real|numeric" => "+/-",
+					// "text" => "date/time/datetime",
+					"text" => "||",
+				]
+			];
 		}
 
 		public function getStructuredTypes(): array
@@ -802,15 +812,6 @@ if (isset($_GET["sqlite"])) {
 			'operator_like' => "LIKE %%",
 			'functions' => ["hex", "length", "lower", "round", "unixepoch", "upper"],
 			'grouping' => ["avg", "count", "count distinct", "group_concat", "max", "min", "sum"],
-			'edit_functions' => [
-				[
-					// "text" => "date('now')/time('now')/datetime('now')",
-				], [
-					"integer|real|numeric" => "+/-",
-					// "text" => "date/time/datetime",
-					"text" => "||",
-				]
-			],
 		];
 	}
 }

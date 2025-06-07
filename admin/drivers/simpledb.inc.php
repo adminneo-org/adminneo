@@ -151,8 +151,16 @@ if (isset($_GET["simpledb"])) {
 
 
 
-	class SimpleDbDriver extends Driver {
+	class SimpleDbDriver extends Driver
+	{
 		public $primary = "itemName()";
+
+		protected function __construct(Connection $connection, $admin)
+		{
+			parent::__construct($connection, $admin);
+
+			$this->editFunctions = [["json"]];
+		}
 
 		private function chunkRequest($ids, $action, $params, $expand = []) {
 			foreach (array_chunk($ids, 25) as $chunk) {
@@ -540,7 +548,6 @@ if (isset($_GET["simpledb"])) {
 			'operator_like' => "LIKE %%",
 			'functions' => [],
 			'grouping' => ["count"],
-			'edit_functions' => [["json"]],
 		];
 	}
 }

@@ -197,6 +197,17 @@ if (isset($_GET["oracle"])) {
 					"blob" => 4294967295, "bfile" => 4294967296,
 				],
 			];
+
+			$this->editFunctions = [
+				[ //! no parentheses
+					"date" => "current_date",
+					"timestamp" => "current_timestamp",
+				], [
+					"number|float|double" => "+/-",
+					"date|timestamp" => "+ interval/- interval",
+					"char|clob" => "||",
+				]
+			];
 		}
 
 		//! support empty $set in insert()
@@ -598,16 +609,6 @@ ORDER BY PROCESS
 			'operator_like' => "LIKE %%",
 			'functions' => ["length", "lower", "round", "upper"],
 			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
-			'edit_functions' => [
-				[ //! no parentheses
-					"date" => "current_date",
-					"timestamp" => "current_timestamp",
-				], [
-					"number|float|double" => "+/-",
-					"date|timestamp" => "+ interval/- interval",
-					"char|clob" => "||",
-				]
-			],
 		];
 	}
 }

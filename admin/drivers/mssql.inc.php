@@ -270,6 +270,15 @@ if (isset($_GET["mssql"])) {
 					"binary" => 8000, "varbinary" => 8000, "image" => 2147483647,
 				],
 			];
+
+			$this->editFunctions = [
+				[
+					"date|time" => "getdate",
+				], [
+					"int|decimal|real|float|money|datetime" => "+/-",
+					"char|text" => "+",
+				]
+			];
 		}
 
 		public function insertUpdate(string $table, array $records, array $primary)
@@ -792,14 +801,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 			'operator_like' => "LIKE %%",
 			'functions' => ["len", "lower", "round", "upper"],
 			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
-			'edit_functions' => [
-				[
-					"date|time" => "getdate",
-				], [
-					"int|decimal|real|float|money|datetime" => "+/-",
-					"char|text" => "+",
-				]
-			],
 			"system_schemas" => ["INFORMATION_SCHEMA", "guest", "sys", "db_*"],
 		];
 	}

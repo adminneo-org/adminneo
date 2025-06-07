@@ -161,6 +161,8 @@ if (isset($_GET["elastic"])) {
 					"binary" => 255,
 				],
 			];
+
+			$this->editFunctions = [["json"]];
 		}
 
 		public function select(string $table, array $select, array $where, array $group, array $order = [], ?int $limit = 1, int $page = 0, bool $print = false)
@@ -685,7 +687,6 @@ if (isset($_GET["elastic"])) {
 			'operator_regexp' => "should(regexp)",
 			'functions' => [],
 			'grouping' => [],
-			'edit_functions' => [["json"]],
 		];
 	}
 }

@@ -13,6 +13,9 @@ abstract class Driver
 	/** @var array [$description => [$type => $maximum_unsigned_length, ...], ...] */
 	protected $types = [];
 
+	/** @var array Array of ["$type|$type2" => "$function/$function2"] functions used in editing, [0] - edit and insert, [1] - edit only */
+	protected $editFunctions = [];
+
 	/** @var ?Driver */
 	private static $instance = null;
 
@@ -74,6 +77,11 @@ abstract class Driver
 	public function getUserTypes(): array
 	{
 		return array_keys($this->types[lang('User types')] ?? []);
+	}
+
+	public function getEditFunctions(): array
+	{
+		return $this->editFunctions;
 	}
 
 	/**
