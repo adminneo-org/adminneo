@@ -188,6 +188,19 @@ if (isset($_GET["mongo"])) {
 			{
 				parent::__construct($connection, $admin);
 
+				$this->operators = [
+					"=", "!=",
+					">", "<", ">=", "<=",
+					"regex",
+					"(f)=", "(f)!=",
+					"(f)>", "(f)<", "(f)>=", "(f)<=",
+					"(date)=", "(date)!=",
+					"(date)>", "(date)<", "(date)>=", "(date)<=",
+				];
+
+				$this->likeOperator = "LIKE %%"; // TODO: LIKE operator is not listed in operators.
+				$this->regexpOperator = "regex";
+
 				$this->editFunctions = [["json"]];
 			}
 
@@ -583,31 +596,6 @@ if (isset($_GET["mongo"])) {
 		return [
 			'possible_drivers' => ["mongodb"],
 			'jush' => "mongo",
-			'operators' => [
-				"=",
-				"!=",
-				">",
-				"<",
-				">=",
-				"<=",
-				"regex",
-				"(f)=",
-				"(f)!=",
-				"(f)>",
-				"(f)<",
-				"(f)>=",
-				"(f)<=",
-				"(date)=",
-				"(date)!=",
-				"(date)>",
-				"(date)<",
-				"(date)>=",
-				"(date)<=",
-			],
-			'operator_like' => "LIKE %%", // TODO: LIKE operator is not listed in operators.
-			'operator_regexp' => 'regex',
-			'functions' => [],
-			'grouping' => [],
 		];
 	}
 }

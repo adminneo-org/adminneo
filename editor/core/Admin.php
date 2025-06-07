@@ -6,12 +6,7 @@ class Admin extends Origin
 {
 	private $values = [];
 
-	public function setOperators(?array $operators, ?string $likeOperator, ?string $regexpOperator): void
-	{
-		//
-	}
-
-	public function getOperators(): ?array
+	public function getOperators(): array
 	{
 		return ["<=", ">="];
 	}

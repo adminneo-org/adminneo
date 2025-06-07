@@ -4,33 +4,19 @@ namespace AdminNeo;
 
 class Admin extends Origin
 {
-	/** @var ?array operators used in select, null for all operators */
-	private $operators = null;
-	/** @var ?string operator for LIKE condition */
-	private $likeOperator = null;
-	/** @var ?string operator for regular expression condition */
-	private $regexpOperator = null;
-
-	public function setOperators(?array $operators, ?string $likeOperator, ?string $regexpOperator): void
+    public function getOperators(): array
 	{
-		$this->operators = $operators;
-		$this->likeOperator = $likeOperator;
-		$this->regexpOperator = $regexpOperator;
-	}
-
-    public function getOperators(): ?array
-	{
-		return $this->operators;
+		return Driver::get()->getOperators();
 	}
 
 	public function getLikeOperator(): ?string
 	{
-		return $this->likeOperator;
+		return Driver::get()->getLikeOperator();
 	}
 
 	public function getRegexpOperator(): ?string
 	{
-		return $this->regexpOperator;
+		return Driver::get()->getRegexpOperator();
 	}
 
 	/**
@@ -513,8 +499,6 @@ class Admin extends Origin
 	 */
 	public function printSelectionColumns(array $select, array $columns): void
 	{
-		global $functions, $grouping;
-
 		print_fieldset_start("select", lang('Select'), "columns", (bool)$select, true);
 
 		$_GET["columns"][""] = [];
@@ -533,9 +517,9 @@ class Admin extends Origin
 			echo "<div ", ($key != "" ? "" : "class='no-sort'"), ">",
 				icon("handle", "handle jsonly");
 
-			if ($functions || $grouping) {
+			if (Driver::get()->getFunctions() || Driver::get()->getGrouping()) {
 				echo "<select name='columns[$i][fun]'>",
-					optionlist([-1 => ""] + array_filter([lang('Functions') => $functions, lang('Aggregation') => $grouping]), $val["fun"]),
+					optionlist([-1 => ""] + array_filter([lang('Functions') => Driver::get()->getFunctions(), lang('Aggregation') => Driver::get()->getGrouping()]), $val["fun"]),
 					"</select>",
 					help_script_command("value && value.replace(/ |\$/, '(') + ')'", true),
 					script("qsl('select').onchange = (event) => { " . ($key !== "" ? "" : " qsl('select, input:not(.remove)', event.target.parentNode).onchange();") . " };", ""),
@@ -576,7 +560,7 @@ class Admin extends Origin
 
 		$change_next = "this.parentNode.firstChild.onchange();";
 		foreach (array_merge((array) $_GET["where"], [[]]) as $i => $val) {
-			if (!$val || ("$val[col]$val[val]" != "" && in_array($val["op"], $this->operators))) {
+			if (!$val || ("$val[col]$val[val]" != "" && in_array($val["op"], $this->getOperators()))) {
 				echo "<div>",
 					select_input(
 						" name='where[$i][col]'",
@@ -585,7 +569,7 @@ class Admin extends Origin
 						($val ? "selectFieldChange" : "selectAddRow"),
 						"(" . lang('anywhere') . ")"
 					),
-					html_select("where[$i][op]", $this->operators, $val["op"], $change_next),
+					html_select("where[$i][op]", $this->getOperators(), $val["op"], $change_next),
 					"<input type='search' class='input' name='where[$i][val]' value='" . h($val["val"]) . "'>",
 					script("mixin(qsl('input'), {oninput: function () { $change_next }, onkeydown: selectSearchKeydown, onsearch: selectSearchSearch});", ""),
 					" <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>",
@@ -688,13 +672,12 @@ class Admin extends Origin
 	 */
 	public function processSelectionColumns(array $columns, array $indexes): array
 	{
-		global $functions, $grouping;
 		$select = []; // select expressions, empty for *
 		$group = []; // expressions without aggregation - will be used for GROUP BY if an aggregation function is used
 		foreach ((array) $_GET["columns"] as $key => $val) {
-			if ($val["fun"] == "count" || ($val["col"] != "" && (!$val["fun"] || in_array($val["fun"], $functions) || in_array($val["fun"], $grouping)))) {
+			if ($val["fun"] == "count" || ($val["col"] != "" && (!$val["fun"] || in_array($val["fun"], Driver::get()->getFunctions()) || in_array($val["fun"], Driver::get()->getGrouping())))) {
 				$select[$key] = apply_sql_function($val["fun"], ($val["col"] != "" ? idf_escape($val["col"]) : "*"));
-				if (!in_array($val["fun"], $grouping)) {
+				if (!in_array($val["fun"], Driver::get()->getGrouping())) {
 					$group[] = $select[$key];
 				}
 			}
@@ -722,7 +705,7 @@ class Admin extends Origin
 			$op = $where["op"];
 			$val = $where["val"];
 
-			if ("$col$val" != "" && in_array($op, $this->operators)) {
+			if ("$col$val" != "" && in_array($op, $this->getOperators())) {
 				$prefix = "";
 				$cond = " $op";
 

@@ -90,9 +90,7 @@ abstract class Origin extends Plugin
 		return $this->config;
 	}
 
-	public abstract function setOperators(?array $operators, ?string $likeOperator, ?string $regexpOperator): void;
-
-	public abstract function getOperators(): ?array;
+	public abstract function getOperators(): array;
 
 	public abstract function getLikeOperator(): ?string;
 

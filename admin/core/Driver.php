@@ -13,6 +13,21 @@ abstract class Driver
 	/** @var array [$description => [$type => $maximum_unsigned_length, ...], ...] */
 	protected $types = [];
 
+	/** @var array Operators used in select. */
+	protected $operators = [];
+
+	/** @var ?String Operator for LIKE condition. */
+	protected $likeOperator = null;
+
+	/** @var ?String Operator for regular expression condition. */
+	protected $regexpOperator = null;
+
+	/** @var array Functions used in select. */
+	protected $functions = [];
+
+	/** @var array Grouping functions used in select. */
+	protected $grouping = [];
+
 	/** @var array Array of ["$type|$type2" => "$function/$function2"] functions used in editing, [0] - edit and insert, [1] - edit only */
 	protected $editFunctions = [];
 
@@ -77,6 +92,31 @@ abstract class Driver
 	public function getUserTypes(): array
 	{
 		return array_keys($this->types[lang('User types')] ?? []);
+	}
+
+	public function getOperators(): array
+	{
+		return $this->operators;
+	}
+
+	public function getLikeOperator(): ?string
+	{
+		return $this->likeOperator;
+	}
+
+	public function getRegexpOperator(): ?string
+	{
+		return $this->regexpOperator;
+	}
+
+	public function getFunctions(): array
+	{
+		return $this->functions;
+	}
+
+	public function getGrouping(): array
+	{
+		return $this->grouping;
 	}
 
 	public function getEditFunctions(): array

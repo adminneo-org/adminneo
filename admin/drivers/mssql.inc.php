@@ -271,6 +271,25 @@ if (isset($_GET["mssql"])) {
 				],
 			];
 
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"LIKE", "LIKE %%", "NOT LIKE",
+				"IN", "NOT IN",
+				"IS NULL", "IS NOT NULL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+
+			$this->functions = [
+				"len", "lower", "upper",
+				"round",
+			];
+
+			$this->grouping = [
+				"sum", "min", "max", "avg",
+				"count", "count distinct",
+			];
+
 			$this->editFunctions = [
 				[
 					"date|time" => "getdate",
@@ -797,10 +816,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 			'possible_drivers' => ["SQLSRV", "MSSQL", "PDO_SQLSRV", "PDO_DBLIB"],
 			'jush' => "mssql",
 			'unsigned' => [],
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL"],
-			'operator_like' => "LIKE %%",
-			'functions' => ["len", "lower", "round", "upper"],
-			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
 			"system_schemas" => ["INFORMATION_SCHEMA", "guest", "sys", "db_*"],
 		];
 	}

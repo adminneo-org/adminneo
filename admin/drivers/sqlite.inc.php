@@ -156,6 +156,29 @@ if (isset($_GET["sqlite"])) {
 				]
 			];
 
+			// REGEXP can be a user defined function.
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"LIKE", "LIKE %%", "NOT LIKE",
+				"IN", "NOT IN",
+				"IS NULL", "IS NOT NULL",
+				"SQL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+
+			$this->functions = [
+				"length", "lower", "upper",
+				"round",
+				"hex", "unixepoch",
+			];
+
+			$this->grouping = [
+				"sum", "min", "max", "avg",
+				"count", "count distinct",
+				"group_concat",
+			];
+
 			$this->editFunctions = [
 				[
 					// "text" => "date('now')/time('now')/datetime('now')",
@@ -808,10 +831,6 @@ if (isset($_GET["sqlite"])) {
 			'possible_drivers' => [(isset($_GET["sqlite"]) ? "SQLite3" : "SQLite"), "PDO_SQLite"],
 			'jush' => "sqlite",
 			'unsigned' => [],
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL", "SQL"], // REGEXP can be user defined function
-			'operator_like' => "LIKE %%",
-			'functions' => ["hex", "length", "lower", "round", "unixepoch", "upper"],
-			'grouping' => ["avg", "count", "count distinct", "group_concat", "max", "min", "sum"],
 		];
 	}
 }

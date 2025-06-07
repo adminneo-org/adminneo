@@ -215,6 +215,31 @@ if (isset($_GET["mysql"])) {
 				],
 			];
 
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"LIKE", "LIKE %%", "NOT LIKE",
+				"IN", "NOT IN", "FIND_IN_SET",
+				"IS NULL", "IS NOT NULL",
+				"REGEXP", "NOT REGEXP",
+				"SQL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+			$this->regexpOperator = "REGEXP";
+
+			$this->functions = [
+				"char_length", "lower", "upper",
+				"round", "floor", "ceil",
+				"date", "from_unixtime", "unix_timestamp",
+				"sec_to_time", "time_to_sec",
+			];
+
+			$this->grouping = [
+				"sum", "min", "max", "avg",
+				"count", "count distinct",
+				"group_concat",
+			];
+
 			$this->editFunctions = [
 				[
 					"char" => "md5/sha1/password/encrypt/uuid",
@@ -1151,18 +1176,13 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/** Get driver config
-	* @return array ['possible_drivers' => , 'jush' => , 'unsigned' => , 'operators' => , 'functions' => , 'grouping' => ]
+	* @return array ['possible_drivers' => , 'jush' => , 'unsigned' => ]
 	*/
 	function driver_config() {
 		return [
 			'possible_drivers' => ["MySQLi", "MySQL", "PDO_MySQL"],
 			'jush' => "sql", ///< @var string JUSH identifier
 			'unsigned' => ["unsigned", "zerofill", "unsigned zerofill"], ///< @var array number variants
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "REGEXP", "IN", "FIND_IN_SET", "IS NULL", "NOT LIKE", "NOT REGEXP", "NOT IN", "IS NOT NULL", "SQL"], ///< @var array operators used in select
-			'operator_like' => "LIKE %%",
-			'operator_regexp' => 'REGEXP',
-			'functions' => ["char_length", "date", "from_unixtime", "unix_timestamp", "lower", "round", "floor", "ceil", "sec_to_time", "time_to_sec", "upper"], ///< @var array functions used in select
-			'grouping' => ["avg", "count", "count distinct", "group_concat", "max", "min", "sum"], ///< @var array grouping functions used in select
 			"system_databases" => ["mysql", "information_schema", "performance_schema", "sys"],
 		];
 	}

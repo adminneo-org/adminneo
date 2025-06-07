@@ -180,6 +180,22 @@ if (isset($_GET["clickhouse"])) {
 					"FixedString" => 0,
 				],
 			];
+
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"~", "!~",
+				"LIKE", "LIKE %%", "NOT LIKE",
+				"IN", "NOT IN",
+				"IS NULL", "IS NOT NULL",
+				"SQL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+
+			$this->grouping = [
+				"sum", "min", "max", "avg",
+				"count", "count distinct",
+			];
 		}
 
 		public function delete(string $table, string $queryWhere, int $limit = 0)
@@ -442,10 +458,6 @@ if (isset($_GET["clickhouse"])) {
 		return [
 			'jush' => "clickhouse",
 			'unsigned' => [],
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "~", "!~", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL", "SQL"],
-			'operator_like' => "LIKE %%",
-			'functions' => [],
-			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
 			"system_databases" => ["INFORMATION_SCHEMA", "information_schema", "system"],
 		];
 	}

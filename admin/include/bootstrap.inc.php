@@ -44,7 +44,7 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including AdminNeo inside a function.
-global $enum_length, $error, $functions, $grouping, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $has_token, $token, $translations, $unsigned, $VERSION;
+global $enum_length, $error, $HTTPS, $inout, $jush, $LANG, $languages, $on_actions, $permanent, $has_token, $token, $translations, $unsigned, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
@@ -128,13 +128,7 @@ if (defined("AdminNeo\DRIVER")) {
 	$possible_drivers = $config['possible_drivers'];
 	$jush = $config['jush'];
 	$unsigned = $config['unsigned'];
-	$operators = $config['operators'];
-	$operator_like = $config['operator_like'];
-	$operator_regexp = $config['operator_regexp'];
-	$functions = $config['functions'];
-	$grouping = $config['grouping'];
 
-	Admin::get()->setOperators($operators, $operator_like, $operator_regexp);
 	Admin::get()->setSystemObjects($config["system_databases"] ?? [], $config["system_schemas"] ?? []);
 } else {
 	define("AdminNeo\DRIVER", null);

@@ -159,6 +159,19 @@ if (isset($_GET["simpledb"])) {
 		{
 			parent::__construct($connection, $admin);
 
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"LIKE", "LIKE %%", "NOT LIKE",
+				"IN",
+				"IS NULL", "IS NOT NULL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+
+			$this->grouping = [
+				"count",
+			];
+
 			$this->editFunctions = [["json"]];
 		}
 
@@ -544,10 +557,6 @@ if (isset($_GET["simpledb"])) {
 		return [
 			'possible_drivers' => ["SimpleXML + allow_url_fopen"],
 			'jush' => "simpledb",
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "LIKE", "LIKE %%", "IN", "IS NULL", "NOT LIKE", "IS NOT NULL"],
-			'operator_like' => "LIKE %%",
-			'functions' => [],
-			'grouping' => ["count"],
 		];
 	}
 }

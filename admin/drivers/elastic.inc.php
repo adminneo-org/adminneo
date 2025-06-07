@@ -162,6 +162,15 @@ if (isset($_GET["elastic"])) {
 				],
 			];
 
+			$this->operators = [
+				"must(term)", "must(match)", "must(regexp)",
+				"should(term)", "should(match)", "should(regexp)",
+				"must_not(term)", "must_not(match)", "must_not(regexp)",
+			];
+
+			$this->likeOperator = "should(match)";
+			$this->regexpOperator = "should(regexp)";
+
 			$this->editFunctions = [["json"]];
 		}
 
@@ -678,15 +687,6 @@ if (isset($_GET["elastic"])) {
 		return [
 			'possible_drivers' => ["json + allow_url_fopen"],
 			'jush' => "elastic",
-			'operators' => [
-				"must(term)", "must(match)", "must(regexp)",
-				"should(term)", "should(match)", "should(regexp)",
-				"must_not(term)", "must_not(match)", "must_not(regexp)",
-			],
-			'operator_like' => "should(match)",
-			'operator_regexp' => "should(regexp)",
-			'functions' => [],
-			'grouping' => [],
 		];
 	}
 }

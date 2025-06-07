@@ -270,6 +270,29 @@ if (isset($_GET["pgsql"])) {
 				}
 			}
 
+			// No "SQL" to avoid CSRF.
+			$this->operators = [
+				"=", "<", ">", "<=", ">=", "!=",
+				"~", "~*", "!~", "!~*",
+				"LIKE", "LIKE %%", "ILIKE", "ILIKE %%", "NOT LIKE",
+				"IN", "NOT IN",
+				"IS NULL", "IS NOT NULL",
+			];
+
+			$this->likeOperator = "LIKE %%";
+			$this->regexpOperator = "~*";
+
+			$this->functions = [
+				"char_length", "lower", "upper",
+				"round",
+				"to_hex", "to_timestamp",
+			];
+
+			$this->grouping = [
+				"sum", "min", "max", "avg",
+				"count", "count distinct",
+			];
+
 			$this->editFunctions = [
 				[
 					"char" => "md5",
@@ -1022,11 +1045,6 @@ AND typelem = 0"
 			'possible_drivers' => ["PgSQL", "PDO_PgSQL"],
 			'jush' => "pgsql",
 			'unsigned' => [],
-			'operators' => ["=", "<", ">", "<=", ">=", "!=", "~", "~*", "!~", "!~*", "LIKE", "LIKE %%", "ILIKE", "ILIKE %%", "IN", "IS NULL", "NOT LIKE", "NOT IN", "IS NOT NULL"], // no "SQL" to avoid CSRF
-			'operator_like' => "LIKE %%",
-			'operator_regexp' => '~*',
-			'functions' => ["char_length", "lower", "round", "to_hex", "to_timestamp", "upper"],
-			'grouping' => ["avg", "count", "count distinct", "max", "min", "sum"],
 			'c_style_escapes' => true,
 			"system_databases" => ["template1"],
 			"system_schemas" => ["information_schema", "pg_catalog", "pg_toast", "pg_temp_*", "pg_toast_temp_*"],
