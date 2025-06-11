@@ -689,6 +689,15 @@ if (isset($_GET["elastic"])) {
 		}
 	}
 
+	function drop_views(array $tables): bool
+	{
+		$return = Connection::get()->rootQuery('_aliases', ['actions' => array_map(function ($table) {
+			return ['remove' => ['index' => '*', 'alias' => $table]];
+		}, $tables)], 'POST');
+
+		return $return && !$return['errors'];
+	}
+
 	function drop_tables($tables): bool
 	{
 		$return = true;

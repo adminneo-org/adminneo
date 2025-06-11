@@ -10,6 +10,7 @@ AdminNeo 5.5.0
 - Do not order descending in GROUP BY select (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
+- Elasticsearch: Support dropping aliases (by @vrana)
 
 ### Bugfixes
 
