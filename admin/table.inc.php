@@ -45,10 +45,12 @@ if ($comment != "") {
 	echo "<p class='keep-lines'>", lang('Comment'), ": ", Admin::get()->formatComment($comment), "</p>\n";
 }
 
-if (is_view($table_status)) {
+if (!is_view($table_status)) {
+	$editLink = '<p class="links"><a href="' . h(ME) . 'create=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter table') . "</a>\n";
+} elseif (support("view")) {
 	$editLink = '<p class="links"><a href="' . h(ME) . 'view=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter view') . "</a>\n";
 } else {
-	$editLink = '<p class="links"><a href="' . h(ME) . 'create=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter table') . "</a>\n";
+	$editLink = "";
 }
 
 if ($info || $fields || $comment != "") {

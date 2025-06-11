@@ -8,6 +8,7 @@ AdminNeo 5.5.0
 
 - Check max_file_uploads in SQL import form
 - Do not order descending in GROUP BY select (by @vrana)
+- Hide view links without view support (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
