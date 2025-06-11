@@ -551,6 +551,13 @@ if (isset($_GET["elastic"])) {
 		return $table_status["Engine"] == "view";
 	}
 
+	function view(string $name): array
+	{
+		$return = Connection::get()->rootQuery("_alias/" . urlencode($name));
+
+		return ["select" => implode("\n", array_keys($return))];
+	}
+
 	function error() {
 		return h(Connection::get()->getError());
 	}
