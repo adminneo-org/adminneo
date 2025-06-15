@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	'Login' => 'लॉगिन',
 	'Logout successful.' => 'सफलतापूर्वक लॉगआउट हो गया।',
 	'Server' => 'सर्वर',

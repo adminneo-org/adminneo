@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	'Too many unsuccessful logins, try again in %d minute(s).' => ['Too many unsuccessful logins, try again in %d minute.', 'Too many unsuccessful logins, try again in %d minutes.'],
 	'Query executed OK, %d row(s) affected.' => ['Query executed OK, %d row affected.', 'Query executed OK, %d rows affected.'],
 	'%d byte(s)' => ['%d byte', '%d bytes'],

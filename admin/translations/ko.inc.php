@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	'Home' => null,
 	'$1-$3-$5' => '$1-$3-$5',
 	'%.3f s' => '%.3f 초',

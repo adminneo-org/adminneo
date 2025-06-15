@@ -74,7 +74,7 @@ class TranslationPlugin extends Plugin
 	private function translate(string $text): string
 	{
 		if ($this->language === null) {
-			$this->language = get_lang();
+			$this->language = $this->locale->getLanguage();
 		}
 
 		if ($text == "") {

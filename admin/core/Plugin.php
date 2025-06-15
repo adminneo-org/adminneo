@@ -18,13 +18,16 @@ abstract class Plugin
 	/** @var Config */
 	protected $config;
 
+	/** @var Locale */
+	protected $locale;
+
 	/**
 	 * @param Origin|Pluginer $admin
-	 * @param Config $config
 	 */
-	public function inject($admin, Config $config): void
+	public function inject($admin, Config $config, Locale $locale): void
 	{
 		$this->admin = $admin;
 		$this->config = $config;
+		$this->locale = $locale;
 	}
 }

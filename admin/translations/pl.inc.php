@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	'%s must return an array.' => '%s musi zwrócić tablicę.',
 	'More information.' => 'Więcej informacji.',
 

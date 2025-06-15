@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	'%s must return an array.' => '%s xx.',
 	'%s and %s must return an object created by %s method.' => '%s xx %s xx %s.',
 	'More information.' => 'Xx.',

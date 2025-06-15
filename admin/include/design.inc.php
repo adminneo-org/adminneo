@@ -15,8 +15,6 @@ if (!ob_get_level()) {
  */
 function page_header(string $title, string $error = "", $breadcrumb = []): void
 {
-	global $LANG;
-
 	page_headers();
 	if (is_ajax() && $error) {
 		page_messages($error);
@@ -41,7 +39,7 @@ function page_header(string $title, string $error = "", $breadcrumb = []): void
 	}
 	?>
 <!DOCTYPE html>
-<html lang="<?= $LANG; ?>" dir="<?= lang('ltr'); ?>">
+<html lang="<?= Locale::get()->getLanguage(); ?>" dir="<?= lang('ltr'); ?>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="robots" content="noindex, nofollow">

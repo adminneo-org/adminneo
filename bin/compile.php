@@ -56,11 +56,6 @@ function put_file(array $match, string $current_path = ""): string
 	$filename = basename($match[2]);
 	$file_path = ltrim($match[2], "/");
 
-	// Language is processed later.
-	if ($filename == '$LANG.inc.php') {
-		return $match[0];
-	}
-
 	$content = file_get_contents(__DIR__ . "/../$project/" . ($current_path ? "$current_path/" : "") . $file_path);
 
 	if ($filename == "lang.inc.php") {
@@ -108,7 +103,7 @@ function put_file(array $match, string $current_path = ""): string
 	return "?>\n$content" . (in_array($tokens[count($tokens) - 1][0], [T_CLOSE_TAG, T_INLINE_HTML], true) ? "<?php" : "");
 }
 
-function put_file_lang(): string
+function put_translations(): string
 {
 	global $lang_ids, $selected_languages;
 
@@ -128,8 +123,7 @@ function put_file_lang(): string
 		}
 
 		// Assign $translations
-		$translations = [];
-		include __DIR__ . "/../admin/translations/$language.inc.php";
+		$translations = include __DIR__ . "/../admin/translations/$language.inc.php";
 
 		$translation_ids = array_flip($lang_ids); // default translation
 		foreach ($translations as $key => $val) {
@@ -161,18 +155,19 @@ function put_file_lang(): string
 		}
 
 		$translations = $_SESSION["translations"];
+		$language = Locale::get()->getLanguage();
 
 		if ($_SESSION["translations_version"] != ' . $translations_version . ') {
 			$translations = [];
 			$_SESSION["translations_version"] = ' . $translations_version . ';
 		}
-		if ($_SESSION["translations_language"] != $LANG) {
+		if ($_SESSION["translations_language"] != $language) {
 			$translations = [];
-			$_SESSION["translations_language"] = $LANG;
+			$_SESSION["translations_language"] = $language;
 		}
 
 		if (!$translations) {
-			$translations = get_translations($LANG);
+			$translations = get_translations($language);
 			$_SESSION["translations"] = $translations;
 		}
 	';
@@ -418,7 +413,7 @@ if ($single_driver) {
 }
 
 // Compile files included into the index.php.
-$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]*)";~', 'AdminNeo\put_file', $file);
+$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]+)";~', 'AdminNeo\put_file', $file);
 
 // Remove including unneeded code.
 $file = str_replace('include __DIR__ . "/debug.inc.php"', '', $file);
@@ -441,7 +436,7 @@ $file = str_replace(
 );
 
 // Compile files included into the /admin/include/bootstrap.inc.php.
-$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]*)";~', function ($match) {
+$file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]+)";~', function ($match) {
 	return put_file($match, "../admin/include");
 }, $file);
 
@@ -467,7 +462,7 @@ if ($single_driver) {
 
 // Compile language files.
 $file = preg_replace_callback("~lang\\('((?:[^\\\\']+|\\\\.)*)'([,)])~s", 'AdminNeo\replace_lang', $file);
-$file = preg_replace_callback('~\binclude __DIR__ \. "([^"]*\$LANG.inc.php)";~', 'AdminNeo\put_file_lang', $file);
+$file = preg_replace_callback('~\$translations = .* // !compile: translations~', 'AdminNeo\put_translations', $file);
 
 $file = str_replace("\r", "", $file);
 

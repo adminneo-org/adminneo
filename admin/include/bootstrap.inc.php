@@ -44,7 +44,7 @@ if ($_GET["script"] == "version") {
 }
 
 // Allows including AdminNeo inside a function.
-global $error, $HTTPS, $LANG, $languages, $permanent, $has_token, $token, $translations, $VERSION;
+global $error, $HTTPS, $permanent, $has_token, $token, $VERSION;
 
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
@@ -72,8 +72,8 @@ remove_slashes([&$_GET, &$_POST, &$_COOKIE], $filter);
 @set_time_limit(0); // @ - can be disabled
 @ini_set("precision", 15); // @ - can be disabled, 15 - internal PHP precision
 
+include __DIR__ . "/../core/Locale.php";
 include __DIR__ . "/lang.inc.php";
-include __DIR__ . "/../translations/$LANG.inc.php";
 
 include __DIR__ . "/../core/Connection.php";
 include __DIR__ . "/pdo.inc.php";
@@ -97,6 +97,9 @@ if (is_dir($plugins_dir)) {
 		include_once $filename;
 	}
 }
+
+$translations = include __DIR__ . "/../translations/" . Locale::get()->getLanguage() . ".inc.php"; // !compile: translations
+Locale::get()->setTranslations($translations);
 
 $admin = null;
 $custom_instance = false;

@@ -48,9 +48,9 @@ abstract class Origin extends Plugin
 		$admin = new static($errors);
 		self::$instance = $plugins ? new Pluginer($admin, $plugins) : $admin;
 
-		$admin->inject(self::$instance, $config);
+		$admin->inject(self::$instance, $config, Locale::get());
 		foreach ($plugins as $plugin) {
-			$plugin->inject(self::$instance, $config);
+			$plugin->inject(self::$instance, $config, Locale::get());
 		}
 
 		return self::$instance;

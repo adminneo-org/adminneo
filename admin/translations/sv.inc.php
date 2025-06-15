@@ -2,7 +2,7 @@
 
 namespace AdminNeo;
 
-$translations = [
+return [
 	// label for database system selection (MySQL, SQLite, ...)
 	'Home' => null,
 	'System' => 'System',
