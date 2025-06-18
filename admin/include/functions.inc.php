@@ -318,6 +318,8 @@ function where($where, $fields = []) {
 
 		if (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
+		} elseif (DIALECT == "pgsql" && preg_match('~^json~', $field_type)) {
+			$conditions[] = "::jsonb = " . q($val) . "::jsonb";
 		} elseif (DIALECT == "sql" && is_numeric($val) && strpos($val, ".") !== false) {
 			// LIKE because of floats but slow with ints.
 			$conditions[] = "$column LIKE " . q($val);
