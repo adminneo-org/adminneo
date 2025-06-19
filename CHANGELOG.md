@@ -17,6 +17,7 @@ AdminNeo 5.5.0
 
 - MS SQL: Fix hiding system schemas (regression from 5.1.0)
 - PostgreSQL: Allow comparing json columns (by @vrana)
+- MariaDB: Parse COLLATE in routine definition (by @vrana)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------
