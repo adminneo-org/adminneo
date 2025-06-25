@@ -1057,7 +1057,7 @@ function is_web_url($value) {
  */
 function is_shortable(?array $field): bool
 {
-	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea~', $field["type"]) : false;
+	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea|hstor~', $field["type"]) : false;
 }
 
 /** Get query to compute number of found rows

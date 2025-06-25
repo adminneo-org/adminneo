@@ -12,6 +12,7 @@ AdminNeo 5.5.0
 - Display data length and index length for materialized views (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
+- PostgreSQL: Shorten values in hstore columns (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
 
 ### Bugfixes
