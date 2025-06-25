@@ -141,8 +141,8 @@ if ($_GET["ns"] === "") {
 			}
 			echo "<th><a href='", h(ME), "$action=", urlencode($name), "' id='$id'>", h($name), "</a></th>";
 
-			if ($view) {
-				$title = (preg_match('~materialized~i', $type) ? lang('Materialized view') : lang('View'));
+			if ($view && !preg_match('~materialized~i', $type)) {
+				$title = lang('View');
 				echo '<td colspan="6">' . (support("view") ? "<a href='" . h(ME) . "view=" . urlencode($name) . "' title='" . lang('Alter view') . "'>$title</a>" : $title);
 				echo '<td align="right"><a href="' . h(ME) . "select=" . urlencode($name) . '" title="' . lang('Select data') . '">?</a>';
 			} else {

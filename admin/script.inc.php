@@ -11,7 +11,7 @@ if ($_GET["script"] == "db") {
 	foreach (table_status() as $name => $table_status) {
 		$data["Comment-$name"] = h($table_status["Comment"]);
 
-		if (!is_view($table_status)) {
+		if (!is_view($table_status) || preg_match('~materialized~i', $table_status["Engine"])) {
 			foreach (["Engine", "Collation"] as $key) {
 				$data["$key-$name"] = h($table_status[$key]);
 			}
