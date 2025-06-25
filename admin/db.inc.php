@@ -183,6 +183,8 @@ if ($_GET["ns"] === "") {
 		echo "</table>\n";
 		echo "</div>\n"; // scrollable
 
+		echo script("ajaxSetHtml('" . js_escape(ME) . "script=db');");
+
 		if (Admin::get()->isDataEditAllowed()) {
 			echo "<div class='table-footer'><div class='field-sets'>\n";
 			$vacuum = "<input type='submit' class='button' value='" . lang('Vacuum') . "'> " . help_script("VACUUM");
@@ -324,9 +326,5 @@ if ($_GET["ns"] === "") {
 			}
 		}
 		echo '<p class="links"><a href="', h(ME), 'event=">', icon("event-add"), lang('Create event'), "</a></p>\n";
-	}
-
-	if ($tables_list) {
-		echo script("ajaxSetHtml('" . js_escape(ME) . "script=db');");
 	}
 }
