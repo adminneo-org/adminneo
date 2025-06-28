@@ -200,18 +200,23 @@ if ($_GET["ns"] === "") {
 			. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script(DIALECT == "sqlite" ? "DELETE" : ("TRUNCATE" . (DIALECT == "pgsql" ? "" : " TABLE"))) . confirm()
 			. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
 			$databases = (support("scheme") ? Admin::get()->getSchemas() : Admin::get()->getDatabases());
+			echo "</div></fieldset>\n";
+			$script = "";
 			if (count($databases) != 1 && DIALECT != "sqlite") {
+				echo "<fieldset><legend>" . lang('Move to other database') . " <span id='selected3'></span></legend><div>";
 				$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
-				echo "<p><span id='label-move'>" . lang('Move to other database') . ":</span> ";
 				echo ($databases ? html_select("target", $databases, $db, "", "label-move") : '<input class="input" name="target" value="' . h($db) . '" autocapitalize="off">');
 				echo " <input type='submit' class='button' name='move' value='" . lang('Move') . "'>";
 				echo (support("copy") ? " <input type='submit' class='button' name='copy' value='" . lang('Copy') . "'> " . checkbox("overwrite", 1, $_POST["overwrite"], lang('overwrite')) : "");
-				echo "\n";
+				echo "</div></fieldset>\n";
+				$script = " selectCount('selected3', formChecked(this, /^(tables|views)\[/));";
 			}
 			echo input_hidden("all"); // used by trCheck()
-			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));" . (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "") . " }");
+			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));"
+				. (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "")
+				. "$script }"
+			);
 			echo input_token();
-			echo "</div></fieldset>\n";
 			echo "</div></div>\n";
 
 			echo script("initTableFooter()");
