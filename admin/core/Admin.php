@@ -1243,8 +1243,16 @@ class Admin extends Origin
 						$links[] = preg_quote($table, '/');
 					}
 					// Note: It has to be 'var' to be visible in Jush library.
-					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table=" : "select=";
-					echo "window.jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . "$tableParam\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table" : "select";
+					echo "window.jushLinks = { " . DIALECT . ":";
+					json_row(js_escape(ME) . $tableParam . '=$&', '/\b(' . implode('|', $links) . ')\b/g', false);
+					if (support('routine')) {
+						foreach (routines() as $row) {
+							json_row(js_escape(ME) . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&', '/\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g', false);
+						}
+					}
+					json_row('');
+					echo "};\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}

@@ -10,6 +10,7 @@ AdminNeo 5.5.0
 - Do not order descending in GROUP BY select (by @vrana)
 - Hide view links without view support (by @vrana)
 - Display data length and index length for materialized views (by @vrana)
+- Link routines from syntax highlighting (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
