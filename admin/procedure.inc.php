@@ -87,7 +87,7 @@ if (support("move_col")) {
 echo "</div>\n";
 
 echo "<p>";
-textarea("definition", $row["definition"]);
+textarea("definition", $row["definition"], 20);
 
 echo "</p>\n<p>";
 echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
