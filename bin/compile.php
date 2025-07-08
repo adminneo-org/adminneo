@@ -169,28 +169,11 @@ function put_translations(): string
 	';
 }
 
-function short_identifier(int $number, string $chars): string
-{
-	$return = '';
-
-	while ($number >= 0) {
-		$return .= $chars[$number % strlen($chars)];
-		$number = floor($number / strlen($chars)) - 1;
-	}
-
-	return $return;
-}
-
 function get_absolute_path($file_path): string
 {
 	global $current_path;
 
 	return $file_path[0] == "/" ? $file_path : "$current_path/$file_path";
-}
-
-function ini_bool(): bool
-{
-	return true;
 }
 
 function print_usage(): void
