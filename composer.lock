@@ -4,21 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05c101e73c77c491592789ae180936e2",
+    "content-hash": "2e1e4545232af60dc6765863b2c6dd53",
     "packages": [
         {
             "name": "vrana/jsshrink",
-            "version": "dev-master",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/peterpp/js-shrink.git",
-                "reference": "96a466fa4cef74ba8362f4bc4b1bb17b2c9ecbcc"
+                "url": "https://github.com/vrana/JsShrink.git",
+                "reference": "4f8a69bd80bda24e8233bca428e5f56400e3cb1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/peterpp/js-shrink/zipball/96a466fa4cef74ba8362f4bc4b1bb17b2c9ecbcc",
-                "reference": "96a466fa4cef74ba8362f4bc4b1bb17b2c9ecbcc",
+                "url": "https://api.github.com/repos/vrana/JsShrink/zipball/4f8a69bd80bda24e8233bca428e5f56400e3cb1b",
+                "reference": "4f8a69bd80bda24e8233bca428e5f56400e3cb1b",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
             },
             "default-branch": true,
             "type": "library",
@@ -41,15 +44,16 @@
             "authors": [
                 {
                     "name": "Jakub Vrána",
-                    "homepage": "http://www.vrana.cz"
+                    "homepage": "https://www.vrana.cz"
                 }
             ],
             "description": "Remove spaces and comments from JavaScript code (available in PHP and JavaScript).",
             "homepage": "https://github.com/vrana/JsShrink",
             "support": {
-                "source": "https://github.com/peterpp/js-shrink/tree/master"
+                "source": "https://github.com/vrana/JsShrink/tree/main",
+                "issues": "https://github.com/vrana/JsShrink/issues"
             },
-            "time": "2014-10-25T23:40:07+00:00"
+            "time": "2025-03-19T21:30:40+00:00"
         },
         {
             "name": "vrana/jush",

@@ -2,7 +2,7 @@ JsShrink - Remove spaces and comments from JavaScript code
 Available in PHP and JavaScript
 Requires statements ending by semicolon, use JSHint or JSLint to verify.
 
-http://vrana.github.com/JsShrink/
+https://vrana.github.io/JsShrink/
 
 Usage PHP:
 <?php

@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Jakub Vrána",
-            "homepage": "http://www.vrana.cz"
+            "homepage": "https://www.vrana.cz"
         }
     ],
     "autoload": {
@@ -17,6 +17,9 @@
         "Apache-2.0",
         "GPL-2.0"
     ],
+    "require": {
+        "php": ">=5.3"
+    },
     "extra": {
         "component": {
             "scripts": [
