@@ -264,7 +264,8 @@ if (isset($_GET["mysql"])) {
 
 			$this->unsigned = ["unsigned", "zerofill", "unsigned zerofill"];
 
-			if (min_version('5.7', '10.2', $connection)) {
+			$maria = $connection->isMariaDB();
+			if ($connection->isMinVersion($maria ? "10.2" : "5.7")) {
 				$this->generated = ["STORED", "VIRTUAL"];
 			}
 
@@ -306,17 +307,17 @@ if (isset($_GET["mysql"])) {
 				]
 			];
 
-			if (min_version('5.7.8', '10.2', $connection)) {
+			if ($connection->isMinVersion($maria ? "10.2" : "5.7.8")) {
 				$this->types[lang('Strings')]["json"] = 4294967295;
 			}
 
 			// UUID data type for Mariadb >= 10.7
-			if (min_version('', '10.7', $connection)) {
+			if ($maria && $connection->isMinVersion("10.7")) {
 				$this->types[lang('Strings')]["uuid"] = 128;
 				$this->editFunctions[0]['uuid'] = 'uuid';
 			}
 
-			if (min_version('9', '', $connection)) {
+			if ($connection->isMinVersion("9")) {
 				$this->types[lang('Numbers')]["vector"] = 16383;
 				$this->editFunctions[0]['vector'] = 'string_to_vector';
 			}
@@ -370,15 +371,19 @@ if (isset($_GET["mysql"])) {
 
 		public function slowQuery(string $query, int $timeout): ?string
         {
-			if (min_version('5.7.8', '10.1.2')) {
-				if ($this->connection->isMariaDB()) {
-					return "SET STATEMENT max_statement_time=$timeout FOR $query";
-				} elseif (preg_match('~^(SELECT\b)(.+)~is', $query, $match)) {
-					return "$match[1] /*+ MAX_EXECUTION_TIME(" . ($timeout * 1000) . ") */ $match[2]";
-				}
+			$maria = $this->connection->isMariaDB();
+
+			if (!$this->connection->isMinVersion($maria ? "10.1.2" : "5.7.8")) {
+				return null;
 			}
 
-            return null;
+			if ($maria) {
+				return "SET STATEMENT max_statement_time=$timeout FOR $query";
+			} elseif (preg_match('~^(SELECT\b)(.+)~is', $query, $match)) {
+				return "$match[1] /*+ MAX_EXECUTION_TIME(" . ($timeout * 1000) . ") */ $match[2]";
+			} else {
+				return null;
+			}
 		}
 
 		public function convertSearch(string $idf, array $where, array $field): string
@@ -624,7 +629,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function fk_support($table_status) {
 		return preg_match('~InnoDB|IBMDB2I~i', $table_status["Engine"])
-			|| (preg_match('~NDB~i', $table_status["Engine"]) && min_version(5.6));
+			|| (preg_match('~NDB~i', $table_status["Engine"]) && Connection::get()->isMinVersion("5.6"));
 	}
 
 	/** Get information about fields
@@ -759,7 +764,7 @@ if (isset($_GET["mysql"])) {
 
 		// Since MariaDB 10.10, one collation can be compatible with more character sets, so collations no longer have unique IDs.
 		// All combinations can be selected from information_schema.COLLATION_CHARACTER_SET_APPLICABILITY table.
-		$query = min_version('', '10.10', Connection::get()) ?
+		$query = Connection::get()->isMariaDB() && Connection::get()->isMinVersion("10.10") ?
 			"SELECT CHARACTER_SET_NAME AS Charset, FULL_COLLATION_NAME AS Collation, IS_DEFAULT AS `Default` FROM information_schema.COLLATION_CHARACTER_SET_APPLICABILITY" :
 			"SHOW COLLATION";
 
@@ -785,7 +790,7 @@ if (isset($_GET["mysql"])) {
 	*/
 	function information_schema($db) {
 		return ($db == "information_schema")
-			|| (min_version(5.5) && $db == "performance_schema");
+			|| (Connection::get()->isMinVersion("5.5") && $db == "performance_schema");
 	}
 
 	/** Get escaped error message
@@ -1127,7 +1132,7 @@ if (isset($_GET["mysql"])) {
 	 */
 	function explain(Connection $connection, string $query)
 	{
-		return $connection->query("EXPLAIN " . (min_version(5.1) && !min_version(5.7) ? "PARTITIONS " : "") . $query);
+		return $connection->query("EXPLAIN " . (Connection::get()->isMinVersion("5.1") && !Connection::get()->isMinVersion("5.7") ? "PARTITIONS " : "") . $query);
 	}
 
 	/** Get approximate number of rows
@@ -1214,7 +1219,7 @@ if (isset($_GET["mysql"])) {
 			return "BIN(" . idf_escape($field["field"]) . " + 0)"; // + 0 is required outside MySQLnd
 		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
-			return (min_version(8) ? "ST_" : "") . "AsWKT(" . idf_escape($field["field"]) . ")";
+			return (Connection::get()->isMinVersion("8") ? "ST_" : "") . "AsWKT(" . idf_escape($field["field"]) . ")";
 		}
 	}
 
@@ -1231,7 +1236,7 @@ if (isset($_GET["mysql"])) {
 			$return = "CONVERT(b$return, UNSIGNED)";
 		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
-			$prefix = (min_version(8) ? "ST_" : "");
+			$prefix = (Connection::get()->isMinVersion("8") ? "ST_" : "");
 			$return = $prefix . "GeomFromText($return, $prefix" . "SRID($field[field]))";
 		}
 
@@ -1243,7 +1248,7 @@ if (isset($_GET["mysql"])) {
 	* @return bool
 	*/
 	function support($feature) {
-		return !preg_match("~scheme|sequence|type|view_trigger|materializedview" . (min_version(8) ? "" : "|descidx" . (min_version(5.1) ? "" : "|event|partitioning")) . (min_version('8.0.16', '10.2.1') ? "" : "|check") . "~", $feature);
+		return !preg_match("~scheme|sequence|type|view_trigger|materializedview" . (Connection::get()->isMinVersion("8") ? "" : "|descidx" . (Connection::get()->isMinVersion("5.1") ? "" : "|event|partitioning")) . (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? "" : "|check") . "~", $feature);
 	}
 
 	/** Kill a process

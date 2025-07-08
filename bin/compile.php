@@ -188,11 +188,6 @@ function get_absolute_path($file_path): string
 	return $file_path[0] == "/" ? $file_path : "$current_path/$file_path";
 }
 
-function min_version(): bool
-{
-	return true;
-}
-
 function ini_bool(): bool
 {
 	return true;
@@ -388,6 +383,7 @@ $file = file_get_contents(__DIR__ . "/../$project/index.php");
 // Remove including source code for unsupported features in single-driver file.
 if ($single_driver) {
 	include __DIR__ . "/../admin/core/Connection.php";
+	include __DIR__ . "/../admin/core/DummyConnection.php";
 	include __DIR__ . "/../admin/core/Result.php";
 	include __DIR__ . "/../admin/include/pdo.inc.php";
 	include __DIR__ . "/../admin/core/Drivers.php";
@@ -395,6 +391,8 @@ if ($single_driver) {
 
 	$_GET[$single_driver] = true; // to load the driver
 	include __DIR__ . "/../admin/drivers/$single_driver.inc.php";
+
+	DummyConnection::create(); // to make support() work
 
 	foreach ($features as $key => $feature) {
 		if (!support($feature)) {

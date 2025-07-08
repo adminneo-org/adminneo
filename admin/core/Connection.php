@@ -62,6 +62,11 @@ abstract class Connection
 		return $this->getServerInfo();
 	}
 
+	public function isMinVersion(string $version): bool
+	{
+		return version_compare($this->getVersion(), $version) >= 0;
+	}
+
 	public function isMariaDB(): bool
 	{
 		return str_contains($this->getServerInfo(), "MariaDB");

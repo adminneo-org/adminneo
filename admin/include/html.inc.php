@@ -382,7 +382,7 @@ function input($field, $value, $function, $autofocus = false) {
 		$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)
 			? ((preg_match("~binary~", $field["type"]) ? 2 : 1) * $match[1] + ($match[3] ? 1 : 0) + ($match[2] && !$field["unsigned"] ? 1 : 0))
 			: ($types && $types[$field["type"]] ? $types[$field["type"]] + ($field["unsigned"] ? 0 : 1) : 0);
-		if (DIALECT == 'sql' && min_version(5.6) && preg_match('~time~', $field["type"])) {
+		if (DIALECT == 'sql' && Connection::get()->isMinVersion("5.6") && preg_match('~time~', $field["type"])) {
 			$maxlength += 7; // microtime
 		}
 		// type='date' and type='time' display localized value which may be confusing, type='datetime' uses 'T' as date and time separator

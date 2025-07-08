@@ -409,7 +409,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 			echo "</td>\n";
 
 			if (support("comment")) {
-				$max_length = min_version(5.5) ? 1024 : 255;
+				$max_length = Connection::get()->isMinVersion("5.5") ? 1024 : 255;
 				echo "<td $comment_class>",
 					"<input class='input' name='fields[$i][comment]' value='", h($field["comment"]), "' data-maxlength='$max_length' aria-labelledby='label-comment'>",
 					"</td>\n";

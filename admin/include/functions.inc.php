@@ -85,27 +85,22 @@ function bracket_escape($idf, $back = false) {
 	return strtr($idf, ($back ? array_flip($trans) : $trans));
 }
 
-/** Check if connection has at least the given version
-*
-* @param string required version
-* @param string required MariaDB version
-* @param ?Connection defaults to $connection
-*
-* @return bool
-*/
-function min_version($version, $maria_db = "", ?Connection $connection = null) {
+/**
+ * @deprecated
+ *
+ * Checks if connection has at least the given version.
+ */
+function min_version(?string $version, ?string $maria_db = null, ?Connection $connection = null): bool
+{
 	if (!$connection) {
 		$connection = Connection::get();
 	}
-	$server_info = $connection->getServerInfo();
-	if ($maria_db && preg_match('~([\d.]+)-MariaDB~', $server_info, $match)) {
-		$server_info = $match[1];
+
+	if ($maria_db && $connection->isMariaDB()) {
 		$version = $maria_db;
 	}
-	if ($version == "") {
-		return false;
-	}
-	return (version_compare($server_info, $version) >= 0);
+
+	return $version && $connection->isMinVersion($version);
 }
 
 /**
@@ -114,7 +109,7 @@ function min_version($version, $maria_db = "", ?Connection $connection = null) {
 function charset(Connection $connection): string
 {
 	// Note: SHOW CHARSET would require an extra query
-	return (min_version("5.5.3", 0, $connection) ? "utf8mb4" : "utf8");
+	return ($connection->isMinVersion("5.5.3") ? "utf8mb4" : "utf8");
 }
 
 function link_files(string $name, array $file_paths): ?string

@@ -175,7 +175,7 @@ if (isset($_GET["sqlite"])) {
 				]
 			];
 
-			if (min_version('3.31', '0', $connection)) {
+			if ($connection->isMinVersion("3.31")) {
 				$this->generated = ["STORED", "VIRTUAL"];
 			}
 
@@ -338,7 +338,7 @@ if (isset($_GET["sqlite"])) {
 	function fields($table) {
 		$return = [];
 		$primary = "";
-		foreach (get_rows("PRAGMA table_" . (min_version('3.31') ? "x" : "") . "info(" . table($table) . ")") as $row) {
+		foreach (get_rows("PRAGMA table_" . (Connection::get()->isMinVersion("3.31") ? "x" : "") . "info(" . table($table) . ")") as $row) {
 			$name = $row["name"];
 			$type = strtolower($row["type"]);
 			$default = $row["dflt_value"];

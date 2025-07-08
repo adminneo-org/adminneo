@@ -228,7 +228,7 @@ if (isset($_GET["pgsql"])) {
 			{
 				$db = Admin::get()->getDatabase();
 
-				//! client_encoding is supported since 9.1, but we can't yet use min_version here
+				//! client_encoding is supported since 9.1, but we can't yet use minVersion() here
 				$dsn = "pgsql:host='" . str_replace(":", "' port='", addcslashes($server, "'\\")) . "' client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
@@ -315,15 +315,15 @@ if (isset($_GET["pgsql"])) {
 				],
 			];
 
-			if (min_version('9.2', '0', $connection)) {
+			if ($connection->isMinVersion("9.2")) {
 				$this->types[lang('Strings')]["json"] = 4294967295;
 
-				if (min_version('9.4', '0', $connection)) {
+				if ($connection->isMinVersion("9.4")) {
 					$this->types[lang('Strings')]["jsonb"] = 4294967295;
 				}
 			}
 
-			if (min_version('12', '0', $connection)) {
+			if ($connection->isMinVersion("12")) {
 				$this->generated = ["STORED"];
 			}
 
@@ -478,7 +478,7 @@ if (isset($_GET["pgsql"])) {
 			return $connection->getError();
 		}
 
-		if (min_version(9, 0, $connection)) {
+		if ($connection->isMinVersion("9")) {
 			$connection->query("SET application_name = 'AdminNeo'");
 		}
 
@@ -558,7 +558,7 @@ ORDER BY 1";
 	pg_table_size(c.oid) AS \"Data_length\",
 	pg_indexes_size(c.oid) AS \"Index_length\"" : "") . ",
 	obj_description(c.oid, 'pg_class') AS \"Comment\",
-	" . (min_version(12) ? "''" : "CASE WHEN c.relhasoids THEN 'oid' ELSE '' END") . " AS \"Oid\",
+	" . (Connection::get()->isMinVersion("12") ? "''" : "CASE WHEN c.relhasoids THEN 'oid' ELSE '' END") . " AS \"Oid\",
 	c.reltuples as \"Rows\",
 	n.nspname
 FROM pg_class c
@@ -585,7 +585,7 @@ WHERE relkind IN ('r', 'm', 'v', 'f', 'p')
 			'timestamp without time zone' => 'timestamp',
 			'timestamp with time zone' => 'timestamptz',
 		];
-		foreach (get_rows("SELECT a.attname AS field, format_type(a.atttypid, a.atttypmod) AS full_type, pg_get_expr(d.adbin, d.adrelid) AS default, a.attnotnull::int, col_description(c.oid, a.attnum) AS comment" . (min_version(10) ? ", a.attidentity" . (min_version(12) ? ", a.attgenerated" : "") : "") . "
+		foreach (get_rows("SELECT a.attname AS field, format_type(a.atttypid, a.atttypmod) AS full_type, pg_get_expr(d.adbin, d.adrelid) AS default, a.attnotnull::int, col_description(c.oid, a.attnum) AS comment" . (Connection::get()->isMinVersion("10") ? ", a.attidentity" . (Connection::get()->isMinVersion("12") ? ", a.attgenerated" : "") : "") . "
 FROM pg_class c
 JOIN pg_namespace n ON c.relnamespace = n.oid
 JOIN pg_attribute a ON c.oid = a.attrelid
@@ -1021,7 +1021,7 @@ AND typelem = 0"
 			// sequences for fields
 			if (preg_match('~nextval\(\'([^\']+)\'\)~', $field['default'], $matches)) {
 				$sequence_name = $matches[1];
-				$rows = get_rows((min_version(10)
+				$rows = get_rows((Connection::get()->isMinVersion("10")
 					? "SELECT *, cache_size AS cache_value FROM pg_sequences WHERE schemaname = current_schema() AND sequencename = " . q(idf_unescape($sequence_name))
 					: "SELECT * FROM $sequence_name"
 				), null, "-- ");
@@ -1095,7 +1095,7 @@ AND typelem = 0"
 	}
 
 	function process_list() {
-		return get_rows("SELECT * FROM pg_stat_activity ORDER BY " . (min_version(9.2) ? "pid" : "procpid"));
+		return get_rows("SELECT * FROM pg_stat_activity ORDER BY " . (Connection::get()->isMinVersion("9.2") ? "pid" : "procpid"));
 	}
 
 	function convert_field($field) {
@@ -1110,7 +1110,7 @@ AND typelem = 0"
 			// https://github.com/cockroachdb/cockroach/issues/24745
 			return !Connection::get()->isCockroachDB();
 		} elseif ($feature == "materializedview") {
-			return min_version(9.3);
+			return Connection::get()->isMinVersion("9.3");
 		}
 
 		return preg_match('~^(check|database|table|columns|sql|indexes|descidx|comment|view|scheme|routine|sequence|trigger|type|variables|drop_col|kill|dump)$~', $feature);

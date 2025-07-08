@@ -5,10 +5,12 @@ namespace AdminNeo;
 $TABLE = $_GET["indexes"];
 $index_types = ["PRIMARY", "UNIQUE", "INDEX"];
 $table_status = table_status($TABLE, true);
-if (preg_match('~MyISAM|M?aria' . (min_version(5.6, '10.0.5') ? '|InnoDB' : '') . '~i', $table_status["Engine"])) {
+$connection = Connection::get();
+$maria = $connection->isMariaDB();
+if (preg_match('~MyISAM|M?aria' . ($connection->isMinVersion($maria ? "10.0.5" : "5.6") ? '|InnoDB' : '') . '~i', $table_status["Engine"])) {
 	$index_types[] = "FULLTEXT";
 }
-if (preg_match('~MyISAM|M?aria' . (min_version(5.7, '10.2.2') ? '|InnoDB' : '') . '~i', $table_status["Engine"])) {
+if (preg_match('~MyISAM|M?aria' . ($connection->isMinVersion($maria ? "10.2.2" : "5.7") ? '|InnoDB' : '') . '~i', $table_status["Engine"])) {
 	$index_types[] = "SPATIAL";
 }
 $indexes = indexes($TABLE);
