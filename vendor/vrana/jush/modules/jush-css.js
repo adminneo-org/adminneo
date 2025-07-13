@@ -6,45 +6,17 @@ jush.tr.css_val = { php: jush.php, quo: /"/, apo: /'/, css_js: /expression\s*\(/
 jush.tr.css_js = { php: jush.php, css_js: /\(/, _1: /\)/ };
 jush.tr.clr = { _1: /(?=[^a-fA-F0-9])/ };
 
-jush.urls.css_val = 'https://www.w3.org/TR/CSS21/$key.html#propdef-$val';
-jush.urls.css_at = 'https://www.w3.org/TR/CSS21/$key';
-jush.urls.css = ['https://www.w3.org/TR/css3-selectors/#$key',
-	'link', 'useraction-pseudos', '$1-pseudo', 'enableddisabled', '$1', '$1', 'gen-content'
+jush.urls.css_at = 'https://developer.mozilla.org/en-US/docs/Web/CSS/$key';
+jush.urls.css_val = jush.urls.css_at;
+jush.urls.css = [jush.urls.css_at,
+	'_colon_$1', '_doublecolon_$1'
 ];
 
-jush.links.css_val = {
-	'aural': /^(azimuth|cue-after|cue-before|cue|elevation|pause-after|pause-before|pause|pitch-range|pitch|play-during|richness|speak-header|speak-numeral|speak-punctuation|speak|speech-rate|stress|voice-family|volume)$/i,
-	'box': /^(border(?:-top|-right|-bottom|-left)?(?:-color|-style|-width)?|margin(?:-top|-right|-bottom|-left)?|padding(?:-top|-right|-bottom|-left)?)$/i,
-	'colors': /^(background-attachment|background-color|background-image|background-position|background-repeat|background|color)$/i,
-	'fonts': /^(font-family|font-size|font-style|font-variant|font-weight|font)$/i,
-	'generate': /^(content|counter-increment|counter-reset|list-style-image|list-style-position|list-style-type|list-style|quotes)$/i,
-	'page': /^(orphans|page-break-after|page-break-before|page-break-inside|widows)$/i,
-	'tables': /^(border-collapse|border-spacing|caption-side|empty-cells|table-layout)$/i,
-	'text': /^(letter-spacing|text-align|text-decoration|text-indent|text-transform|white-space|word-spacing)$/i,
-	'ui': /^(cursor|outline-color|outline-style|outline-width|outline)$/i,
-	'visudet': /^(height|line-height|max-height|max-width|min-height|min-width|vertical-align|width)$/i,
-	'visufx': /^(clip|overflow|visibility)$/i,
-	'visuren': /^(bottom|clear|direction|display|float|left|position|right|top|unicode-bidi|z-index)$/i,
-	'https://www.w3.org/TR/css3-cascade/#$val': /^(?:-[a-z]+-)?(all)$/i,
-	'https://www.w3.org/TR/css3-writing-modes/#$val': /^(?:-[a-z]+-)?(text-combine-horizontal|text-orientation|writing-mode)$/i,
-	'https://www.w3.org/TR/css3-break/#$val': /^(?:-[a-z]+-)?(break-after|break-before|break-inside)$/i,
-	'https://www.w3.org/TR/css3-images/#$val': /^(?:-[a-z]+-)?(image-orientation|image-resolution|object-fit|object-position)$/i,
-	'https://www.w3.org/TR/css3-marquee/#$val': /^(?:-[a-z]+-)?(marquee-direction|marquee-play-count|marquee-speed|marquee-style|overflow-style)$/i,
-	'https://www.w3.org/TR/css3-grid/#$val': /^(?:-[a-z]+-)?(grid-columns|grid-rows|align-content|align-items|align-self|justify-content|justify-items|justify-self)$/i,
-	'https://www.w3.org/TR/css-fonts-3/#$val-prop': /^(?:-[a-z]+-)?(font-feature-settings|font-kerning|font-language-override|font-size-adjust|font-stretch|font-synthesis|font-variant-alternates|font-variant-caps|font-variant-east-asian|font-variant-ligatures|font-variant-numeric|font-variant-position)$/i,
-	'https://www.w3.org/TR/css-overflow-3/#$val': /^(?:-[a-z]+-)?(max-lines|overflow-x|overflow-y)$/i,
-	'https://www.w3.org/TR/css3-ui/#$val': /^(?:-[a-z]+-)?(box-sizing|icon|ime-mode|nav-index|nav-up|nav-right|nav-down|nav-left|outline-offset|resize|text-overflow)$/i,
-	'https://www.w3.org/TR/css3-background/#$val': /^(?:-[a-z]+-)?(background-clip|background-origin|background-size|border-image|border-image-outset|border-image-repeat|border-image-slice|border-image-source|border-image-width|border-radius|border-top-left-radius|border-top-right-radius|border-bottom-right-radius|border-bottom-left-radius|box-decoration-break|box-shadow)$/i
-};
 jush.links.css_at = {
-	'page.html#page-box': /^page$/i,
-	'media.html#at-media-rule': /^media$/i,
-	'cascade.html#at-import': /^import$/i,
-	'syndata.html#charset': /^charset$/i,
-	'https://www.w3.org/TR/css3-conditional/#at-$val': /^supports$/i,
-	'https://www.w3.org/TR/css-fonts-3/#at-$val-rule': /^(font-face|font-feature-values)$/i,
-	'https://www.w3.org/TR/css-counter-styles-3/#the-$val-rule': /^counter-style$/i,
-	'https://www.w3.org/TR/css3-namespace/#declaration': /namespace/
+	'@$val': /^(charset|color-profile|container|counter-style|document|font-face|font-feature-values|font-palette-values|import|keyframes|layer|media|namespace|page|position-try|property|scope|starting-style|supports|view-transition)$/i
+};
+jush.links.css_val = {
+	'$val': /^(accent-color|align-(content|items|self)|alignment-baseline|all|anchor-name|animation(-composition|-delay|-direction|-duration|-fill-mode|-iteration-count|-name|-play-state|-range(-end|-start)?|-timeline|-timing-function)?|appearance|aspect-ratio|backdrop-filter|backface-visibility|background(-attachment|-blend-mode|-clip|-color|-image|-origin|-position(-x|-y)?|-repeat|-size)?|block-size|border(-block(-color|-end(-color|-style|-width)?|-start(-color|-style|-width)?|-style|-width)?|-bottom(-color|-left-radius|-right-radius|-style|-width)?|-collapse|-color|-end-end-radius|-end-start-radius|-image(-outset|-repeat|-slice|-source|-width)?|-inline(-color|-end(-color|-style|-width)?|-start(-color|-style|-width)?|-style|-width)?|-left(-color|-style|-width)?|-radius|-right(-color|-style|-width)?|-spacing|-start-end-radius|-start-start-radius|-style|-top(-color|-left-radius|-right-radius|-style|-width)?|-width)?|bottom|box-(align|decoration-break|direction|flex(-group)?|lines|ordinal-group|orient|pack|shadow|sizing)|break-(after|before|inside)|caption-side|caret-color|clear|clip(-path|-rule)?|color(-interpolation(-filters)?|-scheme)?|column-(count|fill|gap|rule(-color|-style|-width)?|span|width)|columns|contain(-intrinsic-block-size|-intrinsic-height|-intrinsic-inline-size|-intrinsic-size|-intrinsic-width)?|container(-name|-type)?|content(-visibility)?|counter-(increment|reset|set)|cursor|cx|cy|d|direction|display|dominant-baseline|empty-cells|field-sizing|fill(-opacity|-rule)?|filter|flex(-basis|-direction|-flow|-grow|-shrink|-wrap)?|float|flood-(color|opacity)|font(-family|-feature-settings|-kerning|-language-override|-optical-sizing|-palette|-size(-adjust)?|-smooth|-stretch|-style|-synthesis(-position|-small-caps|-style|-weight)?|-variant(-alternates|-caps|-east-asian|-emoji|-ligatures|-numeric|-position)?|-variation-settings|-weight)?|forced-color-adjust|gap|grid(-area|-auto-columns|-auto-flow|-auto-rows|-column(-end|-start)?|-row(-end|-start)?|-template(-areas|-columns|-rows)?)?|hanging-punctuation|height|hyphenate-(character|limit-chars)|hyphens|image-(orientation|rendering|resolution)|initial-letter|inline-size|inset(-block(-end|-start)?|-inline(-end|-start)?)?|interpolate-size|isolation|justify-(content|items|self)|left|letter-spacing|lighting-color|line-(break|clamp|height(-step)?)|list-style(-image|-position|-type)?|margin(-block(-end|-start)?|-bottom|-inline(-end|-start)?|-left|-right|-top|-trim)?|marker(-end|-mid|-start)?|mask(-border(-mode|-outset|-repeat|-slice|-source|-width)?|-clip|-composite|-image|-mode|-origin|-position|-repeat|-size|-type)?|math-(depth|shift|style)|max-(block-size|height|inline-size|width)|min-(block-size|height|inline-size|width)|mix-blend-mode|object-(fit|position)|offset(-anchor|-distance|-path|-position|-rotate)?|opacity|order|orphans|outline(-color|-offset|-style|-width)?|overflow(-anchor|-block|-clip-margin|-inline|-wrap|-x|-y)?|overlay|overscroll-behavior(-block|-inline|-x|-y)?|padding(-block(-end|-start)?|-bottom|-inline(-end|-start)?|-left|-right|-top)?|page(-break-after|-break-before|-break-inside)?|paint-order|perspective(-origin)?|place-(content|items|self)|pointer-events|position(-anchor|-area|-try(-fallbacks|-order)?|-visibility)?|print-color-adjust|quotes|r|resize|right|rotate|row-gap|ruby-(align|position)|rx|ry|scale|scroll-(behavior|margin(-block(-end|-start)?|-bottom|-inline(-end|-start)?|-left|-right|-top)?|marker-group|padding(-block(-end|-start)?|-bottom|-inline(-end|-start)?|-left|-right|-top)?|snap-(align|stop|type)|timeline(-axis|-name)?)|scrollbar-(color|gutter|width)|shape-(image-threshold|margin|outside|rendering)|speak-as|stop-(color|opacity)|stroke(-dasharray|-dashoffset|-linecap|-linejoin|-miterlimit|-opacity|-width)?|tab-size|table-layout|text-(align(-last)?|anchor|box(-edge|-trim)?|combine-upright|decoration(-color|-line|-skip(-ink)?|-style|-thickness)?|emphasis(-color|-position|-style)?|indent|justify|orientation|overflow|rendering|shadow|size-adjust|spacing-trim|transform|underline-(offset|position)|wrap(-mode|-style)?)|timeline-scope|top|touch-action|transform(-box|-origin|-style)?|transition(-behavior|-delay|-duration|-property|-timing-function)?|translate|unicode-bidi|user-(modify|select)|vector-effect|vertical-align|view-(timeline(-axis|-inset|-name)?|transition-name)|visibility|white-space(-collapse)?|widows|width|will-change|word-(break|spacing)|writing-mode|x|y|z-index|zoom)$/i
 };
 
-jush.links2.css = /(:)(link|visited|(hover|active|focus)|(target|lang|root|nth-child|nth-last-child|nth-of-type|nth-last-of-type|first-child|last-child|first-of-type|last-of-type|only-child|only-of-type|empty)|(enabled|disabled)|(checked|indeterminate|not)|(first-line|first-letter)|(before|after))(\b)/gi;
+jush.links2.css = /(:)(?<!::)(active|any-link|autofill|blank|buffering|checked|current|default|defined|dir|disabled|empty|enabled|first|first-child|first-of-type|focus|focus-visible|focus-within|fullscreen|future|has|has-slotted|host|host-context|host_function|hover|in-range|indeterminate|invalid|is|lang|last-child|last-of-type|left|link|local-link|modal|muted|not|nth-child|nth-last-child|nth-last-of-type|nth-of-type|only-child|only-of-type|open|optional|out-of-range|past|paused|picture-in-picture|placeholder-shown|playing|popover-open|read-only|read-write|required|right|root|scope|seeking|stalled|state|target|target-current|target-within|user-invalid|user-valid|valid|visited|volume-locked|where)|(?<=::)(after|backdrop|before|checkmark|column|cue|details-content|file-selector-button|first-letter|first-line|grammar-error|highlight|marker|part|picker|picker-icon|placeholder|scroll-button|scroll-marker|scroll-marker-group|selection|slotted|spelling-error|target-text|view-transition|view-transition-group|view-transition-image-pair|view-transition-new|view-transition-old)((?![-\w]))/gi;
