@@ -1,16 +1,24 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
 <title>JUSH textarea</title>
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="demo-dark.css">
 <body>
 
 <h1>SQL</h1>
-<textarea id="source" rows="25" cols="80" class="jush-sql" style="width: 98%;" spellcheck="off"></textarea>
+<textarea id="source" rows="25" cols="80" class="jush-sql" style="width: 98%;" spellcheck="off" autofocus></textarea>
 
-<script type="text/javascript" src="modules/jush.js"></script>
-<script type="text/javascript" src="modules/jush-textarea.js"></script>
-<script type="text/javascript" src="modules/jush-sql.js"></script>
-<script type="text/javascript">
+<script src="modules/jush.js"></script>
+<script src="modules/jush-textarea.js"></script>
+<script src="modules/jush-autocomplete-sql.js"></script>
+<script src="modules/jush-txt.js"></script>
+<script src="modules/jush-sql.js"></script>
+<script>
 jush.style('jush.css');
-jush.textarea(document.getElementById('source'));
+jush.style('jush-dark.css', '(prefers-color-scheme: dark)');
+jush.textarea(document.getElementById('source'), jush.autocompleteSql('``', {
+	"albums": ["id", "interpret", "title"],
+	"interprets": ["id", "name"],
+	"songs": ["id", "album", "rank", "title", "duration"]
+}));
 </script>

@@ -3,7 +3,7 @@
         'name' => 'adminneo/adminneo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'e050fe9dc5db5ec0647cf34207f8d7675aef5b6b',
+        'reference' => 'ff8b3521ad0be9fb3ff8d3602b61eabcc0d21c99',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'adminneo/adminneo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e050fe9dc5db5ec0647cf34207f8d7675aef5b6b',
+            'reference' => 'ff8b3521ad0be9fb3ff8d3602b61eabcc0d21c99',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -31,12 +31,14 @@
             'dev_requirement' => false,
         ),
         'vrana/jush' => array(
-            'pretty_version' => 'v2.1.3',
-            'version' => '2.1.3.0',
-            'reference' => 'bddd8a9df2177582426363899fd3b86cdd5e9dd9',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '1775a0dafa190ba9e782783c71d3de671743a139',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vrana/jush',
-            'aliases' => array(),
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'vrana/phpshrink' => array(

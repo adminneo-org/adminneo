@@ -1,24 +1,26 @@
 .jush {
-    --text-color: #000;
-    --bg-color: #fff;
-    --keyword-color: #03c;
-    --identifier-color: #f00;
-    --value-color: #808;
-    --string-color: #808;
-    --number-color: #090;
-    --attribute-color: #008080;
-    --js-bg-color: #f0f6ff;
-    --css-bg-color: #fffae0;
-    --php-color: #000;
-    --php-bg-color: #fff3f0;
-    --php-sql-bg-color: #fffae0;
-
-    color: var(--text-color);
+	--text-color: #000;
+	--bg-color: #fff;
+	--php-color: #003;
+	--string-color: green;
+	--string-plain-color: #009F00;
+	--keyword-color: navy;
+	--identifier-color: red;
+	--value-color: purple;
+	--number-color: #007F7F;
+	--attribute-color: teal;
+	--js-bg-color: #f0f0ff;
+	--css-bg-color: #ffffe0;
+	--php-bg-color: #fff0f0;
+	--php-sql-bg-color: #ffbbb0;
 }
+
+.jush { color: var(--text-color); }
 .jush-htm_com, .jush-com, .jush-com_code, .jush-one, .jush-php_doc, .jush-php_com, .jush-php_one, .jush-js_one, .jush-js_doc { color: gray; }
 .jush-php, .jush-php_new, .jush-php_fun { color: var(--php-color); background-color: var(--php-bg-color); }
-.jush-php_quo, .jush-quo, .jush-quo_one, .jush-php_eot, .jush-apo, .jush-php_apo, .jush-sql_apo, .jush-sqlite_apo, .jush-sql_quo, .jush-sql_eot { color: var(--string-color); }
-.jush-php_quo_var, .jush-php_var, .jush-sql_var { font-style: italic; }
+.jush-php_quo, .jush-php_eot, .jush-js_bac { color: var(--string-color); }
+.jush-php_apo, .jush-quo, .jush-quo_one, .jush-apo, .jush-sql_apo, .jush-sqlite_apo, .jush-sql_quo, .jush-sql_eot { color: var(--string-plain-color); }
+.jush-php_quo_var, .jush-php_var, .jush-sql_var, .jush-js_bac .jush-js { font-style: italic; }
 .jush-php_apo .jush-php_quo_var, .jush-php_apo .jush-php_var { font-style: normal; }
 .jush-php_halt2 { background-color: var(--bg-color); color: var(--text-color); }
 .jush-tag_css, .jush-att_css .jush-att_quo, .jush-att_css .jush-att_apo, .jush-att_css .jush-att_val { color: var(--text-color); background-color: var(--css-bg-color); }
@@ -27,7 +29,7 @@
 .jush-att, .jush-xml_att, .jush-att_js, .jush-att_css, .jush-att_http { color: var(--attribute-color); }
 .jush-att_quo, .jush-att_apo, .jush-att_val { color: var(--value-color); }
 .jush-ent { color: var(--value-color); }
-.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo { color: var(--attribute-color); }
+.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo { color: var(--value-color); }
 .jush-js_reg { color: var(--keyword-color); }
 .jush-php_sql .jush-php_quo, .jush-php_sql .jush-php_apo,
 .jush-php_sqlite .jush-php_quo, .jush-php_sqlite .jush-php_apo,
@@ -41,7 +43,7 @@
 .jush a.jush-help { cursor: help; }
 .jush-sql a, .jush-sql_code a, .jush-sqlite a, .jush-pgsql a, .jush-mssql a, .jush-oracle a, .jush-simpledb a { font-weight: bold; }
 .jush-php_sql .jush-php_quo a, .jush-php_sql .jush-php_apo a { font-weight: normal; }
-.jush-tag a, .jush-att a, .jush-apo a, .jush-quo a, .jush-php_apo a, .jush-php_quo a, .jush-php_eot2 a { color: inherit; color: expression(parentNode.currentStyle.color); }
-a.jush-custom:link, a.jush-custom:visited { font-weight: normal; color: inherit; color: expression(parentNode.currentStyle.color); }
+.jush-tag a, .jush-att a, .jush-apo a, .jush-quo a, .jush-php_apo a, .jush-php_quo a, .jush-php_eot2 a { color: inherit; }
+a.jush-custom:link, a.jush-custom:visited { font-weight: normal; color: inherit; }
 
 .jush p { margin: 0; }

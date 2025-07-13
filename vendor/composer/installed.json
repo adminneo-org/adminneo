@@ -54,20 +54,21 @@
         },
         {
             "name": "vrana/jush",
-            "version": "v2.1.3",
-            "version_normalized": "2.1.3.0",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/peterpp/jush.git",
-                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9"
+                "reference": "1775a0dafa190ba9e782783c71d3de671743a139"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/peterpp/jush/zipball/bddd8a9df2177582426363899fd3b86cdd5e9dd9",
-                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9",
+                "url": "https://api.github.com/repos/peterpp/jush/zipball/1775a0dafa190ba9e782783c71d3de671743a139",
+                "reference": "1775a0dafa190ba9e782783c71d3de671743a139",
                 "shasum": ""
             },
-            "time": "2025-03-23T22:20:39+00:00",
+            "time": "2025-07-29T08:29:12+00:00",
+            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "license": [

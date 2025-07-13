@@ -1,0 +1,29 @@
+.jush {
+	--text-color: #333;
+	--bg-color: #fff;
+	--keyword-color: #03c;
+	--identifier-color: #808;
+	--value-color: #d10;
+	--string-color: #d10;
+	--string-plain-color: #d10;
+	--number-color: #090;
+	--attribute-color: #008080;
+
+	--js-bg-color: #f0f6ff;
+	--css-bg-color: #fffae0;
+	--php-color: #000;
+	--php-bg-color: #fff3f0;
+	--php-sql-bg-color: #fffae0;
+}
+
+.jush a[href]:hover, .jush a[href]:active {
+	text-decoration: underline;
+}
+
+.sqlarea.jush a.jush-help {
+	cursor: inherit;
+}
+
+a[href].jush-custom {
+	color: var(--identifier-color);
+}

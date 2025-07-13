@@ -1,17 +1,18 @@
-jush.tr.js = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_obj: /\s*\{/, js_code: /()/ };
-jush.tr.js_code = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, js_doc: /\/\*\*/, com: /\/\*/, num: jush.num, js_write: /(\b)(write(?:ln)?)(\()/, js_http: /(\.)(setRequestHeader|getResponseHeader)(\()/, _3: /(<)(\/script)(>)/i, _1: /[^.\])}$\w\s]/ };
+jush.tr.js = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_obj: /\s*\{/, _1: /}/, js_code: /()/ };
+jush.tr.js_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, js_doc: /\/\*\*/, com: /\/\*/, num: jush.num, js_write: /(\b)(write(?:ln)?)(\()/, js_http: /(\.)(setRequestHeader|getResponseHeader)(\()/, js: /\{/, _3: /(<)(\/script)(>)/i, _2: /}/, _1: /[^.\])}$\w\s]/ };
 jush.tr.js_write = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_write_code: /()/ };
 jush.tr.js_http = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_http_code: /()/ };
-jush.tr.js_write_code = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_write: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
-jush.tr.js_http_code = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_http: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
+jush.tr.js_write_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_write: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
+jush.tr.js_http_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_http: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
 jush.tr.js_one = { php: jush.php, _1: /\n/, _3: /(<)(\/script)(>)/i };
 jush.tr.js_reg = { php: jush.php, esc: /\\/, js_reg_bra: /\[/, _1: /\/[a-z]*/i }; //! highlight regexp
 jush.tr.js_reg_bra = { php: jush.php, esc: /\\/, _1: /]/ };
 jush.tr.js_doc = { _1: /\*\// };
-jush.tr.js_arr = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_arr: /\[/, js_obj: /\{/, _1: /]/ };
+jush.tr.js_arr = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_arr: /\[/, js_obj: /\{/, _1: /]/ };
 jush.tr.js_obj = { php: jush.php, js_one: /\s*\/\//, com: /\s*\/\*/, js_val: /:/, _1: /\s*}/, js_key: /()/ };
-jush.tr.js_val = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_arr: /\[/, js_obj: /\{/, _1: /,|(?=})/ };
-jush.tr.js_key = { php: jush.php, quo: /"/, apo: /'/, js_one: /\/\//, com: /\/\*/, num: jush.num, _1: /(?=[:}])/ };
+jush.tr.js_val = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_arr: /\[/, js_obj: /\{/, _1: /,|(?=})/ };
+jush.tr.js_key = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, _1: /(?=[:}])/ };
+jush.tr.js_bac = { php: jush.php, esc: /\\/, js: /\$\{/, _1: /`/ };
 
 jush.urls.js_write = 'https://developer.mozilla.org/en/docs/DOM/$key.$val';
 jush.urls.js_http = 'https://www.w3.org/TR/XMLHttpRequest/#the-$val-$key';
@@ -24,7 +25,7 @@ jush.urls.js = ['https://developer.mozilla.org/en/$key',
 	'JavaScript/Reference/Operators/Special/$1',
 	'DOM/document.$1', 'DOM/element.$1', 'DOM/event.$1', 'DOM/form.$1', 'DOM/table.$1', 'DOM/window.$1',
 	'https://www.w3.org/TR/XMLHttpRequest/',
-	'JavaScript/Reference/Global_Objects/Array$1',
+	'JavaScript/Reference/Global_Objects/Array.$1',
 	'JavaScript/Reference/Global_Objects/Array$1',
 	'JavaScript/Reference/Global_Objects/Date$1',
 	'JavaScript/Reference/Global_Objects/Function$1',

@@ -1,24 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>JUSH - Tests</title>
-    <link rel="stylesheet" type="text/css" href="jush.css" />
-    <style type="text/css">
-        .error { background: #e00; color: #fee; }
-        @media (prefers-color-scheme: dark) {
-            body { background: #111; color: #ccc; }
-            .error { background: #900; color: #fcc; }
-        }
-    </style>
-</head>
-
+<meta charset="utf-8">
+<title>JUSH - Tests</title>
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="demo-dark.css">
+<link rel="stylesheet" href="jush.css">
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="jush-dark.css">
+<style>
+.error { background: #e00; color: #fee; }
+@media (prefers-color-scheme: dark) {
+    body { background: #111; color: #ccc; }
+    .error { background: #900; color: #fcc; }
+}
+</style>
 <body>
-    <div id="result"></div>
 
-    <script type="text/javascript" src="jush.js"></script>
-    <script type="text/javascript" src="tests.js"></script>
+<div id="result"></div>
 
-    <noscript><p>Enable JavaScript to run tests.</p></noscript>
-</body>
-</html>
+<script src="jush.js"></script>
+<script src="tests.js"></script>
+
+<noscript><p>Enable JavaScript to run tests.</p></noscript>

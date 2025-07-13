@@ -1,44 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <title>JUSH - Demo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style type="text/css">
-        @media (prefers-color-scheme: dark) {
-            body { background: #111; color: #ccc; }
-        }
-    </style>
-</head>
-
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>JUSH - Demo</title>
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="demo-dark.css">
 <body>
-    <form action="">
-    <div>
-        <textarea id="source" name="source" rows="12" cols="80" wrap="off"></textarea><br />
-        Language: <select name="language">
-        <option value="htm">HTML</option>
-        <option value="css">CSS</option>
-        <option value="js">JavaScript</option>
-        <option value="php">PHP</option>
-        <option value="sql">MySQL</option>
-        <option value="sqlite">SQLite</option>
-        <option value="pgsql">PostgreSQL</option>
-        <option value="mssql">MS SQL</option>
-        <option value="oracle">Oracle</option>
-        <option value="simpledb">SimpleDB</option>
-        <option value="cnf">Apache</option>
-        <option value="phpini">php.ini</option>
-        <option value="http">HTTP</option>
-        <option value="mail">E-mail</option>
-        <option value="xml">XML</option>
-        <option value="txt">Text</option>
-        </select>
-    </div>
-    </form>
 
-    <pre><code id="result"></code></pre>
+<form action="">
+<div>
+<textarea id="source" name="source" rows="12" cols="80" wrap="off" autofocus></textarea><br>
+Language: <select name="language">
+<option value="htm">HTML</option>
+<option value="css">CSS</option>
+<option value="js">JavaScript</option>
+<option value="php">PHP</option>
+<option value="sql">MySQL</option>
+<option value="sqlite">SQLite</option>
+<option value="pgsql">PostgreSQL</option>
+<option value="mssql">MS SQL</option>
+<option value="oracle">Oracle</option>
+<option value="simpledb">SimpleDB</option>
+<option value="cnf">Apache</option>
+<option value="phpini">php.ini</option>
+<option value="http">HTTP</option>
+<option value="mail">E-mail</option>
+<option value="xml">XML</option>
+<option value="txt">Text</option>
+</select>
+</div>
+</form>
 
-    <script type="text/javascript" src="jush.js"></script>
-    <script type="text/javascript" src="jush-api.js"></script>
-    <script type="text/javascript" src="demo.js"></script>
-</body>
-</html>
+<pre class="jush"><code id="result"></code></pre>
+
+<script src="jush.js"></script>
+<script src="jush-api.js"></script>
+<script src="demo.js"></script>
