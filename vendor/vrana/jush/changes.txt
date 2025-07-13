@@ -1,20 +1,19 @@
-JUSH 2.1.3 (2025-03-23):
-- Fix attribute color in JSON
+JUSH 2.2.0-dev:
+Add textarea autocomplete
+Add autocomplete for SQL
 
-JUSH 2.1.2 (2025-03-18):
-- Separate colors for dark mode
+JUSH 2.1.3:
+Split dark mode
 
-JUSH 2.1.1 (2025-03-10):
-- Lowercase sqlstatus link in MariaDB
+JUSH 2.1.2:
+Textarea: Open help on Ctrl+click
 
-JUSH 2.1.0 (2024-10-23):
-- Add support for dark mode
-
-JUSH 2.0.3 (2024-10-23):
-- Update HTTPS links to external pages
-- Add support for IME composition
-- PostgreSQL: Fix dollar-quoted strings
-- MySQL: Fix doc links
+JUSH 2.1.1:
+Add support for dark mode
+Add support for IME composition
+PostgreSQL: Fix dollar-quoted strings
+MySQL: Fix doc links
+MySQL: Lowercase sqlstatus link in MariaDB
 
 JUSH 2.0.0:
 Add highlighted textarea

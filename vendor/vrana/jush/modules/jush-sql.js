@@ -22,7 +22,7 @@ jush.urls.sql = ['https://dev.mysql.com/doc/mysql/en/$key',
 	'functions-for-testing-spatial-relations-between-geometric-objects.html#function_$1',
 	'functions-that-create-new-geometries-from-existing-ones.html#function_$1',
 	'geometry-property-functions.html#function_$1',
-	'creating-spatial-values.html#function_$1',
+	'gis-wkt-functions.html#function_st-$1',
 	'row-subqueries.html',
 	'fulltext-search.html#function_match'
 ];

@@ -28,7 +28,7 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "vrana/jush": "2.1.*",
+        "vrana/jush": "@dev",
         "vrana/jsshrink": "@dev",
         "vrana/phpshrink": "@dev"
     },
@@ -62,14 +62,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/peterpp/jush.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/vrana/JsShrink.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/vrana/PhpShrink.git"
         }
     ]
 }

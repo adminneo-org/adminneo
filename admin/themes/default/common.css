@@ -39,7 +39,6 @@ a:focus-visible {
 
 a[href]:hover, a[href]:active {
 	color: var(--link-text-hover);
-	/* text-decoration: underline; */
 }
 
 /* We can not use a:hover because of jush formatting. */

@@ -1,18 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
 <title>JUSH - SQL</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
-
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="demo-dark.css">
 <body>
 
-<form action="" onsubmit="highlight(this['source'].value); return false;">
 <p>
-<input id="source" name="source" />
-<input type="submit" value="Highlight" />
+<input id="source" name="source" size="50" oninput="highlight(this.value);" autocomplete="off">
 </p>
-</form>
 
 <table cellspacing="0">
 <tr><th>MySQL</th><td id="sql"></td></tr>
@@ -22,22 +17,21 @@
 <tr><th>Oracle </th><td id="oracle"></td></tr>
 </table>
 
-<script type="text/javascript" src="jush.js"></script>
-<script type="text/javascript">
+<script src="jush.js"></script>
+<script>
 function highlight(source) {
 	for (var lang in { sql: 1, sqlite: 1, pgsql: 1, mssql: 1, oracle: 1 }) {
 		document.getElementById(lang).innerHTML = '<code class="jush-' + lang + '">' + jush.highlight(lang, source) + '</code>';
 	}
-	location.hash = source;
+	location.hash = encodeURIComponent(source);
 }
 
+jush.create_links = 'target="_blank"';
 jush.style('jush.css');
+jush.style('jush-dark.css', '(prefers-color-scheme: dark)');
 if (location.hash) {
 	var source = document.getElementById('source');
-	source.value = location.hash.substr(1);
+	source.value = decodeURIComponent(location.hash.substr(1));
 	highlight(source.value);
 }
 </script>
-
-</body>
-</html>

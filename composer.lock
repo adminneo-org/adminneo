@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e1e4545232af60dc6765863b2c6dd53",
-    "packages": [
+    "content-hash": "c69810b75c543093d01de2eaaf736e41",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "vrana/jsshrink",
             "version": "dev-main",
@@ -37,6 +38,7 @@
                     "jsShrink.js"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0",
                 "GPL-2.0"
@@ -50,25 +52,26 @@
             "description": "Remove spaces and comments from JavaScript code (available in PHP and JavaScript).",
             "homepage": "https://github.com/vrana/JsShrink",
             "support": {
-                "source": "https://github.com/vrana/JsShrink/tree/main",
-                "issues": "https://github.com/vrana/JsShrink/issues"
+                "issues": "https://github.com/vrana/JsShrink/issues",
+                "source": "https://github.com/vrana/JsShrink/tree/main"
             },
             "time": "2025-03-19T21:30:40+00:00"
         },
         {
             "name": "vrana/jush",
-            "version": "v2.1.3",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/peterpp/jush.git",
-                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9"
+                "reference": "bcc3e3d0bf5ab2e6c327e47f6b456ad6689fcc63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/peterpp/jush/zipball/bddd8a9df2177582426363899fd3b86cdd5e9dd9",
-                "reference": "bddd8a9df2177582426363899fd3b86cdd5e9dd9",
+                "url": "https://api.github.com/repos/peterpp/jush/zipball/bcc3e3d0bf5ab2e6c327e47f6b456ad6689fcc63",
+                "reference": "bcc3e3d0bf5ab2e6c327e47f6b456ad6689fcc63",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "license": [
                 "Apache-2.0",
@@ -89,7 +92,7 @@
             "support": {
                 "source": "https://github.com/vrana/jush/"
             },
-            "time": "2025-03-23T22:20:39+00:00"
+            "time": "2025-08-15T22:08:57+00:00"
         },
         {
             "name": "vrana/phpshrink",
@@ -110,6 +113,7 @@
             },
             "default-branch": true,
             "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
@@ -122,17 +126,17 @@
             "description": "Remove spaces and comments from PHP code.",
             "homepage": "https://github.com/vrana/PhpShrink",
             "support": {
-                "source": "https://github.com/vrana/PhpShrink/tree/main",
-                "issues": "https://github.com/vrana/PhpShrink/issues"
+                "issues": "https://github.com/vrana/PhpShrink/issues",
+                "source": "https://github.com/vrana/PhpShrink/tree/main"
             },
             "time": "2025-05-07T06:59:19+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "vrana/jsshrink": 20,
+        "vrana/jush": 20,
         "vrana/phpshrink": 20
     },
     "prefer-stable": false,
