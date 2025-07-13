@@ -11,24 +11,27 @@ unnecessary escaping (e.g. echo "\'" or ='&quot;') is removed
 */
 
 var jush = {
-	create_links: true, // string for extra <a> parameters, e.g. ' target="_blank"'
+	create_links: true, // string for extra <a> parameters, e.g. 'target="_blank"'
 	timeout: 1000, // milliseconds
-	custom_links: { }, // { state: [ url, regexp ] }, for example { php : [ 'doc/$&.html', /\b(getData|setData)\b/g ] }
+	custom_links: { }, // { state: { url: regexp } }, for example { php : { 'doc/$&.html': /\b(getData|setData)\b/g } }
 	api: { }, // { state: { function: description } }, for example { php: { array: 'Create an array' } }
-	
+
 	php: /<\?(?!xml)(?:php)?|<script\s+language\s*=\s*(?:"php"|'php'|php)\s*>/i, // asp_tags=0, short_open_tag=1
 	num: /(?:0x[0-9a-f]+)|(?:\b[0-9]+\.?[0-9]*|\.[0-9]+)(?:e[+-]?[0-9]+)?/i,
-	
+
 	regexps: undefined,
 	subpatterns: { },
 
 	/** Link stylesheet
 	* @param string
+	* @param [string]
 	*/
-	style: function (href) {
+	style: function (href, media) {
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
-		link.type = 'text/css';
+		if (media) {
+			link.media = media;
+		}
 		link.href = href;
 		document.getElementsByTagName('head')[0].appendChild(link);
 	},
@@ -41,7 +44,7 @@ var jush = {
 	highlight: function (language, text) {
 		this.last_tag = '';
 		this.last_class = '';
-		return '<span class="jush">' + this.highlight_states([ language ], text.replace(/\r\n?/g, '\n'), !/^(htm|tag|xml|txt)$/.test(language))[0] + '</span>';
+		return this.highlight_states([ language ], text.replace(/\r\n?/g, '\n'), !/^(htm|tag|xml|txt)$/.test(language))[0];
 	},
 
 	/** Highlight html
@@ -52,7 +55,7 @@ var jush = {
 	highlight_html: function (language, html) {
 		var original = html.replace(/<br(\s+[^>]*)?>/gi, '\n');
 		var highlighted = jush.highlight(language, jush.html_entity_decode(original.replace(/<[^>]*>/g, ''))).replace(/(^|\n| ) /g, '$1&nbsp;');
-		
+
 		var inject = { };
 		var pos = 0;
 		var last_offset = 0;
@@ -63,7 +66,7 @@ var jush = {
 			}
 			last_offset = offset + str.length;
 		});
-		
+
 		pos = 0;
 		highlighted = highlighted.replace(/([^&<]*)(?:(&[^;]+;)|(?:<[^>]+>)+|$)/g, function (str, text, entity) {
 			for (var i = text.length; i >= 0; i--) {
@@ -95,7 +98,7 @@ var jush = {
 				var match = /(^|\s)(?:jush|language(?=-\S))($|\s|-(\S+))/.exec(pre[i].className); // https://www.w3.org/TR/html5/text-level-semantics.html#the-code-element
 				if (match) {
 					var language = match[3] ? match[3] : 'htm';
-					var s = '<span class="jush-' + language + '">' + jush.highlight_html(language, pre[i].innerHTML.replace(/\t/g, tab.length ? tab : '\t')) + '</span>'; // span - enable style for class="language-"
+					var s = '<span class="jush"><span class="jush-' + language + '">' + jush.highlight_html(language, pre[i].innerHTML.replace(/\t/g, tab.length ? tab : '\t')) + '</span></span>'; // span - enable style for class="language-"
 					if (pre[i].outerHTML && /^pre$/i.test(pre[i].tagName)) {
 						pre[i].outerHTML = pre[i].outerHTML.match(/[^>]+>/)[0] + s + '</' + pre[i].tagName + '>';
 					} else {
@@ -111,7 +114,7 @@ var jush = {
 		};
 		highlight();
 	},
-	
+
 	link_manual: function (language, text) {
 		var code = document.createElement('code');
 		code.innerHTML = this.highlight(language, text);
@@ -127,7 +130,7 @@ var jush = {
 	create_link: function (link, s, attrs) {
 		return '<a'
 			+ (this.create_links && link ? ' href="' + link + '" class="jush-help"' : '')
-			+ (typeof this.create_links == 'string' ? this.create_links : '')
+			+ (typeof this.create_links == 'string' ? ' ' + this.create_links.replace(/^\s+/, '') : '')
 			+ (attrs || '')
 			+ '>' + s + '</a>'
 		;
@@ -152,7 +155,7 @@ var jush = {
 						var link = (/^https?:/.test(url[i-1]) || !url[i-1] ? url[i-1] : url[0].replace(/\$key/g, url[i-1]));
 						switch (state) {
 							case 'php': link = link.replace(/\$1/g, arguments[i].toLowerCase()); break;
-							case 'php_new': link = link.replace(/\$1/g, arguments[i].toLowerCase()); break; // toLowerCase() - case sensitive after #
+							case 'php_new': link = link.replace(/\$1/g, arguments[i].toLowerCase()).replace(/\\/g, '-'); break; // toLowerCase() - case sensitive after #
 							case 'phpini': link = link.replace(/\$1/g, (/^suhosin\./.test(arguments[i])) ? arguments[i] : arguments[i].toLowerCase().replace(/_/g, '-')); break;
 							case 'php_doc': link = link.replace(/\$1/g, arguments[i].replace(/^\W+/, '')); break;
 							case 'js_doc': link = link.replace(/\$1/g, arguments[i].replace(/^\W*(.)/, function (match, p1) { return p1.toUpperCase(); })); break;
@@ -167,7 +170,7 @@ var jush = {
 							case 'pgsqlset': link = link.replace(/\$1/g, arguments[i].replace(/_/g, '-').toUpperCase()); break;
 							case 'cnf': link = link.replace(/\$1/g, arguments[i].toLowerCase()); break;
 							case 'js': link = link.replace(/\$1/g, arguments[i].replace(/\./g, '/')); break;
-							default: link = link.replace(/\$1/g, arguments[i]);
+							default: link = link.replace(/\$1/g, arguments[i]).replace(/\\/g, '-');
 						}
 						var title = '';
 						if (jush.api[state]) {
@@ -179,13 +182,21 @@ var jush = {
 			});
 		}
 		if (this.custom_links[state]) {
-			s = s.replace(this.custom_links[state][1], function (str) {
-				var offset = arguments[arguments.length - 2];
-				if (/<[^>]*$/.test(s.substr(0, offset))) {
-					return str; // don't create links inside tags
-				}
-				return '<a href="' + jush.htmlspecialchars_quo(jush.custom_links[state][0].replace('$&', encodeURIComponent(str))) + '" class="jush-custom">' + str + '</a>' // not create_link() - ignores create_links
-			});
+			if (Array.isArray(this.custom_links[state])) { // backwards compatibility
+				var url = this.custom_links[state][0];
+				var re = this.custom_links[state][1];
+				this.custom_links[state] = {};
+				this.custom_links[state][url] = re;
+			}
+			for (var url in this.custom_links[state]) {
+				s = s.replace(this.custom_links[state][url], function (str) {
+					var offset = arguments[arguments.length - 2];
+					if (/<[^>]*$/.test(s.substr(0, offset))) {
+						return str; // don't create links inside tags
+					}
+					return '<a href="' + jush.htmlspecialchars_quo(url.replace('$&', encodeURIComponent(str))) + '" class="jush-custom">' + str + '</a>' // not create_link() - ignores create_links
+				});
+			}
 		}
 		return s;
 	},
@@ -217,7 +228,7 @@ var jush = {
 		this.subpatterns[key] = subpatterns;
 		this.regexps[key] = new RegExp(re.join('|'), 'g');
 	},
-	
+
 	highlight_states: function (states, text, in_php, escape) {
 		if (!this.regexps) {
 			this.regexps = { };
@@ -262,7 +273,7 @@ var jush = {
 			if (!key) {
 				return [ 'regexp not found', [ ] ];
 			}
-			
+
 			if (in_php && key == 'php') {
 				continue;
 			}
@@ -270,7 +281,7 @@ var jush = {
 			var out = (key.charAt(0) == '_');
 			var division = match.index + (key == 'php_halt2' ? match[0].length : 0);
 			var s = text.substring(start, division);
-			
+
 			// highlight children
 			var prev_state = states[states.length - 2];
 			if (/^(att_quo|att_apo|att_val)$/.test(state) && (/^(att_js|att_css|att_http)$/.test(prev_state) || /^\s*javascript:/i.test(s))) { // javascript: - easy but without own state //! should be checked only in %URI;
@@ -321,32 +332,25 @@ var jush = {
 			child_states = s_states[1];
 			s = this.keywords_links(state, s);
 			ret.push(s);
-			
+
 			s = text.substring(division, match.index + match[0].length);
 			s = (m.length < 3 ? (s ? '<span class="jush-op">' + this.htmlspecialchars(escape ? escape(s) : s) + '</span>' : '') : (m[1] ? '<span class="jush-op">' + this.htmlspecialchars(escape ? escape(m[1]) : m[1]) + '</span>' : '') + this.htmlspecialchars(escape ? escape(m[2]) : m[2]) + (m[3] ? '<span class="jush-op">' + this.htmlspecialchars(escape ? escape(m[3]) : m[3]) + '</span>' : ''));
 			if (!out) {
 				if (this.links && this.links[key] && m[2]) {
 					if (/^tag/.test(key)) {
-						this.last_tag = m[2].toUpperCase();
+						this.last_tag = m[2].toLowerCase();
 					}
-					var link = (/^tag/.test(key) && !/^(ins|del)$/i.test(m[2]) ? m[2].toUpperCase() : m[2].toLowerCase());
+					var link = m[2].toLowerCase();
 					var k_link = '';
-					var att_tag = (this.att_mapping[link + '-' + this.last_tag] ? this.att_mapping[link + '-' + this.last_tag] : this.last_tag);
 					for (var k in this.links[key]) {
-						if (key == 'att' && this.links[key][k].test(link + '-' + att_tag) && !/^https?:/.test(k)) {
-							link += '-' + att_tag;
+						var m2 = this.links[key][k].exec(m[2]);
+						if (m2) {
+							if (m2[1]) {
+								link = m2[1].toLowerCase().replace(/\\/g, '-'); // \ is PHP namespace;
+							}
 							k_link = k;
-							break;
-						} else {
-							var m2 = this.links[key][k].exec(m[2]);
-							if (m2) {
-								if (m2[1]) {
-									link = (/^tag/.test(key) && !/^(ins|del)$/i.test(m2[1]) ? m2[1].toUpperCase() : m2[1].toLowerCase());
-								}
-								k_link = k;
-								if (key != 'att') {
-									break;
-								}
+							if (key != 'att') {
+								break;
 							}
 						}
 					}
@@ -355,7 +359,11 @@ var jush = {
 					}
 					if (k_link) {
 						s = (m[1] ? '<span class="jush-op">' + this.htmlspecialchars(escape ? escape(m[1]) : m[1]) + '</span>' : '');
-						s += this.create_link((/^https?:/.test(k_link) ? k_link : this.urls[key].replace(/\$key/, k_link)).replace(/\$val/, (/^https?:/.test(k_link) ? link.toLowerCase() : link)), this.htmlspecialchars(escape ? escape(m[2]) : m[2])); //! use jush.api
+						s += this.create_link(
+							(/^https?:/.test(k_link) ? k_link : this.urls[key].replace(/\$key/, k_link))
+								.replace(/\$val/, (/^https?:/.test(k_link) ? link.toLowerCase() : link))
+								.replace(/\$tag/, this.last_tag),
+							this.htmlspecialchars(escape ? escape(m[2]) : m[2])); //! use jush.api
 						s += (m[3] ? '<span class="jush-op">' + this.htmlspecialchars(escape ? escape(m[3]) : m[3]) + '</span>' : '');
 					}
 				}
@@ -370,7 +378,8 @@ var jush = {
 				}
 			} else {
 				if (state == 'php_met' && this.last_class) {
-					s = this.create_link(this.urls[state].replace(/\$key/, this.last_class) + '.' + s.toLowerCase(), s);
+					var title = (jush.api['php2'] ? jush.api['php2'][(this.last_class + '::' + s).toLowerCase()] : '');
+					s = this.create_link(this.urls[state].replace(/\$key/, this.last_class) + '.' + s.toLowerCase(), s, (title ? ' title="' + this.htmlspecialchars_quo(title) + '"' : ''));
 				}
 				ret.push(s);
 				for (var i = Math.min(states.length, +key.substr(1)); i--; ) {
@@ -393,31 +402,6 @@ var jush = {
 		return [ ret.join(''), states ];
 	},
 
-	att_mapping: {
-		'align-APPLET': 'IMG', 'align-IFRAME': 'IMG', 'align-INPUT': 'IMG', 'align-OBJECT': 'IMG',
-		'align-COL': 'TD', 'align-COLGROUP': 'TD', 'align-TBODY': 'TD', 'align-TFOOT': 'TD', 'align-TH': 'TD', 'align-THEAD': 'TD', 'align-TR': 'TD',
-		'border-OBJECT': 'IMG',
-		'cite-BLOCKQUOTE': 'Q',
-		'cite-DEL': 'INS',
-		'color-BASEFONT': 'FONT',
-		'face-BASEFONT': 'FONT',
-		'height-INPUT': 'IMG',
-		'height-TD': 'TH',
-		'height-OBJECT': 'IMG',
-		'label-MENU': 'OPTION',
-		'longdesc-IFRAME': 'FRAME',
-		'name-FIELDSET': 'FORM',
-		'name-TEXTAREA': 'BUTTON',
-		'name-IFRAME': 'FRAME',
-		'name-OBJECT': 'INPUT',
-		'src-IFRAME': 'FRAME',
-		'type-AREA': 'A',
-		'type-LINK': 'A',
-		'width-INPUT': 'IMG',
-		'width-OBJECT': 'IMG',
-		'width-TD': 'TH'
-	},
-
 	/** Replace <&> by HTML entities
 	* @param string
 	* @return string
@@ -425,19 +409,19 @@ var jush = {
 	htmlspecialchars: function (string) {
 		return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	},
-	
+
 	htmlspecialchars_quo: function (string) {
 		return jush.htmlspecialchars(string).replace(/"/g, '&quot;'); // jush - this.htmlspecialchars_quo is passed as reference
 	},
-	
+
 	htmlspecialchars_apo: function (string) {
 		return jush.htmlspecialchars(string).replace(/'/g, '&#39;');
 	},
-	
+
 	htmlspecialchars_quo_apo: function (string) {
 		return jush.htmlspecialchars_quo(string).replace(/'/g, '&#39;');
 	},
-	
+
 	/** Decode HTML entities
 	* @param string
 	* @return string
@@ -447,7 +431,7 @@ var jush = {
 			return String.fromCharCode(p1 ? p1 : parseInt(p2, 16));
 		}).replace(/&amp;/g, '&');
 	},
-	
+
 	/** Add backslash before backslash
 	* @param string
 	* @return string
@@ -455,15 +439,15 @@ var jush = {
 	addslashes: function (string) {
 		return string.replace(/\\/g, '\\$&');
 	},
-	
+
 	addslashes_apo: function (string) {
 		return string.replace(/[\\']/g, '\\$&');
 	},
-	
+
 	addslashes_quo: function (string) {
 		return string.replace(/[\\"]/g, '\\$&');
 	},
-	
+
 	/** Remove backslash before \"'
 	* @param string
 	* @return string
@@ -485,7 +469,7 @@ jush.tr = { // transitions - key: go inside this state, _2: go outside 2 levels 
 	esc: { _1: /./ }, //! php_quo allows [0-7]{1,3} and x[0-9A-Fa-f]{1,2}
 	one: { _1: /(?=\n)/ },
 	num: { _1: /()/ },
-	
+
 	sql_apo: { esc: /\\/, _0: /''/, _1: /'/ },
 	sql_quo: { esc: /\\/, _0: /""/, _1: /"/ },
 	sql_var: { _1: /(?=[^_.$a-zA-Z0-9])/ },

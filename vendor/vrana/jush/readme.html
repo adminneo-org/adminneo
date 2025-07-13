@@ -1,7 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <title>JUSH - JavaScript Syntax Highlighter</title>
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="demo-dark.css">
 <body>
 
 <h1>JUSH - JavaScript Syntax Highlighter</h1>
@@ -26,14 +27,15 @@
 <ol>
 <li>Copy <a href="jush.css">jush.css</a> and <a href="jush.js">jush.js</a> into your directory.</li>
 <li>Add following snippet before the <code class="jush">&lt;/body&gt;</code> tag in HTML file:
-<pre><code class="jush">&lt;script type="text/javascript" src="jush.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
+<pre><code class="jush">&lt;script src="jush.js"&gt;&lt;/script&gt;
+&lt;script&gt;
 jush.style('jush.css');
 jush.highlight_tag('code');
 &lt;/script&gt;
 </code></pre>
 All <code class="jush">&lt;code class="jush"&gt;</code> tags will be highlighted. Language is determined by the class name beginning with "jush-" (e.g. <code class="jush">&lt;code class="jush-js"&gt;</code>). Default language is <code>htm</code>. It is also possible to use <code class="jush">&lt;code class="language-*"&gt;</code>.
 </li>
+<li>If you want to enable dark mode, call <code class="jush-js">jush.style('jush-dark.css')</code>. To enable it only based on user preferences, call <code class="jush-js">jush.style('jush-dark.css', '(prefers-color-scheme: dark)')</code>.</li>
 </ol>
 <p>Alternativelly call <code class="jush-js">jush.highlight(language, text)</code> to syntax highlight single text.</p>
 
@@ -44,8 +46,9 @@ Example: WScript jush-help.wsf readme.html 2 2
 </pre>
 <p>The example should open a browser with documentation of the <code class="jush">&lt;html&gt;</code> tag which is at position 2:2 of this file.</p>
 
-<script type="text/javascript" src="jush.js"></script>
-<script type="text/javascript">
+<script src="jush.js"></script>
+<script>
 jush.style('jush.css');
+jush.style('jush-dark.css', '(prefers-color-scheme: dark)');
 jush.highlight_tag('code');
 </script>

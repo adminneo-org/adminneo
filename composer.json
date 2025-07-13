@@ -26,7 +26,7 @@
     "require": {
         "php": "7.1 - 8.4",
         "ext-json": "*",
-        "vrana/jush": "2.1.*",
+        "vrana/jush": "@dev",
         "vrana/jsshrink": "@dev",
         "vrana/phpshrink": "@dev"
     },

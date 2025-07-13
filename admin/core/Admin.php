@@ -52,11 +52,16 @@ class Admin extends Origin
 	 */
 	public function printToHead(): void
 	{
-		echo "<link rel='stylesheet' href='", link_files("jush.css", ["../vendor/vrana/jush/jush.css"]), "'>";
+		echo "<link rel='stylesheet' href='", link_files("jush.css", [
+			"../vendor/vrana/jush/jush.css",
+			"themes/default/jush.css",
+		]), "'>";
 
 		if (!$this->admin->isLightModeForced()) {
 			echo "<link rel='stylesheet' " . (!$this->admin->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
-			echo link_files("jush-dark.css", ["../vendor/vrana/jush/jush-dark.css"]);
+			echo link_files("jush-dark.css", [
+				"themes/default/jush-dark.css",
+			]);
 			echo "'>\n";
 		}
 

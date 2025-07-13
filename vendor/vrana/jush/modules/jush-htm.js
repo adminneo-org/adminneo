@@ -15,83 +15,31 @@ jush.tr.xml = { php: jush.php, htm_com: /<!--/, xml_tag: /(<)(\/?[-\w:]+)/, ent:
 jush.tr.xml_tag = { php: jush.php, xml_att: /(\s*)([-\w:]+)()/, _1: />/ };
 jush.tr.xml_att = { php: jush.php, att_quo: /\s*=\s*"/, att_apo: /\s*=\s*'/, _1: /()/ };
 
-jush.urls.tag = 'https://www.w3.org/TR/html4/$key.html#edef-$val';
-jush.urls.tag_css = 'https://www.w3.org/TR/html4/$key.html#edef-$val';
-jush.urls.tag_js = 'https://www.w3.org/TR/html4/$key.html#edef-$val';
-jush.urls.att = 'https://www.w3.org/TR/html4/$key.html#adef-$val';
-jush.urls.att_css = 'https://www.w3.org/TR/html4/$key.html#adef-$val';
-jush.urls.att_js = 'https://www.w3.org/TR/html4/$key.html#adef-$val';
-jush.urls.att_http = 'https://www.w3.org/TR/html4/$key.html#adef-$val';
+jush.urls.tag = 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/$key';
+jush.urls.tag_css = jush.urls.tag;
+jush.urls.tag_js = jush.urls.tag;
+jush.urls.att = jush.urls.tag;
+jush.urls.att_css = jush.urls.tag;
+jush.urls.att_js = 'https://developer.mozilla.org/en-US/docs/Web/API/$key/$val_event';
+jush.urls.att_http = jush.urls.tag;
 
 jush.links.tag = {
-	'interact/forms': /^(button|fieldset|form|input|isindex|label|legend|optgroup|option|select|textarea)$/i,
-	'interact/scripts': /^(noscript)$/i,
-	'present/frames': /^(frame|frameset|iframe|noframes)$/i,
-	'present/graphics': /^(b|basefont|big|center|font|hr|i|s|small|strike|tt|u)$/i,
-	'struct/dirlang': /^(bdo)$/i,
-	'struct/global': /^(address|body|div|h1|h2|h3|h4|h5|h6|head|html|meta|span|title)$/i,
-	'struct/links': /^(a|base|link)$/i,
-	'struct/lists': /^(dd|dir|dl|dt|li|menu|ol|ul)$/i,
-	'struct/objects': /^(applet|area|img|map|object|param)$/i,
-	'struct/tables': /^(caption|col|colgroup|table|tbody|td|tfoot|th|thead|tr)$/i,
-	'struct/text': /^(abbr|acronym|blockquote|br|cite|code|del|dfn|em|ins|kbd|p|pre|q|samp|strong|sub|sup|var)$/i,
-	'https://whatwg.org/html/sections.html#the-$val-element': /^(section|article|aside|hgroup|header|footer|nav)$/i,
-	'https://whatwg.org/html/grouping-content.html#the-$val-element': /^(main|figure|figcaption)$/i,
-	'https://whatwg.org/html/the-video-element.html#the-$val-element': /^(video|audio|source|track)$/i,
-	'https://whatwg.org/html/the-iframe-element.html#the-$val-element': /^(embed)$/i,
-	'https://whatwg.org/html/text-level-semantics.html#the-$val-element': /^(mark|time|data|ruby|rt|rp|bdi|wbr)$/i,
-	'https://whatwg.org/html/the-button-element.html#the-$val-element': /^(progress|meter|datalist|keygen|output)$/i,
-	'https://whatwg.org/html/commands.html#the-$val-element': /^(dialog)$/i,
-	'https://whatwg.org/html/the-canvas-element.html#the-$val-element': /^(canvas)$/i,
-	'https://whatwg.org/html/interactive-elements.html#the-$val-element': /^(menuitem|details|summary)$/i
+	'Elements/$val': /^(a|abbr|acronym|address|area|article|aside|audio|b|base|bdi|bdo|big|blockquote|body|br|button|canvas|caption|center|cite|code|col|colgroup|data|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fencedframe|fieldset|figcaption|figure|font|footer|form|frame|frameset|head|header|heading_elements|hgroup|hr|html|i|iframe|img|input|ins|kbd|label|legend|li|link|main|map|mark|marquee|menu|meta|meter|nav|nobr|noembed|noframes|noscript|object|ol|optgroup|option|output|p|param|picture|plaintext|pre|progress|q|rb|rp|rt|rtc|ruby|s|samp|search|section|select|selectedcontent|slot|small|source|span|strike|strong|sub|summary|sup|table|tbody|td|template|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video|wbr|xmp)$/i
 };
-jush.links.tag_css = { 'present/styles': /^(style)$/i };
-jush.links.tag_js = { 'interact/scripts': /^(script)$/i };
-jush.links.att_css = { 'present/styles': /^(style)$/i };
+jush.links.tag_css = { 'Elements/$val': /^(style)$/i };
+jush.links.tag_js = { 'Elements/$val': /^(script)$/i };
+jush.links.att_css = { 'Global_attributes/$val': /^(style)$/i };
 jush.links.att_js = {
-	'interact/scripts': /^(onblur|onchange|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onreset|onselect|onsubmit|onunload|onunload)$/i,
-	'https://whatwg.org/html/webappapis.html#handler-$val': /^(onabort|oncancel|oncanplay|oncanplaythrough|onclose|oncontextmenu|oncuechange|ondrag|ondragend|ondragenter|ondragexit|ondragleave|ondragover|ondragstart|ondrop|ondurationchange|onemptied|onended|oninput|oninvalid|onloadeddata|onloadedmetadata|onloadstart|onmouseenter|onmouseleave|onmousewheel|onpause|onplay|onplaying|onprogress|onratechange|onseeked|onseeking|onshow|onsort|onstalled|onsuspend|ontimeupdate|onvolumechange|onwaiting)$/i
+	'Element': /on(blur|click|contextmenu|dblclick|focus|input|keydown|keypress|keyup|mousedown|mouseenter|mouseleave|mousemove|mouseout|mouseover|mouseup|mousewheel|scroll)$/i,
+	'HTMLElement': /on(change|drag|dragend|dragenter|dragleave|dragover|dragstart|drop|error|load|toggle)$/i,
+	'HTMLFormElement': /on(reset|submit)$/i,
+	'HTMLInputElement': /on(cancel|invalid|select)$/i,
+	'HTMLMediaElement': /on(canplay|canplaythrough|durationchange|emptied|ended|loadeddata|loadedmetadata|pause|play|playing|ratechange|seeked|seeking|stalled|suspend|timeupdate|volumechange|waiting)$/i,
+	'Window': /on(resize)$/i,
 };
-jush.links.att_http = { 'struct/global': /^(http-equiv)$/i };
+jush.links.att_http = { 'Elements/meta#$val': /^(http-equiv)$/i };
 jush.links.att = {
-	'interact/forms': /^(accept-charset|accept|accesskey|action|align-LEGEND|checked|cols-TEXTAREA|disabled|enctype|for|label-OPTION|label-OPTGROUP|maxlength|method|multiple|name-BUTTON|name-SELECT|name-FORM|name-INPUT|prompt|readonly|rows-TEXTAREA|selected|size-INPUT|size-SELECT|src|tabindex|type-INPUT|type-BUTTON|value-INPUT|value-OPTION|value-BUTTON)$/i,
-	'interact/scripts': /^(defer|language|src-SCRIPT|type-SCRIPT)$/i,
-	'present/frames': /^(cols-FRAMESET|frameborder|height-IFRAME|longdesc-FRAME|marginheight|marginwidth|name-FRAME|noresize|rows-FRAMESET|scrolling|src-FRAME|target|width-IFRAME)$/i,
-	'present/graphics': /^(align-HR|align|bgcolor|clear|color-FONT|face-FONT|noshade|size-HR|size-FONT|size-BASEFONT|width-HR)$/i,
-	'present/styles': /^(media|type-STYLE)$/i,
-	'struct/dirlang': /^(dir|dir-BDO|lang)$/i,
-	'struct/global': /^(alink|background|class|content|id|link|name-META|profile|scheme|text|title|version|vlink)$/i,
-	'struct/links': /^(charset|href|href-BASE|hreflang|name-A|rel|rev|type-A)$/i,
-	'struct/lists': /^(compact|start|type-LI|type-OL|type-UL|value-LI)$/i,
-	'struct/objects': /^(align-IMG|alt|archive-APPLET|archive-OBJECT|border-IMG|classid|code|codebase-OBJECT|codebase-APPLET|codetype|coords|data|declare|height-IMG|height-APPLET|hspace|ismap|longdesc-IMG|name-APPLET|name-IMG|name-MAP|name-PARAM|nohref|object|shape|src-IMG|standby|type-OBJECT|type-PARAM|usemap|value-PARAM|valuetype|vspace|width-IMG|width-APPLET)$/i,
-	'struct/tables': /^(abbr|align-CAPTION|align-TABLE|align-TD|axis|border-TABLE|cellpadding|cellspacing|char|charoff|colspan|frame|headers|height-TH|nowrap|rowspan|rules|scope|span-COL|span-COLGROUP|summary|valign|width-TABLE|width-TH|width-COL|width-COLGROUP)$/i,
-	'struct/text': /^(cite-Q|cite-INS|datetime|width-PRE)$/i,
-	'https://whatwg.org/html/links.html#attr-hyperlink-$val': /^(download)$/i,
-	'https://whatwg.org/html/semantics.html#attr-meta-$val': /^(charset)$/i,
-	'https://whatwg.org/html/tabular-data.html#attr-table-$val': /^(sortable)$/i,
-	'https://whatwg.org/html/tabular-data.html#attr-th-$val': /^(sorted)$/i,
-	'https://whatwg.org/html/association-of-controls-and-forms.html#attr-fe-$val': /^(autofocus|autocomplete|dirname|inputmode)$/i,
-	'https://whatwg.org/html/common-input-element-attributes.html#attr-input-$val': /^(placeholder|required|min|max|pattern|step|list)$/i,
-	'https://whatwg.org/html/association-of-controls-and-forms.html#attr-fae-$val': /^(form)$/i,
-	'https://whatwg.org/html/the-button-element.html#attr-textarea-$val': /^(wrap)$/i,
-	'https://whatwg.org/html/association-of-controls-and-forms.html#attr-fs-$val': /^(novalidate|formaction|formenctype|formmethod|formnovalidate|formtarget)$/i,
-	'https://whatwg.org/html/interactive-elements.html#attr-$val': /^(contextmenu)$/i,
-	'https://whatwg.org/html/the-button-element.html#attr-button-$val': /^(menu)$/i,
-	'https://whatwg.org/html/semantics.html#attr-style-$val': /^(scoped)$/i,
-	'https://whatwg.org/html/scripting-1.html#attr-script-$val': /^(async)$/i,
-	'https://whatwg.org/html/semantics.html#attr-html-$val': /^(manifest)$/i,
-	'https://whatwg.org/html/links.html#attr-link-$val': /^(sizes)$/i,
-	'https://whatwg.org/html/grouping-content.html#attr-ol-$val': /^(reversed)$/i,
-	'https://whatwg.org/html/the-iframe-element.html#attr-iframe-$val': /^(sandbox|seamless|srcdoc)$/i,
-	'https://whatwg.org/html/the-iframe-element.html#attr-object-$val': /^(typemustmatch)$/i,
-	'https://whatwg.org/html/embedded-content-1.html#attr-img-$val': /^(crossorigin|srcset)$/i,
-	'https://whatwg.org/html/editing.html#attr-$val': /^(contenteditable|spellcheck)$/i,
-	'https://whatwg.org/html/elements.html#attr-data-*': /^(data-.+)$/i,
-	'https://whatwg.org/html/dnd.html#the-$val-attribute': /^(draggable|dropzone)$/i,
-	'https://whatwg.org/html/editing.html#the-$val-attribute': /^(hidden|inert)$/i,
-	'https://www.w3.org/WAI/PF/aria/states_and_properties#$val': /^(aria-.+)$/i,
-	'https://whatwg.org/html/infrastructure.html#attr-aria-$val': /^(role)$/i,
-	'https://whatwg.org/html/elements.html#attr-$val': /^(translate)$/i,
-	'https://schema.org/docs/gs.html#microdata_itemscope_itemtype': /^(itemscope|itemtype)$/i,
-	'https://schema.org/docs/gs.html#microdata_$val': /^(itemprop)$/i
+	'Global_attributes/$val': /^(accesskey|anchor|autocapitalize|autocorrect|autofocus|class|contenteditable|dir|draggable|enterkeyhint|exportparts|hidden|id|inert|inputmode|is|itemid|itemprop|itemref|itemscope|itemtype|lang|nonce|part|popover|slot|spellcheck|style|tabindex|title|translate|virtualkeyboardpolicy|writingsuggestions)$/i,
+	'Global_attributes/data-_star_': /^(data-.*)$/i,
+	'Elements/$tag#$val': /^(abbr|accept|accept-charset|action|align|alink|allow|allowfullscreen|allowpaymentrequest|alt|archive|as|async|attributionsrc|autocomplete|autoplay|axis|background|behavior|bgcolor|blocking|border|bottommargin|browsingtopics|capture|cellpadding|cellspacing|char|charoff|charset|checked|cite|classid|clear|codebase|codetype|color|cols|colspan|command|commandfor|compact|content|controls|controlslist|coords|credentialless|crossorigin|csp|data|datetime|declare|decoding|default|defer|direction|dirname|disabled|disablepictureinpicture|disableremoteplayback|download|elementtiming|enctype|face|fetchpriority|for|form|formaction|formenctype|formmethod|formnovalidate|formtarget|frame|frameborder|headers|height|high|href|hreflang|hspace|http-equiv|imagesizes|imagesrcset|incremental|integrity|ismap|kind|label|language|leftmargin|link|list|loading|longdesc|loop|low|marginheight|marginwidth|max|maxlength|media|method|min|minlength|moz-opaque|multiple|muted|name|nomodule|noresize|noshade|novalidate|onafterprint|onbeforeprint|onbeforeunload|onblur|onerror|onfocus|onhashchange|onlanguagechange|onload|onmessage|onmessageerror|onoffline|ononline|onpagehide|onpagereveal|onpageshow|onpageswap|onpopstate|onrejectionhandled|onresize|onstorage|onunhandledrejection|onunload|open|optimum|orient|pattern|ping|placeholder|playsinline|popovertarget|popovertargetaction|poster|preload|profile|readonly|referrerpolicy|rel|required|results|rev|reversed|rightmargin|rows|rowspan|rules|sandbox|scope|scrollamount|scrolldelay|scrolling|selected|shadowrootclonable|shadowrootdelegatesfocus|shadowrootmode|shadowrootserializable|shape|size|sizes|span|src|srcdoc|srclang|srcset|standby|start|step|summary|target|text|topmargin|truespeed|type|usemap|valign|value|valuetype|version|vlink|vspace|webkitdirectory|width|wrap|xmlns)$/i
 };

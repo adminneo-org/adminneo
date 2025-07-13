@@ -19,6 +19,7 @@ AdminNeo 5.1.0
 - Optimize retrieving columns for schema (by @vrana)
 - Shorten queries saved from SQL command to URL (by @vrana)
 - Remember export setting at SQL command
+- SQL textarea: Open help and links to tables on Ctrl+click
 - Refine and standardize Japanese translation (by @yama)
 - Plugins: Use protected visibility of member properties
 - Force inline editing with the Shift key when clicking on a link.

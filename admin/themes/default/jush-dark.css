@@ -1,16 +1,16 @@
 .jush {
 	--text-color: #ccc;
 	--bg-color: #111;
-	--php-color: #cc9;
-	--string-color: #e6e;
-	--string-plain-color: #e6e;
 	--keyword-color: #acf;
-	--identifier-color: #f88;
-	--value-color: #e6e;
+	--identifier-color: #e6e;
+	--value-color: #f66;
+	--string-color: #f66;
+	--string-plain-color: #f66;
 	--number-color: #0c0;
 	--attribute-color: #3cc;
 	--js-bg-color: #036;
 	--css-bg-color: #404000;
+	--php-color: #ccc;
 	--php-bg-color: #520;
 	--php-sql-bg-color: #404000;
 }
