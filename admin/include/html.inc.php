@@ -11,12 +11,12 @@ function script($source, $trailing = "\n") {
 	return "<script" . nonce() . ">$source</script>$trailing";
 }
 
-/** Return <script src> element
-* @param string
-* @return string
-*/
-function script_src($url) {
-	return "<script src='" . h($url) . "'" . nonce() . "></script>\n";
+/**
+ * Returns <script src> element.
+ */
+function script_src(string $url, bool $defer = false): string
+{
+	return "<script src='" . h($url) . "'" . nonce() . ($defer ? " defer" : "") . "></script>\n";
 }
 
 /** Get a nonce="" attribute with CSP nonce

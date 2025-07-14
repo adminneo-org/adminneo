@@ -76,7 +76,7 @@ class Admin extends Origin
 			"../vendor/vrana/jush/modules/jush-oracle.js",
 			"../vendor/vrana/jush/modules/jush-simpledb.js",
 			"../vendor/vrana/jush/modules/jush-js.js",
-		]));
+		]), true);
 	}
 
 	/**
@@ -1206,13 +1206,14 @@ class Admin extends Origin
 							$tablesColumns[$table][] = $field["field"];
 						}
 					}
-					echo "const autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . ");\n";
+
+					echo "window.addEventListener('DOMContentLoaded', () => { autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . "); });\n";
 				}
 
 				echo "</script>\n";
 			}
 
-			echo script("initSyntaxHighlighting('" . Connection::get()->getVersion() . "', " . (Connection::get()->isMariaDB() ? "true" : "false") . ", autocompletion);");
+			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" . Connection::get()->getVersion() . "', " . (Connection::get()->isMariaDB() ? "true" : "false") . ", autocompletion); });");
 		}
 	}
 
