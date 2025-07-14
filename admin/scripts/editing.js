@@ -12,51 +12,49 @@ function initSyntaxHighlighting(version, maria, autocompletion) {
 		return;
 	}
 
-	document.addEventListener("DOMContentLoaded", () => {
-		jush.create_links = ' target="_blank" rel="noreferrer noopener"';
+	jush.create_links = ' target="_blank" rel="noreferrer noopener"';
 
-		if (version) {
-			for (let key in jush.urls) {
-				let obj = jush.urls;
-				if (typeof obj[key] != 'string') {
-					obj = obj[key];
-					key = 0;
-					if (maria) {
-						for (let i = 1; i < obj.length; i++) {
-							obj[i] = obj[i]
-								.replace('.html', '/')
-								.replace('-type-syntax', '-data-types')
-								.replace(/numeric-(data-types)/, '$1-$&')
-								.replace(/replication-options-(master|binary-log)\//, 'replication-and-binary-log-system-variables/')
-								.replace('server-options/', 'server-system-variables/')
-								.replace('innodb-parameters/', 'innodb-system-variables/')
-								.replace(/#(statvar|sysvar|option_mysqld)_(.*)/, '#$2')
-								.replace(/#sysvar_(.*)/, '#$1')
-							;
-						}
+	if (version) {
+		for (let key in jush.urls) {
+			let obj = jush.urls;
+			if (typeof obj[key] != 'string') {
+				obj = obj[key];
+				key = 0;
+				if (maria) {
+					for (let i = 1; i < obj.length; i++) {
+						obj[i] = obj[i]
+							.replace('.html', '/')
+							.replace('-type-syntax', '-data-types')
+							.replace(/numeric-(data-types)/, '$1-$&')
+							.replace(/replication-options-(master|binary-log)\//, 'replication-and-binary-log-system-variables/')
+							.replace('server-options/', 'server-system-variables/')
+							.replace('innodb-parameters/', 'innodb-system-variables/')
+							.replace(/#(statvar|sysvar|option_mysqld)_(.*)/, '#$2')
+							.replace(/#sysvar_(.*)/, '#$1')
+						;
 					}
 				}
-
-				obj[key] = (maria ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
-					.replace('/doc/mysql', '/doc/refman/' + version) // MySQL
-					.replace('/docs/current', '/docs/' + version) // PostgreSQL
-				;
 			}
-		}
 
-		if (window.jushLinks) {
-			jush.custom_links = jushLinks;
+			obj[key] = (maria ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
+				.replace('/doc/mysql', '/doc/refman/' + version) // MySQL
+				.replace('/docs/current', '/docs/' + version) // PostgreSQL
+			;
 		}
+	}
 
-		jush.highlight_tag('code', 0);
+	if (window.jushLinks) {
+		jush.custom_links = jushLinks;
+	}
 
-		const tags = qsa('textarea');
-		for (let i = 0; i < tags.length; i++) {
-			if (tags[i].className.match(/(^|\s)jush-/)) {
-				jush.textarea(tags[i], autocompletion);
-			}
+	jush.highlight_tag('code', 0);
+
+	const tags = qsa('textarea');
+	for (let i = 0; i < tags.length; i++) {
+		if (tags[i].className.match(/(^|\s)jush-/)) {
+			jush.textarea(tags[i], autocompletion);
 		}
-	});
+	}
 }
 
 /** Try to change input type to password or to text

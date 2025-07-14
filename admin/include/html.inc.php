@@ -13,9 +13,9 @@ function script(string $source, string $trailing = "\n"): string
 /**
  * Returns <script src> element.
  */
-function script_src(string $url): string
+function script_src(string $url, bool $defer = false): string
 {
-	return "<script src='" . h($url) . "'" . nonce() . "></script>\n";
+	return "<script src='" . h($url) . "'" . nonce() . ($defer ? " defer" : "") . "></script>\n";
 }
 
 /**
