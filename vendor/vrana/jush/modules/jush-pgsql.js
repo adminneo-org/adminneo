@@ -1,5 +1,5 @@
 jush.tr.pgsql = { sql_apo: /'/, sqlite_quo: /"/, pgsql_eot: /\$/, one: /--/, com_nest: /\/\*/, pgsql_pgsqlset: /(\b)(SHOW|SET)(\s+)/i, num: jush.num }; // standard_conforming_strings=off
-jush.tr.pgsql_eot = { pgsql_eot2: /\w*\$/, _1: /()/ };
+jush.tr.pgsql_eot = { pgsql_eot2: /([a-z]\w*)?\$/i, _1: /()/ };
 jush.tr.pgsql_eot2 = { }; // pgsql_eot2._2 to be set in pgsql_eot handler
 jush.tr.pgsql_pgsqlset = { sql_apo: /'/, sqlite_quo: /"/, pgsql_eot: /\$/, one: /--/, com_nest: /\/\*/, num: jush.num, _1: /;|$/ };
 jush.tr.pgsqlset = { _0: /$/ };
