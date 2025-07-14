@@ -1206,13 +1206,13 @@ class Admin extends Origin
 							$tablesColumns[$table][] = $field["field"];
 						}
 					}
-					echo "autocompleter = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . ");\n";
+					echo "const autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . ");\n";
 				}
 
 				echo "</script>\n";
 			}
 
-			echo script("initSyntaxHighlighting('" . Connection::get()->getVersion() . "'" . (Connection::get()->isMariaDB() ? ", true" : "") . ");");
+			echo script("initSyntaxHighlighting('" . Connection::get()->getVersion() . "', " . (Connection::get()->isMariaDB() ? "true" : "false") . ", autocompletion);");
 		}
 	}
 
