@@ -3,7 +3,7 @@
         'name' => 'adminneo/adminneo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '43d5c0dfd85134e1660f3d72ca657d1fd03b6c92',
+        'reference' => '7942f86356feccb32a74f0ff3534114e89ca1650',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'adminneo/adminneo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '43d5c0dfd85134e1660f3d72ca657d1fd03b6c92',
+            'reference' => '7942f86356feccb32a74f0ff3534114e89ca1650',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -33,7 +33,7 @@
         'vrana/jush' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2f564fdbdbdbcd745eac711fa963f1612b73eac0',
+            'reference' => 'b9416c8151512ab0027c2ed96622c1fb9cca7272',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vrana/jush',
             'aliases' => array(

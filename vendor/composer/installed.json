@@ -58,16 +58,16 @@
             "version_normalized": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vrana/jush.git",
-                "reference": "2f564fdbdbdbcd745eac711fa963f1612b73eac0"
+                "url": "https://github.com/peterpp/jush.git",
+                "reference": "b9416c8151512ab0027c2ed96622c1fb9cca7272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vrana/jush/zipball/2f564fdbdbdbcd745eac711fa963f1612b73eac0",
-                "reference": "2f564fdbdbdbcd745eac711fa963f1612b73eac0",
+                "url": "https://api.github.com/repos/peterpp/jush/zipball/b9416c8151512ab0027c2ed96622c1fb9cca7272",
+                "reference": "b9416c8151512ab0027c2ed96622c1fb9cca7272",
                 "shasum": ""
             },
-            "time": "2025-07-07T12:56:49+00:00",
+            "time": "2025-07-14T19:59:14+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -88,8 +88,7 @@
                 "syntax highlighter"
             ],
             "support": {
-                "source": "https://github.com/vrana/jush/",
-                "issues": "https://github.com/vrana/jush/issues"
+                "source": "https://github.com/vrana/jush/"
             },
             "install-path": "../vrana/jush"
         },
