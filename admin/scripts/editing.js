@@ -1,14 +1,13 @@
 // Admin specific functions
 
-let autocompleter; // set in adminer.inc.php
-
 /**
  * Loads syntax highlighting.
  *
  * @param {string} version First three characters of database system version.
  * @param {boolean} maria
+ * @param {object} autocompletion
  */
-function initSyntaxHighlighting(version, maria) {
+function initSyntaxHighlighting(version, maria, autocompletion) {
 	if (!window.jush) {
 		return;
 	}
@@ -54,7 +53,7 @@ function initSyntaxHighlighting(version, maria) {
 		const tags = qsa('textarea');
 		for (let i = 0; i < tags.length; i++) {
 			if (tags[i].className.match(/(^|\s)jush-/)) {
-				jush.textarea(tags[i], autocompleter);
+				jush.textarea(tags[i], autocompletion);
 			}
 		}
 	});
