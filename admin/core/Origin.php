@@ -350,7 +350,7 @@ abstract class Origin extends Plugin
 	 */
 	public function isLightModeForced(): bool
 	{
-		return file_exists("adminneo-light.css") && !file_exists("adminneo-dark.css");
+		return $this->isColorModeForced(false);
 	}
 
 	/**
@@ -358,7 +358,24 @@ abstract class Origin extends Plugin
 	 */
 	public function isDarkModeForced(): bool
 	{
-		return file_exists("adminneo-dark.css") && !file_exists("adminneo-light.css");
+		return $this->isColorModeForced(true);
+	}
+
+	private function isColorModeForced(bool $dark): bool
+	{
+		$mode1 = $dark ? "dark" : "light";
+		$mode2 = $dark ? "light" : "dark";
+
+		$file1Exists = file_exists("adminneo-$mode1.css");
+		$file2Exists = file_exists("adminneo-$mode2.css");
+
+		// If the current theme supports only given color mode, it will be forced.
+		if ($file1Exists && !$file2Exists) {
+			return true;
+		}
+
+		// Return the user setting but only if the theme supports both modes.
+		return $this->settings->getColorMode() == $mode1 && !($file1Exists xor $file2Exists);
 	}
 
 	/**
