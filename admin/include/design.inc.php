@@ -315,7 +315,16 @@ function page_footer(?string $missing = null): void
 	Admin::get()->printNavigation($missing);
 
 	echo "<div class='footer'>\n";
-	language_select();
+
+	echo "<div class='toolbox'>";
+	if ($missing == "auth") {
+		language_select();
+	} else {
+		$link = h(preg_replace('~\b(db|ns)=[^&]*&~', "", ME) . "settings=");
+		echo "<a class='button light' title='", lang('Settings'), "' href='$link'>", icon_solo("settings"), "</a>";
+	}
+	echo "</div>";
+
     if ($missing != "auth") {
 		Admin::get()->printLogout();
 	}
