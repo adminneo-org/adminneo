@@ -224,7 +224,7 @@ menu.dual .secondary {
 	top: 0;
 	right: 0;
 	height: 2rem;
-	line-height: 2rem;
+	line-height: 2.05rem; /* +0.05rem for better alignment on Firefox. */
 	padding: 0 20px;
 	display: flex;
 	gap: 10px 20px;
@@ -294,7 +294,7 @@ menu.dual .secondary {
 		border-top: 1px solid var(--panel-border);
 	}
 
-	.language, .logout {
+	.toolbox, .logout {
 		overflow: hidden;
 		line-height: normal;
 		max-width: 100%;

@@ -28,6 +28,11 @@ include "core/TmpFile.php";
 
 include "include/editing.inc.php";
 include "include/bootstrap.inc.php";
+
+if (isset($_GET["settings"])) {
+	include "settings.inc.php";
+}
+
 include "include/connect.inc.php";
 
 if (isset($_GET["select"]) && ($_POST["edit"] || $_POST["clone"]) && !$_POST["save"]) {

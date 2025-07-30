@@ -483,6 +483,20 @@ function initToggles(parent) {
 }
 
 /**
+ * Initialize auto-submitting of settings form.
+ */
+function initSettingsForm() {
+	const form = gid("settings");
+	const inputs = qsa("select, input[type='checkbox'], input[type='radio']", form);
+
+	for (let input of inputs) {
+		input.addEventListener("change", () => {
+			input.form.submit();
+		});
+	}
+}
+
+/**
  * Adds row in select fieldset.
  *
  * @param {Event} event

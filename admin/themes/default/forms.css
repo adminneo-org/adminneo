@@ -175,6 +175,8 @@ pre.jush {
 .button .icon {
 	margin-inline-end: 0.25em;
 	opacity: 0.85;
+	margin-top: -4px;
+	margin-bottom: -1px;
 }
 
 .button .icon:first-child {
@@ -193,7 +195,7 @@ a.button {
 
 .button.light {
 	border: none;
-	padding: 4px 5px;
+	padding: 5px;
 	background: transparent;
 	color: var(--link-text);
 }

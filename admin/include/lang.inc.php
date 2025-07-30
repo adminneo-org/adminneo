@@ -31,11 +31,11 @@ function lang($key, $number = null): string
 	return call_user_func_array([Locale::get(), "translate"], func_get_args());
 }
 
-function language_select(): void
+function get_language_options(): array
 {
 	$available_languages = get_available_languages();
 	if (count($available_languages) == 1) {
-		return;
+		return [];
 	}
 
 	$options = [];
@@ -45,14 +45,24 @@ function language_select(): void
 		}
 	}
 
-	echo "<div class='language'><form action='' method='post'>\n";
+	return $options;
+}
+
+function language_select(): void
+{
+	$options = get_language_options();
+	if (!$options) {
+		return;
+	}
+
+	echo "<form action='' method='post'>\n";
 	echo html_select("lang", $options, Locale::get()->getLanguage(), "this.form.submit();");
 	echo "<input type='submit' value='" . lang('Use'), "' class='button hidden'>\n";
 	echo "<input type='hidden' name='token' value='", get_token(), "'>\n";
-	echo "</form></div>\n";
+	echo "</form>\n";
 }
 
-if (isset($_POST["lang"]) && verify_token()) { // $error not yet available
+if (isset($_POST["lang"]) && $_POST["lang"] != $_COOKIE["neo_lang"] && verify_token()) { // $error not yet available
 	cookie("neo_lang", $_POST["lang"]);
 
 	$_SESSION["lang"] = $_POST["lang"]; // cookies may be disabled
