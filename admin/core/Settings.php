@@ -74,4 +74,9 @@ class Settings
 	{
 		return $this->getNavigationMode() == Config::NavigationReversed;
 	}
+
+	public function isSelectionPreferred(): bool
+	{
+		return $this->getParameter("preferSelection") ?? $this->config->isSelectionPreferred();
+	}
 }

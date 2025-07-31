@@ -137,8 +137,8 @@ class Admin extends Origin
 
 		$links = [];
 
-		$selectionFirst = ($this->config->isSelectionPreferred() && !$this->settings->isNavigationReversed()) ||
-			(!$this->config->isSelectionPreferred() && $this->settings->isNavigationReversed());
+		$selectionFirst = ($this->settings->isSelectionPreferred() && !$this->settings->isNavigationReversed()) ||
+			(!$this->settings->isSelectionPreferred() && $this->settings->isNavigationReversed());
 
 		if ($selectionFirst) {
 			$links["select"] = [lang('Select data'), "data"];
@@ -1271,7 +1271,7 @@ class Admin extends Origin
 			$selectUrl = h(ME) . "select=" . urlencode($table);
 			$tableUrl = h(ME) . "table=" . urlencode($table);
 
-			if ($this->config->isSelectionPreferred()) {
+			if ($this->settings->isSelectionPreferred()) {
 				if ($this->settings->isNavigationReversed() && $supportStructure) {
 					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon("structure"), "</a>";
 				}
