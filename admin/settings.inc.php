@@ -5,7 +5,7 @@ $config = Admin::get()->getConfig();
 $settings = Admin::get()->getSettings();
 
 if ($_POST) {
-	$paramKeys = ["colorMode", "navigationMode", "preferSelection"];
+	$paramKeys = ["colorMode", "navigationMode", "preferSelection", "enumAsSelectThreshold"];
 
 	$params = [];
 	foreach ($paramKeys as $key) {
@@ -74,6 +74,23 @@ $options[""] .= " ($default)";
 
 echo html_select("preferSelection", $options, $settings->getParameter("preferSelection") ?? "", "", "", true);
 echo "<span class='input-hint'>", lang('Primary action for all table links.'), "</span>";
+echo "</td></tr>\n";
+
+// Threshold for displaying enum values as <select>.
+echo "<tr><th>", lang('Enum as select'), "</th>";
+echo "<td>";
+$default = $config->getEnumAsSelectThreshold() ?? lang('Never');
+$options = [
+	"" => lang('Default') . " ($default)",
+	-1 => lang('Never'),
+	0 => lang('Always'),
+	3 => lang('More values than %d', 3),
+	5 => lang('More values than %d', 5),
+	10 => lang('More values than %d', 10),
+	20 => lang('More values than %d', 20),
+];
+echo html_select("enumAsSelectThreshold", $options, $settings->getParameter("enumAsSelectThreshold") ?? "", "", "", true);
+echo "<span class='input-hint'>", lang('Threshold for displaying a selection menu for enum fields.'), "</span>";
 echo "</td></tr>\n";
 
 // Form end.

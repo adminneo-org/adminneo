@@ -79,4 +79,14 @@ class Settings
 	{
 		return $this->getParameter("preferSelection") ?? $this->config->isSelectionPreferred();
 	}
+
+    public function getEnumAsSelectThreshold(): ?int
+    {
+        $value = $this->getParameter("enumAsSelectThreshold");
+        if ($value < 0) {
+            return null;
+        }
+
+        return $value !== null ? (int)$value : $this->config->getEnumAsSelectThreshold();
+    }
 }
