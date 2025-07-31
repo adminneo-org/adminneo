@@ -98,6 +98,11 @@ class Config
 		return $this->params["jsonValuesAutoFormat"] ?? false;
 	}
 
+	public function getRecordsPerPage(): int
+	{
+		return (int)($this->params["recordsPerPage"] ?? 50);
+	}
+
 	public function getEnumAsSelectThreshold(): ?int
 	{
 		if (array_key_exists("enumAsSelectThreshold", $this->params)) {
@@ -105,11 +110,6 @@ class Config
 		} else {
 			return 5;
 		}
-	}
-
-	public function getRecordsPerPage(): int
-	{
-		return (int)($this->params["recordsPerPage"] ?? 50);
 	}
 
 	public function isVersionVerificationEnabled(): bool

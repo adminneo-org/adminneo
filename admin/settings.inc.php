@@ -5,7 +5,7 @@ $config = Admin::get()->getConfig();
 $settings = Admin::get()->getSettings();
 
 if ($_POST) {
-	$paramKeys = ["colorMode", "navigationMode", "preferSelection", "enumAsSelectThreshold"];
+	$paramKeys = ["colorMode", "navigationMode", "preferSelection", "recordsPerPage", "enumAsSelectThreshold"];
 
 	$params = [];
 	foreach ($paramKeys as $key) {
@@ -74,6 +74,22 @@ $options[""] .= " ($default)";
 
 echo html_select("preferSelection", $options, $settings->getParameter("preferSelection") ?? "", "", "", true);
 echo "<span class='input-hint'>", lang('Primary action for all table links.'), "</span>";
+echo "</td></tr>\n";
+
+// Records per page.
+echo "<tr><th>", lang('Records per page'), "</th>";
+echo "<td>";
+$default = $config->getRecordsPerPage();
+$options = [
+	"" => lang('Default') . " ($default)",
+	"20",
+	"30",
+	"50",
+	"70",
+	"100",
+];
+echo html_select("recordsPerPage", $options, $settings->getParameter("recordsPerPage") ?? "");
+echo "<span class='input-hint'>", lang('Default number of records displayed in data table.'), "</span>";
 echo "</td></tr>\n";
 
 // Threshold for displaying enum values as <select>.
