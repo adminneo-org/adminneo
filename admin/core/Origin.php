@@ -536,7 +536,7 @@ abstract class Origin extends Plugin
 	public function processSelectionLimit(): ?int
 	{
 		if (!isset($_GET["limit"])) {
-			return $this->config->getRecordsPerPage();
+			return $this->settings->getRecordsPerPage();
 		}
 
 		return $_GET["limit"] != "" ? (int)$_GET["limit"] : null;

@@ -80,6 +80,11 @@ class Settings
 		return $this->getParameter("preferSelection") ?? $this->config->isSelectionPreferred();
 	}
 
+    public function getRecordsPerPage(): int
+    {
+        return $this->getParameter("recordsPerPage") ?? $this->config->getRecordsPerPage();
+    }
+
     public function getEnumAsSelectThreshold(): ?int
     {
         $value = $this->getParameter("enumAsSelectThreshold");
