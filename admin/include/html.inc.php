@@ -134,10 +134,10 @@ function optionlist($options, $selected = null, $use_keys = false) {
 * @param string
 * @return string
 */
-function html_select($name, $options, $value = "", $onchange = "", $labelled_by = "") {
+function html_select($name, $options, $value = "", $onchange = "", $labelled_by = "", bool $use_keys = false) {
 	return "<select name='" . h($name) . "'"
 		. ($labelled_by ? " aria-labelledby='$labelled_by'" : "")
-		. ">" . optionlist($options, $value) . "</select>"
+		. ">" . optionlist($options, $value, $use_keys) . "</select>"
 		. ($onchange ? script("qsl('select').onchange = function () { $onchange };", "") : "");
 }
 

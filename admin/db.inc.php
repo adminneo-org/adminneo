@@ -132,7 +132,7 @@ if ($_GET["ns"] === "") {
 
 			echo '<tr><td class="actions">' . checkbox(($view ? "views[]" : "tables[]"), $name, in_array($name, $tables_views, true), "", "", "", $id);
 
-			if (!Admin::get()->getConfig()->isSelectionPreferred() && (support("table") || support("indexes"))) {
+			if (!Admin::get()->getSettings()->isSelectionPreferred() && (support("table") || support("indexes"))) {
 				$action = "table";
 			} else {
 				$action = "select";

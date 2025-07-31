@@ -5,7 +5,7 @@ $config = Admin::get()->getConfig();
 $settings = Admin::get()->getSettings();
 
 if ($_POST) {
-	$paramKeys = ["colorMode", "navigationMode"];
+	$paramKeys = ["colorMode", "navigationMode", "preferSelection"];
 
 	$params = [];
 	foreach ($paramKeys as $key) {
@@ -59,6 +59,21 @@ $options[""] .= " ($default)";
 
 echo html_radios("navigationMode", $options, $settings->getParameter("navigationMode") ?? "");
 echo "<span class='input-hint'>", lang('Layout of main navigation with table links.'), "</span>";
+echo "</td></tr>\n";
+
+// Preferred action for table links.
+echo "<tr><th>", lang('Table links'), "</th>";
+echo "<td>";
+$options = [
+	"" => lang('Default'),
+	0 => lang('Show structure'),
+	1 => lang('Select data'),
+];
+$default = $options[$config->isSelectionPreferred() ? 1 : 0];
+$options[""] .= " ($default)";
+
+echo html_select("preferSelection", $options, $settings->getParameter("preferSelection") ?? "", "", "", true);
+echo "<span class='input-hint'>", lang('Primary action for all table links.'), "</span>";
 echo "</td></tr>\n";
 
 // Form end.
