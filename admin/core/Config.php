@@ -59,16 +59,25 @@ class Config
 		return $this->params["navigationMode"] ?? self::NavigationSimple;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public function isNavigationSimple(): bool
 	{
 		return $this->getNavigationMode() == self::NavigationSimple;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public function isNavigationDual(): bool
 	{
 		return $this->getNavigationMode() == self::NavigationDual;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public function isNavigationReversed(): bool
 	{
 		return $this->getNavigationMode() == self::NavigationReversed;

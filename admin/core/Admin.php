@@ -137,8 +137,8 @@ class Admin extends Origin
 
 		$links = [];
 
-		$selectionFirst = ($this->config->isSelectionPreferred() && !$this->config->isNavigationReversed()) ||
-			(!$this->config->isSelectionPreferred() && $this->config->isNavigationReversed());
+		$selectionFirst = ($this->config->isSelectionPreferred() && !$this->settings->isNavigationReversed()) ||
+			(!$this->config->isSelectionPreferred() && $this->settings->isNavigationReversed());
 
 		if ($selectionFirst) {
 			$links["select"] = [lang('Select data'), "data"];
@@ -1253,7 +1253,7 @@ class Admin extends Origin
 	 */
 	public function printTableList(array $tables): void
 	{
-		$menuClass = ($this->config->isNavigationDual() ? "class='dual'" : ($this->config->isNavigationReversed() ? "class='reversed'" : ""));
+		$menuClass = ($this->settings->isNavigationDual() ? "class='dual'" : ($this->settings->isNavigationReversed() ? "class='reversed'" : ""));
 
 		echo "<nav id='tables'><menu $menuClass>";
 
@@ -1272,17 +1272,17 @@ class Admin extends Origin
 			$tableUrl = h(ME) . "table=" . urlencode($table);
 
 			if ($this->config->isSelectionPreferred()) {
-				if ($this->config->isNavigationReversed() && $supportStructure) {
+				if ($this->settings->isNavigationReversed() && $supportStructure) {
 					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon("structure"), "</a>";
 				}
 
 				echo "<a href='$selectUrl'", bold($active, $class), " data-primary='true' title='$name'>$name</a>";
 
-				if ($this->config->isNavigationDual() && $supportStructure) {
+				if ($this->settings->isNavigationDual() && $supportStructure) {
 					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon_solo("structure"), "</a>";
 				}
 			} else {
-				if ($this->config->isNavigationReversed()) {
+				if ($this->settings->isNavigationReversed()) {
 					echo " <a href='$selectUrl' title='", lang('Select data'), "' class='secondary'>", icon("data"), "</a>";
 				}
 
@@ -1292,7 +1292,7 @@ class Admin extends Origin
 					echo "<span data-primary='true'", bold($active, $class), ">$name</span>";
 				}
 
-				if ($this->config->isNavigationDual()) {
+				if ($this->settings->isNavigationDual()) {
 					echo " <a href='$selectUrl' title='", lang('Select data'), "' class='secondary'>", icon_solo("data"), "</a>";
 				}
 			}
