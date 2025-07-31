@@ -38,6 +38,7 @@ abstract class Origin extends Plugin
 		}
 
 		$config = new Config($config);
+		$settings = new Settings($config);
 
 		if (!$plugins && file_exists("adminneo-plugins.php")) {
 			$plugins = include_once("adminneo-plugins.php");
@@ -54,9 +55,9 @@ abstract class Origin extends Plugin
 
 		self::$instance = $plugins ? new Pluginer($admin, $plugins) : $admin;
 
-		$admin->inject(self::$instance, $config, Locale::get());
+		$admin->inject(self::$instance, $config, $settings, Locale::get());
 		foreach ($plugins as $plugin) {
-			$plugin->inject(self::$instance, $config, Locale::get());
+			$plugin->inject(self::$instance, $config, $settings, Locale::get());
 		}
 
 		return self::$instance;
@@ -85,6 +86,11 @@ abstract class Origin extends Plugin
 	public function getConfig(): Config
 	{
 		return $this->config;
+	}
+
+	public function getSettings(): Settings
+	{
+		return $this->settings;
 	}
 
 	public abstract function getOperators(): array;
@@ -363,8 +369,8 @@ abstract class Origin extends Plugin
 
 	private function isColorModeForced(bool $dark): bool
 	{
-		$mode1 = $dark ? "dark" : "light";
-		$mode2 = $dark ? "light" : "dark";
+		$mode1 = $dark ? Settings::ColorModeDark : Settings::ColorModeLight;
+		$mode2 = $dark ? Settings::ColorModeLight : Settings::ColorModeDark;
 
 		$file1Exists = file_exists("adminneo-$mode1.css");
 		$file2Exists = file_exists("adminneo-$mode2.css");

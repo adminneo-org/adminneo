@@ -1,17 +1,22 @@
 <?php
 namespace AdminNeo;
 
+$config = Admin::get()->getConfig();
+$settings = Admin::get()->getSettings();
+
 if ($_POST) {
-	$settings = [];
-	if (isset($_POST["color_mode"])) {
-		$settings["color_mode"] = $_POST["color_mode"];
+	$paramKeys = ["colorMode", "navigationMode"];
+
+	$params = [];
+	foreach ($paramKeys as $key) {
+		if (isset($_POST[$key])) {
+			$params[$key] = $_POST[$key] !== "" ? $_POST[$key] : null;
+		}
 	}
 
-	save_settings($settings);
+	$settings->updateParameters($params);
 	redirect(remove_from_uri());
 }
-
-$settings = get_settings();
 
 $title = lang('Settings');
 page_header($title, [$title]);
@@ -34,10 +39,26 @@ echo "<tr><th>", lang('Color mode'), "</th>";
 echo "<td>";
 $options = [
 	"" => lang('System'),
-	"light" => lang('Light'),
-	"dark" => lang('Dark')
+	Settings::ColorModeLight => lang('Light'),
+	Settings::ColorModeDark => lang('Dark')
 ];
-echo html_radios("color_mode", $options, $settings["color_mode"] ?? "");
+echo html_radios("colorMode", $options, $settings->getParameter("colorMode") ?? "");
+echo "</td></tr>\n";
+
+// Navigation mode.
+echo "<tr><th>", lang('Navigation mode'), "</th>";
+echo "<td>";
+$options = [
+	"" => lang('Default'),
+	Config::NavigationSimple => lang('Simple'),
+	Config::NavigationDual => lang('Dual'),
+	Config::NavigationReversed => lang('Reversed')
+];
+$default = $options[$config->getNavigationMode()];
+$options[""] .= " ($default)";
+
+echo html_radios("navigationMode", $options, $settings->getParameter("navigationMode") ?? "");
+echo "<span class='input-hint'>", lang('Layout of main navigation with table links.'), "</span>";
 echo "</td></tr>\n";
 
 // Form end.
