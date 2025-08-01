@@ -11,13 +11,18 @@ class Settings
 	private $config;
 
 	/** @var array */
-	private $params;
+	private $params = [];
 
 	public function __construct(Config $config)
 	{
 		$this->config = $config;
 
-		parse_str($_COOKIE["neo_settings"] ?? "", $this->params);
+		if (isset($_COOKIE["neo_settings"])) {
+			parse_str($_COOKIE["neo_settings"], $this->params);
+
+			// Prolong settings cookie.
+			$this->save();
+		}
 	}
 
 	/**
@@ -42,7 +47,13 @@ class Settings
 			return $value !== null;
 		});
 
-		cookie("neo_settings", http_build_query($this->params));
+		$this->save();
+	}
+
+	private function save(): void
+	{
+		// Expires in 90 days.
+		cookie("neo_settings", http_build_query($this->params), 7776000);
 	}
 
 	public function updateParameter(string $key, string $value): void
