@@ -334,7 +334,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	public function printSelectionLimit(?int $limit): void
 	{
 		echo "<fieldset><legend>" . lang('Limit') . "</legend><div class='fieldset-content'>";
-		echo html_select("limit", ["", "50", "100"], (string)$limit);
+		echo html_select("limit", ["", "20", "30", "50", "70", "100"], (string)$limit);
 		echo "</div></fieldset>\n";
 	}
 
