@@ -62,22 +62,23 @@ function language_select(): void
 	echo "</form>\n";
 }
 
-if (isset($_POST["lang"]) && $_POST["lang"] != $_COOKIE["neo_lang"] && verify_token()) { // $error not yet available
-	cookie("neo_lang", $_POST["lang"]);
-
-	$_SESSION["lang"] = $_POST["lang"]; // cookies may be disabled
-	$_SESSION["translations"] = []; // used in compiled version
-
-	redirect(remove_from_uri());
-}
-
 $available_languages = get_available_languages();
 $language = array_keys($available_languages)[0];
 
+if (isset($_POST["lang"]) && isset($available_languages[$_POST["lang"]]) && verify_token()) { // $error not yet available
+	$_SESSION["lang"] = $_COOKIE["neo_lang"] = $_POST["lang"]; // cookies may be disabled
+	$_SESSION["translations"] = []; // used in compiled version
+
+	if (!isset($_GET["settings"])) {
+		cookie("neo_lang", $_POST["lang"], 7776000); // expires in 90 days
+		redirect(remove_from_uri());
+	}
+}
+
 if (isset($_COOKIE["neo_lang"]) && isset($available_languages[$_COOKIE["neo_lang"]])) {
-	cookie("neo_lang", $_COOKIE["neo_lang"]);
+	cookie("neo_lang", $_COOKIE["neo_lang"], 7776000);
 	$language = $_COOKIE["neo_lang"];
-} elseif (isset($available_languages[$_SESSION["lang"]])) {
+} elseif (isset($_SESSION["lang"]) && isset($available_languages[$_SESSION["lang"]])) {
 	$language = $_SESSION["lang"];
 } elseif (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
 	$accept_language = [];
