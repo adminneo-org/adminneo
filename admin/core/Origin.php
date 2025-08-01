@@ -674,5 +674,77 @@ abstract class Origin extends Plugin
 
 	public abstract function printTableList(array $tables): void;
 
+	/**
+	 * Returns rows for settings table organised in groups.
+	 *
+	 * @param int $groupId: 1 - overall UI settings, 2 - UI elements settings, 3 - other settings.
+	 *
+	 * @return string[]
+	 */
+	public function getSettingsRows(int $groupId): array
+	{
+		$settings = [];
+
+		if ($groupId == 1) {
+			// Language.
+			$options = get_language_options();
+			if ($options) {
+				$settings["lang"] = "<tr><th>" . lang('Language') . "</th>" .
+					"<td>" .
+					html_select("lang", get_language_options(), Locale::get()->getLanguage()) .
+					"</td></tr>\n";
+			}
+
+			// Color mode.
+			$options = [
+				"" => lang('By system'),
+				Settings::ColorModeLight => lang('Light'),
+				Settings::ColorModeDark => lang('Dark')
+			];
+
+			$settings["colorMode"] = "<tr><th>" . lang('Color mode') . "</th>" .
+				"<td>" .
+				html_radios("colorMode", $options, $this->settings->getParameter("colorMode") ?? "") .
+				"</td></tr>\n";
+		} elseif ($groupId == 2) {
+			// Records per page.
+			$default = $this->config->getRecordsPerPage();
+			$options = [
+				"" => lang('Default') . " ($default)",
+				"20",
+				"30",
+				"50",
+				"70",
+				"100",
+			];
+
+			$settings["recordsPerPage"] = "<tr><th>" . lang('Records per page') . "</th>" .
+				"<td>" .
+				html_select("recordsPerPage", $options, $this->settings->getParameter("recordsPerPage") ?? "") .
+				"<span class='input-hint'>" . lang('Default number of records displayed in data table.') . "</span>" .
+				"</td></tr>\n";
+
+			// Threshold for displaying enum values as <select>.
+			$default = $this->config->getEnumAsSelectThreshold() ?? lang('Never');
+			$options = [
+				"" => lang('Default') . " ($default)",
+				-1 => lang('Never'),
+				0 => lang('Always'),
+				3 => lang('More values than %d', 3),
+				5 => lang('More values than %d', 5),
+				10 => lang('More values than %d', 10),
+				20 => lang('More values than %d', 20),
+			];
+
+			$settings["enumAsSelectThreshold"] = "<tr><th>" . lang('Enum as select') . "</th>" .
+				"<td>" .
+				html_select("enumAsSelectThreshold", $options, $this->settings->getParameter("enumAsSelectThreshold") ?? "", "", "", true) .
+				"<span class='input-hint'>" . lang('Threshold for displaying a selection menu for enum fields.') . "</span>" .
+				"</td></tr>\n";
+			}
+
+		return $settings;
+	}
+
 	public abstract function getForeignColumnInfo(array $foreignKeys, string $column): ?array;
 }

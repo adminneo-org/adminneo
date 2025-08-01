@@ -1303,6 +1303,46 @@ class Admin extends Origin
 		echo "</menu></nav>\n";
 	}
 
+	public function getSettingsRows(int $groupId): array
+	{
+		$settings = parent::getSettingsRows($groupId);
+
+		if ($groupId == 1) {
+			// Navigation mode.
+			$options = [
+				"" => lang('Default'),
+				Config::NavigationSimple => lang('Simple'),
+				Config::NavigationDual => lang('Dual'),
+				Config::NavigationReversed => lang('Reversed')
+			];
+			$default = $options[$this->config->getNavigationMode()];
+			$options[""] .= " ($default)";
+
+			$settings["navigationMode"] = "<tr><th>" . lang('Navigation mode') . "</th>" .
+				"<td>" .
+				html_radios("navigationMode", $options, $this->settings->getParameter("navigationMode") ?? "") .
+				"<span class='input-hint'>" . lang('Layout of main navigation with table links.') . "</span>" .
+				"</td></tr>\n";
+
+			// Preferred action for table links.
+			$options = [
+				"" => lang('Default'),
+				0 => lang('Show structure'),
+				1 => lang('Select data'),
+			];
+			$default = $options[$this->config->isSelectionPreferred() ? 1 : 0];
+			$options[""] .= " ($default)";
+
+			$settings["preferSelection"] = "<tr><th>" . lang('Table links') . "</th>" .
+				"<td>" .
+				html_select("preferSelection", $options, $this->settings->getParameter("preferSelection") ?? "", "", "", true) .
+				"<span class='input-hint'>" . lang('Primary action for all table links.') . "</span>" .
+				"</td></tr>\n";
+		}
+
+		return $settings;
+	}
+
 	public function getForeignColumnInfo(array $foreignKeys, string $column): ?array
 	{
 		return null;

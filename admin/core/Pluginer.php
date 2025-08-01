@@ -24,7 +24,8 @@ class Pluginer
 		"getErrors" => true,
 		"getFieldFunctions" => true,
 		"getDumpOutputs" => true,
-		"getDumpFormats" => true
+		"getDumpFormats" => true,
+		"getSettingsRows" => true,
 	];
 
 	/** @var Plugin[] */

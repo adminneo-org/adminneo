@@ -1,15 +1,18 @@
 <?php
 namespace AdminNeo;
 
-$config = Admin::get()->getConfig();
 $settings = Admin::get()->getSettings();
 
-if ($_POST) {
-	$paramKeys = ["colorMode", "navigationMode", "preferSelection", "recordsPerPage", "enumAsSelectThreshold"];
+$settingsRows = array_merge(
+    Admin::get()->getSettingsRows(1),
+    Admin::get()->getSettingsRows(2),
+    Admin::get()->getSettingsRows(3)
+);
 
+if ($_POST) {
 	$params = [];
-	foreach ($paramKeys as $key) {
-		if (isset($_POST[$key])) {
+	foreach ($settingsRows as $key => $row) {
+		if ($key != "lang" && isset($_POST[$key])) {
 			$params[$key] = $_POST[$key] !== "" ? $_POST[$key] : null;
 		}
 	}
@@ -25,89 +28,9 @@ page_header($title, [$title]);
 echo "<form id='settings' action='' method='post'>\n";
 echo "<table class='box'>\n";
 
-// Language.
-$options = get_language_options();
-if ($options) {
-	echo "<tr><th>", lang('Language'), "</th>";
-	echo "<td>";
-	echo html_select("lang", get_language_options(), Locale::get()->getLanguage());
-	echo "</td></tr>\n";
+foreach ($settingsRows as $row) {
+	echo $row;
 }
-
-// Color mode.
-echo "<tr><th>", lang('Color mode'), "</th>";
-echo "<td>";
-$options = [
-	"" => lang('System'),
-	Settings::ColorModeLight => lang('Light'),
-	Settings::ColorModeDark => lang('Dark')
-];
-echo html_radios("colorMode", $options, $settings->getParameter("colorMode") ?? "");
-echo "</td></tr>\n";
-
-// Navigation mode.
-echo "<tr><th>", lang('Navigation mode'), "</th>";
-echo "<td>";
-$options = [
-	"" => lang('Default'),
-	Config::NavigationSimple => lang('Simple'),
-	Config::NavigationDual => lang('Dual'),
-	Config::NavigationReversed => lang('Reversed')
-];
-$default = $options[$config->getNavigationMode()];
-$options[""] .= " ($default)";
-
-echo html_radios("navigationMode", $options, $settings->getParameter("navigationMode") ?? "");
-echo "<span class='input-hint'>", lang('Layout of main navigation with table links.'), "</span>";
-echo "</td></tr>\n";
-
-// Preferred action for table links.
-echo "<tr><th>", lang('Table links'), "</th>";
-echo "<td>";
-$options = [
-	"" => lang('Default'),
-	0 => lang('Show structure'),
-	1 => lang('Select data'),
-];
-$default = $options[$config->isSelectionPreferred() ? 1 : 0];
-$options[""] .= " ($default)";
-
-echo html_select("preferSelection", $options, $settings->getParameter("preferSelection") ?? "", "", "", true);
-echo "<span class='input-hint'>", lang('Primary action for all table links.'), "</span>";
-echo "</td></tr>\n";
-
-// Records per page.
-echo "<tr><th>", lang('Records per page'), "</th>";
-echo "<td>";
-$default = $config->getRecordsPerPage();
-$options = [
-	"" => lang('Default') . " ($default)",
-	"20",
-	"30",
-	"50",
-	"70",
-	"100",
-];
-echo html_select("recordsPerPage", $options, $settings->getParameter("recordsPerPage") ?? "");
-echo "<span class='input-hint'>", lang('Default number of records displayed in data table.'), "</span>";
-echo "</td></tr>\n";
-
-// Threshold for displaying enum values as <select>.
-echo "<tr><th>", lang('Enum as select'), "</th>";
-echo "<td>";
-$default = $config->getEnumAsSelectThreshold() ?? lang('Never');
-$options = [
-	"" => lang('Default') . " ($default)",
-	-1 => lang('Never'),
-	0 => lang('Always'),
-	3 => lang('More values than %d', 3),
-	5 => lang('More values than %d', 5),
-	10 => lang('More values than %d', 10),
-	20 => lang('More values than %d', 20),
-];
-echo html_select("enumAsSelectThreshold", $options, $settings->getParameter("enumAsSelectThreshold") ?? "", "", "", true);
-echo "<span class='input-hint'>", lang('Threshold for displaying a selection menu for enum fields.'), "</span>";
-echo "</td></tr>\n";
 
 // Form end.
 echo "</table>\n";

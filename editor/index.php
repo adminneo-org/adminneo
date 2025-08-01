@@ -32,7 +32,9 @@ if (isset($_GET["select"]) && ($_POST["edit"] || $_POST["clone"]) && !$_POST["sa
 	$_GET["edit"] = $_GET["select"];
 }
 
-if (isset($_GET["download"])) {
+if (isset($_GET["settings"])) {
+	include "../admin/settings.inc.php";
+} elseif (isset($_GET["download"])) {
 	include "../admin/download.inc.php";
 } elseif (isset($_GET["edit"])) {
 	include "../admin/edit.inc.php";
