@@ -5,7 +5,7 @@ namespace AdminNeo;
 /**
  * Displays JSON preview as a table.
  *
- * JSON previews can be displayed in selection table and/or in edit form. Previews will be displayed for columns with
+ * JSON previews can be displayed in data table and/or in edit form. Previews will be displayed for columns with
  * native JSON data type and for values that are automatically detected as JSON objects or arrays if
  * `jsonValuesDetection` configuration option is enabled.
  *
@@ -17,7 +17,7 @@ namespace AdminNeo;
 class JsonPreviewPlugin extends Plugin
 {
 	/** @var bool */
-	protected $inSelection;
+	protected $inTable;
 
 	/** @var bool */
 	protected $inEdit;
@@ -35,19 +35,30 @@ class JsonPreviewPlugin extends Plugin
 	protected $counter = 1;
 
 	/**
-	 * @param bool $inSelection Whether apply JSON preview in selection table.
+	 * @param bool $inTable Whether apply JSON preview in data table.
 	 * @param bool $inEdit Whether apply JSON preview in edit form.
 	 * @param int $maxLevel Max. level in recursion.
 	 * @param int $maxTextLength Maximal length of string values. Longer texts will be truncated with ellipsis sign '…'.
 	 */
-	public function __construct(bool $inSelection = true, bool $inEdit = true, int $maxLevel = 5, int $maxTextLength = 100)
+	public function __construct(bool $inTable = true, bool $inEdit = true, int $maxLevel = 5, int $maxTextLength = 100)
 	{
-		$this->inSelection = $inSelection;
+		$this->inTable = $inTable;
 		$this->inEdit = $inEdit;
 		$this->maxLevel = $maxLevel;
 		$this->maxTextLength = $maxTextLength;
 
 		$this->linkIdBase = (string)microtime(true);
+	}
+
+	public function inject($admin, Config $config, Settings $settings, Locale $locale): void
+	{
+		parent::inject($admin, $config, $settings, $locale);
+
+		$param = $settings->getParameter("jsonPreview");
+		if ($param) {
+			$this->inTable = in_array("table", $param);
+			$this->inEdit = in_array("edit", $param);
+		}
 	}
 
 	/**
@@ -104,7 +115,7 @@ class JsonPreviewPlugin extends Plugin
 
 	public function formatSelectionValue(?string $val, ?string $link, ?array $field, ?string $original): ?string
 	{
-		if (!$field || !$this->inSelection) {
+		if (!$field || !$this->inTable) {
 			return null;
 		}
 
@@ -190,5 +201,24 @@ class JsonPreviewPlugin extends Plugin
 		$value .= "</table>";
 
 		return $value;
+	}
+
+	public function getSettingsRows(int $groupId): array
+	{
+		if ($groupId != 2) {
+			return [];
+		}
+
+		$useDefault = !$this->settings->getParameter("jsonPreview");
+
+		$settings["jsonPreview"] = "<tr><th>" . lang('JSON previews') . "</th>" .
+			"<td><span class='labels'>" .
+			checkbox("jsonPreview[]", "", $useDefault, lang('Default')) .
+			checkbox("jsonPreview[]", "table",  $this->inTable, lang('Data table'), "", $useDefault ? "disabled" : "") .
+			checkbox("jsonPreview[]", "edit", $this->inEdit, lang('Edit form'), "", $useDefault ? "disabled" : "") .
+			"<input type='hidden' name='jsonPreview[]' value='x'>" .
+			"</span></td></tr>\n";
+
+		return $settings;
 	}
 }

@@ -100,6 +100,12 @@ label {
 	line-height: 1.357;
 }
 
+label.disabled {
+	opacity: 0.3;
+	filter: saturate(0);
+	pointer-events: none;
+}
+
 label input[type="checkbox"], label input[type="radio"] {
 	margin-top: 0;
 	margin-bottom: 0;

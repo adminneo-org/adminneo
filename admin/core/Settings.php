@@ -33,17 +33,20 @@ class Settings
 		return $this->params;
 	}
 
-	public function getParameter(string $key): ?string
+	/**
+	 * @return string|array|null
+	 */
+	public function getParameter(string $key)
 	{
 		return $this->params[$key] ?? null;
 	}
 
 	/**
-	 * @param string[] $params
+	 * @param (string|array)[] $params
 	 */
 	public function updateParameters(array $params): void
 	{
-		$this->params = array_filter(array_merge($this->params, $params), function (?string $value) {
+		$this->params = array_filter(array_merge($this->params, $params), function ($value) {
 			return $value !== null;
 		});
 

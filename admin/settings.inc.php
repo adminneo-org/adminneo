@@ -13,7 +13,8 @@ if ($_POST) {
 	$params = [];
 	foreach ($settingsRows as $key => $row) {
 		if ($key != "lang" && isset($_POST[$key])) {
-			$params[$key] = $_POST[$key] !== "" ? $_POST[$key] : null;
+            $useDefault = $_POST[$key] === "" || (is_array($_POST[$key]) && in_array("", $_POST[$key]));
+			$params[$key] = (!$useDefault ? $_POST[$key] : null);
 		}
 	}
 
