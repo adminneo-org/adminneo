@@ -382,7 +382,7 @@ return [
 	// Settings.
 	'Settings' => 'Xx',
 	'Default' => 'Xx',
-	'Color mode' => 'Xx',
+	'Color scheme' => 'Xx',
 	'By system' => 'Xx',
 	'Light' => 'Xx',
 	'Dark' => 'Xx',

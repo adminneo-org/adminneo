@@ -414,10 +414,10 @@ return [
 	// Settings.
 	'Settings' => 'Nastavenia',
 	'Default' => 'Predvolené',
-	'Color mode' => 'Farebný mód',
+	'Color scheme' => 'Farebná schéma',
 	'By system' => 'Podľa systému',
-	'Light' => 'Svetlý',
-	'Dark' => 'Tmavý',
+	'Light' => 'Svetlá',
+	'Dark' => 'Tmavá',
 	'Navigation mode' => 'Navigačný mód',
 	'Simple' => 'Jednoduchý',
 	'Dual' => 'Dvojitý',

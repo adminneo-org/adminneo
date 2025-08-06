@@ -4,8 +4,8 @@ namespace AdminNeo;
 
 class Settings
 {
-	public const ColorModeLight = "light";
-	public const ColorModeDark = "dark";
+	public const ColorSchemeLight = "light";
+	public const ColorSchemeDark = "dark";
 
 	/** @var Config */
 	private $config;
@@ -64,9 +64,9 @@ class Settings
 		$this->updateParameters([$key => $value]);
 	}
 
-	public function getColorMode(): ?string
+	public function getColorScheme(): ?string
 	{
-		return $this->getParameter("colorMode");
+		return $this->getParameter("colorScheme");
 	}
 
 	public function getNavigationMode(): string

@@ -406,7 +406,7 @@ return [
 	// Settings.
 	'Settings' => 'Einstellungen',
 	'Default' => 'Standard',
-	'Color mode' => 'Farbmodus',
+	'Color scheme' => 'Farbschema',
 	'By system' => 'Systembasiert',
 	'Light' => 'Hell',
 	'Dark' => 'Dunkel',
