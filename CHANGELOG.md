@@ -19,6 +19,7 @@ AdminNeo 5.5.0
 ### Bugfixes
 
 - MS SQL: Fix hiding system schemas (regression from 5.1.0)
+- Autofocus the first added field in alter table (by @vrana)
 - PostgreSQL: Allow comparing json columns (by @vrana)
 - PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)
 - PostgreSQL: Quote edit value with interval operator (by @vrana)
