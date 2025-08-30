@@ -16,6 +16,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS',
 
 	// Bootstrap.
+	'%s must return an array.' => '%s doit retourner un tableau.',
+	'%s and %s must return an object created by %s method.' => '%s et %s doivent retourner un objet créé par la méthode %s.',
 
 	// Login.
 	'System' => 'Système',
@@ -27,6 +29,7 @@ return [
 	'Logout' => 'Déconnexion',
 	'Logged as: %s' => 'Authentifié en tant que : %s',
 	'Logout successful.' => 'Déconnexion réussie.',
+	'Invalid server or credentials.' => 'Serveur ou identifiants invalides.',
 	'There is a space in the input password which might be the cause.' => 'Il y a un espace dans le mot de passe entré qui pourrait en être la cause.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne supporte pas l\'accès aux bases de données sans mot de passe, <a href="https://www.adminneo.org/password"%s>plus d\'information</a>.',
 	'Database does not support password.' => 'La base de données ne support pas les mots de passe.',
@@ -34,11 +37,14 @@ return [
 		'Trop de connexions échouées, essayez à nouveau dans %d minute.',
 		'Trop de connexions échouées, essayez à nouveau dans %d minutes.',
 	],
+	'Invalid permanent login, please login again.' => 'Authentification permanente invalide, veuillez vous reconnecter.',
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF invalide. Veuillez renvoyer le formulaire.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Si vous n\'avez pas envoyé cette requête depuis AdminNeo, alors fermez cette page.',
 	'The action will be performed after successful login with the same credentials.' => 'Cette action sera exécutée après s\'être connecté avec les mêmes données de connexion.',
 
 	// Connection.
+	'No driver' => 'Aucun driver',
+	'Database driver not found.' => 'Driver de base de données introuvable.',
 	'No extension' => 'Extension introuvable',
 	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'None of the supported PHP extensions (%s) are available.' => 'Aucune des extensions PHP supportées (%s) n\'est disponible.',
@@ -50,7 +56,10 @@ return [
 	// Settings.
 	'Language' => 'Langue',
 
+	'Home' => 'Accueil',
 	'Refresh' => 'Rafraîchir',
+	'Info' => 'Info',
+	'More information.' => 'Plus d\'informations.',
 
 	// Privileges.
 	'Privileges' => 'Privilèges',
@@ -78,6 +87,7 @@ return [
 
 	// Queries.
 	'SQL command' => 'Requête SQL',
+	'HTTP request' => 'Requête HTTP',
 	'%d query(s) executed OK.' => [
 		'%d requête exécutée avec succès.',
 		'%d requêtes exécutées avec succès.',
@@ -148,6 +158,9 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL).
 	'Schema' => 'Schéma',
+	'Schemas' => 'Schémas',
+	'No schemas.' => 'Aucun schéma.',
+	'Show schema' => 'Afficher le schéma',
 	'Alter schema' => 'Modifier le schéma',
 	'Create schema' => 'Créer un schéma',
 	'Schema has been dropped.' => 'Le schéma a été supprimé.',
@@ -222,6 +235,7 @@ return [
 
 	// Partitions.
 	'Partition by' => 'Partitionner par',
+	'Partition' => 'Partition',
 	'Partitions' => 'Partitions',
 	'Partition name' => 'Nom de la partition',
 	'Values' => 'Valeurs',
@@ -308,6 +322,12 @@ return [
 	'Create trigger' => 'Ajouter un déclencheur',
 
 	// Table check constraints.
+	'Checks' => 'Checks',
+	'Create check' => 'Créer un check',
+	'Alter check' => 'Modifier le check',
+	'Check has been created.' => 'Le check a été créé.',
+	'Check has been altered.' => 'Le check a été modifié.',
+	'Check has been dropped.' => 'Le check a été supprimé.',
 
 	// Selection.
 	'Select data' => 'Afficher les données',
@@ -343,7 +363,7 @@ return [
 	],
 
 	// In-place editing in selection.
-	'Modify' => 'Modification',
+	'Modify' => 'Modifier',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+cliquez sur une valeur pour la modifier.',
 	'Use edit link to modify this value.' => 'Utilisez le lien "modifier" pour modifier cette valeur.',
 
@@ -358,7 +378,7 @@ return [
 	'Save and continue edit' => 'Enr. et continuer édition',
 	'Save and insert next' => 'Enr. et insérer prochain',
 	'Saving' => 'Enregistrement',
-	'Selected' => 'Sélectionnée(s)',
+	'Selected' => 'Sélectionné(s)',
 	'Clone' => 'Cloner',
 	'Delete' => 'Effacer',
 	// %s can contain auto-increment value, e.g. ' 123'
@@ -386,5 +406,34 @@ return [
 	'yes' => 'oui',
 	'no' => 'non',
 
+	// Settings.
+	'Settings' => 'Paramètres',
+	'Default' => 'Défaut',
+	'Color scheme' => 'Schéma de couleurs',
+	'By system' => 'Par le système',
+	'Light' => 'Clair',
+	'Dark' => 'Sombre',
+	'Navigation mode' => 'Mode de navigation',
+	'Simple' => 'Simple',
+	'Dual' => 'Double',
+	'Reversed' => 'Inversé',
+	'Layout of main navigation with table links.' => 'Disposition de la navigation principale avec liens de la table.',
+	'Table links' => 'Liens de la table',
+	'Primary action for all table links.' => 'Action principale pour tous les liens de la table.',
+	'Records per page' => 'Enregistrements par page',
+	'Default number of records displayed in data table.' => 'Nombre d\'enregistrements affichés par défaut dans la table de données.',
+	'Enum as select' => 'Enum comme liste de sélection',
+	'Never' => 'Jamais',
+	'Always' => 'Toujours',
+	'More values than %d' => 'Plus de valeurs que %d',
+	'Threshold for displaying a selection menu for enum fields.' => 'Seuil pour afficher un menu de sélection pour les champs enum.',
+
 	// Plugins.
+	'One Time Password' => 'Mot de passe à usage unique',
+	'Enter OTP code.' => 'Saisissez le code OTP.',
+	'Invalid OTP code.' => 'Code OTP invalide.',
+	'Access denied.' => 'Accès refusé.',
+	'JSON previews' => 'Aperçus JSON',
+	'Data table' => 'Table de données',
+	'Edit form' => 'Formulaire d\'édition',
 ];
