@@ -629,7 +629,7 @@ function edit_form($table, $fields, $row, $update) {
 				}
 				echo "\n";
 			}
-			if (!support("table")) {
+			if (!support("table") && !fields($table)) {
 				echo "<tr>"
 					. "<th><input class='input' name='field_keys[]'>"
 					. script("qsl('input').oninput = fieldChange;")
