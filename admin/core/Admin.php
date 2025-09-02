@@ -130,7 +130,11 @@ class Admin extends Origin
 	 */
 	public function getFieldName(array $field, int $order = 0): string
 	{
-		return '<span title="' . h($field["full_type"] . ($field["comment"] != "" ? " : $field[comment]" : '')) . '">' . h($field["field"]) . '</span>';
+		$type = $field["full_type"];
+		$comment = $field["comment"];
+		$separator = $type && $comment != "" ? ": " : "";
+
+		return '<span title="' . h($type . $separator . $comment) . '">' . h($field["field"]) . '</span>';
 	}
 
 	/**
