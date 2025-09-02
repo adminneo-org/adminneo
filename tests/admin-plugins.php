@@ -9,7 +9,6 @@ use AdminNeo\JsonDumpPlugin;
 use AdminNeo\JsonPreviewPlugin;
 use AdminNeo\SlugifyEditPlugin;
 use AdminNeo\SystemForeignKeysPlugin;
-use AdminNeo\TranslationPlugin;
 use AdminNeo\XmlDumpPlugin;
 use AdminNeo\ZipOutputPlugin;
 
@@ -55,7 +54,6 @@ function adminneo_instance()
 		// new TinyMcePlugin("../externals/tinymce/tinymce.min.js"),
 		new FileUploadPlugin("../export/upload"),
 		new JsonPreviewPlugin(true, false),
-		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
 		new ForeignEditPlugin(),
 		new SlugifyEditPlugin(),
