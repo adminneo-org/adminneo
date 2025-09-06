@@ -190,7 +190,8 @@ function edit_type($key, $field, $collations, $foreign_keys = [], $extra_types =
 	$type = $field["type"] ?? null;
 	?>
 <td><select name="<?php echo h($key); ?>[type]" class="type" aria-labelledby="label-type"><?php
-if ($type && !isset(Driver::get()->getTypes()[$type]) && !isset($foreign_keys[$type]) && !in_array($type, $extra_types)) {
+$driverTypes = Driver::get()->getTypes();
+if ($type && !isset($driverTypes[$type]) && !isset($foreign_keys[$type]) && !in_array($type, $extra_types)) {
 	$extra_types[] = $type;
 }
 $structured_types = Driver::get()->getStructuredTypes();
