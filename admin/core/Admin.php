@@ -333,7 +333,7 @@ class Admin extends Origin
 			$text = $val;
 		} elseif (preg_match("~char|binary|boolean~", $field["type"]) && !preg_match("~var~", $field["type"])) {
 			$text = "<code>$val</code>";
-		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && !is_utf8($val)) {
+		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
 		} elseif ($this->admin->detectJson($field["type"], $original)) {
 			$text = "<code class='jush-js'>$val</code>";
@@ -851,7 +851,7 @@ class Admin extends Origin
 				}
 			}
 
-			if ($key && $functions && !preg_match('~enum|set|blob|bytea|raw|file|bool~', $field["type"])) {
+			if ($key && $functions && !preg_match('~enum|set|bool~', $field["type"]) && !is_blob($field)) {
 				$return .= "/SQL";
 			}
 		}
@@ -1042,7 +1042,7 @@ class Admin extends Origin
 				}
 			}
 
-			$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT //! enum and set as numbers
+			$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT
 			if ($result) {
 				$insert = "";
 				$buffer = "";

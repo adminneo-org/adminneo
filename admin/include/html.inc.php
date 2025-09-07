@@ -449,7 +449,7 @@ function input($field, $value, $function, $autofocus = false): void {
 		}
 
 		echo "</span>";
-	} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
+	} elseif (is_blob($field) && ini_bool("file_uploads")) {
 		echo "<input type='file' name='fields-$name'>";
 	} elseif ($json_type) {
 		echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
@@ -532,7 +532,7 @@ function process_input($field) {
 		}
 		return $value;
 	}
-	if (preg_match('~blob|bytea|raw|file~', $field["type"]) && ini_bool("file_uploads")) {
+	if (is_blob($field) && ini_bool("file_uploads")) {
 		$file = get_file("fields-$idf");
 		if (!is_string($file)) {
 			return false; //! report errors

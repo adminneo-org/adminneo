@@ -1019,6 +1019,18 @@ function select_array_value(array $values, string $val, string $link, array $fie
 }
 
 /**
+ * Checks whether the field type is blob or equivalent.
+ *
+ * @param ?array $field Single field returned from fields().
+ */
+function is_blob(array $field): bool
+{
+	$types = Driver::get()->getStructuredTypes();
+
+	return preg_match('~blob|bytea|raw|file~', $field["type"]) && !in_array($field["type"], $types[lang('User types')] ?? []);
+}
+
+/**
  * Checks whether the string is e-mail address.
  *
  * @param mixed $value
