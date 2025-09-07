@@ -24,6 +24,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)
 - PostgreSQL: Quote edit value with interval operator (by @vrana)
 - PostgreSQL: Don't treat user types containing 'file' as blobs (by @vrana)
+- PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 
 AdminNeo 5.4.1 (2026-06-07)

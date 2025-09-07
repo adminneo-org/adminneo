@@ -1304,8 +1304,17 @@ ORDER BY ordinal_position";
 	* @param string
 	* @return string
 	*/
-	function use_sql($database) {
-		return "USE " . idf_escape($database);
+	function use_sql($database, string $style = "") {
+		$name = idf_escape($database);
+		$return = "";
+		if (preg_match('~CREATE~', $style) && ($create = Connection::get()->getValue("SHOW CREATE DATABASE $name", 1))) {
+			set_utf8mb4($create);
+			if ($style == "DROP+CREATE") {
+				$return = "DROP DATABASE IF EXISTS $name;\n";
+			}
+			$return .= "$create;\n";
+		}
+		return $return . "USE $name";
 	}
 
 	/**

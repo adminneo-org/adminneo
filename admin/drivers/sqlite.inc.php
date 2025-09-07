@@ -845,7 +845,7 @@ if (isset($_GET["sqlite"])) {
 		return "DELETE FROM " . table($table);
 	}
 
-	function use_sql($database) {
+	function use_sql($database, $style = "") {
 	}
 
 	function trigger_sql(string $table): string
