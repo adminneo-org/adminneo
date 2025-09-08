@@ -33,7 +33,7 @@ if (isset($_GET["mysql"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				mysqli_report(MYSQLI_REPORT_OFF);
-				list($host, $port) = explode(":", $server, 2); // part after : is used for port or socket
+				list($host, $port) = host_port($server);
 
 				$key = Admin::get()->getConfig()->getSslKey();
 				$certificate = Admin::get()->getConfig()->getSslCertificate();
@@ -182,7 +182,8 @@ if (isset($_GET["mysql"])) {
 		{
 			public function open(string $server, string $username, string $password): bool
 			{
-				$dsn = "mysql:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server));
+				list($host, $port) = host_port($server);
+				$dsn = "mysql:charset=utf8;host=$host" . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : "");
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
 

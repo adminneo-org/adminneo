@@ -1072,6 +1072,16 @@ function is_shortable(?array $field): bool
 	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea|hstor~', $field["type"]) : false;
 }
 
+/** Split server into host and (port or socket)
+ * @return array{0: string, 1: string}
+ */
+function host_port(string $server) {
+	return (preg_match('~^(\[(.+)]|([^:]+)):([^:]+)$~', $server, $match) // [a:b] - IPv6
+		? [$match[2] . $match[3], $match[4]]
+		: [$server, '']
+	);
+}
+
 /** Get query to compute number of found rows
 * @param string
 * @param list<string>
