@@ -9,16 +9,17 @@ page_header($title, [$title]);
 
 $variables = ($status ? show_status() : show_variables());
 if (!$variables) {
-	echo "<p class='message'>" . lang('No rows.') . "\n";
+	echo "<p class='message'>", lang('No rows.'), "</p>\n";
 } else {
 	echo "<div class='scrollable'><table>\n";
 	foreach ($variables as $row) {
 		echo "<tr>";
 		$key = array_shift($row);
-		echo "<th><code class='jush-" . DIALECT . ($status ? "status" : "set") . "'>" . h($key) . "</code>";
+		echo "<th><code class='jush-" . DIALECT . ($status ? "status" : "set") . "'>" . h($key) . "</code></th>";
 		foreach ($row as $val) {
-			echo "<td>" . nl2br(h($val));
+			echo "<td>", nl2br(h($val)), "</td>";
 		}
+		echo "</tr>\n";
 	}
 	echo "</table></div>\n";
 }

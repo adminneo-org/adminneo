@@ -163,11 +163,10 @@ SET foreign_key_checks = 0;
 
 $name = DB !== null ? h(DB) : (SERVER != "" ? h(Admin::get()->getServerName(SERVER)) : lang('Server'));
 page_header(lang('Export') . ": $name", ($_GET["export"] != "" ? ["table" => $_GET["export"]] : [lang('Export')]));
-?>
 
-<form action="" method="post">
-<table class="box">
-<?php
+echo "<form action='' method='post'>\n";
+echo "<table class='box'>\n";
+
 $db_style = ['', 'USE', 'DROP+CREATE', 'CREATE'];
 $table_style = ['', 'DROP+CREATE', 'CREATE'];
 $data_style = ['', 'TRUNCATE+INSERT', 'INSERT'];
@@ -207,16 +206,16 @@ echo "</span></td></tr>";
 echo "<tr><th>", lang('Data'), "</th><td>", html_select("data_style", $data_style, $settings->getParameter("dumpDataStyle", "INSERT")), "</td></tr>";
 
 echo "<tr><th>", lang('Output'), "</th><td>", html_radios("output", Admin::get()->getDumpOutputs(), $settings->getParameter("dumpOutput", "file")), "</td></tr>\n";
+echo "</table>\n";
 
-?>
-</table>
+echo "<p>";
+echo "<input type='submit' class='button default' value='", lang('Export'), "'>";
+echo input_token();
+echo "</p>\n";
 
-<p><input type="submit" class="button default" value="<?php echo lang('Export'); ?>">
-<?php echo input_token(); ?>
-
-<table>
-<?php
+echo "<table>\n";
 echo script("qsl('table').onclick = dumpClick;");
+
 $prefixes = [];
 if (DB != "") {
 	$checked = ($TABLE != "" ? "" : " checked");
@@ -262,10 +261,10 @@ if (DB != "") {
 		echo "<tr><td><textarea name='databases' rows='10' cols='20'></textarea>";
 	}
 }
-?>
-</table>
-</form>
-<?php
+
+echo "</table>\n";
+echo "</form>\n";
+
 $links = [];
 foreach ($prefixes as $key => $val) {
 	if ($key != "" && $val > 1) {

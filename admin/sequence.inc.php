@@ -28,16 +28,16 @@ if ($SEQUENCE != "") {
 if (!$row) {
 	$row["name"] = $SEQUENCE;
 }
-?>
 
-<form action="" method="post">
-<p><input class="input" name="name" value="<?php echo h($row["name"]); ?>" autocapitalize="off">
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php
+echo "<form action='' method='post'>\n";
+
+echo "<p>";
+echo "<input class='input' name='name' value='", h($row["name"]), "' autocapitalize='off'>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
 if ($SEQUENCE != "") {
 	echo "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm(lang('Drop %s?', $SEQUENCE)) . "\n";
 }
-
 echo input_token();
-?>
-</form>
+echo "</p>\n";
+
+echo "</form>\n";

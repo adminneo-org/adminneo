@@ -37,20 +37,43 @@ if ($name != "") {
 } else {
 	page_header(lang('Create trigger'), ["table" => $TABLE, lang('Create trigger')]);
 }
-?>
 
-<form action="" method="post" id="form">
-<table class="box box-light">
-<tr><th><?php echo lang('Time'); ?><td><?php echo html_select("Timing", $trigger_options["Timing"], $row["Timing"], "triggerChange(/^" . preg_quote($TABLE, "/") . "_[ba][iud]$/, '" . js_escape($TABLE) . "', this.form);"); ?>
-<tr><th><?php echo lang('Event'); ?><td><?php echo html_select("Event", $trigger_options["Event"], $row["Event"], "this.form['Timing'].onchange();"); ?>
-<?php echo (in_array("UPDATE OF", $trigger_options["Event"]) ? " <input name='Of' value='" . h($row["Of"]) . "' class='input hidden'>": ""); ?>
-<tr><th><?php echo lang('Type'); ?><td><?php echo html_select("Type", $trigger_options["Type"], $row["Type"]); ?>
-</table>
-<p><?php echo lang('Name'); ?>: <input class="input" name="Trigger" value="<?php echo h($row["Trigger"]); ?>" data-maxlength="64" autocapitalize="off">
-<?php echo script("gid('form')['Timing'].onchange();"); ?>
-<p><?php textarea("Statement", $row["Statement"]); ?>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php if ($name != "") { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $name)); ?><?php } ?>
-<?php echo input_token(); ?>
-</form>
+echo "<form action='' method='post' id='form'>\n";
+echo "<table class='box box-light'>\n";
+
+echo "<tr><th>", lang('Time'), "</th><td>";
+echo html_select("Timing", $trigger_options["Timing"], $row["Timing"], "triggerChange(/^" . preg_quote($TABLE, "/") . "_[ba][iud]$/, '" . js_escape($TABLE) . "', this.form);");
+echo "</td></tr>\n";
+
+echo "<tr><th>", lang('Event'), "</th><td>";
+echo html_select("Event", $trigger_options["Event"], $row["Event"], "this.form['Timing'].onchange();");
+if (in_array("UPDATE OF", $trigger_options["Event"])) {
+	echo " <input name='Of' value='" . h($row["Of"]) . "' class='input hidden'>";
+}
+echo "</td></tr>\n";
+
+echo "<tr><th>", lang('Type'), "</th><td>";
+echo html_select("Type", $trigger_options["Type"], $row["Type"]);
+echo "</td></tr>\n";
+
+echo "</table>\n";
+
+echo "<p>", lang('Name');
+echo "<input class='input' name='Trigger' value='", h($row["Trigger"]), "' data-maxlength='64' autocapitalize='off'>";
+echo "</p>\n";
+echo script("gid('form')['Timing'].onchange();");
+
+echo "<p>";
+textarea("Statement", $row["Statement"]);
+echo "</p>\n";
+
+echo "<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
+if ($name != "") {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>";
+	echo confirm(lang('Drop %s?', $name));
+}
+echo "</p>\n";
+
+echo input_token();
+echo "</form>\n";

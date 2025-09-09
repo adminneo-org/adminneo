@@ -147,17 +147,23 @@ if ($_POST) {
 	}
 }
 
-?>
-<form action="" method="post">
-<table class="box box-light">
-<tr><th><?php echo lang('Server'); ?><td><input class="input" name="host" data-maxlength="60" value="<?php echo h($row["host"]); ?>" autocapitalize="off">
-<tr><th><?php echo lang('Username'); ?><td><input class="input" name="user" data-maxlength="80" value="<?php echo h($row["user"]); ?>" autocapitalize="off">
-<tr><th><?php echo lang('Password'); ?><td><input class="input" name="pass" id="pass" value="<?php echo h($row["pass"]); ?>" autocomplete="new-password">
-<?php if (!$row["hashed"]) { echo script("typePassword(gid('pass'));"); } ?>
-<?php echo (Connection::get()->isMinVersion("8") ? "" : checkbox("hashed", 1, $row["hashed"], lang('Hashed'), "typePassword(this.form['pass'], this.checked);")); ?>
-</table>
+echo "<form action='' method='post'>\n";
 
-<?php
+echo "<table class='box box-light'>\n";
+echo "<tr><th>", lang('Server'), "</th>";
+echo "<td><input class='input' name='host' data-maxlength='60' value='", h($row["host"]), "' autocapitalize='off'></td>\n";
+echo "<tr><th>", lang('Username'), "</th>";
+echo "<td><input class='input' name='user' data-maxlength='80' value='", h($row["user"]), "' autocapitalize='off'></td>\n";
+echo '<tr><th>', lang('Password'), "</th>";
+echo "<td><input class='input' name='pass' id='pass' value='", h($row["pass"]), "' autocomplete='new-password'></td>\n";
+if (!$row["hashed"]) {
+	echo script("typePassword(gid('pass'));");
+}
+if (!Connection::get()->isMinVersion("8")) {
+	echo checkbox("hashed", 1, $row["hashed"], lang('Hashed'), "typePassword(this.form['pass'], this.checked);");
+}
+echo "</table>\n";
+
 //! MAX_* limits, REQUIRE
 echo "<div class='scrollable'><table class='checkable'>\n";
 
@@ -237,9 +243,16 @@ foreach ([
 }
 
 echo "</table></div>\n";
-?>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php if (isset($_GET["host"])) { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', "$USER@$_GET[host]")); ?><?php } ?>
-<?php echo input_token(); ?>
-</form>
+
+echo "<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>\n";
+
+if (isset($_GET["host"])) {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>\n";
+	echo confirm(lang('Drop %s?', "$USER@$_GET[host]"));
+}
+
+echo input_token();
+echo "</p>\n";
+
+echo "</form>\n";

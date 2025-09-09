@@ -28,10 +28,10 @@ if (!$row) {
 	$checks = Driver::get()->checkConstraints($TABLE);
 	$row = ["name" => $name, "clause" => $checks[$name]];
 }
-?>
 
-<form action="" method="post">
-<p><?php
+echo "<form action='' method='post'>\n";
+echo "<p>";
+
 if (DIALECT != "sqlite") {
 	echo lang('Name') . ': <input name="name" value="' . h($row["name"]) . '" class="input" data-maxlength="64" autocapitalize="off"> ';
 }
@@ -42,9 +42,17 @@ echo doc_link([
 	'mssql' => "relational-databases/tables/create-check-constraints",
 	'sqlite' => "lang_createtable.html#check_constraints",
 ], "?");
-?>
-<p><?php textarea("clause", $row["clause"]); ?>
-<p><input type="submit" class='button default' value="<?php echo lang('Save'); ?>">
-<?php if ($name != "") { ?><input type="submit" class='button' name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $name)); ?><?php } ?>
-<?php echo input_token(); ?>
-</form>
+
+echo "</p>\n<p>";
+textarea("clause", $row["clause"]);
+
+echo "</p>\n<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
+if ($name != "") {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>";
+	echo confirm(lang('Drop %s?', $name));
+}
+echo input_token();
+echo "</p>\n";
+
+echo "</form>\n";

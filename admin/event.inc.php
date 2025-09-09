@@ -39,21 +39,52 @@ if (!$row && $EVENT != "") {
 	$rows = get_rows("SELECT * FROM information_schema.EVENTS WHERE EVENT_SCHEMA = " . q(DB) . " AND EVENT_NAME = " . q($EVENT));
 	$row = reset($rows);
 }
-?>
 
-<form action="" method="post">
-<table class="box box-light">
-<tr><th><?php echo lang('Name'); ?><td><input class="input" name="EVENT_NAME" value="<?php echo h($row["EVENT_NAME"]); ?>" data-maxlength="64" autocapitalize="off">
-<tr><th title="datetime"><?php echo lang('Start'); ?><td><input class="input" name="STARTS" value="<?php echo h("$row[EXECUTE_AT]$row[STARTS]"); ?>">
-<tr><th title="datetime"><?php echo lang('End'); ?><td><input class="input" name="ENDS" value="<?php echo h($row["ENDS"]); ?>">
-<tr><th><?php echo lang('Every'); ?><td><input type="number" name="INTERVAL_VALUE" value="<?php echo h($row["INTERVAL_VALUE"]); ?>" class="input size"> <?php echo html_select("INTERVAL_FIELD", $intervals, $row["INTERVAL_FIELD"]); ?>
-<tr><th><?php echo lang('Status'); ?><td><?php echo html_select("STATUS", $statuses, $row["STATUS"]); ?>
-<tr><th><?php echo lang('Comment'); ?><td><input class="input" name="EVENT_COMMENT" value="<?php echo h($row["EVENT_COMMENT"]); ?>" data-maxlength="64">
-<tr><th><td><?php echo checkbox("ON_COMPLETION", "PRESERVE", $row["ON_COMPLETION"] == "PRESERVE", lang('On completion preserve')); ?>
-</table>
-<p><?php textarea("EVENT_DEFINITION", $row["EVENT_DEFINITION"]); ?>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php if ($EVENT != "") { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $EVENT)); ?><?php } ?>
-<?php echo input_token(); ?>
-</form>
+echo "<form action='' method='post'>\n";
+echo "<table class='box box-light'>\n";
+
+echo "<tr><th>", lang('Name'), "</th><td>";
+echo "<input class='input' name='EVENT_NAME' value='", h($row["EVENT_NAME"]), "' data-maxlength='64' autocapitalize='off'>";
+echo "</td></tr>\n";
+
+echo "<tr><th title='datetime'>", lang('Start'), "</th><td>";
+echo "<input class='input' name='STARTS' value='", h("$row[EXECUTE_AT]$row[STARTS]"), "'>";
+echo "</td></tr>\n";
+
+echo "<tr><th title='datetime'>", lang('End'), "</th><td>";
+echo "<input class='input' name='ENDS' value='", h($row["ENDS"]), "'>";
+echo "</td></tr>\n";
+
+echo "<tr><th>", lang('Every'), "</th><td>";
+echo "<input type='number' name='INTERVAL_VALUE' value='", h($row["INTERVAL_VALUE"]), "' class='input size'> ";
+echo html_select("INTERVAL_FIELD", $intervals, $row["INTERVAL_FIELD"]);
+echo "</td></tr>\n";
+
+echo "<tr><th>", lang('Status'), "</th><td>";
+echo html_select("STATUS", $statuses, $row["STATUS"]);
+echo "</td></tr>\n";
+
+echo "<tr><th>", lang('Comment'), "</th><td>";
+echo "<input class='input' name='EVENT_COMMENT' value='", h($row["EVENT_COMMENT"]), "' data-maxlength='64'>";
+echo "</td></tr>\n";
+
+echo "<tr><th></th><td>";
+echo checkbox("ON_COMPLETION", "PRESERVE", $row["ON_COMPLETION"] == "PRESERVE", lang('On completion preserve'));
+echo "</td></tr>\n";
+
+echo "</table>\n";
+
+echo "<p>";
+textarea("EVENT_DEFINITION", $row["EVENT_DEFINITION"]);
+echo "</p>\n";
+
+echo "<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
+if ($EVENT != "") {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>";
+	echo confirm(lang('Drop %s?', $EVENT));
+}
+echo "</p>\n";
+
+echo input_token();
+echo "</form>\n";
