@@ -83,7 +83,7 @@ function add_invalid_login() {
 	}
 
 	if (!$file) {
-		$file = open_file_with_lock("$base_name-" . get_random_string());
+		$file = open_file_with_lock("$base_name-" . bin2hex(Random::bytes(32)));
 		if (!$file) {
 			return;
 		}
@@ -309,7 +309,7 @@ function auth_error(array &$permanent, ?string $error = null): void
 function print_login_page(): void
 {
 	$params = session_get_cookie_params();
-	cookie("neo_key", ($_COOKIE["neo_key"] ?: get_random_string()), $params["lifetime"]);
+	cookie("neo_key", ($_COOKIE["neo_key"] ?: bin2hex(Random::bytes(32))), $params["lifetime"]);
 
 	// Set token for the unsuccessful login.
 	if (!$_SESSION["token"]) {
