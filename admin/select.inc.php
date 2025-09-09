@@ -612,16 +612,21 @@ if (!$columns && support("table")) {
 				echo "</div></fieldset>\n";
 
 				if (Admin::get()->isDataEditAllowed()) {
-					?>
-<fieldset<?php echo ($_GET["modify"] ? '' : ' class="jsonly"'); ?>><legend><?php echo lang('Modify'); ?></legend><div class='fieldset-content'>
-<input type="submit" class="button" value="<?php echo lang('Save'); ?>"<?php echo ($_GET["modify"] ? '' : ' title="' . lang('Ctrl+click on a value to modify it.') . '"'); ?>>
-</div></fieldset>
-<fieldset><legend><?php echo lang('Selected'); ?> <span id="selected"></span></legend><div class='fieldset-content'>
-<input type="submit" class="button" name="edit" value="<?php echo lang('Edit'); ?>">
-<input type="submit" class="button" name="clone" value="<?php echo lang('Clone'); ?>">
-<input type="submit" class="button" name="delete" value="<?php echo lang('Delete'); ?>"><?php echo confirm(); ?>
-</div></fieldset>
-<?php
+					echo "<fieldset", ($_GET["modify"] ? '' : ' class="jsonly"'), ">";
+					echo "<legend>", lang('Modify'), "</legend>";
+					echo "<div class='fieldset-content'>";
+					echo "<input type='submit' class='button' value='", lang('Save'), "'", ($_GET["modify"] ? "" : " title='" . lang('Ctrl+click on a value to modify it.') . "'"), ">";
+					echo "</div>";
+					echo "</fieldset>\n";
+
+					echo "<fieldset>";
+					echo "<legend>", lang('Selected'), " <span id='selected'></span></legend>";
+					echo "<div class='fieldset-content'>";
+					echo "<input type='submit' class='button' name='edit' value='", lang('Edit'), "'> ";
+					echo "<input type='submit' class='button' name='clone' value='", lang('Clone'), "'> ";
+					echo "<input type='submit' class='button' name='delete' value='", lang('Delete'), "'>", confirm();
+					echo "</div>";
+					echo "</fieldset>\n";
 				}
 
 				$format = Admin::get()->getDumpFormats();

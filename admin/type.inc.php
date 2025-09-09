@@ -23,27 +23,33 @@ if ($TYPE != "") {
 if (!$row) {
 	$row["as"] = "AS ";
 }
-?>
 
-<form action="" method="post">
-<p>
-<?php
+echo "<form action='' method='post'>\n";
+
 if ($TYPE != "") {
 	$types = Driver::get()->getTypes();
 	$enums = type_values($types[$TYPE]);
 	if ($enums) {
-		echo "<code class='jush-" . DIALECT. "'>ENUM (" . h($enums) . ")</code>\n<p>";
+		echo "<p><code class='jush-" . DIALECT. "'>ENUM (" . h($enums) . ")</code><p>\n";
 	}
-	echo "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm(lang('Drop %s?', $TYPE)) . "\n";
+
+	echo "<p>";
+	echo "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm(lang('Drop %s?', $TYPE));
+	echo "</p>\n";
 } else {
+	echo "<p>";
 	echo lang('Name') . ": <input class='input' name='name' value='" . h($row['name']) . "' autocapitalize='off'>\n";
 	echo doc_link([
 		'pgsql' => "datatype-enum.html",
 	], "?");
+
+	echo "</p>\n<p>";
 	textarea("as", $row["as"]);
+	echo "</p>\n";
+
 	echo "<p><input type='submit' class='button default' value='" . lang('Save') . "'></p>\n";
 }
 
 echo input_token();
-?>
-</form>
+
+echo "</form>\n";

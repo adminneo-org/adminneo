@@ -53,14 +53,26 @@ if ($TABLE != "") {
 } else {
 	page_header(lang('Create view'), [lang('Create view')]);
 }
-?>
 
-<form action="" method="post">
-<p><?php echo lang('Name'); ?>: <input class="input" name="name" value="<?php echo h($row["name"]); ?>" data-maxlength="64" autocapitalize="off">
-<?php echo (support("materializedview") ? " " . checkbox("materialized", 1, $row["materialized"], lang('Materialized view')) : ""); ?>
-<p><?php textarea("select", $row["select"]); ?>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php if ($TABLE != "") { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $TABLE)); ?><?php } ?>
-<?php echo input_token(); ?>
-</form>
+echo "<form action='' method='post'>\n";
+
+echo "<p>", lang('Name'), ":";
+echo "<input class='input' name='name' value='", h($row["name"]), "' data-maxlength='64' autocapitalize='off'>\n";
+if (support("materializedview")) {
+	echo checkbox("materialized", 1, $row["materialized"], lang('Materialized view'));
+}
+echo "</p>\n<p>";
+textarea("select", $row["select"]);
+
+echo "</p>\n<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>\n";
+
+if ($TABLE != "") {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>\n";
+	echo confirm(lang('Drop %s?', $TABLE));
+}
+
+echo input_token();
+echo "</p>\n";
+
+echo "</form>\n";

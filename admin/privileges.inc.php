@@ -17,7 +17,9 @@ echo "<form action=''><p>\n";
 hidden_fields_get();
 echo "<input type='hidden' name='db' value='" . h(DB) . "'>\n";
 echo ($grant ? "" : "<input type='hidden' name='grant' value=''>\n");
-echo "<div class='scrollable'><table class='checkable'>\n";
+echo "<div class='scrollable'>\n";
+
+echo "<table class='checkable'>\n";
 echo "<thead><tr><th>" . lang('Username') . "<th>" . lang('Server') . "<th></thead>\n";
 
 while ($row = $result->fetchAssoc()) {
@@ -28,5 +30,7 @@ if (!$grant || DB != "") {
 	echo "<tr><td><input class='input' name='user' autocapitalize='off'><td><input class='input' name='host' value='localhost' autocapitalize='off'><td><input type='submit' class='button' value='" . lang('Edit') . "'>\n";
 }
 
-echo "</table></div>\n";
+echo "</table>\n";
+
+echo "</div>\n";
 echo "</form>\n";

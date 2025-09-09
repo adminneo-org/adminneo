@@ -15,13 +15,12 @@ if (support("kill")) {
 }
 
 page_header(lang('Process list'), [lang('Process list')]);
-?>
 
-<form action="" method="post">
-<div class="scrollable">
-<table class="nowrap checkable">
-<?php
+echo "<form action='' method='post'>\n";
+echo "<div class='scrollable'>\n";
+echo "<table class='nowrap checkable'>\n";
 echo script("mixin(qsl('table'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
+
 // HTML valid because there is always at least one process
 $i = -1;
 foreach (process_list() as $i => $row) {
@@ -49,17 +48,18 @@ foreach (process_list() as $i => $row) {
 	}
 	echo "\n";
 }
-?>
-</table>
-</div>
-<p>
-<?php
+
+echo "</table>\n";
+echo "</div>\n";
+
+echo "<p>";
 if (support("kill")) {
 	echo ($i + 1) . "/" . lang('%d in total', max_connections());
 	echo "<p><input type='submit' class='button' value='" . lang('Kill') . "'>\n";
 }
 
 echo input_token();
-?>
-</form>
-<?php echo script("tableCheck();"); ?>
+echo "</p>\n";
+
+echo "</form>\n";
+echo script("tableCheck();");

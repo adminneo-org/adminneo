@@ -53,16 +53,16 @@ foreach (table_status('', true) as $table => $table_status) {
 	$top = max($top, $schema[$table]["pos"][0] + 2.5 + $pos);
 }
 
-?>
-<div id="schema" style="height: <?php echo $top; ?>em;">
-<script<?php echo nonce(); ?>>
-gid('schema').onselectstart = function () { return false; };
-var tablePos = {<?php echo implode(",", $table_pos_js) . "\n"; ?>};
-var em = gid('schema').offsetHeight / <?php echo $top; ?>;
-document.onmousemove = schemaMousemove;
-document.onmouseup = partialArg(schemaMouseup, '<?php echo js_escape(DB); ?>');
-</script>
-<?php
+echo "<div id='schema' style='height: {$top}em;'>\n";
+
+echo "<script", nonce(), ">\n";
+echo "gid('schema').onselectstart = function () { return false; };\n";
+echo "var tablePos = {", implode(",", $table_pos_js), "\n};\n";
+echo "var em = gid('schema').offsetHeight / $top;\n";
+echo "document.onmousemove = schemaMousemove;\n";
+echo "document.onmouseup = partialArg(schemaMouseup, '", js_escape(DB), "');\n";
+echo "</script>\n";
+
 foreach ($schema as $name => $table) {
 	echo "<div class='table' style='top: " . $table["pos"][0] . "em; left: " . $table["pos"][1] . "em;'>";
 	echo '<a href="' . h(ME) . 'table=' . urlencode($name) . '"><b>' . h($name) . "</b></a>";
@@ -103,7 +103,7 @@ foreach ($schema as $name => $table) {
 	echo "\n</div>\n";
 }
 
-foreach ($schema as $name => $table) {
+foreach ($schema as $table) {
 	foreach ((array) $table["references"] as $target_name => $refs) {
 		foreach ($refs as $left => $ref) {
 			$min_pos = $top;
@@ -118,6 +118,9 @@ foreach ($schema as $name => $table) {
 		}
 	}
 }
-?>
-</div>
-<p class="links"><a href="<?php echo h(ME . "schema=" . urlencode($SCHEMA)); ?>" id="schema-link"><?php echo lang('Permanent link'); ?></a>
+
+echo "</div>\n";
+
+echo "<p class='links'>";
+echo "<a href='", (ME . "schema=" . urlencode($SCHEMA)), "' id='schema-link'>", lang('Permanent link'), "</a>";
+echo "</p>\n";

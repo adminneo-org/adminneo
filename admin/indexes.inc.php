@@ -100,25 +100,28 @@ if (!$row) {
 }
 $lengths = (DIALECT == "sql" || DIALECT == "mssql");
 $show_options = $_POST ? $_POST["options"] : Admin::get()->getSettings()->getParameter("indexOptions");
-?>
 
-<form action="" method="post">
-<div class="scrollable">
-<table class="nowrap">
-<thead><tr>
-<th id="label-type"><?php echo lang('Index Type'); ?>
-<th><input type="submit" class="button invisible"><?php
+echo "<form action='' method='post'>\n";
+echo "<div class='scrollable'>\n";
+
+echo "<table class='nowrap'>\n";
+echo "<thead><tr>";
+echo "<th id='label-type'>", lang('Index Type'), "</th>";
+
+echo "<th><input type='submit' class='button invisible'>";
 echo lang('Column') . ($lengths ? "<span class='idxopts" . ($show_options ? "" : " hidden") . "'> (" . lang('length') . ")</span>" : "");
 if ($lengths || support("descidx")) {
 	echo checkbox("options", 1, $show_options, lang('Options'), "indexOptionsShow(this.checked)", "jsonly") . "\n";
 }
-?>
-<th id="label-name"><?php echo lang('Name'); ?>
-<th><?php
-	echo "<button name='add[0]' value='1' title='", h(lang('Add next')), "' class='button light hidden'>", icon_solo("add"), "</button>";
-?></th>
-</thead>
-<?php
+echo "</th>";
+
+echo "<th id='label-name'>", lang('Name'), "</th>";
+echo "<th>";
+echo "<button name='add[0]' value='1' title='", lang('Add next'), "' class='button light hidden'>", icon_solo("add"), "</button>";
+echo "</th>";
+
+echo "</tr></thead>\n";
+
 if ($primary) {
 	echo "<tr><td>PRIMARY<td>";
 	foreach ($primary["columns"] as $key => $column) {
@@ -160,10 +163,13 @@ foreach ($row["indexes"] as $index) {
 	}
 	$j++;
 }
-?>
-</table>
-</div>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php echo input_token(); ?>
-</form>
+
+echo "</table>\n";
+echo "</div>\n";
+
+echo "<p>";
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
+echo input_token();
+echo "</p>\n";
+
+echo "</form>\n";

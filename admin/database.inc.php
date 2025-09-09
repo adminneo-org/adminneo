@@ -62,22 +62,27 @@ if ($_POST) {
 
 $collations = Admin::get()->getCollations($row["collation"] ? [$row["collation"]] : []);
 
-?>
+echo "<form action='' method='post'>\n";
+echo "<p>";
 
-<form action="" method="post">
-<p>
-<?php
-echo ($_POST["add_x"] || strpos($name, "\n")
-	? '<textarea id="name" name="name" rows="10" cols="40">' . h($name) . '</textarea><br>'
-	: '<input class="input" name="name" id="name" value="' . h($name) . '" data-maxlength="64" autocapitalize="off" autofocus>'
-) . "\n" . ($collations ? html_select("collation", ["" => "(" . lang('collation') . ")"] + $collations, $row["collation"]) . doc_link([
-	'sql' => "charset-charsets.html",
-	'mariadb' => "supported-character-sets-and-collations/",
-	'mssql' => "relational-databases/system-functions/sys-fn-helpcollations-transact-sql",
-]) : "");
-?>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php
+if ($_POST["add_x"] || strpos($name, "\n")) {
+	echo "<textarea id='name' name='name' rows='10' cols='40'>", h($name), "</textarea><br>\n";
+} else {
+	echo "<input class='input' name='name' id='name' value='", h($name), "' data-maxlength='64' autocapitalize='off' autofocus>\n";
+}
+
+if ($collations) {
+	echo html_select("collation", ["" => "(" . lang('collation') . ")"] + $collations, $row["collation"]);
+	echo doc_link([
+		'sql' => "charset-charsets.html",
+		'mariadb' => "supported-character-sets-and-collations/",
+		'mssql' => "relational-databases/system-functions/sys-fn-helpcollations-transact-sql",
+	]);
+	echo "\n";
+}
+
+echo "<input type='submit' class='button default' value='", lang('Save'), "'>\n";
+
 if (DB != "") {
 	echo "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm(lang('Drop %s?', DB)) . "\n";
 } elseif (!$_POST["add_x"] && $_GET["db"] == "") {
@@ -85,5 +90,5 @@ if (DB != "") {
 }
 
 echo input_token();
-?>
-</form>
+echo "</p>\n";
+echo "</form>\n";

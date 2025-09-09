@@ -196,90 +196,103 @@ foreach ($engines as $engine) {
 		break;
 	}
 }
-?>
 
-<form action="" method="post" id="form">
-<?php
-	if (support("columns") || $TABLE == "") {
-		echo "<p>";
-		echo lang('Table name'), ": ";
+echo "<form action='' method='post' id='form'>\n";
 
-		echo "<input class='input' name='name' data-maxlength='64' value='", h($row["name"]), "' autocapitalize='off'", (($TABLE == "" && !$_POST) ? " autofocus" : ""), ">";
+if (support("columns") || $TABLE == "") {
+	echo "<p>";
+	echo lang('Table name'), ": ";
 
-		if ($engines) {
-			echo " ", html_select("Engine", ["" => "(" . lang('engine') . ")"] + $engines, $row["Engine"]);
-			echo help_script_command("value", true);
-		}
+	echo "<input class='input' name='name' data-maxlength='64' value='", h($row["name"]), "' autocapitalize='off'", (($TABLE == "" && !$_POST) ? " autofocus" : ""), ">";
 
-		if ($collations && !preg_match("~sqlite|mssql~", DIALECT)) {
-			echo " ", html_select("Collation", ["" => "(" . lang('collation') . ")"] + $collations, $row["Collation"]);
-		}
-
-		echo " <input type='submit' class='button default' value='", lang('Save'), "'>";
-		echo "</p>";
+	if ($engines) {
+		echo " ", html_select("Engine", ["" => "(" . lang('engine') . ")"] + $engines, $row["Engine"]);
+		echo help_script_command("value", true);
 	}
-?>
 
-<?php if (support("columns")) { ?>
-<div class="scrollable">
-<table id="edit-fields" class="nowrap">
-<?php
-edit_fields($row["fields"], $collations, "TABLE", $foreign_keys);
-?>
-</table>
-<?php
+	if ($collations && !preg_match("~sqlite|mssql~", DIALECT)) {
+		echo " ", html_select("Collation", ["" => "(" . lang('collation') . ")"] + $collations, $row["Collation"]);
+	}
+
+	echo " <input type='submit' class='button default' value='", lang('Save'), "'>";
+	echo "</p>";
+}
+
+if (support("columns")) {
+	echo "<div class='scrollable'>\n";
+	echo "<table id='edit-fields' class='nowrap'>\n";
+	edit_fields($row["fields"], $collations, "TABLE", $foreign_keys);
+	echo "</table>\n";
 	echo script("initFieldsEditing(gid('edit-fields'));");
 	if (support("move_col")) {
 		echo script("initSortable('#edit-fields tbody');");
 	}
-?>
-</div>
-<p>
-<?php echo lang('Auto Increment'); ?>: <input type="number" class="input size" name="Auto_increment" size="6" value="<?php echo h($row["Auto_increment"]); ?>">
-<?php
-$comments_opened = $_POST ? $_POST["comments"] : Admin::get()->getSettings()->getParameter("commentsOpened");
-$comment_class = $comments_opened ? "" : "hidden";
+	echo "</div>\n";
 
-echo (support("comment")
-	? checkbox("comments", 1, $comments_opened, lang('Comment'), "editingCommentsClick(this, true);", "jsonly")
-		. ' ' . (preg_match('~\n~', $row["Comment"])
-			? "<textarea name='Comment' rows='2' cols='20'" . ($comment_class ? " class='$comment_class'" : "") . ">" . h($row["Comment"]) . "</textarea>"
-			: "<input name='Comment' value='" . h($row["Comment"]) . "' data-maxlength='" . (Connection::get()->isMinVersion("5.5") ? 2048 : 60) . "' class='input $comment_class'>"
-		)
-	: '')
-;
-?>
-<p>
-<input type="submit" class="button default" value="<?php echo lang('Save'); ?>">
-<?php } ?>
+	echo "<p>";
+	echo lang('Auto Increment'), ": ";
+	echo "<input type='number' class='input size' name='Auto_increment' size='6' value='", h($row["Auto_increment"]), "'>";
 
-<?php if ($TABLE != "") { ?><input type="submit" class="button" name="drop" value="<?php echo lang('Drop'); ?>"><?php echo confirm(lang('Drop %s?', $TABLE)); ?><?php } ?>
-<?php
+	$comments_opened = $_POST ? $_POST["comments"] : Admin::get()->getSettings()->getParameter("commentsOpened");
+	$comment_class = $comments_opened ? "" : "hidden";
+
+	if (support("comment")) {
+		echo checkbox("comments", 1, $comments_opened, lang('Comment'), "editingCommentsClick(this, true);", "jsonly");
+		echo " ";
+		if (preg_match('~\n~', $row["Comment"])) {
+			echo "<textarea name='Comment' rows='2' cols='20'", ($comment_class ? " class='$comment_class'" : ""), ">", h($row["Comment"]), "</textarea>";
+		} else {
+			echo "<input name='Comment' value='", h($row["Comment"]), "' data-maxlength='", (Connection::get()->isMinVersion("5.5") ? 2048 : 60), "' class='input $comment_class'>";
+		}
+	}
+
+	echo "</p>\n<p>";
+	echo "<input type='submit' class='button default' value='", lang('Save'), "'>";
+} elseif ($TABLE != "") {
+	echo "<p>";
+}
+
+if ($TABLE != "") {
+	echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>";
+	echo confirm(lang('Drop %s?', $TABLE));
+	echo "</p>\n";
+}
+
 if (support("partitioning")) {
 	echo "<div class='field-sets'>\n";
 	$partition_table = preg_match('~RANGE|LIST~', $row["partition_by"]);
 	print_fieldset_start("partition", lang('Partition by'), "split", (bool)$row["partition_by"]);
-	?>
-<p>
-<?php echo html_select("partition_by", ["" => ""] + $partition_by, $row["partition_by"]) . help_script_command("value.replace(/./, 'PARTITION BY \$&')", true) . script("qsl('select').onchange = partitionByChange;"); ?>
-(<input class="input" name="partition" value="<?php echo h($row["partition"]); ?>">)
-<?php echo lang('Partitions'); ?>: <input type="number" name="partitions" class="input size <?php echo ($partition_table || !$row["partition_by"] ? "hidden" : ""); ?>" value="<?php echo h($row["partitions"]); ?>">
-<table id="partition-table"<?php echo ($partition_table ? "" : " class='hidden'"); ?>>
-<thead><tr><th><?php echo lang('Partition name'); ?><th><?php echo lang('Values'); ?></thead>
-<?php
-foreach ($row["partition_names"] as $key => $val) {
-	echo '<tr>';
-	echo '<td><input class="input" name="partition_names[]" value="' . h($val) . '" autocapitalize="off">';
-	echo ($key == count($row["partition_names"]) - 1 ? script("qsl('input').oninput = partitionNameChange;") : '');
-	echo '<td><input class="input" name="partition_values[]" value="' . h($row["partition_values"][$key]) . '">';
-}
-?>
-</table>
-<?php
+
+	echo "<p>";
+	echo html_select("partition_by", ["" => ""] + $partition_by, $row["partition_by"]);
+	echo help_script_command("value.replace(/./, 'PARTITION BY \$&')", true);
+	echo script("qsl('select').onchange = partitionByChange;");
+
+	echo "(<input class='input' name='partition' value='", h($row["partition"]), "'>) ";
+	echo lang('Partitions'), ": ";
+	echo "<input type='number' name='partitions' class='input size ", ($partition_table || !$row["partition_by"] ? "hidden" : ""), "' value='", h($row["partitions"]), "'>";
+	echo "</p>\n";
+
+	echo "<table id='partition-table'", ($partition_table ? "" : " class='hidden'"), ">\n";
+	echo "<thead><tr><th>", lang('Partition name'), "</th><th>", lang('Values'), "</th></tr></thead>\n";
+
+	foreach ($row["partition_names"] as $key => $val) {
+		echo "<tr>";
+		echo "<td><input class='input' name='partition_names[]' value='", h($val), "' autocapitalize='off'>";
+		if ($key == count($row["partition_names"]) - 1) {
+			echo script("qsl('input').oninput = partitionNameChange;");
+		}
+		echo "</td>";
+		echo "<td><input class='input' name='partition_values[]' value='", h($row["partition_values"][$key]), "'></td>";
+		echo "</tr>\n";
+	}
+
+	echo "</table>\n";
+
+	echo "</p>\n";
 	print_fieldset_end("partition");
 	echo "</div>\n";
 }
 
 echo input_token();
-?>
-</form>
+echo "</form>\n";
