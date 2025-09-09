@@ -279,10 +279,9 @@ if ($_POST) {
 		echo "<p class='error'>" . upload_error($query) . "\n";
 	}
 }
-?>
 
-<form action="" method="post" enctype="multipart/form-data" id="form">
-<?php
+echo "<form action='' method='post' enctype='multipart/form-data' id='form'>\n";
+
 if (!isset($_GET["import"])) {
 	$q = $_GET["sql"]; // overwrite $q from if ($_POST) to save memory
 	if ($_POST) {
@@ -353,5 +352,5 @@ if (!isset($_GET["import"]) && $history) {
 
 	echo "</div>\n";
 }
-?>
-</form>
+
+echo "</form>\n";

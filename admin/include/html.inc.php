@@ -35,7 +35,7 @@ function nonce(): string
  */
 function input_token(): string
 {
-	return "<input type='hidden' name='token' value='" . get_token() . "'>\n";
+	return "<input type='hidden' name='token' value='" . get_token() . "'>";
 }
 
 /**
@@ -565,101 +565,101 @@ function edit_form($table, $fields, $row, $update) {
 		echo "<p class='error'>" . lang('No rows.') . "\n";
 		return;
 	}
-	?>
-	<form action="" method="post" enctype="multipart/form-data" id="form">
-		<?php
-		$first = 0;
-		if (!$fields) {
-			echo "<p class='error'>" . lang('You have no privileges to update this table.') . "\n";
-		} else {
-			echo "<table class='box'>" . script("qsl('table').onkeydown = onEditingKeydown;");
 
-			$autofocus = !$_POST;
+	echo "<form action='' method='post' enctype='multipart/form-data' id='form'>\n";
 
-			foreach ($fields as $name => $field) {
-				echo "<tr><th>" . Admin::get()->getFieldName($field);
-				$key = bracket_escape($name);
-				$default = $_GET["set"][$key] ?? null;
-				if ($default === null) {
-					$default = $field["default"];
-					if ($field["type"] == "bit" && preg_match("~^b'([01]*)'\$~", $default, $regs)) {
-						$default = $regs[1];
-					}
-					if (DIALECT == "sql" && preg_match('~binary~', $field["type"])) {
-						$default = bin2hex($default); // same as UNHEX
-					}
+	if (!$fields) {
+		echo "<p class='error'>" . lang('You have no privileges to update this table.') . "\n";
+	} else {
+		echo "<table class='box'>" . script("qsl('table').onkeydown = onEditingKeydown;");
+
+		$autofocus = !$_POST;
+
+		foreach ($fields as $name => $field) {
+			echo "<tr><th>" . Admin::get()->getFieldName($field);
+			$key = bracket_escape($name);
+			$default = $_GET["set"][$key] ?? null;
+			if ($default === null) {
+				$default = $field["default"];
+				if ($field["type"] == "bit" && preg_match("~^b'([01]*)'\$~", $default, $regs)) {
+					$default = $regs[1];
 				}
-				$value = ($row !== null
-					? ($row[$name] != "" && DIALECT == "sql" && preg_match("~enum|set~", $field["type"]) && is_array($row[$name])
-						? implode(",", $row[$name])
-						: (is_bool($row[$name]) ? +$row[$name] : $row[$name])
-					)
-					: (!$update && $field["auto_increment"]
-						? ""
-						: (isset($_GET["select"]) ? false : $default)
-					)
-				);
-				if (!$_POST["save"] && is_string($value)) {
-					$value = Admin::get()->formatFieldValue($value, $field);
+				if (DIALECT == "sql" && preg_match('~binary~', $field["type"])) {
+					$default = bin2hex($default); // same as UNHEX
 				}
-				$function = ($_POST["save"]
-					? $_POST["function"][$name] ?? ""
-					: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
-						? "now"
-						: ($value === false ? null : ($value !== null ? '' : 'NULL'))
-					)
-				);
-				if (!$_POST && !$update && $value == $field["default"] && preg_match('~^[\w.]+\(~', $value)) {
-					$function = "SQL";
-				}
-				if (preg_match("~time~", $field["type"]) && preg_match('~^CURRENT_TIMESTAMP~i', $value)) {
-					$value = "";
-					$function = "now";
-				}
-				if ($field["type"] == "uuid" && $value == "uuid()") {
-					$value = "";
-					$function = "uuid";
-				}
-				if ($autofocus !== false) {
-					$autofocus = ($field["auto_increment"] || $function == "now" || $function == "uuid" ? null : true); // null - don't autofocus this input but check the next one
-				}
-				input($field, $value, $function, $autofocus);
-				if ($autofocus) {
-					$autofocus = false;
-				}
-				echo "\n";
 			}
-			if (!support("table") && !fields($table)) {
-				echo "<tr>"
-					. "<th><input class='input' name='field_keys[]'>"
-					. script("qsl('input').oninput = fieldChange;")
-					. "<td class='function'>" . html_select("field_funs[]", Admin::get()->getFieldFunctions(["null" => isset($_GET["select"])]))
-					. "<td><input class='input' name='field_vals[]'>"
-					. "\n"
-				;
+			$value = ($row !== null
+				? ($row[$name] != "" && DIALECT == "sql" && preg_match("~enum|set~", $field["type"]) && is_array($row[$name])
+					? implode(",", $row[$name])
+					: (is_bool($row[$name]) ? +$row[$name] : $row[$name])
+				)
+				: (!$update && $field["auto_increment"]
+					? ""
+					: (isset($_GET["select"]) ? false : $default)
+				)
+			);
+			if (!$_POST["save"] && is_string($value)) {
+				$value = Admin::get()->formatFieldValue($value, $field);
 			}
-			echo "</table>\n";
-			echo script("initToggles(gid('form'));");
-		}
-		echo "<p>\n";
-		if ($fields) {
-			echo "<input type='submit' class='button default' value='" . lang('Save') . "'>\n";
-			if (!isset($_GET["select"])) {
-				echo "<input type='submit' class='button' name='insert' value='" . ($update
-						? lang('Save and continue edit')
-						: lang('Save and insert next')
-					) . "' title='Ctrl+Shift+Enter'>\n";
-				echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . lang('Saving') . "…', this); };") : "");
+			$function = ($_POST["save"]
+				? $_POST["function"][$name] ?? ""
+				: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
+					? "now"
+					: ($value === false ? null : ($value !== null ? '' : 'NULL'))
+				)
+			);
+			if (!$_POST && !$update && $value == $field["default"] && preg_match('~^[\w.]+\(~', $value)) {
+				$function = "SQL";
 			}
+			if (preg_match("~time~", $field["type"]) && preg_match('~^CURRENT_TIMESTAMP~i', $value)) {
+				$value = "";
+				$function = "now";
+			}
+			if ($field["type"] == "uuid" && $value == "uuid()") {
+				$value = "";
+				$function = "uuid";
+			}
+			if ($autofocus !== false) {
+				$autofocus = ($field["auto_increment"] || $function == "now" || $function == "uuid" ? null : true); // null - don't autofocus this input but check the next one
+			}
+			input($field, $value, $function, $autofocus);
+			if ($autofocus) {
+				$autofocus = false;
+			}
+			echo "\n";
 		}
-		echo ($update ? "<input type='submit' class='button' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n" : "");
-		if (isset($_GET["select"])) {
-			hidden_fields(["check" => (array) $_POST["check"], "clone" => $_POST["clone"], "all" => $_POST["all"]]);
+		if (!support("table") && !fields($table)) {
+			echo "<tr>"
+				. "<th><input class='input' name='field_keys[]'>"
+				. script("qsl('input').oninput = fieldChange;")
+				. "<td class='function'>" . html_select("field_funs[]", Admin::get()->getFieldFunctions(["null" => isset($_GET["select"])]))
+				. "<td><input class='input' name='field_vals[]'>"
+				. "\n"
+			;
 		}
-		?>
-		<input type="hidden" name="referer" value="<?php echo h($_POST["referer"] ?? $_SERVER["HTTP_REFERER"]); ?>">
-		<input type="hidden" name="save" value="1">
-		<?php echo input_token(); ?>
-	</form>
-	<?php
+		echo "</table>\n";
+		echo script("initToggles(gid('form'));");
+	}
+
+	echo "<p>";
+	if ($fields) {
+		echo "<input type='submit' class='button default' value='" . lang('Save') . "'>\n";
+		if (!isset($_GET["select"])) {
+			echo "<input type='submit' class='button' name='insert' value='" . ($update
+					? lang('Save and continue edit')
+					: lang('Save and insert next')
+				) . "' title='Ctrl+Shift+Enter'>\n";
+			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . lang('Saving') . "…', this); };") : "");
+		}
+	}
+	echo ($update ? "<input type='submit' class='button' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n" : "");
+	if (isset($_GET["select"])) {
+		hidden_fields(["check" => (array) $_POST["check"], "clone" => $_POST["clone"], "all" => $_POST["all"]]);
+	}
+
+	echo "<input type='hidden' name='referer' value='", h($_POST["referer"] ?? $_SERVER["HTTP_REFERER"]), "'>\n";
+	echo "<input type='hidden' name='save' value='1'>\n";
+	echo input_token();
+
+	echo "</form>\n";
 }
