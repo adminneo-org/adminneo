@@ -69,7 +69,11 @@ if ($_POST) {
 				$created = queries((Connection::get()->isMinVersion("5") ? "CREATE USER" : "GRANT USAGE ON *.* TO") . " $new_user IDENTIFIED BY " . (Connection::get()->isMinVersion("8") ? "" : "PASSWORD ") . q($pass));
 				$error = !$created;
 			} elseif ($pass != $old_pass) {
-				queries("SET PASSWORD FOR $new_user = " . q($pass));
+				if (Connection::get()->isMariaDB() && version_compare(Connection::get()->getVersion(), '10.4', '>=')) {
+					queries("ALTER USER $new_user IDENTIFIED BY " . q($pass));
+				} else {
+					queries("SET PASSWORD FOR $new_user = " . q($pass));
+				}
 			}
 		}
 
