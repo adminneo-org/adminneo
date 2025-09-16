@@ -29,12 +29,15 @@ include "core/TmpFile.php";
 include "include/editing.inc.php";
 include "include/bootstrap.inc.php";
 
+// Settings page
 if (isset($_GET["settings"])) {
 	include "settings.inc.php";
 }
 
+// Connect to DB
 include "include/connect.inc.php";
 
+// Handle GET/POST shortcuts
 if (isset($_GET["select"]) && ($_POST["edit"] || $_POST["clone"]) && !$_POST["save"]) {
 	$_GET["edit"] = $_GET["select"];
 }
@@ -45,6 +48,25 @@ if (isset($_GET["function"])) {
 	$_GET["procedure"] = $_GET["function"];
 }
 
+// --- New Feature: Coverage Page ---
+if (isset($_GET["coverage"])) {
+	include "coverage.php";
+	exit; // Coverage page handles its own footer
+}
+
+// --- New Feature: Batch SQL Execution ---
+if (isset($_GET["batchsql"])) {
+	include "batchsql.inc.php"; // New page to execute batch SQL commands
+	exit;
+}
+
+// --- New Feature: Plugin Management ---
+if (isset($_GET["plugins"])) {
+	include "plugins.inc.php"; // New page to view/manage installed plugins
+	exit;
+}
+
+// --- Existing Pages ---
 if (isset($_GET["download"])) {
 	include "download.inc.php";
 } elseif (isset($_GET["table"])) {
@@ -99,5 +121,5 @@ if (isset($_GET["download"])) {
 	include "db.inc.php";
 }
 
-// each page calls its own page_header(), if the footer should not be called then the page exits
+// Each page calls its own page_header(), if the footer should not be called then the page exits
 page_footer();

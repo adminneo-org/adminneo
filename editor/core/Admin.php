@@ -178,7 +178,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				// use the descriptions
 				foreach ($rows as $n => $row) {
 					if (isset($row[$key])) {
-						$return[$n][$key] = (string)$descriptions[$row[$key]];
+						$return[$n][$key] = (string) $descriptions[$row[$key]];
 					}
 				}
 			}
@@ -249,7 +249,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	public function printSelectionSearch(array $where, array $columns, array $indexes): void
 	{
-		$where = (array)$_GET["where"];
+		$where = (array) $_GET["where"];
 		echo '<fieldset id="fieldset-search"><legend>' . lang('Search') . "</legend><div class='fieldset-content'>\n";
 		$keys = [];
 		foreach ($where as $key => $val) {
@@ -267,7 +267,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				if ($this->looksLikeBool($field)) {
 					echo " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>";
 				} else {
-					echo " ", enum_input("name='where[$i][val][]'", $field, (array)($where[$key]["val"] ?? []), ($field["null"] ? 0 : null), true);
+					echo " ", enum_input("name='where[$i][val][]'", $field, (array) ($where[$key]["val"] ?? []), ($field["null"] ? 0 : null), true);
 				}
 
 				echo "</div>\n";
@@ -334,7 +334,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	public function printSelectionLimit(?int $limit): void
 	{
 		echo "<fieldset><legend>" . lang('Limit') . "</legend><div class='fieldset-content'>";
-		echo html_select("limit", ["", "20", "30", "50", "70", "100"], (string)$limit);
+		echo html_select("limit", ["", "20", "30", "50", "70", "100"], (string) $limit);
 		echo "</div></fieldset>\n";
 	}
 
@@ -359,7 +359,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 	{
 		$return = [];
 
-		foreach ((array)$_GET["where"] as $key => $where) {
+		foreach ((array) $_GET["where"] as $key => $where) {
 			$col = $where["col"];
 			$op = $where["op"];
 			$val = $where["val"];
@@ -379,9 +379,9 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 							$conds[] = Driver::get()->convertSearch($name, $where, $field) . ($value == "NULL" ? " IS" . ($op == ">=" ? " NOT" : "") . " $value"
 								: (in_array($op, $this->admin->getOperators()) || $op == "=" ? " $op $value"
-								: ($text_type ? " LIKE $value"
-								: " IN (" . str_replace(",", "', '", $value) . ")"
-							)));
+									: ($text_type ? " LIKE $value"
+										: " IN (" . str_replace(",", "', '", $value) . ")"
+									)));
 
 							if ($key < 0 && $val == "0") {
 								$conds[] = "$name IS NULL";
@@ -593,7 +593,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 		if ($missing == "auth") {
 			$first = true;
-			foreach ((array)$_SESSION["pwds"] as $vendor => $servers) {
+			foreach ((array) $_SESSION["pwds"] as $vendor => $servers) {
 				foreach ($servers[""] as $username => $password) {
 					if ($password !== null) {
 						if ($first) {
@@ -654,7 +654,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 
 	public function getForeignColumnInfo(array $foreignKeys, string $column): ?array
 	{
-		foreach ((array)$foreignKeys[$column] as $foreignKey) {
+		foreach ((array) $foreignKeys[$column] as $foreignKey) {
 			if (count($foreignKey["source"]) == 1) {
 				$name = $this->admin->getTableDescriptionFieldName($foreignKey["table"]);
 				if ($name != "") {
