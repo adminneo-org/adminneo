@@ -34,6 +34,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Mark unique partial indexes as unique (by @vrana)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
+- ClickHouse: Fix list of tables (by @Marcus-Nightingale)
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
 
 (Ported relevant changes from Adminer 5.4.0-5.4.1.)

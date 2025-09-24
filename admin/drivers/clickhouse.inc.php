@@ -412,7 +412,7 @@ if (isset($_GET["clickhouse"])) {
 
 	function table_status($name = "", $fast = false) {
 		$return = [];
-		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()));
+		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()) . ($name != "" ? " AND name = " . q($name) : ""));
 		foreach ($tables as $table) {
 			$return[$table['name']] = [
 				'Name' => $table['name'],
