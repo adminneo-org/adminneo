@@ -11,7 +11,7 @@ default: compile
 
 .PHONY: compile
 compile:
-	$(PHP) $(ROOT_DIRECTORY)/compile.php
+	$(PHP) $(ROOT_DIRECTORY)/bin/compile.php
 
 .PHONY: server
 server:
