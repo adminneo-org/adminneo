@@ -395,7 +395,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 		if ($display) {
 			echo "<input class='input' name='fields[$i][field]' value='", h($field["field"]), "' data-maxlength='64' autocapitalize='off' aria-labelledby='label-name'>";
 		}
-		echo "<input type='hidden' name='fields[$i][orig]' value='",  h($orig), "'>";
+		echo input_hidden("fields[$i][orig]", $orig);
 		edit_type("fields[$i]", $field, $collations, $foreign_keys);
 		echo "</th>\n";
 

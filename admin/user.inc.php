@@ -173,7 +173,8 @@ foreach ($grants as $object => $grant) {
 	echo "<th>";
 	//! separate db, table, columns, PROCEDURE|FUNCTION, routine
 	if ($object == "*.*") {
-		echo "<input type='hidden' name='objects[$i]' value='*.*' size='10'>*.*";
+		echo "*.*";
+		echo input_hidden("objects[$i]", "*.*");
 	} else {
 		echo "<input class='input' name='objects[$i]' value='" . h(trim($object)) . "' size='10' autocapitalize='off'>";
 	}

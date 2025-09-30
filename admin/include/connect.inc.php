@@ -84,12 +84,13 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 			echo "</div>\n"; // scrollable
 
 			if (support("database")) {
-				echo "<div class='table-footer'><div class='field-sets'>\n"
-					. "<fieldset><legend>" . lang('Selected') . " <span id='selected'></span></legend><div class='fieldset-content'>\n"
-					. "<input type='hidden' name='all' value=''>" . script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^db/)); };") // used by trCheck()
-					. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . confirm() . "\n"
-					. "</div></fieldset>\n"
-					. "</div></div>\n";
+				echo "<div class='table-footer'><div class='field-sets'>\n";
+				echo "<fieldset><legend>", lang('Selected'), " <span id='selected'></span></legend><div class='fieldset-content'>\n";
+				echo input_hidden("all");
+				echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^db/)); };"); // used by trCheck()
+				echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>", confirm(), "\n";
+				echo "</div></fieldset>\n";
+				echo "</div></div>\n";
 
 				echo script("initTableFooter()");
 			}

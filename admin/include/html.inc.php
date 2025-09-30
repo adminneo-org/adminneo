@@ -29,13 +29,23 @@ function nonce(): string
 }
 
 /**
+ * Returns <input type="hidden">
+
+ * @return string HTML-formatted string.
+ */
+function input_hidden(string $name, ?string $value = ""): string
+{
+	return "<input type='hidden' name='" . h($name) . "' value='" . h($value) . "'>";
+}
+
+/**
  * Returns <input type="hidden" name="token">.
  *
  * @return string HTML-formatted string.
  */
 function input_token(): string
 {
-	return "<input type='hidden' name='token' value='" . get_token() . "'>";
+	return input_hidden("token", get_token());
 }
 
 /**
@@ -232,34 +242,40 @@ function pagination(int $page, int $current): string
 		"</li>";
 }
 
-/** Print hidden fields
-* @param array
-* @param array
-* @param string
-* @return bool
+/**
+ * Prints hidden fields.
 */
-function hidden_fields($process, $ignore = [], $prefix = '') {
-	$return = false;
+function print_hidden_fields(array $process, array $ignore = [], string $prefix = ""): bool
+{
+	$result = false;
+
 	foreach ($process as $key => $val) {
 		if (!in_array($key, $ignore)) {
 			if (is_array($val)) {
-				hidden_fields($val, [], $key);
+				print_hidden_fields($val, [], $key);
 			} else {
-				$return = true;
-				echo '<input type="hidden" name="' . h($prefix ? $prefix . "[$key]" : $key) . '" value="' . h($val) . '">';
+				$result = true;
+				echo input_hidden($prefix ? $prefix . "[$key]" : $key, $val);
 			}
 		}
 	}
-	return $return;
+
+	return $result;
 }
 
-/** Print hidden fields for GET forms
-* @return null
-*/
-function hidden_fields_get() {
-	echo (sid() ? '<input type="hidden" name="' . session_name() . '" value="' . h(session_id()) . '">' : '');
-	echo (SERVER !== null ? '<input type="hidden" name="' . DRIVER . '" value="' . h(SERVER) . '">' : "");
-	echo '<input type="hidden" name="username" value="' . h($_GET["username"]) . '">';
+/**
+ * Prints hidden fields for GET forms.
+ */
+function hidden_fields_get(): void
+{
+	if (sid()) {
+		echo input_hidden(session_name(), session_id());
+	}
+	if (SERVER !== null) {
+		echo input_hidden(DRIVER, SERVER);
+	}
+
+	echo input_hidden("username", $_GET["username"]);
 }
 
 /**
@@ -654,11 +670,11 @@ function edit_form($table, $fields, $row, $update) {
 	}
 	echo ($update ? "<input type='submit' class='button' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n" : "");
 	if (isset($_GET["select"])) {
-		hidden_fields(["check" => (array) $_POST["check"], "clone" => $_POST["clone"], "all" => $_POST["all"]]);
+		print_hidden_fields(["check" => (array) $_POST["check"], "clone" => $_POST["clone"], "all" => $_POST["all"]]);
 	}
 
-	echo "<input type='hidden' name='referer' value='", h($_POST["referer"] ?? $_SERVER["HTTP_REFERER"]), "'>\n";
-	echo "<input type='hidden' name='save' value='1'>\n";
+	echo input_hidden("referer", $_POST["referer"] ?? $_SERVER["HTTP_REFERER"]);
+	echo input_hidden("save", "1");
 	echo input_token();
 
 	echo "</form>\n";

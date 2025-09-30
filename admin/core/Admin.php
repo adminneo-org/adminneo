@@ -99,7 +99,7 @@ class Admin extends Origin
 			if (count($drivers) > 1) {
 				echo $this->admin->getLoginFormRow('driver', lang('System'), html_select("auth[driver]", $drivers, $driver) . script("initLoginDriver(qsl('select'));", ""));
 			} else {
-				echo $this->admin->getLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . h($driver) . '">');
+				echo $this->admin->getLoginFormRow('driver', '', input_hidden("auth[driver]", $driver));
 			}
 
 			echo $this->admin->getLoginFormRow('server', lang('Server'), '<input class="input" name="auth[server]" value="' . h($server) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">');
@@ -1253,7 +1253,7 @@ class Admin extends Origin
 
 		foreach (["import", "sql", "schema", "dump", "privileges"] as $val) {
 			if (isset($_GET[$val])) {
-				echo "<input type='hidden' name='$val' value=''>";
+				echo input_hidden($val);
 				break;
 			}
 		}

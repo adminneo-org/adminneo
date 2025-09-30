@@ -4,7 +4,7 @@ namespace AdminNeo;
 
 $title2 = DB != "" ? h(": " . DB) : "";
 page_header(lang('Privileges') . $title2, [lang('Privileges')]);
-echo '<p class="links top-links"><a href="', h(ME), 'user=">', icon("user-add"), lang('Create user'), "</a>";
+echo '<p class="links top-links"><a href="', h(ME), 'user=">', icon("user-add"), lang('Create user'), "</a></p>\n";
 
 $result =  Connection::get()->query("SELECT User, Host FROM mysql." . (DB == "" ? "user" : "db WHERE " . q(DB) . " LIKE Db") . " ORDER BY Host, User");
 $grant = $result;
@@ -13,10 +13,14 @@ if (!$result) {
 	$result =  Connection::get()->query("SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1) AS User, SUBSTRING_INDEX(CURRENT_USER, '@', -1) AS Host");
 }
 
-echo "<form action=''><p>\n";
+echo "<form action=''>\n";
 hidden_fields_get();
-echo "<input type='hidden' name='db' value='" . h(DB) . "'>\n";
-echo ($grant ? "" : "<input type='hidden' name='grant' value=''>\n");
+echo input_hidden("db", DB);
+if (!$grant) {
+	echo input_hidden("grant");
+}
+echo "\n";
+
 echo "<div class='scrollable'>\n";
 
 echo "<table class='checkable'>\n";

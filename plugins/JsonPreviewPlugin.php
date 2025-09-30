@@ -216,7 +216,7 @@ class JsonPreviewPlugin extends Plugin
 			checkbox("jsonPreview[]", "", $useDefault, lang('Default')) .
 			checkbox("jsonPreview[]", "table",  $this->inTable, lang('Data table'), "", $useDefault ? "disabled" : "") .
 			checkbox("jsonPreview[]", "edit", $this->inEdit, lang('Edit form'), "", $useDefault ? "disabled" : "") .
-			"<input type='hidden' name='jsonPreview[]' value='x'>" .
+			input_hidden("jsonPreview[]", "x") .
 			"</span></td></tr>\n";
 
 		return $settings;
