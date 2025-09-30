@@ -62,8 +62,8 @@ class Admin extends Origin
 		$server = $this->config->getDefaultServer();
 
 		echo "<table class='box box-light'>\n";
-		echo $this->admin->getLoginFormRow('driver', '', '<input type="hidden" name="auth[driver]" value="' . h($driver) . '">');
-		echo $this->admin->getLoginFormRow('server', '', '<input type="hidden" name="auth[server]" value="' . h($server) . '">');
+		echo $this->admin->getLoginFormRow('driver', '', input_hidden("auth[driver]", $driver));
+		echo $this->admin->getLoginFormRow('server', '', input_hidden("auth[server]", $server));
 		echo $this->admin->getLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
 		echo $this->admin->getLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 		echo "</table>\n";
@@ -262,7 +262,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			if (preg_match("~enum~", $field["type"]) || $this->looksLikeBool($field)) { //! set - uses 1 << $i and FIND_IN_SET()
 				$key = $keys[$name];
 				$i--;
-				echo "<div>" . h($desc) . "<input type='hidden' name='where[$i][col]' value='" . h($name) . "'>:";
+				echo "<div>" . h($desc) . input_hidden("where[$i][col]", $name) . ":";
 
 				if ($this->looksLikeBool($field)) {
 					echo " <select name='where[$i][val]'>" . optionlist(["" => "", lang('no'), lang('yes')], $where[$key]["val"] ?? null, true) . "</select>";
@@ -278,7 +278,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 				}
 				$key = $keys[$name];
 				$i--;
-				echo "<div>" . h($desc) . "<input type='hidden' name='where[$i][col]' value='" . h($name) . "'><input type='hidden' name='where[$i][op]' value='='>: <select name='where[$i][val]'>" . optionlist($options, $where[$key]["val"] ?? null, true) . "</select></div>\n";
+				echo "<div>" . h($desc) . input_hidden("where[$i][col]", $name) . input_hidden("where[$i][op]", "=") . ": <select name='where[$i][val]'>" . optionlist($options, $where[$key]["val"] ?? null, true) . "</select></div>\n";
 				unset($columns[$name]);
 			}
 		}
@@ -324,7 +324,7 @@ ORDER BY ORDINAL_POSITION", null, "") as $row) { //! requires MySQL 5
 			echo "</div></fieldset>\n";
 		}
 		if ($_GET["order"]) {
-			echo "<div style='display: none;'>" . hidden_fields([
+			echo "<div style='display: none;'>" . print_hidden_fields([
 				"order" => [1 => reset($_GET["order"])],
 				"desc" => ($_GET["desc"] ? [1 => 1] : []),
 			]) . "</div>\n";

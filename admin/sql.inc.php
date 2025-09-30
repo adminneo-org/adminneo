@@ -242,7 +242,7 @@ if ($_POST) {
 										echo "<form id='$export_id' action='' method='post' class='hidden'><p>\n";
 										echo html_select("format", $dump_format, $settings->getParameter("exportFormat"));
 										echo html_select("output", Admin::get()->getDumpOutputs(), $settings->getParameter("exportOutput")) . " ";
-										echo "<input type='hidden' name='query' value='", h($q), "'>";
+										echo input_hidden("query", $q);
 										echo input_token();
 										echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>";
 										echo "</p></form>\n";

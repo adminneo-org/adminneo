@@ -89,7 +89,7 @@ if (support("scheme")) {
 	echo lang('DB'), ": ", html_select("db", $dbs, $row["db"] != "" ? $row["db"] : $_GET["db"], $onchange);
 }
 
-echo "<input type='hidden' name='change-js' value=''>";
+echo input_hidden("change-js");
 echo "<noscript><input type='submit' class='button' name='change' value='", lang('Change'), "'></noscript>";
 echo "</p>\n";
 

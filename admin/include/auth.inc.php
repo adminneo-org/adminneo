@@ -319,7 +319,7 @@ function print_login_page(): void
 	page_header(lang('Login'), null);
 	echo "<form action='' method='post'>\n";
 	echo "<div>";
-	if (hidden_fields($_POST, ["auth"])) { // expired session
+	if (print_hidden_fields($_POST, ["auth"])) { // expired session
 		echo "<p class='message'>" . lang('The action will be performed after successful login with the same credentials.') . "\n";
 	}
 	echo "</div>\n";

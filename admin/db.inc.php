@@ -203,7 +203,7 @@ if ($_GET["ns"] === "") {
 				echo (support("copy") ? " <input type='submit' class='button' name='copy' value='" . lang('Copy') . "'> " . checkbox("overwrite", 1, $_POST["overwrite"], lang('overwrite')) : "");
 				echo "\n";
 			}
-			echo "<input type='hidden' name='all' value=''>"; // used by trCheck()
+			echo input_hidden("all"); // used by trCheck()
 			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));" . (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "") . " }");
 			echo input_token();
 			echo "</div></fieldset>\n";

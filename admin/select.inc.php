@@ -265,8 +265,14 @@ if (!$columns && support("table")) {
 	echo "<form action='' id='form'>\n";
 	echo "<div style='display: none;'>";
 	hidden_fields_get();
-	echo (DB != "" ? '<input type="hidden" name="db" value="' . h(DB) . '">' . (isset($_GET["ns"]) ? '<input type="hidden" name="ns" value="' . h($_GET["ns"]) . '">' : "") : ""); // not used in Editor
-	echo '<input type="hidden" name="select" value="' . h($TABLE) . '">';
+	// Not used in Editor.
+	if (DB != "") {
+		echo input_hidden("db", DB);
+		if (isset($_GET["ns"])) {
+			echo input_hidden("ns", $_GET["ns"]);
+		}
+	}
+	echo input_hidden("select", $TABLE);
 	echo '<input type="submit" class="button" value="' . h(lang('Select')) . '">'; # hidden default submit so filter remove buttons aren't "clicked" on submission from enter key
 	echo "</div>\n";
 	echo "<div class='field-sets'>\n";
