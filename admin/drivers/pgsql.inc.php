@@ -57,7 +57,7 @@ if (isset($_GET["pgsql"])) {
 					$versionInfo = $this->getValue("SELECT version()");
 
 					$this->flavor = str_contains($versionInfo, "CockroachDB") ? "cockroach" : null;
-					$this->version = preg_replace('~^\D*([\d.]+).*~', "$1", $versionInfo);
+					$this->version = preg_replace('~^\D*([\d.]+[-\w]*).*~', "$1", $versionInfo);
 
 					pg_set_client_encoding($this->connection, "UTF8");
 				}
