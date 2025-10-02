@@ -653,7 +653,7 @@ class Admin extends Origin
 		echo "<input type='submit' class='button' value='" . lang('Select') . "'>";
 		echo " <span id='noindex' title='" . lang('Full table scan') . "'></span>";
 		echo "<script" . nonce() . ">\n";
-		echo "var indexColumns = ";
+		echo "const indexColumns = ";
 
 		$columns = [];
 		foreach ($indexes as $index) {
@@ -1197,7 +1197,7 @@ class Admin extends Origin
 					foreach ($tables as $table => $type) {
 						$links[] = preg_quote($table, '/');
 					}
-					echo "var jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					echo "const jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}

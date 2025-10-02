@@ -120,8 +120,8 @@ function page_header(string $title, $breadcrumb = []): void
 	body.classList.remove("nojs");
 	body.classList.add("js");
 
-	var offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
-	var thousandsSeparator = '<?php echo js_escape(lang(',')); ?>';
+	const offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
+	const thousandsSeparator = '<?php echo js_escape(lang(',')); ?>';
 </script>
 
 

@@ -17,14 +17,14 @@ function selectFieldChange() {
 * @this HTMLInputElement
 */
 function whisper(url) {
-	var field = this;
+	const field = this;
 	field.orig = field.value;
 	field.previousSibling.value = field.value; // accept number, reject string
 	return ajax(url + encodeURIComponent(field.value), function (xmlhttp) {
 		if (xmlhttp.status && field.orig == field.value) { // ignore old responses
 			field.nextSibling.innerHTML = xmlhttp.responseText;
 			field.nextSibling.style.display = '';
-			var a = field.nextSibling.firstChild;
+			const a = field.nextSibling.firstChild;
 			if (a && a.firstChild.data == field.value) {
 				field.previousSibling.value = decodeURIComponent(a.href.replace(/.*=/, ''));
 				a.className = 'active';
@@ -39,8 +39,8 @@ function whisper(url) {
 * @this HTMLDivElement
 */
 function whisperClick(event) {
-	var field = this.previousSibling;
-	var el = event.target;
+	const field = this.previousSibling;
+	const el = event.target;
 	if (isTag(el, 'a') && !(event.button || event.shiftKey || event.altKey || isCtrl(event))) {
 		field.value = el.firstChild.data;
 		field.previousSibling.value = decodeURIComponent(el.href.replace(/.*=/, ''));
