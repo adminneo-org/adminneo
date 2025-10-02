@@ -79,7 +79,7 @@ function typePassword(el, disable) {
  * @param {HTMLSelectElement} driverSelect
  */
 function initLoginDriver(driverSelect) {
-	driverSelect.onchange = function () {
+	driverSelect.onchange = () => {
 		const trs = parentTag(driverSelect, 'table').rows;
 		const disabled = /sqlite/.test(selectValue(driverSelect));
 
@@ -88,7 +88,7 @@ function initLoginDriver(driverSelect) {
 		trs[1].getElementsByTagName('input')[0].disabled = disabled;
 	};
 
-	document.addEventListener('DOMContentLoaded', function () {
+	document.addEventListener('DOMContentLoaded', () => {
 		driverSelect.onchange();
 	});
 }
@@ -135,7 +135,7 @@ function dbChange() {
 */
 function selectFieldChange() {
 	const form = this.form;
-	const ok = (function () {
+	const ok = (() => {
 		for (const input of qsa('input', form)) {
 			if (input.value && /^fulltext/.test(input.name)) {
 				return true;
@@ -187,7 +187,7 @@ function selectFieldChange() {
 
 
 // Table/Procedure fields editing.
-(function() {
+(() => {
 	let added = '.';
 	let lastType = '';
 
@@ -217,7 +217,7 @@ function selectFieldChange() {
 		// Field name. Is null if some row is removed and then new row is added to the beginning (form is posted).
 		let field = qs('[name$="[field]"]', row);
 		if (field) {
-			field.addEventListener("input", (event) => {
+			field.addEventListener("input", event => {
 				const input = event.target;
 				detectForeignKey(input);
 
@@ -230,7 +230,7 @@ function selectFieldChange() {
 
 		// Type.
 		field = qs('[name$="[type]"]', row);
-		field.addEventListener("focus", (event) => {
+		field.addEventListener("focus", event => {
 			lastType = selectValue(event.target);
 		});
 		field.addEventListener("change", onFieldTypeChange);
@@ -243,7 +243,7 @@ function selectFieldChange() {
 		// Length.
 		field = qs('[name$="[length]"]', row);
 		field.addEventListener("focus", onFieldLengthFocus);
-		field.addEventListener("input", (event) => {
+		field.addEventListener("input", event => {
 			// Mark length as required.
 			const input = event.target;
 			input.classList.toggle('required', !input.value.length && /var(char|binary)$/.test(selectValue(input.parentNode.previousSibling.firstChild)));
@@ -252,7 +252,7 @@ function selectFieldChange() {
 		// Autoincrement. Is null in procedure editing.
 		field = qs("[name='auto_increment_col']", row);
 		if (field) {
-			field.addEventListener("click", (event) => {
+			field.addEventListener("click", event => {
 				const input = event.target;
 				const field = input.form['fields[' + input.value + '][field]'];
 				if (!field.value) {
@@ -265,7 +265,7 @@ function selectFieldChange() {
 		// Default value. Is null in procedure editing.
 		field = qs('[name$="[default]"]', row);
 		if (field) {
-			field.addEventListener("input", (event) => {
+			field.addEventListener("input", event => {
 				// Set usage of the default value Previous element can be checkbox or select.
 				const element = event.target.previousElementSibling;
 
@@ -279,7 +279,7 @@ function selectFieldChange() {
 		// Actions.
 		let button = qs("button[name^='add']", row);
 		if (button) {
-			button.addEventListener("click", (event) => {
+			button.addEventListener("click", event => {
 				addRow(event.currentTarget, true);
 				event.preventDefault();
 			});
@@ -287,7 +287,7 @@ function selectFieldChange() {
 
 		button = qs("button[name^='drop_col']", row);
 		if (button) {
-			button.addEventListener("click", (event) => {
+			button.addEventListener("click", event => {
 				removeTableRow(event.currentTarget, "field");
 				event.preventDefault();
 			});
@@ -580,7 +580,7 @@ function partitionNameChange() {
 	const row = cloneNode(parentTag(this, 'tr'));
 	row.firstChild.firstChild.value = '';
 	parentTag(this, 'table').appendChild(row);
-	this.oninput = function () {};
+	this.oninput = () => {};
 }
 
 /** Show or hide comment fields
@@ -621,7 +621,7 @@ function dumpClick(event) {
 */
 function foreignAddRow() {
 	const row = cloneNode(parentTag(this, 'tr'));
-	this.onchange = function () { };
+	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
 		select.name = select.name.replace(/\d+]/, '1$&');
 		select.selectedIndex = 0;
@@ -636,7 +636,7 @@ function foreignAddRow() {
 */
 function indexesAddRow() {
 	const row = cloneNode(parentTag(this, 'tr'));
-	this.onchange = function () { };
+	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
 		select.name = select.name.replace(/indexes\[\d+/, '$&1');
 		select.selectedIndex = 0;
@@ -805,12 +805,12 @@ function schemaMouseup(event, db) {
 
 
 // Help.
-(function() {
+(() => {
 	let openTimeout = null;
 	let closeTimeout = null;
 	let helpVisible = false;
 
-	window.initHelpPopup = function () {
+	window.initHelpPopup = function() {
 		const help = gid("help");
 
 		help.addEventListener("mouseenter", () => {
@@ -829,7 +829,7 @@ function schemaMouseup(event, db) {
 	window.initHelpFor = function(element, content, side = false) {
 		const withCallback = typeof content === "function";
 
-		element.addEventListener("mouseenter", (event) => {
+		element.addEventListener("mouseenter", event => {
 			showHelp(event.target, withCallback ? content(event.target.value) : content, side)
 		});
 

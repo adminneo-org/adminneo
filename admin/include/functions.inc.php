@@ -1029,7 +1029,7 @@ function slow_query($query) {
 		$kill = $connection->getValue(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
 		?>
 <script<?php echo nonce(); ?>>
-	const timeout = setTimeout(function() {
+	const timeout = setTimeout(() => {
 		ajax('<?php echo js_escape(ME); ?>script=kill', function() {
 		}, 'kill=<?php echo $kill; ?>&token=<?php echo get_token(); ?>');
 	}, <?php echo 1000 * $timeout; ?>);

@@ -45,7 +45,7 @@
 	const adminneoFrame = document.getElementById("adminneo-frame");
 	const messageBox = document.getElementById("message");
 
-	window.addEventListener("message", function (event) {
+	window.addEventListener("message", event => {
 		if (!event.isTrusted || event.origin !== allowedOrigin || event.source !== adminneoFrame.contentWindow) {
 			return;
 		}
