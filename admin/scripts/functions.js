@@ -25,7 +25,7 @@ function qs(selector, context = null) {
 * @return HTMLElement
 */
 function qsl(selector, context = null) {
-	var els = qsa(selector, context);
+	const els = qsa(selector, context);
 	return els[els.length - 1];
 }
 
@@ -44,7 +44,7 @@ function qsa(selector, context = null) {
 * @return function with preserved this
 */
 function partial(fn) {
-	var args = Array.apply(null, arguments).slice(1);
+	const args = Array.apply(null, arguments).slice(1);
 	return function () {
 		return fn.apply(this, args);
 	};
@@ -56,7 +56,7 @@ function partial(fn) {
 * @return function with preserved this
 */
 function partialArg(fn) {
-	var args = Array.apply(null, arguments);
+	const args = Array.apply(null, arguments);
 	return function (arg) {
 		args[0] = arg;
 		return fn.apply(this, args);
@@ -68,7 +68,7 @@ function partialArg(fn) {
 * @param Object
 */
 function mixin(target, source) {
-	for (var key in source) {
+	for (const key in source) {
 		target[key] = source[key];
 	}
 }
@@ -90,7 +90,7 @@ function toggle(id) {
 * @param number
 */
 function cookie(assign, days) {
-	var date = new Date();
+	const date = new Date();
 	date.setDate(date.getDate() + days);
 	document.cookie = assign + '; expires=' + date;
 }
@@ -129,7 +129,7 @@ function selectValue(select) {
 	if (!select.selectedIndex) {
 		return select.value;
 	}
-	var selected = select.options[select.selectedIndex];
+	const selected = select.options[select.selectedIndex];
 	return ((selected.attributes.value || {}).specified ? selected.value : selected.text);
 }
 
@@ -139,7 +139,7 @@ function selectValue(select) {
 * @return boolean
 */
 function isTag(el, tag) {
-	var re = new RegExp('^(' + tag + ')$', 'i');
+	const re = new RegExp('^(' + tag + ')$', 'i');
 	return el && re.test(el.tagName);
 }
 
@@ -159,7 +159,7 @@ function parentTag(el, tag) {
 * @param HTMLInputElement
 */
 function trCheck(el) {
-	var tr = parentTag(el, 'tr');
+	const tr = parentTag(el, 'tr');
 	tr.classList.toggle('checked', el.checked);
 	if (el.form && el.form['all'] && el.form['all'].onclick) { // Opera treats form.all as document.all
 		el.form['all'].onclick();
@@ -192,11 +192,10 @@ function selectCount(id, count) {
 * @this HTMLInputElement
 */
 function formCheck(name) {
-	var elems = this.form.elements;
-	for (var i=0; i < elems.length; i++) {
-		if (name.test(elems[i].name)) {
-			elems[i].checked = this.checked;
-			trCheck(elems[i]);
+	for (const el of this.form.elements) {
+		if (name.test(el.name)) {
+			el.checked = this.checked;
+			trCheck(el);
 		}
 	}
 }
@@ -204,9 +203,8 @@ function formCheck(name) {
 /** Check all rows in <table class="checkable">
 */
 function tableCheck() {
-	var inputs = qsa('table.checkable td:first-child input');
-	for (var i=0; i < inputs.length; i++) {
-		trCheck(inputs[i]);
+	for (const input of qsa('table.checkable td:first-child input')) {
+		trCheck(input);
 	}
 }
 
@@ -232,11 +230,10 @@ function formUncheckAll(selector) {
 * @param RegExp
 * @return number
 */
-function formChecked(el, name) {
-	var checked = 0;
-	var elems = el.form.elements;
-	for (var i=0; i < elems.length; i++) {
-		if (name.test(elems[i].name) && elems[i].checked) {
+function formChecked(input, name) {
+	let checked = 0;
+	for (const el of input.form.elements) {
+		if (name.test(el.name) && el.checked) {
 			checked++;
 		}
 	}
@@ -248,15 +245,15 @@ function formChecked(el, name) {
 * @param [boolean] force click
 */
 function tableClick(event, click, canEdit = true) {
-	var td = parentTag(event.target, 'td');
-	var text;
+	const td = parentTag(event.target, 'td');
+	let text;
 	if (canEdit && td && (text = td.getAttribute('data-text'))) {
 		if (selectClick.call(td, event, +text, td.getAttribute('data-warning'))) {
 			return;
 		}
 	}
 	click = (click || !window.getSelection || getSelection().isCollapsed);
-	var el = event.target;
+	let el = event.target;
 	while (!isTag(el, 'tr')) {
 		if (isTag(el, 'table|a|input|textarea')) {
 			if (el.type !== 'checkbox') {
@@ -285,7 +282,7 @@ function tableClick(event, click, canEdit = true) {
 	trCheck(el);
 }
 
-var lastChecked;
+let lastChecked;
 
 /** Shift-click on checkbox for multiple selection.
 * @param MouseEvent
@@ -296,11 +293,9 @@ function checkboxClick(event) {
 		return;
 	}
 	if (event.shiftKey && (!lastChecked || lastChecked.name === this.name)) {
-		var checked = (lastChecked ? lastChecked.checked : true);
-		var inputs = qsa('input', parentTag(this, 'table'));
-		var checking = !lastChecked;
-		for (var i=0; i < inputs.length; i++) {
-			var input = inputs[i];
+		const checked = (lastChecked ? lastChecked.checked : true);
+		let checking = !lastChecked;
+		for (const input of qsa('input', parentTag(this, 'table'))) {
 			if (input.name === this.name) {
 				if (checking) {
 					input.checked = checked;
@@ -324,7 +319,7 @@ function checkboxClick(event) {
 * @param string undefined to set parentNode to empty string
 */
 function setHtml(id, html) {
-	var el = qs('[id="' + id.replace(/[\\"]/g, '\\$&') + '"]'); // database name is used as ID
+	const el = qs('[id="' + id.replace(/[\\"]/g, '\\$&') + '"]'); // database name is used as ID
 	if (el) {
 		if (html == null) {
 			el.parentNode.innerHTML = '';
@@ -339,7 +334,7 @@ function setHtml(id, html) {
 * @return number
 */
 function nodePosition(el) {
-	var pos = 0;
+	let pos = 0;
 	while ((el = el.previousSibling)) {
 		pos++;
 	}
@@ -416,25 +411,24 @@ function filterTables() {
 		sessionStorage.setItem('neo_tables_filter', value);
 	}
 
-	const tables = qsa('#tables li');
-	for (let i = 0; i < tables.length; i++) {
-		let a = qs('*[data-primary="true"]', tables[i]);
+	for (const table of qsa('#tables li')) {
+		let a = qs('*[data-primary="true"]', table);
 
-		let tableName = tables[i].dataset.tableName;
+		let tableName = table.dataset.tableName;
 		if (tableName == null) {
 			tableName = a.innerHTML.trim();
 
-			tables[i].dataset.tableName = tableName;
+			table.dataset.tableName = tableName;
 		}
 
 		if (value === "") {
-			tables[i].classList.remove('hidden');
+			table.classList.remove('hidden');
 			a.innerHTML = tableName;
 		} else if (tableName.toLowerCase().indexOf(value) >= 0) {
-			tables[i].classList.remove('hidden');
+			table.classList.remove('hidden');
 			a.innerHTML = tableName.replace(reg, '<strong>$1</strong>');
 		} else {
-			tables[i].classList.add('hidden');
+			table.classList.add('hidden');
 		}
 	}
 }
@@ -466,14 +460,12 @@ function initFieldset(id) {
  * @param {HTMLElement} parent
  */
 function initToggles(parent) {
-	const links = qsa('.toggle', parent);
-
-	for (let i = 0; i < links.length; i++) {
-		links[i].addEventListener("click", (event) => {
-			const id = links[i].getAttribute('href').substring(1);
+	for (const link of qsa('.toggle', parent)) {
+		link.addEventListener("click", (event) => {
+			const id = link.getAttribute('href').substring(1);
 
 			gid(id).classList.toggle("hidden");
-			links[i].classList.toggle("opened");
+			link.classList.toggle("opened");
 
 			event.preventDefault();
 			event.stopPropagation();
@@ -508,14 +500,12 @@ function selectAddRow(event) {
 	field.onchange = selectFieldChange;
 	field.onchange(event);
 
-	const selects = qsa('select', row);
-	for (const select of selects) {
+	for (const select of qsa('select', row)) {
 		select.name = select.name.replace(/[a-z]\[\d+/, '$&1');
 		select.selectedIndex = 0;
 	}
 
-	const inputs = qsa('input', row);
-	for (const input of inputs) {
+	for (const input of qsa('input', row)) {
 		input.name = input.name.replace(/[a-z]\[\d+/, '$&1');
 		if (input.type === 'checkbox') {
 			input.checked = false;
@@ -766,10 +756,9 @@ function selectSearchSearch() {
 * @this HTMLElement
 */
 function columnMouse(className) {
-	var spans = qsa('span', this);
-	for (var i=0; i < spans.length; i++) {
-		if (/column/.test(spans[i].className)) {
-			spans[i].className = 'column' + (className || '');
+	for (const span of qsa('span', this)) {
+		if (/column/.test(span.className)) {
+			span.className = 'column' + (className || '');
 		}
 	}
 }
@@ -781,12 +770,13 @@ function columnMouse(className) {
 * @return boolean false
 */
 function selectSearch(name) {
-	var el = gid('fieldset-search');
+	const el = gid('fieldset-search');
 	el.className = '';
-	var divs = qsa('div', el);
-	for (var i=0; i < divs.length; i++) {
-		var div = divs[i];
-		var el = qs('[name$="[col]"]', div);
+	const divs = qsa('div', el);
+	let i, div;
+	for (i = 0; i < divs.length; i++) {
+		div = divs[i];
+		const el = qs('[name$="[col]"]', div);
 		if (el && selectValue(el) === name) {
 			break;
 		}
@@ -815,7 +805,7 @@ function isCtrl(event) {
 */
 function bodyKeydown(event, button) {
 	eventStop(event);
-	var target = event.target;
+	let target = event.target;
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
 	}
@@ -839,7 +829,7 @@ function bodyKeydown(event, button) {
 * @param MouseEvent
 */
 function bodyClick(event) {
-	var target = event.target;
+	const target = event.target;
 	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && isTag(target, 'input')) {
 		target.form.target = '_blank';
 		setTimeout(function () {
@@ -1000,10 +990,9 @@ function skipOriginal(first) {
 * @this HTMLInputElement
 */
 function fieldChange() {
-	var row = cloneNode(parentTag(this, 'tr'));
-	var inputs = qsa('input', row);
-	for (var i = 0; i < inputs.length; i++) {
-		inputs[i].value = '';
+	const row = cloneNode(parentTag(this, 'tr'));
+	for (const input of qsa('input', row)) {
+		input.value = '';
 	}
 	// keep value in <select> (function)
 	parentTag(this, 'table').appendChild(row);
@@ -1066,8 +1055,8 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 */
 function ajaxSetHtml(url) {
 	return !ajax(url, function (request) {
-		var data = window.JSON ? JSON.parse(request.responseText) : eval('(' + request.responseText + ')');
-		for (var key in data) {
+		const data = window.JSON ? JSON.parse(request.responseText) : eval('(' + request.responseText + ')');
+		for (const key in data) {
 			setHtml(key, data[key]);
 		}
 	});
@@ -1080,10 +1069,8 @@ function ajaxSetHtml(url) {
 * @return boolean
 */
 function ajaxForm(form, message, button) {
-	var data = [];
-	var els = form.elements;
-	for (var i = 0; i < els.length; i++) {
-		var el = els[i];
+	let data = [];
+	for (const el of form.elements) {
 		if (el.name && !el.disabled) {
 			if (/^file$/i.test(el.type) && el.value) {
 				return false;
@@ -1095,7 +1082,7 @@ function ajaxForm(form, message, button) {
 	}
 	data = data.join('&');
 
-	var url = form.action;
+	let url = form.action;
 	if (!/post/i.test(form.method)) {
 		url = url.replace(/\?.*/, '') + '?' + data;
 		data = '';
@@ -1165,9 +1152,6 @@ function selectClick(event, text, warning) {
 	}
 
 	input.onkeydown = function (event) {
-		if (!event) {
-			event = window.event;
-		}
 		if (event.keyCode === 27 && !event.shiftKey && !event.altKey && !isCtrl(event)) { // 27 - Esc
 			td.dataset.editing = "";
 			td.innerHTML = original;
@@ -1306,13 +1290,14 @@ function eventStop(event) {
 * @return HTMLElement
 */
 function cloneNode(el) {
-	var el2 = el.cloneNode(true);
-	var selector = 'input, select';
-	var origEls = qsa(selector, el);
-	var cloneEls = qsa(selector, el2);
-	for (var i=0; i < origEls.length; i++) {
-		var origEl = origEls[i];
-		for (var key in origEl) {
+	const el2 = el.cloneNode(true);
+	const selector = 'input, select';
+	const origEls = qsa(selector, el);
+	const cloneEls = qsa(selector, el2);
+
+	for (let i = 0; i < origEls.length; i++) {
+		const origEl = origEls[i];
+		for (const key in origEl) {
 			if (/^on/.test(key) && origEl[key]) {
 				cloneEls[i][key] = origEl[key];
 			}

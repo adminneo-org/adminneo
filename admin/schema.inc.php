@@ -57,8 +57,8 @@ echo "<div id='schema' style='height: {$top}em;'>\n";
 
 echo "<script", nonce(), ">\n";
 echo "gid('schema').onselectstart = function () { return false; };\n";
-echo "var tablePos = {", implode(",", $table_pos_js), "\n};\n";
-echo "var em = gid('schema').offsetHeight / $top;\n";
+echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
+echo "const em = gid('schema').offsetHeight / $top;\n";
 echo "document.onmousemove = schemaMousemove;\n";
 echo "document.onmouseup = partialArg(schemaMouseup, '", js_escape(DB), "');\n";
 echo "</script>\n";

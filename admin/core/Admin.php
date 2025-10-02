@@ -664,7 +664,7 @@ class Admin extends Origin
 			}
 		}
 
-		echo "var indexColumns = " . json_encode($columns, JSON_UNESCAPED_UNICODE) . ";\n";
+		echo "const indexColumns = " . json_encode($columns, JSON_UNESCAPED_UNICODE) . ";\n";
 		echo "selectFieldChange.call(gid('form')['select']);\n";
 		echo "</script>\n";
 		echo "</div></fieldset>\n";
@@ -1193,7 +1193,7 @@ class Admin extends Origin
 					foreach ($tables as $table => $type) {
 						$links[] = preg_quote($table, '/');
 					}
-					echo "var jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					echo "const jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}
