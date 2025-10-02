@@ -366,7 +366,7 @@ let tablesFilterValue = '';
 
 function initTablesFilter(dbName) {
 	if (sessionStorage) {
-		document.addEventListener('DOMContentLoaded', function () {
+		document.addEventListener('DOMContentLoaded', () => {
 			if (dbName === sessionStorage.getItem('neo_tables_filter_db') && sessionStorage.getItem('neo_tables_filter')) {
 				gid('tables-filter').value = sessionStorage.getItem('neo_tables_filter');
 				filterTables();
@@ -379,12 +379,12 @@ function initTablesFilter(dbName) {
 	}
 
 	const filterInput = gid('tables-filter');
-	filterInput.addEventListener('input', function () {
+	filterInput.addEventListener('input', () => {
 		window.clearTimeout(tablesFilterTimeout);
 		tablesFilterTimeout = window.setTimeout(filterTables, 200);
 	});
 
-	document.body.addEventListener('keydown', function(event) {
+	document.body.addEventListener('keydown', event => {
 		if (isCtrl(event) && event.shiftKey && event.key.toUpperCase() === 'F') {
 			filterInput.focus();
 			filterInput.select();
@@ -447,7 +447,7 @@ function initFieldset(id) {
 		}
 	});
 
-	qs("legend a", fieldset).addEventListener("click", (event) => {
+	qs("legend a", fieldset).addEventListener("click", event => {
 		fieldset.classList.toggle("closed");
 		event.preventDefault();
 		event.stopPropagation();
@@ -461,7 +461,7 @@ function initFieldset(id) {
  */
 function initToggles(parent) {
 	for (const link of qsa('.toggle', parent)) {
-		link.addEventListener("click", (event) => {
+		link.addEventListener("click", event => {
 			const id = link.getAttribute('href').substring(1);
 
 			gid(id).classList.toggle("hidden");
@@ -543,7 +543,7 @@ function selectRemoveRow() {
 */
 function selectSearchKeydown(event) {
 	if (event.keyCode === 13 || event.keyCode === 10) {
-		this.onsearch = function () {
+		this.onsearch = () => {
 		};
 	}
 }
@@ -558,7 +558,7 @@ function selectSearchSearch() {
 }
 
 // Sorting.
-(function() {
+(() => {
 	let placeholderRow = null, nextRow = null, dragHelper = null;
 	let startScrollY, startY, minY, maxY, lastPointerY, rowHeight;
 
@@ -587,11 +587,11 @@ function selectSearchSearch() {
 		row.classList.remove("no-sort");
 
 		const handle = qs(".handle", row);
-		handle.addEventListener("mousedown", (event) => { startSorting(row, event) });
-		handle.addEventListener("touchstart", (event) => { startSorting(row, event) });
+		handle.addEventListener("mousedown", event => { startSorting(row, event) });
+		handle.addEventListener("touchstart", event => { startSorting(row, event) });
 	};
 
-	window.isSorting = function () {
+	window.isSorting = function() {
 		return dragHelper !== null;
 	};
 
@@ -832,7 +832,7 @@ function bodyClick(event) {
 	const target = event.target;
 	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && isTag(target, 'input')) {
 		target.form.target = '_blank';
-		setTimeout(function () {
+		setTimeout(() => {
 			// if (isCtrl(event)) { focus(); } doesn't work
 			target.form.target = '';
 		}, 0);
@@ -996,7 +996,7 @@ function fieldChange() {
 	}
 	// keep value in <select> (function)
 	parentTag(this, 'table').appendChild(row);
-	this.oninput = function () { };
+	this.oninput = () => { };
 }
 
 
@@ -1054,7 +1054,7 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 * @return boolean false for success
 */
 function ajaxSetHtml(url) {
-	return !ajax(url, function (request) {
+	return !ajax(url, request => {
 		const data = window.JSON ? JSON.parse(request.responseText) : eval('(' + request.responseText + ')');
 		for (const key in data) {
 			setHtml(key, data[key]);
@@ -1087,7 +1087,7 @@ function ajaxForm(form, message, button) {
 		url = url.replace(/\?.*/, '') + '?' + data;
 		data = '';
 	}
-	return ajax(url, function (request) {
+	return ajax(url, request => {
 		setHtml('ajaxstatus', request.responseText);
 		if (window.jush) {
 			jush.highlight_tag(qsa('code', gid('ajaxstatus')), 0);
@@ -1151,7 +1151,7 @@ function selectClick(event, text, warning) {
 		input.classList.add("input");
 	}
 
-	input.onkeydown = function (event) {
+	input.onkeydown = event => {
 		if (event.keyCode === 27 && !event.shiftKey && !event.altKey && !isCtrl(event)) { // 27 - Esc
 			td.dataset.editing = "";
 			td.innerHTML = original;
@@ -1173,7 +1173,7 @@ function selectClick(event, text, warning) {
 
 	if (text) {
 		let rows = 1;
-		value.replace(/\n/g, function () {
+		value.replace(/\n/g, () => {
 			rows++;
 		});
 		input.rows = rows;
@@ -1201,7 +1201,7 @@ function selectClick(event, text, warning) {
 	input.focus();
 
 	if (text === 2) { // long text
-		return ajax(location.href + '&' + encodeURIComponent(td.id) + '=', function (request) {
+		return ajax(location.href + '&' + encodeURIComponent(td.id) + '=', request => {
 			if (request.responseText) {
 				input.value = request.responseText;
 				input.name = td.id;
@@ -1245,7 +1245,7 @@ function loadNextPage(limit, loadingText) {
 	a.innerHTML = loadingText;
 	a.removeAttribute('href');
 
-	return !ajax(href, function (request) {
+	return !ajax(href, request => {
 		const newBody = document.createElement('tbody');
 		newBody.innerHTML = request.responseText;
 
@@ -1262,9 +1262,7 @@ function loadNextPage(limit, loadingText) {
 		if (lastPage) {
 			a.parentElement.remove();
 		} else {
-			a.href = href.replace(/\d+$/, function (page) {
-				return +page + 1;
-			});
+			a.href = href.replace(/\d+$/, page => +page + 1);
 			a.innerHTML = title;
 		}
 	});
@@ -1319,7 +1317,7 @@ function getOffsetLeft(element) {
 	return box.left + window.scrollX;
 }
 
-oninput = function (event) {
+oninput = event => {
 	const target = event.target;
 	const maxLength = target.getAttribute('data-maxlength');
 
