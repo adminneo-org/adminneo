@@ -11,7 +11,7 @@
 <tr><td rowspan="1" colspan="3" data-tags="">SQLite</td></tr>
 </thead>
 <tbody>
-<tr><td>open</td><td>/adminneo/tests/admin-devel.php<datalist></datalist></td><td></td></tr>
+<tr><td>open</td><td>/adminneo/tests/admin-compiled.php<datalist></datalist></td><td></td></tr>
 <tr><td>select</td><td>name=auth[driver]<datalist></datalist></td><td>label=SQLite</td></tr>
 <tr><td>type</td><td>id=username<datalist></datalist></td><td>admin</td></tr>
 <tr><td>type</td><td>name=auth[password]<datalist></datalist></td><td></td></tr>
