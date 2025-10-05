@@ -11,6 +11,7 @@ namespace AdminNeo;
  * @link https://www.adminneo.org/plugins/#usage
  *
  * @author Jakub Vrana, https://www.vrana.cz/
+ * @author Peter Knut
  *
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
@@ -58,12 +59,13 @@ class GeminiSqlPlugin extends Plugin
 			]
 		]);
 
-		$result = file_get_contents("https://generativelanguage.googleapis.com/v1beta/models/$this->model:generateContent?key=$this->apiKey", false, $context);
-		if (!$result) {
+		$url = "https://generativelanguage.googleapis.com/v1beta/models/$this->model:generateContent";
+
+		$result = @file_get_contents("$url?key=$this->apiKey", false, $context);
+		if ($result === false || !($response = json_decode($result))) {
+			echo "-- Error loading URL: $url\n\n";
 			exit;
 		}
-
-		$response = json_decode($result);
 
 		if (isset($response->error)) {
 			echo "-- " . $response->error->message;
