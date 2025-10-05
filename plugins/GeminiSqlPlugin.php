@@ -42,9 +42,15 @@ class GeminiSqlPlugin extends Plugin
 			return null;
 		}
 
-		$prompt = "I have a " . get_driver_name(DRIVER) . " database with this structure:\n\n";
-		foreach (tables_list() as $table => $type) {
-			$prompt .= create_sql($table, false, "CREATE") . ";\n\n";
+		$prompt = "I have a " . get_driver_name(DRIVER) . " database";
+		if (DB) {
+			$prompt .= " with this structure:\n\n";
+
+			foreach (tables_list() as $table => $type) {
+				$prompt .= create_sql($table, false, "CREATE") . ";\n\n";
+			}
+		} else {
+			$prompt .= ".\n\n";
 		}
 
 		$prompt .= "Prefer returning relevant columns including the primary key.\n\n";
