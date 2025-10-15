@@ -33,6 +33,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
 - PostgreSQL: Mark unique partial indexes as unique (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
+- ClickHouse: Fix offset (by @Marcus-Nightingale)
 
 (Ported relevant changes from Adminer 5.4.0-5.4.1.)
 
