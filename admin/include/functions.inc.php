@@ -290,7 +290,7 @@ function get_rows($query, ?Connection $connection = null, $error = "<p class='er
 function unique_array(array $row, array $indexes): ?array
 {
 	foreach ($indexes as $index) {
-		if (!preg_match("~PRIMARY|UNIQUE~", $index["type"])) {
+		if (!preg_match("~PRIMARY|UNIQUE~", $index["type"]) && !$index["partial"]) {
 			continue;
 		}
 

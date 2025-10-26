@@ -31,6 +31,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Quote edit value with interval operator (by @vrana)
 - PostgreSQL: Don't treat user types containing 'file' as blobs (by @vrana)
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
+- PostgreSQL: Mark unique partial indexes as unique (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 
 (Ported relevant changes from Adminer 5.4.0-5.4.1.)
