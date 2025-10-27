@@ -1167,46 +1167,29 @@ ORDER BY ordinal_position";
 			return [];
 		}
 
-		$info = get_rows("SELECT ROUTINE_BODY, ROUTINE_COMMENT FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_NAME = " . q($name))[0];
+		$fields = get_rows("SELECT
+	PARAMETER_NAME field,
+	DATA_TYPE type,
+	CHARACTER_MAXIMUM_LENGTH length,
+	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^ ]+ ', '') `unsigned`,
+	1 `null`,
+	DTD_IDENTIFIER full_type,
+	PARAMETER_MODE `inout`,
+	CHARACTER_SET_NAME collation
+FROM information_schema.PARAMETERS
+WHERE SPECIFIC_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND SPECIFIC_NAME = " . q($name) . "
+ORDER BY ORDINAL_POSITION");
 
-		$aliases = ["bool", "boolean", "integer", "double precision", "real", "dec", "numeric", "fixed", "national char", "national varchar"];
-		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|-- )[^\n]*\n?|--\r?\n)";
-		$enumLengthPattern = Driver::EnumLengthPattern;
-		$type_pattern = "((" . implode("|", array_merge(array_keys(Driver::get()->getTypes()), $aliases)) . ")\\b(?:\\s*\\(((?:[^'\")]|$enumLengthPattern)++)\\))?" .
-			"\\s*(zerofill\\s*)?(unsigned(?:\\s+zerofill)?)?)(?:\\s*(?:CHARSET|CHARACTER\\s+SET)\\s*['\"]?([^'\"\\s,]+)['\"]?)?(?:\\s*COLLATE\\s*['\"]?[^'\"\\s,]+['\"]?)?"; // TODO store COLLATE
-		$inOut = implode("|", Driver::get()->getInOut());
-		$pattern = "$space*(" . ($type == "FUNCTION" ? "" : $inOut) . ")?\\s*(?:`((?:[^`]|``)*)`\\s*|\\b(\\S+)\\s+)$type_pattern";
-		$create = Connection::get()->getValue("SHOW CREATE $type " . idf_escape($name), 2);
-		preg_match("~\\(((?:$pattern\\s*,?)*)\\)\\s*" . ($type == "FUNCTION" ? "RETURNS\\s+$type_pattern\\s+" : "") . "(.*)~is", $create, $match);
-		$fields = [];
-		preg_match_all("~$pattern\\s*,?~is", $match[1], $matches, PREG_SET_ORDER);
+		$return = Connection::get()->query("SELECT ROUTINE_COMMENT comment, ROUTINE_DEFINITION definition, 'SQL' language
+FROM information_schema.ROUTINES
+WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = " . q($name))->fetchAssoc();
 
-		foreach ($matches as $param) {
-			$fields[] = [
-				"field" => str_replace("``", "`", $param[2]) . $param[3],
-				"type" => strtolower($param[5]),
-				"length" => preg_replace_callback("~$enumLengthPattern~s", 'AdminNeo\normalize_enum', $param[6]),
-				"unsigned" => strtolower(preg_replace('~\s+~', ' ', trim("$param[8] $param[7]"))),
-				"null" => true,
-				"full_type" => $param[4],
-				"inout" => strtoupper($param[1]),
-				"collation" => strtolower($param[9]),
-			];
+		if ($fields && $fields[0]['field'] == '') {
+			$return['returns'] = array_shift($fields);
 		}
+		$return['fields'] = $fields;
 
-		return $type == "FUNCTION" ? [
-			"fields" => $fields,
-			"returns" => ["type" => $match[12], "length" => $match[13], "unsigned" => $match[15], "collation" => $match[16]],
-			"definition" => $match[17],
-			"language" => $info["ROUTINE_BODY"],
-			"comment" => $info["ROUTINE_COMMENT"],
-		] : [
-			"fields" => $fields,
-			"returns" => null,
-			"definition" => $match[11],
-			"language" => $info["ROUTINE_BODY"],
-			"comment" => $info["ROUTINE_COMMENT"],
-		];
+		return $return;
 	}
 
 	/** Get list of routines

@@ -32,6 +32,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Don't treat user types containing 'file' as blobs (by @vrana)
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
 - PostgreSQL: Mark unique partial indexes as unique (by @vrana)
+- MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
 
