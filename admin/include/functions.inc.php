@@ -919,7 +919,7 @@ function get_private_key($create)
 
 	$key = stream_get_contents($file);
 	if (!$key) {
-		$key = bin2hex(Radom::bytes(32));
+		$key = bin2hex(Random::bytes(32));
 		write_and_unlock_file($file, $key);
 	} else {
 		unlock_file($file);
