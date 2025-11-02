@@ -24,7 +24,7 @@ return [
 	'Server' => 'Servidor',
 	'Username' => 'Usuario',
 	'Password' => 'Contraseña',
-	'Permanent login' => 'Guardar contraseña',
+	'Permanent login' => 'Mantener sesión iniciada',
 	'Login' => 'Login',
 	'Logout' => 'Cerrar sesión',
 	'Logged as: %s' => 'Logueado como: %s',
@@ -34,8 +34,8 @@ return [
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo no soporta el acceso a bases de datos sin contraseña, <a href="https://www.adminneo.org/password"%s>más informacion</a>.',
 	'Database does not support password.' => 'La Base de Datos no soporta el uso de contraseña.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'Demasiados intentos erroneos, pruebe de nuevo en %d minuto.',
-		'Demasiados intentos erroneos, pruebe de nuevo en %d minutos.',
+		'Demasiados intentos erróneos, intente de nuevo en %d minuto.',
+		'Demasiados intentos erróneos, intente de nuevo en %d minutos.',
 	],
 	'Invalid permanent login, please login again.' => 'La sesión permanente no es válida, por favor inicia sesión de nuevo.',
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Vuelva a enviar los datos del formulario.',
@@ -330,7 +330,7 @@ return [
 	'Check has been dropped.' => 'Chequeo eliminado.',
 
 	// Selection.
-	'Select data' => 'Visualizar contenido',
+	'Select data' => 'Seleccionar datos',
 	'Select' => 'Mostrar',
 	'Functions' => 'Funciones',
 	'Aggregation' => 'Agregados',
@@ -417,9 +417,12 @@ return [
 	'Simple' => 'Simple',
 	'Dual' => 'Dual',
 	'Reversed' => 'Invertido',
-	'Layout of main navigation with table links.' => 'Diseño de la navegación principal con table links.',
-	'Table links' => 'Table links',
-	'Primary action for all table links.' => 'Acción principal para todos los table links.',
+	'Layout of main navigation with table links.' => 'Diseño de la navegación principal con enlaces de tabla.',
+	'Table links' => 'Enlaces de tabla',
+	'Primary action for all table links.' => 'Acción principal para todos los enlaces de tabla.',
+	'Links to tables referencing the current row.' => 'Unir las tablas de referencia al registro actual',
+	'Display' => 'Mostrar',
+	'Hide' => 'Ocultar',
 	'Records per page' => 'Registros por página',
 	'Default number of records displayed in data table.' => 'Número predeterminado de registros mostrados en la tabla.',
 	'Enum as select' => 'Enumerado como select',
@@ -436,4 +439,7 @@ return [
 	'JSON previews' => 'Previsualización de JSON',
 	'Data table' => 'Tabla',
 	'Edit form' => 'Editar formulario',
+	// Use the phrases from https://gemini.google.com/
+	'Ask Gemini' => 'Preguntar a Gemini',
+	'Just a sec...' => 'Un segundo...',
 ];
