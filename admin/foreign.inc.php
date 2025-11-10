@@ -113,7 +113,7 @@ echo "<span id='label-update'>" . lang('ON UPDATE'), ":</span> ", html_select("o
 echo doc_link([
 	'sql' => "innodb-foreign-key-constraints.html",
 	'mariadb' => "architecture/server-constraints/foreign-key-constraints",
-	'pgsql' => "sql-createtable.html#SQL-CREATETABLE-REFERENCES",
+	'pgsql' => "sql-createtable.html#SQL-CREATETABLE-PARMS-REFERENCES",
 	'mssql' => "t-sql/statements/create-table-transact-sql",
 	'oracle' => "SQLRF01111",
 ]);
