@@ -6,6 +6,7 @@ AdminNeo 5.3.0
 
 ### Bugfixes
 
+- PostgreSQL: Fix connecting via default socket if server is not specified (regression from 5.2.0)
 - ForeignEditPlugin: Fix displaying foreign values from different schema
 - JsonDumpPlugin: Fix invalid JSON format (regression from 5.2.0)
 - Fix opening exported CSV file to browser window (issue #171, regression from 5.0.0)
