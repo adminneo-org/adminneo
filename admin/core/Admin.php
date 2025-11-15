@@ -542,10 +542,12 @@ class Admin extends Origin
 
 		foreach ($indexes as $i => $index) {
 			if ($index["type"] == "FULLTEXT") {
-				echo "<div>(<i>" . implode("</i>, <i>", array_map('AdminNeo\h', $index["columns"])) . "</i>) AGAINST";
+				echo "<div>(<i>" . implode("</i>, <i>", array_map('AdminNeo\h', $index["columns"])) . "</i>) AGAINST ";
 				echo "<input type='text' class='input' name='fulltext[$i]' value='" . h($_GET["fulltext"][$i] ?? null) . "'>";
 				echo script("qsl('input').oninput = selectFieldChange;", "");
 				echo checkbox("boolean[$i]", 1, isset($_GET["boolean"][$i]), "BOOL");
+				echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "' style='float: right'>", icon_solo("remove"), "</button>";
+				echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 				echo "</div>\n";
 			}
 		}
