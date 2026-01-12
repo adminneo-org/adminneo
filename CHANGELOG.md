@@ -35,6 +35,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Mark unique partial indexes as unique (by @vrana)
 - PostgreSQL: Add missing parentheses to CHECK export (by @vrana)
 - PostgreSQL: Remove duplicate DEFERRABLE in foreign key export (by @vrana)
+- PostgreSQL: Add schema to sequence and view export (by @vrana)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - ClickHouse: Fix list of tables (by @Marcus-Nightingale)

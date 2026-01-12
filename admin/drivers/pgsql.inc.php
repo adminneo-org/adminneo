@@ -1306,9 +1306,10 @@ AND typelem = 0"
 		$sequences = [];
 
 		$status = table_status1($table);
+		$ns = idf_escape($status['nspname']);
 		if (is_view($status)) {
 			$view = view($table);
-			return rtrim("CREATE VIEW " . idf_escape($table) . " AS $view[select]", ";");
+			return rtrim("CREATE VIEW $ns." . idf_escape($table) . " AS $view[select]", ";");
 		}
 		$fields = fields($table);
 
@@ -1316,7 +1317,7 @@ AND typelem = 0"
 			return false;
 		}
 
-		$return = "CREATE TABLE " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " (\n    ";
+		$return = "CREATE TABLE $ns." . idf_escape($status['Name']) . " (\n    ";
 
 		// fields' definitions
 		foreach ($fields as $field) {
@@ -1333,8 +1334,8 @@ AND typelem = 0"
 					: "SELECT * FROM $sequence_name"
 				), null, "-- "));
 
-				$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $sequence_name;\n" : "") .
-					"CREATE SEQUENCE $sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
+				$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $ns.$sequence_name;\n" : "") .
+					"CREATE SEQUENCE $ns.$sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
 					($auto_increment && $sq['last_value'] ? " START " . ($sq["last_value"] + 1) : "") .
 					" CACHE $sq[cache_value];";
 			}
@@ -1369,12 +1370,12 @@ AND typelem = 0"
 
 		// comments for table & fields
 		if ($status['Comment']) {
-			$return .= "\n\nCOMMENT ON TABLE " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " IS " . q($status['Comment']) . ";";
+			$return .= "\n\nCOMMENT ON TABLE $ns." . idf_escape($status['Name']) . " IS " . q($status['Comment']) . ";";
 		}
 
 		foreach ($fields as $field_name => $field) {
 			if ($field['comment']) {
-				$return .= "\n\nCOMMENT ON COLUMN " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . "." . idf_escape($field_name) . " IS " . q($field['comment']) . ";";
+				$return .= "\n\nCOMMENT ON COLUMN $ns." . idf_escape($status['Name']) . "." . idf_escape($field_name) . " IS " . q($field['comment']) . ";";
 			}
 		}
 
