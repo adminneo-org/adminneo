@@ -18,6 +18,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
 - PostgreSQL: Offer foreign keys in create table (by @vrana)
+- PostgreSQL: Allow creating NOT DEFERRABLE foreign keys (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
 - Update Polish translation (by @Matthaiks)
 

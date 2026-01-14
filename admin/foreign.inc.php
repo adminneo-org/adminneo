@@ -110,6 +110,9 @@ echo "<noscript><p><input type='submit' class='button' name='add' value='", lang
 echo "<p>\n";
 echo "<span id='label-delete'>" . lang('ON DELETE'), ":</span> ", html_select("on_delete", [-1 => ""] + Driver::get()->getOnActions(), $row["on_delete"], "", "label-delete");
 echo "<span id='label-update'>" . lang('ON UPDATE'), ":</span> ", html_select("on_update", [-1 => ""] + Driver::get()->getOnActions(), $row["on_update"], "", "label-update");
+if (DRIVER == 'pgsql') {
+	echo html_select("deferrable", ['NOT DEFERRABLE', 'DEFERRABLE', 'DEFERRABLE INITIALLY DEFERRED'], $row["deferrable"]);
+}
 echo doc_link([
 	'sql' => "innodb-foreign-key-constraints.html",
 	'mariadb' => "architecture/server-constraints/foreign-key-constraints",
