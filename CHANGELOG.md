@@ -4,6 +4,10 @@ Changelog
 AdminNeo 5.5.1
 --------------
 
+### Changes
+
+- Support multiline generated values in alter table (by @vrana)
+
 ### Bugfixes
 
 - Fix processing of file input fields (regression from 5.5.0)
