@@ -970,7 +970,7 @@ function get_random_string(): string
 }
 
 /** Format value to use in select
-* @param string|string[]
+* @param string|string[]|list<string[]>
 * @param string
 * @param ?array
 * @param ?int
@@ -979,11 +979,26 @@ function get_random_string(): string
 function select_value($val, $link, $field, $text_length) {
 	if (is_array($val)) {
 		$return = "";
-		foreach ($val as $k => $v) {
-			$return .= "<tr>"
-				. ($val != array_values($val) ? "<th>" . h($k) : "")
-				. "<td>" . select_value($v, $link, $field, $text_length)
-			;
+		if (array_filter($val, 'is_array') == array_values($val)) { // list of arrays
+			$keys = [];
+			foreach ($val as $v) {
+				$keys += array_fill_keys(array_keys($v), null);
+			}
+			foreach (array_keys($keys) as $k) {
+				$return .= "<th>" . h($k);
+			}
+			foreach ($val as $v) {
+				$return .= "<tr>";
+				foreach (array_merge($keys, $v) as $v2) {
+					$return .= "<td>" . select_value($v2, $link, $field, $text_length);
+				}
+			}
+		} else {
+			foreach ($val as $k => $v) {
+				$return .= "<tr>"
+					. ($val != array_values($val) ? "<th>" . h($k) : "")
+					. "<td>" . select_value($v, $link, $field, $text_length);
+			}
 		}
 		return "<table>$return</table>";
 	}
