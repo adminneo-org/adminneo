@@ -92,24 +92,15 @@ function print_select_result(Result $result, ?Connection $connection = null, arr
 						$link .= "&where" . urlencode("[" . bracket_escape($col) . "]") . "=" . urlencode($row[$j]);
 					}
 				}
-			} elseif (is_web_url($val)) {
-				$link = $val;
 			}
 
-			if ($val === null) {
-				$val = "<i>NULL</i>";
-			} elseif ($blobs[$key] && !is_utf8($val)) {
-				$val = "<i>" . lang('%d byte(s)', strlen($val)) . "</i>"; //! link to download
-			} else {
-				$val = h($val);
-				if ($types[$key] == 254) { // 254 - char
-					$val = "<code>$val</code>";
-				}
-			}
+			$type = ($blobs[$key] ? 'blob' : ($types[$key] == 254 ? 'char' : ''));
+			$field = [
+				'full_type' => $type,
+				'type' => $type,
+			];
 
-			if ($link) {
-				$val = "<a href='" . h($link) . "'" . (is_web_url($link) ? target_blank() : '') . ">$val</a>";
-			}
+			$val = select_value($val, $link, $field, null);
 
 			// https://dev.mysql.com/doc/dev/mysql-server/latest/field__types_8h.html
 			$class = $types[$key] <= 9 || $types[$key] == 246 ? "class='number'" : "";
