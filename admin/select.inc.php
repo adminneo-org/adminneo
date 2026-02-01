@@ -549,7 +549,7 @@ if (!$columns && support("table")) {
 						if ($found_rows < max(1e4, 2 * ($page + 1) * $limit)) {
 							// slow with big tables
 							$found_rows = first(slow_query(count_rows($TABLE, $where, $is_group, $group)));
-						} else {
+						} elseif (DIALECT == 'sql' || DIALECT == 'pgsql') {
 							$exact_count = false;
 						}
 					}
