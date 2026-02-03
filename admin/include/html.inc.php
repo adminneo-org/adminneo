@@ -621,6 +621,7 @@ function edit_form($table, $fields, $row, $update): void {
 	}
 
 	echo "<form action='' method='post' enctype='multipart/form-data' id='form'>\n";
+	$editable = false;
 
 	if (!$fields) {
 		echo "<p class='error'>" . lang('You have no privileges to update this table.') . "\n";
@@ -664,6 +665,7 @@ function edit_form($table, $fields, $row, $update): void {
 				}
 				echo "</td>";
 			} else {
+				$editable = true;
 				$function = ($_POST["save"]
 					? $_POST["function"][$name] ?? ""
 					: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
@@ -706,7 +708,7 @@ function edit_form($table, $fields, $row, $update): void {
 	}
 
 	echo "<p>";
-	if ($fields) {
+	if ($editable) {
 		echo "<input type='submit' class='button default' value='" . lang('Save') . "'>\n";
 		if (!isset($_GET["select"])) {
 			echo "<input type='submit' class='button' name='insert' value='" . ($update
