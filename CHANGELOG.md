@@ -15,6 +15,7 @@ AdminNeo 5.5.0
 - Do not quote 0 in CSV export (by @vrana)
 - Add getServerVariables() and getStatusVariables() customization methods
 - Link //domain.tld values
+- Display uneditable fields in edit form (by @vrana)
 - Improve print of nested tables (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)

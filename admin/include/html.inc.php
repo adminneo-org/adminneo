@@ -402,8 +402,7 @@ function input($field, $value, $function, $autofocus = false): void {
 	}
 
 	// Attributes.
-	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled" : "";
-	$attrs = " name='fields[$name]' $disabled" . ($autofocus ? " autofocus" : "");
+	$attrs = " name='fields[$name]' " . ($autofocus ? " autofocus" : "");
 
 	// Function list.
 	$functions = (isset($_GET["select"]) || $reset ? ["orig" => lang('original')] : []) + Admin::get()->getFieldFunctions($field);
@@ -414,7 +413,7 @@ function input($field, $value, $function, $autofocus = false): void {
 
 	if (count($functions) > 1) {
 		$selected = $function === null || $has_function ? $function : "";
-		echo "<select name='function[$name]' $disabled>" . optionlist($functions, $selected) . "</select>";
+		echo "<select name='function[$name]'>" . optionlist($functions, $selected) . "</select>";
 
 		echo help_script_command("value.replace(/^SQL\$/, '')", true);
 		echo script("qsl('select').onchange = functionChange;", "");
@@ -504,14 +503,12 @@ function input($field, $value, $function, $autofocus = false): void {
  * @return string|array|false|null False to leave the original value (copy original while cloning), null to skip the column
  */
 function process_input($field) {
-	if (stripos($field["default"], "GENERATED ALWAYS AS ") === 0) {
-		return null;
-	}
-
 	$idf = bracket_escape($field["field"]);
 	$function = $_POST["function"][$idf] ?? "";
-	// Value can miss if strict mode is turned off and enum field has no value.
-	$value = $_POST["fields"][$idf] ?? "";
+	$value = $_POST["fields"][$idf] ?? null;
+	if ($value === null) {
+		return false;
+	}
 
 	if ($field["auto_increment"] && $value == "") {
 		return null;
@@ -658,30 +655,34 @@ function edit_form($table, $fields, $row, $update): void {
 			if (!$_POST["save"] && is_string($value)) {
 				$value = Admin::get()->formatFieldValue($value, $field);
 			}
-			$function = ($_POST["save"]
-				? $_POST["function"][$name] ?? ""
-				: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
-					? "now"
-					: ($value === false ? null : ($value !== null ? '' : 'NULL'))
-				)
-			);
-			if (!$_POST && !$update && $value == $field["default"] && preg_match('~^[\w.]+\(~', $value)) {
-				$function = "SQL";
-			}
-			if (preg_match("~time~", $field["type"]) && preg_match('~^CURRENT_TIMESTAMP~i', $value)) {
-				$value = "";
-				$function = "now";
-			}
-			if ($field["type"] == "uuid" && $value == "uuid()") {
-				$value = "";
-				$function = "uuid";
-			}
-			if ($autofocus !== false) {
-				$autofocus = ($field["auto_increment"] || $function == "now" || $function == "uuid" ? null : true); // null - don't autofocus this input but check the next one
-			}
-			input($field, $value, $function, $autofocus);
-			if ($autofocus) {
-				$autofocus = false;
+			if (($update && !isset($field["privileges"]["update"])) || $field["generated"]) {
+				echo "<td class='function'></td><td>", select_value($value, '', $field, null), "</td>";
+			} else {
+				$function = ($_POST["save"]
+					? $_POST["function"][$name] ?? ""
+					: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
+						? "now"
+						: ($value === false ? null : ($value !== null ? '' : 'NULL'))
+					)
+				);
+				if (!$_POST && !$update && $value == $field["default"] && preg_match('~^[\w.]+\(~', $value)) {
+					$function = "SQL";
+				}
+				if (preg_match("~time~", $field["type"]) && preg_match('~^CURRENT_TIMESTAMP~i', $value)) {
+					$value = "";
+					$function = "now";
+				}
+				if ($field["type"] == "uuid" && $value == "uuid()") {
+					$value = "";
+					$function = "uuid";
+				}
+				if ($autofocus !== false) {
+					$autofocus = ($field["auto_increment"] || $function == "now" || $function == "uuid" ? null : true); // null - don't autofocus this input but check the next one
+				}
+				input($field, $value, $function, $autofocus);
+				if ($autofocus) {
+					$autofocus = false;
+				}
 			}
 			echo "\n";
 		}
