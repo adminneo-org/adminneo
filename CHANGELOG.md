@@ -17,6 +17,7 @@ AdminNeo 5.5.0
 - Link //domain.tld values
 - Display uneditable fields in edit form (by @vrana)
 - Improve print of nested tables (by @vrana)
+- Shorten all but numeric and date types in select (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)

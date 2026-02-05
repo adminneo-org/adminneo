@@ -1111,7 +1111,7 @@ function is_web_url($value): bool
  */
 function is_shortable(?array $field): bool
 {
-	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea|hstor~', $field["type"]) : false;
+	return $field && !preg_match('~' . number_type() . '|date|time|year~', $field["type"]);
 }
 
 /** Split server into host and (port or socket)
