@@ -492,14 +492,14 @@ if (isset($_GET["pgsql"])) {
 
 		public function getInheritedTables(string $table): array
 		{
-			return get_vals("SELECT relname FROM pg_inherits JOIN pg_class ON inhrelid = oid WHERE inhparent = " . $this->tableOid($table) .
+			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_inherits JOIN pg_class ON inhrelid = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhparent = " . $this->tableOid($table) .
 				(Connection::get()->isMinVersion("10") ? " AND relispartition::int = 0" : "") . // do not return partitions
-				" ORDER BY 1");
+				" ORDER BY 2, 1");
 		}
 
 		public function getParentTables(string $table): array
 		{
-			return get_vals("SELECT relname FROM pg_class JOIN pg_inherits ON inhparent = oid WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 1");
+			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_class JOIN pg_inherits ON inhparent = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 2, 1");
 		}
 
 		public function isPartition(string $table): bool

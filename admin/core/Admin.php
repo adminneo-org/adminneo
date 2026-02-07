@@ -461,8 +461,14 @@ class Admin extends Origin
 	{
 		echo "<ul class='links'>\n";
 
-		foreach ($tables as $table) {
-			echo "<li><a href='", h(ME . "table=" . urlencode($table)), "'>", icon("structure"), h($table), "</a>";
+		foreach ($tables as $row) {
+			$link = preg_replace('~ns=[^&]*~', "ns=" . urlencode($row["ns"]), ME);
+			echo "<li><a href='", h($link . "table=" . urlencode($row["table"])), "'>", icon("structure");
+			if ($row["ns"] != $_GET["ns"]) {
+				echo "<b>" . h($row["ns"]) . "</b>.";
+			}
+			echo h($row["table"]);
+			echo "</a>";
 		}
 
 		echo "</ul>\n";

@@ -456,7 +456,7 @@ abstract class Driver
 	/**
 	 * Returns inherited tables.
 	 *
-	 * @return list<string>
+	 * @return list<array{table: string, ns: string}>
 	 */
 	public function getInheritedTables(string $table): array
 	{
@@ -466,7 +466,7 @@ abstract class Driver
 	/**
 	 * Returns tables this table inherits from.
 	 *
-	 * @return list<string>
+	 * @return list<array{table: string, ns: string}>
 	 */
 	public function getParentTables(string $table): array
 	{

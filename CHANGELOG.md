@@ -43,6 +43,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Remove duplicate DEFERRABLE in foreign key export (by @vrana)
 - PostgreSQL: Add schema to sequence and view export (by @vrana)
 - PostgreSQL: Fix definition of complex generated columns (by @vrana)
+- PostgreSQL: Fix namespace in inheritance links (by @professor93)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - ClickHouse: Fix list of tables (by @Marcus-Nightingale)
