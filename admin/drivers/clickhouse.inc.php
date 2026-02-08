@@ -26,8 +26,11 @@ if (isset($_GET["clickhouse"])) {
 			{
 				$file = @file_get_contents("$this->serviceUrl/?database=$db", false, stream_context_create(['http' => [
 					'method' => 'POST',
-					'content' => $this->isQuerySelectLike($query) ? "$query FORMAT JSONCompact" : $query,
-					'header' => 'Content-type: application/x-www-form-urlencoded',
+					'content' => $query,
+					'header' => [
+						'Content-Type: application/x-www-form-urlencoded',
+						'X-ClickHouse-Format: JSONCompact',
+					],
 					'ignore_errors' => 1,
 					'follow_location' => 0,
 					'max_redirects' => 0,
@@ -80,7 +83,7 @@ if (isset($_GET["clickhouse"])) {
 
 			private function isQuerySelectLike($query): bool
 			{
-				return (bool)preg_match('~^(select|show)~i', $query);
+				return (bool)preg_match('~^\s*(select|show|with)~i', $query);
 			}
 
 			function query(string $query, bool $unbuffered = false)

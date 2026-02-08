@@ -48,6 +48,7 @@ AdminNeo 5.5.0
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - ClickHouse: Fix list of tables (by @Marcus-Nightingale)
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
+- ClickHouse: Set default format, support Common Table Expressions (by @polonskiy)
 
 (Ported relevant changes from Adminer 5.4.0-5.4.1.)
 
