@@ -46,6 +46,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Fix namespace in inheritance links (by @professor93)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
+- MariaDB: Don't display checks with the same name from another table (by @vrana)
 - ClickHouse: Fix list of tables (by @Marcus-Nightingale)
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
 - ClickHouse: Set default format, support Common Table Expressions (by @polonskiy)
