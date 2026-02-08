@@ -32,6 +32,7 @@ AdminNeo 5.5.0
 - Autofocus the first added field in alter table (by @vrana)
 - Fix validating IPv6 host
 - Allow connecting to IPv6 (by @vrana)
+- Don't quote comma in TSV export (by @vrana)
 - MS SQL: Fix hiding system schemas (regression from 5.1.0)
 - PostgreSQL: Allow comparing json columns (by @vrana)
 - PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)

@@ -832,12 +832,13 @@ function dump_headers(string $identifier, bool $multi_table = false): string
 * @param string[]
 */
 function dump_csv($row): void {
+	$tsv = $_POST["format"] == "tsv";
 	foreach ($row as $key => $val) {
-		if (preg_match('~["\n,;\t]|^0.|\.\d*0$~', $val) || $val === "") {
+		if (preg_match('~["\n]|^0[^.]|\.\d*0$|' . ($tsv ? '\t' : '[,;]|^$') . '~', $val)) {
 			$row[$key] = '"' . str_replace('"', '""', $val) . '"';
 		}
 	}
-	echo implode(($_POST["format"] == "csv" ? "," : ($_POST["format"] == "tsv" ? "\t" : ";")), $row) . "\r\n";
+	echo implode(($_POST["format"] == "csv" ? "," : ($tsv ? "\t" : ";")), $row) . "\r\n";
 }
 
 /** Apply SQL function
