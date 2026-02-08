@@ -44,6 +44,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Add schema to sequence and view export (by @vrana)
 - PostgreSQL: Fix definition of complex generated columns (by @vrana)
 - PostgreSQL: Fix namespace in inheritance links (by @professor93)
+- non-PostgreSQL: display NOT NULL checks (by @vrana)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - MariaDB: Don't display checks with the same name from another table (by @vrana)
