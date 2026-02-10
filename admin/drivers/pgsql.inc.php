@@ -141,9 +141,13 @@ if (isset($_GET["pgsql"])) {
 
 			public function warnings(): ?string
 			{
-				$result = pg_last_notice($this->connection);
-
-				return $result ? h($result) : null;
+				if (PHP_VERSION_ID >= 70100) {
+					$return = implode("\n", pg_last_notice($this->connection, 2)); // 2 - PGSQL_NOTICE_ALL
+					pg_last_notice($this->connection, 3); // 3 - PGSQL_NOTICE_CLEAR
+				} else {
+					$return = pg_last_notice($this->connection);
+				}
+				return nl2br(h($return));
 			}
 
 			/**
