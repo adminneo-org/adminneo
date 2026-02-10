@@ -11,6 +11,7 @@ AdminNeo 5.8.0
 - Alter table, Privileges: Do not print a success message if nothing was changed (by @vrana)
 - SQL command: Check the "Stop on error" option by default
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
+- PostgreSQL: Order NULL last (by @vrana)
 - MS SQL: Hide table actions and row editing in the sys schema
 - Fix mistranslated texts in all languages (AI reviewed)
 
