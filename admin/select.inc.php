@@ -497,6 +497,7 @@ if (!$columns && support("table")) {
 						$escaped_key = bracket_escape($key);
 						$id = h("val[$unique_idf][$escaped_key]");
 						$posted = $_POST["val"][$unique_idf][$escaped_key] ?? null;
+						$update = $field["privileges"]["update"] ?? false;
 						$editable = !is_array($row[$key]) && is_utf8($html) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
 						$type = ($column && preg_match('~^(AVG|MIN|MAX)\((.+)\)~', $column, $matches) ? $fields[idf_unescape($matches[2])]["type"] : ($field["type"] ?? null));
 						$money = $type == "money" || ($column && preg_match('~^SUM\((.+)\)~', $column, $matches) && $fields[idf_unescape($matches[1])]["type"]) == "money";
@@ -510,10 +511,11 @@ if (!$columns && support("table")) {
 							echo ">" . ($text ? "<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" : "<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
 						} else {
 							$long = strpos($html, "<i>…</i>");
-							echo " data-text='" . ($long ? 2 : ($text ? 1 : 0)) . "'"
-								. ($editable ? "" : " data-warning='" . h(lang('Use edit link to modify this value.')) . "'")
-								. ">$html"
-							;
+							if ($update) {
+								echo " data-text='" . ($long ? 2 : ($text ? 1 : 0)) . "'"
+									. ($editable ? "" : " data-warning='" . h(lang('Use edit link to modify this value.')) . "'");
+							}
+							echo ">$html";
 						}
 					}
 					next($select);
