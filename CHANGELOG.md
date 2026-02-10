@@ -19,6 +19,7 @@ AdminNeo 5.5.0
 - Improve print of nested tables (by @vrana)
 - Shorten all but numeric and date types in select (by @vrana)
 - Select: Disable Ctrl+click inline edit without UPDATE privilege (by @vrana)
+- Select: Display NULL in column title (by @vrana)
 - Foreign key: Display new field in case of an error (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
