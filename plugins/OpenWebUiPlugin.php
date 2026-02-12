@@ -115,7 +115,7 @@ class OpenWebUIPlugin extends Plugin
             ],
         ]);
 
-        $url = rtrim($this->apiUrl, "/") . "/api/v1/chat/completions";
+        $url = $this->apiUrl . "/api/v1/chat/completions";
         $result = @file_get_contents($url, false, $context);
 
         /* ------------------------------------------------------------------
