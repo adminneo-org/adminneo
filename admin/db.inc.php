@@ -39,7 +39,7 @@ if ($tables_views && !$_POST["search"]) {
 	} elseif (DIALECT != "sql") {
 		$result = (DIALECT == "sqlite"
 			? queries("VACUUM")
-			: apply_queries("VACUUM" . ($_POST["optimize"] ? "" : " ANALYZE"), $_POST["tables"])
+			: apply_queries("VACUUM" . ($_POST["optimize"] ? " ANALYZE" : ""), $_POST["tables"])
 		);
 		$message = lang('Tables have been optimized.');
 	} elseif (!$_POST["tables"]) {
@@ -188,7 +188,7 @@ if ($_GET["ns"] === "") {
 		if (Admin::get()->isDataEditAllowed()) {
 			echo "<div class='table-footer'><div class='field-sets'>\n";
 			$vacuum = "<input type='submit' class='button' value='" . lang('Vacuum') . "'> " . help_script("VACUUM");
-			$optimize = "<input type='submit' class='button' name='optimize' value='" . lang('Optimize') . "'> " . help_script(DIALECT == "sql" ? "OPTIMIZE TABLE" : "VACUUM OPTIMIZE");
+			$optimize = "<input type='submit' class='button' name='optimize' value='" . lang('Optimize') . "'> " . help_script(DIALECT == "sql" ? "OPTIMIZE TABLE" : "VACUUM ANALYZE");
 			echo "<fieldset><legend>" . lang('Selected') . " <span id='selected'></span></legend><div class='fieldset-content'>"
 			. (DIALECT == "sqlite" ? $vacuum . "<input type='submit' class='button' name='check' value='" . lang('Check') . "'> " . help_script("PRAGMA integrity_check")
 			: (DIALECT == "pgsql" ? $vacuum . $optimize
