@@ -1305,11 +1305,12 @@ AND typelem = 0"
 		$return = "";
 
 		$status = table_status1($table);
+		$ns = idf_escape($status['nspname']);
 		$fkeys = foreign_keys($table);
 		ksort($fkeys);
 
 		foreach ($fkeys as $fkey_name => $fkey) {
-			$return .= "ALTER TABLE ONLY " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " $fkey[definition];\n";
+			$return .= "ALTER TABLE ONLY $ns." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " " . preg_replace('~( REFERENCES )([^(.]+\()~', "\\1$ns.\\2", $fkey["definition"]) . ";\n";
 		}
 
 		return ($return ? "$return\n" : $return);
