@@ -1336,7 +1336,7 @@ AND typelem = 0"
 		// fields' definitions
 		foreach ($fields as $field) {
 			$part = idf_escape($field['field']) . ' ' . $field['full_type']
-				. default_value($field)
+				. preg_replace('~(nextval\(\')([^.\']+\')~', '\1' . str_replace("'", "''", $status['nspname']) . '.\2', default_value($field))
 				. ($field['null'] ? "" : " NOT NULL");
 			$return_parts[] = $part;
 
