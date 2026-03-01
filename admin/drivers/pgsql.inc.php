@@ -1336,6 +1336,11 @@ AND typelem = 0"
 
 		// fields' definitions
 		foreach ($fields as $field) {
+			if ($field['default'] == "nextval('$status[Name]_$field[field]_seq')") {
+				$field['default'] = null;
+				$field['full_type'] = preg_replace('~int(eger)?~', 'serial', $field['full_type']);
+			}
+
 			$part = idf_escape($field['field']) . ' ' . $field['full_type']
 				. preg_replace('~(nextval\(\')([^.\']+\')~', '\1' . str_replace("'", "''", $status['nspname']) . '.\2', default_value($field))
 				. ($field['null'] ? "" : " NOT NULL");

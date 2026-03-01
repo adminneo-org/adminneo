@@ -27,6 +27,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Offer foreign keys in create table (by @vrana)
 - PostgreSQL: Allow creating NOT DEFERRABLE foreign keys (by @vrana)
 - PostgreSQL: Display all SQL command warnings at once (by @vrana)
+- PostgreSQL: Export serial as serial, not nextval() (by @vrana)
 - PostgreSQL: Export schema in nextval() (by @vrana)
 - PostgreSQL: Export schema in REFERENCES (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
