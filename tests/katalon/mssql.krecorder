@@ -18,7 +18,8 @@
 <tr><td>type</td><td>id=username</td><td>test</td></tr>
 <tr><td>type</td><td>name=auth[password]</td><td>340$Uuxwp7Mcxo7Khy</td></tr>
 <tr><td>clickAndWait</td><td>//input[@value='Login']</td><td></td></tr>
-<tr><td>verifyTextPresent</td><td>Logged as</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>MS SQL version</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>extension sqlsrv</td><td></td></tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>

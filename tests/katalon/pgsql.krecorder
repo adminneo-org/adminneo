@@ -18,7 +18,8 @@
 <tr><td>type</td><td>id=username</td><td>test</td></tr>
 <tr><td>type</td><td>name=auth[password]</td><td>test</td></tr>
 <tr><td>clickAndWait</td><td>//input[@value='Login']</td><td></td></tr>
-<tr><td>verifyTextPresent</td><td>Logged as</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>PostgreSQL version</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>extension PgSQL</td><td></td></tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>

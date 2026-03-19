@@ -17,7 +17,8 @@
 <tr><td>select</td><td>name=auth[driver]</td><td>label=SQLite</td></tr>
 <tr><td>type</td><td>id=username</td><td>test</td></tr>
 <tr><td>click</td><td>//input[@value='Login']</td><td></td></tr>
-<tr><td>verifyTextPresent</td><td>Logged as</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>SQLite version</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>extension SQLite3</td><td></td></tr>
 <tr><td>click</td><td>link=Create database</td><td></td></tr>
 <tr><td>type</td><td>name=name</td><td>adminneo_test</td></tr>
 <tr><td>click</td><td>css=input[type="submit"]</td><td></td></tr>
