@@ -533,7 +533,6 @@ if (!$columns && support("table")) {
 		if (!is_ajax()) {
 			if ($rows || $page) {
 				$exact_count = true;
-				$found_rows = null;
 
 				if ($_GET["page"] != "last") {
 					if (!$limit || (count($rows) < $limit && ($rows || !$page))) {
