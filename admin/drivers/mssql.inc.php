@@ -283,7 +283,12 @@ if (isset($_GET["mssql"])) {
 			{
 				public function open(string $server, string $username, string $password): bool
 				{
-					return $this->dsn("dblib:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server)), $username, $password);
+					$result = $this->dsn("dblib:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server)), $username, $password);
+					if ($result) {
+						$this->query("SET ANSI_NULLS ON; SET ANSI_PADDING ON; SET CONCAT_NULL_YIELDS_NULL ON; SET ANSI_WARNINGS ON;");
+					}
+
+					return $result;
 				}
 			}
 		}
