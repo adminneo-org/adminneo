@@ -262,6 +262,10 @@ if (isset($_GET["pgsql"])) {
 			}
 
 			// warnings() not implemented in PDO_PgSQL as of PHP 7.2.1
+			public function warnings(): ?string
+			{
+				return null;
+			}
 
 			public function close(): void
 			{
