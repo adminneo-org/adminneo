@@ -239,10 +239,19 @@ echo optionlist(array_merge($extra_types, $structured_types), $type);
 function get_partitions_info($table) {
 	$from = "FROM information_schema.PARTITIONS WHERE TABLE_SCHEMA = " . q(DB) . " AND TABLE_NAME = " . q($table);
 
-	$result = Connection::get()->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1");
+	$result = Connection::get()
+		->query("SELECT PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_ORDINAL_POSITION $from ORDER BY PARTITION_ORDINAL_POSITION DESC LIMIT 1")
+		->fetchRow();
 
-	$info = [];
-	list($info["partition_by"], $info["partition"],  $info["partitions"]) = $result->fetchRow();
+	if (!$result) {
+		return [];
+	}
+
+	$info = [
+		"partition_by" => $result[0],
+		"partition" => $result[1],
+		"partitions" => $result[2],
+	];
 
 	$partitions = get_key_vals("SELECT PARTITION_NAME, PARTITION_DESCRIPTION $from AND PARTITION_NAME != '' ORDER BY PARTITION_ORDINAL_POSITION");
 	$info["partition_names"] = array_keys($partitions);

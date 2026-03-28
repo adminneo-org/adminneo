@@ -1091,6 +1091,10 @@ ORDER BY ordinal_position";
 	 * @return array array{fields:list<array{field:string, type:string, length:string, unsigned:string, null:bool, full_type:string, inout:string, collation:string}>, comment:string, returns:array, definition:string, language:string}
 	 */
 	function routine($name, $type) {
+		if ($name == "") {
+			return [];
+		}
+
 		$info = get_rows("SELECT ROUTINE_BODY, ROUTINE_COMMENT FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_NAME = " . q($name))[0];
 
 		$aliases = ["bool", "boolean", "integer", "double precision", "real", "dec", "numeric", "fixed", "national char", "national varchar"];
