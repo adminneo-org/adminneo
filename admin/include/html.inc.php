@@ -505,6 +505,20 @@ function input($field, $value, $function, $autofocus = false): void {
 function process_input($field) {
 	$idf = bracket_escape($field["field"]);
 	$function = $_POST["function"][$idf] ?? "";
+	if ($function == "orig") {
+		return (preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? idf_escape($field["field"]) : false);
+	}
+	if ($function == "NULL") {
+		return Driver::get()->getNull();
+	}
+	if (is_blob($field) && ini_bool("file_uploads")) {
+		$file = get_file("fields-$idf");
+		if (!is_string($file)) {
+			return false; //! report errors
+		}
+		return Driver::get()->quoteBinary($file);
+	}
+
 	$value = $_POST["fields"][$idf] ?? ($_FILES["fields"]["name"][$idf] ?? null);
 	if ($value === null) {
 		return false;
@@ -512,12 +526,6 @@ function process_input($field) {
 
 	if ($field["auto_increment"] && $value == "") {
 		return null;
-	}
-	if ($function == "orig") {
-		return (preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? idf_escape($field["field"]) : false);
-	}
-	if ($function == "NULL") {
-		return Driver::get()->getNull();
 	}
 	if ($field["type"] == "set") {
 		$value = implode(",", (array) $value);
@@ -529,13 +537,7 @@ function process_input($field) {
 		}
 		return $value;
 	}
-	if (is_blob($field) && ini_bool("file_uploads")) {
-		$file = get_file("fields-$idf");
-		if (!is_string($file)) {
-			return false; //! report errors
-		}
-		return Driver::get()->quoteBinary($file);
-	}
+
 	return Admin::get()->processFieldInput($field, $value, $function);
 }
 
