@@ -153,7 +153,7 @@ return [
 	'Alter database' => 'Zmień bazę danych',
 	'Create database' => 'Utwórz bazę danych',
 	'Database schema' => 'Schemat bazy danych',
-	'Permanent link' => 'Trwały link',
+	'Permanent link' => 'Trwały odnośnik',
 	'Database has been dropped.' => 'Baza danych została usunięta.',
 	'Databases have been dropped.' => 'Bazy danych zostały usunięte.',
 	'Database has been created.' => 'Baza danych została utworzona.',
@@ -247,6 +247,8 @@ return [
 	'Partitions' => 'Partycje',
 	'Partition name' => 'Nazwa partycji',
 	'Values' => 'Wartości',
+	'Inherited tables' => 'Tabele dziedziczone',
+	'Inherited from' => 'Dziedziczone z',
 
 	// Indexes.
 	'Indexes' => 'Indeksy',
@@ -377,7 +379,7 @@ return [
 	// In-place editing in selection.
 	'Modify' => 'Zmień',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+kliknij wartość, aby ją edytować.',
-	'Use edit link to modify this value.' => 'Użyj linku edycji, aby zmienić tę wartość.',
+	'Use edit link to modify this value.' => 'Użyj odnośnika edycji, aby zmienić tę wartość.',
 
 	// Editing.
 	'New item' => 'Nowy rekord',
@@ -419,11 +421,39 @@ return [
 	'yes' => 'tak',
 	'no' => 'nie',
 
+	// Settings.
+	'Settings' => 'Ustawienia',
+	'Default' => 'Domyślne',
+	'Color scheme' => 'Motyw kolorów',
+	'By system' => 'Według systemu',
+	'Light' => 'Jasny',
+	'Dark' => 'Ciemny',
+	'Navigation mode' => 'Tryb nawigacji',
+	'Simple' => 'Prosty',
+	'Dual' => 'Podwójny',
+	'Reversed' => 'Odwrócony',
+	'Layout of main navigation with table links.' => 'Układ głównej nawigacji z odnośnikami do tabel.',
+	'Table links' => 'Odnośniki do tabel',
+	'Primary action for all table links.' => 'Podstawowa czynność dla wszystkich odnośników do tabel.',
+	'Links to tables referencing the current row.' => 'Odnośniki do tabel odwołujących się do bieżącego wiersza.',
+	'Display' => 'Wyświetlanie',
+	'Hide' => 'Ukryj',
+	'Records per page' => 'Rekordy na stronę',
+	'Default number of records displayed in data table.' => 'Domyślna liczba rekordów wyświetlanych w tabeli danych.',
+	'Enum as select' => 'Wyliczenie jako wybór',
+	'Never' => 'Nigdy',
+	'Always' => 'Zawsze',
+	'More values than %d' => 'Więcej wartości niż %d',
+	'Threshold for displaying a selection menu for enum fields.' => 'Próg wyświetlania menu wyboru dla pól wyliczeniowych.',
+
 	// Plugins.
 	'One Time Password' => 'Jednorazowe hasło',
 	'Enter OTP code.' => 'Wprowadź kod OTP.',
 	'Invalid OTP code.' => 'Nieprawidłowy kod OTP.',
 	'Access denied.' => 'Odmowa dostępu.',
+	'JSON previews' => 'Podglądy JSON',
+	'Data table' => 'Tabela danych',
+	'Edit form' => 'Formularz edycji',
 	// Use the phrases from https://gemini.google.com/
 	'Ask %s' => 'Zapytaj %s',
 	'Just a sec...' => 'Chwileczkę...',
