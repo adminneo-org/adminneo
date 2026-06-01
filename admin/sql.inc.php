@@ -314,6 +314,9 @@ if (!isset($_GET["import"])) {
 		// Ignore post_max_size because it is for all form fields together and bytes computing would be necessary.
 		echo "SQL$gz (&lt; " . ini_get("upload_max_filesize") . "B): <input type='file' name='sql_file[]' multiple>";
 		echo "<input type='submit' class='button default' value='" . lang('Execute') . "'>";
+
+		$max_files = ini_get("max_file_uploads");
+		echo script("initFilesUploadForm('form', 'sql_file[]', $max_files, \"" . lang('The maximum number of files is %d. Select fewer files or increase the %s configuration directive.', $max_files, "'max_file_uploads'") . "\")");
 	} else {
 		echo lang('File uploads are disabled.');
 	}

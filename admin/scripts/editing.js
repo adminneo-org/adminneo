@@ -706,7 +706,24 @@ function indexesAddColumn(prefix) {
 	field.onchange();
 }
 
+/**
+ * Setup validation of files upload form.
+ *
+ * @param {string} formId
+ * @param {string} inputName
+ * @param {number} maxFiles
+ * @param {string} errorMessage
+ */
+function initFilesUploadForm(formId, inputName, maxFiles, errorMessage) {
+	const form = gid(formId);
 
+	form.addEventListener("submit", event => {
+		if (form.elements[inputName].files.length > maxFiles) {
+			alert(errorMessage);
+			event.preventDefault();
+		}
+	});
+}
 
 /** Updates the form action
 * @param HTMLFormElement
