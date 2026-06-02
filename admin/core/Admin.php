@@ -1198,20 +1198,20 @@ class Admin extends Origin
 			$this->admin->printDatabaseSwitcher($missing);
 
 			$actions = [];
-			if (DB == null || !$missing) {
+			if (DB == "" || !$missing) {
 				if (support("sql")) {
 					$actions[] = "<a href='" . h(ME) . "sql='" . bold(isset($_GET["sql"]) && !isset($_GET["import"])) . ">" . icon("command") . lang('SQL command') . "</a>";
 					$actions[] = "<a href='" . h(ME) . "import='" . bold(isset($_GET["import"])) . ">" . icon("import") . lang('Import') . "</a>";
 				}
 				$actions[] = "<a href='" . h(ME) . "dump=" . urlencode($_GET["table"] ?? $_GET["select"]) . "' id='dump'" . bold(isset($_GET["dump"])) . ">" . icon("export") . lang('Export') . "</a>";
 			}
-			if (DB == null) {
+			if (DB == "") {
 				$actions[] = '<a href="' . h(ME) . 'database="' . bold($_GET["database"] === "") . ">" . icon("database-add") . lang('Create database') . "</a>\n";
 			}
-			if (DB != null && $_GET["ns"] === "" && !$missing) {
+			if (DB != "" && $_GET["ns"] === "" && !$missing) {
 				$actions[] = '<a href="' . h(ME) . 'scheme="' . bold($_GET["scheme"] === "") . ">" . icon("database-add") . lang('Create schema') . "</a>\n";
 			}
-			if (DB != null && $_GET["ns"] !== "" && !$missing) {
+			if (DB != "" && $_GET["ns"] !== "" && !$missing) {
 				$actions[] = '<a href="' . h(ME) . 'create="' . bold($_GET["create"] === "") . ">" . icon("table-add") . lang('Create table') . "</a>\n";
 			}
 			if ($actions) {
