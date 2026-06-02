@@ -262,6 +262,14 @@ function js_escape($string) {
 }
 
 /**
+ * Escapes string to be used as object key in JavaScript.
+ */
+function js_escape_key($string): string
+{
+	return '"' . addcslashes($string, "\r\n\t\"\\/") . '"';
+}
+
+/**
  * Generates page number for pagination.
  */
 function pagination(int $page, int $current): string

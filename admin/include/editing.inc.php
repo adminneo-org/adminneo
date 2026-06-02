@@ -190,13 +190,13 @@ function select_input($attrs, $options, $value = "", $onchange = "", $placeholde
 
 * @deprecated
 */
-function json_row($key, $val = null, bool $escape = true): void {
+function json_row($key, $val = null): void {
 	static $first = true;
 	if ($first) {
 		echo "{";
 	}
 	if ($key != "") {
-		echo ($first ? "" : ",") . "\n\t\"" . addcslashes($key, "\r\n\t\"\\/") . '": ' . ($val !== null ? ($escape ? '"' . addcslashes($val, "\r\n\"\\/") . '"' : $val) : 'null');
+		echo ($first ? "" : ",") . "\n\t\"" . addcslashes($key, "\r\n\t\"\\/") . '": ' . ($val !== null ? '"' . addcslashes($val, "\r\n\t\"\\/") . '"' : 'null');
 		$first = false;
 	} else {
 		echo "\n}\n";

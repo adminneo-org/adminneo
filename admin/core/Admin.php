@@ -1242,17 +1242,15 @@ class Admin extends Origin
 					foreach ($tables as $table => $type) {
 						$links[] = preg_quote($table, '/');
 					}
-					// Note: It has to be 'var' to be visible in Jush library.
 					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table" : "select";
-					echo "window.jushLinks = { " . DIALECT . ":";
-					json_row(js_escape(ME) . $tableParam . '=$&', '/\b(' . implode('|', $links) . ')\b/g', false);
+					echo "window.jushLinks = { " . DIALECT . ": {\n";
+					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(' . implode('|', $links) . ')\b/g';
 					if (support('routine')) {
 						foreach (routines() as $row) {
-							json_row(js_escape(ME) . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&', '/\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g', false);
+							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g';
 						}
 					}
-					json_row('');
-					echo "};\n";
+					echo "\n}};\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}
