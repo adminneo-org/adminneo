@@ -8,6 +8,10 @@ AdminNeo 5.4.1
 
 - Complete the full Polish translation (by @Matthaiks)
 
+### Bugfixes
+
+- PostgreSQL: Fix exporting whole databases (regression from 5.1.0)
+
 AdminNeo 5.4.0 (2026-05-27)
 ---------------------------
 

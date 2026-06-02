@@ -95,7 +95,7 @@ if (isset($_GET["pgsql"])) {
 					$this->connection = $return;
 				}
 
-				return $return;
+				return (bool)$return;
 			}
 
 			public function close(): void
