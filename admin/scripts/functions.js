@@ -177,7 +177,7 @@ function trCheck(el) {
 function selectCount(id, count) {
 	const zero = count === 0 || count === '0' || count === '';
 
-	setHtml(id, (zero ? '' : '(' + (count + '').replace(/\B(?=(\d{3})+$)/g, thousandsSeparator) + ')'));
+	setHtml(id, '(' + (count + '').replace(/\B(?=(\d{3})+$)/g, thousandsSeparator) + ')');
 
 	const el = gid(id);
 	if (!el) return;
