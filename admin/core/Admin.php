@@ -1242,7 +1242,8 @@ class Admin extends Origin
 					foreach ($tables as $table => $type) {
 						$links[] = preg_quote($table, '/');
 					}
-					echo "const jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					// Note: It has to be 'var' to be visible in Jush library.
+					echo "var jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . (support("table") ? "table=" : "select=") . "\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}

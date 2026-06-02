@@ -10,6 +10,7 @@ AdminNeo 5.4.1
 
 ### Bugfixes
 
+- Fix links to tables in syntax highlighting (regression from 5.2.0)
 - PostgreSQL: Fix exporting whole databases (regression from 5.1.0)
 
 AdminNeo 5.4.0 (2026-05-27)
