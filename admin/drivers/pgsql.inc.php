@@ -895,6 +895,9 @@ JOIN information_schema.referential_constraints r USING (constraint_catalog, con
 JOIN information_schema.key_column_usage t ON r.unique_constraint_catalog = t.constraint_catalog
 	AND r.unique_constraint_schema = t.constraint_schema
 	AND r.unique_constraint_name = t.constraint_name
+	AND r.constraint_catalog = t.constraint_catalog
+	AND r.constraint_schema = t.constraint_schema
+	AND r.unique_constraint_name = t.constraint_name
 	AND s.position_in_unique_constraint = t.ordinal_position
 WHERE t.table_catalog = " . q(DB) . "
 AND t.table_schema = " . q($_GET["ns"]) . "
