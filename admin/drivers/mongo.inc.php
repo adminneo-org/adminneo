@@ -385,6 +385,7 @@ if (isset($_GET["mongo"])) {
 						$fields[$key] = [
 							"field" => $key,
 							"type" => "string",
+							"full_type" => "string",
 							"null" => ($key != Driver::get()->primary),
 							"auto_increment" => ($key == Driver::get()->primary),
 							"privileges" => [
