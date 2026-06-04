@@ -28,7 +28,7 @@ if (isset($_GET["mongo"])) {
 			/** @var string */
 			private $dbName;
 
-			public function open(string $server, string $username, string $password, ?string $dbName = null, ?string $authSource = null): bool
+			public function open(string $server, string $username, string $password, string $dbName = "", string $authSource = ""): bool
 			{
 				$this->version = MONGODB_VERSION;
 
@@ -38,11 +38,11 @@ if (isset($_GET["mongo"])) {
 					$options["password"] = $password;
 				}
 
-				if ($dbName) {
+				if ($dbName != "") {
 					$options["db"] = $dbName;
 				}
 
-				if ($authSource) {
+				if ($authSource != "") {
 					$options["authSource"] = $authSource;
 				}
 
