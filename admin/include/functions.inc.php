@@ -159,31 +159,42 @@ function get_driver_name(string $driver, ?string $server = null): string
 	return $_SESSION["drivers"][$driver][$server] ?? Drivers::get($driver);
 }
 
-/** Set password to session
-* @param string
-* @param string
-* @param string
-* @param ?string
-*/
-function set_password($vendor, $server, $username, $password): void {
-	$_SESSION["pwds"][$vendor][$server][$username] = ($_COOKIE["neo_key"] && is_string($password)
-		? [encrypt_string($password, $_COOKIE["neo_key"])]
-		: $password
-	);
+/**
+ * Saves login into the session.
+ *
+ * @param string|false $password False in case of an encryption error.
+ */
+function save_login(string $driver, string $server, string $username, $password, string $db = ""): void
+{
+	$key = $_COOKIE["neo_key"] ?? null;
+	$_SESSION["pwds"][$driver][$server][$username] = $key ? [encrypt_string($password, $key)] : $password;
+
+	$_SESSION["db"][$driver][$server][$username][$db] = true;
 }
 
-/** Get password from session
-* @return string|false|null null for missing password or false for expired password
-*/
-function get_password() {
-	$return = get_session("pwds");
-	if (is_array($return)) {
-		$return = ($_COOKIE["neo_key"]
-			? decrypt_string($return[0], $_COOKIE["neo_key"])
-			: false
-		);
+/**
+ * Deletes saved login in session.
+ */
+function delete_login(string $driver, string $server, string $username): void
+{
+	unset($_SESSION["pwds"][$driver][$server][$username]);
+	unset($_SESSION["db"][$driver][$server][$username]);
+}
+
+/**
+ * Returns password from session
+ *
+ * @return string|false|null null for missing password or false for expired password.
+ */
+function get_password()
+{
+	$password = get_session("pwds");
+
+	if (is_array($password)) {
+		return $_COOKIE["neo_key"] ? decrypt_string($password[0], $_COOKIE["neo_key"]) : false;
 	}
-	return $return;
+
+	return $password;
 }
 
 /** Get list of values from database

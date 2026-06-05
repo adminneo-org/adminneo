@@ -248,15 +248,6 @@ if ($auth) {
 	}
 }
 
-/**
- * @param string|false $password False in case of an encryption error.
- */
-function save_login(string $driver, string $server, string $username, $password, string $db = ""): void
-{
-	set_password($driver, $server, $username, $password);
-	$_SESSION["db"][$driver][$server][$username][$db] = true;
-}
-
 function unset_permanent(array &$permanent): void
 {
 	foreach ($permanent as $key => $val) {
@@ -295,7 +286,7 @@ function auth_error(array &$permanent, ?string $error = null): void
 				if ($password === false) {
 					$error = lang('Invalid permanent login, please login again.');
 				}
-				set_password(DRIVER, SERVER, $_GET["username"], null);
+				delete_login(DRIVER, SERVER, $_GET["username"]);
 			}
 
 			unset_permanent($permanent);
