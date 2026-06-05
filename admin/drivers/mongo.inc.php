@@ -228,6 +228,8 @@ if (isset($_GET["mongo"])) {
 
 		public function select(string $table, array $select, array $where, array $group, array $order = [], int $limit = 1, int $page = 0, bool $print = false)
 		{
+			$filter = where_to_query($where);
+
 			$select = ($select == ["*"]
 				? []
 				: array_fill_keys($select, 1)
@@ -236,31 +238,38 @@ if (isset($_GET["mongo"])) {
 				$select['_id'] = 0;
 			}
 
-			$where = where_to_query($where);
+			$options = $select ? ['projection' => $select] : [];
+
 			$sort = [];
 			foreach ($order as $val) {
 				$val = preg_replace('~ DESC$~', '', $val, 1, $count);
 				$sort[$val] = ($count ? -1 : 1);
 			}
+			if ($sort) {
+				$options['sort'] = $sort;
+			}
 
 			$limit = min(200, max(1, $limit));
 			$skip = $page * $limit;
+			$options += ['limit' => $limit, 'skip' => $skip];
 
-			$query = new Query($where, ['projection' => $select, 'limit' => $limit, 'skip' => $skip, 'sort' => $sort]);
+			$query = new Query($filter, $options);
 
+			$start = microtime(true);
 			try {
-				return new MongoResult(Connection::get()->executeQuery(Connection::get()->getDbName() . ".$table", $query));
+				$result = new MongoResult(Connection::get()->executeQuery(Connection::get()->getDbName() . ".$table", $query));
 			} catch (Exception $e) {
 				Connection::get()->setError($e->getMessage());
-				return false;
+				$result = false;
 			}
+
+			return $result;
 		}
 
 		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 		{
-			$db = Connection::get()->getDbName();
-			$where = sql_query_where_parser($queryWhere);
-			$bulk = new BulkWrite([]);
+			$filter = sql_query_where_parser($queryWhere);
+
 			if (isset($record['_id'])) {
 				unset($record['_id']);
 			}
@@ -271,19 +280,27 @@ if (isset($_GET["mongo"])) {
 					unset($record[$key]);
 				}
 			}
-			$update = ['$set' => $record];
-			if (count($removeFields)) {
-				$update['$unset'] = $removeFields;
-			}
-			$bulk->update($where, $update, ['upsert' => false]);
 
-			return Connection::get()->executeBulkWrite("$db.$table", $bulk, 'getModifiedCount');
+			$object = ['$set' => $record];
+			if (count($removeFields)) {
+				$object['$unset'] = $removeFields;
+			}
+
+			$options = ['upsert' => false];
+
+			$bulk = new BulkWrite();
+			$bulk->update($filter, $object, $options);
+
+			return Connection::get()->executeBulkWrite(Connection::get()->getDbName() . ".$table", $bulk, 'getModifiedCount');
 		}
 
 		public function delete(string $table, string $queryWhere, int $limit = 0)
 		{
-			$bulk = new BulkWrite([]);
-			$bulk->delete(sql_query_where_parser($queryWhere), ['limit' => $limit]);
+			$filter = sql_query_where_parser($queryWhere);
+			$options = $limit ? ['limit' => $limit] : [];
+
+			$bulk = new BulkWrite();
+			$bulk->delete($filter, $options);
 
 			return Connection::get()->executeBulkWrite(Connection::get()->getDbName() . ".$table", $bulk, 'getDeletedCount');
 		}
@@ -294,7 +311,7 @@ if (isset($_GET["mongo"])) {
 				unset($record['_id']);
 			}
 
-			$bulk = new BulkWrite([]);
+			$bulk = new BulkWrite();
 			$bulk->insert($record);
 
 			return Connection::get()->executeBulkWrite(Connection::get()->getDbName() . ".$table", $bulk, 'getInsertedCount');
