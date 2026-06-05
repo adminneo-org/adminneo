@@ -197,7 +197,7 @@ class Admin extends Origin
 			$query .= ";";
 		}
 
-		$syntax = DIALECT == "elastic" ? "js" : DIALECT;
+		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "js" : DIALECT;
 		$return = "<pre><code class='jush-$syntax'>" . h(str_replace("\n", " ", $query)) . "</code></pre>\n";
 
 		$return .= "<p class='links'>";
@@ -262,7 +262,7 @@ class Admin extends Origin
 		}
 
 		$return .= "<div id='$sqlId' class='hidden'>\n";
-		$syntax = DIALECT == "elastic" ? "js" : DIALECT;
+		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "js" : DIALECT;
 		$return .= "<pre><code class='jush-$syntax'>" . truncate_utf8($query, 1000) . "</code></pre>\n";
 
 		$return .= "<p class='links'>";
@@ -1235,7 +1235,7 @@ class Admin extends Origin
 			}
 
 			// Syntax highlighting.
-			if (support("sql") || DIALECT == "elastic") {
+			if (support("sql") || DIALECT == "elastic" || DIALECT == "mongo") {
 				echo "<script" . nonce() . ">\n";
 				if (support("sql") && $tables) {
 					$links = [];
@@ -1250,7 +1250,7 @@ class Admin extends Origin
 				}
 
 				if (
-					DIALECT != "elastic" &&
+					DIALECT != "elastic" && DIALECT != "mongo" &&
 					$this->getConfig()->isSqlAutocompletionEnabled() &&
 					(isset($_GET["sql"]) || isset($_GET["trigger"]) || isset($_GET["check"]))
 				) {
@@ -1267,8 +1267,10 @@ class Admin extends Origin
 				echo "</script>\n";
 			}
 
+			$noLinks = DIALECT == "mongo" ? "true" : "false";
+
 			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" .
-				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion); });");
+				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion, $noLinks); });");
 		}
 	}
 

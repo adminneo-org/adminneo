@@ -7,13 +7,14 @@
  * @param {string} version First three characters of database system version.
  * @param {string|null} vendor
  * @param {object} autocompletion
+ * @param {boolean} noLinks
  */
-function initSyntaxHighlighting(version, vendor, autocompletion) {
+function initSyntaxHighlighting(version, vendor, autocompletion, noLinks = false) {
 	if (!window.jush) {
 		return;
 	}
 
-	jush.create_links = ' target="_blank" rel="noreferrer noopener"';
+	jush.create_links = noLinks ? false : ' target="_blank" rel="noreferrer noopener"';
 
 	if (version) {
 		for (let key in jush.urls) {

@@ -6,6 +6,7 @@ AdminNeo 5.4.1
 
 ### Changes
 
+- MongoDB: Print executed queries
 - Complete the full Polish translation (by @Matthaiks)
 - Complete the full Vietnamese translation (by @chuongminhofficial)
 - Add Katalon tests for MongoDB

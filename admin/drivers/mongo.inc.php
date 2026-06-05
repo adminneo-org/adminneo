@@ -263,6 +263,10 @@ if (isset($_GET["mongo"])) {
 				$result = false;
 			}
 
+			if ($print) {
+				echo $this->admin->formatSelectQuery('find(' . json_encode(($filter ? ["filter" => $filter] : []) + $options) . ")", $start, !$result);
+			}
+
 			return $result;
 		}
 
@@ -288,6 +292,9 @@ if (isset($_GET["mongo"])) {
 
 			$options = ['upsert' => false];
 
+			// Save the query for later use in a flesh message. TODO: This is so ugly.
+			queries('update(' . json_encode(($filter ? ["filter" => $filter] : []) + $object + $options) . ")");
+
 			$bulk = new BulkWrite();
 			$bulk->update($filter, $object, $options);
 
@@ -298,6 +305,9 @@ if (isset($_GET["mongo"])) {
 		{
 			$filter = sql_query_where_parser($queryWhere);
 			$options = $limit ? ['limit' => $limit] : [];
+
+			// Save the query for later use in a flesh message. TODO: This is so ugly.
+			queries('delete(' . json_encode(($filter ? ["filter" => $filter] : []) + $options) . ")");
 
 			$bulk = new BulkWrite();
 			$bulk->delete($filter, $options);
@@ -310,6 +320,9 @@ if (isset($_GET["mongo"])) {
 			if ($record['_id'] == '') {
 				unset($record['_id']);
 			}
+
+			// Save the query for later use in a flesh message. TODO: This is so ugly.
+			queries('insert(' . json_encode($record) . ")");
 
 			$bulk = new BulkWrite();
 			$bulk->insert($record);
