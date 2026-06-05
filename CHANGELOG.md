@@ -13,6 +13,7 @@ AdminNeo 5.4.1
 - Fix links to tables in syntax highlighting (regression from 5.2.0)
 - PostgreSQL: Fix exporting whole databases (regression from 5.1.0)
 - MongoDB: Fix displaying selection table (regression from 5.4.0)
+- MongoDB: Fix authenticating user restricted to one database (fix #177)
 
 AdminNeo 5.4.0 (2026-05-27)
 ---------------------------

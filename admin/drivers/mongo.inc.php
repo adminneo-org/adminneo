@@ -536,13 +536,14 @@ if (isset($_GET["mongo"])) {
 		$connection = $primary ? MongoConnection::create() : MongoConnection::createSecondary();
 
 		list($server, $username, $password) = Admin::get()->getCredentials();
+		$loginDbs = $_SESSION["db"][DRIVER][SERVER][$username];
 
 		if ($server == "") {
 			$server = "localhost:27017";
 		}
 
 		$dbName = Admin::get()->getDatabase();
-		$authSource = getenv("MONGO_AUTH_SOURCE") ?: null;
+		$authSource = getenv("MONGO_AUTH_SOURCE") ?: key($loginDbs);
 
 		if (!$connection->open("mongodb://$server", $username, $password, $dbName, $authSource)) {
 			$error = $connection->getError();
