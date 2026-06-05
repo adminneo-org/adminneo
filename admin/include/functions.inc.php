@@ -774,6 +774,8 @@ function fields_from_edit() {
 		$name = bracket_escape($key, true);
 		$return[$name] = [
 			"field" => $name,
+			"full_type" => "varchar",
+			"type" => "varchar",
 			"privileges" => ["insert" => 1, "update" => 1, "where" => 1, "order" => 1],
 			"null" => true,
 			"auto_increment" => ($key == Driver::get()->primary),
