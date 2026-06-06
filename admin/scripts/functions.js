@@ -981,8 +981,8 @@ function fieldChange() {
 		input.value = '';
 	}
 	// keep value in <select> (function)
-	parentTag(this, 'table').appendChild(row);
-	this.oninput = () => { };
+	parentTag(this, 'tbody').appendChild(row);
+	this.oninput = null;
 }
 
 
