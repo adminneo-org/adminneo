@@ -691,7 +691,7 @@ abstract class Origin extends Plugin
 		}
 
 		if (
-			$value != "" &&
+			is_string($value) && $value != "" &&
 			preg_match('~varchar|text|character varying|String|keyword~', $fieldType) &&
 			($value[0] == "{" || $value[0] == "[") &&
 			($json = json_decode($value))
