@@ -29,7 +29,8 @@
 .jush-att, .jush-xml_att, .jush-att_js, .jush-att_css, .jush-att_http { color: var(--attribute-color); }
 .jush-att_quo, .jush-att_apo, .jush-att_val { color: var(--value-color); }
 .jush-ent { color: var(--value-color); }
-.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo { color: var(--value-color); }
+.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo { color: var(--identifier-color); }
+.jush-js_bool { color: var(--keyword-color); }
 .jush-js_reg { color: var(--keyword-color); }
 .jush-php_sql .jush-php_quo, .jush-php_sql .jush-php_apo,
 .jush-php_sqlite .jush-php_quo, .jush-php_sqlite .jush-php_apo,

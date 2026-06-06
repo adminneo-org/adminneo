@@ -1,3 +1,5 @@
+JavaScript: Highlight true and false
+
 JUSH 2.2.0:
 Add textarea autocomplete
 Add autocomplete for SQL
