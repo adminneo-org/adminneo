@@ -203,6 +203,7 @@ if (isset($_GET["mongo"])) {
 
 	class MongoDriver extends Driver
 	{
+		public const NULL = "\0";
 		public $primary = "_id";
 
 		protected function __construct(Connection $connection, $admin)
@@ -279,7 +280,7 @@ if (isset($_GET["mongo"])) {
 			}
 			$removeFields = [];
 			foreach ($record as $key => $value) {
-				if ($value == 'NULL') {
+				if ($value == self::NULL) {
 					$removeFields[$key] = 1;
 					unset($record[$key]);
 				}
@@ -321,6 +322,12 @@ if (isset($_GET["mongo"])) {
 				unset($record['_id']);
 			}
 
+			foreach ($record as $key => $value) {
+				if ($value == self::NULL) {
+					unset($record[$key]);
+				}
+			}
+
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
 			queries('insert(' . json_encode($record) . ")");
 
@@ -328,6 +335,11 @@ if (isset($_GET["mongo"])) {
 			$bulk->insert($record);
 
 			return Connection::get()->executeBulkWrite(Connection::get()->getDbName() . ".$table", $bulk, 'getInsertedCount');
+		}
+
+		public function getNull(): string
+		{
+			return self::NULL;
 		}
 	}
 

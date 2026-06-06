@@ -396,6 +396,14 @@ abstract class Driver
 	}
 
 	/**
+	 * Returns NULL expression.
+	 */
+	public function getNull(): string
+	{
+		return "NULL";
+	}
+
+	/**
 	 * Quotes binary string.
 	 */
 	public function quoteBinary(string $string): string

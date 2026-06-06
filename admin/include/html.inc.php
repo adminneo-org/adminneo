@@ -512,7 +512,7 @@ function process_input($field) {
 		return (preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? idf_escape($field["field"]) : false);
 	}
 	if ($function == "NULL") {
-		return "NULL";
+		return Driver::get()->getNull();
 	}
 	if ($field["type"] == "set") {
 		$value = implode(",", (array) $value);

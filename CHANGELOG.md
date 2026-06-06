@@ -19,6 +19,7 @@ AdminNeo 5.4.1
   MongoDB: Fix edit form when inserting the first record (regression from 5.0.0)
 - MongoDB: Fix authenticating user restricted to one database (fix #177)
 - MongoDB: Fix detecting of JSON values
+- MongoDB: Fix saving NULL and "NULL" values
 
 AdminNeo 5.4.0 (2026-05-27)
 ---------------------------
