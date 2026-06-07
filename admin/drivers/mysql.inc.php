@@ -947,7 +947,7 @@ ORDER BY ordinal_position";
 	* @param string
 	* @param string
 	* @param string
-	* @param numeric-string
+	* @param numeric-string|''
 	* @param ?array null means remove partitioning
 	* @return bool
 	*/
