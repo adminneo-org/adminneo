@@ -1300,21 +1300,31 @@ ORDER BY ordinal_position";
 		return "TRUNCATE " . table($table);
 	}
 
-	/** Get SQL command to change database
-	* @param string
-	* @return string
-	*/
-	function use_sql($database, string $style = "") {
+	/**
+	 * Returns SQL command to create database.
+	 */
+	function create_database_sql(string $database, string $style = ""): string
+	{
 		$name = idf_escape($database);
-		$return = "";
-		if (preg_match('~CREATE~', $style) && ($create = Connection::get()->getValue("SHOW CREATE DATABASE $name", 1))) {
+
+		$command = "";
+		if (str_contains($style, "CREATE") && ($create = Connection::get()->getValue("SHOW CREATE DATABASE $name", 1))) {
 			set_utf8mb4($create);
 			if ($style == "DROP+CREATE") {
-				$return = "DROP DATABASE IF EXISTS $name;\n";
+				$command = "DROP DATABASE IF EXISTS $name;\n";
 			}
-			$return .= "$create;\n";
+			$command .= "$create;\n";
 		}
-		return $return . "USE $name";
+
+		return $command;
+	}
+
+	/**
+	 * Returns SQL command to change database.
+	 */
+	function use_sql(string $database, string $style = ""): string
+	{
+		return "USE " . idf_escape($database) . ";\n";
 	}
 
 	/**

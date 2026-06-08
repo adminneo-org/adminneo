@@ -1398,17 +1398,24 @@ AND typelem = 0"
 		return $sql;
 	}
 
-
-	function use_sql($database, $style = "") {
+	function create_database_sql($database, string $style = ""): string
+	{
 		$name = idf_escape($database);
-		$return = "";
-		if (preg_match('~CREATE~', $style)) {
+
+		$command = "";
+		if (str_contains($style, "CREATE")) {
 			if ($style == "DROP+CREATE") {
-				$return = "DROP DATABASE IF EXISTS $name;\n";
+				$command = "DROP DATABASE IF EXISTS $name;\n";
 			}
-			$return .= "CREATE DATABASE $name;\n"; //! get info from pg_database
+			$command .= "CREATE DATABASE $name;\n"; // TODO get info from pg_database
 		}
-		return "$return\\connect $name";
+
+		return $command;
+	}
+
+	function use_sql(string $database): string
+	{
+		return '\connect ' . idf_escape($database) . ";\n";
 	}
 
 	function show_variables() {

@@ -845,9 +845,6 @@ if (isset($_GET["sqlite"])) {
 		return "DELETE FROM " . table($table);
 	}
 
-	function use_sql($database, $style = "") {
-	}
-
 	function trigger_sql(string $table): string
 	{
 		return implode(get_vals("SELECT sql || ';;\n' FROM sqlite_master WHERE type = 'trigger' AND tbl_name = " . q($table)));

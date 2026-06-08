@@ -61,7 +61,8 @@ SET foreign_key_checks = 0;
 		if (Connection::get()->selectDatabase($db)) {
 			if ($is_sql) {
 				if ($style) {
-					echo use_sql($db, $style) . ";\n\n";
+					echo create_database_sql($db, $style);
+					echo use_sql($db, $style) . "\n";
 				}
 				$out = "";
 

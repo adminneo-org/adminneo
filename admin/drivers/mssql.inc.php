@@ -872,8 +872,14 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return "TRUNCATE TABLE " . table($table);
 	}
 
-	function use_sql($database, $style = "") {
-		return "USE " . idf_escape($database);
+	function create_database_sql(string $database, string $style = ""): string
+	{
+		return "";
+	}
+
+	function use_sql(string $database): string
+	{
+		return "USE " . idf_escape($database) . ";\n";
 	}
 
 	function trigger_sql(string $table): string
