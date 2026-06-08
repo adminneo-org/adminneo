@@ -308,11 +308,8 @@ if (isset($_GET["oracle"])) {
 		return OracleDriver::create($connection, Admin::get());
 	}
 
-	/**
-	 * @param string $hostPath
-	 * @return bool
-	 */
-	function is_server_host_valid($hostPath) {
+	function is_server_host_valid(string $hostPath): bool
+	{
 		// EasyConnect host+path format: host[/[service_name][:server_type][/instance_name]]
 		return (bool)preg_match('~^[^/]+(/([^/:]+)?(:[^/:]+)?(/[^/:]+)?)?$~', $hostPath);
 	}

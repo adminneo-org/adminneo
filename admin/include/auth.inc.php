@@ -55,10 +55,12 @@ function validate_server_input(array &$permanent): void
 
 if (!function_exists('AdminNeo\is_server_host_valid')) {
 	/**
-	 * @param string $hostPath
-	 * @return bool
+	 * Validates server host+path.
+	 *
+	 * Every driver can validate URL host and path by its own rules. Path is forbidden by default, HTTP-based drivers
+	 * allow only '/' as path and Oracle driver validates path according to the EasyConnect URL format.
 	 */
-	function is_server_host_valid($hostPath)
+	function is_server_host_valid(string $hostPath): bool
 	{
 		return strpos($hostPath, '/') === false;
 	}

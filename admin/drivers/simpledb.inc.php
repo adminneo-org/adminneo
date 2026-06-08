@@ -343,11 +343,7 @@ if (isset($_GET["simpledb"])) {
 		return SimpleDbDriver::create($connection, Admin::get());
 	}
 
-	/**
-	 * @param string $hostPath
-	 * @return bool
-	 */
-	function is_server_host_valid($hostPath)
+	function is_server_host_valid(string $hostPath): bool
 	{
 		return strpos(rtrim($hostPath, '/'), '/') === false;
 	}

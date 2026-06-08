@@ -346,11 +346,7 @@ if (isset($_GET["clickhouse"])) {
 		return apply_queries("DROP TABLE", $tables);
 	}
 
-	/**
-	 * @param string $hostPath
-	 * @return bool
-	 */
-	function is_server_host_valid($hostPath)
+	function is_server_host_valid(string $hostPath): bool
 	{
 		return strpos(rtrim($hostPath, '/'), '/') === false;
 	}
