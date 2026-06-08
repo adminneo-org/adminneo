@@ -10,7 +10,7 @@ AdminNeo 5.5.0
 
 ### Bugfixes
 
-
+- MS SQL: Fix hiding system schemas (regression from 5.1.0)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------

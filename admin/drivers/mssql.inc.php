@@ -363,7 +363,7 @@ if (isset($_GET["mssql"])) {
 				"char|text" => "+",
 			];
 
-			$this->systemDatabases = ["INFORMATION_SCHEMA", "guest", "sys", "db_*"];
+			$this->systemSchemas = ["INFORMATION_SCHEMA", "guest", "sys", "db_*"];
 		}
 
 		public function insertUpdate(string $table, array $records, array $primary)
