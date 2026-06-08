@@ -30,7 +30,7 @@ if (isset($_GET["mysql"])) {
 			}
 
 			/** @see https://php.net/mysqli.construct */
-			public function open(string $server, string $username, string $password, $database = null, $port = null, $socket = null): bool
+			public function open(string $server, string $username, string $password): bool
 			{
 				mysqli_report(MYSQLI_REPORT_OFF);
 				list($host, $port) = explode(":", $server, 2); // part after : is used for port or socket
@@ -51,9 +51,9 @@ if (isset($_GET["mysql"])) {
 					($server != "" ? $host : ini_get("mysqli.default_host")),
 					($server . $username != "" ? $username : ini_get("mysqli.default_user")),
 					($server . $username . $password != "" ? $password : ini_get("mysqli.default_pw")),
-					$database,
+					null,
 					(is_numeric($port) ? (int)$port : ini_get("mysqli.default_port")),
-					(!is_numeric($port) ? $port : $socket),
+					(!is_numeric($port) ? $port : null),
 					$flags
 				);
 
