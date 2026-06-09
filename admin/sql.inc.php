@@ -275,7 +275,8 @@ if ($_POST) {
 		if ($empty) {
 			echo "<p class='message'>" . lang('No commands to execute.') . "\n";
 		} elseif ($_POST["only_errors"]) {
-			echo "<p class='message'>" . lang('%d query(s) executed OK.', $commands - count($errors));
+			$ok_count = $commands - count($errors);
+			echo "<p class='" . ($ok_count ? "message" : "error") . "'>" . lang('%d query(s) executed OK.', $commands - count($errors));
 			echo " <span class='time'>(" . format_time($total_start) . ")</span>\n";
 		} elseif ($errors && $commands > 1) {
 			echo "<p class='error'>" . lang('Error in query') . ": " . implode("", $errors) . "\n";
