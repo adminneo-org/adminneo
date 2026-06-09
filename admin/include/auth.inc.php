@@ -23,7 +23,7 @@ function validate_server_input(array &$permanent): void
 
 	// Add brackets around single IPv6 for correct parsing.
 	$server = SERVER;
-	if (!preg_match('~^\[~', $server) && function_exists("filter_var") && filter_var($server,  FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+	if (function_exists("filter_var") && filter_var($server,  FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 		$server = "[$server]";
 	}
 
