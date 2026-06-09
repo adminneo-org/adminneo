@@ -28,7 +28,7 @@ foreach (table_status('', true) as $table => $table_status) {
 	}
 	$pos = 0;
 	$schema[$table]["fields"] = [];
-	foreach ($all_fields[$table] as $field) {
+	foreach ($all_fields[$table] ?? [] as $field) {
 		$pos += 1.25;
 		$field["pos"] = $pos;
 		$schema[$table]["fields"][$field["field"]] = $field;
