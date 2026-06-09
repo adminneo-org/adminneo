@@ -7,10 +7,12 @@ AdminNeo 5.5.0
 ### Changes
 
 - Check max_file_uploads in SQL import form
+- Check upload_max_filesize in import forms
 - Do not order descending in GROUP BY select (by @vrana)
 - Hide view links without view support (by @vrana)
 - Display data length and index length for materialized views (by @vrana)
 - Link routines from syntax highlighting (by @vrana)
+- Do not quote 0 in CSV export (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
@@ -29,7 +31,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 
-(Ported relevant changes from Adminer 5.4.0.)
+(Ported relevant changes from Adminer 5.4.0-5.4.1.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------

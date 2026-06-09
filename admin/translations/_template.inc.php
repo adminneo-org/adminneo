@@ -111,6 +111,7 @@ return [
 	'Unable to upload a file.' => 'Xx.',
 	'Maximum allowed file size is %sB.' => 'Xx %sB.',
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Xx %d. Xx %s.',
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Xx %s. Xx %s.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Xx %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Xx.',
 	'File must be in UTF-8 encoding.' => 'Xx.',
