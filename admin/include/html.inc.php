@@ -720,3 +720,14 @@ function edit_form($table, $fields, $row, $update): void {
 
 	echo "</form>\n";
 }
+
+function file_upload_form_script(string $formId, string $inputName): string
+{
+	$max_count = ini_get("max_file_uploads");
+	$max_size = ini_get("upload_max_filesize");
+	$max_size_bytes = ini_bytes("upload_max_filesize");
+
+	return script("initFilesUploadForm('" . js_escape($formId) . "', '" . js_escape($inputName) . "', " .
+		"$max_count, '" . lang('The maximum number of files is %d. Select fewer files or increase the %s configuration directive.', $max_count, "\'max_file_uploads\'") . "', " .
+		"$max_size_bytes, '" . lang('The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.', $max_size, "\'upload_max_filesize\'") . "')");
+}

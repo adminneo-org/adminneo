@@ -7,6 +7,7 @@ AdminNeo 5.5.0
 ### Changes
 
 - Check max_file_uploads in SQL import form
+- Check upload_max_filesize in import forms
 - Do not order descending in GROUP BY select (by @vrana)
 - Hide view links without view support (by @vrana)
 - Display data length and index length for materialized views (by @vrana)
