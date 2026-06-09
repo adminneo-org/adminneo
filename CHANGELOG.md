@@ -17,6 +17,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
+- Update Polish translation (by @Matthaiks)
 
 ### Bugfixes
 
