@@ -29,6 +29,8 @@ AdminNeo 5.5.0
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 
+(Ported relevant changes from Adminer 5.4.0.)
+
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------
 
