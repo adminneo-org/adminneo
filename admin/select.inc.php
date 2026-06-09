@@ -266,7 +266,7 @@ Admin::get()->printTableMenu($table_status, $set);
 if (!$columns && support("table")) {
 	echo "<p class='error'>" . lang('Unable to select the table') . ($fields ? "." : ": " . error()) . "\n";
 } else {
-	echo "<form action='' id='form'>\n";
+	echo "<form id='form' action=''>\n";
 	echo "<div style='display: none;'>";
 	hidden_fields_get();
 	// Not used in Editor.
@@ -328,7 +328,7 @@ if (!$columns && support("table")) {
 		if (DIALECT == "mssql" && $page) {
 			$result->seek($limit * $page);
 		}
-		echo "<form action='' method='post' enctype='multipart/form-data'>\n";
+		echo "<form id='selection_form' action='' method='post' enctype='multipart/form-data'>\n";
 		echo "<div class='table-footer-parent'>\n";
 		$rows = [];
 		while ($row = $result->fetchAssoc()) {
@@ -674,13 +674,19 @@ if (!$columns && support("table")) {
 
 			if (Admin::get()->isDataEditAllowed()) {
 				echo "<p>";
-				echo "<a href='#import'>", icon("import"), lang('Import') . "</a>";
+				echo "<a href='#import'>", icon("import"), lang('Import'), "</a>";
 				echo script("qsl('a').onclick = partial(toggle, 'import');", "");
 				echo "</p>";
-				echo "<p id='import'" . ($_POST["import"] ? "" : " class='hidden'") . ">";
-				echo "<input type='file' name='csv_file'> ";
-				echo html_select("import_format", ["csv" => "CSV,", "csv;" => "CSV;", "tsv" => "TSV"], $settings->getParameter("exportFormat"));
-				echo " <input type='submit' class='button default' name='import' value='" . lang('Import') . "'>";
+
+				echo "<p id='import'", ($_POST["import"] ? "" : " class='hidden'"), ">";
+				if (ini_bool("file_uploads")) {
+					echo "<input type='file' name='csv_file'> ";
+					echo html_select("import_format", ["csv" => "CSV,", "csv;" => "CSV;", "tsv" => "TSV"], $settings->getParameter("exportFormat"));
+					echo " <input type='submit' class='button default' name='import' value='" . lang('Import') . "'>";
+					echo file_upload_form_script("selection_form", "csv_file");
+				} else {
+					echo lang('File uploads are disabled.');
+				}
 				echo "</p>";
 			}
 

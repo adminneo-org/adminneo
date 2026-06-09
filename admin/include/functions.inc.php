@@ -130,6 +130,22 @@ function ini_bool(string $option): bool
 	return preg_match('~^(on|true|yes)$~i', $val) || (int) $val;
 }
 
+/**
+ * Returns INI bytes value.
+ */
+function ini_bytes(string $ini): int
+{
+	$val = ini_get($ini);
+
+	switch (strtolower(substr($val, -1))) {
+		case 'g': $val = (int)$val * 1024; // no break
+		case 'm': $val = (int)$val * 1024; // no break
+		case 'k': $val = (int)$val * 1024;
+	}
+
+	return $val;
+}
+
 /** Check if SID is necessary
 * @return bool
 */
@@ -817,7 +833,7 @@ function dump_headers(string $identifier, bool $multi_table = false): string
 */
 function dump_csv($row): void {
 	foreach ($row as $key => $val) {
-		if (preg_match('~["\n,;\t]|^0|\.\d*0$~', $val) || $val === "") {
+		if (preg_match('~["\n,;\t]|^0.|\.\d*0$~', $val) || $val === "") {
 			$row[$key] = '"' . str_replace('"', '""', $val) . '"';
 		}
 	}
