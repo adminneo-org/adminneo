@@ -126,6 +126,7 @@ return [
 	'File uploads are disabled.' => 'Nahrávánie súborov nie je povolené.',
 	'Unable to upload a file.' => 'Súbor sa nepodarilo nahrať.',
 	'Maximum allowed file size is %sB.' => 'Maximálna povolená veľkosť súboru je %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maximálny počet súborov je %d. Vyberte menej súborov alebo zvýšte hodnotu konfiguračnej direktívy %s.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Príliš veľké POST dáta. Zmenšite dáta alebo zvýšte hodnotu konfiguračej direktívy %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Veľký SQL soubor môžete nahrať pomocou FTP a importovať ho zo servera.',
 	'File must be in UTF-8 encoding.' => 'Súbor musí byť v kódovaní UTF-8.',

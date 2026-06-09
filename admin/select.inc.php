@@ -382,7 +382,7 @@ if (!$columns && support("table")) {
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || $fun;
 						if ($sortable) {
-							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key || (!$order && $is_group && $group[0] == $column) ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
+							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
 						} else {
 							echo $fun;
 						}
@@ -460,7 +460,7 @@ if (!$columns && support("table")) {
 						$val = $field ? Connection::get()->formatValue($val, $field) : $val;
 
 						$link = "";
-						if ($field && preg_match('~blob|bytea|raw|file~', $field["type"]) && $val != "") {
+						if ($field && is_blob($field) && $val != "") {
 							$link = ME . 'download=' . urlencode($TABLE) . '&field=' . urlencode($key) . $unique_idf;
 						}
 						if (!$link && $val !== null) { // link related items

@@ -158,10 +158,10 @@ class Admin extends Origin
 		$is_view = false;
 		if (support("table")) {
 			$is_view = is_view($tableStatus);
-			if ($is_view) {
-				$links["view"] = [lang('Alter view'), "edit"];
-			} else {
+			if (!$is_view) {
 				$links["create"] = [lang('Alter table'), "edit"];
+			} elseif (support("view")) {
+				$links["view"] = [lang('Alter view'), "edit"];
 			}
 		}
 
@@ -333,7 +333,7 @@ class Admin extends Origin
 			$text = $val;
 		} elseif (preg_match("~char|binary|boolean~", $field["type"]) && !preg_match("~var~", $field["type"])) {
 			$text = "<code>$val</code>";
-		} elseif (preg_match('~blob|bytea|raw|file~', $field["type"]) && !is_utf8($val)) {
+		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
 		} elseif ($this->admin->detectJson($field["type"], $original)) {
 			$text = "<code class='jush-js'>$val</code>";
@@ -851,7 +851,7 @@ class Admin extends Origin
 				}
 			}
 
-			if ($key && $functions && !preg_match('~enum|set|blob|bytea|raw|file|bool~', $field["type"])) {
+			if ($key && $functions && !preg_match('~enum|set|bool~', $field["type"]) && !is_blob($field)) {
 				$return .= "/SQL";
 			}
 		}
@@ -905,7 +905,7 @@ class Admin extends Origin
 		} elseif (preg_match('~^([+-]|\|\|)$~', $function)) {
 			$return = idf_escape($name) . " $function $return";
 		} elseif (preg_match('~^[+-] interval$~', $function)) {
-			$return = idf_escape($name) . " $function " . (preg_match("~^(\\d+|'[0-9.: -]') [A-Z_]+\$~i", $value) ? $value : $return);
+			$return = idf_escape($name) . " $function " . (preg_match("~^(\\d+|'[0-9.: -]') [A-Z_]+\$~i", $value) && DIALECT != "pgsql" ? $value : $return);
 		} elseif (preg_match('~^(addtime|subtime|concat)$~', $function)) {
 			$return = "$function(" . idf_escape($name) . ", $return)";
 		} elseif (preg_match('~^(md5|sha1|password|encrypt)$~', $function)) {
@@ -1042,7 +1042,7 @@ class Admin extends Origin
 				}
 			}
 
-			$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT //! enum and set as numbers
+			$result = Connection::get()->query($query, 1); // 1 - MYSQLI_USE_RESULT
 			if ($result) {
 				$insert = "";
 				$buffer = "";
@@ -1242,9 +1242,15 @@ class Admin extends Origin
 					foreach ($tables as $table => $type) {
 						$links[] = preg_quote($table, '/');
 					}
-					// Note: It has to be 'var' to be visible in Jush library.
-					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table=" : "select=";
-					echo "window.jushLinks = { " . DIALECT . ": [ '" . js_escape(ME) . "$tableParam\$&', /\\b(" . implode("|", $links) . ")\\b/g ] };\n";
+					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table" : "select";
+					echo "window.jushLinks = { " . DIALECT . ": {\n";
+					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(' . implode('|', $links) . ')\b/g';
+					if (support('routine')) {
+						foreach (routines() as $row) {
+							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g';
+						}
+					}
+					echo "\n}};\n";
 					foreach (["bac", "bra", "sqlite_quo", "mssql_bra"] as $val) {
 						echo "jushLinks.$val = jushLinks." . DIALECT . ";\n";
 					}

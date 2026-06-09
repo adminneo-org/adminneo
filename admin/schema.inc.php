@@ -20,6 +20,7 @@ $base_left = -1;
 /** @var array{fields:array[], pos:array{float, float}, references:string[][][]}[] $schema */
 $schema = []; // table => array("fields" => array(name => field), "pos" => array(top, left), "references" => array(table => array(left => array(source, target))))
 $referenced = []; // target_table => array(table => array(left => target_column))
+/** @var array<numeric-string, bool> $lefts */
 $lefts = []; // float => bool
 $all_fields = Driver::get()->getAllFields();
 foreach (table_status('', true) as $table => $table_status) {

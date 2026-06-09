@@ -551,6 +551,13 @@ if (isset($_GET["elastic"])) {
 		return $table_status["Engine"] == "view";
 	}
 
+	function view(string $name): array
+	{
+		$return = Connection::get()->rootQuery("_alias/" . urlencode($name));
+
+		return ["select" => implode("\n", array_keys($return))];
+	}
+
 	function error() {
 		return h(Connection::get()->getError());
 	}
@@ -687,6 +694,15 @@ if (isset($_GET["elastic"])) {
 
 			return (bool)Connection::get()->rootQuery($name, $content, "PUT");
 		}
+	}
+
+	function drop_views(array $tables): bool
+	{
+		$return = Connection::get()->rootQuery('_aliases', ['actions' => array_map(function ($table) {
+			return ['remove' => ['index' => '*', 'alias' => $table]];
+		}, $tables)], 'POST');
+
+		return $return && !$return['errors'];
 	}
 
 	function drop_tables($tables): bool

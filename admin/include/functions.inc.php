@@ -318,6 +318,8 @@ function where($where, $fields = []) {
 
 		if (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
+		} elseif (DIALECT == "pgsql" && preg_match('~^json~', $field_type)) {
+			$conditions[] = "::jsonb = " . q($val) . "::jsonb";
 		} elseif (DIALECT == "sql" && is_numeric($val) && strpos($val, ".") !== false) {
 			// LIKE because of floats but slow with ints.
 			$conditions[] = "$column LIKE " . q($val);
@@ -1017,6 +1019,18 @@ function select_array_value(array $values, string $val, string $link, array $fie
 }
 
 /**
+ * Checks whether the field type is blob or equivalent.
+ *
+ * @param ?array $field Single field returned from fields().
+ */
+function is_blob(array $field): bool
+{
+	$types = Driver::get()->getStructuredTypes();
+
+	return preg_match('~blob|bytea|raw|file~', $field["type"]) && !in_array($field["type"], $types[lang('User types')] ?? []);
+}
+
+/**
  * Checks whether the string is e-mail address.
  *
  * @param mixed $value
@@ -1055,7 +1069,17 @@ function is_web_url($value) {
  */
 function is_shortable(?array $field): bool
 {
-	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea~', $field["type"]) : false;
+	return $field ? preg_match('~char|text|json|lob|geometry|point|linestring|polygon|string|bytea|hstor~', $field["type"]) : false;
+}
+
+/** Split server into host and (port or socket)
+ * @return array{0: string, 1: string}
+ */
+function host_port(string $server) {
+	return (preg_match('~^(\[(.+)]|([^:]+)):([^:]+)$~', $server, $match) // [a:b] - IPv6
+		? [$match[2] . $match[3], $match[4]]
+		: [$server, '']
+	);
 }
 
 /** Get query to compute number of found rows

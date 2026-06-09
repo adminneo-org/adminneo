@@ -59,16 +59,10 @@ SET foreign_key_checks = 0;
 	foreach ($databases as $db) {
 		Admin::get()->dumpDatabase($db);
 		if (Connection::get()->selectDatabase($db)) {
-			if ($is_sql && preg_match('~CREATE~', $style) && ($create = Connection::get()->getValue("SHOW CREATE DATABASE " . idf_escape($db), 1))) {
-				set_utf8mb4($create);
-				if ($style == "DROP+CREATE") {
-					echo "DROP DATABASE IF EXISTS " . idf_escape($db) . ";\n";
-				}
-				echo "$create;\n";
-			}
 			if ($is_sql) {
 				if ($style) {
-					echo use_sql($db) . ";\n\n";
+					echo create_database_sql($db, $style);
+					echo use_sql($db, $style) . "\n";
 				}
 				$out = "";
 

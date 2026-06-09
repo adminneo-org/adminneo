@@ -6,11 +6,30 @@ AdminNeo 5.5.0
 
 ### Changes
 
-
+- Check max_file_uploads in SQL import form
+- Do not order descending in GROUP BY select (by @vrana)
+- Hide view links without view support (by @vrana)
+- Display data length and index length for materialized views (by @vrana)
+- Link routines from syntax highlighting (by @vrana)
+- PostgreSQL: Add SQL operator to select (by @vrana)
+- PostgreSQL: Display index expressions (by @vrana)
+- PostgreSQL: Shorten values in hstore columns (by @vrana)
+- Elasticsearch: Support dropping aliases (by @vrana)
 
 ### Bugfixes
 
 - MS SQL: Fix hiding system schemas (regression from 5.1.0)
+- Autofocus the first added field in alter table (by @vrana)
+- Fix validating IPv6 host
+- Allow connecting to IPv6 (by @vrana)
+- PostgreSQL: Allow comparing json columns (by @vrana)
+- PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)
+- PostgreSQL: Quote edit value with interval operator (by @vrana)
+- PostgreSQL: Don't treat user types containing 'file' as blobs (by @vrana)
+- PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
+- MariaDB: Parse COLLATE in routine definition (by @vrana)
+
+(Ported relevant changes from Adminer 5.4.0.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------

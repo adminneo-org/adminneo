@@ -21,7 +21,18 @@ function validate_server_input(array &$permanent): void
 		return;
 	}
 
-	$parts = parse_url(SERVER);
+	// Add brackets around single IPv6 for correct parsing.
+	$server = SERVER;
+	if (!preg_match('~^\[~', $server) && function_exists("filter_var") && filter_var($server,  FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+		$server = "[$server]";
+	}
+
+	// Add dummy https scheme for correct parsing.
+	if (!preg_match('~^[^:]+://~', $server)) {
+		$server = "https://$server";
+	}
+
+	$parts = parse_url($server);
 	if (!$parts) {
 		auth_error($permanent);
 	}
@@ -36,10 +47,8 @@ function validate_server_input(array &$permanent): void
 		auth_error($permanent);
 	}
 
-	// Note that "localhost" and IP address without a scheme is parsed as a path.
-	$hostPath = ($parts['host'] ?? '') . ($parts['path'] ?? '');
-
 	// Validate host.
+	$hostPath = $parts['host'] . ($parts['path'] ?? '');
 	if (!is_server_host_valid($hostPath)) {
 		auth_error($permanent);
 	}

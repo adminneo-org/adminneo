@@ -31,7 +31,7 @@ function adminneo_instance()
 
 	$config = [
 		"colorVariant" => "green",
-		"navigationMode" => "dual",
+//		"navigationMode" => "dual",
 		"preferSelection" => true,
 		"jsonValuesDetection" => true,
 		"jsonValuesAutoFormat" => true,

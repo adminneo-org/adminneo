@@ -37,7 +37,8 @@ if (isset($_GET["pgsql"])) {
 					$this->error = $error;
 				});
 
-				$this->connectionString = "host='" . str_replace(":", "' port='", addcslashes($server, "'\\")) . "' user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
+				list($host, $port) = host_port(addcslashes($server, "'\\"));
+				$this->connectionString = "host='$host'" . ($port ? " port='$port'" : "") . " user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -245,8 +246,9 @@ if (isset($_GET["pgsql"])) {
 			{
 				$db = Admin::get()->getDatabase();
 
+				list($host, $port) = host_port(addcslashes($server, "'\\"));
 				//! client_encoding is supported since 9.1, but we can't yet use minVersion() here
-				$dsn = "pgsql:host='" . str_replace(":", "' port='", addcslashes($server, "'\\")) . "' client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
+				$dsn = "pgsql:host='$host'" . ($port ? " port='$port'" : "") . " client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -378,6 +380,7 @@ if (isset($_GET["pgsql"])) {
 				"ILIKE", "ILIKE %%", "NOT ILIKE",
 				"IN", "NOT IN",
 				"IS NULL", "IS NOT NULL",
+				"SQL", // TODO same-site CSRF
 			];
 
 			$this->functions = [
@@ -837,7 +840,7 @@ ORDER BY a.attnum"
 		$return = [];
 		$table_oid = Driver::get()->tableOid($table);
 		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection);
-		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, (indpred IS NOT NULL)::int as indispartial, pg_am.amname as algorithm, pg_get_expr(pg_index.indpred, pg_index.indrelid, true) AS partial
+		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr
 FROM pg_index
 JOIN pg_class ON indexrelid = oid
 JOIN pg_am ON pg_am.oid = pg_class.relam
@@ -845,18 +848,17 @@ WHERE indrelid = $table_oid
 ORDER BY indisprimary DESC, indisunique DESC", $connection
          ) as $row) {
 			$relname = $row["relname"];
-			$return[$relname]["type"] = ($row["indispartial"] ? "INDEX" : ($row["indisprimary"] ? "PRIMARY" : ($row["indisunique"] ? "UNIQUE" : "INDEX")));
+			$return[$relname]["type"] = ($row["partial"] ? "INDEX" : ($row["indisprimary"] ? "PRIMARY" : ($row["indisunique"] ? "UNIQUE" : "INDEX")));
 			$return[$relname]["columns"] = [];
 			$return[$relname]["descs"] = [];
-			$return[$relname]["algorithm"] = $row["algorithm"];
+			$return[$relname]["algorithm"] = $row["amname"];
 			$return[$relname]["partial"] = $row["partial"];
-			if ($row["indkey"]) {
-				foreach (explode(" ", $row["indkey"]) as $indkey) {
-					$return[$relname]["columns"][] = $columns[$indkey];
-				}
-				foreach (explode(" ", $row["indoption"]) as $indoption) {
-					$return[$relname]["descs"][] = (intval($indoption) & 1 ? '1' : null); // 1 - INDOPTION_DESC
-				}
+			$indexpr = preg_split('~(?<=\)), (?=\()~', $row["indexpr"]); //! '), (' used in expression
+			foreach (explode(" ", $row["indkey"]) as $indkey) {
+				$return[$relname]["columns"][] = ($indkey ? $columns[$indkey] : array_shift($indexpr));
+			}
+			foreach (explode(" ", $row["indoption"]) as $indoption) {
+				$return[$relname]["descs"][] = (intval($indoption) & 1 ? '1' : null); // 1 - INDOPTION_DESC
 			}
 			$return[$relname]["lengths"] = [];
 		}
@@ -894,6 +896,9 @@ FROM information_schema.key_column_usage s
 JOIN information_schema.referential_constraints r USING (constraint_catalog, constraint_schema, constraint_name)
 JOIN information_schema.key_column_usage t ON r.unique_constraint_catalog = t.constraint_catalog
 	AND r.unique_constraint_schema = t.constraint_schema
+	AND r.unique_constraint_name = t.constraint_name
+	AND r.constraint_catalog = t.constraint_catalog
+	AND r.constraint_schema = t.constraint_schema
 	AND r.unique_constraint_name = t.constraint_name
 	AND s.position_in_unique_constraint = t.ordinal_position
 WHERE t.table_catalog = " . q(DB) . "
@@ -1395,9 +1400,24 @@ AND typelem = 0"
 		return $sql;
 	}
 
+	function create_database_sql($database, string $style = ""): string
+	{
+		$name = idf_escape($database);
 
-	function use_sql($database) {
-		return "\connect " . idf_escape($database);
+		$command = "";
+		if (str_contains($style, "CREATE")) {
+			if ($style == "DROP+CREATE") {
+				$command = "DROP DATABASE IF EXISTS $name;\n";
+			}
+			$command .= "CREATE DATABASE $name;\n"; // TODO get info from pg_database
+		}
+
+		return $command;
+	}
+
+	function use_sql(string $database): string
+	{
+		return '\connect ' . idf_escape($database) . ";\n";
 	}
 
 	function show_variables() {

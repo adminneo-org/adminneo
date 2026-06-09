@@ -576,7 +576,7 @@ if (isset($_GET["sqlite"])) {
 	* @param list<list<string>> [process_field()], empty to preserve
 	* @param string[] [$original => idf_escape($new_column)], empty to preserve
 	* @param string [format_foreign_key()], empty to preserve
-	* @param numeric-string set auto_increment to this value, 0 to preserve
+	* @param numeric-string|'' set auto_increment to this value, 0 to preserve
 	* @param string[] [[$type, $name, $columns]], empty to preserve
 	* @param string CHECK constraint to drop
 	* @param string CHECK constraint to add
@@ -843,9 +843,6 @@ if (isset($_GET["sqlite"])) {
 
 	function truncate_sql($table) {
 		return "DELETE FROM " . table($table);
-	}
-
-	function use_sql($database) {
 	}
 
 	function trigger_sql(string $table): string

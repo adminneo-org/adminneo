@@ -141,8 +141,9 @@ if ($_GET["ns"] === "") {
 			}
 			echo "<th><a href='", h(ME), "$action=", urlencode($name), "' id='$id'>", h($name), "</a></th>";
 
-			if ($view) {
-				echo '<td colspan="6"><a href="' . h(ME) . "view=" . urlencode($name) . '" title="' . lang('Alter view') . '">' . (preg_match('~materialized~i', $type) ? lang('Materialized view') : lang('View')) . '</a>';
+			if ($view && !preg_match('~materialized~i', $type)) {
+				$title = lang('View');
+				echo '<td colspan="6">' . (support("view") ? "<a href='" . h(ME) . "view=" . urlencode($name) . "' title='" . lang('Alter view') . "'>$title</a>" : $title);
 				echo '<td align="right"><a href="' . h(ME) . "select=" . urlencode($name) . '" title="' . lang('Select data') . '">?</a>';
 			} else {
 				foreach ([
@@ -182,6 +183,8 @@ if ($_GET["ns"] === "") {
 		echo "</table>\n";
 		echo "</div>\n"; // scrollable
 
+		echo script("ajaxSetHtml('" . js_escape(ME) . "script=db');");
+
 		if (Admin::get()->isDataEditAllowed()) {
 			echo "<div class='table-footer'><div class='field-sets'>\n";
 			$vacuum = "<input type='submit' class='button' value='" . lang('Vacuum') . "'> " . help_script("VACUUM");
@@ -197,18 +200,23 @@ if ($_GET["ns"] === "") {
 			. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script(DIALECT == "sqlite" ? "DELETE" : ("TRUNCATE" . (DIALECT == "pgsql" ? "" : " TABLE"))) . confirm()
 			. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
 			$databases = (support("scheme") ? Admin::get()->getSchemas() : Admin::get()->getDatabases());
+			echo "</div></fieldset>\n";
+			$script = "";
 			if (count($databases) != 1 && DIALECT != "sqlite") {
+				echo "<fieldset><legend>" . lang('Move to other database') . " <span id='selected3'></span></legend><div>";
 				$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
-				echo "<p><span id='label-move'>" . lang('Move to other database') . ":</span> ";
 				echo ($databases ? html_select("target", $databases, $db, "", "label-move") : '<input class="input" name="target" value="' . h($db) . '" autocapitalize="off">');
 				echo " <input type='submit' class='button' name='move' value='" . lang('Move') . "'>";
 				echo (support("copy") ? " <input type='submit' class='button' name='copy' value='" . lang('Copy') . "'> " . checkbox("overwrite", 1, $_POST["overwrite"], lang('overwrite')) : "");
-				echo "\n";
+				echo "</div></fieldset>\n";
+				$script = " selectCount('selected3', formChecked(this, /^(tables|views)\[/));";
 			}
 			echo input_hidden("all"); // used by trCheck()
-			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));" . (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "") . " }");
+			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));"
+				. (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "")
+				. "$script }"
+			);
 			echo input_token();
-			echo "</div></fieldset>\n";
 			echo "</div></div>\n";
 
 			echo script("initTableFooter()");
@@ -323,9 +331,5 @@ if ($_GET["ns"] === "") {
 			}
 		}
 		echo '<p class="links"><a href="', h(ME), 'event=">', icon("event-add"), lang('Create event'), "</a></p>\n";
-	}
-
-	if ($tables_list) {
-		echo script("ajaxSetHtml('" . js_escape(ME) . "script=db');");
 	}
 }

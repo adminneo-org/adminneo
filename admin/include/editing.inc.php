@@ -402,7 +402,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 		echo "<th>";
 		if ($display) {
-			echo "<input class='input' name='fields[$i][field]' value='", h($field["field"]), "' data-maxlength='64' autocapitalize='off' aria-labelledby='label-name'>";
+			echo "<input class='input' name='fields[$i][field]' value='", h($field["field"]), "' data-maxlength='64' autocapitalize='off' aria-labelledby='label-name' " . (isset($_POST["add"][$i-1]) ? "autofocus" : "") . ">";
 		}
 		echo input_hidden("fields[$i][orig]", $orig);
 		edit_type("fields[$i]", $field, $collations, $foreign_keys);

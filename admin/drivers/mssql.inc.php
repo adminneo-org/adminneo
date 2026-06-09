@@ -48,7 +48,7 @@ if (isset($_GET["mssql"])) {
 					$connectionInfo["Database"] = $db;
 				}
 
-				$this->connection = @sqlsrv_connect(preg_replace('~:~', ',', $server), $connectionInfo);
+				$this->connection = @sqlsrv_connect(implode(",", host_port($server)), $connectionInfo);
 				if ($this->connection) {
 					$info = sqlsrv_server_info($this->connection);
 					$this->version = $info['SQLServerVersion'];
@@ -273,7 +273,7 @@ if (isset($_GET["mssql"])) {
 
 					$optionsString = $options ? (";" . implode(";", $options)) : "";
 
-					return $this->dsn("sqlsrv:Server=" . str_replace(":", ",", $server) . $optionsString, $username, $password);
+					return $this->dsn("sqlsrv:Server=" . implode(",", host_port($server)) . $optionsString, $username, $password);
 				}
 			}
 		} elseif (extension_loaded("pdo_dblib")) {
@@ -283,7 +283,8 @@ if (isset($_GET["mssql"])) {
 			{
 				public function open(string $server, string $username, string $password): bool
 				{
-					$result = $this->dsn("dblib:charset=utf8;host=" . str_replace(":", ";unix_socket=", preg_replace('~:(\d)~', ';port=\1', $server)), $username, $password);
+					list($host, $port) = host_port($server);
+					$result = $this->dsn("dblib:charset=utf8;host=$host" . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : ""), $username, $password);
 					if ($result) {
 						$this->query("SET ANSI_NULLS ON; SET ANSI_PADDING ON; SET CONCAT_NULL_YIELDS_NULL ON; SET ANSI_WARNINGS ON;");
 					}
@@ -872,8 +873,14 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return "TRUNCATE TABLE " . table($table);
 	}
 
-	function use_sql($database) {
-		return "USE " . idf_escape($database);
+	function create_database_sql(string $database, string $style = ""): string
+	{
+		return "";
+	}
+
+	function use_sql(string $database): string
+	{
+		return "USE " . idf_escape($database) . ";\n";
 	}
 
 	function trigger_sql(string $table): string
