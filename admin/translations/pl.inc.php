@@ -127,6 +127,7 @@ return [
 	'Unable to upload a file.' => 'Wgranie pliku było niemożliwe.',
 	'Maximum allowed file size is %sB.' => 'Maksymalna wielkość pliku to %sB.',
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksymalna liczba plików to %d. Wybierz mniej plików lub zwiększ zmienną konfiguracyjną %s.',
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksymalny rozmiar całkowity plików to %s. Wybierz mniejsze pliki lub zwiększ zmienną konfiguracyjną %s.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Przesłano zbyt dużo danych. Zmniejsz objętość danych lub zwiększ zmienną konfiguracyjną %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Większe pliki SQL możesz wgrać na serwer poprzez FTP przed zaimportowaniem.',
 	'File must be in UTF-8 encoding.' => 'Kodowanie pliku musi być ustawione na UTF-8.',
