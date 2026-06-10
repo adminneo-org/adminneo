@@ -67,7 +67,7 @@ class Admin extends Origin
 			"../vendor/vrana/jush/modules/jush-sqlite.js",
 			"../vendor/vrana/jush/modules/jush-oracle.js",
 			"../vendor/vrana/jush/modules/jush-simpledb.js",
-			"../vendor/vrana/jush/modules/jush-js.js",
+			"../vendor/vrana/jush/modules/jush-json.js",
 		]), true);
 	}
 
@@ -197,7 +197,7 @@ class Admin extends Origin
 			$query .= ";";
 		}
 
-		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "js" : DIALECT;
+		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "json" : DIALECT;
 		$return = "<pre><code class='jush-$syntax'>" . h(str_replace("\n", " ", $query)) . "</code></pre>\n";
 
 		$return .= "<p class='links'>";
@@ -262,7 +262,7 @@ class Admin extends Origin
 		}
 
 		$return .= "<div id='$sqlId' class='hidden'>\n";
-		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "js" : DIALECT;
+		$syntax = DIALECT == "elastic" || DIALECT == "mongo" ? "json" : DIALECT;
 		$return .= "<pre><code class='jush-$syntax'>" . truncate_utf8($query, 1000) . "</code></pre>\n";
 
 		$return .= "<p class='links'>";
@@ -336,7 +336,7 @@ class Admin extends Origin
 		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
 		} elseif ($this->admin->detectJson($field["type"], $original)) {
-			$text = "<code class='jush-js'>$val</code>";
+			$text = "<code class='jush-json'>$val</code>";
 		} else {
 			$text = $val;
 		}
@@ -1274,10 +1274,8 @@ class Admin extends Origin
 				echo "</script>\n";
 			}
 
-			$noLinks = DIALECT == "mongo" ? "true" : "false";
-
 			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" .
-				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion, $noLinks); });");
+				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion); });");
 		}
 	}
 

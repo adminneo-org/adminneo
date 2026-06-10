@@ -452,7 +452,7 @@ function input($field, $value, $function, $autofocus = false): void {
 	} elseif (is_blob($field) && ini_bool("file_uploads")) {
 		echo "<input type='file' name='fields-$name'>";
 	} elseif ($json_type) {
-		echo "<textarea$attrs cols='50' rows='12' class='jush-js'>" . h($value) . '</textarea>';
+		echo "<textarea$attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
 	} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
 		if ($text && DIALECT != "sqlite") {
 			$attrs .= " cols='50' rows='12'";

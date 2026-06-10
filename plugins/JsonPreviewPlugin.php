@@ -127,7 +127,7 @@ class JsonPreviewPlugin extends Plugin
 		}
 
 		return "<a class='toggle jsonly' href='#json-code-$this->linkIdBase-$this->counter' title='JSON' data-value='" . h($val) . "'>" . icon_chevron_right() . "</a>" .
-			" <code class='jush-js'>$val</code>" .
+			" <code class='jush-json'>$val</code>" .
 			$this->buildTable($json, 1, $this->counter++);
 
 	}
@@ -145,7 +145,7 @@ class JsonPreviewPlugin extends Plugin
 
 		return "<div class='jsonly'><a class='toggle' href='#json-code-$this->linkIdBase-$this->counter'>JSON" . icon_chevron_down() . "</a></div>" .
 			$this->buildTable($json, 1, $this->counter++) .
-			"<textarea $attrs cols='50' rows='12' class='jush-js'>" . h($value) . "</textarea>";
+			"<textarea $attrs cols='50' rows='12' class='jush-json'>" . h($value) . "</textarea>";
 
 	}
 
@@ -192,7 +192,7 @@ class JsonPreviewPlugin extends Plugin
 					$val = "null";
 				}
 
-				$value .= "<code class='jush-js'>$val</code>";
+				$value .= "<code class='jush-json'>$val</code>";
 			}
 		}
 
