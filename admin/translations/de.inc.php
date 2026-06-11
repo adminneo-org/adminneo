@@ -29,6 +29,7 @@ return [
 	'Logout' => 'Abmelden',
 	'Logged as: %s' => 'Angemeldet als: %s',
 	'Logout successful.' => 'Abmeldung erfolgreich.',
+	'hostname[:port] or :socket' => 'hostname[:port] oder :socket',
 	'Invalid server or credentials.' => 'Ungültige Server oder Anmelde-Informationen.',
 	'There is a space in the input password which might be the cause.' => 'Es gibt ein Leerzeichen im Eingabepasswort, das die Ursache sein könnte.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo unterstützt den Zugriff auf eine Datenbank ohne Passwort nicht, <a href="https://www.adminneo.org/password"%s>mehr Informationen</a>.',

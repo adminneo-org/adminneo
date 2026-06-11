@@ -29,6 +29,7 @@ return [
 	'Logout' => 'Cerrar sesión',
 	'Logged as: %s' => 'Logueado como: %s',
 	'Logout successful.' => 'Sesión finalizada con éxito.',
+	'hostname[:port] or :socket' => 'hostname[:port] o :socket',
 	'Invalid server or credentials.' => 'Servidor o credenciales no válidos.',
 	'There is a space in the input password which might be the cause.' => 'Hay un espacio en la contraseña introducida, lo que puede ser la causa.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo no soporta el acceso a bases de datos sin contraseña, <a href="https://www.adminneo.org/password"%s>más informacion</a>.',

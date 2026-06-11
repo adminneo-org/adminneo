@@ -29,6 +29,7 @@ return [
 	'Logout' => 'Afmelden',
 	'Logged as: %s' => 'Aangemeld als: %s',
 	'Logout successful.' => 'Successvol afgemeld.',
+	'hostname[:port] or :socket' => 'hostname[:port] of :socket',
 	'Invalid server or credentials.' => 'Ongeldige server- of aanmeldingsgegevens..',
 	'There is a space in the input password which might be the cause.' => 'Er staat een spatie in het wachtwoord, wat misschien de oorzaak is.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ondersteunt geen toegang tot databases zonder wachtwoord, <a href="https://www.adminneo.org/password"%s>meer informatie</a>.',
