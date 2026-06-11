@@ -706,6 +706,26 @@ abstract class Origin extends Plugin
 		return false;
 	}
 
+	/**
+	 * Returns server variables.
+	 *
+	 * @return list<string[]> [[$name, $value]]
+	 */
+	function getServerVariables(): array
+	{
+		return show_variables();
+	}
+
+	/**
+	 * Returns status variables.
+	 *
+	 * @return list<string[]> [[$name, $value]]
+	 */
+	function getStatusVariables(): array
+	{
+		return show_status();
+	}
+
 	public abstract function getDumpOutputs(): array;
 
 	public abstract function getDumpFormats(): array;
