@@ -1056,26 +1056,32 @@ function is_mail($value): bool
 	return is_string($value) && filter_var($value, FILTER_VALIDATE_EMAIL);
 }
 
-/** Check whether the string is web URL address
-* @param string
-* @return bool
-*/
-function is_web_url($value) {
+/**
+ * Check whether the value is web URL address.
+ */
+function is_web_url($value): bool
+{
 	if (!is_string($value) || !preg_match('~^https?://~i', $value)) {
 		return false;
 	}
 
 	$components = parse_url($value);
-    if (!$components) {
-        return false;
-    }
+	if (!$components) {
+		return false;
+	}
 
-    // Encode URL path. If path was encoded already, it will be encoded twice, but we are OK with that.
-	$encodedParts = array_map('urlencode', explode('/', $components['path']));
-	$url = str_replace($components['path'], implode('/', $encodedParts), $value);
+	$url = $value;
 
-	parse_str($components['query'], $params);
-	$url = str_replace($components['query'], http_build_query($params), $url);
+	// Encode URL path. If path was encoded already, it will be encoded twice, but we are OK with that.
+	if (isset($components['path'])) {
+		$encodedParts = array_map('urlencode', explode('/', $components['path']));
+		$url = str_replace($components['path'], implode('/', $encodedParts), $url);
+	}
+
+	if (isset($components['query'])) {
+		parse_str($components['query'], $params);
+		$url = str_replace($components['query'], http_build_query($params), $url);
+	}
 
 	return (bool)filter_var($url, FILTER_VALIDATE_URL);
 }
