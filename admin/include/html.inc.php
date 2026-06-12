@@ -402,7 +402,7 @@ function input($field, $value, $function, $autofocus = false): void {
 	}
 
 	// Attributes.
-	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled=''" : "";
+	$disabled = stripos($field["default"], "GENERATED ALWAYS AS ") === 0 ? " disabled" : "";
 	$attrs = " name='fields[$name]' $disabled" . ($autofocus ? " autofocus" : "");
 
 	// Function list.
