@@ -14,6 +14,7 @@ AdminNeo 5.5.0
 - Link routines from syntax highlighting (by @vrana)
 - Do not quote 0 in CSV export (by @vrana)
 - Add getServerVariables() and getStatusVariables() customization methods
+- Link //domain.tld values
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)

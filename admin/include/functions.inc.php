@@ -1061,7 +1061,7 @@ function is_mail($value): bool
  */
 function is_web_url($value): bool
 {
-	if (!is_string($value) || !preg_match('~^https?://~i', $value)) {
+	if (!is_string($value) || !preg_match('~^(https?:)?//~i', $value)) {
 		return false;
 	}
 
@@ -1081,6 +1081,11 @@ function is_web_url($value): bool
 	if (isset($components['query'])) {
 		parse_str($components['query'], $params);
 		$url = str_replace($components['query'], http_build_query($params), $url);
+	}
+
+	// FILTER_VALIDATE_URL requires a scheme, add a dummy one for //domain.tld values.
+	if (!isset($components['scheme'])) {
+		$url = "https:$url";
 	}
 
 	return (bool)filter_var($url, FILTER_VALIDATE_URL);
