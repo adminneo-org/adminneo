@@ -656,7 +656,13 @@ function edit_form($table, $fields, $row, $update): void {
 				$value = Admin::get()->formatFieldValue($value, $field);
 			}
 			if (($update && !isset($field["privileges"]["update"])) || $field["generated"]) {
-				echo "<td class='function'></td><td>", select_value($value, '', $field, null), "</td>";
+				echo "<td class='function'></td><td>";
+				if ($update || !$field["generated"]) {
+					echo select_value($value, '', $field, null);
+				} else {
+					echo "<code class='jush-" . DIALECT . "'>", h($value), "</code>";
+				}
+				echo "</td>";
 			} else {
 				$function = ($_POST["save"]
 					? $_POST["function"][$name] ?? ""
