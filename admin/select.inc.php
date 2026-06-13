@@ -457,7 +457,6 @@ if (!$columns && support("table")) {
 					if (isset($names[$key])) {
 						$column = current($select);
 						$field = $fields[$key] ?? null;
-						$val = $field ? Connection::get()->formatValue($val, $field) : $val;
 
 						$link = "";
 						if ($field && is_blob($field) && $val != "") {
