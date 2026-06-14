@@ -298,7 +298,8 @@ if (isset($_GET["clickhouse"])) {
 		$alter = $order = [];
 		foreach ($fields as $field) {
 			if ($field[1][2] === " NULL") {
-				$field[1][1] = " Nullable({$field[1][1]})";
+				$field[1][1] = " Nullable(" . (ltrim($field[1][1])) . ")";
+				$field[1][2] = '';
 			} elseif ($field[1][2] === ' NOT NULL') {
 				$field[1][2] = '';
 			}
@@ -451,13 +452,15 @@ if (isset($_GET["clickhouse"])) {
 		$return = [];
 		$result = get_rows("SELECT name, type, default_expression FROM system.columns WHERE " . idf_escape('table') . " = " . q($table));
 		foreach ($result as $row) {
-			$type = trim($row['type']);
-			$nullable = strpos($type, 'Nullable(') === 0;
-			$return[trim($row['name'])] = [
-				"field" => trim($row['name']),
+			$type = $row['type'];
+			$nullable = str_contains($type, 'Nullable(');
+			$type = preg_replace('~Nullable\(([^)]+)\)~', "$1", $type);
+
+			$return[$row['name']] = [
+				"field" => $row['name'],
 				"full_type" => $type,
 				"type" => $type,
-				"default" => trim($row['default_expression']),
+				"default" => $row['default_expression'],
 				"null" => $nullable,
 				"auto_increment" => '0',
 				"privileges" => ["insert" => 1, "select" => 1, "update" => 0, "where" => 1, "order" => 1],
