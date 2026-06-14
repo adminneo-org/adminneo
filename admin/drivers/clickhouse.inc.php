@@ -296,6 +296,7 @@ if (isset($_GET["clickhouse"])) {
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
 	{
 		$alter = $order = [];
+		$remove = [];
 		foreach ($fields as $field) {
 			if ($field[1][2] === " NULL") {
 				$field[1][1] = " Nullable(" . (ltrim($field[1][1])) . ")";
@@ -304,8 +305,8 @@ if (isset($_GET["clickhouse"])) {
 				$field[1][2] = '';
 			}
 
-			if ($field[1][3]) {
-				$field[1][3] = '';
+			if ($field[1][3] == "" && Connection::get()->isMinVersion("20.10")) {
+				$remove[] = "MODIFY COLUMN " . idf_escape($field[0]) . " REMOVE DEFAULT";
 			}
 
 			$alter[] = ($field[1]
@@ -316,7 +317,7 @@ if (isset($_GET["clickhouse"])) {
 			$order[] = $field[1][0];
 		}
 
-		$alter = array_merge($alter, $foreign);
+		$alter = array_merge($alter, $remove, $foreign);
 		$status = ($engine ? " ENGINE " . $engine : "");
 		if ($table == "") {
 			return (bool)queries("CREATE TABLE " . table($name) . " (\n" . implode(",\n", $alter) . "\n)$status" . ' ORDER BY (' . implode(',', $order) . ')');
@@ -460,7 +461,7 @@ if (isset($_GET["clickhouse"])) {
 				"field" => $row['name'],
 				"full_type" => $type,
 				"type" => $type,
-				"default" => $row['default_expression'],
+				"default" => $row['default_expression'] != "" ? preg_replace('~^\'(.*)\'$~', "$1", $row['default_expression']) : null,
 				"null" => $nullable,
 				"auto_increment" => '0',
 				"privileges" => ["insert" => 1, "select" => 1, "update" => 0, "where" => 1, "order" => 1],

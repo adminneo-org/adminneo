@@ -50,6 +50,7 @@ AdminNeo 5.5.0
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
 - ClickHouse: Set default format, support Common Table Expressions (by @polonskiy)
 - ClickHouse: Fix nullable columns
+- ClickHouse: Fix default values
 
 (Ported relevant changes from Adminer 5.4.0-5.4.1.)
 
