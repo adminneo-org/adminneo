@@ -315,7 +315,7 @@ if (isset($_GET["clickhouse"])) {
 		$alter = array_merge($alter, $foreign);
 		$status = ($engine ? " ENGINE " . $engine : "");
 		if ($table == "") {
-			return (bool)queries("CREATE TABLE " . table($name) . " (\n" . implode(",\n", $alter) . "\n)$status$partitioning" . ' ORDER BY (' . implode(',', $order) . ')');
+			return (bool)queries("CREATE TABLE " . table($name) . " (\n" . implode(",\n", $alter) . "\n)$status" . ' ORDER BY (' . implode(',', $order) . ')');
 		}
 		if ($table != $name) {
 			$result = (bool)queries("RENAME TABLE " . table($table) . " TO " . table($name));
@@ -328,7 +328,7 @@ if (isset($_GET["clickhouse"])) {
 		if ($status) {
 			$alter[] = ltrim($status);
 		}
-		return !($alter || $partitioning) || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter) . $partitioning);
+		return !$alter || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter));
 	}
 
 	function truncate_tables($tables): bool
