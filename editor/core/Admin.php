@@ -181,7 +181,7 @@ class Admin extends Origin
 		//
 	}
 
-	public function printInheritedTables(array $inheritedTables): void
+	public function printRelatedTables(array $tables): void
 	{
 		//
 	}

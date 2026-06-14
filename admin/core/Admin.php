@@ -457,11 +457,11 @@ class Admin extends Origin
 		}
 	}
 
-	public function printInheritedTables(array $inheritedTables): void
+	public function printRelatedTables(array $tables): void
 	{
 		echo "<ul class='links'>\n";
 
-		foreach ($inheritedTables as $table) {
+		foreach ($tables as $table) {
 			echo "<li><a href='", h(ME . "table=" . urlencode($table)), "'>", icon("structure"), h($table), "</a>";
 		}
 

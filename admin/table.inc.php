@@ -60,11 +60,7 @@ if ($info || $fields || $comment != "") {
 $parent_tables = Driver::get()->getParentTables($TABLE);
 if ($parent_tables) {
 	echo "<h2>" . lang('Inherited from') . "</h2>\n";
-	echo "<ul class='links'>\n";
-	foreach ($parent_tables as $table) {
-		echo "<li><a href='", h(ME . "table=" . urlencode($table)), "'>", icon("structure"), h($table), "</a>";
-	}
-	echo "</ul>\n";
+	Admin::get()->printRelatedTables($parent_tables);
 }
 
 if (Driver::get()->getPartitionBy() && str_contains($table_status["Create_options"] ?? "", "partitioned")) {
@@ -83,7 +79,7 @@ if (Driver::get()->getPartitionBy() && str_contains($table_status["Create_option
 $inherited_tables = Driver::get()->getInheritedTables($TABLE);
 if ($inherited_tables) {
 	echo "<h2 id='inherited-by'>" . lang('Inherited tables') . "</h2>\n";
-	Admin::get()->printInheritedTables($inherited_tables);
+	Admin::get()->printRelatedTables($inherited_tables);
 }
 
 if (support("indexes") && Driver::get()->supportsIndex($table_status)) {
