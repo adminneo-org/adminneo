@@ -380,7 +380,7 @@ if (!$columns && support("table")) {
 						$desc = "&desc%5B0%5D=1";
 						echo "<th id='th[" . h(bracket_escape($key)) . "]'>" . script("mixin(qsl('th'), {onmouseover: partial(columnMouse), onmouseout: partial(columnMouse, ' hidden')});", "");
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
-						$sortable = isset($field["privileges"]["order"]) || $fun;
+						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
 							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
 						} else {
@@ -457,7 +457,6 @@ if (!$columns && support("table")) {
 					if (isset($names[$key])) {
 						$column = current($select);
 						$field = $fields[$key] ?? null;
-						$val = $field ? Connection::get()->formatValue($val, $field) : $val;
 
 						$link = "";
 						if ($field && is_blob($field) && $val != "") {
@@ -549,7 +548,7 @@ if (!$columns && support("table")) {
 						if ($found_rows < max(1e4, 2 * ($page + 1) * $limit)) {
 							// slow with big tables
 							$found_rows = first(slow_query(count_rows($TABLE, $where, $is_group, $group)));
-						} else {
+						} elseif (DIALECT == 'sql' || DIALECT == 'pgsql') {
 							$exact_count = false;
 						}
 					}

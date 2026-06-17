@@ -113,11 +113,7 @@ function verifyVersion(baseUrl, token) {
 			const matches = response.tag_name.match(/^v(\d{1,2}\.\d{1,2}\.\d{1,2}(-(alpha|beta|rc)\d?)?)$/);
 			if (!matches) return;
 
-			const version = matches[1];
-			cookie('neo_version=' + version, 1);
-
-			const data = 'version=' + version + '&token=' + token;
-			ajax(baseUrl + 'script=version', null, data);
+			cookie('neo_version=' + matches[1], 1);
 		}, null, null, true);
 	});
 }

@@ -7,7 +7,7 @@ $title = $status ? lang('Status') : lang('Variables');
 
 page_header($title, [$title]);
 
-$variables = ($status ? show_status() : show_variables());
+$variables = ($status ? Admin::get()->getStatusVariables() : Admin::get()->getServerVariables());
 if (!$variables) {
 	echo "<p class='message'>", lang('No rows.'), "</p>\n";
 } else {

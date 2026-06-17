@@ -7,7 +7,7 @@ $fields = fields($TABLE);
 $where = (isset($_GET["select"]) ? ($_POST["check"] && count($_POST["check"]) == 1 ? where_check($_POST["check"][0], $fields) : "") : where($_GET, $fields));
 $update = (isset($_GET["select"]) ? $_POST["edit"] : $where);
 foreach ($fields as $name => $field) {
-	if (!isset($field["privileges"][$update ? "update" : "insert"]) || Admin::get()->getFieldName($field) == "" || $field["generated"]) {
+	if ((!$update && !isset($field["privileges"]["insert"])) || Admin::get()->getFieldName($field) == "") {
 		unset($fields[$name]);
 	}
 }
@@ -67,9 +67,7 @@ if ($_POST && !isset($_GET["select"])) {
 }
 
 $row = null;
-if ($_POST["save"]) {
-	$row = (array) $_POST["fields"];
-} elseif ($where) {
+if ($where) {
 	$select = [];
 	foreach ($fields as $name => $field) {
 		if (isset($field["privileges"]["select"])) {
@@ -113,6 +111,10 @@ if (!support("table") && !$fields) {
 			$fields[$key] = ["field" => $key, "null" => ($key != Driver::get()->primary), "auto_increment" => ($key == Driver::get()->primary)];
 		}
 	}
+}
+
+if ($_POST["save"] ?? false) {
+	$row = ($_POST["fields"] ?? []) + ($row ?: []);
 }
 
 edit_form($TABLE, $fields, $row, $update);

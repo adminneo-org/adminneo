@@ -492,14 +492,14 @@ if (isset($_GET["pgsql"])) {
 
 		public function getInheritedTables(string $table): array
 		{
-			return get_vals("SELECT relname FROM pg_inherits JOIN pg_class ON inhrelid = oid WHERE inhparent = " . $this->tableOid($table) .
+			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_inherits JOIN pg_class ON inhrelid = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhparent = " . $this->tableOid($table) .
 				(Connection::get()->isMinVersion("10") ? " AND relispartition::int = 0" : "") . // do not return partitions
-				" ORDER BY 1");
+				" ORDER BY 2, 1");
 		}
 
 		public function getParentTables(string $table): array
 		{
-			return get_vals("SELECT relname FROM pg_class JOIN pg_inherits ON inhparent = oid WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 1");
+			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_class JOIN pg_inherits ON inhparent = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 2, 1");
 		}
 
 		public function isPartition(string $table): bool
@@ -791,17 +791,19 @@ AND relnamespace = " . Driver::get()->getNsOidSql() . "
 	format_type(a.atttypid, a.atttypmod) AS full_type,
 	a.attndims, pg_get_expr(d.adbin, d.adrelid) AS default,
 	a.attnotnull::int,
+	i.indrelid AS primary,
 	col_description(a.attrelid, a.attnum) AS comment" . (Connection::get()->isMinVersion("10") ? ",
 	a.attidentity" . (Connection::get()->isMinVersion("12") ? ",
 	a.attgenerated" : "") : "") . "
 FROM pg_attribute a
 LEFT JOIN pg_attrdef d ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+LEFT JOIN pg_index i ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey) AND i.indisprimary
 WHERE a.attrelid = " . Driver::get()->tableOid($table) . "
 AND NOT a.attisdropped
 AND a.attnum > 0
 ORDER BY a.attnum"
 		) as $row) {
-			//! collation, primary
+			//! collation
 			preg_match('~([^([]+)(\((.*)\))?([a-z ]+)?((\[[0-9]*])*)$~', $row["full_type"], $match);
 			list(, $type, $length, $row["length"], $addon, $array) = $match;
 			$check_type = $type . $addon;
@@ -824,7 +826,7 @@ ORDER BY a.attnum"
 			$row["auto_increment"] = $row['attidentity'] || preg_match('~^nextval\(~i', $row["default"])
 				|| preg_match('~^unique_rowid\(~', $row["default"]); // CockroachDB
 			$row["privileges"] = ["insert" => 1, "select" => 1, "update" => 1, "where" => 1, "order" => 1];
-			if (preg_match('~(.+)::[^,)]+(.*)~', $row["default"], $match)) {
+			if (!$row['generated'] && preg_match('~(.+)::[^,)]+(.*)~', $row["default"], $match)) {
 				$row["default"] = ($match[1] == "NULL" ? null : idf_unescape($match[1]) . $match[2]);
 			}
 			$return[$row["field"]] = $row;
@@ -848,7 +850,7 @@ WHERE indrelid = $table_oid
 ORDER BY indisprimary DESC, indisunique DESC", $connection
          ) as $row) {
 			$relname = $row["relname"];
-			$return[$relname]["type"] = ($row["partial"] ? "INDEX" : ($row["indisprimary"] ? "PRIMARY" : ($row["indisunique"] ? "UNIQUE" : "INDEX")));
+			$return[$relname]["type"] = ($row["indisprimary"] ? "PRIMARY" : ($row["indisunique"] ? "UNIQUE" : "INDEX"));
 			$return[$relname]["columns"] = [];
 			$return[$relname]["descs"] = [];
 			$return[$relname]["algorithm"] = $row["amname"];
@@ -869,11 +871,12 @@ ORDER BY indisprimary DESC, indisunique DESC", $connection
 		$onActions = implode("|", Driver::get()->getOnActions());
 
 		$return = [];
-		foreach (get_rows("SELECT conname, condeferrable::int AS deferrable, pg_get_constraintdef(oid) AS definition
+		foreach (get_rows("SELECT conname, condeferrable::int AS deferrable, condeferred::int AS deferred, pg_get_constraintdef(oid) AS definition
 FROM pg_constraint
 WHERE conrelid = " . Driver::get()->tableOid($table) . "
 AND contype = 'f'::char
 ORDER BY conkey, conname") as $row) {
+			$row['deferrable'] = ($row['deferrable'] ? '' : 'NOT ') . 'DEFERRABLE' . ($row['deferred'] ? ' INITIALLY DEFERRED' : '');
 			if (preg_match('~FOREIGN KEY\s*\((.+)\)\s*REFERENCES (.+)\((.+)\)(.*)$~iA', $row['definition'], $match)) {
 				$row['source'] = array_map('AdminNeo\idf_unescape', array_map('trim', explode(',', $match[1])));
 				if (preg_match('~^(("([^"]|"")+"|[^"]+)\.)?"?("([^"]|"")+"|[^"]+)$~', $match[2], $match2)) {
@@ -1293,7 +1296,7 @@ AND typelem = 0"
 		ksort($fkeys);
 
 		foreach ($fkeys as $fkey_name => $fkey) {
-			$return .= "ALTER TABLE ONLY " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " $fkey[definition] " . ($fkey['deferrable'] ? 'DEFERRABLE' : 'NOT DEFERRABLE') . ";\n";
+			$return .= "ALTER TABLE ONLY " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " $fkey[definition];\n";
 		}
 
 		return ($return ? "$return\n" : $return);
@@ -1304,9 +1307,10 @@ AND typelem = 0"
 		$sequences = [];
 
 		$status = table_status1($table);
+		$ns = idf_escape($status['nspname']);
 		if (is_view($status)) {
 			$view = view($table);
-			return rtrim("CREATE VIEW " . idf_escape($table) . " AS $view[select]", ";");
+			return rtrim("CREATE VIEW $ns." . idf_escape($table) . " AS $view[select]", ";");
 		}
 		$fields = fields($table);
 
@@ -1314,7 +1318,7 @@ AND typelem = 0"
 			return false;
 		}
 
-		$return = "CREATE TABLE " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " (\n    ";
+		$return = "CREATE TABLE $ns." . idf_escape($status['Name']) . " (\n    ";
 
 		// fields' definitions
 		foreach ($fields as $field) {
@@ -1331,8 +1335,8 @@ AND typelem = 0"
 					: "SELECT * FROM $sequence_name"
 				), null, "-- "));
 
-				$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $sequence_name;\n" : "") .
-					"CREATE SEQUENCE $sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
+				$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $ns.$sequence_name;\n" : "") .
+					"CREATE SEQUENCE $ns.$sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
 					($auto_increment && $sq['last_value'] ? " START " . ($sq["last_value"] + 1) : "") .
 					" CACHE $sq[cache_value];";
 			}
@@ -1352,7 +1356,7 @@ AND typelem = 0"
 		}
 
 		foreach (Driver::get()->checkConstraints($table) as $conname => $consrc) {
-			$return_parts[] = "CONSTRAINT " . idf_escape($conname) . " CHECK $consrc";
+			$return_parts[] = "CONSTRAINT " . idf_escape($conname) . " CHECK ($consrc)";
 		}
 
 		$return .= implode(",\n    ", $return_parts) . "\n)";
@@ -1367,12 +1371,12 @@ AND typelem = 0"
 
 		// comments for table & fields
 		if ($status['Comment']) {
-			$return .= "\n\nCOMMENT ON TABLE " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " IS " . q($status['Comment']) . ";";
+			$return .= "\n\nCOMMENT ON TABLE $ns." . idf_escape($status['Name']) . " IS " . q($status['Comment']) . ";";
 		}
 
 		foreach ($fields as $field_name => $field) {
 			if ($field['comment']) {
-				$return .= "\n\nCOMMENT ON COLUMN " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . "." . idf_escape($field_name) . " IS " . q($field['comment']) . ";";
+				$return .= "\n\nCOMMENT ON COLUMN $ns." . idf_escape($status['Name']) . "." . idf_escape($field_name) . " IS " . q($field['comment']) . ";";
 			}
 		}
 

@@ -26,8 +26,11 @@ if (isset($_GET["clickhouse"])) {
 			{
 				$file = @file_get_contents("$this->serviceUrl/?database=$db", false, stream_context_create(['http' => [
 					'method' => 'POST',
-					'content' => $this->isQuerySelectLike($query) ? "$query FORMAT JSONCompact" : $query,
-					'header' => 'Content-type: application/x-www-form-urlencoded',
+					'content' => $query,
+					'header' => [
+						'Content-Type: application/x-www-form-urlencoded',
+						'X-ClickHouse-Format: JSONCompact',
+					],
 					'ignore_errors' => 1,
 					'follow_location' => 0,
 					'max_redirects' => 0,
@@ -80,7 +83,7 @@ if (isset($_GET["clickhouse"])) {
 
 			private function isQuerySelectLike($query): bool
 			{
-				return (bool)preg_match('~^(select|show)~i', $query);
+				return (bool)preg_match('~^\s*(select|show|with)~i', $query);
 			}
 
 			function query(string $query, bool $unbuffered = false)
@@ -293,15 +296,17 @@ if (isset($_GET["clickhouse"])) {
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
 	{
 		$alter = $order = [];
+		$remove = [];
 		foreach ($fields as $field) {
 			if ($field[1][2] === " NULL") {
-				$field[1][1] = " Nullable({$field[1][1]})";
+				$field[1][1] = " Nullable(" . (ltrim($field[1][1])) . ")";
+				$field[1][2] = '';
 			} elseif ($field[1][2] === ' NOT NULL') {
 				$field[1][2] = '';
 			}
 
-			if ($field[1][3]) {
-				$field[1][3] = '';
+			if ($field[1][3] == "" && Connection::get()->isMinVersion("20.10")) {
+				$remove[] = "MODIFY COLUMN " . idf_escape($field[0]) . " REMOVE DEFAULT";
 			}
 
 			$alter[] = ($field[1]
@@ -312,10 +317,10 @@ if (isset($_GET["clickhouse"])) {
 			$order[] = $field[1][0];
 		}
 
-		$alter = array_merge($alter, $foreign);
+		$alter = array_merge($alter, $remove, $foreign);
 		$status = ($engine ? " ENGINE " . $engine : "");
 		if ($table == "") {
-			return (bool)queries("CREATE TABLE " . table($name) . " (\n" . implode(",\n", $alter) . "\n)$status$partitioning" . ' ORDER BY (' . implode(',', $order) . ')');
+			return (bool)queries("CREATE TABLE " . table($name) . " (\n" . implode(",\n", $alter) . "\n)$status" . ' ORDER BY (' . implode(',', $order) . ')');
 		}
 		if ($table != $name) {
 			$result = (bool)queries("RENAME TABLE " . table($table) . " TO " . table($name));
@@ -328,7 +333,7 @@ if (isset($_GET["clickhouse"])) {
 		if ($status) {
 			$alter[] = ltrim($status);
 		}
-		return !($alter || $partitioning) || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter) . $partitioning);
+		return !$alter || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter));
 	}
 
 	function truncate_tables($tables): bool
@@ -380,7 +385,7 @@ if (isset($_GET["clickhouse"])) {
 	}
 
 	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
-		return " $query$where" . ($limit ? $separator . "LIMIT $limit" . ($offset ? ", $offset" : "") : "");
+		return " $query$where" . ($limit ? $separator . "LIMIT " . ($offset ? "$offset, " : "") . $limit : "");
 	}
 
 	function limit1($table, $query, $where, $separator = "\n") {
@@ -412,7 +417,7 @@ if (isset($_GET["clickhouse"])) {
 
 	function table_status($name = "", $fast = false) {
 		$return = [];
-		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()));
+		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()) . ($name != "" ? " AND name = " . q($name) : ""));
 		foreach ($tables as $table) {
 			$return[$table['name']] = [
 				'Name' => $table['name'],
@@ -448,13 +453,15 @@ if (isset($_GET["clickhouse"])) {
 		$return = [];
 		$result = get_rows("SELECT name, type, default_expression FROM system.columns WHERE " . idf_escape('table') . " = " . q($table));
 		foreach ($result as $row) {
-			$type = trim($row['type']);
-			$nullable = strpos($type, 'Nullable(') === 0;
-			$return[trim($row['name'])] = [
-				"field" => trim($row['name']),
+			$type = $row['type'];
+			$nullable = str_contains($type, 'Nullable(');
+			$type = preg_replace('~Nullable\(([^)]+)\)~', "$1", $type);
+
+			$return[$row['name']] = [
+				"field" => $row['name'],
 				"full_type" => $type,
 				"type" => $type,
-				"default" => trim($row['default_expression']),
+				"default" => $row['default_expression'] != "" ? preg_replace('~^\'(.*)\'$~', "$1", $row['default_expression']) : null,
 				"null" => $nullable,
 				"auto_increment" => '0',
 				"privileges" => ["insert" => 1, "select" => 1, "update" => 0, "where" => 1, "order" => 1],

@@ -29,6 +29,7 @@ return [
 	'Logout' => 'Odhlásit',
 	'Logged as: %s' => 'Přihlášen jako: %s',
 	'Logout successful.' => 'Odhlášení proběhlo v pořádku.',
+	'hostname[:port] or :socket' => 'hostname[:port] nebo :socket',
 	'Invalid server or credentials.' => 'Neplatný server nebo přihlašovací údaje.',
 	'There is a space in the input password which might be the cause.' => 'Problém může být, že je v zadaném hesle mezera.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nepodporuje přístup k databázi bez hesla, <a href="https://www.adminneo.org/password"%s>více informací</a>.',

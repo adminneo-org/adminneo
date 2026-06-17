@@ -13,26 +13,49 @@ AdminNeo 5.5.0
 - Display data length and index length for materialized views (by @vrana)
 - Link routines from syntax highlighting (by @vrana)
 - Do not quote 0 in CSV export (by @vrana)
+- Add getServerVariables() and getStatusVariables() customization methods
+- Link //domain.tld values
+- Display uneditable fields in edit form (by @vrana)
+- Improve print of nested tables (by @vrana)
+- Shorten all but numeric and date types in select (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
+- PostgreSQL: Offer foreign keys in create table (by @vrana)
+- PostgreSQL: Allow creating NOT DEFERRABLE foreign keys (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
 - Update Polish translation (by @Matthaiks)
 
 ### Bugfixes
 
-- MS SQL: Fix hiding system schemas (regression from 5.1.0)
+- Fix hiding sort links on unsupported columns (regression from 5.1.0)
 - Autofocus the first added field in alter table (by @vrana)
 - Fix validating IPv6 host
 - Allow connecting to IPv6 (by @vrana)
+- Don't quote comma in TSV export (by @vrana)
+- MySQL: Use information_schema to get routine definition (by @vrana)
+- MariaDB: Parse COLLATE in routine definition (by @vrana)
+- MariaDB: Don't display checks with the same name from another table (by @vrana)
 - PostgreSQL: Allow comparing json columns (by @vrana)
 - PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)
 - PostgreSQL: Quote edit value with interval operator (by @vrana)
 - PostgreSQL: Don't treat user types containing 'file' as blobs (by @vrana)
 - PostgreSQL: Export DROP and CREATE DATABASE (by @vrana)
-- MariaDB: Parse COLLATE in routine definition (by @vrana)
+- PostgreSQL: Mark unique partial indexes as unique (by @vrana)
+- PostgreSQL: Add missing parentheses to CHECK export (by @vrana)
+- PostgreSQL: Remove duplicate DEFERRABLE in foreign key export (by @vrana)
+- PostgreSQL: Add schema to sequence and view export (by @vrana)
+- PostgreSQL: Fix definition of complex generated columns (by @vrana)
+- PostgreSQL: Fix namespace in inheritance links (by @professor93)
+- non-PostgreSQL: display NOT NULL checks (by @vrana)
+- MS SQL: Fix hiding system schemas (regression from 5.1.0)
+- ClickHouse: Fix list of tables (by @Marcus-Nightingale)
+- ClickHouse: Fix offset (by @Marcus-Nightingale)
+- ClickHouse: Set default format, support Common Table Expressions (by @polonskiy)
+- ClickHouse: Fix nullable columns
+- ClickHouse: Fix default values
 
-(Ported relevant changes from Adminer 5.4.0-5.4.1.)
+(Ported relevant changes from Adminer 5.4.0-5.4.2.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------
@@ -153,6 +176,7 @@ AdminNeo 5.2.0 (2025-11-02)
 
 ### Bugfixes
 
+- Avoid denial-of-service via version check
 - MySQL: Fix retrieving additional info about the last query
 - MariaDB: Fix changing user password (issue #155)
 - MS SQL: Fix collation issues when retrieving default values (by @vrana)

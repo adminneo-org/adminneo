@@ -92,7 +92,7 @@ class Admin extends Origin
 				echo $this->admin->getLoginFormRow('driver', '', input_hidden("auth[driver]", $driver));
 			}
 
-			echo $this->admin->getLoginFormRow('server', lang('Server'), '<input class="input" name="auth[server]" value="' . h($server) . '" title="hostname[:port]" placeholder="localhost" autocapitalize="off">');
+			echo $this->admin->getLoginFormRow('server', lang('Server'), '<input class="input" name="auth[server]" value="' . h($server) . '" title="' . lang('hostname[:port] or :socket') . '" placeholder="localhost" autocapitalize="off">');
 		}
 
 		echo $this->admin->getLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
@@ -457,12 +457,18 @@ class Admin extends Origin
 		}
 	}
 
-	public function printInheritedTables(array $inheritedTables): void
+	public function printRelatedTables(array $tables): void
 	{
 		echo "<ul class='links'>\n";
 
-		foreach ($inheritedTables as $table) {
-			echo "<li><a href='", h(ME . "table=" . urlencode($table)), "'>", icon("structure"), h($table), "</a>";
+		foreach ($tables as $row) {
+			$link = preg_replace('~ns=[^&]*~', "ns=" . urlencode($row["ns"]), ME);
+			echo "<li><a href='", h($link . "table=" . urlencode($row["table"])), "'>", icon("structure");
+			if ($row["ns"] != $_GET["ns"]) {
+				echo "<b>" . h($row["ns"]) . "</b>.";
+			}
+			echo h($row["table"]);
+			echo "</a>";
 		}
 
 		echo "</ul>\n";
@@ -587,7 +593,9 @@ class Admin extends Origin
 				echo "<div>(<i>" . implode("</i>, <i>", array_map('AdminNeo\h', $index["columns"])) . "</i>) AGAINST";
 				echo "<input type='text' class='input' name='fulltext[$i]' value='" . h($_GET["fulltext"][$i] ?? null) . "'>";
 				echo script("qsl('input').oninput = selectFieldChange;", "");
-				echo checkbox("boolean[$i]", 1, isset($_GET["boolean"][$i]), "BOOL");
+				if (DIALECT == 'sql') {
+					echo checkbox("boolean[$i]", 1, isset($_GET["boolean"][$i]), "BOOL");
+				}
 				echo "</div>\n";
 			}
 		}

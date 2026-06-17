@@ -41,17 +41,6 @@ include __DIR__ . "/compile.inc.php";
 // Compiled files loading.
 include __DIR__ . "/../file.inc.php";
 
-if ($_GET["script"] == "version") {
-	$filename = get_temp_dir() . "/adminneo.version";
-	@unlink($filename); // It may not be writable by us, @ - it may not exist.
-
-	$file = open_file_with_lock($filename);
-	if ($file) {
-		write_and_unlock_file($file, serialize(["version" => $_POST["version"]]));
-	}
-	exit;
-}
-
 if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
 }
@@ -99,6 +88,9 @@ if (isset($_COOKIE["neo_import"])) {
 	unset($_COOKIE["neo_import"]);
 	cookie("neo_import", "", -3600);
 }
+
+// Remove unused file.
+@unlink(get_temp_dir() . "/adminneo.version");
 
 include __DIR__ . "/../core/Locale.php";
 include __DIR__ . "/lang.inc.php";
