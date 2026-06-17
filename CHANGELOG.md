@@ -176,6 +176,7 @@ AdminNeo 5.2.0 (2025-11-02)
 
 ### Bugfixes
 
+- Avoid denial-of-service via version check
 - MySQL: Fix retrieving additional info about the last query
 - MariaDB: Fix changing user password (issue #155)
 - MS SQL: Fix collation issues when retrieving default values (by @vrana)

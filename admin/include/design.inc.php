@@ -29,17 +29,6 @@ function page_header(string $title, $breadcrumb = []): void
 	$service_title = strip_tags(Admin::get()->getServiceTitle());
 
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
-
-	// Load AdminNeo version from file if cookie is missing.
-	if (Admin::get()->getConfig()->isVersionVerificationEnabled()) {
-		$filename = get_temp_dir() . "/adminneo.version";
-		if (!isset($_COOKIE["neo_version"]) && file_exists($filename) && ($lifetime = filemtime($filename) + 86400 - time()) > 0) { // 86400 - 1 day in seconds
-			$data = unserialize(file_get_contents($filename));
-
-			$_COOKIE["neo_version"] = $data["version"];
-			cookie("neo_version", $data["version"], $lifetime); // Sync expiration with the file.
-		}
-	}
 	?>
 <!DOCTYPE html>
 <html lang="<?= Locale::get()->getLanguage(); ?>" dir="<?= lang('ltr'); ?>">
