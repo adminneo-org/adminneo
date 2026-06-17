@@ -33,7 +33,9 @@ AdminNeo 5.5.0
 - Fix validating IPv6 host
 - Allow connecting to IPv6 (by @vrana)
 - Don't quote comma in TSV export (by @vrana)
-- MS SQL: Fix hiding system schemas (regression from 5.1.0)
+- MySQL: Use information_schema to get routine definition (by @vrana)
+- MariaDB: Parse COLLATE in routine definition (by @vrana)
+- MariaDB: Don't display checks with the same name from another table (by @vrana)
 - PostgreSQL: Allow comparing json columns (by @vrana)
 - PostgreSQL: Link only tables in the same schema in backward keys (by @vrana)
 - PostgreSQL: Quote edit value with interval operator (by @vrana)
@@ -46,16 +48,14 @@ AdminNeo 5.5.0
 - PostgreSQL: Fix definition of complex generated columns (by @vrana)
 - PostgreSQL: Fix namespace in inheritance links (by @professor93)
 - non-PostgreSQL: display NOT NULL checks (by @vrana)
-- MySQL: Use information_schema to get routine definition (by @vrana)
-- MariaDB: Parse COLLATE in routine definition (by @vrana)
-- MariaDB: Don't display checks with the same name from another table (by @vrana)
+- MS SQL: Fix hiding system schemas (regression from 5.1.0)
 - ClickHouse: Fix list of tables (by @Marcus-Nightingale)
 - ClickHouse: Fix offset (by @Marcus-Nightingale)
 - ClickHouse: Set default format, support Common Table Expressions (by @polonskiy)
 - ClickHouse: Fix nullable columns
 - ClickHouse: Fix default values
 
-(Ported relevant changes from Adminer 5.4.0-5.4.1.)
+(Ported relevant changes from Adminer 5.4.0-5.4.2.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------
