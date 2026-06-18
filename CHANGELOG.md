@@ -25,6 +25,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Allow creating NOT DEFERRABLE foreign keys (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
 - Update Polish translation (by @Matthaiks)
+- Update Vietnamese translation (by @chuongminhofficial)
 
 ### Bugfixes
 
