@@ -9,12 +9,12 @@ if ($_POST) {
 	$settings->updateParameters([
 		"dumpFormat" => $_POST["format"],
 		"dumpDbStyle" => $_POST["db_style"],
-		"dumpTypes" => $_POST["types"] ?? null,
-		"dumpRoutines" => $_POST["routines"] ?? null,
-		"dumpEvents" => $_POST["events"] ?? null,
+		"dumpTypes" => $_POST["types"] ?? (support("type") ? "" : null),
+		"dumpRoutines" => $_POST["routines"] ?? (support("routine") ? "" : null),
+		"dumpEvents" => $_POST["events"] ?? (support("event") ? "" : null),
 		"dumpTableStyle" => $_POST["table_style"],
-		"dumpAutoIncrement" => $_POST["auto_increment"] ?? null,
-		"dumpTriggers" => $_POST["triggers"] ?? null,
+		"dumpAutoIncrement" => $_POST["auto_increment"] ?? "",
+		"dumpTriggers" => $_POST["triggers"] ?? (support("trigger") ? "" : null),
 		"dumpDataStyle" => $_POST["data_style"],
 		"dumpOutput" => $_POST["output"],
 	]);
