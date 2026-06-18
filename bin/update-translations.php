@@ -6,26 +6,24 @@ include __DIR__ . "/../admin/include/debug.inc.php";
 include __DIR__ . "/../admin/include/available.inc.php";
 include __DIR__ . "/../admin/include/polyfill.inc.php";
 
-$languages = find_available_languages();
 $to_end = $clean = false;
-$language = null;
-$template = "_template";
+$languages = [];
 
 array_shift($argv);
 foreach ($argv as $key => $option) {
 	if ($option == "-h" || $option == "--help") {
 		echo "Usage:\n";
-		echo "  php bin/update-translations.php [-h] [--keep-order] [--clean] [language]\n";
+		echo "  php bin/update-translations.php [-h] [-to-end] [--clean] [languages]\n";
 		echo "\n";
 		echo "Updates admin/translations/*.inc.php from the source code messages.\n";
 		echo "\n";
 		echo "OPTIONS:\n";
-		echo "  --to-end    - Group untranslated texts at the end of the list.\n";
-		echo "  --clean     - Delete untranslated texts.\n";
-		echo "  -h, --help  - Print help.\n";
+		echo "  --to-end    - group untranslated texts at the end of the list\n";
+		echo "  --clean     - delete untranslated texts\n";
+		echo "  -h, --help  - print help\n";
 		echo "\n";
 		echo "PARAMETERS:\n";
-		echo "  language     - Language code.\n";
+		echo "  languages   - comma-separated list of language codes (de,es)\n";
 		exit;
 	}
 
@@ -35,26 +33,35 @@ foreach ($argv as $key => $option) {
 	} elseif ($option == "--clean") {
 		$clean = true;
 		unset($argv[$key]);
-	} else {
-		$language = $option;
+	} elseif (!$languages) {
+		$languages = explode(",", $option);
 	}
 }
 
-if ($language && $language != $template && !isset($languages[$language])) {
-	echo "⚠️ Unknown language: $language\n";
+$available_languages = find_available_languages();
+$template = "_template";
+
+$unknown = false;
+foreach ($languages as $language) {
+	if ($language != $template && !isset($available_languages[$language])) {
+		echo "⚠️ Unknown language: $language\n";
+		$unknown = true;
+	}
+}
+if ($unknown) {
 	exit(1);
 }
 
-if (isset($argv[2])) {
-	echo "⚠️ Unknown argument: $argv[2]\n";
+if (isset($argv[1])) {
+	echo "⚠️ Unknown argument: $argv[1]\n";
 	echo "Run `php bin/update-translations.php -h` for help.\n";
 	exit(1);
 }
 
-if ($language) {
-	$languages = [
-		$language => true,
-	];
+if ($languages) {
+	$languages = array_fill_keys($languages, true);
+} else {
+	$languages = $available_languages;
 }
 
 // Always update the template at first.
