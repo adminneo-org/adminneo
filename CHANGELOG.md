@@ -33,6 +33,7 @@ AdminNeo 5.5.0
 - Elasticsearch: Support dropping aliases (by @vrana)
 - Update Polish translation (by @Matthaiks)
 - Update Vietnamese translation (by @chuongminhofficial)
+- Add partial Croatian translation (by Nikola)
 
 ### Bugfixes
 
