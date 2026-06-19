@@ -335,7 +335,7 @@
 <tr><td>clickAndWait</td><td>//input[@value='Export']</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>CREATE TABLE "public"."interprets"</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>INSERT INTO "interprets"</td><td></td></tr>
-<tr><td>verifyTextPresent</td><td>VIEW "albums_interprets"</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>VIEW "public"."albums_interprets"</td><td></td></tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>

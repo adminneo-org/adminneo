@@ -18,11 +18,18 @@ AdminNeo 5.5.0
 - Display uneditable fields in edit form (by @vrana)
 - Improve print of nested tables (by @vrana)
 - Shorten all but numeric and date types in select (by @vrana)
+- Select: Disable Ctrl+click inline edit without UPDATE privilege (by @vrana)
+- Select: Display NULL in column title (by @vrana)
+- Foreign key: Display new field in case of an error (by @vrana)
 - PostgreSQL: Add SQL operator to select (by @vrana)
 - PostgreSQL: Display index expressions (by @vrana)
 - PostgreSQL: Shorten values in hstore columns (by @vrana)
 - PostgreSQL: Offer foreign keys in create table (by @vrana)
 - PostgreSQL: Allow creating NOT DEFERRABLE foreign keys (by @vrana)
+- PostgreSQL: Display all SQL command warnings at once (by @vrana)
+- PostgreSQL: Export serial as serial, not nextval() (by @vrana)
+- PostgreSQL: Export schema in nextval() (by @vrana)
+- PostgreSQL: Export schema in REFERENCES (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
 - Update Polish translation (by @Matthaiks)
 - Update Vietnamese translation (by @chuongminhofficial)
@@ -34,6 +41,7 @@ AdminNeo 5.5.0
 - Fix validating IPv6 host
 - Allow connecting to IPv6 (by @vrana)
 - Don't quote comma in TSV export (by @vrana)
+- Export: Remember unchecked parameters (regression from 5.1.0)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - MariaDB: Don't display checks with the same name from another table (by @vrana)
@@ -56,7 +64,7 @@ AdminNeo 5.5.0
 - ClickHouse: Fix nullable columns
 - ClickHouse: Fix default values
 
-(Ported relevant changes from Adminer 5.4.0-5.4.2.)
+(Ported relevant changes from Adminer 5.4.0-5.4.2 and several changes from dev version.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------

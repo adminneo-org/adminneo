@@ -141,9 +141,22 @@ if (isset($_GET["pgsql"])) {
 
 			public function warnings(): ?string
 			{
-				$result = pg_last_notice($this->connection);
+				if (PHP_VERSION_ID >= 70100) {
+					$warnings = pg_last_notice($this->connection, PGSQL_NOTICE_ALL);
+					if (!$warnings) {
+						return null;
+					}
 
-				return $result ? h($result) : null;
+					$warnings = implode("\n", $warnings);
+					pg_last_notice($this->connection, PGSQL_NOTICE_CLEAR);
+				} else {
+					$warnings = pg_last_notice($this->connection);
+					if (!$warnings) {
+						return null;
+					}
+				}
+
+				return nl2br(h($warnings));
 			}
 
 			/**
@@ -1292,11 +1305,12 @@ AND typelem = 0"
 		$return = "";
 
 		$status = table_status1($table);
+		$ns = idf_escape($status['nspname']);
 		$fkeys = foreign_keys($table);
 		ksort($fkeys);
 
 		foreach ($fkeys as $fkey_name => $fkey) {
-			$return .= "ALTER TABLE ONLY " . idf_escape($status['nspname']) . "." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " $fkey[definition];\n";
+			$return .= "ALTER TABLE ONLY $ns." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " " . preg_replace('~( REFERENCES )([^(.]+\()~', "\\1$ns.\\2", $fkey["definition"]) . ";\n";
 		}
 
 		return ($return ? "$return\n" : $return);
@@ -1322,8 +1336,13 @@ AND typelem = 0"
 
 		// fields' definitions
 		foreach ($fields as $field) {
+			if ($field['default'] == "nextval('$status[Name]_$field[field]_seq')") {
+				$field['default'] = null;
+				$field['full_type'] = preg_replace('~int(eger)?~', 'serial', $field['full_type']);
+			}
+
 			$part = idf_escape($field['field']) . ' ' . $field['full_type']
-				. default_value($field)
+				. preg_replace('~(nextval\(\')([^.\']+\')~', '\1' . str_replace("'", "''", $status['nspname']) . '.\2', default_value($field))
 				. ($field['null'] ? "" : " NOT NULL");
 			$return_parts[] = $part;
 

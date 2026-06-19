@@ -40,10 +40,10 @@ page_header(lang('Foreign key') . ": " . h($TABLE), ["table" => $TABLE, lang('Fo
 
 if ($_POST) {
 	ksort($row["source"]);
-	if ($_POST["add"]) {
-		$row["source"][] = "";
-	} elseif ($_POST["change"] || $_POST["change-js"]) {
+	if ($_POST["change"] || $_POST["change-js"]) {
 		$row["target"] = [];
+	} else {
+		$row["source"][] = "";
 	}
 } elseif ($name != "") {
 	$foreign_keys = foreign_keys($TABLE);

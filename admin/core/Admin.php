@@ -120,7 +120,7 @@ class Admin extends Origin
 	 */
 	public function getFieldName(array $field, int $order = 0): string
 	{
-		$type = $field["full_type"];
+		$type = $field["full_type"] . ($field["null"] ? " NULL" : "");
 		$comment = $field["comment"];
 		$separator = $type && $comment != "" ? ": " : "";
 
