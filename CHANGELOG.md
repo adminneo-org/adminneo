@@ -64,7 +64,7 @@ AdminNeo 5.5.0
 - ClickHouse: Fix nullable columns
 - ClickHouse: Fix default values
 
-(Ported relevant changes from Adminer 5.4.0-5.4.2.)
+(Ported relevant changes from Adminer 5.4.0-5.4.2 and several changes from dev version.)
 
 AdminNeo 5.4.1 (2026-06-07)
 ---------------------------
