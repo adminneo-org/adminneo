@@ -31,6 +31,7 @@ AdminNeo 5.5.0
 - PostgreSQL: Export schema in nextval() (by @vrana)
 - PostgreSQL: Export schema in REFERENCES (by @vrana)
 - Elasticsearch: Support dropping aliases (by @vrana)
+- Update German and Dutch translations (by @wintstar)
 - Update Polish translation (by @Matthaiks)
 - Update Vietnamese translation (by @chuongminhofficial)
 - Add partial Croatian translation (by Nikola)
