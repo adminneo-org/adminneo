@@ -44,6 +44,7 @@ AdminNeo 5.5.0
 - Allow connecting to IPv6 (by @vrana)
 - Don't quote comma in TSV export (by @vrana)
 - Export: Remember unchecked parameters (regression from 5.1.0)
+- Fix PHP 5 compatibility (regression from 5.4.0)
 - MySQL: Use information_schema to get routine definition (by @vrana)
 - MariaDB: Parse COLLATE in routine definition (by @vrana)
 - MariaDB: Don't display checks with the same name from another table (by @vrana)

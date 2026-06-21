@@ -304,7 +304,8 @@ if (isset($_GET["pgsql"])) {
 			public function copyFrom(string $table, array $rows): bool
 			{
 				$result = $this->pdo->pgsqlCopyFromArray($table, $rows);
-				$this->error = $this->pdo->errorInfo()[2] ?? "";
+				$errors = $this->pdo->errorInfo();
+				$this->error = $errors[2] ?? "";
 
 				return $result;
 			}

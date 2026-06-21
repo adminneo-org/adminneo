@@ -156,7 +156,7 @@ if (!defined("AdminNeo\DRIVER")) {
 }
 
 define("AdminNeo\SERVER", DRIVER ? $_GET[DRIVER] : null); // read from pgsql=localhost
-define("AdminNeo\DB", $_GET["db"]  ?? ""); // for the sake of speed and size
+define("AdminNeo\DB", $_GET["db"] ?? ""); // for the sake of speed and size
 define("AdminNeo\BASE_URL", preg_replace('~\?.*~', '', relative_uri()));
 define("AdminNeo\ME", BASE_URL . '?'
 	. (sid() ? session_name() . "=" . urlencode(session_id()) . '&' : '')

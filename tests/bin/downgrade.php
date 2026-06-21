@@ -19,6 +19,7 @@ function check(string $code, string $expected): void
 
 // Null coalescing.
 check('$a ?? 1', 'isset($a) ? $a : 1');
+check('$a  ??1', 'isset($a) ? $a :1');
 check('$a[1] ?? 1', 'isset($a[1]) ? $a[1] : 1');
 check('$a[1][1] ?? 1', 'isset($a[1][1]) ? $a[1][1] : 1');
 check('$a[$b] ?? 1', 'isset($a[$b]) ? $a[$b] : 1');

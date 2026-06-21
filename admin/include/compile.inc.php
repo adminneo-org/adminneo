@@ -166,7 +166,7 @@ function downgrade_php(string $code): string
 	$code = stripTypes($code);
 
 	// Null coalescing - variables and constants.
-	$coalescing = '\s?\?\?';
+	$coalescing = '\s*\?\?';
 
 	$array_key = '[^](]+';
 	$array_key2 = $array_key . '\[' . $array_key . ']' . '[^](]*';
