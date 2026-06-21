@@ -16,16 +16,6 @@ include __DIR__ . "/../admin/include/available.inc.php";
 include __DIR__ . "/../admin/include/compile.inc.php";
 include __DIR__ . "/../vendor/vrana/phpshrink/phpShrink.php";
 
-function is_dev_version(): bool
-{
-	return (bool)preg_match('~-dev$~', VERSION);
-}
-
-function add_apo_slashes(string $s): string
-{
-	return addcslashes($s, "\\'");
-}
-
 function replace_lang(array $match): string
 {
 	global $lang_ids;
@@ -601,7 +591,7 @@ if ($output_file_path) {
 
 if (!$output_name) {
 	$output_name = "{$project}neo"
-		. (is_dev_version() ? "" : "-" . VERSION)
+		. (preg_match('~-dev$~', VERSION) ? "" : "-" . VERSION)
 		. ($single_driver ? "-$single_driver" : "")
 		. ($single_language ? "-$single_language" : "")
 		. ".php";
