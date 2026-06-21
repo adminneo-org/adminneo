@@ -38,6 +38,7 @@ AdminNeo 5.5.0
 
 ### Bugfixes
 
+- Avoid denial-of-service via version check (GHSA-jm85-8cpp-9cjc)
 - Fix hiding sort links on unsupported columns (regression from 5.1.0)
 - Autofocus the first added field in alter table (by @vrana)
 - Fix validating IPv6 host
@@ -188,7 +189,6 @@ AdminNeo 5.2.0 (2025-11-02)
 
 ### Bugfixes
 
-- Avoid denial-of-service via version check
 - MySQL: Fix retrieving additional info about the last query
 - MariaDB: Fix changing user password (issue #155)
 - MS SQL: Fix collation issues when retrieving default values (by @vrana)
