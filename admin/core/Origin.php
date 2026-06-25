@@ -236,7 +236,7 @@ abstract class Origin extends Plugin
 	 *
 	 * @return list<string>
 	 */
-	public function getDatabases($flush = true): array
+	public function getDatabases(bool $flush = true): array
 	{
 		return $this->filterListWithWildcards(
 			get_databases($flush), $this->config->getHiddenDatabases(), false, Driver::get()->getSystemDatabases()
