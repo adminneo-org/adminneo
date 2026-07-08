@@ -19,6 +19,7 @@ AdminNeo 5.5.1
 - SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
+- Avoid unserialize() in brute force protection (by @vrana)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
 
 AdminNeo 5.5.0 (2026-06-21)

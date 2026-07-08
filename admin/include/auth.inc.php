@@ -89,7 +89,7 @@ function build_http_url(string $server, string $username, string $password, stri
 
 function add_invalid_login(): void
 {
-	$base_name = get_temp_dir() . "/adminneo.invalid";
+	$base_name = get_temp_dir() . "/adminneo-invalid";
 	// adminer.invalid may not be writable by us, try the files with random suffixes
 	$file = null;
 	foreach (glob("$base_name*") ?: [$base_name] as $filename) {
@@ -106,7 +106,7 @@ function add_invalid_login(): void
 		}
 	}
 
-	$invalids = unserialize(stream_get_contents($file));
+	$invalids = json_decode(stream_get_contents($file), true);
 	$time = time();
 	if ($invalids) {
 		foreach ($invalids as $ip => $val) {
@@ -122,7 +122,7 @@ function add_invalid_login(): void
 	}
 	$invalid[1]++;
 
-	write_and_unlock_file($file, serialize($invalids));
+	write_and_unlock_file($file, json_encode($invalids));
 }
 
 /**
@@ -130,13 +130,13 @@ function add_invalid_login(): void
  */
 function check_invalid_login(array &$permanent): void
 {
-	$base_name = get_temp_dir() . "/adminneo.invalid";
+	$base_name = get_temp_dir() . "/adminneo-invalid";
 
 	$invalids = [];
 	foreach (glob("$base_name*") as $filename) {
 		$file = open_file_with_lock($filename);
 		if ($file) {
-			$invalids = unserialize(stream_get_contents($file));
+			$invalids = json_decode(stream_get_contents($file), true);
 			unlock_file($file);
 			break;
 		}
