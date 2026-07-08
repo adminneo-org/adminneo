@@ -13,6 +13,7 @@ AdminNeo 5.5.1
 - Fix processing of file input fields (regression from 5.5.0)
 - Fix escaping DB server version (GHSA-rx7m-wxwq-vxr9)
 - Check Sec-Fetch-Site header (by @vrana, GHSA-wm25-49w3-5qrg)
+- Escape REQUEST_URI (by @vrana, GHSA-79wv-8rh2-9vp2)
 - SQLite: Disallow ATTACH commands (by @vrana, GHSA-p96f-p2p2-2g3h)
 - SQLite: Disallow VACUUM INTO commands (by @vrana, GHSA-q5mp-gfjf-cf2j)
 - Fix hiding generated columns in multi edit form

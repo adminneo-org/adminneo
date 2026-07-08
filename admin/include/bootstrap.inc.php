@@ -58,7 +58,7 @@ define("Adminneo\HTTPS", ($_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "of
 if (!defined("SID")) {
 	session_cache_limiter(""); // to allow restarting session
 	session_name("neo_sid");
-	session_set_cookie_params(0, preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"]), "", HTTPS, true);
+	session_set_cookie_params(0, cookie_path(), "", HTTPS, true);
 	session_start();
 }
 

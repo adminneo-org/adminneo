@@ -409,6 +409,14 @@ function convert_fields(array $columns, array $fields, array $select = []): stri
 }
 
 /**
+ * Returns path for a cookie.
+ */
+function cookie_path(): string
+{
+	return strtr(preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"]), [";" => "%3B", "," => "%2C"]);
+}
+
+/**
  * Sets cookie valid on the current path.
  *
  * @param int $lifetime Number of seconds, 0 for session cookie, 2592000 = 30 days.
@@ -417,7 +425,7 @@ function cookie(string $name, string $value, int $lifetime = 2592000): void
 {
 	header("Set-Cookie: $name=" . rawurlencode($value)
 		. ($lifetime ? "; expires=" . gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT" : "")
-		. "; path=" . preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"])
+		. "; path=" . cookie_path()
 		. (HTTPS ? "; secure" : "")
 		. "; HttpOnly; SameSite=lax",
 		false);
