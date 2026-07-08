@@ -16,6 +16,7 @@ AdminNeo 5.5.1
 - Escape REQUEST_URI (by @vrana, GHSA-79wv-8rh2-9vp2)
 - SQLite: Disallow ATTACH commands (by @vrana, GHSA-p96f-p2p2-2g3h)
 - SQLite: Disallow VACUUM INTO commands (by @vrana, GHSA-q5mp-gfjf-cf2j)
+- SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
