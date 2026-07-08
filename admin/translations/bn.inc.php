@@ -89,7 +89,7 @@ return [
 	'Error in query' => 'অনুসন্ধানে ভুল আছে',
 	'Unknown error.' => 'অজানা ত্রুটি।',
 	'Warnings' => 'সতর্কতা',
-	'ATTACH queries are not supported.' => 'ATTACH কোয়েরি সমর্থিত নয়।',
+	'%s queries are not supported.' => '%s কোয়েরি সমর্থিত নয়।',
 	'Execute' => 'সম্পাদন করো',
 	'Stop on error' => 'ত্রুটি পেলে থেমে যান',
 	'Show only errors' => 'শুধুমাত্র ত্রুটিগুলো দেখান',

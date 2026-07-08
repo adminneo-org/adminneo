@@ -93,7 +93,7 @@ return [
 	'Error in query' => 'Greška u upitu',
 	'Unknown error.' => 'Nepoznata greška.',
 	'Warnings' => 'Upozorenja',
-	'ATTACH queries are not supported.' => 'ATTACH upiti nisu podržani.',
+	'%s queries are not supported.' => '%s upiti nisu podržani.',
 	'Execute' => 'Izvrši',
 	'Stop on error' => 'Zaustavi pri grešci',
 	'Show only errors' => 'Prikaži samo greške',

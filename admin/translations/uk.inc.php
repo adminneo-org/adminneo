@@ -94,7 +94,7 @@ return [
 	'Error in query' => 'Помилка в запиті',
 	'Unknown error.' => 'Невідома помилка.',
 	'Warnings' => 'Попередження',
-	'ATTACH queries are not supported.' => 'ATTACH-запити не підтримуються.',
+	'%s queries are not supported.' => '%s-запити не підтримуються.',
 	'Execute' => 'Виконати',
 	'Stop on error' => 'Зупинитись при помилці',
 	'Show only errors' => 'Показувати тільки помилки',

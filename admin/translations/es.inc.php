@@ -102,7 +102,7 @@ return [
 	'Error in query' => 'Error al ejecutar consulta',
 	'Unknown error.' => 'Error desconocido.',
 	'Warnings' => 'Advertencias',
-	'ATTACH queries are not supported.' => 'Consultas tipo ATTACH no soportadas.',
+	'%s queries are not supported.' => 'Consultas tipo %s no soportadas.',
 	'Execute' => 'Ejecutar',
 	'Stop on error' => 'Detener en caso de error',
 	'Show only errors' => 'Mostrar solamente errores',

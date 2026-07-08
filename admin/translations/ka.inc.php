@@ -78,7 +78,7 @@ return [
 	'Error in query' => 'შეცდომა მოთხოვნაში',
 	'Unknown error.' => 'უცნობი შეცდომა.',
 	'Warnings' => 'გაფრთხილება',
-	'ATTACH queries are not supported.' => 'ATTACH-მოთხოვნები არაა მხარდაჭერილი.',
+	'%s queries are not supported.' => '%s-მოთხოვნები არაა მხარდაჭერილი.',
 	'Execute' => 'შესრულება',
 	'Stop on error' => 'გაჩერება შეცდომისას',
 	'Show only errors' => 'მხოლოდ შეცდომები',

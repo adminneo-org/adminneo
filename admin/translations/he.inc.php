@@ -71,7 +71,7 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'השאילתה בוצעה כהלכה, %d שורות הושפעו',
 	'No commands to execute.' => 'לא נמצאו פקודות להרצה',
 	'Error in query' => 'שגיאה בשאילתה',
-	'ATTACH queries are not supported.' => 'שאילתת ATTACH אינה נתמכת',
+	'%s queries are not supported.' => 'שאילתת %s אינה נתמכת',
 	'Execute' => 'הרץ',
 	'Stop on error' => 'עצור בעת שגיאה',
 	'Show only errors' => 'הראה שגיאות בלבד',

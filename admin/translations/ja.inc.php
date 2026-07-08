@@ -89,7 +89,7 @@ return [
 	'Error in query' => 'クエリーのエラー',
 	'Unknown error.' => '不明なエラーです。',
 	'Warnings' => '警告',
-	'ATTACH queries are not supported.' => 'ATTACH クエリーは対応していません。',
+	'%s queries are not supported.' => '%s クエリーは対応していません。',
 	'Execute' => '実行',
 	'Stop on error' => 'エラーの場合は停止',
 	'Show only errors' => 'エラーのみ表示',

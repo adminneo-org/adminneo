@@ -102,7 +102,7 @@ return [
 	'Error in query' => 'Fout in query',
 	'Unknown error.' => 'Onbekende fout.',
 	'Warnings' => 'Waarschuwingen',
-	'ATTACH queries are not supported.' => 'ATTACH queries worden niet ondersteund.',
+	'%s queries are not supported.' => '%s queries worden niet ondersteund.',
 	'Execute' => 'Uitvoeren',
 	'Stop on error' => 'Stoppen bij fout',
 	'Show only errors' => 'Enkel fouten tonen',

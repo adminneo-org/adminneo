@@ -102,7 +102,7 @@ return [
 	'Error in query' => 'Fehler in der SQL-Abfrage',
 	'Unknown error.' => 'Unbekannter Fehler.',
 	'Warnings' => 'Warnungen',
-	'ATTACH queries are not supported.' => 'ATTACH Abfragen werden nicht unterstützt.',
+	'%s queries are not supported.' => '%s Abfragen werden nicht unterstützt.',
 	'Execute' => 'Ausführen',
 	'Stop on error' => 'Bei Fehler anhalten',
 	'Show only errors' => 'Nur Fehler anzeigen',

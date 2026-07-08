@@ -101,7 +101,7 @@ return [
 	'Error in query' => 'Erreur dans la requête',
 	'Unknown error.' => 'Erreur inconnue.',
 	'Warnings' => 'Avertissements',
-	'ATTACH queries are not supported.' => 'Requêtes ATTACH ne sont pas supportées.',
+	'%s queries are not supported.' => 'Requêtes %s ne sont pas supportées.',
 	'Execute' => 'Exécuter',
 	'Stop on error' => 'Arrêter en cas d\'erreur',
 	'Show only errors' => 'Montrer seulement les erreurs',

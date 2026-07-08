@@ -94,7 +94,7 @@ return [
 	'Error in query' => 'Ошибка в запросe',
 	'Unknown error.' => 'Неизвестная ошибка.',
 	'Warnings' => 'Предупреждения',
-	'ATTACH queries are not supported.' => 'ATTACH-запросы не поддерживаются.',
+	'%s queries are not supported.' => '%s-запросы не поддерживаются.',
 	'Execute' => 'Выполнить',
 	'Stop on error' => 'Остановить при ошибке',
 	'Show only errors' => 'Только ошибки',

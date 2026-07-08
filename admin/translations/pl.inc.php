@@ -106,7 +106,7 @@ return [
 	'Error in query' => 'Błąd w zapytaniu',
 	'Unknown error.' => 'Nieznany błąd.',
 	'Warnings' => 'Ostrzeżenia',
-	'ATTACH queries are not supported.' => 'Zapytania ATTACH są niewspierane.',
+	'%s queries are not supported.' => 'Zapytania %s są niewspierane.',
 	'Execute' => 'Wykonaj',
 	'Stop on error' => 'Zatrzymaj w przypadku błędu',
 	'Show only errors' => 'Pokaż tylko błędy',
