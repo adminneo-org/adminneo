@@ -143,7 +143,7 @@ if ($_POST) {
 						$q = substr($query, 0, $pos + $delimiter_length);
 						$commands++;
 						$print = "<pre id='sql-$commands'><code class='jush-" . DIALECT . "'>" . Admin::get()->formatSqlCommandQuery(trim($q)) . "</code></pre>\n";
-						if (DIALECT == "sqlite" && preg_match("~^$space*+ATTACH\\b~i", $q, $match)) {
+						if (DIALECT == "sqlite" && preg_match("~^$space*+ATTACH\\b~i", $q, $match) !== 0) {
 							// PHP doesn't support setting SQLITE_LIMIT_ATTACHED
 							echo $print;
 							echo "<p class='error'>" . lang('ATTACH queries are not supported.') . "\n";
