@@ -11,6 +11,7 @@ AdminNeo 5.5.1
 ### Bugfixes
 
 - Fix processing of file input fields (regression from 5.5.0)
+- Check Sec-Fetch-Site header (by @vrana, GHSA-wm25-49w3-5qrg)
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - MariaDB: Fix form for changing user password (regression from 5.1.0)

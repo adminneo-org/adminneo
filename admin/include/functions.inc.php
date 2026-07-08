@@ -1188,7 +1188,7 @@ function get_token() {
 */
 function verify_token() {
 	list($token, $rand) = explode(":", $_POST["token"]);
-	return ($rand ^ $_SESSION["token"]) == $token;
+	return ($rand ^ $_SESSION["token"]) == $token && in_array($_SERVER["HTTP_SEC_FETCH_SITE"], ["", "same-origin"]);
 }
 
 function lzw_decompress(string $binary): string
