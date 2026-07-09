@@ -416,8 +416,12 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 			}
 			$attrs = "name='fields[$i][default]' aria-labelledby='label-default'";
 			$value = h($field["default"]);
-			if (str_contains($field["default"] ?? "", "\n")) {
-				echo "<textarea $attrs rows='3' cols='30' style='vertical-align: bottom;'>\n$value</textarea>"; // \n to preserve the leading newline
+			if (str_contains($value, "\n")) {
+				// Preserve the leading newline in textarea.
+				if ($value[0] == "\n") {
+					$value = "\n$value";
+				}
+				echo "<textarea $attrs rows='3' cols='30' style='vertical-align: bottom;'>$value</textarea>";
 			} else {
 				echo "<input class='input' $attrs value='$value'>";
 			}
