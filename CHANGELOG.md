@@ -1,6 +1,13 @@
 Changelog
 =========
 
+AdminNeo 5.5.1
+--------------
+
+### Bugfixes
+
+- ForeignEditPlugin: Fix escaping tables in MS SQL
+
 AdminNeo 5.5.0 (2026-06-21)
 ---------------------------
 

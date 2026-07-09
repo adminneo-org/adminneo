@@ -63,7 +63,7 @@ class ForeignEditPlugin extends Plugin
 					$column = "HEX($column)";
 				}
 
-				$values = get_vals("SELECT $column FROM " . ($ns ? idf_escape($ns) . "." : "") . table($target) . " ORDER BY 1 LIMIT " . ($this->limit + 1));
+				$values = get_vals("SELECT $column FROM " . ($ns ? idf_escape($ns) . "." : "") . idf_escape($target) . " ORDER BY 1 LIMIT " . ($this->limit + 1));
 
 				if (Connection::get()->getError() || count($values) > $this->limit) {
 					$this->foreignOptions[$key][$id] = false;
