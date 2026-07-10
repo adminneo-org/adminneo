@@ -24,7 +24,7 @@ if (isset($_GET["clickhouse"])) {
 			 */
 			function rootQuery(string $db, string $query)
 			{
-				$file = @file_get_contents("$this->serviceUrl/?database=$db", false, stream_context_create(['http' => [
+				[$file, $headers] = get_url("$this->serviceUrl/?database=$db", stream_context_create(['http' => [
 					'method' => 'POST',
 					'content' => $query,
 					'header' => [
@@ -43,7 +43,7 @@ if (isset($_GET["clickhouse"])) {
 				}
 
 				$isClickHouse = false;
-				foreach ($http_response_header as $header) {
+				foreach ($headers as $header) {
 					if (preg_match('~^X-ClickHouse-Summary:~i', $header)) {
 						$isClickHouse = true;
 						break;
@@ -55,7 +55,7 @@ if (isset($_GET["clickhouse"])) {
 					return false;
 				}
 
-				if (!preg_match('~^HTTP/[0-9.]+ 2~i', $http_response_header[0])) {
+				if (!preg_match('~^HTTP/[0-9.]+ 2~i', $headers[0] ?? '')) {
 					$this->error = preg_replace('~\(version [^(]+\(.+$~', '', $file);
 
 					return false;

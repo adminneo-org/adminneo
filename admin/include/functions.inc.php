@@ -433,6 +433,22 @@ function cookie(string $name, string $value, int $lifetime = 2592000): void
 }
 
 /**
+ * Returns contents from a URL.
+ *
+ * @param resource $context
+ * @return array{0: string|false, 1: string[]} [$contents, $headers]
+ */
+function get_url(string $url, $context): array
+{
+	$return = @file_get_contents($url, false, $context);
+	if (function_exists('http_get_last_response_headers')) {
+		$http_response_header = http_get_last_response_headers() ?? [];
+	}
+
+	return [$return, $http_response_header ?? []];
+}
+
+/**
  * @deprecated
  *
  * Returns settings stored in a cookie.

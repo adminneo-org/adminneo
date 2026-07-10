@@ -525,7 +525,7 @@ if (isset($_GET["simpledb"])) {
 		$query = str_replace('%7E', '~', substr($query, 1));
 		$query .= "&Signature=" . urlencode(base64_encode(hash_hmac('sha1', "POST\n" . preg_replace('~^https?://~', '', $host) . "\n/\n$query", $secret, true)));
 
-		$file = @file_get_contents($connection->getServiceUrl(), false, stream_context_create(['http' => [
+		list($file) = get_url($connection->getServiceUrl(), stream_context_create(['http' => [
 			'method' => 'POST', // may not fit in URL with GET
 			'content' => $query,
 			'ignore_errors' => 1,

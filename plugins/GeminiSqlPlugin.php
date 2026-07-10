@@ -79,7 +79,7 @@ class GeminiSqlPlugin extends Plugin
 
 		$url = "https://generativelanguage.googleapis.com/v1beta/models/$this->model:generateContent";
 
-		$result = @file_get_contents("$url?key=$this->apiKey", false, $context);
+		[$result] = get_url("$url?key=$this->apiKey", $context);
 		if ($result === false || !($response = json_decode($result))) {
 			echo "-- Error loading URL: $url\n\n";
 			exit();
