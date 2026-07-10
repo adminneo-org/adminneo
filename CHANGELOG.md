@@ -23,6 +23,7 @@ AdminNeo 5.5.1
 - MySQL: Preserve DETERMINISTIC and DATA ACCESS in routine definition (by @vrana, regression from 5.5.0)
 - MySQL: Fix routine fields length (by @vrana, regression from 5.5.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
+- MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)
 - PostgreSQL: Fix editing json columns (regression from 5.5.0)
 
 (Ported relevant changes from Adminer 5.4.3.)
