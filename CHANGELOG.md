@@ -20,6 +20,7 @@ AdminNeo 5.5.1
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - Avoid unserialize() in brute force protection (by @vrana)
+- MySQL: Preserve DETERMINISTIC and DATA ACCESS in routine definition (by @vrana, regression from 5.5.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
 - PostgreSQL: Fix editing json columns (regression from 5.5.0)
 
