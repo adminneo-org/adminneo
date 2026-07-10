@@ -30,7 +30,7 @@ class GeminiSqlPlugin extends Plugin
 	 * @param string $apiKey API key (get your own at https://aistudio.google.com/apikey)
 	 * @param string $model Model (https://ai.google.dev/gemini-api/docs/models#available-models)
 	 */
-	public function __construct(string $apiKey, string $model = "gemini-2.5-flash")
+	public function __construct(string $apiKey, string $model = "gemini-3.1-flash-lite")
 	{
 		$this->apiKey = $apiKey;
 		$this->model = $model;
