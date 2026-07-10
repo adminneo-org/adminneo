@@ -1170,7 +1170,7 @@ ORDER BY ordinal_position";
 		$fields = get_rows("SELECT
 	PARAMETER_NAME field,
 	DATA_TYPE type,
-	CHARACTER_MAXIMUM_LENGTH length,
+	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^(]+\\\\(?|\\\\)$', '') length,
 	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^ ]+ ', '') `unsigned`,
 	1 `null`,
 	DTD_IDENTIFIER full_type,
