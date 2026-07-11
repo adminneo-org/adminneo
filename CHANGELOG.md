@@ -20,6 +20,7 @@ AdminNeo 5.5.1
 - SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
 - Fix processing of file input fields (regression from 5.5.0)
 - Fix blob editing (by @marcovdbout, regression from 5.5.0)
+- Speed up HTML escaping (by @vrana)
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - Avoid unserialize() in brute force protection (by @vrana)

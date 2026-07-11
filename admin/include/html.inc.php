@@ -63,7 +63,16 @@ function target_blank(): string
  */
 function h(?string $string): string
 {
-	return $string !== null && $string !== "" ? str_replace("\0", "&#0;", htmlspecialchars($string, ENT_QUOTES, 'utf-8')) : "";
+	if ($string === null || $string === "") {
+		return "";
+	}
+
+	// This is 50x faster than htmlspecialchars().
+	return str_replace(
+		["&", "<", "\"", "'", "\0"],
+		["&amp;", "&lt;", "&quot;", "&#039;", "&#0;"],
+		$string
+	);
 }
 
 /**
