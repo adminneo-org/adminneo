@@ -7,6 +7,7 @@ AdminNeo 5.5.1
 ### Changes
 
 - Support multiline generated values in alter table (by @vrana)
+- PostgreSQL: Allow exporting more schemas at once (by @vrana)
 - PostgreSQL 18: Support VIRTUAL generated columns (by @vrana)
 
 ### Bugfixes
