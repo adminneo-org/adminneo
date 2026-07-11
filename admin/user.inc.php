@@ -9,10 +9,6 @@ foreach (get_rows("SHOW PRIVILEGES") as $row) {
 		$privileges[$context == "File access on server" ? "Server Admin" : $context][$row["Privilege"]] = $row["Comment"];
 	}
 }
-$privileges["Columns"] = [];
-foreach (["Select", "Insert", "Update", "References"] as $val) {
-	$privileges["Columns"][$val] = $privileges["Tables"][$val];
-}
 unset($privileges["Server Admin"]["Usage"]);
 foreach ($privileges["Tables"] as $key => $val) {
 	unset($privileges["Databases"][$key]);
@@ -187,7 +183,6 @@ foreach ([
 	"Server Admin" => lang('Server'),
 	"Databases" => lang('Database'),
 	"Tables" => lang('Table'),
-	"Columns" => lang('Column'),
 	"Procedures" => lang('Routine'),
  ] as $context => $desc) {
 	foreach ((array) $privileges[$context] as $privilege => $comment) {
