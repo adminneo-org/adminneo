@@ -71,7 +71,7 @@ if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
 }
 
 @set_time_limit(0); // @ - can be disabled
-@ini_set("precision", "15"); // @ - can be disabled, 15 - internal PHP precision
+@ini_set("precision", "16"); // @ - can be disabled, 16 - IEEE 754 has 15.95 decimal digits for double
 
 // Migrate changed cookies.
 if (!isset($_COOKIE["neo_dump"]) && str_contains($_COOKIE["neo_export"] ?? "", "db_style")) {
