@@ -30,6 +30,7 @@ AdminNeo 5.5.1
 - MariaDB: Speed up getting checks (by @vrana, regression from 5.4.2)
 - MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)
 - PostgreSQL: Fix editing json columns (regression from 5.5.0)
+- MS SQL: Fix table status (by @vrana)
 - PDO: Increase precision of double (by @vrana)
 - Editor PDO: Fix foreign key value in edit (by @vrana)
 - Editor PostgreSQL: Fix enums (by @vrana)
