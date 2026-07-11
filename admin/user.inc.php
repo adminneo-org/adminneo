@@ -10,8 +10,6 @@ foreach (get_rows("SHOW PRIVILEGES") as $row) {
 	}
 }
 $privileges["Server Admin"] += $privileges["File access on server"];
-$privileges["Databases"]["Create routine"] = $privileges["Procedures"]["Create routine"]; // MySQL bug #30305
-unset($privileges["Procedures"]["Create routine"]);
 $privileges["Columns"] = [];
 foreach (["Select", "Insert", "Update", "References"] as $val) {
 	$privileges["Columns"][$val] = $privileges["Tables"][$val];
