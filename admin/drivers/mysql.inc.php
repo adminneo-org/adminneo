@@ -353,6 +353,11 @@ if (isset($_GET["mysql"])) {
 			}
 		}
 
+		public function quoteBinary(string $string): string
+		{
+			return "X" . q(bin2hex($string));
+		}
+
 		public function insertUpdate(string $table, array $records, array $primary)
         {
 			$columns = array_keys(reset($records));

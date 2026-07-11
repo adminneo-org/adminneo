@@ -25,6 +25,7 @@ AdminNeo 5.5.1
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - Avoid unserialize() in brute force protection (by @vrana)
 - MySQL: Preserve DETERMINISTIC and DATA ACCESS in routine definition (by @vrana, regression from 5.5.0)
+- MySQL: Export binary data as hex (by @vrana)
 - MySQL: Fix routine fields length (by @vrana, regression from 5.5.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
 - MariaDB: Speed up getting checks (by @vrana, regression from 5.4.2)
