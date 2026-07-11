@@ -1045,7 +1045,10 @@ function select_value($val, $link, $field, $text_length) {
 	if (!$link) {
 		$link = Admin::get()->getFieldValueLink($val, $field);
 	}
-	$return = $field ? Admin::get()->formatFieldValue(Connection::get()->formatValue($val, $field), $field) : $val;
+	if ($field) {
+		$val = Connection::get()->formatValue($val, $field);
+	}
+	$return = $field ? Admin::get()->formatFieldValue($val, $field) : $val;
 	if ($return !== null) {
 		if (!is_utf8($return)) {
 			$return = "\0"; // htmlspecialchars of binary data returns an empty string
