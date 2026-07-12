@@ -892,9 +892,9 @@ class Admin extends Origin
 	 *
 	 * @param array $field Single field from fields().
 	 *
-	 * @return string Expression to use in a query.
+	 * @return string|false Expression to use in a query or false to skip the input.
 	 */
-	public function processFieldInput(array $field, string $value, string $function = ""): string
+	public function processFieldInput(array $field, string $value, string $function = "")
 	{
 		if ($function == "SQL") {
 			return $value; //! SQL injection

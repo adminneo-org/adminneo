@@ -656,7 +656,7 @@ abstract class Origin extends Plugin
 		return support("comment") ? $this->admin->formatComment($field["comment"]) : "";
 	}
 
-	public abstract function processFieldInput(array $field, string $value, string $function = ""): string;
+	public abstract function processFieldInput(array $field, string $value, string $function = "");
 
 	/**
 	 * Detect JSON field or value and optionally reformat the value.
