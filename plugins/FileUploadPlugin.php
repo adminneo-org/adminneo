@@ -31,11 +31,12 @@ class FileUploadPlugin extends Plugin
 
 	/**
 	 * @param string $uploadPath Path to a writable directory where uploading data will be stored.
-	 *
+	 *                           It is strongly recommended to disable script execution in this folder.
 	 * @param ?string $linkPath Prefix for displaying data, null stands for $uploadPath.
 	 * @param string $extensions Regular expression with allowed file extensions.
 	 */
-	public function __construct(string $uploadPath = "../static/data/", string $linkPath = null, string $extensions = "[a-zA-Z0-9]+")
+	public function __construct(string $uploadPath = "../static/data/", string $linkPath = null,
+		string $extensions = "jpe?g|png|gif|webp|svg|pdf|txt")
 	{
 		$this->uploadPath = $uploadPath;
 		$this->linkPath = $linkPath ?? $uploadPath;
@@ -80,7 +81,7 @@ class FileUploadPlugin extends Plugin
 		}
 
 		// Check upload error and file extension.
-		if ($files["error"][$fieldName] || !preg_match('~\.(' . $this->extensions . ')$~', $files["name"][$fieldName], $matches)) {
+		if ($files["error"][$fieldName] || !preg_match('~\.(' . $this->extensions . ')$~i', $files["name"][$fieldName], $matches)) {
 			return false;
 		}
 
