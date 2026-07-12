@@ -1283,7 +1283,7 @@ class Admin extends Origin
 			}
 
 			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" .
-				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion); });");
+				js_escape(Connection::get()->getVersion()) . "', '" . js_escape(Connection::get()->getFlavor()) . "', autocompletion); });");
 		}
 	}
 
