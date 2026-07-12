@@ -505,7 +505,7 @@ function input($field, $value, $function, $autofocus = false): void {
 function process_input($field) {
 	$idf = bracket_escape($field["field"]);
 	$function = $_POST["function"][$idf] ?? "";
-	$value = $_POST["fields"][$idf] ?? null;
+	$value = $_POST["fields"][$idf] ?? ($_FILES["fields"]["name"][$idf] ?? null);
 	if ($value === null) {
 		return false;
 	}

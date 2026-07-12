@@ -6,6 +6,7 @@ AdminNeo 5.5.1
 
 ### Bugfixes
 
+- Fix processing of file input fields (regression from 5.5.0)
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 
 AdminNeo 5.5.0 (2026-06-21)
