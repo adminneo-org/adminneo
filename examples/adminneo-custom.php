@@ -53,7 +53,7 @@ function adminneo_instance()
 		new XmlDumpPlugin(),
 		// new SqlLogPlugin(),
 		// new TinyMcePlugin("../externals/tinymce/tinymce.min.js"),
-		new FileUploadPlugin("../export/upload"),
+		new FileUploadPlugin("../compiled/upload"),
 		new JsonPreviewPlugin(),
 		new TranslationPlugin(),
 		new SystemForeignKeysPlugin(),
