@@ -32,14 +32,6 @@ function q($string) {
 	return Connection::get()->quote($string);
 }
 
-/** Escape string to use inside ''
-* @param string
-* @return string
-*/
-function escape_string($val) {
-	return substr(q($val), 1, -1);
-}
-
 /** Remove non-digits from a string; used instead of intval() to not corrupt big numbers
 * @param numeric-string
 * @return string
