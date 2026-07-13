@@ -1179,7 +1179,7 @@ ORDER BY ordinal_position";
 	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^ ]+ ', '') `unsigned`,
 	1 `null`,
 	DTD_IDENTIFIER full_type,
-	PARAMETER_MODE `inout`,
+	" . ($type == "FUNCTION" ? "''" : "PARAMETER_MODE") . " `inout`,
 	CHARACTER_SET_NAME collation
 FROM information_schema.PARAMETERS
 WHERE SPECIFIC_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND SPECIFIC_NAME = " . q($name) . "
