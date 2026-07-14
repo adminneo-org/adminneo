@@ -21,6 +21,7 @@ AdminNeo 5.5.1
 - ForeignEditPlugin: Fix escaping tables in MS SQL
 - Avoid unserialize() in brute force protection (by @vrana)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
+- PostgreSQL: Fix editing json columns (regression from 5.5.0)
 
 (Ported relevant changes from Adminer 5.4.3.)
 
