@@ -386,7 +386,7 @@ function input($field, $value, $function, $autofocus = false): void {
 	$name = h(bracket_escape($field["field"]));
 
 	$types = Driver::get()->getTypes();
-	$json_type = isset($field["type"]) && Admin::get()->detectJson($field["type"], $value, true);
+	$is_json = isset($field["full_type"]) && Admin::get()->detectJson($field["full_type"], $value, true);
 
 	$reset = (DIALECT == "mssql" && $field["auto_increment"]);
 	if ($reset && !$_POST["save"]) {
@@ -450,16 +450,16 @@ function input($field, $value, $function, $autofocus = false): void {
 		echo "</span>";
 	} elseif (is_blob($field) && ini_bool("file_uploads")) {
 		echo "<input type='file' name='fields-$name'>";
-	} elseif ($json_type) {
-		echo "<textarea$attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
-	} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
+	} elseif ($is_json) {
+		echo "<textarea $attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
+	} elseif (($text = preg_match('~text|lob|memo|json~i', $field["type"])) || preg_match("~\n~", $value)) {
 		if ($text && DIALECT != "sqlite") {
 			$attrs .= " cols='50' rows='12'";
 		} else {
 			$rows = min(12, substr_count($value, "\n") + 1);
 			$attrs .= " cols='30' rows='$rows'";
 		}
-		echo "<textarea$attrs>" . h($value) . '</textarea>';
+		echo "<textarea $attrs>" . h($value) . '</textarea>';
 	} else {
 		// int(3) is only a display hint
 		$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)

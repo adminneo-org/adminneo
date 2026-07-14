@@ -678,8 +678,8 @@ abstract class Origin extends Plugin
 
 		$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ($pretty ? JSON_PRETTY_PRINT : 0);
 
-		if (str_contains($fieldType, "json")) {
-			if ($pretty !== null && $this->config->isJsonValuesAutoFormat()) {
+		if (preg_match('~^jsonb?$~', $fieldType)) {
+			if ($value != null && $pretty !== null && $this->config->isJsonValuesAutoFormat()) {
 				$value = json_encode(json_decode($value), $flags);
 			}
 

@@ -599,7 +599,13 @@ if (isset($_GET["pgsql"])) {
 				// Trim array parenthesis.
 				$value = preg_replace('~^\{(.*)}$~', "$1", $value);
 
-				if (preg_match('~^(\{+)(.*)(}+)$~', $value, $matches)) {
+				$isJson = str_contains($scalarType, "json");
+				if ($isJson) {
+					$values = explode('","', trim($value, '"'));
+					array_walk($values, function (&$v) {
+						$v = str_replace('\"', '"', $v);
+					});
+				} elseif (preg_match('~^(\{+)(.*)(}+)$~', $value, $matches)) {
 					// Explode multidimensional array.
 					$values = explode("$matches[3],$matches[1]", $matches[2]);
 					array_walk($values, function (&$v) use ($matches) {
@@ -610,13 +616,13 @@ if (isset($_GET["pgsql"])) {
 					$values = explode(",", $value);
 				}
 
-				if ($values[0][0] == "{") {
+				if (!$isJson && $values[0][0] == "{") {
 					// Multidimensional array.
 					$type = $scalarType;
 					array_walk($values, function (&$v) use ($type, &$scalarType) {
 						$v = $this->explodeArrayValue($v, $type, $scalarType);
 					});
-				} elseif (isset($this->types[lang('Strings')][$scalarType])) {
+				} elseif (!$isJson && isset($this->types[lang('Strings')][$scalarType])) {
 					// Trim apostrophes from string values.
 					array_walk($values, function (&$v) {
 						$v = preg_replace('~^\'(.*)\'$~', "$1", $v);
@@ -639,11 +645,13 @@ if (isset($_GET["pgsql"])) {
 			// Array type.
 			if (preg_match('~^([^[]+)(\[])+$~', $type, $matches)) {
 				$isString = isset($this->types[lang('Strings')][$matches[1]]);
+				$isJson = str_contains($type, "json");
 
-				// Add apostrophes to string values.
-				array_walk($values, function (&$v) use ($type, $isString) {
+				array_walk($values, function (&$v) use ($type, $isString, $isJson) {
 					if (is_array($v)) {
 						$v = $this->implodeArrayValues($v, $type);
+					} elseif ($isJson) {
+						$v = "\"$v\"";
 					} elseif ($isString) {
 						$v = "'$v'";
 					}

@@ -331,10 +331,11 @@ function where($where, $fields = []) {
 		$key = bracket_escape($key, true);
 		$column = escape_key($key);
 		$field_type = $fields[$key]["type"] ?? null;
+		$full_field_type = $fields[$key]["full_type"] ?? null;
 
 		if (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
-		} elseif (DIALECT == "pgsql" && preg_match('~^json~', $field_type)) {
+		} elseif (DIALECT == "pgsql" && preg_match('~^jsonb?$~', $full_field_type)) {
 			$conditions[] = "$column::jsonb = " . q($val) . "::jsonb";
 		} elseif (DIALECT == "sql" && is_numeric($val) && strpos($val, ".") !== false) {
 			// LIKE because of floats but slow with ints.
@@ -981,7 +982,7 @@ function get_random_string(): string
 /** Format value to use in select
 * @param string|string[]|list<string[]>
 * @param string
-* @param ?array
+* @param array{type: string, full_type?: string}
 * @param ?int
 * @return string HTML
 */

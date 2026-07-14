@@ -335,7 +335,7 @@ class Admin extends Origin
 			$text = "<code>$val</code>";
 		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
-		} elseif ($this->admin->detectJson($field["type"], $original)) {
+		} elseif ($this->admin->detectJson($field["full_type"], $original)) {
 			$text = "<code class='jush-json'>$val</code>";
 		} else {
 			$text = $val;
@@ -900,8 +900,8 @@ class Admin extends Origin
 			return $value; //! SQL injection
 		}
 
-		if (isset($field["type"])) {
-			$this->admin->detectJson($field["type"], $value, false);
+		if (isset($field["full_type"])) {
+			$this->admin->detectJson($field["full_type"], $value, false);
 		}
 
 		$name = $field["field"];
