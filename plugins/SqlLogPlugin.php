@@ -50,7 +50,7 @@ class SqlLogPlugin extends Plugin
 				$name .= "." . $_GET["ns"];
 			}
 
-			$this->filename = $name . ($name ? "-" : "") . "log.sql";
+			$this->filename = $this->encodeFs($name) . ($name ? "-" : "") . "log.sql";
 		}
 
 		$folder = dirname($this->filename);
@@ -68,4 +68,13 @@ class SqlLogPlugin extends Plugin
 		fclose($fp);
 	}
 
+	private function encodeFs(string $value): string
+	{
+		// Encode special filesystem characters.
+		return strtr($value, [
+			'.' => '%2E',
+			'/' => '%2F',
+			'\\' => '%5C',
+		]);
+	}
 }
