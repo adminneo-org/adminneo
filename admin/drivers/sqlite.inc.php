@@ -206,6 +206,13 @@ if (isset($_GET["sqlite"])) {
 			return parent::getStructuredTypes()[0];
 		}
 
+		public function engines(): array
+		{
+			return Connection::get()->isMinVersion("3.37")
+				? ["STRICT", "STRICT, WITHOUT ROWID", "WITHOUT ROWID"]
+				: (Connection::get()->isMinVersion("3.8.2") ? ["WITHOUT ROWID"] : []);
+		}
+
 		public function insertUpdate(string $table, array $records, array $primary)
 		{
 			$values = [];
@@ -312,7 +319,15 @@ if (isset($_GET["sqlite"])) {
 
 	function table_status($name = "") {
 		$return = [];
-		foreach (get_rows("SELECT name AS Name, type AS Engine, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
+		foreach (get_rows("SELECT name AS Name, type AS Engine, sql, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
+			if ($row["Engine"] == "table") {
+				$suffix = preg_replace('~.*\)~s', '', $row["sql"]); // table options are after the last parenthesis
+				$row["Engine"] = implode(", ", array_filter([
+					(preg_match('~\bSTRICT\b~i', $suffix) ? "STRICT" : ""),
+					(preg_match('~\bWITHOUT\s+ROWID\b~i', $suffix) ? "WITHOUT ROWID" : ""),
+				]));
+			}
+			unset($row["sql"]);
 			$row["Rows"] = Connection::get()->getValue("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
 			$return[$row["Name"]] = $row;
 		}
@@ -517,7 +532,7 @@ if (isset($_GET["sqlite"])) {
 
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
 	{
-		$use_all_fields = ($table == "" || $foreign);
+		$use_all_fields = ($table == "" || $foreign || $engine !== null);
 		foreach ($fields as $field) {
 			if ($field[0] != "" || !$field[1] || $field[2]) {
 				$use_all_fields = true;
@@ -548,7 +563,7 @@ if (isset($_GET["sqlite"])) {
 			if ($table != $name && !queries("ALTER TABLE " . table($table) . " RENAME TO " . table($name))) {
 				return false;
 			}
-		} elseif (!recreate_table($table, $name, $alter_fields, $originals, $foreign, $auto_increment)) {
+		} elseif (!recreate_table($table, $name, $alter_fields, $originals, $foreign, $auto_increment, [], "", "", $engine)) {
 			return false;
 		}
 
@@ -578,9 +593,8 @@ if (isset($_GET["sqlite"])) {
 	* @param string CHECK constraint to add
 	* @return bool
 	*/
-	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = ""): bool
+	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = "", ?string $engine = null): bool
 	{
-		$suffix = "";
 		if ($table != "") {
 			if (!$fields) {
 				foreach (fields($table) as $key => $field) {
@@ -648,20 +662,6 @@ if (isset($_GET["sqlite"])) {
 				}
 			}
 
-			$options = [];
-			if (Connection::get()->isMinVersion("3.37")) {
-				$row = first(get_rows("PRAGMA table_list(" . table($table) . ")"));
-				if ($row["wr"]) {
-					$options[] = "WITHOUT ROWID";
-				}
-				if ($row["strict"]) {
-					$options[] = "STRICT";
-				}
-			} elseif (preg_match('~\)\s*WITHOUT\s+ROWID\s*$~i', Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)))) {
-				$options[] = "WITHOUT ROWID";
-			}
-			$suffix = ($options ? " " . implode(", ", $options) : "");
-
 			queries("BEGIN");
 		}
 
@@ -683,7 +683,10 @@ if (isset($_GET["sqlite"])) {
 			$changes[] = "  CHECK ($add_check)";
 		}
 		$temp_name = ($table == $name ? "adminneo_$name" : $name);
-		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)$suffix")) {
+		if ($engine === null && $table != "") {
+			$engine = table_status1($table)["Engine"] ?? null;
+		}
+		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)" . (in_array($engine, Driver::get()->engines()) ? " $engine" : ""))) {
 			// implicit ROLLBACK to not overwrite $connection->error
 			return false;
 		}
