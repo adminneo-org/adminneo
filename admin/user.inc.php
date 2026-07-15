@@ -48,6 +48,7 @@ if (isset($_GET["host"]) && ($result = Connection::get()->query("SHOW GRANTS FOR
 	}
 }
 
+$plain_password = !Connection::get()->isMariaDB() && Connection::get()->isMinVersion("8");
 if ($_POST) {
 	$old_user = (isset($_GET["host"]) ? q($USER) . "@" . q($_GET["host"]) : "''");
 	if ($_POST["drop"]) {
@@ -55,7 +56,7 @@ if ($_POST) {
 	} else {
 		$new_user = q($_POST["user"]) . "@" . q($_POST["host"]); // if $_GET["host"] is not set then $new_user is always different
 		$pass = $_POST["pass"];
-		if ($pass != '' && !$_POST["hashed"] && !Connection::get()->isMinVersion("8")) {
+		if ($pass != '' && !$_POST["hashed"] && !$plain_password) {
 			// compute hash in a separate query so that plain text password is not saved to history
 			$pass = Connection::get()->getValue("SELECT PASSWORD(" . q($pass) . ")");
 			$error = !$pass;
@@ -66,7 +67,7 @@ if ($_POST) {
 		$created = false;
 		if (!$error) {
 			if ($old_user != $new_user) {
-				$created = queries((Connection::get()->isMinVersion("5") ? "CREATE USER" : "GRANT USAGE ON *.* TO") . " $new_user IDENTIFIED BY " . (Connection::get()->isMinVersion("8") ? "" : "PASSWORD ") . q($pass));
+				$created = queries((Connection::get()->isMinVersion("5") ? "CREATE USER" : "GRANT USAGE ON *.* TO") . " $new_user IDENTIFIED BY " . ($plain_password ? "" : "PASSWORD ") . q($pass));
 				$error = !$created;
 			} elseif ($pass != $old_pass) {
 				$pass_part = q($pass);
@@ -155,12 +156,13 @@ echo "<td><input class='input' name='host' data-maxlength='60' value='", h($row[
 echo "<tr><th>", lang('Username'), "</th>";
 echo "<td><input class='input' name='user' data-maxlength='80' value='", h($row["user"]), "' autocapitalize='off'></td>\n";
 echo '<tr><th>', lang('Password'), "</th>";
-echo "<td><input class='input' name='pass' id='pass' value='", h($row["pass"]), "' autocomplete='new-password'></td>\n";
+echo "<td><input class='input' name='pass' id='pass' value='", h($row["pass"]), "' autocomplete='new-password'>";
+if (!$plain_password) {
+	echo checkbox("hashed", 1, $row["hashed"], lang('Hashed'), "typePassword(this.form['pass'], this.checked);");
+}
+echo "</td>\n";
 if (!$row["hashed"]) {
 	echo script("typePassword(gid('pass'));");
-}
-if (!Connection::get()->isMinVersion("8")) {
-	echo checkbox("hashed", 1, $row["hashed"], lang('Hashed'), "typePassword(this.form['pass'], this.checked);");
 }
 echo "</table>\n";
 

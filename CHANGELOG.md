@@ -8,6 +8,7 @@ AdminNeo 5.5.1
 
 - Fix processing of file input fields (regression from 5.5.0)
 - ForeignEditPlugin: Fix escaping tables in MS SQL
+- MariaDB: Fix form for changing user password (regression from 5.1.0)
 
 AdminNeo 5.5.0 (2026-06-21)
 ---------------------------
