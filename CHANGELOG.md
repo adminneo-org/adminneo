@@ -6,6 +6,7 @@ AdminNeo 5.6.0
 
 ### Changes
 
+- MySQL: Convert vector columns to text in select and edit (by @vrana)
 - PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
 
 ### Bugfixes
