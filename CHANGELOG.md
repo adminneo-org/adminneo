@@ -1,6 +1,15 @@
 Changelog
 =========
 
+AdminNeo 5.6.0
+--------------
+
+### Changes
+
+- PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
+
+### Bugfixes
+
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
 
