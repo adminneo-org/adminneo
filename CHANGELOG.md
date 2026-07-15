@@ -15,6 +15,7 @@ AdminNeo 5.6.0
 
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
+- SQLite: Disable editing of sqlite_schema (by @vrana)
 
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
