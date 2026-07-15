@@ -332,7 +332,7 @@ if (isset($_GET["sqlite"])) {
 
 	function fields($table) {
 		$return = [];
-		$primary = "";
+		$sql = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		foreach (get_rows("PRAGMA table_" . (Connection::get()->isMinVersion("3.31") ? "x" : "") . "info(" . table($table) . ")") as $row) {
 			$name = $row["name"];
 			$type = strtolower($row["type"]);
@@ -346,16 +346,10 @@ if (isset($_GET["sqlite"])) {
 				"privileges" => ["select" => 1, "insert" => 1, "update" => 1, "where" => 1, "order" => 1],
 				"primary" => $row["pk"],
 			];
-			if ($row["pk"]) {
-				if ($primary != "") {
-					$return[$primary]["auto_increment"] = false;
-				} elseif (preg_match('~^integer$~i', $type)) {
-					$return[$name]["auto_increment"] = true;
-				}
-				$primary = $name;
+			if ($row["pk"] && preg_match('~\bAUTOINCREMENT\b~i', $sql)) {
+				$return[$name]["auto_increment"] = true;
 			}
 		}
-		$sql = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		$idf = '(("[^"]*+")+|[a-z0-9_]+)';
 		preg_match_all('~' . $idf . '\s+text\s+COLLATE\s+(\'[^\']+\'|\S+)~i', $sql, $matches, PREG_SET_ORDER);
 		foreach ($matches as $match) {
