@@ -582,6 +582,7 @@ if (isset($_GET["sqlite"])) {
 	*/
 	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = ""): bool
 	{
+		$suffix = "";
 		if ($table != "") {
 			if (!$fields) {
 				foreach (fields($table) as $key => $field) {
@@ -649,6 +650,20 @@ if (isset($_GET["sqlite"])) {
 				}
 			}
 
+			$options = [];
+			if (Connection::get()->isMinVersion("3.37")) {
+				$row = first(get_rows("PRAGMA table_list(" . table($table) . ")"));
+				if ($row["wr"]) {
+					$options[] = "WITHOUT ROWID";
+				}
+				if ($row["strict"]) {
+					$options[] = "STRICT";
+				}
+			} elseif (preg_match('~\)\s*WITHOUT\s+ROWID\s*$~i', Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)))) {
+				$options[] = "WITHOUT ROWID";
+			}
+			$suffix = ($options ? " " . implode(", ", $options) : "");
+
 			queries("BEGIN");
 		}
 
@@ -670,7 +685,7 @@ if (isset($_GET["sqlite"])) {
 			$changes[] = "  CHECK ($add_check)";
 		}
 		$temp_name = ($table == $name ? "adminneo_$name" : $name);
-		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)")) {
+		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)$suffix")) {
 			// implicit ROLLBACK to not overwrite $connection->error
 			return false;
 		}

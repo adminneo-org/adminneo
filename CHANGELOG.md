@@ -13,6 +13,8 @@ AdminNeo 5.6.0
 
 ### Bugfixes
 
+- SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
+
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
 
