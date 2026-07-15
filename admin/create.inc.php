@@ -28,7 +28,7 @@ if ($row["auto_increment_col"]) {
 	$row["fields"][$row["auto_increment_col"]]["auto_increment"] = true;
 }
 
-if ($_POST) {
+if ($_POST && !Admin::get()->getErrors()) {
 	Admin::get()->getSettings()->updateParameter("commentsOpened", $_POST["comments"] ?? null);
 }
 
