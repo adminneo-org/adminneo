@@ -73,11 +73,6 @@ if (isset($_GET["sqlite"])) {
 				$this->resource = $resource;
 			}
 
-			public function __destruct()
-			{
-				$this->resource->finalize();
-			}
-
 			public function fetchAssoc()
 			{
 				return $this->resource->fetchArray(SQLITE3_ASSOC);

@@ -154,11 +154,6 @@ if (isset($_GET["mssql"])) {
 				$this->resource = $resource;
 			}
 
-			public function __destruct()
-			{
-				sqlsrv_free_stmt($this->resource);
-			}
-
 			public function fetchAssoc()
 			{
 				return $this->convertRow(sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC));

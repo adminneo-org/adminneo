@@ -34,6 +34,7 @@ AdminNeo 5.5.1
 - PostgreSQL: Fix editing json columns (regression from 5.5.0)
 - PostgreSQL: Fix displayed size of bytea (by @vrana)
 - MS SQL: Fix table status (by @vrana)
+- MS SQL: Fix multiple result sets (by @vrana)
 - PDO: Increase precision of double (by @vrana)
 - Editor PDO: Fix foreign key value in edit (by @vrana)
 - Editor PostgreSQL: Fix enums (by @vrana)

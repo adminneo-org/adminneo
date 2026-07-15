@@ -197,11 +197,6 @@ if (isset($_GET["pgsql"])) {
 				$this->resource = $resource;
 			}
 
-			public function __destruct()
-			{
-				pg_free_result($this->resource);
-			}
-
 			public function fetchAssoc()
 			{
 				return pg_fetch_assoc($this->resource);
