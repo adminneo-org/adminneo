@@ -7,6 +7,7 @@ AdminNeo 5.6.0
 ### Changes
 
 - MySQL: Convert vector columns to text in select and edit (by @vrana)
+- MariaDB: Support inet4 and inet6 types (by @vrana)
 - MariaDB 11.7+: Support vector columns and indexes (by @vrana)
 - PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
 

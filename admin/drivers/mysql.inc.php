@@ -327,6 +327,13 @@ if (isset($_GET["mysql"])) {
 				$this->insertFunctions['uuid'] = 'uuid';
 			}
 
+			if ($maria && $connection->isMinVersion("10.5")) {
+				$this->types[lang('Network')]["inet6"] = 39;
+				if ($connection->isMinVersion("10.10")) {
+					$this->types[lang('Network')]["inet4"] = 15;
+				}
+			}
+
 			if ($connection->isMinVersion($maria ? "11.7" : "9")) {
 				$this->types[lang('Numbers')]["vector"] = 16383;
 			}
