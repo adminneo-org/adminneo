@@ -171,8 +171,10 @@ if ($_POST) {
 		}
 		queries_redirect(remove_from_uri($_POST["all"] && $_POST["delete"] ? "page" : ""), $message, (bool)$result);
 		if (!$_POST["delete"]) {
-			$post_fields = (array) $_POST["fields"];
-			edit_form($TABLE, array_intersect_key($fields, $post_fields), $post_fields, !$_POST["clone"]);
+			$editable_fields = array_filter($fields, function ($field) {
+				return !($field["generated"] ?? null);
+			});
+			edit_form($TABLE, $editable_fields, (array)$_POST["fields"], !$_POST["clone"]);
 			page_footer();
 			exit;
 		}

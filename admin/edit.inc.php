@@ -117,4 +117,12 @@ if ($_POST["save"] ?? false) {
 	$row = ($_POST["fields"] ?? []) + ($row ?: []);
 }
 
-edit_form($TABLE, $fields, $row, $update);
+if ($_POST["edit"]) {
+	$editable_fields = array_filter($fields, function ($field) {
+		return !($field["generated"] ?? null);
+	});
+} else {
+	$editable_fields = $fields;
+}
+
+edit_form($TABLE, $editable_fields, $row, $update);
