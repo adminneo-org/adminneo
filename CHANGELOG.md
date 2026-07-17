@@ -15,6 +15,7 @@ AdminNeo 5.5.1
 - Fix escaping DB server version (GHSA-rx7m-wxwq-vxr9)
 - Check Sec-Fetch-Site header (by @vrana, GHSA-wm25-49w3-5qrg)
 - Escape REQUEST_URI (by @vrana, GHSA-79wv-8rh2-9vp2)
+- Ignore invalid X-Forwarded-Prefix (by @vrana, GHSA-r2r4-v3vq-qv2g)
 - SQLite: Disallow ATTACH commands (by @vrana, GHSA-p96f-p2p2-2g3h)
 - SQLite: Disallow VACUUM INTO commands (by @vrana, GHSA-q5mp-gfjf-cf2j)
 - SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
