@@ -28,6 +28,7 @@ AdminNeo 5.5.1
 - MySQL: Export binary data as hex (by @vrana)
 - MySQL: Fix routine fields length (by @vrana, regression from 5.5.0)
 - MySQL: Do not export IN in FUNCTION parameters (by @vrana, regression from 5.5.0)
+- MySQL: Allow connecting to socket without hostname (by @magnusvin, regression from 5.5.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
 - MariaDB: Speed up getting checks (by @vrana, regression from 5.4.2)
 - MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)

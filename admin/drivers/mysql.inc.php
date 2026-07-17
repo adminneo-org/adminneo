@@ -183,7 +183,7 @@ if (isset($_GET["mysql"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				list($host, $port) = host_port($server);
-				$dsn = "mysql:charset=utf8;host=$host" . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : "");
+				$dsn = "mysql:charset=utf8" . ($host != "" ? ";host=$host" : "") . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : "");
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
 
