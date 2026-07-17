@@ -56,7 +56,7 @@ if ($_POST) {
 		$created = false;
 		if (!$error) {
 			if ($old_user != $new_user) {
-				$created = queries((Connection::get()->isMinVersion("5") ? "CREATE USER" : "GRANT USAGE ON *.* TO") . " $new_user IDENTIFIED BY " . ($plain_password ? "" : "PASSWORD ") . q($pass));
+				$created = queries("CREATE USER $new_user IDENTIFIED BY " . ($plain_password ? "" : "PASSWORD ") . q($pass));
 				$error = !$created;
 			} elseif ($pass != "") {
 				$pass_part = q($pass);

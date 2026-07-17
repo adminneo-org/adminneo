@@ -300,9 +300,7 @@ if (isset($_GET["mysql"])) {
 				"group_concat",
 			];
 
-			if ($connection->isMinVersion("5.1")) {
-				$this->partitionBy = ["RANGE", "LIST", "HASH", "LINEAR HASH", "KEY", "LINEAR KEY"];
-			}
+			$this->partitionBy = ["RANGE", "LIST", "HASH", "LINEAR HASH", "KEY", "LINEAR KEY"];
 
 			$this->insertFunctions = [
 				"char" => "md5/sha1/password/encrypt/uuid",
@@ -1250,7 +1248,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	 */
 	function explain(Connection $connection, string $query)
 	{
-		return $connection->query("EXPLAIN " . (Connection::get()->isMinVersion("5.1") && !Connection::get()->isMinVersion("5.7") ? "PARTITIONS " : "") . $query);
+		return $connection->query("EXPLAIN " . (Connection::get()->isMinVersion("5.7") ? "" : "PARTITIONS ") . $query);
 	}
 
 	/**
@@ -1416,8 +1414,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	*/
 	function support($feature) {
 		return preg_match(
-			'~^(comment|columns|copy|database|drop_col|dump|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
-			. (Connection::get()->isMinVersion("5.1") ? '|event' : '')
+			'~^(comment|columns|copy|database|drop_col|dump|event|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
 			. (Connection::get()->isMinVersion("8") ? '|descidx' : '')
 			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? '|check' : '')
 			. ')$~',
