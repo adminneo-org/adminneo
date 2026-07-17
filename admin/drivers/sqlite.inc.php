@@ -168,6 +168,9 @@ if (isset($_GET["sqlite"])) {
 			if ($connection->isMinVersion("3.31")) {
 				$this->generated = ["STORED", "VIRTUAL"];
 			}
+			if ($connection->isMinVersion("3.37")) {
+				$this->types[0]["any"] = 0;
+			}
 
 			// REGEXP can be a user defined function.
 			$this->operators = [
@@ -358,7 +361,13 @@ if (isset($_GET["sqlite"])) {
 			$default = $row["dflt_value"];
 			$return[$name] = [
 				"field" => $name,
-				"type" => (preg_match('~int~i', $type) ? "integer" : (preg_match('~char|clob|text~i', $type) ? "text" : (preg_match('~blob~i', $type) ? "blob" : (preg_match('~real|floa|doub~i', $type) ? "real" : "numeric")))),
+				"type" => (preg_match('~int~i', $type) ? "integer"
+					: (preg_match('~char|clob|text~i', $type) ? "text"
+					: (preg_match('~blob~i', $type) ? "blob"
+					: (preg_match('~real|floa|doub~i', $type) ? "real"
+					: (preg_match('~any~i', $type) ? "any"
+					: "numeric"
+				))))),
 				"full_type" => $type,
 				"default" => (preg_match("~^'(.*)'$~", $default, $match) ? str_replace("''", "'", $match[1]) : ($default == "NULL" ? null : $default)),
 				"null" => !$row["notnull"],

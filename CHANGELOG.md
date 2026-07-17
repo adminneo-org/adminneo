@@ -11,6 +11,7 @@ AdminNeo 5.6.0
 - MariaDB 11.7+: Support vector columns and indexes (by @vrana)
 - PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
 - SQLite: Support STRICT and WITHOUT ROWID in create and alter table (by @vrana)
+- SQLite: Support ANY type (by @vrana)
 
 ### Bugfixes
 
