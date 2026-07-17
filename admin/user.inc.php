@@ -45,25 +45,15 @@ if ($_POST) {
 	} else {
 		$new_user = q($_POST["user"]) . "@" . q($_POST["host"]); // if $_GET["host"] is not set then $new_user is always different
 		$pass = $_POST["pass"];
-		if ($pass != '' && !$_POST["hashed"] && !$plain_password) {
-			// compute hash in a separate query so that plain text password is not saved to history
-			$pass = Connection::get()->getValue("SELECT PASSWORD(" . q($pass) . ")");
-			$error = !$pass;
-		} else {
-			$error = false;
-		}
+		$error = false;
 
 		$created = false;
 		if (!$error) {
 			if ($old_user != $new_user) {
-				$created = queries("CREATE USER $new_user IDENTIFIED BY " . ($plain_password ? "" : "PASSWORD ") . q($pass));
+				$created = queries("CREATE USER $new_user IDENTIFIED BY " . ($_POST["hashed"] ? "PASSWORD " : "") . q($pass));
 				$error = !$created;
 			} elseif ($pass != "") {
-				$pass_part = q($pass);
-				if (Connection::get()->isMariaDB()) {
-					$pass_part = "PASSWORD($pass_part)";
-				}
-				queries("SET PASSWORD FOR $new_user = $pass_part");
+				$error = !queries("SET PASSWORD FOR $new_user = " . ($plain_password || $_POST["hashed"] ? q($pass) : "PASSWORD(" . q($pass) . ")"));
 			}
 		}
 

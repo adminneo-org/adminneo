@@ -16,6 +16,7 @@ AdminNeo 5.6.0
 
 ### Bugfixes
 
+- MariaDB: Allow setting password with password validation plugin (by @vrana)
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
 - SQLite: Disable editing of sqlite_schema (by @vrana)
