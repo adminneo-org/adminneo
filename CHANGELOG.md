@@ -17,6 +17,7 @@ AdminNeo 5.6.0
 
 ### Bugfixes
 
+- Ignore invalid X-Forwarded-Prefix (by @vrana, GHSA-5fw2-qrc6-p4fw)
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
