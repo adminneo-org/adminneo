@@ -706,7 +706,7 @@ if (isset($_GET["sqlite"])) {
 		if ($add_check) {
 			$changes[] = "  CHECK ($add_check)";
 		}
-		$temp_name = ($table == $name ? "adminneo_$name" : $name);
+		$temp_name = ($table != "" && $table == $name ? "adminneo_$name" : $name);
 		if (!$engine && $table != "") {
 			$engine = table_status1($table)["Engine"] ?? null;
 		}
