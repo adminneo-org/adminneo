@@ -37,7 +37,7 @@ AdminNeo 5.5.1
 - Editor PDO: Fix foreign key value in edit (by @vrana)
 - Editor PostgreSQL: Fix enums (by @vrana)
 
-(Ported relevant changes from Adminer 5.4.3.)
+(Ported relevant changes from Adminer 5.4.3 - 5.4.4.)
 
 AdminNeo 5.5.0 (2026-06-21)
 ---------------------------
