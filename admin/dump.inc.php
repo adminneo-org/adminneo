@@ -19,16 +19,29 @@ if ($_POST) {
 		"dumpOutput" => $_POST["output"],
 	]);
 
-	$subjects = array_flip($_POST["databases"] ?? []) + array_flip($_POST["tables"] ?? []) + array_flip($_POST["data"] ?? []);
-	if (count($subjects) == 1) {
-		$identifier = key($subjects);
-	} elseif (DB != "") {
-		$identifier = DB;
+	if (DB != "") {
+		$databases = [DB];
+	} else {
+		$databases = $_POST["databases"] ?? [];
+		if (is_string($databases)) {
+			$databases = explode("\n", rtrim(str_replace("\r", "", $databases), "\n"));
+		}
+	}
+
+	$schemas = $_POST["schemas"] ?? [];
+	$tables = array_flip($_POST["tables"] ?? []) + array_flip($_POST["data"] ?? []);
+
+	if (count($tables) == 1) {
+		$identifier = key($tables);
+	} elseif (count($schemas) == 1) {
+		$identifier = $schemas[0];
+	} elseif (count($databases) == 1) {
+		$identifier = $databases[0];
 	} else {
 		$identifier = SERVER != "" ? Admin::get()->getServerName(SERVER) : "localhost";
 	}
 
-	$ext = dump_headers($identifier, DB == "" || $_GET["ns"] === "" || count($subjects) > 1);
+	$ext = dump_headers($identifier, DB == "" || $_GET["ns"] === "" || count($tables) > 1);
 
 	$is_sql = preg_match('~sql~', $_POST["format"]);
 	if ($is_sql) {
@@ -46,15 +59,6 @@ SET foreign_key_checks = 0;
 	}
 
 	$style = $_POST["db_style"];
-
-	if (DB != "") {
-		$databases = [DB];
-	} else {
-		$databases = $_POST["databases"] ?? [];
-		if (is_string($databases)) {
-			$databases = explode("\n", rtrim(str_replace("\r", "", $databases), "\n"));
-		}
-	}
 
 	foreach ($databases as $db) {
 		Admin::get()->dumpDatabase($db);
@@ -100,12 +104,9 @@ SET foreign_key_checks = 0;
 			}
 
 			if ($_POST["table_style"] || $_POST["data_style"]) {
-				foreach (($_GET["ns"] === "" ? (array) $_POST["schemas"] : (DB != "" || !support("scheme") ? [""] : Admin::get()->getSchemas())) as $schema) {
+				foreach (($_GET["ns"] === "" ? (array) $_POST["schemas"] : (DB != "" || !support("scheme") ? [""] : Admin::get()->getSchemas(true))) as $schema) {
 					if ($schema != "") {
 						set_schema($schema);
-						if (DB == "" && (information_schema(DB) || $schema == "pg_catalog")) {
-							continue;
-						}
 					}
 
 					$views = [];
@@ -223,7 +224,7 @@ echo "<table>\n";
 echo script("qsl('table').onclick = dumpClick;");
 
 $prefixes = [];
-if ($_GET["ns"] === "") {
+if (DB != "" && $_GET["ns"] === "") {
 	echo "<thead><tr><th>";
 	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly'>" . lang('Schema') . "</label>" . script("gid('check-schemas').onclick = partial(formCheck, /^schemas\\[/);", "");
 	echo "</thead>\n";
