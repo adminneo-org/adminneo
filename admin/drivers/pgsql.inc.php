@@ -37,8 +37,8 @@ if (isset($_GET["pgsql"])) {
 					$this->error = $error;
 				});
 
-				list($host, $port) = host_port(addcslashes($server, "'\\"));
-				$this->connectionString = "host='$host'" . ($port ? " port='$port'" : "") . " user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
+				list($host, $port) = host_port($server);
+				$this->connectionString = ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -254,9 +254,9 @@ if (isset($_GET["pgsql"])) {
 			{
 				$db = Admin::get()->getDatabase();
 
-				list($host, $port) = host_port(addcslashes($server, "'\\"));
+				list($host, $port) = host_port($server);
 				//! client_encoding is supported since 9.1, but we can't yet use minVersion() here
-				$dsn = "pgsql:host='$host'" . ($port ? " port='$port'" : "") . " client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
+				$dsn = "pgsql:" . ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
