@@ -106,7 +106,7 @@ return [
 	'Error in query' => 'Chyba v dotaze',
 	'Unknown error.' => 'Neznáma chyba.',
 	'Warnings' => 'Varovania',
-	'ATTACH queries are not supported.' => 'Dotazy ATTACH nie sú podporované.',
+	'%s queries are not supported.' => 'Dotazy %s nie sú podporované.',
 	'Execute' => 'Vykonať',
 	'Stop on error' => 'Zastaviť pri chybe',
 	'Show only errors' => 'Zobraziť iba chyby',

@@ -32,14 +32,6 @@ function q($string) {
 	return Connection::get()->quote($string);
 }
 
-/** Escape string to use inside ''
-* @param string
-* @return string
-*/
-function escape_string($val) {
-	return substr(q($val), 1, -1);
-}
-
 /** Remove non-digits from a string; used instead of intval() to not corrupt big numbers
 * @param numeric-string
 * @return string
@@ -331,11 +323,12 @@ function where($where, $fields = []) {
 		$key = bracket_escape($key, true);
 		$column = escape_key($key);
 		$field_type = $fields[$key]["type"] ?? null;
+		$full_field_type = $fields[$key]["full_type"] ?? null;
 
 		if (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
-		} elseif (DIALECT == "pgsql" && preg_match('~^json~', $field_type)) {
-			$conditions[] = "::jsonb = " . q($val) . "::jsonb";
+		} elseif (DIALECT == "pgsql" && preg_match('~^jsonb?$~', $full_field_type)) {
+			$conditions[] = "$column::jsonb = " . q($val) . "::jsonb";
 		} elseif (DIALECT == "sql" && is_numeric($val) && strpos($val, ".") !== false) {
 			// LIKE because of floats but slow with ints.
 			$conditions[] = "$column LIKE " . q($val);
@@ -409,6 +402,14 @@ function convert_fields(array $columns, array $fields, array $select = []): stri
 }
 
 /**
+ * Returns path for a cookie.
+ */
+function cookie_path(): string
+{
+	return strtr(preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"]), [";" => "%3B", "," => "%2C"]);
+}
+
+/**
  * Sets cookie valid on the current path.
  *
  * @param int $lifetime Number of seconds, 0 for session cookie, 2592000 = 30 days.
@@ -417,10 +418,26 @@ function cookie(string $name, string $value, int $lifetime = 2592000): void
 {
 	header("Set-Cookie: $name=" . rawurlencode($value)
 		. ($lifetime ? "; expires=" . gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT" : "")
-		. "; path=" . preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"])
+		. "; path=" . cookie_path()
 		. (HTTPS ? "; secure" : "")
 		. "; HttpOnly; SameSite=lax",
 		false);
+}
+
+/**
+ * Returns contents from a URL.
+ *
+ * @param resource $context
+ * @return array{0: string|false, 1: string[]} [$contents, $headers]
+ */
+function get_url(string $url, $context): array
+{
+	$return = @file_get_contents($url, false, $context);
+	if (function_exists('http_get_last_response_headers')) {
+		$http_response_header = http_get_last_response_headers() ?? [];
+	}
+
+	return [$return, $http_response_header ?? []];
 }
 
 /**
@@ -973,7 +990,7 @@ function get_random_string(): string
 /** Format value to use in select
 * @param string|string[]|list<string[]>
 * @param string
-* @param ?array
+* @param array{type: string, full_type?: string}
 * @param ?int
 * @return string HTML
 */
@@ -1020,7 +1037,10 @@ function select_value($val, $link, $field, $text_length) {
 	if (!$link) {
 		$link = Admin::get()->getFieldValueLink($val, $field);
 	}
-	$return = $field ? Admin::get()->formatFieldValue(Connection::get()->formatValue($val, $field), $field) : $val;
+	if ($field) {
+		$val = Connection::get()->formatValue($val, $field);
+	}
+	$return = $field ? Admin::get()->formatFieldValue($val, $field) : $val;
 	if ($return !== null) {
 		if (!is_utf8($return)) {
 			$return = "\0"; // htmlspecialchars of binary data returns an empty string
@@ -1120,7 +1140,7 @@ function is_shortable(?array $field): bool
  * @return array{0: string, 1: string}
  */
 function host_port(string $server) {
-	return (preg_match('~^(\[(.+)]|([^:]+)):([^:]+)$~', $server, $match) // [a:b] - IPv6
+	return (preg_match('~^(\[(.+)]|([^:]*)):([^:]+)$~', $server, $match) // [a:b] - IPv6
 		? [$match[2] . $match[3], $match[4]]
 		: [$server, '']
 	);
@@ -1188,7 +1208,7 @@ function get_token() {
 */
 function verify_token() {
 	list($token, $rand) = explode(":", $_POST["token"]);
-	return ($rand ^ $_SESSION["token"]) == $token;
+	return ($rand ^ $_SESSION["token"]) == $token && in_array($_SERVER["HTTP_SEC_FETCH_SITE"], ["", "same-origin"]);
 }
 
 function lzw_decompress(string $binary): string

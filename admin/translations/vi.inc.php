@@ -90,7 +90,7 @@ return [
 	'Error in query' => 'Có lỗi trong câu lệnh',
 	'Unknown error.' => 'Lỗi không xác định.',
 	'Warnings' => 'Cảnh báo',
-	'ATTACH queries are not supported.' => 'Không hỗ trợ các truy vấn ATTACH.',
+	'%s queries are not supported.' => 'Không hỗ trợ các truy vấn %s.',
 	'Execute' => 'Thực hiện',
 	'Stop on error' => 'Dừng khi có lỗi',
 	'Show only errors' => 'Chỉ hiện lỗi',

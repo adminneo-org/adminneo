@@ -82,7 +82,7 @@ return [
 	'No commands to execute.' => 'Çalıştırılacak komut yok.',
 	'Error in query' => 'Sorguda hata',
 	'Warnings' => 'Uyarılar',
-	'ATTACH queries are not supported.' => 'ATTACH sorguları desteklenmiyor.',
+	'%s queries are not supported.' => '%s sorguları desteklenmiyor.',
 	'Execute' => 'Çalıştır',
 	'Stop on error' => 'Hata oluşursa dur',
 	'Show only errors' => 'Sadece hataları göster',

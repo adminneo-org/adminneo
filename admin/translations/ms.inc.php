@@ -72,7 +72,7 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'Query berjaya dilaksanakan, %d baris terjejas.',
 	'No commands to execute.' => 'Tiada arahan untuk dilaksanakan.',
 	'Error in query' => 'Ralat pada query',
-	'ATTACH queries are not supported.' => 'Query berikut tidak disokong.',
+	'%s queries are not supported.' => 'Query %s tidak disokong.',
 	'Execute' => 'Laksana',
 	'Stop on error' => 'Berhenti jika ralat',
 	'Show only errors' => 'Paparkan jika ralat',

@@ -90,7 +90,7 @@ return [
 	'Error in query' => 'Virhe kyselyssä',
 	'Unknown error.' => 'Tuntematon virhe.',
 	'Warnings' => 'Varoitukset',
-	'ATTACH queries are not supported.' => 'ATTACH-komennolla tehtyjä kyselyjä ei tueta.',
+	'%s queries are not supported.' => '%s-komennolla tehtyjä kyselyjä ei tueta.',
 	'Execute' => 'Suorita',
 	'Stop on error' => 'Pysähdy virheeseen',
 	'Show only errors' => 'Näytä vain virheet',

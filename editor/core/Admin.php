@@ -418,7 +418,7 @@ class Admin extends Origin
 		$options = $this->foreignKeyOptions($table, $field["field"], $value);
 		if ($options !== null) {
 			if (is_array($options)) {
-				$result = "<select $attrs>" . optionlist($options, $value, true) . "</select>";
+				$result = "<select $attrs>" . optionlist($options, (string) $value, true) . "</select>";
 			} else {
 				$result = "<input $attrs value='" . h($value) . "' class='input hidden'>"
 					. "<input value='" . h($options) . "' class='input jsonly'>"

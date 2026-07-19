@@ -274,8 +274,11 @@ function process_field($field, $type_field) {
 * @return string
 */
 function default_value($field) {
-	$default = $field["default"];
-	if ($default === null) return "";
+	if ($field["default"] === null) {
+		return "";
+	}
+
+	$default = str_replace("\r", "", $field["default"]);
 
 	$generated = $field["generated"];
 	if (in_array($generated, Driver::get()->getGenerated())) {
@@ -411,7 +414,17 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 			} else {
 				echo checkbox("fields[$i][generated]", 1, $field["generated"], "", "", "", "label-default");
 			}
-			echo "<input class='input' name='fields[$i][default]' value='", h($field["default"]), "' aria-labelledby='label-default'>";
+			$attrs = "name='fields[$i][default]' aria-labelledby='label-default'";
+			$value = h($field["default"]);
+			if (str_contains($value, "\n")) {
+				// Preserve the leading newline in textarea.
+				if ($value[0] == "\n") {
+					$value = "\n$value";
+				}
+				echo "<textarea $attrs rows='3' cols='30' style='vertical-align: bottom;'>$value</textarea>";
+			} else {
+				echo "<input class='input' $attrs value='$value'>";
+			}
 			echo "</td>\n";
 
 			if (support("comment")) {

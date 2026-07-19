@@ -117,11 +117,6 @@ if (isset($_GET["oracle"])) {
 				$this->resource = $result;
 			}
 
-			public function __destruct()
-			{
-				oci_free_statement($this->resource);
-			}
-
 			public function fetchAssoc()
 			{
 				return $this->convertRow(oci_fetch_assoc($this->resource));

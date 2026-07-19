@@ -87,7 +87,7 @@ return [
 	'Error in query' => 'क्वेरी में त्रुटि',
 	'Unknown error.' => 'अज्ञात त्रुटि।',
 	'Warnings' => 'चेतावनियाँ',
-	'ATTACH queries are not supported.' => 'संलग्न क्वेरीज़ समर्थित नहीं हैं।',
+	'%s queries are not supported.' => '%s क्वेरीज़ समर्थित नहीं हैं।',
 	'Execute' => 'निष्पादित करें',
 	'Stop on error' => 'त्रुटि पर रुकें',
 	'Show only errors' => 'केवल त्रुटियां दिखाएं',

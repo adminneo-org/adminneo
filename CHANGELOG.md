@@ -4,12 +4,44 @@ Changelog
 AdminNeo 5.5.1
 --------------
 
+### Changes
+
+- Support multiline generated values in alter table (by @vrana)
+- PostgreSQL: Allow exporting more schemas at once (by @vrana)
+- PostgreSQL 18: Support VIRTUAL generated columns (by @vrana)
+
 ### Bugfixes
 
+- Fix escaping DB server version (GHSA-rx7m-wxwq-vxr9)
+- Check Sec-Fetch-Site header (by @vrana, GHSA-wm25-49w3-5qrg)
+- Escape REQUEST_URI (by @vrana, GHSA-79wv-8rh2-9vp2)
+- Ignore invalid X-Forwarded-Prefix (by @vrana, GHSA-r2r4-v3vq-qv2g)
+- SQLite: Disallow ATTACH commands (by @vrana, GHSA-p96f-p2p2-2g3h)
+- SQLite: Disallow VACUUM INTO commands (by @vrana, GHSA-q5mp-gfjf-cf2j)
+- SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
 - Fix processing of file input fields (regression from 5.5.0)
+- Fix blob editing (by @marcovdbout, regression from 5.5.0)
+- Speed up HTML escaping (by @vrana)
 - Fix hiding generated columns in multi edit form
 - ForeignEditPlugin: Fix escaping tables in MS SQL
+- Avoid unserialize() in brute force protection (by @vrana)
+- MySQL: Preserve DETERMINISTIC and DATA ACCESS in routine definition (by @vrana, regression from 5.5.0)
+- MySQL: Export binary data as hex (by @vrana)
+- MySQL: Fix routine fields length (by @vrana, regression from 5.5.0)
+- MySQL: Do not export IN in FUNCTION parameters (by @vrana, regression from 5.5.0)
+- MySQL: Allow connecting to socket without hostname (by @magnusvin, regression from 5.5.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
+- MariaDB: Speed up getting checks (by @vrana, regression from 5.4.2)
+- MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)
+- PostgreSQL: Fix editing json columns (regression from 5.5.0)
+- PostgreSQL: Fix displayed size of bytea (by @vrana)
+- MS SQL: Fix table status (by @vrana)
+- MS SQL: Fix multiple result sets (by @vrana)
+- PDO: Increase precision of double (by @vrana)
+- Editor PDO: Fix foreign key value in edit (by @vrana)
+- Editor PostgreSQL: Fix enums (by @vrana)
+
+(Ported relevant changes from Adminer 5.4.3 - 5.4.4 and several fixes from 5.5.0.)
 
 AdminNeo 5.5.0 (2026-06-21)
 ---------------------------

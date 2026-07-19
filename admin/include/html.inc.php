@@ -63,7 +63,16 @@ function target_blank(): string
  */
 function h(?string $string): string
 {
-	return $string !== null && $string !== "" ? str_replace("\0", "&#0;", htmlspecialchars($string, ENT_QUOTES, 'utf-8')) : "";
+	if ($string === null || $string === "") {
+		return "";
+	}
+
+	// This is 50x faster than htmlspecialchars().
+	return str_replace(
+		["&", "<", "\"", "'", "\0"],
+		["&amp;", "&lt;", "&quot;", "&#039;", "&#0;"],
+		$string
+	);
 }
 
 /**
@@ -386,7 +395,7 @@ function input($field, $value, $function, $autofocus = false): void {
 	$name = h(bracket_escape($field["field"]));
 
 	$types = Driver::get()->getTypes();
-	$json_type = isset($field["type"]) && Admin::get()->detectJson($field["type"], $value, true);
+	$is_json = isset($field["full_type"]) && Admin::get()->detectJson($field["full_type"], $value, true);
 
 	$reset = (DIALECT == "mssql" && $field["auto_increment"]);
 	if ($reset && !$_POST["save"]) {
@@ -450,16 +459,16 @@ function input($field, $value, $function, $autofocus = false): void {
 		echo "</span>";
 	} elseif (is_blob($field) && ini_bool("file_uploads")) {
 		echo "<input type='file' name='fields-$name'>";
-	} elseif ($json_type) {
-		echo "<textarea$attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
-	} elseif (($text = preg_match('~text|lob|memo~i', $field["type"])) || preg_match("~\n~", $value)) {
+	} elseif ($is_json) {
+		echo "<textarea $attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
+	} elseif (($text = preg_match('~text|lob|memo|json~i', $field["type"])) || preg_match("~\n~", $value)) {
 		if ($text && DIALECT != "sqlite") {
 			$attrs .= " cols='50' rows='12'";
 		} else {
 			$rows = min(12, substr_count($value, "\n") + 1);
 			$attrs .= " cols='30' rows='$rows'";
 		}
-		echo "<textarea$attrs>" . h($value) . '</textarea>';
+		echo "<textarea $attrs>" . h($value) . '</textarea>';
 	} else {
 		// int(3) is only a display hint
 		$maxlength = !preg_match('~int~', $field["type"]) && preg_match('~^(\d+)(,(\d+))?$~', $field["length"], $match)
@@ -505,6 +514,20 @@ function input($field, $value, $function, $autofocus = false): void {
 function process_input($field) {
 	$idf = bracket_escape($field["field"]);
 	$function = $_POST["function"][$idf] ?? "";
+	if ($function == "orig") {
+		return (preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? idf_escape($field["field"]) : false);
+	}
+	if ($function == "NULL") {
+		return Driver::get()->getNull();
+	}
+	if (is_blob($field) && ini_bool("file_uploads")) {
+		$file = get_file("fields-$idf");
+		if (!is_string($file)) {
+			return false; //! report errors
+		}
+		return Driver::get()->quoteBinary($file);
+	}
+
 	$value = $_POST["fields"][$idf] ?? ($_FILES["fields"]["name"][$idf] ?? null);
 	if ($value === null) {
 		return false;
@@ -512,12 +535,6 @@ function process_input($field) {
 
 	if ($field["auto_increment"] && $value == "") {
 		return null;
-	}
-	if ($function == "orig") {
-		return (preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? idf_escape($field["field"]) : false);
-	}
-	if ($function == "NULL") {
-		return Driver::get()->getNull();
 	}
 	if ($field["type"] == "set") {
 		$value = implode(",", (array) $value);
@@ -529,13 +546,7 @@ function process_input($field) {
 		}
 		return $value;
 	}
-	if (is_blob($field) && ini_bool("file_uploads")) {
-		$file = get_file("fields-$idf");
-		if (!is_string($file)) {
-			return false; //! report errors
-		}
-		return Driver::get()->quoteBinary($file);
-	}
+
 	return Admin::get()->processFieldInput($field, $value, $function);
 }
 

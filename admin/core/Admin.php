@@ -335,7 +335,7 @@ class Admin extends Origin
 			$text = "<code>$val</code>";
 		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = "<i>" . lang('%d byte(s)', strlen($original)) . "</i>";
-		} elseif ($this->admin->detectJson($field["type"], $original)) {
+		} elseif ($this->admin->detectJson($field["full_type"], $original)) {
 			$text = "<code class='jush-json'>$val</code>";
 		} else {
 			$text = $val;
@@ -900,8 +900,8 @@ class Admin extends Origin
 			return $value; //! SQL injection
 		}
 
-		if (isset($field["type"])) {
-			$this->admin->detectJson($field["type"], $value, false);
+		if (isset($field["full_type"])) {
+			$this->admin->detectJson($field["full_type"], $value, false);
 		}
 
 		$name = $field["field"];
@@ -1096,10 +1096,13 @@ class Admin extends Origin
 							}
 
 							$field = $fields[$key];
-							$row[$key] = ($val !== null
-								? unconvert_field($field, preg_match(number_type(), $field["type"]) && !preg_match('~\[~', $field["full_type"]) && is_numeric($val) ? $val : q(($val === false ? 0 : $val)))
-								: "NULL"
-							);
+							$row[$key] = ($val === null ? "NULL"
+								: ($val === false ? 0
+								: unconvert_field($field, preg_match(number_type(), $field["type"]) && !preg_match('~\[~', $field["full_type"]) && is_numeric($val)
+									? $val
+									: (!is_blob($field) || is_utf8($val) ? q($val) : Driver::get()->quoteBinary($val))
+								)
+							));
 						}
 
 						$s = ($max_packet ? "\n" : " ") . "(" . implode(",\t", $row) . ")";
@@ -1283,7 +1286,7 @@ class Admin extends Origin
 			}
 
 			echo script("let autocompletion;\nwindow.addEventListener('DOMContentLoaded', () => { initSyntaxHighlighting('" .
-				Connection::get()->getVersion() . "', '" . Connection::get()->getFlavor() . "', autocompletion); });");
+				js_escape(Connection::get()->getVersion()) . "', '" . js_escape(Connection::get()->getFlavor()) . "', autocompletion); });");
 		}
 	}
 

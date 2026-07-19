@@ -248,10 +248,15 @@ abstract class Origin extends Plugin
 	 *
 	 * @return list<string>
 	 */
-	public function getSchemas(): array
+	public function getSchemas(bool $noSystem = false): array
 	{
+		$hiddenSchemas = $this->config->getHiddenSchemas();
+		if ($noSystem && !in_array("__system", $hiddenSchemas)) {
+			$hiddenSchemas[] = "__system";
+		}
+
 		return $this->filterListWithWildcards(
-			schemas(), $this->config->getHiddenSchemas(), false, Driver::get()->getSystemSchemas()
+			schemas(), $hiddenSchemas, false, Driver::get()->getSystemSchemas()
 		);
 	}
 
@@ -678,8 +683,8 @@ abstract class Origin extends Plugin
 
 		$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ($pretty ? JSON_PRETTY_PRINT : 0);
 
-		if (str_contains($fieldType, "json")) {
-			if ($pretty !== null && $this->config->isJsonValuesAutoFormat()) {
+		if (preg_match('~^jsonb?$~', $fieldType)) {
+			if ($value != null && $pretty !== null && $this->config->isJsonValuesAutoFormat()) {
 				$value = json_encode(json_decode($value), $flags);
 			}
 

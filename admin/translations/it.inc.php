@@ -92,7 +92,7 @@ return [
 	'Error in query' => 'Errore nella query',
 	'Unknown error.' => 'Errore sconosciuto.',
 	'Warnings' => 'Attenzione',
-	'ATTACH queries are not supported.' => 'ATTACH queries non sono supportate.',
+	'%s queries are not supported.' => '%s queries non sono supportate.',
 	'Execute' => 'Esegui',
 	'Stop on error' => 'Stop su errore',
 	'Show only errors' => 'Mostra solo gli errori',

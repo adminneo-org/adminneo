@@ -37,8 +37,8 @@ if (isset($_GET["pgsql"])) {
 					$this->error = $error;
 				});
 
-				list($host, $port) = host_port(addcslashes($server, "'\\"));
-				$this->connectionString = "host='$host'" . ($port ? " port='$port'" : "") . " user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
+				list($host, $port) = host_port($server);
+				$this->connectionString = ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -197,11 +197,6 @@ if (isset($_GET["pgsql"])) {
 				$this->resource = $resource;
 			}
 
-			public function __destruct()
-			{
-				pg_free_result($this->resource);
-			}
-
 			public function fetchAssoc()
 			{
 				return pg_fetch_assoc($this->resource);
@@ -259,9 +254,9 @@ if (isset($_GET["pgsql"])) {
 			{
 				$db = Admin::get()->getDatabase();
 
-				list($host, $port) = host_port(addcslashes($server, "'\\"));
+				list($host, $port) = host_port($server);
 				//! client_encoding is supported since 9.1, but we can't yet use minVersion() here
-				$dsn = "pgsql:host='$host'" . ($port ? " port='$port'" : "") . " client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
+				$dsn = "pgsql:" . ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -383,7 +378,10 @@ if (isset($_GET["pgsql"])) {
 			}
 
 			if ($connection->isMinVersion("12")) {
-				$this->generated = ["STORED"];
+				$this->generated[] = "STORED";
+				if ($connection->isMinVersion("18")) {
+					$this->generated[] = "VIRTUAL";
+				}
 			}
 
 			// No "SQL" to avoid CSRF.
@@ -599,7 +597,13 @@ if (isset($_GET["pgsql"])) {
 				// Trim array parenthesis.
 				$value = preg_replace('~^\{(.*)}$~', "$1", $value);
 
-				if (preg_match('~^(\{+)(.*)(}+)$~', $value, $matches)) {
+				$isJson = str_contains($scalarType, "json");
+				if ($isJson) {
+					$values = explode('","', trim($value, '"'));
+					array_walk($values, function (&$v) {
+						$v = str_replace('\"', '"', $v);
+					});
+				} elseif (preg_match('~^(\{+)(.*)(}+)$~', $value, $matches)) {
 					// Explode multidimensional array.
 					$values = explode("$matches[3],$matches[1]", $matches[2]);
 					array_walk($values, function (&$v) use ($matches) {
@@ -610,13 +614,13 @@ if (isset($_GET["pgsql"])) {
 					$values = explode(",", $value);
 				}
 
-				if ($values[0][0] == "{") {
+				if (!$isJson && $values[0][0] == "{") {
 					// Multidimensional array.
 					$type = $scalarType;
 					array_walk($values, function (&$v) use ($type, &$scalarType) {
 						$v = $this->explodeArrayValue($v, $type, $scalarType);
 					});
-				} elseif (isset($this->types[lang('Strings')][$scalarType])) {
+				} elseif (!$isJson && isset($this->types[lang('Strings')][$scalarType])) {
 					// Trim apostrophes from string values.
 					array_walk($values, function (&$v) {
 						$v = preg_replace('~^\'(.*)\'$~', "$1", $v);
@@ -639,11 +643,13 @@ if (isset($_GET["pgsql"])) {
 			// Array type.
 			if (preg_match('~^([^[]+)(\[])+$~', $type, $matches)) {
 				$isString = isset($this->types[lang('Strings')][$matches[1]]);
+				$isJson = str_contains($type, "json");
 
-				// Add apostrophes to string values.
-				array_walk($values, function (&$v) use ($type, $isString) {
+				array_walk($values, function (&$v) use ($type, $isString, $isJson) {
 					if (is_array($v)) {
 						$v = $this->implodeArrayValues($v, $type);
+					} elseif ($isJson) {
+						$v = "\"$v\"";
 					} elseif ($isString) {
 						$v = "'$v'";
 					}
@@ -835,7 +841,8 @@ ORDER BY a.attnum"
 			if (in_array($row['attidentity'], ['a', 'd'])) {
 				$row['default'] = 'GENERATED ' . ($row['attidentity'] == 'd' ? 'BY DEFAULT' : 'ALWAYS') . ' AS IDENTITY';
 			}
-			$row["generated"] = ($row["attgenerated"] == "s" ? "STORED" : "");
+			$options = ["s" => "STORED", "v" => "VIRTUAL"];
+			$row["generated"] = ($options[$row["attgenerated"]] ?? "");
 			$row["null"] = !$row["attnotnull"];
 			$row["auto_increment"] = $row['attidentity'] || preg_match('~^nextval\(~i', $row["default"])
 				|| preg_match('~^unique_rowid\(~', $row["default"]); // CockroachDB
@@ -1002,7 +1009,7 @@ ORDER BY s.ordinal_position";
 					}
 					$alter[] = "ALTER $column TYPE$val[1]";
 					$sequence_name = $table . "_" . idf_unescape($val[0]) . "_seq";
-					$alter[] = "ALTER $column " . ($val[3] ? "SET" . preg_replace('~GENERATED ALWAYS(.*) STORED~', 'EXPRESSION\1', $val[3])
+					$alter[] = "ALTER $column " . ($val[3] ? "SET" . preg_replace('~GENERATED ALWAYS(.*) (STORED|VIRTUAL)~', 'EXPRESSION\1', $val[3])
 						: (isset($val[6]) ? "SET DEFAULT nextval(" . q($sequence_name) . ")"
 						: "DROP DEFAULT" //! change to DROP EXPRESSION with generated columns
 					));

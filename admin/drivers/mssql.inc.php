@@ -154,11 +154,6 @@ if (isset($_GET["mssql"])) {
 				$this->resource = $resource;
 			}
 
-			public function __destruct()
-			{
-				sqlsrv_free_stmt($this->resource);
-			}
-
 			public function fetchAssoc()
 			{
 				return $this->convertRow(sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC));
@@ -505,7 +500,7 @@ if (isset($_GET["mssql"])) {
 
 	function table_status($name = "") {
 		$return = [];
-		foreach (get_rows("SELECT ao.name AS Name, ao.type_desc AS Engine, (SELECT value FROM fn_listextendedproperty(default, 'SCHEMA', schema_name(schema_id), 'TABLE', ao.name, null, null)) AS Comment FROM sys.all_objects AS ao WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
+		foreach (get_rows("SELECT ao.name AS Name, ao.type_desc AS Engine, (SELECT cast(value as varchar(max)) FROM fn_listextendedproperty(default, 'SCHEMA', schema_name(schema_id), 'TABLE', ao.name, null, null)) AS Comment FROM sys.all_objects AS ao WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
 			$return[$row["Name"]] = $row;
 		}
 		return $return;

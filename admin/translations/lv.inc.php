@@ -94,7 +94,7 @@ return [
 	'Error in query' => 'Kļūda pieprasījumā',
 	'Unknown error.' => 'Nezināma kļūda.',
 	'Warnings' => 'Brīdinājumi',
-	'ATTACH queries are not supported.' => 'ATTACH-pieprasījumi nav atbalstīti.',
+	'%s queries are not supported.' => '%s-pieprasījumi nav atbalstīti.',
 	'Execute' => 'Izpidīt',
 	'Stop on error' => 'Astāties kļūdas gadījumā',
 	'Show only errors' => 'Rādīt tikai kļūdas',

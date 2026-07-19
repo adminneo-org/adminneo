@@ -47,7 +47,7 @@ if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
 if (!strpos($_SERVER["REQUEST_URI"], '?') && $_SERVER["QUERY_STRING"] != "") { // IIS 7 compatibility
 	$_SERVER["REQUEST_URI"] .= "?$_SERVER[QUERY_STRING]";
 }
-if ($_SERVER["HTTP_X_FORWARDED_PREFIX"]) {
+if (preg_match('~^/[^/]~', $_SERVER["HTTP_X_FORWARDED_PREFIX"])) {
 	$_SERVER["REQUEST_URI"] = $_SERVER["HTTP_X_FORWARDED_PREFIX"] . $_SERVER["REQUEST_URI"];
 }
 
@@ -58,7 +58,7 @@ define("Adminneo\HTTPS", ($_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "of
 if (!defined("SID")) {
 	session_cache_limiter(""); // to allow restarting session
 	session_name("neo_sid");
-	session_set_cookie_params(0, preg_replace('~\?.*~', '', $_SERVER["REQUEST_URI"]), "", HTTPS, true);
+	session_set_cookie_params(0, cookie_path(), "", HTTPS, true);
 	session_start();
 }
 
@@ -71,7 +71,7 @@ if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
 }
 
 @set_time_limit(0); // @ - can be disabled
-@ini_set("precision", "15"); // @ - can be disabled, 15 - internal PHP precision
+@ini_set("precision", "16"); // @ - can be disabled, 16 - IEEE 754 has 15.95 decimal digits for double
 
 // Migrate changed cookies.
 if (!isset($_COOKIE["neo_dump"]) && str_contains($_COOKIE["neo_export"] ?? "", "db_style")) {

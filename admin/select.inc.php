@@ -12,7 +12,7 @@ $oid = $table_status["Oid"];
 $rights = []; // privilege => 0
 $columns = []; // selectable columns
 $search_columns = []; // searchable columns
-$order_columns = []; // searchable columns
+$order_columns = []; // sortable columns
 $text_length = null;
 foreach ($fields as $key => $field) {
 	$name = Admin::get()->getFieldName($field);

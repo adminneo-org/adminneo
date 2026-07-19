@@ -183,7 +183,7 @@ if (isset($_GET["mysql"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				list($host, $port) = host_port($server);
-				$dsn = "mysql:charset=utf8;host=$host" . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : "");
+				$dsn = "mysql:charset=utf8" . ($host != "" ? ";host=$host" : "") . ($port ? (is_numeric($port) ? ";port=" : ";unix_socket=") . $port : "");
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
 
@@ -351,6 +351,11 @@ if (isset($_GET["mysql"])) {
 			} else {
 				return "";
 			}
+		}
+
+		public function quoteBinary(string $string): string
+		{
+			return "X" . q(bin2hex($string));
 		}
 
 		public function insertUpdate(string $table, array $records, array $primary)
@@ -1170,17 +1175,20 @@ ORDER BY ordinal_position";
 		$fields = get_rows("SELECT
 	PARAMETER_NAME field,
 	DATA_TYPE type,
-	CHARACTER_MAXIMUM_LENGTH length,
+	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^(]+\\\\(?|\\\\)$', '') length,
 	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^ ]+ ', '') `unsigned`,
 	1 `null`,
 	DTD_IDENTIFIER full_type,
-	PARAMETER_MODE `inout`,
+	" . ($type == "FUNCTION" ? "''" : "PARAMETER_MODE") . " `inout`,
 	CHARACTER_SET_NAME collation
 FROM information_schema.PARAMETERS
 WHERE SPECIFIC_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND SPECIFIC_NAME = " . q($name) . "
 ORDER BY ORDINAL_POSITION");
 
-		$return = Connection::get()->query("SELECT ROUTINE_COMMENT comment, ROUTINE_DEFINITION definition, 'SQL' language
+		$return = Connection::get()->query("SELECT
+	ROUTINE_COMMENT comment,
+	CONCAT(IF(IS_DETERMINISTIC = 'YES', 'DETERMINISTIC\\n', ''), IF(SQL_DATA_ACCESS != 'CONTAINS SQL', CONCAT(SQL_DATA_ACCESS, '\\n'), ''), ROUTINE_DEFINITION) definition,
+	'SQL' language
 FROM information_schema.ROUTINES
 WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = " . q($name))->fetchAssoc();
 
