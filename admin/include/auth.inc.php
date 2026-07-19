@@ -17,14 +17,14 @@ if ($_COOKIE["neo_permanent"]) {
  */
 function validate_server_input(array &$permanent): void
 {
-	if (SERVER == "") {
+	// Remove socket. E.g:
+	// :/var/www/mysql.sock
+	// 127.0.0.1:/var/www/mysql.sock
+	// [::1]:/var/www/mysql.sock
+	// :/cloudsql/project:region:instance (Google Cloud SQL Unix socket)
+	$server = preg_replace('~:/[-\w.][-\w.:/]*$~D', "", SERVER);
+	if ($server == "") {
 		return;
-	}
-
-	// Add brackets around single IPv6 for correct parsing.
-	$server = SERVER;
-	if (function_exists("filter_var") && filter_var($server,  FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-		$server = "[$server]";
 	}
 
 	// Add dummy https scheme for correct parsing.

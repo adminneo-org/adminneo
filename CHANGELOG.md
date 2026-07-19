@@ -19,6 +19,7 @@ AdminNeo 5.5.1
 - SQLite: Disallow ATTACH commands (by @vrana, GHSA-p96f-p2p2-2g3h)
 - SQLite: Disallow VACUUM INTO commands (by @vrana, GHSA-q5mp-gfjf-cf2j)
 - SQLite: Check filename before deleting (by @vrana, GHSA-6vfx-w7q3-42gq)
+- Fix connecting to database via Unix socket
 - Fix processing of file input fields (regression from 5.5.0)
 - Fix blob editing (by @marcovdbout, regression from 5.5.0)
 - Speed up HTML escaping (by @vrana)

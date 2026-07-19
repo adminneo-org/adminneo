@@ -1140,7 +1140,7 @@ function is_shortable(?array $field): bool
  * @return array{0: string, 1: string}
  */
 function host_port(string $server) {
-	return (preg_match('~^(\[(.+)]|([^:]*)):([^:]+)$~', $server, $match) // [a:b] - IPv6
+	return (preg_match('~^(\[(.+)]|([^:]*)):(\d+|/[-\w.][-\w.:/]*)$~', $server, $match) // [a:b] - IPv6
 		? [$match[2] . $match[3], $match[4]]
 		: [$server, '']
 	);
