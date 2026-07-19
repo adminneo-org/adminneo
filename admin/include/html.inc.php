@@ -397,7 +397,9 @@ function input($field, $value, $function, bool $autofocus = false): void {
 	$types = Driver::get()->getTypes();
 	$is_json = isset($field["full_type"]) && Admin::get()->detectJson($field["full_type"], $value, true);
 
-	$reset = (DIALECT == "mssql" && $field["auto_increment"]);
+	// MS SQL does not allow to set auto increment column even if the value is the same.
+	// We need to skip it by adding 'orig' function.
+	$reset = (DIALECT == "mssql" && $field["auto_increment"] && !$_POST["clone"]);
 	if ($reset && !$_POST["save"]) {
 		$function = null;
 	}

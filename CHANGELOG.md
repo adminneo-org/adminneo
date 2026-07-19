@@ -37,6 +37,7 @@ AdminNeo 5.5.1
 - PostgreSQL: Fix displayed size of bytea (by @vrana)
 - MS SQL: Fix table status (by @vrana)
 - MS SQL: Fix multiple result sets (by @vrana)
+- MS SQL: Fix cloning record with autoincrement column
 - PDO: Increase precision of double (by @vrana)
 - Editor PDO: Fix foreign key value in edit (by @vrana)
 - Editor PostgreSQL: Fix enums (by @vrana)
