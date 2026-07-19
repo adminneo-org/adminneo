@@ -14,6 +14,7 @@ AdminNeo 5.6.0
 - SQLite: Disable editing of sqlite_schema (by @vrana)
 - SQLite: Support STRICT and WITHOUT ROWID in create and alter table (by @vrana)
 - SQLite: Support ANY type (by @vrana)
+- Add missing translations (by @vrana)
 
 ### Bugfixes
 

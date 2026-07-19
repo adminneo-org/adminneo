@@ -10,6 +10,7 @@ return [
 	// Editor
 	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
 	'YYYY-MM-DD' => 'DD/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts // by Claude Fable 5
 
 	// Bootstrap
 
@@ -23,11 +24,22 @@ return [
 	'Logout' => 'Sair',
 	'Logged as: %s' => 'Logado como: %s',
 	'Logout successful.' => 'Saída bem sucedida.',
+	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Há um espaço na senha digitada que pode ser a causa.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'O AdminNeo não suporta acessar uma base de dados sem senha, <a href="https://www.adminneo.org/password"%s>mais informações</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'A base de dados não suporta senha.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'Muitas tentativas de login sem sucesso, tente novamente em %d minuto.',
+		'Muitas tentativas de login sem sucesso, tente novamente em %d minutos.',
+	], // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Enviar o formulário novamente.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Se você não enviou esta requisição pelo AdminNeo, feche esta página.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'A ação será realizada após o login bem-sucedido com as mesmas credenciais.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Não há extension',
 	'None of the supported PHP extensions (%s) are available.' => 'Nenhuma das extensões PHP suportadas (%s) está disponível.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Não é permitido conectar a portas privilegiadas.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Suporte a sessões deve estar habilitado.',
 	'Session expired, please login again.' => 'Sessão expirada, por favor logue-se novamente.',
 	'%s version: %s through PHP extension %s' => 'Versão %s: %s através da extensão PHP %s',
@@ -57,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Coluna',
+	'Columns' => 'Colunas', // by Claude Fable 5
 	'Routine' => 'Rotina',
 	'Grant' => 'Conceder',
 	'Revoke' => 'Impedir',
@@ -73,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Nenhum comando para executar.',
 	'Error in query' => 'Erro na consulta',
+	'Unknown error.' => 'Erro desconhecido.', // by Claude Fable 5
+	'Warnings' => 'Avisos', // by Claude Fable 5
+	'%s queries are not supported.' => 'Consultas %s não são suportadas.', // by Claude Fable 5
 	'Execute' => 'Executar',
 	'Stop on error' => 'Parar em caso de erro',
 	'Show only errors' => 'Mostrar somente erros',
@@ -80,6 +96,7 @@ return [
 	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Histórico',
 	'Clear' => 'Limpar',
+	'Edit all' => 'Editar tudo', // by Claude Fable 5
 
 	// Import
 	'Import' => 'Importar',
@@ -92,6 +109,9 @@ return [
 	'Unable to upload a file.' => 'Não é possível enviar o arquivo.',
 	'Maximum allowed file size is %sB.' => 'Tamanho máximo do arquivo permitido é %sB.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST data demasiado grande. Reduza o tamanho ou aumente a diretiva de configuração %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Você pode enviar um arquivo SQL grande via FTP e importá-lo do servidor.', // by Claude Fable 5
+	'File must be in UTF-8 encoding.' => 'O arquivo deve estar codificado em UTF-8.', // by Claude Fable 5
+	'You are offline.' => 'Você está offline.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'%d registro foi importado.',
 		'%d registros foram importados.',
@@ -107,11 +127,13 @@ return [
 
 	// Databases
 	'Database' => 'Base de dados',
+	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de dados inválida.',
 	'Alter database' => 'Alterar Base de dados',
 	'Create database' => 'Criar Base de dados',
 	'Database schema' => 'Esquema de Base de dados',
+	'Permanent link' => 'Link permanente', // by Claude Fable 5
 	'Database has been dropped.' => 'A Base de dados foi apagada.',
 	'Databases have been dropped.' => 'A Base de dados foi apagada.',
 	'Database has been created.' => 'A Base de dados foi criada.',
@@ -143,6 +165,7 @@ return [
 	'%d in total' => '%d no total',
 	'Analyze' => 'Analisar',
 	'Optimize' => 'Otimizar',
+	'Vacuum' => 'Limpar', // by Claude Fable 5
 	'Check' => 'Verificar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
@@ -150,6 +173,9 @@ return [
 	'Move to other database' => 'Mover para outra Base de dados',
 	'Move' => 'Mover',
 	'Tables have been moved.' => 'As Tabelas foram movidas.',
+	'Copy' => 'Copiar', // by Claude Fable 5
+	'Tables have been copied.' => 'As tabelas foram copiadas.', // by Claude Fable 5
+	'overwrite' => 'sobrescrever', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Tabelas',
@@ -160,6 +186,7 @@ return [
 	'Create table' => 'Criar tabela',
 	'Table has been dropped.' => 'A Tabela foi eliminada.',
 	'Tables have been dropped.' => 'As Tabelas foram eliminadas.',
+	'Tables have been optimized.' => 'As tabelas foram otimizadas.', // by Claude Fable 5
 	'Table has been altered.' => 'A Tabela foi alterada.',
 	'Table has been created.' => 'A Tabela foi criada.',
 	'Table name' => 'Nome da tabela',
@@ -171,8 +198,12 @@ return [
 	'Auto Increment' => 'Incremento Automático',
 	'Options' => 'Opções',
 	'Comment' => 'Comentário',
+	'Default value' => 'Valor padrão', // by Claude Fable 5
 	'Drop' => 'Apagar',
+	'Drop %s?' => 'Apagar %s?', // by Claude Fable 5
 	'Are you sure?' => 'Você tem certeza?',
+	'Size' => 'Tamanho', // by Claude Fable 5
+	'Compute' => 'Calcular', // by Claude Fable 5
 	'Move up' => 'Mover acima',
 	'Move down' => 'Mover abaixo',
 	'Remove' => 'Remover',
@@ -180,6 +211,7 @@ return [
 
 	// Views
 	'View' => 'Visão',
+	'Materialized view' => 'Visão materializada', // by Claude Fable 5
 	'View has been dropped.' => 'A Visão foi apagada.',
 	'View has been altered.' => 'A Visão foi alterada.',
 	'View has been created.' => 'A Visão foi criada.',
@@ -199,6 +231,8 @@ return [
 	'Add next' => 'Adicionar próximo',
 	'Index Type' => 'Tipo de índice',
 	'length' => 'tamanho',
+	'Algorithm' => 'Algoritmo', // by Claude Fable 5
+	'Condition' => 'Condição', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Chaves estrangeiras',
@@ -274,6 +308,12 @@ return [
 	'Create trigger' => 'Adicionar Trigger',
 
 	// Table check constraints
+	'Checks' => 'Verificações', // by Claude Fable 5
+	'Create check' => 'Criar verificação', // by Claude Fable 5
+	'Alter check' => 'Alterar verificação', // by Claude Fable 5
+	'Check has been created.' => 'A verificação foi criada.', // by Claude Fable 5
+	'Check has been altered.' => 'A verificação foi alterada.', // by Claude Fable 5
+	'Check has been dropped.' => 'A verificação foi apagada.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Selecionar dados',
@@ -285,17 +325,22 @@ return [
 	'Sort' => 'Ordenar',
 	'descending' => 'decrescente',
 	'Limit' => 'Limite',
+	'Limit rows' => 'Limite de registros', // by Claude Fable 5
 	'Text length' => 'Tamanho de texto',
 	'Action' => 'Ação',
+	'Full table scan' => 'Varredura completa da tabela', // by Claude Fable 5
 	'Unable to select the table' => 'Não é possível selecionar a Tabela',
 	'Search data in tables' => 'Buscar dados nas Tabelas',
 	'No rows.' => 'Não existem registros.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => [
 		'%d registro',
 		'%d registros',
 	],
 	'Page' => 'Página',
 	'last' => 'último',
+	'Load more data' => 'Carregar mais dados', // by Claude Fable 5
+	'Loading' => 'Carregando', // by Claude Fable 5
 	'Whole result' => 'Resultado completo',
 	'%d byte(s)' => [
 		'%d byte',
@@ -303,6 +348,7 @@ return [
 	],
 
 	// In-place editing in selection
+	'Modify' => 'Modificar', // by Claude Fable 5
 	'Ctrl+click on a value to modify it.' => 'Ctrl+clique sobre o valor para edita-lo.',
 	'Use edit link to modify this value.' => 'Utilize o link editar para modificar este valor.',
 
@@ -315,6 +361,8 @@ return [
 	'Save' => 'Salvar',
 	'Save and continue edit' => 'Salvar e continuar editando',
 	'Save and insert next' => 'Salvar e inserir outro',
+	'Saving' => 'Salvando', // by Claude Fable 5
+	'Selected' => 'Selecionados', // by Claude Fable 5
 	'Clone' => 'Clonar',
 	'Delete' => 'Deletar',
 	'Item%s has been inserted.' => 'O Registro%s foi inserido.', // %s can contain auto-increment value, e.g. ' 123'
@@ -324,6 +372,7 @@ return [
 		'%d item foi afetado.',
 		'%d itens foram afetados.',
 	],
+	'You have no privileges to update this table.' => 'Você não tem privilégios para atualizar esta tabela.', // by Claude Fable 5
 
 	// Data type descriptions
 	'Numbers' => 'Números',
@@ -337,6 +386,8 @@ return [
 
 	// Editor - data values
 	'now' => 'agora',
+	'yes' => 'sim', // by Claude Fable 5
+	'no' => 'não', // by Claude Fable 5
 
 	// Settings
 

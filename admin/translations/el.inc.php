@@ -24,16 +24,22 @@ return [
 	'Logout' => 'Αποσύνδεση',
 	'Logged as: %s' => 'Συνδεθήκατε ως %s',
 	'Logout successful.' => 'Αποσυνδεθήκατε με επιτυχία.',
+	'hostname[:port] or :socket' => 'hostname[:port] ή :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Υπάρχει ένα κενό στον κωδικό που εισαγάγατε, το οποίο μπορεί να είναι η αιτία.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Το AdminNeo δεν υποστηρίζει πρόσβαση σε βάση δεδομένων χωρίς κωδικό, <a href="https://www.adminneo.org/password"%s>περισσότερες πληροφορίες</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Η βάση δεδομένων δεν υποστηρίζει κωδικό.', // by Claude Fable 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %s λεπτό.',
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %s λεπτά.',
 	],
 	'Invalid CSRF token. Send the form again.' => 'Άκυρο κουπόνι CSRF. Στείλτε τη φόρμα ξανά.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Αν δε στείλατε αυτό το αίτημα από το AdminNeo, τότε κλείστε αυτή τη σελίδα.',
+	'The action will be performed after successful login with the same credentials.' => 'Η ενέργεια θα εκτελεστεί μετά από επιτυχή σύνδεση με τα ίδια διαπιστευτήρια.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Καμία Επέκταση',
 	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Η σύνδεση σε προνομιούχες θύρες δεν επιτρέπεται.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Πρέπει να είναι ενεργοποιημένη η υποστήριξη συνεδριών.',
 	'Session expired, please login again.' => 'Η συνεδρία έληξε, παρακαλώ συνδεθείτε ξανά.',
 	'%s version: %s through PHP extension %s' => '%s έκδοση: %s μέσω επέκτασης PHP %s',
@@ -63,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Στήλη',
+	'Columns' => 'Στήλες', // by Claude Fable 5
 	'Routine' => 'Ρουτίνα',
 	'Grant' => 'Παραχώρηση',
 	'Revoke' => 'Ανάκληση',
@@ -79,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Δεν υπάρχουν εντολές να εκτελεστούν.',
 	'Error in query' => 'Σφάλμα στο ερώτημα',
+	'Unknown error.' => 'Άγνωστο σφάλμα.', // by Claude Fable 5
+	'Warnings' => 'Προειδοποιήσεις', // by Claude Fable 5
+	'%s queries are not supported.' => 'Τα ερωτήματα %s δεν υποστηρίζονται.', // by Claude Fable 5
 	'Execute' => 'Εκτέλεση',
 	'Stop on error' => 'Διακοπή όταν υπάρχει σφάλμα',
 	'Show only errors' => 'Να εμφανίζονται μόνο τα σφάλματα',
@@ -117,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'Β. Δεδομένων',
+	'DB' => 'ΒΔ', // by Claude Fable 5
 	'Use' => 'χρήση',
 	'Invalid database.' => 'Λανθασμένη Β.Δ.',
 	'Alter database' => 'Τροποποίηση Β.Δ.',
@@ -164,6 +175,7 @@ return [
 	'Tables have been moved.' => 'Οι πίνακες μεταφέρθηκαν.',
 	'Copy' => 'Αντιγραφή',
 	'Tables have been copied.' => 'Οι πίνακες αντιγράφηκαν.',
+	'overwrite' => 'αντικατάσταση', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Πίνακες',
@@ -188,6 +200,7 @@ return [
 	'Comment' => 'Σχόλιο',
 	'Default value' => 'Προεπιλεγμένη τιμή',
 	'Drop' => 'Διαγραφή',
+	'Drop %s?' => 'Διαγραφή %s;', // by Claude Fable 5
 	'Are you sure?' => 'Είστε σίγουρος;',
 	'Size' => 'Μέγεθος',
 	'Compute' => 'Υπολογισμός',
@@ -218,6 +231,8 @@ return [
 	'Add next' => 'Προσθήκη επόμενου',
 	'Index Type' => 'Τύπος δείκτη',
 	'length' => 'μήκος',
+	'Algorithm' => 'Αλγόριθμος', // by Claude Fable 5
+	'Condition' => 'Συνθήκη', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Εξαρτημένα κλειδιά',
@@ -293,6 +308,12 @@ return [
 	'Create trigger' => 'Δημιουργία εναύσματος',
 
 	// Table check constraints
+	'Checks' => 'Έλεγχοι', // by Claude Fable 5
+	'Create check' => 'Δημιουργία ελέγχου', // by Claude Fable 5
+	'Alter check' => 'Τροποποίηση ελέγχου', // by Claude Fable 5
+	'Check has been created.' => 'Ο έλεγχος δημιουργήθηκε.', // by Claude Fable 5
+	'Check has been altered.' => 'Ο έλεγχος τροποποιήθηκε.', // by Claude Fable 5
+	'Check has been dropped.' => 'Ο έλεγχος διαγράφηκε.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Επιλέξτε δεδομένα',

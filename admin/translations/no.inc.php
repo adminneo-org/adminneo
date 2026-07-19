@@ -24,11 +24,22 @@ return [
 	'Logout' => 'Logg ut',
 	'Logged as: %s' => 'Logget inn som: %s',
 	'Logout successful.' => 'Utlogging vellykket.',
+	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Det er et mellomrom i det angitte passordet, noe som kan være årsaken.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo støtter ikke tilgang til en database uten passord, <a href="https://www.adminneo.org/password"%s>mer informasjon</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Databasen støtter ikke passord.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutt.',
+		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutter.',
+	], // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Ugylding CSRF-token - Send inn skjemaet igjen.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke sendte denne forespørselen fra AdminNeo, lukk denne siden.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'Handlingen utføres etter vellykket innlogging med samme påloggingsinformasjon.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Ingen utvidelse',
 	'None of the supported PHP extensions (%s) are available.' => 'Ingen av de støttede PHP-utvidelsene (%s) er tilgjengelige.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Tilkobling til privilegerte porter er ikke tillatt.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Økt-støtte må være skrudd på.',
 	'Session expired, please login again.' => 'Økt utløpt - vennligst logg inn på nytt.',
 	'%s version: %s through PHP extension %s' => '%s versjon: %s via PHP-utvidelse %s',
@@ -58,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Kolonne',
+	'Columns' => 'Kolonner', // by Claude Fable 5
 	'Routine' => 'Rutine',
 	'Grant' => 'Gi privilegier',
 	'Revoke' => 'Trekk tilbake',
@@ -74,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Ingen kommandoer å utføre.',
 	'Error in query' => 'Feil i forespørsel',
+	'Unknown error.' => 'Ukjent feil.', // by Claude Fable 5
+	'Warnings' => 'Advarsler', // by Claude Fable 5
+	'%s queries are not supported.' => '%s-spørringer støttes ikke.', // by Claude Fable 5
 	'Execute' => 'Kjør',
 	'Stop on error' => 'Stopp ved feil',
 	'Show only errors' => 'Vis bare feil',
@@ -96,6 +111,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'For stor datamengde i skjemaet. Reduser datamengden, eller øk størrelsen på %s-konfigurasjonsdirektivet.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan laste opp en stor SQL-fil via FTP og importere den fra serveren.',
 	'File must be in UTF-8 encoding.' => 'Filen må være i UTF8-tegnkoding.',
+	'You are offline.' => 'Du er frakoblet.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'%d rad er importert.',
 		'%d rader er importert.',
@@ -111,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'Database',
+	'DB' => 'DB', // by Claude Fable 5
 	'Use' => 'Bruk',
 	'Invalid database.' => 'Ugyldig database.',
 	'Alter database' => 'Endre database',
@@ -158,6 +175,7 @@ return [
 	'Tables have been moved.' => 'Tabellene har blitt flyttet.',
 	'Copy' => 'Kopier',
 	'Tables have been copied.' => 'Tabellene har blitt kopiert.',
+	'overwrite' => 'overskriv', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Tabeller',
@@ -180,8 +198,12 @@ return [
 	'Auto Increment' => 'Autoinkrement',
 	'Options' => 'Valg',
 	'Comment' => 'Kommentarer',
+	'Default value' => 'Standardverdi', // by Claude Fable 5
 	'Drop' => 'Dropp',
+	'Drop %s?' => 'Dropp %s?', // by Claude Fable 5
 	'Are you sure?' => 'Er du sikker?',
+	'Size' => 'Størrelse', // by Claude Fable 5
+	'Compute' => 'Beregn', // by Claude Fable 5
 	'Move up' => 'Flytt opp',
 	'Move down' => 'Flytt ned',
 	'Remove' => 'Fjern',
@@ -189,6 +211,7 @@ return [
 
 	// Views
 	'View' => 'View',
+	'Materialized view' => 'Materialisert view', // by Claude Fable 5
 	'View has been dropped.' => 'Viewet er slettet.',
 	'View has been altered.' => 'Viewet er endret.',
 	'View has been created.' => 'Viewet er opprettet.',
@@ -208,6 +231,8 @@ return [
 	'Add next' => 'Legg til neste',
 	'Index Type' => 'Indekstype',
 	'length' => 'lengde',
+	'Algorithm' => 'Algoritme', // by Claude Fable 5
+	'Condition' => 'Betingelse', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Fremmednøkler',
@@ -283,6 +308,12 @@ return [
 	'Create trigger' => 'Opprett trigger',
 
 	// Table check constraints
+	'Checks' => 'Kontroller', // by Claude Fable 5
+	'Create check' => 'Opprett kontroll', // by Claude Fable 5
+	'Alter check' => 'Endre kontroll', // by Claude Fable 5
+	'Check has been created.' => 'Kontrollen er opprettet.', // by Claude Fable 5
+	'Check has been altered.' => 'Kontrollen er endret.', // by Claude Fable 5
+	'Check has been dropped.' => 'Kontrollen er slettet.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Velg data',
@@ -294,12 +325,14 @@ return [
 	'Sort' => 'Sorter',
 	'descending' => 'minkende',
 	'Limit' => 'Skranke',
+	'Limit rows' => 'Begrens rader', // by Claude Fable 5
 	'Text length' => 'Tekstlengde',
 	'Action' => 'Handling',
 	'Full table scan' => 'Full tabell-scan',
 	'Unable to select the table' => 'Kan ikke velge tabellen',
 	'Search data in tables' => 'Søk data i tabeller',
 	'No rows.' => 'Ingen rader.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => [
 		'%d rad',
 		'%d rader',

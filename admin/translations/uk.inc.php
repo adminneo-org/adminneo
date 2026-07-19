@@ -24,6 +24,7 @@ return [
 	'Logout' => 'Вийти',
 	'Logged as: %s' => 'Ви увійшли як: %s',
 	'Logout successful.' => 'Ви вдало вийшли з системи.',
+	'hostname[:port] or :socket' => 'hostname[:port] або :socket', // by Claude Fable 5
 	'There is a space in the input password which might be the cause.' => 'У вхідному паролі є пробіл, який може бути причиною.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не підтримує доступ до бази даних без пароля, <a href="https://www.adminneo.org/password"%s>більше інформації</a>.',
 	'Database does not support password.' => 'База даних не підтримує пароль.',
@@ -70,6 +71,7 @@ return [
 
 	// Structure
 	'Column' => 'Колонка',
+	'Columns' => 'Колонки', // by Claude Fable 5
 	'Routine' => 'Процедура',
 	'Grant' => 'Дозволити',
 	'Revoke' => 'Заборонити',
@@ -234,6 +236,8 @@ return [
 	'Add next' => 'Додати ще',
 	'Index Type' => 'Тип індексу',
 	'length' => 'довжина',
+	'Algorithm' => 'Алгоритм', // by Claude Fable 5
+	'Condition' => 'Умова', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Зовнішні ключі',

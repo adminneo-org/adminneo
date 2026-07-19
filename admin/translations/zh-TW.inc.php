@@ -24,6 +24,7 @@ return [
 	'Logout' => '登出',
 	'Logged as: %s' => '登錄為： %s',
 	'Logout successful.' => '成功登出。',
+	'hostname[:port] or :socket' => 'hostname[:port] 或 :socket', // by Claude Fable 5
 	'There is a space in the input password which might be the cause.' => '您輸入的密碼中有一個空格，這可能是導致問題的原因。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo預設不支援訪問沒有密碼的資料庫，<a href="https://www.adminneo.org/password"%s>詳情見這裡</a>。',
 	'Database does not support password.' => '資料庫不支援密碼。',
@@ -62,6 +63,7 @@ return [
 
 	// Structure
 	'Column' => '欄位',
+	'Columns' => '欄位', // by Claude Fable 5
 	'Routine' => '程序',
 	'Grant' => '授權',
 	'Revoke' => '廢除',
@@ -214,6 +216,8 @@ return [
 	'Add next' => '新增下一筆',
 	'Index Type' => '索引類型',
 	'length' => '長度',
+	'Algorithm' => '演算法', // by Claude Fable 5
+	'Condition' => '條件', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => '外來鍵',
@@ -286,6 +290,12 @@ return [
 	'Create trigger' => '建立觸發器',
 
 	// Table check constraints
+	'Checks' => '檢查約束', // by Claude Fable 5
+	'Create check' => '建立檢查約束', // by Claude Fable 5
+	'Alter check' => '修改檢查約束', // by Claude Fable 5
+	'Check has been created.' => '已建立檢查約束。', // by Claude Fable 5
+	'Check has been altered.' => '已修改檢查約束。', // by Claude Fable 5
+	'Check has been dropped.' => '已刪除檢查約束。', // by Claude Fable 5
 
 	// Selection
 	'Select data' => '選擇資料',

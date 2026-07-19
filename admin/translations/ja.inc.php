@@ -26,6 +26,7 @@ return [
 	'Logout' => 'ログアウト',
 	'Logged as: %s' => 'ログ：%s',
 	'Logout successful.' => 'ログアウトしました。',
+	'hostname[:port] or :socket' => 'hostname[:port] または :socket', // by Claude Fable 5
 	'Invalid server or credentials.' => 'サーバーまたは認証情報が無効です。',
 	'There is a space in the input password which might be the cause.' => '入力されたパスワードに空白が含まれているので、それが原因かもしれません。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo はパスワードのないデータベースへの接続には対応していません。(<a href="https://www.adminneo.org/password"%s>詳細</a>)',

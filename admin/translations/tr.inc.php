@@ -24,6 +24,10 @@ return [
 	'Logout' => 'Çıkış',
 	'Logged as: %s' => '%s olarak giriş yapıldı',
 	'Logout successful.' => 'Oturum başarıyla sonlandı.',
+	'hostname[:port] or :socket' => 'hostname[:port] veya :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Girilen parolada boşluk var, sorunun nedeni bu olabilir.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo parolasız bir veri tabanına erişimi desteklemez, <a href="https://www.adminneo.org/password"%s>daha fazla bilgi</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Veri tabanı parolayı desteklemez.', // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Geçersiz (CSRF) jetonu. Formu tekrar yolla.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Bu isteği AdminNeo\'den göndermediyseniz bu sayfayı kapatın.',
 	'The action will be performed after successful login with the same credentials.' => 'İşlem, aynı kimlik bilgileriyle başarıyla oturum açıldıktan sonra gerçekleştirilecektir.',
@@ -61,6 +65,7 @@ return [
 
 	// Structure
 	'Column' => 'Kolon',
+	'Columns' => 'Kolonlar', // by Claude Fable 5
 	'Routine' => 'Yordam',
 	'Grant' => 'Yetki Ver',
 	'Revoke' => 'Yetki Kaldır',
@@ -77,6 +82,7 @@ return [
 	],
 	'No commands to execute.' => 'Çalıştırılacak komut yok.',
 	'Error in query' => 'Sorguda hata',
+	'Unknown error.' => 'Bilinmeyen hata.', // by Claude Fable 5
 	'Warnings' => 'Uyarılar',
 	'%s queries are not supported.' => '%s sorguları desteklenmiyor.',
 	'Execute' => 'Çalıştır',
@@ -165,6 +171,7 @@ return [
 	'Tables have been moved.' => 'Tablolar taşındı.',
 	'Copy' => 'Kopyala',
 	'Tables have been copied.' => 'Tablolar kopyalandı.',
+	'overwrite' => 'üzerine yaz', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Tablolar',
@@ -220,6 +227,8 @@ return [
 	'Add next' => 'Bundan sonra ekle',
 	'Index Type' => 'İndex Türü',
 	'length' => 'uzunluğu',
+	'Algorithm' => 'Algoritma', // by Claude Fable 5
+	'Condition' => 'Koşul', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Dış anahtarlar',
@@ -295,6 +304,12 @@ return [
 	'Create trigger' => 'Tetik oluştur',
 
 	// Table check constraints
+	'Checks' => 'Kontroller', // by Claude Fable 5
+	'Create check' => 'Kontrol oluştur', // by Claude Fable 5
+	'Alter check' => 'Kontrolü değiştir', // by Claude Fable 5
+	'Check has been created.' => 'Kontrol oluşturuldu.', // by Claude Fable 5
+	'Check has been altered.' => 'Kontrol değiştirildi.', // by Claude Fable 5
+	'Check has been dropped.' => 'Kontrol silindi.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Veri seç',

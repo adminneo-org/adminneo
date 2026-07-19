@@ -24,6 +24,7 @@ return [
 	'Logout' => 'Esci',
 	'Logged as: %s' => 'Autenticato come: %s',
 	'Logout successful.' => 'Uscita effettuata con successo.',
+	'hostname[:port] or :socket' => 'hostname[:port] o :socket', // by Claude Fable 5
 	'Invalid server or credentials.' => 'Server o credenziali non valide.',
 	'There is a space in the input password which might be the cause.' => 'Esiste uno spazio nella passoword inserita che potrebbe essere la causa.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non supporta accesso a databse senza password, <a href="https://www.adminneo.org/password"%s>piú informazioni</a>.',
@@ -233,6 +234,8 @@ return [
 	'Add next' => 'Aggiungi altro',
 	'Index Type' => 'Tipo indice',
 	'length' => 'lunghezza',
+	'Algorithm' => 'Algoritmo', // by Claude Fable 5
+	'Condition' => 'Condizione', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Chiavi esterne',
@@ -308,6 +311,12 @@ return [
 	'Create trigger' => 'Crea trigger',
 
 	// Table check constraints
+	'Checks' => 'Controlli', // by Claude Fable 5
+	'Create check' => 'Crea controllo', // by Claude Fable 5
+	'Alter check' => 'Modifica controllo', // by Claude Fable 5
+	'Check has been created.' => 'Controllo creato.', // by Claude Fable 5
+	'Check has been altered.' => 'Controllo modificato.', // by Claude Fable 5
+	'Check has been dropped.' => 'Controllo eliminato.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Visualizza dati',

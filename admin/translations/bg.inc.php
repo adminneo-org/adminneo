@@ -24,16 +24,22 @@ return [
 	'Logout' => 'Изход',
 	'Logged as: %s' => 'Текущ потребител: %s',
 	'Logout successful.' => 'Излизането е успешно.',
+	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Има интервал във въведената парола, което може да е причината.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддържа достъп до база данни без парола, <a href="https://www.adminneo.org/password"%s>повече информация</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Базата данни не поддържа парола.', // by Claude Fable 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минута.',
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минути.',
 	],
 	'Invalid CSRF token. Send the form again.' => 'Невалиден шифроващ ключ. Попълнете и изпратете формуляра отново.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ако не сте изпратили тази заявка през AdminNeo, затворете тази страница.',
+	'The action will be performed after successful login with the same credentials.' => 'Действието ще бъде извършено след успешно влизане със същите данни.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Няма разширение',
 	'None of the supported PHP extensions (%s) are available.' => 'Никое от поддържаните PHP разширения (%s) не е налично.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Свързването към привилегировани портове не е разрешено.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Поддръжката на сесии трябва да е разрешена.',
 	'Session expired, please login again.' => 'Сесията е изтекла; моля, влезте отново.',
 	'%s version: %s through PHP extension %s' => '%s версия: %s през PHP разширение %s',
@@ -63,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Колона',
+	'Columns' => 'Колони', // by Claude Fable 5
 	'Routine' => 'Процедура',
 	'Grant' => 'Осигуряване',
 	'Revoke' => 'Отнемане',
@@ -79,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Няма команди за изпълнение.',
 	'Error in query' => 'Грешка в заявката',
+	'Unknown error.' => 'Неизвестна грешка.', // by Claude Fable 5
+	'Warnings' => 'Предупреждения', // by Claude Fable 5
+	'%s queries are not supported.' => 'Заявките %s не се поддържат.', // by Claude Fable 5
 	'Execute' => 'Изпълнение',
 	'Stop on error' => 'Спиране при грешка',
 	'Show only errors' => 'Показване само на грешките',
@@ -117,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'База данни',
+	'DB' => 'БД', // by Claude Fable 5
 	'Use' => 'Избор',
 	'Invalid database.' => 'Невалидна база данни.',
 	'Alter database' => 'Промяна на база данни',
@@ -164,6 +175,7 @@ return [
 	'Tables have been moved.' => 'Таблиците бяха преместени.',
 	'Copy' => 'Копиране',
 	'Tables have been copied.' => 'Таблиците бяха копирани.',
+	'overwrite' => 'презаписване', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Таблици',
@@ -188,6 +200,7 @@ return [
 	'Comment' => 'Коментар',
 	'Default value' => 'Стойност по подразбиране',
 	'Drop' => 'Премахване',
+	'Drop %s?' => 'Премахване на %s?', // by Claude Fable 5
 	'Are you sure?' => 'Сигурни ли сте?',
 	'Size' => 'Големина',
 	'Compute' => 'Изчисляване',
@@ -218,6 +231,8 @@ return [
 	'Add next' => 'Добавяне на следващ',
 	'Index Type' => 'Вид на индекса',
 	'length' => 'дължина',
+	'Algorithm' => 'Алгоритъм', // by Claude Fable 5
+	'Condition' => 'Условие', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Препратки',
@@ -293,6 +308,12 @@ return [
 	'Create trigger' => 'Създаване на тригер',
 
 	// Table check constraints
+	'Checks' => 'Проверки', // by Claude Fable 5
+	'Create check' => 'Създаване на проверка', // by Claude Fable 5
+	'Alter check' => 'Промяна на проверка', // by Claude Fable 5
+	'Check has been created.' => 'Проверката беше създадена.', // by Claude Fable 5
+	'Check has been altered.' => 'Проверката беше променена.', // by Claude Fable 5
+	'Check has been dropped.' => 'Проверката беше премахната.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Показване на данни',

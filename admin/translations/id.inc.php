@@ -24,11 +24,19 @@ return [
 	'Logout' => 'Keluar',
 	'Logged as: %s' => 'Masuk sebagai: %s',
 	'Logout successful.' => 'Berhasil keluar.',
+	'hostname[:port] or :socket' => 'hostname[:port] atau :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Ada spasi pada sandi yang dimasukkan yang mungkin menjadi penyebabnya.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tidak mendukung akses basis data tanpa sandi, <a href="https://www.adminneo.org/password"%s>informasi lebih lanjut</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Basis data tidak mendukung sandi.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Terlalu banyak upaya masuk yang gagal, coba lagi dalam %d menit.', // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF tidak sah. Kirim ulang formulir.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Jika Anda tidak mengirim permintaan ini dari AdminNeo, tutup halaman ini.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'Tindakan akan dilakukan setelah berhasil masuk dengan kredensial yang sama.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Ekstensi tidak ada',
 	'None of the supported PHP extensions (%s) are available.' => 'Ekstensi PHP yang didukung (%s) tidak ada.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Koneksi ke port istimewa tidak diizinkan.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Dukungan sesi harus aktif.',
 	'Session expired, please login again.' => 'Sesi habis, silakan masuk lagi.',
 	'%s version: %s through PHP extension %s' => 'Versi %s: %s dengan ekstensi PHP %s',
@@ -55,6 +63,7 @@ return [
 
 	// Structure
 	'Column' => 'Kolom',
+	'Columns' => 'Kolom', // by Claude Fable 5
 	'Routine' => 'Rutin',
 	'Grant' => 'Beri',
 	'Revoke' => 'Tarik',
@@ -65,6 +74,9 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'Kueri berhasil, %d baris terpengaruh.',
 	'No commands to execute.' => 'Tidak ada perintah untuk dijalankan.',
 	'Error in query' => 'Galat dalam kueri',
+	'Unknown error.' => 'Kesalahan tidak dikenal.', // by Claude Fable 5
+	'Warnings' => 'Peringatan', // by Claude Fable 5
+	'%s queries are not supported.' => 'Kueri %s tidak didukung.', // by Claude Fable 5
 	'Execute' => 'Jalankan',
 	'Stop on error' => 'Hentikan jika galat',
 	'Show only errors' => 'Hanya tampilkan galat',
@@ -85,6 +97,9 @@ return [
 	'Unable to upload a file.' => 'Tidak dapat mengunggah berkas.',
 	'Maximum allowed file size is %sB.' => 'Besar berkas yang diizinkan adalah %sB.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Data POST terlalu besar. Kurangi data atau perbesar direktif konfigurasi %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Anda dapat mengunggah berkas SQL besar melalui FTP dan mengimpornya dari server.', // by Claude Fable 5
+	'File must be in UTF-8 encoding.' => 'Berkas harus dalam pengodean UTF-8.', // by Claude Fable 5
+	'You are offline.' => 'Anda sedang luring.', // by Claude Fable 5
 	'%d row(s) have been imported.' => '%d baris berhasil diimpor.',
 
 	// Export
@@ -97,6 +112,7 @@ return [
 
 	// Databases
 	'Database' => 'Basis data',
+	'DB' => 'DB', // by Claude Fable 5
 	'Use' => 'Gunakan',
 	'Invalid database.' => 'Basis data tidak sah.',
 	'Alter database' => 'Ubah basis data',
@@ -134,6 +150,7 @@ return [
 	'%d in total' => '%d total',
 	'Analyze' => 'Analisis',
 	'Optimize' => 'Optimalkan',
+	'Vacuum' => 'Bersihkan', // by Claude Fable 5
 	'Check' => 'Periksa',
 	'Repair' => 'Perbaiki',
 	'Truncate' => 'Kosongkan',
@@ -143,6 +160,7 @@ return [
 	'Tables have been moved.' => 'Tabel berhasil dipindahkan.',
 	'Copy' => 'Salin',
 	'Tables have been copied.' => 'Tabel berhasil disalin.',
+	'overwrite' => 'timpa', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Tabel',
@@ -165,8 +183,12 @@ return [
 	'Auto Increment' => 'Inkrementasi Otomatis',
 	'Options' => 'Opsi',
 	'Comment' => 'Komentar',
+	'Default value' => 'Nilai bawaan', // by Claude Fable 5
 	'Drop' => 'Hapus',
+	'Drop %s?' => 'Hapus %s?', // by Claude Fable 5
 	'Are you sure?' => 'Anda yakin?',
+	'Size' => 'Ukuran', // by Claude Fable 5
+	'Compute' => 'Hitung', // by Claude Fable 5
 	'Move up' => 'Naik',
 	'Move down' => 'Turun',
 	'Remove' => 'Hapus',
@@ -193,6 +215,8 @@ return [
 	'Add next' => 'Tambah setelahnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'panjang',
+	'Algorithm' => 'Algoritme', // by Claude Fable 5
+	'Condition' => 'Kondisi', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
@@ -265,6 +289,12 @@ return [
 	'Create trigger' => 'Buat pemicu',
 
 	// Table check constraints
+	'Checks' => 'Pemeriksaan', // by Claude Fable 5
+	'Create check' => 'Buat pemeriksaan', // by Claude Fable 5
+	'Alter check' => 'Ubah pemeriksaan', // by Claude Fable 5
+	'Check has been created.' => 'Pemeriksaan berhasil dibuat.', // by Claude Fable 5
+	'Check has been altered.' => 'Pemeriksaan berhasil diubah.', // by Claude Fable 5
+	'Check has been dropped.' => 'Pemeriksaan berhasil dihapus.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Pilih data',
@@ -276,19 +306,25 @@ return [
 	'Sort' => 'Urutkan',
 	'descending' => 'menurun',
 	'Limit' => 'Batas',
+	'Limit rows' => 'Batas baris', // by Claude Fable 5
 	'Text length' => 'Panjang teks',
 	'Action' => 'Tindakan',
 	'Full table scan' => 'Pindai tabel lengkap',
 	'Unable to select the table' => 'Gagal memilih tabel',
 	'Search data in tables' => 'Cari data dalam tabel',
 	'No rows.' => 'Tidak ada baris.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => '%d baris',
 	'Page' => 'Halaman',
 	'last' => 'terakhir',
+	'Load more data' => 'Muat lebih banyak data', // by Claude Fable 5
+	'Loading' => 'Memuat', // by Claude Fable 5
 	'Whole result' => 'Seluruh hasil',
 	'%d byte(s)' => '%d bita',
 
 	// In-place editing in selection
+	'Modify' => 'Ubah', // by Claude Fable 5
+	'Ctrl+click on a value to modify it.' => 'Ctrl+klik pada nilai untuk mengubahnya.', // by Claude Fable 5
 	'Use edit link to modify this value.' => 'Gunakan pranala suntingan untuk mengubah nilai ini.',
 
 	// Editing
@@ -300,12 +336,15 @@ return [
 	'Save' => 'Simpan',
 	'Save and continue edit' => 'Simpan dan lanjut menyunting',
 	'Save and insert next' => 'Simpan dan sisipkan berikutnya',
+	'Saving' => 'Menyimpan', // by Claude Fable 5
+	'Selected' => 'Terpilih', // by Claude Fable 5
 	'Clone' => 'Gandakan',
 	'Delete' => 'Hapus',
 	'Item%s has been inserted.' => 'Entri%s berhasil disisipkan.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Entri berhasil dihapus.',
 	'Item has been updated.' => 'Entri berhasil diperbarui.',
 	'%d item(s) have been affected.' => '%d entri terpengaruh.',
+	'You have no privileges to update this table.' => 'Anda tidak memiliki hak istimewa untuk memperbarui tabel ini.', // by Claude Fable 5
 
 	// Data type descriptions
 	'Numbers' => 'Angka',

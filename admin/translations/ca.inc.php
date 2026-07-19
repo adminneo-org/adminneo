@@ -24,11 +24,22 @@ return [
 	'Logout' => 'Desconnecta',
 	'Logged as: %s' => 'Connectat com a: %s',
 	'Logout successful.' => 'Desconnexió correcta.',
+	'hostname[:port] or :socket' => 'hostname[:port] o :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Hi ha un espai a la contrasenya introduïda que en podria ser la causa.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo no permet accedir a una base de dades sense contrasenya, <a href="https://www.adminneo.org/password"%s>més informació</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'La base de dades no admet contrasenya.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'Massa intents d\'inici de sessió fallits, torneu-ho a provar d\'aquí a %d minut.',
+		'Massa intents d\'inici de sessió fallits, torneu-ho a provar d\'aquí a %d minuts.',
+	], // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF invàlid. Torna a enviar el formulari.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Si no heu enviat aquesta sol·licitud des d\'AdminNeo, tanqueu aquesta pàgina.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'L\'acció es durà a terme després d\'iniciar la sessió correctament amb les mateixes credencials.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Cap extensió',
 	'None of the supported PHP extensions (%s) are available.' => 'No hi ha cap de les extensions PHP suportades (%s) disponible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'No es permet connectar-se a ports privilegiats.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Cal que estigui permès l\'us de sessions.',
 	'Session expired, please login again.' => 'La sessió ha expirat, torna a iniciar-ne una.',
 	'%s version: %s through PHP extension %s' => 'Versió %s: %s amb l\'extensió de PHP %s',
@@ -58,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Columna',
+	'Columns' => 'Columnes', // by Claude Fable 5
 	'Routine' => 'Rutina',
 	'Grant' => 'Grant',
 	'Revoke' => 'Revoke',
@@ -74,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Cap comanda per executar.',
 	'Error in query' => 'Error en la consulta',
+	'Unknown error.' => 'Error desconegut.', // by Claude Fable 5
+	'Warnings' => 'Avisos', // by Claude Fable 5
+	'%s queries are not supported.' => 'Les consultes %s no són compatibles.', // by Claude Fable 5
 	'Execute' => 'Executa',
 	'Stop on error' => 'Atura en trobar un error',
 	'Show only errors' => 'Mostra només els errors',
@@ -94,6 +109,9 @@ return [
 	'Unable to upload a file.' => 'Impossible adjuntar el fitxer.',
 	'Maximum allowed file size is %sB.' => 'La mida màxima permesa del fitxer és de %sB.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Les dades POST són massa grans. Redueix les dades o incrementa la directiva de configuració %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Podeu pujar un fitxer SQL gran per FTP i importar-lo des del servidor.', // by Claude Fable 5
+	'File must be in UTF-8 encoding.' => 'El fitxer ha d\'estar codificat en UTF-8.', // by Claude Fable 5
+	'You are offline.' => 'Esteu fora de línia.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'S\'ha importat %d registre.',
 		'S\'han importat %d registres.',
@@ -109,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'Base de dades',
+	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Utilitza',
 	'Invalid database.' => 'Base de dades invàlida.',
 	'Alter database' => 'Modifica la base de dades',
@@ -146,6 +165,7 @@ return [
 	'%d in total' => '%d en total',
 	'Analyze' => 'Analitza',
 	'Optimize' => 'Optimitza',
+	'Vacuum' => 'Neteja', // by Claude Fable 5
 	'Check' => 'Verifica',
 	'Repair' => 'Repara',
 	'Truncate' => 'Escapça',
@@ -155,6 +175,7 @@ return [
 	'Tables have been moved.' => 'S\'han desplaçat les taules.',
 	'Copy' => 'Còpia',
 	'Tables have been copied.' => 'S\'han copiat les taules.',
+	'overwrite' => 'sobreescriure', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Taules',
@@ -165,6 +186,7 @@ return [
 	'Create table' => 'Crea una taula',
 	'Table has been dropped.' => 'S\'ha suprimit la taula.',
 	'Tables have been dropped.' => 'S\'han suprimit les taules.',
+	'Tables have been optimized.' => 'S\'han optimitzat les taules.', // by Claude Fable 5
 	'Table has been altered.' => 'S\'ha modificat la taula.',
 	'Table has been created.' => 'S\'ha creat la taula.',
 	'Table name' => 'Nom de la taula',
@@ -176,8 +198,12 @@ return [
 	'Auto Increment' => 'Increment automàtic',
 	'Options' => 'Opcions',
 	'Comment' => 'Comentari',
+	'Default value' => 'Valor per defecte', // by Claude Fable 5
 	'Drop' => 'Suprimeix',
+	'Drop %s?' => 'Voleu suprimir %s?', // by Claude Fable 5
 	'Are you sure?' => 'Estàs segur?',
+	'Size' => 'Mida', // by Claude Fable 5
+	'Compute' => 'Calcula', // by Claude Fable 5
 	'Move up' => 'Mou a dalt',
 	'Move down' => 'Mou a baix',
 	'Remove' => 'Suprimeix',
@@ -185,6 +211,7 @@ return [
 
 	// Views
 	'View' => 'Vista',
+	'Materialized view' => 'Vista materialitzada', // by Claude Fable 5
 	'View has been dropped.' => 'S\'ha suprimit la vista.',
 	'View has been altered.' => 'S\'ha modificat la vista.',
 	'View has been created.' => 'S\'ha creat la vista.',
@@ -204,6 +231,8 @@ return [
 	'Add next' => 'Afegeix el següent',
 	'Index Type' => 'Tipus d\'índex',
 	'length' => 'longitud',
+	'Algorithm' => 'Algorisme', // by Claude Fable 5
+	'Condition' => 'Condició', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Claus foranes',
@@ -279,6 +308,12 @@ return [
 	'Create trigger' => 'Crea un activador',
 
 	// Table check constraints
+	'Checks' => 'Comprovacions', // by Claude Fable 5
+	'Create check' => 'Crea una comprovació', // by Claude Fable 5
+	'Alter check' => 'Modifica la comprovació', // by Claude Fable 5
+	'Check has been created.' => 'S\'ha creat la comprovació.', // by Claude Fable 5
+	'Check has been altered.' => 'S\'ha modificat la comprovació.', // by Claude Fable 5
+	'Check has been dropped.' => 'S\'ha suprimit la comprovació.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Selecciona dades',
@@ -290,17 +325,22 @@ return [
 	'Sort' => 'Ordena',
 	'descending' => 'descendent',
 	'Limit' => 'Límit',
+	'Limit rows' => 'Límit de registres', // by Claude Fable 5
 	'Text length' => 'Longitud del text',
 	'Action' => 'Acció',
+	'Full table scan' => 'Escaneig complet de la taula', // by Claude Fable 5
 	'Unable to select the table' => 'Impossible seleccionar la taula',
 	'Search data in tables' => 'Cerca dades en les taules',
 	'No rows.' => 'No hi ha cap registre.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => [
 		'%d registre',
 		'%d registres',
 	],
 	'Page' => 'Plana',
 	'last' => 'darrera',
+	'Load more data' => 'Carrega més dades', // by Claude Fable 5
+	'Loading' => 'S\'està carregant', // by Claude Fable 5
 	'Whole result' => 'Tots els resultats',
 	'%d byte(s)' => [
 		'%d byte',
@@ -308,6 +348,7 @@ return [
 	],
 
 	// In-place editing in selection
+	'Modify' => 'Modifica', // by Claude Fable 5
 	'Ctrl+click on a value to modify it.' => 'Fes un Ctrl+clic a un valor per modificar-lo.',
 	'Use edit link to modify this value.' => 'Utilitza l\'enllaç d\'edició per modificar aquest valor.',
 
@@ -320,6 +361,8 @@ return [
 	'Save' => 'Desa',
 	'Save and continue edit' => 'Desa i segueix editant',
 	'Save and insert next' => 'Desa i insereix el següent',
+	'Saving' => 'S\'està desant', // by Claude Fable 5
+	'Selected' => 'Seleccionats', // by Claude Fable 5
 	'Clone' => 'Clona',
 	'Delete' => 'Suprimeix',
 	'Item%s has been inserted.' => 'S\'ha insertat l\'element%s.', // %s can contain auto-increment value, e.g. ' 123'
@@ -329,6 +372,7 @@ return [
 		'S\'ha modificat %d element.',
 		'S\'han modificat %d elements.',
 	],
+	'You have no privileges to update this table.' => 'No teniu privilegis per actualitzar aquesta taula.', // by Claude Fable 5
 
 	// Data type descriptions
 	'Numbers' => 'Nombres',
@@ -342,6 +386,8 @@ return [
 
 	// Editor - data values
 	'now' => 'ara',
+	'yes' => 'sí', // by Claude Fable 5
+	'no' => 'no', // by Claude Fable 5
 
 	// Settings
 

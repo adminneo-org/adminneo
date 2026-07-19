@@ -24,6 +24,7 @@ return [
 	'Logout' => '登出',
 	'Logged as: %s' => '登录用户：%s',
 	'Logout successful.' => '成功登出。',
+	'hostname[:port] or :socket' => 'hostname[:port] 或 :socket', // by Claude Fable 5
 	'There is a space in the input password which might be the cause.' => '您输入的密码中有一个空格，这可能是导致问题的原因。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo默认不支持访问没有密码的数据库，<a href="https://www.adminneo.org/password"%s>详情见这里</a>。',
 	'Database does not support password.' => '数据库不支持密码。',
@@ -62,6 +63,7 @@ return [
 
 	// Structure
 	'Column' => '列',
+	'Columns' => '列', // by Claude Fable 5
 	'Routine' => '子程序',
 	'Grant' => '授权',
 	'Revoke' => '废除',
@@ -213,6 +215,9 @@ return [
 	'Alter indexes' => '修改索引',
 	'Add next' => '下一行插入',
 	'Index Type' => '索引类型',
+	'length' => '长度', // by Claude Fable 5
+	'Algorithm' => '算法', // by Claude Fable 5
+	'Condition' => '条件', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => '外键',
@@ -285,6 +290,12 @@ return [
 	'Create trigger' => '创建触发器',
 
 	// Table check constraints
+	'Checks' => '检查约束', // by Claude Fable 5
+	'Create check' => '创建检查约束', // by Claude Fable 5
+	'Alter check' => '修改检查约束', // by Claude Fable 5
+	'Check has been created.' => '已创建检查约束。', // by Claude Fable 5
+	'Check has been altered.' => '已修改检查约束。', // by Claude Fable 5
+	'Check has been dropped.' => '已删除检查约束。', // by Claude Fable 5
 
 	// Selection
 	'Select data' => '选择数据',

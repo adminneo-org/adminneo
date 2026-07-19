@@ -24,11 +24,19 @@ return [
 	'Logout' => '로그아웃',
 	'Logged as: %s' => '다음으로 로그인했습니다: %s',
 	'Logout successful.' => '로그아웃을 성공했습니다.',
+	'hostname[:port] or :socket' => 'hostname[:port] 또는 :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => '입력한 비밀번호에 공백이 있는데, 이것이 원인일 수 있습니다.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo는 비밀번호 없이 데이터베이스에 접근하는 것을 지원하지 않습니다(<a href="https://www.adminneo.org/password"%s>자세한 정보</a>).', // by Claude Fable 5
+	'Database does not support password.' => '데이터베이스가 비밀번호를 지원하지 않습니다.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => '로그인 실패가 너무 많습니다. %d분 후에 다시 시도하세요.', // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => '잘못된 CSRF 토큰입니다. 다시 보내주십시오.',
+	'If you did not send this request from AdminNeo then close this page.' => '이 요청을 AdminNeo에서 보낸 것이 아니라면 이 페이지를 닫으세요.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => '같은 자격 증명으로 로그인에 성공하면 작업이 수행됩니다.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => '확장이 없습니다',
 	'None of the supported PHP extensions (%s) are available.' => 'PHP 확장(%s)이 설치되어 있지 않습니다.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => '권한이 필요한 포트로의 연결은 허용되지 않습니다.', // by Claude Fable 5
 	'Session support must be enabled.' => '세션 지원을 사용해야만 합니다.',
 	'Session expired, please login again.' => '세션이 만료되었습니다. 다시 로그인하십시오.',
 	'%s version: %s through PHP extension %s' => '%s 버전 %s, PHP 확장 %s',
@@ -55,6 +63,7 @@ return [
 
 	// Structure
 	'Column' => '열',
+	'Columns' => '열', // by Claude Fable 5
 	'Routine' => '루틴',
 	'Grant' => '권한 부여',
 	'Revoke' => '권한 취소',
@@ -65,7 +74,9 @@ return [
 	'Query executed OK, %d row(s) affected.' => '쿼리를 잘 실행했습니다. %d행을 변경했습니다.',
 	'No commands to execute.' => '실행할 수 있는 명령이 없습니다.',
 	'Error in query' => '쿼리의 오류',
+	'Unknown error.' => '알 수 없는 오류입니다.', // by Claude Fable 5
 	'Warnings' => '경고',
+	'%s queries are not supported.' => '%s 쿼리는 지원되지 않습니다.', // by Claude Fable 5
 	'Execute' => '실행',
 	'Stop on error' => '오류의 경우 중지',
 	'Show only errors' => '오류 만 표시',
@@ -87,6 +98,7 @@ return [
 	'Maximum allowed file size is %sB.' => '파일의 최대 크기 %sB.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST 데이터가 너무 큽니다. 데이터 크기를 줄이거나 %s 설정을 늘리십시오.',
 	'You can upload a big SQL file via FTP and import it from server.' => '큰 SQL 파일은 FTP를 통하여 업로드하여 서버에서 가져올 수 있습니다.',
+	'File must be in UTF-8 encoding.' => '파일은 UTF-8 인코딩이어야 합니다.', // by Claude Fable 5
 	'You are offline.' => '오프라인입니다.',
 	'%d row(s) have been imported.' => '%d개 행을 가져 왔습니다.',
 
@@ -100,6 +112,7 @@ return [
 
 	// Databases
 	'Database' => '데이터베이스',
+	'DB' => 'DB', // by Claude Fable 5
 	'Use' => '사용',
 	'Invalid database.' => '잘못된 데이터베이스입니다.',
 	'Alter database' => '데이터베이스 변경',
@@ -158,6 +171,7 @@ return [
 	'Create table' => '테이블 만들기',
 	'Table has been dropped.' => '테이블을 삭제했습니다.',
 	'Tables have been dropped.' => '테이블을 삭제했습니다.',
+	'Tables have been optimized.' => '테이블을 최적화했습니다.', // by Claude Fable 5
 	'Table has been altered.' => '테이블을 변경했습니다.',
 	'Table has been created.' => '테이블을 만들었습니다.',
 	'Table name' => '테이블 이름',
@@ -169,7 +183,9 @@ return [
 	'Auto Increment' => '자동 증가',
 	'Options' => '설정',
 	'Comment' => '주석',
+	'Default value' => '기본값', // by Claude Fable 5
 	'Drop' => '삭제',
+	'Drop %s?' => '%s을(를) 삭제하시겠습니까?', // by Claude Fable 5
 	'Are you sure?' => '실행 하시겠습니까?',
 	'Size' => '크기',
 	'Compute' => '계산하기',
@@ -180,6 +196,7 @@ return [
 
 	// Views
 	'View' => '보기',
+	'Materialized view' => '구체화된 뷰', // by Claude Fable 5
 	'View has been dropped.' => '보기를 삭제했습니다.',
 	'View has been altered.' => '보기를 변경했습니다.',
 	'View has been created.' => '보기를 만들었습니다.',
@@ -199,6 +216,8 @@ return [
 	'Add next' => '다음 추가',
 	'Index Type' => '색인 형',
 	'length' => '길이',
+	'Algorithm' => '알고리즘', // by Claude Fable 5
+	'Condition' => '조건', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => '외부 키',
@@ -255,6 +274,7 @@ return [
 	'Alter sequence' => '순서 변경',
 
 	// User types (PostgreSQL)
+	'User types' => '사용자 유형', // by Claude Fable 5
 	'Create type' => '사용자 정의 형식 만들기',
 	'Type has been dropped.' => '유형을 삭제했습니다.',
 	'Type has been created.' => '유형을 추가했습니다.',
@@ -270,6 +290,12 @@ return [
 	'Create trigger' => '트리거 만들기',
 
 	// Table check constraints
+	'Checks' => '체크 제약 조건', // by Claude Fable 5
+	'Create check' => '체크 제약 조건 만들기', // by Claude Fable 5
+	'Alter check' => '체크 제약 조건 변경', // by Claude Fable 5
+	'Check has been created.' => '체크 제약 조건을 만들었습니다.', // by Claude Fable 5
+	'Check has been altered.' => '체크 제약 조건을 변경했습니다.', // by Claude Fable 5
+	'Check has been dropped.' => '체크 제약 조건을 삭제했습니다.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => '데이터를 선택하십시오',
@@ -284,9 +310,11 @@ return [
 	'Limit rows' => '행 제약',
 	'Text length' => '문자열의 길이',
 	'Action' => '실행',
+	'Full table scan' => '전체 테이블 스캔', // by Claude Fable 5
 	'Unable to select the table' => '테이블을 선택할 수 없습니다',
 	'Search data in tables' => '테이블 내 데이터 검색',
 	'No rows.' => '행이 없습니다.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => '%d개 행',
 	'Page' => '페이지',
 	'last' => '마지막',
@@ -297,6 +325,7 @@ return [
 
 	// In-place editing in selection
 	'Modify' => '수정',
+	'Ctrl+click on a value to modify it.' => '값을 수정하려면 Ctrl+클릭하세요.', // by Claude Fable 5
 	'Use edit link to modify this value.' => '이 값을 수정하려면 편집 링크를 사용하십시오.',
 
 	// Editing
@@ -308,6 +337,7 @@ return [
 	'Save' => '저장',
 	'Save and continue edit' => '저장하고 계속 편집하기',
 	'Save and insert next' => '저장하고 다음에 추가',
+	'Saving' => '저장 중', // by Claude Fable 5
 	'Selected' => '선택됨',
 	'Clone' => '복제',
 	'Delete' => '삭제',
@@ -330,6 +360,7 @@ return [
 	// Editor - data values
 	'now' => '현재 시간',
 	'yes' => '네',
+	'no' => '아니요', // by Claude Fable 5
 
 	// Settings
 

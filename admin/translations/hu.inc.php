@@ -24,11 +24,21 @@ return [
 	'Logout' => 'Kilépés',
 	'Logged as: %s' => 'Belépve: %s',
 	'Logout successful.' => 'Sikeres kilépés.',
+	'hostname[:port] or :socket' => 'hostname[:port] vagy :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'A megadott jelszóban szóköz található, ami az ok lehet.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Az AdminNeo nem támogatja a jelszó nélküli adatbázis-hozzáférést, <a href="https://www.adminneo.org/password"%s>további információ</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Az adatbázis nem támogat jelszót.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.',
+		'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.',
+	], // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Érvénytelen CSRF azonosító. Küldd újra az űrlapot.',
+	'The action will be performed after successful login with the same credentials.' => 'A művelet az azonos hitelesítő adatokkal történő sikeres bejelentkezés után hajtódik végre.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Nincs kiterjesztés',
 	'None of the supported PHP extensions (%s) are available.' => 'Nincs egy elérhető támogatott PHP kiterjesztés (%s) sem.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'A privilegizált portokhoz való csatlakozás nem engedélyezett.', // by Claude Fable 5
 	'Session support must be enabled.' => 'A munkameneteknek (session) engedélyezve kell lennie.',
 	'Session expired, please login again.' => 'Munkamenet lejárt, jelentkezz be újra.',
 	'%s version: %s through PHP extension %s' => '%s verzió: %s, PHP: %s',
@@ -59,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Oszlop',
+	'Columns' => 'Oszlopok', // by Claude Fable 5
 	'Routine' => 'Rutin',
 	'Grant' => 'Engedélyezés',
 	'Revoke' => 'Visszavonás',
@@ -73,6 +84,9 @@ return [
 	],
 	'No commands to execute.' => 'Nincs végrehajtható parancs.',
 	'Error in query' => 'Hiba a lekérdezésben',
+	'Unknown error.' => 'Ismeretlen hiba.', // by Claude Fable 5
+	'Warnings' => 'Figyelmeztetések', // by Claude Fable 5
+	'%s queries are not supported.' => 'A(z) %s lekérdezések nem támogatottak.', // by Claude Fable 5
 	'Execute' => 'Végrehajt',
 	'Stop on error' => 'Hiba esetén megáll',
 	'Show only errors' => 'Csak a hibák mutatása',
@@ -93,6 +107,9 @@ return [
 	'Unable to upload a file.' => 'Nem tudom feltölteni a fájlt.',
 	'Maximum allowed file size is %sB.' => 'A maximális fájlméret %s B.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Túl sok a POST adat! Csökkentsd az adat méretét, vagy növeld a %s beállítást.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Nagy SQL fájlt FTP-n keresztül is feltölthet, és a szerverről importálhatja.', // by Claude Fable 5
+	'File must be in UTF-8 encoding.' => 'A fájlnak UTF-8 kódolásúnak kell lennie.', // by Claude Fable 5
+	'You are offline.' => 'Ön offline állapotban van.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'%d sor importálva.',
 		'%d sor importálva.',
@@ -109,6 +126,7 @@ return [
 
 	// Databases
 	'Database' => 'Adatbázis',
+	'DB' => 'DB', // by Claude Fable 5
 	'Use' => 'Használ',
 	'Invalid database.' => 'Érvénytelen adatbázis.',
 	'Alter database' => 'Adatbázis módosítása',
@@ -146,6 +164,7 @@ return [
 	'%d in total' => 'összesen %d',
 	'Analyze' => 'Elemzés',
 	'Optimize' => 'Optimalizál',
+	'Vacuum' => 'Tisztítás', // by Claude Fable 5
 	'Check' => 'Ellenőrzés',
 	'Repair' => 'Javít',
 	'Truncate' => 'Felszabadít',
@@ -155,6 +174,7 @@ return [
 	'Tables have been moved.' => 'Táblák áthelyezve.',
 	'Copy' => 'Másolás',
 	'Tables have been copied.' => 'Táblák átmásolva.',
+	'overwrite' => 'felülírás', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Táblák',
@@ -165,6 +185,7 @@ return [
 	'Create table' => 'Tábla létrehozása',
 	'Table has been dropped.' => 'A tábla eldobva.',
 	'Tables have been dropped.' => 'Táblák eldobva.',
+	'Tables have been optimized.' => 'A táblák optimalizálva.', // by Claude Fable 5
 	'Table has been altered.' => 'A tábla módosult.',
 	'Table has been created.' => 'A tábla létrejött.',
 	'Table name' => 'Tábla név',
@@ -176,8 +197,12 @@ return [
 	'Auto Increment' => 'Automatikus növelés',
 	'Options' => 'Opciók',
 	'Comment' => 'Megjegyzés',
+	'Default value' => 'Alapértelmezett érték', // by Claude Fable 5
 	'Drop' => 'Eldob',
+	'Drop %s?' => 'Eldobja: %s?', // by Claude Fable 5
 	'Are you sure?' => 'Biztos benne?',
+	'Size' => 'Méret', // by Claude Fable 5
+	'Compute' => 'Kiszámítás', // by Claude Fable 5
 	'Move up' => 'Felfelé',
 	'Move down' => 'Lefelé',
 	'Remove' => 'Eltávolítás',
@@ -185,6 +210,7 @@ return [
 
 	// Views
 	'View' => 'Nézet',
+	'Materialized view' => 'Materializált nézet', // by Claude Fable 5
 	'View has been dropped.' => 'A nézet eldobva.',
 	'View has been altered.' => 'A nézet módosult.',
 	'View has been created.' => 'A nézet létrejött.',
@@ -204,6 +230,8 @@ return [
 	'Add next' => 'Következő hozzáadása',
 	'Index Type' => 'Index típusa',
 	'length' => 'méret',
+	'Algorithm' => 'Algoritmus', // by Claude Fable 5
+	'Condition' => 'Feltétel', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Idegen kulcs',
@@ -280,6 +308,12 @@ return [
 	'Create trigger' => 'Trigger létrehozása',
 
 	// Table check constraints
+	'Checks' => 'Ellenőrzések', // by Claude Fable 5
+	'Create check' => 'Ellenőrzés létrehozása', // by Claude Fable 5
+	'Alter check' => 'Ellenőrzés módosítása', // by Claude Fable 5
+	'Check has been created.' => 'Az ellenőrzés létrehozva.', // by Claude Fable 5
+	'Check has been altered.' => 'Az ellenőrzés módosult.', // by Claude Fable 5
+	'Check has been dropped.' => 'Az ellenőrzés eldobva.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Tartalom',
@@ -291,11 +325,14 @@ return [
 	'Sort' => 'Sorba rendezés',
 	'descending' => 'csökkenő',
 	'Limit' => 'korlát',
+	'Limit rows' => 'Sorok korlátozása', // by Claude Fable 5
 	'Text length' => 'Szöveg hossz',
 	'Action' => 'Művelet',
+	'Full table scan' => 'Teljes táblaolvasás', // by Claude Fable 5
 	'Unable to select the table' => 'Nem tudom kiválasztani a táblát',
 	'Search data in tables' => 'Keresés a táblákban',
 	'No rows.' => 'Nincs megjeleníthető eredmény.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => [
 		'%d sor',
 		'%d sor',
@@ -303,6 +340,8 @@ return [
 	],
 	'Page' => 'oldal',
 	'last' => 'utolsó',
+	'Load more data' => 'További adatok betöltése', // by Claude Fable 5
+	'Loading' => 'Betöltés', // by Claude Fable 5
 	'Whole result' => 'Összes eredményt mutatása',
 	'%d byte(s)' => [
 		'%d bájt',
@@ -311,6 +350,8 @@ return [
 	],
 
 	// In-place editing in selection
+	'Modify' => 'Módosítás', // by Claude Fable 5
+	'Ctrl+click on a value to modify it.' => 'Ctrl+kattintás egy értékre a módosításához.', // by Claude Fable 5
 	'Use edit link to modify this value.' => 'Használd a szerkesztés hivatkozást ezen érték módosításához.',
 
 	// Editing
@@ -322,6 +363,8 @@ return [
 	'Save' => 'Mentés',
 	'Save and continue edit' => 'Mentés és szerkesztés folytatása',
 	'Save and insert next' => 'Mentés és újat beszúr',
+	'Saving' => 'Mentés', // by Claude Fable 5
+	'Selected' => 'Kijelölve', // by Claude Fable 5
 	'Clone' => 'Klónoz',
 	'Delete' => 'Törlés',
 	'Item%s has been inserted.' => '%s tétel beszúrva.', // %s can contain auto-increment value, e.g. ' 123'
@@ -332,6 +375,7 @@ return [
 		'%d tétel érintett.',
 		'%d tétel érintett.',
 	],
+	'You have no privileges to update this table.' => 'Nincs jogosultsága a tábla frissítéséhez.', // by Claude Fable 5
 
 	// Data type descriptions
 	'Numbers' => 'Szám',
@@ -345,6 +389,8 @@ return [
 
 	// Editor - data values
 	'now' => 'most',
+	'yes' => 'igen', // by Claude Fable 5
+	'no' => 'nem', // by Claude Fable 5
 
 	// Settings
 

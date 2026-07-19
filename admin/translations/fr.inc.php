@@ -26,6 +26,7 @@ return [
 	'Logout' => 'Déconnexion',
 	'Logged as: %s' => 'Authentifié en tant que : %s',
 	'Logout successful.' => 'Déconnexion réussie.',
+	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
 	'Invalid server or credentials.' => 'Serveur ou identifiants invalides.',
 	'There is a space in the input password which might be the cause.' => 'Il y a un espace dans le mot de passe entré qui pourrait en être la cause.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne supporte pas l\'accès aux bases de données sans mot de passe, <a href="https://www.adminneo.org/password"%s>plus d\'information</a>.',
@@ -246,6 +247,8 @@ return [
 	'Add next' => 'Ajouter le prochain',
 	'Index Type' => 'Type d\'index',
 	'length' => 'longueur',
+	'Algorithm' => 'Algorithme', // by Claude Fable 5
+	'Condition' => 'Condition', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Clés étrangères',

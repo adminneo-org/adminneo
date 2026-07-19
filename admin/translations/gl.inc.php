@@ -24,16 +24,22 @@ return [
 	'Logout' => 'Pechar sesión',
 	'Logged as: %s' => 'Conectado como: %s',
 	'Logout successful.' => 'Pechouse a sesión con éxito.',
+	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Hai un espazo no contrasinal introducido que podería ser a causa.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non permite acceder a unha base de datos sen contrasinal, <a href="https://www.adminneo.org/password"%s>máis información</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'A base de datos non admite contrasinal.', // by Claude Fable 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Demasiados intentos de conexión, intentao de novo en %d minuto.',
 		'Demasiados intentos de conexión, intentao de novo en %d minutos.',
 	],
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Envíe de novo os datos do formulario.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Se non enviaches esta petición dende o AdminNeo entón pecha esta páxina.',
+	'The action will be performed after successful login with the same credentials.' => 'A acción realizarase despois de iniciar sesión correctamente coas mesmas credenciais.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Non ten extensión',
 	'None of the supported PHP extensions (%s) are available.' => 'Ningunha das extensións PHP soportadas (%s) está dispoñible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Non se permite conectar a portos privilexiados.', // by Claude Fable 5
 	'Session support must be enabled.' => 'As sesións deben estar habilitadas.',
 	'Session expired, please login again.' => 'Caducou a sesión, por favor acceda de novo.',
 	'%s version: %s through PHP extension %s' => 'Versión %s: %s a través da extensión de PHP %s',
@@ -63,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Columna',
+	'Columns' => 'Columnas', // by Claude Fable 5
 	'Routine' => 'Rutina',
 	'Grant' => 'Conceder',
 	'Revoke' => 'Revocar',
@@ -79,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Non hai comandos para executar.',
 	'Error in query' => 'Erro na consulta',
+	'Unknown error.' => 'Erro descoñecido.', // by Claude Fable 5
+	'Warnings' => 'Avisos', // by Claude Fable 5
+	'%s queries are not supported.' => 'As consultas %s non son compatibles.', // by Claude Fable 5
 	'Execute' => 'Executar',
 	'Stop on error' => 'Parar en caso de erro',
 	'Show only errors' => 'Amosar só erros',
@@ -117,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'Base de datos',
+	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de datos incorrecta.',
 	'Alter database' => 'Modificar Base de datos',
@@ -164,6 +175,7 @@ return [
 	'Tables have been moved.' => 'Movéronse as táboas.',
 	'Copy' => 'Copiar',
 	'Tables have been copied.' => 'Copiáronse as táboas.',
+	'overwrite' => 'sobrescribir', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Táboas',
@@ -188,6 +200,7 @@ return [
 	'Comment' => 'Comentario',
 	'Default value' => 'Valor por defecto',
 	'Drop' => 'Eliminar',
+	'Drop %s?' => 'Eliminar %s?', // by Claude Fable 5
 	'Are you sure?' => 'Está seguro?',
 	'Size' => 'Tamaño',
 	'Compute' => 'Calcular',
@@ -218,6 +231,8 @@ return [
 	'Add next' => 'Engadir seguinte',
 	'Index Type' => 'Tipo de índice',
 	'length' => 'lonxitude',
+	'Algorithm' => 'Algoritmo', // by Claude Fable 5
+	'Condition' => 'Condición', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Chaves externas',
@@ -293,6 +308,12 @@ return [
 	'Create trigger' => 'Crear Disparador',
 
 	// Table check constraints
+	'Checks' => 'Comprobacións', // by Claude Fable 5
+	'Create check' => 'Crear comprobación', // by Claude Fable 5
+	'Alter check' => 'Modificar comprobación', // by Claude Fable 5
+	'Check has been created.' => 'Creouse a comprobación.', // by Claude Fable 5
+	'Check has been altered.' => 'Modificouse a comprobación.', // by Claude Fable 5
+	'Check has been dropped.' => 'Eliminouse a comprobación.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Seleccionar datos',

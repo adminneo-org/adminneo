@@ -24,11 +24,22 @@ return [
 	'Logout' => 'Ieșire',
 	'Logged as: %s' => 'Ați intrat ca: %s',
 	'Logout successful.' => 'Ați ieșit cu succes.',
+	'hostname[:port] or :socket' => 'hostname[:port] sau :socket', // by Claude Fable 5
+	'There is a space in the input password which might be the cause.' => 'Există un spațiu în parola introdusă, care ar putea fi cauza.', // by Claude Fable 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nu acceptă accesul la o bază de date fără parolă, <a href="https://www.adminneo.org/password"%s>mai multe informații</a>.', // by Claude Fable 5
+	'Database does not support password.' => 'Baza de date nu acceptă parolă.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'Prea multe autentificări nereușite, încercați din nou peste %d minut.',
+		'Prea multe autentificări nereușite, încercați din nou peste %d minute.',
+	], // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Dacă nu ați trimis această cerere din AdminNeo, închideți această pagină.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5
 
 	// Connection
 	'No extension' => 'Nu este extensie',
 	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Conectarea la porturi privilegiate nu este permisă.', // by Claude Fable 5
 	'Session support must be enabled.' => 'Sesiunile trebuie să fie pornite.',
 	'Session expired, please login again.' => 'Timpul sesiunii a expirat, rog să vă conectați din nou.',
 	'%s version: %s through PHP extension %s' => 'Versiunea %s: %s cu extensia PHP %s',
@@ -58,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Coloană',
+	'Columns' => 'Coloane', // by Claude Fable 5
 	'Routine' => 'Procedură',
 	'Grant' => 'Permite',
 	'Revoke' => 'Interzice',
@@ -74,6 +86,9 @@ return [
 	],
 	'No commands to execute.' => 'Nu sunt comenzi de executat.',
 	'Error in query' => 'Greșeală în query',
+	'Unknown error.' => 'Eroare necunoscută.', // by Claude Fable 5
+	'Warnings' => 'Avertismente', // by Claude Fable 5
+	'%s queries are not supported.' => 'Interogările %s nu sunt acceptate.', // by Claude Fable 5
 	'Execute' => 'Execută',
 	'Stop on error' => 'Se oprește la greșeală',
 	'Show only errors' => 'Arată doar greșeli',
@@ -94,6 +109,9 @@ return [
 	'Unable to upload a file.' => 'Nu am putut încărca fișierul pe server.',
 	'Maximum allowed file size is %sB.' => 'Fișierul maxim admis - %sO.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Mesajul POST este prea mare. Trimiteți mai puține date sau măriți parametrul configurației directivei %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Puteți încărca un fișier SQL mare prin FTP și să îl importați de pe server.', // by Claude Fable 5
+	'File must be in UTF-8 encoding.' => 'Fișierul trebuie să fie codificat UTF-8.', // by Claude Fable 5
+	'You are offline.' => 'Sunteți offline.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'%d rînd importat.',
 		'%d rînduri importate.',
@@ -109,6 +127,7 @@ return [
 
 	// Databases
 	'Database' => 'Baza de date',
+	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Alege',
 	'Invalid database.' => 'Bază de deate invalidă.',
 	'Alter database' => 'Modifică baza de date',
@@ -146,6 +165,7 @@ return [
 	'%d in total' => 'În total %d',
 	'Analyze' => 'Analizează',
 	'Optimize' => 'Optimizează',
+	'Vacuum' => 'Curăță', // by Claude Fable 5
 	'Check' => 'Controlează',
 	'Repair' => 'Repară',
 	'Truncate' => 'Curăță',
@@ -155,6 +175,7 @@ return [
 	'Tables have been moved.' => 'Tabelele au fost mutate.',
 	'Copy' => 'Copiază',
 	'Tables have been copied.' => 'Tabelele au fost copiate.',
+	'overwrite' => 'suprascrie', // by Claude Fable 5
 
 	// Tables
 	'Tables' => 'Tabele',
@@ -165,6 +186,7 @@ return [
 	'Create table' => 'Crează tabel',
 	'Table has been dropped.' => 'Tabelul a fost șters.',
 	'Tables have been dropped.' => 'Tabelele au fost șterse.',
+	'Tables have been optimized.' => 'Tabelele au fost optimizate.', // by Claude Fable 5
 	'Table has been altered.' => 'Tabelul a fost modificat.',
 	'Table has been created.' => 'Tabelul a fost creat.',
 	'Table name' => 'Denumirea tabelului',
@@ -176,8 +198,12 @@ return [
 	'Auto Increment' => 'Creșterea automată',
 	'Options' => 'Acțiune',
 	'Comment' => 'Comentariu',
+	'Default value' => 'Valoare implicită', // by Claude Fable 5
 	'Drop' => 'Șterge',
+	'Drop %s?' => 'Ștergeți %s?', // by Claude Fable 5
 	'Are you sure?' => 'Sunteți sigur(ă)?',
+	'Size' => 'Mărime', // by Claude Fable 5
+	'Compute' => 'Calculează', // by Claude Fable 5
 	'Move up' => 'Mișcă în sus',
 	'Move down' => 'Mișcă în jos',
 	'Remove' => 'Șterge',
@@ -185,6 +211,7 @@ return [
 
 	// Views
 	'View' => 'Reprezentare',
+	'Materialized view' => 'Reprezentare materializată', // by Claude Fable 5
 	'View has been dropped.' => 'Reprezentarea a fost ștearsă.',
 	'View has been altered.' => 'Reprezentarea a fost modificată.',
 	'View has been created.' => 'Reprezentarea a fost creată.',
@@ -204,6 +231,8 @@ return [
 	'Add next' => 'Adaugă încă',
 	'Index Type' => 'Tipul indexului',
 	'length' => 'lungimea',
+	'Algorithm' => 'Algoritm', // by Claude Fable 5
+	'Condition' => 'Condiție', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Chei externe',
@@ -279,6 +308,12 @@ return [
 	'Create trigger' => 'Crează trigger',
 
 	// Table check constraints
+	'Checks' => 'Verificări', // by Claude Fable 5
+	'Create check' => 'Crează verificare', // by Claude Fable 5
+	'Alter check' => 'Modifică verificarea', // by Claude Fable 5
+	'Check has been created.' => 'Verificarea a fost creată.', // by Claude Fable 5
+	'Check has been altered.' => 'Verificarea a fost modificată.', // by Claude Fable 5
+	'Check has been dropped.' => 'Verificarea a fost ștearsă.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Selectează',
@@ -290,17 +325,22 @@ return [
 	'Sort' => 'Sortare',
 	'descending' => 'descrescător',
 	'Limit' => 'Limit',
+	'Limit rows' => 'Limită de rânduri', // by Claude Fable 5
 	'Text length' => 'Lungimea textului',
 	'Action' => 'Acțiune',
+	'Full table scan' => 'Scanare completă a tabelului', // by Claude Fable 5
 	'Unable to select the table' => 'Nu am putut selecta date din tabel',
 	'Search data in tables' => 'Caută în tabele',
 	'No rows.' => 'Nu sunt înscrieri.',
+	'%d / ' => '%d / ', // by Claude Fable 5
 	'%d row(s)' => [
 		'%d înscriere',
 		'%d înscrieri',
 	],
 	'Page' => 'Pagina',
 	'last' => 'ultima',
+	'Load more data' => 'Încarcă mai multe date', // by Claude Fable 5
+	'Loading' => 'Se încarcă', // by Claude Fable 5
 	'Whole result' => 'Tot rezultatul',
 	'%d byte(s)' => [
 		'%d octet',
@@ -308,6 +348,7 @@ return [
 	],
 
 	// In-place editing in selection
+	'Modify' => 'Modifică', // by Claude Fable 5
 	'Ctrl+click on a value to modify it.' => 'Ctrl+click pe o valoare pentru a o modifica.',
 	'Use edit link to modify this value.' => 'Valoare poate fi modificată cu ajutorul butonului «modifică».',
 
@@ -320,6 +361,8 @@ return [
 	'Save' => 'Salvează',
 	'Save and continue edit' => 'Salvează și continuă editarea',
 	'Save and insert next' => 'Salvează și mai inserează',
+	'Saving' => 'Se salvează', // by Claude Fable 5
+	'Selected' => 'Selectate', // by Claude Fable 5
 	'Clone' => 'Clonează',
 	'Delete' => 'Șterge',
 	'Item%s has been inserted.' => 'Înregistrarea%s a fost inserată.', // %s can contain auto-increment value, e.g. ' 123'
@@ -329,6 +372,7 @@ return [
 		'A fost modificată %d înscriere.',
 		'Au fost modificate %d înscrieri.',
 	],
+	'You have no privileges to update this table.' => 'Nu aveți privilegii pentru a actualiza acest tabel.', // by Claude Fable 5
 
 	// Data type descriptions
 	'Numbers' => 'Număr',
@@ -342,6 +386,8 @@ return [
 
 	// Editor - data values
 	'now' => 'acum',
+	'yes' => 'da', // by Claude Fable 5
+	'no' => 'nu', // by Claude Fable 5
 
 	// Settings
 

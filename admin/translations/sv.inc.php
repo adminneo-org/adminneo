@@ -24,6 +24,7 @@ return [
 	'Logout' => 'Logga ut',
 	'Logged as: %s' => 'Inloggad som: %s',
 	'Logout successful.' => 'Du är nu utloggad.',
+	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
 	'There is a space in the input password which might be the cause.' => 'Det finns ett mellanslag i lösenordet, vilket kan vara anledningen.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tillåter inte att ansluta till en databas utan lösenord. <a href="https://www.adminneo.org/password"%s>Mer information</a>.',
 	'Database does not support password.' => 'Databasen stödjer inte lösenord.',
@@ -68,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Kolumn',
+	'Columns' => 'Kolumner', // by Claude Fable 5
 	'Routine' => 'Rutin',
 	'Grant' => 'Tillåt',
 	'Revoke' => 'Neka',
@@ -229,6 +231,8 @@ return [
 	'Add next' => 'Lägg till nästa',
 	'Index Type' => 'Indextyp',
 	'length' => 'längd',
+	'Algorithm' => 'Algoritm', // by Claude Fable 5
+	'Condition' => 'Villkor', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Främmande nycklar',
@@ -304,6 +308,12 @@ return [
 	'Create trigger' => 'Skapa avtryckare',
 
 	// Table check constraints
+	'Checks' => 'Kontrollvillkor', // by Claude Fable 5
+	'Create check' => 'Skapa kontrollvillkor', // by Claude Fable 5
+	'Alter check' => 'Ändra kontrollvillkor', // by Claude Fable 5
+	'Check has been created.' => 'Kontrollvillkoret har skapats.', // by Claude Fable 5
+	'Check has been altered.' => 'Kontrollvillkoret har ändrats.', // by Claude Fable 5
+	'Check has been dropped.' => 'Kontrollvillkoret har tagits bort.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Välj data',

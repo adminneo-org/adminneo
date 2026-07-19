@@ -24,6 +24,7 @@ return [
 	'Logout' => 'Kirjaudu ulos',
 	'Logged as: %s' => 'Olet kirjautunut käyttäjänä: %s',
 	'Logout successful.' => 'Uloskirjautuminen onnistui.',
+	'hostname[:port] or :socket' => 'hostname[:port] tai :socket', // by Claude Fable 5
 	'There is a space in the input password which might be the cause.' => 'Syynä voi olla syötetyssä salasanassa oleva välilyönti.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei tue pääsyä tietokantaan ilman salasanaa, katso tarkemmin <a href="https://www.adminneo.org/password"%s>täältä</a>.',
 	'Database does not support password.' => 'Tietokanta ei tue salasanaa.',
@@ -68,6 +69,7 @@ return [
 
 	// Structure
 	'Column' => 'Sarake',
+	'Columns' => 'Sarakkeet', // by Claude Fable 5
 	'Routine' => 'Rutiini',
 	'Grant' => 'Myönnä',
 	'Revoke' => 'Kiellä',
@@ -229,6 +231,8 @@ return [
 	'Add next' => 'Lisää seuraava',
 	'Index Type' => 'Indeksityyppi',
 	'length' => 'pituus',
+	'Algorithm' => 'Algoritmi', // by Claude Fable 5
+	'Condition' => 'Ehto', // by Claude Fable 5
 
 	// Foreign keys
 	'Foreign keys' => 'Vieraat avaimet',
@@ -304,6 +308,12 @@ return [
 	'Create trigger' => 'Luo liipaisin',
 
 	// Table check constraints
+	'Checks' => 'Tarkistukset', // by Claude Fable 5
+	'Create check' => 'Luo tarkistus', // by Claude Fable 5
+	'Alter check' => 'Muuta tarkistusta', // by Claude Fable 5
+	'Check has been created.' => 'Tarkistus on luotu.', // by Claude Fable 5
+	'Check has been altered.' => 'Tarkistusta on muutettu.', // by Claude Fable 5
+	'Check has been dropped.' => 'Tarkistus on poistettu.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Valitse data',
