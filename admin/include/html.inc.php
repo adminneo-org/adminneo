@@ -389,9 +389,9 @@ function enum_input(string $attrs, array $field, $value, ?string $empty = null, 
 * @param array one field from fields()
 * @param mixed
 * @param ?string
-* @param ?bool
+* @param bool
 */
-function input($field, $value, $function, $autofocus = false): void {
+function input($field, $value, $function, bool $autofocus = false): void {
 	$name = h(bracket_escape($field["field"]));
 
 	$types = Driver::get()->getTypes();
@@ -698,7 +698,7 @@ function edit_form($table, $fields, $row, $update): void {
 				if ($autofocus !== false) {
 					$autofocus = ($field["auto_increment"] || $function == "now" || $function == "uuid" ? null : true); // null - don't autofocus this input but check the next one
 				}
-				input($field, $value, $function, $autofocus);
+				input($field, $value, $function, (bool)$autofocus);
 				if ($autofocus) {
 					$autofocus = false;
 				}
