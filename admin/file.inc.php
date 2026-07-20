@@ -52,7 +52,7 @@ function load_compiled_file(string $filename)
 	$data = base64_decode($data);
 
 	if (!in_array($extension, ["png", "ico"])) {
-		$data = lzw_decompress($data);
+		$data = decompress_string($data);
 	}
 
 	echo $data;

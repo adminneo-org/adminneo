@@ -13,6 +13,7 @@ include __DIR__ . "/../admin/include/version.inc.php";
 include __DIR__ . "/../admin/include/debug.inc.php";
 include __DIR__ . "/../admin/include/polyfill.inc.php";
 include __DIR__ . "/../admin/include/available.inc.php";
+include __DIR__ . "/../admin/include/decompress.inc.php";
 include __DIR__ . "/../admin/include/compile.inc.php";
 include __DIR__ . "/../vendor/vrana/phpshrink/phpShrink.php";
 
@@ -122,7 +123,7 @@ function put_translations(): string
 			}
 		}
 
-		$cases .= 'case "' . $language . '": $compressed = "' . base64_encode(lzw_compress(json_encode($translation_ids, JSON_UNESCAPED_UNICODE))) . '"; break;';
+		$cases .= "case '$language': \$compressed = '" . base64_encode(compress_string(json_encode($translation_ids, JSON_UNESCAPED_UNICODE))) . "'; break;";
 	}
 
 	$translations_version = crc32($cases);
@@ -131,7 +132,7 @@ function put_translations(): string
 		function get_translations($lang) {
 			switch ($lang) {' . $cases . '}
 
-			return json_decode(lzw_decompress(base64_decode($compressed)), true);
+			return json_decode(decompress_string(base64_decode($compressed)), true);
 		}
 
 		function get_plural_translation_id($key) {

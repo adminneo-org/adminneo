@@ -28,6 +28,7 @@
         "ext-json": "*"
     },
     "require-dev": {
+        "ext-zlib": "*",
         "vrana/jush": "dev-all-fixes",
         "vrana/jsshrink": "@dev",
         "vrana/phpshrink": "@dev"

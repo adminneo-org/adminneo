@@ -6,6 +6,7 @@ AdminNeo 5.6.0
 
 ### Changes
 
+- Compiler: Replace LZW with deflate compression (by @vrana)
 - MySQL: Convert vector columns to text in select and edit (by @vrana)
 - MySQL: Unsupport MySQL < 5.1 (by @vrana)
 - MariaDB: Support inet4 and inet6 types (by @vrana)
