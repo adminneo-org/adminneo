@@ -247,7 +247,7 @@ if (isset($_GET["mssql"])) {
 			}
 		}
 
-		if (extension_loaded("pdo_sqlsrv") && $_GET["ext"] != "dblib") {
+		if (extension_loaded("pdo_sqlsrv") || $_GET["ext"] == "pdo") {
 			define("AdminNeo\DRIVER_EXTENSION", "PDO_SQLSRV");
 
 			class MsSqlConnection extends MsSqlPdoConnection
