@@ -591,7 +591,6 @@ if ($output_file_path) {
 
 if (!$output_name) {
 	$output_name = "{$project}neo"
-		. (preg_match('~-dev$~', VERSION) ? "" : "-" . VERSION)
 		. ($single_driver ? "-$single_driver" : "")
 		. ($single_language ? "-$single_language" : "")
 		. ".php";
