@@ -36,6 +36,7 @@ AdminNeo 5.5.1
 - MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)
 - PostgreSQL: Fix editing json columns (regression from 5.5.0)
 - PostgreSQL: Fix displayed size of bytea (by @vrana)
+- PostgreSQL: Fix table export if auto increment column is defined in different schema
 - MS SQL: Fix table status (by @vrana)
 - MS SQL: Fix multiple result sets (by @vrana)
 - MS SQL: Fix cloning record with autoincrement column

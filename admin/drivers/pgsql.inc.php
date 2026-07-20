@@ -1357,15 +1357,20 @@ AND typelem = 0"
 			// sequences for fields
 			if (preg_match('~nextval\(\'([^\']+)\'\)~', $field['default'], $matches)) {
 				$sequence_name = $matches[1];
-				$sq = first(get_rows((Connection::get()->isMinVersion("10")
+				$rows = get_rows((Connection::get()->isMinVersion("10")
 					? "SELECT *, cache_size AS cache_value FROM pg_sequences WHERE schemaname = current_schema() AND sequencename = " . q(idf_unescape($sequence_name))
 					: "SELECT * FROM $sequence_name"
-				), null, "-- "));
+				), null, "-- ");
 
-				$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $ns.$sequence_name;\n" : "") .
-					"CREATE SEQUENCE $ns.$sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
-					($auto_increment && $sq['last_value'] ? " START " . ($sq["last_value"] + 1) : "") .
-					" CACHE $sq[cache_value];";
+				// Handle possible error or sequence defined in different schema.
+				if ($rows) {
+					$sq = first($rows);
+
+					$sequences[] = ($style == "DROP+CREATE" ? "DROP SEQUENCE IF EXISTS $ns.$sequence_name;\n" : "") .
+						"CREATE SEQUENCE $ns.$sequence_name INCREMENT $sq[increment_by] MINVALUE $sq[min_value] MAXVALUE $sq[max_value]" .
+						($auto_increment && $sq['last_value'] ? " START " . ($sq["last_value"] + 1) : "") .
+						" CACHE $sq[cache_value];";
+				}
 			}
 		}
 
