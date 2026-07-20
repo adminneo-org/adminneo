@@ -70,7 +70,9 @@ if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
 	$_COOKIE = remove_slashes($_COOKIE, $filter);
 }
 
-@set_time_limit(0); // @ - can be disabled
+if (function_exists("set_time_limit")) { // can be disabled
+	set_time_limit(0);
+}
 @ini_set("precision", "16"); // @ - can be disabled, 16 - IEEE 754 has 15.95 decimal digits for double
 
 // Migrate changed cookies.
