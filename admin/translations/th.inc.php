@@ -194,18 +194,18 @@ return [
 	'length' => 'ความยาว',
 
 	// Foreign keys
-	'Foreign keys' => 'คีย์คู่แข่ง',
-	'Foreign key' => 'คีย์คู่แข่ง',
-	'Foreign key has been dropped.' => 'คีย์คู่แข่งถูกลบแล้ว.',
-	'Foreign key has been altered.' => 'คีย์คู่แข่งถูกเปลี่ยนแปลงแล้ว.',
-	'Foreign key has been created.' => 'คีย์คู่แข่งถูกสร้างแล้ว.',
-	'Target table' => 'คารางเป้าหมาย',
+	'Foreign keys' => 'คีย์นอก', // by Claude Fable 5
+	'Foreign key' => 'คีย์นอก', // by Claude Fable 5
+	'Foreign key has been dropped.' => 'คีย์นอกถูกลบแล้ว.', // by Claude Fable 5
+	'Foreign key has been altered.' => 'คีย์นอกถูกเปลี่ยนแปลงแล้ว.', // by Claude Fable 5
+	'Foreign key has been created.' => 'คีย์นอกถูกสร้างแล้ว.', // by Claude Fable 5
+	'Target table' => 'ตารางเป้าหมาย', // by Claude Fable 5
 	'Change' => 'แก้ไข',
 	'Source' => 'แหล่งข้อมูล',
 	'Target' => 'เป้าหมาย',
 	'Add column' => 'เพิ่มคอลัมน์',
 	'Alter' => 'เปลี่ยนแปลง',
-	'Add foreign key' => 'เพิ่มคีย์คู่แข่ง',
+	'Add foreign key' => 'เพิ่มคีย์นอก', // by Claude Fable 5
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'แหล่งที่มาและเป้าหมายของคอลมัน์ต้องมีชนิดข้อมูลเดียวกัน คือต้องมีดัชนีและข้อมูลอ้างอิงของคอลัมน์เป้าหมาย.',
@@ -248,7 +248,7 @@ return [
 	'Alter sequence' => 'Sequence ถูกเปลี่ยนแปลงแล้ว',
 
 	// User types (PostgreSQL)
-	'User types' => 'ประเภทผู้ใช้งาน',
+	'User types' => 'ประเภทข้อมูลที่ผู้ใช้กำหนด', // by Claude Fable 5
 	'Create type' => 'สร้างประเภทผู้ใช้งาน',
 	'Type has been dropped.' => 'ประเภทถูกลบแล้ว.',
 	'Type has been created.' => 'ประเภทถูกสร้างแล้ว.',

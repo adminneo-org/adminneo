@@ -27,9 +27,7 @@ return [
 	'There is a space in the input password which might be the cause.' => 'ইনপুট পাসওয়ার্ডে একটি স্পেস রয়েছে যা এর কারণ হতে পারে।',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo পাসওয়ার্ড ছাড়া ডাটাবেস অ্যাক্সেস সমর্থন করে না, <a href="https://www.adminneo.org/password"%s>আরও তথ্য</a>।',
 	'Database does not support password.' => 'ডাটাবেস পাসওয়ার্ড সমর্থন করে না।',
-	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'অনেকগুলি ব্যর্থ লগইন প্রচেষ্টা, %d মিনিট পরে আবার চেষ্টা করুন।',
-	],
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'অনেকগুলি ব্যর্থ লগইন প্রচেষ্টা, %d মিনিট পরে আবার চেষ্টা করুন।',
 	'Invalid CSRF token. Send the form again.' => 'অবৈধ CSRF টোকেন। ফর্মটি আবার পাঠান।',
 	'If you did not send this request from AdminNeo then close this page.' => 'আপনি যদি AdminNeo থেকে এই অনুরোধ না করে থাকেন তবে এই পৃষ্ঠাটি বন্ধ করুন।',
 	'The action will be performed after successful login with the same credentials.' => 'একই ক্রেডেনশিয়ালস দিয়ে সফলভাবে লগইন করার পরে এই কর্মটি সম্পাদন করা হবে।',
@@ -327,9 +325,7 @@ return [
 	'Unable to select the table' => 'টেবিল নির্বাচন করতে অক্ষম',
 	'Search data in tables' => 'টেবিলে তথ্য খুঁজুন',
 	'No rows.' => 'কোন সারি নাই।',
-	'%d / ' => [
-		'%d / ',
-	],
+	'%d / ' => '%d / ',
 	'%d row(s)' => [
 		'%d সারি',
 		'%d সারি সমূহ',

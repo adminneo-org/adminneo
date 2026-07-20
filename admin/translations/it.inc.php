@@ -26,8 +26,8 @@ return [
 	'Logout successful.' => 'Uscita effettuata con successo.',
 	'hostname[:port] or :socket' => 'hostname[:port] o :socket', // by Claude Fable 5
 	'Invalid server or credentials.' => 'Server o credenziali non valide.',
-	'There is a space in the input password which might be the cause.' => 'Esiste uno spazio nella passoword inserita che potrebbe essere la causa.',
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non supporta accesso a databse senza password, <a href="https://www.adminneo.org/password"%s>piú informazioni</a>.',
+	'There is a space in the input password which might be the cause.' => 'Esiste uno spazio nella password inserita che potrebbe essere la causa.',
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non supporta accesso a database senza password, <a href="https://www.adminneo.org/password"%s>piú informazioni</a>.',
 	'Database does not support password.' => 'Il database non supporta password.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Troppi tentativi infruttuosi di login, si prega di riprovare in %d minuto.',
@@ -40,7 +40,7 @@ return [
 	// Connection
 	'No extension' => 'Estensioni non presenti',
 	'None of the supported PHP extensions (%s) are available.' => 'Nessuna delle estensioni PHP supportate (%s) disponibile.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'LA connessione a porte privilegiate non é permessa.',
+	'Connecting to privileged ports is not allowed.' => 'La connessione a porte privilegiate non é permessa.',
 	'Session support must be enabled.' => 'Le sessioni devono essere abilitate.',
 	'Session expired, please login again.' => 'Sessione scaduta, autenticarsi di nuovo.',
 	'%s version: %s through PHP extension %s' => 'Versione %s: %s via estensione PHP %s',
@@ -85,7 +85,7 @@ return [
 		'Esecuzione della query OK, %d riga interessata.',
 		'Esecuzione della query OK, %d righe interessate.',
 	],
-	'No commands to execute.' => 'Nessun commando da eseguire.',
+	'No commands to execute.' => 'Nessun comando da eseguire.',
 	'Error in query' => 'Errore nella query',
 	'Unknown error.' => 'Errore sconosciuto.',
 	'Warnings' => 'Attenzione',
@@ -110,7 +110,7 @@ return [
 	'Unable to upload a file.' => 'Caricamento del file non riuscito.',
 	'Maximum allowed file size is %sB.' => 'La dimensione massima del file è %sB.',
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Troppi dati via POST. Ridurre i dati o aumentare la direttiva di configurazione %s.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'Puoi caricare un grande file SQL tramite FTP ed impirtarlo dal server.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Puoi caricare un grande file SQL tramite FTP ed importarlo dal server.',
 	'File must be in UTF-8 encoding.' => 'Il file deve avere codifica UTF-8.',
 	'You are offline.' => 'Sei disconnesso.',
 	'%d row(s) have been imported.' => [
@@ -213,7 +213,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Troppi campi. Per favore aumentare %s.',
 
 	// Views
-	'View' => 'Vedi',
+	'View' => 'Vista', // by Claude Fable 5
 	'Materialized view' => 'Vista materializzata',
 	'View has been dropped.' => 'Vista eliminata.',
 	'View has been altered.' => 'Vista modificata.',
@@ -335,9 +335,7 @@ return [
 	'Unable to select the table' => 'Selezione della tabella non riuscita',
 	'Search data in tables' => 'Cerca nelle tabelle',
 	'No rows.' => 'Nessuna riga.',
-	'%d / ' => [
-		'%d / ',
-	],
+	'%d / ' => '%d / ',
 	'%d row(s)' => [
 		'%d riga',
 		'%d righe',

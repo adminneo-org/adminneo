@@ -292,7 +292,7 @@ return [
 	'Alter sequence' => 'Modifică «secvență»',
 
 	// User types (PostgreSQL)
-	'User types' => 'Tipuri de utilizatori',
+	'User types' => 'Tipuri definite de utilizator', // by Claude Fable 5
 	'Create type' => 'Crează tip noi',
 	'Type has been dropped.' => 'Tiipul a fost șters.',
 	'Type has been created.' => 'Crează tip nou.',

@@ -286,15 +286,15 @@ return [
 	'On completion preserve' => 'Beigās saglabāt',
 
 	// Sequences (PostgreSQL)
-	'Sequences' => 'Virknes',
-	'Create sequence' => 'Izveidot virkni',
-	'Sequence has been dropped.' => 'Virkne dzēsta.',
-	'Sequence has been created.' => 'Izveidota virkne.',
-	'Sequence has been altered.' => 'Virkne izmainīta.',
-	'Alter sequence' => 'Izmainīt virkni',
+	'Sequences' => 'Sekvences', // by Claude Fable 5
+	'Create sequence' => 'Izveidot sekvenci', // by Claude Fable 5
+	'Sequence has been dropped.' => 'Sekvence dzēsta.', // by Claude Fable 5
+	'Sequence has been created.' => 'Izveidota sekvence.', // by Claude Fable 5
+	'Sequence has been altered.' => 'Sekvence izmainīta.', // by Claude Fable 5
+	'Alter sequence' => 'Izmainīt sekvenci', // by Claude Fable 5
 
 	// User types (PostgreSQL)
-	'User types' => 'Lietotāju tipi',
+	'User types' => 'Lietotāja definēti tipi', // by Claude Fable 5
 	'Create type' => 'Izveidot tipu',
 	'Type has been dropped.' => 'Tips dzēsts.',
 	'Type has been created.' => 'Tips izveidots.',

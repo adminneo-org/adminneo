@@ -298,7 +298,7 @@ return [
 	'Alter sequence' => 'Змінити послідовність',
 
 	// User types (PostgreSQL)
-	'User types' => 'Типи користувачів',
+	'User types' => 'Користувацькі типи', // by Claude Fable 5
 	'Create type' => 'Створити тип',
 	'Type has been dropped.' => 'Тип було видалено.',
 	'Type has been created.' => 'Тип було створено.',

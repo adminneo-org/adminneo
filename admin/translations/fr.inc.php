@@ -30,7 +30,7 @@ return [
 	'Invalid server or credentials.' => 'Serveur ou identifiants invalides.',
 	'There is a space in the input password which might be the cause.' => 'Il y a un espace dans le mot de passe entré qui pourrait en être la cause.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne supporte pas l\'accès aux bases de données sans mot de passe, <a href="https://www.adminneo.org/password"%s>plus d\'information</a>.',
-	'Database does not support password.' => 'La base de données ne support pas les mots de passe.',
+	'Database does not support password.' => 'La base de données ne supporte pas les mots de passe.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Trop de connexions échouées, essayez à nouveau dans %d minute.',
 		'Trop de connexions échouées, essayez à nouveau dans %d minutes.',

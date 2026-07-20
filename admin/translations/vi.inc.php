@@ -112,7 +112,7 @@ return [
 	'You can upload a big SQL file via FTP and import it from server.' => 'Bạn có thể tải tệp lên dùng FTP và nhập vào cơ sở dữ liệu.',
 	'File must be in UTF-8 encoding.' => 'Tệp phải mã hoá bằng chuẩn UTF-8.',
 	'You are offline.' => 'Bạn đang ngoại tuyến.',
-	'%d row(s) have been imported.' => 'Đã nhập % dòng dữ liệu.',
+	'%d row(s) have been imported.' => 'Đã nhập %d dòng dữ liệu.',
 
 	// Export
 	'Export' => 'Xuất',
@@ -164,7 +164,7 @@ return [
 	'Index Length' => 'Kích thước chỉ mục',
 	'Data Free' => 'Dữ liệu trống',
 	'Rows' => 'Số dòng',
-	'%d in total' => '%s',
+	'%d in total' => 'Tổng cộng %d',
 	'Analyze' => 'Phân tích',
 	'Optimize' => 'Tối ưu',
 	'Vacuum' => 'Dọn dẹp',
@@ -335,7 +335,7 @@ return [
 	'Search data in tables' => 'Tìm kiếm dữ liệu trong các bảng',
 	'No rows.' => 'Không có dòng dữ liệu nào.',
 	'%d / ' => '%d / ',
-	'%d row(s)' => '%s dòng',
+	'%d row(s)' => '%d dòng',
 	'Page' => 'trang',
 	'last' => 'cuối',
 	'Load more data' => 'Xem thêm dữ liệu',

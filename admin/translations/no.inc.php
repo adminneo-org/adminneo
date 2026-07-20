@@ -3,7 +3,7 @@
 namespace AdminNeo;
 
 return [
-	'ltr' => 'venstre-til-høyre', // text direction - 'ltr' or 'rtl'
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
 	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
 

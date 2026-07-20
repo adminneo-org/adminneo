@@ -25,7 +25,7 @@ return [
 	'Logged as: %s' => 'Вы вошли как: %s',
 	'Logout successful.' => 'Вы успешно покинули систему.',
 	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5
-	'There is a space in the input password which might be the cause.' => 'В введеном пароле есть пробел, это может быть причиною.',
+	'There is a space in the input password which might be the cause.' => 'Во введённом пароле есть пробел, это может быть причиной.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддерживает доступ к базе данных без пароля, <a href="https://www.adminneo.org/password"%s>больше информации</a>.',
 	'Database does not support password.' => 'База данных не поддерживает пароль.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
@@ -33,7 +33,7 @@ return [
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минуты.',
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минут.',
 	],
-	'Invalid CSRF token. Send the form again.' => 'Недействительный CSRF-токен. Отправите форму ещё раз.',
+	'Invalid CSRF token. Send the form again.' => 'Недействительный CSRF-токен. Отправьте форму ещё раз.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Если вы не посылали этот запрос из AdminNeo, закройте эту страницу.',
 	'The action will be performed after successful login with the same credentials.' => 'Действие будет выполнено после успешного входа в систему с теми же учетными данными.',
 
@@ -89,7 +89,7 @@ return [
 		'Запрос завершён, изменено %d записей.',
 	],
 	'No commands to execute.' => 'Нет команд для выполнения.',
-	'Error in query' => 'Ошибка в запросe',
+	'Error in query' => 'Ошибка в запросе',
 	'Unknown error.' => 'Неизвестная ошибка.',
 	'Warnings' => 'Предупреждения',
 	'%s queries are not supported.' => '%s-запросы не поддерживаются.',
@@ -115,7 +115,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Слишком большой объем POST-данных. Пошлите меньший объём данных или увеличьте параметр конфигурационной директивы %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Вы можете закачать большой SQL-файл по FTP и затем импортировать его с сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл должен быть в кодировке UTF-8.',
-	'You are offline.' => 'Вы не выполнили вход.',
+	'You are offline.' => 'Вы не в сети.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'Импортирована %d строка.',
 		'Импортировано %d строки.',
@@ -298,7 +298,7 @@ return [
 	'Alter sequence' => 'Изменить «последовательность»',
 
 	// User types (PostgreSQL)
-	'User types' => 'Типы пользователей',
+	'User types' => 'Пользовательские типы', // by Claude Fable 5
 	'Create type' => 'Создать тип',
 	'Type has been dropped.' => 'Тип удален.',
 	'Type has been created.' => 'Создан новый тип.',

@@ -228,7 +228,7 @@ return [
 
 	// Views
 	'View' => 'View',
-	'Materialized view' => 'Strukturierte Ansicht',
+	'Materialized view' => 'Materialisierte View', // by Claude Fable 5
 	'View has been dropped.' => 'View wurde entfernt.',
 	'View has been altered.' => 'View wurde geändert.',
 	'View has been created.' => 'View wurde erstellt.',
@@ -333,7 +333,7 @@ return [
 	'Alter check' => 'Check ändern',
 	'Check has been created.' => 'Check wurde erstellt.',
 	'Check has been altered.' => 'Check wurde geändert.',
-	'Check has been dropped.' => 'Check wurde abgebrochen.',
+	'Check has been dropped.' => 'Check wurde entfernt.', // by Claude Fable 5
 
 	// Selection
 	'Select data' => 'Daten auswählen',

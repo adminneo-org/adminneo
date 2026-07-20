@@ -181,7 +181,7 @@ return [
 	'Move up' => 'மேலே ந‌க‌ர்த்து',
 	'Move down' => 'கீழே நக‌ர்த்து',
 	'Remove' => 'நீக்கு',
-	'Maximum number of allowed fields exceeded. Please increase %s.' => 'அனும‌திக்க‌ப்ப‌ட்ட‌ அதிக‌ப‌ட்ச‌ கோப்புக‌ளின் எண்ணிக்கை மீற‌ப்ப‌ட்ட‌து. த‌ய‌வு செய்து %s ம‌ற்றும் %s யை அதிக‌ரிக்க‌வும்.',
+	'Maximum number of allowed fields exceeded. Please increase %s.' => 'அனும‌திக்க‌ப்ப‌ட்ட‌ அதிக‌ப‌ட்ச‌ கோப்புக‌ளின் எண்ணிக்கை மீற‌ப்ப‌ட்ட‌து. த‌ய‌வு செய்து %s யை அதிக‌ரிக்க‌வும்.', // by Claude Fable 5
 
 	// Views
 	'View' => 'தோற்றம்',

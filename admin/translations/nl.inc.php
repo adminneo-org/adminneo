@@ -25,7 +25,7 @@ return [
 	'Login' => 'Aanmelden',
 	'Logout' => 'Afmelden',
 	'Logged as: %s' => 'Aangemeld als: %s',
-	'Logout successful.' => 'Successvol afgemeld.',
+	'Logout successful.' => 'Succesvol afgemeld.',
 	'hostname[:port] or :socket' => 'hostname[:port] of :socket',
 	'Invalid server or credentials.' => 'Ongeldige server- of aanmeldingsgegevens..',
 	'There is a space in the input password which might be the cause.' => 'Er staat een spatie in het wachtwoord, wat misschien de oorzaak is.',

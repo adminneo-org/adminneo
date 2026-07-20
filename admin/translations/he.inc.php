@@ -260,7 +260,7 @@ return [
 	'Alter sequence' => 'שנה סדרה',
 
 	// User types (PostgreSQL)
-	'User types' => 'סוגי משתמשים',
+	'User types' => 'טיפוסים מוגדרי משתמש', // by Claude Fable 5
 	'Create type' => 'צור סוג',
 	'Type has been dropped.' => 'הסוג הושלך',
 	'Type has been created.' => 'הסוג נוצר',

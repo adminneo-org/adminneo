@@ -163,14 +163,14 @@ return [
 	'Data Free' => 'Espaço Livre',
 	'Rows' => 'Registos',
 	'%d in total' => '%d no total',
-	'Analyze' => 'Analizar',
+	'Analyze' => 'Analisar',
 	'Optimize' => 'Otimizar',
 	'Vacuum' => 'Limpar', // by Claude Fable 5
 	'Check' => 'Verificar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
 	'Tables have been truncated.' => 'Tabelas truncadas (truncate).',
-	'Move to other database' => 'Mover outra Base de dados',
+	'Move to other database' => 'Mover para outra Base de dados',
 	'Move' => 'Mover',
 	'Tables have been moved.' => 'As Tabelas foram movidas.',
 	'Copy' => 'Copiar', // by Claude Fable 5
@@ -249,7 +249,7 @@ return [
 	'Add foreign key' => 'Adicionar Chave estrangeira',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
-	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'As colunas de origen e destino devem ser do mesmo tipo, deve existir um índice entre as colunas de destino e o registo referenciado deve existir.',
+	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'As colunas de origem e destino devem ser do mesmo tipo, deve existir um índice entre as colunas de destino e o registo referenciado deve existir.',
 
 	// Routines
 	'Routines' => 'Procedimentos',

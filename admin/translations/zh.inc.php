@@ -274,7 +274,7 @@ return [
 	'Alter sequence' => '修改序列',
 
 	// User types (PostgreSQL)
-	'User types' => '用户类型',
+	'User types' => '用户定义类型', // by Claude Fable 5
 	'Create type' => '创建类型',
 	'Type has been dropped.' => '已删除类型。',
 	'Type has been created.' => '已创建类型。',

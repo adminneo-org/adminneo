@@ -292,7 +292,7 @@ return [
 	'Alter sequence' => 'Промяна на последователност',
 
 	// User types (PostgreSQL)
-	'User types' => 'Видове потребители',
+	'User types' => 'Потребителски типове', // by Claude Fable 5
 	'Create type' => 'Създаване на вид',
 	'Type has been dropped.' => 'Вида беше пермахнат.',
 	'Type has been created.' => 'Вида беше създаден.',

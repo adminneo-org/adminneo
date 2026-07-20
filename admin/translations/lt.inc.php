@@ -268,7 +268,7 @@ return [
 	'Alter sequence' => 'Keisti seką',
 
 	// User types (PostgreSQL)
-	'User types' => 'Vartotojų tipai',
+	'User types' => 'Vartotojo apibrėžti tipai', // by Claude Fable 5
 	'Create type' => 'Sukurti tipą',
 	'Type has been dropped.' => 'Tipas pašalintas.',
 	'Type has been created.' => 'Tipas sukurtas.',

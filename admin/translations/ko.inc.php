@@ -105,7 +105,7 @@ return [
 	// Export
 	'Export' => '내보내기',
 	'Output' => '출력',
-	'open' => '열',
+	'open' => '열기', // by Claude Fable 5
 	'save' => '저장',
 	'Format' => '형식',
 	'Data' => '데이터',
@@ -274,7 +274,7 @@ return [
 	'Alter sequence' => '순서 변경',
 
 	// User types (PostgreSQL)
-	'User types' => '사용자 유형', // by Claude Fable 5
+	'User types' => '사용자 정의 유형', // by Claude Fable 5
 	'Create type' => '사용자 정의 형식 만들기',
 	'Type has been dropped.' => '유형을 삭제했습니다.',
 	'Type has been created.' => '유형을 추가했습니다.',
