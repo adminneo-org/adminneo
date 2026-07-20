@@ -676,7 +676,7 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 		return "";
 	}
 
-	$version = preg_replace('~^(\d\.?\d).*~s', '\1', Connection::get()->getVersion()); // two most significant digits
+	$version = doc_version();
 
 	$urls = [
 		'sql' => "https://dev.mysql.com/doc/refman/$version/en/",
@@ -693,6 +693,14 @@ function doc_link(array $paths, string $text = "<sup>?</sup>"): string
 	}
 
 	return "<a href='" . h($urls[DIALECT] . $paths[DIALECT] . (DIALECT == 'mssql' ? "?view=sql-server-ver$version" : "")) . "'" . target_blank() . ">$text</a>";
+}
+
+/**
+ * Returns database version used in URL links to documentation.
+ */
+function doc_version(): string
+{
+	return preg_replace('~^(\d\.?\d).*~s', '\1', Connection::get()->getVersion()); // two most significant digits
 }
 
 /** Compute size of database
