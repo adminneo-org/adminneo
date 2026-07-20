@@ -137,11 +137,11 @@ foreach ($languages as $language => $dummy) {
 				{
 					print_warning($filename, $term, "Not matching period");
 				}
+			}
 
-				// Check mismatched placeholders.
-				if (preg_match('~%~', $en) xor preg_match('~%~', $variant)) {
-					print_warning($filename, $term, "Not matching placeholder");
-				}
+			// Check mismatched placeholders.
+			foreach (placeholder_errors($language, $en, $translation, $language == $template) as $error) {
+				print_warning($filename, $term, "Placeholders - $error");
 			}
 		}
 	}
@@ -180,6 +180,76 @@ foreach ($languages as $language => $dummy) {
 	} elseif ($language != $template || count($languages) == 1) {
 		echo "✔︎ $filename\n";
 	}
+}
+
+/**
+ * Checks that printf placeholders in the translation match the English original.
+ *
+ * @param string|array $translation Translated text or the list of its plural forms.
+ * @return string[] Found problems.
+ */
+function placeholder_errors(string $language, string $en, $translation, bool $is_template): array
+{
+	$errors = [];
+	$spec = '%(\d+\$)?(?:\.\d+)?([dsf])'; // %2$s is positional, %.3f is used for time.
+
+	preg_match_all("~$spec~", $en, $matches);
+	$types = $matches[2]; // Types of arguments passed to lang().
+
+	$variants = is_string($translation) ? [$translation] : $translation;
+
+	if (is_array($translation)) {
+		$forms = get_plural_forms_count($language);
+		if (count($variants) != $forms) {
+			$errors[] = "expected $forms plural forms"; // A missing form renders as an empty message.
+		}
+
+		// The template keeps the arrays as it is a base for new translations.
+		if (!$is_template && count(array_unique($variants)) == 1) {
+			$errors[] = "identical plural forms"; // Could be a plain string.
+		}
+	}
+
+	foreach ($variants as $variant) {
+		preg_match_all("~$spec~", $variant, $specs, PREG_SET_ORDER);
+
+		$sequential = 0;
+		$positional = 0;
+		$missing = $types;
+
+		foreach ($specs as $match) {
+			$position = ($match[1] != "" ? intval($match[1]) : ++$sequential);
+			$positional += ($match[1] != "");
+
+			if ($position > count($types)) {
+				$errors[] = "extra %$match[2]"; // Would throw ValueError in vsprintf().
+			} elseif ($types[$position - 1] != $match[2]) {
+				$errors[] = "%$match[2] instead of %" . $types[$position - 1];
+			}
+
+			unset($missing[$position - 1]);
+		}
+
+		if ($positional && $sequential) {
+			$errors[] = "mixed positional and sequential placeholders"; // %s after %2$s would still print the first argument.
+		}
+		if (array_diff($missing, ["d"])) {
+			$errors[] = "missing %s"; // %d may be omitted e.g. in singular forms.
+		}
+		if (str_contains(preg_replace(["~$spec~", '~%%~'], "", $variant), "%")) {
+			$errors[] = "invalid %"; // '% d' prints the number with a space flag and eats the following letter.
+		}
+	}
+
+	return array_unique($errors);
+}
+
+/**
+ * Returns the number of plural forms selected by Locale::translate().
+ */
+function get_plural_forms_count(string $language): int
+{
+	return $language == "sl" ? 4 : (preg_match('~^(cs|sk|pl|lt|lv|bs|hr|ru|sr|uk)$~', $language) ? 3 : 2);
 }
 
 /**

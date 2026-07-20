@@ -28,10 +28,7 @@ return [
 	'There is a space in the input password which might be the cause.' => 'A megadott jelszóban szóköz található, ami az ok lehet.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Az AdminNeo nem támogatja a jelszó nélküli adatbázis-hozzáférést, <a href="https://www.adminneo.org/password"%s>további információ</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Az adatbázis nem támogat jelszót.', // by Claude Fable 5
-	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.',
-		'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.',
-	], // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.', // by Claude Fable 5
 	'Invalid CSRF token. Send the form again.' => 'Érvénytelen CSRF azonosító. Küldd újra az űrlapot.',
 	'The action will be performed after successful login with the same credentials.' => 'A művelet az azonos hitelesítő adatokkal történő sikeres bejelentkezés után hajtódik végre.', // by Claude Fable 5
 
@@ -58,11 +55,7 @@ return [
 
 	// Server
 	'Process list' => 'Folyamatok',
-	'%d process(es) have been killed.' => [
-		'%d folyamat leállítva.',
-		'%d folyamat leállítva.',
-		'%d folyamat leállítva.',
-	],
+	'%d process(es) have been killed.' => '%d folyamat leállítva.',
 	'Kill' => 'Leállít',
 	'Variables' => 'Változók',
 	'Status' => 'Állapot',
@@ -77,11 +70,7 @@ return [
 	// Queries
 	'SQL command' => 'SQL parancs',
 	'%d query(s) executed OK.' => '%d sikeres lekérdezés.',
-	'Query executed OK, %d row(s) affected.' => [
-		'Lekérdezés sikeresen végrehajtva, %d sor érintett.',
-		'Lekérdezés sikeresen végrehajtva, %d sor érintett.',
-		'Lekérdezés sikeresen végrehajtva, %d sor érintett.',
-	],
+	'Query executed OK, %d row(s) affected.' => 'Lekérdezés sikeresen végrehajtva, %d sor érintett.',
 	'No commands to execute.' => 'Nincs végrehajtható parancs.',
 	'Error in query' => 'Hiba a lekérdezésben',
 	'Unknown error.' => 'Ismeretlen hiba.', // by Claude Fable 5
@@ -110,11 +99,7 @@ return [
 	'You can upload a big SQL file via FTP and import it from server.' => 'Nagy SQL fájlt FTP-n keresztül is feltölthet, és a szerverről importálhatja.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'A fájlnak UTF-8 kódolásúnak kell lennie.', // by Claude Fable 5
 	'You are offline.' => 'Ön offline állapotban van.', // by Claude Fable 5
-	'%d row(s) have been imported.' => [
-		'%d sor importálva.',
-		'%d sor importálva.',
-		'%d sor importálva.',
-	],
+	'%d row(s) have been imported.' => '%d sor importálva.',
 
 	// Export
 	'Export' => 'Export',
@@ -252,11 +237,7 @@ return [
 
 	// Routines
 	'Routines' => 'Rutinok',
-	'Routine has been called, %d row(s) affected.' => [
-		'Rutin meghívva, %d sor érintett.',
-		'Rutin meghívva, %d sor érintett.',
-		'Rutin meghívva, %d sor érintett.',
-	],
+	'Routine has been called, %d row(s) affected.' => 'Rutin meghívva, %d sor érintett.',
 	'Call' => 'Meghív',
 	'Parameter name' => 'Paraméter neve',
 	'Create procedure' => 'Eljárás létrehozása',
@@ -333,21 +314,13 @@ return [
 	'Search data in tables' => 'Keresés a táblákban',
 	'No rows.' => 'Nincs megjeleníthető eredmény.',
 	'%d / ' => '%d / ', // by Claude Fable 5
-	'%d row(s)' => [
-		'%d sor',
-		'%d sor',
-		'%d sor',
-	],
+	'%d row(s)' => '%d sor',
 	'Page' => 'oldal',
 	'last' => 'utolsó',
 	'Load more data' => 'További adatok betöltése', // by Claude Fable 5
 	'Loading' => 'Betöltés', // by Claude Fable 5
 	'Whole result' => 'Összes eredményt mutatása',
-	'%d byte(s)' => [
-		'%d bájt',
-		'%d bájt',
-		'%d bájt',
-	],
+	'%d byte(s)' => '%d bájt',
 
 	// In-place editing in selection
 	'Modify' => 'Módosítás', // by Claude Fable 5
@@ -370,11 +343,7 @@ return [
 	'Item%s has been inserted.' => '%s tétel beszúrva.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'A tétel törölve.',
 	'Item has been updated.' => 'A tétel frissítve.',
-	'%d item(s) have been affected.' => [
-		'%d tétel érintett.',
-		'%d tétel érintett.',
-		'%d tétel érintett.',
-	],
+	'%d item(s) have been affected.' => '%d tétel érintett.',
 	'You have no privileges to update this table.' => 'Nincs jogosultsága a tábla frissítéséhez.', // by Claude Fable 5
 
 	// Data type descriptions

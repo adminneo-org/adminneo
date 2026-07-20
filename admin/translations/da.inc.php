@@ -76,10 +76,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL-kommando',
-	'%d query(s) executed OK.' => [
-		'%d kald udført OK.',
-		'%d kald udført OK.',
-	],
+	'%d query(s) executed OK.' => '%d kald udført OK.',
 	'Query executed OK, %d row(s) affected.' => [
 		'Kald udført OK, %d række påvirket.',
 		'Kald udført OK, %d rækker påvirket.',

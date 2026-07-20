@@ -332,10 +332,7 @@ return [
 	'Unable to select the table' => 'No é posible seleccionar a táboa',
 	'Search data in tables' => 'Buscar datos en táboas',
 	'No rows.' => 'Nengún resultado.',
-	'%d / ' => [
-		'%d / ',
-		'%d / ',
-	],
+	'%d / ' => '%d / ',
 	'%d row(s)' => [
 		'%d fila',
 		'%d filas',

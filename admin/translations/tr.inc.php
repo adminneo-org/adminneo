@@ -76,10 +76,7 @@ return [
 		'%d sorgu başarıyla çalıştırıldı.',
 		'%d adet sorgu başarıyla çalıştırıldı.',
 	],
-	'Query executed OK, %d row(s) affected.' => [
-		'Sorgu başarıyla çalıştırıldı, %d adet kayıt etkilendi.',
-		'Sorgu başarıyla çalıştırıldı, %d adet kayıt etkilendi.',
-	],
+	'Query executed OK, %d row(s) affected.' => 'Sorgu başarıyla çalıştırıldı, %d adet kayıt etkilendi.',
 	'No commands to execute.' => 'Çalıştırılacak komut yok.',
 	'Error in query' => 'Sorguda hata',
 	'Unknown error.' => 'Bilinmeyen hata.', // by Claude Fable 5
@@ -338,10 +335,7 @@ return [
 	'Load more data' => 'Daha fazla veri yükle',
 	'Loading' => 'Yükleniyor',
 	'Whole result' => 'Tüm sonuç',
-	'%d byte(s)' => [
-		'%d bayt',
-		'%d bayt',
-	],
+	'%d byte(s)' => '%d bayt',
 
 	// In-place editing in selection
 	'Modify' => 'Düzenle',

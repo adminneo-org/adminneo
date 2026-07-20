@@ -55,10 +55,7 @@ return [
 
 	// Server
 	'Process list' => 'প্রসেস তালিকা',
-	'%d process(es) have been killed.' => [
-		'%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
-		'%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
-	],
+	'%d process(es) have been killed.' => '%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
 	'Kill' => 'বিনষ্ট করো',
 	'Variables' => 'চলকসমূহ',
 	'Status' => 'অবস্থা',
@@ -75,10 +72,7 @@ return [
 		'%d SQL-অনুসন্ধান সফলভাবে সম্পন্ন হয়েছে।',
 		'%d SQL-অনুসন্ধানসমূহ সফলভাবে সম্পন্ন হয়েছে।',
 	],
-	'Query executed OK, %d row(s) affected.' => [
-		'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
-		'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
-	],
+	'Query executed OK, %d row(s) affected.' => 'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
 	'No commands to execute.' => 'সম্পাদন করার মত কোন নির্দেশ নেই।',
 	'Error in query' => 'অনুসন্ধানে ভুল আছে',
 	'Unknown error.' => 'অজানা ত্রুটি।',
@@ -107,10 +101,7 @@ return [
 	'You can upload a big SQL file via FTP and import it from server.' => 'আপনি FTP এর মাধ্যমে একটি বড় SQL ফাইল আপলোড করতে পারেন এবং সার্ভার থেকে এটি ইম্পোর্ট করতে পারেন।',
 	'File must be in UTF-8 encoding.' => 'ফাইলটি UTF-8 এনকোডিংয়ে হতে হবে।',
 	'You are offline.' => 'আপনি অফলাইনে আছেন।',
-	'%d row(s) have been imported.' => [
-		'%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
-		'%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
-	],
+	'%d row(s) have been imported.' => '%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
 
 	// Export
 	'Export' => 'এক্সপোর্ট',
@@ -246,10 +237,7 @@ return [
 
 	// Routines
 	'Routines' => 'রুটিনসমূহ',
-	'Routine has been called, %d row(s) affected.' => [
-		'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
-		'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
-	],
+	'Routine has been called, %d row(s) affected.' => 'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
 	'Call' => 'কল',
 	'Parameter name' => 'প্যারামিটারের নাম',
 	'Create procedure' => 'কার্যপ্রণালী তৈরী করুন',

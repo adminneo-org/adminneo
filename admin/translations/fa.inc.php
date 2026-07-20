@@ -24,10 +24,7 @@ return [
 	'Logout' => 'خروج',
 	'Logged as: %s' => 'ورود به عنوان: %s',
 	'Logout successful.' => 'با موفقیت خارج شدید.',
-	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'ورودهای ناموفق بیش از حد، %d دقیقه دیگر تلاش نمایید.',
-		'ورودهای ناموفق بیش از حد، %d دقیقه دیگر تلاش نمایید.',
-	],
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'ورودهای ناموفق بیش از حد، %d دقیقه دیگر تلاش نمایید.',
 	'Invalid CSRF token. Send the form again.' => 'CSRF token نامعتبر است. دوباره سعی کنید.',
 
 	// Connection
@@ -92,10 +89,7 @@ return [
 	'You can upload a big SQL file via FTP and import it from server.' => 'شما می توانید فایل SQL حجیم را از طریق FTP بارگزاری و از روی سرور وارد نمایید.',
 	'File must be in UTF-8 encoding.' => 'فرمت فایل باید UTF-8 باشید.',
 	'You are offline.' => 'شما آفلاین می باشید.',
-	'%d row(s) have been imported.' => [
-		'%d سطر وارد شد.',
-		'%d سطر وارد شد.',
-	],
+	'%d row(s) have been imported.' => '%d سطر وارد شد.',
 
 	// Export
 	'Export' => 'استخراج',
@@ -228,10 +222,7 @@ return [
 
 	// Routines
 	'Routines' => 'روالها',
-	'Routine has been called, %d row(s) affected.' => [
-		'روال فراخوانی شد %d سطر متاثر شد.',
-		'روال فراخوانی شد %d سطر متاثر شد.',
-	],
+	'Routine has been called, %d row(s) affected.' => 'روال فراخوانی شد %d سطر متاثر شد.',
 	'Call' => 'صدا زدن',
 	'Parameter name' => 'نام پارامتر',
 	'Create procedure' => 'ایجاد زیربرنامه',
@@ -302,19 +293,13 @@ return [
 	'Search data in tables' => 'جستجوی داده در جدول',
 	'No rows.' => 'سطری وجود ندارد.',
 	'%d / ' => '%d / ',
-	'%d row(s)' => [
-		'%d سطر',
-		'%d سطر',
-	],
+	'%d row(s)' => '%d سطر',
 	'Page' => 'صفحه',
 	'last' => 'آخری',
 	'Load more data' => 'بارگزاری اطلاعات بیشتر',
 	'Loading' => 'در حال بارگزاری',
 	'Whole result' => 'همه نتایج',
-	'%d byte(s)' => [
-		'%d بایت',
-		'%d بایت',
-	],
+	'%d byte(s)' => '%d بایت',
 
 	// In-place editing in selection
 	'Modify' => 'ویرایش',
@@ -336,10 +321,7 @@ return [
 	'Item%s has been inserted.' => '%s آیتم درج شد.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'آیتم حذف شد.',
 	'Item has been updated.' => 'آیتم بروز رسانی شد.',
-	'%d item(s) have been affected.' => [
-		'%d آیتم متاثر شد.',
-		'%d آیتم متاثر شد.',
-	],
+	'%d item(s) have been affected.' => '%d آیتم متاثر شد.',
 	'You have no privileges to update this table.' => 'شما اختیار ویرایش این جدول را ندارید.',
 
 	// Data type descriptions

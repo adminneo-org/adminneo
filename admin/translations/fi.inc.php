@@ -28,10 +28,7 @@ return [
 	'There is a space in the input password which might be the cause.' => 'Syynä voi olla syötetyssä salasanassa oleva välilyönti.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei tue pääsyä tietokantaan ilman salasanaa, katso tarkemmin <a href="https://www.adminneo.org/password"%s>täältä</a>.',
 	'Database does not support password.' => 'Tietokanta ei tue salasanaa.',
-	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'Liian monta epäonnistunutta sisäänkirjautumisyritystä, kokeile uudestaan %d minuutin kuluttua.',
-		'Liian monta epäonnistunutta sisäänkirjautumisyritystä, kokeile uudestaan %d minuutin kuluttua.',
-	],
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Liian monta epäonnistunutta sisäänkirjautumisyritystä, kokeile uudestaan %d minuutin kuluttua.',
 	'Invalid CSRF token. Send the form again.' => 'Virheellinen CSRF-vastamerkki. Lähetä lomake uudelleen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Jollet lähettänyt tämä pyyntö AdminNeo, sulje tämä sivu.',
 	'The action will be performed after successful login with the same credentials.' => 'Toiminto suoritetaan sen jälkeen, kun on onnistuttu kirjautumaan samoilla käyttäjätunnuksilla uudestaan.',
@@ -80,10 +77,7 @@ return [
 		'%d kysely onnistui.',
 		'%d kyselyä onnistui.',
 	],
-	'Query executed OK, %d row(s) affected.' => [
-		'Kysely onnistui, kohdistui %d riviin.',
-		'Kysely onnistui, kohdistui %d riviin.',
-	],
+	'Query executed OK, %d row(s) affected.' => 'Kysely onnistui, kohdistui %d riviin.',
 	'No commands to execute.' => 'Ei komentoja suoritettavana.',
 	'Error in query' => 'Virhe kyselyssä',
 	'Unknown error.' => 'Tuntematon virhe.',
@@ -253,10 +247,7 @@ return [
 
 	// Routines
 	'Routines' => 'Rutiinit',
-	'Routine has been called, %d row(s) affected.' => [
-		'Rutiini kutsuttu, kohdistui %d riviin.',
-		'Rutiini kutsuttu, kohdistui %d riviin.',
-	],
+	'Routine has been called, %d row(s) affected.' => 'Rutiini kutsuttu, kohdistui %d riviin.',
 	'Call' => 'Kutsua',
 	'Parameter name' => 'Parametrin nimi',
 	'Create procedure' => 'Luo proseduuri',
@@ -368,10 +359,7 @@ return [
 	'Item%s has been inserted.' => 'Tietue%s lisättiin.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Tietue poistettiin.',
 	'Item has been updated.' => 'Tietue päivitettiin.',
-	'%d item(s) have been affected.' => [
-		'Kohdistui %d tietueeseen.',
-		'Kohdistui %d tietueeseen.',
-	],
+	'%d item(s) have been affected.' => 'Kohdistui %d tietueeseen.',
 	'You have no privileges to update this table.' => 'Sinulla ei ole oikeutta päivittää tätä taulua.',
 
 	// Data type descriptions
