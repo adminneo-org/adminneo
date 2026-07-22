@@ -508,6 +508,23 @@ function selectFieldChange() {
 
 		added += '0';
 	}
+
+	/**
+	 * Adds new table row after the last field. Used by drivers where columns can be added only to the end.
+	 *
+	 * @this {HTMLButtonElement}
+	 * @return {boolean} False on success, true to submit the form.
+	 */
+	window.onAddLastFieldRowClick = function () {
+		const inputs = qsa('#edit-fields [name$="[field]"]');
+		if (!inputs.length) {
+			return true; // Submit the form to add the row by PHP.
+		}
+
+		addRow(inputs[inputs.length - 1], true);
+
+		return false;
+	};
 })();
 
 /**

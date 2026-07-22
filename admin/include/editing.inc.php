@@ -374,6 +374,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 	echo "<td>";
 	echo "<button name='add[", (support("move_col") ? 0 : count($fields)), "]' value='1' title='", h(lang('Add next')), "' class='button light'>", icon_solo("add"), "</button>";
+	echo (support("move_col") ? "" : script("qsl('button').onclick = onAddLastFieldRowClick;"));
 	echo script("row_count = " . count($fields) . ";");
 	echo "</td>\n";
 
