@@ -1262,7 +1262,7 @@ class Admin extends Origin
 					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(?<!\$)(' . implode('|', $links) . ')(?!\$)\b/g';
 					if (support('routine')) {
 						foreach (routines() as $row) {
-							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g';
+							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`\]]?\()/g';
 						}
 					}
 					echo "\n}};\n";
