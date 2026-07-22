@@ -201,6 +201,7 @@ if (isset($_GET["mssql"])) {
 
 				return (object) [
 					'name' => $field["Name"],
+					//! 'native_type': http://msdn.microsoft.com/en-us/library/cc296197.aspx
 					'type' => ($field["Type"] == 1 ? 254 : 15),
 					'charsetnr' => 0,
 				];

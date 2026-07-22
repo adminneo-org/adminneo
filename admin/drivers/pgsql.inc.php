@@ -237,6 +237,7 @@ if (isset($_GET["pgsql"])) {
 				return (object) [
 					'orgtable' => $orgtable,
 					'name' => $name,
+					'native_type' => $type,
 					'type' => (preg_match(number_type(), $type) ? 0 : 15),
 					'charsetnr' => ($type == "bytea" ? 63 : 0), // 63 - binary
 				];

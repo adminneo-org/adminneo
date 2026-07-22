@@ -2,6 +2,8 @@
 
 namespace AdminNeo;
 
+use stdClass;
+
 abstract class Driver
 {
 	public const EnumLengthPattern = "'(?:''|[^'\\\\]|\\\\.)*'";
@@ -401,6 +403,18 @@ abstract class Driver
 	public function getNull(): string
 	{
 		return "NULL";
+	}
+
+	/**
+	 * Returns type name of a result column.
+	 *
+	 * @param stdClass $field Result of Result::fetchField().
+	 *
+	 * @return string Empty string if unknown.
+	 */
+	public function getTypeName(stdClass $field): string
+	{
+		return $field->native_type ?? "";
 	}
 
 	/**

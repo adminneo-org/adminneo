@@ -169,6 +169,7 @@ if (isset($_GET["oracle"])) {
 
 				return (object) [
 					'name' => $name,
+					'native_type' => $type,
 					'type' => $type,
 					'charsetnr' => (preg_match("~raw|blob|bfile~", $type) ? 63 : 0), // 63 - binary
 				];

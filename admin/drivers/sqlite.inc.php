@@ -85,6 +85,9 @@ if (isset($_GET["sqlite"])) {
 
 			public function fetchField()
 			{
+				// SQLITE3_INTEGER, SQLITE3_FLOAT, SQLITE3_TEXT, SQLITE3_BLOB, SQLITE3_NULL
+				$types = [1 => "integer", "real", "text", "blob", "null"];
+
 				$column = $this->offset++;
 
 				$type = $this->resource->columnType($column);
@@ -94,6 +97,7 @@ if (isset($_GET["sqlite"])) {
 
 				return (object) [
 					"name" => $this->resource->columnName($column),
+					"native_type" => $types[$type],
 					"type" => ($type == SQLITE3_TEXT ? 15 : 0),
 					"charsetnr" => ($type == SQLITE3_BLOB ? 63 : 0), // 63 - binary
 				];

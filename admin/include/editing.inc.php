@@ -68,7 +68,10 @@ function print_select_result(Result $result, ?Connection $connection = null, arr
 
 				$types[$j] = $field->type;
 
-				echo "<th" . ($orgtable != "" || $field->name != $orgname ? " title='" . h(($orgtable != "" ? "$orgtable." : "") . $orgname) . "'" : "") . ">" . h($name)
+				$title = trim(($orgtable != "" ? "$orgtable.$orgname" : ($field->name != $orgname ? $orgname : ""))
+					. " " . Driver::get()->getTypeName($field));
+
+				echo "<th" . ($title != "" ? " title='" . h($title) . "'" : "") . ">" . h($name)
 					. ($orgtables ? doc_link([
 						'sql' => "explain-output.html#explain_" . strtolower($name),
 						'mariadb' => "reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#columns-in-explain-...-select",

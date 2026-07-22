@@ -5,6 +5,7 @@ namespace AdminNeo;
 use mysqli;
 use mysqli_result;
 use PDO;
+use stdClass;
 
 Drivers::add("mysql", "MySQL", ["MySQLi", "PDO_MySQL"]);
 
@@ -367,6 +368,24 @@ if (isset($_GET["mysql"])) {
 			} else {
 				return "";
 			}
+		}
+
+		public function getTypeName(stdClass $field): string
+		{
+			// https://dev.mysql.com/doc/dev/mysql-server/latest/field__types_8h.html
+			$types = [
+				"decimal", "tinyint", "smallint", "int", "float", "double", 7 => "timestamp",
+				"bigint", "mediumint", "date", "time", "datetime", "year", 15 => "varchar", "bit",
+				242 => "vector", 245 => "json", "decimal", "enum", "set",
+				"tinytext", "mediumtext", "longtext", "text", "varchar", "char", "geometry",
+			];
+
+			$type = $types[$field->type] ?? "";
+
+			return parent::getTypeName($field) ?: ($field->charsetnr == 63 // 63 - binary
+				? str_replace(["text", "varchar", "char"], ["blob", "varbinary", "binary"], $type)
+				: $type
+			);
 		}
 
 		public function quoteBinary(string $string): string
