@@ -1228,14 +1228,16 @@ WHERE routine_schema = current_schema() AND specific_name = ' . q($name));
 
 		$info = $info[0] ?? [];
 
-		$fields = get_rows('SELECT COALESCE(parameter_name, ordinal_position::text) AS field, data_type AS type, character_maximum_length AS length, parameter_mode AS inout
+		$fields = get_rows("SELECT COALESCE(parameter_name, ordinal_position::text) AS field,
+	CASE data_type WHEN 'USER-DEFINED' THEN udt_name WHEN 'ARRAY' THEN substr(udt_name, 2) || '[]' ELSE data_type END AS type,
+	character_maximum_length AS length, parameter_mode AS inout
 FROM information_schema.parameters
-WHERE specific_schema = current_schema() AND specific_name = ' . q($name) . '
-ORDER BY ordinal_position');
+WHERE specific_schema = current_schema() AND specific_name = " . q($name) . "
+ORDER BY ordinal_position");
 
 		return [
 			"fields" => $fields,
-			"returns" => ["type" => $info["type_udt_name"] ?? null],
+			"returns" => ["type" => preg_replace('~^_(.*)~', '\1[]', $info["type_udt_name"] ?? "")], // _int4 - array of int4
 			"definition" => $info["routine_definition"] ?? null,
 			"language" => $info["language"] ?? null,
 			"comment" => null, // Comments are not supported.
