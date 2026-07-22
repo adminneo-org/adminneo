@@ -233,8 +233,8 @@ if (isset($_GET["sqlite"])) {
 
 		public function tableHelp(string $name, bool $isView = false): ?string
 		{
-			if ($name == "sqlite_sequence") {
-				return "fileformat2.html#seqtab";
+			if (preg_match('~^sqlite_(seq|stat.)~', $name, $match)) {
+				return "fileformat2.html#$match[1]tab";
 			}
 			if (preg_match('~^sqlite(_temp)?_(master|schema)$~', $name)) {
 				return "schematab.html";
@@ -319,7 +319,7 @@ if (isset($_GET["sqlite"])) {
 	}
 
 	function tables_list() {
-		return get_key_vals("SELECT name, type FROM sqlite_master WHERE type IN ('table', 'view') ORDER BY (name = 'sqlite_sequence'), name");
+		return get_key_vals("SELECT name, type FROM sqlite_master WHERE type IN ('table', 'view') ORDER BY (name LIKE 'sqlite_%'), name");
 	}
 
 	function count_tables($databases) {
@@ -340,7 +340,7 @@ if (isset($_GET["sqlite"])) {
 		foreach (
 			get_rows(
 				"SELECT name AS Name, type AS Engine, sql, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') "
-				. ($name != "" ? "AND name = " . q($name) : "ORDER BY (name = 'sqlite_sequence'), name")
+				. ($name != "" ? "AND name = " . q($name) : "ORDER BY (name LIKE 'sqlite_%'), name")
 			) as $row
 		) {
 			if ($row["Engine"] == "table") {
