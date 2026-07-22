@@ -1258,7 +1258,8 @@ class Admin extends Origin
 					}
 					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table" : "select";
 					echo "window.jushLinks = { " . DIALECT . ": {\n";
-					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(' . implode('|', $links) . ')\b/g';
+					// $ is used in PostgreSQL as part of name.
+					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(?<!\$)(' . implode('|', $links) . ')(?!\$)\b/g';
 					if (support('routine')) {
 						foreach (routines() as $row) {
 							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g';
