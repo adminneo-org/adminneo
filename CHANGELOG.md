@@ -13,6 +13,7 @@ Tables overview: Speed up, show totals in SQLite (by @vrana)
 Fix embedding to a page with already started session (fix #199)   
 Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 Editor: Fix displaying relation links (regression from 5.2.0)
+PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
 
 AdminNeo 5.6.0 (2026-08-16)
 ---------------------------

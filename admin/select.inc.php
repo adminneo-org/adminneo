@@ -312,6 +312,14 @@ if (!$columns && support("table")) {
 			$select2[$key] = "$as AS $val";
 		}
 	}
+	if (DIALECT == "pgsql" || DIALECT == "mssql") {
+		// Alias functions so that e.g. COUNT(DISTINCT a) and COUNT(*) don't collapse into a single 'count' column in fetchAssoc().
+		foreach ((array)$_GET["columns"] as $key => $val) {
+			if (isset($select2[$key]) && $val["fun"]) {
+				$select2[$key] .= " AS " . idf_escape(apply_sql_function($val["fun"], ($val["col"] != "" ? $val["col"] : "*")));
+			}
+		}
+	}
 	if (!$is_group && $unselected) {
 		foreach ($unselected as $key => $val) {
 			$select2[] = idf_escape($key);
