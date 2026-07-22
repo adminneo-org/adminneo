@@ -189,6 +189,7 @@ return [
 	'Check' => 'Zkontrolovat',
 	'Repair' => 'Opravit',
 	'Truncate' => 'Vyprázdnit',
+	'Truncate Cascade' => 'Vyprázdnit kaskádově',
 	'Tables have been truncated.' => 'Tabulky byly vyprázdněny.',
 	'Move to other database' => 'Přesunout do jiné databáze',
 	'Move' => 'Přesunout',

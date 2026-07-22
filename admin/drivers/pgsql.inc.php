@@ -1144,9 +1144,9 @@ ORDER BY s.ordinal_position";
 		return true;
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables($tables, $cascade = false): bool
 	{
-		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)));
+		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)) . ($cascade ? " CASCADE" : ""));
 	}
 
 	function drop_views($views): bool
