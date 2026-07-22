@@ -172,6 +172,7 @@ return [
 	'Check' => 'পরীক্ষা',
 	'Repair' => 'মেরামত',
 	'Truncate' => 'ছাঁটাই',
+	'Truncate Cascade' => 'ক্যাসকেড ছাঁটাই', // by Claude Opus 5
 	'Tables have been truncated.' => 'টেবিল ছাঁটাই করা হয়েছে।',
 	'Move to other database' => 'অন্য ডাটাবেজে স্থানান্তর করুন',
 	'Move' => 'স্থানান্তর করুন',

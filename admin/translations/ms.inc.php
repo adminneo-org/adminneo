@@ -169,6 +169,7 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Baiki',
 	'Truncate' => 'Memangkas',
+	'Truncate Cascade' => 'Memangkas secara berperingkat', // by Claude Opus 5
 	'Tables have been truncated.' => 'Jadual telah dimangkaskan.',
 	'Move to other database' => 'Pindahkan ke pangkalan data yang lain',
 	'Move' => 'Pindah',

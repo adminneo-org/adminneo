@@ -184,6 +184,7 @@ return [
 	'Check' => 'ப‌ரிசோதி',
 	'Repair' => 'ப‌ழுது பார்',
 	'Truncate' => 'குறை (Truncate)',
+	'Truncate Cascade' => 'அடுக்கு குறை (Truncate Cascade)', // by Claude Opus 5
 	'Tables have been truncated.' => 'அட்ட‌வ‌ணை குறைக்க‌ப்ப‌ட்ட‌து (truncated).',
 	'Move to other database' => 'ம‌ற்ற‌ த‌க‌வ‌ல் தள‌த்திற்க்கு ந‌க‌ர்த்து',
 	'Move' => 'ந‌க‌ர்த்து',

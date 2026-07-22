@@ -184,6 +184,7 @@ return [
 	'Check' => 'Kolla',
 	'Repair' => 'Reparera',
 	'Truncate' => 'Avkorta',
+	'Truncate Cascade' => 'Avkorta kaskad', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabeller har blivit avkortade.',
 	'Move to other database' => 'Flytta till en annan databas',
 	'Move' => 'Flytta',

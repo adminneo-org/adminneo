@@ -169,6 +169,7 @@ return [
 	'Check' => 'בדוק',
 	'Repair' => 'תקן',
 	'Truncate' => 'קצר',
+	'Truncate Cascade' => 'קצר מדורג', // by Claude Opus 5
 	'Tables have been truncated.' => 'הטבלה קוצרה',
 	'Move to other database' => 'העבר למסד נתונים אחר',
 	'Move' => 'העבר',

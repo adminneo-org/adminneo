@@ -178,6 +178,7 @@ return [
 	'Check' => 'Tarkista',
 	'Repair' => 'Korjaa',
 	'Truncate' => 'Tyhjennä',
+	'Truncate Cascade' => 'Tyhjennä kaskadisesti', // by Claude Opus 5
 	'Tables have been truncated.' => 'Taulujen sisältö on tyhjennetty.',
 	'Move to other database' => 'Siirrä toiseen tietokantaan',
 	'Move' => 'Siirrä',

@@ -169,6 +169,7 @@ return [
 	'Check' => '検査',
 	'Repair' => '修復',
 	'Truncate' => '空にする',
+	'Truncate Cascade' => 'カスケードで空にする', // by Claude Fable 5
 	'Tables have been truncated.' => 'テーブルを空にしました。',
 	'Move to other database' => '他のデータベースへ移動',
 	'Move' => '移動',

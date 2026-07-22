@@ -169,6 +169,7 @@ return [
 	'Check' => '확인',
 	'Repair' => '복구',
 	'Truncate' => '데이터 내용만 지우기',
+	'Truncate Cascade' => '연쇄로 데이터 내용만 지우기', // by Claude Opus 5
 	'Tables have been truncated.' => '테이블의 데이터 내용만 지웠습니다.',
 	'Move to other database' => '다른 데이터베이스로 이동',
 	'Move' => '이동',

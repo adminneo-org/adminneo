@@ -189,6 +189,7 @@ return [
 	'Check' => 'Skontrolovať',
 	'Repair' => 'Opraviť',
 	'Truncate' => 'Vyprázdniť',
+	'Truncate Cascade' => 'Vyprázdniť kaskádovo', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tabuľky boli vyprázdnené.',
 	'Move to other database' => 'Presunúť do inej databázy',
 	'Move' => 'Presunúť',

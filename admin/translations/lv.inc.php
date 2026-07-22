@@ -189,6 +189,7 @@ return [
 	'Check' => 'Pārbaudīt',
 	'Repair' => 'Salabot',
 	'Truncate' => 'Iztīrīt',
+	'Truncate Cascade' => 'Iztīrīt kaskādēti', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabulas iztīrītas.',
 	'Move to other database' => 'Pārvietot uz citu datubāzi',
 	'Move' => 'Pārvietot',

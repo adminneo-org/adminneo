@@ -169,6 +169,7 @@ return [
 	'Check' => 'ตรวจสอบ',
 	'Repair' => 'ซ่อมแซม',
 	'Truncate' => 'ตัดทิ้ง',
+	'Truncate Cascade' => 'ตัดทิ้งแบบต่อเนื่อง', // by Claude Opus 5
 	'Tables have been truncated.' => 'เคลียร์ตารางแล้ว (truncate).',
 	'Move to other database' => 'ย้ายไปยังฐานข้อมูลอื่น',
 	'Move' => 'ย้าย',

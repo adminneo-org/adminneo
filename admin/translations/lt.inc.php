@@ -189,6 +189,7 @@ return [
 	'Check' => 'Patikrinti',
 	'Repair' => 'Pataisyti',
 	'Truncate' => 'Tuštinti',
+	'Truncate Cascade' => 'Tuštinti kaskadiškai', // by Claude Opus 5
 	'Tables have been truncated.' => 'Lentelės buvo ištuštintos.',
 	'Move to other database' => 'Perkelti į kitą duomenų bazę',
 	'Move' => 'Perkelti',

@@ -169,6 +169,7 @@ return [
 	'Check' => 'შემოწმება',
 	'Repair' => 'გასწორება',
 	'Truncate' => 'გასუფთავება',
+	'Truncate Cascade' => 'კასკადური გასუფთავება', // by Claude Opus 5
 	'Tables have been truncated.' => 'ცხრილი გასუფთავდა.',
 	'Move to other database' => 'გადატანა სხვა ბაზაში',
 	'Move' => 'გადატანა',

@@ -189,6 +189,7 @@ return [
 	'Check' => 'Проверить',
 	'Repair' => 'Исправить',
 	'Truncate' => 'Очистить',
+	'Truncate Cascade' => 'Очистить каскадно', // by Claude Fable 5
 	'Tables have been truncated.' => 'Таблицы были очищены.',
 	'Move to other database' => 'Переместить в другую базу данных',
 	'Move' => 'Переместить',

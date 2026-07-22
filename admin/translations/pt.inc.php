@@ -184,6 +184,7 @@ return [
 	'Check' => 'Verificar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
+	'Truncate Cascade' => 'Truncar em cascata', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tabelas truncadas (truncate).',
 	'Move to other database' => 'Mover para outra Base de dados',
 	'Move' => 'Mover',

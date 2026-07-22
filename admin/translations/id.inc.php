@@ -169,6 +169,7 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Perbaiki',
 	'Truncate' => 'Kosongkan',
+	'Truncate Cascade' => 'Kosongkan bertingkat', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabel berhasil dikosongkan.',
 	'Move to other database' => 'Pindahkan ke basis data lain',
 	'Move' => 'Pindahkan',

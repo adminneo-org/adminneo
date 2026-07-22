@@ -169,6 +169,7 @@ return [
 	'Check' => '检查',
 	'Repair' => '修复',
 	'Truncate' => '清空',
+	'Truncate Cascade' => '级联清空', // by Claude Fable 5
 	'Tables have been truncated.' => '已清空表。',
 	'Move to other database' => '转移到其它数据库',
 	'Move' => '转移',

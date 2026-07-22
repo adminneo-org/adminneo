@@ -189,6 +189,7 @@ return [
 	'Check' => 'Controlează',
 	'Repair' => 'Repară',
 	'Truncate' => 'Curăță',
+	'Truncate Cascade' => 'Curăță în cascadă', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tabelele au fost curățate.',
 	'Move to other database' => 'Mută în altă bază de date',
 	'Move' => 'Mută',

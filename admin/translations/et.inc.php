@@ -175,6 +175,7 @@ return [
 	'Check' => 'Kontrolli',
 	'Repair' => 'Paranda',
 	'Truncate' => 'Tühjenda',
+	'Truncate Cascade' => 'Tühjenda kaskaadis', // by Claude Opus 5
 	'Tables have been truncated.' => 'Valitud tabelid on edukalt tühjendatud.', // by Claude Opus 5
 	'Move to other database' => 'Liiguta teise andmebaasi',
 	'Move' => 'Liiguta',
