@@ -18,6 +18,7 @@ PostgreSQL: Do not show functions created by extensions (by @vrana)
 Fix embedding to a page with already started session (fix #199)   
 Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 Editor: Fix displaying relation links (regression from 5.2.0)
+Edit: Keep values of columns with special characters in name after error (by @vrana)
 PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
 PostgreSQL: Fix empty headers of computed columns in query result (regression from 5.1.0)
 

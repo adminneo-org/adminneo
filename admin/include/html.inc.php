@@ -680,7 +680,7 @@ function edit_form($table, $fields, $row, $update): void {
 			} else {
 				$editable = true;
 				$function = ($_POST["save"]
-					? $_POST["function"][$name] ?? ""
+					? $_POST["function"][$key] ?? ""
 					: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
 						? "now"
 						: ($value === false ? null : ($value !== null ? '' : 'NULL'))
