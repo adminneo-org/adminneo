@@ -243,6 +243,7 @@ return [
 	'Add next' => 'Lisää seuraava',
 	'Index Type' => 'Indeksityyppi',
 	'length' => 'pituus',
+	'operator class' => 'operaattoriluokka', // by Claude Fable 5
 	'Algorithm' => 'Algoritmi', // by Claude Fable 5
 	'Condition' => 'Ehto', // by Claude Fable 5
 

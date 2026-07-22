@@ -249,6 +249,7 @@ return [
 	'Add next' => 'Προσθήκη επόμενου',
 	'Index Type' => 'Τύπος δείκτη',
 	'length' => 'μήκος',
+	'operator class' => 'κλάση τελεστών', // by Claude Fable 5
 	'Algorithm' => 'Αλγόριθμος', // by Claude Fable 5
 	'Condition' => 'Συνθήκη', // by Claude Fable 5
 

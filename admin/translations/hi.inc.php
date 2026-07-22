@@ -246,6 +246,7 @@ return [
 	'Add next' => 'अगला जोड़ें',
 	'Index Type' => 'इंडेक्स प्रकार',
 	'length' => 'लंबाई',
+	'operator class' => 'ऑपरेटर क्लास', // by Claude Opus 5
 	'Algorithm' => 'एल्गोरिदम', // by Claude Opus 5
 	'Condition' => 'शर्त', // by Claude Opus 5
 

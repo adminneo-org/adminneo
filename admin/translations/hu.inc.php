@@ -234,6 +234,7 @@ return [
 	'Add next' => 'Következő hozzáadása',
 	'Index Type' => 'Index típusa',
 	'length' => 'méret',
+	'operator class' => 'operátorosztály', // by Claude Fable 5
 	'Algorithm' => 'Algoritmus', // by Claude Fable 5
 	'Condition' => 'Feltétel', // by Claude Fable 5
 

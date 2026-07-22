@@ -254,6 +254,7 @@ return [
 	'Add next' => 'Додати ще',
 	'Index Type' => 'Тип індексу',
 	'length' => 'довжина',
+	'operator class' => 'клас операторів', // by Claude Fable 5
 	'Algorithm' => 'Алгоритм', // by Claude Fable 5
 	'Condition' => 'Умова', // by Claude Fable 5
 

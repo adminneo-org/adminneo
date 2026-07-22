@@ -254,6 +254,7 @@ return [
 	'Add next' => 'Pridėti kitą',
 	'Index Type' => 'Indekso tipas',
 	'length' => 'ilgis',
+	'operator class' => 'operatorių klasė', // by Claude Opus 5
 	'Algorithm' => 'Algoritmas', // by Claude Opus 5
 	'Condition' => 'Sąlyga', // by Claude Opus 5
 

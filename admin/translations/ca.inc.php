@@ -249,6 +249,7 @@ return [
 	'Add next' => 'Afegeix el següent',
 	'Index Type' => 'Tipus d\'índex',
 	'length' => 'longitud',
+	'operator class' => 'classe d\'operadors', // by Claude Fable 5
 	'Algorithm' => 'Algorisme', // by Claude Fable 5
 	'Condition' => 'Condició', // by Claude Fable 5
 

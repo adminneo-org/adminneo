@@ -254,6 +254,7 @@ return [
 	'Add next' => 'Pievienot vēl',
 	'Index Type' => 'Indeksa tips',
 	'length' => 'garums',
+	'operator class' => 'operatoru klase', // by Claude Opus 5
 	'Algorithm' => 'Algoritms', // by Claude Opus 5
 	'Condition' => 'Nosacījums', // by Claude Opus 5
 

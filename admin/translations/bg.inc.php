@@ -249,6 +249,7 @@ return [
 	'Add next' => 'Добавяне на следващ',
 	'Index Type' => 'Вид на индекса',
 	'length' => 'дължина',
+	'operator class' => 'клас оператори', // by Claude Fable 5
 	'Algorithm' => 'Алгоритъм', // by Claude Fable 5
 	'Condition' => 'Условие', // by Claude Fable 5
 

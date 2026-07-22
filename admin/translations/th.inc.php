@@ -234,6 +234,7 @@ return [
 	'Add next' => 'เพิ่มรายการถัดไป',
 	'Index Type' => 'ชนิดของดัชนี',
 	'length' => 'ความยาว',
+	'operator class' => 'คลาสตัวดำเนินการ', // by Claude Opus 5
 	'Algorithm' => 'อัลกอริทึม', // by Claude Opus 5
 	'Condition' => 'เงื่อนไข', // by Claude Opus 5
 

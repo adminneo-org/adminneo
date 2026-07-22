@@ -254,6 +254,7 @@ return [
 	'Add next' => 'Pridať ďalší',
 	'Index Type' => 'Typ indexu',
 	'length' => 'dĺžka',
+	'operator class' => 'trieda operátorov', // by Claude Fable 5
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmienka',
 

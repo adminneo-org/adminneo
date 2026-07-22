@@ -237,6 +237,7 @@ return [
 	'Add next' => 'পরবর্তী সংযোজন করুন',
 	'Index Type' => 'সূচী-ধরণ',
 	'length' => 'দৈর্ঘ্য',
+	'operator class' => 'অপারেটর ক্লাস', // by Claude Opus 5
 	'Algorithm' => 'অ্যালগরিদম', // by Claude Opus 5
 	'Condition' => 'শর্ত', // by Claude Opus 5
 

@@ -234,6 +234,7 @@ return [
 	'Add next' => 'Tambah yang seterusnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'kepanjangan',
+	'operator class' => 'kelas operator', // by Claude Opus 5
 	'Algorithm' => 'Algoritma', // by Claude Opus 5
 	'Condition' => 'Syarat', // by Claude Opus 5
 

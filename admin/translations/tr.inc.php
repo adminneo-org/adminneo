@@ -243,6 +243,7 @@ return [
 	'Add next' => 'Bundan sonra ekle',
 	'Index Type' => 'İndex Türü',
 	'length' => 'uzunluğu',
+	'operator class' => 'operatör sınıfı', // by Claude Fable 5
 	'Algorithm' => 'Algoritma', // by Claude Fable 5
 	'Condition' => 'Koşul', // by Claude Fable 5
 

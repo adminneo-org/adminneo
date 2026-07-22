@@ -234,6 +234,7 @@ return [
 	'Add next' => '다음 추가',
 	'Index Type' => '색인 형',
 	'length' => '길이',
+	'operator class' => '연산자 클래스', // by Claude Fable 5
 	'Algorithm' => '알고리즘', // by Claude Fable 5
 	'Condition' => '조건', // by Claude Fable 5
 

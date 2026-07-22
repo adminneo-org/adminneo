@@ -249,6 +249,7 @@ return [
 	'Add next' => 'அடுத்த‌தை சேர்க்க‌வும்',
 	'Index Type' => 'அக‌வ‌ரிசை வ‌கை (Index Type)',
 	'length' => 'நீள‌ம்',
+	'operator class' => 'செயற்குறி வகுப்பு', // by Claude Opus 5
 	'Algorithm' => 'நெறிமுறை (Algorithm)', // by Claude Opus 5
 	'Condition' => 'நிப‌ந்த‌னை', // by Claude Opus 5
 

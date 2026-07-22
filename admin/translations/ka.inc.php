@@ -234,6 +234,7 @@ return [
 	'Add next' => 'კიდევ დამატება',
 	'Index Type' => 'ინდექსის სახეობა',
 	'length' => 'სიგრძე',
+	'operator class' => 'ოპერატორის კლასი', // by Claude Opus 5
 	'Algorithm' => 'ალგორითმი', // by Claude Opus 5
 	'Condition' => 'პირობა', // by Claude Opus 5
 

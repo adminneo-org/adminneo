@@ -234,6 +234,7 @@ return [
 	'Add next' => '追加',
 	'Index Type' => 'インデックスの型',
 	'length' => '長さ',
+	'operator class' => '演算子クラス', // by Claude Fable 5
 	'Algorithm' => 'アルゴリズム',
 	'Condition' => '条件',
 

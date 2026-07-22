@@ -249,6 +249,7 @@ return [
 	'Add next' => 'Lägg till nästa',
 	'Index Type' => 'Indextyp',
 	'length' => 'längd',
+	'operator class' => 'operatorklass', // by Claude Fable 5
 	'Algorithm' => 'Algoritm', // by Claude Fable 5
 	'Condition' => 'Villkor', // by Claude Fable 5
 

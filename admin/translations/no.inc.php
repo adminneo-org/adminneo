@@ -246,6 +246,7 @@ return [
 	'Add next' => 'Legg til neste',
 	'Index Type' => 'Indekstype',
 	'length' => 'lengde',
+	'operator class' => 'operatorklasse', // by Claude Fable 5
 	'Algorithm' => 'Algoritme', // by Claude Fable 5
 	'Condition' => 'Betingelse', // by Claude Fable 5
 

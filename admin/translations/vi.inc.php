@@ -234,6 +234,7 @@ return [
 	'Add next' => 'Thêm tiếp',
 	'Index Type' => 'Loại chỉ mục',
 	'length' => 'độ dài',
+	'operator class' => 'lớp toán tử', // by Claude Fable 5
 	'Algorithm' => 'Thuật toán',
 	'Condition' => 'Điều kiện',
 

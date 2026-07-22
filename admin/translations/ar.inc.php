@@ -240,6 +240,7 @@ return [
 	'Add next' => 'إضافة التالي',
 	'Index Type' => 'نوع المؤشر',
 	'length' => 'الطول',
+	'operator class' => 'فئة المعاملات', // by Claude Opus 5
 	'Algorithm' => 'الخوارزمية', // by Claude Opus 5
 	'Condition' => 'الشرط', // by Claude Opus 5
 

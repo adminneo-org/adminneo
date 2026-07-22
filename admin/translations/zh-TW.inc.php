@@ -234,6 +234,7 @@ return [
 	'Add next' => '新增下一筆',
 	'Index Type' => '索引類型',
 	'length' => '長度',
+	'operator class' => '運算子類別', // by Claude Fable 5
 	'Algorithm' => '演算法', // by Claude Fable 5
 	'Condition' => '條件', // by Claude Fable 5
 

@@ -240,6 +240,7 @@ return [
 	'Add next' => 'Lisa järgmine',
 	'Index Type' => 'Indeksi tüüp',
 	'length' => 'pikkus',
+	'operator class' => 'operaatoriklass', // by Claude Opus 5
 	'Algorithm' => 'Algoritm', // by Claude Opus 5
 	'Condition' => 'Tingimus', // by Claude Opus 5
 

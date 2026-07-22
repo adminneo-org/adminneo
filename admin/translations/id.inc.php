@@ -234,6 +234,7 @@ return [
 	'Add next' => 'Tambah setelahnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'panjang',
+	'operator class' => 'kelas operator', // by Claude Fable 5
 	'Algorithm' => 'Algoritme', // by Claude Fable 5
 	'Condition' => 'Kondisi', // by Claude Fable 5
 

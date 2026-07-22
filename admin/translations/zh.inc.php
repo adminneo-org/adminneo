@@ -234,6 +234,7 @@ return [
 	'Add next' => '下一行插入',
 	'Index Type' => '索引类型',
 	'length' => '长度', // by Claude Fable 5
+	'operator class' => '运算符类', // by Claude Fable 5
 	'Algorithm' => '算法', // by Claude Fable 5
 	'Condition' => '条件', // by Claude Fable 5
 

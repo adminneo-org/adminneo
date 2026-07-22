@@ -234,6 +234,7 @@ return [
 	'Add next' => 'הוסף הבא',
 	'Index Type' => 'סוג אינדקס',
 	'length' => 'אורך',
+	'operator class' => 'מחלקת אופרטורים', // by Claude Opus 5
 	'Algorithm' => 'אלגוריתם', // by Claude Opus 5
 	'Condition' => 'תנאי', // by Claude Opus 5
 

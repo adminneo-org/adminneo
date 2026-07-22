@@ -234,6 +234,7 @@ return [
 	'Add next' => 'افرودن بعدی',
 	'Index Type' => 'نوع ایندکس',
 	'length' => 'طول',
+	'operator class' => 'کلاس عملگر', // by Claude Opus 5
 	'Algorithm' => 'الگوریتم', // by Claude Opus 5
 	'Condition' => 'شرط', // by Claude Opus 5
 
