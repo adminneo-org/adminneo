@@ -11,6 +11,7 @@ SQL command: Show column type in result table header (by @vrana)
 Alter table: Add next column without page reload (by @vrana)
 PostgreSQL: Support operator classes in indexes (by @vrana)
 PostgreSQL: Add Truncate Cascade button (by @vrana)
+PostgreSQL: Do not show functions created by extensions (by @vrana)
 
 ### Bugfixes
 

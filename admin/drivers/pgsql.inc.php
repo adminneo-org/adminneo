@@ -1245,8 +1245,9 @@ ORDER BY ordinal_position');
 	function routines() {
 		return get_rows('SELECT specific_name AS "SPECIFIC_NAME", routine_name AS "ROUTINE_NAME", routine_type AS "ROUTINE_TYPE", type_udt_name AS "DTD_IDENTIFIER", null AS ROUTINE_COMMENT
 FROM information_schema.routines
-WHERE routine_schema = current_schema()
-ORDER BY SPECIFIC_NAME');
+WHERE routine_schema = current_schema()' . (Connection::get()->isCockroachDB() ? '' : "
+AND substring(specific_name, '[0-9]+\$')::oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_proc'::regclass AND deptype = 'e')") . '
+ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions
 	}
 
 	function routine_languages() {
