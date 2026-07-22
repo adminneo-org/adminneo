@@ -326,6 +326,27 @@ if (isset($_GET["sqlite"])) {
 		return [];
 	}
 
+	/**
+	 * Gets sizes of the whole database.
+	 *
+	 * Sizes of single tables are available only through the dbstat virtual table which reads all pages.
+	 *
+	 * @return array<string, int> [$key => $bytes] with keys of table_status()
+	 */
+	function db_status(): array
+	{
+		$connection = Connection::get();
+
+		$page_size = $connection->getValue("PRAGMA page_size");
+		$free = $connection->getValue("PRAGMA freelist_count") * $page_size;
+
+		return [
+			"Data_length" => $connection->getValue("PRAGMA page_count") * $page_size - $free,
+			"Index_length" => 0, // Pages of tables and indexes are counted together.
+			"Data_free" => $free,
+		];
+	}
+
 	function table_status($name = "", $fast = false) {
 		$return = [];
 		$rows = [];

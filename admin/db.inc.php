@@ -285,6 +285,9 @@ if ($_GET["ns"] === "") {
 		echo "<td><th>" . lang('%d in total', count($tables_list));
 		echo "<td>" . h(DIALECT == "sql" ? Connection::get()->getValue("SELECT @@default_storage_engine") : "");
 		echo ($db_collation != "" ? "<td>" . h($db_collation) : "");
+		if ($with_status && function_exists('AdminNeo\db_status')) {
+			$sums = db_status();
+		}
 		foreach ($sums as $key => $sum) {
 			echo "<td align='right' id='sum-$key'>" . ($with_status ? format_number($sum) : "");
 		}

@@ -6,7 +6,7 @@ AdminNeo 5.7.0
 
 ### Changes
 
-Tables overview: Speed up (by @vrana)
+Tables overview: Speed up, show totals in SQLite (by @vrana)
 
 ### Bugfixes
 

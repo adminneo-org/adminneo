@@ -42,6 +42,9 @@ if ($_GET["script"] == "db") {
 		}
 	}
 
+	if (function_exists('AdminNeo\db_status')) {
+		$sums = db_status();
+	}
 	foreach ($sums as $key => $val) {
 		$data["sum-$key"] = format_number($val);
 	}
