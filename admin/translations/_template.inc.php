@@ -234,6 +234,7 @@ return [
 	'Add next' => 'Xx',
 	'Index Type' => 'Xx',
 	'length' => 'xx',
+	'operator class' => 'xx',
 	'Algorithm' => 'Xx',
 	'Condition' => 'Xx',
 

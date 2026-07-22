@@ -578,6 +578,17 @@ if (isset($_GET["pgsql"])) {
 			return $methods;
 		}
 
+		public function getIndexOpclasses(): array
+		{
+			static $opclasses = [];
+
+			if (!$opclasses && !$this->connection->isCockroachDB()) {
+				$opclasses = get_vals("SELECT DISTINCT opcname FROM pg_catalog.pg_opclass WHERE NOT opcdefault ORDER BY opcname");
+			}
+
+			return $opclasses;
+		}
+
 		public function supportsIndex(array $tableStatus): bool
 		{
 			// Returns true for "materialized view".
@@ -880,7 +891,8 @@ ORDER BY a.attnum"
 		$return = [];
 		$table_oid = Driver::get()->tableOid($table);
 		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection);
-		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr
+		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr" . ($connection->isCockroachDB() ? "" : ",
+	(SELECT string_agg(CASE WHEN opcdefault THEN '' ELSE opcname END, ' ' ORDER BY s) FROM generate_subscripts(indclass, 1) AS s JOIN pg_catalog.pg_opclass ON pg_opclass.oid = indclass[s]) AS opclasses") . "
 FROM pg_index
 JOIN pg_class ON indexrelid = oid
 JOIN pg_am ON pg_am.oid = pg_class.relam
@@ -900,6 +912,7 @@ ORDER BY indisprimary DESC, indisunique DESC", $connection
 			foreach (explode(" ", $row["indoption"]) as $indoption) {
 				$return[$relname]["descs"][] = (intval($indoption) & 1 ? '1' : null); // 1 - INDOPTION_DESC
 			}
+			$return[$relname]["opclasses"] = ($row["opclasses"] != "" ? explode(" ", $row["opclasses"]) : []);
 			$return[$relname]["lengths"] = [];
 		}
 		return $return;

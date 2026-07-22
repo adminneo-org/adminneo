@@ -8,6 +8,7 @@ AdminNeo 5.7.0
 
 Tables overview: Speed up, show totals in SQLite (by @vrana)
 SQL command: Show column type in result table header (by @vrana)
+PostgreSQL: Support operator classes in indexes (by @vrana)
 
 ### Bugfixes
 

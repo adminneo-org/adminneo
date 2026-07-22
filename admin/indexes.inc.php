@@ -37,6 +37,7 @@ if ($_POST && !$_POST["add"] && !$_POST["drop_col"]) {
 			$columns = [];
 			$lengths = [];
 			$descs = [];
+			$opclasses = [];
 			$index_algorithm = $index_algorithms ? (in_array($index["algorithm"], $index_algorithms) ? $index["algorithm"] : first($index_algorithms)) : "";
 			$index_condition = (support("partial_indexes") ? $index["partial"] : "");
 			$set = [];
@@ -45,10 +46,13 @@ if ($_POST && !$_POST["add"] && !$_POST["drop_col"]) {
 				if ($column != "") {
 					$length = $index["lengths"][$key] ?? null;
 					$desc = $index["descs"][$key] ?? null;
-					$set[] = ($fields[$column] ? idf_escape($column) : $column) . ($length ? "(" . (+$length) . ")" : "") . ($desc ? " DESC" : "");
+					$opclass = $index["opclasses"][$key] ?? null;
+					$set[] = ($fields[$column] ? idf_escape($column) : $column) . ($length ? "(" . (+$length) . ")" : "")
+						. ($opclass != "" ? " " . idf_escape($opclass) : "") . ($desc ? " DESC" : "");
 					$columns[] = $column;
 					$lengths[] = ($length ?: null);
 					$descs[] = $desc;
+					$opclasses[] = "$opclass";
 				}
 			}
 
@@ -61,6 +65,7 @@ if ($_POST && !$_POST["add"] && !$_POST["drop_col"]) {
 					&& array_values($existing["columns"]) === $columns
 					&& (!$existing["lengths"] || array_values($existing["lengths"]) === $lengths)
 					&& array_values($existing["descs"]) === $descs
+					&& (!$existing["opclasses"] || array_values($existing["opclasses"]) === $opclasses)
 					&& (!$index_algorithms || $existing["algorithm"] === $index_algorithm)
 					&& $existing["partial"] == $index_condition
 				) {
@@ -108,6 +113,7 @@ if (!$row) {
 	$row["indexes"] = $indexes;
 }
 $lengths = (DIALECT == "sql" || DIALECT == "mssql");
+$opclasses = Driver::get()->getIndexOpclasses();
 $show_options = $_POST ? $_POST["options"] : Admin::get()->getSettings()->getParameter("indexOptions");
 
 echo "<form action='' method='post'>\n";
@@ -178,6 +184,15 @@ foreach ($row["indexes"] as $index) {
 			echo "<span $options_class>";
 			if ($lengths) {
 				echo "<input type='number' name='indexes[$j][lengths][$i]' class='input size' value='". (h($index["lengths"][$key] ?? "")), "' title='" . lang('Length'), "'>";
+			}
+			if ($opclasses) {
+				$opclass = $index["opclasses"][$key] ?? "";
+				echo html_select(
+					"indexes[$j][opclasses][$i]",
+					["" => "(" . lang('operator class') . ")"] + array_combine($opclasses, $opclasses) + ($opclass != "" ? [$opclass => $opclass] : []),
+					$opclass
+				);
+				echo doc_link(['pgsql' => 'indexes-opclass.html']);
 			}
 			if (support("descidx")) {
 				echo checkbox("indexes[$j][descs][$i]", 1, $index["descs"][$key] ?? false, lang('descending'));

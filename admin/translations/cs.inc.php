@@ -254,6 +254,7 @@ return [
 	'Add next' => 'Přidat další',
 	'Index Type' => 'Typ indexu',
 	'length' => 'délka',
+	'operator class' => 'třída operátorů',
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmínka',
 

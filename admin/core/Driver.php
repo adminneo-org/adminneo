@@ -468,6 +468,16 @@ abstract class Driver
 	}
 
 	/**
+	 * Returns operator classes usable in indexes.
+	 *
+	 * @return list<string>
+	 */
+	public function getIndexOpclasses(): array
+	{
+		return [];
+	}
+
+	/**
 	 * Returns inherited tables.
 	 *
 	 * @return list<array{table: string, ns: string}>
