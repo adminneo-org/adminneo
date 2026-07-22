@@ -1421,7 +1421,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	}
 
 	/** Check whether a feature is supported
-	* @param literal-string $feature check|comment|copy|database|descidx|drop_col|dump|event|indexes|kill|materializedview|
+	* @param literal-string $feature check|comment|copy|database|descidx|drop_col|dump|event|fast_status|indexes|kill|materializedview|
 	* privileges|move_col|procedure|processlist|routine|scheme|sequence|status|table|trigger|type|variables|view|view_trigger
 	*/
 	function support($feature) {
@@ -1429,6 +1429,8 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 			'~^(comment|columns|copy|database|drop_col|dump|event|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
 			. (Connection::get()->isMinVersion("8") ? '|descidx' : '')
 			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? '|check' : '')
+			// MySQL 8 reads table stats from the data dictionary; MariaDB still opens all tables.
+			. (!Connection::get()->isMariaDB() && Connection::get()->isMinVersion("8") ? '|fast_status' : '')
 			. ')$~',
 			$feature
 		);

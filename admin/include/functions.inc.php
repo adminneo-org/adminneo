@@ -760,6 +760,16 @@ function format_number($val) {
 	return strtr(number_format($val, 0, ".", lang(',')), preg_split('~~u', lang('0123456789'), -1, PREG_SPLIT_NO_EMPTY));
 }
 
+/** Format the number of rows from table status, prefixed with "~ " if approximate
+* @param array $table_status one element from table_status()
+*/
+function format_rows(array $table_status): string {
+	$rows = $table_status["Rows"];
+	$approximate = ($rows && ($table_status["Engine"] ?? "") == (DIALECT == "pgsql" ? "table" : "InnoDB"));
+
+	return ($approximate ? "~ " : "") . format_number($rows);
+}
+
 /** Generate friendly URL
 * @param string
 * @return string

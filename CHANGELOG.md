@@ -4,6 +4,10 @@ Changelog
 AdminNeo 5.7.0
 --------------
 
+### Changes
+
+Show table statistics without a background request where fast (MySQL 8+, PostgreSQL, Oracle, MS SQL) (by @vrana)
+
 ### Bugfixes
 
 Fix embedding to a page with already started session (fix #199)   

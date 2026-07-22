@@ -152,7 +152,8 @@ if ($_GET["ns"] === "") {
 	}
 
 	// Sorting by a status column requires the statuses of all tables, so they are not loaded by AJAX in that case.
-	$with_status = ($order != "" && $order != "__table");
+	// Neither are they for drivers serving them fast enough to not delay the page.
+	$with_status = ($order != "" && $order != "__table") || support("fast_status");
 
 	$tables_list = ($with_status ? table_status() : tables_list());
 	if (!$tables_list) {
@@ -257,7 +258,7 @@ if ($_GET["ns"] === "") {
 					if ($with_status) {
 						$number = $status[$key] ?? "";
 						if (is_numeric($number) && $number >= 0) {
-							$val = ($key == "Rows" && $number && $engine == (DIALECT == "pgsql" ? "table" : "InnoDB") ? "~ " : "") . format_number($number);
+							$val = ($key == "Rows" ? format_rows($status) : format_number($number));
 
 							// Ignore innodb_file_per_table because it is not active for tables created before it was enabled.
 							if (isset($sums[$key]) && ($engine != "InnoDB" || $key != "Data_free")) {

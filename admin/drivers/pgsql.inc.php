@@ -1529,7 +1529,7 @@ AND typelem = 0"
 			return Connection::get()->isMinVersion("11");
 		}
 
-		return preg_match('~^(check|columns|comment|database|drop_col|dump|descidx|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~', $feature);
+		return preg_match('~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~', $feature);
 	}
 
 	function kill_process($val) {
