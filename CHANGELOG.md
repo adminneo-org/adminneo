@@ -6,7 +6,7 @@ AdminNeo 5.7.0
 
 ### Changes
 
-- Tables overview: Speed up, show totals in SQLite, real size in Oracle (by @vrana)
+- Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
 - SQL command: Show column type in result table header (by @vrana)
 - Alter table: Add next column without page reload (by @vrana)
 - PostgreSQL: Support operator classes in indexes (by @vrana)
