@@ -1132,7 +1132,8 @@ function is_blob(array $field): bool
 	$types = Driver::get()->getStructuredTypes();
 	$type = lang('User types');
 
-	return preg_match('~blob|bytea|raw|file~', $field["type"]) && !in_array($field["type"], $types[$type] ?? []);
+	return preg_match('~blob|bytea|raw|file' . (DIALECT == "mssql" ? '|binary|image' : '') . '~', $field["type"])
+		&& !in_array($field["type"], $types[$type] ?? []);
 }
 
 /**

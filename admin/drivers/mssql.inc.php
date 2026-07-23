@@ -203,7 +203,8 @@ if (isset($_GET["mssql"])) {
 					'name' => $field["Name"],
 					//! 'native_type': http://msdn.microsoft.com/en-us/library/cc296197.aspx
 					'type' => ($field["Type"] == 1 ? 254 : 15),
-					'charsetnr' => 0,
+					// -2 - SQL_BINARY, -3 - SQL_VARBINARY, -4 - SQL_LONGVARBINARY
+					'charsetnr' => (in_array($field["Type"], [-2, -3, -4]) ? 63 : 0), // 63 - binary
 				];
 			}
 
@@ -411,6 +412,11 @@ if (isset($_GET["mssql"])) {
 				$return = queries("INSERT INTO " . table($table) . " (" . implode(", ", array_keys($record)) . ") VALUES\n" . implode(",\n", $values));
 			}
 			return $return;
+		}
+
+		public function quoteBinary(string $string): string
+		{
+			return "0x" . bin2hex($string);
 		}
 
 		public function begin()
