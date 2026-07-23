@@ -28,8 +28,9 @@ if (isset($_GET["oracle"])) {
 					return true;
 				}
 
+				// oci_error() returns false if the client library is not set up.
 				$error = oci_error();
-				$this->error = $error["message"];
+				$this->error = ($error ? $error["message"] : lang('Unknown error.'));
 
 				return false;
 			}
