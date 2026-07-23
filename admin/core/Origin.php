@@ -263,9 +263,16 @@ abstract class Origin extends Plugin
 			$hiddenSchemas[] = "__system";
 		}
 
-		return $this->filterListWithWildcards(
+		$schemas = $this->filterListWithWildcards(
 			schemas(), $hiddenSchemas, false, Driver::get()->getSystemSchemas()
 		);
+
+		// The current schema is listed even if it is hidden or does not exist.
+		if (isset($_GET["ns"]) && $_GET["ns"] != "" && !in_array($_GET["ns"], $schemas)) {
+			array_unshift($schemas, $_GET["ns"]);
+		}
+
+		return $schemas;
 	}
 
 	/**
