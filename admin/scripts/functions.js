@@ -1072,6 +1072,9 @@ function functionChange() {
 		}
 	}
 
+	// Hide input for functions without argument.
+	input.classList.toggle("hidden", /^(now|getdate|current_date|current_timestamp|uuid)$/.test(func));
+
 	if (!input.length) {
 		oninput({target: input});
 	}

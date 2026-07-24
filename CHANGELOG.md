@@ -9,6 +9,7 @@ AdminNeo 5.7.0
 - Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
 - SQL command: Show column type in result table header (by @vrana)
 - Alter table: Add next column without page reload (by @vrana)
+- Edit: Hide the value field for functions without arguments (e.g. now, uuid) (by @vrana)
 - PostgreSQL: Support operator classes in indexes (by @vrana)
 - PostgreSQL: Add Truncate Cascade button (by @vrana)
 - PostgreSQL: Do not show functions created by extensions (by @vrana)
