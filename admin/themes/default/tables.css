@@ -150,7 +150,7 @@ tr .actions .icon {
 	margin-inline-start: 5px;
 }
 
-.js .column {
+.column {
 	position: absolute;
 	background: var(--table-header-bg);
 	margin: -7px 5px 0 5px;
@@ -159,13 +159,13 @@ tr .actions .icon {
 	border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
 }
 
-.js .column .button {
-	padding: 6px 6px 4px;
-	line-height: 1.4;
+th:not(:hover) .column {
+	display: none;
 }
 
-.nojs .column .button:not(.jsonly) {
-	display: inline;
+.column .button {
+	padding: 6px 6px 4px;
+	line-height: 1.4;
 }
 
 /* Required to achieve full with of sticky table footer. */

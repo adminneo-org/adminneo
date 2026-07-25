@@ -840,16 +840,6 @@ function selectSearchKeydown(event) {
 
 
 
-/** Toggles column context menu
-* @param [boolean]
-* @this HTMLElement
-*/
-function columnMouse(hide = false) {
-	qs('span.column', this)?.classList.toggle('hidden', hide);
-}
-
-
-
 /** Fill column in search field
 * @param string
 * @return boolean false

@@ -388,7 +388,7 @@ if (!$columns && support("table")) {
 						$column = idf_escape($key);
 						$href = remove_from_uri('(order|desc)[^=]*|page') . '&order%5B0%5D=' . urlencode($key);
 						$desc = "&desc%5B0%5D=1";
-						echo "<th id='th[" . h(bracket_escape($key)) . "]'>" . script("mixin(qsl('th'), {onmouseover: partial(columnMouse), onmouseout: partial(columnMouse, true)});", "");
+						echo "<th id='th[" . h(bracket_escape($key)) . "]'>";
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
@@ -396,7 +396,7 @@ if (!$columns && support("table")) {
 						} else {
 							echo $fun;
 						}
-						echo "<span class='column hidden'>";
+						echo "<span class='column'>";
 						if ($sortable) {
 							echo "<a href='" . h($href . $desc) . "' title='" . lang('descending') . "' class='button light'>", icon_solo("arrow-down"), "</a>";
 						}
