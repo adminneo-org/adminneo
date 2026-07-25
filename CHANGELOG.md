@@ -22,6 +22,7 @@ AdminNeo 5.7.0
 ### Bugfixes
 
 - Escape index type, algorithm and length (XSS) (by @vrana)
+- Escape values of table status and event schedule (XSS) (by @vrana)
 - Fix embedding to a page with already started session (fix #199)
 - Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 - Editor: Fix displaying relation links (regression from 5.2.0)

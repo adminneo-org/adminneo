@@ -268,8 +268,8 @@ if ($_GET["ns"] === "") {
 					}
 
 					echo "<td align='right'>" . (support("table") || $key == "Rows" || (support("indexes") && $key != "Data_length")
-						? "<a href='" . h(ME . "$link=") . urlencode($name) . "'$id title='" . $column["title"] . "'>$val</a>"
-						: "<span$id>$val</span>"
+						? "<a href='" . h(ME . "$link=") . urlencode($name) . "'$id title='" . $column["title"] . "'>" . h($val) . "</a>"
+						: "<span$id>" . h($val) . "</span>"
 					);
 				}
 				$tables++;
@@ -438,8 +438,8 @@ if ($_GET["ns"] === "") {
 			foreach ($rows as $row) {
 				echo "<tr>";
 				echo "<th>" . h($row["Name"]);
-				echo "<td>" . ($row["Execute at"] ? lang('At given time') . "<td>" . $row["Execute at"] : lang('Every') . " " . $row["Interval value"] . " " . $row["Interval field"] . "<td>$row[Starts]");
-				echo "<td>$row[Ends]";
+				echo "<td>" . ($row["Execute at"] ? lang('At given time') . "<td>" . h($row["Execute at"]) : lang('Every') . " " . h($row["Interval value"]) . " " . h($row["Interval field"]) . "<td>" . h($row["Starts"]));
+				echo "<td>" . h($row["Ends"]);
 				echo '<td><a href="' . h(ME) . 'event=' . urlencode($row["Name"]) . '">' . lang('Alter') . '</a>';
 			}
 			echo "</table>\n";
