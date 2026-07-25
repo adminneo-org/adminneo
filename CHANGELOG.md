@@ -6,6 +6,7 @@ AdminNeo 5.7.0
 
 ### Changes
 
+- Sort languages by their translated name (by @vrana)
 - Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
 - SQL command: Show column type in result table header (by @vrana)
 - SQL command: Export result to CSV by JavaScript without re-running the query (by @vrana)
