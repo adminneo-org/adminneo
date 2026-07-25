@@ -279,6 +279,14 @@ function js_escape_key($string): string
 }
 
 /**
+ * Escapes string to be used inside a JavaScript regular expression literal.
+ */
+function js_escape_re(string $string): string
+{
+	return addcslashes(preg_quote($string, "/"), "\r\n");
+}
+
+/**
  * Generates page number for pagination.
  */
 function pagination(int $page, int $current): string
