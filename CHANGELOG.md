@@ -11,6 +11,7 @@ AdminNeo 5.6.0
 - MariaDB: Support inet4 and inet6 types (by @vrana)
 - MariaDB 11.7+: Support vector columns and indexes (by @vrana)
 - PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
+- SQLite: Disable editing of sqlite_schema (by @vrana)
 - SQLite: Support STRICT and WITHOUT ROWID in create and alter table (by @vrana)
 - SQLite: Support ANY type (by @vrana)
 
@@ -19,7 +20,8 @@ AdminNeo 5.6.0
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
-- SQLite: Disable editing of sqlite_schema (by @vrana)
+
+(Ported relevant changes from Adminer 5.5.0.)
 
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
