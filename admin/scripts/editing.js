@@ -753,6 +753,72 @@ function sqlSubmit(form, root) {
 
 
 
+/**
+ * Exports the result table by JS without re-running the query.
+ *
+ * @return {boolean} False when the export is handled by JS.
+ * @this {HTMLInputElement}
+ */
+function sqlExport() {
+	const form = this.form;
+	const format = form['format'].value;
+	const output = form['output'].value;
+	if (!/^(csv|csv;|tsv)$/.test(format) || !/^(text|file)$/.test(output)) {
+		return true;
+	}
+
+	const table = qs('.scrollable table', form.parentNode);
+	if (!table) {
+		return true;
+	}
+
+	for (const i of qsa('i', table)) {
+		if (i.textContent !== 'NULL') { // <i> other than NULL means the value is not displayed fully
+			return true;
+		}
+	}
+
+	const tsv = (format === 'tsv');
+	const quotable = new RegExp('["\n]|^0[^.]|\\.\\d*0$|' + (tsv ? '\t' : '[,;]|^$')); // dump_csv()
+	const separator = (format === 'csv' ? ',' : (tsv ? '\t' : ';'));
+
+	let data = String.fromCharCode(0xfeff); // UTF-8 byte order mark
+	for (const row of qsa('tr', table)) {
+		data += Array.from(row.children).map(cell => {
+			const val = (qsa('i', cell).length ? '' : cell.textContent); // <i> - NULL
+			return (quotable.test(val) ? '"' + val.replace(/"/g, '""') + '"' : val);
+		}).join(separator) + '\r\n';
+	}
+
+	const url = URL.createObjectURL(new Blob([data], {type: (output === 'file' ? 'text/csv' : 'text/plain') + '; charset=utf-8'}));
+	if (output === 'file') {
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'sql-' + formatDateTime(new Date()) + '.csv'; // dump_headers()
+		document.body.appendChild(a);
+		a.click();
+		a.remove();
+		setTimeout(() => URL.revokeObjectURL(url));
+	} else {
+		location.href = url;
+	}
+
+	return false;
+}
+
+/**
+ * Formats date and time as Ymd-His.
+ *
+ * @param {Date} date
+ * @return {string}
+ */
+function formatDateTime(date) {
+	const pad = number => String(number).padStart(2, '0');
+
+	return date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate())
+		+ '-' + pad(date.getHours()) + pad(date.getMinutes()) + pad(date.getSeconds());
+}
+
 /** Handle changing trigger time or event
 * @param RegExp
 * @param string
