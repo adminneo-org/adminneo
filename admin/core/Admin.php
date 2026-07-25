@@ -509,14 +509,14 @@ class Admin extends Origin
 
 			foreach ($index["columns"] as $key => $val) {
 				$print[] = "<i>" . h($val) . "</i>"
-					. ($index["lengths"][$key] ? "(" . $index["lengths"][$key] . ")" : "")
+					. ($index["lengths"][$key] ? "(" . h($index["lengths"][$key]) . ")" : "")
 					. ($index["descs"][$key] ? " DESC" : "");
 			}
 
 			echo "<tr title='", h($name), "'>";
-			echo "<th>", $index["type"];
+			echo "<th>", h($index["type"]);
 			if (isset($index['algorithm']) && $index['algorithm'] != $defaultAlgorithm) {
-				 echo " ({$index["algorithm"]})";
+				 echo " (", h($index['algorithm']), ")";
 			}
 			echo "</th>";
 			echo "<td>", implode(", ", $print), "</td>";
