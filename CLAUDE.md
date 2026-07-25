@@ -90,6 +90,7 @@ Each driver lives in `admin/drivers/<name>.inc.php`. Drivers:
 | `examples/`           | Customization and plugin usage examples                                                      |
 | `externals/`          | Optional third-party assets (e.g. TinyMCE) used by some example plugins; gitignored          |
 | `tests/`              | Katalon test suites and helper PHP files                                                     |
+| `tests/unit/`         | Unit tests                                                                                   |
 | `vendor/vrana/`       | Committed third-party libs used at runtime and build time (e.g. `jush` for SQL highlighting) |
 
 ### Configuration
