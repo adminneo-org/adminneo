@@ -1365,7 +1365,7 @@ function eventStop(event) {
 */
 function cloneNode(el) {
 	const el2 = el.cloneNode(true);
-	const selector = 'input, select';
+	const selector = 'input, select, button';
 	const origEls = qsa(selector, el);
 	const cloneEls = qsa(selector, el2);
 
