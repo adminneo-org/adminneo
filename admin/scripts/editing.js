@@ -584,9 +584,10 @@ function partitionByChange() {
 * @this HTMLInputElement
 */
 function partitionNameChange() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	row.firstChild.firstChild.value = '';
-	parentTag(this, 'table').append(row);
+	tr.parentNode.append(row);
 	this.oninput = () => {};
 }
 
@@ -629,13 +630,14 @@ function dumpClick(event) {
 * @this HTMLSelectElement
 */
 function foreignAddRow() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
 		select.name = select.name.replace(/\d+]/, '1$&');
 		select.selectedIndex = 0;
 	}
-	parentTag(this, 'table').append(row);
+	tr.parentNode.append(row);
 }
 
 
@@ -644,7 +646,8 @@ function foreignAddRow() {
 * @this HTMLSelectElement
 */
 function indexesAddRow() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const tag of qsa('select, input, button', row)) {
 		tag.name = tag.name.replace(/\[\d+/, '$&1'); // indexes[$j] and drop_col[$j]
@@ -658,7 +661,7 @@ function indexesAddRow() {
 			}
 		}
 	}
-	parentTag(this, 'table').append(row);
+	tr.parentNode.append(row);
 }
 
 /** Change column in index
