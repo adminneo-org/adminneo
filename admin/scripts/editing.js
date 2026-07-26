@@ -355,8 +355,8 @@ function selectFieldChange() {
 			edit.value = parseEnumValues(this.value);
 
 			td.append(edit);
-			this.style.display = 'none';
-			edit.style.display = 'inline';
+			this.hidden = true;
+			edit.hidden = false;
 			edit.focus();
 		}
 	}
@@ -374,8 +374,8 @@ function selectFieldChange() {
 			value :
 			value && "'" + value.replace(/\n+$/, '').replace(/'/g, "''").replace(/\\/g, '\\\\').replace(/\n/g, "','") + "'");
 
-		field.style.display = 'inline';
-		this.style.display = 'none';
+		field.hidden = false;
+		this.hidden = true;
 	};
 
 	/**
@@ -546,7 +546,7 @@ function removeTableRow(button, columnName) {
 	const input = qs(`[name$='[${columnName}]']`, row);
 
 	input.remove();
-	row.style.display = 'none';
+	row.hidden = true;
 
 	return false;
 }

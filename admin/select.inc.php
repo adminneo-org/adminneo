@@ -267,7 +267,7 @@ if (!$columns && support("table")) {
 	echo "<p class='error'>" . lang('Unable to select the table') . ($fields ? "." : ": " . error()) . "\n";
 } else {
 	echo "<form id='form' action=''>\n";
-	echo "<div style='display: none;'>";
+	echo "<div hidden>";
 	hidden_fields_get();
 	// Not used in Editor.
 	if (DB != "") {
