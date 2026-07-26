@@ -96,6 +96,11 @@ ol, ul {
 	display: none;
 }
 
+/* The browser hides [hidden] only by a UA rule which any custom theme setting display would beat. */
+[hidden] {
+	display: none !important;
+}
+
 .nowrap {
 	white-space: nowrap;
 }
