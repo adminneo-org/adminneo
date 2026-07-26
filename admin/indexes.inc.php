@@ -133,7 +133,7 @@ if (count($index_algorithms) > 1) {
 	echo "</th>";
 }
 
-echo "<th><input type='submit' class='button invisible'>";
+echo "<th><input type='submit' hidden>";
 echo lang('Columns') . ($lengths ? "<span $options_class> (" . lang('length') . ")</span>" : "");
 if ($lengths || support("descidx")) {
 	echo checkbox("options", 1, $show_options, lang('Options'), "indexOptionsShow(this.checked)", "jsonly") . "\n";

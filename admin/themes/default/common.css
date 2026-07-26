@@ -143,17 +143,6 @@ ol, ul {
 	color: var(--note-text);
 }
 
-.invisible {
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	position: absolute;
-	padding: 0;
-	border: none;
-	clip: rect(0, 0, 0, 0);
-}
-
 .icon {
 	width: calc(18em / 14);
 	height: calc(18em / 14);
