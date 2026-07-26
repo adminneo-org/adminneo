@@ -192,12 +192,12 @@ function formCheck(name) {
 	}
 }
 
-/** Check all rows in <table class="checkable">
+/** Check all rows in <table class="checkable"> once the browser restores the checkboxes
 */
 function tableCheck() {
-	for (const input of qsa('table.checkable td:first-child input')) {
-		trCheck(input);
-	}
+	window.addEventListener('pageshow', () => {
+		qsa('table.checkable td:first-child input').forEach(trCheck);
+	});
 }
 
 /**

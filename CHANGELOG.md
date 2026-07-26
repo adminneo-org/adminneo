@@ -27,6 +27,7 @@ AdminNeo 5.7.0
 - Fix embedding to a page with already started session (fix #199)
 - Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 - Editor: Fix displaying relation links (regression from 5.2.0)
+- Select: Fix the number of selected rows after going back in history (by @vrana)
 - Edit: Keep values of columns with special characters in name after error (by @vrana)
 - Edit: Fix changing function to SQL with the ForeignEditPlugin
 - PostgreSQL: Fix altering functions with parameters of array or user-defined types (by @vrana)
