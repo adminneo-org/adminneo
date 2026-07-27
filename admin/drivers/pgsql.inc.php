@@ -1293,15 +1293,18 @@ ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions
 	/**
 	 * Returns user defined types.
 	 *
+	 * @param bool $extensions Include types created by extensions.
+	 *
 	 * @return string[] [$id => $name]
 	 */
-	function types(): array
+	function types(bool $extensions = false): array
 	{
 		return get_key_vals("SELECT oid, typname
 FROM pg_type
 WHERE typnamespace = " . Driver::get()->getNsOidSql() . "
 AND typtype IN ('b','d','e')
-AND typelem = 0"
+AND typelem = 0" . ($extensions || Connection::get()->isCockroachDB() ? '' : "
+AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'::regclass AND deptype = 'e')") // 'e' - types created by extensions
 		);
 	}
 
@@ -1335,7 +1338,7 @@ AND typelem = 0"
 		$result = (bool)$connection->query("SET search_path TO " . idf_escape($schema));
 
 		//! get types from current_schemas('t')
-		Driver::get()->setUserTypes(types());
+		Driver::get()->setUserTypes(types(true));
 
 		return $result;
 	}

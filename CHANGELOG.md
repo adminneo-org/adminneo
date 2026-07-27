@@ -17,7 +17,7 @@ AdminNeo 5.7.0
 - Edit: Hide the value field for functions without arguments (e.g. now, uuid) (by @vrana)
 - PostgreSQL: Support operator classes in indexes (by @vrana)
 - PostgreSQL: Add Truncate Cascade button (by @vrana)
-- PostgreSQL: Do not show functions created by extensions (by @vrana)
+- PostgreSQL: Do not show functions and types created by extensions (by @vrana)
 - SimpleDB: Use default server
 
 ### Bugfixes
