@@ -81,7 +81,7 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 			}
 
 			echo "</tbody>\n";
-			echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
+			echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: event => tableClick(event, true)});");
 
 			echo "</table>\n";
 			echo "</div>\n"; // scrollable

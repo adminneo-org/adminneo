@@ -65,7 +65,7 @@ echo "gid('schema').onselectstart = () => false;\n";
 echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
 echo "const em = gid('schema').offsetHeight / $top;\n";
 echo "document.onmousemove = schemaMousemove;\n";
-echo "document.onmouseup = partialArg(schemaMouseup, '", js_escape(DB), "');\n";
+echo "document.onmouseup = event => schemaMouseup(event, '", js_escape(DB), "');\n";
 echo "</script>\n";
 
 foreach ($schema as $name => $table) {

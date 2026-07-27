@@ -546,7 +546,7 @@ if (!$columns && support("table")) {
 			}
 
 			echo "</tbody>\n";
-			echo script("mixin(qs('#table tbody'), {onclick: partialArg(tableClick, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: partialArg(tableClick, true), onkeydown: onEditingKeydown});");
+			echo script("mixin(qs('#table tbody'), {onclick: event => tableClick(event, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: event => tableClick(event, true), onkeydown: onEditingKeydown});");
 
 			echo "</table>\n";
 			echo script("initToggles(gid('table'));");

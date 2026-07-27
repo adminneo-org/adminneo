@@ -52,7 +52,7 @@ foreach (process_list() as $i => $row) {
 
 if ($i >= 0) {
 	echo "</tbody>\n";
-	echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
+	echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: event => tableClick(event, true)});");
 }
 
 echo "</table>\n";
