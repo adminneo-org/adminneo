@@ -576,7 +576,7 @@ if (!$columns && support("table")) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',
 							'<a href="', h(remove_from_uri("page") . "&page=" . ($page + 1)), '" class="loadmore">', icon("expand"), lang('Load more data'), '</a>',
-							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . lang('Loading') . "…');", "");
+							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading')) . "…');", "");
 					}
 					echo "\n";
 				}
@@ -595,7 +595,7 @@ if (!$columns && support("table")) {
 
 					if (DIALECT != "simpledb") {
 						echo "<legend><a href='" . h(remove_from_uri("page")) . "'>" . lang('Page') . "</a></legend>";
-						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . lang('Page') . "', '" . ($page + 1) . "')); return false; };");
+						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . js_escape(lang('Page')) . "', '" . ($page + 1) . "')); return false; };");
 						echo "<div id='fieldset-pagination' class='fieldset-content'><ul class='pagination'>";
 
 						echo pagination(0, $page);

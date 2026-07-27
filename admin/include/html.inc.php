@@ -223,7 +223,7 @@ function html_radios($name, $options, $value = "") {
 * @return string
 */
 function confirm($message = "", $selector = "qsl('input')") {
-	return script("$selector.onclick = () => confirm('" . ($message ? js_escape($message) : lang('Are you sure?')) . "');", "");
+	return script("$selector.onclick = () => confirm('" . js_escape($message ?: lang('Are you sure?')) . "');", "");
 }
 
 /**
@@ -741,7 +741,7 @@ function edit_form($table, $fields, $row, $update): void {
 					? lang('Save and continue edit')
 					: lang('Save and insert next')
 				) . "' title='Ctrl+Shift+Enter'>\n";
-			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . lang('Saving') . "…', this); };") : "");
+			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . js_escape(lang('Saving')) . "…', this); };") : "");
 		}
 	}
 	echo ($update ? "<input type='submit' class='button' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n" : "");
@@ -763,6 +763,6 @@ function file_upload_form_script(string $formId, string $inputName): string
 	$max_size_bytes = ini_bytes("upload_max_filesize");
 
 	return script("initFilesUploadForm('" . js_escape($formId) . "', '" . js_escape($inputName) . "', " .
-		"$max_count, '" . lang('The maximum number of files is %d. Select fewer files or increase the %s configuration directive.', $max_count, "\'max_file_uploads\'") . "', " .
-		"$max_size_bytes, '" . lang('The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.', $max_size, "\'upload_max_filesize\'") . "')");
+		"$max_count, '" . js_escape(lang('The maximum number of files is %d. Select fewer files or increase the %s configuration directive.', $max_count, "'max_file_uploads'")) . "', " .
+		"$max_size_bytes, '" . js_escape(lang('The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.', $max_size, "'upload_max_filesize'")) . "')");
 }
