@@ -401,7 +401,7 @@ if (!$columns && support("table")) {
 							echo "<a href='" . h($href . $desc) . "' title='" . lang('descending') . "' class='button light'>", icon_solo("arrow-down"), "</a>";
 						}
 						if (!isset($val["fun"]) && isset($field["privileges"]["where"])) {
-							echo '<a href="#fieldset-search" title="' . lang('Search') . '" class="button light jsonly">', icon_solo("search"), '</a>';
+							echo "<a href='#fieldset-search' title='" . lang('Search') . "' class='button light jsonly'>", icon_solo("search"), "</a>";
 							echo script("qsl('a').onclick = partial(selectSearch, '" . js_escape($key) . "');");
 						}
 						echo "</span>";

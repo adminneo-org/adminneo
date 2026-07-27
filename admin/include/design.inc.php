@@ -33,7 +33,7 @@ function page_header(string $title, $breadcrumb = []): void
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
 	?>
 <!DOCTYPE html>
-<html lang="<?= Locale::get()->getLanguage(); ?>" dir="<?= lang('ltr'); ?>">
+<html lang='<?= Locale::get()->getLanguage(); ?>' dir='<?= lang('ltr'); ?>'>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="robots" content="noindex, nofollow">
@@ -115,7 +115,7 @@ function page_header(string $title, $breadcrumb = []): void
 	Admin::get()->printToHead();
 	?>
 </head>
-<body class="<?php echo lang('ltr'); ?> nojs">
+<body class='<?php echo lang('ltr'); ?> nojs'>
 <script<?php echo nonce(); ?>>
 	const body = document.body;
 
@@ -138,7 +138,7 @@ function page_header(string $title, $breadcrumb = []): void
 	if ($breadcrumb !== null) {
 		echo '<nav class="breadcrumbs"><ul>';
 
-		echo '<li><a href="' . h(HOME_URL) . '" title="', lang('Home'), '">', icon_solo("home"), '</a></li>';
+		echo "<li><a href='" . h(HOME_URL) . "' title='", lang('Home'), "'>", icon_solo("home"), "</a></li>";
 
 		$server_name = h(Admin::get()->getServerName(SERVER ?? ""));
 

@@ -329,7 +329,7 @@ if (!isset($_GET["import"])) {
 	if ($import_file_path) {
 		echo "<fieldset><legend>" . lang('From server') . "</legend><div class='fieldset-content'>";
 		echo lang('Webserver file %s', "<code>" . h($import_file_path) . "$gz</code>");
-		echo ' <input type="submit" class="button default" name="webfile" value="' . lang('Run file') . '">';
+		echo " <input type='submit' class='button default' name='webfile' value='" . lang('Run file') . "'>";
 		echo "</div></fieldset>\n";
 	}
 	echo "</div>\n";

@@ -230,7 +230,7 @@ if ($_GET["ns"] === "") {
 				$title = lang('View');
 				$colspan = count($columns) - (support("comment") ? 2 : 1); // Rows and Comment columns are printed separately.
 				echo '<td colspan="' . $colspan . '">' . (support("view") ? "<a href='" . h(ME) . "view=" . urlencode($name) . "' title='" . lang('Alter view') . "'>$title</a>" : $title);
-				echo '<td align="right"><a href="' . h(ME) . "select=" . urlencode($name) . '" title="' . lang('Select data') . '">?</a>';
+				echo "<td align='right'><a href='" . h(ME) . "select=" . urlencode($name) . "' title='" . lang('Select data') . "'>?</a>";
 			} else {
 				foreach ($columns as $key => $column) {
 					if ($key == "Comment") {
