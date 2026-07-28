@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'Xx.',
 
 	// Table list
+	'All' => 'Xx', // checkbox selecting all tables and views
 	'Engine' => 'Xx',
 	'engine' => 'xx',
 	'Collation' => 'Xx',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'Xx',
 	'Unable to select the table' => 'Xx',
 	'Search data in tables' => 'Xx',
+	'All rows on this page' => 'Xx',
 	'No rows.' => 'Xx.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => ['%d xx', '%d xx'],

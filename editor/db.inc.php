@@ -19,7 +19,7 @@ echo "<table class='nowrap checkable'>\n";
 echo "<thead>\n";
 echo "<tr class='wrap'>";
 echo "<td class='actions'>";
-echo "<input id='check-all' type='checkbox' class='input jsonly'>";
+echo "<input id='check-all' type='checkbox' class='input jsonly' title='" . lang('All') . "'>";
 echo script("gid('check-all').onclick = partial(formCheck, /^tables\[/);", "");
 echo "</td>";
 echo "<th>", lang('Table'), "</th>";

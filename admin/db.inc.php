@@ -182,7 +182,7 @@ if ($_GET["ns"] === "") {
 		echo "<table class='nowrap checkable'>\n";
 
 		echo '<thead><tr class="wrap">';
-		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly">' . script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
+		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly" title="' . lang('All') . '">' . script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
 		// Tables are already sorted by name when no other column is used, so only the descending order needs a parameter.
 		$name_order = ($order == "" || $order == "__table");
 		$table_link = ($name_order && !$descending ? ME . "order=__table-desc" : substr(ME, 0, -1));

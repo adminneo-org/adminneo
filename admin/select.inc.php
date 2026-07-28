@@ -365,7 +365,7 @@ if (!$columns && support("table")) {
 			echo "<thead><tr>";
 
 			if ($group || !$select) {
-				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly'>" . script("gid('all-page').onclick = partial(formCheck, /check/);", "");
+				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly' title='" . lang('All rows on this page') . "'>" . script("gid('all-page').onclick = partial(formCheck, /check/);", "");
 				if (Admin::get()->isDataEditAllowed()) {
 					echo " <a href='", h($_GET["modify"] ? remove_from_uri("modify") : $_SERVER["REQUEST_URI"] . "&modify=1") . "' title='", lang('Modify'), "'>", icon_solo("edit-all"), "</a>";
 				}

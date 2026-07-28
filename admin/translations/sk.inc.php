@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Neplatná schéma.',
 
 	// Table list
+	'All' => 'Všetko', // checkbox selecting all tables and views
 	'Engine' => 'Typ',
 	'engine' => 'úložisko',
 	'Collation' => 'Porovnávanie',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Prechod celej tabuľky',
 	'Unable to select the table' => 'Tabuľku sa nepodarilo vypísať',
 	'Search data in tables' => 'Vyhľadať dáta v tabuľkách',
+	'All rows on this page' => 'Všetky riadky na tejto stránke',
 	'No rows.' => 'Žiadne riadky.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
