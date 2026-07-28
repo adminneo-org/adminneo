@@ -388,11 +388,15 @@ if (!$columns && support("table")) {
 						$column = idf_escape($key);
 						$href = remove_from_uri('(order|desc)[^=]*|page') . '&order%5B0%5D=' . urlencode($key);
 						$desc = "&desc%5B0%5D=1";
-						echo "<th id='th[" . h(bracket_escape($key)) . "]'>";
+						$order_column = $order[0] ?? "";
+						$sort_column = preg_replace('~ DESC( NULLS LAST)?$~', '', $order_column);
+						$sorted = ($sort_column == $column || $sort_column == $key); // $sort_column == $key - COUNT(*)
+						echo "<th id='th[" . h(bracket_escape($key)) . "]'"
+							. ($sorted ? " aria-sort='" . ($sort_column == $order_column ? "ascending" : "descending") . "'" : "") . ">";
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
-							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
+							echo '<a href="', h($href . ($sorted && $sort_column == $order_column ? $desc : '')), '">', "$fun</a>";
 						} else {
 							echo $fun;
 						}
