@@ -8,6 +8,7 @@ AdminNeo 5.8.0
 
 - Scroll the navigation panel to the selected table when it is out of view
 - Indicate a scrolled table list in the navigation panel by a separator line
+- Alter table, Privileges: Do not print a success message if nothing was changed (by @vrana)
 - SQL command: Check the "Stop on error" option by default
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
 - MS SQL: Hide table actions and row editing in the sys schema
