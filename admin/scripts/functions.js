@@ -1056,7 +1056,7 @@ function isCtrl(event) {
  * @return {boolean}
  */
 function bodyKeydown(event, button) {
-	eventStop(event);
+	event.stopPropagation();
 	let target = event.target;
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
@@ -1545,17 +1545,6 @@ function loadNextPage(limit, loadingText) {
 			a.innerHTML = title;
 		}
 	});
-}
-
-
-
-/**
- * Stops event propagation.
- *
- * @param {Event} event
- */
-function eventStop(event) {
-	event.stopPropagation();
 }
 
 
