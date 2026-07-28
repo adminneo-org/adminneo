@@ -1296,12 +1296,8 @@ function fieldChange() {
 function ajax(url, onSuccess = null, data = null, progressMessage = null, failSilently = false) {
 	const ajaxStatus = gid('ajaxstatus');
 
-	if (progressMessage) {
-		ajaxStatus.innerHTML = '<div class="message">' + progressMessage + '</div>';
-		ajaxStatus.classList.remove("hidden");
-	} else {
-		ajaxStatus.classList.add("hidden");
-	}
+	// Empty the live region instead of hiding it, display: none would remove it from the accessibility tree.
+	ajaxStatus.innerHTML = (progressMessage ? '<div class="message">' + progressMessage + '</div>' : '');
 
 	const request = new XMLHttpRequest();
 	request.open((data ? 'POST' : 'GET'), url);
@@ -1320,7 +1316,6 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 				console.error(request.status ? request.responseText : "No internet connection");
 			} else {
 				ajaxStatus.innerHTML = (request.status ? request.responseText : '<div class="error">' + offlineMessage + '</div>');
-				ajaxStatus.classList.remove("hidden");
 			}
 		}
 	};

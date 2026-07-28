@@ -183,7 +183,7 @@ function page_header(string $title, $breadcrumb = []): void
 	echo "</div>\n"; // header
 
 	echo "<h1>$title</h1>\n";
-	echo "<div id='ajaxstatus' class='jsonly hidden'></div>\n";
+	echo "<div id='ajaxstatus' role='status' class='jsonly'></div>\n";
 
 	restart_session();
 	page_messages();
