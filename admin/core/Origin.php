@@ -240,7 +240,7 @@ abstract class Origin extends Plugin
 	public abstract function getDatabase(): ?string;
 
 	/**
-	 * Returns cached list of databases.
+	 * Returns list of databases.
 	 *
 	 * @return list<string>
 	 */

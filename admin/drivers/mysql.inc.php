@@ -589,22 +589,26 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/**
-	 * Returns cached list of databases.
+	 * Returns list of databases, cached if getting it is slow.
 	 *
 	 * @return list<string>
 	 */
 	function get_databases(bool $flush): array
 	{
-		// SHOW DATABASES can take a very long time so it is cached.
 		$databases = get_session("dbs");
 
 		if ($databases === null) {
 			// SHOW DATABASES can be disabled by skip_show_database
 			$query = "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA ORDER BY SCHEMA_NAME";
+			$start = microtime(true);
 			$databases = ($flush ? slow_query($query) : get_vals($query));
-			restart_session();
-			set_session("dbs", $databases);
-			stop_session();
+
+			// Cache only a slow list, otherwise it would just get stale.
+			if (microtime(true) - $start > 0.1) {
+				restart_session();
+				set_session("dbs", $databases);
+				stop_session();
+			}
 		}
 
 		return $databases;
