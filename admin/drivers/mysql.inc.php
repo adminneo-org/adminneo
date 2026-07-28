@@ -579,7 +579,7 @@ if (isset($_GET["mysql"])) {
 		if (!$connection->openPasswordless($server, $username, $password, false)) {
 			$error = $connection->getError();
 
-			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1250", "utf-8", $error)) > strlen($error)) { // windows-1250 - most common Windows encoding
+			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1252", "utf-8//IGNORE", $error)) > strlen($error)) { // windows-1252 - the same as MySQL latin1
 				$error = $s;
 			}
 
