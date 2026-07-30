@@ -607,11 +607,9 @@ if (!$columns && support("table")) {
 					);
 					$dots = "<li>…</li>";
 
-					echo "<fieldset>";
+					echo "<fieldset><legend>" . lang('Page') . "</legend>";
 
 					if (DIALECT != "simpledb") {
-						echo "<legend><a href='" . h(remove_from_uri("page")) . "'>" . lang('Page') . "</a></legend>";
-						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . js_escape(lang('Page')) . "', '" . ($page + 1) . "')); return false; };");
 						echo "<div id='fieldset-pagination' class='fieldset-content'><ul class='pagination'>";
 
 						echo pagination(0, $page);
@@ -635,7 +633,6 @@ if (!$columns && support("table")) {
 
 						echo "</ul></div>";
 					} else {
-						echo "<legend>" . lang('Page') . "</legend>";
 						echo "<div id='fieldset-pagination'><ul class='pagination'>";
 
 						echo pagination(0, $page);

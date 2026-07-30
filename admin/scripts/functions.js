@@ -373,18 +373,6 @@ function nodePosition(el) {
 }
 
 /**
- * Goes to the specified page.
- *
- * @param {string} href
- * @param {number} page
- */
-function pageClick(href, page) {
-	if (!isNaN(page) && page) {
-		location.href = href + (page !== 1 ? '&page=' + (page - 1) : '');
-	}
-}
-
-/**
  * Initializes toggling of the navigation panel by the navigation button.
  */
 function initNavigation() {
