@@ -366,7 +366,7 @@ if (!$columns && support("table")) {
 
 			if ($group || !$select) {
 				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly' title='" . lang('All rows on this page') . "'>" .
-					script("gid('all-page').onclick = partial(formCheck, /check/);", "");
+					script("gid('all-page').onclick = partial(formCheck, /^check/);", "");
 				if (Admin::get()->isDataEditAllowed()) {
 					echo " <a href='", h($_GET["modify"] ? remove_from_uri("modify") : $_SERVER["REQUEST_URI"] . "&modify=1") . "' title='", lang('Modify'), "'>", icon_solo("edit-all"), "</a>";
 				}
@@ -666,7 +666,7 @@ if (!$columns && support("table")) {
 					1,
 					0,
 					($found_rows !== false ? ($exact_count ? "" : "~ ") . lang('%d row(s)', $found_rows) : ""),
-					"const checked = formChecked(this, /check/); selectCount('selected', this.checked ? '$display_rows' : checked); " .
+					"const checked = formChecked(this, /^check/); selectCount('selected', this.checked ? '$display_rows' : checked); " .
 						"selectCount('selected2', this.checked || !checked ? '$display_rows' : checked);"
 				) . "\n";
 				echo "</div></fieldset>\n";
