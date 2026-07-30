@@ -1535,10 +1535,7 @@ function loadNextPage(limit, loadingText) {
 		return true;
 	}
 
-	a.innerHTML = loadingText;
-	a.removeAttribute('href');
-
-	return !ajax(href, request => {
+	const failed = !ajax(href, request => {
 		const newBody = document.createElement('tbody');
 		newBody.innerHTML = request.responseText;
 
@@ -1556,6 +1553,14 @@ function loadNextPage(limit, loadingText) {
 			a.innerHTML = title;
 		}
 	});
+
+	if (!failed) {
+		// Change the link only after creating the request, returning true lets the browser open it.
+		a.innerHTML = loadingText;
+		a.removeAttribute('href');
+	}
+
+	return failed;
 }
 
 
