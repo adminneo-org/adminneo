@@ -348,7 +348,7 @@ return [
 	'Page' => 'Lehekülg',
 	'last' => 'viimane',
 	'Load more data' => 'Laadi rohkem andmeid', // by Claude Fable 5.1
-	'Loading' => 'Laadimine', // by Claude Fable 5.1
+	'Loading…' => 'Laadimine…', // by Claude Fable 5.1
 	'Whole result' => 'Täielikud tulemused',
 	'%d byte(s)' => [
 		'%d bait',
@@ -369,7 +369,7 @@ return [
 	'Save' => 'Salvesta',
 	'Save and continue edit' => 'Salvesta ja jätka muutmist',
 	'Save and insert next' => 'Salvesta ja lisa järgmine',
-	'Saving' => 'Salvestamine', // by Claude Fable 5.1
+	'Saving…' => 'Salvestamine…', // by Claude Fable 5.1
 	'Selected' => 'Valitud', // by Claude Fable 5.1
 	'Clone' => 'Kloon',
 	'Delete' => 'Kustuta',

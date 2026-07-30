@@ -363,7 +363,7 @@ return [
 	'Page' => 'Plana',
 	'last' => 'darrera',
 	'Load more data' => 'Carrega més dades', // by Claude Fable 5.1
-	'Loading' => 'S\'està carregant', // by Claude Fable 5.1
+	'Loading…' => 'S\'està carregant…', // by Claude Fable 5.1
 	'Whole result' => 'Tots els resultats',
 	'%d byte(s)' => [
 		'%d byte',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Desa',
 	'Save and continue edit' => 'Desa i segueix editant',
 	'Save and insert next' => 'Desa i insereix el següent',
-	'Saving' => 'S\'està desant', // by Claude Fable 5.1
+	'Saving…' => 'S\'està desant…', // by Claude Fable 5.1
 	'Selected' => 'Seleccionats', // by Claude Fable 5.1
 	'Clone' => 'Clona',
 	'Delete' => 'Suprimeix',

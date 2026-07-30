@@ -363,7 +363,7 @@ return [
 	'Page' => 'Página',
 	'last' => 'último',
 	'Load more data' => 'Carregar mais dados', // by Claude Fable 5.1
-	'Loading' => 'Carregando', // by Claude Fable 5.1
+	'Loading…' => 'Carregando…', // by Claude Fable 5.1
 	'Whole result' => 'Resultado completo',
 	'%d byte(s)' => [
 		'%d byte',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Salvar',
 	'Save and continue edit' => 'Salvar e continuar editando',
 	'Save and insert next' => 'Salvar e inserir outro',
-	'Saving' => 'Salvando', // by Claude Fable 5.1
+	'Saving…' => 'Salvando…', // by Claude Fable 5.1
 	'Selected' => 'Selecionados', // by Claude Fable 5.1
 	'Clone' => 'Clonar',
 	'Delete' => 'Deletar',

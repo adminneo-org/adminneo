@@ -363,7 +363,7 @@ return [
 	'Page' => 'Pagina',
 	'last' => 'laatste',
 	'Load more data' => 'Meer data inladen',
-	'Loading' => 'Aan het laden',
+	'Loading…' => 'Aan het laden…',
 	'Whole result' => 'Volledig resultaat',
 	'%d byte(s)' => [
 		'%d byte',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Opslaan',
 	'Save and continue edit' => 'Opslaan en verder bewerken',
 	'Save and insert next' => 'Opslaan en volgende toevoegen',
-	'Saving' => 'Opslaan',
+	'Saving…' => 'Opslaan…',
 	'Selected' => 'Geselecteerd',
 	'Clone' => 'Dupliceer',
 	'Delete' => 'Verwijderen',

@@ -370,7 +370,7 @@ return [
 	'Page' => 'Stranica',
 	'last' => 'posljednja',
 	'Load more data' => 'Učitaj više podataka',
-	'Loading' => 'Učitavanje',
+	'Loading…' => 'Učitavanje…',
 	'Whole result' => 'Cijeli skup rezultata',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Spremi',
 	'Save and continue edit' => 'Spremi i nastavi uređivanje',
 	'Save and insert next' => 'Spremi i unesi sljedeće',
-	'Saving' => 'Spremanje',
+	'Saving…' => 'Spremanje…',
 	'Selected' => 'Odabrano',
 	'Clone' => 'Kloniraj',
 	'Delete' => 'Izbriši',

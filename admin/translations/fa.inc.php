@@ -342,7 +342,7 @@ return [
 	'Page' => 'صفحه',
 	'last' => 'آخری',
 	'Load more data' => 'بارگزاری اطلاعات بیشتر',
-	'Loading' => 'در حال بارگزاری',
+	'Loading…' => 'در حال بارگزاری…',
 	'Whole result' => 'همه نتایج',
 	'%d byte(s)' => '%d بایت',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'ذخیره',
 	'Save and continue edit' => 'ذخیره و ادامه ویرایش',
 	'Save and insert next' => 'ذخیره و درج بعدی',
-	'Saving' => 'در حال ذخیره', // by Claude Fable 5.1
+	'Saving…' => 'در حال ذخیره…', // by Claude Fable 5.1
 	'Selected' => 'انتخاب شده',
 	'Clone' => 'تکثیر',
 	'Delete' => 'حذف',

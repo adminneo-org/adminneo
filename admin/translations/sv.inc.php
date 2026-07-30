@@ -363,7 +363,7 @@ return [
 	'Page' => 'Sida',
 	'last' => 'sist',
 	'Load more data' => 'Ladda mer data',
-	'Loading' => 'Laddar',
+	'Loading…' => 'Laddar…',
 	'Whole result' => 'Hela resultatet',
 	'%d byte(s)' => [
 		'%d byte',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Spara',
 	'Save and continue edit' => 'Spara och fortsätt att redigera',
 	'Save and insert next' => 'Spara och infoga nästa',
-	'Saving' => 'Sparar',
+	'Saving…' => 'Sparar…',
 	'Selected' => 'Vald',
 	'Clone' => 'Klona',
 	'Delete' => 'Ta bort',

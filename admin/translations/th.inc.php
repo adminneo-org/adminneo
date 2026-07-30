@@ -342,7 +342,7 @@ return [
 	'Page' => 'หน้า',
 	'last' => 'ล่าสุด',
 	'Load more data' => 'โหลดข้อมูลเพิ่ม', // by Claude Fable 5.1
-	'Loading' => 'กำลังโหลด', // by Claude Fable 5.1
+	'Loading…' => 'กำลังโหลด…', // by Claude Fable 5.1
 	'Whole result' => 'รวมผล',
 	'%d byte(s)' => '%d ไบท์',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'บันทึก',
 	'Save and continue edit' => 'บันทึกและแก้ไขข้อมูลอื่นๆต่อ',
 	'Save and insert next' => 'บันทึกแล้วเพิ่มรายการถัดไป',
-	'Saving' => 'กำลังบันทึก', // by Claude Fable 5.1
+	'Saving…' => 'กำลังบันทึก…', // by Claude Fable 5.1
 	'Selected' => 'ที่เลือก', // by Claude Fable 5.1
 	'Clone' => 'ทำซ้ำ',
 	'Delete' => 'ลบ',

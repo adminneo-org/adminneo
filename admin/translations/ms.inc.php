@@ -342,7 +342,7 @@ return [
 	'Page' => 'Halaman',
 	'last' => 'akhir',
 	'Load more data' => 'Load lebih data',
-	'Loading' => 'Loading',
+	'Loading…' => 'Loading…',
 	'Whole result' => 'Keputusan keseluruhan',
 	'%d byte(s)' => [
 		'%d byte',
@@ -363,7 +363,7 @@ return [
 	'Save' => 'Simpan',
 	'Save and continue edit' => 'Simpan dan sambung ubah',
 	'Save and insert next' => 'Simpan dan masukkan seterusnya',
-	'Saving' => 'Menyimpan',
+	'Saving…' => 'Menyimpan…',
 	'Selected' => 'Terpilih',
 	'Clone' => 'Klon',
 	'Delete' => 'Padam',

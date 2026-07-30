@@ -363,7 +363,7 @@ return [
 	'Page' => 'ப‌க்க‌ம்',
 	'last' => 'க‌டைசி',
 	'Load more data' => 'மேலும் த‌க‌வ‌லை ஏற்று', // by Claude Fable 5.1
-	'Loading' => 'ஏற்ற‌ப்ப‌டுகிற‌து', // by Claude Fable 5.1
+	'Loading…' => 'ஏற்ற‌ப்ப‌டுகிற‌து…', // by Claude Fable 5.1
 	'Whole result' => 'முழுமையான‌ முடிவு',
 	'%d byte(s)' => [
 		'%d பைட்',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'சேமி',
 	'Save and continue edit' => 'சேமித்த‌ பிற‌கு தொகுப்ப‌தை தொட‌ர‌வும்',
 	'Save and insert next' => 'சேமித்த‌ப் பின் அடுத்த‌தை புகுத்து',
-	'Saving' => 'சேமிக்க‌ப்ப‌டுகிற‌து', // by Claude Fable 5.1
+	'Saving…' => 'சேமிக்க‌ப்ப‌டுகிற‌து…', // by Claude Fable 5.1
 	'Selected' => 'தேர்வு செய்ய‌ப்ப‌ட்ட‌வை', // by Claude Fable 5.1
 	'Clone' => 'ந‌க‌லி (Clone)',
 	'Delete' => 'நீக்கு',

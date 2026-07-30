@@ -342,7 +342,7 @@ return [
 	'Page' => 'გვერდი',
 	'last' => 'ბოლო',
 	'Load more data' => 'მეტი ინფორმაციის ჩატვირთვა',
-	'Loading' => 'ჩატვირთვა',
+	'Loading…' => 'ჩატვირთვა…',
 	'Whole result' => 'სრული შედეგი',
 	'%d byte(s)' => '%d ბაიტი',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'შენახვა',
 	'Save and continue edit' => 'შენახვა და ცვლილების გაგრძელება',
 	'Save and insert next' => 'შენახვა და სხვის ჩასმა',
-	'Saving' => 'შენახვა',
+	'Saving…' => 'შენახვა…',
 	'Selected' => 'არჩეული',
 	'Clone' => 'კლონირება',
 	'Delete' => 'წაშლა',

@@ -342,7 +342,7 @@ return [
 	'Page' => '页面',
 	'last' => '最后',
 	'Load more data' => '加载更多数据',
-	'Loading' => '加载中',
+	'Loading…' => '加载中…',
 	'Whole result' => '所有结果',
 	'%d byte(s)' => '%d 字节',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => '保存',
 	'Save and continue edit' => '保存并继续编辑',
 	'Save and insert next' => '保存并插入下一个',
-	'Saving' => '保存中',
+	'Saving…' => '保存中…',
 	'Selected' => '已选中',
 	'Clone' => '复制',
 	'Delete' => '删除',

@@ -342,7 +342,7 @@ return [
 	'Page' => 'עמוד',
 	'last' => 'אחרון',
 	'Load more data' => 'טען נתונים נוספים',
-	'Loading' => 'טוען',
+	'Loading…' => 'טוען…',
 	'Whole result' => 'כל התוצאות',
 	'%d byte(s)' => '%d בתים',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'שמור',
 	'Save and continue edit' => 'שמור והמשך לערוך',
 	'Save and insert next' => 'שמור והמשך להכניס',
-	'Saving' => 'שומר',
+	'Saving…' => 'שומר…',
 	'Selected' => 'נבחרים',
 	'Clone' => 'שכפל',
 	'Delete' => 'מחק',

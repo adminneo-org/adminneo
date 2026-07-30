@@ -342,7 +342,7 @@ return [
 	'Page' => 'Xx',
 	'last' => 'xx',
 	'Load more data' => 'Xx',
-	'Loading' => 'Xx',
+	'Loading…' => 'Xx…',
 	'Whole result' => 'Xx',
 	'%d byte(s)' => ['%d xx', '%d xx'],
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'Xx',
 	'Save and continue edit' => 'Xx',
 	'Save and insert next' => 'Xx',
-	'Saving' => 'Xx',
+	'Saving…' => 'Xx…',
 	'Selected' => 'Xx',
 	'Clone' => 'Xx',
 	'Delete' => 'Xx',

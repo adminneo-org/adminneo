@@ -370,7 +370,7 @@ return [
 	'Page' => 'Lapa',
 	'last' => 'pēdējā',
 	'Load more data' => 'Ielādēt vēl datus',
-	'Loading' => 'Ielāde',
+	'Loading…' => 'Ielāde…',
 	'Whole result' => 'Viss rezultāts',
 	'%d byte(s)' => [
 		'%d baits',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Saglabāt',
 	'Save and continue edit' => 'Saglabāt un turpināt rediģēt',
 	'Save and insert next' => 'Saglabāt un ievietot nākamo',
-	'Saving' => 'Saglabāšana',
+	'Saving…' => 'Saglabāšana…',
 	'Selected' => 'Izvēlētie',
 	'Clone' => 'Klonēt',
 	'Delete' => 'Dzēst',

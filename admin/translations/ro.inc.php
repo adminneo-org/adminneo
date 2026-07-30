@@ -370,7 +370,7 @@ return [
 	'Page' => 'Pagina',
 	'last' => 'ultima',
 	'Load more data' => 'Încarcă mai multe date', // by Claude Fable 5.1
-	'Loading' => 'Se încarcă', // by Claude Fable 5.1
+	'Loading…' => 'Se încarcă…', // by Claude Fable 5.1
 	'Whole result' => 'Tot rezultatul',
 	'%d byte(s)' => [
 		'%d octet',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Salvează',
 	'Save and continue edit' => 'Salvează și continuă editarea',
 	'Save and insert next' => 'Salvează și mai inserează',
-	'Saving' => 'Se salvează', // by Claude Fable 5.1
+	'Saving…' => 'Se salvează…', // by Claude Fable 5.1
 	'Selected' => 'Selectate', // by Claude Fable 5.1
 	'Clone' => 'Clonează',
 	'Delete' => 'Șterge',

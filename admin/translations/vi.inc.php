@@ -342,7 +342,7 @@ return [
 	'Page' => 'trang',
 	'last' => 'cuối',
 	'Load more data' => 'Xem thêm dữ liệu',
-	'Loading' => 'Đang nạp',
+	'Loading…' => 'Đang nạp…',
 	'Whole result' => 'Toàn bộ kết quả',
 	'%d byte(s)' => '%d byte(s)',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'Lưu',
 	'Save and continue edit' => 'Lưu và tiếp tục sửa',
 	'Save and insert next' => 'Lưu và thêm tiếp',
-	'Saving' => 'Đang lưu',
+	'Saving…' => 'Đang lưu…',
 	'Selected' => 'Chọn',
 	'Clone' => 'Sao chép',
 	'Delete' => 'Xoá',

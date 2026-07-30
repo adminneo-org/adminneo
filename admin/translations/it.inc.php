@@ -363,7 +363,7 @@ return [
 	'Page' => 'Pagina',
 	'last' => 'ultima',
 	'Load more data' => 'Carica piú dati',
-	'Loading' => 'Caricamento',
+	'Loading…' => 'Caricamento…',
 	'Whole result' => 'Intero risultato',
 	'%d byte(s)' => [
 		'%d byte',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Salva',
 	'Save and continue edit' => 'Salva e continua',
 	'Save and insert next' => 'Salva e inserisci un altro',
-	'Saving' => 'Salvataggio',
+	'Saving…' => 'Salvataggio…',
 	'Selected' => 'Selezionato',
 	'Clone' => 'Clona',
 	'Delete' => 'Elimina',

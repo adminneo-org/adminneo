@@ -354,7 +354,7 @@ return [
 	'Page' => 'Sivu',
 	'last' => 'viimeinen',
 	'Load more data' => 'Lataa lisää dataa',
-	'Loading' => 'Ladataan',
+	'Loading…' => 'Ladataan…',
 	'Whole result' => 'Koko tulos',
 	'%d byte(s)' => [
 		'%d tavu',
@@ -375,7 +375,7 @@ return [
 	'Save' => 'Tallenna',
 	'Save and continue edit' => 'Tallenna ja jatka muokkaamista',
 	'Save and insert next' => 'Tallenna ja lisää seuraava',
-	'Saving' => 'Tallennetaan',
+	'Saving…' => 'Tallennetaan…',
 	'Selected' => 'Valitut',
 	'Clone' => 'Kloonaa',
 	'Delete' => 'Poista',

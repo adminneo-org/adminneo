@@ -342,7 +342,7 @@ return [
 	'Page' => '페이지',
 	'last' => '마지막',
 	'Load more data' => '더 많은 데이터 부르기',
-	'Loading' => '부르는 중',
+	'Loading…' => '부르는 중…',
 	'Whole result' => '모든 결과',
 	'%d byte(s)' => '%d 바이트',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => '저장',
 	'Save and continue edit' => '저장하고 계속 편집하기',
 	'Save and insert next' => '저장하고 다음에 추가',
-	'Saving' => '저장 중', // by Claude Fable 5.1
+	'Saving…' => '저장 중…', // by Claude Fable 5.1
 	'Selected' => '선택됨',
 	'Clone' => '복제',
 	'Delete' => '삭제',

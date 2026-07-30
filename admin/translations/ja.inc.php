@@ -342,7 +342,7 @@ return [
 	'Page' => 'ページ',
 	'last' => '最終',
 	'Load more data' => 'さらにデータを表示',
-	'Loading' => '読み込み中',
+	'Loading…' => '読み込み中…',
 	'Whole result' => '全結果',
 	'%d byte(s)' => '%d バイト',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => '保存',
 	'Save and continue edit' => '保存して継続',
 	'Save and insert next' => '保存／追加',
-	'Saving' => '保存しています',
+	'Saving…' => '保存しています…',
 	'Selected' => '選択対象',
 	'Clone' => 'クローン',
 	'Delete' => '削除',

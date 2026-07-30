@@ -342,7 +342,7 @@ return [
 	'Page' => 'Halaman',
 	'last' => 'terakhir',
 	'Load more data' => 'Muat lebih banyak data', // by Claude Fable 5.1
-	'Loading' => 'Memuat', // by Claude Fable 5.1
+	'Loading…' => 'Memuat…', // by Claude Fable 5.1
 	'Whole result' => 'Seluruh hasil',
 	'%d byte(s)' => '%d bita',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'Simpan',
 	'Save and continue edit' => 'Simpan dan lanjut menyunting',
 	'Save and insert next' => 'Simpan dan sisipkan berikutnya',
-	'Saving' => 'Menyimpan', // by Claude Fable 5.1
+	'Saving…' => 'Menyimpan…', // by Claude Fable 5.1
 	'Selected' => 'Terpilih', // by Claude Fable 5.1
 	'Clone' => 'Gandakan',
 	'Delete' => 'Hapus',

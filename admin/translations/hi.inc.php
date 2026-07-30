@@ -360,7 +360,7 @@ return [
 	'Page' => 'पृष्ठ',
 	'last' => 'अंतिम',
 	'Load more data' => 'और डेटा लोड करें',
-	'Loading' => 'लोड हो रहा है',
+	'Loading…' => 'लोड हो रहा है…',
 	'Whole result' => 'पूरा परिणाम',
 	'%d byte(s)' => [
 		'%d बाइट',
@@ -381,7 +381,7 @@ return [
 	'Save' => 'सहेजें',
 	'Save and continue edit' => 'सहेजें और संपादन जारी रखें',
 	'Save and insert next' => 'सहेजें और अगला डालें',
-	'Saving' => 'सेव हो रहा है',
+	'Saving…' => 'सेव हो रहा है…',
 	'Selected' => 'चयनित',
 	'Clone' => 'क्लोन',
 	'Delete' => 'हटाएं',

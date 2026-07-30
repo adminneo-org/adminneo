@@ -348,7 +348,7 @@ return [
 	'Page' => 'صفحة',
 	'last' => 'الأخيرة',
 	'Load more data' => 'تحميل المزيد من البيانات', // by Claude Fable 5.1
-	'Loading' => 'جار التحميل', // by Claude Fable 5.1
+	'Loading…' => 'جار التحميل…', // by Claude Fable 5.1
 	'Whole result' => 'نتيجة كاملة',
 	'%d byte(s)' => '%d بايت',
 
@@ -366,7 +366,7 @@ return [
 	'Save' => 'حفظ',
 	'Save and continue edit' => 'إحفظ و واصل التعديل',
 	'Save and insert next' => 'جفظ و إنشاء التالي',
-	'Saving' => 'جار الحفظ', // by Claude Fable 5.1
+	'Saving…' => 'جار الحفظ…', // by Claude Fable 5.1
 	'Selected' => 'المحدد', // by Claude Fable 5.1
 	'Clone' => 'نسخ',
 	'Delete' => 'مسح',

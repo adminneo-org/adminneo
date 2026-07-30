@@ -592,7 +592,7 @@ if (!$columns && support("table")) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',
 							'<a href="', h(remove_from_uri("page") . "&page=" . ($page + 1)), '" class="loadmore">', icon("expand"), lang('Load more data'), '</a>',
-							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading')) . "…');", "");
+							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading…')) . "');", "");
 					}
 					echo "\n";
 				}

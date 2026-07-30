@@ -370,7 +370,7 @@ return [
 	'Page' => 'Stránka',
 	'last' => 'posledný',
 	'Load more data' => 'Načítať ďalšie dáta',
-	'Loading' => 'Načítava sa',
+	'Loading…' => 'Načítava sa…',
 	'Whole result' => 'Celý výsledok',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Uložiť',
 	'Save and continue edit' => 'Uložiť a pokračovať v úpravách',
 	'Save and insert next' => 'Uložiť a vložiť ďalší',
-	'Saving' => 'Ukladá sa',
+	'Saving…' => 'Ukladá sa…',
 	'Selected' => 'Označené',
 	'Clone' => 'Klonovať',
 	'Delete' => 'Zmazať',

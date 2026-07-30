@@ -360,7 +360,7 @@ return [
 	'Page' => 'Side',
 	'last' => 'siste',
 	'Load more data' => 'Last mer data',
-	'Loading' => 'Laster',
+	'Loading…' => 'Laster…',
 	'Whole result' => 'Hele resultatet',
 	'%d byte(s)' => [
 		'%d byte',
@@ -381,7 +381,7 @@ return [
 	'Save' => 'Lagre',
 	'Save and continue edit' => 'Lagre og fortsett å redigere',
 	'Save and insert next' => 'Lagre og sett inn neste',
-	'Saving' => 'Lagrer',
+	'Saving…' => 'Lagrer…',
 	'Selected' => 'Valgt',
 	'Clone' => 'Klon',
 	'Delete' => 'Slett',

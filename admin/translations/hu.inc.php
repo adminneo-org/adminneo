@@ -342,7 +342,7 @@ return [
 	'Page' => 'oldal',
 	'last' => 'utolsó',
 	'Load more data' => 'További adatok betöltése', // by Claude Fable 5.1
-	'Loading' => 'Betöltés', // by Claude Fable 5.1
+	'Loading…' => 'Betöltés…', // by Claude Fable 5.1
 	'Whole result' => 'Összes eredményt mutatása',
 	'%d byte(s)' => '%d bájt',
 
@@ -360,7 +360,7 @@ return [
 	'Save' => 'Mentés',
 	'Save and continue edit' => 'Mentés és szerkesztés folytatása',
 	'Save and insert next' => 'Mentés és újat beszúr',
-	'Saving' => 'Mentés', // by Claude Fable 5.1
+	'Saving…' => 'Mentés…', // by Claude Fable 5.1
 	'Selected' => 'Kijelölve', // by Claude Fable 5.1
 	'Clone' => 'Klónoz',
 	'Delete' => 'Törlés',

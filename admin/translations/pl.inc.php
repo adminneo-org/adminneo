@@ -370,7 +370,7 @@ return [
 	'Page' => 'Strona',
 	'last' => 'ostatni',
 	'Load more data' => 'Wczytaj więcej danych',
-	'Loading' => 'Wczytywanie',
+	'Loading…' => 'Wczytywanie…',
 	'Whole result' => 'Wybierz wszystkie',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Zapisz zmiany',
 	'Save and continue edit' => 'Zapisz i kontynuuj edycję',
 	'Save and insert next' => 'Zapisz i dodaj następny',
-	'Saving' => 'Zapisywanie',
+	'Saving…' => 'Zapisywanie…',
 	'Selected' => 'Zaznaczone',
 	'Clone' => 'Duplikuj',
 	'Delete' => 'Usuń',

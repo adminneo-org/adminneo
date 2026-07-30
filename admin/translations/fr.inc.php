@@ -363,7 +363,7 @@ return [
 	'Page' => 'Page',
 	'last' => 'dernière',
 	'Load more data' => 'Charger plus de données',
-	'Loading' => 'Chargement',
+	'Loading…' => 'Chargement…',
 	'Whole result' => 'Résultat entier',
 	'%d byte(s)' => [
 		'%d octet',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Enregistrer',
 	'Save and continue edit' => 'Enr. et continuer édition',
 	'Save and insert next' => 'Enr. et insérer prochain',
-	'Saving' => 'Enregistrement',
+	'Saving…' => 'Enregistrement…',
 	'Selected' => 'Sélectionné(s)',
 	'Clone' => 'Cloner',
 	'Delete' => 'Effacer',

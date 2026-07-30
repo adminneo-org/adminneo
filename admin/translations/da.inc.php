@@ -360,7 +360,7 @@ return [
 	'Page' => 'Side',
 	'last' => 'sidste',
 	'Load more data' => 'Indlæs mere data',
-	'Loading' => 'Indlæser',
+	'Loading…' => 'Indlæser…',
 	'Whole result' => 'Hele resultatet',
 	'%d byte(s)' => [
 		'%d byte',
@@ -381,7 +381,7 @@ return [
 	'Save' => 'Gem',
 	'Save and continue edit' => 'Gem og fortsæt redigering',
 	'Save and insert next' => 'Gem og indsæt næste',
-	'Saving' => 'Gemmer',
+	'Saving…' => 'Gemmer…',
 	'Selected' => 'Valgt',
 	'Clone' => 'Klon',
 	'Delete' => 'Slet',

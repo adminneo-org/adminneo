@@ -363,7 +363,7 @@ return [
 	'Page' => 'Страница',
 	'last' => 'последен',
 	'Load more data' => 'Зареждане на повече данни',
-	'Loading' => 'Зареждане',
+	'Loading…' => 'Зареждане…',
 	'Whole result' => 'Пълен резултат',
 	'%d byte(s)' => [
 		'%d байт',
@@ -384,7 +384,7 @@ return [
 	'Save' => 'Запис',
 	'Save and continue edit' => 'Запис и редакция',
 	'Save and insert next' => 'Запис и нов',
-	'Saving' => 'Записване',
+	'Saving…' => 'Записване…',
 	'Selected' => 'Избран',
 	'Clone' => 'Клониране',
 	'Delete' => 'Изтриване',

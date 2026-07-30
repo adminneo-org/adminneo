@@ -370,7 +370,7 @@ return [
 	'Page' => 'Strana',
 	'last' => 'poslijednja',
 	'Load more data' => 'Učitavam još podataka',
-	'Loading' => 'Učitavam',
+	'Loading…' => 'Učitavam…',
 	'Whole result' => 'Ceo rezultat',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Sačuvaj',
 	'Save and continue edit' => 'Sačuvaj i nastavi uređenje',
 	'Save and insert next' => 'Sačuvaj i umijetni slijedeće',
-	'Saving' => 'Čuvam', // by Claude Fable 5.1
+	'Saving…' => 'Čuvam…', // by Claude Fable 5.1
 	'Selected' => 'Izabrano',
 	'Clone' => 'Dupliraj',
 	'Delete' => 'Izbriši',

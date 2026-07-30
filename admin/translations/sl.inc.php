@@ -377,7 +377,7 @@ return [
 	'Page' => 'Stran',
 	'last' => 'Zadnja',
 	'Load more data' => 'Naloži več podatkov', // by Claude Fable 5.1
-	'Loading' => 'Nalaganje', // by Claude Fable 5.1
+	'Loading…' => 'Nalaganje…', // by Claude Fable 5.1
 	'Whole result' => 'Celoten rezultat', // by Claude Fable 5.1
 	'%d byte(s)' => [
 		'%d bajt',
@@ -400,7 +400,7 @@ return [
 	'Save' => 'Shrani',
 	'Save and continue edit' => 'Shrani in nadaljuj z urejanjem',
 	'Save and insert next' => 'Shrani in vstavi tekst',
-	'Saving' => 'Shranjevanje', // by Claude Fable 5.1
+	'Saving…' => 'Shranjevanje…', // by Claude Fable 5.1
 	'Selected' => 'Izbrano', // by Claude Fable 5.1
 	'Clone' => 'Kloniraj',
 	'Delete' => 'Izbriši',

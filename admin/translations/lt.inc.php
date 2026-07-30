@@ -370,7 +370,7 @@ return [
 	'Page' => 'Puslapis',
 	'last' => 'paskutinis',
 	'Load more data' => 'Įkelti daugiau duomenų', // by Claude Fable 5.1
-	'Loading' => 'Kraunama', // by Claude Fable 5.1
+	'Loading…' => 'Kraunama…', // by Claude Fable 5.1
 	'Whole result' => 'Visas rezultatas',
 	'%d byte(s)' => [
 		'%d baitas',
@@ -392,7 +392,7 @@ return [
 	'Save' => 'Išsaugoti',
 	'Save and continue edit' => 'Išsaugoti ir tęsti redagavimą',
 	'Save and insert next' => 'Išsaugoti ir įrašyti kitą',
-	'Saving' => 'Išsaugoma', // by Claude Fable 5.1
+	'Saving…' => 'Išsaugoma…', // by Claude Fable 5.1
 	'Selected' => 'Pasirinkta', // by Claude Fable 5.1
 	'Clone' => 'Klonuoti',
 	'Delete' => 'Trinti',

@@ -357,7 +357,7 @@ return [
 	'Page' => 'Sayfa',
 	'last' => 'son',
 	'Load more data' => 'Daha fazla veri yükle',
-	'Loading' => 'Yükleniyor',
+	'Loading…' => 'Yükleniyor…',
 	'Whole result' => 'Tüm sonuç',
 	'%d byte(s)' => '%d bayt',
 
@@ -375,7 +375,7 @@ return [
 	'Save' => 'Kaydet',
 	'Save and continue edit' => 'Kaydet ve düzenlemeye devam et',
 	'Save and insert next' => 'Kaydet ve sonrakini ekle',
-	'Saving' => 'Saydediliyor',
+	'Saving…' => 'Saydediliyor…',
 	'Selected' => 'Seçildi',
 	'Clone' => 'Kopyala',
 	'Delete' => 'Sil',
