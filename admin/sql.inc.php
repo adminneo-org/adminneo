@@ -258,7 +258,7 @@ if ($_POST) {
 										echo input_token();
 										echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>";
 										if (!$limit) { // JS export requires all rows in the table.
-											echo script("qsl('input').onclick = partial(sqlExport, '" . js_escape(ME) . "set=export-settings');", "");
+											echo script("qsl('input').onclick = function (event) { return sqlExport.call(this, event, '" . js_escape(ME) . "set=export-settings'); };", "");
 										}
 										echo "</p></form>\n";
 									}
