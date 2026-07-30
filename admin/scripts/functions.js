@@ -71,9 +71,8 @@ function partial(fn, ...args) {
  * @param {Object} source
  */
 function mixin(target, source) {
-	for (const key in source) {
-		target[key] = source[key];
-	}
+	// A shortcut for Object.assign() saving bytes in the inline scripts, used also by external plugins.
+	Object.assign(target, source);
 }
 
 /**
