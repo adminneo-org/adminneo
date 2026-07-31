@@ -492,7 +492,7 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		}
 		// type='date' and type='time' display localized value which may be confusing, type='datetime' uses 'T' as date and time separator
 		echo "<input class='input'"
-			. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[\]~', $field["full_type"]) ? " type='number'" : "")
+			. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[]~', $field["full_type"]) ? " type='number'" : "")
 			. ($function != "now" ? " value='" . h($value) . "'" : " data-last-value='" . h($value) . "'")
 			. ($maxlength ? " data-maxlength='$maxlength'" : "")
 			. (preg_match('~char|binary~', $field["type"]) && $maxlength > 20 ? " size='44'" : "")
