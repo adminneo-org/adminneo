@@ -176,7 +176,7 @@ echo "</tr></thead>\n";
 if ($primary) {
 	echo "<tr><td>PRIMARY<td>";
 	foreach ($primary["columns"] as $column) {
-		echo select_input(" disabled", $fields_keys, $column);
+		echo select_input(" disabled", array_combine($fields_keys, $fields_keys), $column);
 		echo "<label><input type='checkbox' disabled>" . lang('descending') . "</label> ";
 	}
 	echo "<td><td>\n";
