@@ -171,6 +171,9 @@ function textarea($name, $value, $rows = 10, $cols = 80): void {
 * @return string
 */
 function select_input($attrs, $options, $value = "", $onchange = "", $placeholder = "") {
+	if ($options && $value != "" && !isset($options[$value])) {
+		$options = [$value => $value] + $options; // e.g. ORDER BY COUNT(*)
+	}
 	$tag = ($options ? "select" : "input");
 	return "<$tag $attrs" . ($options
 			? "><option value=''>$placeholder" . optionlist($options, $value, true) . "</select>"

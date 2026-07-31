@@ -26,6 +26,7 @@ AdminNeo 5.8.0
 - Fix showing and hiding elements in Chrome < 61 and Edge < 17 (regression from 5.2.0)
 - Fix JavaScript error on pages with a sticky table footer in Safari < 12.1 (regression from 5.0.0)
 - Syntax highlighting: Fix the color of JSON keys
+- Select: Keep sorting by an aggregation function in the Sort fieldset (by @vrana)
 - Edit: Fix editing rows with binary columns in tables without a unique key
 - Editor: Fix JavaScript error on the select page caused by the import form (regression from 5.5.0)
 - MySQL: Fix displaying backward relation links
