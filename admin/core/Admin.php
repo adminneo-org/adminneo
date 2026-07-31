@@ -1281,7 +1281,10 @@ class Admin extends Origin
 					echo "window.jushLinks = { " . DIALECT . ": {\n";
 					// $ is used in PostgreSQL as part of name.
 					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(?<!\$)(' . implode('|', $links) . ')(?!\$)\b/g';
-					if (support('routine')) {
+					// routines() is slow, so it is called only on the pages printing SQL where a routine name can appear.
+					// ?function= sets ?procedure=.
+					$sqlPages = ["sql", "check", "event", "procedure", "trigger", "view", "type", "table", "processlist"];
+					if (support('routine') && array_intersect_key($_GET, array_flip($sqlPages))) {
 						foreach (routines() as $row) {
 							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . js_escape_re($row["ROUTINE_NAME"]) . '(?=["`\]]?\()/g';
 						}
