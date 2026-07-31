@@ -128,7 +128,7 @@ if (!is_view($table_status)) {
 			echo "<table cellspacing='0'>\n";
 			foreach ($check_constraints as $key => $val) {
 				echo "<tr title='" . h($key) . "'>";
-				echo "<td><code class='jush-" . DIALECT . "'>" . h($val);
+				echo "<td><code class='jush-" . DIALECT . "'>" . truncate_utf8(preg_replace('~\s+~', ' ', ltrim($val)));
 				echo "<td><a href='" . h(ME . 'check=' . urlencode($TABLE) . '&name=' . urlencode($key)) . "'>" . lang('Alter') . "</a>";
 				echo "\n";
 			}

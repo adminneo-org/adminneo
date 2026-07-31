@@ -10,6 +10,7 @@ AdminNeo 5.8.0
 - Indicate a scrolled table list in the navigation panel by a separator line
 - Alter table, Privileges: Do not print a success message if nothing was changed (by @vrana)
 - Select: Remove asking for the page number after clicking the Page legend (by @vrana)
+- Table structure: Shorten long checks (by @vrana)
 - SQL command: Check the "Stop on error" option by default
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
 - PostgreSQL: Order NULL last (by @vrana)
