@@ -699,55 +699,52 @@ function indexesAddRow() {
 }
 
 /**
- * Changes column in index.
+ * Changes column in index. The last column also adds the next one.
  *
  * @param {string} prefix Name prefix.
  *
  * @this {HTMLSelectElement|HTMLInputElement}
  */
 function indexesChangeColumn(prefix) {
-	const names = [];
-	for (const column of qsa('select, input', parentTag(this, 'td'))) {
-		if (/\[columns]/.test(column.name)) {
-			const value = selectValue(column);
-			if (value) {
-				names.push(value);
+	const field = this;
+	const td = parentTag(field, 'td');
+	const columns = [...qsa('select, input', td)].filter(column => /\[columns]/.test(column.name));
+
+	// The appended column becomes the last one, so it adds the next.
+	if (columns[columns.length - 1] === field) {
+		const type = field.form[field.name.replace(/].*/, '][type]')];
+		if (!type.selectedIndex) {
+			while (selectValue(type) !== "INDEX" && type.selectedIndex < type.options.length) {
+				type.selectedIndex++;
+			}
+			type.onchange();
+		}
+
+		// The clone keeps the handlers, so it adds the next column.
+		const column = cloneNode(field.parentElement);
+		for (const select of qsa('select', column)) {
+			select.name = select.name.replace(/]\[\d+/, '$&1');
+			select.selectedIndex = 0;
+		}
+		for (const input of qsa('input', column)) {
+			input.name = input.name.replace(/]\[\d+/, '$&1');
+			if (input.type !== 'checkbox') {
+				input.value = '';
 			}
 		}
+		td.append(column);
 	}
-	this.form[this.name.replace(/].*/, '][name]')].value = prefix + names.join('_');
-}
 
-/**
- * Adds column for index.
- *
- * @param {string} prefix Name prefix.
- *
- * @this {HTMLSelectElement|HTMLInputElement}
- */
-function indexesAddColumn(prefix) {
-	const field = this;
-	const select = field.form[field.name.replace(/].*/, '][type]')];
-	if (!select.selectedIndex) {
-		while (selectValue(select) !== "INDEX" && select.selectedIndex < select.options.length) {
-			select.selectedIndex++;
-		}
-		select.onchange();
-	}
-	const column = cloneNode(field.parentElement);
-	for (const select of qsa('select', column)) {
-		select.name = select.name.replace(/]\[\d+/, '$&1');
-		select.selectedIndex = 0;
-	}
-	field.onchange = partial(indexesChangeColumn, prefix);
-	for (const input of qsa('input', column)) {
-		input.name = input.name.replace(/]\[\d+/, '$&1');
-		if (input.type !== 'checkbox') {
-			input.value = '';
+	const names = [];
+	// The appended column is empty, so it doesn't matter that it's not in the list.
+	for (const column of columns) {
+		const value = selectValue(column);
+		if (value) {
+			names.push(value);
 		}
 	}
-	parentTag(field, 'td').append(column);
-	field.onchange();
+
+	field.form[field.name.replace(/].*/, '][name]')].value = prefix + names.join('_');
 }
 
 /**

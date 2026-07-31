@@ -202,7 +202,7 @@ foreach ($row["indexes"] as $index) {
 				" name='indexes[$j][columns][$i]' title='" . lang('Column') . "'",
 				($fields && ($column == "" || $fields[$column]) ? array_combine($fields_keys, $fields_keys) : []),
 				$column,
-				"partial(" . ($i == count($index["columns"]) ? "indexesAddColumn" : "indexesChangeColumn") . ", '" . js_escape(DIALECT == "sql" ? "" : $_GET["indexes"] . "_") . "')"
+				"partial(indexesChangeColumn, '" . js_escape(DIALECT == "sql" ? "" : $_GET["indexes"] . "_") . "')"
 			);
 
 			echo "<span $options_class>";
