@@ -757,10 +757,13 @@ function edit_form($table, $fields, $row, $update): void {
 	if ($editable) {
 		echo "<input type='submit' class='button default' value='" . lang('Save') . "'>\n";
 		if (!isset($_GET["select"]) && $continue_edit) {
+			// The printed values were not saved, so they can differ from the WHERE condition in the URL and no change event fires for them.
+			$disabled = ($where_columns && Admin::get()->getErrors() ? " disabled" : "");
+
 			echo "<input type='submit' class='button' name='insert' value='" . ($update
 					? lang('Save and continue edit')
 					: lang('Save and insert next')
-				) . "' title='Ctrl+Shift+Enter'>\n";
+				) . "' title='Ctrl+Shift+Enter'$disabled>\n";
 			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . js_escape(lang('Saving…')) . "', this); };") : "");
 		}
 	}
