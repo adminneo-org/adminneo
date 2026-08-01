@@ -226,15 +226,17 @@ echo optionlist(array_merge($extra_types, $structured_types), $type);
 	echo (!($field["length"] ?? null) && preg_match('~var(char|binary)$~', $type) ? " class='input required'" : " class='input'");
 ?> aria-labelledby="label-length"><td class="options"><?php
 	echo ($collations ?
-		"<select name='" . h($key) . "[collation]'" . (preg_match('~(char|text|enum|set)$~', $type) ? "" : " class='hidden'") .
+		"<select name='" . h($key) . "[collation]'" . option_types($type, '(char|text|enum|set)$') .
 			'><option value="">(' . lang('collation') . ')' . optionlist($collations, $field["collation"] ?? null) . '</select>' :
 		'');
+	// ^$ - the type is not known yet
 	echo (Driver::get()->getUnsigned() ?
-		"<select name='" . h($key) . "[unsigned]'" . (!$type || preg_match(number_type(), $type) ? "" : " class='hidden'") .
+		"<select name='" . h($key) . "[unsigned]'" . option_types($type, '^$|' . number_type()) .
 			'><option>' . optionlist(Driver::get()->getUnsigned(), $field["unsigned"] ?? null) . '</select>' :
 		'');
+	// MySQL supports datetime since 5.6.5.
 	echo (isset($field['on_update']) ?
-		"<select name='" . h($key) . "[on_update]'" . (preg_match('~timestamp|datetime~', $type) ? "" : " class='hidden'") . '>' .
+		"<select name='" . h($key) . "[on_update]'" . option_types($type, 'timestamp|datetime') . '>' .
 			optionlist(
 				["" => "(" . lang('ON UPDATE') . ")", "CURRENT_TIMESTAMP"],
 				(preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"]) ? "CURRENT_TIMESTAMP" : $field["on_update"])
@@ -242,9 +244,23 @@ echo optionlist(array_merge($extra_types, $structured_types), $type);
 		'');
 	// space for IE
 	echo ($foreign_keys ?
-		"<select name='" . h($key) . "[on_delete]'" . (preg_match("~`~", $type) ? "" : " class='hidden'") .
+		"<select name='" . h($key) . "[on_delete]'" . option_types($type, '`') .
 			"><option value=''>(" . lang('ON DELETE') . ")" . optionlist(Driver::get()->getOnActions(), $field["on_delete"] ?? null) . "</select> " :
 		" ");
+}
+
+/**
+ * Returns attributes of an option displayed only for some column types.
+ *
+ * @param ?string $type Current column type.
+ * @param string $types Regular expression matching the column types displaying the option.
+ *
+ * @return string HTML attributes including the leading space.
+ */
+function option_types(?string $type, string $types): string
+{
+	// The expression is printed for onFieldTypeChange() which re-evaluates it after changing the type.
+	return " data-types='" . h($types) . "'" . (preg_match("~$types~", $type) ? "" : " class='hidden'");
 }
 
 /** Filter length value including enums

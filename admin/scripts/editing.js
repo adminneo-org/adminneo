@@ -444,21 +444,9 @@ function selectFieldChange() {
 				el.selectedIndex = 0;
 			}
 
-			if (el.name === name + '[collation]') {
-				el.classList.toggle('hidden', !/(char|text|enum|set)$/.test(text));
-			}
-
-			if (el.name === name + '[unsigned]') {
-				el.classList.toggle('hidden', !/(^|[^o])int(?!er)|numeric|real|float|double|decimal|money/.test(text));
-			}
-
-			if (el.name === name + '[on_update]') {
-				// MySQL supports datetime since 5.6.5.
-				el.classList.toggle('hidden', !/timestamp|datetime/.test(text));
-			}
-
-			if (el.name === name + '[on_delete]') {
-				el.classList.toggle('hidden', !/`/.test(text));
+			// The expressions come from option_types(), the options of the other columns start with another name.
+			if (el.dataset.types && el.name.startsWith(name + '[')) {
+				el.classList.toggle('hidden', !new RegExp(el.dataset.types).test(text));
 			}
 		}
 	}

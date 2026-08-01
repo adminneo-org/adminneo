@@ -44,7 +44,8 @@ function number($val) {
 * @return string
 */
 function number_type() {
-	return '((?<!o)int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
+	// (^|[^o]) instead of (?<!o) - the expression is used also by JavaScript, lookbehind is unsupported in Safari < 16.4
+	return '((^|[^o])int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
 }
 
 /** Disable magic_quotes_gpc
