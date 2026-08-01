@@ -271,7 +271,7 @@ echo script("qsl('table').onclick = dumpClick;");
 $prefixes = [];
 if (DB != "" && $_GET["ns"] === "") {
 	echo "<thead><tr><th>";
-	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly'>" . lang('Schema') . "</label>" .
+	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly' title='" . lang('All') . "'>" . lang('Schema') . "</label>" .
 		script("gid('check-schemas').onclick = partial(formCheck, /^schemas\\[/);", "");
 	echo "</thead>\n";
 	foreach (Admin::get()->getSchemas() as $schema) {
@@ -282,9 +282,9 @@ if (DB != "" && $_GET["ns"] === "") {
 } elseif (DB != "") {
 	$checked = ($TABLE != "" ? "" : " checked");
 	echo "<thead><tr>";
-	echo "<th><label class='block'><input type='checkbox' id='check-tables'$checked class='jsonly'>" . lang('Table') . "</label>" .
+	echo "<th><label class='block'><input type='checkbox' id='check-tables'$checked class='jsonly' title='" . lang('All') . "'>" . lang('Table') . "</label>" .
 		script("gid('check-tables').onclick = partial(formCheck, /^tables\\[/);", "");
-	echo "<th class='right'><label class='block'>" . lang('Data') . "<input type='checkbox' id='check-data'$checked class='jsonly'></label>" .
+	echo "<th class='right'><label class='block'>" . lang('Data') . "<input type='checkbox' id='check-data'$checked class='jsonly' title='" . lang('All') . "'></label>" .
 		script("gid('check-data').onclick = partial(formCheck, /^data\\[/);", "");
 	echo "</thead>\n";
 
@@ -311,7 +311,7 @@ if (DB != "" && $_GET["ns"] === "") {
 	$databases = Admin::get()->getDatabases();
 	echo "<thead><tr><th>";
 	echo "<label class='block'>"
-		. ($databases ? "<input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . " class='jsonly'>" .
+		. ($databases ? "<input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . " class='jsonly' title='" . lang('All') . "'>" .
 			script("gid('check-databases').onclick = partial(formCheck, /^databases\\[/);", "") : "")
 		. lang('Database')
 		. "</label>"
