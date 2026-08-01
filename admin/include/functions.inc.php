@@ -606,6 +606,8 @@ function is_ajax() {
  * Redirects to location and/or set a message.
  *
  * @param ?string $location null to only set a message.
+ *
+ * @return ($location is null ? void : never)
  */
 function redirect(?string $location, ?string $message = null): void
 {
