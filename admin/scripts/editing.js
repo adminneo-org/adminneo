@@ -78,7 +78,7 @@ function typePassword(el, disable) {
  */
 function initLoginDriver(driverSelect) {
 	driverSelect.onchange = () => {
-		const trs = parentTag(driverSelect, 'table').rows;
+		const trs = driverSelect.closest('table').rows;
 		const disabled = /sqlite/.test(selectValue(driverSelect));
 
 		// 1 - row with server
@@ -460,7 +460,7 @@ function selectFieldChange() {
 	function addRow(button, focus = false) {
 		const match = /(\d+)(\.\d+)?/.exec(button.name);
 		const newIndex = match[0] + (match[2] ? added.slice(match[2].length) : added) + '1';
-		const row = parentTag(button, 'tr');
+		const row = button.closest('tr');
 		const newRow = cloneNode(row);
 
 		let inputs = qsa('select, input, button', row);
@@ -494,7 +494,7 @@ function selectFieldChange() {
 
 		initFieldsEditingRow(newRow, !focus);
 
-		const parent = parentTag(button, "tbody");
+		const parent = button.closest("tbody");
 		if (parent.classList.contains("sortable")) {
 			initSortableRow(newRow);
 		}
@@ -570,7 +570,7 @@ function onRemoveIndexRowClick() {
  * @return {boolean} Always false.
  */
 function removeTableRow(button, columnName) {
-	const row = parentTag(button, "tr");
+	const row = button.closest("tr");
 	const input = qs(`[name$='[${columnName}]']`, row);
 
 	input.remove();
@@ -620,7 +620,7 @@ function partitionByChange() {
  * @this {HTMLInputElement}
  */
 function partitionNameChange() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	row.firstChild.firstChild.value = '';
 	tr.parentNode.append(row);
@@ -652,7 +652,7 @@ function editingCommentsClick(el, columnIndex) {
  * @this {HTMLTableElement}
  */
 function dumpClick(event) {
-	let el = parentTag(event.target, 'label');
+	let el = event.target.closest('label');
 	if (!el) return;
 
 	el = qs('input', el);
@@ -671,7 +671,7 @@ function dumpClick(event) {
  * @this {HTMLSelectElement}
  */
 function foreignAddRow() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
@@ -689,7 +689,7 @@ function foreignAddRow() {
  * @this {HTMLSelectElement}
  */
 function indexesAddRow() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const tag of qsa('select, input, button', row)) {
@@ -716,7 +716,7 @@ function indexesAddRow() {
  */
 function indexesChangeColumn(prefix) {
 	const field = this;
-	const td = parentTag(field, 'td');
+	const td = field.closest('td');
 	const columns = [...qsa('select, input', td)].filter(column => /\[columns]/.test(column.name));
 
 	// The appended column becomes the last one, so it adds the next.

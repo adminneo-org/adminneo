@@ -148,27 +148,12 @@ function isTag(el, tag) {
 }
 
 /**
- * Returns the closest parent node with a specified tag name.
- *
- * @param {?Node} el
- * @param {string} tag Regular expression.
- *
- * @return {?HTMLElement}
- */
-function parentTag(el, tag) {
-	while (el && !isTag(el, tag)) {
-		el = el.parentNode;
-	}
-	return el;
-}
-
-/**
  * Sets the checked class on the row of the given checkbox.
  *
  * @param {HTMLInputElement} el
  */
 function trCheck(el) {
-	const tr = parentTag(el, 'tr');
+	const tr = el.closest('tr');
 	tr.classList.toggle('checked', el.checked);
 	const all = el.form && el.form['all'];
 	if (all && all.onclick) {
@@ -303,7 +288,7 @@ function countRows(rows) {
  * @param {boolean} [canEdit]
  */
 function tableClick(event, click, canEdit = true) {
-	const td = parentTag(event.target, 'td');
+	const td = event.target.closest('td');
 	let text;
 	if (canEdit && td && (text = td.dataset.text)) {
 		if (selectClick.call(td, event, +text, td.dataset.warning)) {
@@ -358,7 +343,7 @@ function checkboxClick(event) {
 	if (event.shiftKey && (!lastChecked || lastChecked.name === this.name)) {
 		const checked = (lastChecked ? lastChecked.checked : true);
 		let checking = !lastChecked;
-		for (const input of qsa('input', parentTag(this, 'table'))) {
+		for (const input of qsa('input', this.closest('table'))) {
 			if (input.name === this.name) {
 				if (checking) {
 					input.checked = checked;
@@ -1135,7 +1120,7 @@ function onEditingKeydown(event)
 
 		const target = event.target;
 		// Not parentNode - the NULL and AI checkboxes are wrapped in a <label>.
-		const cell = parentTag(target, "th|td");
+		const cell = target.closest("th, td");
 		if (!cell) {
 			return false;
 		}
@@ -1302,7 +1287,7 @@ function skipOriginal(first) {
  * @this {HTMLInputElement}
  */
 function fieldChange() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	for (const input of qsa('input', row)) {
 		input.value = '';
@@ -1469,7 +1454,7 @@ function selectClick(event, text, warning) {
 	const target = event.target;
 
 	// Note: Shift key forces the editing when clicking on a link.
-	if (!isCtrl(event) || td.dataset.editing || (!event.shiftKey && parentTag(target, 'a'))) {
+	if (!isCtrl(event) || td.dataset.editing || (!event.shiftKey && target.closest('a'))) {
 		return false;
 	}
 
