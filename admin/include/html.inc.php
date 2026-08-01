@@ -452,7 +452,7 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		echo $input;
 	} elseif (preg_match('~bool~', $field["type"])) {
 		echo "<input type='hidden'$attrs value='0'>" .
-			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
+			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked" : "") . "$attrs value='1'>";
 	} elseif ($field["type"] == "enum") {
 		echo enum_input($attrs, $field, $value);
 	} elseif ($field["type"] == "set") {
