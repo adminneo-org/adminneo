@@ -1032,7 +1032,7 @@ Adminer 4.7.0 (2018-11-24)
 - Warn when using password with leading or trailing spaces
 - Hide import from server if importServerPath() returns an empty string
 - Fix inline editing of empty cells (regression from 4.6.3)
-- Allow adding more than two indexes and forign key columns at a time (regression from 4.4.0)
+- Allow adding more than two indexes and foreign key columns at a time (regression from 4.4.0)
 - Avoid overwriting existing tables when copying tables (bug SF-642)
 - Fix function change with set data type
 - Increase username maxlength to 80 (bug SF-623)
@@ -1281,7 +1281,7 @@ Adminer 4.0.3 (2014-02-01)
 - SimpleDB, MongoDB: insert more fields at once
 - SQLite: Fix creating table and altering primary key, bug since ## Adminer 4.0.0
 - Don't store invalid credentials to session, bug since ## Adminer 4.0.0
-- Norweigan translation
+- Norwegian translation
 
 Adminer 4.0.2 (2014-01-11)
 --------------------------
