@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vrana/JsShrink.git",
-                "reference": "4f8a69bd80bda24e8233bca428e5f56400e3cb1b"
+                "reference": "863c0e65c38bbc51308361ebb053599653060659"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vrana/JsShrink/zipball/4f8a69bd80bda24e8233bca428e5f56400e3cb1b",
-                "reference": "4f8a69bd80bda24e8233bca428e5f56400e3cb1b",
+                "url": "https://api.github.com/repos/vrana/JsShrink/zipball/863c0e65c38bbc51308361ebb053599653060659",
+                "reference": "863c0e65c38bbc51308361ebb053599653060659",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "issues": "https://github.com/vrana/JsShrink/issues",
                 "source": "https://github.com/vrana/JsShrink/tree/main"
             },
-            "time": "2025-03-19T21:30:40+00:00"
+            "time": "2026-07-21T12:49:35+00:00"
         },
         {
             "name": "vrana/jush",
@@ -99,12 +99,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vrana/PhpShrink.git",
-                "reference": "b3d92cdf76aacfde22732a9132669d5ab55e7310"
+                "reference": "5cbea29c9c09776a469f546c2b093e4ba93be16a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vrana/PhpShrink/zipball/b3d92cdf76aacfde22732a9132669d5ab55e7310",
-                "reference": "b3d92cdf76aacfde22732a9132669d5ab55e7310",
+                "url": "https://api.github.com/repos/vrana/PhpShrink/zipball/5cbea29c9c09776a469f546c2b093e4ba93be16a",
+                "reference": "5cbea29c9c09776a469f546c2b093e4ba93be16a",
                 "shasum": ""
             },
             "require": {
@@ -128,7 +128,7 @@
                 "issues": "https://github.com/vrana/PhpShrink/issues",
                 "source": "https://github.com/vrana/PhpShrink/tree/main"
             },
-            "time": "2025-05-07T06:59:19+00:00"
+            "time": "2026-07-26T21:32:58+00:00"
         }
     ],
     "aliases": [],

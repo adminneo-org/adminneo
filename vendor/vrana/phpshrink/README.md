@@ -8,7 +8,7 @@ Operations:
 - remove extra `{}`, e.g. in `if (true) { oneCommand(); }`
 - remove `?><?php` and empty `<?php ?>`
 - change `?>HTML<?php` to `echo 'HTML'`
-- join consecutive echo, e.g. in `echo 'a'; echo 'b';`
+- join consecutive echo, e.g. in `echo 'a'; echo 'b';` (adjacent string literals are kept separate)
 - strip public visibility or change it to `var`
 
 Demo: https://vrana.github.io/PhpShrink/
