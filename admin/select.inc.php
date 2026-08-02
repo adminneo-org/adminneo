@@ -528,7 +528,7 @@ if (!$columns && support("table")) {
 						$id = h("val[$unique_idf][$escaped_key]");
 						$posted = $_POST["val"][$unique_idf][$escaped_key] ?? null;
 						$update = $field["privileges"]["update"] ?? false;
-						$editable = !is_array($row[$key]) && !($field && is_blob($field)) && is_utf8((string) $val) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
+						$editable = !is_array($val) && !($field && is_blob($field)) && is_utf8((string) $val) && $rows[$n][$key] == $val && !$functions[$key] && !($field["generated"] ?? false);
 						$type = ($column && preg_match('~^(AVG|MIN|MAX)\((.+)\)~', $column, $matches) ? $fields[idf_unescape($matches[2])]["type"] : ($field["type"] ?? null));
 						$money = $type == "money" || ($column && preg_match('~^SUM\((.+)\)~', $column, $matches) && $fields[idf_unescape($matches[1])]["type"]) == "money";
 						$text = $type && preg_match('~text|json|lob~', $type);
@@ -538,9 +538,9 @@ if (!$columns && support("table")) {
 						echo "<td id='$id' $class";
 						if (($_GET["modify"] && $editable && !$null_val) || $posted !== null) {
 							$editing_fields = true;
-							$h_value = h($posted !== null ? $posted : $row[$key]);
+							$h_value = h($posted !== null ? $posted : $val);
 							echo " data-editing='true'>" . ($text ?
-								"<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" :
+								"<textarea name='$id' cols='30' rows='" . (substr_count($val, "\n") + 1) . "'>$h_value</textarea>" :
 								"<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
 						} else {
 							$long = strpos($html, "<i>…</i>");
