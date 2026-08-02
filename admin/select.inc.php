@@ -528,7 +528,7 @@ if (!$columns && support("table")) {
 						$id = h("val[$unique_idf][$escaped_key]");
 						$posted = $_POST["val"][$unique_idf][$escaped_key] ?? null;
 						$update = $field["privileges"]["update"] ?? false;
-						$editable = !is_array($row[$key]) && is_utf8($html) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
+						$editable = !is_array($row[$key]) && !($field && is_blob($field)) && is_utf8((string) $val) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
 						$type = ($column && preg_match('~^(AVG|MIN|MAX)\((.+)\)~', $column, $matches) ? $fields[idf_unescape($matches[2])]["type"] : ($field["type"] ?? null));
 						$money = $type == "money" || ($column && preg_match('~^SUM\((.+)\)~', $column, $matches) && $fields[idf_unescape($matches[1])]["type"]) == "money";
 						$text = $type && preg_match('~text|json|lob~', $type);
