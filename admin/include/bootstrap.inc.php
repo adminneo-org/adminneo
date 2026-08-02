@@ -42,12 +42,6 @@ include __DIR__ . "/compile.inc.php";
 // Compiled files loading.
 include __DIR__ . "/../file.inc.php";
 
-if (!$_SERVER["REQUEST_URI"]) { // IIS 5 compatibility
-	$_SERVER["REQUEST_URI"] = $_SERVER["ORIG_PATH_INFO"];
-}
-if (!strpos($_SERVER["REQUEST_URI"], '?') && $_SERVER["QUERY_STRING"] != "") { // IIS 7 compatibility
-	$_SERVER["REQUEST_URI"] .= "?$_SERVER[QUERY_STRING]";
-}
 if (preg_match('~^/[-\w.]~', $_SERVER["HTTP_X_FORWARDED_PREFIX"])) {
 	$_SERVER["REQUEST_URI"] = $_SERVER["HTTP_X_FORWARDED_PREFIX"] . $_SERVER["REQUEST_URI"];
 }

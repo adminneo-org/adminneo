@@ -19,6 +19,7 @@ AdminNeo 5.8.0
 - PostgreSQL: Order NULL last (by @vrana)
 - MS SQL: Hide table actions and row editing in the sys schema
 - MongoDB, SimpleDB: Sort the list of tables by name
+- Drop compatibility with IIS 5 and with IIS 7.0 before its 2008 FastCGI update (by @vrana)
 - Fix mistranslated texts in all languages (AI reviewed)
 
 ### Bugfixes
