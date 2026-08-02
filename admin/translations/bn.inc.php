@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '০১২৩৪৫৬৭৮৯',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'T.M.JJJJ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'T.M.JJJJ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'সিস্টেম',
 	'Server' => 'সার্ভার',
 	'Username' => 'ইউজারের নাম',
@@ -37,21 +34,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'আপনি যদি AdminNeo থেকে এই অনুরোধ না করে থাকেন তবে এই পৃষ্ঠাটি বন্ধ করুন।',
 	'The action will be performed after successful login with the same credentials.' => 'একই ক্রেডেনশিয়ালস দিয়ে সফলভাবে লগইন করার পরে এই কর্মটি সম্পাদন করা হবে।',
 
-	// Connection.
+	// Connection
 	'No extension' => 'কোন এক্সটেনশান নাই',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'কোন PHP সমর্থিত এক্সটেনশন (%s) পাওয়া যায় নাই।',
+	'None of the supported PHP extensions (%s) are available.' => 'কোন PHP সমর্থিত এক্সটেনশন (%s) পাওয়া যায় নাই।', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'প্রিভিলেজড পোর্টে সংযোগ করা অনুমোদিত নয়।',
 	'Session support must be enabled.' => 'সেশন সমর্থন সক্রিয় করা আবশ্যক।',
 	'Session expired, please login again.' => 'সেশনের মেয়াদ শেষ হয়েছে, আবার লগইন করুন।',
 	'%s version: %s through PHP extension %s' => 'ভার্সন %s: %s, %s PHP এক্সটেনশনের মধ্য দিয়ে',
 
-	// Settings.
+	// Settings
 	'Language' => 'ভাষা',
 
 	'Refresh' => 'রিফ্রেশ',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'প্রিভিলেজেস',
 	'Create user' => 'ব্যবহারকারি তৈরী করুন',
 	'User has been dropped.' => 'ব্যবহারকারি মুছে ফেলা হয়েছে।',
@@ -59,7 +55,7 @@ return [
 	'User has been created.' => 'ব্যবহারকারি তৈরী করা হয়েছে।',
 	'Hashed' => 'হ্যাশড',
 
-	// Server.
+	// Server
 	'Process list' => 'প্রসেস তালিকা',
 	'%d process(es) have been killed.' => [
 		'%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
@@ -69,13 +65,13 @@ return [
 	'Variables' => 'চলকসমূহ',
 	'Status' => 'অবস্থা',
 
-	// Structure.
+	// Structure
 	'Column' => 'কলাম',
 	'Routine' => 'রুটিন',
 	'Grant' => 'অনুমতি',
 	'Revoke' => 'প্রত্যাহার',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-কমান্ড',
 	'%d query(s) executed OK.' => [
 		'%d SQL-অনুসন্ধান সফলভাবে সম্পন্ন হয়েছে।',
@@ -94,13 +90,12 @@ return [
 	'Stop on error' => 'ত্রুটি পেলে থেমে যান',
 	'Show only errors' => 'শুধুমাত্র ত্রুটিগুলো দেখান',
 	'Time' => 'সময়',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'ইতিহাস',
 	'Clear' => 'সাফ করো',
 	'Edit all' => 'সবগুলো সম্পাদনা করুন',
 
-	// Import.
+	// Import
 	'Import' => 'ইমপোর্ট',
 	'File upload' => 'ফাইল আপলোড',
 	'From server' => 'সার্ভার থেকে',
@@ -119,7 +114,7 @@ return [
 		'%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'এক্সপোর্ট',
 	'Output' => 'আউটপুট',
 	'open' => 'খোলা',
@@ -127,7 +122,7 @@ return [
 	'Format' => 'বিন্যাস',
 	'Data' => 'ডাটা',
 
-	// Databases.
+	// Databases
 	'Database' => 'ডাটাবেজ',
 	'DB' => 'ডিবি',
 	'Use' => 'ব্যবহার',
@@ -141,11 +136,12 @@ return [
 	'Database has been created.' => 'ডাটাবেজ তৈরী করা হয়েছে।',
 	'Database has been renamed.' => 'ডাটাবেজের নতুন নামকরণ করা হয়েছে।',
 	'Database has been altered.' => 'ডাটাবেজ পরিবর্তন করা হয়েছে।',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'ফাইল রয়েছে।',
 	'Please use one of the extensions %s.' => 'কোন একটা এক্সটেনশন %s ব্যবহার করুন।',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'স্কিমা',
 	'Alter schema' => 'স্কিমা পরিবর্তন করো',
 	'Create schema' => 'স্কিমা তৈরী করো',
@@ -154,7 +150,7 @@ return [
 	'Schema has been altered.' => 'স্কিমা সম্পাদনা করা হয়েছে।',
 	'Invalid schema.' => 'অবৈধ স্কিমা।',
 
-	// Table list.
+	// Table list
 	'Engine' => 'ইঞ্জিন',
 	'engine' => 'ইন্জিন',
 	'Collation' => 'কলোকেশন',
@@ -178,7 +174,7 @@ return [
 	'Tables have been copied.' => 'টেবিলগুলো কপি করা হয়েছে।',
 	'overwrite' => 'ওভাররাইট',
 
-	// Tables.
+	// Tables
 	'Tables' => 'টেবিলসমূহ',
 	'Tables and views' => 'টেবিল এবং ভিউ সমূহ',
 	'Table' => 'টেবিল',
@@ -210,7 +206,7 @@ return [
 	'Remove' => 'মুছে ফেলুন',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'অনুমোদিত ফিল্ড এর সর্বাধিক সংখ্যা অতিক্রম করে গেছে। অনুগ্রহপূর্বক %s বৃদ্ধি করুন।',
 
-	// Views.
+	// Views
 	'View' => 'ভিউ',
 	'Materialized view' => 'মেটেরিয়ালাইজড ভিউ',
 	'View has been dropped.' => 'ভিউ মুছে ফেলা হয়েছে।',
@@ -219,13 +215,13 @@ return [
 	'Alter view' => 'ভিউ পরিবর্তন করুন',
 	'Create view' => 'ভিউ তৈরী করুন',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'পার্টিশন যার মাধ্যমে',
 	'Partitions' => 'পার্টিশন',
 	'Partition name' => 'পার্টিশনের নাম',
 	'Values' => 'মানসমূহ',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'সূচীসমূহ',
 	'Indexes have been altered.' => 'সূচীসমূহ সম্পাদনা করা হয়েছে।',
 	'Alter indexes' => 'সূচীসমূহ পরিবর্তন করুন',
@@ -233,7 +229,7 @@ return [
 	'Index Type' => 'সূচী-ধরণ',
 	'length' => 'দৈর্ঘ্য',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'ফরেন কী',
 	'Foreign key' => 'ফরেন কী ',
 	'Foreign key has been dropped.' => 'ফরেন কী মুছে ফেলা হয়েছে।',
@@ -250,7 +246,7 @@ return [
 	'ON UPDATE' => 'অন আপডেট',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'সোর্স এবং টার্গেট কলামে একই ডাটা টাইপ থাকতে হবে, টার্গেট কলামসমূহে একটি সূচী এবং রেফারেন্সড ডেটার উপস্থিতি থাকা আবশ্যক।',
 
-	// Routines.
+	// Routines
 	'Routines' => 'রুটিনসমূহ',
 	'Routine has been called, %d row(s) affected.' => [
 		'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
@@ -267,7 +263,7 @@ return [
 	'Alter procedure' => 'কার্যপ্রণালী পরিবর্তন করুন',
 	'Return type' => 'রিটার্ন টাইপ',
 
-	// Events.
+	// Events
 	'Events' => 'ইভেন্টসমূহ',
 	'Event' => 'ইভেন্ট',
 	'Event has been dropped.' => 'ইভেন্ট মুছে ফেলা হয়েছে।',
@@ -282,7 +278,7 @@ return [
 	'End' => 'সমাপ্তি',
 	'On completion preserve' => 'সমাপ্ত হওয়ার পর সংরক্ষন করুন',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'অনুক্রম',
 	'Create sequence' => 'অনুক্রম তৈরি করো',
 	'Sequence has been dropped.' => 'অনুক্রম মুছে ফেলা হয়েছে।',
@@ -297,7 +293,7 @@ return [
 	'Type has been created.' => 'ধরণ তৈরি করা হয়েছে।',
 	'Alter type' => 'ধরণ পরিবর্তন করুন',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'ট্রিগার',
 	'Add trigger' => 'ট্রিগার সংযোজন করুন',
 	'Trigger has been dropped.' => 'ট্রিগার মুছে ফেলা হয়েছে।',
@@ -306,7 +302,7 @@ return [
 	'Alter trigger' => 'ট্রিগার পরিবর্তন করুন',
 	'Create trigger' => 'ট্রিগার তৈরী করুন',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'চেকস',
 	'Create check' => 'চেক তৈরি করুন',
 	'Alter check' => 'চেক পরিবর্তন করুন',
@@ -314,7 +310,7 @@ return [
 	'Check has been altered.' => 'চেক পরিবর্তন করা হয়েছে।',
 	'Check has been dropped.' => 'চেক ড্রপ করা হয়েছে।',
 
-	// Selection.
+	// Selection
 	'Select data' => 'তথ্য নির্বাচন করো',
 	'Select' => 'নির্বাচন',
 	'Functions' => 'ফাংশন সমূহ',
@@ -348,17 +344,16 @@ return [
 		'%d বাইটসমূহ',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'পরিবর্তন করুন',
 	'Ctrl+click on a value to modify it.' => 'একটি মান পরিবর্তন করতে Ctrl+ক্লিক করুন।',
 	'Use edit link to modify this value.' => 'এই মানটি পরিবর্তনের জন্য সম্পাদনা লিঙ্ক ব্যবহার করুন।',
 
-	// Editing.
+	// Editing
 	'New item' => 'নতুন বিষয়বস্তু',
 	'Edit' => 'সম্পাদনা',
 	'original' => 'প্রকৃত',
-	// label for value '' in enum data type
-	'empty' => 'খালি',
+	'empty' => 'খালি', // label for value '' in enum data type
 	'Insert' => 'সংযোজন',
 	'Save' => 'সংরক্ষণ করুন',
 	'Save and continue edit' => 'সংরক্ষণ করুন এবং সম্পাদনা চালিয়ে যান',
@@ -367,14 +362,13 @@ return [
 	'Selected' => 'নির্বাচিত',
 	'Clone' => 'ক্লোন',
 	'Delete' => 'মুছে ফেলুন',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'বিষয়বস্তুসমূহ%s সংযোজন করা হয়েছে।',
+	'Item%s has been inserted.' => 'বিষয়বস্তুসমূহ%s সংযোজন করা হয়েছে।', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'বিষয়বস্তু মুছে ফেলা হয়েছে।',
 	'Item has been updated.' => 'বিষয়বস্তু হালনাগাদ করা হয়েছে।',
 	'%d item(s) have been affected.' => '%d টি বিষয়বস্তু প্রভাবিত হয়েছে।',
 	'You have no privileges to update this table.' => 'এই টেবিল আপডেট করার জন্য আপনার কোন অনুমতি নেই।',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'সংখ্যা',
 	'Date and time' => 'তারিখ এবং সময়',
 	'Strings' => 'স্ট্রিং',
@@ -384,10 +378,12 @@ return [
 	'Geometry' => 'জ্যামিতি',
 	'Relations' => 'সম্পর্ক',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'এখন',
 	'yes' => 'হ্যাঁ',
 	'no' => 'না',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

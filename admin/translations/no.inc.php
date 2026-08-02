@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'venstre-til-høyre',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'venstre-til-høyre', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6/$4 $1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'D/M ÅÅÅÅ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6/$4 $1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'D/M ÅÅÅÅ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'System',
 	'Server' => 'Server',
 	'Username' => 'Brukernavn',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Utlogging vellykket.',
 	'Invalid CSRF token. Send the form again.' => 'Ugylding CSRF-token - Send inn skjemaet igjen.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Ingen utvidelse',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Ingen av de støttede PHP-utvidelsene (%s) er tilgjengelige.',
+	'None of the supported PHP extensions (%s) are available.' => 'Ingen av de støttede PHP-utvidelsene (%s) er tilgjengelige.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Økt-støtte må være skrudd på.',
 	'Session expired, please login again.' => 'Økt utløpt - vennligst logg inn på nytt.',
 	'%s version: %s through PHP extension %s' => '%s versjon: %s via PHP-utvidelse %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Språk',
 
 	'Refresh' => 'Gjenoppfrisk',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegier',
 	'Create user' => 'Lag bruker',
 	'User has been dropped.' => 'Bruker slettet.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'Bruker opprettet.',
 	'Hashed' => 'Hashet',
 
-	// Server.
+	// Server
 	'Process list' => 'Prosessliste',
 	'%d process(es) have been killed.' => [
 		'%d prosess avsluttet.',
@@ -60,13 +56,13 @@ return [
 	'Variables' => 'Variabler',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'Kolonne',
 	'Routine' => 'Rutine',
 	'Grant' => 'Gi privilegier',
 	'Revoke' => 'Trekk tilbake',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-kommando',
 	'%d query(s) executed OK.' => [
 		'%d kall utført OK.',
@@ -82,13 +78,12 @@ return [
 	'Stop on error' => 'Stopp ved feil',
 	'Show only errors' => 'Vis bare feil',
 	'Time' => 'Tid',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historie',
 	'Clear' => 'Tøm skjema',
 	'Edit all' => 'Rediger alle',
 
-	// Import.
+	// Import
 	'Import' => 'Importer',
 	'File upload' => 'Filopplasting',
 	'From server' => 'Fra server',
@@ -106,7 +101,7 @@ return [
 		'%d rader er importert.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Eksport',
 	'Output' => 'Resultat',
 	'open' => 'åpne',
@@ -114,7 +109,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Database',
 	'Use' => 'Bruk',
 	'Invalid database.' => 'Ugyldig database.',
@@ -127,11 +122,12 @@ return [
 	'Database has been created.' => 'Databasen er opprettet.',
 	'Database has been renamed.' => 'Databasen har fått nytt navn.',
 	'Database has been altered.' => 'Databasen er endret.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Filen finnes.',
 	'Please use one of the extensions %s.' => 'Vennligst bruk en av filendelsene %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skjema',
 	'Alter schema' => 'Endre skjema',
 	'Create schema' => 'Opprett skjema',
@@ -140,7 +136,7 @@ return [
 	'Schema has been altered.' => 'Skjemaet er endret.',
 	'Invalid schema.' => 'Ugylding skjema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'mottor',
 	'Collation' => 'Tekstsortering',
@@ -163,7 +159,7 @@ return [
 	'Copy' => 'Kopier',
 	'Tables have been copied.' => 'Tabellene har blitt kopiert.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabeller',
 	'Tables and views' => 'Tabeller og views',
 	'Table' => 'Tabell',
@@ -191,7 +187,7 @@ return [
 	'Remove' => 'Fjern',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Maksimum antall feltnavn overskredet - venligst øk %s.',
 
-	// Views.
+	// Views
 	'View' => 'View',
 	'View has been dropped.' => 'Viewet er slettet.',
 	'View has been altered.' => 'Viewet er endret.',
@@ -199,13 +195,13 @@ return [
 	'Alter view' => 'Endre view',
 	'Create view' => 'Lag nytt view',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partisjoner ved',
 	'Partitions' => 'Partisjoner',
 	'Partition name' => 'Partisjonsnavn',
 	'Values' => 'Verdier',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indekser',
 	'Indexes have been altered.' => 'Indeksene er endret.',
 	'Alter indexes' => 'Endre indekser',
@@ -213,7 +209,7 @@ return [
 	'Index Type' => 'Indekstype',
 	'length' => 'lengde',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Fremmednøkler',
 	'Foreign key' => 'Fremmednøkkel',
 	'Foreign key has been dropped.' => 'Fremmednøkkelen er slettet.',
@@ -230,7 +226,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kilde- og mål-kolonner må ha samme datatype, det må være en indeks på mål-kolonnen, og dataene som refereres til må eksistere.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutiner',
 	'Routine has been called, %d row(s) affected.' => [
 		'Rutinen er utført, %d rad påvirket.',
@@ -247,7 +243,7 @@ return [
 	'Alter procedure' => 'Endre prosedyre',
 	'Return type' => 'Returtype',
 
-	// Events.
+	// Events
 	'Events' => 'Eventer',
 	'Event' => 'Hendelse',
 	'Event has been dropped.' => 'Eventen er slettet.',
@@ -262,7 +258,7 @@ return [
 	'End' => 'Slutt',
 	'On completion preserve' => 'Ved fullførelse bevar',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekvenser',
 	'Create sequence' => 'Opprett sekvens',
 	'Sequence has been dropped.' => 'Sekvensen er slettet.',
@@ -277,7 +273,7 @@ return [
 	'Type has been created.' => 'Type er opprettet.',
 	'Alter type' => 'Endre type',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Triggere',
 	'Add trigger' => 'Legg til trigger',
 	'Trigger has been dropped.' => 'Triggeren er slettet.',
@@ -286,9 +282,9 @@ return [
 	'Alter trigger' => 'Endre trigger',
 	'Create trigger' => 'Opprett trigger',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Velg data',
 	'Select' => 'Velg',
 	'Functions' => 'Funksjoner',
@@ -318,17 +314,16 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Endre',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klikk på en verdi for å endre den.',
 	'Use edit link to modify this value.' => 'Bruk rediger-lengde for å endre dennne verdien.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Ny rad',
 	'Edit' => 'Rediger',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'tom',
+	'empty' => 'tom', // label for value '' in enum data type
 	'Insert' => 'Sett inn',
 	'Save' => 'Lagre',
 	'Save and continue edit' => 'Lagre og fortsett å redigere',
@@ -337,8 +332,7 @@ return [
 	'Selected' => 'Valgt',
 	'Clone' => 'Klon',
 	'Delete' => 'Slett',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Rad%s er satt inn.',
+	'Item%s has been inserted.' => 'Rad%s er satt inn.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Raden er slettet.',
 	'Item has been updated.' => 'Raden er oppdatert.',
 	'%d item(s) have been affected.' => [
@@ -347,7 +341,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Du mangler rettighetene som trengs for å endre denne tabellen.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Nummer',
 	'Date and time' => 'Dato og tid',
 	'Strings' => 'Strenger',
@@ -357,10 +351,12 @@ return [
 	'Geometry' => 'Geometri',
 	'Relations' => 'Relasjoner',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'nå',
 	'yes' => 'ja',
 	'no' => 'nei',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

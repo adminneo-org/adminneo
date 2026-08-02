@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => '.',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => '.', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistem',
 	'Server' => 'Server',
 	'Username' => 'Pengguna',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Berhasil keluar.',
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF tidak sah. Kirim ulang formulir.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Ekstensi tidak ada',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Ekstensi PHP yang didukung (%s) tidak ada.',
+	'None of the supported PHP extensions (%s) are available.' => 'Ekstensi PHP yang didukung (%s) tidak ada.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Dukungan sesi harus aktif.',
 	'Session expired, please login again.' => 'Sesi habis, silakan masuk lagi.',
 	'%s version: %s through PHP extension %s' => 'Versi %s: %s dengan ekstensi PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Bahasa',
 
 	'Refresh' => 'Segarkan',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilese',
 	'Create user' => 'Buat pengguna',
 	'User has been dropped.' => 'Pengguna berhasil dihapus.',
@@ -50,20 +46,20 @@ return [
 	'User has been created.' => 'Pengguna berhasil dibuat.',
 	'Hashed' => 'Hashed*',
 
-	// Server.
+	// Server
 	'Process list' => 'Daftar proses',
 	'%d process(es) have been killed.' => '%d proses berhasil dihentikan.',
 	'Kill' => 'Hentikan',
 	'Variables' => 'Variabel',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'Kolom',
 	'Routine' => 'Rutin',
 	'Grant' => 'Beri',
 	'Revoke' => 'Tarik',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Perintah SQL',
 	'%d query(s) executed OK.' => '%d kueri berhasil dijalankan.',
 	'Query executed OK, %d row(s) affected.' => 'Kueri berhasil, %d baris terpengaruh.',
@@ -73,13 +69,12 @@ return [
 	'Stop on error' => 'Hentikan jika galat',
 	'Show only errors' => 'Hanya tampilkan galat',
 	'Time' => 'Waktu',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Riwayat',
 	'Clear' => 'Bersihkan',
 	'Edit all' => 'Sunting semua',
 
-	// Import.
+	// Import
 	'Import' => 'Impor',
 	'File upload' => 'Unggah berkas',
 	'From server' => 'Dari server',
@@ -92,7 +87,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Data POST terlalu besar. Kurangi data atau perbesar direktif konfigurasi %s.',
 	'%d row(s) have been imported.' => '%d baris berhasil diimpor.',
 
-	// Export.
+	// Export
 	'Export' => 'Ekspor',
 	'Output' => 'Hasil',
 	'open' => 'buka',
@@ -100,7 +95,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Basis data',
 	'Use' => 'Gunakan',
 	'Invalid database.' => 'Basis data tidak sah.',
@@ -113,11 +108,12 @@ return [
 	'Database has been created.' => 'Basis data berhasil dibuat.',
 	'Database has been renamed.' => 'Basis data berhasil diganti namanya.',
 	'Database has been altered.' => 'Basis data berhasil diubah.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Berkas sudah ada.',
 	'Please use one of the extensions %s.' => 'Harap gunakan salah satu ekstensi %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skema',
 	'Alter schema' => 'Ubah skema',
 	'Create schema' => 'Buat skema',
@@ -126,7 +122,7 @@ return [
 	'Schema has been altered.' => 'Skema berhasil diubah.',
 	'Invalid schema.' => 'Skema tidak sah.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Mesin',
 	'engine' => 'mesin',
 	'Collation' => 'Kolasi',
@@ -148,7 +144,7 @@ return [
 	'Copy' => 'Salin',
 	'Tables have been copied.' => 'Tabel berhasil disalin.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabel',
 	'Tables and views' => 'Tabel dan tampilan',
 	'Table' => 'Tabel',
@@ -176,7 +172,7 @@ return [
 	'Remove' => 'Hapus',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Sudah lebih dumlah ruas maksimum yang diizinkan. Harap naikkan %s.',
 
-	// Views.
+	// Views
 	'View' => 'Tampilan',
 	'View has been dropped.' => 'Tampilan berhasil dihapus.',
 	'View has been altered.' => 'Tampilan berhasil diubah.',
@@ -184,13 +180,13 @@ return [
 	'Alter view' => 'Ubah tampilan',
 	'Create view' => 'Buat tampilan',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partisi menurut',
 	'Partitions' => 'Partisi',
 	'Partition name' => 'Nama partisi',
 	'Values' => 'Nilai',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeks',
 	'Indexes have been altered.' => 'Indeks berhasil diubah.',
 	'Alter indexes' => 'Ubah indeks',
@@ -198,7 +194,7 @@ return [
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'panjang',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
 	'Foreign key' => 'Kunci asing',
 	'Foreign key has been dropped.' => 'Kunci asing berhasil dihapus.',
@@ -215,7 +211,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolom sumber dan sasaran harus memiliki jenis data yang sama. Kolom sasaran harus memiliki indeks dan data rujukan harus ada.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutin',
 	'Routine has been called, %d row(s) affected.' => 'Rutin telah dipanggil, %d baris terpengaruh.',
 	'Call' => 'Panggilan',
@@ -229,7 +225,7 @@ return [
 	'Alter procedure' => 'Ubah prosedur',
 	'Return type' => 'Jenis pengembalian',
 
-	// Events.
+	// Events
 	'Events' => 'Even',
 	'Event' => 'Even',
 	'Event has been dropped.' => 'Even berhasil dihapus.',
@@ -244,7 +240,7 @@ return [
 	'End' => 'Selesai',
 	'On completion preserve' => 'Pertahankan saat selesai',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Deret',
 	'Create sequence' => 'Buat deret',
 	'Sequence has been dropped.' => 'Deret berhasil dihapus.',
@@ -259,7 +255,7 @@ return [
 	'Type has been created.' => 'Jenis berhasil dibuat.',
 	'Alter type' => 'Ubah jenis',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Pemicu',
 	'Add trigger' => 'Tambah pemicu',
 	'Trigger has been dropped.' => 'Pemicu berhasil dihapus.',
@@ -268,9 +264,9 @@ return [
 	'Alter trigger' => 'Ubah pemicu',
 	'Create trigger' => 'Buat pemicu',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Pilih data',
 	'Select' => 'Pilih',
 	'Functions' => 'Fungsi',
@@ -292,28 +288,26 @@ return [
 	'Whole result' => 'Seluruh hasil',
 	'%d byte(s)' => '%d bita',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Use edit link to modify this value.' => 'Gunakan pranala suntingan untuk mengubah nilai ini.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Entri baru',
 	'Edit' => 'Sunting',
 	'original' => 'asli',
-	// label for value '' in enum data type
-	'empty' => 'kosong',
+	'empty' => 'kosong', // label for value '' in enum data type
 	'Insert' => 'Sisipkan',
 	'Save' => 'Simpan',
 	'Save and continue edit' => 'Simpan dan lanjut menyunting',
 	'Save and insert next' => 'Simpan dan sisipkan berikutnya',
 	'Clone' => 'Gandakan',
 	'Delete' => 'Hapus',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Entri%s berhasil disisipkan.',
+	'Item%s has been inserted.' => 'Entri%s berhasil disisipkan.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Entri berhasil dihapus.',
 	'Item has been updated.' => 'Entri berhasil diperbarui.',
 	'%d item(s) have been affected.' => '%d entri terpengaruh.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Angka',
 	'Date and time' => 'Tanggal dan waktu',
 	'Strings' => 'String',
@@ -323,10 +317,12 @@ return [
 	'Geometry' => 'Geometri',
 	'Relations' => 'Relasi',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'now',
 	'yes' => 'yes',
 	'no' => 'no',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

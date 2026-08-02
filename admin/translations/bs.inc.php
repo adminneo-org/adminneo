@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1.',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD.MM.YYYY.',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1.', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD.MM.YYYY.', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistem',
 	'Server' => 'Server',
 	'Username' => 'Korisničko ime',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Uspešna odjava.',
 	'Invalid CSRF token. Send the form again.' => 'Nevažeći CSRF kod. Proslijedite ponovo formu.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Bez dodataka',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nijedan od podržanih PHP dodataka (%s) nije dostupan.',
+	'None of the supported PHP extensions (%s) are available.' => 'Nijedan od podržanih PHP dodataka (%s) nije dostupan.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Morate omogućiti podršku za sesije.',
 	'Session expired, please login again.' => 'Vaša sesija je istekla, prijavite se ponovo.',
 	'%s version: %s through PHP extension %s' => '%s verzija: %s pomoću PHP dodatka je %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Jezik',
 
 	'Refresh' => 'Osveži',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Dozvole',
 	'Create user' => 'Novi korisnik',
 	'User has been dropped.' => 'Korisnik je izbrisan.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'korisnik je spašen.',
 	'Hashed' => 'Heširano',
 
-	// Server.
+	// Server
 	'Process list' => 'Spisak procesa',
 	'%d process(es) have been killed.' => [
 		'%d proces je ukinut.',
@@ -61,13 +57,13 @@ return [
 	'Variables' => 'Promijenljive',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'kolumna',
 	'Routine' => 'Rutina',
 	'Grant' => 'Dozvoli',
 	'Revoke' => 'Opozovi',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL komanda',
 	'%d query(s) executed OK.' => [
 		'%d upit je uspiješno izvršen.',
@@ -85,13 +81,12 @@ return [
 	'Stop on error' => 'Zaustavi prilikom greške',
 	'Show only errors' => 'Prikazuj samo greške',
 	'Time' => 'Vrijeme',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historijat',
 	'Clear' => 'Očisti',
 	'Edit all' => 'Izmijeni sve',
 
-	// Import.
+	// Import
 	'Import' => 'Uvoz',
 	'File upload' => 'Slanje datoteka',
 	'From server' => 'Sa servera',
@@ -108,7 +103,7 @@ return [
 		'%d redova je uveženo.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Izvoz',
 	'Output' => 'Ispis',
 	'open' => 'otvori',
@@ -116,7 +111,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Podaci',
 
-	// Databases.
+	// Databases
 	'Database' => 'Baza podataka',
 	'Use' => 'Koristi',
 	'Invalid database.' => 'Neispravna baza podataka.',
@@ -129,11 +124,12 @@ return [
 	'Database has been created.' => 'Baza podataka je spašena.',
 	'Database has been renamed.' => 'Baza podataka je preimenovana.',
 	'Database has been altered.' => 'Baza podataka je izmijenjena.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Datoteka već postoji.',
 	'Please use one of the extensions %s.' => 'Molim koristite jedan od nastavaka %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Šema',
 	'Alter schema' => 'Ažuriraj šemu',
 	'Create schema' => 'Formiraj šemu',
@@ -142,7 +138,7 @@ return [
 	'Schema has been altered.' => 'Šema je izmijenjena.',
 	'Invalid schema.' => 'Šema nije ispravna.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Stroj',
 	'engine' => 'stroj',
 	'Collation' => 'Sravnjivanje',
@@ -164,7 +160,7 @@ return [
 	'Copy' => 'Umnoži',
 	'Tables have been copied.' => 'Tabele su umnožene.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabele',
 	'Tables and views' => 'Tabele i pogledi',
 	'Table' => 'Tabela',
@@ -192,7 +188,7 @@ return [
 	'Remove' => 'Ukloni',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Premašen je maksimalni broj dozvoljenih polja. Molim uvećajte %s.',
 
-	// Views.
+	// Views
 	'View' => 'Pogled',
 	'View has been dropped.' => 'Pogled je izbrisan.',
 	'View has been altered.' => 'Pogled je izmijenjen.',
@@ -200,13 +196,13 @@ return [
 	'Alter view' => 'Ažuriraj pogled',
 	'Create view' => 'Napravi pogled',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Podijeli po',
 	'Partitions' => 'Podijele',
 	'Partition name' => 'Ime podijele',
 	'Values' => 'Vrijednosti',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksi',
 	'Indexes have been altered.' => 'Indeksi su izmijenjeni.',
 	'Alter indexes' => 'Ažuriraj indekse',
@@ -214,7 +210,7 @@ return [
 	'Index Type' => 'Tip indeksa',
 	'length' => 'dužina',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Strani ključevi',
 	'Foreign key' => 'Strani ključ',
 	'Foreign key has been dropped.' => 'Strani ključ je izbrisan.',
@@ -231,7 +227,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE (prilikom osvežavanja)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Izvorne i ciljne kolumne moraju biti istog tipa, ciljna kolumna mora biti indeksirana i izvorna tabela mora sadržati podatke iz ciljne.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutine',
 	'Routine has been called, %d row(s) affected.' => [
 		'Pozvana je rutina, %d red je ažuriran.',
@@ -249,7 +245,7 @@ return [
 	'Alter procedure' => 'Ažuriraj proceduru',
 	'Return type' => 'Povratni tip',
 
-	// Events.
+	// Events
 	'Events' => 'Događaji',
 	'Event' => 'Događaj',
 	'Event has been dropped.' => 'Događaj je izbrisan.',
@@ -264,7 +260,7 @@ return [
 	'End' => 'Kraj',
 	'On completion preserve' => 'Zadrži po završetku',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Nizovi',
 	'Create sequence' => 'Napravi niz',
 	'Sequence has been dropped.' => 'Niz je izbrisan.',
@@ -279,7 +275,7 @@ return [
 	'Type has been created.' => 'tip je spašen.',
 	'Alter type' => 'Ažuriraj tip',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Okidači',
 	'Add trigger' => 'Dodaj okidač',
 	'Trigger has been dropped.' => 'Okidač je izbrisan.',
@@ -288,9 +284,9 @@ return [
 	'Alter trigger' => 'Ažuriraj okidač',
 	'Create trigger' => 'Formiraj okidač',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Izaberi podatke',
 	'Select' => 'Izaberi',
 	'Functions' => 'Funkcije',
@@ -322,17 +318,16 @@ return [
 		'%d bajtova',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Izmjene',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klik na vrijednost za izmijenu.',
 	'Use edit link to modify this value.' => 'Koristi vezu za izmijenu ove vrijednosti.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nova stavka',
 	'Edit' => 'Izmijeni',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'prazno',
+	'empty' => 'prazno', // label for value '' in enum data type
 	'Insert' => 'Umetni',
 	'Save' => 'Sačuvaj',
 	'Save and continue edit' => 'Sačuvaj i nastavi uređenje',
@@ -340,8 +335,7 @@ return [
 	'Selected' => 'Izabrano',
 	'Clone' => 'Dupliraj',
 	'Delete' => 'Izbriši',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Stavka %s je spašena.',
+	'Item%s has been inserted.' => 'Stavka %s je spašena.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Stavka je izbrisana.',
 	'Item has been updated.' => 'Stavka je izmijenjena.',
 	'%d item(s) have been affected.' => [
@@ -350,7 +344,7 @@ return [
 		'%d stavki je ažurirano.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Broj',
 	'Date and time' => 'Datum i vrijeme',
 	'Strings' => 'Tekst',
@@ -360,10 +354,12 @@ return [
 	'Geometry' => 'Geometrija',
 	'Relations' => 'Odnosi',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'sad',
 	'yes' => 'da',
 	'no' => 'ne',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

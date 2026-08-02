@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD/MM/YYYY',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD/MM/YYYY', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'சிஸ்ட‌ம் (System)',
 	'Server' => 'வ‌ழ‌ங்கி (Server)',
 	'Username' => 'ப‌ய‌னாள‌ர் (User)',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'வெற்றிக‌ர‌மாய் வெளியேறியாயிற்று.',
 	'Invalid CSRF token. Send the form again.' => 'CSRF டோக்க‌ன் செல்லாது. ப‌டிவ‌த்தை மீண்டும் அனுப்ப‌வும்.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'விரிவு (extensஇஒன்) இல்லை ',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'PHP ஆத‌ர‌வு விரிவுக‌ள் (%s) இல்லை.',
+	'None of the supported PHP extensions (%s) are available.' => 'PHP ஆத‌ர‌வு விரிவுக‌ள் (%s) இல்லை.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'செஷ‌ன் ஆத‌ர‌வு இய‌க்க‌ப்ப‌ட‌ வேண்டும்.',
 	'Session expired, please login again.' => 'செஷ‌ன் காலாவ‌தியாகி விட்ட‌து. மீண்டும் நுழைய‌வும்.',
 	'%s version: %s through PHP extension %s' => '%s ப‌திப்பு: %s through PHP extension %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'மொழி',
 
 	'Refresh' => 'புதுப்பி (Refresh)',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'ச‌லுகைக‌ள் / சிற‌ப்புரிமைக‌ள்',
 	'Create user' => 'ப‌ய‌னாள‌ரை உருவாக்கு',
 	'User has been dropped.' => 'ப‌யனீட்டாள‌ர் நீக்க‌ப்ப‌ட்டார்.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'ப‌ய‌னீட்டாள‌ர் உருவாக்க‌ப்ப‌ட்ட‌து.',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'வேலைக‌ளின் ப‌ட்டி',
 	'%d process(es) have been killed.' => [
 		'%d வேலை வ‌லுவில் நிறுத்த‌ப‌ட்ட‌து.',
@@ -60,13 +56,13 @@ return [
 	'Variables' => 'மாறிலிக‌ள் (Variables)',
 	'Status' => 'நிக‌ழ்நிலை (Status)',
 
-	// Structure.
+	// Structure
 	'Column' => 'நெடுவ‌ரிசை',
 	'Routine' => 'ரொட்டீன்',
 	'Grant' => 'அனும‌திய‌ளி',
 	'Revoke' => 'இர‌த்துச்செய்',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL க‌ட்ட‌ளை',
 	'%d query(s) executed OK.' => [
 		'%d வின‌வ‌ல் செய‌ல்ப‌டுத்த‌ப்ப‌ட்ட‌து.',
@@ -82,13 +78,12 @@ return [
 	'Stop on error' => 'பிழை ஏற்ப‌டின் நிற்க‌',
 	'Show only errors' => 'பிழைக‌ளை ம‌ட்டும் காண்பிக்க‌வும்',
 	'Time' => 'நேர‌ம்',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'வ‌ர‌லாறு',
 	'Clear' => 'துடை (Clear)',
 	'Edit all' => 'அனைத்தையும் தொகு',
 
-	// Import.
+	// Import
 	'Import' => 'இற‌க்கும‌தி (Import)',
 	'File upload' => 'கோப்பை மேலேற்று (upload) ',
 	'From server' => 'செர்வ‌ரில் இருந்து',
@@ -104,7 +99,7 @@ return [
 		'%d வ‌ரிசைக‌ள் இற‌க்கும‌தி (Import) செய்ய‌ப்ப‌ட்டன‌.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'ஏற்றும‌தி',
 	'Output' => 'வெளியீடு',
 	'open' => 'திற‌',
@@ -112,7 +107,7 @@ return [
 	'Format' => 'ஃபார்ம‌ட் (Format)',
 	'Data' => 'த‌க‌வ‌ல்',
 
-	// Databases.
+	// Databases
 	'Database' => 'த‌க‌வ‌ல்த‌ள‌ம்',
 	'Use' => 'உப‌யோகி',
 	'Invalid database.' => 'த‌க‌வ‌ல்த‌ள‌ம் ச‌ரியானதல்ல‌.',
@@ -125,11 +120,12 @@ return [
 	'Database has been created.' => 'த‌க‌வ‌ல்த‌ள‌ம் உருவாக்க‌ப்ப‌ட்ட‌து.',
 	'Database has been renamed.' => 'த‌க‌வ‌ல்த‌ள‌ம் பெய‌ர் மாற்ற‌ப்ப‌ட்ட‌து.',
 	'Database has been altered.' => 'த‌க‌வ‌ல்த‌ள‌ம் மாற்ற‌ப்ப‌ட்ட‌து.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'கோப்பு உள்ள‌து.',
 	'Please use one of the extensions %s.' => 'த‌ய‌வு செய்து ஒரு விரிவினை %s (extension) உப‌யோகிக்க‌வும்.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'அமைப்புமுறை',
 	'Alter schema' => 'அமைப்புமுறையை மாற்று',
 	'Create schema' => 'அமைப்புமுறையை உருவாக்கு',
@@ -138,7 +134,7 @@ return [
 	'Schema has been altered.' => 'அமைப்புமுறை மாற்ற‌ப்ப‌ட்ட‌து.',
 	'Invalid schema.' => 'அமைப்புமுறை ச‌ரியான‌த‌ல்ல‌ (Invalid Schema).',
 
-	// Table list.
+	// Table list
 	'Engine' => 'எஞ்சின் (Engine)',
 	'engine' => 'எஞ்சின்',
 	'Collation' => 'கொலேச‌ன்',
@@ -160,7 +156,7 @@ return [
 	'Copy' => 'நகல்',
 	'Tables have been copied.' => 'அட்டவணைகள் நகலெடுக்கப் பட்டது.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'அட்ட‌வ‌ணை',
 	'Tables and views' => 'அட்ட‌வ‌ணைக‌ளும் பார்வைக‌ளும்',
 	'Table' => 'அட்ட‌வ‌ணை',
@@ -187,7 +183,7 @@ return [
 	'Remove' => 'நீக்கு',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'அனும‌திக்க‌ப்ப‌ட்ட‌ அதிக‌ப‌ட்ச‌ கோப்புக‌ளின் எண்ணிக்கை மீற‌ப்ப‌ட்ட‌து. த‌ய‌வு செய்து %s ம‌ற்றும் %s யை அதிக‌ரிக்க‌வும்.',
 
-	// Views.
+	// Views
 	'View' => 'தோற்றம்',
 	'View has been dropped.' => 'தோற்ற‌ம் நீக்க‌ப்ப‌ட்ட‌து.',
 	'View has been altered.' => 'தோற்றம் மாற்றப்ப‌ட்ட‌து.',
@@ -195,13 +191,13 @@ return [
 	'Alter view' => 'தோற்ற‌த்தை மாற்று',
 	'Create view' => 'தோற்றத்தை உருவாக்கு',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'பிரித்த‌து',
 	'Partitions' => 'பிரிவுக‌ள்',
 	'Partition name' => 'பிரிவின் பெய‌ர்',
 	'Values' => 'ம‌திப்புக‌ள்',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'அக‌வ‌ரிசைக‌ள் (Index) ',
 	'Indexes have been altered.' => 'அக‌வ‌ரிசைக‌ள் (Indexes) மாற்ற‌ப்பட்ட‌து.',
 	'Alter indexes' => 'அக‌வ‌ரிசையை (Index) மாற்று',
@@ -209,7 +205,7 @@ return [
 	'Index Type' => 'அக‌வ‌ரிசை வ‌கை (Index Type)',
 	'length' => 'நீள‌ம்',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'வேற்று விசைக‌ள்',
 	'Foreign key' => 'வேற்று விசை',
 	'Foreign key has been dropped.' => 'வேற்று விசை நீக்க‌ப்ப‌ட்ட‌து.',
@@ -226,7 +222,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'இல‌க்கு நெடுவ‌ரிசையில் அக‌வ‌ரிசை (Index) ம‌ற்றும் குறிக்க‌ப்ப‌ட்ட‌ த‌க‌வல் (Referenced DATA) க‌ண்டிப்பாக‌ இருத்த‌ல் வேண்டும். மூல‌ நெடுவ‌ரிசை ம‌ற்றும் இலக்கு நெடுவ‌ரிசையின் த‌க‌வ‌ல் வ‌டிவ‌ம் (DATA TYPE) ஒன்றாக‌ இருக்க‌ வேண்டும்.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'ரொட்டீன் ',
 	'Routine has been called, %d row(s) affected.' => [
 		'ரொட்டீன்க‌ள் அழைக்க‌ப்பட்டுள்ள‌ன‌, %d வ‌ரிசை மாற்ற‌ம் அடைந்த‌து.',
@@ -243,7 +239,7 @@ return [
 	'Alter procedure' => 'செய‌ல்முறையை மாற்று',
 	'Return type' => 'திரும்பு வ‌கை',
 
-	// Events.
+	// Events
 	'Events' => 'நிக‌ழ்ச்சிக‌ள்',
 	'Event' => 'நிக‌ழ்ச்சி',
 	'Event has been dropped.' => 'நிக‌ழ்ச்சி (Event) நீக்க‌ப்ப‌ட்ட‌து.',
@@ -258,7 +254,7 @@ return [
 	'End' => 'முடி (வு)',
 	'On completion preserve' => 'முடிந்த‌தின் பின் பாதுகாக்க‌வும்',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'வ‌ரிசைமுறை',
 	'Create sequence' => 'வ‌ரிசைமுறையை உருவாக்கு',
 	'Sequence has been dropped.' => 'வ‌ரிசைமுறை நீக்க‌ப்ப‌ட்ட‌து.',
@@ -273,7 +269,7 @@ return [
 	'Type has been created.' => 'வ‌கை (type) உருவாக்க‌ப்ப‌ட்ட‌து.',
 	'Alter type' => 'வ‌கையினை (type) மாற்று',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'தூண்டுத‌ல்க‌ள்',
 	'Add trigger' => 'தூண்டு விசையை சேர்',
 	'Trigger has been dropped.' => 'தூண்டு விசை நீக்க‌ப்ப‌ட்ட‌து.',
@@ -282,9 +278,9 @@ return [
 	'Alter trigger' => 'தூண்டு விசையை மாற்று',
 	'Create trigger' => 'தூண்டு விசையை உருவாக்கு',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'த‌க‌வ‌லை தேர்வு செய்',
 	'Select' => 'தேர்வு செய்',
 	'Functions' => 'Functions',
@@ -311,23 +307,21 @@ return [
 		'%d பைட்டுக‌ள்',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Use edit link to modify this value.' => 'இந்த‌ ம‌திப்பினை மாற்ற‌, தொகுப்பு இணைப்பினை உப‌யோகிக்க‌வும்.',
 
-	// Editing.
+	// Editing
 	'New item' => 'புதிய‌ உருப்ப‌டி',
 	'Edit' => 'தொகு',
 	'original' => 'அச‌ல்',
-	// label for value '' in enum data type
-	'empty' => 'வெறுமை (empty)',
+	'empty' => 'வெறுமை (empty)', // label for value '' in enum data type
 	'Insert' => 'புகுத்து',
 	'Save' => 'சேமி',
 	'Save and continue edit' => 'சேமித்த‌ பிற‌கு தொகுப்ப‌தை தொட‌ர‌வும்',
 	'Save and insert next' => 'சேமித்த‌ப் பின் அடுத்த‌தை புகுத்து',
 	'Clone' => 'ந‌க‌லி (Clone)',
 	'Delete' => 'நீக்கு',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'உருப்ப‌டி (Item%s) சேர்க்க‌ப்ப‌ட்ட‌து.',
+	'Item%s has been inserted.' => 'உருப்ப‌டி (Item%s) சேர்க்க‌ப்ப‌ட்ட‌து.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'உருப்படி நீக்க‌ப்ப‌ட்ட‌து.',
 	'Item has been updated.' => 'உருப்ப‌டி புதுப்பிக்க‌ப்ப‌ட்ட‌து.',
 	'%d item(s) have been affected.' => [
@@ -335,7 +329,7 @@ return [
 		'%d உருப்ப‌டிக‌ள் மாற்ற‌ம‌டைந்த‌ன‌.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'எண்க‌ள்',
 	'Date and time' => 'தேதி ம‌ற்றும் நேர‌ம்',
 	'Strings' => 'ச‌ர‌ம் (String)',
@@ -345,8 +339,10 @@ return [
 	'Geometry' => 'வ‌டிவ‌விய‌ல் (Geometry)',
 	'Relations' => 'உற‌வுக‌ள் (Relations)',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'இப்பொழுது',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

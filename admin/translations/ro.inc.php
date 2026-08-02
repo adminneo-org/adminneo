@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD.MM.YYYY',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD.MM.YYYY', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistem',
 	'Server' => 'Server',
 	'Username' => 'Nume de utilizator',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Ați ieșit cu succes.',
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Nu este extensie',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Sesiunile trebuie să fie pornite.',
 	'Session expired, please login again.' => 'Timpul sesiunii a expirat, rog să vă conectați din nou.',
 	'%s version: %s through PHP extension %s' => 'Versiunea %s: %s cu extensia PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Limba',
 
 	'Refresh' => 'Împrospătează',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegii',
 	'Create user' => 'Crează utilizator',
 	'User has been dropped.' => 'Utilizatorul a fost șters.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'Utilizatorul a fost creat.',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'Lista proceselor',
 	'%d process(es) have been killed.' => [
 		'A fost terminat %d proces.',
@@ -60,13 +56,13 @@ return [
 	'Variables' => 'Variabile',
 	'Status' => 'Stare',
 
-	// Structure.
+	// Structure
 	'Column' => 'Coloană',
 	'Routine' => 'Procedură',
 	'Grant' => 'Permite',
 	'Revoke' => 'Interzice',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL query',
 	'%d query(s) executed OK.' => [
 		'%d query executat.',
@@ -82,13 +78,12 @@ return [
 	'Stop on error' => 'Se oprește la greșeală',
 	'Show only errors' => 'Arată doar greșeli',
 	'Time' => 'Timp',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Istoria',
 	'Clear' => 'Curăță',
 	'Edit all' => 'Editează tot',
 
-	// Import.
+	// Import
 	'Import' => 'Importă',
 	'File upload' => 'Încarcă fișierul',
 	'From server' => 'De pe server',
@@ -104,7 +99,7 @@ return [
 		'%d rînduri importate.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Export',
 	'Output' => 'Date de ieșire',
 	'open' => 'deschide',
@@ -112,7 +107,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Date',
 
-	// Databases.
+	// Databases
 	'Database' => 'Baza de date',
 	'Use' => 'Alege',
 	'Invalid database.' => 'Bază de deate invalidă.',
@@ -125,11 +120,12 @@ return [
 	'Database has been created.' => 'Baza de date a fost creată.',
 	'Database has been renamed.' => 'Baza de date a fost redenumită.',
 	'Database has been altered.' => 'Baza de date a fost modificată.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Fișierul există deja.',
 	'Please use one of the extensions %s.' => 'Folosiți una din următoarele extensii %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'Alter schema' => 'Modifică schema',
 	'Create schema' => 'Crează o schemă',
@@ -138,7 +134,7 @@ return [
 	'Schema has been altered.' => 'Schema a fost modificată.',
 	'Invalid schema.' => 'Schemă incorectă.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Tip',
 	'engine' => 'tip',
 	'Collation' => 'Colaționare',
@@ -160,7 +156,7 @@ return [
 	'Copy' => 'Copiază',
 	'Tables have been copied.' => 'Tabelele au fost copiate.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabele',
 	'Tables and views' => 'Tabele și reprezentări',
 	'Table' => 'Tabel',
@@ -187,7 +183,7 @@ return [
 	'Remove' => 'Șterge',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Numărul maxim de înscrieri disponibile a fost atins. Majorați %s.',
 
-	// Views.
+	// Views
 	'View' => 'Reprezentare',
 	'View has been dropped.' => 'Reprezentarea a fost ștearsă.',
 	'View has been altered.' => 'Reprezentarea a fost modificată.',
@@ -195,13 +191,13 @@ return [
 	'Alter view' => 'Modifică reprezentarea',
 	'Create view' => 'Crează reprezentare',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Împarte',
 	'Partitions' => 'Secțiuni',
 	'Partition name' => 'Denumirea secțiunii',
 	'Values' => 'Parametru',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indexuri',
 	'Indexes have been altered.' => 'Indexurile au fost modificate.',
 	'Alter indexes' => 'Modifică indexuri',
@@ -209,7 +205,7 @@ return [
 	'Index Type' => 'Tipul indexului',
 	'length' => 'lungimea',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Chei externe',
 	'Foreign key' => 'Cheie externă',
 	'Foreign key has been dropped.' => 'Cheia externă a fost ștearsă.',
@@ -226,7 +222,7 @@ return [
 	'ON UPDATE' => 'La modificare',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Coloanele ar trebui să aibă aceleaşi tipuri de date, trebuie să existe date de referinţă și un index pe coloanela-ţintă.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Proceduri și funcții salvate',
 	'Routine has been called, %d row(s) affected.' => [
 		'A fost executată procedura, %d înscriere a fost modificată.',
@@ -243,7 +239,7 @@ return [
 	'Alter procedure' => 'Modifică procedura',
 	'Return type' => 'Tipul returnării',
 
-	// Events.
+	// Events
 	'Events' => 'Evenimente',
 	'Event' => 'Eveniment',
 	'Event has been dropped.' => 'Evenimentul a fost șters.',
@@ -258,7 +254,7 @@ return [
 	'End' => 'Sfârșit',
 	'On completion preserve' => 'Salvează după finisare',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => '«Secvențe»',
 	'Create sequence' => 'Crează «secvență»',
 	'Sequence has been dropped.' => '«secvența» a fost ștearsă.',
@@ -273,7 +269,7 @@ return [
 	'Type has been created.' => 'Crează tip nou.',
 	'Alter type' => 'Modifică tip',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Declanșatoare',
 	'Add trigger' => 'Adaugă trigger (declanșator)',
 	'Trigger has been dropped.' => 'Triggerul a fost șters.',
@@ -282,9 +278,9 @@ return [
 	'Alter trigger' => 'Modifică trigger',
 	'Create trigger' => 'Crează trigger',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Selectează',
 	'Select' => 'Selectează',
 	'Functions' => 'Funcții',
@@ -311,24 +307,22 @@ return [
 		'%d octeți',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Ctrl+click on a value to modify it.' => 'Ctrl+click pe o valoare pentru a o modifica.',
 	'Use edit link to modify this value.' => 'Valoare poate fi modificată cu ajutorul butonului «modifică».',
 
-	// Editing.
+	// Editing
 	'New item' => 'Înscriere nouă',
 	'Edit' => 'Editează',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'gol',
+	'empty' => 'gol', // label for value '' in enum data type
 	'Insert' => 'Inserează',
 	'Save' => 'Salvează',
 	'Save and continue edit' => 'Salvează și continuă editarea',
 	'Save and insert next' => 'Salvează și mai inserează',
 	'Clone' => 'Clonează',
 	'Delete' => 'Șterge',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Înregistrarea%s a fost inserată.',
+	'Item%s has been inserted.' => 'Înregistrarea%s a fost inserată.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Înregistrare a fost ștearsă.',
 	'Item has been updated.' => 'Înregistrare a fost înnoită.',
 	'%d item(s) have been affected.' => [
@@ -336,7 +330,7 @@ return [
 		'Au fost modificate %d înscrieri.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Număr',
 	'Date and time' => 'Data și timpul',
 	'Strings' => 'Șiruri de caractere',
@@ -346,8 +340,10 @@ return [
 	'Geometry' => 'Geometrie',
 	'Relations' => 'Relații',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'acum',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

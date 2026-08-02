@@ -180,8 +180,8 @@ foreach ($languages as $language => $dummy) {
 function write_translation(string &$content, string $en, $translation, bool $single_line): void
 {
 	$content = preg_replace(
-		'~(\t\'' . preg_quote($en) . '\' => ).+,\n~',
-		"$1" . format_translation($translation, $single_line, true) . ",\n",
+		'~^(\t\'' . preg_quote($en) . '\' => ).+?,( +//.*)?$~m',
+		"$1" . format_translation($translation, $single_line, true) . ",$2",
 		$content
 	);
 }
@@ -189,7 +189,7 @@ function write_translation(string &$content, string $en, $translation, bool $sin
 function delete_translation(string &$content, string $en): void
 {
 	$content = preg_replace(
-		'~\t+\'' . preg_quote($en) . '\' => .+,\n~',
+		'~\t+\'' . preg_quote($en) . '\' => [^\n]+\n~',
 		"",
 		$content
 	);

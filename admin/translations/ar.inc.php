@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'rtl',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'rtl', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'JJ/MM/AAAA',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'JJ/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'النظام',
 	'Server' => 'الخادم',
 	'Username' => 'اسم المستخدم',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'تم تسجيل الخروج بنجاح.',
 	'Invalid CSRF token. Send the form again.' => 'رمز CSRF غير صالح. المرجو إرسال الاستمارة مرة أخرى.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'امتداد غير موجود',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'إمتدادات php (%s) المدعومة غير موجودة.',
+	'None of the supported PHP extensions (%s) are available.' => 'إمتدادات php (%s) المدعومة غير موجودة.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'عليك تفعيل نظام الجلسات.',
 	'Session expired, please login again.' => 'إنتهت الجلسة، من فضلك أعد تسجيل الدخول.',
 	'%s version: %s through PHP extension %s' => 'النسخة %s : %s عن طريق إمتداد ال PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'اللغة',
 
 	'Refresh' => 'تحديث',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'الإمتيازات',
 	'Create user' => 'إنشاء مستخدم',
 	'User has been dropped.' => 'تم حذف المستخدم.',
@@ -50,20 +46,20 @@ return [
 	'User has been created.' => 'تم إنشاء المستخدم.',
 	'Hashed' => 'تلبيد',
 
-	// Server.
+	// Server
 	'Process list' => 'قائمة الإجراءات',
 	'%d process(es) have been killed.' => 'عدد الإجراءات التي تم إيقافها %d.',
 	'Kill' => 'إيقاف',
 	'Variables' => 'متغيرات',
 	'Status' => 'حالة',
 
-	// Structure.
+	// Structure
 	'Column' => 'عمود',
 	'Routine' => 'روتين',
 	'Grant' => 'موافق',
 	'Revoke' => 'إلغاء',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'استعلام SQL',
 	'%d query(s) executed OK.' => [
 		'تم تنفيذ الاستعلام %d بنجاح.',
@@ -76,13 +72,12 @@ return [
 	'Stop on error' => 'أوقف في حالة حدوث خطأ',
 	'Show only errors' => 'إظهار الأخطاء فقط',
 	'Time' => 'الوقت',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'تاريخ',
 	'Clear' => 'مسح',
 	'Edit all' => 'تعديل الكل',
 
-	// Import.
+	// Import
 	'Import' => 'استيراد',
 	'File upload' => 'رفع ملف',
 	'From server' => 'من الخادم',
@@ -95,7 +90,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'معلومات POST كبيرة جدا. قم بتقليص حجم المعلومات أو قم بزيادة قيمة %s في خيارات ال PHP.',
 	'%d row(s) have been imported.' => 'تم استيراد %d سطرا.',
 
-	// Export.
+	// Export
 	'Export' => 'تصدير',
 	'Output' => 'إخراج',
 	'open' => 'فتح',
@@ -103,7 +98,7 @@ return [
 	'Format' => 'الصيغة',
 	'Data' => 'معلومات',
 
-	// Databases.
+	// Databases
 	'Database' => 'قاعدة بيانات',
 	'Use' => 'استعمال',
 	'Invalid database.' => 'قاعدة البيانات غير صالحة.',
@@ -116,11 +111,12 @@ return [
 	'Database has been created.' => 'تم إنشاء قاعدة البيانات.',
 	'Database has been renamed.' => 'تمت إعادة تسمية فاعدة البيانات.',
 	'Database has been altered.' => 'تم تعديل قاعدة البيانات.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'الملف موجود.',
 	'Please use one of the extensions %s.' => 'المرجو استخدام إحدى الامتدادات %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'المخطط',
 	'Alter schema' => 'تعديل المخطط',
 	'Create schema' => 'إنشاء مخطط',
@@ -129,7 +125,7 @@ return [
 	'Schema has been altered.' => 'تم تعديل المخطط.',
 	'Invalid schema.' => 'مخطط غير صالح.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'المحرك',
 	'engine' => 'المحرك',
 	'Collation' => 'ترتيب',
@@ -151,7 +147,7 @@ return [
 	'Copy' => 'نسخ',
 	'Tables have been copied.' => 'تم نسخ الجداول.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'جداول',
 	'Tables and views' => 'الجداول و العروض',
 	'Table' => 'جدول',
@@ -178,7 +174,7 @@ return [
 	'Remove' => 'مسح',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'لقد تجاوزت العدد الأقصى للحقول. يرجى الرفع من %s.',
 
-	// Views.
+	// Views
 	'View' => 'عرض',
 	'View has been dropped.' => 'تم مسح العرض.',
 	'View has been altered.' => 'تم تعديل العرض.',
@@ -186,13 +182,13 @@ return [
 	'Alter view' => 'تعديل عرض',
 	'Create view' => 'إنشاء عرض',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'مقسم بواسطة',
 	'Partitions' => 'التقسيمات',
 	'Partition name' => 'اسم التقسيم',
 	'Values' => 'القيم',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'المؤشرات',
 	'Indexes have been altered.' => 'تم تعديل المؤشر.',
 	'Alter indexes' => 'تعديل المؤشرات',
@@ -200,7 +196,7 @@ return [
 	'Index Type' => 'نوع المؤشر',
 	'length' => 'الطول',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'مفاتيح أجنبية',
 	'Foreign key' => 'مفتاح أجنبي',
 	'Foreign key has been dropped.' => 'تم مسح المفتاح الأجنبي.',
@@ -217,7 +213,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'أعمدة المصدر و الهدف يجب أن تكون بنفس النوع, يجب أن يكون هناك مؤشر في أعمدة الهدف و البيانات المرجعية يجب ان تكون موجودة.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'الروتينات',
 	'Routine has been called, %d row(s) affected.' => 'تم استدعاء الروتين, عدد الأسطر المعدلة %d.',
 	'Call' => 'استدعاء',
@@ -231,7 +227,7 @@ return [
 	'Alter procedure' => 'تعديل الإجراء',
 	'Return type' => 'نوع العودة',
 
-	// Events.
+	// Events
 	'Events' => 'الأحداث',
 	'Event' => 'الحدث',
 	'Event has been dropped.' => 'تم مسح الحدث.',
@@ -246,7 +242,7 @@ return [
 	'End' => 'إنهاء',
 	'On completion preserve' => 'حفظ عند الإنتهاء',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'السلاسل',
 	'Create sequence' => 'إنشاء سلسلة',
 	'Sequence has been dropped.' => 'تم حذف السلسلة.',
@@ -261,7 +257,7 @@ return [
 	'Type has been created.' => 'تم إنشاء النوع.',
 	'Alter type' => 'تعديل نوع',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'الزنادات',
 	'Add trigger' => 'إضافة زناد',
 	'Trigger has been dropped.' => 'تم حذف الزناد.',
@@ -270,9 +266,9 @@ return [
 	'Alter trigger' => 'تعديل زناد',
 	'Create trigger' => 'إنشاء زناد',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'عرض البيانات',
 	'Select' => 'اختيار',
 	'Functions' => 'الدوال',
@@ -293,28 +289,26 @@ return [
 	'Whole result' => 'نتيجة كاملة',
 	'%d byte(s)' => '%d بايت',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Use edit link to modify this value.' => 'استعمل الرابط "تعديل" لتعديل هذه القيمة.',
 
-	// Editing.
+	// Editing
 	'New item' => 'عنصر جديد',
 	'Edit' => 'تعديل',
 	'original' => 'الأصلي',
-	// label for value '' in enum data type
-	'empty' => 'فارغ',
+	'empty' => 'فارغ', // label for value '' in enum data type
 	'Insert' => 'إنشاء',
 	'Save' => 'حفظ',
 	'Save and continue edit' => 'إحفظ و واصل التعديل',
 	'Save and insert next' => 'جفظ و إنشاء التالي',
 	'Clone' => 'نسخ',
 	'Delete' => 'مسح',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '%sتم إدراج العنصر.',
+	'Item%s has been inserted.' => '%sتم إدراج العنصر.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'تم حذف العنصر.',
 	'Item has been updated.' => 'تم تعديل العنصر.',
 	'%d item(s) have been affected.' => 'عدد العناصر المعدلة هو %d.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'أعداد',
 	'Date and time' => 'التاريخ و الوقت',
 	'Strings' => 'سلاسل',
@@ -324,8 +318,10 @@ return [
 	'Geometry' => 'هندسة',
 	'Relations' => 'علاقات',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'الآن',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

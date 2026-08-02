@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => '.',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => '.', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'ΗΗ/ΜΜ/ΕΕΕΕ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'ΩΩ:ΛΛ:ΔΔ',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'ΗΗ/ΜΜ/ΕΕΕΕ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'ΩΩ:ΛΛ:ΔΔ', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Σύστημα',
 	'Server' => 'Διακομιστής',
 	'Username' => 'Όνομα Χρήστη',
@@ -34,20 +31,19 @@ return [
 	'Invalid CSRF token. Send the form again.' => 'Άκυρο κουπόνι CSRF. Στείλτε τη φόρμα ξανά.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Αν δε στείλατε αυτό το αίτημα από το AdminNeo, τότε κλείστε αυτή τη σελίδα.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Καμία Επέκταση',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.',
+	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Πρέπει να είναι ενεργοποιημένη η υποστήριξη συνεδριών.',
 	'Session expired, please login again.' => 'Η συνεδρία έληξε, παρακαλώ συνδεθείτε ξανά.',
 	'%s version: %s through PHP extension %s' => '%s έκδοση: %s μέσω επέκτασης PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Γλώσσα',
 
 	'Refresh' => 'Ανανέωση',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Δικαιώματα',
 	'Create user' => 'Δημιουργία Χρήστη',
 	'User has been dropped.' => 'Ο Χρήστης διαγράφηκε.',
@@ -55,7 +51,7 @@ return [
 	'User has been created.' => 'Ο Χρήστης δημιουργήθηκε.',
 	'Hashed' => 'Κωδικοποιήθηκε',
 
-	// Server.
+	// Server
 	'Process list' => 'Λίστα διεργασιών',
 	'%d process(es) have been killed.' => [
 		'Τερματίστηκε %d διεργασία.',
@@ -65,13 +61,13 @@ return [
 	'Variables' => 'Μεταβλητές',
 	'Status' => 'Κατάσταση',
 
-	// Structure.
+	// Structure
 	'Column' => 'Στήλη',
 	'Routine' => 'Ρουτίνα',
 	'Grant' => 'Παραχώρηση',
 	'Revoke' => 'Ανάκληση',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Εντολή SQL',
 	'%d query(s) executed OK.' => [
 		'Το ερώτημα %d εκτελέστηκε ΟΚ.',
@@ -87,13 +83,12 @@ return [
 	'Stop on error' => 'Διακοπή όταν υπάρχει σφάλμα',
 	'Show only errors' => 'Να εμφανίζονται μόνο τα σφάλματα',
 	'Time' => 'Ώρα',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Ιστορικό',
 	'Clear' => 'Καθαρισμός',
 	'Edit all' => 'Επεξεργασία όλων',
 
-	// Import.
+	// Import
 	'Import' => 'Εισαγωγή',
 	'File upload' => 'Μεταφόρτωση αρχείου',
 	'From server' => 'Από διακομιστή',
@@ -112,7 +107,7 @@ return [
 		'%d σειρές εισήχθησαν.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Εξαγωγή',
 	'Output' => 'Αποτέλεσμα',
 	'open' => 'άνοιγμα',
@@ -120,7 +115,7 @@ return [
 	'Format' => 'Μορφή',
 	'Data' => 'Δεδομένα',
 
-	// Databases.
+	// Databases
 	'Database' => 'Β. Δεδομένων',
 	'Use' => 'χρήση',
 	'Invalid database.' => 'Λανθασμένη Β.Δ.',
@@ -133,11 +128,12 @@ return [
 	'Database has been created.' => 'Η Β.Δ. δημιουργήθηκε.',
 	'Database has been renamed.' => 'Η. Β.Δ. μετονομάστηκε.',
 	'Database has been altered.' => 'Η Β.Δ. τροποποιήθηκε.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Το αρχείο υπάρχει.',
 	'Please use one of the extensions %s.' => 'Παρακαλώ χρησιμοποιείστε μια από τις επεκτάσεις %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Σχήμα',
 	'Alter schema' => 'Τροποποίηση σχήματος',
 	'Create schema' => 'Δημιουργία σχήματος',
@@ -146,7 +142,7 @@ return [
 	'Schema has been altered.' => 'Το σχήμα τροποποιήθηκε.',
 	'Invalid schema.' => 'Άκυρο σχήμα.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Μηχανή',
 	'engine' => 'μηχανή',
 	'Collation' => 'Collation',
@@ -169,7 +165,7 @@ return [
 	'Copy' => 'Αντιγραφή',
 	'Tables have been copied.' => 'Οι πίνακες αντιγράφηκαν.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Πίνακες',
 	'Tables and views' => 'Πίνακες και Προβολές',
 	'Table' => 'Πίνακας',
@@ -200,7 +196,7 @@ return [
 	'Remove' => 'Αφαίρεση',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Υπέρβαση μέγιστου επιτρεπόμενου αριθμού πεδίων. Παρακαλώ αυξήστε %s.',
 
-	// Views.
+	// Views
 	'View' => 'Προβολή',
 	'Materialized view' => 'Υλοποιημένη προβολή',
 	'View has been dropped.' => 'Η προβολή διαγράφηκε.',
@@ -209,13 +205,13 @@ return [
 	'Alter view' => 'Τροποποίηση προβολής',
 	'Create view' => 'Δημιουργία προβολής',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Τμηματοποίηση ανά',
 	'Partitions' => 'Τμήματα',
 	'Partition name' => 'Όνομα Τμήματος',
 	'Values' => 'Τιμές',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Δείκτες',
 	'Indexes have been altered.' => 'Οι δείκτες τροποποιήθηκαν.',
 	'Alter indexes' => 'Τροποποίηση δεικτών',
@@ -223,7 +219,7 @@ return [
 	'Index Type' => 'Τύπος δείκτη',
 	'length' => 'μήκος',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Εξαρτημένα κλειδιά',
 	'Foreign key' => 'Εξαρτημένο κλειδί',
 	'Foreign key has been dropped.' => 'Το εξαρτημένο κλειδί διαγράφηκε.',
@@ -240,7 +236,7 @@ return [
 	'ON UPDATE' => 'ΚΑΤΑ ΤΗΝ ΑΛΛΑΓΗ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Οι στήλες στην πηγή και το στόχο πρέπει να έχουν τον ίδιο τύπο, πρέπει να υπάρχει δείκτης στη στήλη στόχο και να υπάρχουν εξαρτημένα δεδομένα.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Ρουτίνες',
 	'Routine has been called, %d row(s) affected.' => [
 		'Η ρουτίνα εκτελέστηκε, επηρεάστηκε %d σειρά.',
@@ -257,7 +253,7 @@ return [
 	'Alter procedure' => 'Τροποποίηση διαδικασίας',
 	'Return type' => 'Επιστρεφόμενος τύπος',
 
-	// Events.
+	// Events
 	'Events' => 'Γεγονός',
 	'Event' => 'Γεγονός',
 	'Event has been dropped.' => 'Το γεγονός διαγράφηκε.',
@@ -272,7 +268,7 @@ return [
 	'End' => 'Λήξη',
 	'On completion preserve' => 'Κατά την ολοκλήρωση διατήρησε',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Αλληλουχία',
 	'Create sequence' => 'Δημιουργία αλληλουχίας',
 	'Sequence has been dropped.' => 'Η αλληλουχία διαγράφηκε.',
@@ -287,7 +283,7 @@ return [
 	'Type has been created.' => 'Ο τύπος δημιουργήθηκε.',
 	'Alter type' => 'Τροποποίηση τύπου',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Εναύσματα',
 	'Add trigger' => 'Προσθήκη εναύσματος',
 	'Trigger has been dropped.' => 'Το έναυσμα διαγράφηκε.',
@@ -296,9 +292,9 @@ return [
 	'Alter trigger' => 'Τροποποίηση εναύσματος',
 	'Create trigger' => 'Δημιουργία εναύσματος',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Επιλέξτε δεδομένα',
 	'Select' => 'Επιλογή',
 	'Functions' => 'Λειτουργίες',
@@ -330,17 +326,16 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Τροποποίηση',
 	'Ctrl+click on a value to modify it.' => 'Πιέστε Ctrl+click σε μια τιμή για να την τροποποιήσετε.',
 	'Use edit link to modify this value.' => 'Χρησιμοποιήστε το σύνδεσμο επεξεργασία για να τροποποιήσετε την τιμή.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Νέα εγγραφή',
 	'Edit' => 'Επεξεργασία',
 	'original' => 'πρωτότυπο',
-	// label for value '' in enum data type
-	'empty' => 'κενό',
+	'empty' => 'κενό', // label for value '' in enum data type
 	'Insert' => 'Εισαγωγή',
 	'Save' => 'Αποθήκευση',
 	'Save and continue edit' => 'Αποθήκευση και συνέχεια επεξεργασίας',
@@ -349,8 +344,7 @@ return [
 	'Selected' => 'Επιλεγμένα',
 	'Clone' => 'Κλωνοποίηση',
 	'Delete' => 'Διαγραφή',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Η εγγραφή%s εισήχθη.',
+	'Item%s has been inserted.' => 'Η εγγραφή%s εισήχθη.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Η εγγραφή διαγράφηκε.',
 	'Item has been updated.' => 'Η εγγραφή ενημερώθηκε.',
 	'%d item(s) have been affected.' => [
@@ -359,7 +353,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Δεν έχετε δικαίωμα να τροποποιήσετε αυτό τον πίνακα.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Αριθμοί',
 	'Date and time' => 'Ημερομηνία και ώρα',
 	'Strings' => 'Κείμενο',
@@ -369,10 +363,12 @@ return [
 	'Geometry' => 'Γεωμετρία',
 	'Relations' => 'Συσχετήσεις',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'τώρα',
 	'yes' => 'ναι',
 	'no' => 'όχι',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

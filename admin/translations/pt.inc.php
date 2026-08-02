@@ -3,20 +3,17 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD/MM/AAAA',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Motor de Base de dados',
 	'Server' => 'Servidor',
 	'Username' => 'Nome de utilizador',
@@ -28,20 +25,19 @@ return [
 	'Logout successful.' => 'Sessão terminada com sucesso.',
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Enviar o formulario novamente.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Não há extensão',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nenhuma das extensões PHP suportadas (%s) está disponivel.',
+	'None of the supported PHP extensions (%s) are available.' => 'Nenhuma das extensões PHP suportadas (%s) está disponivel.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'As sessões devem estar ativas.',
 	'Session expired, please login again.' => 'Sessão expirada, por favor entre de novo.',
 	'%s version: %s through PHP extension %s' => 'Versão %s: %s através da extensão PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Idioma',
 
 	'Refresh' => 'Atualizar',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilégios',
 	'Create user' => 'Criar utilizador',
 	'User has been dropped.' => 'Utilizador eliminado.',
@@ -49,7 +45,7 @@ return [
 	'User has been created.' => 'Utilizador criado.',
 	'Hashed' => 'Hash',
 
-	// Server.
+	// Server
 	'Process list' => 'Lista de processos',
 	'%d process(es) have been killed.' => [
 		'%d processo terminado.',
@@ -59,13 +55,13 @@ return [
 	'Variables' => 'Variáveis',
 	'Status' => 'Estado',
 
-	// Structure.
+	// Structure
 	'Column' => 'Coluna',
 	'Routine' => 'Rotina',
 	'Grant' => 'Conceder',
 	'Revoke' => 'Impedir',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Comando SQL',
 	'%d query(s) executed OK.' => [
 		'%d consulta sql executada corretamente.',
@@ -81,12 +77,11 @@ return [
 	'Stop on error' => 'Parar em caso de erro',
 	'Show only errors' => 'Mostrar somente erros',
 	'Time' => 'Tempo',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Histórico',
 	'Clear' => 'Limpar',
 
-	// Import.
+	// Import
 	'Import' => 'Importar',
 	'File upload' => 'Importar ficheiro',
 	'From server' => 'Do servidor',
@@ -102,7 +97,7 @@ return [
 		'%d registos importados.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exportar',
 	'Output' => 'Saída',
 	'open' => 'abrir',
@@ -110,7 +105,7 @@ return [
 	'Format' => 'Formato',
 	'Data' => 'Dados',
 
-	// Databases.
+	// Databases
 	'Database' => 'Base de dados',
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de dados inválida.',
@@ -122,11 +117,12 @@ return [
 	'Database has been created.' => 'Base de dados criada.',
 	'Database has been renamed.' => 'Base de dados renomeada.',
 	'Database has been altered.' => 'Base de dados modificada.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Ficheiro já existe.',
 	'Please use one of the extensions %s.' => 'Por favor use uma das extensões %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Esquema',
 	'Alter schema' => 'Modificar esquema',
 	'Create schema' => 'Criar esquema',
@@ -135,7 +131,7 @@ return [
 	'Schema has been altered.' => 'Esquema modificado.',
 	'Invalid schema.' => 'Esquema inválido.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Colação',
@@ -155,7 +151,7 @@ return [
 	'Move' => 'Mover',
 	'Tables have been moved.' => 'As Tabelas foram movidas.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabelas',
 	'Tables and views' => 'Tabelas e vistas',
 	'Table' => 'Tabela',
@@ -182,7 +178,7 @@ return [
 	'Remove' => 'Remover',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Quantidade máxima de campos permitidos excedidos. Por favor aumente %s.',
 
-	// Views.
+	// Views
 	'View' => 'Visualizar',
 	'View has been dropped.' => 'Vista eliminada.',
 	'View has been altered.' => 'Vista modificada.',
@@ -190,13 +186,13 @@ return [
 	'Alter view' => 'Modificar vista',
 	'Create view' => 'Criar vista',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Particionar por',
 	'Partitions' => 'Partições',
 	'Partition name' => 'Nome da Partição',
 	'Values' => 'Valores',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Índices',
 	'Indexes have been altered.' => 'Índices modificados.',
 	'Alter indexes' => 'Modificar índices',
@@ -204,7 +200,7 @@ return [
 	'Index Type' => 'Tipo de índice',
 	'length' => 'tamanho',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Chaves estrangeiras',
 	'Foreign key' => 'Chave estrangeira',
 	'Foreign key has been dropped.' => 'Chave estrangeira eliminada.',
@@ -221,7 +217,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'As colunas de origen e destino devem ser do mesmo tipo, deve existir um índice entre as colunas de destino e o registo referenciado deve existir.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedimentos',
 	'Routine has been called, %d row(s) affected.' => [
 		'Consulta executada, %d registo afetado.',
@@ -238,7 +234,7 @@ return [
 	'Alter procedure' => 'Modificar procedimento',
 	'Return type' => 'Tipo de valor de regresso',
 
-	// Events.
+	// Events
 	'Events' => 'Eventos',
 	'Event' => 'Evento',
 	'Event has been dropped.' => 'Evento eliminado.',
@@ -253,7 +249,7 @@ return [
 	'End' => 'Fim',
 	'On completion preserve' => 'Preservar ao completar',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sequências',
 	'Create sequence' => 'Criar sequências',
 	'Sequence has been dropped.' => 'Sequência eliminada.',
@@ -268,7 +264,7 @@ return [
 	'Type has been created.' => 'Tipo criado.',
 	'Alter type' => 'Modificar tipo',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Triggers',
 	'Add trigger' => 'Adicionar trigger',
 	'Trigger has been dropped.' => 'Trigger eliminado.',
@@ -277,9 +273,9 @@ return [
 	'Alter trigger' => 'Modificar Trigger',
 	'Create trigger' => 'Adicionar Trigger',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Selecionar dados',
 	'Select' => 'Selecionar',
 	'Functions' => 'Funções',
@@ -306,24 +302,22 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Ctrl+click on a value to modify it.' => 'Ctrl+clique vezes sobre o valor para edita-lo.',
 	'Use edit link to modify this value.' => 'Utilize o link modificar para alterar.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Novo Registo',
 	'Edit' => 'Modificar',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'vazio',
+	'empty' => 'vazio', // label for value '' in enum data type
 	'Insert' => 'Inserir',
 	'Save' => 'Guardar',
 	'Save and continue edit' => 'Guardar e continuar a edição',
 	'Save and insert next' => 'Guardar e inserir outro',
 	'Clone' => 'Clonar',
 	'Delete' => 'Eliminar',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Registo%s inserido.',
+	'Item%s has been inserted.' => 'Registo%s inserido.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Registo eliminado.',
 	'Item has been updated.' => 'Registo modificado.',
 	'%d item(s) have been affected.' => [
@@ -331,7 +325,7 @@ return [
 		'%d itens afetados.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Números',
 	'Date and time' => 'Data e hora',
 	'Strings' => 'Cadeia',
@@ -341,8 +335,10 @@ return [
 	'Geometry' => 'Geometria',
 	'Relations' => 'Relações',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'agora',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

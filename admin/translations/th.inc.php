@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'วันที่/เดือน/ปี',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'วันที่/เดือน/ปี', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'ระบบ',
 	'Server' => 'เซอเวอร์',
 	'Username' => 'ชื่อผู้ใช้งาน',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'ออกจากระบบเรียบร้อยแล้ว.',
 	'Invalid CSRF token. Send the form again.' => 'เครื่องหมาย CSRF ไม่ถูกต้อง ส่งข้อมูลใหม่อีกครั้ง.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'ไม่พบส่วนเสริม',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'ไม่มีส่วนเสริมของ PHP (%s) ที่สามารถใช้งานได้.',
+	'None of the supported PHP extensions (%s) are available.' => 'ไม่มีส่วนเสริมของ PHP (%s) ที่สามารถใช้งานได้.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'ต้องเปิดใช้งาน Session.',
 	'Session expired, please login again.' => 'Session หมดอายุแล้ว กรุณาเข้าสู่ระบบใหม่อีกครั้ง.',
 	'%s version: %s through PHP extension %s' => '%s รุ่น: %s ผ่านส่วนขยาย PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'ภาษา',
 
 	'Refresh' => 'โหลดใหม่',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'สิทธิ์',
 	'Create user' => 'สร้างผู้ใช้งาน',
 	'User has been dropped.' => 'ลบผู้ใช้งานแล้ว.',
@@ -50,20 +46,20 @@ return [
 	'User has been created.' => 'สร้างผู้ใช้งานแล้ว.',
 	'Hashed' => 'Hash',
 
-	// Server.
+	// Server
 	'Process list' => 'รายการของกระบวนการ',
 	'%d process(es) have been killed.' => 'มี %d กระบวนการถูกทำลายแล้ว.',
 	'Kill' => 'ทำลาย',
 	'Variables' => 'ตัวแปร',
 	'Status' => 'สถานะ',
 
-	// Structure.
+	// Structure
 	'Column' => 'คอลัมน์',
 	'Routine' => 'รูทีน',
 	'Grant' => 'การอนุญาต',
 	'Revoke' => 'ยกเลิก',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'คำสั่ง SQL',
 	'%d query(s) executed OK.' => '%d คำสั่งถูกดำเนินการแล้ว.',
 	'Query executed OK, %d row(s) affected.' => 'ประมวลผลคำสั่งแล้ว มี %d ถูกดำเนินการ.',
@@ -73,13 +69,12 @@ return [
 	'Stop on error' => 'หยุดการทำงานเมื่อเออเรอ',
 	'Show only errors' => 'แสดงเฉพาะเออเรอ',
 	'Time' => 'เวลา',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f วินาที',
+	'%.3f s' => '%.3f วินาที', // sprintf() format for time of the command
 	'History' => 'ประวัติ',
 	'Clear' => 'เคลียร์',
 	'Edit all' => 'แก้ไขทั้งหมด',
 
-	// Import.
+	// Import
 	'Import' => 'นำเข้า',
 	'File upload' => 'อัปโหลดไฟล์',
 	'From server' => 'จากเซเวอร์',
@@ -92,7 +87,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'ข้อมูลที่ส่งเข้ามีขนาดใหญ่เกิน คุณสามารถ เพิ่ม-ลดขนาดได้ที่ %s คำสั่งการตั้งค่า.',
 	'%d row(s) have been imported.' => '%d แถวถูกนำเข้าแล้ว.',
 
-	// Export.
+	// Export
 	'Export' => 'ส่งออก',
 	'Output' => 'ข้อมูลที่ส่งออก',
 	'open' => 'เปิด',
@@ -100,7 +95,7 @@ return [
 	'Format' => 'รูปแบบ',
 	'Data' => 'ข้อมูล',
 
-	// Databases.
+	// Databases
 	'Database' => 'ฐานข้อมูล',
 	'Use' => 'ใช้งาน',
 	'Invalid database.' => 'ฐานข้อมูลไม่ถูกต้อง.',
@@ -113,11 +108,12 @@ return [
 	'Database has been created.' => 'สร้างฐานข้อมูลใหม่แล้ว.',
 	'Database has been renamed.' => 'เปลี่ยนชื่อฐานข้อมูลแล้ว.',
 	'Database has been altered.' => 'เปลี่ยนแปลงฐานข้อมูลแล้ว.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'มีไฟล์นี้อยู่แล้ว.',
 	'Please use one of the extensions %s.' => 'กรุณาใช้ส่วนเสริมอย่างน้อย 1 ส่วนเสริมจากทั้งหมด %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'Alter schema' => 'เปลี่ยนแปลง schema',
 	'Create schema' => 'สร้าง schema',
@@ -126,7 +122,7 @@ return [
 	'Schema has been altered.' => 'Schema ถูกเปลี่ยนแปลงแล้ว.',
 	'Invalid schema.' => 'schema ไม่ถูกต้อง.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'ชนิดของฐานข้อมูล',
 	'engine' => 'ชนิดของฐานข้อมูล',
 	'Collation' => 'การตรวจทาน',
@@ -148,7 +144,7 @@ return [
 	'Copy' => 'ทำซ้ำ',
 	'Tables have been copied.' => 'ทำซ้ำตารางฐานข้อมูลแล้ว.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'ตาราง',
 	'Tables and views' => 'ตารางและวิว',
 	'Table' => 'ตาราง',
@@ -175,7 +171,7 @@ return [
 	'Remove' => 'ลบ',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'จำนวนสูงสุดของฟิลด์อนุญาตให้เกิน กรุณาเพิ่มอีก %s.',
 
-	// Views.
+	// Views
 	'View' => 'วิว',
 	'View has been dropped.' => 'วิวถูกลบแล้ว.',
 	'View has been altered.' => 'วิวถูกเปลี่ยนแปลงแล้ว.',
@@ -183,13 +179,13 @@ return [
 	'Alter view' => 'เปลี่ยนแปลงวิว',
 	'Create view' => 'เพิ่มวิว',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'พาร์ทิชันโดย',
 	'Partitions' => 'พาร์ทิชัน',
 	'Partition name' => 'ชื่อของพาร์ทิชัน',
 	'Values' => 'ค่า',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'ดัชนี',
 	'Indexes have been altered.' => 'เปลี่ยนแปลงดัชนีแล้ว.',
 	'Alter indexes' => 'เปลี่ยนแปลงดัชนี',
@@ -197,7 +193,7 @@ return [
 	'Index Type' => 'ชนิดของดัชนี',
 	'length' => 'ความยาว',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'คีย์คู่แข่ง',
 	'Foreign key' => 'คีย์คู่แข่ง',
 	'Foreign key has been dropped.' => 'คีย์คู่แข่งถูกลบแล้ว.',
@@ -214,7 +210,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'แหล่งที่มาและเป้าหมายของคอลมัน์ต้องมีชนิดข้อมูลเดียวกัน คือต้องมีดัชนีและข้อมูลอ้างอิงของคอลัมน์เป้าหมาย.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'รูทีน',
 	'Routine has been called, %d row(s) affected.' => 'รูทีนถูกเรียกใช้งาน มี %d แถวถูกดำเนินการ.',
 	'Call' => 'เรียกใช้งาน',
@@ -228,7 +224,7 @@ return [
 	'Alter procedure' => 'เปลี่ยนแปลง procedure',
 	'Return type' => 'ประเภทของค่าที่คืนกลับ',
 
-	// Events.
+	// Events
 	'Events' => 'เหตุการณ์',
 	'Event' => 'เหตุการณ์',
 	'Event has been dropped.' => 'เหตุการณ์ถูกลบแล้ว.',
@@ -243,7 +239,7 @@ return [
 	'End' => 'สิ้นสุด',
 	'On completion preserve' => 'เมื่อเสร็จสิ้นการสงวน',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sequences',
 	'Create sequence' => 'Sequence ถูกสร้างแล้ว',
 	'Sequence has been dropped.' => 'Sequence ถูกลบแล้ว.',
@@ -258,7 +254,7 @@ return [
 	'Type has been created.' => 'ประเภทถูกสร้างแล้ว.',
 	'Alter type' => 'แก้ไขประเภท',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'ทริกเกอร์',
 	'Add trigger' => 'เพิ่ม trigger',
 	'Trigger has been dropped.' => 'Trigger ถูกลบแล้ว.',
@@ -267,9 +263,9 @@ return [
 	'Alter trigger' => 'เปลี่ยนแปลง Trigger',
 	'Create trigger' => 'สร้าง Trigger',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'เลือกข้อมูล',
 	'Select' => 'เลือก',
 	'Functions' => 'ฟังก์ชั่น',
@@ -290,29 +286,27 @@ return [
 	'Whole result' => 'รวมผล',
 	'%d byte(s)' => '%d ไบท์',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Ctrl+click on a value to modify it.' => 'กด Ctrl+click เพื่อแก้ไขค่า.',
 	'Use edit link to modify this value.' => 'ใช้ลิงค์ แก้ไข เพื่อปรับเปลี่ยนค่านี้.',
 
-	// Editing.
+	// Editing
 	'New item' => 'รายการใหม่',
 	'Edit' => 'แก้ไข',
 	'original' => 'ต้นฉบับ',
-	// label for value '' in enum data type
-	'empty' => 'ว่างเปล่า',
+	'empty' => 'ว่างเปล่า', // label for value '' in enum data type
 	'Insert' => 'เพิ่ม',
 	'Save' => 'บันทึก',
 	'Save and continue edit' => 'บันทึกและแก้ไขข้อมูลอื่นๆต่อ',
 	'Save and insert next' => 'บันทึกแล้วเพิ่มรายการถัดไป',
 	'Clone' => 'ทำซ้ำ',
 	'Delete' => 'ลบ',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'มี%s รายการ ถูกเพิ่มแล้ว.',
+	'Item%s has been inserted.' => 'มี%s รายการ ถูกเพิ่มแล้ว.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'รายการถูกลบแล้ว.',
 	'Item has been updated.' => 'ปรับปรุงรายการแล้ว.',
 	'%d item(s) have been affected.' => 'มี %d รายการถูกดำเนินการแล้ว.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'ตัวเลข',
 	'Date and time' => 'วันและเวลา',
 	'Strings' => 'ตัวอักษร',
@@ -322,8 +316,10 @@ return [
 	'Geometry' => 'เรขาคณิต',
 	'Relations' => 'ความสำพันธ์',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'ตอนนี้',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

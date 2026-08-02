@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'rtl',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'rtl', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '۰۱۲۳۴۵۶۷۸۹',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'سیستم',
 	'Server' => 'سرور',
 	'Username' => 'نام کاربری',
@@ -33,20 +30,19 @@ return [
 	],
 	'Invalid CSRF token. Send the form again.' => 'CSRF token نامعتبر است. دوباره سعی کنید.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'پسوند نامعتبر',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'هیچ کدام از افزونه های PHP پشتیبانی شده (%s) موجود نمی باشند.',
+	'None of the supported PHP extensions (%s) are available.' => 'هیچ کدام از افزونه های PHP پشتیبانی شده (%s) موجود نمی باشند.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'پشتیبانی از نشست بایستی فعال گردد.',
 	'Session expired, please login again.' => 'نشست پایان یافته، لطفا دوباره وارد شوید.',
 	'%s version: %s through PHP extension %s' => 'نسخه %s : %s توسعه پی اچ پی %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'زبان',
 
 	'Refresh' => 'بازیابی',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'امتیازات',
 	'Create user' => 'ایجاد کاربر',
 	'User has been dropped.' => 'کاربر حذف شد.',
@@ -54,20 +50,20 @@ return [
 	'User has been created.' => 'کاربر ایجاد شد.',
 	'Hashed' => 'به هم ریخته',
 
-	// Server.
+	// Server
 	'Process list' => 'لیست فرآیند',
 	'%d process(es) have been killed.' => '%d فرآیند متوقف شد.',
 	'Kill' => 'حذف فرآیند',
 	'Variables' => 'متغیرها',
 	'Status' => 'وضعیت',
 
-	// Structure.
+	// Structure
 	'Column' => 'ستون',
 	'Routine' => 'روتین',
 	'Grant' => 'اعطا',
 	'Revoke' => 'لغو کردن',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'دستور SQL',
 	'%d query(s) executed OK.' => '%d کوئری اجرا شد.',
 	'Query executed OK, %d row(s) affected.' => 'کوئری اجرا شد. %d سطر تغیر کرد.',
@@ -77,13 +73,12 @@ return [
 	'Stop on error' => 'توقف بر روی خطا',
 	'Show only errors' => 'فقط نمایش خطاها',
 	'Time' => 'زمان',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'تاریخ',
 	'Clear' => 'پاک کردن',
 	'Edit all' => 'ویرایش همه',
 
-	// Import.
+	// Import
 	'Import' => 'وارد کردن',
 	'File upload' => 'بارگذاری فایل',
 	'From server' => 'از سرور',
@@ -102,7 +97,7 @@ return [
 		'%d سطر وارد شد.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'استخراج',
 	'Output' => 'خروجی',
 	'open' => 'بازکردن',
@@ -110,7 +105,7 @@ return [
 	'Format' => 'حذف',
 	'Data' => 'داده',
 
-	// Databases.
+	// Databases
 	'Database' => 'پایگاه داده',
 	'Use' => 'استفاده',
 	'Invalid database.' => 'پایگاه داده نامعتبر.',
@@ -123,11 +118,12 @@ return [
 	'Database has been created.' => 'پایگاه داده ایجاد شد.',
 	'Database has been renamed.' => 'نام پایگاه داده تغیر کرد.',
 	'Database has been altered.' => 'پایگاه داده ویرایش شد.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'فایل موجود است.',
 	'Please use one of the extensions %s.' => 'لطفا یکی از پسوندها را انتخاب نمائید %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'ساختار',
 	'Alter schema' => 'ویرایش ساختار',
 	'Create schema' => 'ایجاد ساختار',
@@ -136,7 +132,7 @@ return [
 	'Schema has been altered.' => 'ساختار ویرایش شد.',
 	'Invalid schema.' => 'ساختار نامعتبر.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'موتور',
 	'engine' => 'موتور',
 	'Collation' => 'تطبیق',
@@ -159,7 +155,7 @@ return [
 	'Copy' => 'کپی کردن',
 	'Tables have been copied.' => 'جدولها کپی شدند.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'جدولها',
 	'Tables and views' => 'جدولها و نمایه ها',
 	'Table' => 'جدول',
@@ -190,7 +186,7 @@ return [
 	'Remove' => 'حذف',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'حداکثر تعداد فیلدهای مجاز اشباع شد. لطفا %s را افزایش دهید.',
 
-	// Views.
+	// Views
 	'View' => 'نمایش',
 	'Materialized view' => 'نمایه مادی',
 	'View has been dropped.' => 'نمایش حذف شد.',
@@ -199,13 +195,13 @@ return [
 	'Alter view' => 'حذف نمایش',
 	'Create view' => 'ایجاد نمایش',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'بخشبندی توسط',
 	'Partitions' => 'بخشبندیها',
 	'Partition name' => 'نام بخش',
 	'Values' => 'مقادیر',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'ایندکسها',
 	'Indexes have been altered.' => 'ایندکسها ویرایش شدند.',
 	'Alter indexes' => 'ویرایش ایندکسها',
@@ -213,7 +209,7 @@ return [
 	'Index Type' => 'نوع ایندکس',
 	'length' => 'طول',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'کلیدهای خارجی',
 	'Foreign key' => 'کلید خارجی',
 	'Foreign key has been dropped.' => 'کلید خارجی حذف شد.',
@@ -230,7 +226,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'داده مبدا و مقصد ستونها بایستی شبیه هم باشند.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'روالها',
 	'Routine has been called, %d row(s) affected.' => [
 		'روال فراخوانی شد %d سطر متاثر شد.',
@@ -247,7 +243,7 @@ return [
 	'Alter procedure' => 'ویرایش زیربرنامه',
 	'Return type' => 'برگرداندن نوع',
 
-	// Events.
+	// Events
 	'Events' => 'رویدادها',
 	'Event' => 'رویداد',
 	'Event has been dropped.' => 'رویداد حذف شد.',
@@ -262,7 +258,7 @@ return [
 	'End' => 'پایان',
 	'On completion preserve' => 'تکمیل حفاظت فعال است',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'صف ها',
 	'Create sequence' => 'ایجاد صف',
 	'Sequence has been dropped.' => 'صف حذف شد.',
@@ -277,7 +273,7 @@ return [
 	'Type has been created.' => 'نوع ایجاد شد.',
 	'Alter type' => 'ویرایش نوع',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'تریگرها',
 	'Add trigger' => 'افزودن تریگر',
 	'Trigger has been dropped.' => 'تریگر حذف شد.',
@@ -286,9 +282,9 @@ return [
 	'Alter trigger' => 'ویرایش تریگر',
 	'Create trigger' => 'ایجاد تریگر',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'انتخاب داده',
 	'Select' => 'انتخاب',
 	'Functions' => 'توابع',
@@ -320,17 +316,16 @@ return [
 		'%d بایت',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'ویرایش',
 	'Ctrl+click on a value to modify it.' => 'برای ویرایش بر روی مقدار ctrl+click کنید.',
 	'Use edit link to modify this value.' => 'از لینک ویرایش برای ویرایش این مقدار استفاده کنید.',
 
-	// Editing.
+	// Editing
 	'New item' => 'آیتم جدید',
 	'Edit' => 'ویرایش',
 	'original' => 'اصلی',
-	// label for value '' in enum data type
-	'empty' => 'خالی',
+	'empty' => 'خالی', // label for value '' in enum data type
 	'Insert' => 'درج',
 	'Save' => 'ذخیره',
 	'Save and continue edit' => 'ذخیره و ادامه ویرایش',
@@ -338,8 +333,7 @@ return [
 	'Selected' => 'انتخاب شده',
 	'Clone' => 'تکثیر',
 	'Delete' => 'حذف',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '%s آیتم درج شد.',
+	'Item%s has been inserted.' => '%s آیتم درج شد.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'آیتم حذف شد.',
 	'Item has been updated.' => 'آیتم بروز رسانی شد.',
 	'%d item(s) have been affected.' => [
@@ -348,7 +342,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'شما اختیار ویرایش این جدول را ندارید.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'اعداد',
 	'Date and time' => 'تاریخ و زمان',
 	'Strings' => 'رشته ها',
@@ -358,10 +352,12 @@ return [
 	'Geometry' => 'هندسه',
 	'Relations' => 'رابطه ها',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'اکنون',
 	'yes' => 'بله',
 	'no' => 'خیر',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

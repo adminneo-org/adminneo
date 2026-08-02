@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'G.A.YYYY',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'SS:DD:ss',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'G.A.YYYY', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'SS:DD:ss', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistem',
 	'Server' => 'Sunucu',
 	'Username' => 'Kullanıcı',
@@ -31,21 +28,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Bu isteği AdminNeo\'den göndermediyseniz bu sayfayı kapatın.',
 	'The action will be performed after successful login with the same credentials.' => 'İşlem, aynı kimlik bilgileriyle başarıyla oturum açıldıktan sonra gerçekleştirilecektir.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Uzantı yok',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Desteklenen PHP eklentilerinden (%s) hiçbiri mevcut değil.',
+	'None of the supported PHP extensions (%s) are available.' => 'Desteklenen PHP eklentilerinden (%s) hiçbiri mevcut değil.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Ayrıcalıklı bağlantı noktalarına bağlanmaya izin verilmiyor.',
 	'Session support must be enabled.' => 'Oturum desteği etkin olmalıdır.',
 	'Session expired, please login again.' => 'Oturum süresi doldu, lütfen tekrar giriş yapın.',
 	'%s version: %s through PHP extension %s' => '%s sürüm: %s, %s PHP eklentisi ile',
 
-	// Settings.
+	// Settings
 	'Language' => 'Dil',
 
 	'Refresh' => 'Tazele',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'İzinler',
 	'Create user' => 'Kullanıcı oluştur',
 	'User has been dropped.' => 'Kullanıcı silindi.',
@@ -53,7 +49,7 @@ return [
 	'User has been created.' => 'Kullanıcı oluşturuldu.',
 	'Hashed' => 'Harmanlandı',
 
-	// Server.
+	// Server
 	'Process list' => 'İşlem listesi',
 	'%d process(es) have been killed.' => [
 		'%d işlem sonlandırıldı.',
@@ -63,13 +59,13 @@ return [
 	'Variables' => 'Değişkenler',
 	'Status' => 'Durum',
 
-	// Structure.
+	// Structure
 	'Column' => 'Kolon',
 	'Routine' => 'Yordam',
 	'Grant' => 'Yetki Ver',
 	'Revoke' => 'Yetki Kaldır',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL komutu',
 	'%d query(s) executed OK.' => [
 		'%d sorgu başarıyla çalıştırıldı.',
@@ -87,13 +83,12 @@ return [
 	'Stop on error' => 'Hata oluşursa dur',
 	'Show only errors' => 'Sadece hataları göster',
 	'Time' => 'Zaman',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Geçmiş',
 	'Clear' => 'Temizle',
 	'Edit all' => 'Tümünü düzenle',
 
-	// Import.
+	// Import
 	'Import' => 'İçeri Aktar',
 	'File upload' => 'Dosya gönder',
 	'From server' => 'Sunucudan',
@@ -112,7 +107,7 @@ return [
 		'%d adet kayıt içeri aktarıldı.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Dışarı Aktar',
 	'Output' => 'Çıktı',
 	'open' => 'aç',
@@ -120,7 +115,7 @@ return [
 	'Format' => 'Biçim',
 	'Data' => 'Veri',
 
-	// Databases.
+	// Databases
 	'Database' => 'Veri Tabanı',
 	'DB' => 'DB',
 	'Use' => 'Kullan',
@@ -134,11 +129,12 @@ return [
 	'Database has been created.' => 'Veri tabanı oluşturuldu.',
 	'Database has been renamed.' => 'Veri tabanının ismi değiştirildi.',
 	'Database has been altered.' => 'Veri tabanı değiştirildi.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Dosya zaten mevcut.',
 	'Please use one of the extensions %s.' => '%s uzantılarından birini kullanın.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Şema',
 	'Alter schema' => 'Şemayı değiştir',
 	'Create schema' => 'Şema oluştur',
@@ -147,7 +143,7 @@ return [
 	'Schema has been altered.' => 'Şema değiştirildi.',
 	'Invalid schema.' => 'Geçersiz şema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Karşılaştırma',
@@ -170,7 +166,7 @@ return [
 	'Copy' => 'Kopyala',
 	'Tables have been copied.' => 'Tablolar kopyalandı.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tablolar',
 	'Tables and views' => 'Tablolar ve görünümler',
 	'Table' => 'Tablo',
@@ -202,7 +198,7 @@ return [
 	'Remove' => 'Sil',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'İzin verilen en fazla alan sayısı aşıldı. Lütfen %s değerlerini artırın.',
 
-	// Views.
+	// Views
 	'View' => 'Görünüm',
 	'Materialized view' => 'Materialized Görünüm',
 	'View has been dropped.' => 'Görünüm silindi.',
@@ -211,13 +207,13 @@ return [
 	'Alter view' => 'Görünümü değiştir',
 	'Create view' => 'Görünüm oluştur',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Bununla bölümle',
 	'Partitions' => 'Bölümler',
 	'Partition name' => 'Bölüm adı',
 	'Values' => 'Değerler',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'İndeksler',
 	'Indexes have been altered.' => 'İndeksler değiştirildi.',
 	'Alter indexes' => 'İndeksleri değiştir',
@@ -225,7 +221,7 @@ return [
 	'Index Type' => 'İndex Türü',
 	'length' => 'uzunluğu',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Dış anahtarlar',
 	'Foreign key' => 'Dış anahtar',
 	'Foreign key has been dropped.' => 'Dış anahtar silindi.',
@@ -242,7 +238,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE (Hedefteki Kayıt Değiştirilirse)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kaynak ve hedef kolonlar aynı veri türünde olmalı, hedef kolonlarda dizin bulunmalı ve başvurulan veri mevcut olmalı.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Yordamlar',
 	'Routine has been called, %d row(s) affected.' => [
 		'Yordam çağrıldı, %d adet kayıt etkilendi.',
@@ -259,7 +255,7 @@ return [
 	'Alter procedure' => 'Yöntemi değiştir',
 	'Return type' => 'Geri dönüş türü',
 
-	// Events.
+	// Events
 	'Events' => 'Olaylar',
 	'Event' => 'Olay',
 	'Event has been dropped.' => 'Olay silindi.',
@@ -274,7 +270,7 @@ return [
 	'End' => 'Son',
 	'On completion preserve' => 'Tamamlama koruması',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Diziler',
 	'Create sequence' => 'Dizi oluştur',
 	'Sequence has been dropped.' => 'Dizi silindi.',
@@ -289,7 +285,7 @@ return [
 	'Type has been created.' => 'Tür oluşturuldu.',
 	'Alter type' => 'Türü değiştir',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Tetikler',
 	'Add trigger' => 'Tetik ekle',
 	'Trigger has been dropped.' => 'Tetik silindi.',
@@ -298,9 +294,9 @@ return [
 	'Alter trigger' => 'Tetiği değiştir',
 	'Create trigger' => 'Tetik oluştur',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Veri seç',
 	'Select' => 'Seç',
 	'Functions' => 'Fonksiyonlar',
@@ -332,17 +328,16 @@ return [
 		'%d bayt',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Düzenle',
 	'Ctrl+click on a value to modify it.' => 'Bir değeri değiştirmek için üzerine Ctrl+tıklayın.',
 	'Use edit link to modify this value.' => 'Değeri değiştirmek için düzenleme bağlantısını kullanın.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Yeni kayıt',
 	'Edit' => 'Düzenle',
 	'original' => 'orijinal',
-	// label for value '' in enum data type
-	'empty' => 'boş',
+	'empty' => 'boş', // label for value '' in enum data type
 	'Insert' => 'Ekle',
 	'Save' => 'Kaydet',
 	'Save and continue edit' => 'Kaydet ve düzenlemeye devam et',
@@ -351,8 +346,7 @@ return [
 	'Selected' => 'Seçildi',
 	'Clone' => 'Kopyala',
 	'Delete' => 'Sil',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Kayıt%s eklendi.',
+	'Item%s has been inserted.' => 'Kayıt%s eklendi.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Kayıt silindi.',
 	'Item has been updated.' => 'Kayıt güncellendi.',
 	'%d item(s) have been affected.' => [
@@ -361,7 +355,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Bu tabloyu güncellemek için yetkiniz yok.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Sayılar',
 	'Date and time' => 'Tarih ve zaman',
 	'Strings' => 'Dizge',
@@ -371,10 +365,12 @@ return [
 	'Geometry' => 'Geometri',
 	'Relations' => 'İlişkiler',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'şimdi',
 	'yes' => 'evet',
 	'no' => 'hayır',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

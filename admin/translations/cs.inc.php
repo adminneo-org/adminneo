@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'D.M.RRRR',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'D.M.RRRR', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s musí vracet pole.',
 	'%s and %s must return an object created by %s method.' => '%s a %s musí vracet objekt vytvořený pomocí metody %s.',
 
-	// Login.
+	// Login
 	'System' => 'Systém',
 	'Server' => 'Server',
 	'Username' => 'Uživatel',
@@ -44,18 +41,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Pokud jste tento požadavek neposlali z AdminNeo, tak tuto stránku zavřete.',
 	'The action will be performed after successful login with the same credentials.' => 'Akce bude provedena po úspěšném přihlášení se stejnými přihlašovacími údaji.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Žádný ovladač',
 	'Database driver not found.' => 'Databázový ovladač se nenašel.',
 	'No extension' => 'Žádné rozšíření',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Není dostupné žádné z podporovaných PHP rozšíření (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Není dostupné žádné z podporovaných PHP rozšíření (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Připojování k privilegovaným portům není povoleno.',
 	'Session support must be enabled.' => 'Session proměnné musí být povolené.',
 	'Session expired, please login again.' => 'Session vypršela, přihlaste se prosím znovu.',
 	'%s version: %s through PHP extension %s' => 'Verze %s: %s přes PHP rozšíření %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Jazyk',
 
 	'Home' => 'Domů',
@@ -63,7 +59,7 @@ return [
 	'Info' => 'Info',
 	'More information.' => 'Více informací.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Oprávnění',
 	'Create user' => 'Vytvořit uživatele',
 	'User has been dropped.' => 'Uživatel byl odstraněn.',
@@ -71,7 +67,7 @@ return [
 	'User has been created.' => 'Uživatel byl vytvořen.',
 	'Hashed' => 'Zahašované',
 
-	// Server.
+	// Server
 	'Process list' => 'Seznam procesů',
 	'%d process(es) have been killed.' => [
 		'Byl ukončen %d proces.',
@@ -82,14 +78,14 @@ return [
 	'Variables' => 'Proměnné',
 	'Status' => 'Stav',
 
-	// Structure.
+	// Structure
 	'Column' => 'Sloupec',
 	'Columns' => 'Sloupce',
 	'Routine' => 'Procedura',
 	'Grant' => 'Povolit',
 	'Revoke' => 'Zakázat',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL příkaz',
 	'HTTP request' => 'HTTP dotaz',
 	'%d query(s) executed OK.' => [
@@ -111,13 +107,12 @@ return [
 	'Stop on error' => 'Zastavit při chybě',
 	'Show only errors' => 'Zobrazit pouze chyby',
 	'Time' => 'Čas',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historie',
 	'Clear' => 'Vyčistit',
 	'Edit all' => 'Upravit vše',
 
-	// Import.
+	// Import
 	'Import' => 'Import',
 	'File upload' => 'Nahrání souboru',
 	'From server' => 'Ze serveru',
@@ -139,7 +134,7 @@ return [
 		'Bylo importováno %d záznamů.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Export',
 	'Output' => 'Výstup',
 	'open' => 'otevřít',
@@ -147,7 +142,7 @@ return [
 	'Format' => 'Formát',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Databáze',
 	'database' => 'databáze',
 	'DB' => 'DB',
@@ -162,11 +157,12 @@ return [
 	'Database has been created.' => 'Databáze byla vytvořena.',
 	'Database has been renamed.' => 'Databáze byla přejmenována.',
 	'Database has been altered.' => 'Databáze byla změněna.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Soubor existuje.',
 	'Please use one of the extensions %s.' => 'Prosím použijte jednu z koncovek %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schéma',
 	'schema' => 'schéma',
 	'Schemas' => 'Schémy',
@@ -179,7 +175,7 @@ return [
 	'Schema has been altered.' => 'Schéma bylo změněno.',
 	'Invalid schema.' => 'Nesprávné schéma.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Úložiště',
 	'engine' => 'úložiště',
 	'Collation' => 'Porovnávání',
@@ -203,7 +199,7 @@ return [
 	'Tables have been copied.' => 'Tabulky byly zkopírovány.',
 	'overwrite' => 'přepsat',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabulky',
 	'Tables and views' => 'Tabulky a pohledy',
 	'Table' => 'Tabulka',
@@ -235,7 +231,7 @@ return [
 	'Remove' => 'Odebrat',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Byl překročen maximální povolený počet polí. Zvyšte prosím %s.',
 
-	// Views.
+	// Views
 	'View' => 'Pohled',
 	'Materialized view' => 'Materializovaný pohled',
 	'View has been dropped.' => 'Pohled byl odstraněn.',
@@ -244,7 +240,7 @@ return [
 	'Alter view' => 'Pozměnit pohled',
 	'Create view' => 'Vytvořit pohled',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Rozdělit podle',
 	'Partition' => 'Oddíl',
 	'Partitions' => 'Oddíly',
@@ -253,7 +249,7 @@ return [
 	'Inherited tables' => 'Zděděné tabulky',
 	'Inherited from' => 'Zděděná z',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indexy',
 	'Indexes have been altered.' => 'Indexy byly změněny.',
 	'Alter indexes' => 'Pozměnit indexy',
@@ -263,7 +259,7 @@ return [
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmínka',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Cizí klíče',
 	'Foreign key' => 'Cizí klíč',
 	'Foreign key has been dropped.' => 'Cizí klíč byl odstraněn.',
@@ -280,7 +276,7 @@ return [
 	'ON UPDATE' => 'Při změně',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Zdrojové a cílové sloupce musí mít stejný datový typ, nad cílovými sloupci musí být definován index a odkazovaná data musí existovat.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedury a funkce',
 	'Routine has been called, %d row(s) affected.' => [
 		'Procedura byla zavolána, byl změněn %d záznam.',
@@ -298,7 +294,7 @@ return [
 	'Alter procedure' => 'Změnit proceduru',
 	'Return type' => 'Návratový typ',
 
-	// Events.
+	// Events
 	'Events' => 'Události',
 	'Event' => 'Událost',
 	'Event has been dropped.' => 'Událost byla odstraněna.',
@@ -313,7 +309,7 @@ return [
 	'End' => 'Konec',
 	'On completion preserve' => 'Po dokončení zachovat',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekvence',
 	'Create sequence' => 'Vytvořit sekvenci',
 	'Sequence has been dropped.' => 'Sekvence byla odstraněna.',
@@ -328,7 +324,7 @@ return [
 	'Type has been created.' => 'Typ byl vytvořen.',
 	'Alter type' => 'Pozměnit typ',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Triggery',
 	'Add trigger' => 'Přidat trigger',
 	'Trigger has been dropped.' => 'Trigger byl odstraněn.',
@@ -337,7 +333,7 @@ return [
 	'Alter trigger' => 'Změnit trigger',
 	'Create trigger' => 'Vytvořit trigger',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Kontroly',
 	'Create check' => 'Vytvořit kontrolu',
 	'Alter check' => 'Změnit kontrolu',
@@ -345,7 +341,7 @@ return [
 	'Check has been altered.' => 'Kontrola byla změněna.',
 	'Check has been dropped.' => 'Kontrola byla odstraněna.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Vypsat data',
 	'Select' => 'Vypsat',
 	'Functions' => 'Funkce',
@@ -379,17 +375,16 @@ return [
 		'%d bajtů',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Změnit',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klikněte na políčko, které chcete změnit.',
 	'Use edit link to modify this value.' => 'Ke změně této hodnoty použijte odkaz upravit.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nová položka',
 	'Edit' => 'Upravit',
 	'original' => 'původní',
-	// label for value '' in enum data type
-	'empty' => 'prázdné',
+	'empty' => 'prázdné', // label for value '' in enum data type
 	'Insert' => 'Vložit',
 	'Save' => 'Uložit',
 	'Save and continue edit' => 'Uložit a pokračovat v editaci',
@@ -398,8 +393,7 @@ return [
 	'Selected' => 'Označené',
 	'Clone' => 'Klonovat',
 	'Delete' => 'Smazat',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Položka%s byla vložena.',
+	'Item%s has been inserted.' => 'Položka%s byla vložena.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Položka byla smazána.',
 	'Item has been updated.' => 'Položka byla aktualizována.',
 	'%d item(s) have been affected.' => [
@@ -409,7 +403,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Nemáte oprávnění editovat tuto tabulku.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Čísla',
 	'Date and time' => 'Datum a čas',
 	'Strings' => 'Řetězce',
@@ -419,12 +413,12 @@ return [
 	'Geometry' => 'Geometrie',
 	'Relations' => 'Vztahy',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'teď',
 	'yes' => 'ano',
 	'no' => 'ne',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Nastavení',
 	'Default' => 'Výchozí',
 	'Color scheme' => 'Barevné schéma',
@@ -449,7 +443,7 @@ return [
 	'More values than %d' => 'Víc položek než %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Hranice pro zobrazení rozbalovací nabídky pro hodnoty typu enum.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Jednorázové heslo',
 	'Enter OTP code.' => 'Zadejte jednorázový kód.',
 	'Invalid OTP code.' => 'Neplatný jednorázový kód.',
@@ -457,7 +451,6 @@ return [
 	'JSON previews' => 'Náhled JSON',
 	'Data table' => 'Datová tabulka',
 	'Edit form' => 'Editační formulář',
-	// Use the phrases from https://gemini.google.com/
-	'Ask %s' => 'Zeptat se %s',
+	'Ask %s' => 'Zeptat se %s', // Use the phrase from https://gemini.google.com/
 	'Just a sec...' => 'Chviličku...',
 ];

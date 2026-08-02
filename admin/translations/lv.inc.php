@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD.MM.GGGG',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD.MM.GGGG', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistēma',
 	'Server' => 'Serveris',
 	'Username' => 'Lietotājs',
@@ -39,21 +36,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Ja nesūtījāt šo pieprasījumu no AdminNeo, tad aizveriet pārlūka logu.',
 	'The action will be performed after successful login with the same credentials.' => 'Darbība tiks pabeigta pēc derīgas pieteikšanās sistēmā.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Nav paplašinājuma',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Neviens PHP no atbalstītajiem paplašinājumiem (%s) nav pieejams.',
+	'None of the supported PHP extensions (%s) are available.' => 'Neviens PHP no atbalstītajiem paplašinājumiem (%s) nav pieejams.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Pieeja priviliģētiem portiem nav atļauta.',
 	'Session support must be enabled.' => 'Sesiju atbalstam jābūt ieslēgtam.',
 	'Session expired, please login again.' => 'Sesijas laiks ir beidzies, piesakies no jauna sistēmā.',
 	'%s version: %s through PHP extension %s' => 'Versija %s: %s ar PHP paplašinājumu %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Valoda',
 
 	'Refresh' => 'Atjaunot',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Tiesības',
 	'Create user' => 'Izveidot lietotāju',
 	'User has been dropped.' => 'Lietotājs dzests.',
@@ -61,7 +57,7 @@ return [
 	'User has been created.' => 'Lietotājs izveidots.',
 	'Hashed' => 'Sajaukts',
 
-	// Server.
+	// Server
 	'Process list' => 'Procesu saraksts',
 	'%d process(es) have been killed.' => [
 		'Pabeigts %d process.',
@@ -72,13 +68,13 @@ return [
 	'Variables' => 'Mainīgie',
 	'Status' => 'Statuss',
 
-	// Structure.
+	// Structure
 	'Column' => 'Lauks',
 	'Routine' => 'Procedūra',
 	'Grant' => 'Atļaut',
 	'Revoke' => 'Aizliegt',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL pieprasījums',
 	'%d query(s) executed OK.' => [
 		'%d pieprasījums veiksmīgs.',
@@ -99,13 +95,12 @@ return [
 	'Stop on error' => 'Astāties kļūdas gadījumā',
 	'Show only errors' => 'Rādīt tikai kļūdas',
 	'Time' => 'Laiks',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Vēsture',
 	'Clear' => 'Notīrīt',
 	'Edit all' => 'Rediģēt visus',
 
-	// Import.
+	// Import
 	'Import' => 'Imports',
 	'File upload' => 'Augšupielāde',
 	'From server' => 'No servera',
@@ -125,7 +120,7 @@ return [
 		'Importētas %d rindas.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Eksports',
 	'Output' => 'Izejas dati',
 	'open' => 'atvērt',
@@ -133,7 +128,7 @@ return [
 	'Format' => 'Formāts',
 	'Data' => 'Dati',
 
-	// Databases.
+	// Databases
 	'Database' => 'Datubāze',
 	'DB' => 'DB',
 	'Use' => 'Lietot',
@@ -147,11 +142,12 @@ return [
 	'Database has been created.' => 'Datubāze tika izveidota.',
 	'Database has been renamed.' => 'Datubāze tika pārsaukta.',
 	'Database has been altered.' => 'Datubāze tika mainīta.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Fails eksistē.',
 	'Please use one of the extensions %s.' => 'Izmainojiet kādu no paplašinājumiem %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Shēma',
 	'Alter schema' => 'Izmainīt shēmu',
 	'Create schema' => 'Jauna shēma',
@@ -160,7 +156,7 @@ return [
 	'Schema has been altered.' => 'Shēma izmainīta.',
 	'Invalid schema.' => 'Nederīga shēma.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Dzinējs',
 	'engine' => 'Tabulas tips',
 	'Collation' => 'Kolācija',
@@ -184,7 +180,7 @@ return [
 	'Tables have been copied.' => 'Tabulas nokopētas.',
 	'overwrite' => 'pārrakstīt',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabulas',
 	'Tables and views' => 'Tabulas un skati',
 	'Table' => 'Tabula',
@@ -216,7 +212,7 @@ return [
 	'Remove' => 'Noņemt',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Sasniegts maksimālais lauku skaita ierobežojums. Palieliniet %s.',
 
-	// Views.
+	// Views
 	'View' => 'Skats',
 	'Materialized view' => 'Matrializēts skats',
 	'View has been dropped.' => 'Skats dzēsts.',
@@ -225,13 +221,13 @@ return [
 	'Alter view' => 'Izmainīt skatu',
 	'Create view' => 'Izveidot skatu',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Sadalīt pēc',
 	'Partitions' => 'Partīcijas',
 	'Partition name' => 'Partīcijas nosaukums',
 	'Values' => 'Vērtības',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksi',
 	'Indexes have been altered.' => 'Indeksi mainīti.',
 	'Alter indexes' => 'Izmainīt indeksus',
@@ -239,7 +235,7 @@ return [
 	'Index Type' => 'Indeksa tips',
 	'length' => 'garums',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Ārejā atslēgas',
 	'Foreign key' => 'Ārejā atslēga',
 	'Foreign key has been dropped.' => 'Ārejā atslēga dzēsta.',
@@ -256,7 +252,7 @@ return [
 	'ON UPDATE' => 'Pie atjaunošanas',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lauku tipiem jābūt vienādiem, rezultējošā laukā jābut indeksa datiem.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedūras un funkcijas',
 	'Routine has been called, %d row(s) affected.' => [
 		'Procedūra izsaukta, izmainīts %d ieraksts.',
@@ -274,7 +270,7 @@ return [
 	'Alter procedure' => 'Mainīt procedūru',
 	'Return type' => 'Atgriezt tips',
 
-	// Events.
+	// Events
 	'Events' => 'Notikumi',
 	'Event' => 'Notikums',
 	'Event has been dropped.' => 'Notikums dzēsts.',
@@ -289,7 +285,7 @@ return [
 	'End' => 'Beigas',
 	'On completion preserve' => 'Beigās saglabāt',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Virknes',
 	'Create sequence' => 'Izveidot virkni',
 	'Sequence has been dropped.' => 'Virkne dzēsta.',
@@ -304,7 +300,7 @@ return [
 	'Type has been created.' => 'Tips izveidots.',
 	'Alter type' => 'Izmainīt tipu',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Trigeri',
 	'Add trigger' => 'Pievienot trigeri',
 	'Trigger has been dropped.' => 'Trigeris dzēsts.',
@@ -313,9 +309,9 @@ return [
 	'Alter trigger' => 'Izmainīt trigeri',
 	'Create trigger' => 'Izveidot trigeri',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Izvēlēties datus',
 	'Select' => 'Izvēlēties',
 	'Functions' => 'Funkcijas',
@@ -349,17 +345,16 @@ return [
 		'%d baiti',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Izmainīt',
 	'Ctrl+click on a value to modify it.' => 'Lai izmainītu vērtību, izmanto Ctrl + peles klikšķi.',
 	'Use edit link to modify this value.' => 'Izmainīt vērtību var tikai ar saiti \'Izmainīt\'.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Jauns ieraksts',
 	'Edit' => 'Rediģēt',
 	'original' => 'oriģināls',
-	// label for value '' in enum data type
-	'empty' => 'tukšs',
+	'empty' => 'tukšs', // label for value '' in enum data type
 	'Insert' => 'Ievietot',
 	'Save' => 'Saglabāt',
 	'Save and continue edit' => 'Saglabāt un turpināt rediģēt',
@@ -368,8 +363,7 @@ return [
 	'Selected' => 'Izvēlētie',
 	'Clone' => 'Klonēt',
 	'Delete' => 'Dzēst',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Ieraksti%s tika ievietoti.',
+	'Item%s has been inserted.' => 'Ieraksti%s tika ievietoti.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Ieraksts dzests.',
 	'Item has been updated.' => 'Ieraksts atjaunots.',
 	'%d item(s) have been affected.' => [
@@ -379,7 +373,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Jums nav pieejas labot šo tabulu.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Skaitļi',
 	'Date and time' => 'Datums un laiks',
 	'Strings' => 'Virknes',
@@ -389,10 +383,12 @@ return [
 	'Geometry' => 'Ģeometrija',
 	'Relations' => 'Relācijas',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'tagad',
 	'yes' => 'jā',
 	'no' => 'nē',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

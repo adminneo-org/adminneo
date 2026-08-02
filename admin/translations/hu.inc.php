@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY.M.D',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'óó:pp:mm',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY.M.D', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'óó:pp:mm', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Adatbázis',
 	'Server' => 'Szerver',
 	'Username' => 'Felhasználó',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Sikeres kilépés.',
 	'Invalid CSRF token. Send the form again.' => 'Érvénytelen CSRF azonosító. Küldd újra az űrlapot.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Nincs kiterjesztés',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nincs egy elérhető támogatott PHP kiterjesztés (%s) sem.',
+	'None of the supported PHP extensions (%s) are available.' => 'Nincs egy elérhető támogatott PHP kiterjesztés (%s) sem.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'A munkameneteknek (session) engedélyezve kell lennie.',
 	'Session expired, please login again.' => 'Munkamenet lejárt, jelentkezz be újra.',
 	'%s version: %s through PHP extension %s' => '%s verzió: %s, PHP: %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Nyelv',
 
 	'Refresh' => 'Frissítés',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilégiumok',
 	'Create user' => 'Felhasználó hozzáadása',
 	'User has been dropped.' => 'A felhasználó eldobva.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'A felhasználó létrejött.',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'Folyamatok',
 	'%d process(es) have been killed.' => [
 		'%d folyamat leállítva.',
@@ -61,13 +57,13 @@ return [
 	'Variables' => 'Változók',
 	'Status' => 'Állapot',
 
-	// Structure.
+	// Structure
 	'Column' => 'Oszlop',
 	'Routine' => 'Rutin',
 	'Grant' => 'Engedélyezés',
 	'Revoke' => 'Visszavonás',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL parancs',
 	'%d query(s) executed OK.' => '%d sikeres lekérdezés.',
 	'Query executed OK, %d row(s) affected.' => [
@@ -81,13 +77,12 @@ return [
 	'Stop on error' => 'Hiba esetén megáll',
 	'Show only errors' => 'Csak a hibák mutatása',
 	'Time' => 'Idő',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f másodperc',
+	'%.3f s' => '%.3f másodperc', // sprintf() format for time of the command
 	'History' => 'Történet',
 	'Clear' => 'Törlés',
 	'Edit all' => 'Összes szerkesztése',
 
-	// Import.
+	// Import
 	'Import' => 'Importálás',
 	'File upload' => 'Fájl feltöltése',
 	'From server' => 'Szerverről',
@@ -104,7 +99,7 @@ return [
 		'%d sor importálva.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Export',
 	'Output' => 'Kimenet',
 	'open' => 'megnyit',
@@ -112,7 +107,7 @@ return [
 	'Format' => 'Formátum',
 	'Data' => 'Adat',
 
-	// Databases.
+	// Databases
 	'Database' => 'Adatbázis',
 	'Use' => 'Használ',
 	'Invalid database.' => 'Érvénytelen adatbázis.',
@@ -125,11 +120,12 @@ return [
 	'Database has been created.' => 'Az adatbázis létrejött.',
 	'Database has been renamed.' => 'Az adadtbázis átnevezve.',
 	'Database has been altered.' => 'Az adatbázis módosult.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'A fájl létezik.',
 	'Please use one of the extensions %s.' => 'Használja a(z) %s kiterjesztést.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Séma',
 	'Alter schema' => 'Séma módosítása',
 	'Create schema' => 'Séma létrehozása',
@@ -138,7 +134,7 @@ return [
 	'Schema has been altered.' => 'Séma módosult.',
 	'Invalid schema.' => 'Érvénytelen séma.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Egybevetés',
@@ -160,7 +156,7 @@ return [
 	'Copy' => 'Másolás',
 	'Tables have been copied.' => 'Táblák átmásolva.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Táblák',
 	'Tables and views' => 'Táblák és nézetek',
 	'Table' => 'Tábla',
@@ -187,7 +183,7 @@ return [
 	'Remove' => 'Eltávolítás',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'A maximális mezőszámot elérted. Növeld meg ezeket: %s.',
 
-	// Views.
+	// Views
 	'View' => 'Nézet',
 	'View has been dropped.' => 'A nézet eldobva.',
 	'View has been altered.' => 'A nézet módosult.',
@@ -195,13 +191,13 @@ return [
 	'Alter view' => 'Nézet módosítása',
 	'Create view' => 'Nézet létrehozása',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Particionálás ezzel',
 	'Partitions' => 'Particiók',
 	'Partition name' => 'Partició neve',
 	'Values' => 'Értékek',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indexek',
 	'Indexes have been altered.' => 'Az indexek megváltoztak.',
 	'Alter indexes' => 'Index módosítása',
@@ -209,7 +205,7 @@ return [
 	'Index Type' => 'Index típusa',
 	'length' => 'méret',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Idegen kulcs',
 	'Foreign key' => 'Idegen kulcs',
 	'Foreign key has been dropped.' => 'Idegen kulcs eldobva.',
@@ -226,7 +222,7 @@ return [
 	'ON UPDATE' => 'frissítéskor',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'A forrás és cél oszlopoknak azonos típusúak legyenek, a cél oszlopok indexeltek legyenek, és a hivatkozott adatnak léteznie kell.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutinok',
 	'Routine has been called, %d row(s) affected.' => [
 		'Rutin meghívva, %d sor érintett.',
@@ -244,7 +240,7 @@ return [
 	'Alter procedure' => 'Eljárás módosítása',
 	'Return type' => 'Visszatérési érték',
 
-	// Events.
+	// Events
 	'Events' => 'Esemény',
 	'Event' => 'Esemény',
 	'Event has been dropped.' => 'Az esemény eldobva.',
@@ -259,7 +255,7 @@ return [
 	'End' => 'Vége',
 	'On completion preserve' => 'Befejezéskor megőrzi',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sorozatok',
 	'Create sequence' => 'Sorozat létrehozása',
 	'Sequence has been dropped.' => 'Sorozat eldobva.',
@@ -274,7 +270,7 @@ return [
 	'Type has been created.' => 'Típus létrehozva.',
 	'Alter type' => 'Típus módosítása',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Trigger',
 	'Add trigger' => 'Trigger hozzáadása',
 	'Trigger has been dropped.' => 'A trigger eldobva.',
@@ -283,9 +279,9 @@ return [
 	'Alter trigger' => 'Trigger módosítása',
 	'Create trigger' => 'Trigger létrehozása',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Tartalom',
 	'Select' => 'Kiválasztás',
 	'Functions' => 'Funkciók',
@@ -314,23 +310,21 @@ return [
 		'%d bájt',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Use edit link to modify this value.' => 'Használd a szerkesztés hivatkozást ezen érték módosításához.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Új tétel',
 	'Edit' => 'Szerkeszt',
 	'original' => 'eredeti',
-	// label for value '' in enum data type
-	'empty' => 'üres',
+	'empty' => 'üres', // label for value '' in enum data type
 	'Insert' => 'Beszúr',
 	'Save' => 'Mentés',
 	'Save and continue edit' => 'Mentés és szerkesztés folytatása',
 	'Save and insert next' => 'Mentés és újat beszúr',
 	'Clone' => 'Klónoz',
 	'Delete' => 'Törlés',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '%s tétel beszúrva.',
+	'Item%s has been inserted.' => '%s tétel beszúrva.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'A tétel törölve.',
 	'Item has been updated.' => 'A tétel frissítve.',
 	'%d item(s) have been affected.' => [
@@ -339,7 +333,7 @@ return [
 		'%d tétel érintett.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Szám',
 	'Date and time' => 'Dátum és idő',
 	'Strings' => 'Szöveg',
@@ -349,8 +343,10 @@ return [
 	'Geometry' => 'Geometria',
 	'Relations' => 'Reláció',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'most',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

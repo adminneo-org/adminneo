@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'rtl',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'rtl', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'מערכת',
 	'Server' => 'שרת',
 	'Username' => 'שם משתמש',
@@ -31,20 +28,19 @@ return [
 	'Invalid CSRF token. Send the form again.' => 'כשל באבטחת נתונים, שלח טופס שוב',
 	'If you did not send this request from AdminNeo then close this page.' => 'אם לא אתה שלחת בקשה ל-AdminNeo הינך יכול לסגור חלון זה',
 
-	// Connection.
+	// Connection
 	'No extension' => 'אין תוסף',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'שום תוסף PHP (%s) זמין',
+	'None of the supported PHP extensions (%s) are available.' => 'שום תוסף PHP (%s) זמין', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'חובה להפעיל תמיכה בסשן',
 	'Session expired, please login again.' => 'תם זמן ההפעלה, אנא התחבר שוב',
 	'%s version: %s through PHP extension %s' => '%s גרסה: %s דרך תוסף PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'שפה',
 
 	'Refresh' => 'רענן',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'פריווילגיות',
 	'Create user' => 'צור משתמש',
 	'User has been dropped.' => 'המשתמש הושלך',
@@ -52,20 +48,20 @@ return [
 	'User has been created.' => 'המשתמש נוצר',
 	'Hashed' => 'הצפנה',
 
-	// Server.
+	// Server
 	'Process list' => 'רשימת תהליכים',
 	'%d process(es) have been killed.' => '%d תהליכים חוסלו',
 	'Kill' => 'חסל',
 	'Variables' => 'משתנים',
 	'Status' => 'סטטוס',
 
-	// Structure.
+	// Structure
 	'Column' => 'עמודה',
 	'Routine' => 'רוטינה',
 	'Grant' => 'הענק',
 	'Revoke' => 'שלול',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'שאילתת SQL',
 	'%d query(s) executed OK.' => '%d שאילתות בוצעו בהצלחה',
 	'Query executed OK, %d row(s) affected.' => 'השאילתה בוצעה כהלכה, %d שורות הושפעו',
@@ -76,13 +72,12 @@ return [
 	'Stop on error' => 'עצור בעת שגיאה',
 	'Show only errors' => 'הראה שגיאות בלבד',
 	'Time' => 'זמן',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'היסטוריה',
 	'Clear' => 'נקה',
 	'Edit all' => 'ערוך הכל',
 
-	// Import.
+	// Import
 	'Import' => 'יבא',
 	'File upload' => 'העלה קובץ',
 	'From server' => 'משרת',
@@ -98,7 +93,7 @@ return [
 	'You are offline.' => 'הינך לא מקוון',
 	'%d row(s) have been imported.' => '%d שורות יובאו',
 
-	// Export.
+	// Export
 	'Export' => 'יצא',
 	'Output' => 'פלט',
 	'open' => 'פתח',
@@ -106,7 +101,7 @@ return [
 	'Format' => 'פורמט',
 	'Data' => 'נתונים',
 
-	// Databases.
+	// Databases
 	'Database' => 'מסד נתונים',
 	'Use' => 'השתמש',
 	'Invalid database.' => 'מסד נתונים שגוי',
@@ -119,11 +114,12 @@ return [
 	'Database has been created.' => 'מסד הנתונים נוצר',
 	'Database has been renamed.' => 'שם מסד הנתונים שונה',
 	'Database has been altered.' => 'מסד הנתונים שונה',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'קובץ קיים',
 	'Please use one of the extensions %s.' => 'בבקשה השתמש באחד מהתוספים %s',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'סכמה',
 	'Alter schema' => 'שנה סכמה',
 	'Create schema' => 'צור סכמה',
@@ -132,7 +128,7 @@ return [
 	'Schema has been altered.' => 'הסכמה שונתה',
 	'Invalid schema.' => 'סכמה שגויה',
 
-	// Table list.
+	// Table list
 	'Engine' => 'מנוע',
 	'engine' => 'מנוע',
 	'Collation' => 'קולקציה',
@@ -155,7 +151,7 @@ return [
 	'Copy' => 'העתק',
 	'Tables have been copied.' => 'הטבלה הועתקה',
 
-	// Tables.
+	// Tables
 	'Tables' => 'טבלאות',
 	'Tables and views' => 'טבלאות ותצוגות',
 	'Table' => 'טבלה',
@@ -186,7 +182,7 @@ return [
 	'Remove' => 'הסר',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'הגעת למספר השדות המרבי. בבקשה הגדל את %s',
 
-	// Views.
+	// Views
 	'View' => 'הצג',
 	'Materialized view' => 'תצוגת מימוש ',
 	'View has been dropped.' => 'התצוגה הושלכה',
@@ -195,13 +191,13 @@ return [
 	'Alter view' => 'שנה תצוגה',
 	'Create view' => 'צור תצוגה',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'מחיצות ע"י',
 	'Partitions' => 'מחיצות',
 	'Partition name' => 'שם מחיצה',
 	'Values' => 'ערכים',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'אינדקסים',
 	'Indexes have been altered.' => 'האינדקסים שונו',
 	'Alter indexes' => 'שנה אינדקסים',
@@ -209,7 +205,7 @@ return [
 	'Index Type' => 'סוג אינדקס',
 	'length' => 'אורך',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'מפתחות זרים',
 	'Foreign key' => 'מפתח זר',
 	'Foreign key has been dropped.' => 'המפתח הזר הושלך',
@@ -226,7 +222,7 @@ return [
 	'ON UPDATE' => 'בעת עידכון',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'על עמודות המקור והיעד להיות מאותו טיפוס נתונים, חובה שיהיה אינדקס בעמודת היעד ושהמידע המתאים יהיה קיים',
 
-	// Routines.
+	// Routines
 	'Routines' => 'רוטינות',
 	'Routine has been called, %d row(s) affected.' => 'הרוטינה נקראה, %d שורות הושפעו',
 	'Call' => 'קרא',
@@ -240,7 +236,7 @@ return [
 	'Alter procedure' => 'שנה פרוצדורה',
 	'Return type' => 'סוג ערך מוחזר',
 
-	// Events.
+	// Events
 	'Events' => 'אירועים',
 	'Event' => 'אירוע',
 	'Event has been dropped.' => 'האירוע הושלך',
@@ -255,7 +251,7 @@ return [
 	'End' => 'סיום',
 	'On completion preserve' => 'בעת סיום שמור',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'סדרות',
 	'Create sequence' => 'צור סדרה',
 	'Sequence has been dropped.' => 'הסדרה הושלכה',
@@ -270,7 +266,7 @@ return [
 	'Type has been created.' => 'הסוג נוצר',
 	'Alter type' => 'שנה סוג',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'מפעילים',
 	'Add trigger' => 'הוסף טריגר',
 	'Trigger has been dropped.' => 'הטריגר הושלך',
@@ -279,9 +275,9 @@ return [
 	'Alter trigger' => 'שנה טריגר',
 	'Create trigger' => 'צור טריגר',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'בחר נתונים',
 	'Select' => 'בחר',
 	'Functions' => 'פונקציות',
@@ -307,17 +303,16 @@ return [
 	'Whole result' => 'כל התוצאות',
 	'%d byte(s)' => '%d בתים',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'ערוך',
 	'Ctrl+click on a value to modify it.' => 'לחץ ctrl + לחיצת עכבר לערוך ערך זה',
 	'Use edit link to modify this value.' => 'השתמש בקישור העריכה בשביל לשנות את הערך',
 
-	// Editing.
+	// Editing
 	'New item' => 'פריט חדש',
 	'Edit' => 'ערוך',
 	'original' => 'מקורי',
-	// label for value '' in enum data type
-	'empty' => 'ריק',
+	'empty' => 'ריק', // label for value '' in enum data type
 	'Insert' => 'הכנס',
 	'Save' => 'שמור',
 	'Save and continue edit' => 'שמור והמשך לערוך',
@@ -326,14 +321,13 @@ return [
 	'Selected' => 'נבחרים',
 	'Clone' => 'שכפל',
 	'Delete' => 'מחק',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'הפריט %s הוזן בהצלחה',
+	'Item%s has been inserted.' => 'הפריט %s הוזן בהצלחה', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'הפריט נמחק',
 	'Item has been updated.' => 'הפריט עודכן',
 	'%d item(s) have been affected.' => '%d פריטים הושפעו',
 	'You have no privileges to update this table.' => 'אין לך ההרשאות המתאימות לעדכן טבלה זו',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'מספרים',
 	'Date and time' => 'תאריך ושעה',
 	'Strings' => 'מחרוזות',
@@ -343,10 +337,12 @@ return [
 	'Geometry' => 'גיאומטריה',
 	'Relations' => 'הקשרים',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'כעת',
 	'yes' => 'כן',
 	'no' => 'לא',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

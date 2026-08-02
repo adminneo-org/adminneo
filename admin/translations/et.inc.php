@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'D.M.YYYY',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'D.M.YYYY', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Andmebaasimootor',
 	'Server' => 'Server',
 	'Username' => 'Kasutajanimi',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Väljalogimine õnnestus.',
 	'Invalid CSRF token. Send the form again.' => 'Sobimatu CSRF, palun postitage vorm uuesti.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Ei leitud laiendust',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Serveris pole ühtegi toetatud PHP laiendustest (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Serveris pole ühtegi toetatud PHP laiendustest (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Sessioonid peavad olema lubatud.',
 	'Session expired, please login again.' => 'Sessioon on aegunud, palun logige uuesti sisse.',
 	'%s version: %s through PHP extension %s' => '%s versioon: %s, kasutatud PHP moodul: %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Keel',
 
 	'Refresh' => 'Uuenda',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Õigused',
 	'Create user' => 'Loo uus kasutaja',
 	'User has been dropped.' => 'Kasutaja on edukalt kustutatud.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'Kasutaja on edukalt lisatud.',
 	'Hashed' => 'Häshitud (Hashed)',
 
-	// Server.
+	// Server
 	'Process list' => 'Protsesside nimekiri',
 	'%d process(es) have been killed.' => [
 		'Protsess on edukalt peatatud (%d).',
@@ -60,13 +56,13 @@ return [
 	'Variables' => 'Muutujad',
 	'Status' => 'Staatus',
 
-	// Structure.
+	// Structure
 	'Column' => 'Veerg',
 	'Routine' => 'Protseduur',
 	'Grant' => 'Anna',
 	'Revoke' => 'Eemalda',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-Päring',
 	'%d query(s) executed OK.' => [
 		'%d päring edukalt käivitatud.',
@@ -79,13 +75,12 @@ return [
 	'Stop on error' => 'Peatuda vea esinemisel',
 	'Show only errors' => 'Kuva vaid veateateid',
 	'Time' => 'Aeg',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Ajalugu',
 	'Clear' => 'Puhasta',
 	'Edit all' => 'Muuda kõiki',
 
-	// Import.
+	// Import
 	'Import' => 'Impordi',
 	'File upload' => 'Faili üleslaadimine',
 	'From server' => 'Serverist',
@@ -98,7 +93,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST-andmete maht on liialt suur. Palun vähendage andmeid või suurendage %s php-seadet.',
 	'%d row(s) have been imported.' => 'Imporditi %d rida.',
 
-	// Export.
+	// Export
 	'Export' => 'Ekspordi',
 	'Output' => 'Väljund',
 	'open' => 'näita brauseris',
@@ -106,7 +101,7 @@ return [
 	'Format' => 'Formaat',
 	'Data' => 'Andmed',
 
-	// Databases.
+	// Databases
 	'Database' => 'Andmebaas',
 	'Use' => 'Kasuta',
 	'Invalid database.' => 'Tundmatu andmebaas.',
@@ -119,11 +114,12 @@ return [
 	'Database has been created.' => 'Andmebaas on edukalt loodud.',
 	'Database has been renamed.' => 'Andmebaas on edukalt ümber nimetatud.',
 	'Database has been altered.' => 'Andmebaasi struktuuri uuendamine õnnestus.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Fail juba eksisteerib.',
 	'Please use one of the extensions %s.' => 'Palun kasuta üht laiendustest %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Struktuur',
 	'Alter schema' => 'Muuda struktuuri',
 	'Create schema' => 'Loo struktuur',
@@ -132,7 +128,7 @@ return [
 	'Schema has been altered.' => 'Struktuur on edukalt muudetud.',
 	'Invalid schema.' => 'Sobimatu skeema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Implementatsioon',
 	'engine' => 'andmebaasimootor',
 	'Collation' => 'Tähetabel',
@@ -154,7 +150,7 @@ return [
 	'Copy' => 'Kopeeri',
 	'Tables have been copied.' => 'Tabelid on edukalt kopeeritud.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabelid',
 	'Tables and views' => 'Tabelid ja vaated',
 	'Table' => 'Tabel',
@@ -181,7 +177,7 @@ return [
 	'Remove' => 'Eemalda',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Maksimaalne väljade arv ületatud. Palun suurendage %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vaata',
 	'View has been dropped.' => 'Vaade (VIEW) on edukalt kustutatud.',
 	'View has been altered.' => 'Vaade (VIEW) on edukalt muudetud.',
@@ -189,13 +185,13 @@ return [
 	'Alter view' => 'Muuda vaadet (VIEW)',
 	'Create view' => 'Loo uus vaade (VIEW)',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partitsiooni',
 	'Partitions' => 'Partitsioonid',
 	'Partition name' => 'Partitsiooni nimi',
 	'Values' => 'Väärtused',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksid',
 	'Indexes have been altered.' => 'Indeksite andmed on edukalt uuendatud.',
 	'Alter indexes' => 'Muuda indekseid',
@@ -203,7 +199,7 @@ return [
 	'Index Type' => 'Indeksi tüüp',
 	'length' => 'pikkus',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Võõrvõtmed (foreign key)',
 	'Foreign key' => 'Võõrvõti',
 	'Foreign key has been dropped.' => 'Võõrvõti on edukalt kustutatud.',
@@ -220,7 +216,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lähte- ja sihtveerud peavad eksisteerima ja omama sama andmetüüpi, sihtveergudel peab olema määratud indeks ning viidatud andmed peavad eksisteerima.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Protseduurid',
 	'Routine has been called, %d row(s) affected.' => 'Protseduur täideti edukalt, mõjutatud ridu: %d.',
 	'Call' => 'Käivita',
@@ -234,7 +230,7 @@ return [
 	'Alter procedure' => 'Muuda protseduuri',
 	'Return type' => 'Tagastustüüp',
 
-	// Events.
+	// Events
 	'Events' => 'Sündmused (EVENTS)',
 	'Event' => 'Sündmus',
 	'Event has been dropped.' => 'Sündmus on edukalt kustutatud.',
@@ -249,7 +245,7 @@ return [
 	'End' => 'Lõpeta',
 	'On completion preserve' => 'Lõpetamisel jäta sündmus alles',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Jadad (sequences)',
 	'Create sequence' => 'Loo jada',
 	'Sequence has been dropped.' => 'Jada on edukalt kustutatud.',
@@ -264,7 +260,7 @@ return [
 	'Type has been created.' => 'Tüüp on edukalt loodud.',
 	'Alter type' => 'Muuda tüüpi',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Päästikud (trigger)',
 	'Add trigger' => 'Lisa päästik (TRIGGER)',
 	'Trigger has been dropped.' => 'Päästik on edukalt kustutatud.',
@@ -273,9 +269,9 @@ return [
 	'Alter trigger' => 'Muuda päästiku andmeid',
 	'Create trigger' => 'Loo uus päästik (TRIGGER)',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Vaata andmeid',
 	'Select' => 'Kuva',
 	'Functions' => 'Funktsioonid',
@@ -299,29 +295,27 @@ return [
 		'%d baiti',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Ctrl+click on a value to modify it.' => 'Väärtuse muutmiseks Ctrl+kliki sellel.',
 	'Use edit link to modify this value.' => 'Väärtuse muutmiseks kasuta muutmislinki.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Lisa kirje',
 	'Edit' => 'Muuda',
 	'original' => 'originaal',
-	// label for value '' in enum data type
-	'empty' => 'tühi',
+	'empty' => 'tühi', // label for value '' in enum data type
 	'Insert' => 'Sisesta',
 	'Save' => 'Salvesta',
 	'Save and continue edit' => 'Salvesta ja jätka muutmist',
 	'Save and insert next' => 'Salvesta ja lisa järgmine',
 	'Clone' => 'Kloon',
 	'Delete' => 'Kustuta',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Kirje%s on edukalt lisatud.',
+	'Item%s has been inserted.' => 'Kirje%s on edukalt lisatud.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Kustutamine õnnestus.',
 	'Item has been updated.' => 'Uuendamine õnnestus.',
 	'%d item(s) have been affected.' => 'Mõjutatud kirjeid: %d.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Numbrilised',
 	'Date and time' => 'Kuupäev ja kellaaeg',
 	'Strings' => 'Tekstid',
@@ -331,8 +325,10 @@ return [
 	'Geometry' => 'Geomeetria',
 	'Relations' => 'Seosed',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'nüüd',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

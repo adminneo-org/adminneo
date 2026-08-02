@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD/MM/AAAA',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistema',
 	'Server' => 'Servidor',
 	'Username' => 'Nom d\'usuari',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Desconnexió correcta.',
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF invàlid. Torna a enviar el formulari.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Cap extensió',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'No hi ha cap de les extensions PHP suportades (%s) disponible.',
+	'None of the supported PHP extensions (%s) are available.' => 'No hi ha cap de les extensions PHP suportades (%s) disponible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Cal que estigui permès l\'us de sessions.',
 	'Session expired, please login again.' => 'La sessió ha expirat, torna a iniciar-ne una.',
 	'%s version: %s through PHP extension %s' => 'Versió %s: %s amb l\'extensió de PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Idioma',
 
 	'Refresh' => 'Refresca',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegis',
 	'Create user' => 'Crea un usuari',
 	'User has been dropped.' => 'S\'ha suprimit l\'usuari.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'S\'ha creat l\'usuari.',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'Llista de processos',
 	'%d process(es) have been killed.' => [
 		'S\'ha aturat %d procés.',
@@ -60,13 +56,13 @@ return [
 	'Variables' => 'Variables',
 	'Status' => 'Estat',
 
-	// Structure.
+	// Structure
 	'Column' => 'Columna',
 	'Routine' => 'Rutina',
 	'Grant' => 'Grant',
 	'Revoke' => 'Revoke',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Ordre SQL',
 	'%d query(s) executed OK.' => [
 		'%d consulta executada correctament.',
@@ -82,13 +78,12 @@ return [
 	'Stop on error' => 'Atura en trobar un error',
 	'Show only errors' => 'Mostra només els errors',
 	'Time' => 'Temps',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Història',
 	'Clear' => 'Suprimeix',
 	'Edit all' => 'Edita-ho tot',
 
-	// Import.
+	// Import
 	'Import' => 'Importa',
 	'File upload' => 'Adjunta un fitxer',
 	'From server' => 'En el servidor',
@@ -104,7 +99,7 @@ return [
 		'S\'han importat %d registres.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exporta',
 	'Output' => 'Sortida',
 	'open' => 'obre',
@@ -112,7 +107,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Dades',
 
-	// Databases.
+	// Databases
 	'Database' => 'Base de dades',
 	'Use' => 'Utilitza',
 	'Invalid database.' => 'Base de dades invàlida.',
@@ -125,11 +120,12 @@ return [
 	'Database has been created.' => 'S\'ha creat la base de dades.',
 	'Database has been renamed.' => 'S\'ha canviat el nom de la base de dades.',
 	'Database has been altered.' => 'S\'ha modificat la base de dades.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'El fitxer ja existeix.',
 	'Please use one of the extensions %s.' => 'Si us plau, utilitza una de les extensions %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Esquema',
 	'Alter schema' => 'Modifica l\'esquema',
 	'Create schema' => 'Crea un esquema',
@@ -138,7 +134,7 @@ return [
 	'Schema has been altered.' => 'S\'ha modificat l\'esquema.',
 	'Invalid schema.' => 'Esquema invàlid.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Compaginació',
@@ -160,7 +156,7 @@ return [
 	'Copy' => 'Còpia',
 	'Tables have been copied.' => 'S\'han copiat les taules.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Taules',
 	'Tables and views' => 'Taules i vistes',
 	'Table' => 'Taula',
@@ -187,7 +183,7 @@ return [
 	'Remove' => 'Suprimeix',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'S\'ha assolit el nombre màxim de camps. Incrementa %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vista',
 	'View has been dropped.' => 'S\'ha suprimit la vista.',
 	'View has been altered.' => 'S\'ha modificat la vista.',
@@ -195,13 +191,13 @@ return [
 	'Alter view' => 'Modifica la vista',
 	'Create view' => 'Crea una vista',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Fes particions segons',
 	'Partitions' => 'Particions',
 	'Partition name' => 'Nom de la partició',
 	'Values' => 'Valors',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Índexs',
 	'Indexes have been altered.' => 'S\'han modificat els índex.',
 	'Alter indexes' => 'Modifica els índex',
@@ -209,7 +205,7 @@ return [
 	'Index Type' => 'Tipus d\'índex',
 	'length' => 'longitud',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Claus foranes',
 	'Foreign key' => 'Clau forana',
 	'Foreign key has been dropped.' => 'S\'ha suprimit la clau forana.',
@@ -226,7 +222,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Les columnes d\'origen i de destinació han de ser del mateix tipus, la columna de destinació ha d\'estar indexada i les dades referenciades han d\'existir.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutines',
 	'Routine has been called, %d row(s) affected.' => [
 		'S\'ha cridat la rutina, %d registre modificat.',
@@ -243,7 +239,7 @@ return [
 	'Alter procedure' => 'Modifica el procediment',
 	'Return type' => 'Tipus retornat',
 
-	// Events.
+	// Events
 	'Events' => 'Events',
 	'Event' => 'Event',
 	'Event has been dropped.' => 'S\'ha suprimit l\'event.',
@@ -258,7 +254,7 @@ return [
 	'End' => 'Acaba',
 	'On completion preserve' => 'Conservar en completar',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Seqüències',
 	'Create sequence' => 'Crea una seqüència',
 	'Sequence has been dropped.' => 'S\'ha suprimit la seqüència.',
@@ -273,7 +269,7 @@ return [
 	'Type has been created.' => 'S\'ha creat el tipus.',
 	'Alter type' => 'Modifica el tipus',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Activadors',
 	'Add trigger' => 'Afegeix un activador',
 	'Trigger has been dropped.' => 'S\'ha suprimit l\'activador.',
@@ -282,9 +278,9 @@ return [
 	'Alter trigger' => 'Modifica l\'activador',
 	'Create trigger' => 'Crea un activador',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Selecciona dades',
 	'Select' => 'Selecciona',
 	'Functions' => 'Funcions',
@@ -311,24 +307,22 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Ctrl+click on a value to modify it.' => 'Fes un Ctrl+clic a un valor per modificar-lo.',
 	'Use edit link to modify this value.' => 'Utilitza l\'enllaç d\'edició per modificar aquest valor.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nou element',
 	'Edit' => 'Edita',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'buit',
+	'empty' => 'buit', // label for value '' in enum data type
 	'Insert' => 'Insereix',
 	'Save' => 'Desa',
 	'Save and continue edit' => 'Desa i segueix editant',
 	'Save and insert next' => 'Desa i insereix el següent',
 	'Clone' => 'Clona',
 	'Delete' => 'Suprimeix',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'S\'ha insertat l\'element%s.',
+	'Item%s has been inserted.' => 'S\'ha insertat l\'element%s.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'S\'ha suprimit l\'element.',
 	'Item has been updated.' => 'S\'ha actualitzat l\'element.',
 	'%d item(s) have been affected.' => [
@@ -336,7 +330,7 @@ return [
 		'S\'han modificat %d elements.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Nombres',
 	'Date and time' => 'Data i hora',
 	'Strings' => 'Cadenes',
@@ -346,8 +340,10 @@ return [
 	'Geometry' => 'Geometria',
 	'Relations' => 'Relacions',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'ara',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

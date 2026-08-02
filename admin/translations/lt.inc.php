@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Sistema',
 	'Server' => 'Serveris',
 	'Username' => 'Vartotojas',
@@ -29,20 +26,19 @@ return [
 	'Logout successful.' => 'Jūs atsijungėte nuo sistemos.',
 	'Invalid CSRF token. Send the form again.' => 'Neteisingas CSRF tokenas. Bandykite siųsti formos duomenis dar kartą.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Nėra plėtiio',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nėra nei vieno iš palaikomų PHP plėtinių (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Nėra nei vieno iš palaikomų PHP plėtinių (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Session support must be enabled.' => 'Sesijų palaikymas turi būti įjungtas.',
 	'Session expired, please login again.' => 'Sesijos galiojimas baigėsi. Prisijunkite iš naujo.',
 	'%s version: %s through PHP extension %s' => '%s versija: %s per PHP plėtinį %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Kalba',
 
 	'Refresh' => 'Atnaujinti',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegijos',
 	'Create user' => 'Sukurti vartotoją',
 	'User has been dropped.' => 'Vartotojas ištrintas.',
@@ -50,7 +46,7 @@ return [
 	'User has been created.' => 'Vartotojas sukurtas.',
 	'Hashed' => 'Šifruotas',
 
-	// Server.
+	// Server
 	'Process list' => 'Procesų sąrašas',
 	'%d process(es) have been killed.' => [
 		'%d procesas nutrauktas.',
@@ -61,13 +57,13 @@ return [
 	'Variables' => 'Kintamieji',
 	'Status' => 'Būsena',
 
-	// Structure.
+	// Structure
 	'Column' => 'Stulpelis',
 	'Routine' => 'Procedūra',
 	'Grant' => 'Suteikti',
 	'Revoke' => 'Atšaukti',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL užklausa',
 	'%d query(s) executed OK.' => [
 		'%d užklausa įvykdyta.',
@@ -85,13 +81,12 @@ return [
 	'Stop on error' => 'Sustabdyti esant klaidai',
 	'Show only errors' => 'Rodyti tik klaidas',
 	'Time' => 'Laikas',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Istorija',
 	'Clear' => 'Išvalyti',
 	'Edit all' => 'Redaguoti visus',
 
-	// Import.
+	// Import
 	'Import' => 'Importas',
 	'File upload' => 'Failo įkėlimas',
 	'From server' => 'Iš serverio',
@@ -108,7 +103,7 @@ return [
 		'%d įrašų įkelta.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Eksportas',
 	'Output' => 'Išvestis',
 	'open' => 'atidaryti',
@@ -116,7 +111,7 @@ return [
 	'Format' => 'Formatas',
 	'Data' => 'Duomenys',
 
-	// Databases.
+	// Databases
 	'Database' => 'Duomenų bazė',
 	'Use' => 'Naudoti',
 	'Invalid database.' => 'Neteisinga duomenų bazė.',
@@ -129,11 +124,12 @@ return [
 	'Database has been created.' => 'Duomenų bazė sukurta.',
 	'Database has been renamed.' => 'Duomenų bazė pervadinta.',
 	'Database has been altered.' => 'Duomenų bazė pakeista.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Failas egzistuoja.',
 	'Please use one of the extensions %s.' => 'Naudokite vieną iš plėtinių %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'Alter schema' => 'Keisti schemą',
 	'Create schema' => 'Sukurti schemą',
@@ -142,7 +138,7 @@ return [
 	'Schema has been altered.' => 'Schema pakeista.',
 	'Invalid schema.' => 'Neteisinga schema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Variklis',
 	'engine' => 'variklis',
 	'Collation' => 'Lyginimas',
@@ -164,7 +160,7 @@ return [
 	'Copy' => 'Kopijuoti',
 	'Tables have been copied.' => 'Lentelės nukopijuotos.',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Lentelės',
 	'Tables and views' => 'Lentelės ir vaizdai',
 	'Table' => 'Lentelė',
@@ -191,7 +187,7 @@ return [
 	'Remove' => 'Pašalinti',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Viršytas maksimalus leidžiamų stulpelių kiekis. Padidinkite %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vaizdas',
 	'View has been dropped.' => 'Vaizdas pašalintas.',
 	'View has been altered.' => 'Vaizdas pakeistas.',
@@ -199,13 +195,13 @@ return [
 	'Alter view' => 'Redaguoti vaizdą',
 	'Create view' => 'Sukurti vaizdą',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Skirstyti pagal',
 	'Partitions' => 'Skirsniai',
 	'Partition name' => 'Skirsnio pavadinimas',
 	'Values' => 'Reikšmės',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksai',
 	'Indexes have been altered.' => 'Indeksai pakeisti.',
 	'Alter indexes' => 'Redaguoti indeksus',
@@ -213,7 +209,7 @@ return [
 	'Index Type' => 'Indekso tipas',
 	'length' => 'ilgis',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Išoriniai raktai',
 	'Foreign key' => 'Išorinis raktas',
 	'Foreign key has been dropped.' => 'Išorinis raktas pašalintas.',
@@ -230,7 +226,7 @@ return [
 	'ON UPDATE' => 'Atnaujinant',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Šaltinio ir tikslinis stulpelis turi būti to paties tipo, tiksliniame stulpelyje turi būti naudojamas indeksas ir duomenys turi egzistuoti.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedūros',
 	'Routine has been called, %d row(s) affected.' => [
 		'Procedūra įvykdyta. %d įrašas pakeistas.',
@@ -248,7 +244,7 @@ return [
 	'Alter procedure' => 'Keiskti procedūrą',
 	'Return type' => 'Grąžinimo tipas',
 
-	// Events.
+	// Events
 	'Events' => 'Įvykiai',
 	'Event' => 'Įvykis',
 	'Event has been dropped.' => 'Įvykis pašalintas.',
@@ -263,7 +259,7 @@ return [
 	'End' => 'Pabaiga',
 	'On completion preserve' => 'Įvykdžius išsaugoti',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekos',
 	'Create sequence' => 'Sukurti seką',
 	'Sequence has been dropped.' => 'Seka pašalinta.',
@@ -278,7 +274,7 @@ return [
 	'Type has been created.' => 'Tipas sukurtas.',
 	'Alter type' => 'Keisti tipą',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Trigeriai',
 	'Add trigger' => 'Pridėti trigerį',
 	'Trigger has been dropped.' => 'Trigeris pašalintas.',
@@ -287,9 +283,9 @@ return [
 	'Alter trigger' => 'Keisti trigerį',
 	'Create trigger' => 'Sukurti trigerį',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Atrinkti duomenis',
 	'Select' => 'Atrinkti',
 	'Functions' => 'Funkcijos',
@@ -318,23 +314,21 @@ return [
 		'%d baitų',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Use edit link to modify this value.' => 'Norėdami redaguoti reikšmę naudokite redagavimo nuorodą.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Naujas įrašas',
 	'Edit' => 'Redaguoti',
 	'original' => 'originalas',
-	// label for value '' in enum data type
-	'empty' => 'tuščia',
+	'empty' => 'tuščia', // label for value '' in enum data type
 	'Insert' => 'Įrašyti',
 	'Save' => 'Išsaugoti',
 	'Save and continue edit' => 'Išsaugoti ir tęsti redagavimą',
 	'Save and insert next' => 'Išsaugoti ir įrašyti kitą',
 	'Clone' => 'Klonuoti',
 	'Delete' => 'Trinti',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Įrašas%s sukurtas.',
+	'Item%s has been inserted.' => 'Įrašas%s sukurtas.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Įrašas ištrintas.',
 	'Item has been updated.' => 'Įrašas pakeistas.',
 	'%d item(s) have been affected.' => [
@@ -343,7 +337,7 @@ return [
 		'Pakeistas %d įrašų.',
 	],
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Skaičiai',
 	'Date and time' => 'Data ir laikas',
 	'Strings' => 'Tekstas',
@@ -353,8 +347,10 @@ return [
 	'Geometry' => 'Geometrija',
 	'Relations' => 'Ryšiai',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'dabar',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

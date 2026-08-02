@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'System',
 	'Server' => 'Server',
 	'Username' => 'Användarnamn',
@@ -38,21 +35,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Om du inte skickade en förfrågan från AdminNeo så kan du stänga den här sidan.',
 	'The action will be performed after successful login with the same credentials.' => 'Åtgärden kommer att utföras efter en lyckad inloggning med samma inloggningsuppgifter.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Inget tillägg',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Inga av de PHP-tilläggen som stöds (%s) är tillgängliga.',
+	'None of the supported PHP extensions (%s) are available.' => 'Inga av de PHP-tilläggen som stöds (%s) är tillgängliga.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Anslutning till privilegierade portar är inte tillåtet.',
 	'Session support must be enabled.' => 'Support för sessioner måste vara på.',
 	'Session expired, please login again.' => 'Session har löpt ut, vänligen logga in igen.',
 	'%s version: %s through PHP extension %s' => '%s version: %s genom PHP-tillägg %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Språk',
 
 	'Refresh' => 'Ladda om',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegier',
 	'Create user' => 'Skapa användare',
 	'User has been dropped.' => 'Användare har blivit borttagen.',
@@ -60,7 +56,7 @@ return [
 	'User has been created.' => 'Användare har blivit skapad.',
 	'Hashed' => 'Hashad',
 
-	// Server.
+	// Server
 	'Process list' => 'Processlista',
 	'%d process(es) have been killed.' => [
 		'%d process har avslutats.',
@@ -70,13 +66,13 @@ return [
 	'Variables' => 'Variabler',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'Kolumn',
 	'Routine' => 'Rutin',
 	'Grant' => 'Tillåt',
 	'Revoke' => 'Neka',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-kommando',
 	'%d query(s) executed OK.' => [
 		'%d förfrågan lyckades.',
@@ -95,13 +91,12 @@ return [
 	'Stop on error' => 'Stanna på fel',
 	'Show only errors' => 'Visa bara fel',
 	'Time' => 'Tid',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historia',
 	'Clear' => 'Rensa',
 	'Edit all' => 'Redigera alla',
 
-	// Import.
+	// Import
 	'Import' => 'Importera',
 	'File upload' => 'Ladda upp fil',
 	'From server' => 'Från server',
@@ -120,7 +115,7 @@ return [
 		'%d rader har importerats.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exportera',
 	'Output' => 'Utmatning',
 	'open' => 'Öppna',
@@ -128,7 +123,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Databas',
 	'DB' => 'DB',
 	'Use' => 'Använd',
@@ -142,11 +137,12 @@ return [
 	'Database has been created.' => 'Databasen har skapats.',
 	'Database has been renamed.' => 'Databasen har fått sitt namn ändrat.',
 	'Database has been altered.' => 'Databasen har ändrats.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Filen finns redan.',
 	'Please use one of the extensions %s.' => 'Vänligen använd en av filändelserna %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'Alter schema' => 'Redigera schema',
 	'Create schema' => 'Skapa schema',
@@ -155,7 +151,7 @@ return [
 	'Schema has been altered.' => 'Schema har ändrats.',
 	'Invalid schema.' => 'Ogiltigt schema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Kollationering',
@@ -179,7 +175,7 @@ return [
 	'Tables have been copied.' => 'Tabeller har kopierats.',
 	'overwrite' => 'Skriv över',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabeller',
 	'Tables and views' => 'Tabeller och vyer',
 	'Table' => 'Tabell',
@@ -211,7 +207,7 @@ return [
 	'Remove' => 'Ta bort',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Högsta nummer tillåtna fält är överskridet. Vänligen höj %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vy',
 	'Materialized view' => 'Materialiserad vy',
 	'View has been dropped.' => 'Vy har tagits bort.',
@@ -220,13 +216,13 @@ return [
 	'Alter view' => 'Ändra vy',
 	'Create view' => 'Skapa vy',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partitionera om',
 	'Partitions' => 'Partitioner',
 	'Partition name' => 'Partition',
 	'Values' => 'Värden',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Index',
 	'Indexes have been altered.' => 'Index har ändrats.',
 	'Alter indexes' => 'Ändra index',
@@ -234,7 +230,7 @@ return [
 	'Index Type' => 'Indextyp',
 	'length' => 'längd',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Främmande nycklar',
 	'Foreign key' => 'Främmande nyckel',
 	'Foreign key has been dropped.' => 'Främmande nyckel har tagits bort.',
@@ -251,7 +247,7 @@ return [
 	'ON UPDATE' => 'VID UPPDATERING',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Käll- och mål-tabellen måste ha samma datatyp, ett index på målkolumnerna och refererad data måste finnas.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutiner',
 	'Routine has been called, %d row(s) affected.' => [
 		'Rutin har kallats, %d rad påverkades.',
@@ -268,7 +264,7 @@ return [
 	'Alter procedure' => 'Ändra procedur',
 	'Return type' => 'Återvändningstyp',
 
-	// Events.
+	// Events
 	'Events' => 'Event',
 	'Event' => 'Event',
 	'Event has been dropped.' => 'Event har tagits bort.',
@@ -283,7 +279,7 @@ return [
 	'End' => 'Slut',
 	'On completion preserve' => 'Bibehåll vid slutet',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekvenser',
 	'Create sequence' => 'Skapa sekvens',
 	'Sequence has been dropped.' => 'Sekvens har tagits bort.',
@@ -298,7 +294,7 @@ return [
 	'Type has been created.' => 'Typ har skapats.',
 	'Alter type' => 'Ändra typ',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Avtryckare',
 	'Add trigger' => 'Lägg till avtryckare',
 	'Trigger has been dropped.' => 'Avtryckare har tagits bort.',
@@ -307,9 +303,9 @@ return [
 	'Alter trigger' => 'Ändra avtryckare',
 	'Create trigger' => 'Skapa avtryckare',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Välj data',
 	'Select' => 'Välj',
 	'Functions' => 'Funktioner',
@@ -341,17 +337,16 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Ändra',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klicka på ett värde för att ändra det.',
 	'Use edit link to modify this value.' => 'Använd redigeringslänken för att ändra värdet.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Ny sak',
 	'Edit' => 'Redigera',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'tom',
+	'empty' => 'tom', // label for value '' in enum data type
 	'Insert' => 'Infoga',
 	'Save' => 'Spara',
 	'Save and continue edit' => 'Spara och fortsätt att redigera',
@@ -360,8 +355,7 @@ return [
 	'Selected' => 'Vald',
 	'Clone' => 'Klona',
 	'Delete' => 'Ta bort',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Sak%s har skapats.',
+	'Item%s has been inserted.' => 'Sak%s har skapats.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'En sak har tagits bort.',
 	'Item has been updated.' => 'En sak har ändrats.',
 	'%d item(s) have been affected.' => [
@@ -370,7 +364,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Du har inga privilegier för att uppdatera den här tabellen.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Nummer',
 	'Date and time' => 'Datum och tid',
 	'Strings' => 'Strängar',
@@ -380,10 +374,12 @@ return [
 	'Geometry' => 'Geometri',
 	'Relations' => 'Relationer',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'nu',
 	'yes' => 'ja',
 	'no' => 'nej',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1.$3.$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY.MM.DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1.$3.$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY.MM.DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => '資料庫系統',
 	'Server' => '伺服器',
 	'Username' => '帳號',
@@ -35,21 +32,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => '如果您並沒有從AdminNeo發送請求，請關閉此頁面。',
 	'The action will be performed after successful login with the same credentials.' => '此操作將在成功使用相同的憑據登錄後執行。',
 
-	// Connection.
+	// Connection
 	'No extension' => '無擴充模組',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => '沒有任何支援的 PHP 擴充模組（%s）。',
+	'None of the supported PHP extensions (%s) are available.' => '沒有任何支援的 PHP 擴充模組（%s）。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '不允許連接到特權埠。',
 	'Session support must be enabled.' => 'Session 必須被啟用。',
 	'Session expired, please login again.' => 'Session 已過期，請重新登入。',
 	'%s version: %s through PHP extension %s' => '%s 版本：%s 透過 PHP 擴充模組 %s',
 
-	// Settings.
+	// Settings
 	'Language' => '語言',
 
 	'Refresh' => '重新載入',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => '權限',
 	'Create user' => '建立使用者',
 	'User has been dropped.' => '已刪除使用者。',
@@ -57,20 +53,20 @@ return [
 	'User has been created.' => '已建立使用者。',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => '處理程序列表',
 	'%d process(es) have been killed.' => '%d 個 Process(es) 被終止。',
 	'Kill' => '終止',
 	'Variables' => '變數',
 	'Status' => '狀態',
 
-	// Structure.
+	// Structure
 	'Column' => '欄位',
 	'Routine' => '程序',
 	'Grant' => '授權',
 	'Revoke' => '廢除',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL 命令',
 	'%d query(s) executed OK.' => '已順利執行 %d 個查詢。',
 	'Query executed OK, %d row(s) affected.' => '執行查詢 OK，%d 行受影響。',
@@ -83,13 +79,12 @@ return [
 	'Stop on error' => '出錯時停止',
 	'Show only errors' => '僅顯示錯誤訊息',
 	'Time' => '時間',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f 秒',
+	'%.3f s' => '%.3f 秒', // sprintf() format for time of the command
 	'History' => '紀錄',
 	'Clear' => '清除',
 	'Edit all' => '編輯全部',
 
-	// Import.
+	// Import
 	'Import' => '匯入',
 	'File upload' => '檔案上傳',
 	'From server' => '從伺服器',
@@ -105,7 +100,7 @@ return [
 	'You are offline.' => '您離線了。',
 	'%d row(s) have been imported.' => '已匯入 %d 行。',
 
-	// Export.
+	// Export
 	'Export' => '匯出',
 	'Output' => '輸出',
 	'open' => '打開',
@@ -113,7 +108,7 @@ return [
 	'Format' => '格式',
 	'Data' => '資料',
 
-	// Databases.
+	// Databases
 	'Database' => '資料庫',
 	'DB' => '資料庫',
 	'Use' => '使用',
@@ -127,11 +122,12 @@ return [
 	'Database has been created.' => '已建立資料庫。',
 	'Database has been renamed.' => '已重新命名資料庫。',
 	'Database has been altered.' => '已修改資料庫。',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => '檔案已存在。',
 	'Please use one of the extensions %s.' => '請使用下列其中一個擴充模組 %s。',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => '資料表結構',
 	'Alter schema' => '修改資料表結構',
 	'Create schema' => '建立資料表結構',
@@ -140,7 +136,7 @@ return [
 	'Schema has been altered.' => '已修改資料表結構。',
 	'Invalid schema.' => '無效的資料表結構。',
 
-	// Table list.
+	// Table list
 	'Engine' => '引擎',
 	'engine' => '引擎',
 	'Collation' => '校對',
@@ -164,7 +160,7 @@ return [
 	'Tables have been copied.' => '資料表已經複製。',
 	'overwrite' => '覆蓋',
 
-	// Tables.
+	// Tables
 	'Tables' => '資料表',
 	'Tables and views' => '資料表和檢視表',
 	'Table' => '資料表',
@@ -196,7 +192,7 @@ return [
 	'Remove' => '移除',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => '超過允許的字段數量的最大值。請增加 %s。',
 
-	// Views.
+	// Views
 	'View' => '檢視表',
 	'Materialized view' => '物化視圖',
 	'View has been dropped.' => '已刪除檢視表。',
@@ -205,13 +201,13 @@ return [
 	'Alter view' => '修改檢視表',
 	'Create view' => '建立檢視表',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => '分區類型',
 	'Partitions' => '分區',
 	'Partition name' => '分區名稱',
 	'Values' => '值',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => '索引',
 	'Indexes have been altered.' => '已修改索引。',
 	'Alter indexes' => '修改索引',
@@ -219,7 +215,7 @@ return [
 	'Index Type' => '索引類型',
 	'length' => '長度',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => '外來鍵',
 	'Foreign key' => '外來鍵',
 	'Foreign key has been dropped.' => '已刪除外來鍵。',
@@ -236,7 +232,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => '來源列和目標列必須具有相同的資料類型，在目標列上必須有一個索引並且引用的資料必須存在。',
 
-	// Routines.
+	// Routines
 	'Routines' => '程序',
 	'Routine has been called, %d row(s) affected.' => '程序已被執行，%d 行被影響。',
 	'Call' => '呼叫',
@@ -250,7 +246,7 @@ return [
 	'Alter procedure' => '修改預存程序',
 	'Return type' => '回傳類型',
 
-	// Events.
+	// Events
 	'Events' => '事件',
 	'Event' => '事件',
 	'Event has been dropped.' => '已刪除事件。',
@@ -265,7 +261,7 @@ return [
 	'End' => '結束',
 	'On completion preserve' => '在完成後儲存',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => '序列',
 	'Create sequence' => '建立序列',
 	'Sequence has been dropped.' => '已刪除序列。',
@@ -280,7 +276,7 @@ return [
 	'Type has been created.' => '已建立類型。',
 	'Alter type' => '修改類型',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => '觸發器',
 	'Add trigger' => '建立觸發器',
 	'Trigger has been dropped.' => '已刪除觸發器。',
@@ -289,9 +285,9 @@ return [
 	'Alter trigger' => '修改觸發器',
 	'Create trigger' => '建立觸發器',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => '選擇資料',
 	'Select' => '選擇',
 	'Functions' => '函式',
@@ -317,17 +313,16 @@ return [
 	'Whole result' => '所有結果',
 	'%d byte(s)' => '%d byte(s)',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => '修改',
 	'Ctrl+click on a value to modify it.' => '按住Ctrl並按一下某個值進行修改。',
 	'Use edit link to modify this value.' => '使用編輯連結來修改。',
 
-	// Editing.
+	// Editing
 	'New item' => '新增項目',
 	'Edit' => '編輯',
 	'original' => '原始',
-	// label for value '' in enum data type
-	'empty' => '空值',
+	'empty' => '空值', // label for value '' in enum data type
 	'Insert' => '新增',
 	'Save' => '儲存',
 	'Save and continue edit' => '儲存並繼續編輯',
@@ -336,14 +331,13 @@ return [
 	'Selected' => '已選中',
 	'Clone' => '複製',
 	'Delete' => '刪除',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '已新增項目 %s。',
+	'Item%s has been inserted.' => '已新增項目 %s。', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => '該項目已被刪除。',
 	'Item has been updated.' => '已更新項目。',
 	'%d item(s) have been affected.' => '%d 個項目受到影響。',
 	'You have no privileges to update this table.' => '您沒有許可權更新這個資料表。',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => '數字',
 	'Date and time' => '日期時間',
 	'Strings' => '字串',
@@ -353,10 +347,12 @@ return [
 	'Geometry' => '幾何',
 	'Relations' => '關聯',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => '現在',
 	'yes' => '是',
 	'no' => '否',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

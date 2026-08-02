@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'PP.KK.VVVV',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'PP.KK.VVVV', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Järjestelmä',
 	'Server' => 'Palvelin',
 	'Username' => 'Käyttäjänimi',
@@ -38,21 +35,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Jollet lähettänyt tämä pyyntö AdminNeo, sulje tämä sivu.',
 	'The action will be performed after successful login with the same credentials.' => 'Toiminto suoritetaan sen jälkeen, kun on onnistuttu kirjautumaan samoilla käyttäjätunnuksilla uudestaan.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Ei laajennusta',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Mitään tuetuista PHP-laajennuksista (%s) ei ole käytettävissä.',
+	'None of the supported PHP extensions (%s) are available.' => 'Mitään tuetuista PHP-laajennuksista (%s) ei ole käytettävissä.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Yhteydet etuoikeutettuihin portteihin eivät ole sallittuja.',
 	'Session support must be enabled.' => 'Istuntotuki on oltava päällä.',
 	'Session expired, please login again.' => 'Istunto vanhentunut, kirjaudu uudelleen.',
 	'%s version: %s through PHP extension %s' => '%s versio: %s PHP-laajennuksella %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Kieli',
 
 	'Refresh' => 'Virkistä',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Oikeudet',
 	'Create user' => 'Luo käyttäjä',
 	'User has been dropped.' => 'Käyttäjä poistettiin.',
@@ -60,7 +56,7 @@ return [
 	'User has been created.' => 'Käyttäjä luotiin.',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'Prosessilista',
 	'%d process(es) have been killed.' => [
 		'%d prosessi lopetettu.',
@@ -70,13 +66,13 @@ return [
 	'Variables' => 'Muuttujat',
 	'Status' => 'Tila',
 
-	// Structure.
+	// Structure
 	'Column' => 'Sarake',
 	'Routine' => 'Rutiini',
 	'Grant' => 'Myönnä',
 	'Revoke' => 'Kiellä',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-komento',
 	'%d query(s) executed OK.' => [
 		'%d kysely onnistui.',
@@ -95,13 +91,12 @@ return [
 	'Stop on error' => 'Pysähdy virheeseen',
 	'Show only errors' => 'Näytä vain virheet',
 	'Time' => 'Aika',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historia',
 	'Clear' => 'Tyhjennä',
 	'Edit all' => 'Muokkaa kaikkia',
 
-	// Import.
+	// Import
 	'Import' => 'Tuonti',
 	'File upload' => 'Tiedoston lataus palvelimelle',
 	'From server' => 'Verkkopalvelimella Adminer-kansiossa oleva tiedosto',
@@ -120,7 +115,7 @@ return [
 		'%d riviä tuotiin.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Vienti',
 	'Output' => 'Tulos',
 	'open' => 'avaa',
@@ -128,7 +123,7 @@ return [
 	'Format' => 'Muoto',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Tietokanta',
 	'DB' => 'TK',
 	'Use' => 'Käytä',
@@ -142,11 +137,12 @@ return [
 	'Database has been created.' => 'Tietokanta on luotu.',
 	'Database has been renamed.' => 'Tietokanta on nimetty uudelleen.',
 	'Database has been altered.' => 'Tietokantaa on muutettu.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Tiedosto on olemassa.',
 	'Please use one of the extensions %s.' => 'Käytä jotain %s-laajennuksista.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Kaava',
 	'Alter schema' => 'Muuta kaavaa',
 	'Create schema' => 'Luo kaava',
@@ -155,7 +151,7 @@ return [
 	'Schema has been altered.' => 'Kaavaa muutettiin.',
 	'Invalid schema.' => 'Kaava ei kelpaa.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Moottori',
 	'engine' => 'moottori',
 	'Collation' => 'Kollaatio',
@@ -179,7 +175,7 @@ return [
 	'Tables have been copied.' => 'Taulut on kopioitu.',
 	'overwrite' => 'kirjoittaen päälle',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Taulut',
 	'Tables and views' => 'Taulut ja näkymät',
 	'Table' => 'Taulu',
@@ -211,7 +207,7 @@ return [
 	'Remove' => 'Poista',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Kenttien sallittu enimmäismäärä ylitetty. Kasvata arvoa %s.',
 
-	// Views.
+	// Views
 	'View' => 'Näkymä',
 	'Materialized view' => 'Materialisoitunut näkymä',
 	'View has been dropped.' => 'Näkymä on poistettu.',
@@ -220,13 +216,13 @@ return [
 	'Alter view' => 'Muuta näkymää',
 	'Create view' => 'Luo näkymä',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Osioi arvolla',
 	'Partitions' => 'Osiot',
 	'Partition name' => 'Osion nimi',
 	'Values' => 'Arvot',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksit',
 	'Indexes have been altered.' => 'Indeksejä on muutettu.',
 	'Alter indexes' => 'Muuta indeksejä',
@@ -234,7 +230,7 @@ return [
 	'Index Type' => 'Indeksityyppi',
 	'length' => 'pituus',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Vieraat avaimet',
 	'Foreign key' => 'Vieras avain',
 	'Foreign key has been dropped.' => 'Vieras avain on poistettu.',
@@ -251,7 +247,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lähde- ja kohdesarakkeiden tulee olla samaa tietotyyppiä, kohdesarakkeisiin tulee olla indeksi ja dataa, johon viitataan, täytyy olla.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutiinit',
 	'Routine has been called, %d row(s) affected.' => [
 		'Rutiini kutsuttu, kohdistui %d riviin.',
@@ -268,7 +264,7 @@ return [
 	'Alter procedure' => 'Muuta proseduuria',
 	'Return type' => 'Palautustyyppi',
 
-	// Events.
+	// Events
 	'Events' => 'Tapahtumat',
 	'Event' => 'Tapahtuma',
 	'Event has been dropped.' => 'Tapahtuma on poistettu.',
@@ -283,7 +279,7 @@ return [
 	'End' => 'Lopetus',
 	'On completion preserve' => 'Säilytä, kun valmis',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekvenssit',
 	'Create sequence' => 'Luo sekvenssi',
 	'Sequence has been dropped.' => 'Sekvenssi on poistettu.',
@@ -298,7 +294,7 @@ return [
 	'Type has been created.' => 'Tyyppi luotiin.',
 	'Alter type' => 'Muuta tyyppiä',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Liipaisimet',
 	'Add trigger' => 'Lisää liipaisin',
 	'Trigger has been dropped.' => 'Liipaisin on poistettu.',
@@ -307,9 +303,9 @@ return [
 	'Alter trigger' => 'Muuta liipaisinta',
 	'Create trigger' => 'Luo liipaisin',
 
-	// Table check constraints.
+	// Table check constraints
 
-	// Selection.
+	// Selection
 	'Select data' => 'Valitse data',
 	'Select' => 'Valitse',
 	'Functions' => 'Funktiot',
@@ -341,17 +337,16 @@ return [
 		'%d tavua',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Muuta',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+napsauta arvoa muuttaaksesi.',
 	'Use edit link to modify this value.' => 'Käytä muokkaa-linkkiä muuttaaksesi tätä arvoa.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Uusi tietue',
 	'Edit' => 'Muokkaa',
 	'original' => 'alkuperäinen',
-	// label for value '' in enum data type
-	'empty' => 'tyhjä',
+	'empty' => 'tyhjä', // label for value '' in enum data type
 	'Insert' => 'Lisää',
 	'Save' => 'Tallenna',
 	'Save and continue edit' => 'Tallenna ja jatka muokkaamista',
@@ -360,8 +355,7 @@ return [
 	'Selected' => 'Valitut',
 	'Clone' => 'Kloonaa',
 	'Delete' => 'Poista',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Tietue%s lisättiin.',
+	'Item%s has been inserted.' => 'Tietue%s lisättiin.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Tietue poistettiin.',
 	'Item has been updated.' => 'Tietue päivitettiin.',
 	'%d item(s) have been affected.' => [
@@ -370,7 +364,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Sinulla ei ole oikeutta päivittää tätä taulua.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Numerot',
 	'Date and time' => 'Päiväys ja aika',
 	'Strings' => 'Merkkijonot',
@@ -380,10 +374,12 @@ return [
 	'Geometry' => 'Geometria',
 	'Relations' => 'Suhteet',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'nyt',
 	'yes' => 'kyllä',
 	'no' => 'ei',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];

@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'JJ/MM/AAAA',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'JJ/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s doit retourner un tableau.',
 	'%s and %s must return an object created by %s method.' => '%s et %s doivent retourner un objet créé par la méthode %s.',
 
-	// Login.
+	// Login
 	'System' => 'Système',
 	'Server' => 'Serveur',
 	'Username' => 'Utilisateur',
@@ -42,18 +39,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Si vous n\'avez pas envoyé cette requête depuis AdminNeo, alors fermez cette page.',
 	'The action will be performed after successful login with the same credentials.' => 'Cette action sera exécutée après s\'être connecté avec les mêmes données de connexion.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Aucun driver',
 	'Database driver not found.' => 'Driver de base de données introuvable.',
 	'No extension' => 'Extension introuvable',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Aucune des extensions PHP supportées (%s) n\'est disponible.',
+	'None of the supported PHP extensions (%s) are available.' => 'Aucune des extensions PHP supportées (%s) n\'est disponible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'La connexion aux ports privilégiés n\'est pas autorisée.',
 	'Session support must be enabled.' => 'Veuillez activer les sessions.',
 	'Session expired, please login again.' => 'Session expirée, veuillez vous authentifier à nouveau.',
 	'%s version: %s through PHP extension %s' => 'Version de %s : %s via l\'extension PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Langue',
 
 	'Home' => 'Accueil',
@@ -61,7 +57,7 @@ return [
 	'Info' => 'Info',
 	'More information.' => 'Plus d\'informations.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilèges',
 	'Create user' => 'Créer un utilisateur',
 	'User has been dropped.' => 'L\'utilisateur a été effacé.',
@@ -69,7 +65,7 @@ return [
 	'User has been created.' => 'L\'utilisateur a été créé.',
 	'Hashed' => 'Haché',
 
-	// Server.
+	// Server
 	'Process list' => 'Liste des processus',
 	'%d process(es) have been killed.' => [
 		'%d processus a été arrêté.',
@@ -79,14 +75,14 @@ return [
 	'Variables' => 'Variables',
 	'Status' => 'Statut',
 
-	// Structure.
+	// Structure
 	'Column' => 'Colonne',
 	'Columns' => 'Colonnes',
 	'Routine' => 'Routine',
 	'Grant' => 'Grant',
 	'Revoke' => 'Revoke',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Requête SQL',
 	'HTTP request' => 'Requête HTTP',
 	'%d query(s) executed OK.' => [
@@ -106,13 +102,12 @@ return [
 	'Stop on error' => 'Arrêter en cas d\'erreur',
 	'Show only errors' => 'Montrer seulement les erreurs',
 	'Time' => 'Temps',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historique',
 	'Clear' => 'Effacer',
 	'Edit all' => 'Tout modifier',
 
-	// Import.
+	// Import
 	'Import' => 'Importer',
 	'File upload' => 'Importer un fichier',
 	'From server' => 'Depuis le serveur',
@@ -131,7 +126,7 @@ return [
 		'%d lignes ont été importées.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exporter',
 	'Output' => 'Sortie',
 	'open' => 'ouvrir',
@@ -139,7 +134,7 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Données',
 
-	// Databases.
+	// Databases
 	'Database' => 'Base de données',
 	'database' => 'base de données',
 	'DB' => 'BD',
@@ -154,11 +149,12 @@ return [
 	'Database has been created.' => 'La base de données a été créée.',
 	'Database has been renamed.' => 'La base de données a été renommée.',
 	'Database has been altered.' => 'La base de données a été modifiée.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Le fichier existe.',
 	'Please use one of the extensions %s.' => 'Veuillez utiliser l\'une des extensions %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schéma',
 	'schema' => 'schéma',
 	'Schemas' => 'Schémas',
@@ -171,7 +167,7 @@ return [
 	'Schema has been altered.' => 'Le schéma a été modifié.',
 	'Invalid schema.' => 'Schéma invalide.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Moteur',
 	'engine' => 'moteur',
 	'Collation' => 'Interclassement',
@@ -195,7 +191,7 @@ return [
 	'Tables have been copied.' => 'Les tables ont été copiées.',
 	'overwrite' => 'écraser',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tables',
 	'Tables and views' => 'Tables et vues',
 	'Table' => 'Table',
@@ -227,7 +223,7 @@ return [
 	'Remove' => 'Effacer',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Le nombre maximum de champs est dépassé. Veuillez augmenter %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vue',
 	'Materialized view' => 'Vue matérialisée',
 	'View has been dropped.' => 'La vue a été effacée.',
@@ -236,14 +232,14 @@ return [
 	'Alter view' => 'Modifier une vue',
 	'Create view' => 'Créer une vue',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partitionner par',
 	'Partition' => 'Partition',
 	'Partitions' => 'Partitions',
 	'Partition name' => 'Nom de la partition',
 	'Values' => 'Valeurs',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Index',
 	'Indexes have been altered.' => 'Index modifiés.',
 	'Alter indexes' => 'Modifier les index',
@@ -251,7 +247,7 @@ return [
 	'Index Type' => 'Type d\'index',
 	'length' => 'longueur',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Clés étrangères',
 	'Foreign key' => 'Clé étrangère',
 	'Foreign key has been dropped.' => 'La clé étrangère a été effacée.',
@@ -268,7 +264,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Les colonnes de source et de destination doivent être du même type, il doit y avoir un index sur les colonnes de destination et les données référencées doivent exister.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Routines',
 	'Routine has been called, %d row(s) affected.' => [
 		'La routine a été exécutée, %d ligne modifiée.',
@@ -285,7 +281,7 @@ return [
 	'Alter procedure' => 'Modifier la procédure',
 	'Return type' => 'Type de retour',
 
-	// Events.
+	// Events
 	'Events' => 'Évènements',
 	'Event' => 'Évènement',
 	'Event has been dropped.' => 'L\'évènement a été supprimé.',
@@ -300,7 +296,7 @@ return [
 	'End' => 'Terminer',
 	'On completion preserve' => 'Conserver quand complété',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Séquences',
 	'Create sequence' => 'Créer une séquence',
 	'Sequence has been dropped.' => 'La séquence a été supprimée.',
@@ -315,7 +311,7 @@ return [
 	'Type has been created.' => 'Le type a été créé.',
 	'Alter type' => 'Modifier le type',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Déclencheurs',
 	'Add trigger' => 'Ajouter un déclencheur',
 	'Trigger has been dropped.' => 'Le déclencheur a été supprimé.',
@@ -324,7 +320,7 @@ return [
 	'Alter trigger' => 'Modifier un déclencheur',
 	'Create trigger' => 'Ajouter un déclencheur',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Checks',
 	'Create check' => 'Créer un check',
 	'Alter check' => 'Modifier le check',
@@ -332,7 +328,7 @@ return [
 	'Check has been altered.' => 'Le check a été modifié.',
 	'Check has been dropped.' => 'Le check a été supprimé.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Afficher les données',
 	'Select' => 'Sélectionner',
 	'Functions' => 'Fonctions',
@@ -364,17 +360,16 @@ return [
 		'%d octets',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Modifier',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+cliquez sur une valeur pour la modifier.',
 	'Use edit link to modify this value.' => 'Utilisez le lien \'modifier\' pour modifier cette valeur.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nouvel élément',
 	'Edit' => 'Modifier',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'vide',
+	'empty' => 'vide', // label for value '' in enum data type
 	'Insert' => 'Insérer',
 	'Save' => 'Enregistrer',
 	'Save and continue edit' => 'Enr. et continuer édition',
@@ -383,8 +378,7 @@ return [
 	'Selected' => 'Sélectionné(s)',
 	'Clone' => 'Cloner',
 	'Delete' => 'Effacer',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'L\'élément%s a été inséré.',
+	'Item%s has been inserted.' => 'L\'élément%s a été inséré.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'L\'élément a été supprimé.',
 	'Item has been updated.' => 'L\'élément a été modifié.',
 	'%d item(s) have been affected.' => [
@@ -393,7 +387,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Vous n\'avez pas les droits pour mettre à jour cette table.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Nombres',
 	'Date and time' => 'Date et heure',
 	'Strings' => 'Chaînes',
@@ -403,12 +397,12 @@ return [
 	'Geometry' => 'Géométrie',
 	'Relations' => 'Relations',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'maintenant',
 	'yes' => 'oui',
 	'no' => 'non',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Paramètres',
 	'Default' => 'Défaut',
 	'Color scheme' => 'Schéma de couleurs',
@@ -430,7 +424,7 @@ return [
 	'More values than %d' => 'Plus de valeurs que %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Seuil pour afficher un menu de sélection pour les champs enum.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Mot de passe à usage unique',
 	'Enter OTP code.' => 'Saisissez le code OTP.',
 	'Invalid OTP code.' => 'Code OTP invalide.',

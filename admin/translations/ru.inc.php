@@ -3,21 +3,18 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'ДД.ММ.ГГГГ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'ЧЧ:ММ:СС',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'ДД.ММ.ГГГГ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'ЧЧ:ММ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+
+	// Login
 	'System' => 'Движок',
 	'Server' => 'Сервер',
 	'Username' => 'Имя пользователя',
@@ -39,21 +36,20 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Если вы не посылали этот запрос из AdminNeo, закройте эту страницу.',
 	'The action will be performed after successful login with the same credentials.' => 'Действие будет выполнено после успешного входа в систему с теми же учетными данными.',
 
-	// Connection.
+	// Connection
 	'No extension' => 'Нет расширений',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Недоступно ни одного расширения из поддерживаемых (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Недоступно ни одного расширения из поддерживаемых (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Подключение к привилегированным портам не допускается.',
 	'Session support must be enabled.' => 'Сессии должны быть включены.',
 	'Session expired, please login again.' => 'Срок действия сессии истёк, нужно снова войти в систему.',
 	'%s version: %s through PHP extension %s' => 'Версия %s: %s с PHP-расширением %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Язык',
 
 	'Refresh' => 'Обновить',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Полномочия',
 	'Create user' => 'Создать пользователя',
 	'User has been dropped.' => 'Пользователь был удалён.',
@@ -61,7 +57,7 @@ return [
 	'User has been created.' => 'Пользователь был создан.',
 	'Hashed' => 'Хешировано',
 
-	// Server.
+	// Server
 	'Process list' => 'Список процессов',
 	'%d process(es) have been killed.' => [
 		'Был завершён %d процесс.',
@@ -72,13 +68,13 @@ return [
 	'Variables' => 'Переменные',
 	'Status' => 'Состояние',
 
-	// Structure.
+	// Structure
 	'Column' => 'поле',
 	'Routine' => 'Процедура',
 	'Grant' => 'Позволить',
 	'Revoke' => 'Запретить',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-запрос',
 	'%d query(s) executed OK.' => [
 		'%d запрос выполнен успешно.',
@@ -99,13 +95,12 @@ return [
 	'Stop on error' => 'Остановить при ошибке',
 	'Show only errors' => 'Только ошибки',
 	'Time' => 'Время',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'История',
 	'Clear' => 'Очистить',
 	'Edit all' => 'Редактировать всё',
 
-	// Import.
+	// Import
 	'Import' => 'Импорт',
 	'File upload' => 'Загрузить файл на сервер',
 	'From server' => 'С сервера',
@@ -125,7 +120,7 @@ return [
 		'Импортировано %d строк.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Экспорт',
 	'Output' => 'Выходные данные',
 	'open' => 'открыть',
@@ -133,7 +128,7 @@ return [
 	'Format' => 'Формат',
 	'Data' => 'Данные',
 
-	// Databases.
+	// Databases
 	'Database' => 'База данных',
 	'DB' => 'DB',
 	'Use' => 'Выбрать',
@@ -147,11 +142,12 @@ return [
 	'Database has been created.' => 'База данных была создана.',
 	'Database has been renamed.' => 'База данных была переименована.',
 	'Database has been altered.' => 'База данных была изменена.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Файл уже существует.',
 	'Please use one of the extensions %s.' => 'Используйте одно из этих расширений %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
 	'Alter schema' => 'Изменить схему',
 	'Create schema' => 'Новая схема',
@@ -160,7 +156,7 @@ return [
 	'Schema has been altered.' => 'Схема изменена.',
 	'Invalid schema.' => 'Неправильная схема.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Тип таблиц',
 	'engine' => 'Тип таблицы',
 	'Collation' => 'Режим сопоставления',
@@ -184,7 +180,7 @@ return [
 	'Tables have been copied.' => 'Таблицы скопированы.',
 	'overwrite' => 'перезаписать',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Таблицы',
 	'Tables and views' => 'Таблицы и представления',
 	'Table' => 'Таблица',
@@ -216,7 +212,7 @@ return [
 	'Remove' => 'Удалить',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Достигнуто максимальное значение количества доступных полей. Увеличьте %s.',
 
-	// Views.
+	// Views
 	'View' => 'Представление',
 	'Materialized view' => 'Материализованное представление',
 	'View has been dropped.' => 'Представление было удалено.',
@@ -225,13 +221,13 @@ return [
 	'Alter view' => 'Изменить представление',
 	'Create view' => 'Создать представление',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Разделить по',
 	'Partitions' => 'Разделы',
 	'Partition name' => 'Название раздела',
 	'Values' => 'Параметры',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Индексы',
 	'Indexes have been altered.' => 'Индексы изменены.',
 	'Alter indexes' => 'Изменить индексы',
@@ -239,7 +235,7 @@ return [
 	'Index Type' => 'Тип индекса',
 	'length' => 'длина',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Внешние ключи',
 	'Foreign key' => 'Внешний ключ',
 	'Foreign key has been dropped.' => 'Внешний ключ был удалён.',
@@ -256,7 +252,7 @@ return [
 	'ON UPDATE' => 'При обновлении',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Поля должны иметь одинаковые типы данных, в результирующем поле должен быть индекс, данные для импорта должны существовать.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Хранимые процедуры и функции',
 	'Routine has been called, %d row(s) affected.' => [
 		'Была вызвана процедура, %d запись была изменена.',
@@ -274,7 +270,7 @@ return [
 	'Alter procedure' => 'Изменить процедуру',
 	'Return type' => 'Возвращаемый тип',
 
-	// Events.
+	// Events
 	'Events' => 'События',
 	'Event' => 'Событие',
 	'Event has been dropped.' => 'Событие было удалено.',
@@ -289,7 +285,7 @@ return [
 	'End' => 'Конец',
 	'On completion preserve' => 'После завершения сохранить',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => '«Последовательности»',
 	'Create sequence' => 'Создать «последовательность»',
 	'Sequence has been dropped.' => '«Последовательность» удалена.',
@@ -304,7 +300,7 @@ return [
 	'Type has been created.' => 'Создан новый тип.',
 	'Alter type' => 'Изменить тип',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Триггеры',
 	'Add trigger' => 'Добавить триггер',
 	'Trigger has been dropped.' => 'Триггер был удалён.',
@@ -313,7 +309,7 @@ return [
 	'Alter trigger' => 'Изменить триггер',
 	'Create trigger' => 'Создать триггер',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Проверки',
 	'Create check' => 'Создать проверку',
 	'Alter check' => 'Изменить проверку',
@@ -321,7 +317,7 @@ return [
 	'Check has been altered.' => 'Проверка изменена.',
 	'Check has been dropped.' => 'Проверка удалена.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Выбрать',
 	'Select' => 'Выбрать',
 	'Functions' => 'Функции',
@@ -355,17 +351,16 @@ return [
 		'%d байтов',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Изменить',
 	'Ctrl+click on a value to modify it.' => 'Выполните Ctrl+Щелчок мышью по значению, чтобы его изменить.',
 	'Use edit link to modify this value.' => 'Изменить это значение можно с помощью ссылки «изменить».',
 
-	// Editing.
+	// Editing
 	'New item' => 'Новая запись',
 	'Edit' => 'Редактировать',
 	'original' => 'исходный',
-	// label for value '' in enum data type
-	'empty' => 'пусто',
+	'empty' => 'пусто', // label for value '' in enum data type
 	'Insert' => 'Вставить',
 	'Save' => 'Сохранить',
 	'Save and continue edit' => 'Сохранить и продолжить редактирование',
@@ -374,8 +369,7 @@ return [
 	'Selected' => 'Выбранные',
 	'Clone' => 'Клонировать',
 	'Delete' => 'Стереть',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Запись%s была вставлена.',
+	'Item%s has been inserted.' => 'Запись%s была вставлена.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Запись удалена.',
 	'Item has been updated.' => 'Запись обновлена.',
 	'%d item(s) have been affected.' => [
@@ -385,7 +379,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'У вас нет прав на обновление этой таблицы.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Числа',
 	'Date and time' => 'Дата и время',
 	'Strings' => 'Строки',
@@ -395,10 +389,12 @@ return [
 	'Geometry' => 'Геометрия',
 	'Relations' => 'Отношения',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'сейчас',
 	'yes' => 'да',
 	'no' => 'нет',
 
-	// Plugins.
+	// Settings
+
+	// Plugins
 ];
