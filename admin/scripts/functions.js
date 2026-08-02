@@ -135,19 +135,6 @@ function selectValue(select) {
 }
 
 /**
- * Checks whether the element has a specified tag name.
- *
- * @param {?Node} el
- * @param {string} tag Regular expression.
- *
- * @return {boolean}
- */
-function isTag(el, tag) {
-	const re = new RegExp('^(' + tag + ')$', 'i');
-	return el && re.test(el.tagName);
-}
-
-/**
  * Sets the checked class on the row of the given checkbox.
  *
  * @param {HTMLInputElement} el
@@ -296,19 +283,19 @@ function tableClick(event, click, canEdit = true) {
 		}
 	}
 	click = (click || getSelection().isCollapsed);
-	let el = event.target;
-	while (!isTag(el, 'tr')) {
-		if (isTag(el, 'table|a|input|textarea')) {
-			if (el.type !== 'checkbox') {
-				return;
-			}
-			checkboxClick.call(el, event);
-			click = false;
-		}
-		el = el.parentNode;
-		if (!el) { // Ctrl+click on text fields hides the element
+
+	// The other elements handle the click themselves.
+	let el = event.target.closest('tr, table, a, input, textarea');
+	if (el && !el.matches('tr')) {
+		if (el.type !== 'checkbox') {
 			return;
 		}
+		checkboxClick.call(el, event);
+		click = false;
+		el = el.closest('tr');
+	}
+	if (!el) { // Ctrl+click on text fields hides the element
+		return;
 	}
 	el = el.firstChild.firstChild;
 	if (click) {
@@ -1074,7 +1061,7 @@ function bodyKeydown(event, button) {
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
 	}
-	if (isCtrl(event) && event.key === 'Enter' && isTag(target, 'select|textarea|input')) {
+	if (isCtrl(event) && event.key === 'Enter' && target.matches('select, textarea, input')) {
 		target.blur();
 		if (target.form[button]) {
 			target.form[button].click();
@@ -1095,7 +1082,9 @@ function bodyKeydown(event, button) {
  */
 function bodyClick(event) {
 	const target = event.target;
-	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && isTag(target, 'input')) {
+
+	// type - the target can be a text node without matches()
+	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && target.matches('input')) {
 		target.form.target = '_blank';
 		setTimeout(() => {
 			// if (isCtrl(event)) { focus(); } doesn't work
@@ -1384,7 +1373,7 @@ function ajaxForm(form, message, button) {
 				return false;
 			}
 			if (!/^(checkbox|radio|submit|file)$/i.test(el.type) || el.checked || el === button) {
-				const value = (isTag(el, 'select') ? selectValue(/** @type {HTMLSelectElement} */ (el)) : el.value);
+				const value = (el.matches('select') ? selectValue(/** @type {HTMLSelectElement} */ (el)) : el.value);
 
 				data.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(value));
 			}

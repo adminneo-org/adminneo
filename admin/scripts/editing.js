@@ -694,9 +694,9 @@ function indexesAddRow() {
 	this.onchange = () => { };
 	for (const tag of qsa('select, input, button', row)) {
 		tag.name = tag.name.replace(/\[\d+/, '$&1'); // indexes[$j] and drop_col[$j]
-		if (isTag(tag, 'select')) {
+		if (tag.matches('select')) {
 			tag.selectedIndex = 0;
-		} else if (isTag(tag, 'input')) {
+		} else if (tag.matches('input')) {
 			if (tag.type === 'checkbox') {
 				tag.checked = false;
 			} else {
