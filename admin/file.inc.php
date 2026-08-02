@@ -24,7 +24,8 @@ function load_compiled_file(string $filename)
 
 	@ini_set("zlib.output_compression", "1"); // @ - may be disabled
 
-	switch (pathinfo($filename, PATHINFO_EXTENSION)) {
+	$extension = pathinfo($filename, PATHINFO_EXTENSION);
+	switch ($extension) {
 		case "css":
 			header("Content-Type: text/css; charset=utf-8");
 			break;
@@ -48,6 +49,12 @@ function load_compiled_file(string $filename)
 		exit;
 	}
 
-	echo lzw_decompress(base64_decode($data));
+	$data = base64_decode($data);
+
+	if (!in_array($extension, ["png", "ico"])) {
+		$data = lzw_decompress($data);
+	}
+
+	echo $data;
 	exit;
 }

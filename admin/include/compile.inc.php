@@ -70,7 +70,8 @@ function linked_filename(string $name, array $file_paths): ?string
 
 function compile_file(string $name, array $file_paths): ?string
 {
-	switch (pathinfo($name, PATHINFO_EXTENSION)) {
+	$extension = pathinfo($name, PATHINFO_EXTENSION);
+	switch ($extension) {
 		case "css":
 			$shrink_function = "AdminNeo\\minify_css";
 			break;
@@ -100,7 +101,11 @@ function compile_file(string $name, array $file_paths): ?string
 		$file = call_user_func($shrink_function, $file);
 	}
 
-	return base64_encode(lzw_compress($file));
+	if (!in_array($extension, ["png", "ico"])) {
+		$file = lzw_compress($file);
+	}
+
+	return base64_encode($file);
 }
 
 function minify_css(string $file): string
