@@ -190,6 +190,14 @@ if (isset($_GET["pgsql"])) {
 
 				return $result;
 			}
+
+			public function inTransaction(): bool
+			{
+				$status = pg_transaction_status($this->connection);
+
+				// Not PGSQL_TRANSACTION_UNKNOWN, the connection is bad.
+				return $status == PGSQL_TRANSACTION_INTRANS || $status == PGSQL_TRANSACTION_INERROR;
+			}
 		}
 
 		class PgSqlResult extends Result

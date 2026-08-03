@@ -257,6 +257,14 @@ abstract class Connection
 	}
 
 	/**
+	 * Checks if a transaction is in progress, false if the extension can't tell.
+	 */
+	public function inTransaction(): bool
+	{
+		return false;
+	}
+
+	/**
 	 * Begins a transaction. Extensions with a transaction API use it.
 	 */
 	public function begin(): bool

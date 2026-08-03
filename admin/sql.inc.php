@@ -300,7 +300,12 @@ if ($_POST) {
 		if ($empty) {
 			echo "<p class='message'>" . lang('No commands to execute.') . "\n";
 		} else {
+			$in_transaction = Connection::get()->inTransaction(); // ROLLBACK doesn't report whether it did anything.
 			Driver::get()->rollback(); // An unfinished transaction would break the following queries (e.g. in the menu).
+			if ($in_transaction) {
+				// Print it also with only_errors, the data was discarded.
+				echo "<pre><code class='jush-" . DIALECT . "'>ROLLBACK -- AdminNeo</code></pre>\n";
+			}
 
 			if ($_POST["only_errors"]) {
 				$ok_count = $commands - count($errors);

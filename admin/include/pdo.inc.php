@@ -95,6 +95,12 @@ if (extension_loaded('pdo')) {
 			return true;
 		}
 
+		public function inTransaction(): bool
+		{
+			// PDO_PgSQL, PDO_MySQL and PDO_SQLite (since PHP 8.4) ask the connection, other drivers report only transactions started by PDO.
+			return $this->pdo->inTransaction();
+		}
+
 		public function begin(): bool
 		{
 			// The API works also where a separate BEGIN doesn't, e.g. MS SQL rolls it back at the end of the batch and Oracle commits each command.
