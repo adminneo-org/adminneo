@@ -299,12 +299,16 @@ if ($_POST) {
 
 		if ($empty) {
 			echo "<p class='message'>" . lang('No commands to execute.') . "\n";
-		} elseif ($_POST["only_errors"]) {
-			$ok_count = $commands - count($errors);
-			echo "<p class='" . ($ok_count ? "message" : "error") . "'>" . lang('%d query(s) executed OK.', $commands - count($errors));
-			echo " <span class='time'>(" . format_time($total_start) . ")</span>\n";
-		} elseif ($errors && $commands > 1) {
-			echo "<p class='error'>" . lang('Error in query') . ": " . implode("", $errors) . "\n";
+		} else {
+			Driver::get()->rollback(); // An unfinished transaction would break the following queries (e.g. in the menu).
+
+			if ($_POST["only_errors"]) {
+				$ok_count = $commands - count($errors);
+				echo "<p class='" . ($ok_count ? "message" : "error") . "'>" . lang('%d query(s) executed OK.', $commands - count($errors));
+				echo " <span class='time'>(" . format_time($total_start) . ")</span>\n";
+			} elseif ($errors && $commands > 1) {
+				echo "<p class='error'>" . lang('Error in query') . ": " . implode("", $errors) . "\n";
+			}
 		}
 		// TODO MS SQL - SET SHOWPLAN_ALL OFF
 
