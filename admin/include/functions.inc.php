@@ -587,8 +587,8 @@ function auth_url($vendor, $server, $username, $db = null) {
 	preg_match('~([^?]*)\??(.*)~', $uri, $match);
 	return "$match[1]?"
 		. (sid() ? session_name() . "=" . urlencode(session_id()) . "&" : "")
-		. urlencode($vendor) . "=" . urlencode($server) . "&"
 		. ($_GET["ext"] ? "ext=" . urlencode($_GET["ext"]) . "&" : "")
+		. urlencode($vendor) . "=" . urlencode($server) . "&"
 		. "username=" . urlencode($username)
 		. ($db != "" ? "&db=" . urlencode($db) : "")
 		. ($match[2] ? "&$match[2]" : "")

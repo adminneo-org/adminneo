@@ -332,6 +332,9 @@ function hidden_fields_get(): void
 	if (sid()) {
 		echo input_hidden(session_name(), session_id());
 	}
+	if ($_GET["ext"]) {
+		echo input_hidden("ext", $_GET["ext"]);
+	}
 	if (SERVER !== null) {
 		echo input_hidden(DRIVER, SERVER);
 	}
