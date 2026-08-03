@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Дефиниши тип',
 	'Type has been dropped.' => 'Тип је избрисан.',
 	'Type has been created.' => 'тип је креиран.',
+	'Type has been altered.' => 'Тип је измењен.', // by Claude Opus 5
 	'Alter type' => 'Уреди тип',
 
 	// Triggers

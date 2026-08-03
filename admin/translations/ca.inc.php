@@ -325,6 +325,7 @@ return [
 	'Create type' => 'Crea un tipus',
 	'Type has been dropped.' => 'S\'ha suprimit el tipus.',
 	'Type has been created.' => 'S\'ha creat el tipus.',
+	'Type has been altered.' => 'S\'ha modificat el tipus.', // by Claude Opus 5
 	'Alter type' => 'Modifica el tipus',
 
 	// Triggers

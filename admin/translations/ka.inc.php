@@ -307,6 +307,7 @@ return [
 	'Create type' => 'სახეობის შექმნა',
 	'Type has been dropped.' => 'სახეობა წაიშალა.',
 	'Type has been created.' => 'სახეობა შეიქმნა.',
+	'Type has been altered.' => 'სახეობა შეიცვალა.', // by Claude Opus 5.5
 	'Alter type' => 'სახეობის შეცვლა',
 
 	// Triggers

@@ -310,6 +310,7 @@ return [
 	'Create type' => 'ধরণ তৈরী করুন',
 	'Type has been dropped.' => 'ধরণ মুছে ফেলা হয়েছে।',
 	'Type has been created.' => 'ধরণ তৈরি করা হয়েছে।',
+	'Type has been altered.' => 'ধরণ পরিবর্তন করা হয়েছে।', // by Claude Opus 5.5
 	'Alter type' => 'ধরণ পরিবর্তন করুন',
 
 	// Triggers

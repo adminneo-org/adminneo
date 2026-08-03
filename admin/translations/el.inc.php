@@ -325,6 +325,7 @@ return [
 	'Create type' => 'Δημιουργία τύπου',
 	'Type has been dropped.' => 'Ο τύπος διαγράφηκε.',
 	'Type has been created.' => 'Ο τύπος δημιουργήθηκε.',
+	'Type has been altered.' => 'Ο τύπος τροποποιήθηκε.', // by Claude Opus 5
 	'Alter type' => 'Τροποποίηση τύπου',
 
 	// Triggers

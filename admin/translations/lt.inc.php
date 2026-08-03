@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Sukurti tipą',
 	'Type has been dropped.' => 'Tipas pašalintas.',
 	'Type has been created.' => 'Tipas sukurtas.',
+	'Type has been altered.' => 'Tipas pakeistas.', // by Claude Opus 5.5
 	'Alter type' => 'Keisti tipą',
 
 	// Triggers

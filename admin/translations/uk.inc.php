@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Створити тип',
 	'Type has been dropped.' => 'Тип було видалено.',
 	'Type has been created.' => 'Тип було створено.',
+	'Type has been altered.' => 'Тип було змінено.', // by Claude Opus 5
 	'Alter type' => 'Змінити тип',
 
 	// Triggers

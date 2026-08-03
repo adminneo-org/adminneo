@@ -307,6 +307,7 @@ return [
 	'Create type' => 'צור סוג',
 	'Type has been dropped.' => 'הסוג הושלך',
 	'Type has been created.' => 'הסוג נוצר',
+	'Type has been altered.' => 'הסוג שונה', // by Claude Opus 5.5
 	'Alter type' => 'שנה סוג',
 
 	// Triggers

@@ -307,6 +307,7 @@ return [
 	'Create type' => 'ユーザー定義型作成',
 	'Type has been dropped.' => 'ユーザー定義型を削除しました。',
 	'Type has been created.' => 'ユーザー定義型を追加しました。',
+	'Type has been altered.' => 'ユーザー定義型を変更しました。', // by Claude Opus 5
 	'Alter type' => 'ユーザー定義型変更',
 
 	// Triggers

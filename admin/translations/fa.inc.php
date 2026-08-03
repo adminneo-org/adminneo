@@ -307,6 +307,7 @@ return [
 	'Create type' => 'ایجاد نوع',
 	'Type has been dropped.' => 'نوع حذف شد.',
 	'Type has been created.' => 'نوع ایجاد شد.',
+	'Type has been altered.' => 'نوع ویرایش شد.', // by Claude Opus 5.5
 	'Alter type' => 'ویرایش نوع',
 
 	// Triggers

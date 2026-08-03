@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Crează tip noi',
 	'Type has been dropped.' => 'Tiipul a fost șters.',
 	'Type has been created.' => 'Crează tip nou.',
+	'Type has been altered.' => 'Tipul a fost modificat.', // by Claude Opus 5
 	'Alter type' => 'Modifică tip',
 
 	// Triggers

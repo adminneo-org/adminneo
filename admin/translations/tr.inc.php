@@ -319,6 +319,7 @@ return [
 	'Create type' => 'Tür oluştur',
 	'Type has been dropped.' => 'Tür silindi.',
 	'Type has been created.' => 'Tür oluşturuldu.',
+	'Type has been altered.' => 'Tür değiştirildi.', // by Claude Opus 5
 	'Alter type' => 'Türü değiştir',
 
 	// Triggers

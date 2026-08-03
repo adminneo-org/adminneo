@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Definiši tip',
 	'Type has been dropped.' => 'Tip je izbrisan.',
 	'Type has been created.' => 'tip je spašen.',
+	'Type has been altered.' => 'Tip je izmijenjen.', // by Claude Opus 5
 	'Alter type' => 'Ažuriraj tip',
 
 	// Triggers
