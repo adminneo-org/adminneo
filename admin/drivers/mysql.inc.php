@@ -198,6 +198,11 @@ if (isset($_GET["mysql"])) {
 
 				$options = [PDO::MYSQL_ATTR_LOCAL_INFILE => false];
 
+				// The attribute can be set only when connecting and it is available since PHP 5.5.21 and 5.6.5.
+				if (isset($_GET["select"]) && defined('\PDO::MYSQL_ATTR_MULTI_STATEMENTS')) {
+					$options[PDO::MYSQL_ATTR_MULTI_STATEMENTS] = false; // Connection::isUntrusted() is not known here yet.
+				}
+
 				$key = Admin::get()->getConfig()->getSslKey();
 				if ($key) {
 					$options[PDO::MYSQL_ATTR_SSL_KEY] = $key;
