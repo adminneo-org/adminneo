@@ -1471,7 +1471,7 @@ WHERE rngtypid = $id"));
 
 	function get_schema(): string
 	{
-		return Connection::get()->getValue("SELECT current_schema()");
+		return (string)Connection::get()->getValue("SELECT current_schema()"); // NULL if no schema in search_path exists or is visible.
 	}
 
 	function set_schema(string $schema, ?Connection $connection = null): bool
