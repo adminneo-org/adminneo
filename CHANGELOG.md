@@ -26,6 +26,7 @@ AdminNeo 5.9
 - Edit: Fix JavaScript error for blob fields with file upload
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - Alter table: Fix toggling of column comments (regression from 5.8.0)
+- Alter routine: Fix altering a routine with a name longer than 42 characters (by @vrana)
 - MySQL: Fix lost charset introducers and parameters starting with "_" in routine definitions (issue #197)
 - MySQL: Fix exhausted memory in export of big tables (issue #211, regression from 5.1.0)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats

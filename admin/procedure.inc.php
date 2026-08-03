@@ -23,7 +23,7 @@ if ($_POST && !process_fields($row["fields"])) {
 	if (!$_POST["drop"] && $old_id == $new_id && (DIALECT != "sql" || Connection::get()->isMariaDB())) {
 		query_redirect(substr_replace($create, ' OR REPLACE', 6, 0), $location, $message); // 6 - strlen('CREATE')
 	} else {
-		$temp_name = "$row[name]_adminer_" . uniqid();
+		$temp_name = "adminer_" . uniqid();
 		drop_create(
 			"DROP $routine $old_id",
 			$create,
