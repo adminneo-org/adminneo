@@ -88,7 +88,11 @@ foreach ($languages as $language => $dummy) {
 
 	$texts = $all_texts;
 	$translations = require $file_path;
+	$old_content = str_replace("\r", "", file_get_contents($file_path));
 	$content = file_get_contents(__DIR__ . "/../admin/translations/$template.inc.php");
+
+	// Language files are regenerated from the template, so remember which texts are marked as machine translated.
+	$marks = read_ai_marks($old_content);
 
 	foreach ($translations as $en => $translation) {
 		// Skip/remove the translation of nonexistent text.
@@ -164,7 +168,11 @@ foreach ($languages as $language => $dummy) {
 		$content = preg_replace('~\n{2,}([\t\]])~', "\n$1", $content);
 	}
 
-	$old_content = str_replace("\r", "", file_get_contents($file_path));
+	// Restore the marks of machine translated texts.
+	foreach ($marks as $en => $mark) {
+		$content = write_ai_mark($content, $en, $mark);
+	}
+
 	if ($content != $old_content) {
 		file_put_contents($file_path, $content);
 
@@ -172,6 +180,62 @@ foreach ($languages as $language => $dummy) {
 	} elseif ($language != $template || count($languages) == 1) {
 		echo "✔︎ $filename\n";
 	}
+}
+
+/**
+ * Returns texts whose translations are marked as machine translated.
+ *
+ * @return array<string, true> Keys are texts in the same escaping as they are written in the file.
+ */
+function read_ai_marks(string $content): array
+{
+	$marks = [];
+	$en = null;
+
+	foreach (explode("\n", $content) as $line) {
+		if (preg_match('~^\t\'(.+)\' => ~', $line, $matches)) {
+			$en = $matches[1];
+		}
+
+		if ($en != null && preg_match('~ +// (by .+)$~', $line, $matches2)) {
+			$marks[$en] = $matches2[1];
+			$en = null;
+		}
+	}
+
+	return $marks;
+}
+
+/**
+ * Marks the translation as machine translated. Multiline translations are marked at their last line.
+ */
+function write_ai_mark(string $content, string $en, string $mark): string
+{
+	$lines = explode("\n", $content);
+	$found = $multiline = false;
+
+	foreach ($lines as $key => $line) {
+		if (!$found) {
+			if (!preg_match('~^\t\'' . preg_quote($en, '~') . '\' => (.+)$~', $line, $matches)) {
+				continue;
+			}
+
+			$found = true;
+
+			$multiline = ($matches[1] == "[");
+			if ($multiline) {
+				continue;
+			}
+		} elseif ($multiline && !preg_match('~^\t],~', $line)) {
+			continue;
+		}
+
+		$lines[$key] = rtrim($line) . " // $mark";
+
+		return implode("\n", $lines);
+	}
+
+	return $content;
 }
 
 /**

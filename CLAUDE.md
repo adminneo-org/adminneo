@@ -142,6 +142,7 @@ git fetch vrana master --no-tags
   - Grep for the changed function/pattern across `admin/`, `editor/`, and `plugins/` — AdminNeo may have more or fewer call sites than upstream for the same code.
   - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
   - Ignore changes of upstream's git submodules.
+  - Use `// by AI model name` mark in translations instead of `// AI model name`.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there — if it didn't, don't invent one. When porting a line: keep the original wording but bug/issue references, add "(by @author)" where `@author` is the GitHub user who wrote the commit, adapt relese version in "regression from X" note to AdminNeo's releases and place it under `### Changes` or `### Bugfixes` to match its nature.
 - If changes adaptation for AdminNeo is simple and straight forward, then:
   - Commit with the original author and author-date preserved (committer/date stay as yours), e.g.:
