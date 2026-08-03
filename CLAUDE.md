@@ -126,6 +126,18 @@ SQLite is not in the table above because it has no server — a database is just
 
 When logging in to SQLite, fill the database file path into the Database field. Leave username and password empty. Most alters (e.g. renaming a column) recreate the whole table via `recreate_table()`; a plain no-op resubmit of the alter form does not.
 
+### Translations
+
+Translations use technical language and terms related to database systems. Czech language (`admin/translations/cs.inc.php`) is considered as correct because it was created by the author. All machine-translated texts are marked with trailing comment naming the AI model, e.g. `'Vacuum' => 'Počisti', // by Claude Fable 5`. In case of multiline translation, mark is placed on the last line.
+
+To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
+
+The same script validates the files. A finished pass must print no `⚠️` warnings. It checks:
+
+- **Placeholders** — types and order must match the English text.
+- **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
+- **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
+
 ### Porting changes from Adminer
 
 AdminNeo started as a fork of [Adminer](https://github.com/vrana/adminer) project and evolves in a standalone product with separated code base. The process of porting changes from original Adminer includes these steps:
