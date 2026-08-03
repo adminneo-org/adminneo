@@ -307,6 +307,7 @@ return [
 	'Create type' => '사용자 정의 형식 만들기',
 	'Type has been dropped.' => '유형을 삭제했습니다.',
 	'Type has been created.' => '유형을 추가했습니다.',
+	'Type has been altered.' => '유형을 변경했습니다.', // by Claude Opus 5
 	'Alter type' => '형 변경',
 
 	// Triggers

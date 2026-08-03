@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Izveidot tipu',
 	'Type has been dropped.' => 'Tips dzēsts.',
 	'Type has been created.' => 'Tips izveidots.',
+	'Type has been altered.' => 'Tips izmainīts.', // by Claude Opus 5
 	'Alter type' => 'Izmainīt tipu',
 
 	// Triggers

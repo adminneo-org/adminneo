@@ -325,6 +325,7 @@ return [
 	'Create type' => 'வ‌கையை உருவாக்கு',
 	'Type has been dropped.' => 'வ‌கை (type) நீக்க‌ப்ப‌ட்ட‌து.',
 	'Type has been created.' => 'வ‌கை (type) உருவாக்க‌ப்ப‌ட்ட‌து.',
+	'Type has been altered.' => 'வ‌கை (type) மாற்ற‌ப்ப‌ட்ட‌து.', // by Claude Opus 5.5
 	'Alter type' => 'வ‌கையினை (type) மாற்று',
 
 	// Triggers

@@ -307,6 +307,7 @@ return [
 	'Create type' => 'Tạo kiểu',
 	'Type has been dropped.' => 'Đã xoá kiểu.',
 	'Type has been created.' => 'Đã tạo kiểu.',
+	'Type has been altered.' => 'Đã sửa kiểu.', // by Claude Opus 5
 	'Alter type' => 'Sửa kiểu dữ liệu',
 
 	// Triggers

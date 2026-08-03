@@ -307,6 +307,7 @@ return [
 	'Create type' => 'สร้างประเภทผู้ใช้งาน',
 	'Type has been dropped.' => 'ประเภทถูกลบแล้ว.',
 	'Type has been created.' => 'ประเภทถูกสร้างแล้ว.',
+	'Type has been altered.' => 'ประเภทถูกเปลี่ยนแปลงแล้ว.', // by Claude Opus 5.5
 	'Alter type' => 'แก้ไขประเภท',
 
 	// Triggers

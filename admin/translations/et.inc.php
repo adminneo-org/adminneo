@@ -313,6 +313,7 @@ return [
 	'Create type' => 'Loo tüüp',
 	'Type has been dropped.' => 'Tüüp on edukalt kustutatud.',
 	'Type has been created.' => 'Tüüp on edukalt loodud.',
+	'Type has been altered.' => 'Tüüp on edukalt muudetud.', // by Claude Opus 5.5
 	'Alter type' => 'Muuda tüüpi',
 
 	// Triggers

@@ -325,6 +325,7 @@ return [
 	'Create type' => 'Създаване на вид',
 	'Type has been dropped.' => 'Вида беше пермахнат.',
 	'Type has been created.' => 'Вида беше създаден.',
+	'Type has been altered.' => 'Вида беше променен.', // by Claude Opus 5
 	'Alter type' => 'Промяна на вид',
 
 	// Triggers

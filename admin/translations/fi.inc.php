@@ -316,6 +316,7 @@ return [
 	'Create type' => 'Luo tyyppi',
 	'Type has been dropped.' => 'Tyyppi poistettiin.',
 	'Type has been created.' => 'Tyyppi luotiin.',
+	'Type has been altered.' => 'Tyyppiä muutettiin.', // by Claude Opus 5
 	'Alter type' => 'Muuta tyyppiä',
 
 	// Triggers

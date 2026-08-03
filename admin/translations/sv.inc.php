@@ -325,6 +325,7 @@ return [
 	'Create type' => 'Skapa typ',
 	'Type has been dropped.' => 'Typ har, typ, tagits bort.',
 	'Type has been created.' => 'Typ har skapats.',
+	'Type has been altered.' => 'Typ har ändrats.', // by Claude Opus 5
 	'Alter type' => 'Ändra typ',
 
 	// Triggers

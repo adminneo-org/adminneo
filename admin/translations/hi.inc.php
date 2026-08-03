@@ -322,6 +322,7 @@ return [
 	'Create type' => 'प्रकार बनाएं',
 	'Type has been dropped.' => 'प्रकार हटा दिया गया है।',
 	'Type has been created.' => 'प्रकार बनाया गया है।',
+	'Type has been altered.' => 'प्रकार बदल दिया गया है।', // by Claude Opus 5.5
 	'Alter type' => 'प्रकार बदलें',
 
 	// Triggers

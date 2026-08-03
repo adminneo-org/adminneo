@@ -307,6 +307,7 @@ return [
 	'Create type' => '建立類型',
 	'Type has been dropped.' => '已刪除類型。',
 	'Type has been created.' => '已建立類型。',
+	'Type has been altered.' => '已修改類型。', // by Claude Opus 5
 	'Alter type' => '修改類型',
 
 	// Triggers

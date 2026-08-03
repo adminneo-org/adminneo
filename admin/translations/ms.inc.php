@@ -307,6 +307,7 @@ return [
 	'Create type' => 'Buat jenis',
 	'Type has been dropped.' => 'Jenis telah dijatuhkan.',
 	'Type has been created.' => 'Jenis telah dibuat.',
+	'Type has been altered.' => 'Jenis telah diubah.', // by Claude Opus 5.5
 	'Alter type' => 'Ubah jenis',
 
 	// Triggers
