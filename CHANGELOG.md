@@ -16,6 +16,7 @@ AdminNeo 5.8.1
 - Navigation: Move the focus between the tables filter and the tables list by arrow keys
 - PostgreSQL: Show composite, domain and range types next to enums
 - PostgreSQL: Alter and rename user defined types
+- PostgreSQL: Add values to an enum type without re-creating it (by @vrana)
 - PostgreSQL: Export all user defined types, fix exporting enum values containing an apostrophe
 
 ### Bugfixes
