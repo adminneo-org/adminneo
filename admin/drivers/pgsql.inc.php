@@ -1708,7 +1708,7 @@ WHERE rngtypid = $id"));
 		}
 
 		return preg_match(
-			'~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~',
+			'~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|transaction_ddl|trigger|type|variables|view)$~',
 			$feature
 		);
 	}

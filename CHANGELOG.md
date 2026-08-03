@@ -14,6 +14,7 @@ AdminNeo 5.9
 - Export: Disable structure and data options for formats that do not support them
 - Export: Compress gzip output into a single stream instead of concatenated chunks
 - Navigation: Move the focus between the tables filter and the tables list by arrow keys
+- Alter view, routine and type: Use a transaction instead of a temporary object in PostgreSQL, SQLite, MS SQL (by @vrana)
 - PostgreSQL: Show composite, domain and range types next to enums (by @vrana)
 - PostgreSQL: Alter and rename user defined types (by @vrana)
 - PostgreSQL: Add values to an enum type without re-creating it (by @vrana)

@@ -1535,7 +1535,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	 * Checks whether a feature is supported.
 	 *
 	 * @param literal-string $feature check|comment|copy|database|descidx|drop_col|dump|event|fast_status|indexes|kill|materializedview|
-	 * privileges|move_col|procedure|processlist|routine|scheme|sequence|status|table|trigger|type|variables|view|view_trigger
+	 * privileges|move_col|procedure|processlist|routine|scheme|sequence|status|table|transaction_ddl|trigger|type|variables|view|view_trigger
 	 */
 	function support(string $feature): bool
 	{
