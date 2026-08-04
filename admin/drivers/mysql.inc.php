@@ -779,6 +779,18 @@ WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name
 	}
 
 	/**
+	 * Parses type declaration.
+	 *
+	 * @return array{string, string, string} [type, length, unsigned]
+	 */
+	function parse_type(string $full_type): array
+	{
+		preg_match('~^([^( ]+)(?:\((.+)\))?( unsigned)?( zerofill)?$~', $full_type, $matches);
+
+		return [$matches[1], $matches[2] ?? "", ltrim(($matches[3] ?? "") . ($matches[4] ?? ""))];
+	}
+
+	/**
 	 * Returns information about fields.
 	 *
 	 * @return array{field:string, full_type:string, type:string, length:int, unsigned:string, default:string,
@@ -802,11 +814,11 @@ WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name
 
 			// https://mariadb.com/kb/en/library/show-columns/, https://github.com/vrana/adminer/pull/359#pullrequestreview-276677186
 			preg_match('~^(VIRTUAL|PERSISTENT|STORED)~', $extra, $generated);
-			preg_match('~^([^( ]+)(?:\((.+)\))?( unsigned)?( zerofill)?$~', $type, $type_matches);
+			list($type_name, $length, $unsigned) = parse_type($type);
 
 			$default = $maria && $row["COLUMN_DEFAULT"] == "NULL" ? null : $row["COLUMN_DEFAULT"];
 			if ($default !== null) {
-				$is_text = preg_match('~(text|json)~', $type_matches[1]);
+				$is_text = preg_match('~(text|json)~', $type_name);
 
 				// MariaDB: texts are escaped with slashes, chars with double apostrophe.
 				// MySQL: default value a'b of text column is stored as _utf8mb4\'a\\\'b\'.
@@ -820,7 +832,7 @@ WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name
 				}
 
 				// MySQL: Convert binary default value.
-				if (!$maria && preg_match('~binary~', $type_matches[1]) && preg_match('~^0x(\w*)$~', $default, $matches)) {
+				if (!$maria && preg_match('~binary~', $type_name) && preg_match('~^0x(\w*)$~', $default, $matches)) {
 					$default = pack("H*", $matches[1]);
 				}
 			}
@@ -836,13 +848,13 @@ WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name
 			$return[$field] = [
 				"field" => $field,
 				"full_type" => $type,
-				"type" => $type_matches[1],
-				"length" => $type_matches[2],
-				"unsigned" => ltrim($type_matches[3] . $type_matches[4]),
+				"type" => $type_name,
+				"length" => $length,
+				"unsigned" => $unsigned,
 				"default" => ($generated ? $generated_expression : $default),
 				"null" => ($row["IS_NULLABLE"] == "YES"),
 				"auto_increment" => ($extra == "auto_increment"),
-				"on_update" => (preg_match('~\bon update (\w+)~i', $extra, $type_matches) ? $type_matches[1] : ""), // TODO available since MySQL 5.1.23
+				"on_update" => (preg_match('~\bon update (\w+)~i', $extra, $matches) ? $matches[1] : ""), // TODO available since MySQL 5.1.23
 				"collation" => $row["COLLATION_NAME"],
 				"privileges" => array_flip(explode(",", $row["PRIVILEGES"])) + ["where" => 1, "order" => 1],
 				"comment" => $row["COLUMN_COMMENT"],
@@ -1296,18 +1308,27 @@ ORDER BY ORDINAL_POSITION";
 			return [];
 		}
 
-		$fields = get_rows("SELECT
-	PARAMETER_NAME field,
-	DATA_TYPE type,
-	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^(]+\\\\(?|\\\\)$', '') length,
-	REGEXP_REPLACE(DTD_IDENTIFIER, '^[^ ]+ ', '') `unsigned`,
-	1 `null`,
-	DTD_IDENTIFIER full_type,
-	" . ($type == "FUNCTION" ? "''" : "PARAMETER_MODE") . " `inout`,
-	CHARACTER_SET_NAME collation
+		$rows = get_rows("SELECT PARAMETER_NAME, DTD_IDENTIFIER, PARAMETER_MODE, CHARACTER_SET_NAME
 FROM information_schema.PARAMETERS
 WHERE SPECIFIC_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND SPECIFIC_NAME = " . q($name) . "
 ORDER BY ORDINAL_POSITION");
+
+		$fields = [];
+		foreach ($rows as $row) {
+			$full_type = $row["DTD_IDENTIFIER"];
+			list($type_name, $length, $unsigned) = parse_type($full_type);
+
+			$fields[] = [
+				"field" => $row["PARAMETER_NAME"],
+				"type" => $type_name,
+				"length" => $length,
+				"unsigned" => $unsigned,
+				"null" => true,
+				"full_type" => $full_type,
+				"inout" => ($type == "FUNCTION" ? "" : $row["PARAMETER_MODE"]), // FUNCTION parameters are always IN
+				"collation" => $row["CHARACTER_SET_NAME"],
+			];
+		}
 
 		$return = Connection::get()->query("SELECT
 	ROUTINE_COMMENT comment,
