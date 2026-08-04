@@ -433,5 +433,5 @@ return [
 	'JSON previews' => 'JSON önizlemeleri', // by Claude Opus 5
 	'Data table' => 'Veri tablosu', // by Claude Opus 5
 	'Edit form' => 'Düzenleme formu', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => '%s uygulamasına sor', // by Claude Opus 5
 ];

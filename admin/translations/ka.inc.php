@@ -415,5 +415,5 @@ return [
 	'JSON previews' => 'JSON-ის გადახედვა', // by Claude Opus 5
 	'Data table' => 'ინფორმაციის ცხრილი', // by Claude Opus 5
 	'Edit form' => 'შეცვლის ფორმა', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'ჰკითხეთ %s-ს', // by Claude Opus 5
 ];

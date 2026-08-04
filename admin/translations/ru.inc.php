@@ -451,5 +451,5 @@ return [
 	'JSON previews' => 'Предпросмотр JSON', // by Claude Opus 5
 	'Data table' => 'Таблица данных', // by Claude Opus 5
 	'Edit form' => 'Форма редактирования', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Спросить %s', // by Claude Opus 5
 ];

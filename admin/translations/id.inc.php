@@ -415,5 +415,5 @@ return [
 	'JSON previews' => 'Pratinjau JSON', // by Claude Opus 5
 	'Data table' => 'Tabel data', // by Claude Opus 5
 	'Edit form' => 'Formulir suntingan', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Tanya %s', // by Claude Opus 5
 ];

@@ -418,5 +418,5 @@ return [
 	'JSON previews' => 'Pratonton JSON', // by Claude Opus 5
 	'Data table' => 'Jadual data', // by Claude Opus 5
 	'Edit form' => 'Borang ubah', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Tanya %s', // by Claude Opus 5
 ];

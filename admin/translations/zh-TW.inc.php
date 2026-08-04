@@ -415,5 +415,5 @@ return [
 	'JSON previews' => 'JSON 預覽', // by Claude Opus 5
 	'Data table' => '資料表格', // by Claude Opus 5
 	'Edit form' => '編輯表單', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => '詢問 %s', // by Claude Opus 5
 ];

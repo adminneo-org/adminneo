@@ -436,5 +436,5 @@ return [
 	'JSON previews' => 'JSON पूर्वावलोकन', // by Claude Opus 5
 	'Data table' => 'डेटा टेबल', // by Claude Opus 5
 	'Edit form' => 'संपादन फॉर्म', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => '%s से पूछें', // by Claude Opus 5
 ];

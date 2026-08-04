@@ -424,5 +424,5 @@ return [
 	'JSON previews' => 'JSON-i eelvaated', // by Claude Opus 5
 	'Data table' => 'Andmetabel', // by Claude Opus 5
 	'Edit form' => 'Muutmisvorm', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Küsi %s käest', // by Claude Opus 5
 ];

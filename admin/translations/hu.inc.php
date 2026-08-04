@@ -415,5 +415,5 @@ return [
 	'JSON previews' => 'JSON előnézet', // by Claude Opus 5
 	'Data table' => 'Adattábla', // by Claude Opus 5
 	'Edit form' => 'Szerkesztő űrlap', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => '%s megkérdezése', // by Claude Opus 5
 ];

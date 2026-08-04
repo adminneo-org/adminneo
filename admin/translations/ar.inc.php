@@ -421,5 +421,5 @@ return [
 	'JSON previews' => 'معاينات JSON', // by Claude Opus 5
 	'Data table' => 'جدول البيانات', // by Claude Opus 5
 	'Edit form' => 'استمارة التعديل', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'اسأل %s', // by Claude Opus 5
 ];

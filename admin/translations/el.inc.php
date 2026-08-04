@@ -442,5 +442,5 @@ return [
 	'JSON previews' => 'Προεπισκοπήσεις JSON', // by Claude Opus 5
 	'Data table' => 'Πίνακας δεδομένων', // by Claude Opus 5
 	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Ρωτήστε το %s', // by Claude Opus 5
 ];

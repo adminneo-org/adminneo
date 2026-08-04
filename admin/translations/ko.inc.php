@@ -415,5 +415,5 @@ return [
 	'JSON previews' => 'JSON 미리 보기', // by Claude Opus 5
 	'Data table' => '데이터 테이블', // by Claude Opus 5
 	'Edit form' => '편집 양식', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => '%s에게 질문하기', // by Claude Opus 5
 ];

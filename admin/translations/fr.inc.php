@@ -442,5 +442,5 @@ return [
 	'JSON previews' => 'Aperçus JSON',
 	'Data table' => 'Table de données',
 	'Edit form' => 'Formulaire d\'édition',
-	'Ask %s' => null,
+	'Ask %s' => 'Demander à %s', // by Claude Opus 5
 ];

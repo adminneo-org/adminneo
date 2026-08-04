@@ -460,5 +460,5 @@ return [
 	'JSON previews' => 'Predogledi JSON', // by Claude Opus 5
 	'Data table' => 'Tabela podatkov', // by Claude Opus 5
 	'Edit form' => 'Obrazec za urejanje', // by Claude Opus 5
-	'Ask %s' => null,
+	'Ask %s' => 'Vprašaj %s', // by Claude Opus 5
 ];
