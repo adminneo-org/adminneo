@@ -120,7 +120,9 @@ if (support("indexes") && Driver::get()->supportsIndex($table_status)) {
 	if ($indexes) {
 		Admin::get()->printTableIndexes($indexes, $table_status);
 	}
-	echo '<p class="links"><a href="' . h(ME) . 'indexes=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter indexes') . "</a>\n";
+	if (Driver::get()->supportsAlterIndex($table_status)) {
+		echo '<p class="links"><a href="' . h(ME) . 'indexes=' . urlencode($TABLE) . '">' . icon("edit") . lang('Alter indexes') . "</a>\n";
+	}
 }
 
 if (!is_view($table_status)) {

@@ -473,6 +473,16 @@ abstract class Driver
 	}
 
 	/**
+	 * Checks whether table indexes can be altered.
+	 *
+	 * @param array $tableStatus The result of table_status1().
+	 */
+	public function supportsAlterIndex(array $tableStatus): bool
+	{
+		return true;
+	}
+
+	/**
 	 * Returns list of supported index algorithms, first one is the default.
 	 *
 	 * @return list<string>
