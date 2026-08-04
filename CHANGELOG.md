@@ -19,6 +19,7 @@ AdminNeo 5.6.0
 ### Bugfixes
 
 - Ignore invalid X-Forwarded-Prefix (by @vrana, GHSA-5fw2-qrc6-p4fw)
+- Compiler: Fix removing unsupported features in single driver file (regression from 5.5.0)
 - Support disabled set_time_limit() and ini_set() (by @vrana)
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
