@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s 必须返回一个数组。', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s 和 %s 必须返回由 %s 方法创建的对象。', // by Claude Opus 5
 
 	// Login
 	'System' => '系统',
@@ -25,15 +27,19 @@ return [
 	'Logged as: %s' => '登录用户：%s',
 	'Logout successful.' => '成功登出。',
 	'hostname[:port] or :socket' => 'hostname[:port] 或 :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => '无效的服务器或登录凭据。', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => '您输入的密码中有一个空格，这可能是导致问题的原因。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo默认不支持访问没有密码的数据库，<a href="https://www.adminneo.org/password"%s>详情见这里</a>。',
 	'Database does not support password.' => '数据库不支持密码。',
 	'Too many unsuccessful logins, try again in %d minute(s).' => '登录失败次数过多，请 %d 分钟后重试。',
+	'Invalid permanent login, please login again.' => '保持登录无效，请重新登录。', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => '无效 CSRF 令牌。请重新发送表单。',
-	'If you did not send this request from AdminNeo then close this page.' => '如果您并没有从AAdminNeo发送请求，请关闭此页面。',
+	'If you did not send this request from AdminNeo then close this page.' => '如果您并没有从 AdminNeo 发送请求，请关闭此页面。', // by Claude Opus 5
 	'The action will be performed after successful login with the same credentials.' => '此操作将在成功使用相同的凭据登录后执行。',
 
 	// Connection
+	'No driver' => '没有驱动', // by Claude Opus 5
+	'Database driver not found.' => '找不到数据库驱动。', // by Claude Opus 5
 	'No extension' => '没有扩展',
 	'None of the supported PHP extensions (%s) are available.' => '没有支持的 PHP 扩展可用（%s）。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '不允许连接到特权端口。',
@@ -44,7 +50,10 @@ return [
 	// Settings
 	'Language' => '语言',
 
+	'Home' => '首页', // by Claude Opus 5
 	'Refresh' => '刷新',
+	'Info' => '信息', // by Claude Opus 5
+	'More information.' => '更多信息。', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => '权限',
@@ -70,6 +79,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL命令',
+	'HTTP request' => 'HTTP请求', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d 条查询已成功执行。',
 	'Query executed OK, %d row(s) affected.' => '查询执行完毕，%d 行受影响。',
 	'No commands to execute.' => '没有命令被执行。',
@@ -96,6 +106,8 @@ return [
 	'File uploads are disabled.' => '文件上传被禁用。',
 	'Unable to upload a file.' => '不能上传文件。',
 	'Maximum allowed file size is %sB.' => '最多允许的文件大小为 %sB。',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => '最多允许的文件数量为 %d。请减少所选文件或者增加 %s 配置命令。', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => '文件总大小最多为 %s。请选择更小的文件或者增加 %s 配置命令。', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST 数据太大。请减少数据或者增加 %s 配置命令。',
 	'You can upload a big SQL file via FTP and import it from server.' => '您可以通过FTP上传大型SQL文件并从服务器导入。',
 	'File must be in UTF-8 encoding.' => '文件必须使用UTF-8编码。',
@@ -112,6 +124,7 @@ return [
 
 	// Databases
 	'Database' => '数据库',
+	'database' => '数据库', // by Claude Opus 5
 	'DB' => '数据库',
 	'Use' => '使用',
 	'Invalid database.' => '无效数据库。',
@@ -131,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => '模式',
+	'schema' => '模式', // by Claude Opus 5
+	'Schemas' => '模式', // by Claude Opus 5
+	'No schemas.' => '没有模式。', // by Claude Opus 5
+	'Show schema' => '显示模式', // by Claude Opus 5
 	'Alter schema' => '修改模式',
 	'Create schema' => '创建模式',
 	'Schema has been dropped.' => '已删除模式。',
@@ -205,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => '分区类型',
+	'Partition' => '分区', // by Claude Opus 5
 	'Partitions' => '分区',
 	'Partition name' => '分区名',
 	'Values' => '值',
+	'Inherited tables' => '继承的表', // by Claude Opus 5
+	'Inherited from' => '继承自', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => '索引',
@@ -363,6 +383,38 @@ return [
 	'no' => '否',
 
 	// Settings
+	'Settings' => '设置', // by Claude Opus 5
+	'Default' => '默认', // by Claude Opus 5
+	'Color scheme' => '配色方案', // by Claude Opus 5
+	'By system' => '跟随系统', // by Claude Opus 5
+	'Light' => '浅色', // by Claude Opus 5
+	'Dark' => '深色', // by Claude Opus 5
+	'Navigation mode' => '导航模式', // by Claude Opus 5
+	'Simple' => '简单', // by Claude Opus 5
+	'Dual' => '双栏', // by Claude Opus 5
+	'Reversed' => '反向', // by Claude Opus 5
+	'Layout of main navigation with table links.' => '带有表链接的主导航布局。', // by Claude Opus 5
+	'Table links' => '表链接', // by Claude Opus 5
+	'Primary action for all table links.' => '所有表链接的主要动作。', // by Claude Opus 5
+	'Links to tables referencing the current row.' => '指向引用当前行的表的链接。', // by Claude Opus 5
+	'Display' => '显示', // by Claude Opus 5
+	'Hide' => '隐藏', // by Claude Opus 5
+	'Records per page' => '每页记录数', // by Claude Opus 5
+	'Default number of records displayed in data table.' => '数据表中默认显示的记录数量。', // by Claude Opus 5
+	'Enum as select' => '枚举显示为选择列表', // by Claude Opus 5
+	'Never' => '从不', // by Claude Opus 5
+	'Always' => '总是', // by Claude Opus 5
+	'More values than %d' => '值多于 %d 个', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => '枚举字段显示选择列表的阈值。', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => '一次性密码', // by Claude Opus 5
+	'Enter OTP code.' => '请输入 OTP 验证码。', // by Claude Opus 5
+	'Invalid OTP code.' => '无效的 OTP 验证码。', // by Claude Opus 5
+	'Access denied.' => '拒绝访问。', // by Claude Opus 5
+	'JSON previews' => 'JSON 预览', // by Claude Opus 5
+	'Data table' => '数据表', // by Claude Opus 5
+	'Edit form' => '编辑表单', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => '请稍候。', // by Claude Opus 5
 ];

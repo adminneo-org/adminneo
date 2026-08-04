@@ -118,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Importación de archivos deshablilitada.',
 	'Unable to upload a file.' => 'No es posible cargar el archivo.',
 	'Maximum allowed file size is %sB.' => 'El tamaño máximo de archivo es %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'El número máximo de archivos es %d. Seleccione menos archivos o aumente la directiva de configuración %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'El tamaño total máximo de los archivos es %s. Seleccione archivos más pequeños o aumente la directiva de configuración %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST data demasiado grande. Reduzca el tamaño o aumente la directiva de configuración %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Usted puede cargar un SQL grande mediante FTP e importarlo desde el servidor.',
 	'File must be in UTF-8 encoding.' => 'El archivo tiene que ser codificacion UTF-8.',

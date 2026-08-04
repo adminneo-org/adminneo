@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s måste returnera en array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s och %s måste returnera ett objekt skapat av metoden %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'System',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Inloggad som: %s',
 	'Logout successful.' => 'Du är nu utloggad.',
 	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Ogiltig server eller inloggningsuppgifter.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Det finns ett mellanslag i lösenordet, vilket kan vara anledningen.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tillåter inte att ansluta till en databas utan lösenord. <a href="https://www.adminneo.org/password"%s>Mer information</a>.',
 	'Database does not support password.' => 'Databasen stödjer inte lösenord.',
@@ -32,11 +35,14 @@ return [
 		'För många misslyckade inloggningar, försök igen om %d minut.',
 		'För många misslyckade inloggningar, försök igen om %d minuter.',
 	],
+	'Invalid permanent login, please login again.' => 'Ogiltig permanent inloggning, vänligen logga in igen.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Ogiltig CSRF-token. Skicka formuläret igen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Om du inte skickade en förfrågan från AdminNeo så kan du stänga den här sidan.',
 	'The action will be performed after successful login with the same credentials.' => 'Åtgärden kommer att utföras efter en lyckad inloggning med samma inloggningsuppgifter.',
 
 	// Connection
+	'No driver' => 'Ingen drivrutin', // by Claude Opus 5
+	'Database driver not found.' => 'Databasdrivrutinen hittades inte.', // by Claude Opus 5
 	'No extension' => 'Inget tillägg',
 	'None of the supported PHP extensions (%s) are available.' => 'Inga av de PHP-tilläggen som stöds (%s) är tillgängliga.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Anslutning till privilegierade portar är inte tillåtet.',
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Språk',
 
+	'Home' => 'Start', // by Claude Opus 5
 	'Refresh' => 'Ladda om',
+	'Info' => 'Info', // by Claude Opus 5
+	'More information.' => 'Mer information.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilegier',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL-kommando',
+	'HTTP request' => 'HTTP-förfrågan', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d förfrågan lyckades.',
 		'%d förfrågor lyckades.',
@@ -106,8 +116,10 @@ return [
 	'Run file' => 'Kör fil',
 	'File does not exist.' => 'Filen finns inte.',
 	'File uploads are disabled.' => 'Filuppladdningar är avstängda.',
-	'Unable to upload a file.' => 'Det går inte add ladda upp filen.',
+	'Unable to upload a file.' => 'Det går inte att ladda upp filen.', // by Claude Opus 5
 	'Maximum allowed file size is %sB.' => 'Högsta tillåtna storlek är %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Högsta antal filer är %d. Välj färre filer eller höj %s-direktivet.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Högsta sammanlagda filstorlek är %s. Välj mindre filer eller höj %s-direktivet.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST-datan är för stor. Minska det eller höj %s-direktivet.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan ladda upp en stor SQL-fil via FTP och importera det från servern.',
 	'File must be in UTF-8 encoding.' => 'Filer måste vara i UTF-8-format.',
@@ -127,6 +139,7 @@ return [
 
 	// Databases
 	'Database' => 'Databas',
+	'database' => 'databas', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Använd',
 	'Invalid database.' => 'Ogiltig databas.',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
+	'schema' => 'schema', // by Claude Opus 5
+	'Schemas' => 'Scheman', // by Claude Opus 5
+	'No schemas.' => 'Inga scheman.', // by Claude Opus 5
+	'Show schema' => 'Visa schema', // by Claude Opus 5
 	'Alter schema' => 'Redigera schema',
 	'Create schema' => 'Skapa schema',
 	'Schema has been dropped.' => 'Schema har tagits bort.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partitionera om',
+	'Partition' => 'Partition', // by Claude Opus 5
 	'Partitions' => 'Partitioner',
 	'Partition name' => 'Partition',
 	'Values' => 'Värden',
+	'Inherited tables' => 'Ärvda tabeller', // by Claude Opus 5
+	'Inherited from' => 'Ärvd från', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Index',
@@ -390,6 +410,38 @@ return [
 	'no' => 'nej',
 
 	// Settings
+	'Settings' => 'Inställningar', // by Claude Opus 5
+	'Default' => 'Standard', // by Claude Opus 5
+	'Color scheme' => 'Färgtema', // by Claude Opus 5
+	'By system' => 'Enligt systemet', // by Claude Opus 5
+	'Light' => 'Ljust', // by Claude Opus 5
+	'Dark' => 'Mörkt', // by Claude Opus 5
+	'Navigation mode' => 'Navigeringsläge', // by Claude Opus 5
+	'Simple' => 'Enkelt', // by Claude Opus 5
+	'Dual' => 'Dubbelt', // by Claude Opus 5
+	'Reversed' => 'Omvänt', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Utformning av huvudnavigeringen med tabellänkar.', // by Claude Opus 5
+	'Table links' => 'Tabellänkar', // by Claude Opus 5
+	'Primary action for all table links.' => 'Primär åtgärd för alla tabellänkar.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Länkar till tabeller som refererar till den aktuella raden.', // by Claude Opus 5
+	'Display' => 'Visa', // by Claude Opus 5
+	'Hide' => 'Dölj', // by Claude Opus 5
+	'Records per page' => 'Poster per sida', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Antal poster som visas i datatabellen som standard.', // by Claude Opus 5
+	'Enum as select' => 'Enum som vallista', // by Claude Opus 5
+	'Never' => 'Aldrig', // by Claude Opus 5
+	'Always' => 'Alltid', // by Claude Opus 5
+	'More values than %d' => 'Fler än %d värden', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Gräns för att visa en vallista för enum-fält.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Engångslösenord', // by Claude Opus 5
+	'Enter OTP code.' => 'Ange OTP-koden.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Ogiltig OTP-kod.', // by Claude Opus 5
+	'Access denied.' => 'Åtkomst nekad.', // by Claude Opus 5
+	'JSON previews' => 'JSON-förhandsvisning', // by Claude Opus 5
+	'Data table' => 'Datatabell', // by Claude Opus 5
+	'Edit form' => 'Redigeringsformulär', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Ett ögonblick...', // by Claude Opus 5
 ];

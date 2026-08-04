@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'SS:DD:ss', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s bir dizi döndürmelidir.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s ve %s, %s yöntemiyle oluşturulmuş bir nesne döndürmelidir.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistem',
@@ -25,14 +27,19 @@ return [
 	'Logged as: %s' => '%s olarak giriş yapıldı',
 	'Logout successful.' => 'Oturum başarıyla sonlandı.',
 	'hostname[:port] or :socket' => 'hostname[:port] veya :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Geçersiz sunucu veya kimlik bilgileri.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Girilen parolada boşluk var, sorunun nedeni bu olabilir.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo parolasız bir veri tabanına erişimi desteklemez, <a href="https://www.adminneo.org/password"%s>daha fazla bilgi</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Veri tabanı parolayı desteklemez.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Çok fazla başarısız giriş denemesi, %d dakika sonra tekrar deneyin.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Geçersiz kalıcı oturum, lütfen tekrar giriş yapın.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Geçersiz (CSRF) jetonu. Formu tekrar yolla.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Bu isteği AdminNeo\'den göndermediyseniz bu sayfayı kapatın.',
 	'The action will be performed after successful login with the same credentials.' => 'İşlem, aynı kimlik bilgileriyle başarıyla oturum açıldıktan sonra gerçekleştirilecektir.',
 
 	// Connection
+	'No driver' => 'Sürücü yok', // by Claude Opus 5
+	'Database driver not found.' => 'Veri tabanı sürücüsü bulunamadı.', // by Claude Opus 5
 	'No extension' => 'Uzantı yok',
 	'None of the supported PHP extensions (%s) are available.' => 'Desteklenen PHP eklentilerinden (%s) hiçbiri mevcut değil.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Ayrıcalıklı bağlantı noktalarına bağlanmaya izin verilmiyor.',
@@ -43,7 +50,10 @@ return [
 	// Settings
 	'Language' => 'Dil',
 
+	'Home' => 'Ana sayfa', // by Claude Opus 5
 	'Refresh' => 'Tazele',
+	'Info' => 'Bilgi', // by Claude Opus 5
+	'More information.' => 'Daha fazla bilgi.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'İzinler',
@@ -72,6 +82,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL komutu',
+	'HTTP request' => 'HTTP isteği', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d sorgu başarıyla çalıştırıldı.',
 		'%d adet sorgu başarıyla çalıştırıldı.',
@@ -101,6 +112,8 @@ return [
 	'File uploads are disabled.' => 'Dosya gönderimi etkin değil.',
 	'Unable to upload a file.' => 'Dosya gönderilemiyor.',
 	'Maximum allowed file size is %sB.' => 'İzin verilen dosya boyutu sınırı %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'En fazla dosya sayısı %d. Daha az dosya seçin ya da %s ayar yönergesini artırın.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Dosyaların toplam boyut sınırı %s. Daha küçük dosyalar seçin ya da %s ayar yönergesini artırın.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Çok büyük POST verisi, veriyi azaltın ya da %s ayar yönergesini uygun olarak yapılandırın.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'FTP yoluyla büyük bir SQL dosyası yükleyebilir ve sunucudan içe aktarabilirsiniz.',
 	'File must be in UTF-8 encoding.' => 'Dosya UTF-8 kodlamasında olmalıdır.',
@@ -120,6 +133,7 @@ return [
 
 	// Databases
 	'Database' => 'Veri Tabanı',
+	'database' => 'veri tabanı', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Kullan',
 	'Invalid database.' => 'Geçersiz veri tabanı.',
@@ -139,6 +153,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Şema',
+	'schema' => 'şema', // by Claude Opus 5
+	'Schemas' => 'Şemalar', // by Claude Opus 5
+	'No schemas.' => 'Şema yok.', // by Claude Opus 5
+	'Show schema' => 'Şemayı göster', // by Claude Opus 5
 	'Alter schema' => 'Şemayı değiştir',
 	'Create schema' => 'Şema oluştur',
 	'Schema has been dropped.' => 'Şema silindi.',
@@ -213,9 +231,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Bununla bölümle',
+	'Partition' => 'Bölüm', // by Claude Opus 5
 	'Partitions' => 'Bölümler',
 	'Partition name' => 'Bölüm adı',
 	'Values' => 'Değerler',
+	'Inherited tables' => 'Miras alınan tablolar', // by Claude Opus 5
+	'Inherited from' => 'Miras alındığı tablo', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'İndeksler',
@@ -314,7 +335,7 @@ return [
 	'Functions' => 'Fonksiyonlar',
 	'Aggregation' => 'Kümeleme',
 	'Search' => 'Ara',
-	'anywhere' => 'hiçbir yerde',
+	'anywhere' => 'herhangi bir yerde', // by Claude Opus 5
 	'Sort' => 'Sırala',
 	'descending' => 'Azalan',
 	'Limit' => 'Limit',
@@ -380,6 +401,38 @@ return [
 	'no' => 'hayır',
 
 	// Settings
+	'Settings' => 'Ayarlar', // by Claude Opus 5
+	'Default' => 'Varsayılan', // by Claude Opus 5
+	'Color scheme' => 'Renk şeması', // by Claude Opus 5
+	'By system' => 'Sisteme göre', // by Claude Opus 5
+	'Light' => 'Açık', // by Claude Opus 5
+	'Dark' => 'Koyu', // by Claude Opus 5
+	'Navigation mode' => 'Gezinme kipi', // by Claude Opus 5
+	'Simple' => 'Basit', // by Claude Opus 5
+	'Dual' => 'İkili', // by Claude Opus 5
+	'Reversed' => 'Ters', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Tablo bağlantılarını içeren ana gezinme yerleşimi.', // by Claude Opus 5
+	'Table links' => 'Tablo bağlantıları', // by Claude Opus 5
+	'Primary action for all table links.' => 'Tüm tablo bağlantıları için birincil işlem.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Geçerli kaydı referans alan tablolara bağlantılar.', // by Claude Opus 5
+	'Display' => 'Göster', // by Claude Opus 5
+	'Hide' => 'Gizle', // by Claude Opus 5
+	'Records per page' => 'Sayfa başına kayıt', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Veri tablosunda gösterilen varsayılan kayıt sayısı.', // by Claude Opus 5
+	'Enum as select' => 'Enum seçim listesi olarak', // by Claude Opus 5
+	'Never' => 'Asla', // by Claude Opus 5
+	'Always' => 'Her zaman', // by Claude Opus 5
+	'More values than %d' => '%d değerden fazlaysa', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Enum kolonları için seçim listesi gösterme eşiği.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Tek Kullanımlık Parola', // by Claude Opus 5
+	'Enter OTP code.' => 'OTP kodunu girin.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Geçersiz OTP kodu.', // by Claude Opus 5
+	'Access denied.' => 'Erişim reddedildi.', // by Claude Opus 5
+	'JSON previews' => 'JSON önizlemeleri', // by Claude Opus 5
+	'Data table' => 'Veri tablosu', // by Claude Opus 5
+	'Edit form' => 'Düzenleme formu', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Bir saniye...', // by Claude Opus 5
 ];

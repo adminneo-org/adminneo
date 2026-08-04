@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s debe devolver un array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s e %s deben devolver un obxecto creado polo método %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistema',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Conectado como: %s',
 	'Logout successful.' => 'Pechouse a sesión con éxito.',
 	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Servidor ou credenciais incorrectos.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Hai un espazo no contrasinal introducido que podería ser a causa.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non permite acceder a unha base de datos sen contrasinal, <a href="https://www.adminneo.org/password"%s>máis información</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'A base de datos non admite contrasinal.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'Demasiados intentos de conexión, intentao de novo en %d minuto.',
 		'Demasiados intentos de conexión, intentao de novo en %d minutos.',
 	],
+	'Invalid permanent login, please login again.' => 'Sesión permanente inválida, por favor acceda de novo.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Envíe de novo os datos do formulario.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Se non enviaches esta petición dende o AdminNeo entón pecha esta páxina.',
 	'The action will be performed after successful login with the same credentials.' => 'A acción realizarase despois de iniciar sesión correctamente coas mesmas credenciais.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Non ten controlador', // by Claude Opus 5
+	'Database driver not found.' => 'Non se atopou o controlador da base de datos.', // by Claude Opus 5
 	'No extension' => 'Non ten extensión',
 	'None of the supported PHP extensions (%s) are available.' => 'Ningunha das extensións PHP soportadas (%s) está dispoñible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Non se permite conectar a portos privilexiados.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Lingua',
 
+	'Home' => 'Inicio', // by Claude Opus 5
 	'Refresh' => 'Refrescar',
+	'Info' => 'Info', // by Claude Opus 5
+	'More information.' => 'Máis información.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilexios',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'Comando SQL',
+	'HTTP request' => 'Petición HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d consulta executada correctamente.',
 		'%d consultas executadas correctamente.',
@@ -105,9 +115,11 @@ return [
 	'Webserver file %s' => 'Ficheiro de servidor web %s',
 	'Run file' => 'Executar ficheiro',
 	'File does not exist.' => 'O ficheiro non existe.',
-	'File uploads are disabled.' => 'Importación de ficheiros deshablilitada.',
+	'File uploads are disabled.' => 'Importación de ficheiros deshabilitada.', // by Claude Opus 5
 	'Unable to upload a file.' => 'Non é posible importar o ficheiro.',
 	'Maximum allowed file size is %sB.' => 'O tamaño máximo de ficheiro permitido é de %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'O número máximo de ficheiros é %d. Seleccione menos ficheiros ou aumente a directiva de configuración %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'O tamaño total máximo dos ficheiros é de %s. Seleccione ficheiros máis pequenos ou aumente a directiva de configuración %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Datos POST demasiado grandes. Reduza os datos ou aumente a directiva de configuración %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Podes subir un ficheiro SQL de gran tamaño vía FTP e importalo dende o servidor.',
 	'File must be in UTF-8 encoding.' => 'O ficheiro ten que estar codificado con UTF-8.',
@@ -119,7 +131,7 @@ return [
 
 	// Export
 	'Export' => 'Exportar',
-	'Output' => 'Salida',
+	'Output' => 'Saída', // by Claude Opus 5
 	'open' => 'abrir',
 	'save' => 'gardar',
 	'Format' => 'Formato',
@@ -127,6 +139,7 @@ return [
 
 	// Databases
 	'Database' => 'Base de datos',
+	'database' => 'base de datos', // by Claude Opus 5
 	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de datos incorrecta.',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Esquema',
+	'schema' => 'esquema', // by Claude Opus 5
+	'Schemas' => 'Esquemas', // by Claude Opus 5
+	'No schemas.' => 'Nengún esquema.', // by Claude Opus 5
+	'Show schema' => 'Amosar esquema', // by Claude Opus 5
 	'Alter schema' => 'Modificar esquema',
 	'Create schema' => 'Crear esquema',
 	'Schema has been dropped.' => 'Eliminouse o esquema.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Particionar por',
+	'Partition' => 'Partición', // by Claude Opus 5
 	'Partitions' => 'Particións',
 	'Partition name' => 'Nome da Partición',
 	'Values' => 'Valores',
+	'Inherited tables' => 'Táboas herdadas', // by Claude Opus 5
+	'Inherited from' => 'Herdada de', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Índices',
@@ -326,10 +346,10 @@ return [
 	'descending' => 'descendente',
 	'Limit' => 'Límite',
 	'Limit rows' => 'Limitar filas',
-	'Text length' => 'Lonxitud do texto',
+	'Text length' => 'Lonxitude do texto', // by Claude Opus 5
 	'Action' => 'Acción',
 	'Full table scan' => 'Escaneo completo da táboa',
-	'Unable to select the table' => 'No é posible seleccionar a táboa',
+	'Unable to select the table' => 'Non é posible seleccionar a táboa', // by Claude Opus 5
 	'Search data in tables' => 'Buscar datos en táboas',
 	'No rows.' => 'Nengún resultado.',
 	'%d / ' => '%d / ',
@@ -359,7 +379,7 @@ return [
 	'empty' => 'baleiro', // label for value '' in enum data type
 	'Insert' => 'Inserir',
 	'Save' => 'Gardar',
-	'Save and continue edit' => 'Gardar se seguir editando',
+	'Save and continue edit' => 'Gardar e seguir editando', // by Claude Opus 5
 	'Save and insert next' => 'Guardar e inserir seguinte',
 	'Saving' => 'Gardando',
 	'Selected' => 'Selección',
@@ -382,7 +402,7 @@ return [
 	'Lists' => 'Listas',
 	'Network' => 'Rede',
 	'Geometry' => 'Xeometría',
-	'Relations' => 'Relacins',
+	'Relations' => 'Relacións', // by Claude Opus 5
 
 	// Editor - data values
 	'now' => 'agora',
@@ -390,6 +410,38 @@ return [
 	'no' => 'non',
 
 	// Settings
+	'Settings' => 'Configuración', // by Claude Opus 5
+	'Default' => 'Predeterminado', // by Claude Opus 5
+	'Color scheme' => 'Esquema de cores', // by Claude Opus 5
+	'By system' => 'Segundo o sistema', // by Claude Opus 5
+	'Light' => 'Claro', // by Claude Opus 5
+	'Dark' => 'Escuro', // by Claude Opus 5
+	'Navigation mode' => 'Modo de navegación', // by Claude Opus 5
+	'Simple' => 'Simple', // by Claude Opus 5
+	'Dual' => 'Dual', // by Claude Opus 5
+	'Reversed' => 'Invertido', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Disposición da navegación principal coas ligazóns das táboas.', // by Claude Opus 5
+	'Table links' => 'Ligazóns das táboas', // by Claude Opus 5
+	'Primary action for all table links.' => 'Acción principal para todas as ligazóns das táboas.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Ligazóns ás táboas que referencian a fila actual.', // by Claude Opus 5
+	'Display' => 'Amosar', // by Claude Opus 5
+	'Hide' => 'Agochar', // by Claude Opus 5
+	'Records per page' => 'Rexistros por páxina', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Número de rexistros amosados por defecto na táboa de datos.', // by Claude Opus 5
+	'Enum as select' => 'Enum como selección', // by Claude Opus 5
+	'Never' => 'Nunca', // by Claude Opus 5
+	'Always' => 'Sempre', // by Claude Opus 5
+	'More values than %d' => 'Máis de %d valores', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Límite para amosar un menú de selección nos campos enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Contrasinal de un só uso', // by Claude Opus 5
+	'Enter OTP code.' => 'Introduza o código OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Código OTP inválido.', // by Claude Opus 5
+	'Access denied.' => 'Acceso denegado.', // by Claude Opus 5
+	'JSON previews' => 'Vistas previas de JSON', // by Claude Opus 5
+	'Data table' => 'Táboa de datos', // by Claude Opus 5
+	'Edit form' => 'Formulario de edición', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Un momento...', // by Claude Opus 5
 ];

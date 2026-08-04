@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts // by Claude Fable 5
 
 	// Bootstrap
+	'%s must return an array.' => '%s deve devolver um array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s e %s devem devolver um objeto criado pelo método %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Motor de Base de dados',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Ligado como: %s',
 	'Logout successful.' => 'Sessão terminada com sucesso.',
 	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Servidor ou credenciais inválidos.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Existe um espaço na senha introduzida que pode ser a causa.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'O AdminNeo não suporta aceder a uma base de dados sem senha, <a href="https://www.adminneo.org/password"%s>mais informações</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'A base de dados não suporta senha.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'Demasiadas tentativas de início de sessão falhadas, tente novamente em %d minuto.',
 		'Demasiadas tentativas de início de sessão falhadas, tente novamente em %d minutos.',
 	], // by Claude Fable 5
+	'Invalid permanent login, please login again.' => 'Sessão memorizada inválida, por favor entre de novo.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Enviar o formulario novamente.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Se não enviou este pedido a partir do AdminNeo, feche esta página.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'A ação será realizada após iniciar sessão com êxito com as mesmas credenciais.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Não há controlador', // by Claude Opus 5
+	'Database driver not found.' => 'Controlador da base de dados não encontrado.', // by Claude Opus 5
 	'No extension' => 'Não há extensão',
 	'None of the supported PHP extensions (%s) are available.' => 'Nenhuma das extensões PHP suportadas (%s) está disponivel.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Não é permitido ligar a portos privilegiados.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Idioma',
 
+	'Home' => 'Início', // by Claude Opus 5
 	'Refresh' => 'Atualizar',
+	'Info' => 'Informação', // by Claude Opus 5
+	'More information.' => 'Mais informação.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilégios',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'Comando SQL',
+	'HTTP request' => 'Pedido HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d consulta sql executada corretamente.',
 		'%d consultas sql executadas corretamente.',
@@ -108,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Importação de ficheiros desativada.',
 	'Unable to upload a file.' => 'Não é possível enviar o ficheiro.',
 	'Maximum allowed file size is %sB.' => 'Tamanho máximo do ficheiro é %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'O número máximo de ficheiros é %d. Selecione menos ficheiros ou aumente a diretiva de configuração %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'O tamanho total máximo dos ficheiros é %s. Selecione ficheiros mais pequenos ou aumente a diretiva de configuração %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST data demasiado grande. Reduza o tamanho ou aumente a diretiva de configuração %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Pode enviar um ficheiro SQL grande por FTP e importá-lo a partir do servidor.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'O ficheiro deve estar codificado em UTF-8.', // by Claude Fable 5
@@ -127,6 +139,7 @@ return [
 
 	// Databases
 	'Database' => 'Base de dados',
+	'database' => 'base de dados', // by Claude Opus 5
 	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de dados inválida.',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Esquema',
+	'schema' => 'esquema', // by Claude Opus 5
+	'Schemas' => 'Esquemas', // by Claude Opus 5
+	'No schemas.' => 'Não existem esquemas.', // by Claude Opus 5
+	'Show schema' => 'Mostrar esquema', // by Claude Opus 5
 	'Alter schema' => 'Modificar esquema',
 	'Create schema' => 'Criar esquema',
 	'Schema has been dropped.' => 'Esquema eliminado.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Particionar por',
+	'Partition' => 'Partição', // by Claude Opus 5
 	'Partitions' => 'Partições',
 	'Partition name' => 'Nome da Partição',
 	'Values' => 'Valores',
+	'Inherited tables' => 'Tabelas herdadas', // by Claude Opus 5
+	'Inherited from' => 'Herdada de', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Índices',
@@ -390,6 +410,38 @@ return [
 	'no' => 'não', // by Claude Fable 5
 
 	// Settings
+	'Settings' => 'Definições', // by Claude Opus 5
+	'Default' => 'Predefinido', // by Claude Opus 5
+	'Color scheme' => 'Esquema de cores', // by Claude Opus 5
+	'By system' => 'Conforme o sistema', // by Claude Opus 5
+	'Light' => 'Claro', // by Claude Opus 5
+	'Dark' => 'Escuro', // by Claude Opus 5
+	'Navigation mode' => 'Modo de navegação', // by Claude Opus 5
+	'Simple' => 'Simples', // by Claude Opus 5
+	'Dual' => 'Duplo', // by Claude Opus 5
+	'Reversed' => 'Invertido', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Disposição da navegação principal com as ligações das tabelas.', // by Claude Opus 5
+	'Table links' => 'Ligações das tabelas', // by Claude Opus 5
+	'Primary action for all table links.' => 'Ação principal para todas as ligações das tabelas.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Ligações para as tabelas que referenciam o registo atual.', // by Claude Opus 5
+	'Display' => 'Mostrar', // by Claude Opus 5
+	'Hide' => 'Ocultar', // by Claude Opus 5
+	'Records per page' => 'Registos por página', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Número predefinido de registos mostrados na tabela de dados.', // by Claude Opus 5
+	'Enum as select' => 'Enum como seleção', // by Claude Opus 5
+	'Never' => 'Nunca', // by Claude Opus 5
+	'Always' => 'Sempre', // by Claude Opus 5
+	'More values than %d' => 'Mais de %d valores', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Limite para mostrar um menu de seleção nos campos enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Senha de uso único', // by Claude Opus 5
+	'Enter OTP code.' => 'Introduza o código OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Código OTP inválido.', // by Claude Opus 5
+	'Access denied.' => 'Acesso negado.', // by Claude Opus 5
+	'JSON previews' => 'Pré-visualizações JSON', // by Claude Opus 5
+	'Data table' => 'Tabela de dados', // by Claude Opus 5
+	'Edit form' => 'Formulário de edição', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Só um momento...', // by Claude Opus 5
 ];

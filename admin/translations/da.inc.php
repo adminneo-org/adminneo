@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s skal returnere et array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s og %s skal returnere et objekt oprettet af metoden %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'System',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Logget ind som: %s',
 	'Logout successful.' => 'Log af vellykket.',
 	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Ugyldig server eller loginoplysninger.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Der er et mellemrum i det indtastede kodeord, hvilket kan være årsagen.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo understøtter ikke adgang til en database uden kodeord, <a href="https://www.adminneo.org/password"%s>mere information</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Databasen understøtter ikke kodeord.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'For mange mislykkede loginforsøg, prøv igen om %d minut.',
 		'For mange mislykkede loginforsøg, prøv igen om %d minutter.',
 	], // by Claude Fable 5
+	'Invalid permanent login, please login again.' => 'Ugyldigt permanent login - Log venligst ind igen.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Ugyldigt CSRF-token - Genindsend formen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke har sendt denne forespørgsel fra AdminNeo, så luk denne side.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'Handlingen udføres efter vellykket login med de samme loginoplysninger.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Ingen driver', // by Claude Opus 5
+	'Database driver not found.' => 'Databasedriveren blev ikke fundet.', // by Claude Opus 5
 	'No extension' => 'Ingen udvidelse',
 	'None of the supported PHP extensions (%s) are available.' => 'Ingen af de understøttede PHP-udvidelser (%s) er tilgængelige.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Forbindelse til privilegerede porte er ikke tilladt.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Sprog',
 
+	'Home' => 'Forside', // by Claude Opus 5
 	'Refresh' => 'Genindlæs',
+	'Info' => 'Info', // by Claude Opus 5
+	'More information.' => 'Flere oplysninger.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilegier',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL-kommando',
+	'HTTP request' => 'HTTP-forespørgsel', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d kald udført OK.',
 	'Query executed OK, %d row(s) affected.' => [
 		'Kald udført OK, %d række påvirket.',
@@ -105,6 +115,8 @@ return [
 	'File uploads are disabled.' => 'Fil upload er slået fra.',
 	'Unable to upload a file.' => 'Kunne ikke uploade fil.',
 	'Maximum allowed file size is %sB.' => 'Maksimum tilladte filstørrelse er %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimum antal filer er %d. Vælg færre filer eller øg størrelsen i %s-konfigurationen.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimum samlet filstørrelse er %s. Vælg mindre filer eller øg størrelsen i %s-konfigurationen.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Maks POST data er overskredet. Reducer mængden af data eller øg størrelsen i %s-konfigurationen.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan uploade en stor SQL-fil via FTP og importere den fra serveren.',
 	'File must be in UTF-8 encoding.' => 'Filen skal være i UTF8-tegnkoding.',
@@ -124,6 +136,7 @@ return [
 
 	// Databases
 	'Database' => 'Database',
+	'database' => 'database', // by Claude Opus 5
 	'DB' => 'DB', // by Claude Fable 5
 	'Use' => 'Brug',
 	'Invalid database.' => 'Ugyldig database.',
@@ -143,6 +156,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skema',
+	'schema' => 'skema', // by Claude Opus 5
+	'Schemas' => 'Skemaer', // by Claude Opus 5
+	'No schemas.' => 'Ingen skemaer.', // by Claude Opus 5
+	'Show schema' => 'Vis skema', // by Claude Opus 5
 	'Alter schema' => 'Ændre skema',
 	'Create schema' => 'Opret skema',
 	'Schema has been dropped.' => 'Skemaet er slettet.',
@@ -217,9 +234,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partition ved',
+	'Partition' => 'Partition', // by Claude Opus 5
 	'Partitions' => 'Partitioner',
 	'Partition name' => 'Partitionsnavn',
 	'Values' => 'Værdier',
+	'Inherited tables' => 'Nedarvede tabeller', // by Claude Opus 5
+	'Inherited from' => 'Nedarvet fra', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indekser',
@@ -347,7 +367,7 @@ return [
 	// In-place editing in selection
 	'Modify' => 'Ændre',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klik på en værdi for at ændre den.',
-	'Use edit link to modify this value.' => 'Brug rediger-link for at ændre dennne værdi.',
+	'Use edit link to modify this value.' => 'Brug rediger-linket for at ændre denne værdi.', // by Claude Opus 5
 
 	// Editing
 	'New item' => 'Nyt emne',
@@ -387,6 +407,38 @@ return [
 	'no' => 'nej',
 
 	// Settings
+	'Settings' => 'Indstillinger', // by Claude Opus 5
+	'Default' => 'Standard', // by Claude Opus 5
+	'Color scheme' => 'Farveskema', // by Claude Opus 5
+	'By system' => 'Efter system', // by Claude Opus 5
+	'Light' => 'Lyst', // by Claude Opus 5
+	'Dark' => 'Mørkt', // by Claude Opus 5
+	'Navigation mode' => 'Navigationstilstand', // by Claude Opus 5
+	'Simple' => 'Enkel', // by Claude Opus 5
+	'Dual' => 'Dobbelt', // by Claude Opus 5
+	'Reversed' => 'Omvendt', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Layout af hovednavigationen med tabellinks.', // by Claude Opus 5
+	'Table links' => 'Tabellinks', // by Claude Opus 5
+	'Primary action for all table links.' => 'Primær handling for alle tabellinks.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Links til tabeller, der refererer til den aktuelle række.', // by Claude Opus 5
+	'Display' => 'Vis', // by Claude Opus 5
+	'Hide' => 'Skjul', // by Claude Opus 5
+	'Records per page' => 'Poster pr. side', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Standardantal poster vist i datatabellen.', // by Claude Opus 5
+	'Enum as select' => 'Enum som valgliste', // by Claude Opus 5
+	'Never' => 'Aldrig', // by Claude Opus 5
+	'Always' => 'Altid', // by Claude Opus 5
+	'More values than %d' => 'Flere end %d værdier', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Grænse for at vise en valgliste for enum-felter.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Engangskode', // by Claude Opus 5
+	'Enter OTP code.' => 'Indtast OTP-kode.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Ugyldig OTP-kode.', // by Claude Opus 5
+	'Access denied.' => 'Adgang nægtet.', // by Claude Opus 5
+	'JSON previews' => 'JSON-forhåndsvisning', // by Claude Opus 5
+	'Data table' => 'Datatabel', // by Claude Opus 5
+	'Edit form' => 'Redigeringsformular', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Et øjeblik...', // by Claude Opus 5
 ];

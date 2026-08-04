@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'ЧЧ:ММ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s трябва да върне масив.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s и %s трябва да върнат обект, създаден чрез метода %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Система',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Текущ потребител: %s',
 	'Logout successful.' => 'Излизането е успешно.',
 	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Невалиден сървър или данни за вход.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Има интервал във въведената парола, което може да е причината.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддържа достъп до база данни без парола, <a href="https://www.adminneo.org/password"%s>повече информация</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Базата данни не поддържа парола.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минута.',
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минути.',
 	],
+	'Invalid permanent login, please login again.' => 'Невалидно запаметено влизане; моля, влезте отново.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Невалиден шифроващ ключ. Попълнете и изпратете формуляра отново.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ако не сте изпратили тази заявка през AdminNeo, затворете тази страница.',
 	'The action will be performed after successful login with the same credentials.' => 'Действието ще бъде извършено след успешно влизане със същите данни.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Няма драйвер', // by Claude Opus 5
+	'Database driver not found.' => 'Драйверът за базата данни не беше намерен.', // by Claude Opus 5
 	'No extension' => 'Няма разширение',
 	'None of the supported PHP extensions (%s) are available.' => 'Никое от поддържаните PHP разширения (%s) не е налично.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Свързването към привилегировани портове не е разрешено.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Език',
 
+	'Home' => 'Начало', // by Claude Opus 5
 	'Refresh' => 'Обновяване',
+	'Info' => 'Информация', // by Claude Opus 5
+	'More information.' => 'Повече информация.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Права',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL команда',
+	'HTTP request' => 'HTTP заявка', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d заявка е изпълнена.',
 		'%d заявки са изпълнени.',
@@ -108,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Прикачването на файлове е забранено.',
 	'Unable to upload a file.' => 'Неуспешно прикачване на файл.',
 	'Maximum allowed file size is %sB.' => 'Максимално разрешената големина на файл е %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максималният брой файлове е %d. Изберете по-малко файлове или увеличете %s управляващата директива.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максималната обща големина на файловете е %s. Изберете по-малки файлове или увеличете %s управляващата директива.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Изпратени са прекалено много данни. Намалете обема на данните или увеличете %s управляващата директива.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Можете да прикачите голям SQL файл чрез FTP и да го импортирате от сървъра.',
 	'File must be in UTF-8 encoding.' => 'Файла трябва да е с UTF-8 кодировка.',
@@ -127,6 +139,7 @@ return [
 
 	// Databases
 	'Database' => 'База данни',
+	'database' => 'база данни', // by Claude Opus 5
 	'DB' => 'БД', // by Claude Fable 5
 	'Use' => 'Избор',
 	'Invalid database.' => 'Невалидна база данни.',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
+	'schema' => 'схема', // by Claude Opus 5
+	'Schemas' => 'Схеми', // by Claude Opus 5
+	'No schemas.' => 'Няма схеми.', // by Claude Opus 5
+	'Show schema' => 'Схема', // by Claude Opus 5
 	'Alter schema' => 'Промяна на схемата',
 	'Create schema' => 'Създаване на схема',
 	'Schema has been dropped.' => 'Схемата беше премахната.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Разделяне на',
+	'Partition' => 'Раздел', // by Claude Opus 5
 	'Partitions' => 'Раздели',
 	'Partition name' => 'Име на раздела',
 	'Values' => 'Стойности',
+	'Inherited tables' => 'Наследени таблици', // by Claude Opus 5
+	'Inherited from' => 'Наследена от', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Индекси',
@@ -390,6 +410,38 @@ return [
 	'no' => 'не',
 
 	// Settings
+	'Settings' => 'Настройки', // by Claude Opus 5
+	'Default' => 'По подразбиране', // by Claude Opus 5
+	'Color scheme' => 'Цветова схема', // by Claude Opus 5
+	'By system' => 'Според системата', // by Claude Opus 5
+	'Light' => 'Светла', // by Claude Opus 5
+	'Dark' => 'Тъмна', // by Claude Opus 5
+	'Navigation mode' => 'Режим на навигация', // by Claude Opus 5
+	'Simple' => 'Опростен', // by Claude Opus 5
+	'Dual' => 'Двоен', // by Claude Opus 5
+	'Reversed' => 'Обърнат', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Подредба на основната навигация с препратките към таблиците.', // by Claude Opus 5
+	'Table links' => 'Препратки към таблиците', // by Claude Opus 5
+	'Primary action for all table links.' => 'Основно действие за всички препратки към таблиците.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Препратки към таблиците, сочещи към текущия ред.', // by Claude Opus 5
+	'Display' => 'Показване', // by Claude Opus 5
+	'Hide' => 'Скриване', // by Claude Opus 5
+	'Records per page' => 'Записи на страница', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Брой записи, показвани по подразбиране в таблицата с данни.', // by Claude Opus 5
+	'Enum as select' => 'Enum като списък', // by Claude Opus 5
+	'Never' => 'Никога', // by Claude Opus 5
+	'Always' => 'Винаги', // by Claude Opus 5
+	'More values than %d' => 'Повече от %d стойности', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Праг за показване на списък с избор при полета от вид enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Еднократна парола', // by Claude Opus 5
+	'Enter OTP code.' => 'Въведете OTP кода.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Невалиден OTP код.', // by Claude Opus 5
+	'Access denied.' => 'Достъпът е отказан.', // by Claude Opus 5
+	'JSON previews' => 'Преглед на JSON', // by Claude Opus 5
+	'Data table' => 'Таблица с данни', // by Claude Opus 5
+	'Edit form' => 'Формуляр за редактиране', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Само секунда...', // by Claude Opus 5
 ];

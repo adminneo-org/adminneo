@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'óó:pp:mm', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => 'A(z) %s tömböt kell visszaadjon.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => 'A(z) %s és %s a(z) %s metódussal létrehozott objektumot kell visszaadjon.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Adatbázis',
@@ -25,14 +27,19 @@ return [
 	'Logged as: %s' => 'Belépve: %s',
 	'Logout successful.' => 'Sikeres kilépés.',
 	'hostname[:port] or :socket' => 'hostname[:port] vagy :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Érvénytelen szerver vagy belépési adatok.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'A megadott jelszóban szóköz található, ami az ok lehet.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Az AdminNeo nem támogatja a jelszó nélküli adatbázis-hozzáférést, <a href="https://www.adminneo.org/password"%s>további információ</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Az adatbázis nem támogat jelszót.', // by Claude Fable 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.', // by Claude Fable 5
+	'Invalid permanent login, please login again.' => 'Érvénytelen megjegyzett belépés, jelentkezz be újra.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Érvénytelen CSRF azonosító. Küldd újra az űrlapot.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Ha nem az AdminNeo-ból küldted ezt a kérést, akkor zárd be ezt az oldalt.', // by Claude Opus 5
 	'The action will be performed after successful login with the same credentials.' => 'A művelet az azonos hitelesítő adatokkal történő sikeres bejelentkezés után hajtódik végre.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Nincs meghajtó', // by Claude Opus 5
+	'Database driver not found.' => 'Az adatbázis meghajtó nem található.', // by Claude Opus 5
 	'No extension' => 'Nincs kiterjesztés',
 	'None of the supported PHP extensions (%s) are available.' => 'Nincs egy elérhető támogatott PHP kiterjesztés (%s) sem.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'A privilegizált portokhoz való csatlakozás nem engedélyezett.', // by Claude Fable 5
@@ -43,7 +50,10 @@ return [
 	// Settings
 	'Language' => 'Nyelv',
 
+	'Home' => 'Kezdőlap', // by Claude Opus 5
 	'Refresh' => 'Frissítés',
+	'Info' => 'Infó', // by Claude Opus 5
+	'More information.' => 'További információ.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilégiumok',
@@ -69,6 +79,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL parancs',
+	'HTTP request' => 'HTTP kérés', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d sikeres lekérdezés.',
 	'Query executed OK, %d row(s) affected.' => 'Lekérdezés sikeresen végrehajtva, %d sor érintett.',
 	'No commands to execute.' => 'Nincs végrehajtható parancs.',
@@ -95,6 +106,8 @@ return [
 	'File uploads are disabled.' => 'A fájl feltöltés le van tiltva.',
 	'Unable to upload a file.' => 'Nem tudom feltölteni a fájlt.',
 	'Maximum allowed file size is %sB.' => 'A maximális fájlméret %s B.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'A fájlok maximális száma %d. Válassz kevesebb fájlt, vagy növeld a %s beállítást.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'A fájlok maximális összmérete %s. Válassz kisebb fájlokat, vagy növeld a %s beállítást.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Túl sok a POST adat! Csökkentsd az adat méretét, vagy növeld a %s beállítást.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Nagy SQL fájlt FTP-n keresztül is feltölthet, és a szerverről importálhatja.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'A fájlnak UTF-8 kódolásúnak kell lennie.', // by Claude Fable 5
@@ -111,6 +124,7 @@ return [
 
 	// Databases
 	'Database' => 'Adatbázis',
+	'database' => 'adatbázis', // by Claude Opus 5
 	'DB' => 'DB', // by Claude Fable 5
 	'Use' => 'Használ',
 	'Invalid database.' => 'Érvénytelen adatbázis.',
@@ -130,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Séma',
+	'schema' => 'séma', // by Claude Opus 5
+	'Schemas' => 'Sémák', // by Claude Opus 5
+	'No schemas.' => 'Nincs séma.', // by Claude Opus 5
+	'Show schema' => 'Séma mutatása', // by Claude Opus 5
 	'Alter schema' => 'Séma módosítása',
 	'Create schema' => 'Séma létrehozása',
 	'Schema has been dropped.' => 'Séma eldobva.',
@@ -204,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Particionálás ezzel',
+	'Partition' => 'Partició', // by Claude Opus 5
 	'Partitions' => 'Particiók',
 	'Partition name' => 'Partició neve',
 	'Values' => 'Értékek',
+	'Inherited tables' => 'Örökölt táblák', // by Claude Opus 5
+	'Inherited from' => 'Örökölve innen', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indexek',
@@ -362,6 +383,38 @@ return [
 	'no' => 'nem', // by Claude Fable 5
 
 	// Settings
+	'Settings' => 'Beállítások', // by Claude Opus 5
+	'Default' => 'Alapértelmezett', // by Claude Opus 5
+	'Color scheme' => 'Színséma', // by Claude Opus 5
+	'By system' => 'Rendszer szerint', // by Claude Opus 5
+	'Light' => 'Világos', // by Claude Opus 5
+	'Dark' => 'Sötét', // by Claude Opus 5
+	'Navigation mode' => 'Navigációs mód', // by Claude Opus 5
+	'Simple' => 'Egyszerű', // by Claude Opus 5
+	'Dual' => 'Kettős', // by Claude Opus 5
+	'Reversed' => 'Fordított', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'A fő navigáció elrendezése a tábla hivatkozásokkal.', // by Claude Opus 5
+	'Table links' => 'Tábla hivatkozások', // by Claude Opus 5
+	'Primary action for all table links.' => 'Az elsődleges művelet minden tábla hivatkozáshoz.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Hivatkozások az aktuális sorra hivatkozó táblákra.', // by Claude Opus 5
+	'Display' => 'Mutat', // by Claude Opus 5
+	'Hide' => 'Elrejt', // by Claude Opus 5
+	'Records per page' => 'Rekord oldalanként', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Az adattáblában megjelenített rekordok alapértelmezett száma.', // by Claude Opus 5
+	'Enum as select' => 'Enum legördülő listaként', // by Claude Opus 5
+	'Never' => 'Soha', // by Claude Opus 5
+	'Always' => 'Mindig', // by Claude Opus 5
+	'More values than %d' => 'Több mint %d érték', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Küszöbérték a legördülő lista megjelenítéséhez az enum mezőknél.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Egyszer használatos jelszó', // by Claude Opus 5
+	'Enter OTP code.' => 'Add meg az OTP kódot.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Érvénytelen OTP kód.', // by Claude Opus 5
+	'Access denied.' => 'Hozzáférés megtagadva.', // by Claude Opus 5
+	'JSON previews' => 'JSON előnézet', // by Claude Opus 5
+	'Data table' => 'Adattábla', // by Claude Opus 5
+	'Edit form' => 'Szerkesztő űrlap', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Egy pillanat...', // by Claude Opus 5
 ];

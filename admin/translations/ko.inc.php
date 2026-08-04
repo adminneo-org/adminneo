@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => '시:분:초', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s은(는) 배열을 반환해야 합니다.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s과(와) %s은(는) %s 메서드로 만든 객체를 반환해야 합니다.', // by Claude Opus 5
 
 	// Login
 	'System' => '데이터베이스 형식',
@@ -25,15 +27,19 @@ return [
 	'Logged as: %s' => '다음으로 로그인했습니다: %s',
 	'Logout successful.' => '로그아웃을 성공했습니다.',
 	'hostname[:port] or :socket' => 'hostname[:port] 또는 :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => '잘못된 서버 또는 인증 정보입니다.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => '입력한 비밀번호에 공백이 있는데, 이것이 원인일 수 있습니다.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo는 비밀번호 없이 데이터베이스에 접근하는 것을 지원하지 않습니다(<a href="https://www.adminneo.org/password"%s>자세한 정보</a>).', // by Claude Fable 5
 	'Database does not support password.' => '데이터베이스가 비밀번호를 지원하지 않습니다.', // by Claude Fable 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => '로그인 실패가 너무 많습니다. %d분 후에 다시 시도하세요.', // by Claude Fable 5
+	'Invalid permanent login, please login again.' => '영구 로그인이 잘못되었습니다. 다시 로그인하십시오.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => '잘못된 CSRF 토큰입니다. 다시 보내주십시오.',
 	'If you did not send this request from AdminNeo then close this page.' => '이 요청을 AdminNeo에서 보낸 것이 아니라면 이 페이지를 닫으세요.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => '같은 자격 증명으로 로그인에 성공하면 작업이 수행됩니다.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => '드라이버가 없습니다', // by Claude Opus 5
+	'Database driver not found.' => '데이터베이스 드라이버를 찾을 수 없습니다.', // by Claude Opus 5
 	'No extension' => '확장이 없습니다',
 	'None of the supported PHP extensions (%s) are available.' => 'PHP 확장(%s)이 설치되어 있지 않습니다.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '권한이 필요한 포트로의 연결은 허용되지 않습니다.', // by Claude Fable 5
@@ -44,7 +50,10 @@ return [
 	// Settings
 	'Language' => '언어',
 
+	'Home' => '홈', // by Claude Opus 5
 	'Refresh' => '새로 고침',
+	'Info' => '정보', // by Claude Opus 5
+	'More information.' => '자세한 정보.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => '권한',
@@ -70,6 +79,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL 명령',
+	'HTTP request' => 'HTTP 요청', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d개 쿼리를 잘 실행했습니다.',
 	'Query executed OK, %d row(s) affected.' => '쿼리를 잘 실행했습니다. %d행을 변경했습니다.',
 	'No commands to execute.' => '실행할 수 있는 명령이 없습니다.',
@@ -96,6 +106,8 @@ return [
 	'File uploads are disabled.' => '파일 업로드가 잘못되었습니다.',
 	'Unable to upload a file.' => '파일을 업로드 할 수 없습니다.',
 	'Maximum allowed file size is %sB.' => '파일의 최대 크기 %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => '파일의 최대 개수는 %d입니다. 파일을 더 적게 선택하거나 %s 설정을 늘리십시오.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => '파일의 최대 전체 크기는 %s입니다. 더 작은 파일을 선택하거나 %s 설정을 늘리십시오.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST 데이터가 너무 큽니다. 데이터 크기를 줄이거나 %s 설정을 늘리십시오.',
 	'You can upload a big SQL file via FTP and import it from server.' => '큰 SQL 파일은 FTP를 통하여 업로드하여 서버에서 가져올 수 있습니다.',
 	'File must be in UTF-8 encoding.' => '파일은 UTF-8 인코딩이어야 합니다.', // by Claude Fable 5
@@ -112,6 +124,7 @@ return [
 
 	// Databases
 	'Database' => '데이터베이스',
+	'database' => '데이터베이스', // by Claude Opus 5
 	'DB' => 'DB', // by Claude Fable 5
 	'Use' => '사용',
 	'Invalid database.' => '잘못된 데이터베이스입니다.',
@@ -131,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => '스키마',
+	'schema' => '스키마', // by Claude Opus 5
+	'Schemas' => '스키마', // by Claude Opus 5
+	'No schemas.' => '스키마가 없습니다.', // by Claude Opus 5
+	'Show schema' => '스키마 표시', // by Claude Opus 5
 	'Alter schema' => '스키마 변경',
 	'Create schema' => '스키마 추가',
 	'Schema has been dropped.' => '스키마를 삭제했습니다.',
@@ -205,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => '파티션',
+	'Partition' => '파티션', // by Claude Opus 5
 	'Partitions' => '파티션',
 	'Partition name' => '파티션 이름',
 	'Values' => '값',
+	'Inherited tables' => '상속된 테이블', // by Claude Opus 5
+	'Inherited from' => '상속 원본', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => '색인',
@@ -363,6 +383,38 @@ return [
 	'no' => '아니요', // by Claude Fable 5
 
 	// Settings
+	'Settings' => '설정', // by Claude Opus 5
+	'Default' => '기본값', // by Claude Opus 5
+	'Color scheme' => '색상 테마', // by Claude Opus 5
+	'By system' => '시스템 설정에 따름', // by Claude Opus 5
+	'Light' => '밝게', // by Claude Opus 5
+	'Dark' => '어둡게', // by Claude Opus 5
+	'Navigation mode' => '탐색 방식', // by Claude Opus 5
+	'Simple' => '단순', // by Claude Opus 5
+	'Dual' => '이중', // by Claude Opus 5
+	'Reversed' => '역방향', // by Claude Opus 5
+	'Layout of main navigation with table links.' => '테이블 링크가 있는 기본 탐색 영역의 배치입니다.', // by Claude Opus 5
+	'Table links' => '테이블 링크', // by Claude Opus 5
+	'Primary action for all table links.' => '모든 테이블 링크의 기본 동작입니다.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => '현재 행을 참조하는 테이블로의 링크입니다.', // by Claude Opus 5
+	'Display' => '표시', // by Claude Opus 5
+	'Hide' => '숨김', // by Claude Opus 5
+	'Records per page' => '페이지당 레코드 수', // by Claude Opus 5
+	'Default number of records displayed in data table.' => '데이터 테이블에 표시되는 기본 레코드 수입니다.', // by Claude Opus 5
+	'Enum as select' => 'Enum을 선택 목록으로', // by Claude Opus 5
+	'Never' => '안 함', // by Claude Opus 5
+	'Always' => '항상', // by Claude Opus 5
+	'More values than %d' => '값이 %d개보다 많을 때', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'enum 열에 선택 목록을 표시하는 기준값입니다.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => '일회용 비밀번호', // by Claude Opus 5
+	'Enter OTP code.' => 'OTP 코드를 입력하십시오.', // by Claude Opus 5
+	'Invalid OTP code.' => '잘못된 OTP 코드입니다.', // by Claude Opus 5
+	'Access denied.' => '접근이 거부되었습니다.', // by Claude Opus 5
+	'JSON previews' => 'JSON 미리 보기', // by Claude Opus 5
+	'Data table' => '데이터 테이블', // by Claude Opus 5
+	'Edit form' => '편집 양식', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => '잠시만 기다려 주십시오...', // by Claude Opus 5
 ];

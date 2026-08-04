@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'ЧЧ:ММ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s должен возвращать массив.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s и %s должны возвращать объект, созданный методом %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Движок',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Вы вошли как: %s',
 	'Logout successful.' => 'Вы успешно покинули систему.',
 	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Неверный сервер или учётные данные.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Во введённом пароле есть пробел, это может быть причиной.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддерживает доступ к базе данных без пароля, <a href="https://www.adminneo.org/password"%s>больше информации</a>.',
 	'Database does not support password.' => 'База данных не поддерживает пароль.',
@@ -33,11 +36,14 @@ return [
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минуты.',
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минут.',
 	],
+	'Invalid permanent login, please login again.' => 'Недействительный постоянный вход, нужно снова войти в систему.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Недействительный CSRF-токен. Отправьте форму ещё раз.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Если вы не посылали этот запрос из AdminNeo, закройте эту страницу.',
 	'The action will be performed after successful login with the same credentials.' => 'Действие будет выполнено после успешного входа в систему с теми же учетными данными.',
 
 	// Connection
+	'No driver' => 'Нет драйвера', // by Claude Opus 5
+	'Database driver not found.' => 'Драйвер базы данных не найден.', // by Claude Opus 5
 	'No extension' => 'Нет расширений',
 	'None of the supported PHP extensions (%s) are available.' => 'Недоступно ни одного расширения из поддерживаемых (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Подключение к привилегированным портам не допускается.',
@@ -48,7 +54,10 @@ return [
 	// Settings
 	'Language' => 'Язык',
 
+	'Home' => 'Главная', // by Claude Opus 5
 	'Refresh' => 'Обновить',
+	'Info' => 'Сведения', // by Claude Opus 5
+	'More information.' => 'Подробнее.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Полномочия',
@@ -78,6 +87,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL-запрос',
+	'HTTP request' => 'HTTP-запрос', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d запрос выполнен успешно.',
 		'%d запроса выполнено успешно.',
@@ -112,6 +122,8 @@ return [
 	'File uploads are disabled.' => 'Загрузка файлов на сервер запрещена.',
 	'Unable to upload a file.' => 'Не удалось загрузить файл на сервер.',
 	'Maximum allowed file size is %sB.' => 'Максимальный разрешённый размер файла — %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальное количество файлов — %d. Выберите меньше файлов или увеличьте параметр конфигурационной директивы %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальный суммарный размер файлов — %s. Выберите файлы поменьше или увеличьте параметр конфигурационной директивы %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Слишком большой объем POST-данных. Пошлите меньший объём данных или увеличьте параметр конфигурационной директивы %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Вы можете закачать большой SQL-файл по FTP и затем импортировать его с сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл должен быть в кодировке UTF-8.',
@@ -132,6 +144,7 @@ return [
 
 	// Databases
 	'Database' => 'База данных',
+	'database' => 'база данных', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Выбрать',
 	'Invalid database.' => 'Неверная база данных.',
@@ -151,6 +164,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
+	'schema' => 'схема', // by Claude Opus 5
+	'Schemas' => 'Схемы', // by Claude Opus 5
+	'No schemas.' => 'Нет схем.', // by Claude Opus 5
+	'Show schema' => 'Показать схему', // by Claude Opus 5
 	'Alter schema' => 'Изменить схему',
 	'Create schema' => 'Новая схема',
 	'Schema has been dropped.' => 'Схема удалена.',
@@ -225,9 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Разделить по',
+	'Partition' => 'Раздел', // by Claude Opus 5
 	'Partitions' => 'Разделы',
 	'Partition name' => 'Название раздела',
 	'Values' => 'Параметры',
+	'Inherited tables' => 'Унаследованные таблицы', // by Claude Opus 5
+	'Inherited from' => 'Унаследована от', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Индексы',
@@ -399,6 +419,38 @@ return [
 	'no' => 'нет',
 
 	// Settings
+	'Settings' => 'Настройки', // by Claude Opus 5
+	'Default' => 'По умолчанию', // by Claude Opus 5
+	'Color scheme' => 'Цветовая схема', // by Claude Opus 5
+	'By system' => 'Как в системе', // by Claude Opus 5
+	'Light' => 'Светлая', // by Claude Opus 5
+	'Dark' => 'Тёмная', // by Claude Opus 5
+	'Navigation mode' => 'Режим навигации', // by Claude Opus 5
+	'Simple' => 'Простой', // by Claude Opus 5
+	'Dual' => 'Двойной', // by Claude Opus 5
+	'Reversed' => 'Обратный', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Расположение главной навигации со ссылками таблиц.', // by Claude Opus 5
+	'Table links' => 'Ссылки таблиц', // by Claude Opus 5
+	'Primary action for all table links.' => 'Основное действие для всех ссылок таблиц.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Ссылки на таблицы, ссылающиеся на текущую запись.', // by Claude Opus 5
+	'Display' => 'Показывать', // by Claude Opus 5
+	'Hide' => 'Скрыть', // by Claude Opus 5
+	'Records per page' => 'Записей на странице', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Количество записей, отображаемых в таблице данных по умолчанию.', // by Claude Opus 5
+	'Enum as select' => 'Enum как список', // by Claude Opus 5
+	'Never' => 'Никогда', // by Claude Opus 5
+	'Always' => 'Всегда', // by Claude Opus 5
+	'More values than %d' => 'Больше %d значений', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Порог отображения списка выбора для полей типа enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Одноразовый пароль', // by Claude Opus 5
+	'Enter OTP code.' => 'Введите код OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Неверный код OTP.', // by Claude Opus 5
+	'Access denied.' => 'Доступ запрещён.', // by Claude Opus 5
+	'JSON previews' => 'Предпросмотр JSON', // by Claude Opus 5
+	'Data table' => 'Таблица данных', // by Claude Opus 5
+	'Edit form' => 'Форма редактирования', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Секундочку...', // by Claude Opus 5
 ];

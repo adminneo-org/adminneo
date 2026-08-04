@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'ΩΩ:ΛΛ:ΔΔ', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => 'Η %s πρέπει να επιστρέφει πίνακα.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => 'Οι %s και %s πρέπει να επιστρέφουν αντικείμενο που δημιουργήθηκε από τη μέθοδο %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Σύστημα',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Συνδεθήκατε ως %s',
 	'Logout successful.' => 'Αποσυνδεθήκατε με επιτυχία.',
 	'hostname[:port] or :socket' => 'hostname[:port] ή :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Λανθασμένος διακομιστής ή στοιχεία σύνδεσης.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Υπάρχει ένα κενό στον κωδικό που εισαγάγατε, το οποίο μπορεί να είναι η αιτία.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Το AdminNeo δεν υποστηρίζει πρόσβαση σε βάση δεδομένων χωρίς κωδικό, <a href="https://www.adminneo.org/password"%s>περισσότερες πληροφορίες</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Η βάση δεδομένων δεν υποστηρίζει κωδικό.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %d λεπτό.',
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %d λεπτά.',
 	],
+	'Invalid permanent login, please login again.' => 'Άκυρη μόνιμη σύνδεση, παρακαλώ συνδεθείτε ξανά.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Άκυρο κουπόνι CSRF. Στείλτε τη φόρμα ξανά.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Αν δε στείλατε αυτό το αίτημα από το AdminNeo, τότε κλείστε αυτή τη σελίδα.',
 	'The action will be performed after successful login with the same credentials.' => 'Η ενέργεια θα εκτελεστεί μετά από επιτυχή σύνδεση με τα ίδια διαπιστευτήρια.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Κανένας οδηγός', // by Claude Opus 5
+	'Database driver not found.' => 'Δεν βρέθηκε ο οδηγός της Β.Δ.', // by Claude Opus 5
 	'No extension' => 'Καμία Επέκταση',
 	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Η σύνδεση σε προνομιούχες θύρες δεν επιτρέπεται.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Γλώσσα',
 
+	'Home' => 'Αρχική', // by Claude Opus 5
 	'Refresh' => 'Ανανέωση',
+	'Info' => 'Πληροφορίες', // by Claude Opus 5
+	'More information.' => 'Περισσότερες πληροφορίες.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Δικαιώματα',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'Εντολή SQL',
+	'HTTP request' => 'Αίτημα HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'Το ερώτημα %d εκτελέστηκε ΟΚ.',
 		'Τα ερώτηματα %d εκτελέστηκαν ΟΚ.',
@@ -108,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Έχει απενεργοποιηθεί η μεταφόρτωση αρχείων.',
 	'Unable to upload a file.' => 'Αδυναμία μεταφόρτωσης αρχείου.',
 	'Maximum allowed file size is %sB.' => 'Το μέγιστο επιτρεπόμενο μέγεθος αρχείου είναι %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Ο μέγιστος αριθμός αρχείων είναι %d. Επιλέξτε λιγότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Το μέγιστο συνολικό μέγεθος των αρχείων είναι %s. Επιλέξτε μικρότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Πολλά δεδομένα POST. Μείωστε τα περιεχόμενα ή αυξήστε την σχετική ρύθμιση %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Μπορείτε να μεταφορτώσετε ένα μεγάλο αρχείο SQL μέσω FTP και να το εισάγετε από το διακομιστή.',
 	'File must be in UTF-8 encoding.' => 'Το αρχείο πρέπει να έχει κωδικοποίηση UTF-8.',
@@ -127,6 +139,7 @@ return [
 
 	// Databases
 	'Database' => 'Β. Δεδομένων',
+	'database' => 'β. δεδομένων', // by Claude Opus 5
 	'DB' => 'ΒΔ', // by Claude Fable 5
 	'Use' => 'χρήση',
 	'Invalid database.' => 'Λανθασμένη Β.Δ.',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Σχήμα',
+	'schema' => 'σχήμα', // by Claude Opus 5
+	'Schemas' => 'Σχήματα', // by Claude Opus 5
+	'No schemas.' => 'Χωρίς σχήματα.', // by Claude Opus 5
+	'Show schema' => 'Προβολή σχήματος', // by Claude Opus 5
 	'Alter schema' => 'Τροποποίηση σχήματος',
 	'Create schema' => 'Δημιουργία σχήματος',
 	'Schema has been dropped.' => 'Το σχήμα διαγράφηκε.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Τμηματοποίηση ανά',
+	'Partition' => 'Τμήμα', // by Claude Opus 5
 	'Partitions' => 'Τμήματα',
 	'Partition name' => 'Όνομα Τμήματος',
 	'Values' => 'Τιμές',
+	'Inherited tables' => 'Κληρονομημένοι πίνακες', // by Claude Opus 5
+	'Inherited from' => 'Κληρονομήθηκε από', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Δείκτες',
@@ -390,6 +410,38 @@ return [
 	'no' => 'όχι',
 
 	// Settings
+	'Settings' => 'Ρυθμίσεις', // by Claude Opus 5
+	'Default' => 'Προεπιλογή', // by Claude Opus 5
+	'Color scheme' => 'Συνδυασμός χρωμάτων', // by Claude Opus 5
+	'By system' => 'Κατά το σύστημα', // by Claude Opus 5
+	'Light' => 'Φωτεινό', // by Claude Opus 5
+	'Dark' => 'Σκοτεινό', // by Claude Opus 5
+	'Navigation mode' => 'Λειτουργία πλοήγησης', // by Claude Opus 5
+	'Simple' => 'Απλή', // by Claude Opus 5
+	'Dual' => 'Διπλή', // by Claude Opus 5
+	'Reversed' => 'Αντίστροφη', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Διάταξη της κύριας πλοήγησης με τους συνδέσμους των πινάκων.', // by Claude Opus 5
+	'Table links' => 'Σύνδεσμοι πινάκων', // by Claude Opus 5
+	'Primary action for all table links.' => 'Κύρια ενέργεια για όλους τους συνδέσμους των πινάκων.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Σύνδεσμοι προς τους πίνακες που αναφέρονται στην τρέχουσα σειρά.', // by Claude Opus 5
+	'Display' => 'Εμφάνιση', // by Claude Opus 5
+	'Hide' => 'Απόκρυψη', // by Claude Opus 5
+	'Records per page' => 'Εγγραφές ανά σελίδα', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Προεπιλεγμένος αριθμός εγγραφών που εμφανίζονται στον πίνακα δεδομένων.', // by Claude Opus 5
+	'Enum as select' => 'Enum ως λίστα επιλογής', // by Claude Opus 5
+	'Never' => 'Ποτέ', // by Claude Opus 5
+	'Always' => 'Πάντα', // by Claude Opus 5
+	'More values than %d' => 'Περισσότερες από %d τιμές', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Όριο για την εμφάνιση λίστας επιλογής στα πεδία enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Κωδικός μιας χρήσης', // by Claude Opus 5
+	'Enter OTP code.' => 'Εισάγετε τον κωδικό OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Άκυρος κωδικός OTP.', // by Claude Opus 5
+	'Access denied.' => 'Άρνηση πρόσβασης.', // by Claude Opus 5
+	'JSON previews' => 'Προεπισκοπήσεις JSON', // by Claude Opus 5
+	'Data table' => 'Πίνακας δεδομένων', // by Claude Opus 5
+	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Μισό λεπτό...', // by Claude Opus 5
 ];

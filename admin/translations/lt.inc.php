@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s turi grąžinti masyvą.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s ir %s turi grąžinti objektą, sukurtą metodu %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistema',
@@ -24,11 +26,27 @@ return [
 	'Logout' => 'Atsijungti',
 	'Logged as: %s' => 'Prisijungęs kaip: %s',
 	'Logout successful.' => 'Jūs atsijungėte nuo sistemos.',
+	'hostname[:port] or :socket' => 'serverio vardas[:prievadas] arba :lizdas', // by Claude Opus 5
+	'Invalid server or credentials.' => 'Neteisingas serveris arba prisijungimo duomenys.', // by Claude Opus 5
+	'There is a space in the input password which might be the cause.' => 'Įvestame slaptažodyje yra tarpas, tai gali būti priežastis.', // by Claude Opus 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nepalaiko prisijungimo prie duomenų bazės be slaptažodžio, <a href="https://www.adminneo.org/password"%s>daugiau informacijos</a>.', // by Claude Opus 5
+	'Database does not support password.' => 'Duomenų bazė nepalaiko slaptažodžio.', // by Claude Opus 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => [
+		'Per daug nesėkmingų prisijungimų, bandykite dar kartą po %d minutės.',
+		'Per daug nesėkmingų prisijungimų, bandykite dar kartą po %d minučių.',
+		'Per daug nesėkmingų prisijungimų, bandykite dar kartą po %d minučių.',
+	], // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Neteisingas pastovus prisijungimas. Prisijunkite iš naujo.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Neteisingas CSRF tokenas. Bandykite siųsti formos duomenis dar kartą.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Jei šios užklausos nesiuntėte iš AdminNeo, uždarykite šį puslapį.', // by Claude Opus 5
+	'The action will be performed after successful login with the same credentials.' => 'Veiksmas bus atliktas sėkmingai prisijungus su tais pačiais duomenimis.', // by Claude Opus 5
 
 	// Connection
-	'No extension' => 'Nėra plėtiio',
+	'No driver' => 'Nėra tvarkyklės', // by Claude Opus 5
+	'Database driver not found.' => 'Duomenų bazės tvarkyklė nerasta.', // by Claude Opus 5
+	'No extension' => 'Nėra plėtinio', // by Claude Opus 5
 	'None of the supported PHP extensions (%s) are available.' => 'Nėra nei vieno iš palaikomų PHP plėtinių (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'Jungtis prie privilegijuotų prievadų neleidžiama.', // by Claude Opus 5
 	'Session support must be enabled.' => 'Sesijų palaikymas turi būti įjungtas.',
 	'Session expired, please login again.' => 'Sesijos galiojimas baigėsi. Prisijunkite iš naujo.',
 	'%s version: %s through PHP extension %s' => '%s versija: %s per PHP plėtinį %s',
@@ -36,7 +54,10 @@ return [
 	// Settings
 	'Language' => 'Kalba',
 
+	'Home' => 'Pradžia', // by Claude Opus 5
 	'Refresh' => 'Atnaujinti',
+	'Info' => 'Informacija', // by Claude Opus 5
+	'More information.' => 'Daugiau informacijos.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilegijos',
@@ -59,12 +80,14 @@ return [
 
 	// Structure
 	'Column' => 'Stulpelis',
+	'Columns' => 'Stulpeliai', // by Claude Opus 5
 	'Routine' => 'Procedūra',
 	'Grant' => 'Suteikti',
 	'Revoke' => 'Atšaukti',
 
 	// Queries
 	'SQL command' => 'SQL užklausa',
+	'HTTP request' => 'HTTP užklausa', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d užklausa įvykdyta.',
 		'%d užklausos įvykdytos.',
@@ -77,6 +100,9 @@ return [
 	],
 	'No commands to execute.' => 'Nėra vykdomų užklausų.',
 	'Error in query' => 'Klaida užklausoje',
+	'Unknown error.' => 'Nežinoma klaida.', // by Claude Opus 5
+	'Warnings' => 'Įspėjimai', // by Claude Opus 5
+	'%s queries are not supported.' => '%s užklausos nepalaikomos.', // by Claude Opus 5
 	'Execute' => 'Vykdyti',
 	'Stop on error' => 'Sustabdyti esant klaidai',
 	'Show only errors' => 'Rodyti tik klaidas',
@@ -96,7 +122,12 @@ return [
 	'File uploads are disabled.' => 'Failų įkėlimas išjungtas.',
 	'Unable to upload a file.' => 'Nepavyko įkelti failo.',
 	'Maximum allowed file size is %sB.' => 'Maksimalus failo dydis - %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimalus failų skaičius - %d. Pasirinkite mažiau failų arba padidinkite konfigūracijos nustatymą %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimalus bendras failų dydis - %s. Pasirinkite mažesnius failus arba padidinkite konfigūracijos nustatymą %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Per daug POST duomenų. Sumažinkite duomenų kiekį arba padidinkite konfigūracijos nustatymą %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Didelį SQL failą galite įkelti per FTP ir importuoti jį iš serverio.', // by Claude Opus 5
+	'File must be in UTF-8 encoding.' => 'Failas turi būti UTF-8 koduotės.', // by Claude Opus 5
+	'You are offline.' => 'Jūs esate atsijungę nuo tinklo.', // by Claude Opus 5
 	'%d row(s) have been imported.' => [
 		'%d įrašas įkelta.',
 		'%d įrašai įkelti.',
@@ -113,6 +144,8 @@ return [
 
 	// Databases
 	'Database' => 'Duomenų bazė',
+	'database' => 'duomenų bazė', // by Claude Opus 5
+	'DB' => 'DB', // by Claude Opus 5
 	'Use' => 'Naudoti',
 	'Invalid database.' => 'Neteisinga duomenų bazė.',
 	'Alter database' => 'Redaguoti duomenų bazę',
@@ -131,6 +164,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
+	'schema' => 'schema', // by Claude Opus 5
+	'Schemas' => 'Schemos', // by Claude Opus 5
+	'No schemas.' => 'Nėra schemų.', // by Claude Opus 5
+	'Show schema' => 'Rodyti schemą', // by Claude Opus 5
 	'Alter schema' => 'Keisti schemą',
 	'Create schema' => 'Sukurti schemą',
 	'Schema has been dropped.' => 'Schema pašalinta.',
@@ -150,6 +187,7 @@ return [
 	'%d in total' => '%d iš viso',
 	'Analyze' => 'Analizuoti',
 	'Optimize' => 'Optimizuoti',
+	'Vacuum' => 'Valyti (Vacuum)', // by Claude Opus 5
 	'Check' => 'Patikrinti',
 	'Repair' => 'Pataisyti',
 	'Truncate' => 'Tuštinti',
@@ -159,6 +197,7 @@ return [
 	'Tables have been moved.' => 'Lentelės perkeltos.',
 	'Copy' => 'Kopijuoti',
 	'Tables have been copied.' => 'Lentelės nukopijuotos.',
+	'overwrite' => 'perrašyti', // by Claude Opus 5
 
 	// Tables
 	'Tables' => 'Lentelės',
@@ -169,6 +208,7 @@ return [
 	'Create table' => 'Sukurti lentelę',
 	'Table has been dropped.' => 'Lentelė pašalinta.',
 	'Tables have been dropped.' => 'Lentelės pašalintos.',
+	'Tables have been optimized.' => 'Lentelės buvo optimizuotos.', // by Claude Opus 5
 	'Table has been altered.' => 'Lentelė pakeista.',
 	'Table has been created.' => 'Lentelė sukurta.',
 	'Table name' => 'Lentelės pavadinimas',
@@ -180,8 +220,12 @@ return [
 	'Auto Increment' => 'Auto Increment',
 	'Options' => 'Nustatymai',
 	'Comment' => 'Komentaras',
+	'Default value' => 'Numatytoji reikšmė', // by Claude Opus 5
 	'Drop' => 'Pašalinti',
+	'Drop %s?' => 'Pašalinti %s?', // by Claude Opus 5
 	'Are you sure?' => 'Tikrai?',
+	'Size' => 'Dydis', // by Claude Opus 5
+	'Compute' => 'Apskaičiuoti', // by Claude Opus 5
 	'Move up' => 'Perkelti į viršų',
 	'Move down' => 'Perkelti žemyn',
 	'Remove' => 'Pašalinti',
@@ -189,6 +233,7 @@ return [
 
 	// Views
 	'View' => 'Vaizdas',
+	'Materialized view' => 'Materializuotas vaizdas', // by Claude Opus 5
 	'View has been dropped.' => 'Vaizdas pašalintas.',
 	'View has been altered.' => 'Vaizdas pakeistas.',
 	'View has been created.' => 'Vaizdas sukurtas.',
@@ -197,9 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Skirstyti pagal',
+	'Partition' => 'Skirsnis', // by Claude Opus 5
 	'Partitions' => 'Skirsniai',
 	'Partition name' => 'Skirsnio pavadinimas',
 	'Values' => 'Reikšmės',
+	'Inherited tables' => 'Paveldėtos lentelės', // by Claude Opus 5
+	'Inherited from' => 'Paveldėta iš', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indeksai',
@@ -208,6 +256,8 @@ return [
 	'Add next' => 'Pridėti kitą',
 	'Index Type' => 'Indekso tipas',
 	'length' => 'ilgis',
+	'Algorithm' => 'Algoritmas', // by Claude Opus 5
+	'Condition' => 'Sąlyga', // by Claude Opus 5
 
 	// Foreign keys
 	'Foreign keys' => 'Išoriniai raktai',
@@ -284,6 +334,12 @@ return [
 	'Create trigger' => 'Sukurti trigerį',
 
 	// Table check constraints
+	'Checks' => 'Patikros', // by Claude Opus 5
+	'Create check' => 'Sukurti patikrą', // by Claude Opus 5
+	'Alter check' => 'Keisti patikrą', // by Claude Opus 5
+	'Check has been created.' => 'Patikra sukurta.', // by Claude Opus 5
+	'Check has been altered.' => 'Patikra pakeista.', // by Claude Opus 5
+	'Check has been dropped.' => 'Patikra pašalinta.', // by Claude Opus 5
 
 	// Selection
 	'Select data' => 'Atrinkti duomenis',
@@ -295,11 +351,14 @@ return [
 	'Sort' => 'Rikiuoti',
 	'descending' => 'mažėjimo tvarka',
 	'Limit' => 'Limitas',
+	'Limit rows' => 'Riboti įrašus', // by Claude Opus 5
 	'Text length' => 'Teksto ilgis',
 	'Action' => 'Veiksmas',
+	'Full table scan' => 'Pilnas lentelės peržiūrėjimas', // by Claude Opus 5
 	'Unable to select the table' => 'Neįmanoma atrinkti lentelės',
 	'Search data in tables' => 'Ieškoti duomenų lentelėse',
 	'No rows.' => 'Nėra įrašų.',
+	'%d / ' => '%d / ', // by Claude Opus 5
 	'%d row(s)' => [
 		'%d įrašas',
 		'%d įrašai',
@@ -307,6 +366,8 @@ return [
 	],
 	'Page' => 'Puslapis',
 	'last' => 'paskutinis',
+	'Load more data' => 'Įkelti daugiau duomenų', // by Claude Opus 5
+	'Loading' => 'Kraunama', // by Claude Opus 5
 	'Whole result' => 'Visas rezultatas',
 	'%d byte(s)' => [
 		'%d baitas',
@@ -315,6 +376,8 @@ return [
 	],
 
 	// In-place editing in selection
+	'Modify' => 'Keisti', // by Claude Opus 5
+	'Ctrl+click on a value to modify it.' => 'Norėdami pakeisti reikšmę, spustelėkite ją laikydami Ctrl.', // by Claude Opus 5
 	'Use edit link to modify this value.' => 'Norėdami redaguoti reikšmę naudokite redagavimo nuorodą.',
 
 	// Editing
@@ -326,6 +389,8 @@ return [
 	'Save' => 'Išsaugoti',
 	'Save and continue edit' => 'Išsaugoti ir tęsti redagavimą',
 	'Save and insert next' => 'Išsaugoti ir įrašyti kitą',
+	'Saving' => 'Išsaugoma', // by Claude Opus 5
+	'Selected' => 'Pasirinkti', // by Claude Opus 5
 	'Clone' => 'Klonuoti',
 	'Delete' => 'Trinti',
 	'Item%s has been inserted.' => 'Įrašas%s sukurtas.', // %s can contain auto-increment value, e.g. ' 123'
@@ -336,6 +401,7 @@ return [
 		'Pakeisti %d įrašai.',
 		'Pakeistas %d įrašų.',
 	],
+	'You have no privileges to update this table.' => 'Neturite teisių keisti šios lentelės.', // by Claude Opus 5
 
 	// Data type descriptions
 	'Numbers' => 'Skaičiai',
@@ -349,8 +415,42 @@ return [
 
 	// Editor - data values
 	'now' => 'dabar',
+	'yes' => 'taip', // by Claude Opus 5
+	'no' => 'ne', // by Claude Opus 5
 
 	// Settings
+	'Settings' => 'Nustatymai', // by Claude Opus 5
+	'Default' => 'Numatytasis', // by Claude Opus 5
+	'Color scheme' => 'Spalvų schema', // by Claude Opus 5
+	'By system' => 'Pagal sistemą', // by Claude Opus 5
+	'Light' => 'Šviesi', // by Claude Opus 5
+	'Dark' => 'Tamsi', // by Claude Opus 5
+	'Navigation mode' => 'Navigacijos režimas', // by Claude Opus 5
+	'Simple' => 'Paprasta', // by Claude Opus 5
+	'Dual' => 'Dviguba', // by Claude Opus 5
+	'Reversed' => 'Atvirkštinė', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Pagrindinės navigacijos su lentelių nuorodomis išdėstymas.', // by Claude Opus 5
+	'Table links' => 'Lentelių nuorodos', // by Claude Opus 5
+	'Primary action for all table links.' => 'Pagrindinis veiksmas visoms lentelių nuorodoms.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Nuorodos į lenteles, susietas su dabartiniu įrašu.', // by Claude Opus 5
+	'Display' => 'Rodyti', // by Claude Opus 5
+	'Hide' => 'Slėpti', // by Claude Opus 5
+	'Records per page' => 'Įrašų puslapyje', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Numatytasis duomenų lentelėje rodomų įrašų skaičius.', // by Claude Opus 5
+	'Enum as select' => 'Enum kaip pasirinkimo sąrašas', // by Claude Opus 5
+	'Never' => 'Niekada', // by Claude Opus 5
+	'Always' => 'Visada', // by Claude Opus 5
+	'More values than %d' => 'Daugiau nei %d reikšmių', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Riba, nuo kurios enum stulpeliams rodomas pasirinkimo sąrašas.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Vienkartinis slaptažodis', // by Claude Opus 5
+	'Enter OTP code.' => 'Įveskite OTP kodą.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Neteisingas OTP kodas.', // by Claude Opus 5
+	'Access denied.' => 'Prieiga uždrausta.', // by Claude Opus 5
+	'JSON previews' => 'JSON peržiūros', // by Claude Opus 5
+	'Data table' => 'Duomenų lentelė', // by Claude Opus 5
+	'Edit form' => 'Redagavimo forma', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Akimirką...', // by Claude Opus 5
 ];

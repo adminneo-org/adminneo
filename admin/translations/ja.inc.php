@@ -106,6 +106,8 @@ return [
 	'File uploads are disabled.' => 'ファイルのアップロードが無効です。',
 	'Unable to upload a file.' => 'ファイルをアップロードできません。',
 	'Maximum allowed file size is %sB.' => '最大ファイルサイズは %sB です。',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ファイル数の上限は %d です。ファイル数を減らすか %s 設定を大きくしてください。', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ファイルの合計サイズの上限は %s です。より小さいファイルを選択するか %s 設定を大きくしてください。', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POSTデータが大きすぎます。データサイズを小さくするか %s 設定を大きくしてください。',
 	'You can upload a big SQL file via FTP and import it from server.' => '大きなSQLファイルは、FTP経由でアップロードしてサーバからインポートしてください。',
 	'File must be in UTF-8 encoding.' => 'ファイルをUTF-8で保存してください。',
@@ -224,6 +226,8 @@ return [
 	'Partitions' => 'パーティション',
 	'Partition name' => 'パーティション名',
 	'Values' => '値',
+	'Inherited tables' => '継承テーブル', // by Claude Opus 5
+	'Inherited from' => '継承元', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'インデックス',
@@ -379,12 +383,38 @@ return [
 	'no' => 'いいえ',
 
 	// Settings
+	'Settings' => '設定', // by Claude Opus 5
+	'Default' => '既定', // by Claude Opus 5
+	'Color scheme' => '配色', // by Claude Opus 5
+	'By system' => 'システムに従う', // by Claude Opus 5
+	'Light' => 'ライト', // by Claude Opus 5
+	'Dark' => 'ダーク', // by Claude Opus 5
+	'Navigation mode' => 'ナビゲーションモード', // by Claude Opus 5
+	'Simple' => 'シンプル', // by Claude Opus 5
+	'Dual' => 'デュアル', // by Claude Opus 5
+	'Reversed' => '反転', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Opus 5
+	'Table links' => 'テーブルリンク', // by Claude Opus 5
+	'Primary action for all table links.' => 'すべてのテーブルリンクの主要な動作です。', // by Claude Opus 5
+	'Links to tables referencing the current row.' => '現在の行を参照しているテーブルへのリンクです。', // by Claude Opus 5
+	'Display' => '表示', // by Claude Opus 5
+	'Hide' => '非表示', // by Claude Opus 5
+	'Records per page' => '1ページあたりのレコード数', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'データテーブルに表示されるレコードの既定数です。', // by Claude Opus 5
+	'Enum as select' => 'ENUMを選択メニューで表示', // by Claude Opus 5
+	'Never' => 'しない', // by Claude Opus 5
+	'Always' => '常に', // by Claude Opus 5
+	'More values than %d' => '値が %d 個より多い場合', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'ENUMカラムを選択メニューで表示するしきい値です。', // by Claude Opus 5
 
 	// Plugins
 	'One Time Password' => 'ワンタイムパスワード(OTP)',
 	'Enter OTP code.' => 'OTPコードを入力してください。',
 	'Invalid OTP code.' => '無効なOTPコードです。',
 	'Access denied.' => 'アクセスが拒否されました。',
+	'JSON previews' => 'JSONプレビュー', // by Claude Opus 5
+	'Data table' => 'データテーブル', // by Claude Opus 5
+	'Edit form' => '編集フォーム', // by Claude Opus 5
 	'Ask %s' => '%s に聞く', // Use the phrase from https://gemini.google.com/
 	'Just a sec...' => 'しばらくお待ち下さい...',
 ];

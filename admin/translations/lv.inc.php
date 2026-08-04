@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s jāatgriež masīvs.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s un %s jāatgriež objekts, kas izveidots ar metodi %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistēma',
@@ -24,6 +26,8 @@ return [
 	'Logout' => 'Iziet',
 	'Logged as: %s' => 'Ielogojies kā: %s',
 	'Logout successful.' => 'Jūs veiksmīgi izgājāt no sistēmas.',
+	'hostname[:port] or :socket' => 'servera nosaukums[:ports] vai :sokets', // by Claude Opus 5
+	'Invalid server or credentials.' => 'Nederīgs serveris vai pieteikšanās dati.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Parole satur atstarpi, kas varētu būt lieka.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo neatbalsta pieeju bez paroles, <a href="https://www.adminneo.org/password"%s>vairāk informācijas šeit</a>.',
 	'Database does not support password.' => 'Datubāze neatbalsta paroli.',
@@ -32,11 +36,14 @@ return [
 		'Pieteikšanās mēģinājumu skaits par lielu. Mēginiet pēc %d minūtēm.',
 		'Pieteikšanās mēģinājumu skaits par lielu. Mēginiet pēc %d minūtēm.',
 	],
+	'Invalid permanent login, please login again.' => 'Nederīga pastāvīgā pieteikšanās, piesakies no jauna sistēmā.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Nederīgs CSRF žetons. Nosūtiet formu vēl vienu reizi.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ja nesūtījāt šo pieprasījumu no AdminNeo, tad aizveriet pārlūka logu.',
 	'The action will be performed after successful login with the same credentials.' => 'Darbība tiks pabeigta pēc derīgas pieteikšanās sistēmā.',
 
 	// Connection
+	'No driver' => 'Nav draivera', // by Claude Opus 5
+	'Database driver not found.' => 'Datubāzes draiveris nav atrasts.', // by Claude Opus 5
 	'No extension' => 'Nav paplašinājuma',
 	'None of the supported PHP extensions (%s) are available.' => 'Neviens PHP no atbalstītajiem paplašinājumiem (%s) nav pieejams.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Pieeja priviliģētiem portiem nav atļauta.',
@@ -47,7 +54,10 @@ return [
 	// Settings
 	'Language' => 'Valoda',
 
+	'Home' => 'Sākums', // by Claude Opus 5
 	'Refresh' => 'Atjaunot',
+	'Info' => 'Informācija', // by Claude Opus 5
+	'More information.' => 'Vairāk informācijas.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Tiesības',
@@ -70,12 +80,14 @@ return [
 
 	// Structure
 	'Column' => 'Lauks',
+	'Columns' => 'Lauki', // by Claude Opus 5
 	'Routine' => 'Procedūra',
 	'Grant' => 'Atļaut',
 	'Revoke' => 'Aizliegt',
 
 	// Queries
 	'SQL command' => 'SQL pieprasījums',
+	'HTTP request' => 'HTTP pieprasījums', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d pieprasījums veiksmīgs.',
 		'%d pieprasījumi veiksmīgi.',
@@ -91,8 +103,8 @@ return [
 	'Unknown error.' => 'Nezināma kļūda.',
 	'Warnings' => 'Brīdinājumi',
 	'%s queries are not supported.' => '%s-pieprasījumi nav atbalstīti.',
-	'Execute' => 'Izpidīt',
-	'Stop on error' => 'Astāties kļūdas gadījumā',
+	'Execute' => 'Izpildīt', // by Claude Opus 5
+	'Stop on error' => 'Apstāties kļūdas gadījumā', // by Claude Opus 5
 	'Show only errors' => 'Rādīt tikai kļūdas',
 	'Time' => 'Laiks',
 	'%.3f s' => '%.3f s', // sprintf() format for time of the command
@@ -110,6 +122,8 @@ return [
 	'File uploads are disabled.' => 'Augšupielādes aizliegtas.',
 	'Unable to upload a file.' => 'Neizdevās ielādēt failu uz servera.',
 	'Maximum allowed file size is %sB.' => 'Faila maksimālais izmērs — %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Failu maksimālais skaits — %d. Izvēlieties mazāk failu vai palieliniet konfigurācijas direktīvu %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Failu maksimālais kopējais izmērs — %s. Izvēlieties mazākus failus vai palieliniet konfigurācijas direktīvu %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST metodes pieprasījums apjoms par lielu. Atsūtiet mazāka apjoma pieprasījumu kā konfigurācijas %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Varat ielādēt lielu SQL failu uz servera un tad importēt to.',
 	'File must be in UTF-8 encoding.' => 'Failam jābūt UTF-8 kodējumam.',
@@ -130,6 +144,7 @@ return [
 
 	// Databases
 	'Database' => 'Datubāze',
+	'database' => 'datubāze', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Lietot',
 	'Invalid database.' => 'Nederīga datubāze.',
@@ -149,6 +164,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Shēma',
+	'schema' => 'shēma', // by Claude Opus 5
+	'Schemas' => 'Shēmas', // by Claude Opus 5
+	'No schemas.' => 'Nav shēmu.', // by Claude Opus 5
+	'Show schema' => 'Parādīt shēmu', // by Claude Opus 5
 	'Alter schema' => 'Izmainīt shēmu',
 	'Create schema' => 'Jauna shēma',
 	'Schema has been dropped.' => 'Shēma dzēsta.',
@@ -214,7 +233,7 @@ return [
 
 	// Views
 	'View' => 'Skats',
-	'Materialized view' => 'Matrializēts skats',
+	'Materialized view' => 'Materializēts skats', // by Claude Opus 5
 	'View has been dropped.' => 'Skats dzēsts.',
 	'View has been altered.' => 'Skats izmainīts.',
 	'View has been created.' => 'Skats izveidots.',
@@ -223,9 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Sadalīt pēc',
+	'Partition' => 'Partīcija', // by Claude Opus 5
 	'Partitions' => 'Partīcijas',
 	'Partition name' => 'Partīcijas nosaukums',
 	'Values' => 'Vērtības',
+	'Inherited tables' => 'Mantotās tabulas', // by Claude Opus 5
+	'Inherited from' => 'Mantota no', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indeksi',
@@ -234,6 +256,8 @@ return [
 	'Add next' => 'Pievienot vēl',
 	'Index Type' => 'Indeksa tips',
 	'length' => 'garums',
+	'Algorithm' => 'Algoritms', // by Claude Opus 5
+	'Condition' => 'Nosacījums', // by Claude Opus 5
 
 	// Foreign keys
 	'Foreign keys' => 'Ārejā atslēgas',
@@ -310,6 +334,12 @@ return [
 	'Create trigger' => 'Izveidot trigeri',
 
 	// Table check constraints
+	'Checks' => 'Pārbaudes', // by Claude Opus 5
+	'Create check' => 'Izveidot pārbaudi', // by Claude Opus 5
+	'Alter check' => 'Izmainīt pārbaudi', // by Claude Opus 5
+	'Check has been created.' => 'Pārbaude izveidota.', // by Claude Opus 5
+	'Check has been altered.' => 'Pārbaude izmainīta.', // by Claude Opus 5
+	'Check has been dropped.' => 'Pārbaude dzēsta.', // by Claude Opus 5
 
 	// Selection
 	'Select data' => 'Izvēlēties datus',
@@ -364,7 +394,7 @@ return [
 	'Clone' => 'Klonēt',
 	'Delete' => 'Dzēst',
 	'Item%s has been inserted.' => 'Ieraksti%s tika ievietoti.', // %s can contain auto-increment value, e.g. ' 123'
-	'Item has been deleted.' => 'Ieraksts dzests.',
+	'Item has been deleted.' => 'Ieraksts dzēsts.', // by Claude Opus 5
 	'Item has been updated.' => 'Ieraksts atjaunots.',
 	'%d item(s) have been affected.' => [
 		'Izmainīts %d ieraksts.',
@@ -389,6 +419,38 @@ return [
 	'no' => 'nē',
 
 	// Settings
+	'Settings' => 'Iestatījumi', // by Claude Opus 5
+	'Default' => 'Noklusētais', // by Claude Opus 5
+	'Color scheme' => 'Krāsu shēma', // by Claude Opus 5
+	'By system' => 'Pēc sistēmas', // by Claude Opus 5
+	'Light' => 'Gaišā', // by Claude Opus 5
+	'Dark' => 'Tumšā', // by Claude Opus 5
+	'Navigation mode' => 'Navigācijas režīms', // by Claude Opus 5
+	'Simple' => 'Vienkāršs', // by Claude Opus 5
+	'Dual' => 'Dubults', // by Claude Opus 5
+	'Reversed' => 'Apgriezts', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Galvenās navigācijas izkārtojums ar tabulu saitēm.', // by Claude Opus 5
+	'Table links' => 'Tabulu saites', // by Claude Opus 5
+	'Primary action for all table links.' => 'Galvenā darbība visām tabulu saitēm.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Saites uz tabulām, kas atsaucas uz pašreizējo rindu.', // by Claude Opus 5
+	'Display' => 'Rādīt', // by Claude Opus 5
+	'Hide' => 'Slēpt', // by Claude Opus 5
+	'Records per page' => 'Ierakstu skaits lapā', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Noklusētais datu tabulā rādāmo ierakstu skaits.', // by Claude Opus 5
+	'Enum as select' => 'Enum kā izvēlne', // by Claude Opus 5
+	'Never' => 'Nekad', // by Claude Opus 5
+	'Always' => 'Vienmēr', // by Claude Opus 5
+	'More values than %d' => 'Vairāk nekā %d vērtības', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Slieksnis izvēlnes rādīšanai enum laukiem.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Vienreizēja parole', // by Claude Opus 5
+	'Enter OTP code.' => 'Ievadiet OTP kodu.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Nederīgs OTP kods.', // by Claude Opus 5
+	'Access denied.' => 'Pieeja liegta.', // by Claude Opus 5
+	'JSON previews' => 'JSON priekšskatījumi', // by Claude Opus 5
+	'Data table' => 'Datu tabula', // by Claude Opus 5
+	'Edit form' => 'Rediģēšanas forma', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Tikai mirklīti...', // by Claude Opus 5
 ];

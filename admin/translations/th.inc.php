@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s ต้องคืนค่าเป็นอาร์เรย์.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s และ %s ต้องคืนค่าเป็นอ็อบเจกต์ที่สร้างโดยเมธอด %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'ระบบ',
@@ -24,11 +26,23 @@ return [
 	'Logout' => 'ออกจากระบบ',
 	'Logged as: %s' => 'สวัสดีคุณ: %s',
 	'Logout successful.' => 'ออกจากระบบเรียบร้อยแล้ว.',
+	'hostname[:port] or :socket' => 'ชื่อโฮสต์[:พอร์ต] หรือ :ซ็อกเก็ต', // by Claude Opus 5
+	'Invalid server or credentials.' => 'เซอเวอร์หรือข้อมูลเข้าสู่ระบบไม่ถูกต้อง.', // by Claude Opus 5
+	'There is a space in the input password which might be the cause.' => 'มีช่องว่างในรหัสผ่านที่กรอก ซึ่งอาจเป็นสาเหตุ.', // by Claude Opus 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ไม่รองรับการเข้าถึงฐานข้อมูลโดยไม่มีรหัสผ่าน <a href="https://www.adminneo.org/password"%s>ข้อมูลเพิ่มเติม</a>.', // by Claude Opus 5
+	'Database does not support password.' => 'ฐานข้อมูลไม่รองรับรหัสผ่าน.', // by Claude Opus 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'เข้าสู่ระบบไม่สำเร็จหลายครั้งเกินไป กรุณาลองใหม่อีกครั้งใน %d นาที.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'การจดจำการเข้าสู่ระบบไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่อีกครั้ง.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'เครื่องหมาย CSRF ไม่ถูกต้อง ส่งข้อมูลใหม่อีกครั้ง.',
+	'If you did not send this request from AdminNeo then close this page.' => 'หากคุณไม่ได้ส่งคำขอนี้จาก AdminNeo กรุณาปิดหน้านี้.', // by Claude Opus 5
+	'The action will be performed after successful login with the same credentials.' => 'การดำเนินการจะทำงานหลังจากเข้าสู่ระบบสำเร็จด้วยข้อมูลเดิม.', // by Claude Opus 5
 
 	// Connection
+	'No driver' => 'ไม่พบไดรเวอร์', // by Claude Opus 5
+	'Database driver not found.' => 'ไม่พบไดรเวอร์ของฐานข้อมูล.', // by Claude Opus 5
 	'No extension' => 'ไม่พบส่วนเสริม',
 	'None of the supported PHP extensions (%s) are available.' => 'ไม่มีส่วนเสริมของ PHP (%s) ที่สามารถใช้งานได้.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
+	'Connecting to privileged ports is not allowed.' => 'ไม่อนุญาตให้เชื่อมต่อกับพอร์ตที่สงวนไว้.', // by Claude Opus 5
 	'Session support must be enabled.' => 'ต้องเปิดใช้งาน Session.',
 	'Session expired, please login again.' => 'Session หมดอายุแล้ว กรุณาเข้าสู่ระบบใหม่อีกครั้ง.',
 	'%s version: %s through PHP extension %s' => '%s รุ่น: %s ผ่านส่วนขยาย PHP %s',
@@ -36,7 +50,10 @@ return [
 	// Settings
 	'Language' => 'ภาษา',
 
+	'Home' => 'หน้าแรก', // by Claude Opus 5
 	'Refresh' => 'โหลดใหม่',
+	'Info' => 'ข้อมูล', // by Claude Opus 5
+	'More information.' => 'ข้อมูลเพิ่มเติม.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'สิทธิ์',
@@ -55,16 +72,21 @@ return [
 
 	// Structure
 	'Column' => 'คอลัมน์',
+	'Columns' => 'คอลัมน์', // by Claude Opus 5
 	'Routine' => 'รูทีน',
 	'Grant' => 'การอนุญาต',
 	'Revoke' => 'ยกเลิก',
 
 	// Queries
 	'SQL command' => 'คำสั่ง SQL',
+	'HTTP request' => 'คำขอ HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d คำสั่งถูกดำเนินการแล้ว.',
 	'Query executed OK, %d row(s) affected.' => 'ประมวลผลคำสั่งแล้ว มี %d ถูกดำเนินการ.',
 	'No commands to execute.' => 'ไม่มีคำสั่งที่จะประมวลผล.',
 	'Error in query' => 'คำสั่งไม่ถูกต้อง',
+	'Unknown error.' => 'เออเรอที่ไม่รู้จัก.', // by Claude Opus 5
+	'Warnings' => 'คำเตือน', // by Claude Opus 5
+	'%s queries are not supported.' => 'ไม่รองรับคำสั่ง %s.', // by Claude Opus 5
 	'Execute' => 'ประมวลผล',
 	'Stop on error' => 'หยุดการทำงานเมื่อเออเรอ',
 	'Show only errors' => 'แสดงเฉพาะเออเรอ',
@@ -77,14 +99,19 @@ return [
 	// Import
 	'Import' => 'นำเข้า',
 	'File upload' => 'อัปโหลดไฟล์',
-	'From server' => 'จากเซเวอร์',
+	'From server' => 'จากเซอเวอร์', // by Claude Opus 5
 	'Webserver file %s' => 'Webserver file %s',
 	'Run file' => 'ทำงานจากไฟล์',
 	'File does not exist.' => 'ไม่มีไฟล์.',
 	'File uploads are disabled.' => 'การอัปโหลดไฟล์ถูกปิดการใช้งาน.',
 	'Unable to upload a file.' => 'ไม่สามารถอัปโหลดไฟล์ได้.',
 	'Maximum allowed file size is %sB.' => 'ขนาดไฟล์สูงสุดที่อนุญาตให้ใช้งานคือ %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'จำนวนไฟล์สูงสุดคือ %d เลือกไฟล์ให้น้อยลงหรือเพิ่มค่า %s คำสั่งการตั้งค่า.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ขนาดรวมของไฟล์สูงสุดคือ %s เลือกไฟล์ที่เล็กลงหรือเพิ่มค่า %s คำสั่งการตั้งค่า.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'ข้อมูลที่ส่งเข้ามีขนาดใหญ่เกิน คุณสามารถ เพิ่ม-ลดขนาดได้ที่ %s คำสั่งการตั้งค่า.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'คุณสามารถอัปโหลดไฟล์ SQL ขนาดใหญ่ผ่าน FTP แล้วนำเข้าจากเซอเวอร์.', // by Claude Opus 5
+	'File must be in UTF-8 encoding.' => 'ไฟล์ต้องอยู่ในรูปแบบการเข้ารหัส UTF-8.', // by Claude Opus 5
+	'You are offline.' => 'คุณออฟไลน์อยู่.', // by Claude Opus 5
 	'%d row(s) have been imported.' => '%d แถวถูกนำเข้าแล้ว.',
 
 	// Export
@@ -97,6 +124,8 @@ return [
 
 	// Databases
 	'Database' => 'ฐานข้อมูล',
+	'database' => 'ฐานข้อมูล', // by Claude Opus 5
+	'DB' => 'ฐานข้อมูล', // by Claude Opus 5
 	'Use' => 'ใช้งาน',
 	'Invalid database.' => 'ฐานข้อมูลไม่ถูกต้อง.',
 	'Alter database' => 'เปลี่ยนแปลงฐานข้อมูล',
@@ -115,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
+	'schema' => 'schema', // by Claude Opus 5
+	'Schemas' => 'Schema', // by Claude Opus 5
+	'No schemas.' => 'ไม่พบ schema.', // by Claude Opus 5
+	'Show schema' => 'แสดง schema', // by Claude Opus 5
 	'Alter schema' => 'เปลี่ยนแปลง schema',
 	'Create schema' => 'สร้าง schema',
 	'Schema has been dropped.' => 'Schema ถูกลบแล้ว.',
@@ -134,6 +167,7 @@ return [
 	'%d in total' => '%d ของทั้งหมด',
 	'Analyze' => 'วิเคราะห์',
 	'Optimize' => 'เพิ่มประสิทธิภาพ',
+	'Vacuum' => 'ล้างข้อมูล (VACUUM)', // by Claude Opus 5
 	'Check' => 'ตรวจสอบ',
 	'Repair' => 'ซ่อมแซม',
 	'Truncate' => 'ตัดทิ้ง',
@@ -143,16 +177,18 @@ return [
 	'Tables have been moved.' => 'ตารางถูกย้ายแล้ว.',
 	'Copy' => 'ทำซ้ำ',
 	'Tables have been copied.' => 'ทำซ้ำตารางฐานข้อมูลแล้ว.',
+	'overwrite' => 'เขียนทับ', // by Claude Opus 5
 
 	// Tables
 	'Tables' => 'ตาราง',
 	'Tables and views' => 'ตารางและวิว',
 	'Table' => 'ตาราง',
 	'No tables.' => 'ไม่พบตาราง.',
-	'Alter table' => 'เปลี่ยนแปลงตารางแล้ว',
+	'Alter table' => 'เปลี่ยนแปลงตาราง', // by Claude Opus 5
 	'Create table' => 'สร้างตารางใหม่',
 	'Table has been dropped.' => 'ลบตารางแล้ว.',
 	'Tables have been dropped.' => 'ตารางถูกลบแล้ว.',
+	'Tables have been optimized.' => 'เพิ่มประสิทธิภาพตารางแล้ว.', // by Claude Opus 5
 	'Table has been altered.' => 'แก้ไขตารางแล้ว.',
 	'Table has been created.' => 'สร้างตารางใหม่แล้ว.',
 	'Table name' => 'ชื่อตาราง',
@@ -164,8 +200,12 @@ return [
 	'Auto Increment' => 'เพิ่มลำดับโดยอัตโนมัติ',
 	'Options' => 'ตัวเลือก',
 	'Comment' => 'หมายเหตุ',
+	'Default value' => 'ค่าเริ่มต้น', // by Claude Opus 5
 	'Drop' => 'ลบ',
+	'Drop %s?' => 'ลบ %s หรือไม่?', // by Claude Opus 5
 	'Are you sure?' => 'คุณแน่ใจแล้วหรือ',
+	'Size' => 'ขนาด', // by Claude Opus 5
+	'Compute' => 'คำนวณ', // by Claude Opus 5
 	'Move up' => 'ย้ายไปข้างบน',
 	'Move down' => 'ย้ายลงล่าง',
 	'Remove' => 'ลบ',
@@ -173,6 +213,7 @@ return [
 
 	// Views
 	'View' => 'วิว',
+	'Materialized view' => 'วิวแบบเก็บข้อมูล', // by Claude Opus 5
 	'View has been dropped.' => 'วิวถูกลบแล้ว.',
 	'View has been altered.' => 'วิวถูกเปลี่ยนแปลงแล้ว.',
 	'View has been created.' => 'วิวถูกสร้างแล้ว.',
@@ -181,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'พาร์ทิชันโดย',
+	'Partition' => 'พาร์ทิชัน', // by Claude Opus 5
 	'Partitions' => 'พาร์ทิชัน',
 	'Partition name' => 'ชื่อของพาร์ทิชัน',
 	'Values' => 'ค่า',
+	'Inherited tables' => 'ตารางที่สืบทอด', // by Claude Opus 5
+	'Inherited from' => 'สืบทอดจาก', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'ดัชนี',
@@ -192,6 +236,8 @@ return [
 	'Add next' => 'เพิ่มรายการถัดไป',
 	'Index Type' => 'ชนิดของดัชนี',
 	'length' => 'ความยาว',
+	'Algorithm' => 'อัลกอริทึม', // by Claude Opus 5
+	'Condition' => 'เงื่อนไข', // by Claude Opus 5
 
 	// Foreign keys
 	'Foreign keys' => 'คีย์นอก', // by Claude Fable 5
@@ -264,6 +310,12 @@ return [
 	'Create trigger' => 'สร้าง Trigger',
 
 	// Table check constraints
+	'Checks' => 'การตรวจสอบ', // by Claude Opus 5
+	'Create check' => 'สร้างการตรวจสอบ', // by Claude Opus 5
+	'Alter check' => 'เปลี่ยนแปลงการตรวจสอบ', // by Claude Opus 5
+	'Check has been created.' => 'สร้างการตรวจสอบแล้ว.', // by Claude Opus 5
+	'Check has been altered.' => 'เปลี่ยนแปลงการตรวจสอบแล้ว.', // by Claude Opus 5
+	'Check has been dropped.' => 'ลบการตรวจสอบแล้ว.', // by Claude Opus 5
 
 	// Selection
 	'Select data' => 'เลือกข้อมูล',
@@ -275,18 +327,24 @@ return [
 	'Sort' => 'เรียงลำดับ',
 	'descending' => 'มากไปน้อย',
 	'Limit' => 'จำกัด',
+	'Limit rows' => 'จำกัดแถว', // by Claude Opus 5
 	'Text length' => 'ความยาวของอักษร',
 	'Action' => 'ดำเนินการ',
+	'Full table scan' => 'การสแกนทั้งตาราง', // by Claude Opus 5
 	'Unable to select the table' => 'ไม่สามารถเลือกตารางได้',
 	'Search data in tables' => 'ค้นหาในตาราง',
 	'No rows.' => 'ไม่มีแถวของตาราง.',
+	'%d / ' => '%d / ', // by Claude Opus 5
 	'%d row(s)' => '%d แถว',
 	'Page' => 'หน้า',
 	'last' => 'ล่าสุด',
+	'Load more data' => 'โหลดข้อมูลเพิ่ม', // by Claude Opus 5
+	'Loading' => 'กำลังโหลด', // by Claude Opus 5
 	'Whole result' => 'รวมผล',
 	'%d byte(s)' => '%d ไบท์',
 
 	// In-place editing in selection
+	'Modify' => 'ปรับเปลี่ยน', // by Claude Opus 5
 	'Ctrl+click on a value to modify it.' => 'กด Ctrl+click เพื่อแก้ไขค่า.',
 	'Use edit link to modify this value.' => 'ใช้ลิงค์ แก้ไข เพื่อปรับเปลี่ยนค่านี้.',
 
@@ -299,12 +357,15 @@ return [
 	'Save' => 'บันทึก',
 	'Save and continue edit' => 'บันทึกและแก้ไขข้อมูลอื่นๆต่อ',
 	'Save and insert next' => 'บันทึกแล้วเพิ่มรายการถัดไป',
+	'Saving' => 'กำลังบันทึก', // by Claude Opus 5
+	'Selected' => 'ที่เลือก', // by Claude Opus 5
 	'Clone' => 'ทำซ้ำ',
 	'Delete' => 'ลบ',
 	'Item%s has been inserted.' => 'มี%s รายการ ถูกเพิ่มแล้ว.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'รายการถูกลบแล้ว.',
 	'Item has been updated.' => 'ปรับปรุงรายการแล้ว.',
 	'%d item(s) have been affected.' => 'มี %d รายการถูกดำเนินการแล้ว.',
+	'You have no privileges to update this table.' => 'คุณไม่มีสิทธิ์แก้ไขตารางนี้.', // by Claude Opus 5
 
 	// Data type descriptions
 	'Numbers' => 'ตัวเลข',
@@ -312,14 +373,48 @@ return [
 	'Strings' => 'ตัวอักษร',
 	'Binary' => 'เลขฐานสอง',
 	'Lists' => 'รายการ',
-	'Network' => 'เครื่องข่าย',
+	'Network' => 'เครือข่าย', // by Claude Opus 5
 	'Geometry' => 'เรขาคณิต',
-	'Relations' => 'ความสำพันธ์',
+	'Relations' => 'ความสัมพันธ์', // by Claude Opus 5
 
 	// Editor - data values
 	'now' => 'ตอนนี้',
+	'yes' => 'ใช่', // by Claude Opus 5
+	'no' => 'ไม่ใช่', // by Claude Opus 5
 
 	// Settings
+	'Settings' => 'การตั้งค่า', // by Claude Opus 5
+	'Default' => 'ค่าเริ่มต้น', // by Claude Opus 5
+	'Color scheme' => 'ชุดสี', // by Claude Opus 5
+	'By system' => 'ตามระบบ', // by Claude Opus 5
+	'Light' => 'สว่าง', // by Claude Opus 5
+	'Dark' => 'มืด', // by Claude Opus 5
+	'Navigation mode' => 'รูปแบบการนำทาง', // by Claude Opus 5
+	'Simple' => 'แบบง่าย', // by Claude Opus 5
+	'Dual' => 'แบบคู่', // by Claude Opus 5
+	'Reversed' => 'แบบกลับด้าน', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'การจัดวางของการนำทางหลักพร้อมลิงค์ของตาราง.', // by Claude Opus 5
+	'Table links' => 'ลิงค์ของตาราง', // by Claude Opus 5
+	'Primary action for all table links.' => 'การดำเนินการหลักสำหรับลิงค์ของตารางทั้งหมด.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'ลิงค์ไปยังตารางที่อ้างอิงถึงแถวปัจจุบัน.', // by Claude Opus 5
+	'Display' => 'แสดง', // by Claude Opus 5
+	'Hide' => 'ซ่อน', // by Claude Opus 5
+	'Records per page' => 'จำนวนรายการต่อหน้า', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'จำนวนรายการเริ่มต้นที่แสดงในตารางข้อมูล.', // by Claude Opus 5
+	'Enum as select' => 'แสดง enum เป็นรายการให้เลือก', // by Claude Opus 5
+	'Never' => 'ไม่แสดง', // by Claude Opus 5
+	'Always' => 'แสดงเสมอ', // by Claude Opus 5
+	'More values than %d' => 'มีค่ามากกว่า %d', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'เกณฑ์ในการแสดงรายการให้เลือกสำหรับคอลัมน์ enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'รหัสผ่านครั้งเดียว', // by Claude Opus 5
+	'Enter OTP code.' => 'กรอกรหัส OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'รหัส OTP ไม่ถูกต้อง.', // by Claude Opus 5
+	'Access denied.' => 'ไม่มีสิทธิ์เข้าถึง.', // by Claude Opus 5
+	'JSON previews' => 'ตัวอย่าง JSON', // by Claude Opus 5
+	'Data table' => 'ตารางข้อมูล', // by Claude Opus 5
+	'Edit form' => 'ฟอร์มแก้ไข', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'รอสักครู่.', // by Claude Opus 5
 ];

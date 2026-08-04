@@ -9,9 +9,12 @@ return [
 
 	// Editor
 	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => null, // hint for date format - use language equivalents for day, month and year shortcuts
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s mora vratiti polje.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s i %s moraju vratiti objekt kreiran metodom %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sustav',
@@ -24,17 +27,23 @@ return [
 	'Logged as: %s' => 'Prijavljen kao: %s',
 	'Logout successful.' => 'Uspješna odjava.',
 	'hostname[:port] or :socket' => 'hostname[:port] ili :socket',
+	'Invalid server or credentials.' => 'Neispravan poslužitelj ili podaci za prijavu.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'U unesenoj lozinci postoji razmak koji bi mogao biti uzrok problema.',
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne podržava pristup bazi podataka bez lozinke, <a href="https://www.adminneo.org/password"%s>više informacija</a>.', // by Claude Opus 5
 	'Database does not support password.' => 'Baza podataka ne podržava lozinku.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minutu.',
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minute.',
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minuta.',
 	],
+	'Invalid permanent login, please login again.' => 'Neispravna trajna prijava, molimo prijavite se ponovo.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Nevažeći CSRF token. Pošaljite obrazac ponovo.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Ako ovaj zahtjev niste poslali iz AdminNea, zatvorite ovu stranicu.', // by Claude Opus 5
 	'The action will be performed after successful login with the same credentials.' => 'Radnja će biti izvršena nakon uspješne prijave s istim podacima.',
 
 	// Connection
+	'No driver' => 'Nema upravljačkog programa', // by Claude Opus 5
+	'Database driver not found.' => 'Upravljački program baze podataka nije pronađen.', // by Claude Opus 5
 	'No extension' => 'Nema proširenja',
 	'None of the supported PHP extensions (%s) are available.' => 'Nijedno od podržanih PHP proširenja (%s) nije dostupno.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Spajanje na privilegirane portove nije dopušteno.',
@@ -45,7 +54,10 @@ return [
 	// Settings
 	'Language' => 'Jezik',
 
+	'Home' => 'Početna', // by Claude Opus 5
 	'Refresh' => 'Osvježi',
+	'Info' => 'Informacije', // by Claude Opus 5
+	'More information.' => 'Više informacija.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Ovlasti',
@@ -75,6 +87,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL naredba',
+	'HTTP request' => 'HTTP zahtjev', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d upit je uspješno izvršen.',
 		'%d upita su uspješno izvršena.',
@@ -109,6 +122,8 @@ return [
 	'File uploads are disabled.' => 'Prijenos datoteka je onemogućen.',
 	'Unable to upload a file.' => 'Prijenos datoteke nije uspio.',
 	'Maximum allowed file size is %sB.' => 'Maksimalna dozvoljena veličina datoteke je %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimalan broj datoteka je %d. Odaberite manje datoteka ili povećajte vrijednost konfiguracijske direktive %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimalna ukupna veličina datoteka je %s. Odaberite manje datoteke ili povećajte vrijednost konfiguracijske direktive %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Preveliki POST podaci. Smanjite podatke ili povećajte vrijednost konfiguracijske direktive %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Veliku SQL datoteku možete prenijeti putem FTP-a i uvesti je s poslužitelja.',
 	'File must be in UTF-8 encoding.' => 'Datoteka mora biti u UTF-8 kodiranju.',
@@ -129,6 +144,7 @@ return [
 
 	// Databases
 	'Database' => 'Baza podataka',
+	'database' => 'baza podataka', // by Claude Opus 5
 	'DB' => 'BP',
 	'Use' => 'Koristi',
 	'Invalid database.' => 'Neispravna baza podataka.',
@@ -148,6 +164,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Shema',
+	'schema' => 'shema', // by Claude Opus 5
+	'Schemas' => 'Sheme', // by Claude Opus 5
+	'No schemas.' => 'Nema shema.', // by Claude Opus 5
+	'Show schema' => 'Prikaži shemu', // by Claude Opus 5
 	'Alter schema' => 'Izmijeni shemu',
 	'Create schema' => 'Kreiraj shemu',
 	'Schema has been dropped.' => 'Shema je izbrisana.',
@@ -222,9 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Particioniraj po',
+	'Partition' => 'Particija', // by Claude Opus 5
 	'Partitions' => 'Particije',
 	'Partition name' => 'Naziv particije',
 	'Values' => 'Vrijednosti',
+	'Inherited tables' => 'Naslijeđene tablice', // by Claude Opus 5
+	'Inherited from' => 'Naslijeđena od', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indeksi',
@@ -396,6 +419,38 @@ return [
 	'no' => 'ne',
 
 	// Settings
+	'Settings' => 'Postavke', // by Claude Opus 5
+	'Default' => 'Zadano', // by Claude Opus 5
+	'Color scheme' => 'Shema boja', // by Claude Opus 5
+	'By system' => 'Prema sustavu', // by Claude Opus 5
+	'Light' => 'Svijetla', // by Claude Opus 5
+	'Dark' => 'Tamna', // by Claude Opus 5
+	'Navigation mode' => 'Način navigacije', // by Claude Opus 5
+	'Simple' => 'Jednostavan', // by Claude Opus 5
+	'Dual' => 'Dvostruk', // by Claude Opus 5
+	'Reversed' => 'Obrnut', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Raspored glavne navigacije s vezama tablica.', // by Claude Opus 5
+	'Table links' => 'Veze tablica', // by Claude Opus 5
+	'Primary action for all table links.' => 'Glavna radnja za sve veze tablica.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Veze na tablice koje se referenciraju na trenutni redak.', // by Claude Opus 5
+	'Display' => 'Prikaži', // by Claude Opus 5
+	'Hide' => 'Sakrij', // by Claude Opus 5
+	'Records per page' => 'Zapisa po stranici', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Zadani broj zapisa prikazanih u tablici podataka.', // by Claude Opus 5
+	'Enum as select' => 'Enum kao padajući izbornik', // by Claude Opus 5
+	'Never' => 'Nikada', // by Claude Opus 5
+	'Always' => 'Uvijek', // by Claude Opus 5
+	'More values than %d' => 'Više od %d vrijednosti', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Prag za prikaz padajućeg izbornika za enum stupce.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Jednokratna lozinka', // by Claude Opus 5
+	'Enter OTP code.' => 'Unesite OTP kod.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Neispravan OTP kod.', // by Claude Opus 5
+	'Access denied.' => 'Pristup odbijen.', // by Claude Opus 5
+	'JSON previews' => 'Pregled JSON-a', // by Claude Opus 5
+	'Data table' => 'Tablica podataka', // by Claude Opus 5
+	'Edit form' => 'Obrazac za uređivanje', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Samo trenutak...', // by Claude Opus 5
 ];

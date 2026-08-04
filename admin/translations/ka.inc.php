@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'სთ:წთ:წმ', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s უნდა აბრუნებდეს მასივს.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s და %s უნდა აბრუნებდეს ობიექტს, რომელიც შექმნილია %s მეთოდით.', // by Claude Opus 5
 
 	// Login
 	'System' => 'სისტემა',
@@ -24,15 +26,20 @@ return [
 	'Logout' => 'გასვლა',
 	'Logged as: %s' => 'შესული ხართ როგორც: %s',
 	'Logout successful.' => 'გამოხვედით სისტემიდან.',
+	'hostname[:port] or :socket' => 'სერვერის სახელი[:პორტი] ან :სოკეტი', // by Claude Opus 5
+	'Invalid server or credentials.' => 'არასწორი სერვერი ან ავტორიზაციის მონაცემები.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'პაროლში არის გამოტოვება, შეიძლება ეს ქმნის პრობლემას.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'უპაროლო წვდომა ბაზასთან არაა დაშვებული AdminNeo-ში, მეტი ინფორმაციისთვის ეწვიეთ <a href="https://www.adminneo.org/password"%s>ბმულს</a>.',
 	'Database does not support password.' => 'ბაზაში არაა მხარდაჭერილი პაროლი.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'ძალიან ბევრჯერ შეგეშალათ მომხმარებელი და პაროლი. სცადეთ %d წუთში.',
+	'Invalid permanent login, please login again.' => 'სისტემაში დარჩენა არასწორია, გაიარეთ ხელახალი ავტორიზაცია.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'უმოქმედო CSRF-ტოკენი. ფორმის კიდევ ერთხელ გაგზავნა.',
 	'If you did not send this request from AdminNeo then close this page.' => 'ეს მოთხოვნა თქვენ თუ არ გაგიგზავნაით AdminNeo-იდან, დახურეთ ეს ფანჯარა..',
 	'The action will be performed after successful login with the same credentials.' => 'მოქმედება შესრულდება იგივე მომხმარებლით წარმატებული ავტორიზაციის შემდეგ.',
 
 	// Connection
+	'No driver' => 'დრაივერი არაა', // by Claude Opus 5
+	'Database driver not found.' => 'ბაზის დრაივერი ვერ მოიძებნა.', // by Claude Opus 5
 	'No extension' => 'გაფართოება არაა',
 	'None of the supported PHP extensions (%s) are available.' => 'არც ერთი მხარდაჭერილი გაფართოება არ მოიძებნა (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'პრივილეგირებულ პორტთან წვდომა დაუშვებელია.',
@@ -43,7 +50,10 @@ return [
 	// Settings
 	'Language' => 'ენა',
 
+	'Home' => 'საწყისი', // by Claude Opus 5
 	'Refresh' => 'განახლება',
+	'Info' => 'ინფორმაცია', // by Claude Opus 5
+	'More information.' => 'მეტი ინფორმაცია.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'უფლებამოსილება',
@@ -62,12 +72,14 @@ return [
 
 	// Structure
 	'Column' => 'ველი',
+	'Columns' => 'ველები', // by Claude Opus 5
 	'Routine' => 'პროცედურა',
 	'Grant' => 'დაშვება',
 	'Revoke' => 'შეზღუდვა',
 
 	// Queries
 	'SQL command' => 'SQL-ბრძანება',
+	'HTTP request' => 'HTTP-მოთხოვნა', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d მოთხოვნა შესრულდა.',
 	'Query executed OK, %d row(s) affected.' => 'მოთხოვდა შესრულდა, შეიცვალა %d ჩანაწერი.',
 	'No commands to execute.' => 'შესასრულებელი ბრძანება არაა.',
@@ -94,6 +106,8 @@ return [
 	'File uploads are disabled.' => 'ფაილის სერვერზე ატვირთვა გათიშულია.',
 	'Unable to upload a file.' => 'ფაილი არ აიტვირთა სერვერზე.',
 	'Maximum allowed file size is %sB.' => 'ფაილის მაქსიმალური ზომა - %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური რაოდენობა - %d. აირჩიეთ ნაკლები ფაილი ან გაზარდეთ პარამეტრი %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური საერთო ზომა - %s. აირჩიეთ უფრო მცირე ფაილები ან გაზარდეთ პარამეტრი %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST ინფორმაცია ძალიან დიდია. შეამცირეთ ზომა ან გაზარდეს POST ინფორმაციის ზომა პარამეტრებიდან %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'დიდი ფაილი უნდა ატვირტოთ FTP-თი და შემდეგ გაუკეთოთ იმპორტი სერვერიდან.',
 	'File must be in UTF-8 encoding.' => 'ფაილი უნდა იყოს კოდირებაში UTF-8.',
@@ -110,6 +124,7 @@ return [
 
 	// Databases
 	'Database' => 'ბაზა',
+	'database' => 'ბაზა', // by Claude Opus 5
 	'DB' => 'ბაზა',
 	'Use' => 'არჩევა',
 	'Invalid database.' => 'არასწორი ბაზა.',
@@ -129,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'სქემა',
+	'schema' => 'სქემა', // by Claude Opus 5
+	'Schemas' => 'სქემები', // by Claude Opus 5
+	'No schemas.' => 'სქემა არაა.', // by Claude Opus 5
+	'Show schema' => 'სქემის ჩვენება', // by Claude Opus 5
 	'Alter schema' => 'სქემის შეცვლა',
 	'Create schema' => 'ახალი სქემა',
 	'Schema has been dropped.' => 'სქემა წაიშალა.',
@@ -158,6 +177,7 @@ return [
 	'Tables have been moved.' => 'ცხრილი გადაადგილდა.',
 	'Copy' => 'კოპირება',
 	'Tables have been copied.' => 'ცხრილი დაკოპირდა.',
+	'overwrite' => 'გადაწერა', // by Claude Opus 5
 
 	// Tables
 	'Tables' => 'ცხრილები',
@@ -202,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'დაყოფა',
+	'Partition' => 'დანაყოფი', // by Claude Opus 5
 	'Partitions' => 'დანაყოფები',
 	'Partition name' => 'დანაყოფის სახელი',
 	'Values' => 'პარამეტრები',
+	'Inherited tables' => 'მემკვიდრეობითი ცხრილები', // by Claude Opus 5
+	'Inherited from' => 'მემკვიდრეობა ცხრილიდან', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'ინდექსები',
@@ -213,6 +236,8 @@ return [
 	'Add next' => 'კიდევ დამატება',
 	'Index Type' => 'ინდექსის სახეობა',
 	'length' => 'სიგრძე',
+	'Algorithm' => 'ალგორითმი', // by Claude Opus 5
+	'Condition' => 'პირობა', // by Claude Opus 5
 
 	// Foreign keys
 	'Foreign keys' => 'გარე გასაღები',
@@ -285,6 +310,12 @@ return [
 	'Create trigger' => 'ტრიგერის შექმნა',
 
 	// Table check constraints
+	'Checks' => 'შემოწმებები', // by Claude Opus 5
+	'Create check' => 'შემოწმების შექმნა', // by Claude Opus 5
+	'Alter check' => 'შემოწმების შეცვლა', // by Claude Opus 5
+	'Check has been created.' => 'შემოწმება შეიქმნა.', // by Claude Opus 5
+	'Check has been altered.' => 'შემოწმება შეიცვალა.', // by Claude Opus 5
+	'Check has been dropped.' => 'შემოწმება წაიშალა.', // by Claude Opus 5
 
 	// Selection
 	'Select data' => 'არჩევა',
@@ -352,6 +383,38 @@ return [
 	'no' => 'არა',
 
 	// Settings
+	'Settings' => 'პარამეტრები', // by Claude Opus 5
+	'Default' => 'ნაგულისხმევი', // by Claude Opus 5
+	'Color scheme' => 'ფერთა სქემა', // by Claude Opus 5
+	'By system' => 'სისტემის მიხედვით', // by Claude Opus 5
+	'Light' => 'ღია', // by Claude Opus 5
+	'Dark' => 'მუქი', // by Claude Opus 5
+	'Navigation mode' => 'ნავიგაციის რეჟიმი', // by Claude Opus 5
+	'Simple' => 'მარტივი', // by Claude Opus 5
+	'Dual' => 'ორმაგი', // by Claude Opus 5
+	'Reversed' => 'შებრუნებული', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'მთავარი ნავიგაციის განლაგება ცხრილის ბმულებით.', // by Claude Opus 5
+	'Table links' => 'ცხრილის ბმულები', // by Claude Opus 5
+	'Primary action for all table links.' => 'ძირითადი მოქმედება ცხრილის ყველა ბმულისთვის.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'ბმულები ცხრილებზე, რომლებიც მიმართავენ მიმდინარე ჩანაწერს.', // by Claude Opus 5
+	'Display' => 'ჩვენება', // by Claude Opus 5
+	'Hide' => 'დამალვა', // by Claude Opus 5
+	'Records per page' => 'ჩანაწერი გვერდზე', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'ინფორმაციის ცხრილში ნაჩვენები ჩანაწერების ნაგულისხმევი რაოდენობა.', // by Claude Opus 5
+	'Enum as select' => 'Enum როგორც სია', // by Claude Opus 5
+	'Never' => 'არასოდეს', // by Claude Opus 5
+	'Always' => 'ყოველთვის', // by Claude Opus 5
+	'More values than %d' => '%d-ზე მეტი მნიშვნელობა', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'ზღვარი enum ველებისთვის ასარჩევი სიის ჩვენებისას.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'ერთჯერადი პაროლი', // by Claude Opus 5
+	'Enter OTP code.' => 'შეიყვანეთ OTP-კოდი.', // by Claude Opus 5
+	'Invalid OTP code.' => 'არასწორი OTP-კოდი.', // by Claude Opus 5
+	'Access denied.' => 'წვდომა აკრძალულია.', // by Claude Opus 5
+	'JSON previews' => 'JSON-ის გადახედვა', // by Claude Opus 5
+	'Data table' => 'ინფორმაციის ცხრილი', // by Claude Opus 5
+	'Edit form' => 'შეცვლის ფორმა', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'ერთი წამი...', // by Claude Opus 5
 ];

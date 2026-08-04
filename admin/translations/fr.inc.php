@@ -118,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'L\'importation de fichier est désactivée.',
 	'Unable to upload a file.' => 'Impossible d\'importer le fichier.',
 	'Maximum allowed file size is %sB.' => 'La taille maximale des fichiers est de %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Le nombre maximal de fichiers est %d. Sélectionnez moins de fichiers ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'La taille totale maximale des fichiers est de %s. Sélectionnez des fichiers plus petits ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Données POST trop grandes. Réduisez la taille des données ou augmentez la valeur de %s dans la configuration de PHP.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Vous pouvez uploader un gros fichier SQL par FTP et ensuite l\'importer depuis le serveur.',
 	'File must be in UTF-8 encoding.' => 'Les fichiers doivent être encodés en UTF-8.',
@@ -239,6 +241,8 @@ return [
 	'Partitions' => 'Partitions',
 	'Partition name' => 'Nom de la partition',
 	'Values' => 'Valeurs',
+	'Inherited tables' => 'Tables héritées', // by Claude Opus 5
+	'Inherited from' => 'Hérité de', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Index',
@@ -419,6 +423,9 @@ return [
 	'Layout of main navigation with table links.' => 'Disposition de la navigation principale avec liens de la table.',
 	'Table links' => 'Liens de la table',
 	'Primary action for all table links.' => 'Action principale pour tous les liens de la table.',
+	'Links to tables referencing the current row.' => 'Liens vers les tables référençant la ligne courante.', // by Claude Opus 5
+	'Display' => 'Afficher', // by Claude Opus 5
+	'Hide' => 'Masquer', // by Claude Opus 5
 	'Records per page' => 'Enregistrements par page',
 	'Default number of records displayed in data table.' => 'Nombre d\'enregistrements affichés par défaut dans la table de données.',
 	'Enum as select' => 'Enum comme liste de sélection',
@@ -435,4 +442,6 @@ return [
 	'JSON previews' => 'Aperçus JSON',
 	'Data table' => 'Table de données',
 	'Edit form' => 'Formulaire d\'édition',
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Un instant...', // by Claude Opus 5
 ];

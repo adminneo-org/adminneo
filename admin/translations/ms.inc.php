@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s mesti memulangkan array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s dan %s mesti memulangkan objek yang dibina oleh kaedah %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistem',
@@ -24,11 +26,20 @@ return [
 	'Logout' => 'Log keluar',
 	'Logged as: %s' => 'Log masuk sebagai: %s',
 	'Logout successful.' => 'Log keluar berjaya.',
+	'hostname[:port] or :socket' => 'nama hos[:port] atau :soket', // by Claude Opus 5
+	'Invalid server or credentials.' => 'Pelayan atau kelayakan tidak sah.', // by Claude Opus 5
+	'There is a space in the input password which might be the cause.' => 'Terdapat ruang kosong dalam kata laluan yang dimasukkan, mungkin itu puncanya.', // by Claude Opus 5
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tidak menyokong capaian ke pangkalan data tanpa kata laluan, <a href="https://www.adminneo.org/password"%s>maklumat lanjut</a>.', // by Claude Opus 5
+	'Database does not support password.' => 'Pangkalan data tidak menyokong kata laluan.', // by Claude Opus 5
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'Terlalu banyak percubaan log masuk yang gagal, sila cuba lagi dalam masa %d minit.',
+	'Invalid permanent login, please login again.' => 'Log masuk kekal tidak sah, sila log masuk kembali.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF tidak sah. Sila hantar borang sekali lagi.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Jika anda tidak menghantar permintaan ini dari AdminNeo sila tutup halaman ini.',
+	'The action will be performed after successful login with the same credentials.' => 'Tindakan ini akan dilaksanakan selepas log masuk berjaya dengan kelayakan yang sama.', // by Claude Opus 5
 
 	// Connection
+	'No driver' => 'Tiada pemacu', // by Claude Opus 5
+	'Database driver not found.' => 'Pemacu pangkalan data tidak dijumpai.', // by Claude Opus 5
 	'No extension' => 'Tiada sambungan',
 	'None of the supported PHP extensions (%s) are available.' => 'Sambungan PHP yang (%s) disokong tidak wujud.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Penyambungan ke port yang istimewa tidak dibenarkan.',
@@ -39,7 +50,10 @@ return [
 	// Settings
 	'Language' => 'Bahasa',
 
+	'Home' => 'Utama', // by Claude Opus 5
 	'Refresh' => 'Segar kembali',
+	'Info' => 'Info', // by Claude Opus 5
+	'More information.' => 'Maklumat lanjut.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Keistimewaan',
@@ -58,16 +72,20 @@ return [
 
 	// Structure
 	'Column' => 'Kolum',
+	'Columns' => 'Kolum', // by Claude Opus 5
 	'Routine' => 'Rutin',
 	'Grant' => 'Beri',
 	'Revoke' => 'Batal',
 
 	// Queries
 	'SQL command' => 'Arahan SQL',
+	'HTTP request' => 'Permintaan HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => '%d query berjaya dilaksanakan.',
 	'Query executed OK, %d row(s) affected.' => 'Query berjaya dilaksanakan, %d baris terjejas.',
 	'No commands to execute.' => 'Tiada arahan untuk dilaksanakan.',
 	'Error in query' => 'Ralat pada query',
+	'Unknown error.' => 'Ralat tidak diketahui.', // by Claude Opus 5
+	'Warnings' => 'Amaran', // by Claude Opus 5
 	'%s queries are not supported.' => 'Query %s tidak disokong.',
 	'Execute' => 'Laksana',
 	'Stop on error' => 'Berhenti jika ralat',
@@ -88,6 +106,8 @@ return [
 	'File uploads are disabled.' => 'Muat naik fail dihalang.',
 	'Unable to upload a file.' => 'Muat naik fail gagal.',
 	'Maximum allowed file size is %sB.' => 'Saiz fail maksimum yang dibenarkan adalah %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Bilangan fail maksimum adalah %d. Pilih fail yang lebih sedikit atau tingkatkan tetapan %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Jumlah saiz fail maksimum adalah %s. Pilih fail yang lebih kecil atau tingkatkan tetapan %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Data POST terlalu besar. Kecilkan data atau tingkatkan tetapan %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Anda boleh muat naik fail SQL yang besar melalui FTP dan import melalui pelayan.',
 	'File must be in UTF-8 encoding.' => 'Fail mesti dalam pengekodan UTF-8.',
@@ -104,6 +124,8 @@ return [
 
 	// Databases
 	'Database' => 'Pangkalan data',
+	'database' => 'pangkalan data', // by Claude Opus 5
+	'DB' => 'PD', // by Claude Opus 5
 	'Use' => 'Guna',
 	'Invalid database.' => 'Pangkalan data tidak sah.',
 	'Alter database' => 'Ubah pangkalan data',
@@ -122,6 +144,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skema',
+	'schema' => 'skema', // by Claude Opus 5
+	'Schemas' => 'Skema', // by Claude Opus 5
+	'No schemas.' => 'Tiada skema.', // by Claude Opus 5
+	'Show schema' => 'Paparkan skema', // by Claude Opus 5
 	'Alter schema' => 'Ubah skema',
 	'Create schema' => 'Buat skema',
 	'Schema has been dropped.' => 'Skema telah dijatuhkan.',
@@ -151,6 +177,7 @@ return [
 	'Tables have been moved.' => 'Jadual telah dipindahkan.',
 	'Copy' => 'Salin',
 	'Tables have been copied.' => 'Jadual telah disalin.',
+	'overwrite' => 'tulis ganti', // by Claude Opus 5
 
 	// Tables
 	'Tables' => 'Jadual',
@@ -186,7 +213,7 @@ return [
 
 	// Views
 	'View' => 'Papar',
-	'Materialized view' => 'Paparan yang menjadi kenyataan',
+	'Materialized view' => 'Paparan termaterialisasi', // by Claude Opus 5
 	'View has been dropped.' => 'Paparan telah dijatuhkan.',
 	'View has been altered.' => 'Paparan telah diubah.',
 	'View has been created.' => 'Paparan telah dibuat.',
@@ -195,9 +222,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partition mengikut',
+	'Partition' => 'Partition', // by Claude Opus 5
 	'Partitions' => 'Partition',
 	'Partition name' => 'Nama partition',
 	'Values' => 'Nilai',
+	'Inherited tables' => 'Jadual warisan', // by Claude Opus 5
+	'Inherited from' => 'Diwarisi daripada', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indeks',
@@ -206,6 +236,8 @@ return [
 	'Add next' => 'Tambah yang seterusnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'kepanjangan',
+	'Algorithm' => 'Algoritma', // by Claude Opus 5
+	'Condition' => 'Syarat', // by Claude Opus 5
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
@@ -269,7 +301,7 @@ return [
 	'Alter type' => 'Ubah jenis',
 
 	// Triggers
-	'Triggers' => ' Pencetus',
+	'Triggers' => 'Pencetus', // by Claude Opus 5
 	'Add trigger' => 'Tambah pencetus',
 	'Trigger has been dropped.' => 'Pencetus telah dijatuhkan.',
 	'Trigger has been altered.' => 'Pencetus telah diubah.',
@@ -278,6 +310,12 @@ return [
 	'Create trigger' => 'Buat pencetus',
 
 	// Table check constraints
+	'Checks' => 'Pemeriksaan', // by Claude Opus 5
+	'Create check' => 'Bina pemeriksaan', // by Claude Opus 5
+	'Alter check' => 'Ubah pemeriksaan', // by Claude Opus 5
+	'Check has been created.' => 'Pemeriksaan telah dibina.', // by Claude Opus 5
+	'Check has been altered.' => 'Pemeriksaan telah diubah.', // by Claude Opus 5
+	'Check has been dropped.' => 'Pemeriksaan telah dijatuhkan.', // by Claude Opus 5
 
 	// Selection
 	'Select data' => 'Pilih data',
@@ -348,6 +386,38 @@ return [
 	'no' => 'tidak',
 
 	// Settings
+	'Settings' => 'Tetapan', // by Claude Opus 5
+	'Default' => 'Lalai', // by Claude Opus 5
+	'Color scheme' => 'Skema warna', // by Claude Opus 5
+	'By system' => 'Mengikut sistem', // by Claude Opus 5
+	'Light' => 'Cerah', // by Claude Opus 5
+	'Dark' => 'Gelap', // by Claude Opus 5
+	'Navigation mode' => 'Mod navigasi', // by Claude Opus 5
+	'Simple' => 'Ringkas', // by Claude Opus 5
+	'Dual' => 'Dwi', // by Claude Opus 5
+	'Reversed' => 'Terbalik', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Susun atur navigasi utama dengan pautan jadual.', // by Claude Opus 5
+	'Table links' => 'Pautan jadual', // by Claude Opus 5
+	'Primary action for all table links.' => 'Tindakan utama untuk semua pautan jadual.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Pautan ke jadual yang merujuk baris semasa.', // by Claude Opus 5
+	'Display' => 'Paparkan', // by Claude Opus 5
+	'Hide' => 'Sembunyikan', // by Claude Opus 5
+	'Records per page' => 'Rekod setiap halaman', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Bilangan lalai rekod yang dipaparkan dalam jadual data.', // by Claude Opus 5
+	'Enum as select' => 'Enum sebagai senarai pilihan', // by Claude Opus 5
+	'Never' => 'Tidak sesekali', // by Claude Opus 5
+	'Always' => 'Sentiasa', // by Claude Opus 5
+	'More values than %d' => 'Lebih daripada %d nilai', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Ambang untuk memaparkan senarai pilihan bagi kolum enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Kata Laluan Sekali Guna', // by Claude Opus 5
+	'Enter OTP code.' => 'Masukkan kod OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Kod OTP tidak sah.', // by Claude Opus 5
+	'Access denied.' => 'Capaian dihalang.', // by Claude Opus 5
+	'JSON previews' => 'Pratonton JSON', // by Claude Opus 5
+	'Data table' => 'Jadual data', // by Claude Opus 5
+	'Edit form' => 'Borang ubah', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'Sekejap...', // by Claude Opus 5
 ];

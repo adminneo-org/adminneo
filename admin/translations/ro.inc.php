@@ -13,6 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
+	'%s must return an array.' => '%s trebuie să returneze un array.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s și %s trebuie să returneze un obiect creat prin metoda %s.', // by Claude Opus 5
 
 	// Login
 	'System' => 'Sistem',
@@ -25,6 +27,7 @@ return [
 	'Logged as: %s' => 'Ați intrat ca: %s',
 	'Logout successful.' => 'Ați ieșit cu succes.',
 	'hostname[:port] or :socket' => 'hostname[:port] sau :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Server sau date de autentificare incorecte.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Există un spațiu în parola introdusă, care ar putea fi cauza.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nu acceptă accesul la o bază de date fără parolă, <a href="https://www.adminneo.org/password"%s>mai multe informații</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Baza de date nu acceptă parolă.', // by Claude Fable 5
@@ -32,11 +35,14 @@ return [
 		'Prea multe autentificări nereușite, încercați din nou peste %d minut.',
 		'Prea multe autentificări nereușite, încercați din nou peste %d minute.',
 	], // by Claude Fable 5
+	'Invalid permanent login, please login again.' => 'Logare permanentă incorectă, rog să vă conectați din nou.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Dacă nu ați trimis această cerere din AdminNeo, închideți această pagină.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5
 
 	// Connection
+	'No driver' => 'Nu este driver', // by Claude Opus 5
+	'Database driver not found.' => 'Driverul bazei de date nu a fost găsit.', // by Claude Opus 5
 	'No extension' => 'Nu este extensie',
 	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Conectarea la porturi privilegiate nu este permisă.', // by Claude Fable 5
@@ -47,7 +53,10 @@ return [
 	// Settings
 	'Language' => 'Limba',
 
+	'Home' => 'Acasă', // by Claude Opus 5
 	'Refresh' => 'Împrospătează',
+	'Info' => 'Informații', // by Claude Opus 5
+	'More information.' => 'Mai multe informații.', // by Claude Opus 5
 
 	// Privileges
 	'Privileges' => 'Privilegii',
@@ -76,6 +85,7 @@ return [
 
 	// Queries
 	'SQL command' => 'SQL query',
+	'HTTP request' => 'Cerere HTTP', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d query executat.',
 		'%d query-uri executate cu succes.',
@@ -108,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Încărcarea fișierelor este interzisă.',
 	'Unable to upload a file.' => 'Nu am putut încărca fișierul pe server.',
 	'Maximum allowed file size is %sB.' => 'Fișierul maxim admis - %sO.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Numărul maxim de fișiere este %d. Alegeți mai puține fișiere sau măriți parametrul configurației directivei %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Mărimea totală maximă a fișierelor este %s. Alegeți fișiere mai mici sau măriți parametrul configurației directivei %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Mesajul POST este prea mare. Trimiteți mai puține date sau măriți parametrul configurației directivei %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Puteți încărca un fișier SQL mare prin FTP și să îl importați de pe server.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'Fișierul trebuie să fie codificat UTF-8.', // by Claude Fable 5
@@ -127,9 +139,10 @@ return [
 
 	// Databases
 	'Database' => 'Baza de date',
+	'database' => 'baza de date', // by Claude Opus 5
 	'DB' => 'BD', // by Claude Fable 5
 	'Use' => 'Alege',
-	'Invalid database.' => 'Bază de deate invalidă.',
+	'Invalid database.' => 'Bază de date invalidă.', // by Claude Opus 5
 	'Alter database' => 'Modifică baza de date',
 	'Create database' => 'Crează baza de date',
 	'Database schema' => 'Schema bazei de date',
@@ -146,6 +159,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
+	'schema' => 'schema', // by Claude Opus 5
+	'Schemas' => 'Scheme', // by Claude Opus 5
+	'No schemas.' => 'Nu sunt scheme.', // by Claude Opus 5
+	'Show schema' => 'Arată schema', // by Claude Opus 5
 	'Alter schema' => 'Modifică schema',
 	'Create schema' => 'Crează o schemă',
 	'Schema has been dropped.' => 'Schema a fost ștearsă.',
@@ -220,9 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Împarte',
+	'Partition' => 'Secțiune', // by Claude Opus 5
 	'Partitions' => 'Secțiuni',
 	'Partition name' => 'Denumirea secțiunii',
 	'Values' => 'Parametru',
+	'Inherited tables' => 'Tabele moștenite', // by Claude Opus 5
+	'Inherited from' => 'Moștenit de la', // by Claude Opus 5
 
 	// Indexes
 	'Indexes' => 'Indexuri',
@@ -390,6 +410,38 @@ return [
 	'no' => 'nu', // by Claude Fable 5
 
 	// Settings
+	'Settings' => 'Setări', // by Claude Opus 5
+	'Default' => 'Implicit', // by Claude Opus 5
+	'Color scheme' => 'Schema de culori', // by Claude Opus 5
+	'By system' => 'După sistem', // by Claude Opus 5
+	'Light' => 'Luminoasă', // by Claude Opus 5
+	'Dark' => 'Întunecată', // by Claude Opus 5
+	'Navigation mode' => 'Modul de navigare', // by Claude Opus 5
+	'Simple' => 'Simplu', // by Claude Opus 5
+	'Dual' => 'Dublu', // by Claude Opus 5
+	'Reversed' => 'Inversat', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Aranjarea navigării principale cu adresele tabelelor.', // by Claude Opus 5
+	'Table links' => 'Adresele tabelelor', // by Claude Opus 5
+	'Primary action for all table links.' => 'Acțiunea principală pentru toate adresele tabelelor.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Adrese către tabelele care fac referire la înscrierea curentă.', // by Claude Opus 5
+	'Display' => 'Arată', // by Claude Opus 5
+	'Hide' => 'Ascunde', // by Claude Opus 5
+	'Records per page' => 'Înscrieri pe pagină', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Numărul implicit de înscrieri arătate în tabelul de date.', // by Claude Opus 5
+	'Enum as select' => 'Enum ca listă de selecție', // by Claude Opus 5
+	'Never' => 'Niciodată', // by Claude Opus 5
+	'Always' => 'Întotdeauna', // by Claude Opus 5
+	'More values than %d' => 'Mai mult de %d valori', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Limita pentru afișarea unei liste de selecție la coloanele enum.', // by Claude Opus 5
 
 	// Plugins
+	'One Time Password' => 'Parolă de unică folosință', // by Claude Opus 5
+	'Enter OTP code.' => 'Introduceți codul OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Cod OTP incorect.', // by Claude Opus 5
+	'Access denied.' => 'Acces interzis.', // by Claude Opus 5
+	'JSON previews' => 'Previzualizări JSON', // by Claude Opus 5
+	'Data table' => 'Tabelul de date', // by Claude Opus 5
+	'Edit form' => 'Forma de editare', // by Claude Opus 5
+	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
+	'Just a sec...' => 'O clipă...', // by Claude Opus 5
 ];
