@@ -165,6 +165,7 @@ git fetch vrana master --no-tags
   ```
   Issue: https://github.com/vrana/adminer/issues/<issue_id>
   ```
+  - Don't add your own `Co-Authored-By` signature, but keep original one if present.
 - If adaptation is more complex, then:
   - Commit in a standard way.
   - Add reference to the upstream commit to the commit message:
