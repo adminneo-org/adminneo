@@ -22,7 +22,7 @@ function load_compiled_file(string $filename)
 	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 	header("Cache-Control: immutable");
 
-	@ini_set("zlib.output_compression", "1"); // @ - may be disabled
+	ini_set("zlib.output_compression", "1");
 
 	$extension = pathinfo($filename, PATHINFO_EXTENSION);
 	switch ($extension) {

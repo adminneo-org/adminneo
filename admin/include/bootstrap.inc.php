@@ -54,7 +54,7 @@ if (preg_match('~^/[-\w.]~', $_SERVER["HTTP_X_FORWARDED_PREFIX"])) {
 // session.cookie_secure could be set on HTTP if we are behind a reverse proxy.
 define("Adminneo\HTTPS", ($_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "off")) || ini_bool("session.cookie_secure"));
 
-@ini_set("session.use_trans_sid", "0"); // protect links in export @ - may be disabled
+ini_set("session.use_trans_sid", "0"); // protect links in export
 if (!defined("SID")) {
 	session_cache_limiter(""); // to allow restarting session
 	session_name("neo_sid");
@@ -73,7 +73,7 @@ if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
 if (function_exists("set_time_limit")) { // can be disabled
 	set_time_limit(0);
 }
-@ini_set("precision", "16"); // @ - can be disabled, 16 - IEEE 754 has 15.95 decimal digits for double
+ini_set("precision", "16"); // 16 - IEEE 754 has 15.95 decimal digits for double
 
 // Migrate changed cookies.
 if (!isset($_COOKIE["neo_dump"]) && str_contains($_COOKIE["neo_export"] ?? "", "db_style")) {

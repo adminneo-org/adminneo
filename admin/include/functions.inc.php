@@ -489,7 +489,7 @@ function stop_session($force = false): void {
 	$use_cookies = ini_bool("session.use_cookies");
 	if (!$use_cookies || $force) {
 		session_write_close(); // improves concurrency if a user opens several pages at once, may be restarted later
-		if ($use_cookies && @ini_set("session.use_cookies", "0") === false) { // @ - may be disabled
+		if ($use_cookies && ini_set("session.use_cookies", "0") === false) {
 			session_start();
 		}
 	}

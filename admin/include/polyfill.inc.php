@@ -20,3 +20,11 @@ if (!function_exists("password_verify")) {
 		return false;
 	}
 }
+
+// ini_set() can be disabled by disable_functions.
+if (!function_exists("ini_set")) {
+	function ini_set(string $option, $value): bool
+	{
+		return false;
+	}
+}
