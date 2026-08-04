@@ -439,6 +439,5 @@ return [
 	'JSON previews' => 'JSON-Vorschau',
 	'Data table' => 'Datentabelle',
 	'Edit form' => 'Formular bearbeiten',
-	'Ask %s' => '%s fragen', // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Einen Moment...',
+	'Ask %s' => '%s fragen',
 ];

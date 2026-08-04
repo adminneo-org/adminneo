@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'JSON 预览', // by Claude Opus 5
 	'Data table' => '数据表', // by Claude Opus 5
 	'Edit form' => '编辑表单', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => '请稍候。', // by Claude Opus 5
+	'Ask %s' => null,
 ];

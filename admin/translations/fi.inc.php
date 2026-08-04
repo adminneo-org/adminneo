@@ -430,6 +430,5 @@ return [
 	'JSON previews' => 'JSON-esikatselut', // by Claude Opus 5
 	'Data table' => 'Datataulu', // by Claude Opus 5
 	'Edit form' => 'Muokkauslomake', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Hetkinen...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

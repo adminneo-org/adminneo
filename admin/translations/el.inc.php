@@ -442,6 +442,5 @@ return [
 	'JSON previews' => 'Προεπισκοπήσεις JSON', // by Claude Opus 5
 	'Data table' => 'Πίνακας δεδομένων', // by Claude Opus 5
 	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Μισό λεπτό...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

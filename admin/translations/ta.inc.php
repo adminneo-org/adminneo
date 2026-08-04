@@ -442,6 +442,5 @@ return [
 	'JSON previews' => 'JSON முன்னோட்ட‌ங்க‌ள்', // by Claude Opus 5
 	'Data table' => 'த‌க‌வ‌ல் அட்ட‌வ‌ணை', // by Claude Opus 5
 	'Edit form' => 'தொகுப்புப் ப‌டிவ‌ம்', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'ஒரு நொடி...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

@@ -436,6 +436,5 @@ return [
 	'JSON previews' => 'JSON पूर्वावलोकन', // by Claude Opus 5
 	'Data table' => 'डेटा टेबल', // by Claude Opus 5
 	'Edit form' => 'संपादन फॉर्म', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'बस एक क्षण।', // by Claude Opus 5
+	'Ask %s' => null,
 ];

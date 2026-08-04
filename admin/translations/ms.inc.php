@@ -418,6 +418,5 @@ return [
 	'JSON previews' => 'Pratonton JSON', // by Claude Opus 5
 	'Data table' => 'Jadual data', // by Claude Opus 5
 	'Edit form' => 'Borang ubah', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Sekejap...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

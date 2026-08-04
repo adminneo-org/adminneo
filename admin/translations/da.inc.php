@@ -439,6 +439,5 @@ return [
 	'JSON previews' => 'JSON-forhåndsvisning', // by Claude Opus 5
 	'Data table' => 'Datatabel', // by Claude Opus 5
 	'Edit form' => 'Redigeringsformular', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Et øjeblik...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

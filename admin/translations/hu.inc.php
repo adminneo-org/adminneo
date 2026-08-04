@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'JSON előnézet', // by Claude Opus 5
 	'Data table' => 'Adattábla', // by Claude Opus 5
 	'Edit form' => 'Szerkesztő űrlap', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Egy pillanat...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

@@ -451,6 +451,5 @@ return [
 	'JSON previews' => 'Náhled JSON',
 	'Data table' => 'Datová tabulka',
 	'Edit form' => 'Editační formulář',
-	'Ask %s' => 'Zeptat se %s', // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Chviličku...',
+	'Ask %s' => 'Zeptat se %s',
 ];

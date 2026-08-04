@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'ตัวอย่าง JSON', // by Claude Opus 5
 	'Data table' => 'ตารางข้อมูล', // by Claude Opus 5
 	'Edit form' => 'ฟอร์มแก้ไข', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'รอสักครู่.', // by Claude Opus 5
+	'Ask %s' => null,
 ];

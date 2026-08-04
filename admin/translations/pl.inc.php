@@ -451,6 +451,5 @@ return [
 	'JSON previews' => 'Podglądy JSON',
 	'Data table' => 'Tabela danych',
 	'Edit form' => 'Formularz edycji',
-	'Ask %s' => 'Zapytaj %s', // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Chwileczkę...',
+	'Ask %s' => 'Zapytaj %s',
 ];

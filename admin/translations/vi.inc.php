@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'Xem trước JSON',
 	'Data table' => 'Bảng dữ liệu',
 	'Edit form' => 'Biểu mẫu chỉnh sửa',
-	'Ask %s' => 'Hỏi %s', // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Đợi một chút...',
+	'Ask %s' => 'Hỏi %s',
 ];

@@ -442,6 +442,5 @@ return [
 	'JSON previews' => 'Previzualizări JSON', // by Claude Opus 5
 	'Data table' => 'Tabelul de date', // by Claude Opus 5
 	'Edit form' => 'Forma de editare', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'O clipă...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

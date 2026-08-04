@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'JSON-ის გადახედვა', // by Claude Opus 5
 	'Data table' => 'ინფორმაციის ცხრილი', // by Claude Opus 5
 	'Edit form' => 'შეცვლის ფორმა', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'ერთი წამი...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

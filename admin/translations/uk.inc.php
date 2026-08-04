@@ -451,6 +451,5 @@ return [
 	'JSON previews' => 'Попередній перегляд JSON', // by Claude Opus 5
 	'Data table' => 'Таблиця даних', // by Claude Opus 5
 	'Edit form' => 'Форма редагування', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Одну секунду...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

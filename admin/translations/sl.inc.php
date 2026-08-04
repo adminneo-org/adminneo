@@ -460,6 +460,5 @@ return [
 	'JSON previews' => 'Predogledi JSON', // by Claude Opus 5
 	'Data table' => 'Tabela podatkov', // by Claude Opus 5
 	'Edit form' => 'Obrazec za urejanje', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Samo trenutek...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

@@ -451,6 +451,5 @@ return [
 	'JSON previews' => 'Предпросмотр JSON', // by Claude Opus 5
 	'Data table' => 'Таблица данных', // by Claude Opus 5
 	'Edit form' => 'Форма редактирования', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Секундочку...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

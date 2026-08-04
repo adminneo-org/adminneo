@@ -415,6 +415,5 @@ return [
 	'JSON previews' => 'پیش نمایش JSON', // by Claude Opus 5
 	'Data table' => 'جدول داده', // by Claude Opus 5
 	'Edit form' => 'فرم ویرایش', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'لحظه ای صبر کنید...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

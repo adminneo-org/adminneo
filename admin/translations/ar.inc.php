@@ -421,6 +421,5 @@ return [
 	'JSON previews' => 'معاينات JSON', // by Claude Opus 5
 	'Data table' => 'جدول البيانات', // by Claude Opus 5
 	'Edit form' => 'استمارة التعديل', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'لحظة من فضلك...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

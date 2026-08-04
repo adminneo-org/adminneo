@@ -451,6 +451,5 @@ return [
 	'JSON previews' => 'JSON priekšskatījumi', // by Claude Opus 5
 	'Data table' => 'Datu tabula', // by Claude Opus 5
 	'Edit form' => 'Rediģēšanas forma', // by Claude Opus 5
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Tikai mirklīti...', // by Claude Opus 5
+	'Ask %s' => null,
 ];

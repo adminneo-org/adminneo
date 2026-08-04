@@ -442,6 +442,5 @@ return [
 	'JSON previews' => 'Aperçus JSON',
 	'Data table' => 'Table de données',
 	'Edit form' => 'Formulaire d\'édition',
-	'Ask %s' => null, // Use the phrase from https://gemini.google.com/
-	'Just a sec...' => 'Un instant...', // by Claude Opus 5
+	'Ask %s' => null,
 ];
