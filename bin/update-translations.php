@@ -80,7 +80,8 @@ foreach ($file_paths as $file_path) {
 	}
 }
 
-// Generate language files.
+// Generate language files. The template is always processed first, so its translations are known to the other languages.
+$template_translations = [];
 foreach ($languages as $language => $dummy) {
 	$file_path = __DIR__ . "/../admin/translations/$language.inc.php";
 	$filename = basename($file_path);
@@ -90,6 +91,10 @@ foreach ($languages as $language => $dummy) {
 	$translations = require $file_path;
 	$old_content = str_replace("\r", "", file_get_contents($file_path));
 	$content = file_get_contents(__DIR__ . "/../admin/translations/$template.inc.php");
+
+	if ($language == $template) {
+		$template_translations = $translations;
+	}
 
 	// Language files are regenerated from the template, so remember which texts are marked as machine translated.
 	$marks = read_ai_marks($old_content);
@@ -149,14 +154,18 @@ foreach ($languages as $language => $dummy) {
 	// Process untranslated texts.
 	$first = true;
 	foreach ($texts as $en => $ending) {
-		if ($to_end || $clean) {
+		// Only plural texts are translated in English, the others are the translation itself. A text is plural when the
+		// template holds multiple forms for it, so a newly added one is picked up once the template is filled in.
+		$skip = ($language == "en" && !is_array($template_translations[$en] ?? null));
+
+		if ($to_end || $clean || $skip) {
 			delete_translation($content, $en);
 		} elseif ($language != $template) {
 			write_translation($content, $en, null, false);
 			continue;
 		}
 
-		if (!$clean && ($language != "en" || str_contains($en, "%d"))) {
+		if (!$clean && !$skip) {
 			add_translation($content, $en, $first);
 			$first = false;
 		}
