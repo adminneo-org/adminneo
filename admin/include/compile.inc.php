@@ -101,11 +101,11 @@ function compile_file(string $name, array $file_paths): ?string
 		$file = call_user_func($shrink_function, $file);
 	}
 
-	if (!in_array($extension, ["png", "ico"])) {
-		$file = compress_string($file);
+	if (in_array($extension, ["png", "ico"])) {
+		return base64_encode($file);
+	} else {
+		return compress_string($file);
 	}
-
-	return base64_encode($file);
 }
 
 function minify_css(string $file): string
