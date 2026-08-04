@@ -121,7 +121,9 @@ function minify_js(string $file): string
 	return jsShrink($file);
 }
 
-/** Compress string with deflate to characters from compress_alphabet(), tested by tests/compress.php */
+/**
+ * Compresses string with deflate to characters from compress_alphabet().
+ */
 function compress_string(string $string): string
 {
 	$binary = ($string != "" ? gzdeflate($string, 9) : "");
