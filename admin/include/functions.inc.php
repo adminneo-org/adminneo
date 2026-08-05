@@ -1136,12 +1136,15 @@ function is_shortable(?array $field): bool
 	return $field && !preg_match('~' . number_type() . '|date|time|year~', $field["type"]);
 }
 
-/** Split server into host and (port or socket)
+/**
+ * Splits server into host and (port or socket).
+ *
  * @return array{0: string, 1: string}
  */
-function host_port(string $server) {
-	return (preg_match('~^(:([^:].*)|(\[(.+)\]|(([^:]+://)?[^:]+))(:(\d+))?)$~', $server, $match) // :/tmp/socket | ([IPv6] | host) :port
-		? [$match[4] . $match[5], $match[2] . $match[8]]
+function host_port(string $server): array
+{
+	return (preg_match('~^(:([^:].*)|(\[(.+)]|(([^:]+://)?[^:]+))(:(\d+))?)$~', $server, $match) // :/tmp/socket | ([IPv6] | host) :port
+		? [($match[4] ?? "") . ($match[5] ?? ""), $match[2] .($match[8] ?? "")]
 		: [$server, '']
 	);
 }
