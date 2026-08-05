@@ -812,7 +812,7 @@ ORDER BY table_schema, table_name";
 		return get_rows($query, null, "");
 	}
 
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}

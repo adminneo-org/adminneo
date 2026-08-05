@@ -186,7 +186,6 @@ return [
 	'Check' => 'Vérifier',
 	'Repair' => 'Réparer',
 	'Truncate' => 'Tronquer',
-	'Truncate Cascade' => 'Tronquer en cascade', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Les tables ont été tronquées.',
 	'Move to other database' => 'Déplacer vers une autre base de données',
 	'Move' => 'Déplacer',

@@ -186,7 +186,6 @@ return [
 	'Check' => 'Проверка',
 	'Repair' => 'Поправка',
 	'Truncate' => 'Изрязване',
-	'Truncate Cascade' => 'Каскадно изрязване', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Таблиците бяха изрязани.',
 	'Move to other database' => 'Преместване в друга база данни',
 	'Move' => 'Преместване',

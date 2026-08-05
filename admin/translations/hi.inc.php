@@ -183,7 +183,6 @@ return [
 	'Check' => 'जांच',
 	'Repair' => 'मरम्मत',
 	'Truncate' => 'ट्रंकेट',
-	'Truncate Cascade' => 'कैस्केड ट्रंकेट', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'टेबल्स ट्रंकेट कर दिए गए हैं।',
 	'Move to other database' => 'अन्य डेटाबेस में स्थानांतरित करें',
 	'Move' => 'स्थानांतरित करें',

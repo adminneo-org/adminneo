@@ -171,7 +171,6 @@ return [
 	'Check' => 'შემოწმება',
 	'Repair' => 'გასწორება',
 	'Truncate' => 'გასუფთავება',
-	'Truncate Cascade' => 'კასკადური გასუფთავება', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'ცხრილი გასუფთავდა.',
 	'Move to other database' => 'გადატანა სხვა ბაზაში',
 	'Move' => 'გადატანა',

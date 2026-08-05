@@ -1177,9 +1177,9 @@ ORDER BY s.ordinal_position";
 		return true;
 	}
 
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
-		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)) . ($cascade ? " CASCADE" : ""));
+		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)));
 	}
 
 	function drop_views(array $views): bool

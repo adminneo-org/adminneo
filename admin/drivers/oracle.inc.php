@@ -621,7 +621,7 @@ AND c_src.TABLE_NAME = " . q($table);
 		return [];
 	}
 
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}

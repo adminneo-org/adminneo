@@ -186,7 +186,6 @@ return [
 	'Check' => 'Controleer',
 	'Repair' => 'Herstel',
 	'Truncate' => 'Legen',
-	'Truncate Cascade' => 'Cascade legen', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellen werden geleegd.',
 	'Move to other database' => 'Verplaats naar andere database',
 	'Move' => 'Verplaats',

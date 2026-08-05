@@ -180,7 +180,6 @@ return [
 	'Check' => 'Tarkista',
 	'Repair' => 'Korjaa',
 	'Truncate' => 'Tyhjennä',
-	'Truncate Cascade' => 'Tyhjennä (cascade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Taulujen sisältö on tyhjennetty.',
 	'Move to other database' => 'Siirrä toiseen tietokantaan',
 	'Move' => 'Siirrä',

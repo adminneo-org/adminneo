@@ -345,7 +345,7 @@ if (isset($_GET["clickhouse"])) {
 		return !$alter || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter));
 	}
 
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}

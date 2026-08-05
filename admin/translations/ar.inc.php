@@ -177,7 +177,6 @@ return [
 	'Check' => 'فحص',
 	'Repair' => 'إصلاح',
 	'Truncate' => 'قطع',
-	'Truncate Cascade' => 'قطع متتالي', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'تم قطع الجداول.',
 	'Move to other database' => 'نقل إلى قاعدة بيانات أخرى',
 	'Move' => 'نقل',

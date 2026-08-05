@@ -191,7 +191,6 @@ return [
 	'Check' => 'Sprawdź',
 	'Repair' => 'Napraw',
 	'Truncate' => 'Opróżnij',
-	'Truncate Cascade' => 'Opróżnij kaskadowo', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabele zostały opróżnione.',
 	'Move to other database' => 'Przenieś do innej bazy danych',
 	'Move' => 'Przenieś',

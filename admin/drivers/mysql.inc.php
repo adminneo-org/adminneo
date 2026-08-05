@@ -1124,7 +1124,7 @@ ORDER BY ORDINAL_POSITION";
 	 *
 	 * @param list<string> $tables
 	 */
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}

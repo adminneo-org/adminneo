@@ -186,7 +186,6 @@ return [
 	'Check' => 'Verifica',
 	'Repair' => 'Repara',
 	'Truncate' => 'Escapça',
-	'Truncate Cascade' => 'Escapça en cascada', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'S\'han escapçat les taules.',
 	'Move to other database' => 'Desplaça a una altra base de dades',
 	'Move' => 'Desplaça',

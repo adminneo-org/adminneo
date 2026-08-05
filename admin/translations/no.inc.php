@@ -183,7 +183,6 @@ return [
 	'Check' => 'Sjekk',
 	'Repair' => 'Reparer',
 	'Truncate' => 'Avkort',
-	'Truncate Cascade' => 'Avkort (kaskade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellene har blitt avkortet.',
 	'Move to other database' => 'Flytt til annen database',
 	'Move' => 'Flytt',
