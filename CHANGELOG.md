@@ -27,7 +27,7 @@ AdminNeo 5.6.0
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
 
-(Ported relevant changes from Adminer 5.5.0.)
+(Ported relevant changes from Adminer 5.5.0 - 5.5.1.)
 
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
