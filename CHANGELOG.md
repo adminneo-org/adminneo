@@ -17,6 +17,7 @@ AdminNeo 5.9
 - Alter view, routine and type: Use a transaction instead of a temporary object in PostgreSQL, SQLite, MS SQL (by @vrana)
 - Compiler: Compress translations with the English translation as a dictionary to reduce size (by @vrana)
 - MySQL: Show warnings count of each query in SQL command
+- PostgreSQL: Support range types (by @vrana)
 - PostgreSQL: Show composite, domain and range types next to enums (by @vrana)
 - PostgreSQL: Alter and rename user defined types (by @vrana)
 - PostgreSQL: Add values to an enum type without re-creating it (by @vrana)

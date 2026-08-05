@@ -422,6 +422,7 @@ return [
 	'Lists' => 'Seznamy',
 	'Network' => 'Síť',
 	'Geometry' => 'Geometrie',
+	'Ranges' => 'Rozsahy',
 	'Relations' => 'Vztahy',
 
 	// Editor - data values

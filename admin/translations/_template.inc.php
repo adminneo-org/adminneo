@@ -386,6 +386,7 @@ return [
 	'Lists' => 'Xx',
 	'Network' => 'Xx',
 	'Geometry' => 'Xx',
+	'Ranges' => 'Xx',
 	'Relations' => 'Xx',
 
 	// Editor - data values

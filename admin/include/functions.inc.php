@@ -40,12 +40,21 @@ function number($val) {
 	return preg_replace('~[^0-9]+~', '', $val);
 }
 
+/** Get regular expression to match integer types
+* @return string
+*/
+function int_type() {
+	// int2, int4, int8 are returned by pg_field_type()
+	return '(tiny|small|medium|big)?int(eger|\d)?';
+}
+
 /** Get regular expression to match numeric types
 * @return string
 */
 function number_type() {
-	// (^|[^o]) instead of (?<!o) - the expression is used also by JavaScript, lookbehind is unsupported in Safari < 16.4
-	return '((^|[^o])int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
+	// The type names are listed instead of matching substrings so that e.g. int4range, interval and point are not treated as numbers.
+	// The outer parentheses are the delimiters if the expression is passed to preg_match() alone. The expression is used also by JavaScript.
+	return '(^(' . int_type() . '|decimal|numeric|real|(binary_|half_|scaled_)?float\d?|(binary_)?double( precision)?|(small)?money)$)';
 }
 
 /** Disable magic_quotes_gpc

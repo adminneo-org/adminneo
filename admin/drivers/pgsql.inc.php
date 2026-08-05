@@ -439,6 +439,11 @@ if (isset($_GET["pgsql"])) {
 
 			if ($connection->isMinVersion("9.2")) {
 				$this->types[lang('Strings')]["json"] = 4294967295;
+				// TODO multiranges since 14
+				$this->types[lang('Ranges')] = [
+					"int4range" => 0, "int8range" => 0, "numrange" => 0,
+					"daterange" => 0, "tsrange" => 0, "tstzrange" => 0,
+				];
 
 				if ($connection->isMinVersion("9.4")) {
 					$this->types[lang('Strings')]["jsonb"] = 4294967295;
@@ -540,7 +545,7 @@ if (isset($_GET["pgsql"])) {
 		{
 			$textTypes = "char|text";
 			if (strpos($where["op"], "LIKE") === false) {
-				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|" . number_type();
+				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|range|" . number_type();
 			}
 
 			return (preg_match("~$textTypes~", $field["type"]) ? $idf : "CAST($idf AS text)");
