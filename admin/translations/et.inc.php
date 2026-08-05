@@ -299,7 +299,7 @@ return [
 	'Sequence has been altered.' => 'Jada on edukalt muudetud.',
 	'Alter sequence' => 'Muuda jada',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Kasutajatüübid',
 	'Create type' => 'Loo tüüp',
 	'Type has been dropped.' => 'Tüüp on edukalt kustutatud.',

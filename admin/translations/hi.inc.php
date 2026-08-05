@@ -308,7 +308,7 @@ return [
 	'Sequence has been altered.' => 'अनुक्रम बदल दिया गया है।',
 	'Alter sequence' => 'अनुक्रम बदलें',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'उपयोगकर्ता प्रकार',
 	'Create type' => 'प्रकार बनाएं',
 	'Type has been dropped.' => 'प्रकार हटा दिया गया है।',

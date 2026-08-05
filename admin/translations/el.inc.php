@@ -311,7 +311,7 @@ return [
 	'Sequence has been altered.' => 'Η αλληλουχία τροποποιήθηκε.',
 	'Alter sequence' => 'Τροποποίηση αλληλουχίας',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Τύποι χρήστη',
 	'Create type' => 'Δημιουργία τύπου',
 	'Type has been dropped.' => 'Ο τύπος διαγράφηκε.',

@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'シーケンスを変更しました。',
 	'Alter sequence' => 'シーケンス変更',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ユーザー定義型',
 	'Create type' => 'ユーザー定義型作成',
 	'Type has been dropped.' => 'ユーザー定義型を削除しました。',

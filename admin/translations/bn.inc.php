@@ -296,7 +296,7 @@ return [
 	'Sequence has been altered.' => 'অনুক্রম সম্পাদনা করা হয়েছে।',
 	'Alter sequence' => 'অনুক্রম সম্পাদনা করো',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ব্যবহারকারির ধরণ',
 	'Create type' => 'ধরণ তৈরী করুন',
 	'Type has been dropped.' => 'ধরণ মুছে ফেলা হয়েছে।',

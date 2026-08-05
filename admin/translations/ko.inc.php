@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => '시퀀스를 변경했습니다.',
 	'Alter sequence' => '순서 변경',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => '사용자 정의 유형', // by Claude Fable 5
 	'Create type' => '사용자 정의 형식 만들기',
 	'Type has been dropped.' => '유형을 삭제했습니다.',

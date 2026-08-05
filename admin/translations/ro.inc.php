@@ -311,7 +311,7 @@ return [
 	'Sequence has been altered.' => '«secvența» a fost modificată.',
 	'Alter sequence' => 'Modifică «secvență»',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Tipuri definite de utilizator', // by Claude Fable 5
 	'Create type' => 'Crează tip noi',
 	'Type has been dropped.' => 'Tiipul a fost șters.',

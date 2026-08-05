@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'صف ویرایش شد.',
 	'Alter sequence' => 'ویرایش صف',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'انواع کاربر',
 	'Create type' => 'ایجاد نوع',
 	'Type has been dropped.' => 'نوع حذف شد.',

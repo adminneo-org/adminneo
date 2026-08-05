@@ -317,7 +317,7 @@ return [
 	'Sequence has been altered.' => 'Sekvence izmainīta.', // by Claude Fable 5
 	'Alter sequence' => 'Izmainīt sekvenci', // by Claude Fable 5
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Lietotāja definēti tipi', // by Claude Fable 5
 	'Create type' => 'Izveidot tipu',
 	'Type has been dropped.' => 'Tips dzēsts.',

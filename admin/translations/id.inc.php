@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'Deret berhasil diubah.',
 	'Alter sequence' => 'Ubah deret',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Jenis pengguna',
 	'Create type' => 'Buat jenis',
 	'Type has been dropped.' => 'Jenis berhasil dihapus.',

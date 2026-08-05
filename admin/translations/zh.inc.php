@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => '已修改序列。',
 	'Alter sequence' => '修改序列',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => '用户定义类型', // by Claude Fable 5
 	'Create type' => '创建类型',
 	'Type has been dropped.' => '已删除类型。',

@@ -305,7 +305,7 @@ return [
 	'Sequence has been altered.' => 'Dizi değiştirildi.',
 	'Alter sequence' => 'Diziyi değiştir',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Kullanıcı türleri',
 	'Create type' => 'Tür oluştur',
 	'Type has been dropped.' => 'Tür silindi.',

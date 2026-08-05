@@ -317,7 +317,7 @@ return [
 	'Sequence has been altered.' => 'Низ је измењен.',
 	'Alter sequence' => 'Уреди низ',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Кориснички типови',
 	'Create type' => 'Дефиниши тип',
 	'Type has been dropped.' => 'Тип је избрисан.',

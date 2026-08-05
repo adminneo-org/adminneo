@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'Sequence ถูกเปลี่ยนแปลงแล้ว.',
 	'Alter sequence' => 'Sequence ถูกเปลี่ยนแปลงแล้ว',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ประเภทข้อมูลที่ผู้ใช้กำหนด', // by Claude Fable 5
 	'Create type' => 'สร้างประเภทผู้ใช้งาน',
 	'Type has been dropped.' => 'ประเภทถูกลบแล้ว.',

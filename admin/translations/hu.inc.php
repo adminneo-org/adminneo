@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'Sorozat módosult.',
 	'Alter sequence' => 'Sorozat módosítása',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Felhasználói típus',
 	'Create type' => 'Típus létrehozása',
 	'Type has been dropped.' => 'Típus eldobva.',

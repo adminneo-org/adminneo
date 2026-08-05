@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'მიმდევრობა შეიცვალა.',
 	'Alter sequence' => 'მიმდევრობის შეცვლა',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'მომხმარებლის სახეობა',
 	'Create type' => 'სახეობის შექმნა',
 	'Type has been dropped.' => 'სახეობა წაიშალა.',

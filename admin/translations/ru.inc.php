@@ -317,7 +317,7 @@ return [
 	'Sequence has been altered.' => '«Последовательность» изменена.',
 	'Alter sequence' => 'Изменить «последовательность»',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Пользовательские типы', // by Claude Fable 5
 	'Create type' => 'Создать тип',
 	'Type has been dropped.' => 'Тип удален.',

@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'הסדרה שונתה',
 	'Alter sequence' => 'שנה סדרה',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'טיפוסים מוגדרי משתמש', // by Claude Fable 5
 	'Create type' => 'צור סוג',
 	'Type has been dropped.' => 'הסוג הושלך',

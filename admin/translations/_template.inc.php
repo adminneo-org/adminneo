@@ -293,7 +293,7 @@ return [
 	'Sequence has been altered.' => 'Xx.',
 	'Alter sequence' => 'Xx',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Xx',
 	'Create type' => 'Xx',
 	'Type has been dropped.' => 'Xx.',

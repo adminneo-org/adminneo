@@ -311,7 +311,7 @@ return [
 	'Sequence has been altered.' => 'வ‌ரிசைமுறை மாற்ற‌ப்ப‌ட்ட‌து.',
 	'Alter sequence' => 'வ‌ரிசைமுறையை மாற்று',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ப‌ய‌னாள‌ர் வ‌கைக‌ள்',
 	'Create type' => 'வ‌கையை உருவாக்கு',
 	'Type has been dropped.' => 'வ‌கை (type) நீக்க‌ப்ப‌ட்ட‌து.',

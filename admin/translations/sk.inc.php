@@ -317,7 +317,7 @@ return [
 	'Sequence has been altered.' => 'Sekvencia bola zmenená.',
 	'Alter sequence' => 'Pozmeniť sekvenciu',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Užívateľské typy',
 	'Create type' => 'Vytvoriť typ',
 	'Type has been dropped.' => 'Typ bol odstránený.',

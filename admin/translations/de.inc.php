@@ -311,7 +311,7 @@ return [
 	'Sequence has been altered.' => 'Sequenz wurde geändert.',
 	'Alter sequence' => 'Sequenz ändern',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Benutzerdefinierte Typen',
 	'Create type' => 'Typ erstellen',
 	'Type has been dropped.' => 'Typ wurde gelöscht.',

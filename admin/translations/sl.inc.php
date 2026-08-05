@@ -323,7 +323,7 @@ return [
 	'Sequence has been altered.' => 'Sekvence je spremenjena.',
 	'Alter sequence' => 'Spremni sekvenco',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Uporabniški tipi',
 	'Create type' => 'Ustvari tip',
 	'Type has been dropped.' => 'Tip je zavržen.',

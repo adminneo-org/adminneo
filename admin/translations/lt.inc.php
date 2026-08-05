@@ -317,7 +317,7 @@ return [
 	'Sequence has been altered.' => 'Seka pakeista.',
 	'Alter sequence' => 'Keisti seką',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Vartotojo apibrėžti tipai', // by Claude Fable 5
 	'Create type' => 'Sukurti tipą',
 	'Type has been dropped.' => 'Tipas pašalintas.',

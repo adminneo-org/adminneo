@@ -302,7 +302,7 @@ return [
 	'Sequence has been altered.' => 'Sekvenssiä on muutettu.',
 	'Alter sequence' => 'Muuta sekvenssiä',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Käyttäjän tyypit',
 	'Create type' => 'Luo tyyppi',
 	'Type has been dropped.' => 'Tyyppi poistettiin.',
