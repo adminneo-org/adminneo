@@ -3,21 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'ДД.ММ.ГГГГ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'ЧЧ:ММ:СС',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'ДД.ММ.ГГГГ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'ЧЧ:ММ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+	'%s must return an array.' => '%s должен возвращать массив.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s и %s должны возвращать объект, созданный методом %s.', // by Claude Opus 5
+
+	// Login
 	'System' => 'Движок',
 	'Server' => 'Сервер',
 	'Username' => 'Имя пользователя',
@@ -27,7 +26,9 @@ return [
 	'Logout' => 'Выйти',
 	'Logged as: %s' => 'Вы вошли как: %s',
 	'Logout successful.' => 'Вы успешно покинули систему.',
-	'There is a space in the input password which might be the cause.' => 'В введеном пароле есть пробел, это может быть причиною.',
+	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Неверный сервер или учётные данные.', // by Claude Opus 5
+	'There is a space in the input password which might be the cause.' => 'Во введённом пароле есть пробел, это может быть причиной.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддерживает доступ к базе данных без пароля, <a href="https://www.adminneo.org/password"%s>больше информации</a>.',
 	'Database does not support password.' => 'База данных не поддерживает пароль.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
@@ -35,25 +36,30 @@ return [
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минуты.',
 		'Слишком много неудачных попыток входа. Попробуйте снова через %d минут.',
 	],
-	'Invalid CSRF token. Send the form again.' => 'Недействительный CSRF-токен. Отправите форму ещё раз.',
+	'Invalid permanent login, please login again.' => 'Недействительный постоянный вход, нужно снова войти в систему.', // by Claude Opus 5
+	'Invalid CSRF token. Send the form again.' => 'Недействительный CSRF-токен. Отправьте форму ещё раз.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Если вы не посылали этот запрос из AdminNeo, закройте эту страницу.',
 	'The action will be performed after successful login with the same credentials.' => 'Действие будет выполнено после успешного входа в систему с теми же учетными данными.',
 
-	// Connection.
+	// Connection
+	'No driver' => 'Нет драйвера', // by Claude Opus 5
+	'Database driver not found.' => 'Драйвер базы данных не найден.', // by Claude Opus 5
 	'No extension' => 'Нет расширений',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Недоступно ни одного расширения из поддерживаемых (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Недоступно ни одного расширения из поддерживаемых (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Подключение к привилегированным портам не допускается.',
 	'Session support must be enabled.' => 'Сессии должны быть включены.',
 	'Session expired, please login again.' => 'Срок действия сессии истёк, нужно снова войти в систему.',
 	'%s version: %s through PHP extension %s' => 'Версия %s: %s с PHP-расширением %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Язык',
 
+	'Home' => 'Главная', // by Claude Opus 5
 	'Refresh' => 'Обновить',
+	'Info' => 'Сведения', // by Claude Opus 5
+	'More information.' => 'Подробнее.', // by Claude Opus 5
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Полномочия',
 	'Create user' => 'Создать пользователя',
 	'User has been dropped.' => 'Пользователь был удалён.',
@@ -61,7 +67,7 @@ return [
 	'User has been created.' => 'Пользователь был создан.',
 	'Hashed' => 'Хешировано',
 
-	// Server.
+	// Server
 	'Process list' => 'Список процессов',
 	'%d process(es) have been killed.' => [
 		'Был завершён %d процесс.',
@@ -72,14 +78,16 @@ return [
 	'Variables' => 'Переменные',
 	'Status' => 'Состояние',
 
-	// Structure.
+	// Structure
 	'Column' => 'поле',
+	'Columns' => 'Поля', // by Claude Fable 5
 	'Routine' => 'Процедура',
 	'Grant' => 'Позволить',
 	'Revoke' => 'Запретить',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-запрос',
+	'HTTP request' => 'HTTP-запрос', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d запрос выполнен успешно.',
 		'%d запроса выполнено успешно.',
@@ -91,7 +99,7 @@ return [
 		'Запрос завершён, изменено %d записей.',
 	],
 	'No commands to execute.' => 'Нет команд для выполнения.',
-	'Error in query' => 'Ошибка в запросe',
+	'Error in query' => 'Ошибка в запросе',
 	'Unknown error.' => 'Неизвестная ошибка.',
 	'Warnings' => 'Предупреждения',
 	'%s queries are not supported.' => '%s-запросы не поддерживаются.',
@@ -99,13 +107,12 @@ return [
 	'Stop on error' => 'Остановить при ошибке',
 	'Show only errors' => 'Только ошибки',
 	'Time' => 'Время',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'История',
 	'Clear' => 'Очистить',
 	'Edit all' => 'Редактировать всё',
 
-	// Import.
+	// Import
 	'Import' => 'Импорт',
 	'File upload' => 'Загрузить файл на сервер',
 	'From server' => 'С сервера',
@@ -115,17 +122,19 @@ return [
 	'File uploads are disabled.' => 'Загрузка файлов на сервер запрещена.',
 	'Unable to upload a file.' => 'Не удалось загрузить файл на сервер.',
 	'Maximum allowed file size is %sB.' => 'Максимальный разрешённый размер файла — %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальное количество файлов — %d. Выберите меньше файлов или увеличьте параметр конфигурационной директивы %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальный суммарный размер файлов — %s. Выберите файлы поменьше или увеличьте параметр конфигурационной директивы %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Слишком большой объем POST-данных. Пошлите меньший объём данных или увеличьте параметр конфигурационной директивы %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Вы можете закачать большой SQL-файл по FTP и затем импортировать его с сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл должен быть в кодировке UTF-8.',
-	'You are offline.' => 'Вы не выполнили вход.',
+	'You are offline.' => 'Вы не в сети.', // by Claude Fable 5
 	'%d row(s) have been imported.' => [
 		'Импортирована %d строка.',
 		'Импортировано %d строки.',
 		'Импортировано %d строк.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Экспорт',
 	'Output' => 'Выходные данные',
 	'open' => 'открыть',
@@ -133,8 +142,9 @@ return [
 	'Format' => 'Формат',
 	'Data' => 'Данные',
 
-	// Databases.
+	// Databases
 	'Database' => 'База данных',
+	'database' => 'база данных', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Выбрать',
 	'Invalid database.' => 'Неверная база данных.',
@@ -147,12 +157,17 @@ return [
 	'Database has been created.' => 'База данных была создана.',
 	'Database has been renamed.' => 'База данных была переименована.',
 	'Database has been altered.' => 'База данных была изменена.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Файл уже существует.',
 	'Please use one of the extensions %s.' => 'Используйте одно из этих расширений %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
+	'schema' => 'схема', // by Claude Opus 5
+	'Schemas' => 'Схемы', // by Claude Opus 5
+	'No schemas.' => 'Нет схем.', // by Claude Opus 5
+	'Show schema' => 'Показать схему', // by Claude Opus 5
 	'Alter schema' => 'Изменить схему',
 	'Create schema' => 'Новая схема',
 	'Schema has been dropped.' => 'Схема удалена.',
@@ -160,7 +175,7 @@ return [
 	'Schema has been altered.' => 'Схема изменена.',
 	'Invalid schema.' => 'Неправильная схема.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Тип таблиц',
 	'engine' => 'Тип таблицы',
 	'Collation' => 'Режим сопоставления',
@@ -184,7 +199,7 @@ return [
 	'Tables have been copied.' => 'Таблицы скопированы.',
 	'overwrite' => 'перезаписать',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Таблицы',
 	'Tables and views' => 'Таблицы и представления',
 	'Table' => 'Таблица',
@@ -216,7 +231,7 @@ return [
 	'Remove' => 'Удалить',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Достигнуто максимальное значение количества доступных полей. Увеличьте %s.',
 
-	// Views.
+	// Views
 	'View' => 'Представление',
 	'Materialized view' => 'Материализованное представление',
 	'View has been dropped.' => 'Представление было удалено.',
@@ -225,21 +240,26 @@ return [
 	'Alter view' => 'Изменить представление',
 	'Create view' => 'Создать представление',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Разделить по',
+	'Partition' => 'Раздел', // by Claude Opus 5
 	'Partitions' => 'Разделы',
 	'Partition name' => 'Название раздела',
 	'Values' => 'Параметры',
+	'Inherited tables' => 'Унаследованные таблицы', // by Claude Opus 5
+	'Inherited from' => 'Унаследована от', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Индексы',
 	'Indexes have been altered.' => 'Индексы изменены.',
 	'Alter indexes' => 'Изменить индексы',
 	'Add next' => 'Добавить ещё',
 	'Index Type' => 'Тип индекса',
 	'length' => 'длина',
+	'Algorithm' => 'Алгоритм', // by Claude Fable 5
+	'Condition' => 'Условие', // by Claude Fable 5
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Внешние ключи',
 	'Foreign key' => 'Внешний ключ',
 	'Foreign key has been dropped.' => 'Внешний ключ был удалён.',
@@ -256,7 +276,7 @@ return [
 	'ON UPDATE' => 'При обновлении',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Поля должны иметь одинаковые типы данных, в результирующем поле должен быть индекс, данные для импорта должны существовать.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Хранимые процедуры и функции',
 	'Routine has been called, %d row(s) affected.' => [
 		'Была вызвана процедура, %d запись была изменена.',
@@ -274,7 +294,7 @@ return [
 	'Alter procedure' => 'Изменить процедуру',
 	'Return type' => 'Возвращаемый тип',
 
-	// Events.
+	// Events
 	'Events' => 'События',
 	'Event' => 'Событие',
 	'Event has been dropped.' => 'Событие было удалено.',
@@ -289,7 +309,7 @@ return [
 	'End' => 'Конец',
 	'On completion preserve' => 'После завершения сохранить',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => '«Последовательности»',
 	'Create sequence' => 'Создать «последовательность»',
 	'Sequence has been dropped.' => '«Последовательность» удалена.',
@@ -297,14 +317,14 @@ return [
 	'Sequence has been altered.' => '«Последовательность» изменена.',
 	'Alter sequence' => 'Изменить «последовательность»',
 
-	// User types (PostgreSQL)
-	'User types' => 'Типы пользователей',
+	// User-defined types (PostgreSQL)
+	'User types' => 'Пользовательские типы', // by Claude Fable 5
 	'Create type' => 'Создать тип',
 	'Type has been dropped.' => 'Тип удален.',
 	'Type has been created.' => 'Создан новый тип.',
 	'Alter type' => 'Изменить тип',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Триггеры',
 	'Add trigger' => 'Добавить триггер',
 	'Trigger has been dropped.' => 'Триггер был удалён.',
@@ -313,7 +333,7 @@ return [
 	'Alter trigger' => 'Изменить триггер',
 	'Create trigger' => 'Создать триггер',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Проверки',
 	'Create check' => 'Создать проверку',
 	'Alter check' => 'Изменить проверку',
@@ -321,7 +341,7 @@ return [
 	'Check has been altered.' => 'Проверка изменена.',
 	'Check has been dropped.' => 'Проверка удалена.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Выбрать',
 	'Select' => 'Выбрать',
 	'Functions' => 'Функции',
@@ -355,17 +375,16 @@ return [
 		'%d байтов',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Изменить',
 	'Ctrl+click on a value to modify it.' => 'Выполните Ctrl+Щелчок мышью по значению, чтобы его изменить.',
 	'Use edit link to modify this value.' => 'Изменить это значение можно с помощью ссылки «изменить».',
 
-	// Editing.
+	// Editing
 	'New item' => 'Новая запись',
 	'Edit' => 'Редактировать',
 	'original' => 'исходный',
-	// label for value '' in enum data type
-	'empty' => 'пусто',
+	'empty' => 'пусто', // label for value '' in enum data type
 	'Insert' => 'Вставить',
 	'Save' => 'Сохранить',
 	'Save and continue edit' => 'Сохранить и продолжить редактирование',
@@ -374,8 +393,7 @@ return [
 	'Selected' => 'Выбранные',
 	'Clone' => 'Клонировать',
 	'Delete' => 'Стереть',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Запись%s была вставлена.',
+	'Item%s has been inserted.' => 'Запись%s была вставлена.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Запись удалена.',
 	'Item has been updated.' => 'Запись обновлена.',
 	'%d item(s) have been affected.' => [
@@ -385,7 +403,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'У вас нет прав на обновление этой таблицы.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Числа',
 	'Date and time' => 'Дата и время',
 	'Strings' => 'Строки',
@@ -395,10 +413,43 @@ return [
 	'Geometry' => 'Геометрия',
 	'Relations' => 'Отношения',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'сейчас',
 	'yes' => 'да',
 	'no' => 'нет',
 
-	// Plugins.
+	// Settings
+	'Settings' => 'Настройки', // by Claude Opus 5
+	'Default' => 'По умолчанию', // by Claude Opus 5
+	'Color scheme' => 'Цветовая схема', // by Claude Opus 5
+	'By system' => 'Как в системе', // by Claude Opus 5
+	'Light' => 'Светлая', // by Claude Opus 5
+	'Dark' => 'Тёмная', // by Claude Opus 5
+	'Navigation mode' => 'Режим навигации', // by Claude Opus 5
+	'Simple' => 'Простой', // by Claude Opus 5
+	'Dual' => 'Двойной', // by Claude Opus 5
+	'Reversed' => 'Обратный', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Расположение главной навигации со ссылками таблиц.', // by Claude Opus 5
+	'Table links' => 'Ссылки таблиц', // by Claude Opus 5
+	'Primary action for all table links.' => 'Основное действие для всех ссылок таблиц.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Ссылки на таблицы, ссылающиеся на текущую запись.', // by Claude Opus 5
+	'Display' => 'Показывать', // by Claude Opus 5
+	'Hide' => 'Скрыть', // by Claude Opus 5
+	'Records per page' => 'Записей на странице', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Количество записей, отображаемых в таблице данных по умолчанию.', // by Claude Opus 5
+	'Enum as select' => 'Enum как список', // by Claude Opus 5
+	'Never' => 'Никогда', // by Claude Opus 5
+	'Always' => 'Всегда', // by Claude Opus 5
+	'More values than %d' => 'Больше %d значений', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Порог отображения списка выбора для полей типа enum.', // by Claude Opus 5
+
+	// Plugins
+	'One Time Password' => 'Одноразовый пароль', // by Claude Opus 5
+	'Enter OTP code.' => 'Введите код OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Неверный код OTP.', // by Claude Opus 5
+	'Access denied.' => 'Доступ запрещён.', // by Claude Opus 5
+	'JSON previews' => 'Предпросмотр JSON', // by Claude Opus 5
+	'Data table' => 'Таблица данных', // by Claude Opus 5
+	'Edit form' => 'Форма редактирования', // by Claude Opus 5
+	'Ask %s' => 'Спросить %s', // by Claude Opus 5
 ];

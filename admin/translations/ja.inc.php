@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1/$3/$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY/MM/DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => '時:分:秒',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1/$3/$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY/MM/DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => '時:分:秒', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s は配列を返す必要があります。',
 	'%s and %s must return an object created by %s method.' => '%s と %s は %s メソッドで作成されたオブジェクトを返す必要があります。',
 
-	// Login.
+	// Login
 	'System' => 'データベース種類',
 	'Server' => 'サーバー',
 	'Username' => 'ユーザー名',
@@ -29,6 +26,7 @@ return [
 	'Logout' => 'ログアウト',
 	'Logged as: %s' => 'ログ：%s',
 	'Logout successful.' => 'ログアウトしました。',
+	'hostname[:port] or :socket' => 'hostname[:port] または :socket', // by Claude Fable 5
 	'Invalid server or credentials.' => 'サーバーまたは認証情報が無効です。',
 	'There is a space in the input password which might be the cause.' => '入力されたパスワードに空白が含まれているので、それが原因かもしれません。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo はパスワードのないデータベースへの接続には対応していません。(<a href="https://www.adminneo.org/password"%s>詳細</a>)',
@@ -39,18 +37,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'AdminNeoリクエストでない場合はこのページを閉じてください。',
 	'The action will be performed after successful login with the same credentials.' => '同じアカウントで正しくログインすると作業を実行します。',
 
-	// Connection.
+	// Connection
 	'No driver' => 'ドライバーがありません',
 	'Database driver not found.' => 'データベースドライバーが見つかりません。',
 	'No extension' => '拡張機能がありません',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'PHPの拡張機能（%s）がセットアップされていません。',
+	'None of the supported PHP extensions (%s) are available.' => 'PHPの拡張機能（%s）がセットアップされていません。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '特権ポートへの接続は許可されていません。',
 	'Session support must be enabled.' => 'セッションを有効にしてください。',
 	'Session expired, please login again.' => 'セッションの期限切れ。ログインし直してください。',
 	'%s version: %s through PHP extension %s' => '%sバージョン：%s、 PHP拡張機能 %s',
 
-	// Settings.
+	// Settings
 	'Language' => '言語',
 
 	'Home' => 'ホーム',
@@ -58,7 +55,7 @@ return [
 	'Info' => '情報',
 	'More information.' => '詳細情報。',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => '権限',
 	'Create user' => 'ユーザを作成',
 	'User has been dropped.' => 'ユーザを削除しました。',
@@ -66,21 +63,21 @@ return [
 	'User has been created.' => 'ユーザを作成しました。',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => 'プロセス一覧',
 	'%d process(es) have been killed.' => '%d プロセスを終了しました。',
 	'Kill' => 'プロセスを終了',
 	'Variables' => '変数',
 	'Status' => '状態',
 
-	// Structure.
+	// Structure
 	'Column' => 'カラム',
 	'Columns' => 'カラム',
 	'Routine' => 'ルーチン',
 	'Grant' => '権限を付与',
 	'Revoke' => '権限を取り消す',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQLコマンド',
 	'HTTP request' => 'HTTP リクエスト',
 	'%d query(s) executed OK.' => '%d クエリーを実行しました。',
@@ -94,13 +91,12 @@ return [
 	'Stop on error' => 'エラーの場合は停止',
 	'Show only errors' => 'エラーのみ表示',
 	'Time' => 'タイミング',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f 秒',
+	'%.3f s' => '%.3f 秒', // sprintf() format for time of the command
 	'History' => '履歴',
 	'Clear' => '消去',
 	'Edit all' => '一括編集',
 
-	// Import.
+	// Import
 	'Import' => 'インポート',
 	'File upload' => 'アップロード',
 	'From server' => 'サーバー上のファイル',
@@ -110,13 +106,15 @@ return [
 	'File uploads are disabled.' => 'ファイルのアップロードが無効です。',
 	'Unable to upload a file.' => 'ファイルをアップロードできません。',
 	'Maximum allowed file size is %sB.' => '最大ファイルサイズは %sB です。',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ファイル数の上限は %d です。ファイル数を減らすか %s 設定を大きくしてください。', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ファイルの合計サイズの上限は %s です。より小さいファイルを選択するか %s 設定を大きくしてください。', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POSTデータが大きすぎます。データサイズを小さくするか %s 設定を大きくしてください。',
 	'You can upload a big SQL file via FTP and import it from server.' => '大きなSQLファイルは、FTP経由でアップロードしてサーバからインポートしてください。',
 	'File must be in UTF-8 encoding.' => 'ファイルをUTF-8で保存してください。',
 	'You are offline.' => 'オフライン状態です。',
 	'%d row(s) have been imported.' => '%d 行をインポートしました。',
 
-	// Export.
+	// Export
 	'Export' => 'エクスポート',
 	'Output' => '出力',
 	'open' => 'ブラウザに表示',
@@ -124,7 +122,7 @@ return [
 	'Format' => '形式',
 	'Data' => 'データ',
 
-	// Databases.
+	// Databases
 	'Database' => 'データベース',
 	'database' => 'データベース',
 	'DB' => 'DB',
@@ -139,11 +137,12 @@ return [
 	'Database has been created.' => 'データベースを作成しました。',
 	'Database has been renamed.' => 'データベースの名前を変えました。',
 	'Database has been altered.' => 'データベースの設定を変更しました。',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'ファイルが既に存在します。',
 	'Please use one of the extensions %s.' => '%s のいずれかの拡張機能を使ってください。',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'スキーマ',
 	'schema' => 'スキーマ',
 	'Schemas' => 'スキーマ一覧',
@@ -156,7 +155,7 @@ return [
 	'Schema has been altered.' => 'スキーマを変更しました。',
 	'Invalid schema.' => '無効なスキーマです。',
 
-	// Table list.
+	// Table list
 	'Engine' => 'エンジン',
 	'engine' => 'エンジン',
 	'Collation' => 'コレーション',
@@ -180,7 +179,7 @@ return [
 	'Tables have been copied.' => 'テーブルをコピーしました。',
 	'overwrite' => '上書き',
 
-	// Tables.
+	// Tables
 	'Tables' => 'テーブル',
 	'Tables and views' => 'テーブルとビュー',
 	'Table' => 'テーブル',
@@ -212,7 +211,7 @@ return [
 	'Remove' => '除外',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => '定義可能な最大フィールド数を越えました。%s を増やしてください。',
 
-	// Views.
+	// Views
 	'View' => 'ビュー',
 	'Materialized view' => 'マテリアライズドビュー',
 	'View has been dropped.' => 'ビューを削除しました。',
@@ -221,14 +220,16 @@ return [
 	'Alter view' => 'ビューの設定を変更',
 	'Create view' => 'ビューを作成',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'パーティション',
 	'Partition' => 'パーティション',
 	'Partitions' => 'パーティション',
 	'Partition name' => 'パーティション名',
 	'Values' => '値',
+	'Inherited tables' => '継承テーブル', // by Claude Opus 5
+	'Inherited from' => '継承元', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'インデックス',
 	'Indexes have been altered.' => 'インデックスを変更しました。',
 	'Alter indexes' => 'インデックスを変更',
@@ -238,7 +239,7 @@ return [
 	'Algorithm' => 'アルゴリズム',
 	'Condition' => '条件',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => '外部キー',
 	'Foreign key' => '外部キー',
 	'Foreign key has been dropped.' => '外部キーを削除しました。',
@@ -255,7 +256,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'ソースとターゲットのカラムは同じデータ型でなければなりません。ターゲットカラムにインデックスがあり、データが存在しなければなりません。',
 
-	// Routines.
+	// Routines
 	'Routines' => 'ルーチン',
 	'Routine has been called, %d row(s) affected.' => 'ルーチンを呼びました。%d 行を変更しました。',
 	'Call' => '呼出し',
@@ -269,7 +270,7 @@ return [
 	'Alter procedure' => 'プロシージャを変更',
 	'Return type' => '戻り値の型',
 
-	// Events.
+	// Events
 	'Events' => 'イベント',
 	'Event' => 'イベント',
 	'Event has been dropped.' => 'イベントを削除しました。',
@@ -284,7 +285,7 @@ return [
 	'End' => '終了',
 	'On completion preserve' => '完成後に保存',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'シーケンス',
 	'Create sequence' => 'シーケンス作成',
 	'Sequence has been dropped.' => 'シーケンスを削除しました。',
@@ -292,14 +293,14 @@ return [
 	'Sequence has been altered.' => 'シーケンスを変更しました。',
 	'Alter sequence' => 'シーケンス変更',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ユーザー定義型',
 	'Create type' => 'ユーザー定義型作成',
 	'Type has been dropped.' => 'ユーザー定義型を削除しました。',
 	'Type has been created.' => 'ユーザー定義型を追加しました。',
 	'Alter type' => 'ユーザー定義型変更',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'トリガー',
 	'Add trigger' => 'トリガーを追加',
 	'Trigger has been dropped.' => 'トリガーを削除しました。',
@@ -308,7 +309,7 @@ return [
 	'Alter trigger' => 'トリガーを変更',
 	'Create trigger' => 'トリガーを作成',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'CHECK制約',
 	'Create check' => 'CHECK制約を作成',
 	'Alter check' => 'CHECK制約を変更',
@@ -316,7 +317,7 @@ return [
 	'Check has been altered.' => 'CHECK制約を変更しました。',
 	'Check has been dropped.' => 'CHECK制約を削除しました。',
 
-	// Selection.
+	// Selection
 	'Select data' => 'データ',
 	'Select' => '選択',
 	'Functions' => '関数',
@@ -342,17 +343,16 @@ return [
 	'Whole result' => '全結果',
 	'%d byte(s)' => '%d バイト',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => '編集',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+クリックで値を修正します。',
 	'Use edit link to modify this value.' => 'この値を修正するにはリンクを使用してください。',
 
-	// Editing.
+	// Editing
 	'New item' => '新規レコードを挿入',
 	'Edit' => '編集',
 	'original' => '元',
-	// label for value '' in enum data type
-	'empty' => '空',
+	'empty' => '空', // label for value '' in enum data type
 	'Insert' => '挿入',
 	'Save' => '保存',
 	'Save and continue edit' => '保存して継続',
@@ -361,14 +361,13 @@ return [
 	'Selected' => '選択対象',
 	'Clone' => 'クローン',
 	'Delete' => '削除',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '%sレコードを挿入しました。',
+	'Item%s has been inserted.' => '%sレコードを挿入しました。', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'レコードを削除しました。',
 	'Item has been updated.' => 'レコードを更新しました。',
 	'%d item(s) have been affected.' => '%d レコードを更新しました。',
 	'You have no privileges to update this table.' => 'このテーブルを更新する権限がありません。',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => '数字',
 	'Date and time' => '日時',
 	'Strings' => '文字列',
@@ -378,17 +377,43 @@ return [
 	'Geometry' => 'ジオメトリ型',
 	'Relations' => '関係',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => '現在の日時',
 	'yes' => 'はい',
 	'no' => 'いいえ',
 
-	// Plugins.
+	// Settings
+	'Settings' => '設定', // by Claude Opus 5
+	'Default' => '既定', // by Claude Opus 5
+	'Color scheme' => '配色', // by Claude Opus 5
+	'By system' => 'システムに従う', // by Claude Opus 5
+	'Light' => 'ライト', // by Claude Opus 5
+	'Dark' => 'ダーク', // by Claude Opus 5
+	'Navigation mode' => 'ナビゲーションモード', // by Claude Opus 5
+	'Simple' => 'シンプル', // by Claude Opus 5
+	'Dual' => 'デュアル', // by Claude Opus 5
+	'Reversed' => '反転', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Opus 5
+	'Table links' => 'テーブルリンク', // by Claude Opus 5
+	'Primary action for all table links.' => 'すべてのテーブルリンクの主要な動作です。', // by Claude Opus 5
+	'Links to tables referencing the current row.' => '現在の行を参照しているテーブルへのリンクです。', // by Claude Opus 5
+	'Display' => '表示', // by Claude Opus 5
+	'Hide' => '非表示', // by Claude Opus 5
+	'Records per page' => '1ページあたりのレコード数', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'データテーブルに表示されるレコードの既定数です。', // by Claude Opus 5
+	'Enum as select' => 'ENUMを選択メニューで表示', // by Claude Opus 5
+	'Never' => 'しない', // by Claude Opus 5
+	'Always' => '常に', // by Claude Opus 5
+	'More values than %d' => '値が %d 個より多い場合', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'ENUMカラムを選択メニューで表示するしきい値です。', // by Claude Opus 5
+
+	// Plugins
 	'One Time Password' => 'ワンタイムパスワード(OTP)',
 	'Enter OTP code.' => 'OTPコードを入力してください。',
 	'Invalid OTP code.' => '無効なOTPコードです。',
 	'Access denied.' => 'アクセスが拒否されました。',
-	// Use the phrases from https://gemini.google.com/
+	'JSON previews' => 'JSONプレビュー', // by Claude Opus 5
+	'Data table' => 'データテーブル', // by Claude Opus 5
+	'Edit form' => '編集フォーム', // by Claude Opus 5
 	'Ask %s' => '%s に聞く',
-	'Just a sec...' => 'しばらくお待ち下さい...',
 ];

@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => '.',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => '.', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5-$3-$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD-MM-JJJJ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5-$3-$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD-MM-JJJJ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s moet een array retourneren.',
 	'%s and %s must return an object created by %s method.' => '%s en %s moeten een object retourneren dat met de methode %s is gemaakt.',
 
-	// Login.
+	// Login
 	'System' => 'Databasesysteem',
 	'Server' => 'Server',
 	'Username' => 'Gebruikersnaam',
@@ -28,7 +25,7 @@ return [
 	'Login' => 'Aanmelden',
 	'Logout' => 'Afmelden',
 	'Logged as: %s' => 'Aangemeld als: %s',
-	'Logout successful.' => 'Successvol afgemeld.',
+	'Logout successful.' => 'Succesvol afgemeld.',
 	'hostname[:port] or :socket' => 'hostname[:port] of :socket',
 	'Invalid server or credentials.' => 'Ongeldige server- of aanmeldingsgegevens..',
 	'There is a space in the input password which might be the cause.' => 'Er staat een spatie in het wachtwoord, wat misschien de oorzaak is.',
@@ -43,18 +40,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Als u deze actie niet via AdminNeo hebt gedaan, gelieve deze pagina dan te sluiten.',
 	'The action will be performed after successful login with the same credentials.' => 'Deze actie zal uitgevoerd worden na het succesvol aanmelden met dezelfde gebruikersgegevens.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Geen stuurprogramma',
 	'Database driver not found.' => 'Databankdriver niet gevonden.',
 	'No extension' => 'Geen extensie',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Geen geldige PHP extensies beschikbaar (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Geen geldige PHP extensies beschikbaar (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Verbindingen naar geprivilegieerde poorten is niet toegestaan.',
 	'Session support must be enabled.' => 'Sessies moeten geactiveerd zijn.',
 	'Session expired, please login again.' => 'Uw sessie is verlopen. Gelieve opnieuw aan te melden.',
 	'%s version: %s through PHP extension %s' => '%s versie: %s met PHP extensie %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Taal',
 
 	'Home' => 'Startpagina',
@@ -62,7 +58,7 @@ return [
 	'Info' => 'Informatie',
 	'More information.' => 'Meer informatie.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Rechten',
 	'Create user' => 'Gebruiker aanmaken',
 	'User has been dropped.' => 'Gebruiker verwijderd.',
@@ -70,7 +66,7 @@ return [
 	'User has been created.' => 'Gebruiker aangemaakt.',
 	'Hashed' => 'Gehashed',
 
-	// Server.
+	// Server
 	'Process list' => 'Proceslijst',
 	'%d process(es) have been killed.' => [
 		'%d proces gestopt.',
@@ -80,14 +76,14 @@ return [
 	'Variables' => 'Variabelen',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'Kolom',
 	'Columns' => 'Kolommen',
 	'Routine' => 'Routine',
 	'Grant' => 'Toekennen',
 	'Revoke' => 'Intrekken',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL opdracht',
 	'HTTP request' => 'HTTP-verzoek',
 	'%d query(s) executed OK.' => [
@@ -107,13 +103,12 @@ return [
 	'Stop on error' => 'Stoppen bij fout',
 	'Show only errors' => 'Enkel fouten tonen',
 	'Time' => 'Time',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Geschiedenis',
 	'Clear' => 'Wissen',
 	'Edit all' => 'Alles bewerken',
 
-	// Import.
+	// Import
 	'Import' => 'Importeren',
 	'File upload' => 'Bestand uploaden',
 	'From server' => 'Van server',
@@ -134,7 +129,7 @@ return [
 		'%d rijen werden geïmporteerd.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exporteren',
 	'Output' => 'Uitvoer',
 	'open' => 'openen',
@@ -142,7 +137,7 @@ return [
 	'Format' => 'Formaat',
 	'Data' => 'Data',
 
-	// Databases.
+	// Databases
 	'Database' => 'Database',
 	'database' => 'database',
 	'DB' => 'DB',
@@ -157,11 +152,12 @@ return [
 	'Database has been created.' => 'Database aangemaakt.',
 	'Database has been renamed.' => 'Database hernoemd.',
 	'Database has been altered.' => 'Database aangepast.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Bestand bestaat reeds.',
 	'Please use one of the extensions %s.' => 'Gebruik 1 van volgende extensies: %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'schema' => 'schema',
 	'Schemas' => 'Schema\'s',
@@ -174,7 +170,7 @@ return [
 	'Schema has been altered.' => 'Schema gewijzigd.',
 	'Invalid schema.' => 'Ongeldig schema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Engine',
 	'engine' => 'engine',
 	'Collation' => 'Collatie',
@@ -198,7 +194,7 @@ return [
 	'Tables have been copied.' => 'De tabellen zijn gekopieerd.',
 	'overwrite' => 'overschrijven',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabellen',
 	'Tables and views' => 'Tabellen en views',
 	'Table' => 'Tabel',
@@ -230,7 +226,7 @@ return [
 	'Remove' => 'Verwijderen',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Maximum aantal velden bereikt. Verhoog %s.',
 
-	// Views.
+	// Views
 	'View' => 'View',
 	'Materialized view' => 'Materialized view',
 	'View has been dropped.' => 'View verwijderd.',
@@ -239,7 +235,7 @@ return [
 	'Alter view' => 'View aanpassen',
 	'Create view' => 'View aanmaken',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Partitioneren op',
 	'Partition' => 'Partitie',
 	'Partitions' => 'Partities',
@@ -248,7 +244,7 @@ return [
 	'Inherited tables' => 'Erfelijke tabellen',
 	'Inherited from' => 'Erfelijk van',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indexen',
 	'Indexes have been altered.' => 'Index aangepast.',
 	'Alter indexes' => 'Indexen aanpassen',
@@ -258,7 +254,7 @@ return [
 	'Algorithm' => 'Algoritme',
 	'Condition' => 'Conditie',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Foreign keys',
 	'Foreign key' => 'Foreign key',
 	'Foreign key has been dropped.' => 'Foreign key verwijderd.',
@@ -275,7 +271,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Bron- en doelkolommen moeten van hetzelfde data type zijn, er moet een index bestaan op de gekozen kolommen en er moet gerelateerde data bestaan.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedures',
 	'Routine has been called, %d row(s) affected.' => [
 		'Procedure uitgevoerd, %d rij geraakt.',
@@ -292,7 +288,7 @@ return [
 	'Alter procedure' => 'Procedure aanpassen',
 	'Return type' => 'Return type',
 
-	// Events.
+	// Events
 	'Events' => 'Events',
 	'Event' => 'Event',
 	'Event has been dropped.' => 'Event werd verwijderd.',
@@ -307,7 +303,7 @@ return [
 	'End' => 'Stop',
 	'On completion preserve' => 'Bewaren na voltooiing',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sequences',
 	'Create sequence' => 'Sequence maken',
 	'Sequence has been dropped.' => 'Sequence verwijderd.',
@@ -315,14 +311,14 @@ return [
 	'Sequence has been altered.' => 'Sequence gewijzigd.',
 	'Alter sequence' => 'Sequence wijzigen',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Gebruikersgedefiniëerde types',
 	'Create type' => 'Type maken',
 	'Type has been dropped.' => 'Type verwijderd.',
 	'Type has been created.' => 'Type aangemaakt.',
 	'Alter type' => 'Type wijzigen',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Triggers',
 	'Add trigger' => 'Trigger aanmaken',
 	'Trigger has been dropped.' => 'Trigger verwijderd.',
@@ -331,7 +327,7 @@ return [
 	'Alter trigger' => 'Trigger aanpassen',
 	'Create trigger' => 'Trigger aanmaken',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Checks',
 	'Create check' => 'Check aanmaken',
 	'Alter check' => 'Check wijzigen',
@@ -339,7 +335,7 @@ return [
 	'Check has been altered.' => 'Check is gewijzigd.',
 	'Check has been dropped.' => 'Check is afgebroken.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Gegevens selecteren',
 	'Select' => 'Kies',
 	'Functions' => 'Functies',
@@ -371,17 +367,16 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Aanpassen',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klik op een waarde om deze te bewerken.',
 	'Use edit link to modify this value.' => 'Gebruik de link \'bewerk\' om deze waarde te wijzigen.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nieuw item',
 	'Edit' => 'Bewerk',
 	'original' => 'origineel',
-	// label for value '' in enum data type
-	'empty' => 'leeg',
+	'empty' => 'leeg', // label for value '' in enum data type
 	'Insert' => 'Toevoegen',
 	'Save' => 'Opslaan',
 	'Save and continue edit' => 'Opslaan en verder bewerken',
@@ -390,8 +385,7 @@ return [
 	'Selected' => 'Geselecteerd',
 	'Clone' => 'Dupliceer',
 	'Delete' => 'Verwijderen',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Item%s toegevoegd.',
+	'Item%s has been inserted.' => 'Item%s toegevoegd.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Item verwijderd.',
 	'Item has been updated.' => 'Item aangepast.',
 	'%d item(s) have been affected.' => [
@@ -400,7 +394,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'U bent niet gemachtigd om deze tabel aan te passen.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Getallen',
 	'Date and time' => 'Datum en tijd',
 	'Strings' => 'Tekst',
@@ -410,12 +404,12 @@ return [
 	'Geometry' => 'Geometrie',
 	'Relations' => 'Relaties',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'nu',
 	'yes' => 'ja',
 	'no' => 'neen',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Instellingen',
 	'Default' => 'Standaard',
 	'Color scheme' => 'Kleurenschema',
@@ -440,7 +434,7 @@ return [
 	'More values than %d' => 'Meer dan %d waarden',
 	'Threshold for displaying a selection menu for enum fields.' => 'Drempelwaarde voor het weergeven van een keuzemenu voor Enum-velden.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Eenmalig wachtwoord',
 	'Enter OTP code.' => 'OTP-code in voer.',
 	'Invalid OTP code.' => 'Ongeldige OTP-code.',
@@ -448,7 +442,5 @@ return [
 	'JSON previews' => 'JSON voorvertoning',
 	'Data table' => 'Gegevenstabel',
 	'Edit form' => 'Formulier bewerken',
-	// Use the phrases from https://gemini.google.com/
 	'Ask %s' => 'Vraag het aan %s',
-	'Just a sec...' => 'Een momentje.',
 ];

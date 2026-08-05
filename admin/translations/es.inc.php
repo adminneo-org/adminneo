@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5/$3/$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'DD/MM/AAAA',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5/$3/$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'DD/MM/AAAA', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s debe ser un array.',
 	'%s and %s must return an object created by %s method.' => '%s y %s deben devolver un objeto creado mediante el método %s.',
 
-	// Login.
+	// Login
 	'System' => 'Motor de base de datos',
 	'Server' => 'Servidor',
 	'Username' => 'Usuario',
@@ -43,18 +40,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Si no mandó ésta solicitud desde AdminNeo entonces cierre esta página.',
 	'The action will be performed after successful login with the same credentials.' => 'La acción se realizará tras iniciar sesión de nuevo con las mismas credenciales.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Sin driver',
 	'Database driver not found.' => 'No se ha encontrado un driver para la base de datos.',
 	'No extension' => 'No hay extensión',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Ninguna de las extensiones PHP soportadas (%s) está disponible.',
+	'None of the supported PHP extensions (%s) are available.' => 'Ninguna de las extensiones PHP soportadas (%s) está disponible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'La conexion a puertos especiales no está permitida.',
 	'Session support must be enabled.' => 'Deben estar habilitadas las sesiones.',
 	'Session expired, please login again.' => 'Sesión caducada, por favor escriba su clave de nuevo.',
 	'%s version: %s through PHP extension %s' => 'Versión %s: %s a través de la extensión de PHP %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Idioma',
 
 	'Home' => 'Inicio',
@@ -62,7 +58,7 @@ return [
 	'Info' => 'Info',
 	'More information.' => 'Más información.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Privilegios',
 	'Create user' => 'Crear Usuario',
 	'User has been dropped.' => 'Usuario eliminado.',
@@ -70,7 +66,7 @@ return [
 	'User has been created.' => 'Usuario creado.',
 	'Hashed' => 'Hash',
 
-	// Server.
+	// Server
 	'Process list' => 'Lista de procesos',
 	'%d process(es) have been killed.' => [
 		'%d proceso detenido.',
@@ -80,14 +76,14 @@ return [
 	'Variables' => 'Variables',
 	'Status' => 'Estado',
 
-	// Structure.
+	// Structure
 	'Column' => 'Columna',
 	'Columns' => 'Columnas',
 	'Routine' => 'Rutina',
 	'Grant' => 'Conceder',
 	'Revoke' => 'Impedir',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Comando SQL',
 	'HTTP request' => 'Petición HTTP',
 	'%d query(s) executed OK.' => [
@@ -107,13 +103,12 @@ return [
 	'Stop on error' => 'Detener en caso de error',
 	'Show only errors' => 'Mostrar solamente errores',
 	'Time' => 'Tiempo',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Historial',
 	'Clear' => 'Limpiar',
 	'Edit all' => 'Editar todos',
 
-	// Import.
+	// Import
 	'Import' => 'Importar',
 	'File upload' => 'Importar archivo',
 	'From server' => 'Desde servidor',
@@ -123,6 +118,8 @@ return [
 	'File uploads are disabled.' => 'Importación de archivos deshablilitada.',
 	'Unable to upload a file.' => 'No es posible cargar el archivo.',
 	'Maximum allowed file size is %sB.' => 'El tamaño máximo de archivo es %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'El número máximo de archivos es %d. Seleccione menos archivos o aumente la directiva de configuración %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'El tamaño total máximo de los archivos es %s. Seleccione archivos más pequeños o aumente la directiva de configuración %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST data demasiado grande. Reduzca el tamaño o aumente la directiva de configuración %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Usted puede cargar un SQL grande mediante FTP e importarlo desde el servidor.',
 	'File must be in UTF-8 encoding.' => 'El archivo tiene que ser codificacion UTF-8.',
@@ -132,7 +129,7 @@ return [
 		'%d registros importados.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Exportar',
 	'Output' => 'Salida',
 	'open' => 'abrir',
@@ -140,7 +137,7 @@ return [
 	'Format' => 'Formato',
 	'Data' => 'Datos',
 
-	// Databases.
+	// Databases
 	'Database' => 'Base de datos',
 	'database' => 'base de datos',
 	'DB' => 'BD',
@@ -155,11 +152,12 @@ return [
 	'Database has been created.' => 'Base de datos creada.',
 	'Database has been renamed.' => 'Base de datos renombrada.',
 	'Database has been altered.' => 'Base de datos modificada.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Ese archivo ya existe.',
 	'Please use one of the extensions %s.' => 'Por favor, use una de las extensiones %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Esquema',
 	'schema' => 'esquema',
 	'Schemas' => 'Esquemas',
@@ -172,7 +170,7 @@ return [
 	'Schema has been altered.' => 'Esquema modificado.',
 	'Invalid schema.' => 'Esquema inválido.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Codificación',
@@ -196,7 +194,7 @@ return [
 	'Tables have been copied.' => 'Tablas copiadas.',
 	'overwrite' => 'sobreescribir',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tablas',
 	'Tables and views' => 'Tablas y vistas',
 	'Table' => 'Tabla',
@@ -228,7 +226,7 @@ return [
 	'Remove' => 'Eliminar',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Excedida la cantidad máxima de campos permitidos. Por favor aumente %s.',
 
-	// Views.
+	// Views
 	'View' => 'Vista',
 	'Materialized view' => 'Vista materializada',
 	'View has been dropped.' => 'Vista eliminada.',
@@ -237,7 +235,7 @@ return [
 	'Alter view' => 'Modificar vista',
 	'Create view' => 'Crear vista',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Particionar por',
 	'Partition' => 'Partición',
 	'Partitions' => 'Particiones',
@@ -246,7 +244,7 @@ return [
 	'Inherited tables' => 'Tablas heredadas',
 	'Inherited from' => 'Heredada desde',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Índices',
 	'Indexes have been altered.' => 'Índices actualizados.',
 	'Alter indexes' => 'Modificar índices',
@@ -256,7 +254,7 @@ return [
 	'Algorithm' => 'Algoritmo',
 	'Condition' => 'Condición',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Claves foráneas',
 	'Foreign key' => 'Clave foránea',
 	'Foreign key has been dropped.' => 'Clave foránea eliminada.',
@@ -273,7 +271,7 @@ return [
 	'ON UPDATE' => 'AL ACTUALIZAR',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Las columnas de origen y destino deben ser del mismo tipo, debe existir un índice entre las columnas del destino y el registro referenciado debe existir también.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedimientos',
 	'Routine has been called, %d row(s) affected.' => [
 		'Consulta ejecutada, %d registro afectado.',
@@ -290,7 +288,7 @@ return [
 	'Alter procedure' => 'Modificar procedimiento',
 	'Return type' => 'Tipo de valor de vuelta',
 
-	// Events.
+	// Events
 	'Events' => 'Eventos',
 	'Event' => 'Evento',
 	'Event has been dropped.' => 'Evento eliminado.',
@@ -305,7 +303,7 @@ return [
 	'End' => 'Fin',
 	'On completion preserve' => 'Al completar mantener',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Secuencias',
 	'Create sequence' => 'Crear secuencias',
 	'Sequence has been dropped.' => 'Secuencia eliminada.',
@@ -313,14 +311,14 @@ return [
 	'Sequence has been altered.' => 'Secuencia modificada.',
 	'Alter sequence' => 'Modificar secuencia',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Tipos definidos por el usuario',
 	'Create type' => 'Crear tipo',
 	'Type has been dropped.' => 'Tipo eliminado.',
 	'Type has been created.' => 'Tipo creado.',
 	'Alter type' => 'Modificar tipo',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Disparadores',
 	'Add trigger' => 'Agregar disparador',
 	'Trigger has been dropped.' => 'Disparador eliminado.',
@@ -329,7 +327,7 @@ return [
 	'Alter trigger' => 'Modificar Disparador',
 	'Create trigger' => 'Agregar Disparador',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Chequeos',
 	'Create check' => 'Crear chequeo',
 	'Alter check' => 'Cambiar chequeo',
@@ -337,7 +335,7 @@ return [
 	'Check has been altered.' => 'Chequeo cambiado.',
 	'Check has been dropped.' => 'Chequeo eliminado.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Seleccionar datos',
 	'Select' => 'Mostrar',
 	'Functions' => 'Funciones',
@@ -369,17 +367,16 @@ return [
 		'%d bytes',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Modificar',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+clic sobre el valor para editarlo.',
 	'Use edit link to modify this value.' => 'Utilice el enlace de edición para realizar cambios.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nuevo Registro',
 	'Edit' => 'Modificar',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'ninguno',
+	'empty' => 'ninguno', // label for value '' in enum data type
 	'Insert' => 'Insertar',
 	'Save' => 'Guardar',
 	'Save and continue edit' => 'Guardar y continuar editando',
@@ -388,8 +385,7 @@ return [
 	'Selected' => 'Seleccionado',
 	'Clone' => 'Clonar',
 	'Delete' => 'Eliminar',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Registro%s insertado.',
+	'Item%s has been inserted.' => 'Registro%s insertado.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Registro eliminado.',
 	'Item has been updated.' => 'Registro modificado.',
 	'%d item(s) have been affected.' => [
@@ -398,7 +394,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'No tiene privilegios para actualizar esta tabla.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Números',
 	'Date and time' => 'Fecha y hora',
 	'Strings' => 'Cadena',
@@ -408,12 +404,12 @@ return [
 	'Geometry' => 'Geometría',
 	'Relations' => 'Relaciones',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'ahora',
 	'yes' => 'sí',
 	'no' => 'no',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Ajustes',
 	'Default' => 'Por defecto',
 	'Color scheme' => 'Esquema de colores',
@@ -438,7 +434,7 @@ return [
 	'More values than %d' => 'Valores mayores que %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Límite para mostrar un menú de selección en campos de tipo \'enum\'.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Contraseña de un solo uso',
 	'Enter OTP code.' => 'Introduce el código OTP.',
 	'Invalid OTP code.' => 'Código OTP inválido.',
@@ -446,7 +442,5 @@ return [
 	'JSON previews' => 'Previsualización de JSON',
 	'Data table' => 'Tabla',
 	'Edit form' => 'Editar formulario',
-	// Use the phrases from https://gemini.google.com/
 	'Ask %s' => 'Preguntar a %s',
-	'Just a sec...' => 'Un segundo...',
 ];

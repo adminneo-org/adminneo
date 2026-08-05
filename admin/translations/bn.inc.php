@@ -3,21 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '০১২৩৪৫৬৭৮৯',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'T.M.JJJJ',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'T.M.JJJJ', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+	'%s must return an array.' => '%s অবশ্যই একটি অ্যারে ফেরত দিতে হবে।', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরী একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Opus 5
+
+	// Login
 	'System' => 'সিস্টেম',
 	'Server' => 'সার্ভার',
 	'Username' => 'ইউজারের নাম',
@@ -27,31 +26,36 @@ return [
 	'Logout' => 'লগআউট',
 	'Logged as: %s' => '%s হিসাবে লগড',
 	'Logout successful.' => 'সফলভাবে লগআউট হয়েছে।',
+	'hostname[:port] or :socket' => 'হোস্টনাম[:পোর্ট] অথবা :সকেট', // by Claude Opus 5
+	'Invalid server or credentials.' => 'অবৈধ সার্ভার অথবা লগইন তথ্য।', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'ইনপুট পাসওয়ার্ডে একটি স্পেস রয়েছে যা এর কারণ হতে পারে।',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo পাসওয়ার্ড ছাড়া ডাটাবেস অ্যাক্সেস সমর্থন করে না, <a href="https://www.adminneo.org/password"%s>আরও তথ্য</a>।',
 	'Database does not support password.' => 'ডাটাবেস পাসওয়ার্ড সমর্থন করে না।',
-	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'অনেকগুলি ব্যর্থ লগইন প্রচেষ্টা, %d মিনিট পরে আবার চেষ্টা করুন।',
-	],
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'অনেকগুলি ব্যর্থ লগইন প্রচেষ্টা, %d মিনিট পরে আবার চেষ্টা করুন।',
+	'Invalid permanent login, please login again.' => 'অবৈধ স্থায়ী লগইন, আবার লগইন করুন।', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'অবৈধ CSRF টোকেন। ফর্মটি আবার পাঠান।',
 	'If you did not send this request from AdminNeo then close this page.' => 'আপনি যদি AdminNeo থেকে এই অনুরোধ না করে থাকেন তবে এই পৃষ্ঠাটি বন্ধ করুন।',
 	'The action will be performed after successful login with the same credentials.' => 'একই ক্রেডেনশিয়ালস দিয়ে সফলভাবে লগইন করার পরে এই কর্মটি সম্পাদন করা হবে।',
 
-	// Connection.
+	// Connection
+	'No driver' => 'কোন ড্রাইভার নাই', // by Claude Opus 5
+	'Database driver not found.' => 'ডাটাবেজ ড্রাইভার পাওয়া যায় নাই।', // by Claude Opus 5
 	'No extension' => 'কোন এক্সটেনশান নাই',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'কোন PHP সমর্থিত এক্সটেনশন (%s) পাওয়া যায় নাই।',
+	'None of the supported PHP extensions (%s) are available.' => 'কোন PHP সমর্থিত এক্সটেনশন (%s) পাওয়া যায় নাই।', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'প্রিভিলেজড পোর্টে সংযোগ করা অনুমোদিত নয়।',
 	'Session support must be enabled.' => 'সেশন সমর্থন সক্রিয় করা আবশ্যক।',
 	'Session expired, please login again.' => 'সেশনের মেয়াদ শেষ হয়েছে, আবার লগইন করুন।',
 	'%s version: %s through PHP extension %s' => 'ভার্সন %s: %s, %s PHP এক্সটেনশনের মধ্য দিয়ে',
 
-	// Settings.
+	// Settings
 	'Language' => 'ভাষা',
 
+	'Home' => 'প্রথম পাতা', // by Claude Opus 5
 	'Refresh' => 'রিফ্রেশ',
+	'Info' => 'তথ্য', // by Claude Opus 5
+	'More information.' => 'আরও তথ্য।', // by Claude Opus 5
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'প্রিভিলেজেস',
 	'Create user' => 'ব্যবহারকারি তৈরী করুন',
 	'User has been dropped.' => 'ব্যবহারকারি মুছে ফেলা হয়েছে।',
@@ -59,32 +63,28 @@ return [
 	'User has been created.' => 'ব্যবহারকারি তৈরী করা হয়েছে।',
 	'Hashed' => 'হ্যাশড',
 
-	// Server.
+	// Server
 	'Process list' => 'প্রসেস তালিকা',
-	'%d process(es) have been killed.' => [
-		'%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
-		'%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
-	],
+	'%d process(es) have been killed.' => '%d টি প্রসেস(সমূহ) বিনষ্ট করা হয়েছে।',
 	'Kill' => 'বিনষ্ট করো',
 	'Variables' => 'চলকসমূহ',
 	'Status' => 'অবস্থা',
 
-	// Structure.
+	// Structure
 	'Column' => 'কলাম',
+	'Columns' => 'কলামসমূহ', // by Claude Opus 5
 	'Routine' => 'রুটিন',
 	'Grant' => 'অনুমতি',
 	'Revoke' => 'প্রত্যাহার',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL-কমান্ড',
+	'HTTP request' => 'HTTP অনুরোধ', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d SQL-অনুসন্ধান সফলভাবে সম্পন্ন হয়েছে।',
 		'%d SQL-অনুসন্ধানসমূহ সফলভাবে সম্পন্ন হয়েছে।',
 	],
-	'Query executed OK, %d row(s) affected.' => [
-		'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
-		'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
-	],
+	'Query executed OK, %d row(s) affected.' => 'কোয়্যারী সম্পাদন হয়েছে, %d সারি প্রভাবিত হয়েছে।',
 	'No commands to execute.' => 'সম্পাদন করার মত কোন নির্দেশ নেই।',
 	'Error in query' => 'অনুসন্ধানে ভুল আছে',
 	'Unknown error.' => 'অজানা ত্রুটি।',
@@ -94,13 +94,12 @@ return [
 	'Stop on error' => 'ত্রুটি পেলে থেমে যান',
 	'Show only errors' => 'শুধুমাত্র ত্রুটিগুলো দেখান',
 	'Time' => 'সময়',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'ইতিহাস',
 	'Clear' => 'সাফ করো',
 	'Edit all' => 'সবগুলো সম্পাদনা করুন',
 
-	// Import.
+	// Import
 	'Import' => 'ইমপোর্ট',
 	'File upload' => 'ফাইল আপলোড',
 	'From server' => 'সার্ভার থেকে',
@@ -110,16 +109,15 @@ return [
 	'File uploads are disabled.' => 'ফাইল আপলোড নিষ্ক্রিয় করা আছে।',
 	'Unable to upload a file.' => 'ফাইল আপলোড করা সম্ভব হচ্ছে না।',
 	'Maximum allowed file size is %sB.' => 'সর্বাধিক অনুমোদিত ফাইল সাইজ %sB।',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক সংখ্যা %d। কম ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক মোট সাইজ %s। ছোট ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'খুব বড় POST ডাটা। ডাটা সংক্ষিপ্ত করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।',
 	'You can upload a big SQL file via FTP and import it from server.' => 'আপনি FTP এর মাধ্যমে একটি বড় SQL ফাইল আপলোড করতে পারেন এবং সার্ভার থেকে এটি ইম্পোর্ট করতে পারেন।',
 	'File must be in UTF-8 encoding.' => 'ফাইলটি UTF-8 এনকোডিংয়ে হতে হবে।',
 	'You are offline.' => 'আপনি অফলাইনে আছেন।',
-	'%d row(s) have been imported.' => [
-		'%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
-		'%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
-	],
+	'%d row(s) have been imported.' => '%d টি সারি(সমূহ) ইমপোর্ট করা হয়েছে।',
 
-	// Export.
+	// Export
 	'Export' => 'এক্সপোর্ট',
 	'Output' => 'আউটপুট',
 	'open' => 'খোলা',
@@ -127,8 +125,9 @@ return [
 	'Format' => 'বিন্যাস',
 	'Data' => 'ডাটা',
 
-	// Databases.
+	// Databases
 	'Database' => 'ডাটাবেজ',
+	'database' => 'ডাটাবেজ', // by Claude Opus 5
 	'DB' => 'ডিবি',
 	'Use' => 'ব্যবহার',
 	'Invalid database.' => 'অকার্যকর ডাটাবেজ।',
@@ -141,12 +140,17 @@ return [
 	'Database has been created.' => 'ডাটাবেজ তৈরী করা হয়েছে।',
 	'Database has been renamed.' => 'ডাটাবেজের নতুন নামকরণ করা হয়েছে।',
 	'Database has been altered.' => 'ডাটাবেজ পরিবর্তন করা হয়েছে।',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'ফাইল রয়েছে।',
 	'Please use one of the extensions %s.' => 'কোন একটা এক্সটেনশন %s ব্যবহার করুন।',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'স্কিমা',
+	'schema' => 'স্কিমা', // by Claude Opus 5
+	'Schemas' => 'স্কিমাসমূহ', // by Claude Opus 5
+	'No schemas.' => 'কোন স্কিমা নাই।', // by Claude Opus 5
+	'Show schema' => 'স্কিমা দেখান', // by Claude Opus 5
 	'Alter schema' => 'স্কিমা পরিবর্তন করো',
 	'Create schema' => 'স্কিমা তৈরী করো',
 	'Schema has been dropped.' => 'স্কিমা মুছে ফেলা হয়েছে।',
@@ -154,7 +158,7 @@ return [
 	'Schema has been altered.' => 'স্কিমা সম্পাদনা করা হয়েছে।',
 	'Invalid schema.' => 'অবৈধ স্কিমা।',
 
-	// Table list.
+	// Table list
 	'Engine' => 'ইঞ্জিন',
 	'engine' => 'ইন্জিন',
 	'Collation' => 'কলোকেশন',
@@ -178,7 +182,7 @@ return [
 	'Tables have been copied.' => 'টেবিলগুলো কপি করা হয়েছে।',
 	'overwrite' => 'ওভাররাইট',
 
-	// Tables.
+	// Tables
 	'Tables' => 'টেবিলসমূহ',
 	'Tables and views' => 'টেবিল এবং ভিউ সমূহ',
 	'Table' => 'টেবিল',
@@ -210,7 +214,7 @@ return [
 	'Remove' => 'মুছে ফেলুন',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'অনুমোদিত ফিল্ড এর সর্বাধিক সংখ্যা অতিক্রম করে গেছে। অনুগ্রহপূর্বক %s বৃদ্ধি করুন।',
 
-	// Views.
+	// Views
 	'View' => 'ভিউ',
 	'Materialized view' => 'মেটেরিয়ালাইজড ভিউ',
 	'View has been dropped.' => 'ভিউ মুছে ফেলা হয়েছে।',
@@ -219,21 +223,26 @@ return [
 	'Alter view' => 'ভিউ পরিবর্তন করুন',
 	'Create view' => 'ভিউ তৈরী করুন',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'পার্টিশন যার মাধ্যমে',
+	'Partition' => 'পার্টিশন', // by Claude Opus 5
 	'Partitions' => 'পার্টিশন',
 	'Partition name' => 'পার্টিশনের নাম',
 	'Values' => 'মানসমূহ',
+	'Inherited tables' => 'উত্তরাধিকারসূত্রে পাওয়া টেবিলসমূহ', // by Claude Opus 5
+	'Inherited from' => 'উত্তরাধিকারসূত্রে পাওয়া', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'সূচীসমূহ',
 	'Indexes have been altered.' => 'সূচীসমূহ সম্পাদনা করা হয়েছে।',
 	'Alter indexes' => 'সূচীসমূহ পরিবর্তন করুন',
 	'Add next' => 'পরবর্তী সংযোজন করুন',
 	'Index Type' => 'সূচী-ধরণ',
 	'length' => 'দৈর্ঘ্য',
+	'Algorithm' => 'অ্যালগরিদম', // by Claude Opus 5
+	'Condition' => 'শর্ত', // by Claude Opus 5
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'ফরেন কী',
 	'Foreign key' => 'ফরেন কী ',
 	'Foreign key has been dropped.' => 'ফরেন কী মুছে ফেলা হয়েছে।',
@@ -250,12 +259,9 @@ return [
 	'ON UPDATE' => 'অন আপডেট',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'সোর্স এবং টার্গেট কলামে একই ডাটা টাইপ থাকতে হবে, টার্গেট কলামসমূহে একটি সূচী এবং রেফারেন্সড ডেটার উপস্থিতি থাকা আবশ্যক।',
 
-	// Routines.
+	// Routines
 	'Routines' => 'রুটিনসমূহ',
-	'Routine has been called, %d row(s) affected.' => [
-		'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
-		'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
-	],
+	'Routine has been called, %d row(s) affected.' => 'রুটিন কল করা হয়েছে, %d টি সারি(সমূহ) প্রভাবিত হয়েছে।',
 	'Call' => 'কল',
 	'Parameter name' => 'প্যারামিটারের নাম',
 	'Create procedure' => 'কার্যপ্রণালী তৈরী করুন',
@@ -267,7 +273,7 @@ return [
 	'Alter procedure' => 'কার্যপ্রণালী পরিবর্তন করুন',
 	'Return type' => 'রিটার্ন টাইপ',
 
-	// Events.
+	// Events
 	'Events' => 'ইভেন্টসমূহ',
 	'Event' => 'ইভেন্ট',
 	'Event has been dropped.' => 'ইভেন্ট মুছে ফেলা হয়েছে।',
@@ -282,7 +288,7 @@ return [
 	'End' => 'সমাপ্তি',
 	'On completion preserve' => 'সমাপ্ত হওয়ার পর সংরক্ষন করুন',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'অনুক্রম',
 	'Create sequence' => 'অনুক্রম তৈরি করো',
 	'Sequence has been dropped.' => 'অনুক্রম মুছে ফেলা হয়েছে।',
@@ -290,14 +296,14 @@ return [
 	'Sequence has been altered.' => 'অনুক্রম সম্পাদনা করা হয়েছে।',
 	'Alter sequence' => 'অনুক্রম সম্পাদনা করো',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'ব্যবহারকারির ধরণ',
 	'Create type' => 'ধরণ তৈরী করুন',
 	'Type has been dropped.' => 'ধরণ মুছে ফেলা হয়েছে।',
 	'Type has been created.' => 'ধরণ তৈরি করা হয়েছে।',
 	'Alter type' => 'ধরণ পরিবর্তন করুন',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'ট্রিগার',
 	'Add trigger' => 'ট্রিগার সংযোজন করুন',
 	'Trigger has been dropped.' => 'ট্রিগার মুছে ফেলা হয়েছে।',
@@ -306,7 +312,7 @@ return [
 	'Alter trigger' => 'ট্রিগার পরিবর্তন করুন',
 	'Create trigger' => 'ট্রিগার তৈরী করুন',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'চেকস',
 	'Create check' => 'চেক তৈরি করুন',
 	'Alter check' => 'চেক পরিবর্তন করুন',
@@ -314,7 +320,7 @@ return [
 	'Check has been altered.' => 'চেক পরিবর্তন করা হয়েছে।',
 	'Check has been dropped.' => 'চেক ড্রপ করা হয়েছে।',
 
-	// Selection.
+	// Selection
 	'Select data' => 'তথ্য নির্বাচন করো',
 	'Select' => 'নির্বাচন',
 	'Functions' => 'ফাংশন সমূহ',
@@ -331,9 +337,7 @@ return [
 	'Unable to select the table' => 'টেবিল নির্বাচন করতে অক্ষম',
 	'Search data in tables' => 'টেবিলে তথ্য খুঁজুন',
 	'No rows.' => 'কোন সারি নাই।',
-	'%d / ' => [
-		'%d / ',
-	],
+	'%d / ' => '%d / ',
 	'%d row(s)' => [
 		'%d সারি',
 		'%d সারি সমূহ',
@@ -348,17 +352,16 @@ return [
 		'%d বাইটসমূহ',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'পরিবর্তন করুন',
 	'Ctrl+click on a value to modify it.' => 'একটি মান পরিবর্তন করতে Ctrl+ক্লিক করুন।',
 	'Use edit link to modify this value.' => 'এই মানটি পরিবর্তনের জন্য সম্পাদনা লিঙ্ক ব্যবহার করুন।',
 
-	// Editing.
+	// Editing
 	'New item' => 'নতুন বিষয়বস্তু',
 	'Edit' => 'সম্পাদনা',
 	'original' => 'প্রকৃত',
-	// label for value '' in enum data type
-	'empty' => 'খালি',
+	'empty' => 'খালি', // label for value '' in enum data type
 	'Insert' => 'সংযোজন',
 	'Save' => 'সংরক্ষণ করুন',
 	'Save and continue edit' => 'সংরক্ষণ করুন এবং সম্পাদনা চালিয়ে যান',
@@ -367,14 +370,13 @@ return [
 	'Selected' => 'নির্বাচিত',
 	'Clone' => 'ক্লোন',
 	'Delete' => 'মুছে ফেলুন',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'বিষয়বস্তুসমূহ%s সংযোজন করা হয়েছে।',
+	'Item%s has been inserted.' => 'বিষয়বস্তুসমূহ%s সংযোজন করা হয়েছে।', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'বিষয়বস্তু মুছে ফেলা হয়েছে।',
 	'Item has been updated.' => 'বিষয়বস্তু হালনাগাদ করা হয়েছে।',
 	'%d item(s) have been affected.' => '%d টি বিষয়বস্তু প্রভাবিত হয়েছে।',
 	'You have no privileges to update this table.' => 'এই টেবিল আপডেট করার জন্য আপনার কোন অনুমতি নেই।',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'সংখ্যা',
 	'Date and time' => 'তারিখ এবং সময়',
 	'Strings' => 'স্ট্রিং',
@@ -384,10 +386,43 @@ return [
 	'Geometry' => 'জ্যামিতি',
 	'Relations' => 'সম্পর্ক',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'এখন',
 	'yes' => 'হ্যাঁ',
 	'no' => 'না',
 
-	// Plugins.
+	// Settings
+	'Settings' => 'সেটিংস', // by Claude Opus 5
+	'Default' => 'ডিফল্ট', // by Claude Opus 5
+	'Color scheme' => 'রঙের বিন্যাস', // by Claude Opus 5
+	'By system' => 'সিস্টেম অনুযায়ী', // by Claude Opus 5
+	'Light' => 'হালকা', // by Claude Opus 5
+	'Dark' => 'গাঢ়', // by Claude Opus 5
+	'Navigation mode' => 'নেভিগেশন মোড', // by Claude Opus 5
+	'Simple' => 'সরল', // by Claude Opus 5
+	'Dual' => 'দ্বৈত', // by Claude Opus 5
+	'Reversed' => 'বিপরীত', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'টেবিল লিংকসহ প্রধান নেভিগেশনের বিন্যাস।', // by Claude Opus 5
+	'Table links' => 'টেবিল লিংকসমূহ', // by Claude Opus 5
+	'Primary action for all table links.' => 'সকল টেবিল লিংকের প্রধান ক্রিয়া।', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'বর্তমান সারিকে নির্দেশ করা টেবিলসমূহের লিংক।', // by Claude Opus 5
+	'Display' => 'দেখান', // by Claude Opus 5
+	'Hide' => 'লুকান', // by Claude Opus 5
+	'Records per page' => 'প্রতি পৃষ্ঠায় রেকর্ড', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'ডাটা টেবিলে দেখানো রেকর্ডের ডিফল্ট সংখ্যা।', // by Claude Opus 5
+	'Enum as select' => 'Enum নির্বাচন তালিকা হিসাবে', // by Claude Opus 5
+	'Never' => 'কখনো নয়', // by Claude Opus 5
+	'Always' => 'সর্বদা', // by Claude Opus 5
+	'More values than %d' => '%d এর বেশি মান', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'enum কলামের জন্য নির্বাচন তালিকা দেখানোর সীমা।', // by Claude Opus 5
+
+	// Plugins
+	'One Time Password' => 'এককালীন পাসওয়ার্ড', // by Claude Opus 5
+	'Enter OTP code.' => 'OTP কোড লিখুন।', // by Claude Opus 5
+	'Invalid OTP code.' => 'অবৈধ OTP কোড।', // by Claude Opus 5
+	'Access denied.' => 'প্রবেশাধিকার নাই।', // by Claude Opus 5
+	'JSON previews' => 'JSON প্রাকদর্শন', // by Claude Opus 5
+	'Data table' => 'ডাটা টেবিল', // by Claude Opus 5
+	'Edit form' => 'সম্পাদনা ফর্ম', // by Claude Opus 5
+	'Ask %s' => '%s কে জিজ্ঞাসা করুন', // by Claude Opus 5
 ];

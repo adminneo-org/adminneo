@@ -101,11 +101,11 @@ function compile_file(string $name, array $file_paths): ?string
 		$file = call_user_func($shrink_function, $file);
 	}
 
-	if (!in_array($extension, ["png", "ico"])) {
-		$file = lzw_compress($file);
+	if (in_array($extension, ["png", "ico"])) {
+		return base64_encode($file);
+	} else {
+		return compress_string($file);
 	}
-
-	return base64_encode($file);
 }
 
 function minify_css(string $file): string
@@ -121,48 +121,38 @@ function minify_js(string $file): string
 	return jsShrink($file);
 }
 
-function lzw_compress(string $string): string
+/**
+ * Compresses string with deflate to characters from compress_alphabet().
+ */
+function compress_string(string $string): string
 {
-	// Compress.
-	$dictionary = array_flip(range("\0", "\xFF"));
-	$word = "";
-	$codes = [];
-
-	for ($i = 0; $i <= strlen($string); $i++) {
-		$x = @$string[$i];
-		if (strlen($x) && isset($dictionary[$word . $x])) {
-			$word .= $x;
-		} elseif ($i) {
-			$codes[] = $dictionary[$word];
-			$dictionary[$word . $x] = count($dictionary);
-			$word = $x;
-		}
-	}
-
-	// Convert codes to binary string.
-	$dictionary_count = 256;
-	$bits = 8; // ceil(log($dictionary_count, 2))
+	$binary = ($string != "" ? gzdeflate($string, 9) : "");
+	// convert bytes to string; 2 chars from a 93-symbol alphabet hold 13 bits
+	$alphabet = compress_alphabet();
 	$return = "";
 	$rest = 0;
 	$rest_length = 0;
 
-	foreach ($codes as $code) {
-		$rest = ($rest << $bits) + $code;
-		$rest_length += $bits;
+	for ($i = 0; $i < strlen($binary); $i++) {
+		$rest = ($rest << 8) + ord($binary[$i]);
+		$rest_length += 8;
 
-		$dictionary_count++;
-		if ($dictionary_count >> $bits) {
-			$bits++;
-		}
-
-		while ($rest_length > 7) {
-			$rest_length -= 8;
-			$return .= chr($rest >> $rest_length);
+		if ($rest_length >= 13) {
+			$rest_length -= 13;
+			$chunk = $rest >> $rest_length;
+			$return .= $alphabet[(int) ($chunk / 93)] . $alphabet[$chunk % 93];
 			$rest &= (1 << $rest_length) - 1;
 		}
 	}
 
-	return $return . ($rest_length ? chr($rest << (8 - $rest_length)) : "");
+	$padding = 0;
+	if ($rest_length) {
+		$padding = 13 - $rest_length;
+		$chunk = $rest << $padding;
+		$return .= $alphabet[(int) ($chunk / 93)] . $alphabet[$chunk % 93];
+	}
+
+	return ($binary != "" ? $alphabet[$padding] . $return : "");
 }
 
 function downgrade_php(string $code): string

@@ -90,6 +90,7 @@ Each driver lives in `admin/drivers/<name>.inc.php`. Drivers:
 | `examples/`           | Customization and plugin usage examples                                                      |
 | `externals/`          | Optional third-party assets (e.g. TinyMCE) used by some example plugins; gitignored          |
 | `tests/`              | Katalon test suites and helper PHP files                                                     |
+| `tests/unit/`         | Unit tests                                                                                   |
 | `vendor/vrana/`       | Committed third-party libs used at runtime and build time (e.g. `jush` for SQL highlighting) |
 
 ### Configuration
@@ -102,21 +103,17 @@ Each driver lives in `admin/drivers/<name>.inc.php`. Drivers:
 
 All PHP code lives under the `AdminNeo\` namespace.
 
-### Databases
+### Translations
 
-Databases for testing:
+Translations use technical language and terms related to database systems. Czech language (`admin/translations/cs.inc.php`) is considered as correct because it was created by the author. All machine-translated texts are marked with trailing comment naming the AI model, e.g. `'Vacuum' => 'Počisti', // by Claude Fable 5`. In case of multiline translation, mark is placed on the last line.
 
-| Database        | Host            | Username | Password           |
-|-----------------|-----------------|----------|--------------------|
-| MySQL 9         | 127.0.0.1:3307  | test     | test               |
-| MariaDB 12      | 127.0.0.1       | test     | test               |
-| PostgreSQL 18   | 127.0.0.1:5432  | test     | test               |
-| MS SQL 18       | 127.0.0.1:1433  | test     | 340$Uuxwp7Mcxo7Khy |
-| Elasticsearch 7 | 127.0.0.1:9200  |          |                    |
-| Mongo DB        | 127.0.0.1:27017 | test     | test               |
-| Clickhouse      | 127.0.0.1:8123  | default  | default            |
+To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
 
-If not accessible, try to start existing Docker container. Do not change existing databases except `adminneo_test`. Do not drop `adminneo_test`.
+The same script validates the files. A finished pass must print no `⚠️` warnings. It checks:
+
+- **Placeholders** — types and order must match the English text.
+- **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
+- **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
 
 ### Porting changes from Adminer
 
@@ -133,6 +130,8 @@ git fetch vrana master --no-tags
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
   - Grep for the changed function/pattern across `admin/`, `editor/`, and `plugins/` — AdminNeo may have more or fewer call sites than upstream for the same code.
   - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
+  - Ignore changes of upstream's git submodules.
+  - Use `// by AI model name` mark in translations instead of `// AI model name`.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there — if it didn't, don't invent one. When porting a line: keep the original wording but bug/issue references, add "(by @author)" where `@author` is the GitHub user who wrote the commit, adapt relese version in "regression from X" note to AdminNeo's releases and place it under `### Changes` or `### Bugfixes` to match its nature.
 - If changes adaptation for AdminNeo is simple and straight forward, then:
   - Commit with the original author and author-date preserved (committer/date stay as yours), e.g.:
@@ -143,6 +142,7 @@ git fetch vrana master --no-tags
   ```
   Issue: https://github.com/vrana/adminer/issues/<issue_id>
   ```
+  - Don't add your own `Co-Authored-By` signature, but keep original one if present.
 - If adaptation is more complex, then:
   - Commit in a standard way.
   - Add reference to the upstream commit to the commit message:
@@ -157,3 +157,52 @@ git fetch vrana master --no-tags
 - Verify: `php -l` every changed file, then run a real `php bin/compile.php admin <affected-drivers> en` (or `editor`) build to confirm the change compiles cleanly into the single-file output. For behavior-changing (not purely cosmetic) ports, prefer also verifying against a live test database (see Databases section) when one's available for the affected driver — start the dev server, log in, and drive the actual affected request/feature rather than trusting static review alone.
 
 To understand the historical changes in public interface, look at Migration guide for AdminNeo 5.0.0: https://www.adminneo.org/upgrade#v5.0.0
+
+### Running test instance
+
+To drive a live instance for testing AdminNeo run dev server and then open:
+
+- http://127.0.0.1:8000/tests/admin-devel-agent.php — dev version of AdminNeo from source (`admin/`), so edits are picked up live.
+- http://127.0.0.1:8000/tests/admin-compiled-agent.php — compiled single file of AdminNeo (`compiled/adminneo.php`).
+- http://127.0.0.1:8000/tests/editor-devel-agent.php — dev version of EditorNeo from source (`editor/`), so edits are picked up live.
+- http://127.0.0.1:8000/tests/editor-compiled-agent.php — compiled single file of EditorNeo (`compiled/editorneo.php`).
+
+These entry points are pre-configured, so it is possible to connect to selected database without inserting user credentials to the login form — see [Databases](#databases) for the login steps. You can temporarily edit configuration in these files to test specific functionality and plugins.
+
+Always use the `*-agent.php` variants. The counterparts without the suffix (`tests/admin-devel.php`, `tests/admin-compiled.php`, …) back the Katalon test suites and are not pre-configured with servers.
+
+### Databases
+
+Databases for testing:
+
+| Database        | Host            | Username | Password           | URL parameter             |
+|-----------------|-----------------|----------|--------------------|---------------------------|
+| MySQL 9         | 127.0.0.1:3307  | test     | test               | `mysql=mysql9`            |
+| MariaDB 12      | 127.0.0.1       | test     | test               | `mysql=mariadb12`         |
+| PostgreSQL 18   | 127.0.0.1:5432  | test     | test               | `pgsql=pgsql18`           |
+| MS SQL 18       | 127.0.0.1:1433  | test     | 340$Uuxwp7Mcxo7Khy | `mssql=mssql18`           |
+| Elasticsearch 7 | 127.0.0.1:9200  |          |                    | `elastic=elastic7`        |
+| MongoDB 2       | 127.0.0.1:27017 | test     | test               | `mongo=mongo2`            |
+| Clickhouse 26   | 127.0.0.1:8123  | default  | default            | `clickhouse=clickhouse26` |
+| SQLite          | —               |          |                    | `sqlite=sqlite`           |
+
+If not accessible, try to start existing Docker container. Do not change existing databases except `adminneo_test`. Do not drop `adminneo_test`.
+
+Credentials in the table are for direct CLI access (`docker exec`, `psql`, `mysql`). Never type them into AdminNeo's login form — use the `*-agent.php` entry points (see [Running test instance](#running-test-instance)), which supply them from configuration.
+
+To log in: open the entry point with `?<driver>=<server-key>` from the table above (or with no query string and pick the database from the **Server** dropdown), leave **Username** and **Password** empty, and submit. Do not put `username=` or `password=` in the URL of the login request — they pre-fill the form, override the configured credentials and the login fails.
+
+Server keys are static, so deep links can be hand-written once logged in — but they must carry the same `username=` value the app puts in its own links, otherwise the login page appears again:
+
+```
+http://127.0.0.1:8000/tests/admin-devel-agent.php?mysql=mariadb12&username=test&db=adminneo_test&select=albums
+http://127.0.0.1:8000/tests/admin-devel-agent.php?pgsql=pgsql18&username=test&db=adminneo_test&ns=public&sql=SELECT+version()
+```
+
+Log in per server first; the session is per server key. A `db=` in the URL of the login request itself is dropped by the redirect, so open the deep link after logging in.
+
+#### SQLite
+
+SQLite is not in the table above because it has no server — a database is just a file, so there is nothing to start. Create a test database file (e.g. with PHP's `SQLite3` API or the `sqlite3` CLI) and point AdminNeo at it **after log in**: type the database file path into the database input (`#database-select`) in the page header. The file must be readable and writable by the dev server process.
+
+Most alters (e.g. renaming a column) recreate the whole table via `recreate_table()`; a plain no-op resubmit of the alter form does not.

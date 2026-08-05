@@ -5,6 +5,11 @@ use AdminNeo\FrameSupportPlugin;
 use AdminNeo\JsonPreviewPlugin;
 use AdminNeo\SlugifyEditPlugin;
 use AdminNeo\TranslationPlugin;
+use const AdminNeo\SERVER;
+
+if (!file_exists("../compiled/editorneo.php")) {
+	exec("php ../bin/compile.php editor");
+}
 
 function adminneo_instance()
 {
@@ -12,12 +17,17 @@ function adminneo_instance()
 	{
 		public function getServiceTitle(): string
 		{
-			return 'Plugins Test';
+			return 'Agent Compiled';
 		}
 
 		public function getDatabase(): ?string
 		{
 			return 'adminneo_test';
+		}
+
+		public function getCredentials(): array
+		{
+			return [SERVER, "test", "test"];
 		}
 	}
 
@@ -26,6 +36,8 @@ function adminneo_instance()
 		"jsonValuesDetection" => true,
 		"jsonValuesAutoFormat" => true,
 		"relationLinks" => true,
+		"defaultPasswordHash" => "",
+		"sslTrustServerCertificate" => true,
 	];
 
 	$plugins = [
@@ -38,6 +50,6 @@ function adminneo_instance()
 	return PluginsEditor::create($config, $plugins);
 }
 
-chdir("../editor/");
+chdir("../compiled/");
 
-require "../editor/index.php";
+require "editorneo.php";

@@ -9,7 +9,8 @@ use AdminNeo\Admin;
 function adminneo_instance()
 {
 	$config = [
-		"colorVariant" => "green",
+		"defaultPasswordHash" => "",
+		"sslTrustServerCertificate" => true,
 	];
 
 	return Admin::create($config);
@@ -17,4 +18,4 @@ function adminneo_instance()
 
 chdir("../editor/");
 
-require "../editor/index.php";
+require "index.php";

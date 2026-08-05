@@ -3,20 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => '.',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => '.', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => null, // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+	'%s must return an array.' => '%s mora vratiti polje.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s i %s moraju vratiti objekt kreiran metodom %s.', // by Claude Opus 5
+
+	// Login
 	'System' => 'Sustav',
 	'Server' => 'Poslužitelj',
 	'Username' => 'Korisničko ime',
@@ -27,31 +27,39 @@ return [
 	'Logged as: %s' => 'Prijavljen kao: %s',
 	'Logout successful.' => 'Uspješna odjava.',
 	'hostname[:port] or :socket' => 'hostname[:port] ili :socket',
+	'Invalid server or credentials.' => 'Neispravan poslužitelj ili podaci za prijavu.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'U unesenoj lozinci postoji razmak koji bi mogao biti uzrok problema.',
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne podržava pristup bazi podataka bez lozinke, <a href="https://www.adminneo.org/password"%s>više informacija</a>.', // by Claude Opus 5
 	'Database does not support password.' => 'Baza podataka ne podržava lozinku.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minutu.',
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minute.',
 		'Previše neuspješnih pokušaja prijave, pokušajte ponovo za %d minuta.',
 	],
+	'Invalid permanent login, please login again.' => 'Neispravna trajna prijava, molimo prijavite se ponovo.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Nevažeći CSRF token. Pošaljite obrazac ponovo.',
+	'If you did not send this request from AdminNeo then close this page.' => 'Ako ovaj zahtjev niste poslali iz AdminNea, zatvorite ovu stranicu.', // by Claude Opus 5
 	'The action will be performed after successful login with the same credentials.' => 'Radnja će biti izvršena nakon uspješne prijave s istim podacima.',
 
-	// Connection.
+	// Connection
+	'No driver' => 'Nema upravljačkog programa', // by Claude Opus 5
+	'Database driver not found.' => 'Upravljački program baze podataka nije pronađen.', // by Claude Opus 5
 	'No extension' => 'Nema proširenja',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nijedno od podržanih PHP proširenja (%s) nije dostupno.',
+	'None of the supported PHP extensions (%s) are available.' => 'Nijedno od podržanih PHP proširenja (%s) nije dostupno.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Spajanje na privilegirane portove nije dopušteno.',
 	'Session support must be enabled.' => 'Podrška za sesije mora biti uključena.',
 	'Session expired, please login again.' => 'Sesija je istekla, molimo prijavite se ponovo.',
 	'%s version: %s through PHP extension %s' => '%s verzija: %s putem PHP proširenja %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Jezik',
 
+	'Home' => 'Početna', // by Claude Opus 5
 	'Refresh' => 'Osvježi',
+	'Info' => 'Informacije', // by Claude Opus 5
+	'More information.' => 'Više informacija.', // by Claude Opus 5
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Ovlasti',
 	'Create user' => 'Novi korisnik',
 	'User has been dropped.' => 'Korisnik je izbrisan.',
@@ -59,7 +67,7 @@ return [
 	'User has been created.' => 'Korisnik je kreiran.',
 	'Hashed' => 'Hashirano',
 
-	// Server.
+	// Server
 	'Process list' => 'Popis procesa',
 	'%d process(es) have been killed.' => [
 		'%d proces je zaustavljen.',
@@ -70,15 +78,16 @@ return [
 	'Variables' => 'Varijable',
 	'Status' => 'Status',
 
-	// Structure.
+	// Structure
 	'Column' => 'Stupac',
 	'Columns' => 'Stupci',
 	'Routine' => 'Rutina',
 	'Grant' => 'Dodijeli',
 	'Revoke' => 'Opozovi',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL naredba',
+	'HTTP request' => 'HTTP zahtjev', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d upit je uspješno izvršen.',
 		'%d upita su uspješno izvršena.',
@@ -98,13 +107,12 @@ return [
 	'Stop on error' => 'Zaustavi pri grešci',
 	'Show only errors' => 'Prikaži samo greške',
 	'Time' => 'Vrijeme',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Povijest',
 	'Clear' => 'Očisti',
 	'Edit all' => 'Uredi sve',
 
-	// Import.
+	// Import
 	'Import' => 'Uvoz',
 	'File upload' => 'Prijenos datoteke',
 	'From server' => 'S poslužitelja',
@@ -114,6 +122,8 @@ return [
 	'File uploads are disabled.' => 'Prijenos datoteka je onemogućen.',
 	'Unable to upload a file.' => 'Prijenos datoteke nije uspio.',
 	'Maximum allowed file size is %sB.' => 'Maksimalna dozvoljena veličina datoteke je %sB.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimalan broj datoteka je %d. Odaberite manje datoteka ili povećajte vrijednost konfiguracijske direktive %s.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimalna ukupna veličina datoteka je %s. Odaberite manje datoteke ili povećajte vrijednost konfiguracijske direktive %s.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Preveliki POST podaci. Smanjite podatke ili povećajte vrijednost konfiguracijske direktive %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Veliku SQL datoteku možete prenijeti putem FTP-a i uvesti je s poslužitelja.',
 	'File must be in UTF-8 encoding.' => 'Datoteka mora biti u UTF-8 kodiranju.',
@@ -124,7 +134,7 @@ return [
 		'%d redaka je uvezeno.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Izvoz',
 	'Output' => 'Ispis',
 	'open' => 'otvori',
@@ -132,8 +142,9 @@ return [
 	'Format' => 'Format',
 	'Data' => 'Podaci',
 
-	// Databases.
+	// Databases
 	'Database' => 'Baza podataka',
+	'database' => 'baza podataka', // by Claude Opus 5
 	'DB' => 'BP',
 	'Use' => 'Koristi',
 	'Invalid database.' => 'Neispravna baza podataka.',
@@ -146,12 +157,17 @@ return [
 	'Database has been created.' => 'Baza podataka je kreirana.',
 	'Database has been renamed.' => 'Baza podataka je preimenovana.',
 	'Database has been altered.' => 'Baza podataka je izmijenjena.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Datoteka već postoji.',
 	'Please use one of the extensions %s.' => 'Molimo koristite jedan od nastavaka %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Shema',
+	'schema' => 'shema', // by Claude Opus 5
+	'Schemas' => 'Sheme', // by Claude Opus 5
+	'No schemas.' => 'Nema shema.', // by Claude Opus 5
+	'Show schema' => 'Prikaži shemu', // by Claude Opus 5
 	'Alter schema' => 'Izmijeni shemu',
 	'Create schema' => 'Kreiraj shemu',
 	'Schema has been dropped.' => 'Shema je izbrisana.',
@@ -159,7 +175,7 @@ return [
 	'Schema has been altered.' => 'Shema je izmijenjena.',
 	'Invalid schema.' => 'Neispravna shema.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Uspoređivanje',
@@ -183,7 +199,7 @@ return [
 	'Tables have been copied.' => 'Tablice su kopirane.',
 	'overwrite' => 'prepiši',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tablice',
 	'Tables and views' => 'Tablice i pogledi',
 	'Table' => 'Tablica',
@@ -215,7 +231,7 @@ return [
 	'Remove' => 'Ukloni',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Premašen je maksimalni broj dozvoljenih polja. Molimo povećajte %s.',
 
-	// Views.
+	// Views
 	'View' => 'Pogled',
 	'Materialized view' => 'Materijaliziran pogled',
 	'View has been dropped.' => 'Pogled je izbrisan.',
@@ -224,13 +240,16 @@ return [
 	'Alter view' => 'Izmijeni pogled',
 	'Create view' => 'Kreiraj pogled',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Particioniraj po',
+	'Partition' => 'Particija', // by Claude Opus 5
 	'Partitions' => 'Particije',
 	'Partition name' => 'Naziv particije',
 	'Values' => 'Vrijednosti',
+	'Inherited tables' => 'Naslijeđene tablice', // by Claude Opus 5
+	'Inherited from' => 'Naslijeđena od', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indeksi',
 	'Indexes have been altered.' => 'Indeksi su izmijenjeni.',
 	'Alter indexes' => 'Izmijeni indekse',
@@ -240,7 +259,7 @@ return [
 	'Algorithm' => 'Algoritam',
 	'Condition' => 'Uvjet',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Strani ključevi',
 	'Foreign key' => 'Strani ključ',
 	'Foreign key has been dropped.' => 'Strani ključ je izbrisan.',
@@ -257,7 +276,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE (pri ažuriranju)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Izvorni i ciljni stupci moraju biti istog tipa podataka, ciljni stupci moraju biti indeksirani i referencirani podaci moraju postojati.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Rutine',
 	'Routine has been called, %d row(s) affected.' => [
 		'Rutina je pozvana, %d redak je ažuriran.',
@@ -275,7 +294,7 @@ return [
 	'Alter procedure' => 'Izmijeni proceduru',
 	'Return type' => 'Tip povratne vrijednosti',
 
-	// Events.
+	// Events
 	'Events' => 'Događaji',
 	'Event' => 'Događaj',
 	'Event has been dropped.' => 'Događaj je izbrisan.',
@@ -290,7 +309,7 @@ return [
 	'End' => 'Kraj',
 	'On completion preserve' => 'Zadrži po završetku',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Nizovi',
 	'Create sequence' => 'Kreiraj niz',
 	'Sequence has been dropped.' => 'Niz je izbrisan.',
@@ -298,14 +317,14 @@ return [
 	'Sequence has been altered.' => 'Niz je izmijenjen.',
 	'Alter sequence' => 'Izmijeni niz',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Korisnički tipovi',
 	'Create type' => 'Kreiraj tip',
 	'Type has been dropped.' => 'Tip je izbrisan.',
 	'Type has been created.' => 'Tip je kreiran.',
 	'Alter type' => 'Izmijeni tip',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Okidači',
 	'Add trigger' => 'Dodaj okidač',
 	'Trigger has been dropped.' => 'Okidač je izbrisan.',
@@ -314,7 +333,7 @@ return [
 	'Alter trigger' => 'Izmijeni okidač',
 	'Create trigger' => 'Kreiraj okidač',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Provjere',
 	'Create check' => 'Kreiraj provjeru',
 	'Alter check' => 'Izmijeni provjeru',
@@ -322,7 +341,7 @@ return [
 	'Check has been altered.' => 'Provjera je izmijenjena.',
 	'Check has been dropped.' => 'Provjera je izbrisana.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Odaberi podatke',
 	'Select' => 'Odaberi',
 	'Functions' => 'Funkcije',
@@ -356,17 +375,16 @@ return [
 		'%d bajtova',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Izmijeni',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klik na vrijednost za izmjenu.',
 	'Use edit link to modify this value.' => 'Koristite vezu za uređivanje ove vrijednosti.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nova stavka',
 	'Edit' => 'Uredi',
 	'original' => 'original',
-	// label for value '' in enum data type
-	'empty' => 'prazno',
+	'empty' => 'prazno', // label for value '' in enum data type
 	'Insert' => 'Unesi',
 	'Save' => 'Spremi',
 	'Save and continue edit' => 'Spremi i nastavi uređivanje',
@@ -375,8 +393,7 @@ return [
 	'Selected' => 'Odabrano',
 	'Clone' => 'Kloniraj',
 	'Delete' => 'Izbriši',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Stavka %s je unesena.',
+	'Item%s has been inserted.' => 'Stavka %s je unesena.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Stavka je izbrisana.',
 	'Item has been updated.' => 'Stavka je ažurirana.',
 	'%d item(s) have been affected.' => [
@@ -386,7 +403,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Nemate ovlasti za ažuriranje ove tablice.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Brojevi',
 	'Date and time' => 'Datum i vrijeme',
 	'Strings' => 'Tekst',
@@ -396,13 +413,43 @@ return [
 	'Geometry' => 'Geometrija',
 	'Relations' => 'Odnosi',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'sada',
 	'yes' => 'da',
 	'no' => 'ne',
 
-	// Settings.
+	// Settings
+	'Settings' => 'Postavke', // by Claude Opus 5
+	'Default' => 'Zadano', // by Claude Opus 5
+	'Color scheme' => 'Shema boja', // by Claude Opus 5
+	'By system' => 'Prema sustavu', // by Claude Opus 5
+	'Light' => 'Svijetla', // by Claude Opus 5
+	'Dark' => 'Tamna', // by Claude Opus 5
+	'Navigation mode' => 'Način navigacije', // by Claude Opus 5
+	'Simple' => 'Jednostavan', // by Claude Opus 5
+	'Dual' => 'Dvostruk', // by Claude Opus 5
+	'Reversed' => 'Obrnut', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Raspored glavne navigacije s vezama tablica.', // by Claude Opus 5
+	'Table links' => 'Veze tablica', // by Claude Opus 5
+	'Primary action for all table links.' => 'Glavna radnja za sve veze tablica.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Veze na tablice koje se referenciraju na trenutni redak.', // by Claude Opus 5
+	'Display' => 'Prikaži', // by Claude Opus 5
+	'Hide' => 'Sakrij', // by Claude Opus 5
+	'Records per page' => 'Zapisa po stranici', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Zadani broj zapisa prikazanih u tablici podataka.', // by Claude Opus 5
+	'Enum as select' => 'Enum kao padajući izbornik', // by Claude Opus 5
+	'Never' => 'Nikada', // by Claude Opus 5
+	'Always' => 'Uvijek', // by Claude Opus 5
+	'More values than %d' => 'Više od %d vrijednosti', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Prag za prikaz padajućeg izbornika za enum stupce.', // by Claude Opus 5
 
-	// Plugins.
-	// Use the phrases from https://gemini.google.com/
+	// Plugins
+	'One Time Password' => 'Jednokratna lozinka', // by Claude Opus 5
+	'Enter OTP code.' => 'Unesite OTP kod.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Neispravan OTP kod.', // by Claude Opus 5
+	'Access denied.' => 'Pristup odbijen.', // by Claude Opus 5
+	'JSON previews' => 'Pregled JSON-a', // by Claude Opus 5
+	'Data table' => 'Tablica podataka', // by Claude Opus 5
+	'Edit form' => 'Obrazac za uređivanje', // by Claude Opus 5
+	'Ask %s' => 'Pitaj %s', // by Claude Opus 5
 ];

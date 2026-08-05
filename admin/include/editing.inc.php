@@ -350,7 +350,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 	echo "<th id='label-name'>", ($type == "TABLE" ? lang('Column name') : lang('Parameter name')), "</th>\n";
 	echo "<td id='label-type'>", lang('Type'), "<textarea id='enum-edit' rows='4' cols='12' wrap='off' style='display: none;'></textarea>", script("gid('enum-edit').onblur = onFieldLengthBlur;"), "</td>\n";
-	echo "<td id='label-length'>", lang("Length"), "</td>\n";
+	echo "<td id='label-length'>", lang('Length'), "</td>\n";
 	echo "<td>", lang('Options'), "</td>\n"; // No label required, options have their own label.
 
 	if ($type == "TABLE") {

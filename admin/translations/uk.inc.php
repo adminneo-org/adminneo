@@ -3,21 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$5.$3.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'ДД.ММ.РРРР',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'ГГ:ХХ:СС',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'ДД.ММ.РРРР', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'ГГ:ХХ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+	'%s must return an array.' => '%s повинен повертати масив.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s і %s повинні повертати об\'єкт, створений методом %s.', // by Claude Opus 5
+
+	// Login
 	'System' => 'Система Бази Даних',
 	'Server' => 'Сервер',
 	'Username' => 'Користувач',
@@ -27,6 +26,8 @@ return [
 	'Logout' => 'Вийти',
 	'Logged as: %s' => 'Ви увійшли як: %s',
 	'Logout successful.' => 'Ви вдало вийшли з системи.',
+	'hostname[:port] or :socket' => 'hostname[:port] або :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => 'Невірний сервер або дані для входу.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'У вхідному паролі є пробіл, який може бути причиною.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не підтримує доступ до бази даних без пароля, <a href="https://www.adminneo.org/password"%s>більше інформації</a>.',
 	'Database does not support password.' => 'База даних не підтримує пароль.',
@@ -35,25 +36,30 @@ return [
 		'Занадто багато невдалих спроб входу. Спробуйте знову через %d хвилини.',
 		'Занадто багато невдалих спроб входу. Спробуйте знову через %d хвилин.',
 	],
+	'Invalid permanent login, please login again.' => 'Недійсна запам\'ятована сесія, будь ласка, увійдіть в систему знову.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Недійсний CSRF токен. Надішліть форму ще раз.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Якщо ви не посилали цей запит з AdminNeo, закрийте цю сторінку.',
 	'The action will be performed after successful login with the same credentials.' => 'Дія буде виконуватися після успішного входу в систему з тими ж обліковими даними.',
 
-	// Connection.
+	// Connection
+	'No driver' => 'Нема драйвера', // by Claude Opus 5
+	'Database driver not found.' => 'Драйвер бази даних не знайдено.', // by Claude Opus 5
 	'No extension' => 'Нема розширень',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Жодне з PHP-розширень (%s), що підтримуються, не доступне.',
+	'None of the supported PHP extensions (%s) are available.' => 'Жодне з PHP-розширень (%s), що підтримуються, не доступне.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Підключення до привілейованих портів заборонено.',
 	'Session support must be enabled.' => 'Сесії повинні бути дозволені.',
 	'Session expired, please login again.' => 'Сесія закінчилась, будь ласка, увійдіть в систему знову.',
 	'%s version: %s through PHP extension %s' => 'Версія %s: %s з PHP-розширенням %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Мова',
 
+	'Home' => 'Головна', // by Claude Opus 5
 	'Refresh' => 'Оновити',
+	'Info' => 'Інформація', // by Claude Opus 5
+	'More information.' => 'Детальніше.', // by Claude Opus 5
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Привілеї',
 	'Create user' => 'Створити користувача',
 	'User has been dropped.' => 'Користувача було видалено.',
@@ -61,7 +67,7 @@ return [
 	'User has been created.' => 'Користувача було створено.',
 	'Hashed' => 'Хешовано',
 
-	// Server.
+	// Server
 	'Process list' => 'Перелік процесів',
 	'%d process(es) have been killed.' => [
 		'Було завершено %d процес.',
@@ -72,14 +78,16 @@ return [
 	'Variables' => 'Змінні',
 	'Status' => 'Статус',
 
-	// Structure.
+	// Structure
 	'Column' => 'Колонка',
+	'Columns' => 'Колонки', // by Claude Fable 5
 	'Routine' => 'Процедура',
 	'Grant' => 'Дозволити',
 	'Revoke' => 'Заборонити',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL запит',
+	'HTTP request' => 'HTTP запит', // by Claude Opus 5
 	'%d query(s) executed OK.' => [
 		'%d запит виконано успішно.',
 		'%d запити виконано успішно.',
@@ -99,13 +107,12 @@ return [
 	'Stop on error' => 'Зупинитись при помилці',
 	'Show only errors' => 'Показувати тільки помилки',
 	'Time' => 'Час',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Історія',
 	'Clear' => 'Очистити',
 	'Edit all' => 'Редагувати все',
 
-	// Import.
+	// Import
 	'Import' => 'Імпортувати',
 	'File upload' => 'Завантажити файл',
 	'From server' => 'З сервера',
@@ -115,6 +122,8 @@ return [
 	'File uploads are disabled.' => 'Завантаження файлів заборонене.',
 	'Unable to upload a file.' => 'Неможливо завантажити файл.',
 	'Maximum allowed file size is %sB.' => 'Максимально допустимий розмір файлу %sБ.',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальна кількість файлів %d. Виберіть менше файлів або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальний загальний розмір файлів %s. Виберіть менші файли або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Занадто великий об\'єм POST-даних. Зменшіть об\'єм або збільшіть параметр директиви %s конфигурації.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Ви можете завантажити великий файл SQL через FTP та імпортувати його з сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл повинен бути в кодуванні UTF-8.',
@@ -125,7 +134,7 @@ return [
 		'%d рядків було імпортовано.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Експорт',
 	'Output' => 'Вихідні дані',
 	'open' => 'відкрити',
@@ -133,8 +142,9 @@ return [
 	'Format' => 'Формат',
 	'Data' => 'Дані',
 
-	// Databases.
+	// Databases
 	'Database' => 'База даних',
+	'database' => 'база даних', // by Claude Opus 5
 	'DB' => 'DB',
 	'Use' => 'Обрати',
 	'Invalid database.' => 'Погана база даних.',
@@ -147,12 +157,17 @@ return [
 	'Database has been created.' => 'Базу даних було створено.',
 	'Database has been renamed.' => 'Базу даних було переіменовано.',
 	'Database has been altered.' => 'Базу даних було змінено.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Файл існує.',
 	'Please use one of the extensions %s.' => 'Будь ласка, використовуйте одне з розширень %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
+	'schema' => 'схема', // by Claude Opus 5
+	'Schemas' => 'Схеми', // by Claude Opus 5
+	'No schemas.' => 'Нема схем.', // by Claude Opus 5
+	'Show schema' => 'Показати схему', // by Claude Opus 5
 	'Alter schema' => 'Змінити схему',
 	'Create schema' => 'Створити схему',
 	'Schema has been dropped.' => 'Схему було видалено.',
@@ -160,7 +175,7 @@ return [
 	'Schema has been altered.' => 'Схему було змінено.',
 	'Invalid schema.' => 'Невірна схема.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Рушій',
 	'engine' => 'рушій',
 	'Collation' => 'Співставлення',
@@ -184,7 +199,7 @@ return [
 	'Tables have been copied.' => 'Таблиці було зкопійовано.',
 	'overwrite' => 'перезаписати',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Таблиці',
 	'Tables and views' => 'Таблиці і вигляди',
 	'Table' => 'Таблиця',
@@ -216,7 +231,7 @@ return [
 	'Remove' => 'Видалити',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Досягнута максимальна кількість доступних полів. Будь ласка, збільшіть %s.',
 
-	// Views.
+	// Views
 	'View' => 'Вигляд',
 	'Materialized view' => 'Матеріалізований вигляд',
 	'View has been dropped.' => 'Вигляд було видалено.',
@@ -225,21 +240,26 @@ return [
 	'Alter view' => 'Змінити вигляд',
 	'Create view' => 'Створити вигляд',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Розділити по',
+	'Partition' => 'Розділ', // by Claude Opus 5
 	'Partitions' => 'Розділи',
 	'Partition name' => 'Назва розділу',
 	'Values' => 'Значення',
+	'Inherited tables' => 'Успадковані таблиці', // by Claude Opus 5
+	'Inherited from' => 'Успадкована від', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Індекси',
 	'Indexes have been altered.' => 'Індексування було змінено.',
 	'Alter indexes' => 'Змінити індексування',
 	'Add next' => 'Додати ще',
 	'Index Type' => 'Тип індексу',
 	'length' => 'довжина',
+	'Algorithm' => 'Алгоритм', // by Claude Fable 5
+	'Condition' => 'Умова', // by Claude Fable 5
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Зовнішні ключі',
 	'Foreign key' => 'Зовнішній ключ',
 	'Foreign key has been dropped.' => 'Зовнішній ключ було видалено.',
@@ -256,7 +276,7 @@ return [
 	'ON UPDATE' => 'ПРИ ЗМІНІ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Стовпці повинні мати той самий тип даних, цільові стовпці повинні бути проіндексовані і дані, на які посилаються повинні існувати.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Збережені процедури',
 	'Routine has been called, %d row(s) affected.' => [
 		'Була викликана процедура, %d запис було змінено.',
@@ -274,7 +294,7 @@ return [
 	'Alter procedure' => 'Змінити процедуру',
 	'Return type' => 'Тип, що повернеться',
 
-	// Events.
+	// Events
 	'Events' => 'Події',
 	'Event' => 'Подія',
 	'Event has been dropped.' => 'Подію було видалено.',
@@ -289,7 +309,7 @@ return [
 	'End' => 'Кінець',
 	'On completion preserve' => 'Після завершення зберегти',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Послідовності',
 	'Create sequence' => 'Створити послідовність',
 	'Sequence has been dropped.' => 'Послідовність було видалено.',
@@ -297,14 +317,14 @@ return [
 	'Sequence has been altered.' => 'Послідовність було змінено.',
 	'Alter sequence' => 'Змінити послідовність',
 
-	// User types (PostgreSQL)
-	'User types' => 'Типи користувачів',
+	// User-defined types (PostgreSQL)
+	'User types' => 'Користувацькі типи', // by Claude Fable 5
 	'Create type' => 'Створити тип',
 	'Type has been dropped.' => 'Тип було видалено.',
 	'Type has been created.' => 'Тип було створено.',
 	'Alter type' => 'Змінити тип',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Тригери',
 	'Add trigger' => 'Додати тригер',
 	'Trigger has been dropped.' => 'Тригер було видалено.',
@@ -313,7 +333,7 @@ return [
 	'Alter trigger' => 'Змінити тригер',
 	'Create trigger' => 'Створити тригер',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Перевірки',
 	'Create check' => 'Створити перевірку',
 	'Alter check' => 'Змінити перевірку',
@@ -321,7 +341,7 @@ return [
 	'Check has been altered.' => 'Перевірка змінена.',
 	'Check has been dropped.' => 'Перевірку видалено.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Вибрати дані',
 	'Select' => 'Вибрати',
 	'Functions' => 'Функції',
@@ -355,17 +375,16 @@ return [
 		'%d байтів',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Змінити',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+клікніть на значенні щоб змінити його.',
 	'Use edit link to modify this value.' => 'Використовуйте посилання щоб змінити це значення.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Новий запис',
 	'Edit' => 'Редагувати',
 	'original' => 'початковий',
-	// label for value '' in enum data type
-	'empty' => 'порожньо',
+	'empty' => 'порожньо', // label for value '' in enum data type
 	'Insert' => 'Вставити',
 	'Save' => 'Зберегти',
 	'Save and continue edit' => 'Зберегти і продовжити редагування',
@@ -374,8 +393,7 @@ return [
 	'Selected' => 'Вибрані',
 	'Clone' => 'Клонувати',
 	'Delete' => 'Видалити',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Запис%s було вставлено.',
+	'Item%s has been inserted.' => 'Запис%s було вставлено.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Запис було видалено.',
 	'Item has been updated.' => 'Запис було змінено.',
 	'%d item(s) have been affected.' => [
@@ -385,7 +403,7 @@ return [
 	],
 	'You have no privileges to update this table.' => 'Ви не маєте привілеїв для оновлення цієї таблиці.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Числа',
 	'Date and time' => 'Дата і час',
 	'Strings' => 'Рядки',
@@ -395,10 +413,43 @@ return [
 	'Geometry' => 'Геометрія',
 	'Relations' => 'Зв\'язки',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'зараз',
 	'yes' => 'так',
 	'no' => 'ні',
 
-	// Plugins.
+	// Settings
+	'Settings' => 'Налаштування', // by Claude Opus 5
+	'Default' => 'За замовчуванням', // by Claude Opus 5
+	'Color scheme' => 'Кольорова схема', // by Claude Opus 5
+	'By system' => 'Як у системі', // by Claude Opus 5
+	'Light' => 'Світла', // by Claude Opus 5
+	'Dark' => 'Темна', // by Claude Opus 5
+	'Navigation mode' => 'Режим навігації', // by Claude Opus 5
+	'Simple' => 'Простий', // by Claude Opus 5
+	'Dual' => 'Подвійний', // by Claude Opus 5
+	'Reversed' => 'Зворотний', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями таблиць.', // by Claude Opus 5
+	'Table links' => 'Посилання таблиць', // by Claude Opus 5
+	'Primary action for all table links.' => 'Основна дія для всіх посилань таблиць.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Посилання на таблиці, що посилаються на поточний рядок.', // by Claude Opus 5
+	'Display' => 'Показувати', // by Claude Opus 5
+	'Hide' => 'Приховати', // by Claude Opus 5
+	'Records per page' => 'Записів на сторінці', // by Claude Opus 5
+	'Default number of records displayed in data table.' => 'Кількість записів, що показуються в таблиці даних за замовчуванням.', // by Claude Opus 5
+	'Enum as select' => 'Enum як список', // by Claude Opus 5
+	'Never' => 'Ніколи', // by Claude Opus 5
+	'Always' => 'Завжди', // by Claude Opus 5
+	'More values than %d' => 'Більше %d значень', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => 'Поріг для показу списку вибору для полів типу enum.', // by Claude Opus 5
+
+	// Plugins
+	'One Time Password' => 'Одноразовий пароль', // by Claude Opus 5
+	'Enter OTP code.' => 'Введіть код OTP.', // by Claude Opus 5
+	'Invalid OTP code.' => 'Невірний код OTP.', // by Claude Opus 5
+	'Access denied.' => 'Доступ заборонено.', // by Claude Opus 5
+	'JSON previews' => 'Попередній перегляд JSON', // by Claude Opus 5
+	'Data table' => 'Таблиця даних', // by Claude Opus 5
+	'Edit form' => 'Форма редагування', // by Claude Opus 5
+	'Ask %s' => 'Запитати %s', // by Claude Opus 5
 ];

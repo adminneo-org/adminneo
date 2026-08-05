@@ -300,9 +300,7 @@ if (isset($_GET["mysql"])) {
 				"group_concat",
 			];
 
-			if ($connection->isMinVersion("5.1")) {
-				$this->partitionBy = ["RANGE", "LIST", "HASH", "LINEAR HASH", "KEY", "LINEAR KEY"];
-			}
+			$this->partitionBy = ["RANGE", "LIST", "HASH", "LINEAR HASH", "KEY", "LINEAR KEY"];
 
 			$this->insertFunctions = [
 				"char" => "md5/sha1/password/encrypt/uuid",
@@ -327,9 +325,15 @@ if (isset($_GET["mysql"])) {
 				$this->insertFunctions['uuid'] = 'uuid';
 			}
 
-			if ($connection->isMinVersion("9")) {
+			if ($maria && $connection->isMinVersion("10.5")) {
+				$this->types[lang('Network')]["inet6"] = 39;
+				if ($connection->isMinVersion("10.10")) {
+					$this->types[lang('Network')]["inet4"] = 15;
+				}
+			}
+
+			if ($connection->isMinVersion($maria ? "11.7" : "9")) {
 				$this->types[lang('Numbers')]["vector"] = 16383;
-				$this->insertFunctions['vector'] = 'string_to_vector';
 			}
 
 			$this->systemDatabases = ["mysql", "information_schema", "performance_schema", "sys"];
@@ -346,6 +350,8 @@ if (isset($_GET["mysql"])) {
 				return "<code class='jush-sql'>UNHEX</code>";
 			} elseif ($field["type"] == "bit") {
 				return doc_link(['sql' => 'bit-value-literals.html', 'mariadb' => "reference/sql-structure/sql-language-structure/binary-literals"], "<code>b''</code>");
+			} elseif ($field["type"] == "vector") {
+				return "<code class='jush-sql'>" . ($this->connection->isMariaDB() ? "VEC_FromText" : "STRING_TO_VECTOR") . "</code>";
 			} elseif (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
 				return "<code class='jush-sql'>GeomFromText</code>";
 			} else {
@@ -770,7 +776,7 @@ if (isset($_GET["mysql"])) {
 		$return = [];
 		foreach (get_rows("SHOW INDEX FROM " . table($table), $connection) as $row) {
 			$name = $row["Key_name"];
-			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" : ($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" : ($row["Non_unique"] ? ($row["Index_type"] == "SPATIAL" ? "SPATIAL" : "INDEX") : "UNIQUE")));
+			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" : ($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" : ($row["Non_unique"] ? (preg_match('~^(SPATIAL|VECTOR)$~', $row["Index_type"]) ? $row["Index_type"] : "INDEX") : "UNIQUE")));
 			$return[$name]["columns"][] = $row["Column_name"];
 			$return[$name]["lengths"][] = ($row["Index_type"] == "SPATIAL" ? null : $row["Sub_part"]);
 			$return[$name]["descs"][] = null;
@@ -1242,7 +1248,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	 */
 	function explain(Connection $connection, string $query)
 	{
-		return $connection->query("EXPLAIN " . (Connection::get()->isMinVersion("5.1") && !Connection::get()->isMinVersion("5.7") ? "PARTITIONS " : "") . $query);
+		return $connection->query("EXPLAIN " . (Connection::get()->isMinVersion("5.7") ? "" : "PARTITIONS ") . $query);
 	}
 
 	/**
@@ -1368,6 +1374,9 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 		if ($field["type"] == "bit") {
 			return "BIN(" . idf_escape($field["field"]) . " + 0)"; // + 0 is required outside MySQLnd
 		}
+		if ($field["type"] == "vector") {
+			return (Connection::get()->isMariaDB() ? "VEC_ToText" : "VECTOR_TO_STRING") . "(" . idf_escape($field["field"]) . ")";
+		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
 			return (Connection::get()->isMinVersion("8") ? "ST_" : "") . "AsWKT(" . idf_escape($field["field"]) . ")";
 		}
@@ -1388,6 +1397,9 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 		if ($field["type"] == "bit") {
 			$return = "CONVERT(b$return, UNSIGNED)";
 		}
+		if ($field["type"] == "vector") {
+			$return = (Connection::get()->isMariaDB() ? "VEC_FromText" : "STRING_TO_VECTOR") . "($return)";
+		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
 			$prefix = (Connection::get()->isMinVersion("8") ? "ST_" : "");
 			$return = $prefix . "GeomFromText($return, $prefix" . "SRID($field[field]))";
@@ -1402,8 +1414,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	*/
 	function support($feature) {
 		return preg_match(
-			'~^(comment|columns|copy|database|drop_col|dump|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
-			. (Connection::get()->isMinVersion("5.1") ? '|event' : '')
+			'~^(comment|columns|copy|database|drop_col|dump|event|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
 			. (Connection::get()->isMinVersion("8") ? '|descidx' : '')
 			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? '|check' : '')
 			. ')$~',

@@ -3,21 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1.$3.$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY.MM.DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1.$3.$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY.MM.DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
-	// Login.
+	// Bootstrap
+	'%s must return an array.' => '%s 必須回傳陣列。', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s 和 %s 必須回傳由 %s 方法建立的物件。', // by Claude Opus 5
+
+	// Login
 	'System' => '資料庫系統',
 	'Server' => '伺服器',
 	'Username' => '帳號',
@@ -27,29 +26,36 @@ return [
 	'Logout' => '登出',
 	'Logged as: %s' => '登錄為： %s',
 	'Logout successful.' => '成功登出。',
+	'hostname[:port] or :socket' => 'hostname[:port] 或 :socket', // by Claude Fable 5
+	'Invalid server or credentials.' => '無效的伺服器或帳號密碼。', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => '您輸入的密碼中有一個空格，這可能是導致問題的原因。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo預設不支援訪問沒有密碼的資料庫，<a href="https://www.adminneo.org/password"%s>詳情見這裡</a>。',
 	'Database does not support password.' => '資料庫不支援密碼。',
 	'Too many unsuccessful logins, try again in %d minute(s).' => '登錄失敗次數過多，請 %d 分鐘後重試。',
+	'Invalid permanent login, please login again.' => '永久登入無效，請重新登入。', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => '無效的 CSRF token。請重新發送表單。',
 	'If you did not send this request from AdminNeo then close this page.' => '如果您並沒有從AdminNeo發送請求，請關閉此頁面。',
 	'The action will be performed after successful login with the same credentials.' => '此操作將在成功使用相同的憑據登錄後執行。',
 
-	// Connection.
+	// Connection
+	'No driver' => '無驅動程式', // by Claude Opus 5
+	'Database driver not found.' => '找不到資料庫驅動程式。', // by Claude Opus 5
 	'No extension' => '無擴充模組',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => '沒有任何支援的 PHP 擴充模組（%s）。',
+	'None of the supported PHP extensions (%s) are available.' => '沒有任何支援的 PHP 擴充模組（%s）。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '不允許連接到特權埠。',
 	'Session support must be enabled.' => 'Session 必須被啟用。',
 	'Session expired, please login again.' => 'Session 已過期，請重新登入。',
 	'%s version: %s through PHP extension %s' => '%s 版本：%s 透過 PHP 擴充模組 %s',
 
-	// Settings.
+	// Settings
 	'Language' => '語言',
 
+	'Home' => '首頁', // by Claude Opus 5
 	'Refresh' => '重新載入',
+	'Info' => '資訊', // by Claude Opus 5
+	'More information.' => '更多資訊。', // by Claude Opus 5
 
-	// Privileges.
+	// Privileges
 	'Privileges' => '權限',
 	'Create user' => '建立使用者',
 	'User has been dropped.' => '已刪除使用者。',
@@ -57,21 +63,23 @@ return [
 	'User has been created.' => '已建立使用者。',
 	'Hashed' => 'Hashed',
 
-	// Server.
+	// Server
 	'Process list' => '處理程序列表',
 	'%d process(es) have been killed.' => '%d 個 Process(es) 被終止。',
 	'Kill' => '終止',
 	'Variables' => '變數',
 	'Status' => '狀態',
 
-	// Structure.
+	// Structure
 	'Column' => '欄位',
+	'Columns' => '欄位', // by Claude Fable 5
 	'Routine' => '程序',
 	'Grant' => '授權',
 	'Revoke' => '廢除',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL 命令',
+	'HTTP request' => 'HTTP 請求', // by Claude Opus 5
 	'%d query(s) executed OK.' => '已順利執行 %d 個查詢。',
 	'Query executed OK, %d row(s) affected.' => '執行查詢 OK，%d 行受影響。',
 	'No commands to execute.' => '沒有命令可執行。',
@@ -83,13 +91,12 @@ return [
 	'Stop on error' => '出錯時停止',
 	'Show only errors' => '僅顯示錯誤訊息',
 	'Time' => '時間',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f 秒',
+	'%.3f s' => '%.3f 秒', // sprintf() format for time of the command
 	'History' => '紀錄',
 	'Clear' => '清除',
 	'Edit all' => '編輯全部',
 
-	// Import.
+	// Import
 	'Import' => '匯入',
 	'File upload' => '檔案上傳',
 	'From server' => '從伺服器',
@@ -99,13 +106,15 @@ return [
 	'File uploads are disabled.' => '檔案上傳已經被停用。',
 	'Unable to upload a file.' => '無法上傳檔案。',
 	'Maximum allowed file size is %sB.' => '允許的檔案上限大小為 %sB。',
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => '檔案數量上限為 %d。請減少所選檔案或者增加 %s 的設定值。', // by Claude Opus 5
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => '檔案總大小上限為 %s。請選擇較小的檔案或者增加 %s 的設定值。', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST 資料太大。減少資料或者增加 %s 的設定值。',
 	'You can upload a big SQL file via FTP and import it from server.' => '您可以通過FTP上傳大型SQL檔並從伺服器導入。',
 	'File must be in UTF-8 encoding.' => '檔必須使用UTF-8編碼。',
 	'You are offline.' => '您離線了。',
 	'%d row(s) have been imported.' => '已匯入 %d 行。',
 
-	// Export.
+	// Export
 	'Export' => '匯出',
 	'Output' => '輸出',
 	'open' => '打開',
@@ -113,8 +122,9 @@ return [
 	'Format' => '格式',
 	'Data' => '資料',
 
-	// Databases.
+	// Databases
 	'Database' => '資料庫',
+	'database' => '資料庫', // by Claude Opus 5
 	'DB' => '資料庫',
 	'Use' => '使用',
 	'Invalid database.' => '無效的資料庫。',
@@ -127,12 +137,17 @@ return [
 	'Database has been created.' => '已建立資料庫。',
 	'Database has been renamed.' => '已重新命名資料庫。',
 	'Database has been altered.' => '已修改資料庫。',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => '檔案已存在。',
 	'Please use one of the extensions %s.' => '請使用下列其中一個擴充模組 %s。',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => '資料表結構',
+	'schema' => '資料表結構', // by Claude Opus 5
+	'Schemas' => '資料表結構', // by Claude Opus 5
+	'No schemas.' => '沒有資料表結構。', // by Claude Opus 5
+	'Show schema' => '顯示資料表結構', // by Claude Opus 5
 	'Alter schema' => '修改資料表結構',
 	'Create schema' => '建立資料表結構',
 	'Schema has been dropped.' => '已刪除資料表結構。',
@@ -140,7 +155,7 @@ return [
 	'Schema has been altered.' => '已修改資料表結構。',
 	'Invalid schema.' => '無效的資料表結構。',
 
-	// Table list.
+	// Table list
 	'Engine' => '引擎',
 	'engine' => '引擎',
 	'Collation' => '校對',
@@ -164,7 +179,7 @@ return [
 	'Tables have been copied.' => '資料表已經複製。',
 	'overwrite' => '覆蓋',
 
-	// Tables.
+	// Tables
 	'Tables' => '資料表',
 	'Tables and views' => '資料表和檢視表',
 	'Table' => '資料表',
@@ -196,7 +211,7 @@ return [
 	'Remove' => '移除',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => '超過允許的字段數量的最大值。請增加 %s。',
 
-	// Views.
+	// Views
 	'View' => '檢視表',
 	'Materialized view' => '物化視圖',
 	'View has been dropped.' => '已刪除檢視表。',
@@ -205,21 +220,26 @@ return [
 	'Alter view' => '修改檢視表',
 	'Create view' => '建立檢視表',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => '分區類型',
+	'Partition' => '分區', // by Claude Opus 5
 	'Partitions' => '分區',
 	'Partition name' => '分區名稱',
 	'Values' => '值',
+	'Inherited tables' => '繼承的資料表', // by Claude Opus 5
+	'Inherited from' => '繼承自', // by Claude Opus 5
 
-	// Indexes.
+	// Indexes
 	'Indexes' => '索引',
 	'Indexes have been altered.' => '已修改索引。',
 	'Alter indexes' => '修改索引',
 	'Add next' => '新增下一筆',
 	'Index Type' => '索引類型',
 	'length' => '長度',
+	'Algorithm' => '演算法', // by Claude Fable 5
+	'Condition' => '條件', // by Claude Fable 5
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => '外來鍵',
 	'Foreign key' => '外來鍵',
 	'Foreign key has been dropped.' => '已刪除外來鍵。',
@@ -236,7 +256,7 @@ return [
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => '來源列和目標列必須具有相同的資料類型，在目標列上必須有一個索引並且引用的資料必須存在。',
 
-	// Routines.
+	// Routines
 	'Routines' => '程序',
 	'Routine has been called, %d row(s) affected.' => '程序已被執行，%d 行被影響。',
 	'Call' => '呼叫',
@@ -250,7 +270,7 @@ return [
 	'Alter procedure' => '修改預存程序',
 	'Return type' => '回傳類型',
 
-	// Events.
+	// Events
 	'Events' => '事件',
 	'Event' => '事件',
 	'Event has been dropped.' => '已刪除事件。',
@@ -265,7 +285,7 @@ return [
 	'End' => '結束',
 	'On completion preserve' => '在完成後儲存',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => '序列',
 	'Create sequence' => '建立序列',
 	'Sequence has been dropped.' => '已刪除序列。',
@@ -273,14 +293,14 @@ return [
 	'Sequence has been altered.' => '已修改序列。',
 	'Alter sequence' => '修改序列',
 
-	// User types (PostgreSQL)
-	'User types' => '使用者類型',
+	// User-defined types (PostgreSQL)
+	'User types' => '使用者定義類型', // by Claude Fable 5
 	'Create type' => '建立類型',
 	'Type has been dropped.' => '已刪除類型。',
 	'Type has been created.' => '已建立類型。',
 	'Alter type' => '修改類型',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => '觸發器',
 	'Add trigger' => '建立觸發器',
 	'Trigger has been dropped.' => '已刪除觸發器。',
@@ -289,9 +309,15 @@ return [
 	'Alter trigger' => '修改觸發器',
 	'Create trigger' => '建立觸發器',
 
-	// Table check constraints.
+	// Table check constraints
+	'Checks' => '檢查約束', // by Claude Fable 5
+	'Create check' => '建立檢查約束', // by Claude Fable 5
+	'Alter check' => '修改檢查約束', // by Claude Fable 5
+	'Check has been created.' => '已建立檢查約束。', // by Claude Fable 5
+	'Check has been altered.' => '已修改檢查約束。', // by Claude Fable 5
+	'Check has been dropped.' => '已刪除檢查約束。', // by Claude Fable 5
 
-	// Selection.
+	// Selection
 	'Select data' => '選擇資料',
 	'Select' => '選擇',
 	'Functions' => '函式',
@@ -317,17 +343,16 @@ return [
 	'Whole result' => '所有結果',
 	'%d byte(s)' => '%d byte(s)',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => '修改',
 	'Ctrl+click on a value to modify it.' => '按住Ctrl並按一下某個值進行修改。',
 	'Use edit link to modify this value.' => '使用編輯連結來修改。',
 
-	// Editing.
+	// Editing
 	'New item' => '新增項目',
 	'Edit' => '編輯',
 	'original' => '原始',
-	// label for value '' in enum data type
-	'empty' => '空值',
+	'empty' => '空值', // label for value '' in enum data type
 	'Insert' => '新增',
 	'Save' => '儲存',
 	'Save and continue edit' => '儲存並繼續編輯',
@@ -336,14 +361,13 @@ return [
 	'Selected' => '已選中',
 	'Clone' => '複製',
 	'Delete' => '刪除',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => '已新增項目 %s。',
+	'Item%s has been inserted.' => '已新增項目 %s。', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => '該項目已被刪除。',
 	'Item has been updated.' => '已更新項目。',
 	'%d item(s) have been affected.' => '%d 個項目受到影響。',
 	'You have no privileges to update this table.' => '您沒有許可權更新這個資料表。',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => '數字',
 	'Date and time' => '日期時間',
 	'Strings' => '字串',
@@ -353,10 +377,43 @@ return [
 	'Geometry' => '幾何',
 	'Relations' => '關聯',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => '現在',
 	'yes' => '是',
 	'no' => '否',
 
-	// Plugins.
+	// Settings
+	'Settings' => '設定', // by Claude Opus 5
+	'Default' => '預設', // by Claude Opus 5
+	'Color scheme' => '配色方案', // by Claude Opus 5
+	'By system' => '依系統設定', // by Claude Opus 5
+	'Light' => '淺色', // by Claude Opus 5
+	'Dark' => '深色', // by Claude Opus 5
+	'Navigation mode' => '導覽模式', // by Claude Opus 5
+	'Simple' => '簡易', // by Claude Opus 5
+	'Dual' => '雙欄', // by Claude Opus 5
+	'Reversed' => '反向', // by Claude Opus 5
+	'Layout of main navigation with table links.' => '含資料表連結的主導覽版面配置。', // by Claude Opus 5
+	'Table links' => '資料表連結', // by Claude Opus 5
+	'Primary action for all table links.' => '所有資料表連結的主要動作。', // by Claude Opus 5
+	'Links to tables referencing the current row.' => '指向參照目前資料行的資料表連結。', // by Claude Opus 5
+	'Display' => '顯示', // by Claude Opus 5
+	'Hide' => '隱藏', // by Claude Opus 5
+	'Records per page' => '每頁筆數', // by Claude Opus 5
+	'Default number of records displayed in data table.' => '資料表格中預設顯示的資料筆數。', // by Claude Opus 5
+	'Enum as select' => '列舉顯示為選單', // by Claude Opus 5
+	'Never' => '永不', // by Claude Opus 5
+	'Always' => '總是', // by Claude Opus 5
+	'More values than %d' => '值超過 %d 個', // by Claude Opus 5
+	'Threshold for displaying a selection menu for enum fields.' => '列舉欄位顯示選單的門檻值。', // by Claude Opus 5
+
+	// Plugins
+	'One Time Password' => '一次性密碼', // by Claude Opus 5
+	'Enter OTP code.' => '請輸入 OTP 驗證碼。', // by Claude Opus 5
+	'Invalid OTP code.' => '無效的 OTP 驗證碼。', // by Claude Opus 5
+	'Access denied.' => '存取被拒絕。', // by Claude Opus 5
+	'JSON previews' => 'JSON 預覽', // by Claude Opus 5
+	'Data table' => '資料表格', // by Claude Opus 5
+	'Edit form' => '編輯表單', // by Claude Opus 5
+	'Ask %s' => '詢問 %s', // by Claude Opus 5
 ];

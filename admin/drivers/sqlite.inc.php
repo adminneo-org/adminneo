@@ -168,6 +168,9 @@ if (isset($_GET["sqlite"])) {
 			if ($connection->isMinVersion("3.31")) {
 				$this->generated = ["STORED", "VIRTUAL"];
 			}
+			if ($connection->isMinVersion("3.37")) {
+				$this->types[0]["any"] = 0;
+			}
 
 			// REGEXP can be a user defined function.
 			$this->operators = [
@@ -206,6 +209,19 @@ if (isset($_GET["sqlite"])) {
 			return parent::getStructuredTypes()[0];
 		}
 
+		public function engines(): array
+		{
+			$return = ["table"];
+			if (Connection::get()->isMinVersion("3.8.2")) {
+				if (Connection::get()->isMinVersion("3.37")) {
+					$return[] = "STRICT";
+					$return[] = "STRICT, WITHOUT ROWID";
+				}
+				$return[] = "WITHOUT ROWID";
+			}
+			return $return;
+		}
+
 		public function insertUpdate(string $table, array $records, array $primary)
 		{
 			$values = [];
@@ -220,8 +236,8 @@ if (isset($_GET["sqlite"])) {
 			if ($name == "sqlite_sequence") {
 				return "fileformat2.html#seqtab";
 			}
-			if ($name == "sqlite_master") {
-				return "fileformat2.html#$name";
+			if (preg_match('~^sqlite(_temp)?_(master|schema)$~', $name)) {
+				return "schematab.html";
 			}
 
 			return null;
@@ -310,14 +326,31 @@ if (isset($_GET["sqlite"])) {
 		return [];
 	}
 
-	function table_status($name = "") {
+	function table_status($name = "", $fast = false) {
 		$return = [];
-		foreach (get_rows("SELECT name AS Name, type AS Engine, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
-			$row["Rows"] = Connection::get()->getValue("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
+		foreach (
+			get_rows(
+				"SELECT name AS Name, type AS Engine, sql, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') "
+				. ($name != "" ? "AND name = " . q($name) : "ORDER BY (name = 'sqlite_sequence'), name")
+			) as $row
+		) {
+			if ($row["Engine"] == "table") {
+				$suffix = preg_replace('~.*\)~s', '', $row["sql"]); // table options are after the last parenthesis
+				$row["Engine"] = implode(", ", array_filter([
+					(preg_match('~\bSTRICT\b~i', $suffix) ? "STRICT" : ""),
+					(preg_match('~\bWITHOUT\s+ROWID\b~i', $suffix) ? "WITHOUT ROWID" : ""),
+				])) ?: "table";
+			}
+			unset($row["sql"]);
+			if (!$fast) {
+				$row["Rows"] = Connection::get()->getValue("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
+			}
 			$return[$row["Name"]] = $row;
 		}
-		foreach (get_rows("SELECT * FROM sqlite_sequence" . ($name != "" ? " WHERE name = " . q($name) : ""), null, "") as $row) {
-			$return[$row["name"]]["Auto_increment"] = $row["seq"];
+		if (!$fast) {
+			foreach (get_rows("SELECT * FROM sqlite_sequence" . ($name != "" ? " WHERE name = " . q($name) : ""), null, "") as $row) {
+				$return[$row["name"]]["Auto_increment"] = $row["seq"];
+			}
 		}
 		return $return;
 	}
@@ -332,30 +365,34 @@ if (isset($_GET["sqlite"])) {
 
 	function fields($table) {
 		$return = [];
-		$primary = "";
+		$sql = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
+		$privileges = ["select" => 1, "where" => 1, "order" => 1];
+		if (!preg_match('~^sqlite(_temp)?_(master|schema)$~', $table)) {
+			$privileges += ["insert" => 1, "update" => 1];
+		}
 		foreach (get_rows("PRAGMA table_" . (Connection::get()->isMinVersion("3.31") ? "x" : "") . "info(" . table($table) . ")") as $row) {
 			$name = $row["name"];
 			$type = strtolower($row["type"]);
 			$default = $row["dflt_value"];
 			$return[$name] = [
 				"field" => $name,
-				"type" => (preg_match('~int~i', $type) ? "integer" : (preg_match('~char|clob|text~i', $type) ? "text" : (preg_match('~blob~i', $type) ? "blob" : (preg_match('~real|floa|doub~i', $type) ? "real" : "numeric")))),
+				"type" => (preg_match('~int~i', $type) ? "integer"
+					: (preg_match('~char|clob|text~i', $type) ? "text"
+					: (preg_match('~blob~i', $type) ? "blob"
+					: (preg_match('~real|floa|doub~i', $type) ? "real"
+					: (preg_match('~any~i', $type) ? "any"
+					: "numeric"
+				))))),
 				"full_type" => $type,
 				"default" => (preg_match("~^'(.*)'$~", $default, $match) ? str_replace("''", "'", $match[1]) : ($default == "NULL" ? null : $default)),
 				"null" => !$row["notnull"],
-				"privileges" => ["select" => 1, "insert" => 1, "update" => 1, "where" => 1, "order" => 1],
+				"privileges" => $privileges,
 				"primary" => $row["pk"],
 			];
-			if ($row["pk"]) {
-				if ($primary != "") {
-					$return[$primary]["auto_increment"] = false;
-				} elseif (preg_match('~^integer$~i', $type)) {
-					$return[$name]["auto_increment"] = true;
-				}
-				$primary = $name;
+			if ($row["pk"] && preg_match('~\bAUTOINCREMENT\b~i', $sql)) {
+				$return[$name]["auto_increment"] = true;
 			}
 		}
-		$sql = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		$idf = '(("[^"]*+")+|[a-z0-9_]+)';
 		preg_match_all('~' . $idf . '\s+text\s+COLLATE\s+(\'[^\']+\'|\S+)~i', $sql, $matches, PREG_SET_ORDER);
 		foreach ($matches as $match) {
@@ -519,7 +556,7 @@ if (isset($_GET["sqlite"])) {
 
 	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
 	{
-		$use_all_fields = ($table == "" || $foreign);
+		$use_all_fields = ($table == "" || $foreign || $engine);
 		foreach ($fields as $field) {
 			if ($field[0] != "" || !$field[1] || $field[2]) {
 				$use_all_fields = true;
@@ -550,7 +587,7 @@ if (isset($_GET["sqlite"])) {
 			if ($table != $name && !queries("ALTER TABLE " . table($table) . " RENAME TO " . table($name))) {
 				return false;
 			}
-		} elseif (!recreate_table($table, $name, $alter_fields, $originals, $foreign, $auto_increment)) {
+		} elseif (!recreate_table($table, $name, $alter_fields, $originals, $foreign, $auto_increment, [], "", "", $engine)) {
 			return false;
 		}
 
@@ -580,7 +617,7 @@ if (isset($_GET["sqlite"])) {
 	* @param string CHECK constraint to add
 	* @return bool
 	*/
-	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = ""): bool
+	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = "", string $engine = ""): bool
 	{
 		if ($table != "") {
 			if (!$fields) {
@@ -669,8 +706,11 @@ if (isset($_GET["sqlite"])) {
 		if ($add_check) {
 			$changes[] = "  CHECK ($add_check)";
 		}
-		$temp_name = ($table == $name ? "adminneo_$name" : $name);
-		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)")) {
+		$temp_name = ($table != "" && $table == $name ? "adminneo_$name" : $name);
+		if (!$engine && $table != "") {
+			$engine = table_status1($table)["Engine"] ?? null;
+		}
+		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)" . ($engine != "table" && in_array($engine, Driver::get()->engines()) ? " $engine" : ""))) {
 			// implicit ROLLBACK to not overwrite $connection->error
 			return false;
 		}

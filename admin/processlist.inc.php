@@ -39,10 +39,10 @@ foreach (process_list() as $i => $row) {
 	}
 	echo "<tr>" . (support("kill") ? "<td>" . checkbox("kill[]", $row[DIALECT == "sql" ? "Id" : "pid"], 0) : "");
 	foreach ($row as $key => $val) {
-		echo "<td>" . (
-			(DIALECT == "sql" && $key == "Info" && preg_match("~Query|Killed~", $row["Command"]) && $val != "") ||
-			(DIALECT == "pgsql" && $key == "current_query" && $val != "<IDLE>") ||
-			(DIALECT == "oracle" && $key == "sql_text" && $val != "")
+		echo "<td>" . ($val != "" && (
+			(DIALECT == "sql" && $key == "Info" && preg_match("~Query|Killed~", $row["Command"])) ||
+			(DIALECT == "pgsql" && $key == "query") ||
+			(DIALECT == "oracle" && $key == "sql_text"))
 			? "<code class='jush-" . DIALECT . "'>" . truncate_utf8($val, 100) . '</code> <a href="' . h(ME . ($row["db"] != "" ? "db=" . urlencode($row["db"]) . "&" : "") . "sql=" . urlencode($val)) . '">' . icon("edit") . lang('Clone') . '</a>'
 			: h($val)
 		);

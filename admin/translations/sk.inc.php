@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ' ',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ' ', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$6.$4.$1',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'D.M.RRRR',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$6.$4.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'D.M.RRRR', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s musí vraciať pole.',
 	'%s and %s must return an object created by %s method.' => '%s a %s musí vraciať objekt vytvorený pomocou metódy %s.',
 
-	// Login.
+	// Login
 	'System' => 'Systém',
 	'Server' => 'Server',
 	'Username' => 'Používateľ',
@@ -35,8 +32,8 @@ return [
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nepodporuje prístup k databáze bez hesla, <a href="https://www.adminneo.org/password"%s>viac informácií</a>.',
 	'Database does not support password.' => 'Databáza nepodporuje heslo.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
-		'Príliš veľa pokusov o prihlásenie, skúste to znova za %d minutu.',
-		'Príliš veľa pokusov o prihlásenie, skúste to znova za %d minuty.',
+		'Príliš veľa pokusov o prihlásenie, skúste to znova za %d minútu.',
+		'Príliš veľa pokusov o prihlásenie, skúste to znova za %d minúty.',
 		'Príliš veľa pokusov o prihlásenie, skúste to znova za %d minút.',
 	],
 	'Invalid permanent login, please login again.' => 'Neplatné trvalé prihlásenie, prihláste sa prosím znova.',
@@ -44,18 +41,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Pokiaľ ste tento požiadavok neodoslali z AdminNeo, zatvorte túto stránku.',
 	'The action will be performed after successful login with the same credentials.' => 'Akcia sa vykoná po úspešnom prihlásení s rovnakými prihlasovacími údajmi.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Žiadny ovládač',
 	'Database driver not found.' => 'Databázový ovládač sa nenašiel.',
 	'No extension' => 'Žiadne rozšírenie',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Nie je dostupné žiadne z podporovaných rozšírení (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Nie je dostupné žiadne z podporovaných rozšírení (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Pripojenie k privilegovaným portom nie je povolené.',
 	'Session support must be enabled.' => 'Session premenné musia byť povolené.',
 	'Session expired, please login again.' => 'Session vypršala, prihláste sa prosím znova.',
 	'%s version: %s through PHP extension %s' => 'Verzia %s: %s cez PHP rozšírenie %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Jazyk',
 
 	'Home' => 'Domov',
@@ -63,7 +59,7 @@ return [
 	'Info' => 'Info',
 	'More information.' => 'Viac informácií.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Oprávnenia',
 	'Create user' => 'Vytvoriť používateľa',
 	'User has been dropped.' => 'Používateľ bol odstránený.',
@@ -71,7 +67,7 @@ return [
 	'User has been created.' => 'Používateľ bol vytvorený.',
 	'Hashed' => 'Zahašované',
 
-	// Server.
+	// Server
 	'Process list' => 'Zoznam procesov',
 	'%d process(es) have been killed.' => [
 		'Bol ukončený %d proces.',
@@ -82,14 +78,14 @@ return [
 	'Variables' => 'Premenné',
 	'Status' => 'Stav',
 
-	// Structure.
+	// Structure
 	'Column' => 'Stĺpec',
 	'Columns' => 'Stĺpce',
 	'Routine' => 'Procedúra',
 	'Grant' => 'Povoliť',
 	'Revoke' => 'Zakázať',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'SQL príkaz',
 	'HTTP request' => 'HTTP požiadavka',
 	'%d query(s) executed OK.' => [
@@ -111,26 +107,25 @@ return [
 	'Stop on error' => 'Zastaviť pri chybe',
 	'Show only errors' => 'Zobraziť iba chyby',
 	'Time' => 'Čas',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'História',
 	'Clear' => 'Vyčistiť',
 	'Edit all' => 'Upraviť všetko',
 
-	// Import.
+	// Import
 	'Import' => 'Import',
 	'File upload' => 'Nahranie súboru',
 	'From server' => 'Zo serveru',
 	'Webserver file %s' => 'Súbor %s na webovom serveri',
 	'Run file' => 'Spustiť súbor',
 	'File does not exist.' => 'Súbor neexistuje.',
-	'File uploads are disabled.' => 'Nahrávánie súborov nie je povolené.',
+	'File uploads are disabled.' => 'Nahrávanie súborov nie je povolené.',
 	'Unable to upload a file.' => 'Súbor sa nepodarilo nahrať.',
 	'Maximum allowed file size is %sB.' => 'Maximálna povolená veľkosť súboru je %sB.',
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maximálny počet súborov je %d. Vyberte menej súborov alebo zvýšte hodnotu konfiguračnej direktívy %s.',
 	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maximálna celková veľkosť súborov je %s. Vyberte menšie súbory alebo zvýšte hodnotu konfiguračnej direktívy %s.',
-	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Príliš veľké POST dáta. Zmenšite dáta alebo zvýšte hodnotu konfiguračej direktívy %s.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'Veľký SQL soubor môžete nahrať pomocou FTP a importovať ho zo servera.',
+	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Príliš veľké POST dáta. Zmenšite dáta alebo zvýšte hodnotu konfiguračnej direktívy %s.',
+	'You can upload a big SQL file via FTP and import it from server.' => 'Veľký SQL súbor môžete nahrať pomocou FTP a importovať ho zo servera.',
 	'File must be in UTF-8 encoding.' => 'Súbor musí byť v kódovaní UTF-8.',
 	'You are offline.' => 'Ste offline.',
 	'%d row(s) have been imported.' => [
@@ -139,7 +134,7 @@ return [
 		'Bolo importovaných %d záznamov.',
 	],
 
-	// Export.
+	// Export
 	'Export' => 'Export',
 	'Output' => 'Výstup',
 	'open' => 'otvoriť',
@@ -147,7 +142,7 @@ return [
 	'Format' => 'Formát',
 	'Data' => 'Dáta',
 
-	// Databases.
+	// Databases
 	'Database' => 'Databáza',
 	'database' => 'databáza',
 	'DB' => 'DB',
@@ -162,11 +157,12 @@ return [
 	'Database has been created.' => 'Databáza bola vytvorená.',
 	'Database has been renamed.' => 'Databáza bola premenovaná.',
 	'Database has been altered.' => 'Databáza bola zmenená.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Súbor existuje.',
 	'Please use one of the extensions %s.' => 'Prosím vyberte jednu z koncoviek %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schéma',
 	'schema' => 'schéma',
 	'Schemas' => 'Schémy',
@@ -179,7 +175,7 @@ return [
 	'Schema has been altered.' => 'Schéma bola zmenená.',
 	'Invalid schema.' => 'Neplatná schéma.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Typ',
 	'engine' => 'úložisko',
 	'Collation' => 'Porovnávanie',
@@ -195,15 +191,15 @@ return [
 	'Check' => 'Skontrolovať',
 	'Repair' => 'Opraviť',
 	'Truncate' => 'Vyprázdniť',
-	'Tables have been truncated.' => 'Tabuľka bola vyprázdnená.',
+	'Tables have been truncated.' => 'Tabuľky boli vyprázdnené.',
 	'Move to other database' => 'Presunúť do inej databázy',
 	'Move' => 'Presunúť',
-	'Tables have been moved.' => 'Tabuľka bola presunutá.',
+	'Tables have been moved.' => 'Tabuľky boli presunuté.',
 	'Copy' => 'Kopírovať',
 	'Tables have been copied.' => 'Tabuľky boli skopírované.',
 	'overwrite' => 'prepísať',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Tabuľky',
 	'Tables and views' => 'Tabuľky a pohľady',
 	'Table' => 'Tabuľka',
@@ -211,7 +207,7 @@ return [
 	'Alter table' => 'Zmeniť tabuľku',
 	'Create table' => 'Vytvoriť tabuľku',
 	'Table has been dropped.' => 'Tabuľka bola odstránená.',
-	'Tables have been dropped.' => 'Tabuľka bola odstránená.',
+	'Tables have been dropped.' => 'Tabuľky boli odstránené.',
 	'Tables have been optimized.' => 'Tabuľky boli optimalizované.',
 	'Table has been altered.' => 'Tabuľka bola zmenená.',
 	'Table has been created.' => 'Tabuľka bola vytvorená.',
@@ -235,7 +231,7 @@ return [
 	'Remove' => 'Odobrať',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Bol prekročený maximálny počet povolených polí. Zvýšte prosím %s.',
 
-	// Views.
+	// Views
 	'View' => 'Pohľad',
 	'Materialized view' => 'Materializovaný pohľad',
 	'View has been dropped.' => 'Pohľad bol odstránený.',
@@ -244,7 +240,7 @@ return [
 	'Alter view' => 'Zmeniť pohľad',
 	'Create view' => 'Vytvoriť pohľad',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Rozdeliť podľa',
 	'Partition' => 'Oddiel',
 	'Partitions' => 'Oddiely',
@@ -253,7 +249,7 @@ return [
 	'Inherited tables' => 'Zdedené tabuľky',
 	'Inherited from' => 'Zdedená z',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Indexy',
 	'Indexes have been altered.' => 'Indexy boli zmenené.',
 	'Alter indexes' => 'Zmeniť indexy',
@@ -263,7 +259,7 @@ return [
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmienka',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Cudzie kľúče',
 	'Foreign key' => 'Cudzí kľúč',
 	'Foreign key has been dropped.' => 'Cudzí kľúč bol odstránený.',
@@ -280,7 +276,7 @@ return [
 	'ON UPDATE' => 'Pri aktualizácii',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Zdrojové a cieľové stĺpce musia mať rovnaký datový typ, nad cieľovými stĺpcami musí byť definovaný index a odkazované dáta musia existovať.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Procedúry',
 	'Routine has been called, %d row(s) affected.' => [
 		'Procedúra bola zavolaná, bol zmenený %d záznam.',
@@ -298,7 +294,7 @@ return [
 	'Alter procedure' => 'Zmeniť procedúru',
 	'Return type' => 'Návratový typ',
 
-	// Events.
+	// Events
 	'Events' => 'Udalosti',
 	'Event' => 'Udalosť',
 	'Event has been dropped.' => 'Udalosť bola odstránená.',
@@ -311,9 +307,9 @@ return [
 	'Schedule' => 'Plán',
 	'Start' => 'Začiatok',
 	'End' => 'Koniec',
-	'On completion preserve' => 'Po dokončení zachovat',
+	'On completion preserve' => 'Po dokončení zachovať',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Sekvencia',
 	'Create sequence' => 'Vytvoriť sekvenciu',
 	'Sequence has been dropped.' => 'Sekvencia bola odstránená.',
@@ -321,14 +317,14 @@ return [
 	'Sequence has been altered.' => 'Sekvencia bola zmenená.',
 	'Alter sequence' => 'Pozmeniť sekvenciu',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Užívateľské typy',
 	'Create type' => 'Vytvoriť typ',
 	'Type has been dropped.' => 'Typ bol odstránený.',
 	'Type has been created.' => 'Typ bol vytvorený.',
 	'Alter type' => 'Pozmeniť typ',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Triggery',
 	'Add trigger' => 'Pridať trigger',
 	'Trigger has been dropped.' => 'Trigger bol odstránený.',
@@ -337,7 +333,7 @@ return [
 	'Alter trigger' => 'Zmeniť trigger',
 	'Create trigger' => 'Vytvoriť trigger',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Kontroly',
 	'Create check' => 'Vytvoriť kontrolu',
 	'Alter check' => 'Zmeniť kontrolu',
@@ -345,7 +341,7 @@ return [
 	'Check has been altered.' => 'Kontrola byla zmenená.',
 	'Check has been dropped.' => 'Kontrola byla odstránená.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Vypísať dáta',
 	'Select' => 'Vypísať',
 	'Functions' => 'Funkcie',
@@ -379,17 +375,16 @@ return [
 		'%d bajtov',
 	],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Zmeniť',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+kliknite na políčko, ktoré chcete zmeniť.',
 	'Use edit link to modify this value.' => 'Pre zmenu tejto hodnoty použite odkaz upraviť.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Nová položka',
 	'Edit' => 'Upraviť',
 	'original' => 'originál',
-	// label for value '' in enum data type
-	'empty' => 'prázdne',
+	'empty' => 'prázdne', // label for value '' in enum data type
 	'Insert' => 'Vložiť',
 	'Save' => 'Uložiť',
 	'Save and continue edit' => 'Uložiť a pokračovať v úpravách',
@@ -398,14 +393,13 @@ return [
 	'Selected' => 'Označené',
 	'Clone' => 'Klonovať',
 	'Delete' => 'Zmazať',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Položka%s bola vložená.',
+	'Item%s has been inserted.' => 'Položka%s bola vložená.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Položka bola vymazaná.',
 	'Item has been updated.' => 'Položka bola aktualizovaná.',
 	'%d item(s) have been affected.' => '%d položiek bolo ovplyvnených.',
 	'You have no privileges to update this table.' => 'Nemáte oprávnenie na aktualizáciu tejto tabuľky.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Čísla',
 	'Date and time' => 'Dátum a čas',
 	'Strings' => 'Reťazce',
@@ -415,12 +409,12 @@ return [
 	'Geometry' => 'Geometria',
 	'Relations' => 'Vzťahy',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'teraz',
 	'yes' => 'áno',
 	'no' => 'nie',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Nastavenia',
 	'Default' => 'Predvolené',
 	'Color scheme' => 'Farebná schéma',
@@ -445,7 +439,7 @@ return [
 	'More values than %d' => 'Viac položiek než %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Hranica pre zobrazenie rozbaľovacej ponuky pre hodnoty typu enum.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Jednorázové heslo',
 	'Enter OTP code.' => 'Zadajte jednorázový kód.',
 	'Invalid OTP code.' => 'Neplatný jednorázový kód.',
@@ -453,7 +447,5 @@ return [
 	'JSON previews' => 'Náhľad JSON v',
 	'Data table' => 'Dátová tabuľka',
 	'Edit form' => 'Editační formulář',
-	// Use the phrases from https://gemini.google.com/
-	'Ask %s' => 'Opýtajte sa %s',
-	'Just a sec...' => 'Moment...',
+	'Ask %s' => 'Opýtať sa %s',
 ];

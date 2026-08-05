@@ -132,8 +132,7 @@ class OpenWebUiPlugin extends Plugin
 	 */
 	public function printAfterSqlCommand(): ?bool
 	{
-		// Text shown while we wait for the answer.
-		$waitingText = lang("Just a sec...");
+		$waitingText = lang('Loading') . "…";
 
 		$script = <<<JS
 (function() {

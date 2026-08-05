@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'xx',
-	// thousands separator - must contain single byte
-	',' => 'x',
+	'ltr' => 'xx', // text direction - 'ltr' or 'rtl'
+	',' => 'x', // thousands separator - must contain single byte
 	'0123456789' => 'xxxxxxxxxx',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => 'xx',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'XX',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'XX',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => 'xx', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'XX', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'XX', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s xx.',
 	'%s and %s must return an object created by %s method.' => '%s xx %s xx %s.',
 
-	// Login.
+	// Login
 	'System' => 'Xx',
 	'Server' => 'Xx',
 	'Username' => 'Xx',
@@ -40,18 +37,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Xx.',
 	'The action will be performed after successful login with the same credentials.' => 'Xx.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Xx',
 	'Database driver not found.' => 'Xx.',
 	'No extension' => 'Xx',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Xx (%s).',
+	'None of the supported PHP extensions (%s) are available.' => 'Xx (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Xx.',
 	'Session support must be enabled.' => 'Xx.',
 	'Session expired, please login again.' => 'Xx.',
 	'%s version: %s through PHP extension %s' => '%s xx: %s xx %s',
 
-	// Settings.
+	// Settings
 	'Language' => 'Xx',
 
 	'Home' => 'Xx',
@@ -59,7 +55,7 @@ return [
 	'Info' => 'Xx',
 	'More information.' => 'Xx.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Xx',
 	'Create user' => 'Xx',
 	'User has been dropped.' => 'Xx.',
@@ -67,21 +63,21 @@ return [
 	'User has been created.' => 'Xx.',
 	'Hashed' => 'Xx',
 
-	// Server.
+	// Server
 	'Process list' => 'Xx',
 	'%d process(es) have been killed.' => ['%d xx.', '%d xx.'],
 	'Kill' => 'Xx',
 	'Variables' => 'Xx',
 	'Status' => 'Xx',
 
-	// Structure.
+	// Structure
 	'Column' => 'Xx',
 	'Columns' => 'Xx',
 	'Routine' => 'Xx',
 	'Grant' => 'Xx',
 	'Revoke' => 'Xx',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Xx',
 	'HTTP request' => 'Xx',
 	'%d query(s) executed OK.' => ['%d xx.', '%d xx.'],
@@ -95,13 +91,12 @@ return [
 	'Stop on error' => 'Xx',
 	'Show only errors' => 'Xx',
 	'Time' => 'Xx',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f xx',
+	'%.3f s' => '%.3f xx', // sprintf() format for time of the command
 	'History' => 'Xx',
 	'Clear' => 'Xx',
 	'Edit all' => 'Xx',
 
-	// Import.
+	// Import
 	'Import' => 'Xx',
 	'File upload' => 'Xx',
 	'From server' => 'Xx',
@@ -119,7 +114,7 @@ return [
 	'You are offline.' => 'Xx.',
 	'%d row(s) have been imported.' => ['%d xx.', '%d xx.'],
 
-	// Export.
+	// Export
 	'Export' => 'Xx',
 	'Output' => 'Xx',
 	'open' => 'xx',
@@ -127,7 +122,7 @@ return [
 	'Format' => 'Xx',
 	'Data' => 'Xx',
 
-	// Databases.
+	// Databases
 	'Database' => 'Xx',
 	'database' => 'xx',
 	'DB' => 'XX',
@@ -142,11 +137,12 @@ return [
 	'Database has been created.' => 'Xx.',
 	'Database has been renamed.' => 'Xx.',
 	'Database has been altered.' => 'Xx.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Xx.',
 	'Please use one of the extensions %s.' => 'Xx %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Xx',
 	'schema' => 'xx',
 	'Schemas' => 'Xx',
@@ -159,7 +155,7 @@ return [
 	'Schema has been altered.' => 'Xx.',
 	'Invalid schema.' => 'Xx.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Xx',
 	'engine' => 'xx',
 	'Collation' => 'Xx',
@@ -183,7 +179,7 @@ return [
 	'Tables have been copied.' => 'Xx.',
 	'overwrite' => 'xx',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Xx',
 	'Tables and views' => 'Xx',
 	'Table' => 'Xx',
@@ -215,7 +211,7 @@ return [
 	'Remove' => 'Xx',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Xx %s.',
 
-	// Views.
+	// Views
 	'View' => 'Xx',
 	'Materialized view' => 'Xx',
 	'View has been dropped.' => 'Xx.',
@@ -224,7 +220,7 @@ return [
 	'Alter view' => 'Xx',
 	'Create view' => 'Xx',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Xx',
 	'Partition' => 'Xx',
 	'Partitions' => 'Xx',
@@ -233,7 +229,7 @@ return [
 	'Inherited tables' => 'Xx',
 	'Inherited from' => 'Xx',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Xx',
 	'Indexes have been altered.' => 'Xx.',
 	'Alter indexes' => 'Xx',
@@ -243,7 +239,7 @@ return [
 	'Algorithm' => 'Xx',
 	'Condition' => 'Xx',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Xx',
 	'Foreign key' => 'Xx',
 	'Foreign key has been dropped.' => 'Xx.',
@@ -260,7 +256,7 @@ return [
 	'ON UPDATE' => 'Xx',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Xx.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Xx',
 	'Routine has been called, %d row(s) affected.' => ['Xx, %d.', 'Xx, %d.'],
 	'Call' => 'Xx',
@@ -274,7 +270,7 @@ return [
 	'Alter procedure' => 'Xx',
 	'Return type' => 'Xx',
 
-	// Events.
+	// Events
 	'Events' => 'Xx',
 	'Event' => 'Xx',
 	'Event has been dropped.' => 'Xx.',
@@ -289,7 +285,7 @@ return [
 	'End' => 'Xx',
 	'On completion preserve' => 'Xx',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Xx',
 	'Create sequence' => 'Xx',
 	'Sequence has been dropped.' => 'Xx.',
@@ -297,14 +293,14 @@ return [
 	'Sequence has been altered.' => 'Xx.',
 	'Alter sequence' => 'Xx',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Xx',
 	'Create type' => 'Xx',
 	'Type has been dropped.' => 'Xx.',
 	'Type has been created.' => 'Xx.',
 	'Alter type' => 'Xx',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Xx',
 	'Add trigger' => 'Xx',
 	'Trigger has been dropped.' => 'Xx.',
@@ -313,7 +309,7 @@ return [
 	'Alter trigger' => 'Xx',
 	'Create trigger' => 'Xx',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Xx',
 	'Create check' => 'Xx',
 	'Alter check' => 'Xx',
@@ -321,7 +317,7 @@ return [
 	'Check has been altered.' => 'Xx.',
 	'Check has been dropped.' => 'Xx.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Xx',
 	'Select' => 'Xx',
 	'Functions' => 'Xx',
@@ -347,17 +343,16 @@ return [
 	'Whole result' => 'Xx',
 	'%d byte(s)' => ['%d xx', '%d xx'],
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Xx',
 	'Ctrl+click on a value to modify it.' => 'Xx.',
 	'Use edit link to modify this value.' => 'Xx.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Xx',
 	'Edit' => 'Xx',
 	'original' => 'xx',
-	// label for value '' in enum data type
-	'empty' => 'xx',
+	'empty' => 'xx', // label for value '' in enum data type
 	'Insert' => 'Xx',
 	'Save' => 'Xx',
 	'Save and continue edit' => 'Xx',
@@ -366,14 +361,13 @@ return [
 	'Selected' => 'Xx',
 	'Clone' => 'Xx',
 	'Delete' => 'Xx',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Xx%s.',
+	'Item%s has been inserted.' => 'Xx%s.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Xx.',
 	'Item has been updated.' => 'Xx.',
 	'%d item(s) have been affected.' => ['%d xx.', '%d xx.'],
 	'You have no privileges to update this table.' => 'Xx.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Xx',
 	'Date and time' => 'Xx',
 	'Strings' => 'Xx',
@@ -383,12 +377,12 @@ return [
 	'Geometry' => 'Xx',
 	'Relations' => 'Xx',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'xx',
 	'yes' => 'xx',
 	'no' => 'xx',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Xx',
 	'Default' => 'Xx',
 	'Color scheme' => 'Xx',
@@ -413,7 +407,7 @@ return [
 	'More values than %d' => 'Xx %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Xx.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Xx',
 	'Enter OTP code.' => 'Xx.',
 	'Invalid OTP code.' => 'Xx.',
@@ -421,7 +415,5 @@ return [
 	'JSON previews' => 'Xx',
 	'Data table' => 'Xx',
 	'Edit form' => 'Xx',
-	// Use the phrases from https://gemini.google.com/
 	'Ask %s' => 'Xx %s',
-	'Just a sec...' => 'Xx...',
 ];

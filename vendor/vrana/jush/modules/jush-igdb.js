@@ -1,7 +1,11 @@
 jush.tr.igdb = { quo: /"/ };
 
-jush.urls.igdb = ['https://api-docs.igdb.com/#$key',
-	'endpoints', '$1', 'filters', 'sorting', 'search-1', 'pagination', 'multi-query'
-];
-
-jush.links2.igdb = /(\b)(POST|GET|DELETE|(fields|exclude)|(where)|(sort)|(search)|(limit|offset)|(query))(\b)/gi;
+jush.build_links2('igdb', 'https://api-docs.igdb.com/#$key', /(\b)/, /(\b)/gi, {
+	'endpoints': /(POST|GET|DELETE)/,
+	'$1': /(fields|exclude)/,
+	'filters': /(where)/,
+	'sorting': /(sort)/,
+	'search-1': /(search)/,
+	'pagination': /(limit|offset)/,
+	'multi-query': /(query)/,
+});

@@ -80,7 +80,8 @@ foreach ($file_paths as $file_path) {
 	}
 }
 
-// Generate language files.
+// Generate language files. The template is always processed first, so its translations are known to the other languages.
+$template_translations = [];
 foreach ($languages as $language => $dummy) {
 	$file_path = __DIR__ . "/../admin/translations/$language.inc.php";
 	$filename = basename($file_path);
@@ -88,7 +89,15 @@ foreach ($languages as $language => $dummy) {
 
 	$texts = $all_texts;
 	$translations = require $file_path;
+	$old_content = str_replace("\r", "", file_get_contents($file_path));
 	$content = file_get_contents(__DIR__ . "/../admin/translations/$template.inc.php");
+
+	if ($language == $template) {
+		$template_translations = $translations;
+	}
+
+	// Language files are regenerated from the template, so remember which texts are marked as machine translated.
+	$marks = read_ai_marks($old_content);
 
 	foreach ($translations as $en => $translation) {
 		// Skip/remove the translation of nonexistent text.
@@ -133,11 +142,11 @@ foreach ($languages as $language => $dummy) {
 				{
 					print_warning($filename, $term, "Not matching period");
 				}
+			}
 
-				// Check mismatched placeholders.
-				if (preg_match('~%~', $en) xor preg_match('~%~', $variant)) {
-					print_warning($filename, $term, "Not matching placeholder");
-				}
+			// Check mismatched placeholders.
+			foreach (placeholder_errors($language, $en, $translation, $language == $template) as $error) {
+				print_warning($filename, $term, "Placeholders - $error");
 			}
 		}
 	}
@@ -145,14 +154,18 @@ foreach ($languages as $language => $dummy) {
 	// Process untranslated texts.
 	$first = true;
 	foreach ($texts as $en => $ending) {
-		if ($to_end || $clean) {
+		// Only plural texts are translated in English, the others are the translation itself. A text is plural when the
+		// template holds multiple forms for it, so a newly added one is picked up once the template is filled in.
+		$skip = ($language == "en" && !is_array($template_translations[$en] ?? null));
+
+		if ($to_end || $clean || $skip) {
 			delete_translation($content, $en);
 		} elseif ($language != $template) {
 			write_translation($content, $en, null, false);
 			continue;
 		}
 
-		if (!$clean && ($language != "en" || str_contains($en, "%d"))) {
+		if (!$clean && !$skip) {
 			add_translation($content, $en, $first);
 			$first = false;
 		}
@@ -164,7 +177,11 @@ foreach ($languages as $language => $dummy) {
 		$content = preg_replace('~\n{2,}([\t\]])~', "\n$1", $content);
 	}
 
-	$old_content = str_replace("\r", "", file_get_contents($file_path));
+	// Restore the marks of machine translated texts.
+	foreach ($marks as $en => $mark) {
+		$content = write_ai_mark($content, $en, $mark);
+	}
+
 	if ($content != $old_content) {
 		file_put_contents($file_path, $content);
 
@@ -175,13 +192,139 @@ foreach ($languages as $language => $dummy) {
 }
 
 /**
+ * Checks that printf placeholders in the translation match the English original.
+ *
+ * @param string|array $translation Translated text or the list of its plural forms.
+ * @return string[] Found problems.
+ */
+function placeholder_errors(string $language, string $en, $translation, bool $is_template): array
+{
+	$errors = [];
+	$spec = '%(\d+\$)?(?:\.\d+)?([dsf])'; // %2$s is positional, %.3f is used for time.
+
+	preg_match_all("~$spec~", $en, $matches);
+	$types = $matches[2]; // Types of arguments passed to lang().
+
+	$variants = is_string($translation) ? [$translation] : $translation;
+
+	if (is_array($translation)) {
+		$forms = get_plural_forms_count($language);
+		if (count($variants) != $forms) {
+			$errors[] = "expected $forms plural forms"; // A missing form renders as an empty message.
+		}
+
+		// The template keeps the arrays as it is a base for new translations.
+		if (!$is_template && count(array_unique($variants)) == 1) {
+			$errors[] = "identical plural forms"; // Could be a plain string.
+		}
+	}
+
+	foreach ($variants as $variant) {
+		preg_match_all("~$spec~", $variant, $specs, PREG_SET_ORDER);
+
+		$sequential = 0;
+		$positional = 0;
+		$missing = $types;
+
+		foreach ($specs as $match) {
+			$position = ($match[1] != "" ? intval($match[1]) : ++$sequential);
+			$positional += ($match[1] != "");
+
+			if ($position > count($types)) {
+				$errors[] = "extra %$match[2]"; // Would throw ValueError in vsprintf().
+			} elseif ($types[$position - 1] != $match[2]) {
+				$errors[] = "%$match[2] instead of %" . $types[$position - 1];
+			}
+
+			unset($missing[$position - 1]);
+		}
+
+		if ($positional && $sequential) {
+			$errors[] = "mixed positional and sequential placeholders"; // %s after %2$s would still print the first argument.
+		}
+		if (array_diff($missing, ["d"])) {
+			$errors[] = "missing %s"; // %d may be omitted e.g. in singular forms.
+		}
+		if (str_contains(preg_replace(["~$spec~", '~%%~'], "", $variant), "%")) {
+			$errors[] = "invalid %"; // '% d' prints the number with a space flag and eats the following letter.
+		}
+	}
+
+	return array_unique($errors);
+}
+
+/**
+ * Returns the number of plural forms selected by Locale::translate().
+ */
+function get_plural_forms_count(string $language): int
+{
+	return $language == "sl" ? 4 : (preg_match('~^(cs|sk|pl|lt|lv|bs|hr|ru|sr|uk)$~', $language) ? 3 : 2);
+}
+
+/**
+ * Returns texts whose translations are marked as machine translated.
+ *
+ * @return array<string, true> Keys are texts in the same escaping as they are written in the file.
+ */
+function read_ai_marks(string $content): array
+{
+	$marks = [];
+	$en = null;
+
+	foreach (explode("\n", $content) as $line) {
+		if (preg_match('~^\t\'(.+)\' => ~', $line, $matches)) {
+			$en = $matches[1];
+		}
+
+		if ($en != null && preg_match('~ +// (by .+)$~', $line, $matches2)) {
+			$marks[$en] = $matches2[1];
+			$en = null;
+		}
+	}
+
+	return $marks;
+}
+
+/**
+ * Marks the translation as machine translated. Multiline translations are marked at their last line.
+ */
+function write_ai_mark(string $content, string $en, string $mark): string
+{
+	$lines = explode("\n", $content);
+	$found = $multiline = false;
+
+	foreach ($lines as $key => $line) {
+		if (!$found) {
+			if (!preg_match('~^\t\'' . preg_quote($en, '~') . '\' => (.+)$~', $line, $matches)) {
+				continue;
+			}
+
+			$found = true;
+
+			$multiline = ($matches[1] == "[");
+			if ($multiline) {
+				continue;
+			}
+		} elseif ($multiline && !preg_match('~^\t],~', $line)) {
+			continue;
+		}
+
+		$lines[$key] = rtrim($line) . " // $mark";
+
+		return implode("\n", $lines);
+	}
+
+	return $content;
+}
+
+/**
  * @param string|array|null $translation
  */
 function write_translation(string &$content, string $en, $translation, bool $single_line): void
 {
 	$content = preg_replace(
-		'~(\t\'' . preg_quote($en) . '\' => ).+,\n~',
-		"$1" . format_translation($translation, $single_line, true) . ",\n",
+		'~^(\t\'' . preg_quote($en) . '\' => ).+?,( +//.*)?$~m',
+		"$1" . format_translation($translation, $single_line, true) . ",$2",
 		$content
 	);
 }
@@ -189,7 +332,7 @@ function write_translation(string &$content, string $en, $translation, bool $sin
 function delete_translation(string &$content, string $en): void
 {
 	$content = preg_replace(
-		'~\t+\'' . preg_quote($en) . '\' => .+,\n~',
+		'~\t+\'' . preg_quote($en) . '\' => [^\n]+\n~',
 		"",
 		$content
 	);

@@ -1,6 +1,34 @@
 Changelog
 =========
 
+AdminNeo 5.6.0
+--------------
+
+### Changes
+
+- Compiler: Replace LZW with deflate compression (by @vrana)
+- MySQL: Convert vector columns to text in select and edit (by @vrana)
+- MySQL: Unsupport MySQL < 5.1 (by @vrana)
+- MariaDB: Support inet4 and inet6 types (by @vrana)
+- MariaDB 11.7+: Support vector columns and indexes (by @vrana)
+- PostgreSQL 9.2+: Highlight queries in process list (by @vrana)
+- SQLite: Disable editing of sqlite_schema (by @vrana)
+- SQLite: Support STRICT and WITHOUT ROWID in create and alter table (by @vrana)
+- SQLite: Support ANY type (by @vrana)
+- Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
+- Add all missing translations (AI generated)
+
+### Bugfixes
+
+- Ignore invalid X-Forwarded-Prefix (by @vrana, GHSA-5fw2-qrc6-p4fw)
+- Compiler: Fix removing unsupported features in single driver file (regression from 5.5.0)
+- Support disabled set_time_limit() and ini_set() (by @vrana)
+- MariaDB: Allow setting password with password validation plugin (by @vrana)
+- SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
+- SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
+
+(Ported relevant changes from Adminer 5.5.0 - 5.5.1.)
+
 AdminNeo 5.5.1 (2026-07-20)
 ---------------------------
 

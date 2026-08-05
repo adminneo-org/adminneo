@@ -6,14 +6,9 @@
 
 use AdminNeo\Admin;
 
-if (!file_exists("../compiled/adminneo.php")) {
-	exec("php ../bin/compile.php");
-}
-
 function adminneo_instance()
 {
 	$config = [
-		"colorVariant" => "green",
 		"defaultPasswordHash" => "",
 		"sslTrustServerCertificate" => true,
 	];
@@ -23,4 +18,4 @@ function adminneo_instance()
 
 chdir("../admin/");
 
-require "../admin/index.php";
+require "index.php";

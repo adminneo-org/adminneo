@@ -3,23 +3,20 @@
 namespace AdminNeo;
 
 return [
-	// text direction - 'ltr' or 'rtl'
-	'ltr' => 'ltr',
-	// thousands separator - must contain single byte
-	',' => ',',
+	'ltr' => 'ltr', // text direction - 'ltr' or 'rtl'
+	',' => ',', // thousands separator - must contain single byte
 	'0123456789' => '0123456789',
-	// Editor - date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'$1-$3-$5' => '$1-$3-$5',
-	// Editor - hint for date format - use language equivalents for day, month and year shortcuts
-	'YYYY-MM-DD' => 'YYYY-MM-DD',
-	// Editor - hint for time format - use language equivalents for hour, minute and second shortcuts
-	'HH:MM:SS' => 'HH:MM:SS',
 
-	// Bootstrap.
+	// Editor
+	'$1-$3-$5' => '$1-$3-$5', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
+	'YYYY-MM-DD' => 'YYYY-MM-DD', // hint for date format - use language equivalents for day, month and year shortcuts
+	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
+
+	// Bootstrap
 	'%s must return an array.' => '%s phải trả về một mảng.',
 	'%s and %s must return an object created by %s method.' => '%s và %s phải trả về một đối tượng được tạo bởi phương thức %s.',
 
-	// Login.
+	// Login
 	'System' => 'Hệ thống',
 	'Server' => 'Máy chủ',
 	'Username' => 'Tên người dùng',
@@ -40,18 +37,17 @@ return [
 	'If you did not send this request from AdminNeo then close this page.' => 'Nếu bạn không gửi yêu cầu này từ AdminNeo thì hãy đóng trang này lại.',
 	'The action will be performed after successful login with the same credentials.' => 'Hành động sẽ được thực hiện sau khi đăng nhập thành công với cùng thông tin xác thực.',
 
-	// Connection.
+	// Connection
 	'No driver' => 'Không có driver',
 	'Database driver not found.' => 'Không tìm thấy driver cơ sở dữ liệu.',
 	'No extension' => 'Không có phần mở rộng',
-	// %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'None of the supported PHP extensions (%s) are available.' => 'Bản cài đặt PHP thiếu hỗ trợ cho %s.',
+	'None of the supported PHP extensions (%s) are available.' => 'Bản cài đặt PHP thiếu hỗ trợ cho %s.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Không được phép kết nối đến các cổng đặc quyền.',
 	'Session support must be enabled.' => 'Cần phải bật session.',
 	'Session expired, please login again.' => 'Phiên làm việc đã hết, hãy đăng nhập lại.',
 	'%s version: %s through PHP extension %s' => 'Phiên bản %s: %s (PHP extension: %s)',
 
-	// Settings.
+	// Settings
 	'Language' => 'Ngôn ngữ',
 
 	'Home' => 'Trang chủ',
@@ -59,7 +55,7 @@ return [
 	'Info' => 'Thông tin',
 	'More information.' => 'Thông tin thêm.',
 
-	// Privileges.
+	// Privileges
 	'Privileges' => 'Quyền truy cập',
 	'Create user' => 'Tạo người dùng',
 	'User has been dropped.' => 'Đã xoá người dùng.',
@@ -67,21 +63,21 @@ return [
 	'User has been created.' => 'Đã tạo người dùng.',
 	'Hashed' => 'Mã hoá',
 
-	// Server.
+	// Server
 	'Process list' => 'Danh sách tiến trình',
 	'%d process(es) have been killed.' => '%d tiến trình đã dừng.',
 	'Kill' => 'Dừng',
 	'Variables' => 'Biến',
 	'Status' => 'Trạng thái',
 
-	// Structure.
+	// Structure
 	'Column' => 'Cột',
 	'Columns' => 'Các cột',
 	'Routine' => 'Thủ tục/Hàm',
 	'Grant' => 'Cấp quyền',
 	'Revoke' => 'Thu hồi quyền',
 
-	// Queries.
+	// Queries
 	'SQL command' => 'Câu lệnh SQL',
 	'HTTP request' => 'Yêu cầu HTTP',
 	'%d query(s) executed OK.' => '%d câu lệnh đã chạy thành công.',
@@ -95,13 +91,12 @@ return [
 	'Stop on error' => 'Dừng khi có lỗi',
 	'Show only errors' => 'Chỉ hiện lỗi',
 	'Time' => 'Thời gian',
-	// sprintf() format for time of the command
-	'%.3f s' => '%.3f s',
+	'%.3f s' => '%.3f s', // sprintf() format for time of the command
 	'History' => 'Lịch sử',
 	'Clear' => 'Xoá',
 	'Edit all' => 'Sửa tất cả',
 
-	// Import.
+	// Import
 	'Import' => 'Nhập khẩu',
 	'File upload' => 'Tải tệp lên',
 	'From server' => 'Dùng tệp trên máy chủ',
@@ -117,9 +112,9 @@ return [
 	'You can upload a big SQL file via FTP and import it from server.' => 'Bạn có thể tải tệp lên dùng FTP và nhập vào cơ sở dữ liệu.',
 	'File must be in UTF-8 encoding.' => 'Tệp phải mã hoá bằng chuẩn UTF-8.',
 	'You are offline.' => 'Bạn đang ngoại tuyến.',
-	'%d row(s) have been imported.' => 'Đã nhập % dòng dữ liệu.',
+	'%d row(s) have been imported.' => 'Đã nhập %d dòng dữ liệu.',
 
-	// Export.
+	// Export
 	'Export' => 'Xuất',
 	'Output' => 'Kết quả',
 	'open' => 'xem',
@@ -127,7 +122,7 @@ return [
 	'Format' => 'Định dạng',
 	'Data' => 'Dữ liệu',
 
-	// Databases.
+	// Databases
 	'Database' => 'Cơ sở dữ liệu',
 	'database' => 'cơ sở dữ liệu',
 	'DB' => 'DB',
@@ -142,11 +137,12 @@ return [
 	'Database has been created.' => 'Đã tạo CSDL.',
 	'Database has been renamed.' => 'Đã đổi tên CSDL.',
 	'Database has been altered.' => 'Đã thay đổi CSDL.',
-	// SQLite errors.
+
+	// SQLite errors
 	'File exists.' => 'Tệp đã có rồi.',
 	'Please use one of the extensions %s.' => 'Vui lòng sử dụng một trong các tiện ích mở rộng %s.',
 
-	// Schemas (PostgreSQL, MS SQL).
+	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'schema' => 'schema',
 	'Schemas' => 'Các schema',
@@ -159,7 +155,7 @@ return [
 	'Schema has been altered.' => 'Đã thay đổi schema.',
 	'Invalid schema.' => 'Schema không hợp lệ.',
 
-	// Table list.
+	// Table list
 	'Engine' => 'Cơ chế lưu trữ',
 	'engine' => 'cơ chế lưu trữ',
 	'Collation' => 'Bộ mã',
@@ -168,7 +164,7 @@ return [
 	'Index Length' => 'Kích thước chỉ mục',
 	'Data Free' => 'Dữ liệu trống',
 	'Rows' => 'Số dòng',
-	'%d in total' => '%s',
+	'%d in total' => 'Tổng cộng %d',
 	'Analyze' => 'Phân tích',
 	'Optimize' => 'Tối ưu',
 	'Vacuum' => 'Dọn dẹp',
@@ -183,7 +179,7 @@ return [
 	'Tables have been copied.' => 'Bảng đã được sao chép.',
 	'overwrite' => 'ghi đè',
 
-	// Tables.
+	// Tables
 	'Tables' => 'Các bảng',
 	'Tables and views' => 'Bảng và khung nhìn',
 	'Table' => 'Bảng',
@@ -215,7 +211,7 @@ return [
 	'Remove' => 'Xoá',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Thiết lập %s cần tăng thêm. (Đã vượt giới hạnố trường tối đa cho phép trong một biểu mẫu).',
 
-	// Views.
+	// Views
 	'View' => 'Khung nhìn',
 	'Materialized view' => 'Khung nhìn cụ thể hóa (Materialized view)',
 	'View has been dropped.' => 'Khung nhìn đã bị xoá.',
@@ -224,7 +220,7 @@ return [
 	'Alter view' => 'Sửa khung nhìn',
 	'Create view' => 'Tạo khung nhìn',
 
-	// Partitions.
+	// Partitions
 	'Partition by' => 'Phân chia bằng',
 	'Partition' => 'Phân vùng',
 	'Partitions' => 'Phân hoạch',
@@ -233,7 +229,7 @@ return [
 	'Inherited tables' => 'Các bảng kế thừa',
 	'Inherited from' => 'Kế thừa từ',
 
-	// Indexes.
+	// Indexes
 	'Indexes' => 'Các chỉ mục',
 	'Indexes have been altered.' => 'Chỉ mục đã được sửa.',
 	'Alter indexes' => 'Sửa chỉ mục',
@@ -243,7 +239,7 @@ return [
 	'Algorithm' => 'Thuật toán',
 	'Condition' => 'Điều kiện',
 
-	// Foreign keys.
+	// Foreign keys
 	'Foreign keys' => 'Các khoá ngoại',
 	'Foreign key' => 'Khoá ngoại',
 	'Foreign key has been dropped.' => 'Khoá ngoại đã bị xoá.',
@@ -260,7 +256,7 @@ return [
 	'ON UPDATE' => 'Khi cập nhật',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Cột gốc và cột đích phải cùng kiểu, phải đặt chỉ mục trong cột đích và dữ liệu tham chiếu phải tồn tại.',
 
-	// Routines.
+	// Routines
 	'Routines' => 'Routines',
 	'Routine has been called, %d row(s) affected.' => 'Đã chạy routine, thay đổi %d dòng.',
 	'Call' => 'Gọi',
@@ -274,7 +270,7 @@ return [
 	'Alter procedure' => 'Thay đổi thủ tục',
 	'Return type' => 'Giá trị trả về',
 
-	// Events.
+	// Events
 	'Events' => 'Sự kiện',
 	'Event' => 'Sự kiện',
 	'Event has been dropped.' => 'Đã xoá sự kiện.',
@@ -289,7 +285,7 @@ return [
 	'End' => 'Kết thúc',
 	'On completion preserve' => 'Khi kết thúc, duy trì',
 
-	// Sequences (PostgreSQL).
+	// Sequences (PostgreSQL)
 	'Sequences' => 'Dãy số',
 	'Create sequence' => 'Tạo dãy số',
 	'Sequence has been dropped.' => 'Dãy số đã bị xoá.',
@@ -297,14 +293,14 @@ return [
 	'Sequence has been altered.' => 'Đã sửa dãy số.',
 	'Alter sequence' => 'Thay đổi dãy số',
 
-	// User types (PostgreSQL)
+	// User-defined types (PostgreSQL)
 	'User types' => 'Kiểu tự định nghĩa',
 	'Create type' => 'Tạo kiểu',
 	'Type has been dropped.' => 'Đã xoá kiểu.',
 	'Type has been created.' => 'Đã tạo kiểu.',
 	'Alter type' => 'Sửa kiểu dữ liệu',
 
-	// Triggers.
+	// Triggers
 	'Triggers' => 'Phản xạ',
 	'Add trigger' => 'Thêm phản xạ',
 	'Trigger has been dropped.' => 'Đã xoá phản xạ.',
@@ -313,7 +309,7 @@ return [
 	'Alter trigger' => 'Sửa trigger',
 	'Create trigger' => 'Tạo trigger',
 
-	// Table check constraints.
+	// Table check constraints
 	'Checks' => 'Ràng buộc check',
 	'Create check' => 'Tạo ràng buộc check',
 	'Alter check' => 'Sửa ràng buộc check',
@@ -321,7 +317,7 @@ return [
 	'Check has been altered.' => 'Ràng buộc check đã được thay đổi.',
 	'Check has been dropped.' => 'Ràng buộc check đã bị xóa.',
 
-	// Selection.
+	// Selection
 	'Select data' => 'Xem dữ liệu',
 	'Select' => 'Xem',
 	'Functions' => 'Các chức năng',
@@ -339,7 +335,7 @@ return [
 	'Search data in tables' => 'Tìm kiếm dữ liệu trong các bảng',
 	'No rows.' => 'Không có dòng dữ liệu nào.',
 	'%d / ' => '%d / ',
-	'%d row(s)' => '%s dòng',
+	'%d row(s)' => '%d dòng',
 	'Page' => 'trang',
 	'last' => 'cuối',
 	'Load more data' => 'Xem thêm dữ liệu',
@@ -347,17 +343,16 @@ return [
 	'Whole result' => 'Toàn bộ kết quả',
 	'%d byte(s)' => '%d byte(s)',
 
-	// In-place editing in selection.
+	// In-place editing in selection
 	'Modify' => 'Sửa',
 	'Ctrl+click on a value to modify it.' => 'Nhấn Ctrl và bấm vào giá trị để sửa.',
 	'Use edit link to modify this value.' => 'Dùng nút sửa để thay đổi giá trị này.',
 
-	// Editing.
+	// Editing
 	'New item' => 'Thêm',
 	'Edit' => 'Sửa',
 	'original' => 'bản gốc',
-	// label for value '' in enum data type
-	'empty' => 'trống',
+	'empty' => 'trống', // label for value '' in enum data type
 	'Insert' => 'Thêm',
 	'Save' => 'Lưu',
 	'Save and continue edit' => 'Lưu và tiếp tục sửa',
@@ -366,14 +361,13 @@ return [
 	'Selected' => 'Chọn',
 	'Clone' => 'Sao chép',
 	'Delete' => 'Xoá',
-	// %s can contain auto-increment value, e.g. ' 123'
-	'Item%s has been inserted.' => 'Đã thêm%s.',
+	'Item%s has been inserted.' => 'Đã thêm%s.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Đã xoá.',
 	'Item has been updated.' => 'Đã cập nhật.',
 	'%d item(s) have been affected.' => '%d phần đã thay đổi.',
 	'You have no privileges to update this table.' => 'Bạn không có quyền sửa bảng này.',
 
-	// Data type descriptions.
+	// Data type descriptions
 	'Numbers' => 'Số',
 	'Date and time' => 'Ngày giờ',
 	'Strings' => 'Chuỗi',
@@ -383,12 +377,12 @@ return [
 	'Geometry' => 'Toạ độ',
 	'Relations' => 'Quan hệ',
 
-	// Editor - data values.
+	// Editor - data values
 	'now' => 'hiện tại',
 	'yes' => 'có',
 	'no' => 'không',
 
-	// Settings.
+	// Settings
 	'Settings' => 'Cài đặt',
 	'Default' => 'Mặc định',
 	'Color scheme' => 'Giao diện màu sắc',
@@ -413,7 +407,7 @@ return [
 	'More values than %d' => 'Nhiều giá trị hơn %d',
 	'Threshold for displaying a selection menu for enum fields.' => 'Ngưỡng để hiển thị menu lựa chọn cho các trường enum.',
 
-	// Plugins.
+	// Plugins
 	'One Time Password' => 'Mật khẩu dùng một lần (OTP)',
 	'Enter OTP code.' => 'Nhập mã OTP.',
 	'Invalid OTP code.' => 'Mã OTP không hợp lệ.',
@@ -421,7 +415,5 @@ return [
 	'JSON previews' => 'Xem trước JSON',
 	'Data table' => 'Bảng dữ liệu',
 	'Edit form' => 'Biểu mẫu chỉnh sửa',
-	// Use the phrases from https://gemini.google.com/
 	'Ask %s' => 'Hỏi %s',
-	'Just a sec...' => 'Đợi một chút...',
 ];
