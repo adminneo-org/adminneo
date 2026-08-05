@@ -39,7 +39,7 @@ if ($tables_views && !$_POST["search"]) {
 	} elseif (DIALECT != "sql") {
 		$result = (DIALECT == "sqlite"
 			? queries("VACUUM")
-			: apply_queries("VACUUM" . ($_POST["optimize"] ? " ANALYZE" : ""), $_POST["tables"])
+			: apply_queries("VACUUM" . ($_POST["optimize"] ? " ANALYZE" : ""), (array)$_POST["tables"])
 		);
 		$message = lang('Tables have been optimized.');
 	} elseif (!$_POST["tables"]) {
