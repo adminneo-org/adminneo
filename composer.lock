@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fa836af6eb49cd02e678d8123306e58",
+    "content-hash": "482fada7f4a966cab563dc5b88f1d1ed",
     "packages": [],
     "packages-dev": [
         {
@@ -59,16 +59,16 @@
         },
         {
             "name": "vrana/jush",
-            "version": "dev-all-fixes",
+            "version": "dev-custom",
             "source": {
                 "type": "git",
                 "url": "https://github.com/peterpp/jush.git",
-                "reference": "c539a370770d39653a938e2c7b47cfb01bfffe7a"
+                "reference": "e6035f880baa2061dc6956e4e3a595d075dc7cf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/peterpp/jush/zipball/c539a370770d39653a938e2c7b47cfb01bfffe7a",
-                "reference": "c539a370770d39653a938e2c7b47cfb01bfffe7a",
+                "url": "https://api.github.com/repos/peterpp/jush/zipball/e6035f880baa2061dc6956e4e3a595d075dc7cf7",
+                "reference": "e6035f880baa2061dc6956e4e3a595d075dc7cf7",
                 "shasum": ""
             },
             "type": "library",
@@ -91,7 +91,7 @@
             "support": {
                 "source": "https://github.com/vrana/jush/"
             },
-            "time": "2026-06-10T21:37:44+00:00"
+            "time": "2026-08-05T20:58:25+00:00"
         },
         {
             "name": "vrana/phpshrink",
@@ -144,6 +144,8 @@
         "php": "7.1 - 8.5",
         "ext-json": "*"
     },
-    "platform-dev": {},
+    "platform-dev": {
+        "ext-zlib": "*"
+    },
     "plugin-api-version": "2.9.0"
 }

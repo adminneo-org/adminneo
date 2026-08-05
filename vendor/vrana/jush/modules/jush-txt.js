@@ -1,1 +1,1 @@
-jush.tr.txt = { php: jush.php };
+jush.tr.txt = { };

@@ -14,7 +14,7 @@ if (isset($_POST["json"])) {
 <p><input type="submit" value="JSON">
 </form>
 
-<pre><code class="language-js"><?php
+<pre><code class="language-json"><?php
 if (isset($_POST["json"])) {
 	echo htmlspecialchars(json_encode(json_decode($_POST["json"]), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 }

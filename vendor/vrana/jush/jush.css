@@ -29,8 +29,7 @@
 .jush-att, .jush-xml_att, .jush-att_js, .jush-att_css, .jush-att_http { color: var(--attribute-color); }
 .jush-att_quo, .jush-att_apo, .jush-att_val { color: var(--value-color); }
 .jush-ent { color: var(--value-color); }
-.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo, .jush-json_key, .jush-json_key .jush-quo { color: var(--identifier-color); }
-.jush-js_const, .jush-json_const { color: var(--keyword-color); }
+.jush-js_key, .jush-js_key .jush-quo, .jush-js_key .jush-apo, .jush-json_key, .jush-json_key .jush-quo { color: var(--value-color); }
 .jush-js_reg { color: var(--keyword-color); }
 .jush-php_sql .jush-php_quo, .jush-php_sql .jush-php_apo,
 .jush-php_sqlite .jush-php_quo, .jush-php_sqlite .jush-php_apo,
@@ -42,7 +41,7 @@
 
 .jush a { color: var(--keyword-color); }
 .jush a.jush-help { cursor: help; }
-.jush-sql a, .jush-sql_code a, .jush-sqlite a, .jush-pgsql a, .jush-mssql a, .jush-oracle a, .jush-simpledb a, .jush-igdb a { font-weight: bold; }
+.jush-sql a, .jush-sql_code a, .jush-sqlite a, .jush-pgsql a, .jush-mssql a, .jush-oracle a, .jush-simpledb a, .jush-igdb a, .jush-redis a { font-weight: bold; }
 .jush-php_sql .jush-php_quo a, .jush-php_sql .jush-php_apo a { font-weight: normal; }
 .jush-tag a, .jush-att a, .jush-apo a, .jush-quo a, .jush-php_apo a, .jush-php_quo a, .jush-php_eot2 a { color: inherit; }
 a.jush-custom:link, a.jush-custom:visited { font-weight: normal; color: inherit; }

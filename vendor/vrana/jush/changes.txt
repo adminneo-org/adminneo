@@ -1,9 +1,42 @@
-Add JSON highlighting
-JavaScript: Highlight true, false and null
+JUSH 3.0.1:
+Require ES6
+Fix highlighting in Safari < 16.4 and Firefox < 78
+Highlight keywords leaving the state (e.g. MySQL DO)
+MySQL: Link the longest matching phrase
+CSS: Fix links to MDN
+JS: Highlight true, false and null
+JSDoc: Link tags to jsdoc.app, add new tags
+Highlight JSON
+Highlight Redis 8.10
+
+JUSH 3.0.0:
+Convert jush-help from Windows Script Host to Node
+HTML: Highlight <h[1-6]>, add new tags and attrs
+PHP: Highlight after heredoc/nowdoc
+HTTP: Use MDN
+Text: Do not highlight PHP
+Highlight MySQL 9.7
+Highlight MariaDB 12.3
+Highlight SQLite 3.53
+Highlight PostgreSQL 18
+Highlight PHP 8.5
+
+JUSH 2.2.2:
+Speed up highlighting many elements
+MySQL: Highlight vector type and functions
+MySQL: Highlight inet4 and inet6 types
+Textarea: Defer highlighting to speed up typing and deleting
+Textarea: Speed up delete all in Chrome
+
+JUSH 2.2.1:
+Fix autocomplete bugs
 
 JUSH 2.2.0:
 Add textarea autocomplete
 Add autocomplete for SQL
+Highlight PHP 8.4
+HTML, CSS: Link MDN
+Highlight IGDB
 
 JUSH 2.1.3:
 Split dark mode

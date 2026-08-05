@@ -1,7 +1,7 @@
 /** Get callback for autocompletition
-* @param string escaped empty identifier, e.g. `` for MySQL or [] for MS SQL
-* @param Object<string, Array<string>> keys are table names, values are lists of columns
-* @return Function see autocomplete()
+* @param {string} esc escaped empty identifier, e.g. `` for MySQL or [] for MS SQL
+* @param {Object<string, Array<string>>} tablesColumns keys are table names, values are lists of columns
+* @return {Function} see autocomplete()
 */
 jush.autocompleteSql = function (esc, tablesColumns) {
 	/**
@@ -12,51 +12,50 @@ jush.autocompleteSql = function (esc, tablesColumns) {
 		'^': ['SELECT', 'INSERT INTO', 'UPDATE', 'DELETE FROM', 'TRUNCATE', 'DROP', 'EXPLAIN'],
 		'^EXPLAIN ': ['SELECT'],
 		'^INSERT ': ['IGNORE'],
-		'^INSERT .+\\) ': ['?VALUES', 'ON DUPLICATE KEY UPDATE'],
+		'^INSERT [^]+\\) ': ['?VALUES', 'ON DUPLICATE KEY UPDATE'],
 		'^UPDATE \\w+ ': ['SET'],
-		'^UPDATE \\w+ SET .+ ': ['?WHERE'],
+		'^UPDATE \\w+ SET [^]+ ': ['?WHERE'],
 		'^DELETE FROM \\w+ ': ['WHERE'],
 		'^DROP ': ['TABLE', 'TEMPORARY TABLE', 'VIEW'],
 		'^DROP( TEMPORARY)? TABLE ': ['IF EXISTS'],
 		' JOIN \\w+(( AS)? (?!(ON|USING|AS) )\\w+)? ': ['ON', 'USING'],
 		'\\bSELECT ': ['*', 'DISTINCT'],
-		'\\bSELECT .*[^,] ': ['?FROM'],
-		'\\bSELECT (?!.* (WHERE|GROUP BY|HAVING|ORDER BY|LIMIT) ).+ FROM .+ ': ['INNER JOIN', 'LEFT JOIN', '?WHERE'],
-		'\\bSELECT (?!.* (HAVING|ORDER BY|LIMIT|OFFSET) ).+ FROM .+ ': ['?GROUP BY'],
-		'\\bSELECT (?!.* (ORDER BY|LIMIT|OFFSET) ).+ FROM .+ ': ['?HAVING'],
-		'\\bSELECT (?!.* (LIMIT|OFFSET) ).+ FROM .+ ': ['?ORDER BY'], // this matches prefixes without LIMIT|OFFSET and offers ORDER BY if it's not already used in prefix or suffix
-		'\\bSELECT (?!.* (OFFSET) ).+ FROM .+ ': ['?LIMIT', '?OFFSET'],
-		' ORDER BY (?!.* (LIMIT|OFFSET) ).+ ': ['DESC'],
+		'\\bSELECT [^]*[^,] ': ['?FROM'],
+		'\\bSELECT (?![^]* (WHERE|GROUP BY|HAVING|ORDER BY|LIMIT) )[^]+ FROM [^]+ ': ['INNER JOIN', 'LEFT JOIN', '?WHERE'],
+		'\\bSELECT (?![^]* (HAVING|ORDER BY|LIMIT|OFFSET) )[^]+ FROM [^]+ ': ['?GROUP BY'],
+		'\\bSELECT (?![^]* (ORDER BY|LIMIT|OFFSET) )[^]+ FROM [^]+ ': ['?HAVING'],
+		'\\bSELECT (?![^]* (LIMIT|OFFSET) )[^]+ FROM [^]+ ': ['?ORDER BY'], // this matches prefixes without LIMIT|OFFSET and offers ORDER BY if it's not already used in prefix or suffix
+		'\\bSELECT (?![^]* (OFFSET) )[^]+ FROM [^]+ ': ['?LIMIT', '?OFFSET'],
+		' ORDER BY (?![^]* (LIMIT|OFFSET) )[^]+ ': ['DESC'],
 	};
-	
+
+	let forceEscape = false;
+
 	/** Get list of strings for autocompletion
-	* @param string
-	* @param string
-	* @param string
-	* @return Object<string, number> keys are words, values are offsets
+	* @param {string} state
+	* @param {string} before
+	* @param {string} after
+	* @return {Object<string, number>} keys are words, values are offsets
 	*/
 	function autocomplete(state, before, after) {
 		if (/^(one|com|sql_apo|sqlite_apo)$/.test(state)) {
 			return {};
 		}
-		// do not offer autocomplete in comments
-		if (before.match(/\/\*((?!\*\/).)*$/s) || before.match(/(^|\s)--[^\n]*$/)) {
-			return {};
-		}
 		before = before
-			.replace(/\/\*.*?\*\/|(^|\s)--[^\n]*|'[^']+'/s, '') // strip comments and strings
-			.replace(/.*;/s, '') // strip previous query
-			.trimStart()
+			.replace(/\/\*[^]*?\*\/|(^|\s)--[^\n]*/, ' ') // replace comments with whitespace
+			.replace(/'[^']+'/, '0') // replace string with placeholder
+			.replace(/[^]*;/, '') // strip previous query
+			.replace(/^\s+/, '')
 		;
-		after = after.replace(/;.*/s, ''); // strip next query
-		// strip subquery or a next query if edited query is not terminated yet 
+		after = after.replace(/;[^]*/, ''); // strip next query
+		// strip subquery or a next query if edited query is not terminated yet
 		after = after.replace(/\b(CREATE|ALTER|RENAME|DROP|TRUNCATE|SELECT|INSERT|UPDATE|DELETE|USE|DELIMITER|EXPLAIN)(\s.*|$)/s, '');
 		const query = before + after;
 		const allTables = Object.keys(tablesColumns);
 		const usedTables = findTables(query); // tables used by the current query
 		const uniqueColumns = {};
-		for (const table of Object.values(usedTables)) {
-			for (const column of tablesColumns[table]) {
+		for (const alias in usedTables) {
+			for (const column of tablesColumns[usedTables[alias]]) {
 				uniqueColumns[column] = 0;
 			}
 		}
@@ -69,18 +68,18 @@ jush.autocompleteSql = function (esc, tablesColumns) {
 				columns.push(alias + '.');
 			}
 		}
-		
+
 		const preferred = {
-			'\\b(FROM|INTO|^UPDATE|JOIN|TRUNCATE) ': allTables, // all tables including the current ones (self-join)
+			'\\b(FROM|INTO|^UPDATE|JOIN|^TRUNCATE) ': allTables, // all tables including the current ones (self-join)
 			'\\b(TABLE|VIEW)( IF EXISTS)? (.+, )?': allTables,
 			'\\b(^INSERT|USING) [^(]*\\(([^)]+, )?': columns, // offer columns right after '(' or after ','
-			'(^UPDATE .+ SET| DUPLICATE KEY UPDATE| BY) (.+, )?': columns,
+			'(^UPDATE [^]+ SET| DUPLICATE KEY UPDATE| BY) ([^]+, )?': columns,
 			' (WHERE|HAVING|AND|OR|ON|=) ': columns,
 		};
-		keywordsDefault['\\bSELECT( DISTINCT)? (?!.* FROM )(.*, )?'] = columns; // this is not in preferred because we prefer '*'
-		
+		keywordsDefault['\\bSELECT( DISTINCT)? (?![^]* FROM )([^]+, )?'] = columns; // this is not in preferred because we prefer '*'
+
 		const context = before.replace(escRe('[\\w`]+$'), ''); // in 'UPDATE tab.`co', context is 'UPDATE tab.'
-		before = before.replace(escRe('.*[^\\w`]', 's'), ''); // in 'UPDATE tab.`co', before is '`co'
+		before = before.replace(escRe('[^]*[^\\w`]'), ''); // in 'UPDATE tab.`co', before is '`co'
 
 		const thisColumns = []; // columns in the current table ('table.')
 		const match = context.match(escRe('`?(\\w+)`?\\.$'));
@@ -95,16 +94,15 @@ jush.autocompleteSql = function (esc, tablesColumns) {
 			}
 		}
 
-		if (query.includes(esc[0]) && !/^\w/.test(before)) { // if there's any ` in the query, use ` everywhere unless the user starts typing letters
-			allTables.forEach(addEsc);
-			columns.forEach(addEsc);
-			thisColumns.forEach(addEsc);
-		}
-		
+		forceEscape = query.includes(esc[0]) && !/^\w/.test(before); // if there's any ` in the query, use ` everywhere unless the user starts typing letters
+		allTables.forEach(addEsc);
+		columns.forEach(addEsc);
+		thisColumns.forEach(addEsc);
+
 		const ac = {};
 		for (const keywords of [preferred, keywordsDefault]) {
 			for (const re in keywords) {
-				if (context.match(escRe(re.replace(/ /g, '\\s+').replace(/\\w\+/g, '`?\\w+`?') + '$', 'is'))) {
+				if (context.match(escRe(re.replace(/ /g, '\\s+').replace(/\\w\+/g, '`?\\w+`?') + '$', 'i'))) {
 					for (let keyword of keywords[re]) {
 						if (keyword[0] == '?') {
 							keyword = keyword.substring(1);
@@ -120,12 +118,14 @@ jush.autocompleteSql = function (esc, tablesColumns) {
 				}
 			}
 		}
-		
+
 		return ac;
 	}
-	
+
 	function addEsc(val, key, array) {
-		array[key] = esc[0] + val.replace(/\.?$/, esc[1] + '$&');
+		if (forceEscape || !/^[a-z_]\w*\.?$/i.test(val)) {
+			array[key] = esc[0] + val.replace(/\.?$/, esc[1] + '$&');
+		}
 	}
 
 	/** Change odd ` to esc[0], even to esc[1] */
@@ -134,11 +134,12 @@ jush.autocompleteSql = function (esc, tablesColumns) {
 		return new RegExp(re.replace(/`/g, () => (esc[0] == '[' ? '\\' : '') + esc[i++ % 2]), flags);
 	}
 
-	/** @return Object<string, string> key is alias, value is actual table */
+	/** @return {Object<string, string>} key is alias, value is actual table */
 	function findTables(query) {
-		const matches = query.matchAll(escRe('\\b(FROM|JOIN|INTO|UPDATE)\\s+(\\w+|`.+?`)((\\s+AS)?\\s+((?!(LEFT|INNER|JOIN|ON|USING|WHERE|GROUP|HAVING|ORDER|LIMIT)\\b)\\w+|`.+?`))?', 'gi')); //! handle `abc``def`
+		const re = escRe('\\b(FROM|JOIN|INTO|UPDATE)\\s+(\\w+|`.+?`)((\\s+AS)?\\s+((?!(LEFT|INNER|JOIN|ON|USING|WHERE|GROUP|HAVING|ORDER|LIMIT)\\b)\\w+|`.+?`))?', 'gi'); //! handle `abc``def`
 		const result = {};
-		for (const match of matches) {
+		let match;
+		while ((match = re.exec(query))) {
 			const table = match[2].replace(escRe('^`|`$', 'g'), '');
 			const alias = (match[5] ? match[5].replace(escRe('^`|`$', 'g'), '') : table);
 			if (tablesColumns[table]) {

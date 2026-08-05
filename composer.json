@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "ext-zlib": "*",
-        "vrana/jush": "dev-all-fixes",
+        "vrana/jush": "dev-custom",
         "vrana/jsshrink": "@dev",
         "vrana/phpshrink": "@dev"
     },
