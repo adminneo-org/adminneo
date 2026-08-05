@@ -20,4 +20,6 @@ function adminneo_instance()
 	return Admin::create($config);
 }
 
-require "../compiled/adminneo.php";
+chdir("../compiled/");
+
+require "adminneo.php";
