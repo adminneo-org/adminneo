@@ -1098,6 +1098,16 @@ function initTableFooter() {
 }
 
 /**
+ * Enables the Save button while at least one inline edit field is displayed.
+ */
+function updateSaveButton() {
+	const button = gid('modify-save');
+	if (button && button.dataset.inlineEdit) {
+		button.disabled = !qs('#table td[data-editing="true"]');
+	}
+}
+
+/**
  * Displays inline edit field.
  *
  * @param {MouseEvent} event
@@ -1138,6 +1148,7 @@ function selectClick(event, text, warning) {
 			td.dataset.editing = "";
 			td.innerHTML = original;
 			initToggles(td);
+			updateSaveButton();
 		}
 	};
 
@@ -1173,6 +1184,7 @@ function selectClick(event, text, warning) {
 	td.innerHTML = '';
 	td.appendChild(input);
 	input.focus();
+	updateSaveButton();
 
 	if (text === 2) { // long text
 		return ajax(location.href + '&' + encodeURIComponent(td.id) + '=', request => {

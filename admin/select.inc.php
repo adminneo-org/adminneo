@@ -345,6 +345,9 @@ if (!$columns && support("table")) {
 			$found_rows = Connection::get()->getValue(" SELECT FOUND_ROWS()"); // space to allow mysql.trace_mode
 		}
 
+		// Values rejected by a failed save are printed as edit fields again.
+		$editing_fields = false;
+
 		if (!$rows) {
 			echo "<p class='message'>" . lang('No rows.') . "\n";
 		} else {
@@ -509,8 +512,9 @@ if (!$columns && support("table")) {
 						$class = $numeric_type && ($null_val || is_numeric(strip_tags($html)) || $money) ? "class='number'" : "";
 						echo "<td id='$id' $class";
 						if (($_GET["modify"] && $editable && !$null_val) || $posted !== null) {
+							$editing_fields = true;
 							$h_value = h($posted !== null ? $posted : $row[$key]);
-							echo ">" . ($text ? "<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" : "<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
+							echo " data-editing='true'>" . ($text ? "<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" : "<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
 						} else {
 							$long = strpos($html, "<i>…</i>");
 							if ($update) {
@@ -641,8 +645,11 @@ if (!$columns && support("table")) {
 				if (Admin::get()->isDataEditAllowed()) {
 					echo "<fieldset", ($_GET["modify"] ? '' : ' class="jsonly"'), ">";
 					echo "<legend>", lang('Modify'), "</legend>";
-					echo "<div class='fieldset-content'>";
-					echo "<input type='submit' class='button' value='", lang('Save'), "'", ($_GET["modify"] ? "" : " title='" . lang('Ctrl+click on a value to modify it.') . "'"), ">";
+					// Outside the modify mode the button is enabled only while some inline edit field is displayed.
+					// The title belongs to the wrapper, because browsers don't show tooltips of disabled controls.
+					$save_attributes = ($_GET["modify"] ? "" : " data-inline-edit='1'" . ($editing_fields ? "" : " disabled"));
+					echo "<div class='fieldset-content'", ($_GET["modify"] ? "" : " title='" . lang('Ctrl+click on a value to modify it.') . "'"), ">";
+					echo "<input type='submit' class='button' id='modify-save' value='", lang('Save'), "'", $save_attributes, ">";
 					echo "</div>";
 					echo "</fieldset>\n";
 
