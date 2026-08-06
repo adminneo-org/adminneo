@@ -136,10 +136,25 @@ if ($_GET["ns"] === "") {
 		];
 	}
 
-	// Sorting requires the statuses of all tables, so they are not loaded by AJAX in that case.
-	$order = (isset($columns[$_GET["order"]]) ? $_GET["order"] : "");
+	// Tables are sorted by name in ascending order by default, which is the order returned by drivers.
+	$order = (is_string($_GET["order"]) ? $_GET["order"] : "");
+	$descending = null;
+	if (preg_match('~^(.+)-(asc|desc)$~', $order, $match)) {
+		$order = $match[1];
+		$descending = ($match[2] == "desc");
+	}
+	if ($order != "__table" && !isset($columns[$order])) {
+		$order = "";
+	}
+	if ($descending === null) {
+		// Numeric columns, i.e. those with a link, are sorted in descending order by default.
+		$descending = isset($columns[$order]["link"]);
+	}
 
-	$tables_list = ($order ? table_status() : tables_list());
+	// Sorting by a status column requires the statuses of all tables, so they are not loaded by AJAX in that case.
+	$with_status = ($order != "" && $order != "__table");
+
+	$tables_list = ($with_status ? table_status() : tables_list());
 	if (!$tables_list) {
 		echo "<p class='message'>" . lang('No tables.') . "\n";
 	} else {
@@ -168,20 +183,28 @@ if ($_GET["ns"] === "") {
 
 		echo '<thead><tr class="wrap">';
 		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly">' . script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
-		echo '<th><a href="' . h(substr(ME, 0, -1)) . '">' . lang('Table') . '</a>';
+		// Tables are already sorted by name when no other column is used, so only the descending order needs a parameter.
+		$name_order = ($order == "" || $order == "__table");
+		$table_link = ($name_order && !$descending ? ME . "order=__table-desc" : substr(ME, 0, -1));
+		echo '<th><a href="' . h($table_link) . '">' . lang('Table') . '</a>';
 		foreach ($columns as $key => $column) {
-			echo '<td><a href="' . h(ME) . "order=$key\">" . $column["label"] . '</a>' . $column["doc"];
+			// The sorted column is linked to the opposite direction, so repeated clicks toggle it.
+			$direction = ($key === $order ? !$descending : isset($column["link"]));
+			echo '<td><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
 		}
 		echo "</thead>\n";
 
-		if ($order) {
-			$text_order = in_array($order, ["Engine", "Collation", "Comment"]);
-			uasort($tables_list, function ($a, $b) use ($order, $text_order) {
+		if ($order == "__table") {
+			if ($descending) {
+				$tables_list = array_reverse($tables_list, true); // Drivers return tables sorted by name.
+			}
+		} elseif ($order) {
+			uasort($tables_list, function ($a, $b) use ($order, $descending) {
 				$x = $a[$order] ?? null;
 				$y = $b[$order] ?? null;
 				$result = ($x < $y ? -1 : ($x > $y ? 1 : 0)); // <=> is not downgraded to PHP 5.4.
 
-				return ($text_order ? $result : -$result);
+				return ($descending ? -$result : $result);
 			});
 		}
 
@@ -189,8 +212,8 @@ if ($_GET["ns"] === "") {
 
 		$tables = 0;
 		foreach ($tables_list as $name => $status) {
-			$view = ($order ? is_view($status) : $status !== null && !preg_match('~table|sequence~i', $status));
-			$engine = ($order ? ($status["Engine"] ?? "") : $status);
+			$view = ($with_status ? is_view($status) : $status !== null && !preg_match('~table|sequence~i', $status));
+			$engine = ($with_status ? ($status["Engine"] ?? "") : $status);
 			$id = h("Table-" . $name);
 
 			echo '<tr><td class="actions">' . checkbox(($view ? "views[]" : "tables[]"), $name, in_array("$name", $tables_views, true), "", "", "", $id); // "$name" to check numeric table names
@@ -217,7 +240,7 @@ if ($_GET["ns"] === "") {
 					$link = $column["link"] ?? "";
 					if (!$link) {
 						$val = "";
-						if ($order) {
+						if ($with_status) {
 							$val = $status[$key] ?? "";
 
 							// Tables without own collation inherit it from the database.
@@ -231,7 +254,7 @@ if ($_GET["ns"] === "") {
 					}
 
 					$val = "?";
-					if ($order) {
+					if ($with_status) {
 						$number = $status[$key] ?? "";
 						if (is_numeric($number) && $number >= 0) {
 							$val = ($key == "Rows" && $number && $engine == (DIALECT == "pgsql" ? "table" : "InnoDB") ? "~ " : "") . format_number($number);
@@ -250,7 +273,7 @@ if ($_GET["ns"] === "") {
 				}
 				$tables++;
 			}
-			echo (support("comment") ? "<td id='Comment-" . h($name) . "'>" . ($order ? h($status["Comment"] ?? "") : "") : "");
+			echo (support("comment") ? "<td id='Comment-" . h($name) . "'>" . ($with_status ? h($status["Comment"] ?? "") : "") : "");
 			echo "\n";
 		}
 
@@ -259,7 +282,7 @@ if ($_GET["ns"] === "") {
 		echo "<td>" . h(DIALECT == "sql" ? Connection::get()->getValue("SELECT @@default_storage_engine") : "");
 		echo ($db_collation != "" ? "<td>" . h($db_collation) : "");
 		foreach ($sums as $key => $sum) {
-			echo "<td align='right' id='sum-$key'>" . ($order ? format_number($sum) : "");
+			echo "<td align='right' id='sum-$key'>" . ($with_status ? format_number($sum) : "");
 		}
 		echo "<td></td><td></td>";
 		if (support("comment")) {
@@ -270,7 +293,7 @@ if ($_GET["ns"] === "") {
 		echo "</table>\n";
 		echo "</div>\n"; // scrollable
 
-		echo ($order ? "" : script("ajaxSetHtml('" . js_escape(ME) . "script=db');"));
+		echo ($with_status ? "" : script("ajaxSetHtml('" . js_escape(ME) . "script=db');"));
 
 		if (Admin::get()->isDataEditAllowed()) {
 			echo "<div class='table-footer'><div class='field-sets'>\n";
