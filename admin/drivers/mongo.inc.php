@@ -641,7 +641,9 @@ if (isset($_GET["mongo"])) {
 		return false;
 	}
 
-	function is_view($table_status) {
+	function is_view(array $table_status):bool
+	{
+		return false;
 	}
 
 	function convert_field(array $field): ?string

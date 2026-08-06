@@ -792,7 +792,8 @@ AND relnamespace = " . Driver::get()->getNsOidSql() . "
 		return $return;
 	}
 
-	function is_view($table_status) {
+	function is_view(array $table_status):bool
+	{
 		return in_array($table_status["Engine"], ["view", "materialized view"]);
 	}
 

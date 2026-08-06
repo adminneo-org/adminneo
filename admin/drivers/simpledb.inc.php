@@ -416,6 +416,11 @@ if (isset($_GET["simpledb"])) {
 		return $return;
 	}
 
+	function is_view(array $table_status):bool
+	{
+		return false;
+	}
+
 	function explain(Connection $connection, string $query): bool
 	{
 		return false;

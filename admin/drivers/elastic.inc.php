@@ -547,7 +547,8 @@ if (isset($_GET["elastic"])) {
 		];
 	}
 
-	function is_view($table_status) {
+	function is_view(array $table_status):bool
+	{
 		return $table_status["Engine"] == "view";
 	}
 

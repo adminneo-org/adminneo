@@ -679,11 +679,13 @@ if (isset($_GET["mysql"])) {
 		return $tables;
 	}
 
-	/** Find out whether the identifier is view
-	* @param array
-	* @return bool
-	*/
-	function is_view($table_status) {
+	/**
+	 * Finds out whether the identifier is a view.
+	 *
+	 * @param array $table_status Array returned by table_status().
+	 */
+	function is_view(array $table_status):bool
+	{
 		return $table_status["Engine"] === null;
 	}
 

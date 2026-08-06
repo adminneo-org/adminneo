@@ -404,7 +404,8 @@ ORDER BY 1"
 		return $return;
 	}
 
-	function is_view($table_status) {
+	function is_view(array $table_status):bool
+	{
 		return $table_status["Engine"] == "view";
 	}
 
