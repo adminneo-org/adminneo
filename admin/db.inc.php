@@ -179,7 +179,6 @@ if ($_GET["ns"] === "") {
 
 		echo "<div class='scrollable'>\n";
 		echo "<table class='nowrap checkable'>\n";
-		echo script("mixin(qsl('table'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 		echo '<thead><tr class="wrap">';
 		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly">' . script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
@@ -193,6 +192,7 @@ if ($_GET["ns"] === "") {
 			echo '<td><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
 		}
 		echo "</thead>\n";
+		echo "<tbody>\n";
 
 		if ($order == "__table") {
 			if ($descending) {
@@ -276,6 +276,9 @@ if ($_GET["ns"] === "") {
 			echo (support("comment") ? "<td id='Comment-" . h($name) . "'>" . ($with_status ? h($status["Comment"] ?? "") : "") : "");
 			echo "\n";
 		}
+
+		echo "</tbody>\n";
+		echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 		echo "<tfoot><tr>";
 		echo "<td><th>" . lang('%d in total', count($tables_list));

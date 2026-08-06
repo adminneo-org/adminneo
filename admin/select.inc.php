@@ -353,7 +353,6 @@ if (!$columns && support("table")) {
 			echo "<div class='scrollable'>\n";
 			echo "<table id='table' class='nowrap checkable'>\n";
 
-			echo script("mixin(gid('table'), {onclick: partialArg(tableClick, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: partialArg(tableClick, true), onkeydown: onEditingKeydown});");
 			echo "<thead><tr>";
 
 			if ($group || !$select) {
@@ -416,6 +415,7 @@ if (!$columns && support("table")) {
 				echo "<th>" . lang('Relations') . "</th>";
 			}
 			echo "</thead>\n";
+			echo "<tbody>\n";
 
 			if (is_ajax()) {
 				ob_end_clean();
@@ -534,6 +534,9 @@ if (!$columns && support("table")) {
 			if (is_ajax()) {
 				exit;
 			}
+
+			echo "</tbody>\n";
+			echo script("mixin(qs('#table tbody'), {onclick: partialArg(tableClick, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: partialArg(tableClick, true), onkeydown: onEditingKeydown});");
 
 			echo "</table>\n";
 			echo script("initToggles(gid('table'));");

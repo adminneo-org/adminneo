@@ -55,7 +55,6 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 			echo "<div class='table-footer-parent'>\n";
 			echo "<div class='scrollable'>\n";
 			echo "<table class='checkable'>\n";
-			echo script("mixin(qsl('table'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 			echo "<thead><tr>"
 				. (support("database") ? "<td>" : "")
@@ -65,6 +64,8 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 				. "<td>" . lang('Size') . " - <a href='" . h(ME) . "dbsize=1'>" . lang('Compute') . "</a>" . script("qsl('a').onclick = partial(ajaxSetHtml, '" . js_escape(ME) . "script=connect');", "")
 				. "</thead>\n"
 			;
+
+			echo "<tbody>\n";
 
 			$databases = ($_GET["dbsize"] ? count_tables($databases) : array_flip($databases));
 
@@ -79,6 +80,9 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 				echo "<td align='right' id='size-" . h($db) . "'>" . ($_GET["dbsize"] ? db_size($db) : "?");
 				echo "\n";
 			}
+
+			echo "</tbody>\n";
+			echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 			echo "</table>\n";
 			echo "</div>\n"; // scrollable

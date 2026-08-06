@@ -15,7 +15,6 @@ if ($_POST["query"] != "") {
 
 echo "<div class='scrollable'>\n";
 echo "<table class='nowrap checkable'>\n";
-echo script("mixin(qsl('table'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 echo "<thead>\n";
 echo "<tr class='wrap'>";
@@ -27,6 +26,7 @@ echo "<th>", lang('Table'), "</th>";
 echo "<td>", lang('Rows'), "</td>";
 echo "</tr>\n";
 echo "</thead>\n";
+echo "<tbody>\n";
 
 foreach (table_status() as $table => $status) {
 	$name = Admin::get()->getTableName($status);
@@ -49,6 +49,9 @@ foreach (table_status() as $table => $status) {
 		echo "</tr>\n";
 	}
 }
+
+echo "</tbody>\n";
+echo script("mixin(qsl('tbody'), {onclick: tableClick, ondblclick: partialArg(tableClick, true)});");
 
 echo "</table>\n";
 echo "</div>\n";
