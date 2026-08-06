@@ -115,6 +115,10 @@ The same script validates the files. A finished pass must print no `⚠️` warn
 - **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
 - **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
 
+### Commits
+
+End the commit message with the standard `Co-Authored-By` line naming the used Claude model. The commit rules in [Porting changes from Adminer](#porting-changes-from-adminer) apply only to changes ported from Adminer and take precedence there — a simply adapted port carries no `Co-Authored-By` line of yours, a complex one does.
+
 ### Porting changes from Adminer
 
 AdminNeo started as a fork of [Adminer](https://github.com/vrana/adminer) project and evolves in a standalone product with separated code base. The process of porting changes from original Adminer includes these steps:
@@ -122,9 +126,9 @@ AdminNeo started as a fork of [Adminer](https://github.com/vrana/adminer) projec
 - Fetch git repository if needed:
 ```shell
 git remote add vrana git@github.com:vrana/adminer.git
-git fetch vrana master --no-tags
+git fetch vrana main --no-tags
 ```
-- Find the commit (e.g. `git log vrana/master --oneline --grep="<keyword>" -i`) and inspect it with `git show <hash>`.
+- Find the commit (e.g. `git log vrana/main --oneline --grep="<keyword>" -i`) and inspect it with `git show <hash>`.
 - Don't run a literal `git cherry-pick` — the two code bases have diverged enough (namespaces, driver structure, helper functions) that it will conflict badly. Instead, read the diff and reimplement the same behavior by hand in the current codebase:
   - Map each changed Adminer file to its AdminNeo equivalent; paths aren't always 1:1 (`adminer/` → `admin/`, and a database's code can move between a `plugins/drivers/*.php` optional plugin upstream and a built-in `admin/drivers/*.inc.php` driver here, or vice versa). Skip files for databases AdminNeo doesn't support.
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
@@ -132,7 +136,11 @@ git fetch vrana master --no-tags
   - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
   - Ignore changes of upstream's git submodules.
   - Use `// by AI model name` mark in translations instead of `// AI model name`.
-- Update `CHANGELOG.md` only if the original Adminer commit itself added a line there — if it didn't, don't invent one. When porting a line: keep the original wording but bug/issue references, add "(by @author)" where `@author` is the GitHub user who wrote the commit, adapt relese version in "regression from X" note to AdminNeo's releases and place it under `### Changes` or `### Bugfixes` to match its nature.
+- Update `CHANGELOG.md` only if the original Adminer commit itself added a line there:
+  - When porting a line: keep the original wording but bug/issue references.
+  - Add "(by @author)" where `@author` is the GitHub user who wrote the commit. But only if adaptation is simple and straight forward.
+  - Adapt release version in "regression from X" note to AdminNeo's releases.
+  - Place it under `### Changes` or `### Bugfixes` to match its nature.
 - If changes adaptation for AdminNeo is simple and straight forward, then:
   - Commit with the original author and author-date preserved (committer/date stay as yours), e.g.:
   ```shell
@@ -144,7 +152,8 @@ git fetch vrana master --no-tags
   ```
   - Don't add your own `Co-Authored-By` signature, but keep original one if present.
 - If adaptation is more complex, then:
-  - Commit in a standard way.
+  - Don't commit automatically. Present the change for review and wait for approval; commit only when asked.
+  - Commit the standard way described in [Commits](#commits): don't preserve the original author or author-date, and end the message with your own `Co-Authored-By` line naming the used Claude model. Don't keep the original commit's `Co-Authored-By` line.
   - Add reference to the upstream commit to the commit message:
   ```
   Ported from:
