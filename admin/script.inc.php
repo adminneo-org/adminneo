@@ -7,14 +7,24 @@ header("Content-Type: text/javascript; charset=utf-8");
 if ($_GET["script"] == "db") {
 	$sums = ["Data_length" => 0, "Index_length" => 0, "Data_free" => 0];
 	$data = [];
+	$db_collation = null;
 
 	foreach (table_status() as $name => $table_status) {
 		$data["Comment-$name"] = h($table_status["Comment"]);
 
 		if (!is_view($table_status) || preg_match('~materialized~i', $table_status["Engine"])) {
-			foreach (["Engine", "Collation"] as $key) {
-				$data["$key-$name"] = h($table_status[$key]);
+			$data["Engine-$name"] = h($table_status["Engine"]);
+
+			// Tables without own collation inherit it from the database. It is resolved lazily to not query
+			// the collations if all tables have their own one.
+			$collation = $table_status["Collation"] ?? "";
+			if ($collation == "") {
+				if ($db_collation === null) {
+					$db_collation = db_collation(DB, collations()) ?? "";
+				}
+				$collation = $db_collation;
 			}
+			$data["Collation-$name"] = h($collation);
 			foreach ($sums + ["Auto_increment" => 0, "Rows" => 0] as $key => $val) {
 				if ($table_status[$key] != "") {
 					$val = format_number($table_status[$key]);

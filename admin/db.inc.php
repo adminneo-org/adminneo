@@ -88,15 +88,21 @@ if ($_GET["ns"] === "") {
 		'mariadb' => 'reference/sql-statements/administrative-sql-statements/show/show-table-status'
 	];
 
+	$db_collation = db_collation(DB, collations());
+
 	$columns = [
 		"Engine" => [
 			"label" => lang('Engine'),
 			"doc" => doc_link(['sql' => 'storage-engines.html', 'mariadb' => 'server-usage/storage-engines']),
 		],
-		"Collation" => [
+	];
+	if ($db_collation != "") {
+		$columns["Collation"] = [
 			"label" => lang('Collation'),
 			"doc" => doc_link(['sql' => 'charset-charsets.html', 'mariadb' => 'reference/data-types/string-data-types/character-sets/supported-character-sets-and-collations']),
-		],
+		];
+	}
+	$columns += [
 		"Data_length" => [
 			"label" => lang('Data Length'),
 			"doc" => doc_link($table_status_links + ['pgsql' => 'functions-admin.html#FUNCTIONS-ADMIN-DBOBJECT', 'oracle' => 'REFRN20286']),
@@ -198,7 +204,8 @@ if ($_GET["ns"] === "") {
 
 			if ($view && !preg_match('~materialized~i', $engine)) {
 				$title = lang('View');
-				echo '<td colspan="6">' . (support("view") ? "<a href='" . h(ME) . "view=" . urlencode($name) . "' title='" . lang('Alter view') . "'>$title</a>" : $title);
+				$colspan = count($columns) - (support("comment") ? 2 : 1); // Rows and Comment columns are printed separately.
+				echo '<td colspan="' . $colspan . '">' . (support("view") ? "<a href='" . h(ME) . "view=" . urlencode($name) . "' title='" . lang('Alter view') . "'>$title</a>" : $title);
 				echo '<td align="right"><a href="' . h(ME) . "select=" . urlencode($name) . '" title="' . lang('Select data') . '">?</a>';
 			} else {
 				foreach ($columns as $key => $column) {
@@ -209,7 +216,17 @@ if ($_GET["ns"] === "") {
 					$id = " id='$key-" . h($name) . "'";
 					$link = $column["link"] ?? "";
 					if (!$link) {
-						echo "<td$id>" . ($order ? h($status[$key] ?? "") : "");
+						$val = "";
+						if ($order) {
+							$val = $status[$key] ?? "";
+
+							// Tables without own collation inherit it from the database.
+							if ($key == "Collation" && $val == "") {
+								$val = $db_collation;
+							}
+						}
+
+						echo "<td$id>" . h($val);
 						continue;
 					}
 
@@ -240,7 +257,7 @@ if ($_GET["ns"] === "") {
 		echo "<tfoot><tr>";
 		echo "<td><th>" . lang('%d in total', count($tables_list));
 		echo "<td>" . h(DIALECT == "sql" ? Connection::get()->getValue("SELECT @@default_storage_engine") : "");
-		echo "<td>" . h(db_collation(DB, collations()));
+		echo ($db_collation != "" ? "<td>" . h($db_collation) : "");
 		foreach ($sums as $key => $sum) {
 			echo "<td align='right' id='sum-$key'>" . ($order ? format_number($sum) : "");
 		}
