@@ -6,6 +6,8 @@ AdminNeo 5.6.0
 
 ### Changes
 
+- Tables overview: Allow sorting
+- Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
 - Compiler: Replace LZW with deflate compression (by @vrana)
 - MySQL: Convert vector columns to text in select and edit (by @vrana)
 - MySQL: Unsupport MySQL < 5.1 (by @vrana)
@@ -15,7 +17,6 @@ AdminNeo 5.6.0
 - SQLite: Disable editing of sqlite_schema (by @vrana)
 - SQLite: Support STRICT and WITHOUT ROWID in create and alter table (by @vrana)
 - SQLite: Support ANY type (by @vrana)
-- Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
 - Add all missing translations (AI generated)
 
 ### Bugfixes
