@@ -7,6 +7,10 @@ class Settings
 	public const ColorSchemeLight = "light";
 	public const ColorSchemeDark = "dark";
 
+	/** Limits of the navigation panel width in rem units. */
+	public const NavigationWidthMin = 10;
+	public const NavigationWidthMax = 30;
+
 	/** @var Config */
 	private $config;
 
@@ -119,6 +123,19 @@ class Settings
 	public function isNavigationReversed(): bool
 	{
 		return $this->getNavigationMode() == Config::NavigationReversed;
+	}
+
+	/**
+	 * Returns the width of the navigation panel in rem units set by dragging its edge, adjusted to the limits.
+	 */
+	public function getNavigationWidth(): ?float
+	{
+		$width = $this->getParameter("navigationWidth");
+		if ($width === null) {
+			return null;
+		}
+
+		return min(max((float)$width, self::NavigationWidthMin), self::NavigationWidthMax);
 	}
 
 	public function isSelectionPreferred(): bool

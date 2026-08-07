@@ -358,6 +358,87 @@ function initNavigation() {
 	});
 }
 
+/**
+ * Makes the navigation panel resizable by the handle at its inner edge.
+ *
+ * @param {string} url Address storing the new width.
+ * @param {string} token CSRF token.
+ * @param {number} minWidth Number of rem units.
+ * @param {number} maxWidth Number of rem units.
+ */
+function initNavigationResizer(url, token, minWidth, maxWidth) {
+	const handle = gid("navigation-resizer");
+	const panel = gid("navigation-panel");
+	const style = gid("navigation-width");
+	const rtl = document.body.classList.contains("rtl");
+
+	let hoverTimeout = null;
+	let dragging = false;
+	let remSize = 0;
+	let width = 0;
+
+	// The handle is highlighted with a delay to not distract when the pointer just passes over it.
+	handle.addEventListener("mouseenter", () => {
+		hoverTimeout = window.setTimeout(() => handle.classList.add("active"), 100);
+	});
+
+	handle.addEventListener("mouseleave", () => {
+		window.clearTimeout(hoverTimeout);
+		if (!dragging) {
+			handle.classList.remove("active");
+		}
+	});
+
+	const resize = event => {
+		const rect = panel.getBoundingClientRect();
+		const offset = (rtl ? rect.right - event.clientX : event.clientX - rect.left) / remSize;
+		width = Math.round(Math.min(Math.max(offset, minWidth), maxWidth) * 100) / 100;
+
+		// The same media query as on the server keeps the custom width off the floating panel.
+		style.textContent = '@media screen and (min-width: 1024px) { :root { --menu-width: ' + width + 'rem } }';
+	};
+
+	const save = value => {
+		ajax(url, null, 'width=' + value + '&token=' + encodeURIComponent(token), null, true);
+	};
+
+	const stop = () => {
+		dragging = false;
+		document.removeEventListener("mousemove", resize);
+		document.removeEventListener("mouseup", stop);
+		document.body.classList.remove("resizing");
+		handle.classList.remove("active");
+
+		if (width) {
+			save(width);
+		}
+	};
+
+	handle.addEventListener("mousedown", event => {
+		if (event.button) { // 0 - left button
+			return;
+		}
+
+		// Prevent selecting the panel content.
+		event.preventDefault();
+
+		dragging = true;
+		remSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+		width = 0;
+		handle.classList.add("active");
+		document.body.classList.add("resizing");
+		document.addEventListener("mousemove", resize);
+		document.addEventListener("mouseup", stop);
+	});
+
+	// Double click restores the default width.
+	handle.addEventListener("dblclick", () => {
+		width = 0;
+		style.textContent = "";
+		save("");
+	});
+}
+
 let tablesFilterTimeout = null;
 let tablesFilterValue = '';
 

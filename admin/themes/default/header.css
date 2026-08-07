@@ -6,6 +6,7 @@
 	background: var(--panel-bg);
 	border-bottom: 1px solid var(--panel-border);
 	z-index: 10;
+	white-space: nowrap;
 }
 
 .breadcrumbs {

@@ -94,6 +94,15 @@ function page_header(string $title, $breadcrumb = []): void
 		}
 	}
 
+	// The width set by dragging the panel edge. The media query keeps it off narrow screens, where the panel floats
+	// over the content. The element is reused by JS while dragging.
+	$navigation_width = Admin::get()->getSettings()->getNavigationWidth();
+	echo "<style id='navigation-width'>";
+	if ($navigation_width) {
+		echo "@media screen and (min-width: 1024px) { :root { --menu-width: ", sprintf("%.2F", $navigation_width), "rem } }";
+	}
+	echo "</style>\n";
+
 	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
 
 	foreach (Admin::get()->getJsUrls() as $url) {
@@ -322,7 +331,10 @@ function page_footer(?string $missing = null): void
 		Admin::get()->printLogout();
 	}
 	echo "</div>\n"; // footer
+
+	echo "<div id='navigation-resizer' class='navigation-resizer'></div>\n";
 	echo "</div>\n"; // navigation-panel
 
-	echo script("initNavigation();");
+	echo script("initNavigation(); initNavigationResizer('" . js_escape(ME) . "set=navigation-width', '" . get_token() . "', " .
+		Settings::NavigationWidthMin . ", " . Settings::NavigationWidthMax . ");");
 }

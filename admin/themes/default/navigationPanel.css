@@ -46,6 +46,33 @@
 	right: 0;
 }
 
+/* Invisible handle for resizing the panel. It is highlighted by JS with a small delay. */
+.navigation-resizer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	inset-inline-end: -4px;
+	width: 5px;
+	border-left: 2px solid transparent;
+	transition: border-color .2s ease-in;
+	z-index: 30;
+}
+
+.rtl .navigation-resizer {
+	inset-inline-end: -2px;
+}
+
+.navigation-resizer.active {
+	border-color: var(--link-text);
+	cursor: col-resize;
+}
+
+body.resizing {
+	cursor: col-resize;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 .navigation-button {
 	display: none;
 	position: fixed;
@@ -256,6 +283,11 @@ menu.dual .secondary {
 
 	.navigation-panel.opened {
 		display: block;
+	}
+
+	/* The floating panel keeps the default width, so there is nothing to resize. */
+	.navigation-resizer {
+		display: none;
 	}
 
 	.navigation-panel .header {

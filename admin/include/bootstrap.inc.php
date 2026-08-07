@@ -171,6 +171,7 @@ define("AdminNeo\ME", BASE_URL . '?'
 define("AdminNeo\HOME_URL", BASE_URL ?: ".");
 define("AdminNeo\SERVER_HOME_URL", substr(preg_replace('~\b(username|db|ns)=[^&]*&~', '', ME), 0, -1) ?: ".");
 
+include __DIR__ . "/set.inc.php";
 include __DIR__ . "/version.inc.php";
 include __DIR__ . "/design.inc.php";
 include __DIR__ . "/xxtea.inc.php";

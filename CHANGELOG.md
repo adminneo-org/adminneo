@@ -6,6 +6,7 @@ AdminNeo 5.6.0
 
 ### Changes
 
+- Allow resizing of the navigation panel
 - Tables overview: Allow sorting
 - Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
 - Compiler: Replace LZW with deflate compression (by @vrana)
