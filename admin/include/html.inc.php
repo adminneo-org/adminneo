@@ -710,7 +710,7 @@ function edit_form($table, $fields, $row, $update): void {
 		if (!support("table") && !fields($table)) {
 			echo "<tr>"
 				. "<th><input class='input' name='field_keys[]'>"
-				. script("qsl('input').oninput = fieldChange;")
+				. script("qsl('input').oninput = fieldChange;", "")
 				. "<td class='function'>" . html_select("field_funs[]", Admin::get()->getFieldFunctions(["null" => isset($_GET["select"])]))
 				. "<td><input class='input' name='field_vals[]'>"
 				. "\n"
