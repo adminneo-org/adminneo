@@ -258,7 +258,7 @@ function placeholder_errors(string $language, string $en, $translation, bool $is
  */
 function get_plural_forms_count(string $language): int
 {
-	return $language == "sl" ? 4 : (preg_match('~^(cs|sk|pl|lt|lv|bs|hr|ru|sr|uk)$~', $language) ? 3 : 2);
+	return $language == "sl" ? 4 : (preg_match('~^(cs|sk|pl|lt|lv|ro|bs|hr|ru|sr|uk)$~', $language) ? 3 : 2);
 }
 
 /**

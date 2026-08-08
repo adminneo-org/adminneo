@@ -34,6 +34,7 @@ return [
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Prea multe autentificări nereușite, încercați din nou peste %d minut.',
 		'Prea multe autentificări nereușite, încercați din nou peste %d minute.',
+		'Prea multe autentificări nereușite, încercați din nou peste %d de minute.',
 	], // by Claude Fable 5
 	'Invalid permanent login, please login again.' => 'Logare permanentă incorectă, rog să vă conectați din nou.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
@@ -71,6 +72,7 @@ return [
 	'%d process(es) have been killed.' => [
 		'A fost terminat %d proces.',
 		'Au fost terminate %d procese.',
+		'Au fost terminate %d de procese.',
 	],
 	'Kill' => 'Termină',
 	'Variables' => 'Variabile',
@@ -89,10 +91,12 @@ return [
 	'%d query(s) executed OK.' => [
 		'%d query executat.',
 		'%d query-uri executate cu succes.',
+		'%d de query-uri executate cu succes.',
 	],
 	'Query executed OK, %d row(s) affected.' => [
 		'Query executat, %d înscriere modificată.',
 		'Query executat, %d înscrieri modificate.',
+		'Query executat, %d de înscrieri modificate.',
 	],
 	'No commands to execute.' => 'Nu sunt comenzi de executat.',
 	'Error in query' => 'Greșeală în query',
@@ -127,6 +131,7 @@ return [
 	'%d row(s) have been imported.' => [
 		'%d rînd importat.',
 		'%d rînduri importate.',
+		'%d de rînduri importate.',
 	],
 
 	// Export
@@ -276,6 +281,7 @@ return [
 	'Routine has been called, %d row(s) affected.' => [
 		'A fost executată procedura, %d înscriere a fost modificată.',
 		'A fost executată procedura, %d înscrieri au fost modificate.',
+		'A fost executată procedura, %d de înscrieri au fost modificate.',
 	],
 	'Call' => 'Apelează',
 	'Parameter name' => 'Numele parametrului',
@@ -356,6 +362,7 @@ return [
 	'%d row(s)' => [
 		'%d înscriere',
 		'%d înscrieri',
+		'%d de înscrieri',
 	],
 	'Page' => 'Pagina',
 	'last' => 'ultima',
@@ -365,6 +372,7 @@ return [
 	'%d byte(s)' => [
 		'%d octet',
 		'%d octeți',
+		'%d de octeți',
 	],
 
 	// In-place editing in selection
@@ -391,6 +399,7 @@ return [
 	'%d item(s) have been affected.' => [
 		'A fost modificată %d înscriere.',
 		'Au fost modificate %d înscrieri.',
+		'Au fost modificate %d de înscrieri.',
 	],
 	'You have no privileges to update this table.' => 'Nu aveți privilegii pentru a actualiza acest tabel.', // by Claude Fable 5
 
