@@ -15,7 +15,7 @@ function find_available_themes(): array
 		$paths = glob(__DIR__ . "/../themes/*");
 
 		foreach ($paths as $path) {
-			if (preg_match('~/([^/]+)-(blue|green|red)$~', $path, $matches)) {
+			if (preg_match('~/([^/]+)-(blue|green|orange|red)$~', $path, $matches)) {
 				$themes[$matches[1]][$matches[2]] = true;
 			}
 		}

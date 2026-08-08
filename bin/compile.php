@@ -246,6 +246,7 @@ $compilation_info[] = $text = "languages: " . ($selected_languages ? implode(", 
 echo $text;
 
 // Themes.
+$colors_pattern = "(blue|green|orange|red)";
 $selected_themes = [];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
@@ -253,17 +254,17 @@ if ($arguments) {
 	if (file_exists(__DIR__ . "/../admin/themes/$params[0]")) {
 		$themes_map = [];
 		foreach ($params as $theme) {
-			if (preg_match('~-(blue|green|red)$~', $theme)) {
+			if (preg_match('~-'. $colors_pattern . '$~', $theme)) {
 				$dirNames = [$theme];
 			} else {
-				$dirNames = ["$theme-blue", "$theme-green", "$theme-red"];
+				$dirNames = ["$theme-blue", "$theme-green", "$theme-orange", "$theme-red"];
 			}
 
 			// Collect unique themes, ensure to include the default color variant for every theme.
 			foreach ($dirNames as $dirName) {
 				$dirname = basename($dirName);
 
-				preg_match('~-(blue|green|red)$~', $dirname, $matches);
+				preg_match('~-' . $colors_pattern. '$~', $dirname, $matches);
 
 				$themes_map["default-$matches[1]"] = true;
 				$themes_map[$dirname] = true;
@@ -467,7 +468,7 @@ for ($i = 0; $i < count($matches[0]); $i++) {
 	// Default theme.
 	if (str_starts_with($name, 'default-$color_variant')) {
 		foreach ($selected_themes as $theme) {
-			if (preg_match('~^default-(blue|green|red)$~', $theme, $matches2)) {
+			if (preg_match('~^default-' . $colors_pattern. '$~', $theme, $matches2)) {
 				$name2 = str_replace('default-$color_variant', $theme, $name);
 				$files2 = str_replace('default-$color_variant', $theme, $files);
 
@@ -484,7 +485,7 @@ for ($i = 0; $i < count($matches[0]); $i++) {
 	if (str_starts_with($name, '$theme-$color_variant')) {
 		foreach ($selected_themes as $theme) {
 			if (!str_starts_with($theme, "default-")) {
-				preg_match('~^(.*)-(blue|green|red)$~', $theme, $matches2);
+				preg_match('~^(.*)-' . $colors_pattern. '$~', $theme, $matches2);
 
 				$name2 = str_replace('$theme-$color_variant', $theme, $name);
 				$files2 = str_replace('$theme-$color_variant', $theme, $files);
@@ -502,7 +503,7 @@ for ($i = 0; $i < count($matches[0]); $i++) {
 	// Favicons.
 	if (str_contains($name, 'icon-$colorVariant.')) {
 		foreach ($selected_themes as $theme) {
-			if (preg_match('~^default-(blue|green|red)$~', $theme, $matches2)) {
+			if (preg_match('~^default-' . $colors_pattern. '$~', $theme, $matches2)) {
 				$name2 = str_replace('$colorVariant', $matches2[1], $name);
 				$files2 = str_replace('$colorVariant', $matches2[1], $files);
 

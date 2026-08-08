@@ -82,7 +82,7 @@ Each driver lives in `admin/drivers/<name>.inc.php`. Drivers:
 | `admin/drivers/`      | One file per supported database                                                              |
 | `admin/include/`      | Shared functions, HTML helpers, auth, encryption, bootstrap                                  |
 | `admin/translations/` | Language files returning PHP arrays                                                          |
-| `admin/themes/`       | CSS theme files (variants: blue/green/red)                                                   |
+| `admin/themes/`       | CSS theme files (variants: blue/green/orange/red)                                            |
 | `editor/`             | EditorNeo (shares `admin/` drivers and most of `admin/include/`)                             |
 | `bin/`                | Build scripts                                                                                |
 | `plugins/`            | Bundled optional plugins                                                                     |
