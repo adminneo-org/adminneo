@@ -167,6 +167,31 @@ function downgrade_php(string $code): string
 	$array_key = '[^](]+';
 	$array_key2 = $array_key . '\[' . $array_key . ']' . '[^](]*';
 
+	// Null coalescing - chains. The operator is right associative, but the ternary operator replacing it is not, so
+	// the tail is parenthesized: A ?? B ?? C => A ?? (B ?? C). Chains written with parentheses are left as they are.
+	// The alternatives are ordered from the longest one, there is no ?? anchor forcing the backtracking.
+	$variable = '(?:\$(?:\w+->)+|' . $class . '\$?|\$)\w+(?:\[(?:' . $array_key . '|' . $array_key2 . ')])*';
+	$call = '(?:(?:\$(?:\w+->)+|' . $class . ')?\w+\([^()]*\))';
+	$literal = '(?:null|true|false|-?\d+(?:\.\d+)?|\'[^\']*\'|"[^"]*"|\[])';
+	$operand = '(?:' . $call . '|' . $variable . '|' . $literal . ')';
+
+	$code = preg_replace_callback(
+		'~' . $operand . '(?:' . $coalescing . '\s*' . $operand . '){2,}~',
+		function ($match) use ($operand) {
+			preg_match_all('~' . $operand . '~', $match[0], $operands);
+
+			$operands = $operands[0];
+			$result = array_pop($operands);
+
+			for ($tail = false; $operands; $tail = true) {
+				$result = array_pop($operands) . ' ?? ' . ($tail ? "($result)" : $result);
+			}
+
+			return $result;
+		},
+		$code
+	);
+
 	$code = preg_replace(
 		'~((\$|\$(\w+->)+|' . $class . '\$?)\w+' // name
 		. '(\[(' . $array_key . '|' . $array_key2 . ')])*)' // array, max 2 levels

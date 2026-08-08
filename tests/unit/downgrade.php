@@ -55,6 +55,17 @@ check('\A\B::f() ?? 1', '($_result = \A\B::f()) !== null ? $_result : 1');
 check('f($a ?? 1)', 'f(isset($a) ? $a : 1)');
 check('f($a->f() ?? 1, 2)', 'f(($_result = $a->f()) !== null ? $_result : 1, 2)');
 
+// Null coalescing chains - the tail must be parenthesized, the ternary operator is left associative.
+check('$a ?? $b ?? null', 'isset($a) ? $a : (isset($b) ? $b : null)');
+check('$a ?? $b ?? $c ?? null', 'isset($a) ? $a : (isset($b) ? $b : (isset($c) ? $c : null))');
+check('$a ?? $b ?? $c ?? $d ?? 0', 'isset($a) ? $a : (isset($b) ? $b : (isset($c) ? $c : (isset($d) ? $d : 0)))');
+check('$a[1] ?? $b->c ?? A::d ?? \'\'', 'isset($a[1]) ? $a[1] : (isset($b->c) ? $b->c : (isset(A::d) ? A::d : \'\'))');
+check('A::f() ?? $a ?? null', '($_result = A::f()) !== null ? $_result : (isset($a) ? $a : null)');
+check('f($a) ?? g() ?? false', '($_result = f($a)) !== null ? $_result : (($_result = g()) !== null ? $_result : false)');
+
+// Already parenthesized chains are not changed.
+check('$a ?? ($b ?? null)', 'isset($a) ? $a : (isset($b) ? $b : null)');
+
 // Unsupported.
 check('$a[$b[$c[1]]] ?? 1', '$a[$b[$c[1]]] ?? 1');
 check('$a[f()] ?? 1', '$a[f()] ?? 1');
