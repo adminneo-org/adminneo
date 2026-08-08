@@ -30,6 +30,13 @@ check('$a->a ?? 1', 'isset($a->a) ? $a->a : 1');
 check('$a->a->a ?? 1', 'isset($a->a->a) ? $a->a->a : 1');
 check('self::$a[1] ?? 1', 'isset(self::$a[1]) ? self::$a[1] : 1');
 check('self::a[1] ?? 1', 'isset(self::a[1]) ? self::a[1] : 1');
+check('A::$a ?? 1', 'isset(A::$a) ? A::$a : 1');
+check('A::a ?? 1', 'isset(A::a) ? A::a : 1');
+check('A::a[1] ?? 1', 'isset(A::a[1]) ? A::a[1] : 1');
+check('static::a ?? 1', 'isset(static::a) ? static::a : 1');
+check('parent::a ?? 1', 'isset(parent::a) ? parent::a : 1');
+check('\A::a ?? 1', 'isset(\A::a) ? \A::a : 1');
+check('\A\B::a ?? 1', 'isset(\A\B::a) ? \A\B::a : 1');
 
 check('f() ?? 1', '($_result = f()) !== null ? $_result : 1');
 check('f($a) ?? 1', '($_result = f($a)) !== null ? $_result : 1');
@@ -38,6 +45,12 @@ check('f($a[1], $b) ?? 1', '($_result = f($a[1], $b)) !== null ? $_result : 1');
 check('$a->f() ?? 1', '($_result = $a->f()) !== null ? $_result : 1');
 check('$a->p->f() ?? 1', '($_result = $a->p->f()) !== null ? $_result : 1');
 check('self::f($a[1], $b) ?? 1', '($_result = self::f($a[1], $b)) !== null ? $_result : 1');
+check('A::f() ?? 1', '($_result = A::f()) !== null ? $_result : 1');
+check('A::f($a[1], $b) ?? 1', '($_result = A::f($a[1], $b)) !== null ? $_result : 1');
+check('static::f() ?? 1', '($_result = static::f()) !== null ? $_result : 1');
+check('parent::f() ?? 1', '($_result = parent::f()) !== null ? $_result : 1');
+check('\A::f() ?? 1', '($_result = \A::f()) !== null ? $_result : 1');
+check('\A\B::f() ?? 1', '($_result = \A\B::f()) !== null ? $_result : 1');
 
 check('f($a ?? 1)', 'f(isset($a) ? $a : 1)');
 check('f($a->f() ?? 1, 2)', 'f(($_result = $a->f()) !== null ? $_result : 1, 2)');

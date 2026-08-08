@@ -163,11 +163,12 @@ function downgrade_php(string $code): string
 	// Null coalescing - variables and constants.
 	$coalescing = '\s*\?\?';
 
+	$class = '\\\\?(\w+\\\\)*\w+::'; // self, parent, static or a class name, optionally fully qualified
 	$array_key = '[^](]+';
 	$array_key2 = $array_key . '\[' . $array_key . ']' . '[^](]*';
 
 	$code = preg_replace(
-		'~((\$|\$(\w+->)+|self::\$|self::)\w+' // name
+		'~((\$|\$(\w+->)+|' . $class . '\$?)\w+' // name
 		. '(\[(' . $array_key . '|' . $array_key2 . ')])*)' // array, max 2 levels
 		. $coalescing
 		. '~', 'isset(\1) ? \1 :', $code
@@ -175,7 +176,7 @@ function downgrade_php(string $code): string
 
 	// Null coalescing - function calls.
 	$code = preg_replace(
-		'~((\$(\w+->)+|self::)?\w+' // name
+		'~((\$(\w+->)+|' . $class . ')?\w+' // name
 		. '\([^()]*\))' // parameters
 		. $coalescing
 		. '~', '($_result = \1) !== null ? $_result :', $code);
