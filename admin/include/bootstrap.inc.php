@@ -76,22 +76,6 @@ if (function_exists("set_time_limit")) { // can be disabled
 }
 ini_set("precision", "16"); // 16 - IEEE 754 has 15.95 decimal digits for double
 
-// Migrate changed cookies.
-if (!isset($_COOKIE["neo_dump"]) && str_contains($_COOKIE["neo_export"] ?? "", "db_style")) {
-	$_COOKIE["neo_dump"] = $_COOKIE["neo_export"];
-	cookie("neo_dump", $_COOKIE["neo_dump"]);
-
-	unset($_COOKIE["neo_export"]);
-	cookie("neo_export", "", -3600);
-}
-if (isset($_COOKIE["neo_import"])) {
-	$_COOKIE["neo_export"] = $_COOKIE["neo_import"];
-	cookie("neo_export", $_COOKIE["neo_export"]);
-
-	unset($_COOKIE["neo_import"]);
-	cookie("neo_import", "", -3600);
-}
-
 // Remove unused file.
 @unlink(get_temp_dir() . "/adminneo.version");
 

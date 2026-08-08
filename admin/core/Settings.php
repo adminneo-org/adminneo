@@ -31,45 +31,6 @@ class Settings
 		}
 
 		// Migrate old parameters.
-		if (isset($this->params["comments"])) {
-			$this->updateParameters([
-				"commentsOpened" => $this->params["comments"],
-				"indexOptions" => $this->params["index_options"],
-				"comments" => null,
-				"index_options" => null,
-			]);
-		}
-
-		if (isset($_COOKIE["neo_export"])) {
-			parse_str($_COOKIE["neo_export"], $params);
-			$this->updateParameters([
-				"exportFormat" => $params["format"],
-				"exportOutput" => $params["output"],
-			]);
-
-			unset($_COOKIE["neo_export"]);
-			cookie("neo_export", "", -3600);
-		}
-
-		if (isset($_COOKIE["neo_dump"])) {
-			parse_str($_COOKIE["neo_dump"], $params);
-			$this->updateParameters([
-				"dumpFormat" => $params["format"],
-				"dumpDbStyle" => $params["db_style"],
-				"dumpTypes" => $params["types"] ?? null,
-				"dumpRoutines" => $params["routines"] ?? null,
-				"dumpEvents" => $params["events"] ?? null,
-				"dumpTableStyle" => $params["table_style"],
-				"dumpAutoIncrement" => $params["auto_increment"] ?? null,
-				"dumpTriggers" => $params["triggers"] ?? null,
-				"dumpDataStyle" => $params["data_style"],
-				"dumpOutput" => $params["output"],
-			]);
-
-			unset($_COOKIE["neo_dump"]);
-			cookie("neo_dump", "", -3600);
-		}
-
 		if (isset($_COOKIE["neo_lang"])) {
 			$this->updateParameter("lang", $_COOKIE["neo_lang"]);
 
