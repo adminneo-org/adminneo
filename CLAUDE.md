@@ -39,7 +39,13 @@ php bin/compile.php admin mysql,pgsql en,cs,de
 php bin/update-translations.php [language]   # e.g. php bin/update-translations.php de
 ```
 
-**Tests:** Tests use Katalon Automation Recorder (browser-based). Test suite files are in `tests/katalon/`. Run via Katalon browser extension against a live server.
+**Tests:** 
+Katalon Automation Recorder (browser-based) test suites are in `tests/katalon/`. Run via Katalon browser extension against a live server.
+
+Unit tests in `tests/unit/` are standalone scripts:
+```sh
+for t in tests/unit/*.php; do php $t; done
+```
 
 ## Architecture
 
@@ -49,7 +55,11 @@ The build process in `bin/compile.php` concatenates all source PHP files into on
 
 In dev mode, static assets (CSS/JS) are dynamically generated and cached in a temp directory. In compiled mode, they are inlined as base64-encoded strings switched by filename.
 
-The code in compiled file is downgraded to support PHP 5.4 and above by calling `downgrade_php()`. This function does not cover all language features and constructs, so verify that compiled file is valid after every change.
+The code in compiled file is downgraded to support PHP 5.4 and above by calling `downgrade_php()`. Supported constructs are listed in `tests/unit/downgrade.php`. The compiler does not check its output, so verify that compiled file is valid after every change:
+
+```sh
+php bin/compile.php && php -l compiled/adminneo.php
+```
 
 ### Plugin system
 
@@ -113,7 +123,7 @@ The same script validates the files. A finished pass must print no `⚠️` warn
 
 - **Placeholders** — types and order must match the English text.
 - **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
-- **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
+- **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv ro bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
 
 ### Commits
 
@@ -179,6 +189,8 @@ To drive a live instance for testing AdminNeo run dev server and then open:
 These entry points are pre-configured, so it is possible to connect to selected database without inserting user credentials to the login form — see [Databases](#databases) for the login steps. You can temporarily edit configuration in these files to test specific functionality and plugins.
 
 Always use the `*-agent.php` variants. The counterparts without the suffix (`tests/admin-devel.php`, `tests/admin-compiled.php`, …) back the Katalon test suites and are not pre-configured with servers.
+
+Cookies set by the application (`neo_settings`, `neo_sid`, …) are `HttpOnly`, so they are not visible in `document.cookie`. Check them in the `Set-Cookie` response header (`curl -si …`). Their path is the entry point script, so every `*-agent.php` file keeps its own settings.
 
 ### Databases
 
