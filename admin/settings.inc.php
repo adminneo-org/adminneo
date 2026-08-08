@@ -12,7 +12,7 @@ $settingsRows = array_merge(
 if ($_POST) {
 	$params = [];
 	foreach ($settingsRows as $key => $row) {
-		if ($key != "lang" && isset($_POST[$key])) {
+		if (isset($_POST[$key])) {
             $useDefault = $_POST[$key] === "" || (is_array($_POST[$key]) && in_array("", $_POST[$key]));
 			$params[$key] = (!$useDefault ? $_POST[$key] : null);
 		}

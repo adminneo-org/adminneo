@@ -153,6 +153,12 @@ if ($instance_error) {
 	$admin->addError($instance_error);
 }
 
+// Store the language selected in the navigation panel. The settings page saves it with the other settings.
+if ($posted_language !== null && !isset($_GET["settings"])) {
+	$admin->getSettings()->updateParameter("lang", $posted_language);
+	redirect(remove_from_uri());
+}
+
 if (!defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", null);
 	define("AdminNeo\DIALECT", null);

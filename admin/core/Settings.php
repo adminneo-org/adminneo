@@ -4,6 +4,8 @@ namespace AdminNeo;
 
 class Settings
 {
+	private const CookieName = "neo_settings";
+
 	public const ColorSchemeLight = "light";
 	public const ColorSchemeDark = "dark";
 
@@ -21,8 +23,8 @@ class Settings
 	{
 		$this->config = $config;
 
-		if (isset($_COOKIE["neo_settings"])) {
-			parse_str($_COOKIE["neo_settings"], $this->params);
+		if (isset($_COOKIE[self::CookieName])) {
+			parse_str($_COOKIE[self::CookieName], $this->params);
 
 			// Prolong settings cookie.
 			$this->save();
@@ -67,6 +69,23 @@ class Settings
 			unset($_COOKIE["neo_dump"]);
 			cookie("neo_dump", "", -3600);
 		}
+
+		if (isset($_COOKIE["neo_lang"])) {
+			$this->updateParameter("lang", $_COOKIE["neo_lang"]);
+
+			unset($_COOKIE["neo_lang"]);
+			cookie("neo_lang", "", -3600);
+		}
+	}
+
+	/**
+	 * Returns the parameter read directly from the cookie. Usable before the instance is created.
+	 */
+	public static function readParameter(string $key): ?string
+	{
+		parse_str($_COOKIE[self::CookieName] ?? "", $params);
+
+		return $params[$key] ?? null;
 	}
 
 	/**
@@ -97,7 +116,7 @@ class Settings
 	private function save(): void
 	{
 		// Expires in 90 days.
-		cookie("neo_settings", http_build_query($this->params), 7776000);
+		cookie(self::CookieName, http_build_query($this->params), 7776000);
 	}
 
 	public function getColorScheme(): ?string
