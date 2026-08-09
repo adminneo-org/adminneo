@@ -5,8 +5,12 @@ namespace AdminNeo;
 require __DIR__ . "/../../vendor/vrana/phpshrink/phpShrink.php";
 require __DIR__ . "/../../admin/include/compile.inc.php";
 
+$errors = 0;
+
 function check(string $code, string $expected): void
 {
+	global $errors;
+
 	$result = downgrade_php($code);
 
 	if ($result != $expected) {
@@ -14,6 +18,7 @@ function check(string $code, string $expected): void
 
 		$file_path = basename($backtrace["file"]);
 		echo "⚠️ $file_path:{$backtrace['line']} => $result\n";
+		$errors++;
 	}
 }
 
@@ -84,3 +89,5 @@ check('([$a, $b] = $c)', '(list($a, $b) = $c)');
 check('A::class', '\'\AdminNeo\A\'');
 check('\A::class', '\'\A\'');
 check('\A\B::class', '\'\A\B\'');
+
+exit($errors ? 1 : 0);

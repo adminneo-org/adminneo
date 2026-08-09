@@ -4,6 +4,8 @@ namespace AdminNeo;
 
 require __DIR__ . "/../../admin/include/functions.inc.php";
 
+$errors = 0;
+
 $tests = [
 	'' => ['', ''],
 	'localhost' => ['localhost', ''],
@@ -41,5 +43,8 @@ foreach ($tests as $server => $expected) {
 	$actual = host_port($server);
 	if ($actual !== $expected) {
 		echo "⚠️ $server results in " . implode(" : ", $actual) . "\n";
+		$errors++;
 	}
 }
+
+exit($errors ? 1 : 0);
