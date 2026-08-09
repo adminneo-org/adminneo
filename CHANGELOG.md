@@ -7,7 +7,7 @@ AdminNeo 5.6.0
 ### Changes
 
 - Allow resizing of the navigation panel
-- Add orange color variant of the default theme
+- Add orange and purple color variants of the default theme
 - Tables overview: Allow sorting
 - Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
 - Compiler: Replace LZW with deflate compression (by @vrana)

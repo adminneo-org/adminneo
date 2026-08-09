@@ -246,7 +246,8 @@ $compilation_info[] = $text = "languages: " . ($selected_languages ? implode(", 
 echo $text;
 
 // Themes.
-$colors_pattern = "(blue|green|orange|red)";
+$colors = ["blue", "green", "orange", "purple", "red"];
+$colors_pattern = "(" . implode("|", $colors) . ")";
 $selected_themes = [];
 if ($arguments) {
 	$params = explode(",", $arguments[0]);
@@ -257,7 +258,9 @@ if ($arguments) {
 			if (preg_match('~-'. $colors_pattern . '$~', $theme)) {
 				$dirNames = [$theme];
 			} else {
-				$dirNames = ["$theme-blue", "$theme-green", "$theme-orange", "$theme-red"];
+				$dirNames = array_map(function ($color) use ($theme) {
+					return "$theme-$color";
+				}, $colors);
 			}
 
 			// Collect unique themes, ensure to include the default color variant for every theme.
@@ -281,8 +284,8 @@ $compilation_info[] = $text = "themes:    " . ($selected_themes ? implode(", ", 
 echo $text;
 
 if (!$selected_themes) {
-	foreach (find_available_themes() as $theme => $colors) {
-		foreach ($colors as $color => $available) {
+	foreach (find_available_themes() as $theme => $theme_colors) {
+		foreach ($theme_colors as $color => $available) {
 			$selected_themes[] = "$theme-$color";
 		}
 	}
