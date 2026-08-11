@@ -1392,6 +1392,7 @@ class Admin extends Origin
 		}
 
 		echo "</menu></nav>\n";
+		echo script("initTablesList(" . json_encode($this->admin->getDatabase()) . ");");
 	}
 
 	public function getSettingsRows(int $groupId): array

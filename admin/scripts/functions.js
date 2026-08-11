@@ -439,6 +439,34 @@ function initNavigationResizer(url, token, minWidth, maxWidth) {
 	});
 }
 
+function initTablesList(dbName) {
+	if (!sessionStorage) {
+		return;
+	}
+
+	const navigationPanel = gid('navigation-panel');
+	const tablesList = gid('tables');
+
+	if (sessionStorage.getItem('neo_tables_position_db') !== dbName) {
+		sessionStorage.removeItem('neo_tables_position');
+	} else if (sessionStorage.getItem('neo_tables_position')) {
+		const positions = sessionStorage.getItem('neo_tables_position').split("|");
+
+		navigationPanel.classList.add('opened');
+		navigationPanel.scrollTop = positions[0] * 1;
+		tablesList.scrollTop = positions[1] * 1;
+		navigationPanel.classList.remove('opened');
+	}
+
+	sessionStorage.setItem('neo_tables_position_db', dbName);
+
+	window.addEventListener('pagehide', function() {
+		navigationPanel.classList.add('opened');
+		sessionStorage.setItem('neo_tables_position', `${navigationPanel.scrollTop}|${tablesList.scrollTop}`);
+		navigationPanel.classList.remove('opened');
+	}, false);
+}
+
 let tablesFilterTimeout = null;
 let tablesFilterValue = '';
 
