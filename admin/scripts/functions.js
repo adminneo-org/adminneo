@@ -471,20 +471,21 @@ let tablesFilterTimeout = null;
 let tablesFilterValue = '';
 
 function initTablesFilter(dbName) {
+	const filterInput = gid('tables-filter');
+
 	if (sessionStorage) {
 		document.addEventListener('DOMContentLoaded', () => {
-			if (dbName === sessionStorage.getItem('neo_tables_filter_db') && sessionStorage.getItem('neo_tables_filter')) {
-				gid('tables-filter').value = sessionStorage.getItem('neo_tables_filter');
-				filterTables();
-			} else {
+			if (sessionStorage.getItem('neo_tables_filter_db') !== dbName) {
 				sessionStorage.removeItem('neo_tables_filter');
+			} else if (sessionStorage.getItem('neo_tables_filter')) {
+				filterInput.value = sessionStorage.getItem('neo_tables_filter');
+				filterTables();
 			}
 
 			sessionStorage.setItem('neo_tables_filter_db', dbName);
 		});
 	}
 
-	const filterInput = gid('tables-filter');
 	filterInput.addEventListener('input', () => {
 		window.clearTimeout(tablesFilterTimeout);
 		tablesFilterTimeout = window.setTimeout(filterTables, 200);
