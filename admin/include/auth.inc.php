@@ -475,6 +475,7 @@ issue_permanent($permanent);
 create_driver($connection);
 
 if ($_POST["logout"] && $_SESSION["token"] && !verify_token()) {
+	header("HTTP/1.1 403 Forbidden");
 	Admin::get()->addError(lang('Invalid CSRF token. Send the form again.'));
 
 	page_header(lang('Logout'));
@@ -490,6 +491,7 @@ stop_session(true);
 
 if ($_POST) {
 	if (!verify_token()) {
+		header("HTTP/1.1 403 Forbidden");
 		Admin::get()->addError(
 			lang('Invalid CSRF token. Send the form again.') . ' ' .
 			lang('If you did not send this request from AdminNeo then close this page.')
@@ -499,6 +501,7 @@ if ($_POST) {
 	}
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Posted form with no data means that post_max_size exceeded because AdminNeo always sends token at least.
+	header("HTTP/1.1 413 Content Too Large");
 	$error = lang('Too big POST data. Reduce the data or increase the %s configuration directive.', "'post_max_size'");
 	if (isset($_GET["sql"])) {
 		$error .= ' ' . lang('You can upload a big SQL file via FTP and import it from server.');

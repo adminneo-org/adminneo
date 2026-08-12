@@ -6,6 +6,7 @@ AdminNeo 5.9.2
 
 ### Changes
 
+- Send an error HTTP status on an invalid CSRF token and too large POST data (by @vrana)
 - Plugins: Add method verifyLoginToken() to accept the login form of another website (by @vrana)
 
 ### Bugfixes
