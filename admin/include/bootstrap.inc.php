@@ -62,7 +62,12 @@ if (!defined("SID")) {
 
 	session_cache_limiter(""); // to allow restarting session
 	session_name("neo_sid");
-	session_set_cookie_params(0, cookie_path(), "", HTTPS, true);
+	if (PHP_VERSION_ID >= 70300) {
+		session_set_cookie_params(["lifetime" => 0, "path" => cookie_path(), "domain" => "", "secure" => HTTPS, "httponly" => true, "samesite" => "lax"]);
+	} else {
+		// The older versions don't support the parameter, so the attribute is appended to the path.
+		session_set_cookie_params(0, cookie_path() . "; SameSite=lax", "", HTTPS, true);
+	}
 	session_start();
 }
 
