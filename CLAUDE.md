@@ -127,7 +127,36 @@ The same script validates the files. A finished pass must print no `⚠️` warn
 
 ### Commits
 
-End the commit message with the standard `Co-Authored-By` line naming the used Claude model. The commit rules in [Porting changes from Adminer](#porting-changes-from-adminer) apply only to changes ported from Adminer and take precedence there — a simply adapted port carries no `Co-Authored-By` line of yours, a complex one does.
+Commit one logical change at a time. Split an unrelated bug found along the way into its own commit.
+
+Format:
+
+```
+<Area:> <Imperative subject, keep under 80 chars> (fix #<issue_id>)
+
+<Body: what was wrong and why this fixes it. Omit for trivial changes.>
+
+Co-Authored-By: Claude <model name> <noreply@anthropic.com>
+```
+
+- `<Area:>` is an optional prefix naming the driver or subsystem: `PostgreSQL:`, `MySQL:`, `SQLite:`, `Compiler:`, `Tests:`, `Translations:`, `Select data:`.
+- Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
+- Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
+- Add a `CHANGELOG.md` entry under the open version section for anything user-visible.
+
+Example:
+
+```
+Export tables in the order of their foreign key dependencies (fix #192)
+
+In a data-only export the foreign keys already exist in the target database, unlike
+in a full dump where they are added after inserting all data. The tables were exported
+in alphabetical order, so importing the dump failed on a foreign key violation.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+```
+
+The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one does).
 
 ### Porting changes from Adminer
 
