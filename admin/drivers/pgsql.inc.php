@@ -1325,6 +1325,12 @@ AND typelem = 0"
 		return ($return ? "$return\n" : $return);
 	}
 
+	// PostgreSQL cannot disable only the foreign key checks - session_replication_role disables all triggers
+	// and rules and requires superuser privileges, so use it only if the tables cannot be ordered by their dependencies
+	function foreign_key_checks_sql($enabled) {
+		return "SET session_replication_role = " . ($enabled ? "DEFAULT" : "replica") . ";\n";
+	}
+
 	function create_sql($table, $auto_increment, $style) {
 		$return_parts = [];
 		$sequences = [];

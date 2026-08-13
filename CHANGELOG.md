@@ -30,6 +30,7 @@ AdminNeo 5.6.0
 - Support disabled set_time_limit() and ini_set() (by @vrana)
 - Do not export foreign key constraints if the table structure is not exported
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
+- PostgreSQL: Fix data-only export failing to import due to foreign key violations (fix #192)
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
 

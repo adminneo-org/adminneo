@@ -845,6 +845,48 @@ function dump_headers(string $identifier, bool $multi_table = false): string
 	return $extension;
 }
 
+/**
+ * Orders tables so that a referenced table comes before the table which references it,
+ * as needed to insert data without violating foreign keys present in the target database.
+ *
+ * @param string[] $names
+ * @param array<string, string[]> $references Referenced tables for each table.
+ * @return string[]|null Null if the tables cannot be ordered because of a cyclic reference.
+ */
+function dump_table_order(array $names, array $references): ?array
+{
+	$known = array_flip($names);
+	$ordered = [];
+	$visiting = [];
+	$cyclic = false;
+
+	$visit = function ($name) use (&$visit, &$ordered, &$visiting, &$cyclic, $known, $references) {
+		if (isset($ordered[$name])) {
+			return;
+		}
+		if (isset($visiting[$name])) {
+			$cyclic = true; // also covers a table referencing itself
+			return;
+		}
+
+		$visiting[$name] = true;
+		foreach ($references[$name] ?? [] as $reference) {
+			if (isset($known[$reference])) {
+				$visit($reference);
+			}
+		}
+		unset($visiting[$name]);
+
+		$ordered[$name] = true;
+	};
+
+	foreach ($names as $name) {
+		$visit($name);
+	}
+
+	return ($cyclic ? null : array_keys($ordered));
+}
+
 /** Print CSV row
 * @param string[]
 */

@@ -44,6 +44,12 @@ if ($_POST) {
 	$ext = dump_headers($identifier, DB == "" || $_GET["ns"] === "" || count($tables) > 1);
 
 	$is_sql = preg_match('~sql~', $_POST["format"]);
+
+	// In a data-only export the foreign keys already exist in the target database, unlike in a full dump where they are
+	// added after inserting all data. So the tables must be inserted in an order respecting their dependencies.
+	// MySQL does not need it, it disables the foreign key checks for the whole dump.
+	$data_only = $is_sql && $_POST["data_style"] && !$_POST["table_style"] && DIALECT != "sql";
+
 	if ($is_sql) {
 		echo "-- AdminNeo " . VERSION . " " . Drivers::get(DRIVER) . " " . Connection::get()->getVersion() . " dump\n\n";
 		if (DIALECT == "sql") {
@@ -109,8 +115,36 @@ SET foreign_key_checks = 0;
 						set_schema($schema);
 					}
 
+					$tables_status = table_status('', true);
+					$table_names = array_keys($tables_status);
+					$disable_foreign_keys = false;
+
+					if ($data_only && $table_names) {
+						$references = [];
+						foreach ($table_names as $name) {
+							if (!is_view($tables_status[$name]) && (DB == "" || $_GET["ns"] === "" || in_array($name, (array) $_POST["data"]))) {
+								foreach (foreign_keys($name) as $foreign_key) {
+									$references[$name][] = $foreign_key["table"];
+								}
+							}
+						}
+
+						$ordered_names = dump_table_order($table_names, $references);
+						if ($ordered_names) {
+							$table_names = $ordered_names;
+						} else {
+							// Cyclic reference, the tables cannot be ordered - disable the foreign key checks if the driver is able to.
+							$disable_foreign_keys = function_exists('AdminNeo\foreign_key_checks_sql');
+						}
+					}
+
+					if ($disable_foreign_keys) {
+						echo foreign_key_checks_sql(false) . "\n";
+					}
+
 					$views = [];
-					foreach (table_status('', true) as $name => $table_status) {
+					foreach ($table_names as $name) {
+						$table_status = $tables_status[$name];
 						$table = (DB == "" || $_GET["ns"] === "" || in_array($name, (array) $_POST["tables"]));
 						$data = (DB == "" || $_GET["ns"] === "" || in_array($name, (array) $_POST["data"]));
 						if ($table || $data) {
@@ -140,9 +174,13 @@ SET foreign_key_checks = 0;
 						}
 					}
 
+					if ($disable_foreign_keys) {
+						echo foreign_key_checks_sql(true) . "\n";
+					}
+
 					// add FKs after creating tables (except in MySQL which uses SET FOREIGN_KEY_CHECKS=0)
 					if ($_POST["table_style"] && function_exists('AdminNeo\foreign_keys_sql')) {
-						foreach (table_status('', true) as $name => $table_status) {
+						foreach ($tables_status as $name => $table_status) {
 							$table = (DB == "" || $_GET["ns"] === "" || in_array($name, (array) $_POST["tables"]));
 							if ($table && !is_view($table_status)) {
 								echo foreign_keys_sql($name);
