@@ -31,6 +31,7 @@ AdminNeo 5.6.0
 - Do not export foreign key constraints if the table structure is not exported
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
 - PostgreSQL: Fix data-only export failing to import due to foreign key violations (fix #192)
+- PostgreSQL: Restart sequences in a data-only export if auto increment values are exported
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
 

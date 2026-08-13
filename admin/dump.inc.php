@@ -154,12 +154,19 @@ SET foreign_key_checks = 0;
 								ob_start([$tmp_file, 'write'], 1e5);
 							}
 
-							Admin::get()->dumpTable($name, ($table ? $_POST["table_style"] : ""), (is_view($table_status) ? 2 : 0));
+							$create_style = ($table ? $_POST["table_style"] : "");
+
+							Admin::get()->dumpTable($name, $create_style, (is_view($table_status) ? 2 : 0));
 							if (is_view($table_status) && $ext != "tar") {
 								$views[] = $name;
 							} elseif ($data) {
 								$fields = fields($name);
 								Admin::get()->dumpData($name, $_POST["data_style"], "SELECT *" . convert_fields($fields, $fields) . " FROM " . table($name));
+
+								// the sequences are not created by this dump, so sync them to the imported data
+								if ($is_sql && !$create_style && $_POST["auto_increment"] && function_exists('AdminNeo\restart_sequences_sql')) {
+									echo "\n" . restart_sequences_sql($name);
+								}
 							}
 							if ($is_sql && $_POST["triggers"] && $table && ($triggers = trigger_sql($name))) {
 								echo "\nDELIMITER ;;\n$triggers\nDELIMITER ;\n";

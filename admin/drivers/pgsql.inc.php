@@ -1331,6 +1331,27 @@ AND typelem = 0"
 		return "SET session_replication_role = " . ($enabled ? "DEFAULT" : "replica") . ";\n";
 	}
 
+	// inserting explicit values does not advance the sequence, so set it to the highest imported value,
+	// otherwise the next insert would fail on a duplicate key
+	function restart_sequences_sql($table) {
+		$return = "";
+
+		foreach (fields($table) as $field) {
+			// CockroachDB generates the values by unique_rowid(), there is no sequence to restart
+			if (!$field["auto_increment"] || preg_match('~^unique_rowid\(~', $field["default"])) {
+				continue;
+			}
+
+			// pg_get_serial_sequence() takes the table as a quoted identifier but the column as a plain name
+			$sequence = "pg_get_serial_sequence(" . q(table($table)) . ", " . q($field["field"]) . ")";
+			$column = idf_escape($field["field"]);
+
+			$return .= "SELECT setval($sequence, MAX($column)) FROM " . table($table) . " HAVING MAX($column) IS NOT NULL;\n";
+		}
+
+		return $return;
+	}
+
 	function create_sql($table, $auto_increment, $style) {
 		$return_parts = [];
 		$sequences = [];
