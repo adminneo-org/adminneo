@@ -1104,7 +1104,7 @@ function select_array_value(array $values, string $val, string $link, array $fie
 		if (is_array($value)) {
 			$result[] = select_array_value($value, $val, $link, $field, $text_length);
 		} else {
-			$l = preg_replace('~(where%5B\d+%5D%5Bval%5D=)' . preg_quote(urlencode($val)) . "~", '${1}' . urlencode($value), $link);
+			$l = preg_replace('~(where%5B\d+%5D%5Bval%5D=)' . preg_quote(urlencode($val), "~") . "~", '${1}' . urlencode($value), $link);
 			$result[] = select_value($value, $l, $field, $text_length);
 		}
 	}

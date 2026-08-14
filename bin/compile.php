@@ -422,13 +422,13 @@ if ($single_driver) {
 	// Remove source code for unsupported features.
 	foreach ($features as $feature) {
 		if (!support($feature)) {
-			$file = preg_replace("~(\t*)" . preg_quote('} elseif (support("' . $feature . '")') . ".*?\n\\1}~s", '}', $file);
-			$file = preg_replace("~(\t*)" . preg_quote('if (support("' . $feature . '")') . ".*?\n\\1}( else)?~s", '', $file);
+			$file = preg_replace("~(\t*)" . preg_quote('} elseif (support("' . $feature . '")', "~") . ".*?\n\\1}~s", '}', $file);
+			$file = preg_replace("~(\t*)" . preg_quote('if (support("' . $feature . '")', "~") . ".*?\n\\1}( else)?~s", '', $file);
 		}
 	}
 
 	// Remove Jush modules for other drivers.
-    $keep_driver = '|' . preg_quote($single_driver == "mysql" ? "sql" : $single_driver) . '\.';
+    $keep_driver = '|' . preg_quote($single_driver == "mysql" ? "sql" : $single_driver, "~") . '\.';
     $keep_autocompletion = support("sql") ? '|autocomplete-sql\.' : "";
 
 	$file = preg_replace('~"\.\./vendor/vrana/jush/modules/jush-(?!textarea\.|txt\.|js\.' . $keep_driver . $keep_autocompletion . ')[^.]+.js",\n~', '', $file);
@@ -606,7 +606,7 @@ $filename = "$output_dir/$output_name";
 
 file_put_contents($filename, $file);
 
-$short_filename = preg_replace('~^' . preg_quote("$current_path/") . '~', "", realpath($filename));
+$short_filename = preg_replace('~^' . preg_quote("$current_path/", "~") . '~', "", realpath($filename));
 echo "output:    $short_filename (" . strlen($file) . " B)\n";
 
 // Compile plugins.
