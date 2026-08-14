@@ -21,7 +21,7 @@ server:
 
 .PHONY: clean
 clean:
-	rm -f $(ROOT_DIRECTORY)/compiled/admin*.php $(ROOT_DIRECTORY)/compiled/editor*.php
+	rm -rf $(ROOT_DIRECTORY)/compiled/admin*.php $(ROOT_DIRECTORY)/compiled/editor*.php $(ROOT_DIRECTORY)/adminneo-plugins
 
 .PHONY: clean.all
 clean.all: clean
