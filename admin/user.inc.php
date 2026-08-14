@@ -49,10 +49,10 @@ if ($_POST) {
 		$created = false;
 		$result = true;
 		if ($old_user != $new_user) {
-			$created = queries("CREATE USER $new_user IDENTIFIED BY " . ($_POST["hashed"] ? "PASSWORD " : "") . q($pass));
+			$created = (bool)queries("CREATE USER $new_user IDENTIFIED BY " . ($_POST["hashed"] ? "PASSWORD " : "") . q($pass));
 			$result = $created;
 		} elseif ($pass != "") {
-			$result = queries("SET PASSWORD FOR $new_user = " . ($plain_password || $_POST["hashed"] ? q($pass) : "PASSWORD(" . q($pass) . ")"));
+			$result = (bool)queries("SET PASSWORD FOR $new_user = " . ($plain_password || $_POST["hashed"] ? q($pass) : "PASSWORD(" . q($pass) . ")"));
 		}
 
 		if ($result) {
