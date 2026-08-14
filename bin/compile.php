@@ -36,7 +36,7 @@ function append_linked_files_cases(string $name, string $files, string &$name_ca
 	$linked_filename = linked_filename($name, $file_paths);
 	if ($linked_filename) {
 		$name_cases .= "case '$name': \$filename = '$linked_filename'; break;";
-		$data_cases .= "case '$linked_filename': \$data = '" . compile_file($name, $file_paths) . "'; break;";
+		$data_cases .= "case '$linked_filename': \$data = '" . protect_blob(compile_file($name, $file_paths)) . "'; break;";
 	}
 }
 
@@ -100,6 +100,7 @@ function put_translations(): string
 	}, glob(__DIR__ . "/../admin/translations/*.inc.php"));
 
 	$cases = "";
+	$blobs = "";
 	$plurals_map = [];
 
 	foreach ($languages as $language) {
@@ -123,10 +124,14 @@ function put_translations(): string
 			}
 		}
 
-		$cases .= "case '$language': \$compressed = '" . compress_string(json_encode($translation_ids, JSON_UNESCAPED_UNICODE)) . "'; break;";
+		$blob = compress_string(json_encode($translation_ids, JSON_UNESCAPED_UNICODE));
+		$blobs .= "$language:$blob";
+
+		$cases .= "case '$language': \$compressed = '" . protect_blob($blob) . "'; break;";
 	}
 
-	$translations_version = crc32($cases);
+	// Compute the version from the real data, the placeholders in $cases are the same for any content.
+	$translations_version = crc32($blobs);
 
 	return '
 		function get_translations($lang) {
@@ -165,6 +170,30 @@ function get_absolute_path($file_path): string
 	global $current_path;
 
 	return $file_path[0] == "/" ? $file_path : "$current_path/$file_path";
+}
+
+/**
+ * Replaces a compressed data blob with a placeholder.
+ *
+ * The compression alphabet contains characters like "[", "]", "(" or "=", so a blob can accidentally spell a PHP
+ * construct. downgrade_php() can accidentally corrupt the blob afterward.
+ */
+function protect_blob(string $blob): string
+{
+	global $protected_blobs;
+
+	$protected_blobs[] = $blob;
+
+	return "\0blob:" . (count($protected_blobs) - 1) . "\0";
+}
+
+function restore_blobs(string $code): string
+{
+	global $protected_blobs;
+
+	return preg_replace_callback('~\0blob:(\d+)\0~', function ($match) use ($protected_blobs) {
+		return $protected_blobs[$match[1]];
+	}, $code);
 }
 
 function print_usage(): void
@@ -356,6 +385,7 @@ foreach (glob(__DIR__ . "/../admin/drivers/*.inc.php") as $filename) {
 
 $features = ["check", "call" => "routine", "dump", "event", "privileges", "procedure" => "routine", "processlist", "routine", "scheme", "sequence", "status", "trigger", "type", "user" => "privileges", "variables", "view"];
 $lang_ids = []; // global variable simplifies usage in a callback functions
+$protected_blobs = []; // compressed data hidden from the code transformations, see protect_blob()
 
 // Change current directory to the project's root. This is required for generating static files.
 chdir(__DIR__ . "/../$project");
@@ -576,6 +606,9 @@ $file = downgrade_php($file);
 
 // Shrink final file.
 $file = phpShrink($file);
+
+// Put the compressed data back once no transformation can corrupt it anymore.
+$file = restore_blobs($file);
 
 // Save file to the output directory.
 if ($output_file_path) {
