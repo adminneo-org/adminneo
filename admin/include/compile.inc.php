@@ -4,6 +4,8 @@ namespace AdminNeo;
 
 require __DIR__ . "/../../vendor/vrana/jsshrink/jsShrink.php";
 
+const CompressionMethod = "deflate";
+
 function read_compiled_file(string $filename): ?string
 {
 	$file_path = get_temp_dir() . "/adminneo/$filename";
@@ -63,7 +65,7 @@ function linked_filename(string $name, array $file_paths): ?string
 		return null;
 	}
 
-	$version = md5($pathString) . "__" . substr(md5($timeString), 0, 8);
+	$version = md5($pathString) . "__" . substr(md5($timeString . CompressionMethod), 0, 8);
 
 	return preg_replace('~\.[^.]+$~', "-$version$0", $name);
 }
