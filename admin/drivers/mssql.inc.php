@@ -25,6 +25,11 @@ if (isset($_GET["mssql"])) {
 			/** @var resource|false */
 			protected $multiResult;
 
+			public function getDefaultServerName(): string
+			{
+				return "localhost:1433";
+			}
+
 			public function open(string $server, string $username, string $password): bool
 			{
 				$connectionInfo = [
@@ -230,6 +235,11 @@ if (isset($_GET["mssql"])) {
 	} else {
 		abstract class MsSqlPdoConnection extends PdoConnection
 		{
+			public function getDefaultServerName(): string
+			{
+				return "localhost:1433";
+			}
+
 			public function selectDatabase(string $name): bool
 			{
 				// database selection is separated from the connection so dbname in DSN can't be used

@@ -24,8 +24,7 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 			queries_redirect(substr(ME, 0, -1), lang('Databases have been dropped.'), drop_databases($_POST["db"]));
 		}
 
-		$server_name = Admin::get()->getServerName(SERVER);
-		$title = h(Drivers::get(DRIVER)) . ": " . ($server_name != "" ? h($server_name) : lang('Server'));
+		$title = h(Drivers::get(DRIVER) . ": " . Admin::get()->getServerName(SERVER));
 
 		page_header($title, false);
 

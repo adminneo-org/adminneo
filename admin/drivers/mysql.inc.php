@@ -29,6 +29,11 @@ if (isset($_GET["mysql"])) {
 				$this->mysqli->init();
 			}
 
+			public function getDefaultServerName(): string
+			{
+				return "localhost";
+			}
+
 			/** @see https://php.net/mysqli.construct */
 			public function open(string $server, string $username, string $password): bool
 			{
@@ -180,6 +185,11 @@ if (isset($_GET["mysql"])) {
 
 		class MySqlConnection extends PdoConnection
 		{
+			public function getDefaultServerName(): string
+			{
+				return "localhost";
+			}
+
 			public function open(string $server, string $username, string $password): bool
 			{
 				list($host, $port) = host_port($server);

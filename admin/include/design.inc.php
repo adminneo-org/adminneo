@@ -138,8 +138,7 @@ function page_header(string $title, $breadcrumb = []): void
 
 		echo '<li><a href="' . h(HOME_URL) . '" title="', lang('Home'), '">', icon_solo("home"), '</a></li>';
 
-		$server_name = SERVER !== null ? Admin::get()->getServerName(SERVER) : "";
-		$server_name = $server_name != "" ? h($server_name) : lang('Server');
+		$server_name = h(Admin::get()->getServerName(SERVER ?? ""));
 
 		if ($breadcrumb === false) {
 			echo "<li>$server_name</li>";

@@ -38,7 +38,7 @@ if ($_POST) {
 	} elseif (count($databases) == 1) {
 		$identifier = $databases[0];
 	} else {
-		$identifier = SERVER != "" ? Admin::get()->getServerName(SERVER) : "localhost";
+		$identifier = Admin::get()->getServerName(SERVER, true, "server");
 	}
 
 	$ext = dump_headers($identifier, DB == "" || $_GET["ns"] === "" || count($tables) > 1);
@@ -213,7 +213,7 @@ SET foreign_key_checks = 0;
 	exit;
 }
 
-$name = DB != "" ? h(DB) : (SERVER != "" ? h(Admin::get()->getServerName(SERVER)) : lang('Server'));
+$name = DB != "" ? h(DB) : h(Admin::get()->getServerName(SERVER));
 page_header(lang('Export') . ": $name", ($_GET["export"] != "" ? ["table" => $_GET["export"]] : [lang('Export')]));
 
 echo "<form action='' method='post'>\n";

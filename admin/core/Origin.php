@@ -216,17 +216,25 @@ abstract class Origin extends Plugin
 	}
 
 	/**
-	 * Returns server name displayed in breadcrumbs. Can be empty string.
+	 * Returns server name displayed in breadcrumbs.
 	 */
-	public function getServerName(string $server): string
+	public function getServerName(string $server, bool $resolveDefault = true, ?string $fallback = null): string
 	{
 		if ($server == "") {
-			return "";
+			if (!$resolveDefault) {
+				return "";
+			}
+
+			$server = Connection::exists() ? Connection::get()->getDefaultServerName() : "";
+			if ($server == "") {
+				return $fallback !== null ? $fallback : lang('Server');
+			}
+			$serverObj = null;
+		} else {
+			$serverObj = $this->config->getServer($server);
 		}
 
-		$serverObj = $this->config->getServer($server);
-
-		return $serverObj ? $serverObj->getName() : $server;
+		return $serverObj ? $serverObj->getName() : preg_replace('~^https?://~', "", $server);
 	}
 
 	public abstract function getDatabase(): ?string;

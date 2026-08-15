@@ -28,6 +28,11 @@ if (isset($_GET["mongo"])) {
 			/** @var string */
 			private $dbName;
 
+			public function getDefaultServerName(): string
+			{
+				return "localhost:27017";
+			}
+
 			public function open(string $server, string $username, string $password, string $dbName = "", string $authSource = ""): bool
 			{
 				$this->version = MONGODB_VERSION;

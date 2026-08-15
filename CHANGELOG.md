@@ -11,6 +11,7 @@ AdminNeo 5.6.0
 - Add orange and purple color variants of the default theme
 - Align icon colors with the color variants of the default theme
 - Tables overview: Allow sorting
+- Display 'localhost' as the default server name instead of 'Server'
 - Syntax highlighting: Update MySQL, MariaDB, SQLite, PostgreSQL (by @vrana)
 - Compiler: Replace LZW with deflate compression (by @vrana)
 - MySQL: Convert vector columns to text in select and edit (by @vrana)

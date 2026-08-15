@@ -48,9 +48,19 @@ abstract class Connection
 		return self::$instance;
 	}
 
+	public static function exists(): bool
+	{
+		return self::$instance !== null;
+	}
+
 	protected function __construct()
 	{
 		//
+	}
+
+	public function getDefaultServerName(): string
+	{
+		return "";
 	}
 
 	/**

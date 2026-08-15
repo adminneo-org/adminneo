@@ -19,6 +19,11 @@ if (isset($_GET["clickhouse"])) {
 			/** @var string */
 			private $dbName = 'default';
 
+			public function getDefaultServerName(): string
+			{
+				return "localhost:8123";
+			}
+
 			/**
 			 * @return Result|bool
 			 */

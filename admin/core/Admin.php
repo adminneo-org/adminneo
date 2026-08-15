@@ -1190,7 +1190,7 @@ class Admin extends Origin
 						if ($password !== null) {
 							$dbs = $_SESSION["db"][$vendor][$server][$username];
 							foreach (($dbs ? array_keys($dbs) : [""]) as $db) {
-								$server_name = $this->admin->getServerName($server);
+								$server_name = $this->admin->getServerName($server, false);
 								$title = h(get_driver_name($vendor, $server))
 									. ($username != "" || $server_name != "" ? " - " : "")
 									. h($username)

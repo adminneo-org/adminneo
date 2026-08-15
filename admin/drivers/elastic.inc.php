@@ -17,6 +17,11 @@ if (isset($_GET["elastic"])) {
 			/** @var string */
 			private $serviceUrl;
 
+			public function getDefaultServerName(): string
+			{
+				return "localhost:9200";
+			}
+
 			/**
 			 * @return array|false
 			 */

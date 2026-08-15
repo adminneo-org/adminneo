@@ -315,6 +315,23 @@ if (isset($_GET["pgsql"])) {
 	if (class_exists('AdminNeo\PgSqlConnectionBase')) {
 		class PgSqlConnection extends PgSqlConnectionBase
 		{
+			/** @var bool */
+			private $localhostServer = false;
+
+			public function open(string $server, string $username, string $password): bool
+			{
+				if ($server == "localhost") {
+					$this->localhostServer = true;
+				}
+
+				return parent::open($server, $username, $password);
+			}
+
+			public function getDefaultServerName(): string
+			{
+				return $this->localhostServer ? "localhost" : "";
+			}
+
 			public function multiQuery(string $query): bool
 			{
 				// no ^ to allow leading comments
