@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'அதே நுழைவுத் த‌க‌வ‌லுட‌ன் வெற்றிக‌ர‌மாக‌ நுழைந்த‌ பிற‌கு இந்த‌ செய‌ல் ந‌டைபெறும்.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'இய‌க்கி (driver) இல்லை', // by Claude Opus 5
-	'Database driver not found.' => 'த‌க‌வ‌ல்த‌ள‌ இய‌க்கி (driver) க‌ண்ட‌றிய‌ப்ப‌ட‌வில்லை.', // by Claude Opus 5
 	'No extension' => 'விரிவு (extensஇஒன்) இல்லை ',
 	'None of the supported PHP extensions (%s) are available.' => 'PHP ஆத‌ர‌வு விரிவுக‌ள் (%s) இல்லை.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'சிற‌ப்புரிமை போர்ட்டுக‌ளுக்கு இணைப்ப‌து அனும‌திக்க‌ப்ப‌ட‌வில்லை.', // by Claude Opus 5

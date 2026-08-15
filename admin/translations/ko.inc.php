@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => '같은 자격 증명으로 로그인에 성공하면 작업이 수행됩니다.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => '드라이버가 없습니다', // by Claude Opus 5
-	'Database driver not found.' => '데이터베이스 드라이버를 찾을 수 없습니다.', // by Claude Opus 5
 	'No extension' => '확장이 없습니다',
 	'None of the supported PHP extensions (%s) are available.' => 'PHP 확장(%s)이 설치되어 있지 않습니다.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '권한이 필요한 포트로의 연결은 허용되지 않습니다.', // by Claude Fable 5

@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Η ενέργεια θα εκτελεστεί μετά από επιτυχή σύνδεση με τα ίδια διαπιστευτήρια.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Κανένας οδηγός', // by Claude Opus 5
-	'Database driver not found.' => 'Δεν βρέθηκε ο οδηγός της Β.Δ.', // by Claude Opus 5
 	'No extension' => 'Καμία Επέκταση',
 	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Η σύνδεση σε προνομιούχες θύρες δεν επιτρέπεται.', // by Claude Fable 5

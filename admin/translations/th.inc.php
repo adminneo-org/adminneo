@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'การดำเนินการจะทำงานหลังจากเข้าสู่ระบบสำเร็จด้วยข้อมูลเดิม.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'ไม่พบไดรเวอร์', // by Claude Opus 5
-	'Database driver not found.' => 'ไม่พบไดรเวอร์ของฐานข้อมูล.', // by Claude Opus 5
 	'No extension' => 'ไม่พบส่วนเสริม',
 	'None of the supported PHP extensions (%s) are available.' => 'ไม่มีส่วนเสริมของ PHP (%s) ที่สามารถใช้งานได้.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'ไม่อนุญาตให้เชื่อมต่อกับพอร์ตที่สงวนไว้.', // by Claude Opus 5

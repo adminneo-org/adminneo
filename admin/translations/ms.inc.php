@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Tindakan ini akan dilaksanakan selepas log masuk berjaya dengan kelayakan yang sama.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'Tiada pemacu', // by Claude Opus 5
-	'Database driver not found.' => 'Pemacu pangkalan data tidak dijumpai.', // by Claude Opus 5
 	'No extension' => 'Tiada sambungan',
 	'None of the supported PHP extensions (%s) are available.' => 'Sambungan PHP yang (%s) disokong tidak wujud.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Penyambungan ke port yang istimewa tidak dibenarkan.',

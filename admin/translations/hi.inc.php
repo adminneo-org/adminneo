@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'यह क्रिया उसी क्रेडेंशियल्स से सफल लॉगिन के बाद की जाएगी।',
 
 	// Connection
-	'No driver' => 'कोई ड्राइवर नहीं', // by Claude Opus 5
-	'Database driver not found.' => 'डेटाबेस ड्राइवर नहीं मिला।', // by Claude Opus 5
 	'No extension' => 'कोई एक्सटेंशन नहीं',
 	'None of the supported PHP extensions (%s) are available.' => 'कोई समर्थित PHP एक्सटेंशन (%s) उपलब्ध नहीं है।', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'प्रिविलेज्ड पोर्ट्स से कनेक्ट करने की अनुमति नहीं है।',

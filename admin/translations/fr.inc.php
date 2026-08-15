@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Cette action sera exécutée après s\'être connecté avec les mêmes données de connexion.',
 
 	// Connection
-	'No driver' => 'Aucun driver',
-	'Database driver not found.' => 'Driver de base de données introuvable.',
 	'No extension' => 'Extension introuvable',
 	'None of the supported PHP extensions (%s) are available.' => 'Aucune des extensions PHP supportées (%s) n\'est disponible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'La connexion aux ports privilégiés n\'est pas autorisée.',

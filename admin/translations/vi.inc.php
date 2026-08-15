@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Hành động sẽ được thực hiện sau khi đăng nhập thành công với cùng thông tin xác thực.',
 
 	// Connection
-	'No driver' => 'Không có driver',
-	'Database driver not found.' => 'Không tìm thấy driver cơ sở dữ liệu.',
 	'No extension' => 'Không có phần mở rộng',
 	'None of the supported PHP extensions (%s) are available.' => 'Bản cài đặt PHP thiếu hỗ trợ cho %s.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Không được phép kết nối đến các cổng đặc quyền.',

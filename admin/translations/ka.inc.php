@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'მოქმედება შესრულდება იგივე მომხმარებლით წარმატებული ავტორიზაციის შემდეგ.',
 
 	// Connection
-	'No driver' => 'დრაივერი არაა', // by Claude Opus 5
-	'Database driver not found.' => 'ბაზის დრაივერი ვერ მოიძებნა.', // by Claude Opus 5
 	'No extension' => 'გაფართოება არაა',
 	'None of the supported PHP extensions (%s) are available.' => 'არც ერთი მხარდაჭერილი გაფართოება არ მოიძებნა (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'პრივილეგირებულ პორტთან წვდომა დაუშვებელია.',

@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Tegevus viiakse läbi pärast edukat sisselogimist samade andmetega.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'Ei leitud draiverit', // by Claude Opus 5
-	'Database driver not found.' => 'Andmebaasi draiverit ei leitud.', // by Claude Opus 5
 	'No extension' => 'Ei leitud laiendust',
 	'None of the supported PHP extensions (%s) are available.' => 'Serveris pole ühtegi toetatud PHP laiendustest (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Privilegeeritud portidega ühendumine ei ole lubatud.', // by Claude Opus 5

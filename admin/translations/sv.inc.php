@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Åtgärden kommer att utföras efter en lyckad inloggning med samma inloggningsuppgifter.',
 
 	// Connection
-	'No driver' => 'Ingen drivrutin', // by Claude Opus 5
-	'Database driver not found.' => 'Databasdrivrutinen hittades inte.', // by Claude Opus 5
 	'No extension' => 'Inget tillägg',
 	'None of the supported PHP extensions (%s) are available.' => 'Inga av de PHP-tilläggen som stöds (%s) är tillgängliga.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Anslutning till privilegierade portar är inte tillåtet.',

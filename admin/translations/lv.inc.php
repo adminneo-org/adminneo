@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Darbība tiks pabeigta pēc derīgas pieteikšanās sistēmā.',
 
 	// Connection
-	'No driver' => 'Nav draivera', // by Claude Opus 5
-	'Database driver not found.' => 'Datubāzes draiveris nav atrasts.', // by Claude Opus 5
 	'No extension' => 'Nav paplašinājuma',
 	'None of the supported PHP extensions (%s) are available.' => 'Neviens PHP no atbalstītajiem paplašinājumiem (%s) nav pieejams.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Pieeja priviliģētiem portiem nav atļauta.',

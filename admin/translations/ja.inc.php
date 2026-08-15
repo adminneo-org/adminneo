@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => '同じアカウントで正しくログインすると作業を実行します。',
 
 	// Connection
-	'No driver' => 'ドライバーがありません',
-	'Database driver not found.' => 'データベースドライバーが見つかりません。',
 	'No extension' => '拡張機能がありません',
 	'None of the supported PHP extensions (%s) are available.' => 'PHPの拡張機能（%s）がセットアップされていません。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '特権ポートへの接続は許可されていません。',

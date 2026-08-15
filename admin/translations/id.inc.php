@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Tindakan akan dilakukan setelah berhasil masuk dengan kredensial yang sama.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Penggerak tidak ada', // by Claude Opus 5
-	'Database driver not found.' => 'Penggerak basis data tidak ditemukan.', // by Claude Opus 5
 	'No extension' => 'Ekstensi tidak ada',
 	'None of the supported PHP extensions (%s) are available.' => 'Ekstensi PHP yang didukung (%s) tidak ada.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Koneksi ke port istimewa tidak diizinkan.', // by Claude Fable 5

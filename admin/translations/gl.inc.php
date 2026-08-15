@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'A acción realizarase despois de iniciar sesión correctamente coas mesmas credenciais.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Non ten controlador', // by Claude Opus 5
-	'Database driver not found.' => 'Non se atopou o controlador da base de datos.', // by Claude Opus 5
 	'No extension' => 'Non ten extensión',
 	'None of the supported PHP extensions (%s) are available.' => 'Ningunha das extensións PHP soportadas (%s) está dispoñible.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Non se permite conectar a portos privilexiados.', // by Claude Fable 5

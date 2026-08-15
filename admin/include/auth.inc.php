@@ -341,11 +341,7 @@ function print_login_page(): void
 }
 
 if (isset($_GET["username"]) && !DRIVER) {
-	Admin::get()->addError(lang('Database driver not found.'));
-
-	page_header(lang('No driver'), false);
-	page_footer("auth");
-	exit;
+	print_login_page();
 }
 
 if (isset($_GET["username"]) && !defined('AdminNeo\DRIVER_EXTENSION')) {

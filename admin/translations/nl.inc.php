@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Deze actie zal uitgevoerd worden na het succesvol aanmelden met dezelfde gebruikersgegevens.',
 
 	// Connection
-	'No driver' => 'Geen stuurprogramma',
-	'Database driver not found.' => 'Databankdriver niet gevonden.',
 	'No extension' => 'Geen extensie',
 	'None of the supported PHP extensions (%s) are available.' => 'Geen geldige PHP extensies beschikbaar (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Verbindingen naar geprivilegieerde poorten is niet toegestaan.',

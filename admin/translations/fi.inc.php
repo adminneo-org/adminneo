@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Toiminto suoritetaan sen jälkeen, kun on onnistuttu kirjautumaan samoilla käyttäjätunnuksilla uudestaan.',
 
 	// Connection
-	'No driver' => 'Ei ajuria', // by Claude Opus 5
-	'Database driver not found.' => 'Tietokanta-ajuria ei löytynyt.', // by Claude Opus 5
 	'No extension' => 'Ei laajennusta',
 	'None of the supported PHP extensions (%s) are available.' => 'Mitään tuetuista PHP-laajennuksista (%s) ei ole käytettävissä.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Yhteydet etuoikeutettuihin portteihin eivät ole sallittuja.',

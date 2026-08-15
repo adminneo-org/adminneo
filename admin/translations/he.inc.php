@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'הפעולה תתבצע לאחר התחברות מוצלחת עם אותם פרטי התחברות', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'אין דרייבר', // by Claude Opus 5
-	'Database driver not found.' => 'דרייבר מסד הנתונים לא נמצא', // by Claude Opus 5
 	'No extension' => 'אין תוסף',
 	'None of the supported PHP extensions (%s) are available.' => 'שום תוסף PHP (%s) זמין', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'התחברות לפורטים מוגנים אינה מותרת', // by Claude Opus 5

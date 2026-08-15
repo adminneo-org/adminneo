@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Veiksmas bus atliktas sėkmingai prisijungus su tais pačiais duomenimis.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'Nėra tvarkyklės', // by Claude Opus 5
-	'Database driver not found.' => 'Duomenų bazės tvarkyklė nerasta.', // by Claude Opus 5
 	'No extension' => 'Nėra plėtinio', // by Claude Opus 5
 	'None of the supported PHP extensions (%s) are available.' => 'Nėra nei vieno iš palaikomų PHP plėtinių (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Jungtis prie privilegijuotų prievadų neleidžiama.', // by Claude Opus 5

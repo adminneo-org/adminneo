@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'İşlem, aynı kimlik bilgileriyle başarıyla oturum açıldıktan sonra gerçekleştirilecektir.',
 
 	// Connection
-	'No driver' => 'Sürücü yok', // by Claude Opus 5
-	'Database driver not found.' => 'Veri tabanı sürücüsü bulunamadı.', // by Claude Opus 5
 	'No extension' => 'Uzantı yok',
 	'None of the supported PHP extensions (%s) are available.' => 'Desteklenen PHP eklentilerinden (%s) hiçbiri mevcut değil.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Ayrıcalıklı bağlantı noktalarına bağlanmaya izin verilmiyor.',

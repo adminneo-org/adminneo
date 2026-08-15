@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => '此操作將在成功使用相同的憑據登錄後執行。',
 
 	// Connection
-	'No driver' => '無驅動程式', // by Claude Opus 5
-	'Database driver not found.' => '找不到資料庫驅動程式。', // by Claude Opus 5
 	'No extension' => '無擴充模組',
 	'None of the supported PHP extensions (%s) are available.' => '沒有任何支援的 PHP 擴充模組（%s）。', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => '不允許連接到特權埠。',

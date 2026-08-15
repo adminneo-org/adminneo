@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Handlingen udføres efter vellykket login med de samme loginoplysninger.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Ingen driver', // by Claude Opus 5
-	'Database driver not found.' => 'Databasedriveren blev ikke fundet.', // by Claude Opus 5
 	'No extension' => 'Ingen udvidelse',
 	'None of the supported PHP extensions (%s) are available.' => 'Ingen af de understøttede PHP-udvidelser (%s) er tilgængelige.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Forbindelse til privilegerede porte er ikke tilladt.', // by Claude Fable 5

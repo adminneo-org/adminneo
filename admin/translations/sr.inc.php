@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Радња ће бити извршена након успешне пријаве са истим подацима.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Без управљачког програма', // by Claude Opus 5
-	'Database driver not found.' => 'Управљачки програм базе података није пронађен.', // by Claude Opus 5
 	'No extension' => 'Без додатака',
 	'None of the supported PHP extensions (%s) are available.' => 'Ниједан од подржаних PHP додатака (%s) није доступан.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Повезивање на привилеговане портове није дозвољено.', // by Claude Fable 5

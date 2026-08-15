@@ -41,8 +41,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'سيتم تنفيذ الإجراء بعد تسجيل الدخول بنجاح بنفس بيانات الدخول.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'لا يوجد مشغل', // by Claude Opus 5
-	'Database driver not found.' => 'لم يتم العثور على مشغل قاعدة البيانات.', // by Claude Opus 5
 	'No extension' => 'امتداد غير موجود',
 	'None of the supported PHP extensions (%s) are available.' => 'إمتدادات php (%s) المدعومة غير موجودة.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'الاتصال بالمنافذ المحمية غير مسموح به.', // by Claude Opus 5

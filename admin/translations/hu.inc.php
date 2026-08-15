@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'A művelet az azonos hitelesítő adatokkal történő sikeres bejelentkezés után hajtódik végre.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Nincs meghajtó', // by Claude Opus 5
-	'Database driver not found.' => 'Az adatbázis meghajtó nem található.', // by Claude Opus 5
 	'No extension' => 'Nincs kiterjesztés',
 	'None of the supported PHP extensions (%s) are available.' => 'Nincs egy elérhető támogatott PHP kiterjesztés (%s) sem.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'A privilegizált portokhoz való csatlakozás nem engedélyezett.', // by Claude Fable 5

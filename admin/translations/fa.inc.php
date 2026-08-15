@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'این عملیات پس از ورود موفق با همان اطلاعات انجام خواهد شد.', // by Claude Opus 5
 
 	// Connection
-	'No driver' => 'درایور موجود نیست', // by Claude Opus 5
-	'Database driver not found.' => 'درایور پایگاه داده یافت نشد.', // by Claude Opus 5
 	'No extension' => 'پسوند نامعتبر',
 	'None of the supported PHP extensions (%s) are available.' => 'هیچ کدام از افزونه های PHP پشتیبانی شده (%s) موجود نمی باشند.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'اتصال به پورتهای ممتاز مجاز نیست.', // by Claude Opus 5

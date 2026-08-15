@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Дія буде виконуватися після успішного входу в систему з тими ж обліковими даними.',
 
 	// Connection
-	'No driver' => 'Нема драйвера', // by Claude Opus 5
-	'Database driver not found.' => 'Драйвер бази даних не знайдено.', // by Claude Opus 5
 	'No extension' => 'Нема розширень',
 	'None of the supported PHP extensions (%s) are available.' => 'Жодне з PHP-розширень (%s), що підтримуються, не доступне.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Підключення до привілейованих портів заборонено.',

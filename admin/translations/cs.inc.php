@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Akce bude provedena po úspěšném přihlášení se stejnými přihlašovacími údaji.',
 
 	// Connection
-	'No driver' => 'Žádný ovladač',
-	'Database driver not found.' => 'Databázový ovladač se nenašel.',
 	'No extension' => 'Žádné rozšíření',
 	'None of the supported PHP extensions (%s) are available.' => 'Není dostupné žádné z podporovaných PHP rozšíření (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Připojování k privilegovaným portům není povoleno.',

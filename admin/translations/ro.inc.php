@@ -42,8 +42,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Nu este driver', // by Claude Opus 5
-	'Database driver not found.' => 'Driverul bazei de date nu a fost găsit.', // by Claude Opus 5
 	'No extension' => 'Nu este extensie',
 	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Conectarea la porturi privilegiate nu este permisă.', // by Claude Fable 5

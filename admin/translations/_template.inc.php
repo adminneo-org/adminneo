@@ -38,8 +38,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Xx.',
 
 	// Connection
-	'No driver' => 'Xx',
-	'Database driver not found.' => 'Xx.',
 	'No extension' => 'Xx',
 	'None of the supported PHP extensions (%s) are available.' => 'Xx (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Xx.',

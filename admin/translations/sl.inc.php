@@ -43,8 +43,6 @@ return [
 	'The action will be performed after successful login with the same credentials.' => 'Dejanje bo izvedeno po uspešni prijavi z istimi poverilnicami.', // by Claude Fable 5
 
 	// Connection
-	'No driver' => 'Brez gonilnika', // by Claude Opus 5
-	'Database driver not found.' => 'Gonilnika za bazo ni bilo mogoče najti.', // by Claude Opus 5
 	'No extension' => 'Brez dodatkov',
 	'None of the supported PHP extensions (%s) are available.' => 'Noben od podprtih dodatkov za PHP (%s) ni na voljo.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
 	'Connecting to privileged ports is not allowed.' => 'Povezovanje na privilegirana vrata ni dovoljeno.', // by Claude Fable 5
