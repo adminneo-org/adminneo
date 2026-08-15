@@ -407,7 +407,6 @@ function initNavigationResizer(url, token, minWidth, maxWidth) {
 		document.removeEventListener("mousemove", resize);
 		document.removeEventListener("mouseup", stop);
 		document.body.classList.remove("resizing");
-		handle.classList.remove("active");
 
 		if (width) {
 			save(width);
