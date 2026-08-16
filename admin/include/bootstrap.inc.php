@@ -55,8 +55,9 @@ if (preg_match('~^/[-\w.]~', $_SERVER["HTTP_X_FORWARDED_PREFIX"])) {
 // session.cookie_secure could be set on HTTP if we are behind a reverse proxy.
 define("Adminneo\HTTPS", ($_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "off")) || ini_bool("session.cookie_secure"));
 
-ini_set("session.use_trans_sid", "0"); // protect links in export
 if (!defined("SID")) {
+	ini_set("session.use_trans_sid", "0"); // protect links in export
+
 	session_cache_limiter(""); // to allow restarting session
 	session_name("neo_sid");
 	session_set_cookie_params(0, cookie_path(), "", HTTPS, true);
