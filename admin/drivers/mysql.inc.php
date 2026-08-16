@@ -828,8 +828,8 @@ if (isset($_GET["mysql"])) {
 	{
 		$query = "SELECT constraint_name, table_schema, table_name, column_name, referenced_column_name
 FROM information_schema.key_column_usage
-WHERE table_schema = " . q(DB) . "
-AND referenced_table_schema = " . q(DB) . "
+WHERE table_schema = " . q(Admin::get()->getDatabase()) . "
+AND referenced_table_schema = " . q(Admin::get()->getDatabase()) . "
 AND referenced_table_name = " . q($table) . "
 ORDER BY ordinal_position";
 

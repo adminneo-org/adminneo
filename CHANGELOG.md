@@ -1,6 +1,13 @@
 Changelog
 =========
 
+AdminNeo 5.7.0
+--------------
+
+### Bugfixes
+
+Editor: Fix displaying relation links (regression from 5.2.0)
+
 AdminNeo 5.6.0 (2026-08-16)
 ---------------------------
 
