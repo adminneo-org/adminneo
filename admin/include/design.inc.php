@@ -12,7 +12,9 @@ use Exception;
  */
 function page_header(string $title, $breadcrumb = []): void
 {
-	ini_set("zlib.output_compression", "1");
+	if (!headers_sent() && !array_sum(array_column(ob_get_status(true), "buffer_used"))) {
+		ini_set("zlib.output_compression", "1");
+	}
 
 	page_headers();
 	if (is_ajax() && Admin::get()->getErrors()) {
