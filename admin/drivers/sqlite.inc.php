@@ -328,6 +328,15 @@ if (isset($_GET["sqlite"])) {
 
 	function table_status($name = "", $fast = false) {
 		$return = [];
+		$rows = [];
+		if (!$fast) {
+			if ($name == "") {
+				// Update sqlite_stat1; the 0x10000 bit (all tables, not only the queried ones) works since SQLite 3.46.
+				Connection::get()->query("PRAGMA optimize = 0x10002");
+			}
+			$rows = get_key_vals("SELECT tbl, MAX(CAST(stat AS integer)) FROM sqlite_stat1"
+				. ($name != "" ? " WHERE tbl = " . q($name) : "") . " GROUP BY tbl");
+		}
 		foreach (
 			get_rows(
 				"SELECT name AS Name, type AS Engine, sql, 'rowid' AS Oid, '' AS Auto_increment FROM sqlite_master WHERE type IN ('table', 'view') "
@@ -342,9 +351,7 @@ if (isset($_GET["sqlite"])) {
 				])) ?: "table";
 			}
 			unset($row["sql"]);
-			if (!$fast) {
-				$row["Rows"] = Connection::get()->getValue("SELECT COUNT(*) FROM " . idf_escape($row["Name"]));
-			}
+			$row["Rows"] = $rows[$row["Name"]] ?? 0;
 			$return[$row["Name"]] = $row;
 		}
 		if (!$fast) {

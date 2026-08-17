@@ -765,7 +765,7 @@ function format_number($val) {
 */
 function format_rows(array $table_status): string {
 	$rows = $table_status["Rows"];
-	$approximate = ($rows && ($table_status["Engine"] ?? "") == (DIALECT == "pgsql" ? "table" : "InnoDB"));
+	$approximate = ($rows && (DIALECT == "sqlite" || ($table_status["Engine"] ?? "") == (DIALECT == "pgsql" ? "table" : "InnoDB")));
 
 	return ($approximate ? "~ " : "") . format_number($rows);
 }

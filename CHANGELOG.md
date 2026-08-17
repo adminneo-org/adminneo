@@ -6,7 +6,7 @@ AdminNeo 5.7.0
 
 ### Changes
 
-Show table statistics without a background request where fast (MySQL 8+, PostgreSQL, Oracle, MS SQL) (by @vrana)
+Tables overview: Speed up (by @vrana)
 
 ### Bugfixes
 
