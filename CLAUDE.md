@@ -221,6 +221,15 @@ Always use the `*-agent.php` variants. The counterparts without the suffix (`tes
 
 Cookies set by the application (`neo_settings`, `neo_sid`, …) are `HttpOnly`, so they are not visible in `document.cookie`. Check them in the `Set-Cookie` response header (`curl -si …`). Their path is the entry point script, so every `*-agent.php` file keeps its own settings.
 
+#### Verifying changes
+
+Use `curl` for what is in the server-rendered HTML — it is scriptable, so one loop covers all drivers. Log in first, the form needs a token.
+Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server.
+
+Use the browser when the change touches JavaScript or the visual result.
+
+Clean up test data afterward (tables in `adminneo_test`, SQLite files, screenshots).
+
 ### Databases
 
 Databases for testing:
