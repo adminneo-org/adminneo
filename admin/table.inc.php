@@ -19,11 +19,11 @@ $title = $fields && is_view($table_status) ? $table_status['Engine'] == 'materia
 $table_name = $name != "" ? $name : h($TABLE);
 page_header("$title: $table_name", [$table_name]);
 
-$set = null;
+$insert_params = null;
 if (isset($rights["insert"]) || !support("table")) {
-	$set = "";
+	$insert_params = [];
 }
-Admin::get()->printTableMenu($table_status, $set);
+Admin::get()->printTableMenu($table_status, $insert_params);
 
 $info = [];
 if (!preg_match("~sqlite|mssql|pgsql~", DIALECT) && isset($table_status["Engine"])) {

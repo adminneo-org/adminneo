@@ -250,20 +250,18 @@ if (is_ajax()) {
 	page_header(lang('Select') . ": $table_name", [$table_name]);
 }
 
-$set = null;
+$insert_params = null;
 if (isset($rights["insert"]) || !support("table")) {
-	$params = [];
+	$insert_params = [];
 	foreach ((array) $_GET["where"] as $val) {
 		if (isset($foreign_keys[$val["col"]]) && count($foreign_keys[$val["col"]]) == 1
 			&& ($val["op"] == "=" || (!$val["op"] && (is_array($val["val"]) || !preg_match('~[_%]~', $val["val"]))) // LIKE in Editor
 		)) {
-			$params["set" . "[" . bracket_escape($val["col"]) . "]"] = $val["val"];
+			$insert_params["set" . "[" . bracket_escape($val["col"]) . "]"] = $val["val"];
 		}
 	}
-
-	$set = $params ? "&" . http_build_query($params) : "";
 }
-Admin::get()->printTableMenu($table_status, $set);
+Admin::get()->printTableMenu($table_status, $insert_params);
 
 if (!$columns && support("table")) {
 	echo "<p class='error'>" . lang('Unable to select the table') . ($fields ? "." : ": " . error()) . "\n";

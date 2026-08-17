@@ -69,12 +69,16 @@ class Admin extends Origin
 		return h($field["field"]);
 	}
 
-	public function printTableMenu(array $tableStatus, ?string $set = ""): void
+	public function printTableMenu(array $tableStatus, ?array $insertParams): void
 	{
-		if ($set !== null) {
-			$table = $tableStatus["Name"];
-			echo '<p class="links top-links"><a href="', h(ME . 'edit=' . urlencode($table) . $set), '">', icon("item-add"), lang('New item'), "</a>\n";
+		if ($insertParams === null) {
+			return;
 		}
+
+		$table = $tableStatus["Name"];
+		$params = $insertParams ? "&" . http_build_query($insertParams) : "";
+
+		echo '<p class="links top-links"><a href="', h(ME . 'edit=' . urlencode($table) . $params), '">', icon("item-add"), lang('New item'), "</a>\n";
 	}
 
 	public function formatSelectQuery(string $query, float $start, bool $failed = false): string

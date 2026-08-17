@@ -131,9 +131,9 @@ class Admin extends Origin
 	 * Prints top menu on table selection and structure page.
 	 *
 	 * @param array $tableStatus The result of SHOW TABLE STATUS.
-	 * @param ?string $set New item options, null for no new item.
+	 * @param ?array $insertParams New item URL parameters, null for no new item.
 	 */
-	public function printTableMenu(array $tableStatus, ?string $set = ""): void
+	public function printTableMenu(array $tableStatus, ?array $insertParams): void
 	{
 		echo '<p class="links top-tabs">';
 
@@ -167,12 +167,13 @@ class Admin extends Origin
 			}
 		}
 
-		if ($set !== null) {
+		if ($insertParams !== null) {
 			$links["edit"] = [lang('New item'), "item-add"];
 		}
+		$params = $insertParams ? "&" . http_build_query($insertParams) : "";
 
 		foreach ($links as $key => $val) {
-			echo " <a href='", h(ME), "$key=", urlencode($table), ($key == "edit" ? $set : ""), "'", bold(isset($_GET[$key])), ">", icon($val[1]), "$val[0]</a>";
+			echo " <a href='", h(ME), "$key=", urlencode($table), ($key == "edit" ? $params : ""), "'", bold(isset($_GET[$key])), ">", icon($val[1]), "$val[0]</a>";
 		}
 
 		echo doc_link([DIALECT => Driver::get()->tableHelp($table, $is_view)], icon("help") . lang('Info'));

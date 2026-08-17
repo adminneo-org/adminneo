@@ -481,7 +481,7 @@ abstract class Origin extends Plugin
 		return h($comment);
 	}
 
-	public abstract function printTableMenu(array $tableStatus, ?string $set = ""): void;
+	public abstract function printTableMenu(array $tableStatus, ?array $insertParams): void;
 
 	/**
 	 * Returns foreign keys for table.
