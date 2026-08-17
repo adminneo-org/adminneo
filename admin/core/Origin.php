@@ -558,7 +558,7 @@ abstract class Origin extends Plugin
 
 				$link = $me . 'edit=' . urlencode($key["table"]);
 				foreach ($constraint as $column => $val) {
-					$link .= "&set" . urlencode("[" . bracket_escape($column) . "]") . "=" . urlencode($row[$val]);
+					$link .= "&preset" . urlencode("[" . bracket_escape($column) . "]") . "=" . urlencode($row[$val]);
 				}
 
 				echo "<a href='" . h($link) . "' title='" . lang('New item') . "'>", icon_solo("add"), "</a> ";

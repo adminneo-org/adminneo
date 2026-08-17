@@ -7,6 +7,7 @@ AdminNeo 5.7.0
 ### Bugfixes
 
 Fix embedding to a page with already started session (fix #199)   
+Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 Editor: Fix displaying relation links (regression from 5.2.0)
 
 AdminNeo 5.6.0 (2026-08-16)
