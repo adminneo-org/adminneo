@@ -912,7 +912,8 @@ ORDER BY indisprimary DESC, indisunique DESC", $connection
 			foreach (explode(" ", $row["indoption"]) as $indoption) {
 				$return[$relname]["descs"][] = (intval($indoption) & 1 ? '1' : null); // 1 - INDOPTION_DESC
 			}
-			$return[$relname]["opclasses"] = ($row["opclasses"] != "" ? explode(" ", $row["opclasses"]) : []);
+			// One entry per column, empty for the default operator class. Not selected at all in CockroachDB.
+			$return[$relname]["opclasses"] = (isset($row["opclasses"]) ? explode(" ", $row["opclasses"]) : []);
 			$return[$relname]["lengths"] = [];
 		}
 		return $return;
