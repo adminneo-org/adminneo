@@ -189,7 +189,7 @@ return [
 	'Check' => 'Skontrolovať',
 	'Repair' => 'Opraviť',
 	'Truncate' => 'Vyprázdniť',
-	'Truncate Cascade' => 'Vyprázdniť kaskádovo', // by Claude Fable 5
+	'Truncate Cascade' => 'Vyprázdniť kaskádovo',
 	'Tables have been truncated.' => 'Tabuľky boli vyprázdnené.',
 	'Move to other database' => 'Presunúť do inej databázy',
 	'Move' => 'Presunúť',
@@ -255,7 +255,7 @@ return [
 	'Add next' => 'Pridať ďalší',
 	'Index Type' => 'Typ indexu',
 	'length' => 'dĺžka',
-	'operator class' => 'trieda operátorov', // by Claude Fable 5
+	'operator class' => 'trieda operátorov',
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmienka',
 
