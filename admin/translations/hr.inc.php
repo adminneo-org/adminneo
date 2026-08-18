@@ -9,7 +9,7 @@ return [
 
 	// Editor
 	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'YYYY-MM-DD' => null, // hint for date format - use language equivalents for day, month and year shortcuts
+	'YYYY-MM-DD' => 'DD.MM.GGGG', // hint for date format - use language equivalents for day, month and year shortcuts // by Claude Opus 5
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
