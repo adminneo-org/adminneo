@@ -219,11 +219,6 @@ if (isset($_GET["pgsql"])) {
 			{
 				$column = $this->offset++;
 
-				$orgtable = pg_field_table($this->resource, $column);
-				if ($orgtable === false) {
-					return false;
-				}
-
 				$name = pg_field_name($this->resource, $column);
 				if ($name === false) {
 					return false;
@@ -234,8 +229,11 @@ if (isset($_GET["pgsql"])) {
 					return false;
 				}
 
+				// Computed columns are not a reference to a table column, so no table is returned for them.
+				$orgtable = pg_field_table($this->resource, $column);
+
 				return (object) [
-					'orgtable' => $orgtable,
+					'orgtable' => ($orgtable !== false ? $orgtable : ""),
 					'name' => $name,
 					'native_type' => $type,
 					'type' => (preg_match(number_type(), $type) ? 0 : 15),
