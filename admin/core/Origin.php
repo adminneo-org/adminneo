@@ -246,9 +246,16 @@ abstract class Origin extends Plugin
 	 */
 	public function getDatabases(bool $flush = true): array
 	{
-		return $this->filterListWithWildcards(
+		$databases = $this->filterListWithWildcards(
 			get_databases($flush), $this->config->getHiddenDatabases(), false, Driver::get()->getSystemDatabases()
 		);
+
+		// The current database is listed even if it is hidden.
+		if (DB != "" && !in_array(DB, $databases)) {
+			array_unshift($databases, DB);
+		}
+
+		return $databases;
 	}
 
 	/**
