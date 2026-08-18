@@ -24,8 +24,7 @@ if (isset($_GET["simpledb"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				if ($server == '') {
-					$this->error = lang('Invalid server or credentials.');
-					return false;
+					$server = "https://sdb.amazonaws.com";
 				}
 
 				$parts = parse_url($server);
