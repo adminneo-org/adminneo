@@ -20,6 +20,7 @@ AdminNeo 5.7.0
 - Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
 - Editor: Fix displaying relation links (regression from 5.2.0)
 - Edit: Keep values of columns with special characters in name after error (by @vrana)
+- Edit: Fix changing function to SQL with the ForeignEditPlugin
 - PostgreSQL: Fix altering functions with parameters of array or user-defined types (by @vrana)
 - PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
 - MS SQL: Treat binary fields as blob (by @vrana)

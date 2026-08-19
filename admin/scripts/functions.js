@@ -993,10 +993,25 @@ function functionChange() {
 	const func = selectValue(this);
 
 	const inputName = this.name.replace(/^function/, 'fields');
-	const input = this.form[inputName] || this.form[`${inputName}[]`];
+	let input = this.form[inputName] || this.form[`${inputName}[]`];
 
 	// Switch to the text field if function is selected.
-	if (func && func !== "NULL" && input.type !== "file") {
+	if (func === "SQL" || func === "+" || func === "-") {
+		if (!input.origElement) {
+			const text = document.createElement('input');
+			text.className = "input";
+			text.name = input.name;
+			text.value = input.lastValue || selectValue(input);
+			text.origElement = input;
+			text.size = input.size || -1;
+			input.replaceWith(text);
+		}
+	} else if (input.origElement) { // revive the original element (keeps its type, e.g. number for +)
+		input.replaceWith(input.origElement);
+		input = input.origElement;
+	}
+
+	if (func && func !== "NULL" && input.type !== "select-one" && input.type !== "file") {
 		if (input.origType === undefined) {
 			input.origType = input.type;
 			input.origMaxLength = input.dataset.maxlength;
@@ -1011,7 +1026,7 @@ function functionChange() {
 		}
 	}
 
-	if (func === "NULL" || func === "now") {
+	if (func === "NULL") {
 		// Hide input value if it will be not used by selected function.
 		if (input.type === "select-one") {
 			input.lastValue = input.value;
