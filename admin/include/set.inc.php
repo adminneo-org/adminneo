@@ -14,6 +14,13 @@ if (isset($_GET["set"])) {
 		save_navigation_width($_POST["width"] ?? "");
 	}
 
+	if ($_GET["set"] == "export-settings") {
+		Admin::get()->getSettings()->updateParameters([
+			"exportFormat" => $_POST["format"] ?? "",
+			"exportOutput" => $_POST["output"] ?? "",
+		]);
+	}
+
 	exit;
 }
 

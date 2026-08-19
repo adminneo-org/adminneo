@@ -756,10 +756,11 @@ function sqlSubmit(form, root) {
 /**
  * Exports the result table by JS without re-running the query.
  *
+ * @param {string} settingsUrl Address storing the selected format and output.
  * @return {boolean} False when the export is handled by JS.
  * @this {HTMLInputElement}
  */
-function sqlExport() {
+function sqlExport(settingsUrl) {
 	const form = this.form;
 	const format = form['format'].value;
 	const output = form['output'].value;
@@ -777,6 +778,10 @@ function sqlExport() {
 			return true;
 		}
 	}
+
+	// The form is not submitted, so the settings have to be stored separately.
+	ajax(settingsUrl, null, 'format=' + encodeURIComponent(format) + '&output=' + encodeURIComponent(output)
+		+ '&token=' + encodeURIComponent(form['token'].value), null, true);
 
 	const tsv = (format === 'tsv');
 	const quotable = new RegExp('["\n]|^0[^.]|\\.\\d*0$|' + (tsv ? '\t' : '[,;]|^$')); // dump_csv()
