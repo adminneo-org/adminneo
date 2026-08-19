@@ -11,7 +11,15 @@ if (isset($_GET["set"])) {
 	}
 
 	if ($_GET["set"] == "navigation-width") {
-		save_navigation_width($_POST["width"] ?? "");
+		// Number of rem units received from the client, empty value restores the default width.
+		$width = $_POST["width"] ?? "";
+		if ($width != "") {
+			$width = min(max((float)$width, Settings::NavigationWidthMin), Settings::NavigationWidthMax);
+
+			Admin::get()->getSettings()->updateParameter("navigationWidth", sprintf("%.2F", $width));
+		} else {
+			Admin::get()->getSettings()->updateParameter("navigationWidth", null);
+		}
 	}
 
 	if ($_GET["set"] == "export-settings") {
@@ -22,21 +30,4 @@ if (isset($_GET["set"])) {
 	}
 
 	exit;
-}
-
-/**
- * Stores the width of the navigation panel set by dragging its edge, adjusted to the limits.
- *
- * @param numeric-string $width Number of rem units received from the client, empty value restores the default width.
- */
-function save_navigation_width(string $width): void
-{
-	if ($width == "") {
-		Admin::get()->getSettings()->updateParameter("navigationWidth", null);
-		return;
-	}
-
-	$width = min(max((float)$width, Settings::NavigationWidthMin), Settings::NavigationWidthMax);
-
-	Admin::get()->getSettings()->updateParameter("navigationWidth", sprintf("%.2F", $width));
 }
