@@ -41,6 +41,11 @@
 	border-bottom: 1px solid var(--panel-border);
 }
 
+.navigation-panel .links a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .rtl .navigation-panel {
 	left: auto;
 	right: 0;
