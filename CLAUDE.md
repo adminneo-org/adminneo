@@ -141,7 +141,7 @@ Format:
 Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 ```
 
-- `<Area:>` is an optional prefix naming the driver or subsystem: `PostgreSQL:`, `MySQL:`, `SQLite:`, `Compiler:`, `Tests:`, `Translations:`, `Select data:`.
+- `<Area:>` is an optional prefix naming the driver or subsystem: `PostgreSQL:`, `MySQL:`, `SQLite:`, `Compiler:`, `Tests:`, `Translations:`, `Select:`.
 - Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
 - Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible.
