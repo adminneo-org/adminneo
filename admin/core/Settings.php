@@ -100,6 +100,11 @@ class Settings
 		return $this->getNavigationMode() == Config::NavigationDual;
 	}
 
+	public function isNavigationHover(): bool
+	{
+		return $this->getNavigationMode() == Config::NavigationHover;
+	}
+
 	public function isNavigationReversed(): bool
 	{
 		return $this->getNavigationMode() == Config::NavigationReversed;

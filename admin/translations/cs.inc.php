@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Navigační mód',
 	'Simple' => 'Jednoduchý',
 	'Dual' => 'Dvojitý',
+	'Dual on hover' => 'Dvojitý při najetí myší',
 	'Reversed' => 'Obrácený',
 	'Layout of main navigation with table links.' => 'Rozvržení hlavní navigace s odkazy na tabulky.',
 	'Table links' => 'Odkazy na tabulky',

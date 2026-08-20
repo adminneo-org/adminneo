@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'Xx',
 	'Simple' => 'Xx',
 	'Dual' => 'Xx',
+	'Dual on hover' => 'Xx',
 	'Reversed' => 'Xx',
 	'Layout of main navigation with table links.' => 'Xx.',
 	'Table links' => 'Xx',
