@@ -174,7 +174,7 @@ function selectCount(id, count) {
 	if (!el) return;
 
 	const inputs = qsa('input[type="submit"]', el.parentNode.parentNode);
-	for (let input of inputs) {
+	for (const input of inputs) {
 		input.disabled = zero;
 	}
 }
@@ -575,7 +575,7 @@ function initSettingsForm() {
 	const form = gid("settings");
 	const inputs = qsa("select, input[type='checkbox'], input[type='radio']", form);
 
-	for (let input of inputs) {
+	for (const input of inputs) {
 		input.addEventListener("change", () => {
 			input.form.submit();
 		});
@@ -1046,7 +1046,7 @@ function functionChange() {
 	} else if (input.lastValue) {
 		// Restore last value.
 		if (input.type !== "select-one" && input.length) {
-			for (let index of input.lastValue) {
+			for (const index of input.lastValue) {
 				input[index].checked = true;
 			}
 		} else {

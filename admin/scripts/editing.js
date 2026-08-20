@@ -193,7 +193,7 @@ function selectFieldChange() {
 		tableBody.addEventListener("keydown", onEditingKeydown);
 
 		const rows = qsa("tr", tableBody);
-		for (let row of rows) {
+		for (const row of rows) {
 			initFieldsEditingRow(row);
 		}
 	};
