@@ -388,7 +388,7 @@ if (!$columns && support("table")) {
 						$column = idf_escape($key);
 						$href = remove_from_uri('(order|desc)[^=]*|page') . '&order%5B0%5D=' . urlencode($key);
 						$desc = "&desc%5B0%5D=1";
-						echo "<th id='th[" . h(bracket_escape($key)) . "]'>" . script("mixin(qsl('th'), {onmouseover: partial(columnMouse), onmouseout: partial(columnMouse, ' hidden')});", "");
+						echo "<th id='th[" . h(bracket_escape($key)) . "]'>" . script("mixin(qsl('th'), {onmouseover: partial(columnMouse), onmouseout: partial(columnMouse, true)});", "");
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
