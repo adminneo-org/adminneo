@@ -117,6 +117,8 @@ All PHP code lives under the `AdminNeo\` namespace.
 
 Translations use technical language and terms related to database systems. Czech language (`admin/translations/cs.inc.php`) is considered as correct because it was created by the author. All machine-translated texts are marked with trailing comment naming the AI model, e.g. `'Vacuum' => 'Počisti', // by Claude Fable 5`. In case of multiline translation, mark is placed on the last line.
 
+When implementing a feature that introduces new texts, add only the Czech (`cs.inc.php`) and Slovak (`sk.inc.php`) translations together with the code changes, along with `_template.inc.php`. The remaining languages are translated in a separate commit, e.g. `Translations: Translate 'Dual on hover' text`.
+
 To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
 
 To validate translations, run `php bin/update-translations.php --clean` – it doesn't add new texts. A finished pass must print no `⚠️` warnings. It checks:
