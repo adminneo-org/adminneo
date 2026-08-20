@@ -181,6 +181,7 @@ foreach ($row["indexes"] as $index) {
 				$column,
 				"partial(" . ($i == count($index["columns"]) ? "indexesAddColumn" : "indexesChangeColumn") . ", '" . js_escape(DIALECT == "sql" ? "" : $_GET["indexes"] . "_") . "')"
 			);
+
 			echo "<span $options_class>";
 			if ($lengths) {
 				echo "<input type='number' name='indexes[$j][lengths][$i]' class='input size' value='". (h($index["lengths"][$key] ?? "")), "' title='" . lang('Length'), "'>";
@@ -197,7 +198,8 @@ foreach ($row["indexes"] as $index) {
 			if (support("descidx")) {
 				echo checkbox("indexes[$j][descs][$i]", 1, $index["descs"][$key] ?? false, lang('descending'));
 			}
-			echo "</span> </span>";
+			echo "<br></span></span>";
+
 			$i++;
 		}
 		echo "</td>";
