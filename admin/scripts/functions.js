@@ -7,8 +7,8 @@
  * @param {?HTMLElement} context Defaults to document.
  * @return {?HTMLElement}
  */
-function gid(id, context = null) {
-	return (context || document).getElementById(id);
+function gid(id, context = document) {
+	return context.getElementById(id);
 }
 
 /** Get first element by selector
@@ -16,8 +16,8 @@ function gid(id, context = null) {
 * @param [HTMLElement] defaults to document
 * @return HTMLElement
 */
-function qs(selector, context = null) {
-	return (context || document).querySelector(selector);
+function qs(selector, context = document) {
+	return context.querySelector(selector);
 }
 
 /** Get last element by selector
@@ -25,7 +25,7 @@ function qs(selector, context = null) {
 * @param [HTMLElement] defaults to document
 * @return HTMLElement
 */
-function qsl(selector, context = null) {
+function qsl(selector, context = document) {
 	const els = qsa(selector, context);
 	return els[els.length - 1];
 }
@@ -35,8 +35,8 @@ function qsl(selector, context = null) {
 * @param [HTMLElement] defaults to document
 * @return NodeList
 */
-function qsa(selector, context = null) {
-	return (context || document).querySelectorAll(selector);
+function qsa(selector, context = document) {
+	return context.querySelectorAll(selector);
 }
 
 /** Return a function calling fn with the next arguments
@@ -44,8 +44,7 @@ function qsa(selector, context = null) {
 * @param ...
 * @return function with preserved this
 */
-function partial(fn) {
-	const args = Array.apply(null, arguments).slice(1);
+function partial(fn, ...args) {
 	return function () {
 		return fn.apply(this, args);
 	};
@@ -56,11 +55,9 @@ function partial(fn) {
 * @param ...
 * @return function with preserved this
 */
-function partialArg(fn) {
-	const args = Array.apply(null, arguments);
+function partialArg(fn, ...args) {
 	return function (arg) {
-		args[0] = arg;
-		return fn.apply(this, args);
+		return fn.apply(this, [arg, ...args]);
 	};
 }
 
@@ -127,7 +124,7 @@ function selectValue(select) {
 		return select.value;
 	}
 	const selected = select.options[select.selectedIndex];
-	return ((selected.attributes.value || {}).specified ? selected.value : selected.text);
+	return (selected.attributes.value?.specified ? selected.value : selected.text);
 }
 
 /** Verify if element has a specified tag name
@@ -267,7 +264,7 @@ function tableClick(event, click, canEdit = true) {
 	el = el.firstChild.firstChild;
 	if (click) {
 		el.checked = !el.checked;
-		el.onclick && el.onclick();
+		el.onclick?.();
 	}
 	if (el.name === 'check[]') {
 		el.form['all'].checked = false;
@@ -568,7 +565,7 @@ function initFieldset(id) {
 function initToggles(parent) {
 	for (const link of qsa('.toggle', parent)) {
 		link.addEventListener("click", event => {
-			const id = link.getAttribute('href').substring(1);
+			const id = link.getAttribute('href').slice(1);
 
 			gid(id).classList.toggle("hidden");
 			link.classList.toggle("opened");
@@ -628,7 +625,7 @@ function selectAddRow(event) {
 		initSortableRow(field.parentElement);
 	}
 
-	parent.appendChild(row);
+	parent.append(row);
 }
 
 /**
@@ -648,7 +645,7 @@ function selectRemoveRow() {
 * @this HTMLInputElement
 */
 function selectSearchKeydown(event) {
-	if (event.keyCode === 13 || event.keyCode === 10) {
+	if (event.key === 'Enter') {
 		this.onsearch = () => {
 		};
 	}
@@ -733,8 +730,11 @@ function selectSearchKeydown(event) {
 				child.style.width = child.getBoundingClientRect().width + "px";
 			}
 
+			const body = document.createElement("tbody");
+			body.append(row);
+
 			dragHelper = document.createElement("table");
-			dragHelper.appendChild(document.createElement("tbody")).appendChild(row);
+			dragHelper.append(body);
 		} else {
 			dragHelper = row;
 		}
@@ -743,7 +743,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.left = `${left}px`;
 		dragHelper.style.width = `${width}px`;
 		dragHelper.classList.add("dragging");
-		document.body.appendChild(dragHelper);
+		document.body.append(dragHelper);
 
 		window.addEventListener("mousemove", updateSorting);
 		window.addEventListener("touchmove", updateSorting);
@@ -803,7 +803,7 @@ function selectSearchKeydown(event) {
 			if (nextRow) {
 				parent.insertBefore(placeholderRow, nextRow);
 			} else {
-				parent.appendChild(placeholderRow);
+				parent.append(placeholderRow);
 			}
 		}
 	}
@@ -814,7 +814,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.left = null;
 		dragHelper.style.width = null;
 
-		document.body.removeChild(dragHelper);
+		dragHelper.remove();
 
 		placeholderRow.parentNode.insertBefore(
 			dragHelper.tagName === "TABLE" ? dragHelper.firstChild.firstChild : dragHelper,
@@ -852,10 +852,10 @@ function selectSearchKeydown(event) {
 * @param [string] extra class name
 * @this HTMLElement
 */
-function columnMouse(className) {
+function columnMouse(className = '') {
 	for (const span of qsa('span', this)) {
-		if (/column/.test(span.className)) {
-			span.className = 'column' + (className || '');
+		if (span.classList.contains('column')) {
+			span.className = 'column' + className;
 		}
 	}
 }
@@ -906,7 +906,7 @@ function bodyKeydown(event, button) {
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
 	}
-	if (isCtrl(event) && (event.keyCode === 13 || event.keyCode === 10) && isTag(target, 'select|textarea|input')) { // 13|10 - Enter
+	if (isCtrl(event) && event.key === 'Enter' && isTag(target, 'select|textarea|input')) {
 		target.blur();
 		if (target.form[button]) {
 			target.form[button].click();
@@ -945,7 +945,7 @@ function bodyClick(event) {
  */
 function onEditingKeydown(event)
 {
-	if ((event.keyCode === 40 || event.keyCode === 38) && isCtrl(event)) { // 40 - Down, 38 - Up
+	if (/^Arrow(Down|Up)$/.test(event.key) && isCtrl(event)) {
 		event.preventDefault();
 
 		const target = event.target;
@@ -954,7 +954,7 @@ function onEditingKeydown(event)
 			return false;
 		}
 
-		row = event.keyCode === 40 ? row.nextElementSibling : row.previousElementSibling;
+		row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
 		if (!row || !isTag(row, 'tr')) {
 			return false;
 		}
@@ -1104,7 +1104,7 @@ function fieldChange() {
 		input.value = '';
 	}
 	// keep value in <select> (function)
-	parentTag(this, 'tbody').appendChild(row);
+	parentTag(this, 'tbody').append(row);
 	this.oninput = null;
 }
 
@@ -1229,7 +1229,7 @@ function initTableFooter() {
  */
 function updateSaveButton() {
 	const button = gid('modify-save');
-	if (button && button.dataset.inlineEdit) {
+	if (button?.dataset.inlineEdit) {
 		button.disabled = !qs('#table td[data-editing="true"]');
 	}
 }
@@ -1271,7 +1271,7 @@ function selectClick(event, text, warning) {
 	}
 
 	input.onkeydown = event => {
-		if (event.keyCode === 27 && !event.shiftKey && !event.altKey && !isCtrl(event)) { // 27 - Esc
+		if (event.key === 'Escape' && !event.shiftKey && !event.altKey && !isCtrl(event)) {
 			td.dataset.editing = "";
 			td.innerHTML = original;
 			initToggles(td);
@@ -1279,7 +1279,7 @@ function selectClick(event, text, warning) {
 		}
 	};
 
-	const dataset = td.firstChild ? (td.firstChild.dataset || {}) : {};
+	const dataset = td.firstChild?.dataset ?? {};
 	let value;
 	if (dataset.value !== undefined) {
 		const dom = new DOMParser().parseFromString(dataset.value, "text/html");
@@ -1305,11 +1305,11 @@ function selectClick(event, text, warning) {
 
 	// Firefox: event.rangeOffset is defined, anchorOffset is related to the whole TR not the inner text node.
 	// Chrome/Safari: event.rangeOffset is not defined, anchorOffset is related to the inner text node.
-	const pos = event.rangeOffset !== undefined ? event.rangeOffset : getSelection().anchorOffset;
+	const pos = event.rangeOffset ?? getSelection().anchorOffset;
 
 	td.dataset.editing = "true";
 	td.innerHTML = '';
-	td.appendChild(input);
+	td.append(input);
 	input.focus();
 	updateSaveButton();
 
@@ -1363,7 +1363,7 @@ function loadNextPage(limit, loadingText) {
 		const tableBody = qs('#table tbody');
 
 		while (newBody.children.length) {
-			tableBody.appendChild(newBody.children[0]);
+			tableBody.append(newBody.children[0]);
 		}
 
 		if (lastPage) {
@@ -1381,11 +1381,7 @@ function loadNextPage(limit, loadingText) {
 * @param Event
 */
 function eventStop(event) {
-	if (event.stopPropagation) {
-		event.stopPropagation();
-	} else {
-		event.cancelBubble = true;
-	}
+	event.stopPropagation();
 }
 
 

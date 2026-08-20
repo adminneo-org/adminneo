@@ -40,7 +40,7 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 	jush.highlight_tag('code', 0);
 
 	for (const textarea of qsa('textarea')) {
-		if (textarea.className.match(/(^|\s)jush-/)) {
+		if (/(^|\s)jush-/.test(textarea.className)) {
 			const pre = jush.textarea(textarea, autocompletion, {
 				silentStart: true
 			});
@@ -79,7 +79,7 @@ function initLoginDriver(driverSelect) {
 
 		// 1 - row with server
 		trs[1].classList.toggle('hidden', disabled);
-		trs[1].getElementsByTagName('input')[0].disabled = disabled;
+		qs('input', trs[1]).disabled = disabled;
 	};
 
 	document.addEventListener('DOMContentLoaded', () => {
@@ -102,9 +102,7 @@ function dbMouseDown(event) {
 	if (event.target.tagName === "OPTION") return;
 
 	dbCtrl = isCtrl(event);
-	if (dbPrevious[this.name] === undefined) {
-		dbPrevious[this.name] = this.value;
-	}
+	dbPrevious[this.name] ??= this.value;
 }
 
 /** Load database after selecting it
@@ -144,7 +142,7 @@ function selectFieldChange() {
 			if (match) {
 				const op = selectValue(form[match[1] + 'op]']);
 				const val = form[match[1] + 'val]'].value;
-				if (col in indexColumns && (!/LIKE|REGEXP/.test(op) || (op === 'LIKE' && val.charAt(0) !== '%'))) {
+				if (col in indexColumns && (!/LIKE|REGEXP/.test(op) || (op === 'LIKE' && val[0] !== '%'))) {
 					return true;
 				} else if (col || val) {
 					ok = false;
@@ -294,7 +292,7 @@ function selectFieldChange() {
 	 * @param {HTMLInputElement} input
 	 */
 	function detectForeignKey(input) {
-		const name = input.name.substring(0, input.name.length - 7);
+		const name = input.name.slice(0, -7);
 		const typeSelect = input.form.elements[name + '[type]'];
 		const options = typeSelect.options;
 		const value = input.value;
@@ -343,7 +341,7 @@ function selectFieldChange() {
 	 * @return {boolean}
 	 */
 	function delimiterEqual(value, part1, part2) {
-		return (value === part1 + '_' + part2 || value === part1 + part2 || value === part1 + part2.charAt(0).toUpperCase() + part2.substring(1));
+		return (value === part1 + '_' + part2 || value === part1 + part2 || value === part1 + part2[0].toUpperCase() + part2.slice(1));
 	}
 
 	/**
@@ -358,7 +356,7 @@ function selectFieldChange() {
 			const edit = gid('enum-edit');
 			edit.value = parseEnumValues(this.value);
 
-			td.appendChild(edit);
+			td.append(edit);
 			this.style.display = 'none';
 			edit.style.display = 'inline';
 			edit.focus();
@@ -414,7 +412,7 @@ function selectFieldChange() {
 	 */
 	function onFieldTypeChange() {
 		const type = this;
-		const name = type.name.substring(0, type.name.length - 6);
+		const name = type.name.slice(0, -6);
 		const text = selectValue(type);
 
 		for (const el of type.form.elements) {
@@ -460,7 +458,7 @@ function selectFieldChange() {
 	 */
 	function addRow(button, focus = false) {
 		const match = /(\d+)(\.\d+)?/.exec(button.name);
-		const newIndex = match[0] + (match[2] ? added.substring(match[2].length) : added) + '1';
+		const newIndex = match[0] + (match[2] ? added.slice(match[2].length) : added) + '1';
 		const row = parentTag(button, 'tr');
 		const newRow = cloneNode(row);
 
@@ -590,7 +588,7 @@ function partitionByChange() {
 function partitionNameChange() {
 	const row = cloneNode(parentTag(this, 'tr'));
 	row.firstChild.firstChild.value = '';
-	parentTag(this, 'table').appendChild(row);
+	parentTag(this, 'table').append(row);
 	this.oninput = () => {};
 }
 
@@ -639,7 +637,7 @@ function foreignAddRow() {
 		select.name = select.name.replace(/\d+]/, '1$&');
 		select.selectedIndex = 0;
 	}
-	parentTag(this, 'table').appendChild(row);
+	parentTag(this, 'table').append(row);
 }
 
 
@@ -658,7 +656,7 @@ function indexesAddRow() {
 		input.name = input.name.replace(/indexes\[\d+/, '$&1');
 		input.value = '';
 	}
-	parentTag(this, 'table').appendChild(row);
+	parentTag(this, 'table').append(row);
 }
 
 /** Change column in index
@@ -705,7 +703,7 @@ function indexesAddColumn(prefix) {
 			input.value = '';
 		}
 	}
-	parentTag(field, 'td').appendChild(column);
+	parentTag(field, 'td').append(column);
 	field.onchange();
 }
 
@@ -746,7 +744,7 @@ function sqlSubmit(form, root) {
 		+ (form['error_stops'].checked ? '&error_stops=1' : '')
 		+ (form['only_errors'].checked ? '&only_errors=1' : '')
 	;
-	if ((document.location.origin + document.location.pathname + action).length < 2000) { // reasonable minimum is 2048
+	if ((location.origin + location.pathname + action).length < 2000) { // reasonable minimum is 2048
 		form.action = action;
 	}
 }
@@ -787,7 +785,7 @@ function sqlExport(settingsUrl) {
 	const quotable = new RegExp('["\n]|^0[^.]|\\.\\d*0$|' + (tsv ? '\t' : '[,;]|^$')); // dump_csv()
 	const separator = (format === 'csv' ? ',' : (tsv ? '\t' : ';'));
 
-	let data = String.fromCharCode(0xfeff); // UTF-8 byte order mark
+	let data = '\ufeff'; // UTF-8 byte order mark
 	for (const row of qsa('tr', table)) {
 		data += Array.from(row.children).map(cell => {
 			const val = (qsa('i', cell).length ? '' : cell.textContent); // <i> - NULL
@@ -800,7 +798,7 @@ function sqlExport(settingsUrl) {
 		const a = document.createElement('a');
 		a.href = url;
 		a.download = 'sql-' + formatDateTime(new Date()) + '.csv'; // dump_headers()
-		document.body.appendChild(a);
+		document.body.append(a);
 		a.click();
 		a.remove();
 		setTimeout(() => URL.revokeObjectURL(url));
@@ -832,7 +830,7 @@ function formatDateTime(date) {
 function triggerChange(tableRe, table, form) {
 	const formEvent = selectValue(form['Event']);
 	if (tableRe.test(form['Trigger'].value)) {
-		form['Trigger'].value = table + '_' + (selectValue(form['Timing']).charAt(0) + formEvent.charAt(0)).toLowerCase();
+		form['Trigger'].value = table + '_' + (selectValue(form['Timing'])[0] + formEvent[0]).toLowerCase();
 	}
 	form['Of'].classList.toggle('hidden', !/ OF/.test(formEvent));
 }
@@ -845,7 +843,7 @@ let that, x, y; // em and tablePos defined in schema.inc.php
 * @this HTMLElement
 */
 function schemaMousedown(event) {
-	if ((event.which ? event.which : event.button) === 1) {
+	if (event.button === 0) { // 0 - left button
 		that = this;
 		x = event.clientX - this.offsetLeft;
 		y = event.clientY - this.offsetTop;
@@ -862,8 +860,8 @@ function schemaMousemove(event) {
 		const lineSet = {};
 		for (const div of qsa('div', that)) {
 			if (div.classList.contains('references')) {
-				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.substr(4) + '"]');
-				const ref = (tablePos[div.title] ? tablePos[div.title] : [div2.parentNode.offsetTop / em, 0]);
+				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
+				const ref = (tablePos[div.title] ?? [div2.parentNode.offsetTop / em, 0]);
 				let left1 = -1;
 				const id = div.id.replace(/^ref.(.+)-.+/, '$1');
 				if (div.parentNode !== div2.parentNode) {
@@ -905,7 +903,7 @@ function schemaMouseup(event, db) {
 		for (const key in tablePos) {
 			s += '_' + key + ':' + Math.round(tablePos[key][0]) + 'x' + Math.round(tablePos[key][1]);
 		}
-		s = encodeURIComponent(s.substr(1));
+		s = encodeURIComponent(s.slice(1));
 		const link = gid('schema-link');
 		link.href = link.href.replace(/[^=]+$/, '') + s;
 		cookie('neo_schema-' + db + '=' + s, 30); //! special chars in db

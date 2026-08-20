@@ -146,7 +146,7 @@ class OpenWebUiPlugin extends Plugin
 	textarea.onblur  = () => toggleDefaultButton(this.form);
 	textarea.onkeydown = event => {
 	    // Ctrl+Enter → submit.
-	    if (isCtrl(event) && (event.keyCode === 13 || event.keyCode === 10)) {
+	    if (isCtrl(event) && event.key === 'Enter') {
 	        button.onclick(null);
 	        event.stopPropagation();
 	    }
