@@ -651,7 +651,11 @@ function indexesAddRow() {
 		if (isTag(tag, 'select')) {
 			tag.selectedIndex = 0;
 		} else if (isTag(tag, 'input')) {
-			tag.value = '';
+			if (tag.type === 'checkbox') {
+				tag.checked = false;
+			} else {
+				tag.value = '';
+			}
 		}
 	}
 	parentTag(this, 'table').append(row);
