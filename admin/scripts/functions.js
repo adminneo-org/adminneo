@@ -155,9 +155,7 @@ function parentTag(el, tag) {
 function trCheck(el) {
 	const tr = parentTag(el, 'tr');
 	tr.classList.toggle('checked', el.checked);
-	if (el.form && el.form['all'] && el.form['all'].onclick) { // Opera treats form.all as document.all
-		el.form['all'].onclick();
-	}
+	el.form?.['all']?.onclick?.();
 }
 
 /**
@@ -246,7 +244,7 @@ function tableClick(event, click, canEdit = true) {
 			return;
 		}
 	}
-	click = (click || !window.getSelection || getSelection().isCollapsed);
+	click = (click || getSelection().isCollapsed);
 	let el = event.target;
 	while (!isTag(el, 'tr')) {
 		if (isTag(el, 'table|a|input|textarea')) {
@@ -1164,7 +1162,7 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 */
 function ajaxSetHtml(url) {
 	return !ajax(url, request => {
-		const data = window.JSON ? JSON.parse(request.responseText) : eval('(' + request.responseText + ')');
+		const data = JSON.parse(request.responseText);
 		for (const key in data) {
 			setHtml(key, data[key]);
 		}
@@ -1292,11 +1290,7 @@ function selectClick(event, text, warning) {
 	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), (text ? 200 : 20)) + 'px';
 
 	if (text) {
-		let rows = 1;
-		value.replace(/\n/g, () => {
-			rows++;
-		});
-		input.rows = rows;
+		input.rows = value.split('\n').length;
 	}
 
 	if (qsa('i', td).length) { // <i> - NULL
