@@ -7,6 +7,7 @@ AdminNeo 5.7.0
 ### Changes
 
 - Add "Dual on hover" navigation mode
+- Select: Fade in the column context menu with a short delay
 - Sort languages by their translated name (by @vrana)
 - Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
 - SQL command: Show column type in result table header (by @vrana)
