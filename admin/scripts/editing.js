@@ -40,7 +40,7 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 	jush.highlight_tag('code', 0);
 
 	for (const textarea of qsa('textarea')) {
-		if (/(^|\s)jush-/.test(textarea.className)) {
+		if ([...textarea.classList].some(name => name.startsWith('jush-'))) {
 			const pre = jush.textarea(textarea, autocompletion, {
 				silentStart: true
 			});
@@ -128,11 +128,10 @@ function dbChange() {
 function selectFieldChange() {
 	const form = this.form;
 	const ok = (() => {
-		for (const input of qsa('input', form)) {
-			if (input.value && /^fulltext/.test(input.name)) {
-				return true;
-			}
+		if ([...qsa('input', form)].some(input => input.value && /^fulltext/.test(input.name))) {
+			return true;
 		}
+
 		let ok = form.limit.value;
 		let group = false;
 		const columns = {};
@@ -309,8 +308,7 @@ function selectFieldChange() {
 				break;
 			}
 
-			let table = match[1];
-			const column = match[2];
+			const [, table, column] = match;
 			const tables = [table, table.replace(/s$/, ''), table.replace(/es$/, '')];
 
 			for (const table of tables) {
@@ -465,28 +463,28 @@ function selectFieldChange() {
 		let inputs = qsa('select, input, button', row);
 		let newInputs = qsa('select, input, button', newRow);
 
-		for (let i = 0; i < inputs.length; i++) {
-			newInputs[i].name = inputs[i].name.replace(/[0-9.]+/, newIndex);
+		for (const [i, input] of inputs.entries()) {
+			newInputs[i].name = input.name.replace(/[0-9.]+/, newIndex);
 
 			if (newInputs[i].tagName === "SELECT") {
-				newInputs[i].selectedIndex = /\[(generated)/.test(inputs[i].name) ? 0 : inputs[i].selectedIndex;
+				newInputs[i].selectedIndex = /\[(generated)/.test(input.name) ? 0 : input.selectedIndex;
 			}
 		}
 
 		inputs = qsa('input', row);
 		newInputs = qsa('input', newRow);
 
-		for (let i = 0; i < inputs.length; i++) {
-			if (inputs[i].name === 'auto_increment_col') {
+		for (const [i, input] of inputs.entries()) {
+			if (input.name === 'auto_increment_col') {
 				newInputs[i].value = newIndex;
 				newInputs[i].checked = false;
 			}
 
-			if (/\[(orig|field|comment|default)/.test(inputs[i].name)) {
+			if (/\[(orig|field|comment|default)/.test(input.name)) {
 				newInputs[i].value = '';
 			}
 
-			if (/\[(generated)/.test(inputs[i].name)) {
+			if (/\[(generated)/.test(input.name)) {
 				newInputs[i].checked = false;
 			}
 		}
@@ -665,13 +663,11 @@ function indexesAddRow() {
 */
 function indexesChangeColumn(prefix) {
 	const names = [];
-	for (const tag in { 'select': 1, 'input': 1 }) {
-		for (const column of qsa(tag, parentTag(this, 'td'))) {
-			if (/\[columns]/.test(column.name)) {
-				const value = selectValue(column);
-				if (value) {
-					names.push(value);
-				}
+	for (const column of qsa('select, input', parentTag(this, 'td'))) {
+		if (/\[columns]/.test(column.name)) {
+			const value = selectValue(column);
+			if (value) {
+				names.push(value);
 			}
 		}
 	}
@@ -771,10 +767,9 @@ function sqlExport(settingsUrl) {
 		return true;
 	}
 
-	for (const i of qsa('i', table)) {
-		if (i.textContent !== 'NULL') { // <i> other than NULL means the value is not displayed fully
-			return true;
-		}
+	// <i> other than NULL means the value is not displayed fully
+	if ([...qsa('i', table)].some(i => i.textContent !== 'NULL')) {
+		return true;
 	}
 
 	// The form is not submitted, so the settings have to be stored separately.
@@ -900,8 +895,8 @@ function schemaMouseup(event, db) {
 		tablePos[that.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
 		that = undefined;
 		let s = '';
-		for (const key in tablePos) {
-			s += '_' + key + ':' + Math.round(tablePos[key][0]) + 'x' + Math.round(tablePos[key][1]);
+		for (const [key, [top, left]] of Object.entries(tablePos)) {
+			s += '_' + key + ':' + Math.round(top) + 'x' + Math.round(left);
 		}
 		s = encodeURIComponent(s.slice(1));
 		const link = gid('schema-link');
