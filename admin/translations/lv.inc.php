@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Navigācijas režīms', // by Claude Opus 5
 	'Simple' => 'Vienkāršs', // by Claude Opus 5
 	'Dual' => 'Dubults', // by Claude Opus 5
+	'Dual on hover' => 'Dubults, uzvedot peli', // by Claude Opus 5
 	'Reversed' => 'Apgriezts', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Galvenās navigācijas izkārtojums ar tabulu saitēm.', // by Claude Opus 5
 	'Table links' => 'Tabulu saites', // by Claude Opus 5

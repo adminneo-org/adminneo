@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'Chế độ điều hướng',
 	'Simple' => 'Đơn giản',
 	'Dual' => 'Kép (Dual)',
+	'Dual on hover' => 'Kép (Dual) khi rê chuột', // by Claude Opus 5
 	'Reversed' => 'Đảo ngược',
 	'Layout of main navigation with table links.' => 'Bố cục của điều hướng chính với các liên kết bảng.',
 	'Table links' => 'Liên kết bảng',

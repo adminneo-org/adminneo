@@ -410,6 +410,7 @@ return [
 	'Navigation mode' => 'Gezinme kipi', // by Claude Opus 5
 	'Simple' => 'Basit', // by Claude Opus 5
 	'Dual' => 'İkili', // by Claude Opus 5
+	'Dual on hover' => 'İkili (üzerine gelince)', // by Claude Opus 5
 	'Reversed' => 'Ters', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Tablo bağlantılarını içeren ana gezinme yerleşimi.', // by Claude Opus 5
 	'Table links' => 'Tablo bağlantıları', // by Claude Opus 5

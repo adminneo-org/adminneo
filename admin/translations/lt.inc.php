@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Navigacijos režimas', // by Claude Opus 5
 	'Simple' => 'Paprasta', // by Claude Opus 5
 	'Dual' => 'Dviguba', // by Claude Opus 5
+	'Dual on hover' => 'Dviguba užvedus pelę', // by Claude Opus 5
 	'Reversed' => 'Atvirkštinė', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Pagrindinės navigacijos su lentelių nuorodomis išdėstymas.', // by Claude Opus 5
 	'Table links' => 'Lentelių nuorodos', // by Claude Opus 5

@@ -437,6 +437,7 @@ return [
 	'Navigation mode' => 'Način krmarjenja', // by Claude Opus 5
 	'Simple' => 'Enostavno', // by Claude Opus 5
 	'Dual' => 'Dvojno', // by Claude Opus 5
+	'Dual on hover' => 'Dvojno ob prehodu z miško', // by Claude Opus 5
 	'Reversed' => 'Obrnjeno', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Razporeditev glavnega krmarjenja s povezavami tabel.', // by Claude Opus 5
 	'Table links' => 'Povezave tabel', // by Claude Opus 5

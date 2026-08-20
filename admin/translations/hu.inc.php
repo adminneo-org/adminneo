@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'Navigációs mód', // by Claude Opus 5
 	'Simple' => 'Egyszerű', // by Claude Opus 5
 	'Dual' => 'Kettős', // by Claude Opus 5
+	'Dual on hover' => 'Kettős rámutatáskor', // by Claude Opus 5
 	'Reversed' => 'Fordított', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'A fő navigáció elrendezése a tábla hivatkozásokkal.', // by Claude Opus 5
 	'Table links' => 'Tábla hivatkozások', // by Claude Opus 5

@@ -407,6 +407,7 @@ return [
 	'Navigation mode' => 'Navigointitila', // by Claude Opus 5
 	'Simple' => 'Yksinkertainen', // by Claude Opus 5
 	'Dual' => 'Kaksiosainen', // by Claude Opus 5
+	'Dual on hover' => 'Kaksiosainen osoitettaessa', // by Claude Opus 5
 	'Reversed' => 'Käänteinen', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Päänavigoinnin asettelu taulujen linkkien kanssa.', // by Claude Opus 5
 	'Table links' => 'Taulujen linkit', // by Claude Opus 5

@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'Navigeringsläge', // by Claude Opus 5
 	'Simple' => 'Enkelt', // by Claude Opus 5
 	'Dual' => 'Dubbelt', // by Claude Opus 5
+	'Dual on hover' => 'Dubbelt vid hovring', // by Claude Opus 5
 	'Reversed' => 'Omvänt', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Utformning av huvudnavigeringen med tabellänkar.', // by Claude Opus 5
 	'Table links' => 'Tabellänkar', // by Claude Opus 5

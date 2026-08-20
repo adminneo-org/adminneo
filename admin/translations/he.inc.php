@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'מצב ניווט', // by Claude Opus 5
 	'Simple' => 'פשוט', // by Claude Opus 5
 	'Dual' => 'כפול', // by Claude Opus 5
+	'Dual on hover' => 'כפול בריחוף', // by Claude Opus 5
 	'Reversed' => 'הפוך', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'פריסת הניווט הראשי עם קישורי הטבלאות', // by Claude Opus 5
 	'Table links' => 'קישורי הטבלאות', // by Claude Opus 5

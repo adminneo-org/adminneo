@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'வ‌ழிசெலுத்த‌ல் முறை', // by Claude Opus 5
 	'Simple' => 'எளிமையான‌', // by Claude Opus 5
 	'Dual' => 'இர‌ட்டை', // by Claude Opus 5
+	'Dual on hover' => 'சுட்டி மேல் வரும்போது இர‌ட்டை', // by Claude Opus 5
 	'Reversed' => 'த‌லைகீழ்', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'அட்ட‌வ‌ணை இணைப்புக‌ளுட‌ன் கூடிய‌ முத‌ன்மை வ‌ழிசெலுத்த‌லின் அமைப்பு.', // by Claude Opus 5
 	'Table links' => 'அட்ட‌வ‌ணை இணைப்புக‌ள்', // by Claude Opus 5

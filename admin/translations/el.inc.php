@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'Λειτουργία πλοήγησης', // by Claude Opus 5
 	'Simple' => 'Απλή', // by Claude Opus 5
 	'Dual' => 'Διπλή', // by Claude Opus 5
+	'Dual on hover' => 'Διπλή στο πέρασμα του δείκτη', // by Claude Opus 5
 	'Reversed' => 'Αντίστροφη', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Διάταξη της κύριας πλοήγησης με τους συνδέσμους των πινάκων.', // by Claude Opus 5
 	'Table links' => 'Σύνδεσμοι πινάκων', // by Claude Opus 5

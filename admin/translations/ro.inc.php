@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Modul de navigare', // by Claude Opus 5
 	'Simple' => 'Simplu', // by Claude Opus 5
 	'Dual' => 'Dublu', // by Claude Opus 5
+	'Dual on hover' => 'Dublu la trecerea cursorului', // by Claude Opus 5
 	'Reversed' => 'Inversat', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Aranjarea navigării principale cu adresele tabelelor.', // by Claude Opus 5
 	'Table links' => 'Adresele tabelelor', // by Claude Opus 5

@@ -395,6 +395,7 @@ return [
 	'Navigation mode' => 'Mod navigasi', // by Claude Opus 5
 	'Simple' => 'Ringkas', // by Claude Opus 5
 	'Dual' => 'Dwi', // by Claude Opus 5
+	'Dual on hover' => 'Ganda semasa tuding tetikus', // by Claude Opus 5
 	'Reversed' => 'Terbalik', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Susun atur navigasi utama dengan pautan jadual.', // by Claude Opus 5
 	'Table links' => 'Pautan jadual', // by Claude Opus 5

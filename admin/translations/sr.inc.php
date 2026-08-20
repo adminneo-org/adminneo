@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Начин навигације', // by Claude Opus 5
 	'Simple' => 'Једноставан', // by Claude Opus 5
 	'Dual' => 'Двоструки', // by Claude Opus 5
+	'Dual on hover' => 'Двоструки при преласку мишем', // by Claude Opus 5
 	'Reversed' => 'Обрнути', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Распоред главне навигације са везама табела.', // by Claude Opus 5
 	'Table links' => 'Везе табела', // by Claude Opus 5

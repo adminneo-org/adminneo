@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'Navigatiemodus',
 	'Simple' => 'Eenvoudig',
 	'Dual' => 'Dubbel',
+	'Dual on hover' => 'Dubbel bij aanwijzen', // by Claude Opus 5
 	'Reversed' => 'Omgekeerd',
 	'Layout of main navigation with table links.' => 'Indeling van hoofdnavigatie met tabelkoppelingen.',
 	'Table links' => 'Tabelkoppelingen',

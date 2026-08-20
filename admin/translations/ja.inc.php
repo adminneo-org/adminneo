@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'ナビゲーションモード', // by Claude Opus 5
 	'Simple' => 'シンプル', // by Claude Opus 5
 	'Dual' => 'デュアル', // by Claude Opus 5
+	'Dual on hover' => 'デュアル（ホバー時）', // by Claude Opus 5
 	'Reversed' => '反転', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Opus 5
 	'Table links' => 'テーブルリンク', // by Claude Opus 5

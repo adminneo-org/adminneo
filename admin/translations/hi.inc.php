@@ -413,6 +413,7 @@ return [
 	'Navigation mode' => 'नेविगेशन मोड', // by Claude Opus 5
 	'Simple' => 'सरल', // by Claude Opus 5
 	'Dual' => 'दोहरा', // by Claude Opus 5
+	'Dual on hover' => 'होवर पर दोहरा', // by Claude Opus 5
 	'Reversed' => 'उल्टा', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'टेबल लिंक्स के साथ मुख्य नेविगेशन का लेआउट।', // by Claude Opus 5
 	'Table links' => 'टेबल लिंक्स', // by Claude Opus 5

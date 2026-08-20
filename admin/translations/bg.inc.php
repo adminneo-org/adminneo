@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'Режим на навигация', // by Claude Opus 5
 	'Simple' => 'Опростен', // by Claude Opus 5
 	'Dual' => 'Двоен', // by Claude Opus 5
+	'Dual on hover' => 'Двоен при посочване', // by Claude Opus 5
 	'Reversed' => 'Обърнат', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Подредба на основната навигация с препратките към таблиците.', // by Claude Opus 5
 	'Table links' => 'Препратки към таблиците', // by Claude Opus 5

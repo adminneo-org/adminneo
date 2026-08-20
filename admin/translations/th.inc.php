@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'รูปแบบการนำทาง', // by Claude Opus 5
 	'Simple' => 'แบบง่าย', // by Claude Opus 5
 	'Dual' => 'แบบคู่', // by Claude Opus 5
+	'Dual on hover' => 'แบบคู่เมื่อชี้เมาส์', // by Claude Opus 5
 	'Reversed' => 'แบบกลับด้าน', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'การจัดวางของการนำทางหลักพร้อมลิงค์ของตาราง.', // by Claude Opus 5
 	'Table links' => 'ลิงค์ของตาราง', // by Claude Opus 5

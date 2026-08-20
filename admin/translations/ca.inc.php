@@ -419,6 +419,7 @@ return [
 	'Navigation mode' => 'Mode de navegació', // by Claude Opus 5
 	'Simple' => 'Simple', // by Claude Opus 5
 	'Dual' => 'Dual', // by Claude Opus 5
+	'Dual on hover' => 'Dual en passar el cursor', // by Claude Opus 5
 	'Reversed' => 'Invertit', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Disposició de la navegació principal amb els enllaços de les taules.', // by Claude Opus 5
 	'Table links' => 'Enllaços de les taules', // by Claude Opus 5

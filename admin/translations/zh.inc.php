@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => '导航模式', // by Claude Opus 5
 	'Simple' => '简单', // by Claude Opus 5
 	'Dual' => '双栏', // by Claude Opus 5
+	'Dual on hover' => '悬停时双栏', // by Claude Opus 5
 	'Reversed' => '反向', // by Claude Opus 5
 	'Layout of main navigation with table links.' => '带有表链接的主导航布局。', // by Claude Opus 5
 	'Table links' => '表链接', // by Claude Opus 5

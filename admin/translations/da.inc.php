@@ -416,6 +416,7 @@ return [
 	'Navigation mode' => 'Navigationstilstand', // by Claude Opus 5
 	'Simple' => 'Enkel', // by Claude Opus 5
 	'Dual' => 'Dobbelt', // by Claude Opus 5
+	'Dual on hover' => 'Dobbelt ved mouseover', // by Claude Opus 5
 	'Reversed' => 'Omvendt', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Layout af hovednavigationen med tabellinks.', // by Claude Opus 5
 	'Table links' => 'Tabellinks', // by Claude Opus 5

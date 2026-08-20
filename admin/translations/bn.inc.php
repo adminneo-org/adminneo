@@ -401,6 +401,7 @@ return [
 	'Navigation mode' => 'নেভিগেশন মোড', // by Claude Opus 5
 	'Simple' => 'সরল', // by Claude Opus 5
 	'Dual' => 'দ্বৈত', // by Claude Opus 5
+	'Dual on hover' => 'হোভারে দ্বৈত', // by Claude Opus 5
 	'Reversed' => 'বিপরীত', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'টেবিল লিংকসহ প্রধান নেভিগেশনের বিন্যাস।', // by Claude Opus 5
 	'Table links' => 'টেবিল লিংকসমূহ', // by Claude Opus 5

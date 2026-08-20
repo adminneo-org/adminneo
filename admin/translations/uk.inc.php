@@ -428,6 +428,7 @@ return [
 	'Navigation mode' => 'Режим навігації', // by Claude Opus 5
 	'Simple' => 'Простий', // by Claude Opus 5
 	'Dual' => 'Подвійний', // by Claude Opus 5
+	'Dual on hover' => 'Подвійний при наведенні', // by Claude Opus 5
 	'Reversed' => 'Зворотний', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями таблиць.', // by Claude Opus 5
 	'Table links' => 'Посилання таблиць', // by Claude Opus 5

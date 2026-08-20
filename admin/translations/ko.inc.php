@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => '탐색 방식', // by Claude Opus 5
 	'Simple' => '단순', // by Claude Opus 5
 	'Dual' => '이중', // by Claude Opus 5
+	'Dual on hover' => '마우스 오버 시 이중', // by Claude Opus 5
 	'Reversed' => '역방향', // by Claude Opus 5
 	'Layout of main navigation with table links.' => '테이블 링크가 있는 기본 탐색 영역의 배치입니다.', // by Claude Opus 5
 	'Table links' => '테이블 링크', // by Claude Opus 5

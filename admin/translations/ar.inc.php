@@ -398,6 +398,7 @@ return [
 	'Navigation mode' => 'نمط التصفح', // by Claude Opus 5
 	'Simple' => 'بسيط', // by Claude Opus 5
 	'Dual' => 'مزدوج', // by Claude Opus 5
+	'Dual on hover' => 'مزدوج عند مرور المؤشر', // by Claude Opus 5
 	'Reversed' => 'معكوس', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'تخطيط التصفح الرئيسي مع روابط الجداول.', // by Claude Opus 5
 	'Table links' => 'روابط الجداول', // by Claude Opus 5

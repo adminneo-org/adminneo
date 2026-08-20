@@ -392,6 +392,7 @@ return [
 	'Navigation mode' => 'حالت پیمایش', // by Claude Opus 5
 	'Simple' => 'ساده', // by Claude Opus 5
 	'Dual' => 'دوگانه', // by Claude Opus 5
+	'Dual on hover' => 'دوگانه هنگام اشاره', // by Claude Opus 5
 	'Reversed' => 'معکوس', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'چیدمان پیمایش اصلی به همراه لینکهای جدول.', // by Claude Opus 5
 	'Table links' => 'لینکهای جدول', // by Claude Opus 5
