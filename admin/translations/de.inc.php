@@ -416,7 +416,7 @@ return [
 	'Navigation mode' => 'Navigationsmodus',
 	'Simple' => 'Einfach',
 	'Dual' => 'Dual',
-	'Dual on hover' => 'Dual bei Mouseover', // by Claude Opus 5
+	'Dual on hover' => 'Dual beim Überfahren mit der Maus', // by Claude Opus 5
 	'Reversed' => 'Umgekehrt',
 	'Layout of main navigation with table links.' => 'Layout der Hauptnavigation mit Tabellenlinks.',
 	'Table links' => 'Tabellenlinks',
