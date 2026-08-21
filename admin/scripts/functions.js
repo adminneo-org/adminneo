@@ -1334,11 +1334,8 @@ function loadNextPage(limit, loadingText) {
 		initToggles(newBody);
 
 		const lastPage = newBody.children.length < limit;
-		const tableBody = qs('#table tbody');
 
-		while (newBody.children.length) {
-			tableBody.append(newBody.children[0]);
-		}
+		qs('#table tbody').append(...newBody.children);
 
 		if (lastPage) {
 			a.parentElement.remove();
