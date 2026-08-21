@@ -544,7 +544,7 @@ class Admin extends Origin
 		if ($missing == "auth") {
 			$first = true;
 			foreach ((array)$_SESSION["pwds"] as $vendor => $servers) {
-				foreach ($servers[""] as $username => $password) {
+				foreach (($servers[""] ?? []) as $username => $password) {
 					if ($password !== null) {
 						if ($first) {
 							echo "<nav id='logins'><menu>";
