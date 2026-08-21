@@ -11,6 +11,7 @@ AdminNeo 5.7.0
 - Sort languages by their translated name (by @vrana)
 - Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
 - Indexes: Display columns with options one below the other
+- Indexes: Show index options automatically if some index uses them
 - SQL command: Show column type in result table header (by @vrana)
 - SQL command: Export result to CSV by JavaScript without re-running the query (by @vrana)
 - Alter table: Add next column without page reload (by @vrana)

@@ -26,9 +26,16 @@ if (DIALECT == "mongo") { // doesn't support primary key
 	unset($indexes["_id_"]);
 }
 $row = $_POST;
+
+// Remove obsolete parameter from the settings.
+// TODO: Delete this code in 2027.
 if ($row) {
-	Admin::get()->getSettings()->updateParameter("indexOptions", $row["options"] ?? null);
+	$settings = Admin::get()->getSettings();
+	if ($settings->getParameter("indexOptions") !== null) {
+		$settings->updateParameter("indexOptions", null);
+	}
 }
+
 if ($_POST && !$_POST["add"] && !$_POST["drop_col"]) {
 	$alter = [];
 	foreach ($row["indexes"] as $index) {
@@ -114,7 +121,23 @@ if (!$row) {
 }
 $lengths = (DIALECT == "sql" || DIALECT == "mssql");
 $opclasses = Driver::get()->getIndexOpclasses();
-$show_options = $_POST ? $_POST["options"] : Admin::get()->getSettings()->getParameter("indexOptions");
+if ($_POST) {
+	$show_options = $_POST["options"];
+} else {
+	// Show the options if some of the existing indexes uses them.
+	$show_options = false;
+	foreach ($indexes as $index) {
+		if (
+			array_filter($index["lengths"] ?? []) ||
+			array_filter($index["descs"] ?? []) ||
+			array_filter($index["opclasses"] ?? []) ||
+			($index["partial"] ?? "") != ""
+		) {
+			$show_options = true;
+			break;
+		}
+	}
+}
 
 echo "<form action='' method='post'>\n";
 echo "<div class='scrollable'>\n";
