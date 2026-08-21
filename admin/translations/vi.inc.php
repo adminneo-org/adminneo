@@ -169,6 +169,7 @@ return [
 	'Check' => 'Kiểm tra',
 	'Repair' => 'Sửa chữa',
 	'Truncate' => 'Làm rỗng',
+	'Truncate Cascade' => 'Làm rỗng theo tầng', // by Claude Fable 5
 	'Tables have been truncated.' => 'Bảng đã bị làm rỗng.',
 	'Move to other database' => 'Chuyển tới cơ sở dữ liệu khác',
 	'Move' => 'Chuyển đi',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'Thêm tiếp',
 	'Index Type' => 'Loại chỉ mục',
 	'length' => 'độ dài',
+	'operator class' => 'lớp toán tử', // by Claude Fable 5
 	'Algorithm' => 'Thuật toán',
 	'Condition' => 'Điều kiện',
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'Chế độ điều hướng',
 	'Simple' => 'Đơn giản',
 	'Dual' => 'Kép (Dual)',
+	'Dual on hover' => 'Kép (Dual) khi rê chuột', // by Claude Opus 5
 	'Reversed' => 'Đảo ngược',
 	'Layout of main navigation with table links.' => 'Bố cục của điều hướng chính với các liên kết bảng.',
 	'Table links' => 'Liên kết bảng',

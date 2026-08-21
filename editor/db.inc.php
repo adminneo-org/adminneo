@@ -38,13 +38,8 @@ foreach (table_status() as $table => $status) {
 
 		echo "<th><a href='", h(ME), "select=", urlencode($table), "'>$name</a></th>";
 
-		$val = format_number($status["Rows"]);
-		if ($status["Engine"] == "InnoDB" && $val) {
-			$val = "~ $val";
-		}
-
 		echo "<td class='number'>";
-		echo "<a href='", h(ME . "edit="), urlencode($table), "'>$val</a>";
+		echo "<a href='", h(ME . "edit="), urlencode($table), "'>", format_rows($status), "</a>";
 		echo "</td>";
 		echo "</tr>\n";
 	}

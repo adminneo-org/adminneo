@@ -42,7 +42,7 @@ echo "<form action='' method='post' id='form'>\n";
 echo "<table class='box box-light'>\n";
 
 echo "<tr><th id='label-time'>", lang('Time'), "</th><td>";
-echo html_select("Timing", $trigger_options["Timing"], $row["Timing"], "triggerChange(/^" . preg_quote($TABLE, "/") . "_[ba][iud]$/, '" . js_escape($TABLE) . "', this.form);", "label-time");
+echo html_select("Timing", $trigger_options["Timing"], $row["Timing"], "triggerChange(/^" . js_escape_re($TABLE) . "_[ba][iud]$/, '" . js_escape($TABLE) . "', this.form);", "label-time");
 echo "</td></tr>\n";
 
 echo "<tr><th id='label-event'>", lang('Event'), "</th><td>";

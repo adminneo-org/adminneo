@@ -189,6 +189,7 @@ return [
 	'Check' => 'Pārbaudīt',
 	'Repair' => 'Salabot',
 	'Truncate' => 'Iztīrīt',
+	'Truncate Cascade' => 'Iztīrīt kaskādēti', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabulas iztīrītas.',
 	'Move to other database' => 'Pārvietot uz citu datubāzi',
 	'Move' => 'Pārvietot',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Pievienot vēl',
 	'Index Type' => 'Indeksa tips',
 	'length' => 'garums',
+	'operator class' => 'operatoru klase', // by Claude Opus 5
 	'Algorithm' => 'Algoritms', // by Claude Opus 5
 	'Condition' => 'Nosacījums', // by Claude Opus 5
 
@@ -426,6 +428,7 @@ return [
 	'Navigation mode' => 'Navigācijas režīms', // by Claude Opus 5
 	'Simple' => 'Vienkāršs', // by Claude Opus 5
 	'Dual' => 'Dubults', // by Claude Opus 5
+	'Dual on hover' => 'Dubults, uzvedot peli', // by Claude Opus 5
 	'Reversed' => 'Apgriezts', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Galvenās navigācijas izkārtojums ar tabulu saitēm.', // by Claude Opus 5
 	'Table links' => 'Tabulu saites', // by Claude Opus 5

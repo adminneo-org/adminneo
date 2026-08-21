@@ -9,7 +9,7 @@ return [
 
 	// Editor
 	'$1-$3-$5' => '$5.$3.$1', // date format: $1 yyyy, $2 yy, $3 mm, $4 m, $5 dd, $6 d
-	'YYYY-MM-DD' => null, // hint for date format - use language equivalents for day, month and year shortcuts
+	'YYYY-MM-DD' => 'DD.MM.GGGG', // hint for date format - use language equivalents for day, month and year shortcuts // by Claude Opus 5
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
@@ -189,6 +189,7 @@ return [
 	'Check' => 'Provjeri',
 	'Repair' => 'Popravi',
 	'Truncate' => 'Isprazni',
+	'Truncate Cascade' => 'Isprazni kaskadno', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tablice su ispražnjene.',
 	'Move to other database' => 'Premjesti u drugu bazu podataka',
 	'Move' => 'Premjesti',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Dodaj sljedeći',
 	'Index Type' => 'Tip indeksa',
 	'length' => 'duljina',
+	'operator class' => 'klasa operatora', // by Claude Fable 5
 	'Algorithm' => 'Algoritam',
 	'Condition' => 'Uvjet',
 
@@ -426,6 +428,7 @@ return [
 	'Navigation mode' => 'Način navigacije', // by Claude Opus 5
 	'Simple' => 'Jednostavan', // by Claude Opus 5
 	'Dual' => 'Dvostruk', // by Claude Opus 5
+	'Dual on hover' => 'Dvostruk pri prijelazu mišem', // by Claude Opus 5
 	'Reversed' => 'Obrnut', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Raspored glavne navigacije s vezama tablica.', // by Claude Opus 5
 	'Table links' => 'Veze tablica', // by Claude Opus 5

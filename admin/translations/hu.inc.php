@@ -169,6 +169,7 @@ return [
 	'Check' => 'Ellenőrzés',
 	'Repair' => 'Javít',
 	'Truncate' => 'Felszabadít',
+	'Truncate Cascade' => 'Felszabadít kaszkádolva', // by Claude Opus 5
 	'Tables have been truncated.' => 'A tábla felszabadítva.',
 	'Move to other database' => 'Áthelyezés másik adatbázisba',
 	'Move' => 'Áthelyez',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'Következő hozzáadása',
 	'Index Type' => 'Index típusa',
 	'length' => 'méret',
+	'operator class' => 'operátorosztály', // by Claude Fable 5
 	'Algorithm' => 'Algoritmus', // by Claude Fable 5
 	'Condition' => 'Feltétel', // by Claude Fable 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'Navigációs mód', // by Claude Opus 5
 	'Simple' => 'Egyszerű', // by Claude Opus 5
 	'Dual' => 'Kettős', // by Claude Opus 5
+	'Dual on hover' => 'Kettős rámutatáskor', // by Claude Opus 5
 	'Reversed' => 'Fordított', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'A fő navigáció elrendezése a tábla hivatkozásokkal.', // by Claude Opus 5
 	'Table links' => 'Tábla hivatkozások', // by Claude Opus 5

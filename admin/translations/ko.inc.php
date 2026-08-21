@@ -169,6 +169,7 @@ return [
 	'Check' => '확인',
 	'Repair' => '복구',
 	'Truncate' => '데이터 내용만 지우기',
+	'Truncate Cascade' => '연쇄로 데이터 내용만 지우기', // by Claude Opus 5
 	'Tables have been truncated.' => '테이블의 데이터 내용만 지웠습니다.',
 	'Move to other database' => '다른 데이터베이스로 이동',
 	'Move' => '이동',
@@ -234,6 +235,7 @@ return [
 	'Add next' => '다음 추가',
 	'Index Type' => '색인 형',
 	'length' => '길이',
+	'operator class' => '연산자 클래스', // by Claude Fable 5
 	'Algorithm' => '알고리즘', // by Claude Fable 5
 	'Condition' => '조건', // by Claude Fable 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => '탐색 방식', // by Claude Opus 5
 	'Simple' => '단순', // by Claude Opus 5
 	'Dual' => '이중', // by Claude Opus 5
+	'Dual on hover' => '마우스 오버 시 이중', // by Claude Opus 5
 	'Reversed' => '역방향', // by Claude Opus 5
 	'Layout of main navigation with table links.' => '테이블 링크가 있는 기본 탐색 영역의 배치입니다.', // by Claude Opus 5
 	'Table links' => '테이블 링크', // by Claude Opus 5

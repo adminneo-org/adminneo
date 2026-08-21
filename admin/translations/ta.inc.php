@@ -184,6 +184,7 @@ return [
 	'Check' => 'ப‌ரிசோதி',
 	'Repair' => 'ப‌ழுது பார்',
 	'Truncate' => 'குறை (Truncate)',
+	'Truncate Cascade' => 'அடுக்கு குறை (Truncate Cascade)', // by Claude Opus 5
 	'Tables have been truncated.' => 'அட்ட‌வ‌ணை குறைக்க‌ப்ப‌ட்ட‌து (truncated).',
 	'Move to other database' => 'ம‌ற்ற‌ த‌க‌வ‌ல் தள‌த்திற்க்கு ந‌க‌ர்த்து',
 	'Move' => 'ந‌க‌ர்த்து',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'அடுத்த‌தை சேர்க்க‌வும்',
 	'Index Type' => 'அக‌வ‌ரிசை வ‌கை (Index Type)',
 	'length' => 'நீள‌ம்',
+	'operator class' => 'செயற்குறி வகுப்பு', // by Claude Opus 5
 	'Algorithm' => 'நெறிமுறை (Algorithm)', // by Claude Opus 5
 	'Condition' => 'நிப‌ந்த‌னை', // by Claude Opus 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'வ‌ழிசெலுத்த‌ல் முறை', // by Claude Opus 5
 	'Simple' => 'எளிமையான‌', // by Claude Opus 5
 	'Dual' => 'இர‌ட்டை', // by Claude Opus 5
+	'Dual on hover' => 'சுட்டி மேல் வரும்போது இர‌ட்டை', // by Claude Opus 5
 	'Reversed' => 'த‌லைகீழ்', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'அட்ட‌வ‌ணை இணைப்புக‌ளுட‌ன் கூடிய‌ முத‌ன்மை வ‌ழிசெலுத்த‌லின் அமைப்பு.', // by Claude Opus 5
 	'Table links' => 'அட்ட‌வ‌ணை இணைப்புக‌ள்', // by Claude Opus 5

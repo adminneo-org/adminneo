@@ -178,6 +178,7 @@ return [
 	'Check' => 'Tarkista',
 	'Repair' => 'Korjaa',
 	'Truncate' => 'Tyhjennä',
+	'Truncate Cascade' => 'Tyhjennä kaskadisesti', // by Claude Opus 5
 	'Tables have been truncated.' => 'Taulujen sisältö on tyhjennetty.',
 	'Move to other database' => 'Siirrä toiseen tietokantaan',
 	'Move' => 'Siirrä',
@@ -243,6 +244,7 @@ return [
 	'Add next' => 'Lisää seuraava',
 	'Index Type' => 'Indeksityyppi',
 	'length' => 'pituus',
+	'operator class' => 'operaattoriluokka', // by Claude Fable 5
 	'Algorithm' => 'Algoritmi', // by Claude Fable 5
 	'Condition' => 'Ehto', // by Claude Fable 5
 
@@ -405,6 +407,7 @@ return [
 	'Navigation mode' => 'Navigointitila', // by Claude Opus 5
 	'Simple' => 'Yksinkertainen', // by Claude Opus 5
 	'Dual' => 'Kaksiosainen', // by Claude Opus 5
+	'Dual on hover' => 'Kaksiosainen osoitettaessa', // by Claude Opus 5
 	'Reversed' => 'Käänteinen', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Päänavigoinnin asettelu taulujen linkkien kanssa.', // by Claude Opus 5
 	'Table links' => 'Taulujen linkit', // by Claude Opus 5

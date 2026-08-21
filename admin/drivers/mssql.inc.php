@@ -201,8 +201,10 @@ if (isset($_GET["mssql"])) {
 
 				return (object) [
 					'name' => $field["Name"],
+					//! 'native_type': http://msdn.microsoft.com/en-us/library/cc296197.aspx
 					'type' => ($field["Type"] == 1 ? 254 : 15),
-					'charsetnr' => 0,
+					// -2 - SQL_BINARY, -3 - SQL_VARBINARY, -4 - SQL_LONGVARBINARY
+					'charsetnr' => (in_array($field["Type"], [-2, -3, -4]) ? 63 : 0), // 63 - binary
 				];
 			}
 
@@ -412,6 +414,11 @@ if (isset($_GET["mssql"])) {
 			return $return;
 		}
 
+		public function quoteBinary(string $string): string
+		{
+			return "0x" . bin2hex($string);
+		}
+
 		public function begin()
         {
 			return queries("BEGIN TRANSACTION");
@@ -510,9 +517,32 @@ if (isset($_GET["mssql"])) {
 
 	function table_status($name = "") {
 		$return = [];
-		foreach (get_rows("SELECT ao.name AS Name, ao.type_desc AS Engine, (SELECT cast(value as varchar(max)) FROM fn_listextendedproperty(default, 'SCHEMA', schema_name(schema_id), 'TABLE', ao.name, null, null)) AS Comment FROM sys.all_objects AS ao WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row) {
-			$return[$row["Name"]] = $row;
+		$sizes = [];
+
+		// A page is 8 KB. sys.dm_db_partition_stats requires the VIEW DATABASE STATE permission, so sizes are optional.
+		foreach (
+			get_rows("SELECT object_id, SUM(CASE WHEN index_id < 2 THEN row_count ELSE 0 END) AS [Rows],
+SUM(CASE WHEN index_id < 2 THEN used_page_count ELSE 0 END) * 8192 AS Data_length,
+SUM(CASE WHEN index_id > 1 THEN used_page_count ELSE 0 END) * 8192 AS Index_length,
+SUM(reserved_page_count - used_page_count) * 8192 AS Data_free
+FROM sys.dm_db_partition_stats
+GROUP BY object_id", null, "") as $row
+		) {
+			$object_id = $row["object_id"];
+			unset($row["object_id"]);
+			$sizes[$object_id] = $row;
 		}
+
+		foreach (
+			get_rows("SELECT ao.object_id, ao.name AS Name, ao.type_desc AS Engine, (SELECT cast(value as varchar(max)) FROM fn_listextendedproperty(default, 'SCHEMA', schema_name(schema_id), 'TABLE', ao.name, null, null)) AS Comment
+FROM sys.all_objects AS ao
+WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') " . ($name != "" ? "AND name = " . q($name) : "ORDER BY name")) as $row
+		) {
+			$object_id = $row["object_id"];
+			unset($row["object_id"]);
+			$return[$row["Name"]] = $row + ($sizes[$object_id] ?? []);
+		}
+
 		return $return;
 	}
 
@@ -910,6 +940,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 	}
 
 	function support($feature) {
-		return preg_match('~^(check|comment|columns|database|drop_col|dump|indexes|descidx|scheme|sql|table|trigger|view|view_trigger)$~', $feature); //! routine|
+		return preg_match('~^(check|comment|columns|database|drop_col|dump|fast_status|indexes|descidx|scheme|sql|table|trigger|view|view_trigger)$~', $feature); //! routine|
 	}
 }

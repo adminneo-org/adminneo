@@ -219,11 +219,6 @@ if (isset($_GET["pgsql"])) {
 			{
 				$column = $this->offset++;
 
-				$orgtable = pg_field_table($this->resource, $column);
-				if ($orgtable === false) {
-					return false;
-				}
-
 				$name = pg_field_name($this->resource, $column);
 				if ($name === false) {
 					return false;
@@ -234,9 +229,13 @@ if (isset($_GET["pgsql"])) {
 					return false;
 				}
 
+				// Computed columns are not a reference to a table column, so no table is returned for them.
+				$orgtable = pg_field_table($this->resource, $column);
+
 				return (object) [
-					'orgtable' => $orgtable,
+					'orgtable' => ($orgtable !== false ? $orgtable : ""),
 					'name' => $name,
+					'native_type' => $type,
 					'type' => (preg_match(number_type(), $type) ? 0 : 15),
 					'charsetnr' => ($type == "bytea" ? 63 : 0), // 63 - binary
 				];
@@ -579,6 +578,17 @@ if (isset($_GET["pgsql"])) {
 			return $methods;
 		}
 
+		public function getIndexOpclasses(): array
+		{
+			static $opclasses = [];
+
+			if (!$opclasses && !$this->connection->isCockroachDB()) {
+				$opclasses = get_vals("SELECT DISTINCT opcname FROM pg_catalog.pg_opclass WHERE NOT opcdefault ORDER BY opcname");
+			}
+
+			return $opclasses;
+		}
+
 		public function supportsIndex(array $tableStatus): bool
 		{
 			// Returns true for "materialized view".
@@ -881,7 +891,8 @@ ORDER BY a.attnum"
 		$return = [];
 		$table_oid = Driver::get()->tableOid($table);
 		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection);
-		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr
+		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr" . ($connection->isCockroachDB() ? "" : ",
+	(SELECT string_agg(CASE WHEN opcdefault THEN '' ELSE opcname END, ' ' ORDER BY s) FROM generate_subscripts(indclass, 1) AS s JOIN pg_catalog.pg_opclass ON pg_opclass.oid = indclass[s]) AS opclasses") . "
 FROM pg_index
 JOIN pg_class ON indexrelid = oid
 JOIN pg_am ON pg_am.oid = pg_class.relam
@@ -901,6 +912,8 @@ ORDER BY indisprimary DESC, indisunique DESC", $connection
 			foreach (explode(" ", $row["indoption"]) as $indoption) {
 				$return[$relname]["descs"][] = (intval($indoption) & 1 ? '1' : null); // 1 - INDOPTION_DESC
 			}
+			// One entry per column, empty for the default operator class. Not selected at all in CockroachDB.
+			$return[$relname]["opclasses"] = (isset($row["opclasses"]) ? explode(" ", $row["opclasses"]) : []);
 			$return[$relname]["lengths"] = [];
 		}
 		return $return;
@@ -1131,9 +1144,9 @@ ORDER BY s.ordinal_position";
 		return true;
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables($tables, $cascade = false): bool
 	{
-		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)));
+		return (bool)queries("TRUNCATE " . implode(", ", array_map('AdminNeo\table', $tables)) . ($cascade ? " CASCADE" : ""));
 	}
 
 	function drop_views($views): bool
@@ -1215,14 +1228,16 @@ WHERE routine_schema = current_schema() AND specific_name = ' . q($name));
 
 		$info = $info[0] ?? [];
 
-		$fields = get_rows('SELECT COALESCE(parameter_name, ordinal_position::text) AS field, data_type AS type, character_maximum_length AS length, parameter_mode AS inout
+		$fields = get_rows("SELECT COALESCE(parameter_name, ordinal_position::text) AS field,
+	CASE data_type WHEN 'USER-DEFINED' THEN udt_name WHEN 'ARRAY' THEN substr(udt_name, 2) || '[]' ELSE data_type END AS type,
+	character_maximum_length AS length, parameter_mode AS inout
 FROM information_schema.parameters
-WHERE specific_schema = current_schema() AND specific_name = ' . q($name) . '
-ORDER BY ordinal_position');
+WHERE specific_schema = current_schema() AND specific_name = " . q($name) . "
+ORDER BY ordinal_position");
 
 		return [
 			"fields" => $fields,
-			"returns" => ["type" => $info["type_udt_name"] ?? null],
+			"returns" => ["type" => preg_replace('~^_(.*)~', '\1[]', $info["type_udt_name"] ?? "")], // _int4 - array of int4
 			"definition" => $info["routine_definition"] ?? null,
 			"language" => $info["language"] ?? null,
 			"comment" => null, // Comments are not supported.
@@ -1232,8 +1247,9 @@ ORDER BY ordinal_position');
 	function routines() {
 		return get_rows('SELECT specific_name AS "SPECIFIC_NAME", routine_name AS "ROUTINE_NAME", routine_type AS "ROUTINE_TYPE", type_udt_name AS "DTD_IDENTIFIER", null AS ROUTINE_COMMENT
 FROM information_schema.routines
-WHERE routine_schema = current_schema()
-ORDER BY SPECIFIC_NAME');
+WHERE routine_schema = current_schema()' . (Connection::get()->isCockroachDB() ? '' : "
+AND substring(specific_name, '[0-9]+\$')::oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_proc'::regclass AND deptype = 'e')") . '
+ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions
 	}
 
 	function routine_languages() {
@@ -1277,15 +1293,18 @@ ORDER BY SPECIFIC_NAME');
 	/**
 	 * Returns user defined types.
 	 *
+	 * @param bool $extensions Include types created by extensions.
+	 *
 	 * @return string[] [$id => $name]
 	 */
-	function types(): array
+	function types(bool $extensions = false): array
 	{
 		return get_key_vals("SELECT oid, typname
 FROM pg_type
 WHERE typnamespace = " . Driver::get()->getNsOidSql() . "
 AND typtype IN ('b','d','e')
-AND typelem = 0"
+AND typelem = 0" . ($extensions || Connection::get()->isCockroachDB() ? '' : "
+AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'::regclass AND deptype = 'e')") // 'e' - types created by extensions
 		);
 	}
 
@@ -1319,7 +1338,7 @@ AND typelem = 0"
 		$result = (bool)$connection->query("SET search_path TO " . idf_escape($schema));
 
 		//! get types from current_schemas('t')
-		Driver::get()->setUserTypes(types());
+		Driver::get()->setUserTypes(types(true));
 
 		return $result;
 	}
@@ -1529,7 +1548,7 @@ AND typelem = 0"
 			return Connection::get()->isMinVersion("11");
 		}
 
-		return preg_match('~^(check|columns|comment|database|drop_col|dump|descidx|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~', $feature);
+		return preg_match('~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~', $feature);
 	}
 
 	function kill_process($val) {

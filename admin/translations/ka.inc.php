@@ -169,6 +169,7 @@ return [
 	'Check' => 'შემოწმება',
 	'Repair' => 'გასწორება',
 	'Truncate' => 'გასუფთავება',
+	'Truncate Cascade' => 'კასკადური გასუფთავება', // by Claude Opus 5
 	'Tables have been truncated.' => 'ცხრილი გასუფთავდა.',
 	'Move to other database' => 'გადატანა სხვა ბაზაში',
 	'Move' => 'გადატანა',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'კიდევ დამატება',
 	'Index Type' => 'ინდექსის სახეობა',
 	'length' => 'სიგრძე',
+	'operator class' => 'ოპერატორის კლასი', // by Claude Opus 5
 	'Algorithm' => 'ალგორითმი', // by Claude Opus 5
 	'Condition' => 'პირობა', // by Claude Opus 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'ნავიგაციის რეჟიმი', // by Claude Opus 5
 	'Simple' => 'მარტივი', // by Claude Opus 5
 	'Dual' => 'ორმაგი', // by Claude Opus 5
+	'Dual on hover' => 'ორმაგი მაუსის მიტანისას', // by Claude Opus 5
 	'Reversed' => 'შებრუნებული', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'მთავარი ნავიგაციის განლაგება ცხრილის ბმულებით.', // by Claude Opus 5
 	'Table links' => 'ცხრილის ბმულები', // by Claude Opus 5

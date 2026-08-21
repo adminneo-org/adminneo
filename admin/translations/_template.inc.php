@@ -169,6 +169,7 @@ return [
 	'Check' => 'Xx',
 	'Repair' => 'Xx',
 	'Truncate' => 'Xx',
+	'Truncate Cascade' => 'Xx',
 	'Tables have been truncated.' => 'Xx.',
 	'Move to other database' => 'Xx',
 	'Move' => 'Xx',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'Xx',
 	'Index Type' => 'Xx',
 	'length' => 'xx',
+	'operator class' => 'xx',
 	'Algorithm' => 'Xx',
 	'Condition' => 'Xx',
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'Xx',
 	'Simple' => 'Xx',
 	'Dual' => 'Xx',
+	'Dual on hover' => 'Xx',
 	'Reversed' => 'Xx',
 	'Layout of main navigation with table links.' => 'Xx.',
 	'Table links' => 'Xx',

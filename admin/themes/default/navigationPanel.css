@@ -41,6 +41,11 @@
 	border-bottom: 1px solid var(--panel-border);
 }
 
+.navigation-panel .links a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .rtl .navigation-panel {
 	left: auto;
 	right: 0;
@@ -207,7 +212,7 @@ menu .secondary {
 }
 
 menu .secondary .icon {
-	opacity: 0.85;
+	opacity: 0.8;
 }
 
 menu .secondary:hover .icon {
@@ -237,6 +242,15 @@ menu.dual .primary {
 menu.dual .secondary {
 	left: auto;
 	right: 0;
+}
+
+/* Opacity keeps the link in the tab order, unlike visibility or display. */
+menu.hover .secondary {
+	opacity: 0;
+}
+
+menu.hover li:hover .secondary, menu.hover .secondary:focus-visible {
+	opacity: 1;
 }
 
 .rtl menu .secondary {

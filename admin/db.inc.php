@@ -11,9 +11,9 @@ if ($tables_views && !$_POST["search"]) {
 		queries("SET foreign_key_checks = 0"); // allows to truncate or drop several tables at once
 	}
 
-	if ($_POST["truncate"]) {
+	if ($_POST["truncate"] || $_POST["truncate_cascade"]) {
 		if ($_POST["tables"]) {
-			$result = truncate_tables($_POST["tables"]);
+			$result = truncate_tables($_POST["tables"], (bool)$_POST["truncate_cascade"]);
 		}
 		$message = lang('Tables have been truncated.');
 	} elseif ($_POST["move"]) {
@@ -152,7 +152,8 @@ if ($_GET["ns"] === "") {
 	}
 
 	// Sorting by a status column requires the statuses of all tables, so they are not loaded by AJAX in that case.
-	$with_status = ($order != "" && $order != "__table");
+	// Neither are they for drivers serving them fast enough to not delay the page.
+	$with_status = ($order != "" && $order != "__table") || support("fast_status");
 
 	$tables_list = ($with_status ? table_status() : tables_list());
 	if (!$tables_list) {
@@ -257,7 +258,7 @@ if ($_GET["ns"] === "") {
 					if ($with_status) {
 						$number = $status[$key] ?? "";
 						if (is_numeric($number) && $number >= 0) {
-							$val = ($key == "Rows" && $number && $engine == (DIALECT == "pgsql" ? "table" : "InnoDB") ? "~ " : "") . format_number($number);
+							$val = ($key == "Rows" ? format_rows($status) : format_number($number));
 
 							// Ignore innodb_file_per_table because it is not active for tables created before it was enabled.
 							if (isset($sums[$key]) && ($engine != "InnoDB" || $key != "Data_free")) {
@@ -267,8 +268,8 @@ if ($_GET["ns"] === "") {
 					}
 
 					echo "<td align='right'>" . (support("table") || $key == "Rows" || (support("indexes") && $key != "Data_length")
-						? "<a href='" . h(ME . "$link=") . urlencode($name) . "'$id title='" . $column["title"] . "'>$val</a>"
-						: "<span$id>$val</span>"
+						? "<a href='" . h(ME . "$link=") . urlencode($name) . "'$id title='" . $column["title"] . "'>" . h($val) . "</a>"
+						: "<span$id>" . h($val) . "</span>"
 					);
 				}
 				$tables++;
@@ -284,6 +285,9 @@ if ($_GET["ns"] === "") {
 		echo "<td><th>" . lang('%d in total', count($tables_list));
 		echo "<td>" . h(DIALECT == "sql" ? Connection::get()->getValue("SELECT @@default_storage_engine") : "");
 		echo ($db_collation != "" ? "<td>" . h($db_collation) : "");
+		if ($with_status && function_exists('AdminNeo\db_status')) {
+			$sums = db_status();
+		}
 		foreach ($sums as $key => $sum) {
 			echo "<td align='right' id='sum-$key'>" . ($with_status ? format_number($sum) : "");
 		}
@@ -311,6 +315,7 @@ if ($_GET["ns"] === "") {
 				. "<input type='submit' class='button' name='repair' value='" . lang('Repair') . "'> " . help_script("REPAIR TABLE")
 			: "")))
 			. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script(DIALECT == "sqlite" ? "DELETE" : ("TRUNCATE" . (DIALECT == "pgsql" ? "" : " TABLE"))) . confirm()
+			. (DIALECT == "pgsql" ? "<input type='submit' class='button' name='truncate_cascade' value='" . lang('Truncate Cascade') . "'> " . help_script("TRUNCATE CASCADE") . confirm() : "")
 			. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
 			$databases = (support("scheme") ? Admin::get()->getSchemas() : Admin::get()->getDatabases());
 			echo "</div></fieldset>\n";
@@ -433,8 +438,8 @@ if ($_GET["ns"] === "") {
 			foreach ($rows as $row) {
 				echo "<tr>";
 				echo "<th>" . h($row["Name"]);
-				echo "<td>" . ($row["Execute at"] ? lang('At given time') . "<td>" . $row["Execute at"] : lang('Every') . " " . $row["Interval value"] . " " . $row["Interval field"] . "<td>$row[Starts]");
-				echo "<td>$row[Ends]";
+				echo "<td>" . ($row["Execute at"] ? lang('At given time') . "<td>" . h($row["Execute at"]) : lang('Every') . " " . h($row["Interval value"]) . " " . h($row["Interval field"]) . "<td>" . h($row["Starts"]));
+				echo "<td>" . h($row["Ends"]);
 				echo '<td><a href="' . h(ME) . 'event=' . urlencode($row["Name"]) . '">' . lang('Alter') . '</a>';
 			}
 			echo "</table>\n";

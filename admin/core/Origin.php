@@ -240,15 +240,22 @@ abstract class Origin extends Plugin
 	public abstract function getDatabase(): ?string;
 
 	/**
-	 * Returns cached list of databases.
+	 * Returns list of databases.
 	 *
 	 * @return list<string>
 	 */
 	public function getDatabases(bool $flush = true): array
 	{
-		return $this->filterListWithWildcards(
+		$databases = $this->filterListWithWildcards(
 			get_databases($flush), $this->config->getHiddenDatabases(), false, Driver::get()->getSystemDatabases()
 		);
+
+		// The current database is listed even if it is hidden.
+		if (DB != "" && !in_array(DB, $databases)) {
+			array_unshift($databases, DB);
+		}
+
+		return $databases;
 	}
 
 	/**
@@ -263,9 +270,16 @@ abstract class Origin extends Plugin
 			$hiddenSchemas[] = "__system";
 		}
 
-		return $this->filterListWithWildcards(
+		$schemas = $this->filterListWithWildcards(
 			schemas(), $hiddenSchemas, false, Driver::get()->getSystemSchemas()
 		);
+
+		// The current schema is listed even if it is hidden or does not exist.
+		if (isset($_GET["ns"]) && $_GET["ns"] != "" && !in_array($_GET["ns"], $schemas)) {
+			array_unshift($schemas, $_GET["ns"]);
+		}
+
+		return $schemas;
 	}
 
 	/**

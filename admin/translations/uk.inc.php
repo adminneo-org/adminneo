@@ -189,6 +189,7 @@ return [
 	'Check' => 'Перевірити',
 	'Repair' => 'Виправити',
 	'Truncate' => 'Очистити',
+	'Truncate Cascade' => 'Очистити каскадно', // by Claude Fable 5
 	'Tables have been truncated.' => 'Таблиці було очищено.',
 	'Move to other database' => 'Перенести до іншої бази даних',
 	'Move' => 'Перенести',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Додати ще',
 	'Index Type' => 'Тип індексу',
 	'length' => 'довжина',
+	'operator class' => 'клас операторів', // by Claude Fable 5
 	'Algorithm' => 'Алгоритм', // by Claude Fable 5
 	'Condition' => 'Умова', // by Claude Fable 5
 
@@ -426,6 +428,7 @@ return [
 	'Navigation mode' => 'Режим навігації', // by Claude Opus 5
 	'Simple' => 'Простий', // by Claude Opus 5
 	'Dual' => 'Подвійний', // by Claude Opus 5
+	'Dual on hover' => 'Подвійний при наведенні', // by Claude Opus 5
 	'Reversed' => 'Зворотний', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями таблиць.', // by Claude Opus 5
 	'Table links' => 'Посилання таблиць', // by Claude Opus 5

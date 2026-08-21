@@ -169,6 +169,7 @@ return [
 	'Check' => 'בדוק',
 	'Repair' => 'תקן',
 	'Truncate' => 'קצר',
+	'Truncate Cascade' => 'קצר מדורג', // by Claude Opus 5
 	'Tables have been truncated.' => 'הטבלה קוצרה',
 	'Move to other database' => 'העבר למסד נתונים אחר',
 	'Move' => 'העבר',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'הוסף הבא',
 	'Index Type' => 'סוג אינדקס',
 	'length' => 'אורך',
+	'operator class' => 'מחלקת אופרטורים', // by Claude Opus 5
 	'Algorithm' => 'אלגוריתם', // by Claude Opus 5
 	'Condition' => 'תנאי', // by Claude Opus 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'מצב ניווט', // by Claude Opus 5
 	'Simple' => 'פשוט', // by Claude Opus 5
 	'Dual' => 'כפול', // by Claude Opus 5
+	'Dual on hover' => 'כפול בריחוף', // by Claude Opus 5
 	'Reversed' => 'הפוך', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'פריסת הניווט הראשי עם קישורי הטבלאות', // by Claude Opus 5
 	'Table links' => 'קישורי הטבלאות', // by Claude Opus 5

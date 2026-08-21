@@ -4,11 +4,40 @@ Changelog
 AdminNeo 5.7.0
 --------------
 
+### Changes
+
+- Add "Dual on hover" navigation mode
+- Select: Fade in the column context menu with a short delay
+- Sort languages by their translated name (by @vrana)
+- Tables overview: Speed up, show totals in SQLite, real size in MS SQL, Oracle (by @vrana)
+- Indexes: Display columns with options one below the other
+- SQL command: Show column type in result table header (by @vrana)
+- SQL command: Export result to CSV by JavaScript without re-running the query (by @vrana)
+- Alter table: Add next column without page reload (by @vrana)
+- Edit: Hide the value field for functions without arguments (e.g. now, uuid) (by @vrana)
+- MySQL: Cache the list of databases only if getting it is slow (by @vrana)
+- MySQL: Link sys schema views to their documentation (by @vrana)
+- PostgreSQL: Support operator classes in indexes (by @vrana)
+- PostgreSQL: Add Truncate Cascade button (by @vrana)
+- PostgreSQL: Do not show functions and types created by extensions (by @vrana)
+- SimpleDB: Use default server
+
 ### Bugfixes
 
-Fix embedding to a page with already started session (fix #199)   
-Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
-Editor: Fix displaying relation links (regression from 5.2.0)
+- Escape index type, algorithm and length (XSS) (by @vrana)
+- Escape values of table status and event schedule (XSS) (by @vrana)
+- Fix embedding to a page with already started session (fix #199)
+- Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
+- Editor: Fix displaying relation links (regression from 5.2.0)
+- Select: Fix the number of selected rows after going back in history (by @vrana)
+- Edit: Keep values of columns with special characters in name after error (by @vrana)
+- Edit: Fix changing function to SQL with the ForeignEditPlugin
+- PostgreSQL: Fix altering functions with parameters of array or user-defined types (by @vrana)
+- PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
+- MS SQL: Treat binary fields as blob (by @vrana)
+- PostgreSQL: Fix empty headers of computed columns in query result (regression from 5.1.0)
+
+(Ported relevant changes from Adminer 6.0.0 • part 1)
 
 AdminNeo 5.6.0 (2026-08-16)
 ---------------------------

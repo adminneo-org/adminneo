@@ -2,6 +2,8 @@
 
 namespace AdminNeo;
 
+use stdClass;
+
 abstract class Driver
 {
 	public const EnumLengthPattern = "'(?:''|[^'\\\\]|\\\\.)*'";
@@ -404,6 +406,18 @@ abstract class Driver
 	}
 
 	/**
+	 * Returns type name of a result column.
+	 *
+	 * @param stdClass $field Result of Result::fetchField().
+	 *
+	 * @return string Empty string if unknown.
+	 */
+	public function getTypeName(stdClass $field): string
+	{
+		return $field->native_type ?? "";
+	}
+
+	/**
 	 * Quotes binary string.
 	 */
 	public function quoteBinary(string $string): string
@@ -449,6 +463,16 @@ abstract class Driver
 	 * @return list<string>
 	 */
 	public function getIndexAlgorithms(array $tableStatus): array
+	{
+		return [];
+	}
+
+	/**
+	 * Returns operator classes usable in indexes.
+	 *
+	 * @return list<string>
+	 */
+	public function getIndexOpclasses(): array
 	{
 		return [];
 	}

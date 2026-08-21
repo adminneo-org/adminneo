@@ -184,6 +184,7 @@ return [
 	'Check' => 'Έλεγχος',
 	'Repair' => 'Επιδιόρθωση',
 	'Truncate' => 'Περικοπή',
+	'Truncate Cascade' => 'Αλυσιδωτή περικοπή', // by Claude Opus 5
 	'Tables have been truncated.' => 'Οι πίνακες περικόπηκαν.',
 	'Move to other database' => 'Μεταφορά σε άλλη Β.Δ.',
 	'Move' => 'Μεταφορά',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'Προσθήκη επόμενου',
 	'Index Type' => 'Τύπος δείκτη',
 	'length' => 'μήκος',
+	'operator class' => 'κλάση τελεστών', // by Claude Fable 5
 	'Algorithm' => 'Αλγόριθμος', // by Claude Fable 5
 	'Condition' => 'Συνθήκη', // by Claude Fable 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'Λειτουργία πλοήγησης', // by Claude Opus 5
 	'Simple' => 'Απλή', // by Claude Opus 5
 	'Dual' => 'Διπλή', // by Claude Opus 5
+	'Dual on hover' => 'Διπλή στο πέρασμα του δείκτη', // by Claude Opus 5
 	'Reversed' => 'Αντίστροφη', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Διάταξη της κύριας πλοήγησης με τους συνδέσμους των πινάκων.', // by Claude Opus 5
 	'Table links' => 'Σύνδεσμοι πινάκων', // by Claude Opus 5

@@ -189,6 +189,7 @@ return [
 	'Check' => 'Controlează',
 	'Repair' => 'Repară',
 	'Truncate' => 'Curăță',
+	'Truncate Cascade' => 'Curăță în cascadă', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tabelele au fost curățate.',
 	'Move to other database' => 'Mută în altă bază de date',
 	'Move' => 'Mută',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Adaugă încă',
 	'Index Type' => 'Tipul indexului',
 	'length' => 'lungimea',
+	'operator class' => 'clasă de operatori', // by Claude Fable 5
 	'Algorithm' => 'Algoritm', // by Claude Fable 5
 	'Condition' => 'Condiție', // by Claude Fable 5
 
@@ -426,6 +428,7 @@ return [
 	'Navigation mode' => 'Modul de navigare', // by Claude Opus 5
 	'Simple' => 'Simplu', // by Claude Opus 5
 	'Dual' => 'Dublu', // by Claude Opus 5
+	'Dual on hover' => 'Dublu la trecerea cursorului', // by Claude Opus 5
 	'Reversed' => 'Inversat', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Aranjarea navigării principale cu adresele tabelelor.', // by Claude Opus 5
 	'Table links' => 'Adresele tabelelor', // by Claude Opus 5

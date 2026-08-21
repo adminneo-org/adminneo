@@ -114,7 +114,11 @@ if (!support("table") && !$fields) {
 }
 
 if ($_POST["save"] ?? false) {
-	$row = ($_POST["fields"] ?? []) + ($row ?: []);
+	$post_fields = [];
+	foreach (($_POST["fields"] ?? []) as $key => $val) {
+		$post_fields[bracket_escape($key, true)] = $val;
+	}
+	$row = $post_fields + ($row ?: []);
 }
 
 if ($_POST["edit"]) {

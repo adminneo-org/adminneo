@@ -181,6 +181,7 @@ return [
 	'Check' => 'जांच',
 	'Repair' => 'मरम्मत',
 	'Truncate' => 'ट्रंकेट',
+	'Truncate Cascade' => 'कैस्केड ट्रंकेट', // by Claude Opus 5
 	'Tables have been truncated.' => 'टेबल्स ट्रंकेट कर दिए गए हैं।',
 	'Move to other database' => 'अन्य डेटाबेस में स्थानांतरित करें',
 	'Move' => 'स्थानांतरित करें',
@@ -246,6 +247,7 @@ return [
 	'Add next' => 'अगला जोड़ें',
 	'Index Type' => 'इंडेक्स प्रकार',
 	'length' => 'लंबाई',
+	'operator class' => 'ऑपरेटर क्लास', // by Claude Opus 5
 	'Algorithm' => 'एल्गोरिदम', // by Claude Opus 5
 	'Condition' => 'शर्त', // by Claude Opus 5
 
@@ -411,6 +413,7 @@ return [
 	'Navigation mode' => 'नेविगेशन मोड', // by Claude Opus 5
 	'Simple' => 'सरल', // by Claude Opus 5
 	'Dual' => 'दोहरा', // by Claude Opus 5
+	'Dual on hover' => 'होवर पर दोहरा', // by Claude Opus 5
 	'Reversed' => 'उल्टा', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'टेबल लिंक्स के साथ मुख्य नेविगेशन का लेआउट।', // by Claude Opus 5
 	'Table links' => 'टेबल लिंक्स', // by Claude Opus 5

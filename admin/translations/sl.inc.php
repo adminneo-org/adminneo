@@ -194,6 +194,7 @@ return [
 	'Check' => 'Preveri',
 	'Repair' => 'Popravi',
 	'Truncate' => 'Skrajšaj',
+	'Truncate Cascade' => 'Skrajšaj kaskadno', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tabele so skrajšane.',
 	'Move to other database' => 'Premakni v drugo bazo',
 	'Move' => 'Premakni',
@@ -259,6 +260,7 @@ return [
 	'Add next' => 'Dodaj naslednjega',
 	'Index Type' => 'Tip indeksa',
 	'length' => 'dolžina',
+	'operator class' => 'razred operatorjev', // by Claude Fable 5
 	'Algorithm' => 'Algoritem', // by Claude Fable 5
 	'Condition' => 'Pogoj', // by Claude Fable 5
 
@@ -435,6 +437,7 @@ return [
 	'Navigation mode' => 'Način krmarjenja', // by Claude Opus 5
 	'Simple' => 'Enostavno', // by Claude Opus 5
 	'Dual' => 'Dvojno', // by Claude Opus 5
+	'Dual on hover' => 'Dvojno ob prehodu z miško', // by Claude Opus 5
 	'Reversed' => 'Obrnjeno', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Razporeditev glavnega krmarjenja s povezavami tabel.', // by Claude Opus 5
 	'Table links' => 'Povezave tabel', // by Claude Opus 5

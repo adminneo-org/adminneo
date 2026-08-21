@@ -5,6 +5,7 @@ namespace AdminNeo;
 use mysqli;
 use mysqli_result;
 use PDO;
+use stdClass;
 
 Drivers::add("mysql", "MySQL", ["MySQLi", "PDO_MySQL"]);
 
@@ -369,6 +370,24 @@ if (isset($_GET["mysql"])) {
 			}
 		}
 
+		public function getTypeName(stdClass $field): string
+		{
+			// https://dev.mysql.com/doc/dev/mysql-server/latest/field__types_8h.html
+			$types = [
+				"decimal", "tinyint", "smallint", "int", "float", "double", 7 => "timestamp",
+				"bigint", "mediumint", "date", "time", "datetime", "year", 15 => "varchar", "bit",
+				242 => "vector", 245 => "json", "decimal", "enum", "set",
+				"tinytext", "mediumtext", "longtext", "text", "varchar", "char", "geometry",
+			];
+
+			$type = $types[$field->type] ?? "";
+
+			return parent::getTypeName($field) ?: ($field->charsetnr == 63 // 63 - binary
+				? str_replace(["text", "varchar", "char"], ["blob", "varbinary", "binary"], $type)
+				: $type
+			);
+		}
+
 		public function quoteBinary(string $string): string
 		{
 			return "X" . q(bin2hex($string));
@@ -452,6 +471,15 @@ if (isset($_GET["mysql"])) {
 			        "reference/system-tables/performance-schema/performance-schema-tables/performance-schema-$name-table" :
 			        "performance-schema-" . str_replace("_", "-", $name). "-table.html";
 	        }
+			if (DB == "sys") {
+				//! MariaDB documents each view but the URL is not derivable.
+				if ($maria) {
+					return "reference/system-tables/sys-schema/";
+				}
+
+				// The x$ views are documented together with the views they are based on.
+				return "sys-" . strtolower(str_replace("_", "-", preg_replace('~^x\$~', '', $name))) . ".html";
+			}
 			if (DB == "mysql") {
 				return $maria ?
 					"reference/system-tables/the-mysql-database-tables/mysql-$name" . str_starts_with($name, "innodb_") ? "" : "-table" :
@@ -551,7 +579,7 @@ if (isset($_GET["mysql"])) {
 		if (!$connection->openPasswordless($server, $username, $password, false)) {
 			$error = $connection->getError();
 
-			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1250", "utf-8", $error)) > strlen($error)) { // windows-1250 - most common Windows encoding
+			if (function_exists('iconv') && !is_utf8($error) && strlen($s = iconv("windows-1252", "utf-8//IGNORE", $error)) > strlen($error)) { // windows-1252 - the same as MySQL latin1
 				$error = $s;
 			}
 
@@ -570,22 +598,26 @@ if (isset($_GET["mysql"])) {
 	}
 
 	/**
-	 * Returns cached list of databases.
+	 * Returns list of databases, cached if getting it is slow.
 	 *
 	 * @return list<string>
 	 */
 	function get_databases(bool $flush): array
 	{
-		// SHOW DATABASES can take a very long time so it is cached.
 		$databases = get_session("dbs");
 
 		if ($databases === null) {
 			// SHOW DATABASES can be disabled by skip_show_database
 			$query = "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA ORDER BY SCHEMA_NAME";
+			$start = microtime(true);
 			$databases = ($flush ? slow_query($query) : get_vals($query));
-			restart_session();
-			set_session("dbs", $databases);
-			stop_session();
+
+			// Cache only a slow list, otherwise it would just get stale.
+			if (microtime(true) - $start > 0.1) {
+				restart_session();
+				set_session("dbs", $databases);
+				stop_session();
+			}
 		}
 
 		return $databases;
@@ -1421,7 +1453,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	}
 
 	/** Check whether a feature is supported
-	* @param literal-string $feature check|comment|copy|database|descidx|drop_col|dump|event|indexes|kill|materializedview|
+	* @param literal-string $feature check|comment|copy|database|descidx|drop_col|dump|event|fast_status|indexes|kill|materializedview|
 	* privileges|move_col|procedure|processlist|routine|scheme|sequence|status|table|trigger|type|variables|view|view_trigger
 	*/
 	function support($feature) {
@@ -1429,6 +1461,8 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 			'~^(comment|columns|copy|database|drop_col|dump|event|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
 			. (Connection::get()->isMinVersion("8") ? '|descidx' : '')
 			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? '|check' : '')
+			// MySQL 8 reads table stats from the data dictionary; MariaDB still opens all tables.
+			. (!Connection::get()->isMariaDB() && Connection::get()->isMinVersion("8") ? '|fast_status' : '')
 			. ')$~',
 			$feature
 		);

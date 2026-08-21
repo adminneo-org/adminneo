@@ -509,14 +509,14 @@ class Admin extends Origin
 
 			foreach ($index["columns"] as $key => $val) {
 				$print[] = "<i>" . h($val) . "</i>"
-					. ($index["lengths"][$key] ? "(" . $index["lengths"][$key] . ")" : "")
+					. ($index["lengths"][$key] ? "(" . h($index["lengths"][$key]) . ")" : "")
 					. ($index["descs"][$key] ? " DESC" : "");
 			}
 
 			echo "<tr title='", h($name), "'>";
-			echo "<th>", $index["type"];
+			echo "<th>", h($index["type"]);
 			if (isset($index['algorithm']) && $index['algorithm'] != $defaultAlgorithm) {
-				 echo " ({$index["algorithm"]})";
+				 echo " (", h($index['algorithm']), ")";
 			}
 			echo "</th>";
 			echo "<td>", implode(", ", $print), "</td>";
@@ -1254,14 +1254,15 @@ class Admin extends Origin
 				if (support("sql") && $tables) {
 					$links = [];
 					foreach ($tables as $table => $type) {
-						$links[] = preg_quote($table, '/');
+						$links[] = js_escape_re($table);
 					}
 					$tableParam = support("table") && !$this->config->isSelectionPreferred() ? "table" : "select";
 					echo "window.jushLinks = { " . DIALECT . ": {\n";
-					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(' . implode('|', $links) . ')\b/g';
+					// $ is used in PostgreSQL as part of name.
+					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(?<!\$)(' . implode('|', $links) . ')(?!\$)\b/g';
 					if (support('routine')) {
 						foreach (routines() as $row) {
-							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . preg_quote($row["ROUTINE_NAME"], '/') . '(?=["`]?\()/g';
+							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . js_escape_re($row["ROUTINE_NAME"]) . '(?=["`\]]?\()/g';
 						}
 					}
 					echo "\n}};\n";
@@ -1344,7 +1345,10 @@ class Admin extends Origin
 	 */
 	public function printTableList(array $tables): void
 	{
-		$menuClass = ($this->settings->isNavigationDual() ? "class='dual'" : ($this->settings->isNavigationReversed() ? "class='reversed'" : ""));
+		$dualLinks = $this->settings->isNavigationDual() || $this->settings->isNavigationHover();
+
+		$menuClass = ($dualLinks ? "class='dual" . ($this->settings->isNavigationHover() ? " hover" : "") . "'" :
+			($this->settings->isNavigationReversed() ? "class='reversed'" : ""));
 
 		echo "<nav id='tables'><menu $menuClass>";
 
@@ -1370,7 +1374,7 @@ class Admin extends Origin
 
 				echo "<a href='$selectUrl'", bold($active, $class), " data-primary='true' title='$name'>$name</a>";
 
-				if ($this->settings->isNavigationDual() && $supportStructure) {
+				if ($dualLinks && $supportStructure) {
 					echo " <a href='$tableUrl' title='", lang('Show structure'), "' class='secondary'>", icon_solo("structure"), "</a>";
 				}
 			} else {
@@ -1384,7 +1388,7 @@ class Admin extends Origin
 					echo "<span data-primary='true'", bold($active, $class), ">$name</span>";
 				}
 
-				if ($this->settings->isNavigationDual()) {
+				if ($dualLinks) {
 					echo " <a href='$selectUrl' title='", lang('Select data'), "' class='secondary'>", icon_solo("data"), "</a>";
 				}
 			}
@@ -1406,6 +1410,7 @@ class Admin extends Origin
 				"" => lang('Default'),
 				Config::NavigationSimple => lang('Simple'),
 				Config::NavigationDual => lang('Dual'),
+				Config::NavigationHover => lang('Dual on hover'),
 				Config::NavigationReversed => lang('Reversed')
 			];
 			$default = $options[$this->config->getNavigationMode()];

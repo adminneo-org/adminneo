@@ -184,6 +184,7 @@ return [
 	'Check' => 'Verificar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
+	'Truncate Cascade' => 'Truncar em cascata', // by Claude Fable 5
 	'Tables have been truncated.' => 'As Tabelas foram truncadas.',
 	'Move to other database' => 'Mover para outra Base de dados',
 	'Move' => 'Mover',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'Adicionar próximo',
 	'Index Type' => 'Tipo de índice',
 	'length' => 'tamanho',
+	'operator class' => 'classe de operadores', // by Claude Fable 5
 	'Algorithm' => 'Algoritmo', // by Claude Fable 5
 	'Condition' => 'Condição', // by Claude Fable 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'Modo de navegação', // by Claude Opus 5
 	'Simple' => 'Simples', // by Claude Opus 5
 	'Dual' => 'Duplo', // by Claude Opus 5
+	'Dual on hover' => 'Duplo ao passar o cursor', // by Claude Opus 5
 	'Reversed' => 'Invertido', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Disposição da navegação principal com os links das tabelas.', // by Claude Opus 5
 	'Table links' => 'Links das tabelas', // by Claude Opus 5

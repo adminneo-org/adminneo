@@ -169,6 +169,7 @@ return [
 	'Check' => '検査',
 	'Repair' => '修復',
 	'Truncate' => '空にする',
+	'Truncate Cascade' => 'カスケードで空にする', // by Claude Fable 5
 	'Tables have been truncated.' => 'テーブルを空にしました。',
 	'Move to other database' => '他のデータベースへ移動',
 	'Move' => '移動',
@@ -234,6 +235,7 @@ return [
 	'Add next' => '追加',
 	'Index Type' => 'インデックスの型',
 	'length' => '長さ',
+	'operator class' => '演算子クラス', // by Claude Fable 5
 	'Algorithm' => 'アルゴリズム',
 	'Condition' => '条件',
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'ナビゲーションモード', // by Claude Opus 5
 	'Simple' => 'シンプル', // by Claude Opus 5
 	'Dual' => 'デュアル', // by Claude Opus 5
+	'Dual on hover' => 'デュアル（ホバー時）', // by Claude Opus 5
 	'Reversed' => '反転', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Opus 5
 	'Table links' => 'テーブルリンク', // by Claude Opus 5
