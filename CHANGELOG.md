@@ -32,6 +32,7 @@ AdminNeo 5.7.0
 - Select: Fix the number of selected rows after going back in history (by @vrana)
 - Edit: Keep values of columns with special characters in name after error (by @vrana)
 - Edit: Fix changing function to SQL with the ForeignEditPlugin
+- MySQL, MariaDB: Fix reading descending indexes
 - PostgreSQL: Fix altering functions with parameters of array or user-defined types (by @vrana)
 - PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
 - MS SQL: Treat binary fields as blob (by @vrana)

@@ -813,7 +813,7 @@ if (isset($_GET["mysql"])) {
 	/**
 	 * Returns table indexes.
 	 *
-	 * @return array{type:string, columns:list<string>, lengths:list<int>, descs:list<bool>}[]
+	 * @return array{type:string, columns:list<string>, lengths:list<int>, descs:list<?string>}[]
 	 */
 	function indexes(string $table, ?Connection $connection = null): array
 	{
@@ -823,7 +823,7 @@ if (isset($_GET["mysql"])) {
 			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" : ($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" : ($row["Non_unique"] ? (preg_match('~^(SPATIAL|VECTOR)$~', $row["Index_type"]) ? $row["Index_type"] : "INDEX") : "UNIQUE")));
 			$return[$name]["columns"][] = $row["Column_name"];
 			$return[$name]["lengths"][] = ($row["Index_type"] == "SPATIAL" ? null : $row["Sub_part"]);
-			$return[$name]["descs"][] = null;
+			$return[$name]["descs"][] = ($row["Collation"] == "D" ? '1' : null);
 			$return[$name]["algorithm"] = $row["Index_type"];
 		}
 		return $return;
@@ -1459,7 +1459,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 	function support($feature) {
 		return preg_match(
 			'~^(comment|columns|copy|database|drop_col|dump|event|indexes|kill|privileges|move_col|procedure|processlist|routine|sql|status|table|trigger|variables|view'
-			. (Connection::get()->isMinVersion("8") ? '|descidx' : '')
+			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.8.1" : "8") ? '|descidx' : '')
 			. (Connection::get()->isMinVersion(Connection::get()->isMariaDB() ? "10.2.1" : "8.0.16") ? '|check' : '')
 			// MySQL 8 reads table stats from the data dictionary; MariaDB still opens all tables.
 			. (!Connection::get()->isMariaDB() && Connection::get()->isMinVersion("8") ? '|fast_status' : '')
