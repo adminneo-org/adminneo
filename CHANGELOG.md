@@ -16,6 +16,7 @@ AdminNeo 5.7.0
 - Alter table: Add next column without page reload (by @vrana)
 - Edit: Hide the value field for functions without arguments (e.g. now, uuid) (by @vrana)
 - MySQL: Cache the list of databases only if getting it is slow (by @vrana)
+- MySQL: Link sys schema views to their documentation (by @vrana)
 - PostgreSQL: Support operator classes in indexes (by @vrana)
 - PostgreSQL: Add Truncate Cascade button (by @vrana)
 - PostgreSQL: Do not show functions and types created by extensions (by @vrana)

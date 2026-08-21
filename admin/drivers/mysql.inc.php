@@ -471,6 +471,15 @@ if (isset($_GET["mysql"])) {
 			        "reference/system-tables/performance-schema/performance-schema-tables/performance-schema-$name-table" :
 			        "performance-schema-" . str_replace("_", "-", $name). "-table.html";
 	        }
+			if (DB == "sys") {
+				//! MariaDB documents each view but the URL is not derivable.
+				if ($maria) {
+					return "reference/system-tables/sys-schema/";
+				}
+
+				// The x$ views are documented together with the views they are based on.
+				return "sys-" . strtolower(str_replace("_", "-", preg_replace('~^x\$~', '', $name))) . ".html";
+			}
 			if (DB == "mysql") {
 				return $maria ?
 					"reference/system-tables/the-mysql-database-tables/mysql-$name" . str_starts_with($name, "innodb_") ? "" : "-table" :
