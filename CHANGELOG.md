@@ -37,6 +37,8 @@ AdminNeo 5.7.0
 - MS SQL: Treat binary fields as blob (by @vrana)
 - PostgreSQL: Fix empty headers of computed columns in query result (regression from 5.1.0)
 
+(Ported relevant changes from Adminer 6.0.0 • part 1)
+
 AdminNeo 5.6.0 (2026-08-16)
 ---------------------------
 
