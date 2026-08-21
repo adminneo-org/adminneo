@@ -121,7 +121,7 @@ When implementing a feature that introduces new texts, add only the Czech (`cs.i
 
 To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
 
-To validate translations, run `php bin/update-translations.php --clean` – it doesn't add new texts. A finished pass must print no `⚠️` warnings. It checks:
+To validate translations, run `php bin/update-translations.php --clean` – it doesn't add new texts. It checks:
 
 - **Placeholders** — types and order must match the English text.
 - **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
