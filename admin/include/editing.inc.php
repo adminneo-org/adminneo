@@ -68,7 +68,10 @@ function print_select_result(Result $result, ?Connection $connection = null, arr
 
 				$types[$j] = $field->type;
 
-				echo "<th" . ($orgtable != "" || $field->name != $orgname ? " title='" . h(($orgtable != "" ? "$orgtable." : "") . $orgname) . "'" : "") . ">" . h($name)
+				$title = trim(($orgtable != "" ? "$orgtable.$orgname" : ($field->name != $orgname ? $orgname : ""))
+					. " " . Driver::get()->getTypeName($field));
+
+				echo "<th" . ($title != "" ? " title='" . h($title) . "'" : "") . ">" . h($name)
 					. ($orgtables ? doc_link([
 						'sql' => "explain-output.html#explain_" . strtolower($name),
 						'mariadb' => "reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#columns-in-explain-...-select",
@@ -254,9 +257,9 @@ function process_type($field, $collate = "COLLATE") {
 * @return list<string> ["field", "type", "NULL", "DEFAULT", "ON UPDATE", "COMMENT", "AUTO_INCREMENT"]
 */
 function process_field($field, $type_field) {
-	// MariaDB exports CURRENT_TIMESTAMP as a function.
+	// MariaDB exports CURRENT_TIMESTAMP as a function or lowercase value.
 	if ($field["on_update"]) {
-		$field["on_update"] = str_ireplace("current_timestamp()", "CURRENT_TIMESTAMP", $field["on_update"]);
+		$field["on_update"] = preg_replace('~current_timestamp(\(\))?~i', "CURRENT_TIMESTAMP", $field["on_update"]);
 	}
 	return [
 		idf_escape(trim($field["field"])),
@@ -349,7 +352,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 	}
 
 	echo "<th id='label-name'>", ($type == "TABLE" ? lang('Column name') : lang('Parameter name')), "</th>\n";
-	echo "<td id='label-type'>", lang('Type'), "<textarea id='enum-edit' rows='4' cols='12' wrap='off' style='display: none;'></textarea>", script("gid('enum-edit').onblur = onFieldLengthBlur;"), "</td>\n";
+	echo "<td id='label-type'>", lang('Type'), "<textarea id='enum-edit' rows='4' cols='12' wrap='off' hidden></textarea>", script("gid('enum-edit').onblur = onFieldLengthBlur;"), "</td>\n";
 	echo "<td id='label-length'>", lang('Length'), "</td>\n";
 	echo "<td>", lang('Options'), "</td>\n"; // No label required, options have their own label.
 
@@ -371,6 +374,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 	echo "<td>";
 	echo "<button name='add[", (support("move_col") ? 0 : count($fields)), "]' value='1' title='", h(lang('Add next')), "' class='button light'>", icon_solo("add"), "</button>";
+	echo (support("move_col") ? "" : script("qsl('button').onclick = onAddLastFieldRowClick;"));
 	echo script("row_count = " . count($fields) . ";");
 	echo "</td>\n";
 
@@ -384,8 +388,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 		$orig = $field[($_POST ? "orig" : "field")];
 		$display = (isset($_POST["add"][$i-1]) || (isset($field["field"]) && !($_POST["drop_col"][$i] ?? null))) && (support("drop_col") || $orig == "");
 
-		$style = $display ? "" : "style='display: none;'";
-		echo "<tr $style>\n";
+		echo "<tr", ($display ? "" : " hidden"), ">\n";
 
 		if (support("move_col")) {
 			echo "<td class='handle jsonly'>", icon_solo("handle"), "</td>";

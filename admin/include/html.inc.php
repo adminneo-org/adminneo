@@ -279,6 +279,14 @@ function js_escape_key($string): string
 }
 
 /**
+ * Escapes string to be used inside a JavaScript regular expression literal.
+ */
+function js_escape_re(string $string): string
+{
+	return addcslashes(preg_quote($string, "/"), "\r\n");
+}
+
+/**
  * Generates page number for pagination.
  */
 function pagination(int $page, int $current): string
@@ -495,6 +503,11 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		echo " <span class='input-hint'>$hint</span>";
 	}
 
+	// Apply the initially selected function (e.g. hide the input for now())
+	if (count($functions) > 1) {
+		echo script("qs('select', qsl('td').previousSibling).onchange();", "");
+	}
+
 	// Change scripts.
 	$first_function = 0;
 	foreach ($functions as $key => $val) {
@@ -680,7 +693,7 @@ function edit_form($table, $fields, $row, $update): void {
 			} else {
 				$editable = true;
 				$function = ($_POST["save"]
-					? $_POST["function"][$name] ?? ""
+					? $_POST["function"][$key] ?? ""
 					: ($update && preg_match('~^CURRENT_TIMESTAMP~i', $field["on_update"])
 						? "now"
 						: ($value === false ? null : ($value !== null ? '' : 'NULL'))

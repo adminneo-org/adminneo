@@ -117,9 +117,11 @@ All PHP code lives under the `AdminNeo\` namespace.
 
 Translations use technical language and terms related to database systems. Czech language (`admin/translations/cs.inc.php`) is considered as correct because it was created by the author. All machine-translated texts are marked with trailing comment naming the AI model, e.g. `'Vacuum' => 'Počisti', // by Claude Fable 5`. In case of multiline translation, mark is placed on the last line.
 
+When implementing a feature that introduces new texts, add only the Czech (`cs.inc.php`) and Slovak (`sk.inc.php`) translations together with the code changes, along with `_template.inc.php`. The remaining languages are translated in a separate commit, e.g. `Translations: Translate 'Dual on hover' text`.
+
 To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
 
-The same script validates the files. A finished pass must print no `⚠️` warnings. It checks:
+To validate translations, run `php bin/update-translations.php --clean` – it doesn't add new texts. It checks:
 
 - **Placeholders** — types and order must match the English text.
 - **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
@@ -139,7 +141,7 @@ Format:
 Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 ```
 
-- `<Area:>` is an optional prefix naming the driver or subsystem: `PostgreSQL:`, `MySQL:`, `SQLite:`, `Compiler:`, `Tests:`, `Translations:`, `Select data:`.
+- `<Area:>` is an optional prefix naming the driver or subsystem: `PostgreSQL:`, `MySQL:`, `SQLite:`, `Compiler:`, `Tests:`, `Translations:`, `Select:`.
 - Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
 - Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible.
@@ -220,6 +222,15 @@ These entry points are pre-configured, so it is possible to connect to selected 
 Always use the `*-agent.php` variants. The counterparts without the suffix (`tests/admin-devel.php`, `tests/admin-compiled.php`, …) back the Katalon test suites and are not pre-configured with servers.
 
 Cookies set by the application (`neo_settings`, `neo_sid`, …) are `HttpOnly`, so they are not visible in `document.cookie`. Check them in the `Set-Cookie` response header (`curl -si …`). Their path is the entry point script, so every `*-agent.php` file keeps its own settings.
+
+#### Verifying changes
+
+Use `curl` for what is in the server-rendered HTML — it is scriptable, so one loop covers all drivers. Log in first, the form needs a token.
+Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server.
+
+Use the browser when the change touches JavaScript or the visual result.
+
+Clean up test data afterward (tables in `adminneo_test`, SQLite files, screenshots).
 
 ### Databases
 

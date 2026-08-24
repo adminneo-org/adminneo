@@ -169,6 +169,7 @@ return [
 	'Check' => '检查',
 	'Repair' => '修复',
 	'Truncate' => '清空',
+	'Truncate Cascade' => '级联清空', // by Claude Fable 5
 	'Tables have been truncated.' => '已清空表。',
 	'Move to other database' => '转移到其它数据库',
 	'Move' => '转移',
@@ -234,6 +235,7 @@ return [
 	'Add next' => '下一行插入',
 	'Index Type' => '索引类型',
 	'length' => '长度', // by Claude Fable 5
+	'operator class' => '运算符类', // by Claude Fable 5
 	'Algorithm' => '算法', // by Claude Fable 5
 	'Condition' => '条件', // by Claude Fable 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => '导航模式', // by Claude Opus 5
 	'Simple' => '简单', // by Claude Opus 5
 	'Dual' => '双栏', // by Claude Opus 5
+	'Dual on hover' => '悬停时双栏', // by Claude Opus 5
 	'Reversed' => '反向', // by Claude Opus 5
 	'Layout of main navigation with table links.' => '带有表链接的主导航布局。', // by Claude Opus 5
 	'Table links' => '表链接', // by Claude Opus 5

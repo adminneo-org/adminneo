@@ -80,6 +80,8 @@ foreach ($file_paths as $file_path) {
 	}
 }
 
+$exit_status = 0;
+
 // Generate language files. The template is always processed first, so its translations are known to the other languages.
 $template_translations = [];
 foreach ($languages as $language => $dummy) {
@@ -95,6 +97,8 @@ foreach ($languages as $language => $dummy) {
 	if ($language == $template) {
 		$template_translations = $translations;
 	}
+
+	$ok = true;
 
 	// Language files are regenerated from the template, so remember which texts are marked as machine translated.
 	$marks = read_ai_marks($old_content);
@@ -131,7 +135,8 @@ foreach ($languages as $language => $dummy) {
 
 				// Check forbidden periods.
 				if (!$period && preg_match("~\.$~", $variant)) {
-					print_warning($filename, $term, "Period is forbidden");
+					print_error($filename, $term, "Period is forbidden");
+					$ok = false;
 				}
 
 				// Check mismatched periods. Period is optional in 'ja' and can mismatch in date/time formatting.
@@ -140,13 +145,15 @@ foreach ($languages as $language => $dummy) {
 					!preg_match('~^[0-9.$YMD\-]+$~', $en) &&
 					($endWithPeriod xor preg_match("~$period$~", $variant)))
 				{
-					print_warning($filename, $term, "Not matching period");
+					print_error($filename, $term, "Not matching period");
+					$ok = false;
 				}
 			}
 
 			// Check mismatched placeholders.
 			foreach (placeholder_errors($language, $en, $translation, $language == $template) as $error) {
-				print_warning($filename, $term, "Placeholders - $error");
+				print_error($filename, $term, "Placeholders - $error");
+				$ok = false;
 			}
 		}
 	}
@@ -185,9 +192,19 @@ foreach ($languages as $language => $dummy) {
 	if ($content != $old_content) {
 		file_put_contents($file_path, $content);
 
-		echo "✳️ $filename updated\n";
-	} elseif ($language != $template || count($languages) == 1) {
-		echo "✔︎ $filename\n";
+		echo "✏️  $filename | Updated\n";
+		$ok = false;
+	}
+	if (str_contains($content, " => null,")) {
+		echo "✳️  $filename | Missing translations\n";
+		$ok = false;
+	}
+	if (str_contains($content, " // by ")) {
+		echo "👁️  $filename | Machine translations\n";
+		$ok = false;
+	}
+	if ($ok && ($language != $template || count($languages) == 1)) {
+		echo "✔️  $filename\n";
 	}
 }
 
@@ -381,7 +398,12 @@ function format_translation($translation, bool $single_line = false, bool $escap
 	return $result;
 }
 
-function print_warning(string $filename, string $term, string $message): void
+function print_error(string $filename, string $term, string $message): void
 {
+	global $exit_status;
+
 	echo "⚠️ $filename | $message: $term\n";
+	$exit_status = 1;
 }
+
+exit($exit_status);

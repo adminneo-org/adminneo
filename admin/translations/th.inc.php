@@ -169,6 +169,7 @@ return [
 	'Check' => 'ตรวจสอบ',
 	'Repair' => 'ซ่อมแซม',
 	'Truncate' => 'ตัดทิ้ง',
+	'Truncate Cascade' => 'ตัดทิ้งแบบต่อเนื่อง', // by Claude Opus 5
 	'Tables have been truncated.' => 'เคลียร์ตารางแล้ว (truncate).',
 	'Move to other database' => 'ย้ายไปยังฐานข้อมูลอื่น',
 	'Move' => 'ย้าย',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'เพิ่มรายการถัดไป',
 	'Index Type' => 'ชนิดของดัชนี',
 	'length' => 'ความยาว',
+	'operator class' => 'คลาสตัวดำเนินการ', // by Claude Opus 5
 	'Algorithm' => 'อัลกอริทึม', // by Claude Opus 5
 	'Condition' => 'เงื่อนไข', // by Claude Opus 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'รูปแบบการนำทาง', // by Claude Opus 5
 	'Simple' => 'แบบง่าย', // by Claude Opus 5
 	'Dual' => 'แบบคู่', // by Claude Opus 5
+	'Dual on hover' => 'แบบคู่เมื่อชี้เมาส์', // by Claude Opus 5
 	'Reversed' => 'แบบกลับด้าน', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'การจัดวางของการนำทางหลักพร้อมลิงค์ของตาราง.', // by Claude Opus 5
 	'Table links' => 'ลิงค์ของตาราง', // by Claude Opus 5

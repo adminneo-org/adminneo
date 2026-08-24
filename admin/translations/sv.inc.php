@@ -184,6 +184,7 @@ return [
 	'Check' => 'Kolla',
 	'Repair' => 'Reparera',
 	'Truncate' => 'Avkorta',
+	'Truncate Cascade' => 'Avkorta kaskad', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabeller har blivit avkortade.',
 	'Move to other database' => 'Flytta till en annan databas',
 	'Move' => 'Flytta',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'Lägg till nästa',
 	'Index Type' => 'Indextyp',
 	'length' => 'längd',
+	'operator class' => 'operatorklass', // by Claude Fable 5
 	'Algorithm' => 'Algoritm', // by Claude Fable 5
 	'Condition' => 'Villkor', // by Claude Fable 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'Navigeringsläge', // by Claude Opus 5
 	'Simple' => 'Enkelt', // by Claude Opus 5
 	'Dual' => 'Dubbelt', // by Claude Opus 5
+	'Dual on hover' => 'Dubbelt vid hovring', // by Claude Opus 5
 	'Reversed' => 'Omvänt', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Utformning av huvudnavigeringen med tabellänkar.', // by Claude Opus 5
 	'Table links' => 'Tabellänkar', // by Claude Opus 5

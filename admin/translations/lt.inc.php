@@ -189,6 +189,7 @@ return [
 	'Check' => 'Patikrinti',
 	'Repair' => 'Pataisyti',
 	'Truncate' => 'Tuštinti',
+	'Truncate Cascade' => 'Tuštinti kaskadiškai', // by Claude Opus 5
 	'Tables have been truncated.' => 'Lentelės buvo ištuštintos.',
 	'Move to other database' => 'Perkelti į kitą duomenų bazę',
 	'Move' => 'Perkelti',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Pridėti kitą',
 	'Index Type' => 'Indekso tipas',
 	'length' => 'ilgis',
+	'operator class' => 'operatorių klasė', // by Claude Opus 5
 	'Algorithm' => 'Algoritmas', // by Claude Opus 5
 	'Condition' => 'Sąlyga', // by Claude Opus 5
 
@@ -426,6 +428,7 @@ return [
 	'Navigation mode' => 'Navigacijos režimas', // by Claude Opus 5
 	'Simple' => 'Paprasta', // by Claude Opus 5
 	'Dual' => 'Dviguba', // by Claude Opus 5
+	'Dual on hover' => 'Dviguba užvedus pelę', // by Claude Opus 5
 	'Reversed' => 'Atvirkštinė', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Pagrindinės navigacijos su lentelių nuorodomis išdėstymas.', // by Claude Opus 5
 	'Table links' => 'Lentelių nuorodos', // by Claude Opus 5

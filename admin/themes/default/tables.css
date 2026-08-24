@@ -150,22 +150,29 @@ tr .actions .icon {
 	margin-inline-start: 5px;
 }
 
-.js .column {
+.column {
 	position: absolute;
 	background: var(--table-header-bg);
 	margin: -7px 5px 0 5px;
 	border: 1px solid var(--table-border);
 	border-left: none;
 	border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+	visibility: hidden;
+	opacity: 0;
+	/* Visibility is switched at the end of the transition, so the menu fades out and is not focusable when hidden. */
+	transition: opacity .15s ease-in, visibility .15s;
 }
 
-.js .column .button {
+/* The delay avoids flashing the menu when moving the mouse across the header. */
+th:hover .column {
+	visibility: visible;
+	opacity: 1;
+	transition-delay: .2s;
+}
+
+.column .button {
 	padding: 6px 6px 4px;
 	line-height: 1.4;
-}
-
-.nojs .column .button:not(.jsonly) {
-	display: inline;
 }
 
 /* Required to achieve full with of sticky table footer. */

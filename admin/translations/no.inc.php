@@ -181,6 +181,7 @@ return [
 	'Check' => 'Sjekk',
 	'Repair' => 'Reparer',
 	'Truncate' => 'Avkort',
+	'Truncate Cascade' => 'Avkort kaskade', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabellene har blitt avkortet.',
 	'Move to other database' => 'Flytt til annen database',
 	'Move' => 'Flytt',
@@ -246,6 +247,7 @@ return [
 	'Add next' => 'Legg til neste',
 	'Index Type' => 'Indekstype',
 	'length' => 'lengde',
+	'operator class' => 'operatorklasse', // by Claude Fable 5
 	'Algorithm' => 'Algoritme', // by Claude Fable 5
 	'Condition' => 'Betingelse', // by Claude Fable 5
 
@@ -414,6 +416,7 @@ return [
 	'Navigation mode' => 'Navigasjonsmodus', // by Claude Opus 5
 	'Simple' => 'Enkel', // by Claude Opus 5
 	'Dual' => 'Dobbel', // by Claude Opus 5
+	'Dual on hover' => 'Dobbel ved mouseover', // by Claude Opus 5
 	'Reversed' => 'Omvendt', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Utforming av hovednavigasjonen med tabellenker.', // by Claude Opus 5
 	'Table links' => 'Tabellenker', // by Claude Opus 5

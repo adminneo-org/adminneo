@@ -175,6 +175,7 @@ return [
 	'Check' => 'فحص',
 	'Repair' => 'إصلاح',
 	'Truncate' => 'قطع',
+	'Truncate Cascade' => 'قطع متتالي', // by Claude Opus 5
 	'Tables have been truncated.' => 'تم قطع الجداول.',
 	'Move to other database' => 'نقل إلى قاعدة بيانات أخرى',
 	'Move' => 'نقل',
@@ -240,6 +241,7 @@ return [
 	'Add next' => 'إضافة التالي',
 	'Index Type' => 'نوع المؤشر',
 	'length' => 'الطول',
+	'operator class' => 'فئة المعاملات', // by Claude Opus 5
 	'Algorithm' => 'الخوارزمية', // by Claude Opus 5
 	'Condition' => 'الشرط', // by Claude Opus 5
 
@@ -396,6 +398,7 @@ return [
 	'Navigation mode' => 'نمط التصفح', // by Claude Opus 5
 	'Simple' => 'بسيط', // by Claude Opus 5
 	'Dual' => 'مزدوج', // by Claude Opus 5
+	'Dual on hover' => 'مزدوج عند مرور المؤشر', // by Claude Opus 5
 	'Reversed' => 'معكوس', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'تخطيط التصفح الرئيسي مع روابط الجداول.', // by Claude Opus 5
 	'Table links' => 'روابط الجداول', // by Claude Opus 5

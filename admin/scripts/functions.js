@@ -7,8 +7,8 @@
  * @param {?HTMLElement} context Defaults to document.
  * @return {?HTMLElement}
  */
-function gid(id, context = null) {
-	return (context || document).getElementById(id);
+function gid(id, context = document) {
+	return context.getElementById(id);
 }
 
 /** Get first element by selector
@@ -16,8 +16,8 @@ function gid(id, context = null) {
 * @param [HTMLElement] defaults to document
 * @return HTMLElement
 */
-function qs(selector, context = null) {
-	return (context || document).querySelector(selector);
+function qs(selector, context = document) {
+	return context.querySelector(selector);
 }
 
 /** Get last element by selector
@@ -25,7 +25,7 @@ function qs(selector, context = null) {
 * @param [HTMLElement] defaults to document
 * @return HTMLElement
 */
-function qsl(selector, context = null) {
+function qsl(selector, context = document) {
 	const els = qsa(selector, context);
 	return els[els.length - 1];
 }
@@ -35,8 +35,8 @@ function qsl(selector, context = null) {
 * @param [HTMLElement] defaults to document
 * @return NodeList
 */
-function qsa(selector, context = null) {
-	return (context || document).querySelectorAll(selector);
+function qsa(selector, context = document) {
+	return context.querySelectorAll(selector);
 }
 
 /** Return a function calling fn with the next arguments
@@ -44,8 +44,7 @@ function qsa(selector, context = null) {
 * @param ...
 * @return function with preserved this
 */
-function partial(fn) {
-	const args = Array.apply(null, arguments).slice(1);
+function partial(fn, ...args) {
 	return function () {
 		return fn.apply(this, args);
 	};
@@ -56,11 +55,9 @@ function partial(fn) {
 * @param ...
 * @return function with preserved this
 */
-function partialArg(fn) {
-	const args = Array.apply(null, arguments);
+function partialArg(fn, ...args) {
 	return function (arg) {
-		args[0] = arg;
-		return fn.apply(this, args);
+		return fn.apply(this, [arg, ...args]);
 	};
 }
 
@@ -127,7 +124,7 @@ function selectValue(select) {
 		return select.value;
 	}
 	const selected = select.options[select.selectedIndex];
-	return ((selected.attributes.value || {}).specified ? selected.value : selected.text);
+	return (selected.attributes.value?.specified ? selected.value : selected.text);
 }
 
 /** Verify if element has a specified tag name
@@ -158,9 +155,7 @@ function parentTag(el, tag) {
 function trCheck(el) {
 	const tr = parentTag(el, 'tr');
 	tr.classList.toggle('checked', el.checked);
-	if (el.form && el.form['all'] && el.form['all'].onclick) { // Opera treats form.all as document.all
-		el.form['all'].onclick();
-	}
+	el.form?.['all']?.onclick?.();
 }
 
 /**
@@ -179,7 +174,7 @@ function selectCount(id, count) {
 	if (!el) return;
 
 	const inputs = qsa('input[type="submit"]', el.parentNode.parentNode);
-	for (let input of inputs) {
+	for (const input of inputs) {
 		input.disabled = zero;
 	}
 }
@@ -197,12 +192,12 @@ function formCheck(name) {
 	}
 }
 
-/** Check all rows in <table class="checkable">
+/** Check all rows in <table class="checkable"> once the browser restores the checkboxes
 */
 function tableCheck() {
-	for (const input of qsa('table.checkable td:first-child input')) {
-		trCheck(input);
-	}
+	window.addEventListener('pageshow', () => {
+		qsa('table.checkable td:first-child input').forEach(trCheck);
+	});
 }
 
 /**
@@ -228,13 +223,7 @@ function formUncheckAll(selector) {
 * @return number
 */
 function formChecked(input, name) {
-	let checked = 0;
-	for (const el of input.form.elements) {
-		if (name.test(el.name) && el.checked) {
-			checked++;
-		}
-	}
-	return checked;
+	return [...input.form.elements].filter(el => name.test(el.name) && el.checked).length;
 }
 
 /** Select clicked row
@@ -249,7 +238,7 @@ function tableClick(event, click, canEdit = true) {
 			return;
 		}
 	}
-	click = (click || !window.getSelection || getSelection().isCollapsed);
+	click = (click || getSelection().isCollapsed);
 	let el = event.target;
 	while (!isTag(el, 'tr')) {
 		if (isTag(el, 'table|a|input|textarea')) {
@@ -267,7 +256,7 @@ function tableClick(event, click, canEdit = true) {
 	el = el.firstChild.firstChild;
 	if (click) {
 		el.checked = !el.checked;
-		el.onclick && el.onclick();
+		el.onclick?.();
 	}
 	if (el.name === 'check[]') {
 		el.form['all'].checked = false;
@@ -568,7 +557,7 @@ function initFieldset(id) {
 function initToggles(parent) {
 	for (const link of qsa('.toggle', parent)) {
 		link.addEventListener("click", event => {
-			const id = link.getAttribute('href').substring(1);
+			const id = link.getAttribute('href').slice(1);
 
 			gid(id).classList.toggle("hidden");
 			link.classList.toggle("opened");
@@ -586,7 +575,7 @@ function initSettingsForm() {
 	const form = gid("settings");
 	const inputs = qsa("select, input[type='checkbox'], input[type='radio']", form);
 
-	for (let input of inputs) {
+	for (const input of inputs) {
 		input.addEventListener("change", () => {
 			input.form.submit();
 		});
@@ -628,7 +617,7 @@ function selectAddRow(event) {
 		initSortableRow(field.parentElement);
 	}
 
-	parent.appendChild(row);
+	parent.append(row);
 }
 
 /**
@@ -648,7 +637,7 @@ function selectRemoveRow() {
 * @this HTMLInputElement
 */
 function selectSearchKeydown(event) {
-	if (event.keyCode === 13 || event.keyCode === 10) {
+	if (event.key === 'Enter') {
 		this.onsearch = () => {
 		};
 	}
@@ -733,8 +722,11 @@ function selectSearchKeydown(event) {
 				child.style.width = child.getBoundingClientRect().width + "px";
 			}
 
+			const body = document.createElement("tbody");
+			body.append(row);
+
 			dragHelper = document.createElement("table");
-			dragHelper.appendChild(document.createElement("tbody")).appendChild(row);
+			dragHelper.append(body);
 		} else {
 			dragHelper = row;
 		}
@@ -743,7 +735,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.left = `${left}px`;
 		dragHelper.style.width = `${width}px`;
 		dragHelper.classList.add("dragging");
-		document.body.appendChild(dragHelper);
+		document.body.append(dragHelper);
 
 		window.addEventListener("mousemove", updateSorting);
 		window.addEventListener("touchmove", updateSorting);
@@ -803,7 +795,7 @@ function selectSearchKeydown(event) {
 			if (nextRow) {
 				parent.insertBefore(placeholderRow, nextRow);
 			} else {
-				parent.appendChild(placeholderRow);
+				parent.append(placeholderRow);
 			}
 		}
 	}
@@ -814,7 +806,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.left = null;
 		dragHelper.style.width = null;
 
-		document.body.removeChild(dragHelper);
+		dragHelper.remove();
 
 		placeholderRow.parentNode.insertBefore(
 			dragHelper.tagName === "TABLE" ? dragHelper.firstChild.firstChild : dragHelper,
@@ -848,37 +840,22 @@ function selectSearchKeydown(event) {
 
 
 
-/** Toggles column context menu
-* @param [string] extra class name
-* @this HTMLElement
-*/
-function columnMouse(className) {
-	for (const span of qsa('span', this)) {
-		if (/column/.test(span.className)) {
-			span.className = 'column' + (className || '');
-		}
-	}
-}
-
-
-
 /** Fill column in search field
 * @param string
 * @return boolean false
 */
 function selectSearch(name) {
-	const el = gid('fieldset-search');
-	el.className = '';
-	const divs = qsa('div', el);
-	let i, div;
-	for (i = 0; i < divs.length; i++) {
-		div = divs[i];
-		const el = qs('[name$="[col]"]', div);
-		if (el && selectValue(el) === name) {
-			break;
-		}
-	}
-	if (i === divs.length) {
+	const fieldset = gid('fieldset-search');
+	fieldset.className = '';
+
+	const divs = qsa('div', fieldset);
+	let div = [...divs].find(row => {
+		const col = qs('[name$="[col]"]', row);
+		return col && selectValue(col) === name;
+	});
+
+	if (!div) { // use the last empty row
+		div = divs[divs.length - 1];
 		div.firstChild.value = name;
 		div.firstChild.onchange();
 	}
@@ -906,7 +883,7 @@ function bodyKeydown(event, button) {
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
 	}
-	if (isCtrl(event) && (event.keyCode === 13 || event.keyCode === 10) && isTag(target, 'select|textarea|input')) { // 13|10 - Enter
+	if (isCtrl(event) && event.key === 'Enter' && isTag(target, 'select|textarea|input')) {
 		target.blur();
 		if (target.form[button]) {
 			target.form[button].click();
@@ -945,7 +922,7 @@ function bodyClick(event) {
  */
 function onEditingKeydown(event)
 {
-	if ((event.keyCode === 40 || event.keyCode === 38) && isCtrl(event)) { // 40 - Down, 38 - Up
+	if (/^Arrow(Down|Up)$/.test(event.key) && isCtrl(event)) {
 		event.preventDefault();
 
 		const target = event.target;
@@ -954,7 +931,7 @@ function onEditingKeydown(event)
 			return false;
 		}
 
-		row = event.keyCode === 40 ? row.nextElementSibling : row.previousElementSibling;
+		row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
 		if (!row || !isTag(row, 'tr')) {
 			return false;
 		}
@@ -993,10 +970,25 @@ function functionChange() {
 	const func = selectValue(this);
 
 	const inputName = this.name.replace(/^function/, 'fields');
-	const input = this.form[inputName] || this.form[`${inputName}[]`];
+	let input = this.form[inputName] || this.form[`${inputName}[]`];
 
 	// Switch to the text field if function is selected.
-	if (func && func !== "NULL" && input.type !== "file") {
+	if (func === "SQL" || func === "+" || func === "-") {
+		if (!input.origElement) {
+			const text = document.createElement('input');
+			text.className = "input";
+			text.name = input.name;
+			text.value = input.lastValue || selectValue(input);
+			text.origElement = input;
+			text.size = input.size || -1;
+			input.replaceWith(text);
+		}
+	} else if (input.origElement) { // revive the original element (keeps its type, e.g. number for +)
+		input.replaceWith(input.origElement);
+		input = input.origElement;
+	}
+
+	if (func && func !== "NULL" && input.type !== "select-one" && input.type !== "file") {
 		if (input.origType === undefined) {
 			input.origType = input.type;
 			input.origMaxLength = input.dataset.maxlength;
@@ -1011,7 +1003,7 @@ function functionChange() {
 		}
 	}
 
-	if (func === "NULL" || func === "now") {
+	if (func === "NULL") {
 		// Hide input value if it will be not used by selected function.
 		if (input.type === "select-one") {
 			input.lastValue = input.value;
@@ -1040,7 +1032,7 @@ function functionChange() {
 	} else if (input.lastValue) {
 		// Restore last value.
 		if (input.type !== "select-one" && input.length) {
-			for (let index of input.lastValue) {
+			for (const index of input.lastValue) {
 				input[index].checked = true;
 			}
 		} else {
@@ -1056,6 +1048,9 @@ function functionChange() {
 			input[0].checked = true;
 		}
 	}
+
+	// Hide input for functions without argument.
+	input.classList.toggle("hidden", /^(now|getdate|current_date|current_timestamp|uuid)$/.test(func));
 
 	if (!input.length) {
 		oninput({target: input});
@@ -1081,12 +1076,13 @@ function skipOriginal(first) {
 * @this HTMLInputElement
 */
 function fieldChange() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	for (const input of qsa('input', row)) {
 		input.value = '';
 	}
 	// keep value in <select> (function)
-	parentTag(this, 'tbody').appendChild(row);
+	tr.parentNode.append(row);
 	this.oninput = null;
 }
 
@@ -1146,7 +1142,7 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 */
 function ajaxSetHtml(url) {
 	return !ajax(url, request => {
-		const data = window.JSON ? JSON.parse(request.responseText) : eval('(' + request.responseText + ')');
+		const data = JSON.parse(request.responseText);
 		for (const key in data) {
 			setHtml(key, data[key]);
 		}
@@ -1211,7 +1207,7 @@ function initTableFooter() {
  */
 function updateSaveButton() {
 	const button = gid('modify-save');
-	if (button && button.dataset.inlineEdit) {
+	if (button?.dataset.inlineEdit) {
 		button.disabled = !qs('#table td[data-editing="true"]');
 	}
 }
@@ -1253,7 +1249,7 @@ function selectClick(event, text, warning) {
 	}
 
 	input.onkeydown = event => {
-		if (event.keyCode === 27 && !event.shiftKey && !event.altKey && !isCtrl(event)) { // 27 - Esc
+		if (event.key === 'Escape' && !event.shiftKey && !event.altKey && !isCtrl(event)) {
 			td.dataset.editing = "";
 			td.innerHTML = original;
 			initToggles(td);
@@ -1261,7 +1257,7 @@ function selectClick(event, text, warning) {
 		}
 	};
 
-	const dataset = td.firstChild ? (td.firstChild.dataset || {}) : {};
+	const dataset = td.firstChild?.dataset ?? {};
 	let value;
 	if (dataset.value !== undefined) {
 		const dom = new DOMParser().parseFromString(dataset.value, "text/html");
@@ -1274,11 +1270,7 @@ function selectClick(event, text, warning) {
 	input.style.width = Math.max(td.clientWidth - parseFloat(tdStyle.paddingLeft) - parseFloat(tdStyle.paddingRight), (text ? 200 : 20)) + 'px';
 
 	if (text) {
-		let rows = 1;
-		value.replace(/\n/g, () => {
-			rows++;
-		});
-		input.rows = rows;
+		input.rows = value.split('\n').length;
 	}
 
 	if (qsa('i', td).length) { // <i> - NULL
@@ -1287,11 +1279,11 @@ function selectClick(event, text, warning) {
 
 	// Firefox: event.rangeOffset is defined, anchorOffset is related to the whole TR not the inner text node.
 	// Chrome/Safari: event.rangeOffset is not defined, anchorOffset is related to the inner text node.
-	const pos = event.rangeOffset !== undefined ? event.rangeOffset : getSelection().anchorOffset;
+	const pos = event.rangeOffset ?? getSelection().anchorOffset;
 
 	td.dataset.editing = "true";
 	td.innerHTML = '';
-	td.appendChild(input);
+	td.append(input);
 	input.focus();
 	updateSaveButton();
 
@@ -1342,11 +1334,8 @@ function loadNextPage(limit, loadingText) {
 		initToggles(newBody);
 
 		const lastPage = newBody.children.length < limit;
-		const tableBody = qs('#table tbody');
 
-		while (newBody.children.length) {
-			tableBody.appendChild(newBody.children[0]);
-		}
+		qs('#table tbody').append(...newBody.children);
 
 		if (lastPage) {
 			a.parentElement.remove();
@@ -1363,11 +1352,7 @@ function loadNextPage(limit, loadingText) {
 * @param Event
 */
 function eventStop(event) {
-	if (event.stopPropagation) {
-		event.stopPropagation();
-	} else {
-		event.cancelBubble = true;
-	}
+	event.stopPropagation();
 }
 
 
@@ -1378,12 +1363,11 @@ function eventStop(event) {
 */
 function cloneNode(el) {
 	const el2 = el.cloneNode(true);
-	const selector = 'input, select';
+	const selector = 'input, select, button';
 	const origEls = qsa(selector, el);
 	const cloneEls = qsa(selector, el2);
 
-	for (let i = 0; i < origEls.length; i++) {
-		const origEl = origEls[i];
+	for (const [i, origEl] of origEls.entries()) {
 		for (const key in origEl) {
 			if (/^on/.test(key) && origEl[key]) {
 				cloneEls[i][key] = origEl[key];

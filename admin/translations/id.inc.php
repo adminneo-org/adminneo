@@ -169,6 +169,7 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Perbaiki',
 	'Truncate' => 'Kosongkan',
+	'Truncate Cascade' => 'Kosongkan bertingkat', // by Claude Opus 5
 	'Tables have been truncated.' => 'Tabel berhasil dikosongkan.',
 	'Move to other database' => 'Pindahkan ke basis data lain',
 	'Move' => 'Pindahkan',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'Tambah setelahnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'panjang',
+	'operator class' => 'kelas operator', // by Claude Fable 5
 	'Algorithm' => 'Algoritme', // by Claude Fable 5
 	'Condition' => 'Kondisi', // by Claude Fable 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'Mode navigasi', // by Claude Opus 5
 	'Simple' => 'Sederhana', // by Claude Opus 5
 	'Dual' => 'Ganda', // by Claude Opus 5
+	'Dual on hover' => 'Ganda saat ditunjuk', // by Claude Opus 5
 	'Reversed' => 'Terbalik', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Tata letak navigasi utama dengan pranala tabel.', // by Claude Opus 5
 	'Table links' => 'Pranala tabel', // by Claude Opus 5

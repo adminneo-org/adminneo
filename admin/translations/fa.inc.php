@@ -169,6 +169,7 @@ return [
 	'Check' => 'بررسی',
 	'Repair' => 'تعمیر',
 	'Truncate' => 'کوتاه کردن',
+	'Truncate Cascade' => 'کوتاه کردن آبشاری', // by Claude Opus 5
 	'Tables have been truncated.' => 'جدولها بریده شدند.',
 	'Move to other database' => 'انتقال به یک پایگاه داده دیگر',
 	'Move' => 'انتقال',
@@ -234,6 +235,7 @@ return [
 	'Add next' => 'افرودن بعدی',
 	'Index Type' => 'نوع ایندکس',
 	'length' => 'طول',
+	'operator class' => 'کلاس عملگر', // by Claude Opus 5
 	'Algorithm' => 'الگوریتم', // by Claude Opus 5
 	'Condition' => 'شرط', // by Claude Opus 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => 'حالت پیمایش', // by Claude Opus 5
 	'Simple' => 'ساده', // by Claude Opus 5
 	'Dual' => 'دوگانه', // by Claude Opus 5
+	'Dual on hover' => 'دوگانه هنگام اشاره', // by Claude Opus 5
 	'Reversed' => 'معکوس', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'چیدمان پیمایش اصلی به همراه لینکهای جدول.', // by Claude Opus 5
 	'Table links' => 'لینکهای جدول', // by Claude Opus 5

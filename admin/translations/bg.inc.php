@@ -184,6 +184,7 @@ return [
 	'Check' => 'Проверка',
 	'Repair' => 'Поправка',
 	'Truncate' => 'Изрязване',
+	'Truncate Cascade' => 'Каскадно изрязване', // by Claude Fable 5
 	'Tables have been truncated.' => 'Таблиците бяха изрязани.',
 	'Move to other database' => 'Преместване в друга база данни',
 	'Move' => 'Преместване',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'Добавяне на следващ',
 	'Index Type' => 'Вид на индекса',
 	'length' => 'дължина',
+	'operator class' => 'клас оператори', // by Claude Fable 5
 	'Algorithm' => 'Алгоритъм', // by Claude Fable 5
 	'Condition' => 'Условие', // by Claude Fable 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'Режим на навигация', // by Claude Opus 5
 	'Simple' => 'Опростен', // by Claude Opus 5
 	'Dual' => 'Двоен', // by Claude Opus 5
+	'Dual on hover' => 'Двоен при посочване', // by Claude Opus 5
 	'Reversed' => 'Обърнат', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Подредба на основната навигация с препратките към таблиците.', // by Claude Opus 5
 	'Table links' => 'Препратки към таблиците', // by Claude Opus 5

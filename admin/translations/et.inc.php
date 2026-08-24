@@ -175,6 +175,7 @@ return [
 	'Check' => 'Kontrolli',
 	'Repair' => 'Paranda',
 	'Truncate' => 'Tühjenda',
+	'Truncate Cascade' => 'Tühjenda kaskaadis', // by Claude Opus 5
 	'Tables have been truncated.' => 'Valitud tabelid on edukalt tühjendatud.', // by Claude Opus 5
 	'Move to other database' => 'Liiguta teise andmebaasi',
 	'Move' => 'Liiguta',
@@ -240,6 +241,7 @@ return [
 	'Add next' => 'Lisa järgmine',
 	'Index Type' => 'Indeksi tüüp',
 	'length' => 'pikkus',
+	'operator class' => 'operaatoriklass', // by Claude Opus 5
 	'Algorithm' => 'Algoritm', // by Claude Opus 5
 	'Condition' => 'Tingimus', // by Claude Opus 5
 
@@ -399,6 +401,7 @@ return [
 	'Navigation mode' => 'Navigeerimise režiim', // by Claude Opus 5
 	'Simple' => 'Lihtne', // by Claude Opus 5
 	'Dual' => 'Kahene', // by Claude Opus 5
+	'Dual on hover' => 'Kahene hiirega osutades', // by Claude Opus 5
 	'Reversed' => 'Vastupidine', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Peamise navigeerimise paigutus tabelilinkidega.', // by Claude Opus 5
 	'Table links' => 'Tabelilingid', // by Claude Opus 5

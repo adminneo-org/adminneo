@@ -189,6 +189,7 @@ return [
 	'Check' => 'Skontrolovať',
 	'Repair' => 'Opraviť',
 	'Truncate' => 'Vyprázdniť',
+	'Truncate Cascade' => 'Vyprázdniť kaskádovo',
 	'Tables have been truncated.' => 'Tabuľky boli vyprázdnené.',
 	'Move to other database' => 'Presunúť do inej databázy',
 	'Move' => 'Presunúť',
@@ -254,6 +255,7 @@ return [
 	'Add next' => 'Pridať ďalší',
 	'Index Type' => 'Typ indexu',
 	'length' => 'dĺžka',
+	'operator class' => 'trieda operátorov',
 	'Algorithm' => 'Algoritmus',
 	'Condition' => 'Podmienka',
 
@@ -422,6 +424,7 @@ return [
 	'Navigation mode' => 'Navigačný mód',
 	'Simple' => 'Jednoduchý',
 	'Dual' => 'Dvojitý',
+	'Dual on hover' => 'Dvojitý pri prejdení myšou',
 	'Reversed' => 'Obrátený',
 	'Layout of main navigation with table links.' => 'Rozloženie hlavnej navigácie s odkazmi na tabuľky.',
 	'Table links' => 'Odkazy na tabuľky',

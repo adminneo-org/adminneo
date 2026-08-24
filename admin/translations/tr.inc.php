@@ -178,6 +178,7 @@ return [
 	'Check' => 'Denetle',
 	'Repair' => 'Tamir Et',
 	'Truncate' => 'Boşalt',
+	'Truncate Cascade' => 'Kademeli boşalt', // by Claude Fable 5
 	'Tables have been truncated.' => 'Tablolar boşaltıldı.',
 	'Move to other database' => 'Başka veri tabanına taşı',
 	'Move' => 'Taşı',
@@ -243,6 +244,7 @@ return [
 	'Add next' => 'Bundan sonra ekle',
 	'Index Type' => 'İndex Türü',
 	'length' => 'uzunluğu',
+	'operator class' => 'operatör sınıfı', // by Claude Fable 5
 	'Algorithm' => 'Algoritma', // by Claude Fable 5
 	'Condition' => 'Koşul', // by Claude Fable 5
 
@@ -408,6 +410,7 @@ return [
 	'Navigation mode' => 'Gezinme kipi', // by Claude Opus 5
 	'Simple' => 'Basit', // by Claude Opus 5
 	'Dual' => 'İkili', // by Claude Opus 5
+	'Dual on hover' => 'İkili (üzerine gelince)', // by Claude Opus 5
 	'Reversed' => 'Ters', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Tablo bağlantılarını içeren ana gezinme yerleşimi.', // by Claude Opus 5
 	'Table links' => 'Tablo bağlantıları', // by Claude Opus 5

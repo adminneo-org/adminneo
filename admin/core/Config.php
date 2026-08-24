@@ -6,6 +6,7 @@ class Config
 {
 	public const NavigationSimple = "simple";
 	public const NavigationDual = "dual";
+	public const NavigationHover = "hover";
 	public const NavigationReversed = "reversed";
 
 	/** @var array */

@@ -40,7 +40,7 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 	jush.highlight_tag('code', 0);
 
 	for (const textarea of qsa('textarea')) {
-		if (textarea.className.match(/(^|\s)jush-/)) {
+		if ([...textarea.classList].some(name => name.startsWith('jush-'))) {
 			const pre = jush.textarea(textarea, autocompletion, {
 				silentStart: true
 			});
@@ -79,7 +79,7 @@ function initLoginDriver(driverSelect) {
 
 		// 1 - row with server
 		trs[1].classList.toggle('hidden', disabled);
-		trs[1].getElementsByTagName('input')[0].disabled = disabled;
+		qs('input', trs[1]).disabled = disabled;
 	};
 
 	document.addEventListener('DOMContentLoaded', () => {
@@ -102,9 +102,7 @@ function dbMouseDown(event) {
 	if (event.target.tagName === "OPTION") return;
 
 	dbCtrl = isCtrl(event);
-	if (dbPrevious[this.name] === undefined) {
-		dbPrevious[this.name] = this.value;
-	}
+	dbPrevious[this.name] ??= this.value;
 }
 
 /** Load database after selecting it
@@ -130,11 +128,10 @@ function dbChange() {
 function selectFieldChange() {
 	const form = this.form;
 	const ok = (() => {
-		for (const input of qsa('input', form)) {
-			if (input.value && /^fulltext/.test(input.name)) {
-				return true;
-			}
+		if ([...qsa('input', form)].some(input => input.value && /^fulltext/.test(input.name))) {
+			return true;
 		}
+
 		let ok = form.limit.value;
 		let group = false;
 		const columns = {};
@@ -144,7 +141,7 @@ function selectFieldChange() {
 			if (match) {
 				const op = selectValue(form[match[1] + 'op]']);
 				const val = form[match[1] + 'val]'].value;
-				if (col in indexColumns && (!/LIKE|REGEXP/.test(op) || (op === 'LIKE' && val.charAt(0) !== '%'))) {
+				if (col in indexColumns && (!/LIKE|REGEXP/.test(op) || (op === 'LIKE' && val[0] !== '%'))) {
 					return true;
 				} else if (col || val) {
 					ok = false;
@@ -196,7 +193,7 @@ function selectFieldChange() {
 		tableBody.addEventListener("keydown", onEditingKeydown);
 
 		const rows = qsa("tr", tableBody);
-		for (let row of rows) {
+		for (const row of rows) {
 			initFieldsEditingRow(row);
 		}
 	};
@@ -294,7 +291,7 @@ function selectFieldChange() {
 	 * @param {HTMLInputElement} input
 	 */
 	function detectForeignKey(input) {
-		const name = input.name.substring(0, input.name.length - 7);
+		const name = input.name.slice(0, -7);
 		const typeSelect = input.form.elements[name + '[type]'];
 		const options = typeSelect.options;
 		const value = input.value;
@@ -311,8 +308,7 @@ function selectFieldChange() {
 				break;
 			}
 
-			let table = match[1];
-			const column = match[2];
+			const [, table, column] = match;
 			const tables = [table, table.replace(/s$/, ''), table.replace(/es$/, '')];
 
 			for (const table of tables) {
@@ -343,7 +339,7 @@ function selectFieldChange() {
 	 * @return {boolean}
 	 */
 	function delimiterEqual(value, part1, part2) {
-		return (value === part1 + '_' + part2 || value === part1 + part2 || value === part1 + part2.charAt(0).toUpperCase() + part2.substring(1));
+		return (value === part1 + '_' + part2 || value === part1 + part2 || value === part1 + part2[0].toUpperCase() + part2.slice(1));
 	}
 
 	/**
@@ -358,9 +354,9 @@ function selectFieldChange() {
 			const edit = gid('enum-edit');
 			edit.value = parseEnumValues(this.value);
 
-			td.appendChild(edit);
-			this.style.display = 'none';
-			edit.style.display = 'inline';
+			td.append(edit);
+			this.hidden = true;
+			edit.hidden = false;
 			edit.focus();
 		}
 	}
@@ -378,8 +374,8 @@ function selectFieldChange() {
 			value :
 			value && "'" + value.replace(/\n+$/, '').replace(/'/g, "''").replace(/\\/g, '\\\\').replace(/\n/g, "','") + "'");
 
-		field.style.display = 'inline';
-		this.style.display = 'none';
+		field.hidden = false;
+		this.hidden = true;
 	};
 
 	/**
@@ -414,7 +410,7 @@ function selectFieldChange() {
 	 */
 	function onFieldTypeChange() {
 		const type = this;
-		const name = type.name.substring(0, type.name.length - 6);
+		const name = type.name.slice(0, -6);
 		const text = selectValue(type);
 
 		for (const el of type.form.elements) {
@@ -460,35 +456,35 @@ function selectFieldChange() {
 	 */
 	function addRow(button, focus = false) {
 		const match = /(\d+)(\.\d+)?/.exec(button.name);
-		const newIndex = match[0] + (match[2] ? added.substring(match[2].length) : added) + '1';
+		const newIndex = match[0] + (match[2] ? added.slice(match[2].length) : added) + '1';
 		const row = parentTag(button, 'tr');
 		const newRow = cloneNode(row);
 
 		let inputs = qsa('select, input, button', row);
 		let newInputs = qsa('select, input, button', newRow);
 
-		for (let i = 0; i < inputs.length; i++) {
-			newInputs[i].name = inputs[i].name.replace(/[0-9.]+/, newIndex);
+		for (const [i, input] of inputs.entries()) {
+			newInputs[i].name = input.name.replace(/[0-9.]+/, newIndex);
 
 			if (newInputs[i].tagName === "SELECT") {
-				newInputs[i].selectedIndex = /\[(generated)/.test(inputs[i].name) ? 0 : inputs[i].selectedIndex;
+				newInputs[i].selectedIndex = /\[(generated)/.test(input.name) ? 0 : input.selectedIndex;
 			}
 		}
 
 		inputs = qsa('input', row);
 		newInputs = qsa('input', newRow);
 
-		for (let i = 0; i < inputs.length; i++) {
-			if (inputs[i].name === 'auto_increment_col') {
+		for (const [i, input] of inputs.entries()) {
+			if (input.name === 'auto_increment_col') {
 				newInputs[i].value = newIndex;
 				newInputs[i].checked = false;
 			}
 
-			if (/\[(orig|field|comment|default)/.test(inputs[i].name)) {
+			if (/\[(orig|field|comment|default)/.test(input.name)) {
 				newInputs[i].value = '';
 			}
 
-			if (/\[(generated)/.test(inputs[i].name)) {
+			if (/\[(generated)/.test(input.name)) {
 				newInputs[i].checked = false;
 			}
 		}
@@ -508,6 +504,23 @@ function selectFieldChange() {
 
 		added += '0';
 	}
+
+	/**
+	 * Adds new table row after the last field. Used by drivers where columns can be added only to the end.
+	 *
+	 * @this {HTMLButtonElement}
+	 * @return {boolean} False on success, true to submit the form.
+	 */
+	window.onAddLastFieldRowClick = function () {
+		const inputs = qsa('#edit-fields [name$="[field]"]');
+		if (!inputs.length) {
+			return true; // Submit the form to add the row by PHP.
+		}
+
+		addRow(inputs[inputs.length - 1], true);
+
+		return false;
+	};
 })();
 
 /**
@@ -533,7 +546,7 @@ function removeTableRow(button, columnName) {
 	const input = qs(`[name$='[${columnName}]']`, row);
 
 	input.remove();
-	row.style.display = 'none';
+	row.hidden = true;
 
 	return false;
 }
@@ -571,9 +584,10 @@ function partitionByChange() {
 * @this HTMLInputElement
 */
 function partitionNameChange() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	row.firstChild.firstChild.value = '';
-	parentTag(this, 'table').appendChild(row);
+	tr.parentNode.append(row);
 	this.oninput = () => {};
 }
 
@@ -616,13 +630,14 @@ function dumpClick(event) {
 * @this HTMLSelectElement
 */
 function foreignAddRow() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
 		select.name = select.name.replace(/\d+]/, '1$&');
 		select.selectedIndex = 0;
 	}
-	parentTag(this, 'table').appendChild(row);
+	tr.parentNode.append(row);
 }
 
 
@@ -631,17 +646,22 @@ function foreignAddRow() {
 * @this HTMLSelectElement
 */
 function indexesAddRow() {
-	const row = cloneNode(parentTag(this, 'tr'));
+	const tr = parentTag(this, 'tr');
+	const row = cloneNode(tr);
 	this.onchange = () => { };
-	for (const select of qsa('select', row)) {
-		select.name = select.name.replace(/indexes\[\d+/, '$&1');
-		select.selectedIndex = 0;
+	for (const tag of qsa('select, input, button', row)) {
+		tag.name = tag.name.replace(/\[\d+/, '$&1'); // indexes[$j] and drop_col[$j]
+		if (isTag(tag, 'select')) {
+			tag.selectedIndex = 0;
+		} else if (isTag(tag, 'input')) {
+			if (tag.type === 'checkbox') {
+				tag.checked = false;
+			} else {
+				tag.value = '';
+			}
+		}
 	}
-	for (const input of qsa('input', row)) {
-		input.name = input.name.replace(/indexes\[\d+/, '$&1');
-		input.value = '';
-	}
-	parentTag(this, 'table').appendChild(row);
+	tr.parentNode.append(row);
 }
 
 /** Change column in index
@@ -650,13 +670,11 @@ function indexesAddRow() {
 */
 function indexesChangeColumn(prefix) {
 	const names = [];
-	for (const tag in { 'select': 1, 'input': 1 }) {
-		for (const column of qsa(tag, parentTag(this, 'td'))) {
-			if (/\[columns]/.test(column.name)) {
-				const value = selectValue(column);
-				if (value) {
-					names.push(value);
-				}
+	for (const column of qsa('select, input', parentTag(this, 'td'))) {
+		if (/\[columns]/.test(column.name)) {
+			const value = selectValue(column);
+			if (value) {
+				names.push(value);
 			}
 		}
 	}
@@ -688,7 +706,7 @@ function indexesAddColumn(prefix) {
 			input.value = '';
 		}
 	}
-	parentTag(field, 'td').appendChild(column);
+	parentTag(field, 'td').append(column);
 	field.onchange();
 }
 
@@ -729,12 +747,82 @@ function sqlSubmit(form, root) {
 		+ (form['error_stops'].checked ? '&error_stops=1' : '')
 		+ (form['only_errors'].checked ? '&only_errors=1' : '')
 	;
-	if ((document.location.origin + document.location.pathname + action).length < 2000) { // reasonable minimum is 2048
+	if ((location.origin + location.pathname + action).length < 2000) { // reasonable minimum is 2048
 		form.action = action;
 	}
 }
 
 
+
+/**
+ * Exports the result table by JS without re-running the query.
+ *
+ * @param {string} settingsUrl Address storing the selected format and output.
+ * @return {boolean} False when the export is handled by JS.
+ * @this {HTMLInputElement}
+ */
+function sqlExport(settingsUrl) {
+	const form = this.form;
+	const format = form['format'].value;
+	const output = form['output'].value;
+	if (!/^(csv|csv;|tsv)$/.test(format) || !/^(text|file)$/.test(output)) {
+		return true;
+	}
+
+	const table = qs('.scrollable table', form.parentNode);
+	if (!table) {
+		return true;
+	}
+
+	// <i> other than NULL means the value is not displayed fully
+	if ([...qsa('i', table)].some(i => i.textContent !== 'NULL')) {
+		return true;
+	}
+
+	// The form is not submitted, so the settings have to be stored separately.
+	ajax(settingsUrl, null, 'format=' + encodeURIComponent(format) + '&output=' + encodeURIComponent(output)
+		+ '&token=' + encodeURIComponent(form['token'].value), null, true);
+
+	const tsv = (format === 'tsv');
+	const quotable = new RegExp('["\n]|^0[^.]|\\.\\d*0$|' + (tsv ? '\t' : '[,;]|^$')); // dump_csv()
+	const separator = (format === 'csv' ? ',' : (tsv ? '\t' : ';'));
+
+	let data = '\ufeff'; // UTF-8 byte order mark
+	for (const row of qsa('tr', table)) {
+		data += Array.from(row.children).map(cell => {
+			const val = (qsa('i', cell).length ? '' : cell.textContent); // <i> - NULL
+			return (quotable.test(val) ? '"' + val.replace(/"/g, '""') + '"' : val);
+		}).join(separator) + '\r\n';
+	}
+
+	const url = URL.createObjectURL(new Blob([data], {type: (output === 'file' ? 'text/csv' : 'text/plain') + '; charset=utf-8'}));
+	if (output === 'file') {
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'sql-' + formatDateTime(new Date()) + '.csv'; // dump_headers()
+		document.body.append(a);
+		a.click();
+		a.remove();
+		setTimeout(() => URL.revokeObjectURL(url));
+	} else {
+		location.href = url;
+	}
+
+	return false;
+}
+
+/**
+ * Formats date and time as Ymd-His.
+ *
+ * @param {Date} date
+ * @return {string}
+ */
+function formatDateTime(date) {
+	const pad = number => String(number).padStart(2, '0');
+
+	return date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate())
+		+ '-' + pad(date.getHours()) + pad(date.getMinutes()) + pad(date.getSeconds());
+}
 
 /** Handle changing trigger time or event
 * @param RegExp
@@ -744,7 +832,7 @@ function sqlSubmit(form, root) {
 function triggerChange(tableRe, table, form) {
 	const formEvent = selectValue(form['Event']);
 	if (tableRe.test(form['Trigger'].value)) {
-		form['Trigger'].value = table + '_' + (selectValue(form['Timing']).charAt(0) + formEvent.charAt(0)).toLowerCase();
+		form['Trigger'].value = table + '_' + (selectValue(form['Timing'])[0] + formEvent[0]).toLowerCase();
 	}
 	form['Of'].classList.toggle('hidden', !/ OF/.test(formEvent));
 }
@@ -757,7 +845,7 @@ let that, x, y; // em and tablePos defined in schema.inc.php
 * @this HTMLElement
 */
 function schemaMousedown(event) {
-	if ((event.which ? event.which : event.button) === 1) {
+	if (event.button === 0) { // 0 - left button
 		that = this;
 		x = event.clientX - this.offsetLeft;
 		y = event.clientY - this.offsetTop;
@@ -774,8 +862,8 @@ function schemaMousemove(event) {
 		const lineSet = {};
 		for (const div of qsa('div', that)) {
 			if (div.classList.contains('references')) {
-				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.substr(4) + '"]');
-				const ref = (tablePos[div.title] ? tablePos[div.title] : [div2.parentNode.offsetTop / em, 0]);
+				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
+				const ref = (tablePos[div.title] ?? [div2.parentNode.offsetTop / em, 0]);
 				let left1 = -1;
 				const id = div.id.replace(/^ref.(.+)-.+/, '$1');
 				if (div.parentNode !== div2.parentNode) {
@@ -814,10 +902,10 @@ function schemaMouseup(event, db) {
 		tablePos[that.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
 		that = undefined;
 		let s = '';
-		for (const key in tablePos) {
-			s += '_' + key + ':' + Math.round(tablePos[key][0]) + 'x' + Math.round(tablePos[key][1]);
+		for (const [key, [top, left]] of Object.entries(tablePos)) {
+			s += '_' + key + ':' + Math.round(top) + 'x' + Math.round(left);
 		}
-		s = encodeURIComponent(s.substr(1));
+		s = encodeURIComponent(s.slice(1));
 		const link = gid('schema-link');
 		link.href = link.href.replace(/[^=]+$/, '') + s;
 		cookie('neo_schema-' + db + '=' + s, 30); //! special chars in db

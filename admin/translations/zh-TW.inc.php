@@ -169,6 +169,7 @@ return [
 	'Check' => '檢查',
 	'Repair' => '修復',
 	'Truncate' => '清空',
+	'Truncate Cascade' => '級聯清空', // by Claude Fable 5
 	'Tables have been truncated.' => '已清空資料表。',
 	'Move to other database' => '轉移到其它資料庫',
 	'Move' => '轉移',
@@ -234,6 +235,7 @@ return [
 	'Add next' => '新增下一筆',
 	'Index Type' => '索引類型',
 	'length' => '長度',
+	'operator class' => '運算子類別', // by Claude Fable 5
 	'Algorithm' => '演算法', // by Claude Fable 5
 	'Condition' => '條件', // by Claude Fable 5
 
@@ -390,6 +392,7 @@ return [
 	'Navigation mode' => '導覽模式', // by Claude Opus 5
 	'Simple' => '簡易', // by Claude Opus 5
 	'Dual' => '雙欄', // by Claude Opus 5
+	'Dual on hover' => '滑鼠停留時雙欄', // by Claude Opus 5
 	'Reversed' => '反向', // by Claude Opus 5
 	'Layout of main navigation with table links.' => '含資料表連結的主導覽版面配置。', // by Claude Opus 5
 	'Table links' => '資料表連結', // by Claude Opus 5

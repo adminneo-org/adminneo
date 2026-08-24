@@ -278,7 +278,7 @@ class Admin extends Origin
 			echo "</div></fieldset>\n";
 		}
 		if ($_GET["order"]) {
-			echo "<div style='display: none;'>" . print_hidden_fields([
+			echo "<div hidden>" . print_hidden_fields([
 				"order" => [1 => reset($_GET["order"])],
 				"desc" => ($_GET["desc"] ? [1 => 1] : []),
 			]) . "</div>\n";
@@ -544,7 +544,7 @@ class Admin extends Origin
 		if ($missing == "auth") {
 			$first = true;
 			foreach ((array)$_SESSION["pwds"] as $vendor => $servers) {
-				foreach ($servers[""] as $username => $password) {
+				foreach (($servers[""] ?? []) as $username => $password) {
 					if ($password !== null) {
 						if ($first) {
 							echo "<nav id='logins'><menu>";

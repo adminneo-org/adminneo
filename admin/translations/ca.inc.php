@@ -184,6 +184,7 @@ return [
 	'Check' => 'Verifica',
 	'Repair' => 'Repara',
 	'Truncate' => 'Escapça',
+	'Truncate Cascade' => 'Escapça en cascada', // by Claude Fable 5
 	'Tables have been truncated.' => 'S\'han escapçat les taules.',
 	'Move to other database' => 'Desplaça a una altra base de dades',
 	'Move' => 'Desplaça',
@@ -249,6 +250,7 @@ return [
 	'Add next' => 'Afegeix el següent',
 	'Index Type' => 'Tipus d\'índex',
 	'length' => 'longitud',
+	'operator class' => 'classe d\'operadors', // by Claude Fable 5
 	'Algorithm' => 'Algorisme', // by Claude Fable 5
 	'Condition' => 'Condició', // by Claude Fable 5
 
@@ -417,6 +419,7 @@ return [
 	'Navigation mode' => 'Mode de navegació', // by Claude Opus 5
 	'Simple' => 'Simple', // by Claude Opus 5
 	'Dual' => 'Dual', // by Claude Opus 5
+	'Dual on hover' => 'Dual en passar el cursor', // by Claude Opus 5
 	'Reversed' => 'Invertit', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Disposició de la navegació principal amb els enllaços de les taules.', // by Claude Opus 5
 	'Table links' => 'Enllaços de les taules', // by Claude Opus 5

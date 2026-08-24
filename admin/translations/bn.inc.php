@@ -172,6 +172,7 @@ return [
 	'Check' => 'পরীক্ষা',
 	'Repair' => 'মেরামত',
 	'Truncate' => 'ছাঁটাই',
+	'Truncate Cascade' => 'ক্যাসকেড ছাঁটাই', // by Claude Opus 5
 	'Tables have been truncated.' => 'টেবিল ছাঁটাই করা হয়েছে।',
 	'Move to other database' => 'অন্য ডাটাবেজে স্থানান্তর করুন',
 	'Move' => 'স্থানান্তর করুন',
@@ -237,6 +238,7 @@ return [
 	'Add next' => 'পরবর্তী সংযোজন করুন',
 	'Index Type' => 'সূচী-ধরণ',
 	'length' => 'দৈর্ঘ্য',
+	'operator class' => 'অপারেটর ক্লাস', // by Claude Opus 5
 	'Algorithm' => 'অ্যালগরিদম', // by Claude Opus 5
 	'Condition' => 'শর্ত', // by Claude Opus 5
 
@@ -399,6 +401,7 @@ return [
 	'Navigation mode' => 'নেভিগেশন মোড', // by Claude Opus 5
 	'Simple' => 'সরল', // by Claude Opus 5
 	'Dual' => 'দ্বৈত', // by Claude Opus 5
+	'Dual on hover' => 'হোভারে দ্বৈত', // by Claude Opus 5
 	'Reversed' => 'বিপরীত', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'টেবিল লিংকসহ প্রধান নেভিগেশনের বিন্যাস।', // by Claude Opus 5
 	'Table links' => 'টেবিল লিংকসমূহ', // by Claude Opus 5

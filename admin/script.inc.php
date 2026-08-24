@@ -29,10 +29,7 @@ if ($_GET["script"] == "db") {
 				if ($table_status[$key] != "") {
 					$val = format_number($table_status[$key]);
 					if ($val >= 0) {
-						$data["$key-$name"] = ($key == "Rows" && $val && $table_status["Engine"] == (DIALECT == "pgsql" ? "table" : "InnoDB")
-							? "~ $val"
-							: $val
-						);
+						$data["$key-$name"] = ($key == "Rows" ? format_rows($table_status) : $val);
 					}
 					if (isset($sums[$key])) {
 						// ignore innodb_file_per_table because it is not active for tables created before it was enabled
@@ -45,6 +42,9 @@ if ($_GET["script"] == "db") {
 		}
 	}
 
+	if (function_exists('AdminNeo\db_status')) {
+		$sums = db_status();
+	}
 	foreach ($sums as $key => $val) {
 		$data["sum-$key"] = format_number($val);
 	}
