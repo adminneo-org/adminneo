@@ -110,10 +110,10 @@
 <tr><td>open</td><td>/adminneo/tests/admin-devel.php?pgsql=&username=test&db=adminneo_test&ns=public&table=interprets</td><td></td></tr>
 <tr><td>clickAndWait</td><td>link=Alter table</td><td></td></tr>
 <tr><td>click</td><td>add[3]</td><td></td></tr>
-<tr><td>type</td><td>fields[4][field]</td><td>albums</td></tr>
-<tr><td>select</td><td>fields[4][type]</td><td>label=integer</td></tr>
-<tr><td>type</td><td>fields[4][length]</td><td></td></tr>
-<tr><td>type</td><td>name=fields[4][default]</td><td>0</td></tr>
+<tr><td>type</td><td>fields[3.1][field]</td><td>albums</td></tr>
+<tr><td>select</td><td>fields[3.1][type]</td><td>label=integer</td></tr>
+<tr><td>type</td><td>fields[3.1][length]</td><td></td></tr>
+<tr><td>type</td><td>name=fields[3.1][default]</td><td>0</td></tr>
 <tr><td>clickAndWait</td><td>//input[@value='Save']</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>Table has been altered.</td><td></td></tr>
 </tbody></table>
@@ -235,9 +235,9 @@
 <tr><td>click</td><td>link=interprets</td><td></td></tr>
 <tr><td>click</td><td>link=Alter table</td><td></td></tr>
 <tr><td>click</td><td>name=add[4]</td><td></td></tr>
-<tr><td>type</td><td>name=fields[5][field]</td><td>alive</td></tr>
-<tr><td>select</td><td>name=fields[5][type]</td><td>label=alive</td></tr>
-<tr><td>click</td><td>name=fields[5][null]</td><td></td></tr>
+<tr><td>type</td><td>name=fields[4.1][field]</td><td>alive</td></tr>
+<tr><td>select</td><td>name=fields[4.1][type]</td><td>label=alive</td></tr>
+<tr><td>click</td><td>name=fields[4.1][null]</td><td></td></tr>
 <tr><td>clickAndWait</td><td>//input[@value='Save']</td><td></td></tr>
 <tr><td>click</td><td>link=alive</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>'alive', 'deceased'</td><td></td></tr>
@@ -435,8 +435,8 @@
 <tr><td>type</td><td>name=partition</td><td>id</td></tr>
 <tr><td>type</td><td>name=partition_names[]</td><td>old</td></tr>
 <tr><td>type</td><td>name=partition_values[]</td><td>10</td></tr>
-<tr><td>type</td><td>xpath=//table[@id='partition-table']/tr/td/input</td><td>new</td></tr>
-<tr><td>type</td><td>xpath=//table[@id='partition-table']/tr/td[2]/input</td><td>MAXVALUE</td></tr>
+<tr><td>type</td><td>xpath=//table[@id='partition-table']/tbody/tr[2]/td/input</td><td>new</td></tr>
+<tr><td>type</td><td>xpath=//table[@id='partition-table']/tbody/tr[2]/td[2]/input</td><td>MAXVALUE</td></tr>
 <tr><td>click</td><td>//input[@value='Save']</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>PARTITION BY RANGE(id)</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>"range_old" PARTITION OF "range" FOR VALUES FROM (MINVALUE) TO (10)</td><td></td></tr>
