@@ -34,10 +34,11 @@ AdminNeo 5.7.0
 - Edit: Keep values of columns with special characters in name after error (by @vrana)
 - Edit: Fix changing function to SQL with the ForeignEditPlugin
 - MySQL, MariaDB: Fix reading descending indexes
+- MariaDB: Fix comparing `CURRENT_TIMESTAMP` definition while altering a table
 - PostgreSQL: Fix altering functions with parameters of array or user-defined types (by @vrana)
 - PostgreSQL, MS SQL: Show two columns in select COUNT(*), COUNT(DISTINCT id) (by @vrana)
-- MS SQL: Treat binary fields as blob (by @vrana)
 - PostgreSQL: Fix empty headers of computed columns in query result (regression from 5.1.0)
+- MS SQL: Treat binary fields as blob (by @vrana)
 
 (Ported relevant changes from Adminer 6.0.0 • part 1)
 

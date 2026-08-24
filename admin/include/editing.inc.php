@@ -257,9 +257,9 @@ function process_type($field, $collate = "COLLATE") {
 * @return list<string> ["field", "type", "NULL", "DEFAULT", "ON UPDATE", "COMMENT", "AUTO_INCREMENT"]
 */
 function process_field($field, $type_field) {
-	// MariaDB exports CURRENT_TIMESTAMP as a function.
+	// MariaDB exports CURRENT_TIMESTAMP as a function or lowercase value.
 	if ($field["on_update"]) {
-		$field["on_update"] = str_ireplace("current_timestamp()", "CURRENT_TIMESTAMP", $field["on_update"]);
+		$field["on_update"] = preg_replace('~current_timestamp(\(\))?~i', "CURRENT_TIMESTAMP", $field["on_update"]);
 	}
 	return [
 		idf_escape(trim($field["field"])),
