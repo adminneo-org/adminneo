@@ -1055,8 +1055,11 @@ function functionChange(event, init = false) {
 		}
 	}
 
-	// Hide input for functions without argument.
-	input.classList.toggle("hidden", /^(now|getdate|current_date|current_timestamp|uuid)$/.test(func));
+	// Hide input for functions without argument. Radio/checkbox groups are a RadioNodeList without classList,
+	// but they never offer such a function.
+	if (input.classList) {
+		input.classList.toggle("hidden", /^(now|getdate|current_date|current_timestamp|uuid)$/.test(func));
+	}
 
 	if (!input.length) {
 		oninput({target: input});
