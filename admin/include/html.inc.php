@@ -503,9 +503,9 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		echo " <span class='input-hint'>$hint</span>";
 	}
 
-	// Apply the initially selected function (e.g. hide the input for now())
+	// Apply the initially selected function (e.g. hide the input for now()) without touching the printed value.
 	if (count($functions) > 1) {
-		echo script("qs('select', qsl('td').previousSibling).onchange();", "");
+		echo script("qs('select', qsl('td').previousSibling).onchange(null, true);", "");
 	}
 
 	// Change scripts.

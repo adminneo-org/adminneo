@@ -964,9 +964,12 @@ function onEditingKeydown(event)
 /**
  * Disables maxlength for functions and manages value visibility.
  *
+ * @param {?Event} event
+ * @param {boolean} init True when applying the function selected by the server, so the value must be kept.
+ *
  * @this HTMLSelectElement
  */
-function functionChange() {
+function functionChange(event, init = false) {
 	const func = selectValue(this);
 
 	const inputName = this.name.replace(/^function/, 'fields');
@@ -1003,49 +1006,52 @@ function functionChange() {
 		}
 	}
 
-	if (func === "NULL") {
-		// Hide input value if it will be not used by selected function.
-		if (input.type === "select-one") {
-			input.lastValue = input.value;
-			input.value = "__adminneo_empty__";
-		} else if (input.length) {
-			// Uncheck every single radio/checkbox.
-			let checkedList = [];
-			for (let i = 0; i < input.length; i++) {
-				const radio = input[i];
+	// Adjust the value to the selected function. The initial value is already set by the server.
+	if (!init) {
+		if (func === "NULL") {
+			// Hide input value if it will be not used by selected function.
+			if (input.type === "select-one") {
+				input.lastValue = input.value;
+				input.value = "__adminneo_empty__";
+			} else if (input.length) {
+				// Uncheck every single radio/checkbox.
+				let checkedList = [];
+				for (let i = 0; i < input.length; i++) {
+					const radio = input[i];
 
-				if (!radio.checked) continue;
+					if (!radio.checked) continue;
 
-				checkedList.push(i);
-				radio.checked = false;
+					checkedList.push(i);
+					radio.checked = false;
 
-				if (radio.type === "radio") {
-					break;
+					if (radio.type === "radio") {
+						break;
+					}
 				}
-			}
 
-			input.lastValue = checkedList;
-		} else {
-			input.lastValue = input.value;
-			input.value = "";
-		}
-	} else if (input.lastValue) {
-		// Restore last value.
-		if (input.type !== "select-one" && input.length) {
-			for (const index of input.lastValue) {
-				input[index].checked = true;
+				input.lastValue = checkedList;
+			} else {
+				input.lastValue = input.value;
+				input.value = "";
+			}
+		} else if (input.lastValue) {
+			// Restore last value.
+			if (input.type !== "select-one" && input.length) {
+				for (const index of input.lastValue) {
+					input[index].checked = true;
+				}
+			} else {
+				input.value = input.lastValue;
 			}
 		} else {
-			input.value = input.lastValue;
-		}
-	} else {
-		// Set the first available value.
-		if (input.type === "select-one") {
-			if (input.options[0].value === "__adminneo_empty__") {
-				input.value = input.options[1].value;
+			// Set the first available value.
+			if (input.type === "select-one") {
+				if (input.options[0].value === "__adminneo_empty__") {
+					input.value = input.options[1].value;
+				}
+			} else if (input.length && input[0].type === "radio") {
+				input[0].checked = true;
 			}
-		} else if (input.length && input[0].type === "radio") {
-			input[0].checked = true;
 		}
 	}
 
