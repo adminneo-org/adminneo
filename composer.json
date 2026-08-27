@@ -57,7 +57,7 @@
     "scripts": {
         "pre-update-cmd": "sh bin/packages/composer-pre-update.sh",
         "post-update-cmd": "sh bin/packages/composer-post-update.sh",
-        "compile": "php bin/compile.php",
+        "compile": "@php bin/compile.php",
         "clean": "rm -rf compiled/admin*.php compiled/editor*.php compiled/adminneo-plugins"
     },
     "repositories": [

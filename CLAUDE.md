@@ -12,16 +12,20 @@ Supported databases: MySQL/MariaDB, PostgreSQL/CockroachDB, MS SQL, SQLite, Orac
 
 **Run dev server** (serves from repo root at port 8000):
 ```sh
-make server
-# or: php --server 127.0.0.1:8000 --docroot .
+php --server 127.0.0.1:8000 --docroot .
 ```
 
 Then open `http://127.0.0.1:8000/admin/` (dev) or `http://127.0.0.1:8000/compiled/adminneo.php` (compiled).
 
 **Compile to single file** (output goes to `compiled/`):
 ```sh
-make compile
+composer compile
 # or: php bin/compile.php
+```
+
+**Remove compiled files:**
+```sh
+composer clean
 ```
 
 Compile with options:
