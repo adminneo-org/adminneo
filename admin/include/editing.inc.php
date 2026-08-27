@@ -432,9 +432,20 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 			if (support("comment")) {
 				$max_length = Connection::get()->isMinVersion("5.5") ? 1024 : 255;
-				echo "<td $comment_class>",
-					"<input class='input' name='fields[$i][comment]' value='", h($field["comment"]), "' data-maxlength='$max_length' aria-labelledby='label-comment'>",
-					"</td>\n";
+				$attrs = "name='fields[$i][comment]' data-maxlength='$max_length' aria-labelledby='label-comment'";
+				$value = h($field["comment"]);
+
+				echo "<td $comment_class>";
+				if (str_contains($value, "\n")) {
+					// Preserve the leading newline in textarea.
+					if ($value[0] == "\n") {
+						$value = "\n$value";
+					}
+					echo "<textarea $attrs rows='3' cols='30' style='vertical-align: bottom;'>$value</textarea>";
+				} else {
+					echo "<input class='input' $attrs value='$value'>";
+				}
+				echo "</td>\n";
 			}
 		}
 
