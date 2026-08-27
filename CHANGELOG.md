@@ -4,10 +4,18 @@ Changelog
 AdminNeo 5.7.1
 --------------
 
+### Changes
+
+- Editor: Display all images recognized by PHP, set their size, load them lazily (by @vrana)
+
 ### Bugfixes
 
+- Escape < in strings printed to JavaScript, a name containing <!--<script> broke the page
+- Alter table: Edit multiline column comments in a textarea (by @vrana)
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
 - Edit: Fix JavaScript error when changing the function of enum, set and bool fields (regression from 5.7.0)
+
+(Ported relevant changes from Adminer 6.0.0 • part 2)
 
 AdminNeo 5.7.0 (2026-08-24)
 ---------------------------

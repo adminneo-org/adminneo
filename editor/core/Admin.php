@@ -145,8 +145,17 @@ class Admin extends Origin
 			$text = $val;
 		} elseif (is_blob($field) && !is_utf8($val)) {
 			$text = lang('%d byte(s)', strlen($original));
-			if (preg_match("~^(GIF|\xFF\xD8\xFF|\x89PNG\x0D\x0A\x1A\x0A)~", $original)) { // GIF|JPG|PNG, getimagetype() works with filename
-				$text = "<img src='$link' alt='$text'>";
+
+			// @ - the notice for other data contains the data.
+			$size = @getimagesizefromstring($original);
+
+			// Display only the types renderable by browsers. WBMP is excluded intentionally - it has no magic
+			// bytes, so any binary data is detected as it.
+			$mimeTypes = ["image/gif", "image/jpeg", "image/png", "image/bmp", "image/x-ms-bmp", "image/webp", "image/avif"];
+
+			if ($size && in_array($size["mime"], $mimeTypes)) {
+				// $size[3] contains the width and height attributes.
+				$text = "<img src='$link' alt='$text' $size[3] loading='lazy'>";
 			}
 		} elseif ($this->looksLikeBool($field)) { // bool
 			$text = (preg_match('~^(1|t|true|y|yes|on)$~i', $val) ? lang('yes') : lang('no'));
@@ -242,7 +251,7 @@ class Admin extends Origin
 				echo "<div><select name='where[$i][col]'><option value=''>(" . lang('anywhere') . ")" . optionlist($columns, $val["col"], true) . "</select>";
 				echo html_select("where[$i][op]", [-1 => ""] + $this->admin->getOperators(), $val["op"]);
 				echo "<input type='text' class='input' name='where[$i][val]' value='" . h($val["val"]) . "'>" . script("mixin(qsl('input'), {onkeydown: selectSearchKeydown});", "");
-				echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>";
+				echo " <button class='button light remove jsonly' title='" . lang('Remove') . "'>", icon_solo("remove"), "</button>";
 				echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 				echo "</div>\n";
 				$i++;
@@ -253,7 +262,7 @@ class Admin extends Origin
 		echo html_select("where[$i][op]", [-1 => ""] + $this->admin->getOperators());
 		echo "<input type='text' class='input' name='where[$i][val]'>";
 		echo script("mixin(qsl('input'), {onchange: function () { this.parentNode.firstChild.onchange(); }});");
-		echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>";
+		echo " <button class='button light remove jsonly' title='" . lang('Remove') . "'>", icon_solo("remove"), "</button>";
 		echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 		echo "</div>";
 		echo "</div></fieldset>\n";

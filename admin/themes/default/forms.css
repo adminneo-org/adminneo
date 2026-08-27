@@ -51,7 +51,7 @@ input.required {
 	border-color: var(--required-border);
 }
 
-input.maxlength {
+input.maxlength, textarea.maxlength {
 	border-color: var(--required-border);
 }
 

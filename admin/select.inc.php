@@ -277,7 +277,7 @@ if (!$columns && support("table")) {
 		}
 	}
 	echo input_hidden("select", $TABLE);
-	echo '<input type="submit" class="button" value="' . h(lang('Select')) . '">'; # hidden default submit so filter remove buttons aren't "clicked" on submission from enter key
+	echo "<input type='submit' class='button' value='" . lang('Select') . "'>"; # hidden default submit so filter remove buttons aren't "clicked" on submission from enter key
 	echo "</div>\n";
 	echo "<div class='field-sets'>\n";
 	Admin::get()->printSelectionColumns($select, $columns);
@@ -401,7 +401,7 @@ if (!$columns && support("table")) {
 							echo "<a href='" . h($href . $desc) . "' title='" . lang('descending') . "' class='button light'>", icon_solo("arrow-down"), "</a>";
 						}
 						if (!isset($val["fun"]) && isset($field["privileges"]["where"])) {
-							echo '<a href="#fieldset-search" title="' . lang('Search') . '" class="button light jsonly">', icon_solo("search"), '</a>';
+							echo "<a href='#fieldset-search' title='" . lang('Search') . "' class='button light jsonly'>", icon_solo("search"), "</a>";
 							echo script("qsl('a').onclick = partial(selectSearch, '" . js_escape($key) . "');");
 						}
 						echo "</span>";
@@ -525,7 +525,7 @@ if (!$columns && support("table")) {
 							$long = strpos($html, "<i>…</i>");
 							if ($update) {
 								echo " data-text='" . ($long ? 2 : ($text ? 1 : 0)) . "'"
-									. ($editable ? "" : " data-warning='" . h(lang('Use edit link to modify this value.')) . "'");
+									. ($editable ? "" : " data-warning='" . lang('Use edit link to modify this value.') . "'");
 							}
 							echo ">$html";
 						}
@@ -576,7 +576,7 @@ if (!$columns && support("table")) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',
 							'<a href="', h(remove_from_uri("page") . "&page=" . ($page + 1)), '" class="loadmore">', icon("expand"), lang('Load more data'), '</a>',
-							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . lang('Loading') . "…');", "");
+							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading')) . "…');", "");
 					}
 					echo "\n";
 				}
@@ -595,7 +595,7 @@ if (!$columns && support("table")) {
 
 					if (DIALECT != "simpledb") {
 						echo "<legend><a href='" . h(remove_from_uri("page")) . "'>" . lang('Page') . "</a></legend>";
-						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . lang('Page') . "', '" . ($page + 1) . "')); return false; };");
+						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . js_escape(lang('Page')) . "', '" . ($page + 1) . "')); return false; };");
 						echo "<div id='fieldset-pagination' class='fieldset-content'><ul class='pagination'>";
 
 						echo pagination(0, $page);
