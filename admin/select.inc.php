@@ -277,7 +277,7 @@ if (!$columns && support("table")) {
 		}
 	}
 	echo input_hidden("select", $TABLE);
-	echo '<input type="submit" class="button" value="' . h(lang('Select')) . '">'; # hidden default submit so filter remove buttons aren't "clicked" on submission from enter key
+	echo "<input type='submit' class='button' value='" . lang('Select') . "'>"; # hidden default submit so filter remove buttons aren't "clicked" on submission from enter key
 	echo "</div>\n";
 	echo "<div class='field-sets'>\n";
 	Admin::get()->printSelectionColumns($select, $columns);
@@ -525,7 +525,7 @@ if (!$columns && support("table")) {
 							$long = strpos($html, "<i>…</i>");
 							if ($update) {
 								echo " data-text='" . ($long ? 2 : ($text ? 1 : 0)) . "'"
-									. ($editable ? "" : " data-warning='" . h(lang('Use edit link to modify this value.')) . "'");
+									. ($editable ? "" : " data-warning='" . lang('Use edit link to modify this value.') . "'");
 							}
 							echo ">$html";
 						}

@@ -232,7 +232,7 @@ foreach ($row["indexes"] as $index) {
 			echo "<td $options_class><input name='indexes[$j][partial]' value='" . h($index["partial"]) . "' autocapitalize='off' aria-labelledby='label-condition'>\n";
 		}
 		echo "<td>",
-			"<button name='drop_col[$j]' value='1' title='", h(lang('Remove')), "' class='button light'>", icon_solo("remove"), "</button>",
+			"<button name='drop_col[$j]' value='1' title='", lang('Remove'), "' class='button light'>", icon_solo("remove"), "</button>",
 			script("qsl('button').onclick = onRemoveIndexRowClick;"),
 			"</td>\n";
 	}

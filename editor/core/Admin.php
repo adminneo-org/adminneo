@@ -251,7 +251,7 @@ class Admin extends Origin
 				echo "<div><select name='where[$i][col]'><option value=''>(" . lang('anywhere') . ")" . optionlist($columns, $val["col"], true) . "</select>";
 				echo html_select("where[$i][op]", [-1 => ""] + $this->admin->getOperators(), $val["op"]);
 				echo "<input type='text' class='input' name='where[$i][val]' value='" . h($val["val"]) . "'>" . script("mixin(qsl('input'), {onkeydown: selectSearchKeydown});", "");
-				echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>";
+				echo " <button class='button light remove jsonly' title='" . lang('Remove') . "'>", icon_solo("remove"), "</button>";
 				echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 				echo "</div>\n";
 				$i++;
@@ -262,7 +262,7 @@ class Admin extends Origin
 		echo html_select("where[$i][op]", [-1 => ""] + $this->admin->getOperators());
 		echo "<input type='text' class='input' name='where[$i][val]'>";
 		echo script("mixin(qsl('input'), {onchange: function () { this.parentNode.firstChild.onchange(); }});");
-		echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>";
+		echo " <button class='button light remove jsonly' title='" . lang('Remove') . "'>", icon_solo("remove"), "</button>";
 		echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 		echo "</div>";
 		echo "</div></fieldset>\n";

@@ -373,7 +373,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 	}
 
 	echo "<td>";
-	echo "<button name='add[", (support("move_col") ? 0 : count($fields)), "]' value='1' title='", h(lang('Add next')), "' class='button light'>", icon_solo("add"), "</button>";
+	echo "<button name='add[", (support("move_col") ? 0 : count($fields)), "]' value='1' title='", lang('Add next'), "' class='button light'>", icon_solo("add"), "</button>";
 	echo (support("move_col") ? "" : script("qsl('button').onclick = onAddLastFieldRowClick;"));
 	echo script("row_count = " . count($fields) . ";");
 	echo "</td>\n";
@@ -440,12 +440,12 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 		echo "<td>";
 		if (support("move_col")) {
-			echo "<button name='add[$i]' value='1' title='" . h(lang('Add next')) . "' class='button light'>", icon_solo("add"), "</button>",
-				"<button name='up[$i]' value='1' title='" . h(lang('Move up')) . "' class='button light hidden'>", icon_solo("arrow-up"), "</button>",
-				"<button name='down[$i]' value='1' title='" . h(lang('Move down')) . "' class='button light hidden'>", icon_solo("arrow-down"), "</button>";
+			echo "<button name='add[$i]' value='1' title='" . lang('Add next') . "' class='button light'>", icon_solo("add"), "</button>",
+				"<button name='up[$i]' value='1' title='" . lang('Move up') . "' class='button light hidden'>", icon_solo("arrow-up"), "</button>",
+				"<button name='down[$i]' value='1' title='" . lang('Move down') . "' class='button light hidden'>", icon_solo("arrow-down"), "</button>";
 		}
 		if ($orig == "" || support("drop_col")) {
-			echo "<button name='drop_col[$i]' value='1' title='" . h(lang('Remove')) . "' class='button light'>", icon_solo("remove"), "</button>";
+			echo "<button name='drop_col[$i]' value='1' title='" . lang('Remove') . "' class='button light'>", icon_solo("remove"), "</button>";
 		}
 		echo "</td>\n</tr>\n";
 	}

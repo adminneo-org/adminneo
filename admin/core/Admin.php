@@ -570,7 +570,7 @@ class Admin extends Origin
 				echo $column;
 			}
 
-			echo " <button class='button light remove jsonly' title='", h(lang('Remove')), "'>", icon_solo("remove"), "</button>";
+			echo " <button class='button light remove jsonly' title='", lang('Remove'), "'>", icon_solo("remove"), "</button>";
 			echo script("qsl('#fieldset-select .remove').onclick = selectRemoveRow;", "");
 			echo "</div>\n";
 
@@ -617,7 +617,7 @@ class Admin extends Origin
 				echo html_select("where[$i][op]", $this->getOperators(), $val["op"], $change_next);
 				echo "<input type='text' class='input' name='where[$i][val]' value='" . h($val["val"]) . "'>";
 				echo script("mixin(qsl('input'), {oninput: function () { $change_next }, onkeydown: selectSearchKeydown});", "");
-				echo " <button class='button light remove jsonly' title='" . h(lang('Remove')) . "'>", icon_solo("remove"), "</button>";
+				echo " <button class='button light remove jsonly' title='" . lang('Remove') . "'>", icon_solo("remove"), "</button>";
 				echo script('qsl("#fieldset-search .remove").onclick = selectRemoveRow;', "");
 				echo "</div>\n";
 			}
@@ -647,7 +647,7 @@ class Admin extends Origin
 			echo icon("handle", "handle jsonly");
 			echo select_input("name='order[$i]'", $columns, $val, $key !== "" ? "selectFieldChange" : "selectAddRow");
 			echo " ", checkbox("desc[$i]", 1, isset($_GET["desc"][$key]), lang('descending'));
-			echo " <button class='button light remove jsonly' title='", h(lang('Remove')), "'>", icon_solo("remove"), "</button>";
+			echo " <button class='button light remove jsonly' title='", lang('Remove'), "'>", icon_solo("remove"), "</button>";
 			echo script('qsl("#fieldset-sort .remove").onclick = selectRemoveRow;', "");
 			echo "</div>\n";
 
