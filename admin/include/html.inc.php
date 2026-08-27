@@ -267,7 +267,9 @@ function bold($bold, $class = "") {
 * @return string
 */
 function js_escape($string) {
-	return addcslashes($string, "\r\n'\\/"); // slash for <script>
+	// The HTML parser doesn't understand JavaScript escaping, so < must not stay in the string at all, otherwise
+	// <!-- would start the script data escaped state and the following </script> wouldn't end the element.
+	return str_replace("<", "\\x3C", addcslashes($string, "\r\n'\\"));
 }
 
 /**
@@ -275,7 +277,7 @@ function js_escape($string) {
  */
 function js_escape_key($string): string
 {
-	return '"' . addcslashes($string, "\r\n\t\"\\/") . '"';
+	return '"' . str_replace("<", "\\x3C", addcslashes($string, "\r\n\t\"\\")) . '"';
 }
 
 /**
@@ -283,6 +285,7 @@ function js_escape_key($string): string
  */
 function js_escape_re(string $string): string
 {
+	// preg_quote() escapes also < ! - so the HTML parser doesn't see <!-- or </script>.
 	return addcslashes(preg_quote($string, "/"), "\r\n");
 }
 

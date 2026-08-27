@@ -10,6 +10,7 @@ AdminNeo 5.7.1
 
 ### Bugfixes
 
+- Escape < in strings printed to JavaScript, a name containing <!--<script> broke the page
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
 - Edit: Fix JavaScript error when changing the function of enum, set and bool fields (regression from 5.7.0)
 

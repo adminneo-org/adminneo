@@ -809,7 +809,7 @@ abstract class Origin extends Plugin
 	{
 		echo "<div class='tables-filter jsonly'>"
 			. "<input id='tables-filter' type='search' class='input' autocomplete='off' placeholder='" . lang('Table') . "'>"
-			. script("initTablesFilter(" . json_encode($this->admin->getDatabase()) . ");")
+			. script("initTablesFilter(" . json_encode($this->admin->getDatabase(), JSON_HEX_TAG) . ");")
 			. "</div>\n";
 	}
 

@@ -702,7 +702,7 @@ class Admin extends Origin
 			}
 		}
 
-		echo "const indexColumns = " . json_encode($columns, JSON_UNESCAPED_UNICODE) . ";\n";
+		echo "const indexColumns = " . json_encode($columns, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) . ";\n";
 		echo "selectFieldChange.call(gid('form')['select']);\n";
 		echo "</script>\n";
 		echo "</div></fieldset>\n";
@@ -1283,7 +1283,7 @@ class Admin extends Origin
 						}
 					}
 
-					echo "window.addEventListener('DOMContentLoaded', () => { autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns) . "); });\n";
+					echo "window.addEventListener('DOMContentLoaded', () => { autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns, JSON_HEX_TAG) . "); });\n";
 				}
 
 				echo "</script>\n";
@@ -1397,7 +1397,7 @@ class Admin extends Origin
 		}
 
 		echo "</menu></nav>\n";
-		echo script("initTablesList(" . json_encode($this->admin->getDatabase()) . ");");
+		echo script("initTablesList(" . json_encode($this->admin->getDatabase(), JSON_HEX_TAG) . ");");
 	}
 
 	public function getSettingsRows(int $groupId): array
