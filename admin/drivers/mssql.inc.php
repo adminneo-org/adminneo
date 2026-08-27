@@ -578,7 +578,8 @@ WHERE c.object_id = " . q($table_id)) as $row
 				"full_type" => $type . ($length ? "($length)" : ""),
 				"type" => $type,
 				"length" => $length,
-				"default" => (preg_match("~^\('(.*)'\)$~", $row["default"], $match) ? str_replace("''", "'", $match[1]) : $row["default"]),
+				// The s modifier - a multiline default value contains newlines.
+				"default" => (preg_match("~^\('(.*)'\)$~s", $row["default"], $match) ? str_replace("''", "'", $match[1]) : $row["default"]),
 				"default_constraint" => $row["default_constraint"],
 				"null" => $row["is_nullable"],
 				"auto_increment" => $row["is_identity"],

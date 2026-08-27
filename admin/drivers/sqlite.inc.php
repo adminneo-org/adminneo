@@ -417,7 +417,8 @@ if (isset($_GET["sqlite"])) {
 					: "numeric"
 				))))),
 				"full_type" => $type,
-				"default" => (preg_match("~^'(.*)'$~", $default, $match) ? str_replace("''", "'", $match[1]) : ($default == "NULL" ? null : $default)),
+				// The s modifier - a multiline default value contains newlines.
+				"default" => (preg_match("~^'(.*)'$~s", $default, $match) ? str_replace("''", "'", $match[1]) : ($default == "NULL" ? null : $default)),
 				"null" => !$row["notnull"],
 				"privileges" => $privileges,
 				"primary" => $row["pk"],

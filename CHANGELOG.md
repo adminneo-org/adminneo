@@ -15,6 +15,7 @@ AdminNeo 5.7.1
 - Alter table: Do not rewrite newlines in multiline column and table comments
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
 - Edit: Fix JavaScript error when changing the function of enum, set and bool fields (regression from 5.7.0)
+- PostgreSQL, SQLite, MS SQL: Fix reading a multiline default value
 
 (Ported relevant changes from Adminer 6.0.0 • part 2)
 
