@@ -267,9 +267,17 @@ function process_field($field, $type_field) {
 		($field["null"] ? " NULL" : " NOT NULL"), // NULL for timestamp
 		default_value($field),
 		(preg_match('~timestamp|datetime~', $field["type"]) && $field["on_update"] ? " ON UPDATE " . $field["on_update"] : ""),
-		(support("comment") && $field["comment"] != "" ? " COMMENT " . q($field["comment"]) : ""),
+		(support("comment") && $field["comment"] != "" ? " COMMENT " . q(normalize_newlines($field["comment"])) : ""),
 		($field["auto_increment"] ? auto_increment() : null),
 	];
+}
+
+/**
+ * Normalizes newlines in a value submitted by a textarea, which sends CRLF.
+ */
+function normalize_newlines(?string $value): string
+{
+	return str_replace("\r", "", (string) $value);
 }
 
 /** Get default value clause
@@ -281,7 +289,7 @@ function default_value($field) {
 		return "";
 	}
 
-	$default = str_replace("\r", "", $field["default"]);
+	$default = normalize_newlines($field["default"]);
 
 	$generated = $field["generated"];
 	if (in_array($generated, Driver::get()->getGenerated())) {

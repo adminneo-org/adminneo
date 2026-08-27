@@ -23,6 +23,7 @@ if ($TABLE != "") {
 }
 
 $row = $_POST;
+$row["Comment"] = normalize_newlines($row["Comment"]);
 $row["fields"] = (array) $row["fields"];
 if ($row["auto_increment_col"]) {
 	$row["fields"][$row["auto_increment_col"]]["auto_increment"] = true;
