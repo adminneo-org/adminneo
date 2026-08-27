@@ -15,6 +15,8 @@ AdminNeo 5.7.1
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
 - Edit: Fix JavaScript error when changing the function of enum, set and bool fields (regression from 5.7.0)
 
+(Ported relevant changes from Adminer 6.0.0 • part 2)
+
 AdminNeo 5.7.0 (2026-08-24)
 ---------------------------
 
