@@ -4,6 +4,10 @@ Changelog
 AdminNeo 5.7.1
 --------------
 
+### Changes
+
+- Editor: Display all images recognized by PHP, set their size, load them lazily (by @vrana)
+
 ### Bugfixes
 
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
