@@ -609,6 +609,7 @@ class Admin extends Origin
 		}
 
 		echo "</menu></nav>\n";
+		echo script("initTablesList(" . json_encode($this->admin->getDatabase(), JSON_HEX_TAG) . ");");
 	}
 
 	public function getForeignColumnInfo(array $foreignKeys, string $column): ?array

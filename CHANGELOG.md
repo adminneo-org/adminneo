@@ -1,6 +1,13 @@
 Changelog
 =========
 
+AdminNeo 5.8.0
+--------------
+
+### Changes
+
+- Scroll the navigation panel to the selected table when it is out of view
+
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------
 

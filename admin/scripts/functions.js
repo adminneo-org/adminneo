@@ -428,31 +428,63 @@ function initNavigationResizer(url, token, minWidth, maxWidth) {
 }
 
 function initTablesList(dbName) {
-	if (!sessionStorage) {
+	const navigationPanel = gid('navigation-panel');
+	const tablesList = gid('tables');
+	let restored = false;
+
+	if (sessionStorage) {
+		if (sessionStorage.getItem('neo_tables_position_db') !== dbName) {
+			sessionStorage.removeItem('neo_tables_position');
+		} else if (sessionStorage.getItem('neo_tables_position')) {
+			const positions = sessionStorage.getItem('neo_tables_position').split("|");
+
+			navigationPanel.classList.add('opened');
+			navigationPanel.scrollTop = positions[0] * 1;
+			tablesList.scrollTop = positions[1] * 1;
+			navigationPanel.classList.remove('opened');
+
+			restored = true;
+		}
+
+		sessionStorage.setItem('neo_tables_position_db', dbName);
+
+		window.addEventListener('pagehide', function() {
+			navigationPanel.classList.add('opened');
+			sessionStorage.setItem('neo_tables_position', `${navigationPanel.scrollTop}|${tablesList.scrollTop}`);
+			navigationPanel.classList.remove('opened');
+		}, false);
+	}
+
+	if (!restored) {
+		scrollToActiveTable(navigationPanel, tablesList);
+	}
+}
+
+/**
+ * Scrolls the tables list to make the active table visible, ideally 25 % from its top.
+ *
+ * @param {HTMLElement} navigationPanel Navigation panel element.
+ * @param {HTMLElement} tablesList Tables list element.
+ */
+function scrollToActiveTable(navigationPanel, tablesList) {
+	const active = qs('.active', tablesList);
+	if (!active) {
 		return;
 	}
 
-	const navigationPanel = gid('navigation-panel');
-	const tablesList = gid('tables');
+	navigationPanel.classList.add('opened');
 
-	if (sessionStorage.getItem('neo_tables_position_db') !== dbName) {
-		sessionStorage.removeItem('neo_tables_position');
-	} else if (sessionStorage.getItem('neo_tables_position')) {
-		const positions = sessionStorage.getItem('neo_tables_position').split("|");
+	// On wide screens the tables list scrolls itself, on narrow ones the whole panel scrolls.
+	const container = (tablesList.scrollHeight > tablesList.clientHeight ? tablesList : navigationPanel);
+	const containerTop = container.getBoundingClientRect().top;
+	const activeRect = active.getBoundingClientRect();
 
-		navigationPanel.classList.add('opened');
-		navigationPanel.scrollTop = positions[0] * 1;
-		tablesList.scrollTop = positions[1] * 1;
-		navigationPanel.classList.remove('opened');
+	if (activeRect.top < containerTop || activeRect.bottom > containerTop + container.clientHeight) {
+		// The browser clamps the value to the scrollable range, so the 25 % offset is best effort.
+		container.scrollTop += activeRect.top - containerTop - container.clientHeight * 0.2;
 	}
 
-	sessionStorage.setItem('neo_tables_position_db', dbName);
-
-	window.addEventListener('pagehide', function() {
-		navigationPanel.classList.add('opened');
-		sessionStorage.setItem('neo_tables_position', `${navigationPanel.scrollTop}|${tablesList.scrollTop}`);
-		navigationPanel.classList.remove('opened');
-	}, false);
+	navigationPanel.classList.remove('opened');
 }
 
 let tablesFilterTimeout = null;
