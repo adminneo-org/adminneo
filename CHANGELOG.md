@@ -7,6 +7,7 @@ AdminNeo 5.8.0
 ### Changes
 
 - Scroll the navigation panel to the selected table when it is out of view
+- Indicate a scrolled table list in the navigation panel by a separator line
 
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------

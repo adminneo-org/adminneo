@@ -458,6 +458,8 @@ function initTablesList(dbName) {
 	if (!restored) {
 		scrollToActiveTable(navigationPanel, tablesList);
 	}
+
+	initTablesListSeparator(tablesList);
 }
 
 /**
@@ -485,6 +487,27 @@ function scrollToActiveTable(navigationPanel, tablesList) {
 	}
 
 	navigationPanel.classList.remove('opened');
+}
+
+/**
+ * Displays a separator line at the top of the tables list while the list is scrolled.
+ *
+ * @param {HTMLElement} tablesList Tables list element.
+ */
+function initTablesListSeparator(tablesList) {
+	// The marker sits at the very top of the list content, so it leaves the visible area as soon as
+	// the list is scrolled. Watching it avoids handling every scroll event.
+	const marker = qs('.scroll-marker', tablesList);
+	if (!marker) {
+		return;
+	}
+
+	const observer = new IntersectionObserver(() => {
+		// The observer only triggers the check, the scroll position itself is authoritative.
+		tablesList.classList.toggle('scrolled', tablesList.scrollTop > 1);
+	}, { root: tablesList });
+
+	observer.observe(marker);
 }
 
 let tablesFilterTimeout = null;

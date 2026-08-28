@@ -158,6 +158,17 @@ body.resizing {
 #tables {
 	overflow-y: auto;
 	margin-top: 10px;
+	border-top: 1px solid transparent;
+	transition: border-color .2s ease-in;
+}
+
+#tables.scrolled {
+	border-color: var(--panel-border);
+}
+
+#tables .scroll-marker {
+	height: 1px;
+	margin-bottom: -1px;
 }
 
 #logins {

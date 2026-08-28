@@ -590,7 +590,7 @@ class Admin extends Origin
 
 	public function printTableList(array $tables): void
 	{
-		echo "<nav id='tables'><menu>";
+		echo "<nav id='tables'><div class='scroll-marker'></div><menu>";
 
 		foreach ($tables as $status) {
 			// Skip views and tables without a name.

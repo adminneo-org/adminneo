@@ -1350,7 +1350,7 @@ class Admin extends Origin
 		$menuClass = ($dualLinks ? "class='dual" . ($this->settings->isNavigationHover() ? " hover" : "") . "'" :
 			($this->settings->isNavigationReversed() ? "class='reversed'" : ""));
 
-		echo "<nav id='tables'><menu $menuClass>";
+		echo "<nav id='tables'><div class='scroll-marker'></div><menu $menuClass>";
 
 		foreach ($tables as $table => $status) {
 			$table = "$table"; // do not highlight "0" as active everywhere
