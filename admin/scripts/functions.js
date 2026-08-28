@@ -638,6 +638,32 @@ function initSettingsForm() {
 }
 
 /**
+ * Setup validation of files upload form.
+ *
+ * @param {string} formId
+ * @param {string} inputName
+ * @param {number} maxCount
+ * @param {string} countErrorMessage
+ * @param {number} maxSize
+ * @param {string} sizeErrorMessage
+ */
+function initFilesUploadForm(formId, inputName, maxCount, countErrorMessage, maxSize, sizeErrorMessage) {
+	const form = gid(formId);
+
+	form.addEventListener("submit", event => {
+		const files = form.elements[inputName].files;
+
+		if (files.length > maxCount) {
+			alert(countErrorMessage);
+			event.preventDefault();
+		} else if (Array.from(files).reduce((sum, file) => sum + file.size, 0) > maxSize) {
+			alert(sizeErrorMessage);
+			event.preventDefault();
+		}
+	});
+}
+
+/**
  * Adds row in select fieldset.
  *
  * @param {Event} event

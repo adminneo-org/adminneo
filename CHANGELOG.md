@@ -9,6 +9,10 @@ AdminNeo 5.8.0
 - Scroll the navigation panel to the selected table when it is out of view
 - Indicate a scrolled table list in the navigation panel by a separator line
 
+### Bugfixes
+
+- Editor: Fix JavaScript error on the select page caused by the import form (regression from 5.5.0)
+
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------
 
