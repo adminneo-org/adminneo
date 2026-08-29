@@ -46,7 +46,8 @@ function qsl(selector, context = document) {
  * @return {NodeListOf<HTMLElement>}
  */
 function qsa(selector, context = document) {
-	return context.querySelectorAll(selector);
+	// The application markup holds no other elements than the HTML ones.
+	return /** @type {NodeListOf<HTMLElement>} */ (context.querySelectorAll(selector));
 }
 
 /**
@@ -731,7 +732,7 @@ function initFilesUploadForm(formId, inputName, maxCount, countErrorMessage, max
  */
 function selectAddRow(event) {
 	const field = this;
-	const row = cloneNode(field.parentNode);
+	const row = cloneNode(field.parentElement);
 
 	field.onchange = selectFieldChange;
 	field.onchange(event);
@@ -753,7 +754,7 @@ function selectAddRow(event) {
 	const button = qs('.remove', row);
 	button.onclick = selectRemoveRow;
 
-	const parent = field.parentNode.parentNode;
+	const parent = field.parentElement.parentElement;
 	if (parent.classList.contains("sortable")) {
 		initSortableRow(field.parentElement);
 	}
@@ -842,7 +843,7 @@ function selectSearchKeydown(event) {
 
 		const pointerY = getPointerY(event);
 
-		const parent = row.parentNode;
+		const parent = row.parentElement;
 		startScrollY = window.scrollY;
 		startY = pointerY - getOffsetTop(row);
 		minY = getOffsetTop(parent);
@@ -931,7 +932,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.top = `${top}px`;
 
 		// Find a new position for the placeholder.
-		const parent = placeholderRow.parentNode;
+		const parent = placeholderRow.parentElement;
 		let oldNextRow = nextRow;
 		top = top - minY + parent.offsetTop;
 
@@ -972,8 +973,8 @@ function selectSearchKeydown(event) {
 
 		dragHelper.remove();
 
-		placeholderRow.parentNode.insertBefore(
-			dragHelper.tagName === "TABLE" ? dragHelper.firstChild.firstChild : dragHelper,
+		placeholderRow.parentElement.insertBefore(
+			dragHelper.tagName === "TABLE" ? dragHelper.firstElementChild.firstElementChild : dragHelper,
 			placeholderRow
 		);
 		placeholderRow.remove();
@@ -1244,7 +1245,7 @@ function functionChange(event, init = false) {
 	}
 
 	if (!input.length) {
-		oninput({target: input});
+		updateMaxLengthMark(input);
 	}
 }
 
@@ -1256,7 +1257,7 @@ function functionChange(event, init = false) {
  * @this {HTMLTableCellElement}
  */
 function skipOriginal(first) {
-	const fnSelect = qs('select', this.previousSibling);
+	const fnSelect = qs('select', this.previousElementSibling);
 	const value = selectValue(fnSelect);
 
 	if (fnSelect.selectedIndex < first || value === "NULL" || value === "now") {
@@ -1365,7 +1366,9 @@ function ajaxForm(form, message, button) {
 				return false;
 			}
 			if (!/^(checkbox|radio|submit|file)$/i.test(el.type) || el.checked || el === button) {
-				data.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(isTag(el, 'select') ? selectValue(el) : el.value));
+				const value = (isTag(el, 'select') ? selectValue(/** @type {HTMLSelectElement} */ (el)) : el.value);
+
+				data.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(value));
 			}
 		}
 	}
@@ -1618,12 +1621,13 @@ function getOffsetLeft(element) {
 /**
  * Marks the input by the 'maxlength' class when its value is longer than the allowed length.
  *
- * @param {InputEvent} event
+ * @param {HTMLInputElement|HTMLTextAreaElement} input
  */
-oninput = event => {
-	const target = event.target;
-	const maxLength = target.dataset.maxlength;
+function updateMaxLengthMark(input) {
+	const maxLength = input.dataset.maxlength;
 
 	// maxLength could be 0
-	target.classList.toggle('maxlength', target.value && maxLength != null && target.value.length > maxLength);
-};
+	input.classList.toggle('maxlength', input.value && maxLength != null && input.value.length > maxLength);
+}
+
+oninput = event => updateMaxLengthMark(event.target);

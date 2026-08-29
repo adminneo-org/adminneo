@@ -246,7 +246,9 @@ function selectFieldChange() {
 		field.addEventListener("input", event => {
 			// Mark length as required.
 			const input = event.target;
-			input.classList.toggle('required', !input.value.length && /var(char|binary)$/.test(selectValue(input.parentNode.previousSibling.firstChild)));
+			const typeSelect = input.parentElement.previousElementSibling.firstElementChild;
+
+			input.classList.toggle('required', !input.value.length && /var(char|binary)$/.test(selectValue(typeSelect)));
 		});
 
 		// Autoincrement. Is null in procedure editing.
@@ -357,9 +359,9 @@ function selectFieldChange() {
 	 * @this {HTMLInputElement}
 	 */
 	function onFieldLengthFocus() {
-		const td = this.parentNode;
+		const td = this.parentElement;
 
-		if (/^(enum|set)$/.test(selectValue(td.previousSibling.firstChild))) {
+		if (/^(enum|set)$/.test(selectValue(td.previousElementSibling.firstElementChild))) {
 			const edit = gid('enum-edit');
 			edit.value = parseEnumValues(this.value);
 
@@ -728,7 +730,7 @@ function indexesAddColumn(prefix) {
 		}
 		select.onchange();
 	}
-	const column = cloneNode(field.parentNode);
+	const column = cloneNode(field.parentElement);
 	for (const select of qsa('select', column)) {
 		select.name = select.name.replace(/]\[\d+/, '$&1');
 		select.selectedIndex = 0;
