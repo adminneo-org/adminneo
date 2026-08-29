@@ -793,7 +793,7 @@ abstract class Origin extends Plugin
 			echo "</span>\n";
 
 			if ($this->config->isVersionVerificationEnabled() && !$last_version) {
-				echo script("verifyVersion('" . js_escape(ME) . "', '" . get_token() . "');");
+				echo script("verifyVersion();");
 			}
 		}
 

@@ -103,11 +103,8 @@ function cookie(assign, days) {
 
 /**
  * Verifies current AdminNeo version.
- *
- * @param {string} baseUrl
- * @param {string} token
  */
-function verifyVersion(baseUrl, token) {
+function verifyVersion() {
 	document.addEventListener("DOMContentLoaded", () => {
 		// Dummy value to prevent repeated verifications after AJAX failure.
 		cookie('neo_version=0', 1);
