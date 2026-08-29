@@ -1,22 +1,42 @@
 'use strict';
 // Editor specific functions
 
+/**
+ * Does nothing. EditorNeo does not indicate whether the query will be executed with an index.
+ *
+ * @this {HTMLElement}
+ */
 function selectFieldChange() {
 }
 
 // Help.
 (() => {
+	/**
+	 * Does nothing. EditorNeo displays no help popup.
+	 */
 	window.initHelpPopup = function() {
 	};
 
+	/**
+	 * Does nothing. EditorNeo displays no help popup.
+	 *
+	 * @param {HTMLElement} element
+	 * @param {string|function} content
+	 * @param {boolean} side Displays on left side (otherwise on top).
+	 */
 	window.initHelpFor = function(element, content, side = false) {
 	};
 })();
 
-/** Display typeahead
-* @param string
-* @this HTMLInputElement
-*/
+/**
+ * Displays typeahead.
+ *
+ * @param {string} url
+ *
+ * @this {HTMLInputElement}
+ *
+ * @return {XMLHttpRequest}
+ */
 function whisper(url) {
 	const field = this;
 	field.orig = field.value;
@@ -34,11 +54,15 @@ function whisper(url) {
 	});
 }
 
-/** Select typeahead value
-* @param MouseEvent
-* @return boolean false for success
-* @this HTMLDivElement
-*/
+/**
+ * Selects typeahead value.
+ *
+ * @param {MouseEvent} event
+ *
+ * @this {HTMLDivElement}
+ *
+ * @return {boolean} False for success.
+ */
 function whisperClick(event) {
 	const field = this.previousSibling;
 	const el = event.target;
