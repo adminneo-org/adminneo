@@ -42,11 +42,11 @@ function whisper(url) {
 	field.orig = field.value;
 	field.previousSibling.value = field.value; // accept number, reject string
 	return ajax(url + encodeURIComponent(field.value), xmlhttp => {
-		if (xmlhttp.status && field.orig == field.value) { // ignore old responses
+		if (xmlhttp.status && field.orig === field.value) { // ignore old responses
 			field.nextSibling.innerHTML = xmlhttp.responseText;
 			field.nextSibling.style.display = '';
 			const a = field.nextSibling.firstChild;
-			if (a?.firstChild.data == field.value) {
+			if (a?.firstChild.data === field.value) {
 				field.previousSibling.value = decodeURIComponent(a.href.replace(/.*=/, ''));
 				a.classList.add('active');
 			}
