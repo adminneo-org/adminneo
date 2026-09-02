@@ -336,7 +336,7 @@ if (!isset($_GET["import"])) {
 	echo "<p>";
 }
 
-echo checkbox("error_stops", 1, ($_POST ? $_POST["error_stops"] : isset($_GET["import"]) || $_GET["error_stops"]), lang('Stop on error'));
+echo checkbox("error_stops", 1, ($_POST ? $_POST["error_stops"] : ($_GET["error_stops"] ?? true)), lang('Stop on error'));
 echo checkbox("only_errors", 1, ($_POST ? $_POST["only_errors"] : isset($_GET["import"]) || $_GET["only_errors"]), lang('Show only errors'));
 echo input_token();
 echo "</p>\n";

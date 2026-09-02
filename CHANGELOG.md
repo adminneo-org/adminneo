@@ -8,6 +8,7 @@ AdminNeo 5.8.0
 
 - Scroll the navigation panel to the selected table when it is out of view
 - Indicate a scrolled table list in the navigation panel by a separator line
+- SQL command: Check the "Stop on error" option by default
 
 ### Bugfixes
 

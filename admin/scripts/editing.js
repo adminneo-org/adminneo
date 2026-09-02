@@ -756,7 +756,7 @@ function sqlSubmit(form, root) {
 	const action = root
 		+ '&sql=' + encodeURIComponent(form['query'].value)
 		+ (form['limit'].value ? '&limit=' + +form['limit'].value : '')
-		+ (form['error_stops'].checked ? '&error_stops=1' : '')
+		+ (form['error_stops'].checked ? '' : '&error_stops=0')
 		+ (form['only_errors'].checked ? '&only_errors=1' : '')
 	;
 	if ((location.origin + location.pathname + action).length < 2000) { // reasonable minimum is 2048
