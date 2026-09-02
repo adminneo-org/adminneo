@@ -13,6 +13,7 @@ AdminNeo 5.8.0
 ### Bugfixes
 
 - Editor: Fix JavaScript error on the select page caused by the import form (regression from 5.5.0)
+- PostgreSQL: Fix editing a record with a GENERATED ALWAYS AS IDENTITY column (fix #205, regression from 5.5.0)
 
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------
