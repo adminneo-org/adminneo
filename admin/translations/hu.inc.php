@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'óó:pp:mm', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => 'A(z) %s tömböt kell visszaadjon.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => 'A(z) %s és %s a(z) %s metódussal létrehozott objektumot kell visszaadjon.', // by Claude Opus 5
+	'%s must return an array.' => 'A(z) %s fájlnak tömböt kell visszaadnia.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => 'A(z) %s és %s által visszaadott objektumot a(z) %s metódussal kell létrehozni.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Adatbázis',
@@ -31,7 +31,7 @@ return [
 	'There is a space in the input password which might be the cause.' => 'A megadott jelszóban szóköz található, ami az ok lehet.', // by Claude Fable 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Az AdminNeo nem támogatja a jelszó nélküli adatbázis-hozzáférést, <a href="https://www.adminneo.org/password"%s>további információ</a>.', // by Claude Fable 5
 	'Database does not support password.' => 'Az adatbázis nem támogat jelszót.', // by Claude Fable 5
-	'Too many unsuccessful logins, try again in %d minute(s).' => 'Túl sok sikertelen bejelentkezés, próbálja újra %d perc múlva.', // by Claude Fable 5
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Túl sok sikertelen bejelentkezés, próbáld újra %d perc múlva.', // by Claude Fable 5.1
 	'Invalid permanent login, please login again.' => 'Érvénytelen megjegyzett belépés, jelentkezz be újra.', // by Claude Opus 5
 	'Invalid CSRF token. Send the form again.' => 'Érvénytelen CSRF azonosító. Küldd újra az űrlapot.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ha nem az AdminNeo-ból küldted ezt a kérést, akkor zárd be ezt az oldalt.', // by Claude Opus 5
@@ -108,9 +108,9 @@ return [
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'A fájlok maximális száma %d. Válassz kevesebb fájlt, vagy növeld a %s beállítást.', // by Claude Opus 5
 	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'A fájlok maximális összmérete %s. Válassz kisebb fájlokat, vagy növeld a %s beállítást.', // by Claude Opus 5
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Túl sok a POST adat! Csökkentsd az adat méretét, vagy növeld a %s beállítást.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'Nagy SQL fájlt FTP-n keresztül is feltölthet, és a szerverről importálhatja.', // by Claude Fable 5
+	'You can upload a big SQL file via FTP and import it from server.' => 'Nagy SQL fájlt FTP-n keresztül is feltölthetsz, és a szerverről importálhatod.', // by Claude Fable 5.1
 	'File must be in UTF-8 encoding.' => 'A fájlnak UTF-8 kódolásúnak kell lennie.', // by Claude Fable 5
-	'You are offline.' => 'Ön offline állapotban van.', // by Claude Fable 5
+	'You are offline.' => 'Offline vagy.', // by Claude Fable 5.1
 	'%d row(s) have been imported.' => '%d sor importálva.',
 
 	// Export
@@ -170,7 +170,7 @@ return [
 	'Check' => 'Ellenőrzés',
 	'Repair' => 'Javít',
 	'Truncate' => 'Felszabadít',
-	'Truncate Cascade' => 'Felszabadít kaszkádolva', // by Claude Opus 5
+	'Truncate Cascade' => 'Felszabadít (kaszkád)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'A tábla felszabadítva.',
 	'Move to other database' => 'Áthelyezés másik adatbázisba',
 	'Move' => 'Áthelyez',
@@ -222,8 +222,8 @@ return [
 
 	// Partitions
 	'Partition by' => 'Particionálás ezzel',
-	'Partition' => 'Partició', // by Claude Opus 5
-	'Partitions' => 'Particiók',
+	'Partition' => 'Partíció', // by Claude Fable 5.1
+	'Partitions' => 'Partíciók', // by Claude Fable 5.1
 	'Partition name' => 'Partició neve',
 	'Values' => 'Értékek',
 	'Inherited tables' => 'Örökölt táblák', // by Claude Opus 5
@@ -366,7 +366,7 @@ return [
 	'Item has been deleted.' => 'A tétel törölve.',
 	'Item has been updated.' => 'A tétel frissítve.',
 	'%d item(s) have been affected.' => '%d tétel érintett.',
-	'You have no privileges to update this table.' => 'Nincs jogosultsága a tábla frissítéséhez.', // by Claude Fable 5
+	'You have no privileges to update this table.' => 'Nincs jogosultságod a tábla frissítéséhez.', // by Claude Fable 5.1
 
 	// Data type descriptions
 	'Numbers' => 'Szám',
@@ -395,12 +395,12 @@ return [
 	'Dual' => 'Kettős', // by Claude Opus 5
 	'Dual on hover' => 'Kettős rámutatáskor', // by Claude Opus 5
 	'Reversed' => 'Fordított', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'A fő navigáció elrendezése a tábla hivatkozásokkal.', // by Claude Opus 5
-	'Table links' => 'Tábla hivatkozások', // by Claude Opus 5
-	'Primary action for all table links.' => 'Az elsődleges művelet minden tábla hivatkozáshoz.', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'A fő navigáció elrendezése a táblahivatkozásokkal.', // by Claude Fable 5.1
+	'Table links' => 'Táblahivatkozások', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Az elsődleges művelet minden táblahivatkozáshoz.', // by Claude Fable 5.1
 	'Links to tables referencing the current row.' => 'Hivatkozások az aktuális sorra hivatkozó táblákra.', // by Claude Opus 5
-	'Display' => 'Mutat', // by Claude Opus 5
-	'Hide' => 'Elrejt', // by Claude Opus 5
+	'Display' => 'Megjelenítés', // by Claude Fable 5.1
+	'Hide' => 'Elrejtés', // by Claude Fable 5.1
 	'Records per page' => 'Rekord oldalanként', // by Claude Opus 5
 	'Default number of records displayed in data table.' => 'Az adattáblában megjelenített rekordok alapértelmezett száma.', // by Claude Opus 5
 	'Enum as select' => 'Enum legördülő listaként', // by Claude Opus 5

@@ -431,9 +431,9 @@ return [
 	'Dual' => 'Двойной', // by Claude Opus 5
 	'Dual on hover' => 'Двойной при наведении', // by Claude Opus 5
 	'Reversed' => 'Обратный', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Расположение главной навигации со ссылками таблиц.', // by Claude Opus 5
-	'Table links' => 'Ссылки таблиц', // by Claude Opus 5
-	'Primary action for all table links.' => 'Основное действие для всех ссылок таблиц.', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Расположение главной навигации со ссылками на таблицы.', // by Claude Fable 5.1
+	'Table links' => 'Ссылки на таблицы', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Основное действие для всех ссылок на таблицы.', // by Claude Fable 5.1
 	'Links to tables referencing the current row.' => 'Ссылки на таблицы, ссылающиеся на текущую запись.', // by Claude Opus 5
 	'Display' => 'Показывать', // by Claude Opus 5
 	'Hide' => 'Скрыть', // by Claude Opus 5

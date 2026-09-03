@@ -114,7 +114,7 @@ return [
 	'Webserver file %s' => 'Ficheiro de servidor web %s',
 	'Run file' => 'Executar ficheiro',
 	'File does not exist.' => 'O ficheiro non existe.',
-	'File uploads are disabled.' => 'Importación de ficheiros deshabilitada.', // by Claude Opus 5
+	'File uploads are disabled.' => 'A subida de ficheiros está desactivada.', // by Claude Fable 5.1
 	'Unable to upload a file.' => 'Non é posible importar o ficheiro.',
 	'Maximum allowed file size is %sB.' => 'O tamaño máximo de ficheiro permitido é de %sB.',
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'O número máximo de ficheiros é %d. Seleccione menos ficheiros ou aumente a directiva de configuración %s.', // by Claude Opus 5
@@ -160,7 +160,7 @@ return [
 	'Schema' => 'Esquema',
 	'schema' => 'esquema', // by Claude Opus 5
 	'Schemas' => 'Esquemas', // by Claude Opus 5
-	'No schemas.' => 'Nengún esquema.', // by Claude Opus 5
+	'No schemas.' => 'Ningún esquema.', // by Claude Fable 5.1
 	'Show schema' => 'Amosar esquema', // by Claude Opus 5
 	'Alter schema' => 'Modificar esquema',
 	'Create schema' => 'Crear esquema',
@@ -437,7 +437,7 @@ return [
 	'Threshold for displaying a selection menu for enum fields.' => 'Límite para amosar un menú de selección nos campos enum.', // by Claude Opus 5
 
 	// Plugins
-	'One Time Password' => 'Contrasinal de un só uso', // by Claude Opus 5
+	'One Time Password' => 'Contrasinal dun só uso', // by Claude Fable 5.1
 	'Enter OTP code.' => 'Introduza o código OTP.', // by Claude Opus 5
 	'Invalid OTP code.' => 'Código OTP inválido.', // by Claude Opus 5
 	'Access denied.' => 'Acceso denegado.', // by Claude Opus 5

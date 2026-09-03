@@ -35,7 +35,7 @@ return [
 		'Massa intents d\'inici de sessió fallits, torneu-ho a provar d\'aquí a %d minut.',
 		'Massa intents d\'inici de sessió fallits, torneu-ho a provar d\'aquí a %d minuts.',
 	], // by Claude Fable 5
-	'Invalid permanent login, please login again.' => 'Sessió permanent invàlida, torna a iniciar-ne una.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Sessió permanent invàlida, torna a iniciar la sessió.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF invàlid. Torna a enviar el formulari.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Si no heu enviat aquesta sol·licitud des d\'AdminNeo, tanqueu aquesta pàgina.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'L\'acció es durà a terme després d\'iniciar la sessió correctament amb les mateixes credencials.', // by Claude Fable 5
@@ -346,7 +346,7 @@ return [
 	'Sort' => 'Ordena',
 	'descending' => 'descendent',
 	'Limit' => 'Límit',
-	'Limit rows' => 'Límit de registres', // by Claude Fable 5
+	'Limit rows' => 'Límit de files', // by Claude Fable 5.1
 	'Text length' => 'Longitud del text',
 	'Action' => 'Acció',
 	'Full table scan' => 'Escaneig complet de la taula', // by Claude Fable 5

@@ -36,7 +36,7 @@ return [
 		'Prea multe autentificări nereușite, încercați din nou peste %d minute.',
 		'Prea multe autentificări nereușite, încercați din nou peste %d de minute.',
 	], // by Claude Fable 5
-	'Invalid permanent login, please login again.' => 'Logare permanentă incorectă, rog să vă conectați din nou.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Logare permanentă incorectă, vă rugăm să vă conectați din nou.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Dacă nu ați trimis această cerere din AdminNeo, închideți această pagină.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5
@@ -121,8 +121,8 @@ return [
 	'File uploads are disabled.' => 'Încărcarea fișierelor este interzisă.',
 	'Unable to upload a file.' => 'Nu am putut încărca fișierul pe server.',
 	'Maximum allowed file size is %sB.' => 'Fișierul maxim admis - %sO.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Numărul maxim de fișiere este %d. Alegeți mai puține fișiere sau măriți parametrul configurației directivei %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Mărimea totală maximă a fișierelor este %s. Alegeți fișiere mai mici sau măriți parametrul configurației directivei %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Numărul maxim de fișiere este %d. Alegeți mai puține fișiere sau măriți valoarea directivei de configurare %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Mărimea totală maximă a fișierelor este %s. Alegeți fișiere mai mici sau măriți valoarea directivei de configurare %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Mesajul POST este prea mare. Trimiteți mai puține date sau măriți parametrul configurației directivei %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Puteți încărca un fișier SQL mare prin FTP și să îl importați de pe server.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'Fișierul trebuie să fie codificat UTF-8.', // by Claude Fable 5
@@ -336,7 +336,7 @@ return [
 
 	// Table check constraints
 	'Checks' => 'Verificări', // by Claude Fable 5
-	'Create check' => 'Crează verificare', // by Claude Fable 5
+	'Create check' => 'Creează verificare', // by Claude Fable 5.1
 	'Alter check' => 'Modifică verificarea', // by Claude Fable 5
 	'Check has been created.' => 'Verificarea a fost creată.', // by Claude Fable 5
 	'Check has been altered.' => 'Verificarea a fost modificată.', // by Claude Fable 5
@@ -452,6 +452,6 @@ return [
 	'Access denied.' => 'Acces interzis.', // by Claude Opus 5
 	'JSON previews' => 'Previzualizări JSON', // by Claude Opus 5
 	'Data table' => 'Tabelul de date', // by Claude Opus 5
-	'Edit form' => 'Forma de editare', // by Claude Opus 5
+	'Edit form' => 'Formular de editare', // by Claude Fable 5.1
 	'Ask %s' => 'Întreabă %s', // by Claude Opus 5
 ];

@@ -117,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'Έχει απενεργοποιηθεί η μεταφόρτωση αρχείων.',
 	'Unable to upload a file.' => 'Αδυναμία μεταφόρτωσης αρχείου.',
 	'Maximum allowed file size is %sB.' => 'Το μέγιστο επιτρεπόμενο μέγεθος αρχείου είναι %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Ο μέγιστος αριθμός αρχείων είναι %d. Επιλέξτε λιγότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Το μέγιστο συνολικό μέγεθος των αρχείων είναι %s. Επιλέξτε μικρότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Ο μέγιστος αριθμός αρχείων είναι %d. Επιλέξτε λιγότερα αρχεία ή αυξήστε τη σχετική ρύθμιση %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Το μέγιστο συνολικό μέγεθος των αρχείων είναι %s. Επιλέξτε μικρότερα αρχεία ή αυξήστε τη σχετική ρύθμιση %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Πολλά δεδομένα POST. Μείωστε τα περιεχόμενα ή αυξήστε την σχετική ρύθμιση %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Μπορείτε να μεταφορτώσετε ένα μεγάλο αρχείο SQL μέσω FTP και να το εισάγετε από το διακομιστή.',
 	'File must be in UTF-8 encoding.' => 'Το αρχείο πρέπει να έχει κωδικοποίηση UTF-8.',
@@ -137,8 +137,8 @@ return [
 	'Data' => 'Δεδομένα',
 
 	// Databases
-	'Database' => 'Β. Δεδομένων',
-	'database' => 'β. δεδομένων', // by Claude Opus 5
+	'Database' => 'Βάση Δεδομένων', // by Claude Fable 5.1
+	'database' => 'βάση δεδομένων', // by Claude Fable 5.1
 	'DB' => 'ΒΔ', // by Claude Fable 5
 	'Use' => 'χρήση',
 	'Invalid database.' => 'Λανθασμένη Β.Δ.',

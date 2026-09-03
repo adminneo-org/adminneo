@@ -36,7 +36,7 @@ return [
 		'Pieteikšanās mēģinājumu skaits par lielu. Mēginiet pēc %d minūtēm.',
 		'Pieteikšanās mēģinājumu skaits par lielu. Mēginiet pēc %d minūtēm.',
 	],
-	'Invalid permanent login, please login again.' => 'Nederīga pastāvīgā pieteikšanās, piesakies no jauna sistēmā.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Nederīga pastāvīgā pieteikšanās, lūdzu, piesakieties vēlreiz.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Nederīgs CSRF žetons. Nosūtiet formu vēl vienu reizi.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ja nesūtījāt šo pieprasījumu no AdminNeo, tad aizveriet pārlūka logu.',
 	'The action will be performed after successful login with the same credentials.' => 'Darbība tiks pabeigta pēc derīgas pieteikšanās sistēmā.',
@@ -314,7 +314,7 @@ return [
 	'Sequences' => 'Sekvences', // by Claude Fable 5
 	'Create sequence' => 'Izveidot sekvenci', // by Claude Fable 5
 	'Sequence has been dropped.' => 'Sekvence dzēsta.', // by Claude Fable 5
-	'Sequence has been created.' => 'Izveidota sekvence.', // by Claude Fable 5
+	'Sequence has been created.' => 'Sekvence izveidota.', // by Claude Fable 5.1
 	'Sequence has been altered.' => 'Sekvence izmainīta.', // by Claude Fable 5
 	'Alter sequence' => 'Izmainīt sekvenci', // by Claude Fable 5
 

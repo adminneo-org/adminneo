@@ -35,7 +35,7 @@ return [
 		'For mange mislykkede loginforsøg, prøv igen om %d minut.',
 		'For mange mislykkede loginforsøg, prøv igen om %d minutter.',
 	], // by Claude Fable 5
-	'Invalid permanent login, please login again.' => 'Ugyldigt permanent login - Log venligst ind igen.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Ugyldigt permanent login, log venligst ind igen.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Ugyldigt CSRF-token - Genindsend formen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke har sendt denne forespørgsel fra AdminNeo, så luk denne side.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'Handlingen udføres efter vellykket login med de samme loginoplysninger.', // by Claude Fable 5
@@ -114,8 +114,8 @@ return [
 	'File uploads are disabled.' => 'Fil upload er slået fra.',
 	'Unable to upload a file.' => 'Kunne ikke uploade fil.',
 	'Maximum allowed file size is %sB.' => 'Maksimum tilladte filstørrelse er %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimum antal filer er %d. Vælg færre filer eller øg størrelsen i %s-konfigurationen.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimum samlet filstørrelse er %s. Vælg mindre filer eller øg størrelsen i %s-konfigurationen.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimum antal filer er %d. Vælg færre filer eller øg værdien i %s-konfigurationen.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimum samlet filstørrelse er %s. Vælg mindre filer eller øg værdien i %s-konfigurationen.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Maks POST data er overskredet. Reducer mængden af data eller øg størrelsen i %s-konfigurationen.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan uploade en stor SQL-fil via FTP og importere den fra serveren.',
 	'File must be in UTF-8 encoding.' => 'Filen skal være i UTF8-tegnkoding.',
@@ -182,7 +182,7 @@ return [
 	'Check' => 'Tjek',
 	'Repair' => 'Reparer',
 	'Truncate' => 'Afkort',
-	'Truncate Cascade' => 'Afkort kaskade', // by Claude Opus 5
+	'Truncate Cascade' => 'Afkort (kaskade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellerne er blevet afkortet.',
 	'Move to other database' => 'Flyt til anden database',
 	'Move' => 'Flyt',

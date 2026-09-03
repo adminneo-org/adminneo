@@ -12,6 +12,7 @@ AdminNeo 5.8.0
 - SQL command: Check the "Stop on error" option by default
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
 - MS SQL: Hide table actions and row editing in the sys schema
+- Fix mistranslated texts in all languages (AI reviewed)
 
 ### Bugfixes
 

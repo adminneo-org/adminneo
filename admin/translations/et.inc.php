@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Logi välja',
 	'Logged as: %s' => 'Sisse logitud: %s',
 	'Logout successful.' => 'Väljalogimine õnnestus.',
-	'hostname[:port] or :socket' => 'hostinimi[:port] või :sokkel', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'hostname[:port] või :socket', // by Claude Fable 5.1
 	'Invalid server or credentials.' => 'Sobimatu server või sisselogimisandmed.', // by Claude Opus 5
 	'There is a space in the input password which might be the cause.' => 'Sisestatud paroolis on tühik, mis võib olla põhjuseks.', // by Claude Opus 5
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei toeta andmebaasi kasutamist ilma paroolita, <a href="https://www.adminneo.org/password"%s>rohkem infot</a>.', // by Claude Opus 5
@@ -346,7 +346,7 @@ return [
 	'Page' => 'Lehekülg',
 	'last' => 'viimane',
 	'Load more data' => 'Laadi rohkem andmeid', // by Claude Opus 5
-	'Loading' => 'Laadin', // by Claude Opus 5
+	'Loading' => 'Laadimine', // by Claude Fable 5.1
 	'Whole result' => 'Täielikud tulemused',
 	'%d byte(s)' => [
 		'%d bait',
@@ -367,7 +367,7 @@ return [
 	'Save' => 'Salvesta',
 	'Save and continue edit' => 'Salvesta ja jätka muutmist',
 	'Save and insert next' => 'Salvesta ja lisa järgmine',
-	'Saving' => 'Salvestan', // by Claude Opus 5
+	'Saving' => 'Salvestamine', // by Claude Fable 5.1
 	'Selected' => 'Valitud', // by Claude Opus 5
 	'Clone' => 'Kloon',
 	'Delete' => 'Kustuta',
@@ -399,10 +399,10 @@ return [
 	'By system' => 'Süsteemi järgi', // by Claude Opus 5
 	'Light' => 'Hele', // by Claude Opus 5
 	'Dark' => 'Tume', // by Claude Opus 5
-	'Navigation mode' => 'Navigeerimise režiim', // by Claude Opus 5
+	'Navigation mode' => 'Navigeerimisrežiim', // by Claude Fable 5.1
 	'Simple' => 'Lihtne', // by Claude Opus 5
-	'Dual' => 'Kahene', // by Claude Opus 5
-	'Dual on hover' => 'Kahene hiirega osutades', // by Claude Opus 5
+	'Dual' => 'Kaheosaline', // by Claude Fable 5.1
+	'Dual on hover' => 'Kaheosaline hiirega osutades', // by Claude Fable 5.1
 	'Reversed' => 'Vastupidine', // by Claude Opus 5
 	'Layout of main navigation with table links.' => 'Peamise navigeerimise paigutus tabelilinkidega.', // by Claude Opus 5
 	'Table links' => 'Tabelilingid', // by Claude Opus 5

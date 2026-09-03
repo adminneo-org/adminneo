@@ -35,7 +35,7 @@ return [
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минута.',
 		'Прекалено много неуспешни опити за вход, опитайте пак след %d минути.',
 	],
-	'Invalid permanent login, please login again.' => 'Невалидно запаметено влизане; моля, влезте отново.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Невалидно запаметено влизане, моля, влезте отново.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Невалиден шифроващ ключ. Попълнете и изпратете формуляра отново.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ако не сте изпратили тази заявка през AdminNeo, затворете тази страница.',
 	'The action will be performed after successful login with the same credentials.' => 'Действието ще бъде извършено след успешно влизане със същите данни.', // by Claude Fable 5

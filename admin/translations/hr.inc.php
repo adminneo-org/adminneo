@@ -434,7 +434,7 @@ return [
 	'Layout of main navigation with table links.' => 'Raspored glavne navigacije s vezama tablica.', // by Claude Opus 5
 	'Table links' => 'Veze tablica', // by Claude Opus 5
 	'Primary action for all table links.' => 'Glavna radnja za sve veze tablica.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Veze na tablice koje se referenciraju na trenutni redak.', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Veze na tablice koje referenciraju trenutni redak.', // by Claude Fable 5.1
 	'Display' => 'Prikaži', // by Claude Opus 5
 	'Hide' => 'Sakrij', // by Claude Opus 5
 	'Records per page' => 'Zapisa po stranici', // by Claude Opus 5

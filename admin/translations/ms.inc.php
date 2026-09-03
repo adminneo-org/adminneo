@@ -170,7 +170,7 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Baiki',
 	'Truncate' => 'Memangkas',
-	'Truncate Cascade' => 'Memangkas secara berperingkat', // by Claude Opus 5
+	'Truncate Cascade' => 'Memangkas secara lata', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Jadual telah dimangkaskan.',
 	'Move to other database' => 'Pindahkan ke pangkalan data yang lain',
 	'Move' => 'Pindah',
@@ -226,7 +226,7 @@ return [
 	'Partitions' => 'Partition',
 	'Partition name' => 'Nama partition',
 	'Values' => 'Nilai',
-	'Inherited tables' => 'Jadual warisan', // by Claude Opus 5
+	'Inherited tables' => 'Jadual terbitan', // by Claude Fable 5.1
 	'Inherited from' => 'Diwarisi daripada', // by Claude Opus 5
 
 	// Indexes
@@ -407,7 +407,7 @@ return [
 	'Records per page' => 'Rekod setiap halaman', // by Claude Opus 5
 	'Default number of records displayed in data table.' => 'Bilangan lalai rekod yang dipaparkan dalam jadual data.', // by Claude Opus 5
 	'Enum as select' => 'Enum sebagai senarai pilihan', // by Claude Opus 5
-	'Never' => 'Tidak sesekali', // by Claude Opus 5
+	'Never' => 'Tidak pernah', // by Claude Fable 5.1
 	'Always' => 'Sentiasa', // by Claude Opus 5
 	'More values than %d' => 'Lebih daripada %d nilai', // by Claude Opus 5
 	'Threshold for displaying a selection menu for enum fields.' => 'Ambang untuk memaparkan senarai pilihan bagi kolum enum.', // by Claude Opus 5

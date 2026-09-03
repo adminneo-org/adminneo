@@ -14,7 +14,7 @@ return [
 
 	// Bootstrap
 	'%s must return an array.' => '%s უნდა აბრუნებდეს მასივს.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s და %s უნდა აბრუნებდეს ობიექტს, რომელიც შექმნილია %s მეთოდით.', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s და %s უნდა აბრუნებდნენ ობიექტს, რომელიც შექმნილია %s მეთოდით.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'სისტემა',
@@ -105,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'ფაილის სერვერზე ატვირთვა გათიშულია.',
 	'Unable to upload a file.' => 'ფაილი არ აიტვირთა სერვერზე.',
 	'Maximum allowed file size is %sB.' => 'ფაილის მაქსიმალური ზომა - %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური რაოდენობა - %d. აირჩიეთ ნაკლები ფაილი ან გაზარდეთ პარამეტრი %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური საერთო ზომა - %s. აირჩიეთ უფრო მცირე ფაილები ან გაზარდეთ პარამეტრი %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური რაოდენობა არის %d. აირჩიეთ ნაკლები ფაილი ან გაზარდეთ პარამეტრი %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ფაილების მაქსიმალური საერთო ზომა არის %s. აირჩიეთ უფრო მცირე ფაილები ან გაზარდეთ პარამეტრი %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST ინფორმაცია ძალიან დიდია. შეამცირეთ ზომა ან გაზარდეს POST ინფორმაციის ზომა პარამეტრებიდან %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'დიდი ფაილი უნდა ატვირტოთ FTP-თი და შემდეგ გაუკეთოთ იმპორტი სერვერიდან.',
 	'File must be in UTF-8 encoding.' => 'ფაილი უნდა იყოს კოდირებაში UTF-8.',

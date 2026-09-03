@@ -35,7 +35,7 @@ return [
 		'Muitas tentativas de login sem sucesso, tente novamente em %d minuto.',
 		'Muitas tentativas de login sem sucesso, tente novamente em %d minutos.',
 	], // by Claude Fable 5
-	'Invalid permanent login, please login again.' => 'Login permanente inválido, por favor logue-se novamente.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Login permanente inválido, por favor faça login novamente.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF inválido. Enviar o formulário novamente.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Se você não enviou esta requisição pelo AdminNeo, feche esta página.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'A ação será realizada após o login bem-sucedido com as mesmas credenciais.', // by Claude Fable 5

@@ -376,7 +376,7 @@ return [
 	'last' => 'Zadnja',
 	'Load more data' => 'Naloži več podatkov', // by Claude Fable 5
 	'Loading' => 'Nalaganje', // by Claude Fable 5
-	'Whole result' => 'Cel rezultat', // by Claude Opus 5
+	'Whole result' => 'Celoten rezultat', // by Claude Fable 5.1
 	'%d byte(s)' => [
 		'%d bajt',
 		'%d bajta',

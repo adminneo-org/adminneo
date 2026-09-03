@@ -215,7 +215,7 @@ return [
 	'Auto Increment' => 'Incremento Automático',
 	'Options' => 'Opções',
 	'Comment' => 'Comentário',
-	'Default value' => 'Valor predeterminado', // by Claude Fable 5
+	'Default value' => 'Valor predefinido', // by Claude Fable 5.1
 	'Drop' => 'Remover',
 	'Drop %s?' => 'Remover %s?', // by Claude Fable 5
 	'Are you sure?' => 'Tem a certeza?',

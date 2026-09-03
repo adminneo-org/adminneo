@@ -121,8 +121,8 @@ return [
 	'File uploads are disabled.' => 'Завантаження файлів заборонене.',
 	'Unable to upload a file.' => 'Неможливо завантажити файл.',
 	'Maximum allowed file size is %sB.' => 'Максимально допустимий розмір файлу %sБ.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальна кількість файлів %d. Виберіть менше файлів або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальний загальний розмір файлів %s. Виберіть менші файли або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальна кількість файлів — %d. Виберіть менше файлів або збільшіть значення директиви конфігурації %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальний загальний розмір файлів — %s. Виберіть менші файли або збільшіть значення директиви конфігурації %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Занадто великий об\'єм POST-даних. Зменшіть об\'єм або збільшіть параметр директиви %s конфигурації.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Ви можете завантажити великий файл SQL через FTP та імпортувати його з сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл повинен бути в кодуванні UTF-8.',
@@ -431,9 +431,9 @@ return [
 	'Dual' => 'Подвійний', // by Claude Opus 5
 	'Dual on hover' => 'Подвійний при наведенні', // by Claude Opus 5
 	'Reversed' => 'Зворотний', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями таблиць.', // by Claude Opus 5
-	'Table links' => 'Посилання таблиць', // by Claude Opus 5
-	'Primary action for all table links.' => 'Основна дія для всіх посилань таблиць.', // by Claude Opus 5
+	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями на таблиці.', // by Claude Fable 5.1
+	'Table links' => 'Посилання на таблиці', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Основна дія для всіх посилань на таблиці.', // by Claude Fable 5.1
 	'Links to tables referencing the current row.' => 'Посилання на таблиці, що посилаються на поточний рядок.', // by Claude Opus 5
 	'Display' => 'Показувати', // by Claude Opus 5
 	'Hide' => 'Приховати', // by Claude Opus 5

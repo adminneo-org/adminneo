@@ -55,8 +55,8 @@ return [
 	'Menu' => 'Мени', // by Claude Opus 5
 	'Home' => 'Почетна', // by Claude Opus 5
 	'Refresh' => 'Освежи',
-	'Info' => 'Подаци', // by Claude Opus 5
-	'More information.' => 'Више података.', // by Claude Opus 5
+	'Info' => 'Информације', // by Claude Fable 5.1
+	'More information.' => 'Више информација.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Дозволе',

@@ -117,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'கோப்புக‌ள் மேலேற்றம் (upload)முட‌க்க‌ப்ப‌ட்டுள்ள‌ன‌.',
 	'Unable to upload a file.' => 'கோப்பை மேலேற்ற‌ம் (upload) செய்ய‌ இயல‌வில்லை.',
 	'Maximum allowed file size is %sB.' => 'கோப்பின் அதிக‌ப‌ட்ச‌ அள‌வு %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'கோப்புக‌ளின் அதிக‌ப‌ட்ச‌ எண்ணிக்கை %d. குறைவான‌ கோப்புக‌ளை தேர்வு செய்ய‌வும் அல்ல‌து %s வ‌டிவ‌மைப்பை (configuration directive) மாற்ற‌வும்.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'கோப்புக‌ளின் அதிக‌ப‌ட்ச‌ மொத்த‌ அள‌வு %s. சிறிய‌ கோப்புக‌ளை தேர்வு செய்ய‌வும் அல்ல‌து %s வ‌டிவ‌மைப்பை (configuration directive) மாற்ற‌வும்.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'கோப்புக‌ளின் அதிக‌ப‌ட்ச‌ எண்ணிக்கை %d. குறைவான‌ கோப்புக‌ளை தேர்வு செய்ய‌வும் அல்ல‌து %s வ‌டிவ‌மைப்பை (configuration directive) அதிக‌ரிக்க‌வும்.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'கோப்புக‌ளின் அதிக‌ப‌ட்ச‌ மொத்த‌ அள‌வு %s. சிறிய‌ கோப்புக‌ளை தேர்வு செய்ய‌வும் அல்ல‌து %s வ‌டிவ‌மைப்பை (configuration directive) அதிக‌ரிக்க‌வும்.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'மிக‌ அதிக‌மான‌ POST த‌க‌வ‌ல். த‌க‌வ‌லை குறைக்க‌வும் அல்ல‌து %s வ‌டிவ‌மைப்பை (configuration directive) மாற்ற‌வும்.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'பெரிய‌ SQL கோப்பை FTP வ‌ழியாக‌ மேலேற்றி, ச‌ர்வ‌ரிலிருந்து இற‌க்கும‌தி செய்ய‌லாம்.', // by Claude Opus 5
 	'File must be in UTF-8 encoding.' => 'கோப்பு UTF-8 குறியாக்க‌த்தில் இருக்க‌ வேண்டும்.', // by Claude Opus 5
@@ -224,7 +224,7 @@ return [
 	'Move up' => 'மேலே ந‌க‌ர்த்து',
 	'Move down' => 'கீழே நக‌ர்த்து',
 	'Remove' => 'நீக்கு',
-	'Maximum number of allowed fields exceeded. Please increase %s.' => 'அனும‌திக்க‌ப்ப‌ட்ட‌ அதிக‌ப‌ட்ச‌ கோப்புக‌ளின் எண்ணிக்கை மீற‌ப்ப‌ட்ட‌து. த‌ய‌வு செய்து %s யை அதிக‌ரிக்க‌வும்.', // by Claude Fable 5
+	'Maximum number of allowed fields exceeded. Please increase %s.' => 'அனும‌திக்க‌ப்ப‌ட்ட‌ அதிக‌ப‌ட்ச‌ புல‌ங்க‌ளின் எண்ணிக்கை மீற‌ப்ப‌ட்ட‌து. த‌ய‌வு செய்து %s யை அதிக‌ரிக்க‌வும்.', // by Claude Fable 5.1
 
 	// Views
 	'View' => 'தோற்றம்',
@@ -393,7 +393,7 @@ return [
 		'%d உருப்ப‌டி மாற்ற‌ம‌டைந்தது.',
 		'%d உருப்ப‌டிக‌ள் மாற்ற‌ம‌டைந்த‌ன‌.',
 	],
-	'You have no privileges to update this table.' => 'இந்த‌ அட்ட‌வ‌ணையை புதுப்பிக்க‌ உங்க‌ளுக்கு ச‌லுகைக‌ள் இல்லை.', // by Claude Opus 5
+	'You have no privileges to update this table.' => 'இந்த‌ அட்ட‌வ‌ணையை புதுப்பிக்க‌ உங்க‌ளுக்கு உரிமை இல்லை.', // by Claude Fable 5.1
 
 	// Data type descriptions
 	'Numbers' => 'எண்க‌ள்',
@@ -415,8 +415,8 @@ return [
 	'Default' => 'இய‌ல்பு', // by Claude Opus 5
 	'Color scheme' => 'வ‌ண்ண‌ அமைப்பு', // by Claude Opus 5
 	'By system' => 'சிஸ்ட‌ம் ப‌டி', // by Claude Opus 5
-	'Light' => 'ஒளிர்வு', // by Claude Opus 5
-	'Dark' => 'இருள்', // by Claude Opus 5
+	'Light' => 'வெளிர்', // by Claude Fable 5.1
+	'Dark' => 'இருண்ட', // by Claude Fable 5.1
 	'Navigation mode' => 'வ‌ழிசெலுத்த‌ல் முறை', // by Claude Opus 5
 	'Simple' => 'எளிமையான‌', // by Claude Opus 5
 	'Dual' => 'இர‌ட்டை', // by Claude Opus 5

@@ -14,7 +14,7 @@ return [
 
 	// Bootstrap
 	'%s must return an array.' => '%s অবশ্যই একটি অ্যারে ফেরত দিতে হবে।', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরী একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Opus 5
+	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরি একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'সিস্টেম',
@@ -108,8 +108,8 @@ return [
 	'File uploads are disabled.' => 'ফাইল আপলোড নিষ্ক্রিয় করা আছে।',
 	'Unable to upload a file.' => 'ফাইল আপলোড করা সম্ভব হচ্ছে না।',
 	'Maximum allowed file size is %sB.' => 'সর্বাধিক অনুমোদিত ফাইল সাইজ %sB।',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক সংখ্যা %d। কম ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক মোট সাইজ %s। ছোট ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক সংখ্যা %d। কম ফাইল নির্বাচন করুন অথবা %s কনফিগারেশন নির্দেশের মান বাড়ান।', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক মোট সাইজ %s। ছোট ফাইল নির্বাচন করুন অথবা %s কনফিগারেশন নির্দেশের মান বাড়ান।', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'খুব বড় POST ডাটা। ডাটা সংক্ষিপ্ত করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।',
 	'You can upload a big SQL file via FTP and import it from server.' => 'আপনি FTP এর মাধ্যমে একটি বড় SQL ফাইল আপলোড করতে পারেন এবং সার্ভার থেকে এটি ইম্পোর্ট করতে পারেন।',
 	'File must be in UTF-8 encoding.' => 'ফাইলটি UTF-8 এনকোডিংয়ে হতে হবে।',
@@ -230,7 +230,7 @@ return [
 	'Partition name' => 'পার্টিশনের নাম',
 	'Values' => 'মানসমূহ',
 	'Inherited tables' => 'উত্তরাধিকারসূত্রে পাওয়া টেবিলসমূহ', // by Claude Opus 5
-	'Inherited from' => 'উত্তরাধিকারসূত্রে পাওয়া', // by Claude Opus 5
+	'Inherited from' => 'উত্তরাধিকারের উৎস', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'সূচীসমূহ',
@@ -426,5 +426,5 @@ return [
 	'JSON previews' => 'JSON প্রাকদর্শন', // by Claude Opus 5
 	'Data table' => 'ডাটা টেবিল', // by Claude Opus 5
 	'Edit form' => 'সম্পাদনা ফর্ম', // by Claude Opus 5
-	'Ask %s' => '%s কে জিজ্ঞাসা করুন', // by Claude Opus 5
+	'Ask %s' => '%s-কে জিজ্ঞাসা করুন', // by Claude Fable 5.1
 ];

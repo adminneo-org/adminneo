@@ -35,8 +35,8 @@ return [
 		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutt.',
 		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutter.',
 	], // by Claude Fable 5
-	'Invalid permanent login, please login again.' => 'Ugyldig permanent login - vennligst logg inn på nytt.', // by Claude Opus 5
-	'Invalid CSRF token. Send the form again.' => 'Ugyldig CSRF-token - Send inn skjemaet igjen.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Ugyldig permanent login, vennligst logg inn på nytt.', // by Claude Fable 5.1
+	'Invalid CSRF token. Send the form again.' => 'Ugyldig CSRF-token. Send inn skjemaet igjen.', // by Claude Fable 5.1
 	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke sendte denne forespørselen fra AdminNeo, lukk denne siden.', // by Claude Fable 5
 	'The action will be performed after successful login with the same credentials.' => 'Handlingen utføres etter vellykket innlogging med samme påloggingsinformasjon.', // by Claude Fable 5
 
@@ -114,8 +114,8 @@ return [
 	'File uploads are disabled.' => 'Filopplastinger ikke tillatt.',
 	'Unable to upload a file.' => 'Kunne ikke laste opp fil.',
 	'Maximum allowed file size is %sB.' => 'Maksimum tillatte filstørrelse er %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimalt antall filer er %d. Velg færre filer, eller øk størrelsen på %s-konfigurasjonsdirektivet.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimal samlet filstørrelse er %s. Velg mindre filer, eller øk størrelsen på %s-konfigurasjonsdirektivet.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Maksimalt antall filer er %d. Velg færre filer, eller øk verdien av konfigurasjonsdirektivet %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Maksimal samlet filstørrelse er %s. Velg mindre filer, eller øk verdien av konfigurasjonsdirektivet %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'For stor datamengde i skjemaet. Reduser datamengden, eller øk størrelsen på %s-konfigurasjonsdirektivet.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan laste opp en stor SQL-fil via FTP og importere den fra serveren.',
 	'File must be in UTF-8 encoding.' => 'Filen må være i UTF8-tegnkoding.',
@@ -182,7 +182,7 @@ return [
 	'Check' => 'Sjekk',
 	'Repair' => 'Reparer',
 	'Truncate' => 'Avkort',
-	'Truncate Cascade' => 'Avkort kaskade', // by Claude Opus 5
+	'Truncate Cascade' => 'Avkort (kaskade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellene har blitt avkortet.',
 	'Move to other database' => 'Flytt til annen database',
 	'Move' => 'Flytt',

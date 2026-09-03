@@ -105,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'Pengunggahan berkas dimatikan.',
 	'Unable to upload a file.' => 'Tidak dapat mengunggah berkas.',
 	'Maximum allowed file size is %sB.' => 'Besar berkas yang diizinkan adalah %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Jumlah berkas maksimum adalah %d. Pilih lebih sedikit berkas atau perbesar direktif konfigurasi %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Besar total berkas maksimum adalah %s. Pilih berkas yang lebih kecil atau perbesar direktif konfigurasi %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Jumlah berkas maksimum adalah %d. Pilih lebih sedikit berkas atau tingkatkan nilai direktif konfigurasi %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Ukuran total berkas maksimum adalah %s. Pilih berkas yang lebih kecil atau tingkatkan nilai direktif konfigurasi %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Data POST terlalu besar. Kurangi data atau perbesar direktif konfigurasi %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Anda dapat mengunggah berkas SQL besar melalui FTP dan mengimpornya dari server.', // by Claude Fable 5
 	'File must be in UTF-8 encoding.' => 'Berkas harus dalam pengodean UTF-8.', // by Claude Fable 5
@@ -226,7 +226,7 @@ return [
 	'Partitions' => 'Partisi',
 	'Partition name' => 'Nama partisi',
 	'Values' => 'Nilai',
-	'Inherited tables' => 'Tabel warisan', // by Claude Opus 5
+	'Inherited tables' => 'Tabel turunan', // by Claude Fable 5.1
 	'Inherited from' => 'Diwarisi dari', // by Claude Opus 5
 
 	// Indexes

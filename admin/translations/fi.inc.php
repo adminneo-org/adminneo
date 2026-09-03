@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s täytyy palauttaa taulukko.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s ja %s täytyy palauttaa olio, joka on luotu metodilla %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s:n täytyy palauttaa taulukko.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s:n ja %s:n täytyy palauttaa olio, joka on luotu metodilla %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Järjestelmä',
@@ -179,7 +179,7 @@ return [
 	'Check' => 'Tarkista',
 	'Repair' => 'Korjaa',
 	'Truncate' => 'Tyhjennä',
-	'Truncate Cascade' => 'Tyhjennä kaskadisesti', // by Claude Opus 5
+	'Truncate Cascade' => 'Tyhjennä (cascade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Taulujen sisältö on tyhjennetty.',
 	'Move to other database' => 'Siirrä toiseen tietokantaan',
 	'Move' => 'Siirrä',

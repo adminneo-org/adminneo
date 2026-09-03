@@ -130,7 +130,7 @@ return [
 	// Databases
 	'Database' => 'قاعدة بيانات',
 	'database' => 'قاعدة بيانات', // by Claude Opus 5
-	'DB' => 'ق.ب', // by Claude Opus 5
+	'DB' => 'قاعدة', // by Claude Fable 5.1
 	'Use' => 'استعمال',
 	'Invalid database.' => 'قاعدة البيانات غير صالحة.',
 	'Alter database' => 'تعديل قاعدة البيانات',
@@ -317,12 +317,12 @@ return [
 	'Create trigger' => 'إنشاء زناد',
 
 	// Table check constraints
-	'Checks' => 'الفحوصات', // by Claude Opus 5
-	'Create check' => 'إنشاء فحص', // by Claude Opus 5
-	'Alter check' => 'تعديل فحص', // by Claude Opus 5
-	'Check has been created.' => 'تم إنشاء الفحص.', // by Claude Opus 5
-	'Check has been altered.' => 'تم تعديل الفحص.', // by Claude Opus 5
-	'Check has been dropped.' => 'تم حذف الفحص.', // by Claude Opus 5
+	'Checks' => 'قيود التحقق', // by Claude Fable 5.1
+	'Create check' => 'إنشاء قيد تحقق', // by Claude Fable 5.1
+	'Alter check' => 'تعديل قيد تحقق', // by Claude Fable 5.1
+	'Check has been created.' => 'تم إنشاء قيد التحقق.', // by Claude Fable 5.1
+	'Check has been altered.' => 'تم تعديل قيد التحقق.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'تم حذف قيد التحقق.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'عرض البيانات',

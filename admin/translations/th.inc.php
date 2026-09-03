@@ -83,7 +83,7 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'ประมวลผลคำสั่งแล้ว มี %d ถูกดำเนินการ.',
 	'No commands to execute.' => 'ไม่มีคำสั่งที่จะประมวลผล.',
 	'Error in query' => 'คำสั่งไม่ถูกต้อง',
-	'Unknown error.' => 'เออเรอที่ไม่รู้จัก.', // by Claude Opus 5
+	'Unknown error.' => 'ข้อผิดพลาดที่ไม่รู้จัก.', // by Claude Fable 5.1
 	'Warnings' => 'คำเตือน', // by Claude Opus 5
 	'%s queries are not supported.' => 'ไม่รองรับคำสั่ง %s.', // by Claude Opus 5
 	'Execute' => 'ประมวลผล',
@@ -105,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'การอัปโหลดไฟล์ถูกปิดการใช้งาน.',
 	'Unable to upload a file.' => 'ไม่สามารถอัปโหลดไฟล์ได้.',
 	'Maximum allowed file size is %sB.' => 'ขนาดไฟล์สูงสุดที่อนุญาตให้ใช้งานคือ %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'จำนวนไฟล์สูงสุดคือ %d เลือกไฟล์ให้น้อยลงหรือเพิ่มค่า %s คำสั่งการตั้งค่า.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ขนาดรวมของไฟล์สูงสุดคือ %s เลือกไฟล์ที่เล็กลงหรือเพิ่มค่า %s คำสั่งการตั้งค่า.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'จำนวนไฟล์สูงสุดคือ %d เลือกไฟล์ให้น้อยลงหรือเพิ่มค่าของคำสั่งการตั้งค่า %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ขนาดรวมของไฟล์สูงสุดคือ %s เลือกไฟล์ที่เล็กลงหรือเพิ่มค่าของคำสั่งการตั้งค่า %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'ข้อมูลที่ส่งเข้ามีขนาดใหญ่เกิน คุณสามารถ เพิ่ม-ลดขนาดได้ที่ %s คำสั่งการตั้งค่า.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'คุณสามารถอัปโหลดไฟล์ SQL ขนาดใหญ่ผ่าน FTP แล้วนำเข้าจากเซอเวอร์.', // by Claude Opus 5
 	'File must be in UTF-8 encoding.' => 'ไฟล์ต้องอยู่ในรูปแบบการเข้ารหัส UTF-8.', // by Claude Opus 5
@@ -170,7 +170,7 @@ return [
 	'Check' => 'ตรวจสอบ',
 	'Repair' => 'ซ่อมแซม',
 	'Truncate' => 'ตัดทิ้ง',
-	'Truncate Cascade' => 'ตัดทิ้งแบบต่อเนื่อง', // by Claude Opus 5
+	'Truncate Cascade' => 'ตัดทิ้งแบบลูกโซ่', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'เคลียร์ตารางแล้ว (truncate).',
 	'Move to other database' => 'ย้ายไปยังฐานข้อมูลอื่น',
 	'Move' => 'ย้าย',

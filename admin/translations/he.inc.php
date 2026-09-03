@@ -105,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'העלאת קבצים מבוטלת',
 	'Unable to upload a file.' => 'העלאת הקובץ נכשלה',
 	'Maximum allowed file size is %sB.' => 'גודל מקסימלאי להעלאה: %sB',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'מספר הקבצים המקסימלי הוא %d. בחר פחות קבצים או הגדל את הגדרות ה-%s', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'הגודל הכולל המקסימלי של הקבצים הוא %s. בחר קבצים קטנים יותר או הגדל את הגדרות ה-%s', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'מספר הקבצים המקסימלי הוא %d. בחר פחות קבצים או הגדל את ערך ההגדרה %s', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'הגודל הכולל המקסימלי של הקבצים הוא %s. בחר קבצים קטנים יותר או הגדל את ערך ההגדרה %s', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'מידע גדול מידי נשלח ב-POST. הקטן את את המידע הוא הגדלת את הגדרות ה-%s',
 	'You can upload a big SQL file via FTP and import it from server.' => 'ניתן לעלות קבצים ב-FTP ואז למשוך אותם מהשרת',
 	'File must be in UTF-8 encoding.' => 'על הקובץ להיות בקידוד utf-8',
@@ -213,7 +213,7 @@ return [
 
 	// Views
 	'View' => 'הצג',
-	'Materialized view' => 'תצוגת מימוש', // by Claude Opus 5
+	'Materialized view' => 'תצוגה ממומשת', // by Claude Fable 5.1
 	'View has been dropped.' => 'התצוגה הושלכה',
 	'View has been altered.' => 'התצוגה שונתה',
 	'View has been created.' => 'התצוגה נוצרה',
@@ -227,7 +227,7 @@ return [
 	'Partition name' => 'שם מחיצה',
 	'Values' => 'ערכים',
 	'Inherited tables' => 'טבלאות יורשות', // by Claude Opus 5
-	'Inherited from' => 'יורשת מ', // by Claude Opus 5
+	'Inherited from' => 'טבלאות אב', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'אינדקסים',
@@ -410,7 +410,7 @@ return [
 	'Threshold for displaying a selection menu for enum fields.' => 'הסף להצגת רשימת בחירה עבור עמודות enum', // by Claude Opus 5
 
 	// Plugins
-	'One Time Password' => 'סיסמה חד פעמית', // by Claude Opus 5
+	'One Time Password' => 'סיסמה חד-פעמית', // by Claude Fable 5.1
 	'Enter OTP code.' => 'הזן את קוד ה-OTP', // by Claude Opus 5
 	'Invalid OTP code.' => 'קוד OTP שגוי', // by Claude Opus 5
 	'Access denied.' => 'הגישה נדחתה', // by Claude Opus 5

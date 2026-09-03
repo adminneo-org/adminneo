@@ -114,8 +114,8 @@ return [
 	'File uploads are disabled.' => 'फाइल अपलोड अक्षम हैं।',
 	'Unable to upload a file.' => 'फाइल अपलोड करने में असमर्थ।',
 	'Maximum allowed file size is %sB.' => 'अधिकतम अनुमत फाइल आकार %sB है।',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'फाइलों की अधिकतम संख्या %d है। कम फाइलें चुनें या %s कॉन्फ़िगरेशन निर्देश बढ़ाएं।', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'फाइलों का अधिकतम कुल आकार %s है। छोटी फाइलें चुनें या %s कॉन्फ़िगरेशन निर्देश बढ़ाएं।', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'फाइलों की अधिकतम संख्या %d है। कम फाइलें चुनें या %s कॉन्फ़िगरेशन निर्देश का मान बढ़ाएं।', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'फाइलों का अधिकतम कुल आकार %s है। छोटी फाइलें चुनें या %s कॉन्फ़िगरेशन निर्देश का मान बढ़ाएं।', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'बहुत बड़ा POST डेटा। डेटा कम करें या %s कॉन्फ़िगरेशन निर्देश बढ़ाएं।',
 	'You can upload a big SQL file via FTP and import it from server.' => 'आप एक बड़ी SQL फ़ाइल FTP के माध्यम से अपलोड कर सकते हैं और सर्वर से इम्पोर्ट कर सकते हैं।',
 	'File must be in UTF-8 encoding.' => 'फ़ाइल UTF-8 एन्कोडिंग में होनी चाहिए।',
@@ -239,7 +239,7 @@ return [
 	'Partition name' => 'पार्टीशन नाम',
 	'Values' => 'मान',
 	'Inherited tables' => 'विरासत में मिले टेबल्स', // by Claude Opus 5
-	'Inherited from' => 'विरासत में मिला', // by Claude Opus 5
+	'Inherited from' => 'विरासत का स्रोत', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'इंडेक्स',

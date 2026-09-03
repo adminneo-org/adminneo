@@ -242,7 +242,7 @@ return [
 	'Partition name' => 'Nom de la partition',
 	'Values' => 'Valeurs',
 	'Inherited tables' => 'Tables héritées', // by Claude Opus 5
-	'Inherited from' => 'Hérité de', // by Claude Opus 5
+	'Inherited from' => 'Héritée de', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Index',

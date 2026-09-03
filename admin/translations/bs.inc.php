@@ -220,7 +220,7 @@ return [
 	'Auto Increment' => 'Auto-priraštaj',
 	'Options' => 'Opcije',
 	'Comment' => 'Komentar',
-	'Default value' => 'Zadana vrijednost', // by Claude Fable 5
+	'Default value' => 'Podrazumijevana vrijednost', // by Claude Fable 5.1
 	'Drop' => 'Izbriši',
 	'Drop %s?' => 'Izbrisati %s?', // by Claude Fable 5
 	'Are you sure?' => 'Da li ste sigurni?',
@@ -242,9 +242,9 @@ return [
 
 	// Partitions
 	'Partition by' => 'Podijeli po',
-	'Partition' => 'Podijela', // by Claude Opus 5
-	'Partitions' => 'Podijele',
-	'Partition name' => 'Ime podijele',
+	'Partition' => 'Podjela', // by Claude Fable 5.1
+	'Partitions' => 'Podjele', // by Claude Fable 5.1
+	'Partition name' => 'Ime podjele', // by Claude Fable 5.1
 	'Values' => 'Vrijednosti',
 	'Inherited tables' => 'Naslijeđene tabele', // by Claude Opus 5
 	'Inherited from' => 'Naslijeđena od', // by Claude Opus 5
@@ -390,7 +390,7 @@ return [
 	'Save' => 'Sačuvaj',
 	'Save and continue edit' => 'Sačuvaj i nastavi uređenje',
 	'Save and insert next' => 'Sačuvaj i umijetni slijedeće',
-	'Saving' => 'Spašavam', // by Claude Fable 5
+	'Saving' => 'Čuvam', // by Claude Fable 5.1
 	'Selected' => 'Izabrano',
 	'Clone' => 'Dupliraj',
 	'Delete' => 'Izbriši',
@@ -452,6 +452,6 @@ return [
 	'Access denied.' => 'Pristup odbijen.', // by Claude Opus 5
 	'JSON previews' => 'Pregled JSON-a', // by Claude Opus 5
 	'Data table' => 'Tabela podataka', // by Claude Opus 5
-	'Edit form' => 'Forma za izmijenu', // by Claude Opus 5
+	'Edit form' => 'Forma za izmjenu', // by Claude Fable 5.1
 	'Ask %s' => 'Pitaj %s', // by Claude Opus 5
 ];
