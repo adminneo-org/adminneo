@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s peab tagastama massiivi.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s ja %s peavad tagastama objekti, mis on loodud meetodiga %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s peab tagastama massiivi.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s ja %s peavad tagastama objekti, mis on loodud meetodiga %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Andmebaasimootor',
@@ -27,20 +27,20 @@ return [
 	'Logged as: %s' => 'Sisse logitud: %s',
 	'Logout successful.' => 'Väljalogimine õnnestus.',
 	'hostname[:port] or :socket' => 'hostname[:port] või :socket', // by Claude Fable 5.1
-	'Invalid server or credentials.' => 'Sobimatu server või sisselogimisandmed.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Sisestatud paroolis on tühik, mis võib olla põhjuseks.', // by Claude Opus 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei toeta andmebaasi kasutamist ilma paroolita, <a href="https://www.adminneo.org/password"%s>rohkem infot</a>.', // by Claude Opus 5
-	'Database does not support password.' => 'Andmebaas ei toeta parooli.', // by Claude Opus 5
-	'Too many unsuccessful logins, try again in %d minute(s).' => 'Liiga palju ebaõnnestunud sisselogimisi, proovi uuesti %d minuti pärast.', // by Claude Opus 5
-	'Invalid permanent login, please login again.' => 'Sobimatu püsiv sisselogimine, palun logige uuesti sisse.', // by Claude Opus 5
+	'Invalid server or credentials.' => 'Sobimatu server või sisselogimisandmed.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Sisestatud paroolis on tühik, mis võib olla põhjuseks.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei toeta andmebaasi kasutamist ilma paroolita, <a href="https://www.adminneo.org/password"%s>rohkem infot</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Andmebaas ei toeta parooli.', // by Claude Fable 5.1
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Liiga palju ebaõnnestunud sisselogimisi, proovi uuesti %d minuti pärast.', // by Claude Fable 5.1
+	'Invalid permanent login, please login again.' => 'Sobimatu püsiv sisselogimine, palun logige uuesti sisse.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Sobimatu CSRF, palun postitage vorm uuesti.',
-	'If you did not send this request from AdminNeo then close this page.' => 'Kui te ei saatnud seda päringut AdminNeost, siis sulgege see leht.', // by Claude Opus 5
-	'The action will be performed after successful login with the same credentials.' => 'Tegevus viiakse läbi pärast edukat sisselogimist samade andmetega.', // by Claude Opus 5
+	'If you did not send this request from AdminNeo then close this page.' => 'Kui te ei saatnud seda päringut AdminNeost, siis sulgege see leht.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Tegevus viiakse läbi pärast edukat sisselogimist samade andmetega.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'Ei leitud laiendust',
 	'None of the supported PHP extensions (%s) are available.' => 'Serveris pole ühtegi toetatud PHP laiendustest (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Privilegeeritud portidega ühendumine ei ole lubatud.', // by Claude Opus 5
+	'Connecting to privileged ports is not allowed.' => 'Privilegeeritud portidega ühendumine ei ole lubatud.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'Sessioonid peavad olema lubatud.',
 	'Session expired, please login again.' => 'Sessioon on aegunud, palun logige uuesti sisse.',
 	'%s version: %s through PHP extension %s' => '%s versioon: %s, kasutatud PHP moodul: %s',
@@ -48,11 +48,11 @@ return [
 	// Settings
 	'Language' => 'Keel',
 
-	'Menu' => 'Menüü', // by Claude Opus 5
-	'Home' => 'Avaleht', // by Claude Opus 5
+	'Menu' => 'Menüü', // by Claude Fable 5.1
+	'Home' => 'Avaleht', // by Claude Fable 5.1
 	'Refresh' => 'Uuenda',
-	'Info' => 'Info', // by Claude Opus 5
-	'More information.' => 'Rohkem infot.', // by Claude Opus 5
+	'Info' => 'Info', // by Claude Fable 5.1
+	'More information.' => 'Rohkem infot.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Õigused',
@@ -74,14 +74,14 @@ return [
 
 	// Structure
 	'Column' => 'Veerg',
-	'Columns' => 'Veerud', // by Claude Opus 5
+	'Columns' => 'Veerud', // by Claude Fable 5.1
 	'Routine' => 'Protseduur',
 	'Grant' => 'Anna',
 	'Revoke' => 'Eemalda',
 
 	// Queries
 	'SQL command' => 'SQL-Päring',
-	'HTTP request' => 'HTTP-päring', // by Claude Opus 5
+	'HTTP request' => 'HTTP-päring', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d päring edukalt käivitatud.',
 		'%d päringut edukalt käivitatud.',
@@ -89,9 +89,9 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'Päring õnnestus, mõjutatatud ridu: %d.',
 	'No commands to execute.' => 'Käsk puudub.',
 	'Error in query' => 'Päringus esines viga',
-	'Unknown error.' => 'Tundmatu viga.', // by Claude Opus 5
-	'Warnings' => 'Hoiatused', // by Claude Opus 5
-	'%s queries are not supported.' => '%s päringud ei ole toetatud.', // by Claude Opus 5
+	'Unknown error.' => 'Tundmatu viga.', // by Claude Fable 5.1
+	'Warnings' => 'Hoiatused', // by Claude Fable 5.1
+	'%s queries are not supported.' => '%s päringud ei ole toetatud.', // by Claude Fable 5.1
 	'Execute' => 'Käivita',
 	'Stop on error' => 'Peatuda vea esinemisel',
 	'Show only errors' => 'Kuva vaid veateateid',
@@ -111,12 +111,12 @@ return [
 	'File uploads are disabled.' => 'Failide üleslaadimine on keelatud.',
 	'Unable to upload a file.' => 'Faili üleslaadimine pole võimalik.',
 	'Maximum allowed file size is %sB.' => 'Maksimaalne failisuurus %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Failide maksimaalne arv on %d. Palun valige vähem faile või suurendage %s php-seadet.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Failide maksimaalne kogusuurus on %s. Palun valige väiksemad failid või suurendage %s php-seadet.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Failide maksimaalne arv on %d. Palun valige vähem faile või suurendage %s php-seadet.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Failide maksimaalne kogusuurus on %s. Palun valige väiksemad failid või suurendage %s php-seadet.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST-andmete maht on liialt suur. Palun vähendage andmeid või suurendage %s php-seadet.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'Suure SQL-faili saab üles laadida FTP kaudu ja importida serverist.', // by Claude Opus 5
-	'File must be in UTF-8 encoding.' => 'Fail peab olema UTF-8 kodeeringus.', // by Claude Opus 5
-	'You are offline.' => 'Sa oled võrgust väljas.', // by Claude Opus 5
+	'You can upload a big SQL file via FTP and import it from server.' => 'Suure SQL-faili saab üles laadida FTP kaudu ja importida serverist.', // by Claude Fable 5.1
+	'File must be in UTF-8 encoding.' => 'Fail peab olema UTF-8 kodeeringus.', // by Claude Fable 5.1
+	'You are offline.' => 'Sa oled võrgust väljas.', // by Claude Fable 5.1
 	'%d row(s) have been imported.' => 'Imporditi %d rida.',
 
 	// Export
@@ -129,8 +129,8 @@ return [
 
 	// Databases
 	'Database' => 'Andmebaas',
-	'database' => 'andmebaas', // by Claude Opus 5
-	'DB' => 'AB', // by Claude Opus 5
+	'database' => 'andmebaas', // by Claude Fable 5.1
+	'DB' => 'AB', // by Claude Fable 5.1
 	'Use' => 'Kasuta',
 	'Invalid database.' => 'Tundmatu andmebaas.',
 	'Alter database' => 'Muuda andmebaasi',
@@ -149,10 +149,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Struktuur',
-	'schema' => 'struktuur', // by Claude Opus 5
-	'Schemas' => 'Struktuurid', // by Claude Opus 5
-	'No schemas.' => 'Struktuure ei leitud.', // by Claude Opus 5
-	'Show schema' => 'Näita struktuuri', // by Claude Opus 5
+	'schema' => 'struktuur', // by Claude Fable 5.1
+	'Schemas' => 'Struktuurid', // by Claude Fable 5.1
+	'No schemas.' => 'Struktuure ei leitud.', // by Claude Fable 5.1
+	'Show schema' => 'Näita struktuuri', // by Claude Fable 5.1
 	'Alter schema' => 'Muuda struktuuri',
 	'Create schema' => 'Loo struktuur',
 	'Schema has been dropped.' => 'Struktuur on edukalt kustutatud.',
@@ -172,18 +172,18 @@ return [
 	'%d in total' => 'Kokku: %d',
 	'Analyze' => 'Analüüsi',
 	'Optimize' => 'Optimeeri',
-	'Vacuum' => 'Puhasta (VACUUM)', // by Claude Opus 5
+	'Vacuum' => 'Puhasta (VACUUM)', // by Claude Fable 5.1
 	'Check' => 'Kontrolli',
 	'Repair' => 'Paranda',
 	'Truncate' => 'Tühjenda',
-	'Truncate Cascade' => 'Tühjenda kaskaadis', // by Claude Opus 5
-	'Tables have been truncated.' => 'Valitud tabelid on edukalt tühjendatud.', // by Claude Opus 5
+	'Truncate Cascade' => 'Tühjenda kaskaadis', // by Claude Fable 5.1
+	'Tables have been truncated.' => 'Valitud tabelid on edukalt tühjendatud.', // by Claude Fable 5.1
 	'Move to other database' => 'Liiguta teise andmebaasi',
 	'Move' => 'Liiguta',
 	'Tables have been moved.' => 'Valitud tabelid on edukalt liigutatud.',
 	'Copy' => 'Kopeeri',
 	'Tables have been copied.' => 'Tabelid on edukalt kopeeritud.',
-	'overwrite' => 'kirjuta üle', // by Claude Opus 5
+	'overwrite' => 'kirjuta üle', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Tabelid',
@@ -194,7 +194,7 @@ return [
 	'Create table' => 'Loo uus tabel',
 	'Table has been dropped.' => 'Tabel on edukalt kustutatud.',
 	'Tables have been dropped.' => 'Valitud tabelid on edukalt kustutatud.',
-	'Tables have been optimized.' => 'Valitud tabelid on edukalt optimeeritud.', // by Claude Opus 5
+	'Tables have been optimized.' => 'Valitud tabelid on edukalt optimeeritud.', // by Claude Fable 5.1
 	'Table has been altered.' => 'Tabeli andmed on edukalt muudetud.',
 	'Table has been created.' => 'Tabel on edukalt loodud.',
 	'Table name' => 'Tabeli nimi',
@@ -206,12 +206,12 @@ return [
 	'Auto Increment' => 'Automaatselt suurenev',
 	'Options' => 'Valikud',
 	'Comment' => 'Kommentaar',
-	'Default value' => 'Vaikeväärtus', // by Claude Opus 5
+	'Default value' => 'Vaikeväärtus', // by Claude Fable 5.1
 	'Drop' => 'Kustuta',
-	'Drop %s?' => 'Kustuta %s?', // by Claude Opus 5
+	'Drop %s?' => 'Kustuta %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Kas oled kindel?',
-	'Size' => 'Suurus', // by Claude Opus 5
-	'Compute' => 'Arvuta', // by Claude Opus 5
+	'Size' => 'Suurus', // by Claude Fable 5.1
+	'Compute' => 'Arvuta', // by Claude Fable 5.1
 	'Move up' => 'Liiguta ülespoole',
 	'Move down' => 'Liiguta allapoole',
 	'Remove' => 'Eemalda',
@@ -219,7 +219,7 @@ return [
 
 	// Views
 	'View' => 'Vaata',
-	'Materialized view' => 'Materialiseeritud vaade', // by Claude Opus 5
+	'Materialized view' => 'Materialiseeritud vaade', // by Claude Fable 5.1
 	'View has been dropped.' => 'Vaade (VIEW) on edukalt kustutatud.',
 	'View has been altered.' => 'Vaade (VIEW) on edukalt muudetud.',
 	'View has been created.' => 'Vaade (VIEW) on edukalt loodud.',
@@ -228,12 +228,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partitsiooni',
-	'Partition' => 'Partitsioon', // by Claude Opus 5
+	'Partition' => 'Partitsioon', // by Claude Fable 5.1
 	'Partitions' => 'Partitsioonid',
 	'Partition name' => 'Partitsiooni nimi',
 	'Values' => 'Väärtused',
-	'Inherited tables' => 'Päritud tabelid', // by Claude Opus 5
-	'Inherited from' => 'Päritud tabelist', // by Claude Opus 5
+	'Inherited tables' => 'Päritud tabelid', // by Claude Fable 5.1
+	'Inherited from' => 'Päritud tabelist', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indeksid',
@@ -242,9 +242,9 @@ return [
 	'Add next' => 'Lisa järgmine',
 	'Index Type' => 'Indeksi tüüp',
 	'length' => 'pikkus',
-	'operator class' => 'operaatoriklass', // by Claude Opus 5
-	'Algorithm' => 'Algoritm', // by Claude Opus 5
-	'Condition' => 'Tingimus', // by Claude Opus 5
+	'operator class' => 'operaatoriklass', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritm', // by Claude Fable 5.1
+	'Condition' => 'Tingimus', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Võõrvõtmed (foreign key)',
@@ -317,12 +317,12 @@ return [
 	'Create trigger' => 'Loo uus päästik (TRIGGER)',
 
 	// Table check constraints
-	'Checks' => 'Kontrollid', // by Claude Opus 5
-	'Create check' => 'Loo uus kontroll', // by Claude Opus 5
-	'Alter check' => 'Muuda kontrolli', // by Claude Opus 5
-	'Check has been created.' => 'Uus kontroll on edukalt loodud.', // by Claude Opus 5
-	'Check has been altered.' => 'Kontrolli andmed on edukalt muudetud.', // by Claude Opus 5
-	'Check has been dropped.' => 'Kontroll on edukalt kustutatud.', // by Claude Opus 5
+	'Checks' => 'Kontrollid', // by Claude Fable 5.1
+	'Create check' => 'Loo uus kontroll', // by Claude Fable 5.1
+	'Alter check' => 'Muuda kontrolli', // by Claude Fable 5.1
+	'Check has been created.' => 'Uus kontroll on edukalt loodud.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Kontrolli andmed on edukalt muudetud.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Kontroll on edukalt kustutatud.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Vaata andmeid',
@@ -334,18 +334,18 @@ return [
 	'Sort' => 'Sorteeri',
 	'descending' => 'kahanevalt',
 	'Limit' => 'Piira',
-	'Limit rows' => 'Piira ridu', // by Claude Opus 5
+	'Limit rows' => 'Piira ridu', // by Claude Fable 5.1
 	'Text length' => 'Teksti pikkus',
 	'Action' => 'Tegevus',
-	'Full table scan' => 'Kogu tabeli läbivaatus', // by Claude Opus 5
+	'Full table scan' => 'Kogu tabeli läbivaatus', // by Claude Fable 5.1
 	'Unable to select the table' => 'Tabeli valimine ebaõnnestus',
 	'Search data in tables' => 'Otsi kogu andmebaasist',
 	'No rows.' => 'Sissekanded puuduvad.',
-	'%d / ' => '%d / ', // by Claude Opus 5
+	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d rida',
 	'Page' => 'Lehekülg',
 	'last' => 'viimane',
-	'Load more data' => 'Laadi rohkem andmeid', // by Claude Opus 5
+	'Load more data' => 'Laadi rohkem andmeid', // by Claude Fable 5.1
 	'Loading' => 'Laadimine', // by Claude Fable 5.1
 	'Whole result' => 'Täielikud tulemused',
 	'%d byte(s)' => [
@@ -354,7 +354,7 @@ return [
 	],
 
 	// In-place editing in selection
-	'Modify' => 'Muuda', // by Claude Opus 5
+	'Modify' => 'Muuda', // by Claude Fable 5.1
 	'Ctrl+click on a value to modify it.' => 'Väärtuse muutmiseks Ctrl+kliki sellel.',
 	'Use edit link to modify this value.' => 'Väärtuse muutmiseks kasuta muutmislinki.',
 
@@ -368,14 +368,14 @@ return [
 	'Save and continue edit' => 'Salvesta ja jätka muutmist',
 	'Save and insert next' => 'Salvesta ja lisa järgmine',
 	'Saving' => 'Salvestamine', // by Claude Fable 5.1
-	'Selected' => 'Valitud', // by Claude Opus 5
+	'Selected' => 'Valitud', // by Claude Fable 5.1
 	'Clone' => 'Kloon',
 	'Delete' => 'Kustuta',
 	'Item%s has been inserted.' => 'Kirje%s on edukalt lisatud.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'Kustutamine õnnestus.',
 	'Item has been updated.' => 'Uuendamine õnnestus.',
 	'%d item(s) have been affected.' => 'Mõjutatud kirjeid: %d.',
-	'You have no privileges to update this table.' => 'Sul ei ole õigusi selle tabeli muutmiseks.', // by Claude Opus 5
+	'You have no privileges to update this table.' => 'Sul ei ole õigusi selle tabeli muutmiseks.', // by Claude Fable 5.1
 
 	// Data type descriptions
 	'Numbers' => 'Numbrilised',
@@ -389,42 +389,42 @@ return [
 
 	// Editor - data values
 	'now' => 'nüüd',
-	'yes' => 'jah', // by Claude Opus 5
-	'no' => 'ei', // by Claude Opus 5
+	'yes' => 'jah', // by Claude Fable 5.1
+	'no' => 'ei', // by Claude Fable 5.1
 
 	// Settings
-	'Settings' => 'Seaded', // by Claude Opus 5
-	'Default' => 'Vaikimisi', // by Claude Opus 5
-	'Color scheme' => 'Värviskeem', // by Claude Opus 5
-	'By system' => 'Süsteemi järgi', // by Claude Opus 5
-	'Light' => 'Hele', // by Claude Opus 5
-	'Dark' => 'Tume', // by Claude Opus 5
+	'Settings' => 'Seaded', // by Claude Fable 5.1
+	'Default' => 'Vaikimisi', // by Claude Fable 5.1
+	'Color scheme' => 'Värviskeem', // by Claude Fable 5.1
+	'By system' => 'Süsteemi järgi', // by Claude Fable 5.1
+	'Light' => 'Hele', // by Claude Fable 5.1
+	'Dark' => 'Tume', // by Claude Fable 5.1
 	'Navigation mode' => 'Navigeerimisrežiim', // by Claude Fable 5.1
-	'Simple' => 'Lihtne', // by Claude Opus 5
+	'Simple' => 'Lihtne', // by Claude Fable 5.1
 	'Dual' => 'Kaheosaline', // by Claude Fable 5.1
 	'Dual on hover' => 'Kaheosaline hiirega osutades', // by Claude Fable 5.1
-	'Reversed' => 'Vastupidine', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Peamise navigeerimise paigutus tabelilinkidega.', // by Claude Opus 5
-	'Table links' => 'Tabelilingid', // by Claude Opus 5
-	'Primary action for all table links.' => 'Peamine tegevus kõikidele tabelilinkidele.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Lingid tabelitele, mis viitavad praegusele reale.', // by Claude Opus 5
-	'Display' => 'Näita', // by Claude Opus 5
-	'Hide' => 'Peida', // by Claude Opus 5
-	'Records per page' => 'Kirjeid lehel', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Andmetabelis kuvatavate kirjete vaikimisi arv.', // by Claude Opus 5
-	'Enum as select' => 'Enum valikuloendina', // by Claude Opus 5
-	'Never' => 'Mitte kunagi', // by Claude Opus 5
-	'Always' => 'Alati', // by Claude Opus 5
-	'More values than %d' => 'Rohkem kui %d väärtust', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Lävi valikuloendi kuvamiseks enum-veergudel.', // by Claude Opus 5
+	'Reversed' => 'Vastupidine', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Peamise navigeerimise paigutus tabelilinkidega.', // by Claude Fable 5.1
+	'Table links' => 'Tabelilingid', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Peamine tegevus kõikidele tabelilinkidele.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Lingid tabelitele, mis viitavad praegusele reale.', // by Claude Fable 5.1
+	'Display' => 'Näita', // by Claude Fable 5.1
+	'Hide' => 'Peida', // by Claude Fable 5.1
+	'Records per page' => 'Kirjeid lehel', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Andmetabelis kuvatavate kirjete vaikimisi arv.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum valikuloendina', // by Claude Fable 5.1
+	'Never' => 'Mitte kunagi', // by Claude Fable 5.1
+	'Always' => 'Alati', // by Claude Fable 5.1
+	'More values than %d' => 'Rohkem kui %d väärtust', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Lävi valikuloendi kuvamiseks enum-veergudel.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Ühekordne parool', // by Claude Opus 5
-	'Enter OTP code.' => 'Sisesta OTP-kood.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Sobimatu OTP-kood.', // by Claude Opus 5
-	'Access denied.' => 'Ligipääs keelatud.', // by Claude Opus 5
-	'JSON previews' => 'JSON-i eelvaated', // by Claude Opus 5
-	'Data table' => 'Andmetabel', // by Claude Opus 5
-	'Edit form' => 'Muutmisvorm', // by Claude Opus 5
-	'Ask %s' => 'Küsi %s käest', // by Claude Opus 5
+	'One Time Password' => 'Ühekordne parool', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Sisesta OTP-kood.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Sobimatu OTP-kood.', // by Claude Fable 5.1
+	'Access denied.' => 'Ligipääs keelatud.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON-i eelvaated', // by Claude Fable 5.1
+	'Data table' => 'Andmetabel', // by Claude Fable 5.1
+	'Edit form' => 'Muutmisvorm', // by Claude Fable 5.1
+	'Ask %s' => 'Küsi %s käest', // by Claude Fable 5.1
 ];

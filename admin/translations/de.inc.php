@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Sprache',
 
-	'Menu' => 'Menü', // by Claude Opus 5
+	'Menu' => 'Menü', // by Claude Fable 5.1
 	'Home' => 'Startseite',
 	'Refresh' => 'Aktualisieren',
 	'Info' => 'Info',
@@ -185,7 +185,7 @@ return [
 	'Check' => 'Prüfen',
 	'Repair' => 'Reparieren',
 	'Truncate' => 'Leeren (truncate)',
-	'Truncate Cascade' => 'Leeren (truncate cascade)', // by Claude Fable 5
+	'Truncate Cascade' => 'Leeren (truncate cascade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellen wurden geleert (truncate).',
 	'Move to other database' => 'In andere Datenbank verschieben',
 	'Move' => 'Verschieben',
@@ -228,7 +228,7 @@ return [
 
 	// Views
 	'View' => 'View',
-	'Materialized view' => 'Materialisierte View', // by Claude Fable 5
+	'Materialized view' => 'Materialisierte View', // by Claude Fable 5.1
 	'View has been dropped.' => 'View wurde entfernt.',
 	'View has been altered.' => 'View wurde geändert.',
 	'View has been created.' => 'View wurde erstellt.',
@@ -251,7 +251,7 @@ return [
 	'Add next' => 'Hinzufügen',
 	'Index Type' => 'Index-Typ',
 	'length' => 'Länge',
-	'operator class' => 'Operatorklasse', // by Claude Fable 5
+	'operator class' => 'Operatorklasse', // by Claude Fable 5.1
 	'Algorithm' => 'Algorithmus',
 	'Condition' => 'Bedingung',
 
@@ -334,7 +334,7 @@ return [
 	'Alter check' => 'Check ändern',
 	'Check has been created.' => 'Check wurde erstellt.',
 	'Check has been altered.' => 'Check wurde geändert.',
-	'Check has been dropped.' => 'Check wurde entfernt.', // by Claude Fable 5
+	'Check has been dropped.' => 'Check wurde entfernt.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Daten auswählen',
@@ -417,7 +417,7 @@ return [
 	'Navigation mode' => 'Navigationsmodus',
 	'Simple' => 'Einfach',
 	'Dual' => 'Dual',
-	'Dual on hover' => 'Dual beim Überfahren mit der Maus', // by Claude Opus 5
+	'Dual on hover' => 'Dual beim Überfahren mit der Maus', // by Claude Fable 5.1
 	'Reversed' => 'Umgekehrt',
 	'Layout of main navigation with table links.' => 'Layout der Hauptnavigation mit Tabellenlinks.',
 	'Table links' => 'Tabellenlinks',

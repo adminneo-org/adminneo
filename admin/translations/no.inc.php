@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s må returnere et array.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s og %s må returnere et objekt opprettet av metoden %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s må returnere et array.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s og %s må returnere et objekt opprettet av metoden %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'System',
@@ -26,24 +26,24 @@ return [
 	'Logout' => 'Logg ut',
 	'Logged as: %s' => 'Logget inn som: %s',
 	'Logout successful.' => 'Utlogging vellykket.',
-	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Ugyldig server eller påloggingsinformasjon.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Det er et mellomrom i det angitte passordet, noe som kan være årsaken.', // by Claude Fable 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo støtter ikke tilgang til en database uten passord, <a href="https://www.adminneo.org/password"%s>mer informasjon</a>.', // by Claude Fable 5
-	'Database does not support password.' => 'Databasen støtter ikke passord.', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Ugyldig server eller påloggingsinformasjon.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Det er et mellomrom i det angitte passordet, noe som kan være årsaken.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo støtter ikke tilgang til en database uten passord, <a href="https://www.adminneo.org/password"%s>mer informasjon</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Databasen støtter ikke passord.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutt.',
 		'For mange mislykkede innloggingsforsøk, prøv igjen om %d minutter.',
-	], // by Claude Fable 5
+	], // by Claude Fable 5.1
 	'Invalid permanent login, please login again.' => 'Ugyldig permanent login, vennligst logg inn på nytt.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Ugyldig CSRF-token. Send inn skjemaet igjen.', // by Claude Fable 5.1
-	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke sendte denne forespørselen fra AdminNeo, lukk denne siden.', // by Claude Fable 5
-	'The action will be performed after successful login with the same credentials.' => 'Handlingen utføres etter vellykket innlogging med samme påloggingsinformasjon.', // by Claude Fable 5
+	'If you did not send this request from AdminNeo then close this page.' => 'Hvis du ikke sendte denne forespørselen fra AdminNeo, lukk denne siden.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Handlingen utføres etter vellykket innlogging med samme påloggingsinformasjon.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'Ingen utvidelse',
 	'None of the supported PHP extensions (%s) are available.' => 'Ingen av de støttede PHP-utvidelsene (%s) er tilgjengelige.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Tilkobling til privilegerte porter er ikke tillatt.', // by Claude Fable 5
+	'Connecting to privileged ports is not allowed.' => 'Tilkobling til privilegerte porter er ikke tillatt.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'Økt-støtte må være skrudd på.',
 	'Session expired, please login again.' => 'Økt utløpt - vennligst logg inn på nytt.',
 	'%s version: %s through PHP extension %s' => '%s versjon: %s via PHP-utvidelse %s',
@@ -51,11 +51,11 @@ return [
 	// Settings
 	'Language' => 'Språk',
 
-	'Menu' => 'Meny', // by Claude Opus 5
-	'Home' => 'Forside', // by Claude Opus 5
+	'Menu' => 'Meny', // by Claude Fable 5.1
+	'Home' => 'Forside', // by Claude Fable 5.1
 	'Refresh' => 'Gjenoppfrisk',
-	'Info' => 'Info', // by Claude Opus 5
-	'More information.' => 'Mer informasjon.', // by Claude Opus 5
+	'Info' => 'Info', // by Claude Fable 5.1
+	'More information.' => 'Mer informasjon.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegier',
@@ -77,14 +77,14 @@ return [
 
 	// Structure
 	'Column' => 'Kolonne',
-	'Columns' => 'Kolonner', // by Claude Fable 5
+	'Columns' => 'Kolonner', // by Claude Fable 5.1
 	'Routine' => 'Rutine',
 	'Grant' => 'Gi privilegier',
 	'Revoke' => 'Trekk tilbake',
 
 	// Queries
 	'SQL command' => 'SQL-kommando',
-	'HTTP request' => 'HTTP-forespørsel', // by Claude Opus 5
+	'HTTP request' => 'HTTP-forespørsel', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => '%d kall utført OK.',
 	'Query executed OK, %d row(s) affected.' => [
 		'Kall utført OK, %d rad påvirket.',
@@ -92,9 +92,9 @@ return [
 	],
 	'No commands to execute.' => 'Ingen kommandoer å utføre.',
 	'Error in query' => 'Feil i forespørsel',
-	'Unknown error.' => 'Ukjent feil.', // by Claude Fable 5
-	'Warnings' => 'Advarsler', // by Claude Fable 5
-	'%s queries are not supported.' => '%s-spørringer støttes ikke.', // by Claude Fable 5
+	'Unknown error.' => 'Ukjent feil.', // by Claude Fable 5.1
+	'Warnings' => 'Advarsler', // by Claude Fable 5.1
+	'%s queries are not supported.' => '%s-spørringer støttes ikke.', // by Claude Fable 5.1
 	'Execute' => 'Kjør',
 	'Stop on error' => 'Stopp ved feil',
 	'Show only errors' => 'Vis bare feil',
@@ -119,7 +119,7 @@ return [
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'For stor datamengde i skjemaet. Reduser datamengden, eller øk størrelsen på %s-konfigurasjonsdirektivet.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan laste opp en stor SQL-fil via FTP og importere den fra serveren.',
 	'File must be in UTF-8 encoding.' => 'Filen må være i UTF8-tegnkoding.',
-	'You are offline.' => 'Du er frakoblet.', // by Claude Fable 5
+	'You are offline.' => 'Du er frakoblet.', // by Claude Fable 5.1
 	'%d row(s) have been imported.' => [
 		'%d rad er importert.',
 		'%d rader er importert.',
@@ -135,8 +135,8 @@ return [
 
 	// Databases
 	'Database' => 'Database',
-	'database' => 'database', // by Claude Opus 5
-	'DB' => 'DB', // by Claude Fable 5
+	'database' => 'database', // by Claude Fable 5.1
+	'DB' => 'DB', // by Claude Fable 5.1
 	'Use' => 'Bruk',
 	'Invalid database.' => 'Ugyldig database.',
 	'Alter database' => 'Endre database',
@@ -155,20 +155,20 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skjema',
-	'schema' => 'skjema', // by Claude Opus 5
-	'Schemas' => 'Skjemaer', // by Claude Opus 5
-	'No schemas.' => 'Ingen skjemaer.', // by Claude Opus 5
-	'Show schema' => 'Vis skjema', // by Claude Opus 5
+	'schema' => 'skjema', // by Claude Fable 5.1
+	'Schemas' => 'Skjemaer', // by Claude Fable 5.1
+	'No schemas.' => 'Ingen skjemaer.', // by Claude Fable 5.1
+	'Show schema' => 'Vis skjema', // by Claude Fable 5.1
 	'Alter schema' => 'Endre skjema',
 	'Create schema' => 'Opprett skjema',
 	'Schema has been dropped.' => 'Skjemaet er slettet.',
 	'Schema has been created.' => 'Skjemaet er opprettet.',
 	'Schema has been altered.' => 'Skjemaet er endret.',
-	'Invalid schema.' => 'Ugyldig skjema.', // by Claude Opus 5
+	'Invalid schema.' => 'Ugyldig skjema.', // by Claude Fable 5.1
 
 	// Table list
 	'Engine' => 'Motor',
-	'engine' => 'motor', // by Claude Opus 5
+	'engine' => 'motor', // by Claude Fable 5.1
 	'Collation' => 'Tekstsortering',
 	'collation' => 'sortering',
 	'Data Length' => 'Datalengde',
@@ -189,7 +189,7 @@ return [
 	'Tables have been moved.' => 'Tabellene har blitt flyttet.',
 	'Copy' => 'Kopier',
 	'Tables have been copied.' => 'Tabellene har blitt kopiert.',
-	'overwrite' => 'overskriv', // by Claude Fable 5
+	'overwrite' => 'overskriv', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Tabeller',
@@ -212,12 +212,12 @@ return [
 	'Auto Increment' => 'Autoinkrement',
 	'Options' => 'Valg',
 	'Comment' => 'Kommentarer',
-	'Default value' => 'Standardverdi', // by Claude Fable 5
+	'Default value' => 'Standardverdi', // by Claude Fable 5.1
 	'Drop' => 'Dropp',
-	'Drop %s?' => 'Dropp %s?', // by Claude Fable 5
+	'Drop %s?' => 'Dropp %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Er du sikker?',
-	'Size' => 'Størrelse', // by Claude Fable 5
-	'Compute' => 'Beregn', // by Claude Fable 5
+	'Size' => 'Størrelse', // by Claude Fable 5.1
+	'Compute' => 'Beregn', // by Claude Fable 5.1
 	'Move up' => 'Flytt opp',
 	'Move down' => 'Flytt ned',
 	'Remove' => 'Fjern',
@@ -225,7 +225,7 @@ return [
 
 	// Views
 	'View' => 'View',
-	'Materialized view' => 'Materialisert view', // by Claude Fable 5
+	'Materialized view' => 'Materialisert view', // by Claude Fable 5.1
 	'View has been dropped.' => 'Viewet er slettet.',
 	'View has been altered.' => 'Viewet er endret.',
 	'View has been created.' => 'Viewet er opprettet.',
@@ -234,12 +234,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partisjoner ved',
-	'Partition' => 'Partisjon', // by Claude Opus 5
+	'Partition' => 'Partisjon', // by Claude Fable 5.1
 	'Partitions' => 'Partisjoner',
 	'Partition name' => 'Partisjonsnavn',
 	'Values' => 'Verdier',
-	'Inherited tables' => 'Arvede tabeller', // by Claude Opus 5
-	'Inherited from' => 'Arvet fra', // by Claude Opus 5
+	'Inherited tables' => 'Arvede tabeller', // by Claude Fable 5.1
+	'Inherited from' => 'Arvet fra', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indekser',
@@ -248,9 +248,9 @@ return [
 	'Add next' => 'Legg til neste',
 	'Index Type' => 'Indekstype',
 	'length' => 'lengde',
-	'operator class' => 'operatorklasse', // by Claude Fable 5
-	'Algorithm' => 'Algoritme', // by Claude Fable 5
-	'Condition' => 'Betingelse', // by Claude Fable 5
+	'operator class' => 'operatorklasse', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritme', // by Claude Fable 5.1
+	'Condition' => 'Betingelse', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Fremmednøkler',
@@ -326,12 +326,12 @@ return [
 	'Create trigger' => 'Opprett trigger',
 
 	// Table check constraints
-	'Checks' => 'Kontroller', // by Claude Fable 5
-	'Create check' => 'Opprett kontroll', // by Claude Fable 5
-	'Alter check' => 'Endre kontroll', // by Claude Fable 5
-	'Check has been created.' => 'Kontrollen er opprettet.', // by Claude Fable 5
-	'Check has been altered.' => 'Kontrollen er endret.', // by Claude Fable 5
-	'Check has been dropped.' => 'Kontrollen er slettet.', // by Claude Fable 5
+	'Checks' => 'Kontroller', // by Claude Fable 5.1
+	'Create check' => 'Opprett kontroll', // by Claude Fable 5.1
+	'Alter check' => 'Endre kontroll', // by Claude Fable 5.1
+	'Check has been created.' => 'Kontrollen er opprettet.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Kontrollen er endret.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Kontrollen er slettet.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Velg data',
@@ -343,14 +343,14 @@ return [
 	'Sort' => 'Sorter',
 	'descending' => 'minkende',
 	'Limit' => 'Skranke',
-	'Limit rows' => 'Begrens rader', // by Claude Fable 5
+	'Limit rows' => 'Begrens rader', // by Claude Fable 5.1
 	'Text length' => 'Tekstlengde',
 	'Action' => 'Handling',
 	'Full table scan' => 'Full tabell-scan',
 	'Unable to select the table' => 'Kan ikke velge tabellen',
 	'Search data in tables' => 'Søk data i tabeller',
 	'No rows.' => 'Ingen rader.',
-	'%d / ' => '%d / ', // by Claude Fable 5
+	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [
 		'%d rad',
 		'%d rader',
@@ -368,7 +368,7 @@ return [
 	// In-place editing in selection
 	'Modify' => 'Endre',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+klikk på en verdi for å endre den.',
-	'Use edit link to modify this value.' => 'Bruk rediger-lenken for å endre denne verdien.', // by Claude Opus 5
+	'Use edit link to modify this value.' => 'Bruk rediger-lenken for å endre denne verdien.', // by Claude Fable 5.1
 
 	// Editing
 	'New item' => 'Ny rad',
@@ -408,38 +408,38 @@ return [
 	'no' => 'nei',
 
 	// Settings
-	'Settings' => 'Innstillinger', // by Claude Opus 5
-	'Default' => 'Standard', // by Claude Opus 5
-	'Color scheme' => 'Fargetema', // by Claude Opus 5
-	'By system' => 'Etter systemet', // by Claude Opus 5
-	'Light' => 'Lyst', // by Claude Opus 5
-	'Dark' => 'Mørkt', // by Claude Opus 5
-	'Navigation mode' => 'Navigasjonsmodus', // by Claude Opus 5
-	'Simple' => 'Enkel', // by Claude Opus 5
-	'Dual' => 'Dobbel', // by Claude Opus 5
-	'Dual on hover' => 'Dobbel ved mouseover', // by Claude Opus 5
-	'Reversed' => 'Omvendt', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Utforming av hovednavigasjonen med tabellenker.', // by Claude Opus 5
-	'Table links' => 'Tabellenker', // by Claude Opus 5
-	'Primary action for all table links.' => 'Primærhandling for alle tabellenker.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Lenker til tabeller som refererer til den gjeldende raden.', // by Claude Opus 5
-	'Display' => 'Vis', // by Claude Opus 5
-	'Hide' => 'Skjul', // by Claude Opus 5
-	'Records per page' => 'Rader per side', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Standard antall rader som vises i datatabellen.', // by Claude Opus 5
-	'Enum as select' => 'Enum som nedtrekksliste', // by Claude Opus 5
-	'Never' => 'Aldri', // by Claude Opus 5
-	'Always' => 'Alltid', // by Claude Opus 5
-	'More values than %d' => 'Flere enn %d verdier', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Grense for å vise en nedtrekksliste for enum-felter.', // by Claude Opus 5
+	'Settings' => 'Innstillinger', // by Claude Fable 5.1
+	'Default' => 'Standard', // by Claude Fable 5.1
+	'Color scheme' => 'Fargetema', // by Claude Fable 5.1
+	'By system' => 'Etter systemet', // by Claude Fable 5.1
+	'Light' => 'Lyst', // by Claude Fable 5.1
+	'Dark' => 'Mørkt', // by Claude Fable 5.1
+	'Navigation mode' => 'Navigasjonsmodus', // by Claude Fable 5.1
+	'Simple' => 'Enkel', // by Claude Fable 5.1
+	'Dual' => 'Dobbel', // by Claude Fable 5.1
+	'Dual on hover' => 'Dobbel ved mouseover', // by Claude Fable 5.1
+	'Reversed' => 'Omvendt', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Utforming av hovednavigasjonen med tabellenker.', // by Claude Fable 5.1
+	'Table links' => 'Tabellenker', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Primærhandling for alle tabellenker.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Lenker til tabeller som refererer til den gjeldende raden.', // by Claude Fable 5.1
+	'Display' => 'Vis', // by Claude Fable 5.1
+	'Hide' => 'Skjul', // by Claude Fable 5.1
+	'Records per page' => 'Rader per side', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Standard antall rader som vises i datatabellen.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum som nedtrekksliste', // by Claude Fable 5.1
+	'Never' => 'Aldri', // by Claude Fable 5.1
+	'Always' => 'Alltid', // by Claude Fable 5.1
+	'More values than %d' => 'Flere enn %d verdier', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Grense for å vise en nedtrekksliste for enum-felter.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Engangspassord', // by Claude Opus 5
-	'Enter OTP code.' => 'Skriv inn OTP-koden.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Ugyldig OTP-kode.', // by Claude Opus 5
-	'Access denied.' => 'Tilgang nektet.', // by Claude Opus 5
-	'JSON previews' => 'JSON-forhåndsvisning', // by Claude Opus 5
-	'Data table' => 'Datatabell', // by Claude Opus 5
-	'Edit form' => 'Redigeringsskjema', // by Claude Opus 5
-	'Ask %s' => 'Spør %s', // by Claude Opus 5
+	'One Time Password' => 'Engangspassord', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Skriv inn OTP-koden.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Ugyldig OTP-kode.', // by Claude Fable 5.1
+	'Access denied.' => 'Tilgang nektet.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON-forhåndsvisning', // by Claude Fable 5.1
+	'Data table' => 'Datatabell', // by Claude Fable 5.1
+	'Edit form' => 'Redigeringsskjema', // by Claude Fable 5.1
+	'Ask %s' => 'Spør %s', // by Claude Fable 5.1
 ];

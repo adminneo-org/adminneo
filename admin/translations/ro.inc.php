@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s trebuie să returneze un array.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s și %s trebuie să returneze un obiect creat prin metoda %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s trebuie să returneze un array.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s și %s trebuie să returneze un obiect creat prin metoda %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Sistem',
@@ -26,25 +26,25 @@ return [
 	'Logout' => 'Ieșire',
 	'Logged as: %s' => 'Ați intrat ca: %s',
 	'Logout successful.' => 'Ați ieșit cu succes.',
-	'hostname[:port] or :socket' => 'hostname[:port] sau :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Server sau date de autentificare incorecte.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Există un spațiu în parola introdusă, care ar putea fi cauza.', // by Claude Fable 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nu acceptă accesul la o bază de date fără parolă, <a href="https://www.adminneo.org/password"%s>mai multe informații</a>.', // by Claude Fable 5
-	'Database does not support password.' => 'Baza de date nu acceptă parolă.', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] sau :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Server sau date de autentificare incorecte.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Există un spațiu în parola introdusă, care ar putea fi cauza.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo nu acceptă accesul la o bază de date fără parolă, <a href="https://www.adminneo.org/password"%s>mai multe informații</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Baza de date nu acceptă parolă.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Prea multe autentificări nereușite, încercați din nou peste %d minut.',
 		'Prea multe autentificări nereușite, încercați din nou peste %d minute.',
 		'Prea multe autentificări nereușite, încercați din nou peste %d de minute.',
-	], // by Claude Fable 5
+	], // by Claude Fable 5.1
 	'Invalid permanent login, please login again.' => 'Logare permanentă incorectă, vă rugăm să vă conectați din nou.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'CSRF token imposibil. Retrimite forma.',
-	'If you did not send this request from AdminNeo then close this page.' => 'Dacă nu ați trimis această cerere din AdminNeo, închideți această pagină.', // by Claude Fable 5
-	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5
+	'If you did not send this request from AdminNeo then close this page.' => 'Dacă nu ați trimis această cerere din AdminNeo, închideți această pagină.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Acțiunea va fi efectuată după autentificarea reușită cu aceleași date de autentificare.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'Nu este extensie',
 	'None of the supported PHP extensions (%s) are available.' => 'Nu este aviabilă nici o extensie suportată (%s).', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Conectarea la porturi privilegiate nu este permisă.', // by Claude Fable 5
+	'Connecting to privileged ports is not allowed.' => 'Conectarea la porturi privilegiate nu este permisă.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'Sesiunile trebuie să fie pornite.',
 	'Session expired, please login again.' => 'Timpul sesiunii a expirat, rog să vă conectați din nou.',
 	'%s version: %s through PHP extension %s' => 'Versiunea %s: %s cu extensia PHP %s',
@@ -52,11 +52,11 @@ return [
 	// Settings
 	'Language' => 'Limba',
 
-	'Menu' => 'Meniu', // by Claude Opus 5
-	'Home' => 'Acasă', // by Claude Opus 5
+	'Menu' => 'Meniu', // by Claude Fable 5.1
+	'Home' => 'Acasă', // by Claude Fable 5.1
 	'Refresh' => 'Împrospătează',
-	'Info' => 'Informații', // by Claude Opus 5
-	'More information.' => 'Mai multe informații.', // by Claude Opus 5
+	'Info' => 'Informații', // by Claude Fable 5.1
+	'More information.' => 'Mai multe informații.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegii',
@@ -79,14 +79,14 @@ return [
 
 	// Structure
 	'Column' => 'Coloană',
-	'Columns' => 'Coloane', // by Claude Fable 5
+	'Columns' => 'Coloane', // by Claude Fable 5.1
 	'Routine' => 'Procedură',
 	'Grant' => 'Permite',
 	'Revoke' => 'Interzice',
 
 	// Queries
 	'SQL command' => 'SQL query',
-	'HTTP request' => 'Cerere HTTP', // by Claude Opus 5
+	'HTTP request' => 'Cerere HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d query executat.',
 		'%d query-uri executate cu succes.',
@@ -99,9 +99,9 @@ return [
 	],
 	'No commands to execute.' => 'Nu sunt comenzi de executat.',
 	'Error in query' => 'Greșeală în query',
-	'Unknown error.' => 'Eroare necunoscută.', // by Claude Fable 5
-	'Warnings' => 'Avertismente', // by Claude Fable 5
-	'%s queries are not supported.' => 'Interogările %s nu sunt acceptate.', // by Claude Fable 5
+	'Unknown error.' => 'Eroare necunoscută.', // by Claude Fable 5.1
+	'Warnings' => 'Avertismente', // by Claude Fable 5.1
+	'%s queries are not supported.' => 'Interogările %s nu sunt acceptate.', // by Claude Fable 5.1
 	'Execute' => 'Execută',
 	'Stop on error' => 'Se oprește la greșeală',
 	'Show only errors' => 'Arată doar greșeli',
@@ -124,9 +124,9 @@ return [
 	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Numărul maxim de fișiere este %d. Alegeți mai puține fișiere sau măriți valoarea directivei de configurare %s.', // by Claude Fable 5.1
 	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Mărimea totală maximă a fișierelor este %s. Alegeți fișiere mai mici sau măriți valoarea directivei de configurare %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Mesajul POST este prea mare. Trimiteți mai puține date sau măriți parametrul configurației directivei %s.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'Puteți încărca un fișier SQL mare prin FTP și să îl importați de pe server.', // by Claude Fable 5
-	'File must be in UTF-8 encoding.' => 'Fișierul trebuie să fie codificat UTF-8.', // by Claude Fable 5
-	'You are offline.' => 'Sunteți offline.', // by Claude Fable 5
+	'You can upload a big SQL file via FTP and import it from server.' => 'Puteți încărca un fișier SQL mare prin FTP și să îl importați de pe server.', // by Claude Fable 5.1
+	'File must be in UTF-8 encoding.' => 'Fișierul trebuie să fie codificat UTF-8.', // by Claude Fable 5.1
+	'You are offline.' => 'Sunteți offline.', // by Claude Fable 5.1
 	'%d row(s) have been imported.' => [
 		'%d rînd importat.',
 		'%d rînduri importate.',
@@ -143,10 +143,10 @@ return [
 
 	// Databases
 	'Database' => 'Baza de date',
-	'database' => 'baza de date', // by Claude Opus 5
-	'DB' => 'BD', // by Claude Fable 5
+	'database' => 'baza de date', // by Claude Fable 5.1
+	'DB' => 'BD', // by Claude Fable 5.1
 	'Use' => 'Alege',
-	'Invalid database.' => 'Bază de date invalidă.', // by Claude Opus 5
+	'Invalid database.' => 'Bază de date invalidă.', // by Claude Fable 5.1
 	'Alter database' => 'Modifică baza de date',
 	'Create database' => 'Crează baza de date',
 	'Database schema' => 'Schema bazei de date',
@@ -163,10 +163,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
-	'schema' => 'schema', // by Claude Opus 5
-	'Schemas' => 'Scheme', // by Claude Opus 5
-	'No schemas.' => 'Nu sunt scheme.', // by Claude Opus 5
-	'Show schema' => 'Arată schema', // by Claude Opus 5
+	'schema' => 'schema', // by Claude Fable 5.1
+	'Schemas' => 'Scheme', // by Claude Fable 5.1
+	'No schemas.' => 'Nu sunt scheme.', // by Claude Fable 5.1
+	'Show schema' => 'Arată schema', // by Claude Fable 5.1
 	'Alter schema' => 'Modifică schema',
 	'Create schema' => 'Crează o schemă',
 	'Schema has been dropped.' => 'Schema a fost ștearsă.',
@@ -186,18 +186,18 @@ return [
 	'%d in total' => 'În total %d',
 	'Analyze' => 'Analizează',
 	'Optimize' => 'Optimizează',
-	'Vacuum' => 'Curăță', // by Claude Fable 5
+	'Vacuum' => 'Curăță', // by Claude Fable 5.1
 	'Check' => 'Controlează',
 	'Repair' => 'Repară',
 	'Truncate' => 'Curăță',
-	'Truncate Cascade' => 'Curăță în cascadă', // by Claude Fable 5
+	'Truncate Cascade' => 'Curăță în cascadă', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabelele au fost curățate.',
 	'Move to other database' => 'Mută în altă bază de date',
 	'Move' => 'Mută',
 	'Tables have been moved.' => 'Tabelele au fost mutate.',
 	'Copy' => 'Copiază',
 	'Tables have been copied.' => 'Tabelele au fost copiate.',
-	'overwrite' => 'suprascrie', // by Claude Fable 5
+	'overwrite' => 'suprascrie', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Tabele',
@@ -208,7 +208,7 @@ return [
 	'Create table' => 'Crează tabel',
 	'Table has been dropped.' => 'Tabelul a fost șters.',
 	'Tables have been dropped.' => 'Tabelele au fost șterse.',
-	'Tables have been optimized.' => 'Tabelele au fost optimizate.', // by Claude Fable 5
+	'Tables have been optimized.' => 'Tabelele au fost optimizate.', // by Claude Fable 5.1
 	'Table has been altered.' => 'Tabelul a fost modificat.',
 	'Table has been created.' => 'Tabelul a fost creat.',
 	'Table name' => 'Denumirea tabelului',
@@ -220,12 +220,12 @@ return [
 	'Auto Increment' => 'Creșterea automată',
 	'Options' => 'Acțiune',
 	'Comment' => 'Comentariu',
-	'Default value' => 'Valoare implicită', // by Claude Fable 5
+	'Default value' => 'Valoare implicită', // by Claude Fable 5.1
 	'Drop' => 'Șterge',
-	'Drop %s?' => 'Ștergeți %s?', // by Claude Fable 5
+	'Drop %s?' => 'Ștergeți %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Sunteți sigur(ă)?',
-	'Size' => 'Mărime', // by Claude Fable 5
-	'Compute' => 'Calculează', // by Claude Fable 5
+	'Size' => 'Mărime', // by Claude Fable 5.1
+	'Compute' => 'Calculează', // by Claude Fable 5.1
 	'Move up' => 'Mișcă în sus',
 	'Move down' => 'Mișcă în jos',
 	'Remove' => 'Șterge',
@@ -233,7 +233,7 @@ return [
 
 	// Views
 	'View' => 'Reprezentare',
-	'Materialized view' => 'Reprezentare materializată', // by Claude Fable 5
+	'Materialized view' => 'Reprezentare materializată', // by Claude Fable 5.1
 	'View has been dropped.' => 'Reprezentarea a fost ștearsă.',
 	'View has been altered.' => 'Reprezentarea a fost modificată.',
 	'View has been created.' => 'Reprezentarea a fost creată.',
@@ -242,12 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Împarte',
-	'Partition' => 'Secțiune', // by Claude Opus 5
+	'Partition' => 'Secțiune', // by Claude Fable 5.1
 	'Partitions' => 'Secțiuni',
 	'Partition name' => 'Denumirea secțiunii',
 	'Values' => 'Parametru',
-	'Inherited tables' => 'Tabele moștenite', // by Claude Opus 5
-	'Inherited from' => 'Moștenit de la', // by Claude Opus 5
+	'Inherited tables' => 'Tabele moștenite', // by Claude Fable 5.1
+	'Inherited from' => 'Moștenit de la', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indexuri',
@@ -256,9 +256,9 @@ return [
 	'Add next' => 'Adaugă încă',
 	'Index Type' => 'Tipul indexului',
 	'length' => 'lungimea',
-	'operator class' => 'clasă de operatori', // by Claude Fable 5
-	'Algorithm' => 'Algoritm', // by Claude Fable 5
-	'Condition' => 'Condiție', // by Claude Fable 5
+	'operator class' => 'clasă de operatori', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritm', // by Claude Fable 5.1
+	'Condition' => 'Condiție', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Chei externe',
@@ -319,7 +319,7 @@ return [
 	'Alter sequence' => 'Modifică «secvență»',
 
 	// User-defined types (PostgreSQL)
-	'User types' => 'Tipuri definite de utilizator', // by Claude Fable 5
+	'User types' => 'Tipuri definite de utilizator', // by Claude Fable 5.1
 	'Create type' => 'Crează tip noi',
 	'Type has been dropped.' => 'Tiipul a fost șters.',
 	'Type has been created.' => 'Crează tip nou.',
@@ -335,12 +335,12 @@ return [
 	'Create trigger' => 'Crează trigger',
 
 	// Table check constraints
-	'Checks' => 'Verificări', // by Claude Fable 5
+	'Checks' => 'Verificări', // by Claude Fable 5.1
 	'Create check' => 'Creează verificare', // by Claude Fable 5.1
-	'Alter check' => 'Modifică verificarea', // by Claude Fable 5
-	'Check has been created.' => 'Verificarea a fost creată.', // by Claude Fable 5
-	'Check has been altered.' => 'Verificarea a fost modificată.', // by Claude Fable 5
-	'Check has been dropped.' => 'Verificarea a fost ștearsă.', // by Claude Fable 5
+	'Alter check' => 'Modifică verificarea', // by Claude Fable 5.1
+	'Check has been created.' => 'Verificarea a fost creată.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Verificarea a fost modificată.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Verificarea a fost ștearsă.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Selectează',
@@ -352,14 +352,14 @@ return [
 	'Sort' => 'Sortare',
 	'descending' => 'descrescător',
 	'Limit' => 'Limit',
-	'Limit rows' => 'Limită de rânduri', // by Claude Fable 5
+	'Limit rows' => 'Limită de rânduri', // by Claude Fable 5.1
 	'Text length' => 'Lungimea textului',
 	'Action' => 'Acțiune',
-	'Full table scan' => 'Scanare completă a tabelului', // by Claude Fable 5
+	'Full table scan' => 'Scanare completă a tabelului', // by Claude Fable 5.1
 	'Unable to select the table' => 'Nu am putut selecta date din tabel',
 	'Search data in tables' => 'Caută în tabele',
 	'No rows.' => 'Nu sunt înscrieri.',
-	'%d / ' => '%d / ', // by Claude Fable 5
+	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [
 		'%d înscriere',
 		'%d înscrieri',
@@ -367,8 +367,8 @@ return [
 	],
 	'Page' => 'Pagina',
 	'last' => 'ultima',
-	'Load more data' => 'Încarcă mai multe date', // by Claude Fable 5
-	'Loading' => 'Se încarcă', // by Claude Fable 5
+	'Load more data' => 'Încarcă mai multe date', // by Claude Fable 5.1
+	'Loading' => 'Se încarcă', // by Claude Fable 5.1
 	'Whole result' => 'Tot rezultatul',
 	'%d byte(s)' => [
 		'%d octet',
@@ -377,7 +377,7 @@ return [
 	],
 
 	// In-place editing in selection
-	'Modify' => 'Modifică', // by Claude Fable 5
+	'Modify' => 'Modifică', // by Claude Fable 5.1
 	'Ctrl+click on a value to modify it.' => 'Ctrl+click pe o valoare pentru a o modifica.',
 	'Use edit link to modify this value.' => 'Valoare poate fi modificată cu ajutorul butonului «modifică».',
 
@@ -390,8 +390,8 @@ return [
 	'Save' => 'Salvează',
 	'Save and continue edit' => 'Salvează și continuă editarea',
 	'Save and insert next' => 'Salvează și mai inserează',
-	'Saving' => 'Se salvează', // by Claude Fable 5
-	'Selected' => 'Selectate', // by Claude Fable 5
+	'Saving' => 'Se salvează', // by Claude Fable 5.1
+	'Selected' => 'Selectate', // by Claude Fable 5.1
 	'Clone' => 'Clonează',
 	'Delete' => 'Șterge',
 	'Item%s has been inserted.' => 'Înregistrarea%s a fost inserată.', // %s can contain auto-increment value, e.g. ' 123'
@@ -402,7 +402,7 @@ return [
 		'Au fost modificate %d înscrieri.',
 		'Au fost modificate %d de înscrieri.',
 	],
-	'You have no privileges to update this table.' => 'Nu aveți privilegii pentru a actualiza acest tabel.', // by Claude Fable 5
+	'You have no privileges to update this table.' => 'Nu aveți privilegii pentru a actualiza acest tabel.', // by Claude Fable 5.1
 
 	// Data type descriptions
 	'Numbers' => 'Număr',
@@ -416,42 +416,42 @@ return [
 
 	// Editor - data values
 	'now' => 'acum',
-	'yes' => 'da', // by Claude Fable 5
-	'no' => 'nu', // by Claude Fable 5
+	'yes' => 'da', // by Claude Fable 5.1
+	'no' => 'nu', // by Claude Fable 5.1
 
 	// Settings
-	'Settings' => 'Setări', // by Claude Opus 5
-	'Default' => 'Implicit', // by Claude Opus 5
-	'Color scheme' => 'Schema de culori', // by Claude Opus 5
-	'By system' => 'După sistem', // by Claude Opus 5
-	'Light' => 'Luminoasă', // by Claude Opus 5
-	'Dark' => 'Întunecată', // by Claude Opus 5
-	'Navigation mode' => 'Modul de navigare', // by Claude Opus 5
-	'Simple' => 'Simplu', // by Claude Opus 5
-	'Dual' => 'Dublu', // by Claude Opus 5
-	'Dual on hover' => 'Dublu la trecerea cursorului', // by Claude Opus 5
-	'Reversed' => 'Inversat', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Aranjarea navigării principale cu adresele tabelelor.', // by Claude Opus 5
-	'Table links' => 'Adresele tabelelor', // by Claude Opus 5
-	'Primary action for all table links.' => 'Acțiunea principală pentru toate adresele tabelelor.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Adrese către tabelele care fac referire la înscrierea curentă.', // by Claude Opus 5
-	'Display' => 'Arată', // by Claude Opus 5
-	'Hide' => 'Ascunde', // by Claude Opus 5
-	'Records per page' => 'Înscrieri pe pagină', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Numărul implicit de înscrieri arătate în tabelul de date.', // by Claude Opus 5
-	'Enum as select' => 'Enum ca listă de selecție', // by Claude Opus 5
-	'Never' => 'Niciodată', // by Claude Opus 5
-	'Always' => 'Întotdeauna', // by Claude Opus 5
-	'More values than %d' => 'Mai mult de %d valori', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Limita pentru afișarea unei liste de selecție la coloanele enum.', // by Claude Opus 5
+	'Settings' => 'Setări', // by Claude Fable 5.1
+	'Default' => 'Implicit', // by Claude Fable 5.1
+	'Color scheme' => 'Schema de culori', // by Claude Fable 5.1
+	'By system' => 'După sistem', // by Claude Fable 5.1
+	'Light' => 'Luminoasă', // by Claude Fable 5.1
+	'Dark' => 'Întunecată', // by Claude Fable 5.1
+	'Navigation mode' => 'Modul de navigare', // by Claude Fable 5.1
+	'Simple' => 'Simplu', // by Claude Fable 5.1
+	'Dual' => 'Dublu', // by Claude Fable 5.1
+	'Dual on hover' => 'Dublu la trecerea cursorului', // by Claude Fable 5.1
+	'Reversed' => 'Inversat', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Aranjarea navigării principale cu adresele tabelelor.', // by Claude Fable 5.1
+	'Table links' => 'Adresele tabelelor', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Acțiunea principală pentru toate adresele tabelelor.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Adrese către tabelele care fac referire la înscrierea curentă.', // by Claude Fable 5.1
+	'Display' => 'Arată', // by Claude Fable 5.1
+	'Hide' => 'Ascunde', // by Claude Fable 5.1
+	'Records per page' => 'Înscrieri pe pagină', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Numărul implicit de înscrieri arătate în tabelul de date.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum ca listă de selecție', // by Claude Fable 5.1
+	'Never' => 'Niciodată', // by Claude Fable 5.1
+	'Always' => 'Întotdeauna', // by Claude Fable 5.1
+	'More values than %d' => 'Mai mult de %d valori', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Limita pentru afișarea unei liste de selecție la coloanele enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Parolă de unică folosință', // by Claude Opus 5
-	'Enter OTP code.' => 'Introduceți codul OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Cod OTP incorect.', // by Claude Opus 5
-	'Access denied.' => 'Acces interzis.', // by Claude Opus 5
-	'JSON previews' => 'Previzualizări JSON', // by Claude Opus 5
-	'Data table' => 'Tabelul de date', // by Claude Opus 5
+	'One Time Password' => 'Parolă de unică folosință', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Introduceți codul OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Cod OTP incorect.', // by Claude Fable 5.1
+	'Access denied.' => 'Acces interzis.', // by Claude Fable 5.1
+	'JSON previews' => 'Previzualizări JSON', // by Claude Fable 5.1
+	'Data table' => 'Tabelul de date', // by Claude Fable 5.1
 	'Edit form' => 'Formular de editare', // by Claude Fable 5.1
-	'Ask %s' => 'Întreabă %s', // by Claude Opus 5
+	'Ask %s' => 'Întreabă %s', // by Claude Fable 5.1
 ];

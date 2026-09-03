@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s jāatgriež masīvs.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s un %s jāatgriež objekts, kas izveidots ar metodi %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s jāatgriež masīvs.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s un %s jāatgriež objekts, kas izveidots ar metodi %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Sistēma',
@@ -26,8 +26,8 @@ return [
 	'Logout' => 'Iziet',
 	'Logged as: %s' => 'Ielogojies kā: %s',
 	'Logout successful.' => 'Jūs veiksmīgi izgājāt no sistēmas.',
-	'hostname[:port] or :socket' => 'servera nosaukums[:ports] vai :sokets', // by Claude Opus 5
-	'Invalid server or credentials.' => 'Nederīgs serveris vai pieteikšanās dati.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'servera nosaukums[:ports] vai :sokets', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Nederīgs serveris vai pieteikšanās dati.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'Parole satur atstarpi, kas varētu būt lieka.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo neatbalsta pieeju bez paroles, <a href="https://www.adminneo.org/password"%s>vairāk informācijas šeit</a>.',
 	'Database does not support password.' => 'Datubāze neatbalsta paroli.',
@@ -52,11 +52,11 @@ return [
 	// Settings
 	'Language' => 'Valoda',
 
-	'Menu' => 'Izvēlne', // by Claude Opus 5
-	'Home' => 'Sākums', // by Claude Opus 5
+	'Menu' => 'Izvēlne', // by Claude Fable 5.1
+	'Home' => 'Sākums', // by Claude Fable 5.1
 	'Refresh' => 'Atjaunot',
-	'Info' => 'Informācija', // by Claude Opus 5
-	'More information.' => 'Vairāk informācijas.', // by Claude Opus 5
+	'Info' => 'Informācija', // by Claude Fable 5.1
+	'More information.' => 'Vairāk informācijas.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Tiesības',
@@ -79,14 +79,14 @@ return [
 
 	// Structure
 	'Column' => 'Lauks',
-	'Columns' => 'Lauki', // by Claude Opus 5
+	'Columns' => 'Lauki', // by Claude Fable 5.1
 	'Routine' => 'Procedūra',
 	'Grant' => 'Atļaut',
 	'Revoke' => 'Aizliegt',
 
 	// Queries
 	'SQL command' => 'SQL pieprasījums',
-	'HTTP request' => 'HTTP pieprasījums', // by Claude Opus 5
+	'HTTP request' => 'HTTP pieprasījums', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d pieprasījums veiksmīgs.',
 		'%d pieprasījumi veiksmīgi.',
@@ -102,8 +102,8 @@ return [
 	'Unknown error.' => 'Nezināma kļūda.',
 	'Warnings' => 'Brīdinājumi',
 	'%s queries are not supported.' => '%s-pieprasījumi nav atbalstīti.',
-	'Execute' => 'Izpildīt', // by Claude Opus 5
-	'Stop on error' => 'Apstāties kļūdas gadījumā', // by Claude Opus 5
+	'Execute' => 'Izpildīt', // by Claude Fable 5.1
+	'Stop on error' => 'Apstāties kļūdas gadījumā', // by Claude Fable 5.1
 	'Show only errors' => 'Rādīt tikai kļūdas',
 	'Time' => 'Laiks',
 	'%.3f s' => '%.3f s', // sprintf() format for time of the command
@@ -121,8 +121,8 @@ return [
 	'File uploads are disabled.' => 'Augšupielādes aizliegtas.',
 	'Unable to upload a file.' => 'Neizdevās ielādēt failu uz servera.',
 	'Maximum allowed file size is %sB.' => 'Faila maksimālais izmērs — %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Failu maksimālais skaits — %d. Izvēlieties mazāk failu vai palieliniet konfigurācijas direktīvu %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Failu maksimālais kopējais izmērs — %s. Izvēlieties mazākus failus vai palieliniet konfigurācijas direktīvu %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Failu maksimālais skaits — %d. Izvēlieties mazāk failu vai palieliniet konfigurācijas direktīvu %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Failu maksimālais kopējais izmērs — %s. Izvēlieties mazākus failus vai palieliniet konfigurācijas direktīvu %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST metodes pieprasījums apjoms par lielu. Atsūtiet mazāka apjoma pieprasījumu kā konfigurācijas %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Varat ielādēt lielu SQL failu uz servera un tad importēt to.',
 	'File must be in UTF-8 encoding.' => 'Failam jābūt UTF-8 kodējumam.',
@@ -143,7 +143,7 @@ return [
 
 	// Databases
 	'Database' => 'Datubāze',
-	'database' => 'datubāze', // by Claude Opus 5
+	'database' => 'datubāze', // by Claude Fable 5.1
 	'DB' => 'DB',
 	'Use' => 'Lietot',
 	'Invalid database.' => 'Nederīga datubāze.',
@@ -163,10 +163,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Shēma',
-	'schema' => 'shēma', // by Claude Opus 5
-	'Schemas' => 'Shēmas', // by Claude Opus 5
-	'No schemas.' => 'Nav shēmu.', // by Claude Opus 5
-	'Show schema' => 'Parādīt shēmu', // by Claude Opus 5
+	'schema' => 'shēma', // by Claude Fable 5.1
+	'Schemas' => 'Shēmas', // by Claude Fable 5.1
+	'No schemas.' => 'Nav shēmu.', // by Claude Fable 5.1
+	'Show schema' => 'Parādīt shēmu', // by Claude Fable 5.1
 	'Alter schema' => 'Izmainīt shēmu',
 	'Create schema' => 'Jauna shēma',
 	'Schema has been dropped.' => 'Shēma dzēsta.',
@@ -190,7 +190,7 @@ return [
 	'Check' => 'Pārbaudīt',
 	'Repair' => 'Salabot',
 	'Truncate' => 'Iztīrīt',
-	'Truncate Cascade' => 'Iztīrīt kaskādēti', // by Claude Opus 5
+	'Truncate Cascade' => 'Iztīrīt kaskādēti', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabulas iztīrītas.',
 	'Move to other database' => 'Pārvietot uz citu datubāzi',
 	'Move' => 'Pārvietot',
@@ -233,7 +233,7 @@ return [
 
 	// Views
 	'View' => 'Skats',
-	'Materialized view' => 'Materializēts skats', // by Claude Opus 5
+	'Materialized view' => 'Materializēts skats', // by Claude Fable 5.1
 	'View has been dropped.' => 'Skats dzēsts.',
 	'View has been altered.' => 'Skats izmainīts.',
 	'View has been created.' => 'Skats izveidots.',
@@ -242,12 +242,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Sadalīt pēc',
-	'Partition' => 'Partīcija', // by Claude Opus 5
+	'Partition' => 'Partīcija', // by Claude Fable 5.1
 	'Partitions' => 'Partīcijas',
 	'Partition name' => 'Partīcijas nosaukums',
 	'Values' => 'Vērtības',
-	'Inherited tables' => 'Mantotās tabulas', // by Claude Opus 5
-	'Inherited from' => 'Mantota no', // by Claude Opus 5
+	'Inherited tables' => 'Mantotās tabulas', // by Claude Fable 5.1
+	'Inherited from' => 'Mantota no', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indeksi',
@@ -256,9 +256,9 @@ return [
 	'Add next' => 'Pievienot vēl',
 	'Index Type' => 'Indeksa tips',
 	'length' => 'garums',
-	'operator class' => 'operatoru klase', // by Claude Opus 5
-	'Algorithm' => 'Algoritms', // by Claude Opus 5
-	'Condition' => 'Nosacījums', // by Claude Opus 5
+	'operator class' => 'operatoru klase', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritms', // by Claude Fable 5.1
+	'Condition' => 'Nosacījums', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Ārejā atslēgas',
@@ -311,15 +311,15 @@ return [
 	'On completion preserve' => 'Beigās saglabāt',
 
 	// Sequences (PostgreSQL)
-	'Sequences' => 'Sekvences', // by Claude Fable 5
-	'Create sequence' => 'Izveidot sekvenci', // by Claude Fable 5
-	'Sequence has been dropped.' => 'Sekvence dzēsta.', // by Claude Fable 5
+	'Sequences' => 'Sekvences', // by Claude Fable 5.1
+	'Create sequence' => 'Izveidot sekvenci', // by Claude Fable 5.1
+	'Sequence has been dropped.' => 'Sekvence dzēsta.', // by Claude Fable 5.1
 	'Sequence has been created.' => 'Sekvence izveidota.', // by Claude Fable 5.1
-	'Sequence has been altered.' => 'Sekvence izmainīta.', // by Claude Fable 5
-	'Alter sequence' => 'Izmainīt sekvenci', // by Claude Fable 5
+	'Sequence has been altered.' => 'Sekvence izmainīta.', // by Claude Fable 5.1
+	'Alter sequence' => 'Izmainīt sekvenci', // by Claude Fable 5.1
 
 	// User-defined types (PostgreSQL)
-	'User types' => 'Lietotāja definēti tipi', // by Claude Fable 5
+	'User types' => 'Lietotāja definēti tipi', // by Claude Fable 5.1
 	'Create type' => 'Izveidot tipu',
 	'Type has been dropped.' => 'Tips dzēsts.',
 	'Type has been created.' => 'Tips izveidots.',
@@ -335,12 +335,12 @@ return [
 	'Create trigger' => 'Izveidot trigeri',
 
 	// Table check constraints
-	'Checks' => 'Pārbaudes', // by Claude Opus 5
-	'Create check' => 'Izveidot pārbaudi', // by Claude Opus 5
-	'Alter check' => 'Izmainīt pārbaudi', // by Claude Opus 5
-	'Check has been created.' => 'Pārbaude izveidota.', // by Claude Opus 5
-	'Check has been altered.' => 'Pārbaude izmainīta.', // by Claude Opus 5
-	'Check has been dropped.' => 'Pārbaude dzēsta.', // by Claude Opus 5
+	'Checks' => 'Pārbaudes', // by Claude Fable 5.1
+	'Create check' => 'Izveidot pārbaudi', // by Claude Fable 5.1
+	'Alter check' => 'Izmainīt pārbaudi', // by Claude Fable 5.1
+	'Check has been created.' => 'Pārbaude izveidota.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Pārbaude izmainīta.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Pārbaude dzēsta.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Izvēlēties datus',
@@ -395,7 +395,7 @@ return [
 	'Clone' => 'Klonēt',
 	'Delete' => 'Dzēst',
 	'Item%s has been inserted.' => 'Ieraksti%s tika ievietoti.', // %s can contain auto-increment value, e.g. ' 123'
-	'Item has been deleted.' => 'Ieraksts dzēsts.', // by Claude Opus 5
+	'Item has been deleted.' => 'Ieraksts dzēsts.', // by Claude Fable 5.1
 	'Item has been updated.' => 'Ieraksts atjaunots.',
 	'%d item(s) have been affected.' => [
 		'Izmainīts %d ieraksts.',
@@ -420,38 +420,38 @@ return [
 	'no' => 'nē',
 
 	// Settings
-	'Settings' => 'Iestatījumi', // by Claude Opus 5
-	'Default' => 'Noklusētais', // by Claude Opus 5
-	'Color scheme' => 'Krāsu shēma', // by Claude Opus 5
-	'By system' => 'Pēc sistēmas', // by Claude Opus 5
-	'Light' => 'Gaišā', // by Claude Opus 5
-	'Dark' => 'Tumšā', // by Claude Opus 5
-	'Navigation mode' => 'Navigācijas režīms', // by Claude Opus 5
-	'Simple' => 'Vienkāršs', // by Claude Opus 5
-	'Dual' => 'Dubults', // by Claude Opus 5
-	'Dual on hover' => 'Dubults, uzvedot peli', // by Claude Opus 5
-	'Reversed' => 'Apgriezts', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Galvenās navigācijas izkārtojums ar tabulu saitēm.', // by Claude Opus 5
-	'Table links' => 'Tabulu saites', // by Claude Opus 5
-	'Primary action for all table links.' => 'Galvenā darbība visām tabulu saitēm.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Saites uz tabulām, kas atsaucas uz pašreizējo rindu.', // by Claude Opus 5
-	'Display' => 'Rādīt', // by Claude Opus 5
-	'Hide' => 'Slēpt', // by Claude Opus 5
-	'Records per page' => 'Ierakstu skaits lapā', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Noklusētais datu tabulā rādāmo ierakstu skaits.', // by Claude Opus 5
-	'Enum as select' => 'Enum kā izvēlne', // by Claude Opus 5
-	'Never' => 'Nekad', // by Claude Opus 5
-	'Always' => 'Vienmēr', // by Claude Opus 5
-	'More values than %d' => 'Vairāk nekā %d vērtības', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Slieksnis izvēlnes rādīšanai enum laukiem.', // by Claude Opus 5
+	'Settings' => 'Iestatījumi', // by Claude Fable 5.1
+	'Default' => 'Noklusētais', // by Claude Fable 5.1
+	'Color scheme' => 'Krāsu shēma', // by Claude Fable 5.1
+	'By system' => 'Pēc sistēmas', // by Claude Fable 5.1
+	'Light' => 'Gaišā', // by Claude Fable 5.1
+	'Dark' => 'Tumšā', // by Claude Fable 5.1
+	'Navigation mode' => 'Navigācijas režīms', // by Claude Fable 5.1
+	'Simple' => 'Vienkāršs', // by Claude Fable 5.1
+	'Dual' => 'Dubults', // by Claude Fable 5.1
+	'Dual on hover' => 'Dubults, uzvedot peli', // by Claude Fable 5.1
+	'Reversed' => 'Apgriezts', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Galvenās navigācijas izkārtojums ar tabulu saitēm.', // by Claude Fable 5.1
+	'Table links' => 'Tabulu saites', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Galvenā darbība visām tabulu saitēm.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Saites uz tabulām, kas atsaucas uz pašreizējo rindu.', // by Claude Fable 5.1
+	'Display' => 'Rādīt', // by Claude Fable 5.1
+	'Hide' => 'Slēpt', // by Claude Fable 5.1
+	'Records per page' => 'Ierakstu skaits lapā', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Noklusētais datu tabulā rādāmo ierakstu skaits.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum kā izvēlne', // by Claude Fable 5.1
+	'Never' => 'Nekad', // by Claude Fable 5.1
+	'Always' => 'Vienmēr', // by Claude Fable 5.1
+	'More values than %d' => 'Vairāk nekā %d vērtības', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Slieksnis izvēlnes rādīšanai enum laukiem.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Vienreizēja parole', // by Claude Opus 5
-	'Enter OTP code.' => 'Ievadiet OTP kodu.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Nederīgs OTP kods.', // by Claude Opus 5
-	'Access denied.' => 'Pieeja liegta.', // by Claude Opus 5
-	'JSON previews' => 'JSON priekšskatījumi', // by Claude Opus 5
-	'Data table' => 'Datu tabula', // by Claude Opus 5
-	'Edit form' => 'Rediģēšanas forma', // by Claude Opus 5
-	'Ask %s' => 'Jautāt %s', // by Claude Opus 5
+	'One Time Password' => 'Vienreizēja parole', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Ievadiet OTP kodu.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Nederīgs OTP kods.', // by Claude Fable 5.1
+	'Access denied.' => 'Pieeja liegta.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON priekšskatījumi', // by Claude Fable 5.1
+	'Data table' => 'Datu tabula', // by Claude Fable 5.1
+	'Edit form' => 'Rediģēšanas forma', // by Claude Fable 5.1
+	'Ask %s' => 'Jautāt %s', // by Claude Fable 5.1
 ];

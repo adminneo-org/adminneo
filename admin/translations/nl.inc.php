@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Taal',
 
-	'Menu' => 'Menu', // by Claude Opus 5
+	'Menu' => 'Menu', // by Claude Fable 5.1
 	'Home' => 'Startpagina',
 	'Refresh' => 'Vernieuwen',
 	'Info' => 'Informatie',
@@ -185,7 +185,7 @@ return [
 	'Check' => 'Controleer',
 	'Repair' => 'Herstel',
 	'Truncate' => 'Legen',
-	'Truncate Cascade' => 'Cascade legen', // by Claude Opus 5
+	'Truncate Cascade' => 'Cascade legen', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellen werden geleegd.',
 	'Move to other database' => 'Verplaats naar andere database',
 	'Move' => 'Verplaats',
@@ -251,7 +251,7 @@ return [
 	'Add next' => 'Volgende toevoegen',
 	'Index Type' => 'Index type',
 	'length' => 'lengte',
-	'operator class' => 'operatorklasse', // by Claude Fable 5
+	'operator class' => 'operatorklasse', // by Claude Fable 5.1
 	'Algorithm' => 'Algoritme',
 	'Condition' => 'Conditie',
 
@@ -420,7 +420,7 @@ return [
 	'Navigation mode' => 'Navigatiemodus',
 	'Simple' => 'Eenvoudig',
 	'Dual' => 'Dubbel',
-	'Dual on hover' => 'Dubbel bij aanwijzen', // by Claude Opus 5
+	'Dual on hover' => 'Dubbel bij aanwijzen', // by Claude Fable 5.1
 	'Reversed' => 'Omgekeerd',
 	'Layout of main navigation with table links.' => 'Indeling van hoofdnavigatie met tabelkoppelingen.',
 	'Table links' => 'Tabelkoppelingen',

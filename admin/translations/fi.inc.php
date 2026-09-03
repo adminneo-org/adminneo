@@ -26,13 +26,13 @@ return [
 	'Logout' => 'Kirjaudu ulos',
 	'Logged as: %s' => 'Olet kirjautunut käyttäjänä: %s',
 	'Logout successful.' => 'Uloskirjautuminen onnistui.',
-	'hostname[:port] or :socket' => 'hostname[:port] tai :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Virheellinen palvelin tai tunnukset.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'hostname[:port] tai :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Virheellinen palvelin tai tunnukset.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'Syynä voi olla syötetyssä salasanassa oleva välilyönti.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ei tue pääsyä tietokantaan ilman salasanaa, katso tarkemmin <a href="https://www.adminneo.org/password"%s>täältä</a>.',
 	'Database does not support password.' => 'Tietokanta ei tue salasanaa.',
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'Liian monta epäonnistunutta sisäänkirjautumisyritystä, kokeile uudestaan %d minuutin kuluttua.',
-	'Invalid permanent login, please login again.' => 'Virheellinen pysyvä kirjautuminen, kirjaudu uudelleen.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Virheellinen pysyvä kirjautuminen, kirjaudu uudelleen.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Virheellinen CSRF-vastamerkki. Lähetä lomake uudelleen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Jollet lähettänyt tämä pyyntö AdminNeo, sulje tämä sivu.',
 	'The action will be performed after successful login with the same credentials.' => 'Toiminto suoritetaan sen jälkeen, kun on onnistuttu kirjautumaan samoilla käyttäjätunnuksilla uudestaan.',
@@ -48,11 +48,11 @@ return [
 	// Settings
 	'Language' => 'Kieli',
 
-	'Menu' => 'Valikko', // by Claude Opus 5
-	'Home' => 'Etusivu', // by Claude Opus 5
+	'Menu' => 'Valikko', // by Claude Fable 5.1
+	'Home' => 'Etusivu', // by Claude Fable 5.1
 	'Refresh' => 'Virkistä',
-	'Info' => 'Tiedot', // by Claude Opus 5
-	'More information.' => 'Lisätietoja.', // by Claude Opus 5
+	'Info' => 'Tiedot', // by Claude Fable 5.1
+	'More information.' => 'Lisätietoja.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Oikeudet',
@@ -74,14 +74,14 @@ return [
 
 	// Structure
 	'Column' => 'Sarake',
-	'Columns' => 'Sarakkeet', // by Claude Fable 5
+	'Columns' => 'Sarakkeet', // by Claude Fable 5.1
 	'Routine' => 'Rutiini',
 	'Grant' => 'Myönnä',
 	'Revoke' => 'Kiellä',
 
 	// Queries
 	'SQL command' => 'SQL-komento',
-	'HTTP request' => 'HTTP-pyyntö', // by Claude Opus 5
+	'HTTP request' => 'HTTP-pyyntö', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d kysely onnistui.',
 		'%d kyselyä onnistui.',
@@ -111,8 +111,8 @@ return [
 	'File uploads are disabled.' => 'Tiedostojen lataaminen palvelimelle on estetty.',
 	'Unable to upload a file.' => 'Tiedostoa ei voida ladata palvelimelle.',
 	'Maximum allowed file size is %sB.' => 'Suurin sallittu tiedostokoko on %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Tiedostojen enimmäismäärä on %d. Valitse vähemmän tiedostoja tai kasvata arvoa %s konfigurointitiedostossa.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Tiedostojen suurin yhteiskoko on %s. Valitse pienempiä tiedostoja tai kasvata arvoa %s konfigurointitiedostossa.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Tiedostojen enimmäismäärä on %d. Valitse vähemmän tiedostoja tai kasvata arvoa %s konfigurointitiedostossa.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Tiedostojen suurin yhteiskoko on %s. Valitse pienempiä tiedostoja tai kasvata arvoa %s konfigurointitiedostossa.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Liian suuri POST-datamäärä. Pienennä dataa tai kasvata arvoa %s konfigurointitiedostossa.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Voit ladata suuren SQL-tiedoston FTP:n kautta ja tuoda sen sitten palvelimelta.',
 	'File must be in UTF-8 encoding.' => 'Tiedoston täytyy olla UTF-8-muodossa.',
@@ -132,7 +132,7 @@ return [
 
 	// Databases
 	'Database' => 'Tietokanta',
-	'database' => 'tietokanta', // by Claude Opus 5
+	'database' => 'tietokanta', // by Claude Fable 5.1
 	'DB' => 'TK',
 	'Use' => 'Käytä',
 	'Invalid database.' => 'Tietokanta ei kelpaa.',
@@ -152,10 +152,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Kaava',
-	'schema' => 'kaava', // by Claude Opus 5
-	'Schemas' => 'Kaavat', // by Claude Opus 5
-	'No schemas.' => 'Ei kaavoja.', // by Claude Opus 5
-	'Show schema' => 'Näytä kaava', // by Claude Opus 5
+	'schema' => 'kaava', // by Claude Fable 5.1
+	'Schemas' => 'Kaavat', // by Claude Fable 5.1
+	'No schemas.' => 'Ei kaavoja.', // by Claude Fable 5.1
+	'Show schema' => 'Näytä kaava', // by Claude Fable 5.1
 	'Alter schema' => 'Muuta kaavaa',
 	'Create schema' => 'Luo kaava',
 	'Schema has been dropped.' => 'Kaava poistettiin.',
@@ -231,12 +231,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Osioi arvolla',
-	'Partition' => 'Osio', // by Claude Opus 5
+	'Partition' => 'Osio', // by Claude Fable 5.1
 	'Partitions' => 'Osiot',
 	'Partition name' => 'Osion nimi',
 	'Values' => 'Arvot',
-	'Inherited tables' => 'Perityt taulut', // by Claude Opus 5
-	'Inherited from' => 'Peritty taulusta', // by Claude Opus 5
+	'Inherited tables' => 'Perityt taulut', // by Claude Fable 5.1
+	'Inherited from' => 'Peritty taulusta', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indeksit',
@@ -245,9 +245,9 @@ return [
 	'Add next' => 'Lisää seuraava',
 	'Index Type' => 'Indeksityyppi',
 	'length' => 'pituus',
-	'operator class' => 'operaattoriluokka', // by Claude Fable 5
-	'Algorithm' => 'Algoritmi', // by Claude Fable 5
-	'Condition' => 'Ehto', // by Claude Fable 5
+	'operator class' => 'operaattoriluokka', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritmi', // by Claude Fable 5.1
+	'Condition' => 'Ehto', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Vieraat avaimet',
@@ -320,12 +320,12 @@ return [
 	'Create trigger' => 'Luo liipaisin',
 
 	// Table check constraints
-	'Checks' => 'Tarkistukset', // by Claude Fable 5
-	'Create check' => 'Luo tarkistus', // by Claude Fable 5
-	'Alter check' => 'Muuta tarkistusta', // by Claude Fable 5
-	'Check has been created.' => 'Tarkistus on luotu.', // by Claude Fable 5
-	'Check has been altered.' => 'Tarkistusta on muutettu.', // by Claude Fable 5
-	'Check has been dropped.' => 'Tarkistus on poistettu.', // by Claude Fable 5
+	'Checks' => 'Tarkistukset', // by Claude Fable 5.1
+	'Create check' => 'Luo tarkistus', // by Claude Fable 5.1
+	'Alter check' => 'Muuta tarkistusta', // by Claude Fable 5.1
+	'Check has been created.' => 'Tarkistus on luotu.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Tarkistusta on muutettu.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Tarkistus on poistettu.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Valitse data',
@@ -399,38 +399,38 @@ return [
 	'no' => 'ei',
 
 	// Settings
-	'Settings' => 'Asetukset', // by Claude Opus 5
-	'Default' => 'Oletus', // by Claude Opus 5
-	'Color scheme' => 'Väriteema', // by Claude Opus 5
-	'By system' => 'Järjestelmän mukaan', // by Claude Opus 5
-	'Light' => 'Vaalea', // by Claude Opus 5
-	'Dark' => 'Tumma', // by Claude Opus 5
-	'Navigation mode' => 'Navigointitila', // by Claude Opus 5
-	'Simple' => 'Yksinkertainen', // by Claude Opus 5
-	'Dual' => 'Kaksiosainen', // by Claude Opus 5
-	'Dual on hover' => 'Kaksiosainen osoitettaessa', // by Claude Opus 5
-	'Reversed' => 'Käänteinen', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Päänavigoinnin asettelu taulujen linkkien kanssa.', // by Claude Opus 5
-	'Table links' => 'Taulujen linkit', // by Claude Opus 5
-	'Primary action for all table links.' => 'Ensisijainen toiminto kaikille taulujen linkeille.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Linkit tauluihin, jotka viittaavat nykyiseen riviin.', // by Claude Opus 5
-	'Display' => 'Näytä', // by Claude Opus 5
-	'Hide' => 'Piilota', // by Claude Opus 5
-	'Records per page' => 'Tietueita sivulla', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Datataulussa näytettävien tietueiden oletusmäärä.', // by Claude Opus 5
-	'Enum as select' => 'Enum valintalistana', // by Claude Opus 5
-	'Never' => 'Ei koskaan', // by Claude Opus 5
-	'Always' => 'Aina', // by Claude Opus 5
-	'More values than %d' => 'Enemmän kuin %d arvoa', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Raja valintalistan näyttämiselle enum-kentissä.', // by Claude Opus 5
+	'Settings' => 'Asetukset', // by Claude Fable 5.1
+	'Default' => 'Oletus', // by Claude Fable 5.1
+	'Color scheme' => 'Väriteema', // by Claude Fable 5.1
+	'By system' => 'Järjestelmän mukaan', // by Claude Fable 5.1
+	'Light' => 'Vaalea', // by Claude Fable 5.1
+	'Dark' => 'Tumma', // by Claude Fable 5.1
+	'Navigation mode' => 'Navigointitila', // by Claude Fable 5.1
+	'Simple' => 'Yksinkertainen', // by Claude Fable 5.1
+	'Dual' => 'Kaksiosainen', // by Claude Fable 5.1
+	'Dual on hover' => 'Kaksiosainen osoitettaessa', // by Claude Fable 5.1
+	'Reversed' => 'Käänteinen', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Päänavigoinnin asettelu taulujen linkkien kanssa.', // by Claude Fable 5.1
+	'Table links' => 'Taulujen linkit', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Ensisijainen toiminto kaikille taulujen linkeille.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Linkit tauluihin, jotka viittaavat nykyiseen riviin.', // by Claude Fable 5.1
+	'Display' => 'Näytä', // by Claude Fable 5.1
+	'Hide' => 'Piilota', // by Claude Fable 5.1
+	'Records per page' => 'Tietueita sivulla', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Datataulussa näytettävien tietueiden oletusmäärä.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum valintalistana', // by Claude Fable 5.1
+	'Never' => 'Ei koskaan', // by Claude Fable 5.1
+	'Always' => 'Aina', // by Claude Fable 5.1
+	'More values than %d' => 'Enemmän kuin %d arvoa', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Raja valintalistan näyttämiselle enum-kentissä.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Kertakäyttösalasana', // by Claude Opus 5
-	'Enter OTP code.' => 'Syötä OTP-koodi.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Virheellinen OTP-koodi.', // by Claude Opus 5
-	'Access denied.' => 'Pääsy estetty.', // by Claude Opus 5
-	'JSON previews' => 'JSON-esikatselut', // by Claude Opus 5
-	'Data table' => 'Datataulu', // by Claude Opus 5
-	'Edit form' => 'Muokkauslomake', // by Claude Opus 5
-	'Ask %s' => 'Kysy %s:ltä', // by Claude Opus 5
+	'One Time Password' => 'Kertakäyttösalasana', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Syötä OTP-koodi.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Virheellinen OTP-koodi.', // by Claude Fable 5.1
+	'Access denied.' => 'Pääsy estetty.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON-esikatselut', // by Claude Fable 5.1
+	'Data table' => 'Datataulu', // by Claude Fable 5.1
+	'Edit form' => 'Muokkauslomake', // by Claude Fable 5.1
+	'Ask %s' => 'Kysy %s:ltä', // by Claude Fable 5.1
 ];

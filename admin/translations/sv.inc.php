@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s måste returnera en array.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s och %s måste returnera ett objekt skapat av metoden %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s måste returnera en array.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s och %s måste returnera ett objekt skapat av metoden %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'System',
@@ -26,8 +26,8 @@ return [
 	'Logout' => 'Logga ut',
 	'Logged as: %s' => 'Inloggad som: %s',
 	'Logout successful.' => 'Du är nu utloggad.',
-	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Ogiltig server eller inloggningsuppgifter.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'hostname[:port] eller :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Ogiltig server eller inloggningsuppgifter.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'Det finns ett mellanslag i lösenordet, vilket kan vara anledningen.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tillåter inte att ansluta till en databas utan lösenord. <a href="https://www.adminneo.org/password"%s>Mer information</a>.',
 	'Database does not support password.' => 'Databasen stödjer inte lösenord.',
@@ -35,7 +35,7 @@ return [
 		'För många misslyckade inloggningar, försök igen om %d minut.',
 		'För många misslyckade inloggningar, försök igen om %d minuter.',
 	],
-	'Invalid permanent login, please login again.' => 'Ogiltig permanent inloggning, vänligen logga in igen.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Ogiltig permanent inloggning, vänligen logga in igen.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Ogiltig CSRF-token. Skicka formuläret igen.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Om du inte skickade en förfrågan från AdminNeo så kan du stänga den här sidan.',
 	'The action will be performed after successful login with the same credentials.' => 'Åtgärden kommer att utföras efter en lyckad inloggning med samma inloggningsuppgifter.',
@@ -51,11 +51,11 @@ return [
 	// Settings
 	'Language' => 'Språk',
 
-	'Menu' => 'Meny', // by Claude Opus 5
-	'Home' => 'Start', // by Claude Opus 5
+	'Menu' => 'Meny', // by Claude Fable 5.1
+	'Home' => 'Start', // by Claude Fable 5.1
 	'Refresh' => 'Ladda om',
-	'Info' => 'Info', // by Claude Opus 5
-	'More information.' => 'Mer information.', // by Claude Opus 5
+	'Info' => 'Info', // by Claude Fable 5.1
+	'More information.' => 'Mer information.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegier',
@@ -77,14 +77,14 @@ return [
 
 	// Structure
 	'Column' => 'Kolumn',
-	'Columns' => 'Kolumner', // by Claude Fable 5
+	'Columns' => 'Kolumner', // by Claude Fable 5.1
 	'Routine' => 'Rutin',
 	'Grant' => 'Tillåt',
 	'Revoke' => 'Neka',
 
 	// Queries
 	'SQL command' => 'SQL-kommando',
-	'HTTP request' => 'HTTP-förfrågan', // by Claude Opus 5
+	'HTTP request' => 'HTTP-förfrågan', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d förfrågan lyckades.',
 		'%d förfrågor lyckades.',
@@ -115,10 +115,10 @@ return [
 	'Run file' => 'Kör fil',
 	'File does not exist.' => 'Filen finns inte.',
 	'File uploads are disabled.' => 'Filuppladdningar är avstängda.',
-	'Unable to upload a file.' => 'Det går inte att ladda upp filen.', // by Claude Opus 5
+	'Unable to upload a file.' => 'Det går inte att ladda upp filen.', // by Claude Fable 5.1
 	'Maximum allowed file size is %sB.' => 'Högsta tillåtna storlek är %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Högsta antal filer är %d. Välj färre filer eller höj %s-direktivet.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Högsta sammanlagda filstorlek är %s. Välj mindre filer eller höj %s-direktivet.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Högsta antal filer är %d. Välj färre filer eller höj %s-direktivet.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Högsta sammanlagda filstorlek är %s. Välj mindre filer eller höj %s-direktivet.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST-datan är för stor. Minska det eller höj %s-direktivet.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Du kan ladda upp en stor SQL-fil via FTP och importera det från servern.',
 	'File must be in UTF-8 encoding.' => 'Filer måste vara i UTF-8-format.',
@@ -138,7 +138,7 @@ return [
 
 	// Databases
 	'Database' => 'Databas',
-	'database' => 'databas', // by Claude Opus 5
+	'database' => 'databas', // by Claude Fable 5.1
 	'DB' => 'DB',
 	'Use' => 'Använd',
 	'Invalid database.' => 'Ogiltig databas.',
@@ -158,10 +158,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
-	'schema' => 'schema', // by Claude Opus 5
-	'Schemas' => 'Scheman', // by Claude Opus 5
-	'No schemas.' => 'Inga scheman.', // by Claude Opus 5
-	'Show schema' => 'Visa schema', // by Claude Opus 5
+	'schema' => 'schema', // by Claude Fable 5.1
+	'Schemas' => 'Scheman', // by Claude Fable 5.1
+	'No schemas.' => 'Inga scheman.', // by Claude Fable 5.1
+	'Show schema' => 'Visa schema', // by Claude Fable 5.1
 	'Alter schema' => 'Redigera schema',
 	'Create schema' => 'Skapa schema',
 	'Schema has been dropped.' => 'Schema har tagits bort.',
@@ -237,12 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partitionera om',
-	'Partition' => 'Partition', // by Claude Opus 5
+	'Partition' => 'Partition', // by Claude Fable 5.1
 	'Partitions' => 'Partitioner',
 	'Partition name' => 'Partition',
 	'Values' => 'Värden',
-	'Inherited tables' => 'Ärvda tabeller', // by Claude Opus 5
-	'Inherited from' => 'Ärvd från', // by Claude Opus 5
+	'Inherited tables' => 'Ärvda tabeller', // by Claude Fable 5.1
+	'Inherited from' => 'Ärvd från', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Index',
@@ -251,9 +251,9 @@ return [
 	'Add next' => 'Lägg till nästa',
 	'Index Type' => 'Indextyp',
 	'length' => 'längd',
-	'operator class' => 'operatorklass', // by Claude Fable 5
-	'Algorithm' => 'Algoritm', // by Claude Fable 5
-	'Condition' => 'Villkor', // by Claude Fable 5
+	'operator class' => 'operatorklass', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritm', // by Claude Fable 5.1
+	'Condition' => 'Villkor', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Främmande nycklar',
@@ -329,12 +329,12 @@ return [
 	'Create trigger' => 'Skapa avtryckare',
 
 	// Table check constraints
-	'Checks' => 'Kontrollvillkor', // by Claude Fable 5
-	'Create check' => 'Skapa kontrollvillkor', // by Claude Fable 5
-	'Alter check' => 'Ändra kontrollvillkor', // by Claude Fable 5
-	'Check has been created.' => 'Kontrollvillkoret har skapats.', // by Claude Fable 5
-	'Check has been altered.' => 'Kontrollvillkoret har ändrats.', // by Claude Fable 5
-	'Check has been dropped.' => 'Kontrollvillkoret har tagits bort.', // by Claude Fable 5
+	'Checks' => 'Kontrollvillkor', // by Claude Fable 5.1
+	'Create check' => 'Skapa kontrollvillkor', // by Claude Fable 5.1
+	'Alter check' => 'Ändra kontrollvillkor', // by Claude Fable 5.1
+	'Check has been created.' => 'Kontrollvillkoret har skapats.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Kontrollvillkoret har ändrats.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Kontrollvillkoret har tagits bort.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Välj data',
@@ -411,38 +411,38 @@ return [
 	'no' => 'nej',
 
 	// Settings
-	'Settings' => 'Inställningar', // by Claude Opus 5
-	'Default' => 'Standard', // by Claude Opus 5
-	'Color scheme' => 'Färgtema', // by Claude Opus 5
-	'By system' => 'Enligt systemet', // by Claude Opus 5
-	'Light' => 'Ljust', // by Claude Opus 5
-	'Dark' => 'Mörkt', // by Claude Opus 5
-	'Navigation mode' => 'Navigeringsläge', // by Claude Opus 5
-	'Simple' => 'Enkelt', // by Claude Opus 5
-	'Dual' => 'Dubbelt', // by Claude Opus 5
-	'Dual on hover' => 'Dubbelt vid hovring', // by Claude Opus 5
-	'Reversed' => 'Omvänt', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Utformning av huvudnavigeringen med tabellänkar.', // by Claude Opus 5
-	'Table links' => 'Tabellänkar', // by Claude Opus 5
-	'Primary action for all table links.' => 'Primär åtgärd för alla tabellänkar.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Länkar till tabeller som refererar till den aktuella raden.', // by Claude Opus 5
-	'Display' => 'Visa', // by Claude Opus 5
-	'Hide' => 'Dölj', // by Claude Opus 5
-	'Records per page' => 'Poster per sida', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Antal poster som visas i datatabellen som standard.', // by Claude Opus 5
-	'Enum as select' => 'Enum som vallista', // by Claude Opus 5
-	'Never' => 'Aldrig', // by Claude Opus 5
-	'Always' => 'Alltid', // by Claude Opus 5
-	'More values than %d' => 'Fler än %d värden', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Gräns för att visa en vallista för enum-fält.', // by Claude Opus 5
+	'Settings' => 'Inställningar', // by Claude Fable 5.1
+	'Default' => 'Standard', // by Claude Fable 5.1
+	'Color scheme' => 'Färgtema', // by Claude Fable 5.1
+	'By system' => 'Enligt systemet', // by Claude Fable 5.1
+	'Light' => 'Ljust', // by Claude Fable 5.1
+	'Dark' => 'Mörkt', // by Claude Fable 5.1
+	'Navigation mode' => 'Navigeringsläge', // by Claude Fable 5.1
+	'Simple' => 'Enkelt', // by Claude Fable 5.1
+	'Dual' => 'Dubbelt', // by Claude Fable 5.1
+	'Dual on hover' => 'Dubbelt vid hovring', // by Claude Fable 5.1
+	'Reversed' => 'Omvänt', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Utformning av huvudnavigeringen med tabellänkar.', // by Claude Fable 5.1
+	'Table links' => 'Tabellänkar', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Primär åtgärd för alla tabellänkar.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Länkar till tabeller som refererar till den aktuella raden.', // by Claude Fable 5.1
+	'Display' => 'Visa', // by Claude Fable 5.1
+	'Hide' => 'Dölj', // by Claude Fable 5.1
+	'Records per page' => 'Poster per sida', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Antal poster som visas i datatabellen som standard.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum som vallista', // by Claude Fable 5.1
+	'Never' => 'Aldrig', // by Claude Fable 5.1
+	'Always' => 'Alltid', // by Claude Fable 5.1
+	'More values than %d' => 'Fler än %d värden', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Gräns för att visa en vallista för enum-fält.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Engångslösenord', // by Claude Opus 5
-	'Enter OTP code.' => 'Ange OTP-koden.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Ogiltig OTP-kod.', // by Claude Opus 5
-	'Access denied.' => 'Åtkomst nekad.', // by Claude Opus 5
-	'JSON previews' => 'JSON-förhandsvisning', // by Claude Opus 5
-	'Data table' => 'Datatabell', // by Claude Opus 5
-	'Edit form' => 'Redigeringsformulär', // by Claude Opus 5
-	'Ask %s' => 'Fråga %s', // by Claude Opus 5
+	'One Time Password' => 'Engångslösenord', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Ange OTP-koden.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Ogiltig OTP-kod.', // by Claude Fable 5.1
+	'Access denied.' => 'Åtkomst nekad.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON-förhandsvisning', // by Claude Fable 5.1
+	'Data table' => 'Datatabell', // by Claude Fable 5.1
+	'Edit form' => 'Redigeringsformulär', // by Claude Fable 5.1
+	'Ask %s' => 'Fråga %s', // by Claude Fable 5.1
 ];

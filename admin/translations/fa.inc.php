@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s بایستی یک آرایه برگرداند.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s و %s بایستی یک شیء ایجاد شده توسط متد %s برگردانند.', // by Claude Opus 5
+	'%s must return an array.' => '%s بایستی یک آرایه برگرداند.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s و %s بایستی یک شیء ایجاد شده توسط متد %s برگردانند.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'سیستم',
@@ -26,21 +26,21 @@ return [
 	'Logout' => 'خروج',
 	'Logged as: %s' => 'ورود به عنوان: %s',
 	'Logout successful.' => 'با موفقیت خارج شدید.',
-	'hostname[:port] or :socket' => 'نام میزبان[:پورت] یا :سوکت', // by Claude Opus 5
-	'Invalid server or credentials.' => 'سرور یا اطلاعات ورود نامعتبر است.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'در کلمه عبور وارد شده فاصله وجود دارد که ممکن است دلیل آن باشد.', // by Claude Opus 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo از دسترسی به پایگاه داده بدون کلمه عبور پشتیبانی نمی کند، <a href="https://www.adminneo.org/password"%s>اطلاعات بیشتر</a>.', // by Claude Opus 5
-	'Database does not support password.' => 'پایگاه داده از کلمه عبور پشتیبانی نمی کند.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'نام میزبان[:پورت] یا :سوکت', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'سرور یا اطلاعات ورود نامعتبر است.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'در کلمه عبور وارد شده فاصله وجود دارد که ممکن است دلیل آن باشد.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo از دسترسی به پایگاه داده بدون کلمه عبور پشتیبانی نمی کند، <a href="https://www.adminneo.org/password"%s>اطلاعات بیشتر</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'پایگاه داده از کلمه عبور پشتیبانی نمی کند.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'ورودهای ناموفق بیش از حد، %d دقیقه دیگر تلاش نمایید.',
-	'Invalid permanent login, please login again.' => 'ورود دائم نامعتبر است، لطفا دوباره وارد شوید.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'ورود دائم نامعتبر است، لطفا دوباره وارد شوید.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'CSRF token نامعتبر است. دوباره سعی کنید.',
-	'If you did not send this request from AdminNeo then close this page.' => 'اگر این درخواست را از AdminNeo ارسال نکرده اید، این صفحه را ببندید.', // by Claude Opus 5
-	'The action will be performed after successful login with the same credentials.' => 'این عملیات پس از ورود موفق با همان اطلاعات انجام خواهد شد.', // by Claude Opus 5
+	'If you did not send this request from AdminNeo then close this page.' => 'اگر این درخواست را از AdminNeo ارسال نکرده اید، این صفحه را ببندید.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'این عملیات پس از ورود موفق با همان اطلاعات انجام خواهد شد.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'پسوند نامعتبر',
 	'None of the supported PHP extensions (%s) are available.' => 'هیچ کدام از افزونه های PHP پشتیبانی شده (%s) موجود نمی باشند.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'اتصال به پورتهای ممتاز مجاز نیست.', // by Claude Opus 5
+	'Connecting to privileged ports is not allowed.' => 'اتصال به پورتهای ممتاز مجاز نیست.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'پشتیبانی از نشست بایستی فعال گردد.',
 	'Session expired, please login again.' => 'نشست پایان یافته، لطفا دوباره وارد شوید.',
 	'%s version: %s through PHP extension %s' => 'نسخه %s : %s توسعه پی اچ پی %s',
@@ -48,11 +48,11 @@ return [
 	// Settings
 	'Language' => 'زبان',
 
-	'Menu' => 'منو', // by Claude Opus 5
-	'Home' => 'خانه', // by Claude Opus 5
+	'Menu' => 'منو', // by Claude Fable 5.1
+	'Home' => 'خانه', // by Claude Fable 5.1
 	'Refresh' => 'بازیابی',
-	'Info' => 'اطلاعات', // by Claude Opus 5
-	'More information.' => 'اطلاعات بیشتر.', // by Claude Opus 5
+	'Info' => 'اطلاعات', // by Claude Fable 5.1
+	'More information.' => 'اطلاعات بیشتر.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'امتیازات',
@@ -71,27 +71,27 @@ return [
 
 	// Structure
 	'Column' => 'ستون',
-	'Columns' => 'ستونها', // by Claude Opus 5
+	'Columns' => 'ستونها', // by Claude Fable 5.1
 	'Routine' => 'روتین',
 	'Grant' => 'اعطا',
 	'Revoke' => 'لغو کردن',
 
 	// Queries
 	'SQL command' => 'دستور SQL',
-	'HTTP request' => 'درخواست HTTP', // by Claude Opus 5
+	'HTTP request' => 'درخواست HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => '%d کوئری اجرا شد.',
 	'Query executed OK, %d row(s) affected.' => 'کوئری اجرا شد. %d سطر تغیر کرد.',
 	'No commands to execute.' => 'دستوری برای اجرا وجود ندارد.',
 	'Error in query' => 'خطا در کوئری',
-	'Unknown error.' => 'خطای ناشناخته.', // by Claude Opus 5
-	'Warnings' => 'هشدارها', // by Claude Opus 5
-	'%s queries are not supported.' => 'کوئری های %s پشتیبانی نمی شوند.', // by Claude Opus 5
+	'Unknown error.' => 'خطای ناشناخته.', // by Claude Fable 5.1
+	'Warnings' => 'هشدارها', // by Claude Fable 5.1
+	'%s queries are not supported.' => 'کوئری های %s پشتیبانی نمی شوند.', // by Claude Fable 5.1
 	'Execute' => 'اجرا',
 	'Stop on error' => 'توقف بر روی خطا',
 	'Show only errors' => 'فقط نمایش خطاها',
 	'Time' => 'زمان',
 	'%.3f s' => '%.3f s', // sprintf() format for time of the command
-	'History' => 'تاریخچه', // by Claude Opus 5
+	'History' => 'تاریخچه', // by Claude Fable 5.1
 	'Clear' => 'پاک کردن',
 	'Edit all' => 'ویرایش همه',
 
@@ -105,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'بارگذاری غیر فعال است.',
 	'Unable to upload a file.' => 'قادر به بارگذاری فایل نیستید.',
 	'Maximum allowed file size is %sB.' => ' %sB حداکثر اندازه فایل.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'حداکثر تعداد فایل %d است. فایل کمتری انتخاب کنید و یا مقدار %s را در پیکربندی افزایش دهید.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'حداکثر حجم کل فایلها %s است. فایلهای کوچکتری انتخاب کنید و یا مقدار %s را در پیکربندی افزایش دهید.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'حداکثر تعداد فایل %d است. فایل کمتری انتخاب کنید و یا مقدار %s را در پیکربندی افزایش دهید.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'حداکثر حجم کل فایلها %s است. فایلهای کوچکتری انتخاب کنید و یا مقدار %s را در پیکربندی افزایش دهید.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'حجم داده ارسالی برزگ است. حجم داده کاهش دهید و یا مقدار %s را در پیکربندی افزایش دهید.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'شما می توانید فایل SQL حجیم را از طریق FTP بارگزاری و از روی سرور وارد نمایید.',
 	'File must be in UTF-8 encoding.' => 'فرمت فایل باید UTF-8 باشید.',
@@ -118,13 +118,13 @@ return [
 	'Output' => 'خروجی',
 	'open' => 'بازکردن',
 	'save' => 'ذخیره',
-	'Format' => 'قالب', // by Claude Opus 5
+	'Format' => 'قالب', // by Claude Fable 5.1
 	'Data' => 'داده',
 
 	// Databases
 	'Database' => 'پایگاه داده',
-	'database' => 'پایگاه داده', // by Claude Opus 5
-	'DB' => 'پایگاه', // by Claude Opus 5
+	'database' => 'پایگاه داده', // by Claude Fable 5.1
+	'DB' => 'پایگاه', // by Claude Fable 5.1
 	'Use' => 'استفاده',
 	'Invalid database.' => 'پایگاه داده نامعتبر.',
 	'Alter database' => 'ویرایش پایگاه داده',
@@ -143,10 +143,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'ساختار',
-	'schema' => 'ساختار', // by Claude Opus 5
-	'Schemas' => 'ساختارها', // by Claude Opus 5
-	'No schemas.' => 'ساختاری وجود ندارد.', // by Claude Opus 5
-	'Show schema' => 'نمایش ساختار', // by Claude Opus 5
+	'schema' => 'ساختار', // by Claude Fable 5.1
+	'Schemas' => 'ساختارها', // by Claude Fable 5.1
+	'No schemas.' => 'ساختاری وجود ندارد.', // by Claude Fable 5.1
+	'Show schema' => 'نمایش ساختار', // by Claude Fable 5.1
 	'Alter schema' => 'ویرایش ساختار',
 	'Create schema' => 'ایجاد ساختار',
 	'Schema has been dropped.' => 'ساختار حذف شد.',
@@ -170,14 +170,14 @@ return [
 	'Check' => 'بررسی',
 	'Repair' => 'تعمیر',
 	'Truncate' => 'کوتاه کردن',
-	'Truncate Cascade' => 'کوتاه کردن آبشاری', // by Claude Opus 5
+	'Truncate Cascade' => 'کوتاه کردن آبشاری', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'جدولها بریده شدند.',
 	'Move to other database' => 'انتقال به یک پایگاه داده دیگر',
 	'Move' => 'انتقال',
 	'Tables have been moved.' => 'جدولها انتقال داده شدند.',
 	'Copy' => 'کپی کردن',
 	'Tables have been copied.' => 'جدولها کپی شدند.',
-	'overwrite' => 'بازنویسی', // by Claude Opus 5
+	'overwrite' => 'بازنویسی', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'جدولها',
@@ -202,7 +202,7 @@ return [
 	'Comment' => 'توضیح',
 	'Default value' => 'مقدار پیش فرض',
 	'Drop' => 'حذف',
-	'Drop %s?' => '%s حذف شود؟', // by Claude Opus 5
+	'Drop %s?' => '%s حذف شود؟', // by Claude Fable 5.1
 	'Are you sure?' => 'مطمئن هستید؟',
 	'Size' => 'حجم',
 	'Compute' => 'محاسبه',
@@ -217,17 +217,17 @@ return [
 	'View has been dropped.' => 'نمایش حذف شد.',
 	'View has been altered.' => 'نمایش ویرایش شد.',
 	'View has been created.' => 'نمایش ایجاد شد.',
-	'Alter view' => 'ویرایش نمایش', // by Claude Opus 5
+	'Alter view' => 'ویرایش نمایش', // by Claude Fable 5.1
 	'Create view' => 'ایجاد نمایش',
 
 	// Partitions
 	'Partition by' => 'بخشبندی توسط',
-	'Partition' => 'بخش', // by Claude Opus 5
+	'Partition' => 'بخش', // by Claude Fable 5.1
 	'Partitions' => 'بخشبندیها',
 	'Partition name' => 'نام بخش',
 	'Values' => 'مقادیر',
-	'Inherited tables' => 'جدولهای ارث بری شده', // by Claude Opus 5
-	'Inherited from' => 'ارث بری از', // by Claude Opus 5
+	'Inherited tables' => 'جدولهای ارث بری شده', // by Claude Fable 5.1
+	'Inherited from' => 'ارث بری از', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'ایندکسها',
@@ -236,9 +236,9 @@ return [
 	'Add next' => 'افرودن بعدی',
 	'Index Type' => 'نوع ایندکس',
 	'length' => 'طول',
-	'operator class' => 'کلاس عملگر', // by Claude Opus 5
-	'Algorithm' => 'الگوریتم', // by Claude Opus 5
-	'Condition' => 'شرط', // by Claude Opus 5
+	'operator class' => 'کلاس عملگر', // by Claude Fable 5.1
+	'Algorithm' => 'الگوریتم', // by Claude Fable 5.1
+	'Condition' => 'شرط', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'کلیدهای خارجی',
@@ -280,7 +280,7 @@ return [
 	'Alter event' => 'ویرایش رویداد',
 	'Create event' => 'ایجاد رویداد',
 	'At given time' => 'زمان معین',
-	'Every' => 'هر', // by Claude Opus 5
+	'Every' => 'هر', // by Claude Fable 5.1
 	'Schedule' => 'زمانبندی',
 	'Start' => 'آغاز',
 	'End' => 'پایان',
@@ -311,12 +311,12 @@ return [
 	'Create trigger' => 'ایجاد تریگر',
 
 	// Table check constraints
-	'Checks' => 'بررسیها', // by Claude Opus 5
-	'Create check' => 'ایجاد بررسی', // by Claude Opus 5
-	'Alter check' => 'ویرایش بررسی', // by Claude Opus 5
-	'Check has been created.' => 'بررسی ایجاد شد.', // by Claude Opus 5
-	'Check has been altered.' => 'بررسی ویرایش شد.', // by Claude Opus 5
-	'Check has been dropped.' => 'بررسی حذف شد.', // by Claude Opus 5
+	'Checks' => 'بررسیها', // by Claude Fable 5.1
+	'Create check' => 'ایجاد بررسی', // by Claude Fable 5.1
+	'Alter check' => 'ویرایش بررسی', // by Claude Fable 5.1
+	'Check has been created.' => 'بررسی ایجاد شد.', // by Claude Fable 5.1
+	'Check has been altered.' => 'بررسی ویرایش شد.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'بررسی حذف شد.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'انتخاب داده',
@@ -358,7 +358,7 @@ return [
 	'Save' => 'ذخیره',
 	'Save and continue edit' => 'ذخیره و ادامه ویرایش',
 	'Save and insert next' => 'ذخیره و درج بعدی',
-	'Saving' => 'در حال ذخیره', // by Claude Opus 5
+	'Saving' => 'در حال ذخیره', // by Claude Fable 5.1
 	'Selected' => 'انتخاب شده',
 	'Clone' => 'تکثیر',
 	'Delete' => 'حذف',
@@ -384,38 +384,38 @@ return [
 	'no' => 'خیر',
 
 	// Settings
-	'Settings' => 'تنظیمات', // by Claude Opus 5
-	'Default' => 'پیش فرض', // by Claude Opus 5
-	'Color scheme' => 'طرح رنگ', // by Claude Opus 5
-	'By system' => 'بر اساس سیستم', // by Claude Opus 5
-	'Light' => 'روشن', // by Claude Opus 5
-	'Dark' => 'تیره', // by Claude Opus 5
-	'Navigation mode' => 'حالت پیمایش', // by Claude Opus 5
-	'Simple' => 'ساده', // by Claude Opus 5
-	'Dual' => 'دوگانه', // by Claude Opus 5
-	'Dual on hover' => 'دوگانه هنگام اشاره', // by Claude Opus 5
-	'Reversed' => 'معکوس', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'چیدمان پیمایش اصلی به همراه لینکهای جدول.', // by Claude Opus 5
-	'Table links' => 'لینکهای جدول', // by Claude Opus 5
-	'Primary action for all table links.' => 'عملیات اصلی برای همه لینکهای جدول.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'لینک به جدولهایی که به سطر جاری ارجاع می دهند.', // by Claude Opus 5
-	'Display' => 'نمایش', // by Claude Opus 5
-	'Hide' => 'پنهان کردن', // by Claude Opus 5
-	'Records per page' => 'رکورد در هر صفحه', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'تعداد پیش فرض رکوردهای نمایش داده شده در جدول داده.', // by Claude Opus 5
-	'Enum as select' => 'Enum به صورت لیست انتخاب', // by Claude Opus 5
-	'Never' => 'هرگز', // by Claude Opus 5
-	'Always' => 'همیشه', // by Claude Opus 5
-	'More values than %d' => 'بیش از %d مقدار', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'آستانه نمایش لیست انتخاب برای ستونهای enum.', // by Claude Opus 5
+	'Settings' => 'تنظیمات', // by Claude Fable 5.1
+	'Default' => 'پیش فرض', // by Claude Fable 5.1
+	'Color scheme' => 'طرح رنگ', // by Claude Fable 5.1
+	'By system' => 'بر اساس سیستم', // by Claude Fable 5.1
+	'Light' => 'روشن', // by Claude Fable 5.1
+	'Dark' => 'تیره', // by Claude Fable 5.1
+	'Navigation mode' => 'حالت پیمایش', // by Claude Fable 5.1
+	'Simple' => 'ساده', // by Claude Fable 5.1
+	'Dual' => 'دوگانه', // by Claude Fable 5.1
+	'Dual on hover' => 'دوگانه هنگام اشاره', // by Claude Fable 5.1
+	'Reversed' => 'معکوس', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'چیدمان پیمایش اصلی به همراه لینکهای جدول.', // by Claude Fable 5.1
+	'Table links' => 'لینکهای جدول', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'عملیات اصلی برای همه لینکهای جدول.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'لینک به جدولهایی که به سطر جاری ارجاع می دهند.', // by Claude Fable 5.1
+	'Display' => 'نمایش', // by Claude Fable 5.1
+	'Hide' => 'پنهان کردن', // by Claude Fable 5.1
+	'Records per page' => 'رکورد در هر صفحه', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'تعداد پیش فرض رکوردهای نمایش داده شده در جدول داده.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum به صورت لیست انتخاب', // by Claude Fable 5.1
+	'Never' => 'هرگز', // by Claude Fable 5.1
+	'Always' => 'همیشه', // by Claude Fable 5.1
+	'More values than %d' => 'بیش از %d مقدار', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'آستانه نمایش لیست انتخاب برای ستونهای enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'کلمه عبور یکبار مصرف', // by Claude Opus 5
-	'Enter OTP code.' => 'کد OTP را وارد کنید.', // by Claude Opus 5
-	'Invalid OTP code.' => 'کد OTP نامعتبر است.', // by Claude Opus 5
-	'Access denied.' => 'دسترسی رد شد.', // by Claude Opus 5
-	'JSON previews' => 'پیش نمایش JSON', // by Claude Opus 5
-	'Data table' => 'جدول داده', // by Claude Opus 5
-	'Edit form' => 'فرم ویرایش', // by Claude Opus 5
-	'Ask %s' => 'از %s بپرسید', // by Claude Opus 5
+	'One Time Password' => 'کلمه عبور یکبار مصرف', // by Claude Fable 5.1
+	'Enter OTP code.' => 'کد OTP را وارد کنید.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'کد OTP نامعتبر است.', // by Claude Fable 5.1
+	'Access denied.' => 'دسترسی رد شد.', // by Claude Fable 5.1
+	'JSON previews' => 'پیش نمایش JSON', // by Claude Fable 5.1
+	'Data table' => 'جدول داده', // by Claude Fable 5.1
+	'Edit form' => 'فرم ویرایش', // by Claude Fable 5.1
+	'Ask %s' => 'از %s بپرسید', // by Claude Fable 5.1
 ];

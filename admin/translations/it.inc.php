@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s deve restituire un array.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s e %s devono restituire un oggetto creato dal metodo %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s deve restituire un array.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s e %s devono restituire un oggetto creato dal metodo %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Sistema',
@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Esci',
 	'Logged as: %s' => 'Autenticato come: %s',
 	'Logout successful.' => 'Uscita effettuata con successo.',
-	'hostname[:port] or :socket' => 'hostname[:port] o :socket', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] o :socket', // by Claude Fable 5.1
 	'Invalid server or credentials.' => 'Server o credenziali non valide.',
 	'There is a space in the input password which might be the cause.' => 'Esiste uno spazio nella password inserita che potrebbe essere la causa.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo non supporta accesso a database senza password, <a href="https://www.adminneo.org/password"%s>piú informazioni</a>.',
@@ -35,7 +35,7 @@ return [
 		'Troppi tentativi infruttuosi di login, si prega di riprovare in %d minuto.',
 		'Troppi tentativi infruttuosi di login, si prega di riprovare in %d minuti.',
 	],
-	'Invalid permanent login, please login again.' => 'Login permanente non valido, autenticarsi di nuovo.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Login permanente non valido, autenticarsi di nuovo.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF non valido. Reinvia la richiesta.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Se non hai inviato tu la richiesta tramite AdminNeo puoi chiudere la pagina.',
 	'The action will be performed after successful login with the same credentials.' => 'La azione verrá eseguita dopo un login valido con le stesse credenziali.',
@@ -51,11 +51,11 @@ return [
 	// Settings
 	'Language' => 'Lingua',
 
-	'Menu' => 'Menu', // by Claude Opus 5
-	'Home' => 'Home', // by Claude Opus 5
+	'Menu' => 'Menu', // by Claude Fable 5.1
+	'Home' => 'Home', // by Claude Fable 5.1
 	'Refresh' => 'Aggiorna',
-	'Info' => 'Info', // by Claude Opus 5
-	'More information.' => 'Maggiori informazioni.', // by Claude Opus 5
+	'Info' => 'Info', // by Claude Fable 5.1
+	'More information.' => 'Maggiori informazioni.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegi',
@@ -84,7 +84,7 @@ return [
 
 	// Queries
 	'SQL command' => 'Comando SQL',
-	'HTTP request' => 'Richiesta HTTP', // by Claude Opus 5
+	'HTTP request' => 'Richiesta HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d query eseguita con successo.',
 		'%d query eseguite con successo.',
@@ -117,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'Caricamento file disabilitato.',
 	'Unable to upload a file.' => 'Caricamento del file non riuscito.',
 	'Maximum allowed file size is %sB.' => 'La dimensione massima del file è %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Il numero massimo di file è %d. Selezionare meno file o aumentare la direttiva di configurazione %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'La dimensione totale massima dei file è %s. Selezionare file più piccoli o aumentare la direttiva di configurazione %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Il numero massimo di file è %d. Selezionare meno file o aumentare la direttiva di configurazione %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'La dimensione totale massima dei file è %s. Selezionare file più piccoli o aumentare la direttiva di configurazione %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Troppi dati via POST. Ridurre i dati o aumentare la direttiva di configurazione %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Puoi caricare un grande file SQL tramite FTP ed importarlo dal server.',
 	'File must be in UTF-8 encoding.' => 'Il file deve avere codifica UTF-8.',
@@ -159,9 +159,9 @@ return [
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Schema',
 	'schema' => 'Schema',
-	'Schemas' => 'Schemi', // by Claude Opus 5
-	'No schemas.' => 'Nessuno schema.', // by Claude Opus 5
-	'Show schema' => 'Visualizza schema', // by Claude Opus 5
+	'Schemas' => 'Schemi', // by Claude Fable 5.1
+	'No schemas.' => 'Nessuno schema.', // by Claude Fable 5.1
+	'Show schema' => 'Visualizza schema', // by Claude Fable 5.1
 	'Alter schema' => 'Modifica schema',
 	'Create schema' => 'Crea schema',
 	'Schema has been dropped.' => 'Schema eliminato.',
@@ -185,7 +185,7 @@ return [
 	'Check' => 'Controlla',
 	'Repair' => 'Ripara',
 	'Truncate' => 'Svuota',
-	'Truncate Cascade' => 'Svuota in cascata', // by Claude Fable 5
+	'Truncate Cascade' => 'Svuota in cascata', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Le tabelle sono state svuotate.',
 	'Move to other database' => 'Sposta in altro database',
 	'Move' => 'Sposta',
@@ -198,7 +198,7 @@ return [
 	'Tables' => 'Tabelle',
 	'Tables and views' => 'Tabelle e viste',
 	'Table' => 'Tabella',
-	'No tables.' => 'Nessuna tabella.', // by Claude Opus 5
+	'No tables.' => 'Nessuna tabella.', // by Claude Fable 5.1
 	'Alter table' => 'Modifica tabella',
 	'Create table' => 'Crea tabella',
 	'Table has been dropped.' => 'Tabella eliminata.',
@@ -222,12 +222,12 @@ return [
 	'Size' => 'Taglia',
 	'Compute' => 'Elabora',
 	'Move up' => 'Sposta su',
-	'Move down' => 'Sposta giù', // by Claude Opus 5
+	'Move down' => 'Sposta giù', // by Claude Fable 5.1
 	'Remove' => 'Rimuovi',
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Troppi campi. Per favore aumentare %s.',
 
 	// Views
-	'View' => 'Vista', // by Claude Fable 5
+	'View' => 'Vista', // by Claude Fable 5.1
 	'Materialized view' => 'Vista materializzata',
 	'View has been dropped.' => 'Vista eliminata.',
 	'View has been altered.' => 'Vista modificata.',
@@ -237,12 +237,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partiziona per',
-	'Partition' => 'Partizione', // by Claude Opus 5
+	'Partition' => 'Partizione', // by Claude Fable 5.1
 	'Partitions' => 'Partizioni',
 	'Partition name' => 'Nome partizione',
 	'Values' => 'Valori',
-	'Inherited tables' => 'Tabelle ereditate', // by Claude Opus 5
-	'Inherited from' => 'Ereditata da', // by Claude Opus 5
+	'Inherited tables' => 'Tabelle ereditate', // by Claude Fable 5.1
+	'Inherited from' => 'Ereditata da', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indici',
@@ -251,9 +251,9 @@ return [
 	'Add next' => 'Aggiungi altro',
 	'Index Type' => 'Tipo indice',
 	'length' => 'lunghezza',
-	'operator class' => 'classe di operatori', // by Claude Fable 5
-	'Algorithm' => 'Algoritmo', // by Claude Fable 5
-	'Condition' => 'Condizione', // by Claude Fable 5
+	'operator class' => 'classe di operatori', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritmo', // by Claude Fable 5.1
+	'Condition' => 'Condizione', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Chiavi esterne',
@@ -305,7 +305,7 @@ return [
 	'On completion preserve' => 'Al termine preservare',
 
 	// Sequences (PostgreSQL)
-	'Sequences' => 'Sequenze', // by Claude Opus 5
+	'Sequences' => 'Sequenze', // by Claude Fable 5.1
 	'Create sequence' => 'Crea sequenza',
 	'Sequence has been dropped.' => 'Sequenza eliminata.',
 	'Sequence has been created.' => 'Sequenza creata.',
@@ -329,12 +329,12 @@ return [
 	'Create trigger' => 'Crea trigger',
 
 	// Table check constraints
-	'Checks' => 'Controlli', // by Claude Fable 5
-	'Create check' => 'Crea controllo', // by Claude Fable 5
-	'Alter check' => 'Modifica controllo', // by Claude Fable 5
-	'Check has been created.' => 'Controllo creato.', // by Claude Fable 5
-	'Check has been altered.' => 'Controllo modificato.', // by Claude Fable 5
-	'Check has been dropped.' => 'Controllo eliminato.', // by Claude Fable 5
+	'Checks' => 'Controlli', // by Claude Fable 5.1
+	'Create check' => 'Crea controllo', // by Claude Fable 5.1
+	'Alter check' => 'Modifica controllo', // by Claude Fable 5.1
+	'Check has been created.' => 'Controllo creato.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Controllo modificato.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Controllo eliminato.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Visualizza dati',
@@ -411,38 +411,38 @@ return [
 	'no' => 'no',
 
 	// Settings
-	'Settings' => 'Impostazioni', // by Claude Opus 5
-	'Default' => 'Predefinito', // by Claude Opus 5
-	'Color scheme' => 'Schema colori', // by Claude Opus 5
-	'By system' => 'Come il sistema', // by Claude Opus 5
-	'Light' => 'Chiaro', // by Claude Opus 5
-	'Dark' => 'Scuro', // by Claude Opus 5
-	'Navigation mode' => 'Modalità di navigazione', // by Claude Opus 5
-	'Simple' => 'Semplice', // by Claude Opus 5
-	'Dual' => 'Doppia', // by Claude Opus 5
-	'Dual on hover' => 'Doppia al passaggio del mouse', // by Claude Opus 5
-	'Reversed' => 'Invertita', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Disposizione della navigazione principale con i link delle tabelle.', // by Claude Opus 5
-	'Table links' => 'Link delle tabelle', // by Claude Opus 5
-	'Primary action for all table links.' => 'Azione principale per tutti i link delle tabelle.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Link alle tabelle che referenziano la riga corrente.', // by Claude Opus 5
-	'Display' => 'Mostra', // by Claude Opus 5
-	'Hide' => 'Nascondi', // by Claude Opus 5
-	'Records per page' => 'Record per pagina', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Numero predefinito di record visualizzati nella tabella dei dati.', // by Claude Opus 5
-	'Enum as select' => 'Enum come menu', // by Claude Opus 5
-	'Never' => 'Mai', // by Claude Opus 5
-	'Always' => 'Sempre', // by Claude Opus 5
-	'More values than %d' => 'Più di %d valori', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Soglia per visualizzare un menu di selezione per i campi enum.', // by Claude Opus 5
+	'Settings' => 'Impostazioni', // by Claude Fable 5.1
+	'Default' => 'Predefinito', // by Claude Fable 5.1
+	'Color scheme' => 'Schema colori', // by Claude Fable 5.1
+	'By system' => 'Come il sistema', // by Claude Fable 5.1
+	'Light' => 'Chiaro', // by Claude Fable 5.1
+	'Dark' => 'Scuro', // by Claude Fable 5.1
+	'Navigation mode' => 'Modalità di navigazione', // by Claude Fable 5.1
+	'Simple' => 'Semplice', // by Claude Fable 5.1
+	'Dual' => 'Doppia', // by Claude Fable 5.1
+	'Dual on hover' => 'Doppia al passaggio del mouse', // by Claude Fable 5.1
+	'Reversed' => 'Invertita', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Disposizione della navigazione principale con i link delle tabelle.', // by Claude Fable 5.1
+	'Table links' => 'Link delle tabelle', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Azione principale per tutti i link delle tabelle.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Link alle tabelle che referenziano la riga corrente.', // by Claude Fable 5.1
+	'Display' => 'Mostra', // by Claude Fable 5.1
+	'Hide' => 'Nascondi', // by Claude Fable 5.1
+	'Records per page' => 'Record per pagina', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Numero predefinito di record visualizzati nella tabella dei dati.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum come menu', // by Claude Fable 5.1
+	'Never' => 'Mai', // by Claude Fable 5.1
+	'Always' => 'Sempre', // by Claude Fable 5.1
+	'More values than %d' => 'Più di %d valori', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Soglia per visualizzare un menu di selezione per i campi enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'One Time Password', // by Claude Opus 5
-	'Enter OTP code.' => 'Inserire il codice OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Codice OTP non valido.', // by Claude Opus 5
-	'Access denied.' => 'Accesso negato.', // by Claude Opus 5
-	'JSON previews' => 'Anteprime JSON', // by Claude Opus 5
-	'Data table' => 'Tabella dei dati', // by Claude Opus 5
-	'Edit form' => 'Modulo di modifica', // by Claude Opus 5
-	'Ask %s' => 'Chiedi a %s', // by Claude Opus 5
+	'One Time Password' => 'One Time Password', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Inserire il codice OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Codice OTP non valido.', // by Claude Fable 5.1
+	'Access denied.' => 'Accesso negato.', // by Claude Fable 5.1
+	'JSON previews' => 'Anteprime JSON', // by Claude Fable 5.1
+	'Data table' => 'Tabella dei dati', // by Claude Fable 5.1
+	'Edit form' => 'Modulo di modifica', // by Claude Fable 5.1
+	'Ask %s' => 'Chiedi a %s', // by Claude Fable 5.1
 ];

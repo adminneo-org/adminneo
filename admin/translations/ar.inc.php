@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => 'يجب أن يُرجع %s مصفوفة.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => 'يجب أن يُرجع %s و %s كائنا تم إنشاؤه بواسطة الدالة %s.', // by Claude Opus 5
+	'%s must return an array.' => 'يجب أن يُرجع %s مصفوفة.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => 'يجب أن يُرجع %s و %s كائنا تم إنشاؤه بواسطة الدالة %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'النظام',
@@ -26,24 +26,24 @@ return [
 	'Logout' => 'تسجيل الخروج',
 	'Logged as: %s' => 'تم تسجيل الدخول باسم %s',
 	'Logout successful.' => 'تم تسجيل الخروج بنجاح.',
-	'hostname[:port] or :socket' => 'اسم المضيف[:المنفذ] أو :المقبس', // by Claude Opus 5
-	'Invalid server or credentials.' => 'الخادم أو بيانات الدخول غير صالحة.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'توجد مسافة في كلمة المرور المدخلة، وقد يكون هذا هو السبب.', // by Claude Opus 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'لا يدعم AdminNeo الدخول إلى قاعدة بيانات بدون كلمة مرور، <a href="https://www.adminneo.org/password"%s>مزيد من المعلومات</a>.', // by Claude Opus 5
-	'Database does not support password.' => 'قاعدة البيانات لا تدعم كلمة المرور.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'اسم المضيف[:المنفذ] أو :المقبس', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'الخادم أو بيانات الدخول غير صالحة.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'توجد مسافة في كلمة المرور المدخلة، وقد يكون هذا هو السبب.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'لا يدعم AdminNeo الدخول إلى قاعدة بيانات بدون كلمة مرور، <a href="https://www.adminneo.org/password"%s>مزيد من المعلومات</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'قاعدة البيانات لا تدعم كلمة المرور.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'عدد كبير جدا من محاولات الدخول الفاشلة، أعد المحاولة بعد %d دقيقة.',
 		'عدد كبير جدا من محاولات الدخول الفاشلة، أعد المحاولة بعد %d دقائق.',
-	], // by Claude Opus 5
-	'Invalid permanent login, please login again.' => 'تسجيل الدخول الدائم غير صالح، من فضلك أعد تسجيل الدخول.', // by Claude Opus 5
+	], // by Claude Fable 5.1
+	'Invalid permanent login, please login again.' => 'تسجيل الدخول الدائم غير صالح، من فضلك أعد تسجيل الدخول.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'رمز CSRF غير صالح. المرجو إرسال الاستمارة مرة أخرى.',
-	'If you did not send this request from AdminNeo then close this page.' => 'إذا لم ترسل هذا الطلب من AdminNeo فأغلق هذه الصفحة.', // by Claude Opus 5
-	'The action will be performed after successful login with the same credentials.' => 'سيتم تنفيذ الإجراء بعد تسجيل الدخول بنجاح بنفس بيانات الدخول.', // by Claude Opus 5
+	'If you did not send this request from AdminNeo then close this page.' => 'إذا لم ترسل هذا الطلب من AdminNeo فأغلق هذه الصفحة.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'سيتم تنفيذ الإجراء بعد تسجيل الدخول بنجاح بنفس بيانات الدخول.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'امتداد غير موجود',
 	'None of the supported PHP extensions (%s) are available.' => 'إمتدادات php (%s) المدعومة غير موجودة.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'الاتصال بالمنافذ المحمية غير مسموح به.', // by Claude Opus 5
+	'Connecting to privileged ports is not allowed.' => 'الاتصال بالمنافذ المحمية غير مسموح به.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'عليك تفعيل نظام الجلسات.',
 	'Session expired, please login again.' => 'إنتهت الجلسة، من فضلك أعد تسجيل الدخول.',
 	'%s version: %s through PHP extension %s' => 'النسخة %s : %s عن طريق إمتداد ال PHP %s',
@@ -51,11 +51,11 @@ return [
 	// Settings
 	'Language' => 'اللغة',
 
-	'Menu' => 'قائمة', // by Claude Opus 5
-	'Home' => 'الرئيسية', // by Claude Opus 5
+	'Menu' => 'قائمة', // by Claude Fable 5.1
+	'Home' => 'الرئيسية', // by Claude Fable 5.1
 	'Refresh' => 'تحديث',
-	'Info' => 'معلومات', // by Claude Opus 5
-	'More information.' => 'مزيد من المعلومات.', // by Claude Opus 5
+	'Info' => 'معلومات', // by Claude Fable 5.1
+	'More information.' => 'مزيد من المعلومات.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'الإمتيازات',
@@ -74,14 +74,14 @@ return [
 
 	// Structure
 	'Column' => 'عمود',
-	'Columns' => 'الأعمدة', // by Claude Opus 5
+	'Columns' => 'الأعمدة', // by Claude Fable 5.1
 	'Routine' => 'روتين',
 	'Grant' => 'موافق',
 	'Revoke' => 'إلغاء',
 
 	// Queries
 	'SQL command' => 'استعلام SQL',
-	'HTTP request' => 'طلب HTTP', // by Claude Opus 5
+	'HTTP request' => 'طلب HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'تم تنفيذ الاستعلام %d بنجاح.',
 		'تم تنفيذ الاستعلامات %d بنجاح.',
@@ -89,9 +89,9 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'تم تنفسذ الاستعلام, %d عدد الأسطر المعدلة.',
 	'No commands to execute.' => 'لا توجد أوامر للتنفيذ.',
 	'Error in query' => 'هناك خطأ في الاستعلام',
-	'Unknown error.' => 'خطأ غير معروف.', // by Claude Opus 5
-	'Warnings' => 'تحذيرات', // by Claude Opus 5
-	'%s queries are not supported.' => 'استعلامات %s غير مدعومة.', // by Claude Opus 5
+	'Unknown error.' => 'خطأ غير معروف.', // by Claude Fable 5.1
+	'Warnings' => 'تحذيرات', // by Claude Fable 5.1
+	'%s queries are not supported.' => 'استعلامات %s غير مدعومة.', // by Claude Fable 5.1
 	'Execute' => 'تنفيذ',
 	'Stop on error' => 'أوقف في حالة حدوث خطأ',
 	'Show only errors' => 'إظهار الأخطاء فقط',
@@ -111,12 +111,12 @@ return [
 	'File uploads are disabled.' => 'رفع الملفات غير مشغل.',
 	'Unable to upload a file.' => 'يتعذر رفع ملف ما.',
 	'Maximum allowed file size is %sB.' => 'حجم الملف الأقصى هو %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'العدد الأقصى للملفات هو %d. اختر عددا أقل من الملفات أو قم بزيادة قيمة %s في خيارات ال PHP.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'الحجم الإجمالي الأقصى للملفات هو %s. اختر ملفات أصغر أو قم بزيادة قيمة %s في خيارات ال PHP.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'العدد الأقصى للملفات هو %d. اختر عددا أقل من الملفات أو قم بزيادة قيمة %s في خيارات ال PHP.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'الحجم الإجمالي الأقصى للملفات هو %s. اختر ملفات أصغر أو قم بزيادة قيمة %s في خيارات ال PHP.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'معلومات POST كبيرة جدا. قم بتقليص حجم المعلومات أو قم بزيادة قيمة %s في خيارات ال PHP.',
-	'You can upload a big SQL file via FTP and import it from server.' => 'يمكنك رفع ملف SQL كبير عبر FTP ثم استيراده من الخادم.', // by Claude Opus 5
-	'File must be in UTF-8 encoding.' => 'يجب أن يكون الملف بترميز UTF-8.', // by Claude Opus 5
-	'You are offline.' => 'أنت غير متصل بالشبكة.', // by Claude Opus 5
+	'You can upload a big SQL file via FTP and import it from server.' => 'يمكنك رفع ملف SQL كبير عبر FTP ثم استيراده من الخادم.', // by Claude Fable 5.1
+	'File must be in UTF-8 encoding.' => 'يجب أن يكون الملف بترميز UTF-8.', // by Claude Fable 5.1
+	'You are offline.' => 'أنت غير متصل بالشبكة.', // by Claude Fable 5.1
 	'%d row(s) have been imported.' => 'تم استيراد %d سطرا.',
 
 	// Export
@@ -129,13 +129,13 @@ return [
 
 	// Databases
 	'Database' => 'قاعدة بيانات',
-	'database' => 'قاعدة بيانات', // by Claude Opus 5
+	'database' => 'قاعدة بيانات', // by Claude Fable 5.1
 	'DB' => 'قاعدة', // by Claude Fable 5.1
 	'Use' => 'استعمال',
 	'Invalid database.' => 'قاعدة البيانات غير صالحة.',
 	'Alter database' => 'تعديل قاعدة البيانات',
 	'Create database' => 'إنشاء قاعدة بيانات',
-	'Database schema' => 'مخطط قاعدة البيانات', // by Claude Opus 5
+	'Database schema' => 'مخطط قاعدة البيانات', // by Claude Fable 5.1
 	'Permanent link' => 'رابط دائم',
 	'Database has been dropped.' => 'تم حذف قاعدة البيانات.',
 	'Databases have been dropped.' => 'تم حذف قواعد البيانات.',
@@ -149,10 +149,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'المخطط',
-	'schema' => 'مخطط', // by Claude Opus 5
-	'Schemas' => 'المخططات', // by Claude Opus 5
-	'No schemas.' => 'لا توجد مخططات.', // by Claude Opus 5
-	'Show schema' => 'عرض المخطط', // by Claude Opus 5
+	'schema' => 'مخطط', // by Claude Fable 5.1
+	'Schemas' => 'المخططات', // by Claude Fable 5.1
+	'No schemas.' => 'لا توجد مخططات.', // by Claude Fable 5.1
+	'Show schema' => 'عرض المخطط', // by Claude Fable 5.1
 	'Alter schema' => 'تعديل المخطط',
 	'Create schema' => 'إنشاء مخطط',
 	'Schema has been dropped.' => 'تم حذف المخطط.',
@@ -172,18 +172,18 @@ return [
 	'%d in total' => '%d في المجموع',
 	'Analyze' => 'تحليل',
 	'Optimize' => 'تحسين',
-	'Vacuum' => 'تنظيف (Vacuum)', // by Claude Opus 5
+	'Vacuum' => 'تنظيف (Vacuum)', // by Claude Fable 5.1
 	'Check' => 'فحص',
 	'Repair' => 'إصلاح',
 	'Truncate' => 'قطع',
-	'Truncate Cascade' => 'قطع متتالي', // by Claude Opus 5
+	'Truncate Cascade' => 'قطع متتالي', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'تم قطع الجداول.',
 	'Move to other database' => 'نقل إلى قاعدة بيانات أخرى',
 	'Move' => 'نقل',
 	'Tables have been moved.' => 'تم نقل الجداول.',
 	'Copy' => 'نسخ',
 	'Tables have been copied.' => 'تم نسخ الجداول.',
-	'overwrite' => 'استبدال', // by Claude Opus 5
+	'overwrite' => 'استبدال', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'جداول',
@@ -194,7 +194,7 @@ return [
 	'Create table' => 'إنشاء جدول',
 	'Table has been dropped.' => 'تم حذف الجدول.',
 	'Tables have been dropped.' => 'تم حذف الجداول.',
-	'Tables have been optimized.' => 'تم تحسين الجداول.', // by Claude Opus 5
+	'Tables have been optimized.' => 'تم تحسين الجداول.', // by Claude Fable 5.1
 	'Table has been altered.' => 'تم تعديل الجدول.',
 	'Table has been created.' => 'تم إنشاء الجدول.',
 	'Table name' => 'اسم الجدول',
@@ -206,12 +206,12 @@ return [
 	'Auto Increment' => 'تزايد تلقائي',
 	'Options' => 'خيارات',
 	'Comment' => 'تعليق',
-	'Default value' => 'القيمة الافتراضية', // by Claude Opus 5
+	'Default value' => 'القيمة الافتراضية', // by Claude Fable 5.1
 	'Drop' => 'حذف',
-	'Drop %s?' => 'حذف %s؟', // by Claude Opus 5
+	'Drop %s?' => 'حذف %s؟', // by Claude Fable 5.1
 	'Are you sure?' => 'هل أنت متأكد؟',
-	'Size' => 'الحجم', // by Claude Opus 5
-	'Compute' => 'حساب', // by Claude Opus 5
+	'Size' => 'الحجم', // by Claude Fable 5.1
+	'Compute' => 'حساب', // by Claude Fable 5.1
 	'Move up' => 'نقل للأعلى',
 	'Move down' => 'نقل للأسفل',
 	'Remove' => 'مسح',
@@ -219,7 +219,7 @@ return [
 
 	// Views
 	'View' => 'عرض',
-	'Materialized view' => 'عرض مُجسَّد', // by Claude Opus 5
+	'Materialized view' => 'عرض مُجسَّد', // by Claude Fable 5.1
 	'View has been dropped.' => 'تم مسح العرض.',
 	'View has been altered.' => 'تم تعديل العرض.',
 	'View has been created.' => 'تم إنشاء العرض.',
@@ -228,12 +228,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'مقسم بواسطة',
-	'Partition' => 'تقسيم', // by Claude Opus 5
+	'Partition' => 'تقسيم', // by Claude Fable 5.1
 	'Partitions' => 'التقسيمات',
 	'Partition name' => 'اسم التقسيم',
 	'Values' => 'القيم',
-	'Inherited tables' => 'الجداول الموروثة', // by Claude Opus 5
-	'Inherited from' => 'موروث من', // by Claude Opus 5
+	'Inherited tables' => 'الجداول الموروثة', // by Claude Fable 5.1
+	'Inherited from' => 'موروث من', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'المؤشرات',
@@ -242,9 +242,9 @@ return [
 	'Add next' => 'إضافة التالي',
 	'Index Type' => 'نوع المؤشر',
 	'length' => 'الطول',
-	'operator class' => 'فئة المعاملات', // by Claude Opus 5
-	'Algorithm' => 'الخوارزمية', // by Claude Opus 5
-	'Condition' => 'الشرط', // by Claude Opus 5
+	'operator class' => 'فئة المعاملات', // by Claude Fable 5.1
+	'Algorithm' => 'الخوارزمية', // by Claude Fable 5.1
+	'Condition' => 'الشرط', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'مفاتيح أجنبية',
@@ -334,25 +334,25 @@ return [
 	'Sort' => 'ترتيب',
 	'descending' => 'تنازلي',
 	'Limit' => 'حد',
-	'Limit rows' => 'تحديد الأسطر', // by Claude Opus 5
+	'Limit rows' => 'تحديد الأسطر', // by Claude Fable 5.1
 	'Text length' => 'طول النص',
 	'Action' => 'الإجراء',
-	'Full table scan' => 'مسح كامل للجدول', // by Claude Opus 5
+	'Full table scan' => 'مسح كامل للجدول', // by Claude Fable 5.1
 	'Unable to select the table' => 'يتعذر اختيار الجدول',
 	'Search data in tables' => 'بحث في الجداول',
 	'No rows.' => 'لا توجد نتائج.',
-	'%d / ' => '%d / ', // by Claude Opus 5
+	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d أسطر',
 	'Page' => 'صفحة',
 	'last' => 'الأخيرة',
-	'Load more data' => 'تحميل المزيد من البيانات', // by Claude Opus 5
-	'Loading' => 'جار التحميل', // by Claude Opus 5
+	'Load more data' => 'تحميل المزيد من البيانات', // by Claude Fable 5.1
+	'Loading' => 'جار التحميل', // by Claude Fable 5.1
 	'Whole result' => 'نتيجة كاملة',
 	'%d byte(s)' => '%d بايت',
 
 	// In-place editing in selection
-	'Modify' => 'تعديل', // by Claude Opus 5
-	'Ctrl+click on a value to modify it.' => 'اضغط Ctrl مع النقر على القيمة لتعديلها.', // by Claude Opus 5
+	'Modify' => 'تعديل', // by Claude Fable 5.1
+	'Ctrl+click on a value to modify it.' => 'اضغط Ctrl مع النقر على القيمة لتعديلها.', // by Claude Fable 5.1
 	'Use edit link to modify this value.' => 'استعمل الرابط "تعديل" لتعديل هذه القيمة.',
 
 	// Editing
@@ -364,15 +364,15 @@ return [
 	'Save' => 'حفظ',
 	'Save and continue edit' => 'إحفظ و واصل التعديل',
 	'Save and insert next' => 'جفظ و إنشاء التالي',
-	'Saving' => 'جار الحفظ', // by Claude Opus 5
-	'Selected' => 'المحدد', // by Claude Opus 5
+	'Saving' => 'جار الحفظ', // by Claude Fable 5.1
+	'Selected' => 'المحدد', // by Claude Fable 5.1
 	'Clone' => 'نسخ',
 	'Delete' => 'مسح',
 	'Item%s has been inserted.' => '%sتم إدراج العنصر.', // %s can contain auto-increment value, e.g. ' 123'
 	'Item has been deleted.' => 'تم حذف العنصر.',
 	'Item has been updated.' => 'تم تعديل العنصر.',
 	'%d item(s) have been affected.' => 'عدد العناصر المعدلة هو %d.',
-	'You have no privileges to update this table.' => 'ليس لديك صلاحيات لتعديل هذا الجدول.', // by Claude Opus 5
+	'You have no privileges to update this table.' => 'ليس لديك صلاحيات لتعديل هذا الجدول.', // by Claude Fable 5.1
 
 	// Data type descriptions
 	'Numbers' => 'أعداد',
@@ -386,42 +386,42 @@ return [
 
 	// Editor - data values
 	'now' => 'الآن',
-	'yes' => 'نعم', // by Claude Opus 5
-	'no' => 'لا', // by Claude Opus 5
+	'yes' => 'نعم', // by Claude Fable 5.1
+	'no' => 'لا', // by Claude Fable 5.1
 
 	// Settings
-	'Settings' => 'الإعدادات', // by Claude Opus 5
-	'Default' => 'افتراضي', // by Claude Opus 5
-	'Color scheme' => 'نظام الألوان', // by Claude Opus 5
-	'By system' => 'حسب النظام', // by Claude Opus 5
-	'Light' => 'فاتح', // by Claude Opus 5
-	'Dark' => 'داكن', // by Claude Opus 5
-	'Navigation mode' => 'نمط التصفح', // by Claude Opus 5
-	'Simple' => 'بسيط', // by Claude Opus 5
-	'Dual' => 'مزدوج', // by Claude Opus 5
-	'Dual on hover' => 'مزدوج عند مرور المؤشر', // by Claude Opus 5
-	'Reversed' => 'معكوس', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'تخطيط التصفح الرئيسي مع روابط الجداول.', // by Claude Opus 5
-	'Table links' => 'روابط الجداول', // by Claude Opus 5
-	'Primary action for all table links.' => 'الإجراء الأساسي لجميع روابط الجداول.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'روابط للجداول التي تشير إلى السطر الحالي.', // by Claude Opus 5
-	'Display' => 'إظهار', // by Claude Opus 5
-	'Hide' => 'إخفاء', // by Claude Opus 5
-	'Records per page' => 'عدد السجلات في الصفحة', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'العدد الافتراضي للسجلات المعروضة في جدول البيانات.', // by Claude Opus 5
-	'Enum as select' => 'Enum كقائمة اختيار', // by Claude Opus 5
-	'Never' => 'أبدا', // by Claude Opus 5
-	'Always' => 'دائما', // by Claude Opus 5
-	'More values than %d' => 'أكثر من %d قيمة', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'الحد الذي تظهر عنده قائمة اختيار لأعمدة enum.', // by Claude Opus 5
+	'Settings' => 'الإعدادات', // by Claude Fable 5.1
+	'Default' => 'افتراضي', // by Claude Fable 5.1
+	'Color scheme' => 'نظام الألوان', // by Claude Fable 5.1
+	'By system' => 'حسب النظام', // by Claude Fable 5.1
+	'Light' => 'فاتح', // by Claude Fable 5.1
+	'Dark' => 'داكن', // by Claude Fable 5.1
+	'Navigation mode' => 'نمط التصفح', // by Claude Fable 5.1
+	'Simple' => 'بسيط', // by Claude Fable 5.1
+	'Dual' => 'مزدوج', // by Claude Fable 5.1
+	'Dual on hover' => 'مزدوج عند مرور المؤشر', // by Claude Fable 5.1
+	'Reversed' => 'معكوس', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'تخطيط التصفح الرئيسي مع روابط الجداول.', // by Claude Fable 5.1
+	'Table links' => 'روابط الجداول', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'الإجراء الأساسي لجميع روابط الجداول.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'روابط للجداول التي تشير إلى السطر الحالي.', // by Claude Fable 5.1
+	'Display' => 'إظهار', // by Claude Fable 5.1
+	'Hide' => 'إخفاء', // by Claude Fable 5.1
+	'Records per page' => 'عدد السجلات في الصفحة', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'العدد الافتراضي للسجلات المعروضة في جدول البيانات.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum كقائمة اختيار', // by Claude Fable 5.1
+	'Never' => 'أبدا', // by Claude Fable 5.1
+	'Always' => 'دائما', // by Claude Fable 5.1
+	'More values than %d' => 'أكثر من %d قيمة', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'الحد الذي تظهر عنده قائمة اختيار لأعمدة enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'كلمة مرور لمرة واحدة', // by Claude Opus 5
-	'Enter OTP code.' => 'أدخل رمز OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'رمز OTP غير صالح.', // by Claude Opus 5
-	'Access denied.' => 'تم رفض الوصول.', // by Claude Opus 5
-	'JSON previews' => 'معاينات JSON', // by Claude Opus 5
-	'Data table' => 'جدول البيانات', // by Claude Opus 5
-	'Edit form' => 'استمارة التعديل', // by Claude Opus 5
-	'Ask %s' => 'اسأل %s', // by Claude Opus 5
+	'One Time Password' => 'كلمة مرور لمرة واحدة', // by Claude Fable 5.1
+	'Enter OTP code.' => 'أدخل رمز OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'رمز OTP غير صالح.', // by Claude Fable 5.1
+	'Access denied.' => 'تم رفض الوصول.', // by Claude Fable 5.1
+	'JSON previews' => 'معاينات JSON', // by Claude Fable 5.1
+	'Data table' => 'جدول البيانات', // by Claude Fable 5.1
+	'Edit form' => 'استمارة التعديل', // by Claude Fable 5.1
+	'Ask %s' => 'اسأل %s', // by Claude Fable 5.1
 ];

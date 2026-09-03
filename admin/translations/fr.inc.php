@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Déconnexion',
 	'Logged as: %s' => 'Authentifié en tant que : %s',
 	'Logout successful.' => 'Déconnexion réussie.',
-	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] ou :socket', // by Claude Fable 5.1
 	'Invalid server or credentials.' => 'Serveur ou identifiants invalides.',
 	'There is a space in the input password which might be the cause.' => 'Il y a un espace dans le mot de passe entré qui pourrait en être la cause.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo ne supporte pas l\'accès aux bases de données sans mot de passe, <a href="https://www.adminneo.org/password"%s>plus d\'information</a>.',
@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Langue',
 
-	'Menu' => 'Menu', // by Claude Opus 5
+	'Menu' => 'Menu', // by Claude Fable 5.1
 	'Home' => 'Accueil',
 	'Refresh' => 'Rafraîchir',
 	'Info' => 'Info',
@@ -117,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'L\'importation de fichier est désactivée.',
 	'Unable to upload a file.' => 'Impossible d\'importer le fichier.',
 	'Maximum allowed file size is %sB.' => 'La taille maximale des fichiers est de %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Le nombre maximal de fichiers est %d. Sélectionnez moins de fichiers ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'La taille totale maximale des fichiers est de %s. Sélectionnez des fichiers plus petits ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Le nombre maximal de fichiers est %d. Sélectionnez moins de fichiers ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'La taille totale maximale des fichiers est de %s. Sélectionnez des fichiers plus petits ou augmentez la valeur de %s dans la configuration de PHP.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Données POST trop grandes. Réduisez la taille des données ou augmentez la valeur de %s dans la configuration de PHP.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Vous pouvez uploader un gros fichier SQL par FTP et ensuite l\'importer depuis le serveur.',
 	'File must be in UTF-8 encoding.' => 'Les fichiers doivent être encodés en UTF-8.',
@@ -185,7 +185,7 @@ return [
 	'Check' => 'Vérifier',
 	'Repair' => 'Réparer',
 	'Truncate' => 'Tronquer',
-	'Truncate Cascade' => 'Tronquer en cascade', // by Claude Fable 5
+	'Truncate Cascade' => 'Tronquer en cascade', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Les tables ont été tronquées.',
 	'Move to other database' => 'Déplacer vers une autre base de données',
 	'Move' => 'Déplacer',
@@ -241,7 +241,7 @@ return [
 	'Partitions' => 'Partitions',
 	'Partition name' => 'Nom de la partition',
 	'Values' => 'Valeurs',
-	'Inherited tables' => 'Tables héritées', // by Claude Opus 5
+	'Inherited tables' => 'Tables héritées', // by Claude Fable 5.1
 	'Inherited from' => 'Héritée de', // by Claude Fable 5.1
 
 	// Indexes
@@ -251,9 +251,9 @@ return [
 	'Add next' => 'Ajouter le prochain',
 	'Index Type' => 'Type d\'index',
 	'length' => 'longueur',
-	'operator class' => 'classe d\'opérateurs', // by Claude Fable 5
-	'Algorithm' => 'Algorithme', // by Claude Fable 5
-	'Condition' => 'Condition', // by Claude Fable 5
+	'operator class' => 'classe d\'opérateurs', // by Claude Fable 5.1
+	'Algorithm' => 'Algorithme', // by Claude Fable 5.1
+	'Condition' => 'Condition', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Clés étrangères',
@@ -420,14 +420,14 @@ return [
 	'Navigation mode' => 'Mode de navigation',
 	'Simple' => 'Simple',
 	'Dual' => 'Double',
-	'Dual on hover' => 'Double au survol', // by Claude Opus 5
+	'Dual on hover' => 'Double au survol', // by Claude Fable 5.1
 	'Reversed' => 'Inversé',
 	'Layout of main navigation with table links.' => 'Disposition de la navigation principale avec liens de la table.',
 	'Table links' => 'Liens de la table',
 	'Primary action for all table links.' => 'Action principale pour tous les liens de la table.',
-	'Links to tables referencing the current row.' => 'Liens vers les tables référençant la ligne courante.', // by Claude Opus 5
-	'Display' => 'Afficher', // by Claude Opus 5
-	'Hide' => 'Masquer', // by Claude Opus 5
+	'Links to tables referencing the current row.' => 'Liens vers les tables référençant la ligne courante.', // by Claude Fable 5.1
+	'Display' => 'Afficher', // by Claude Fable 5.1
+	'Hide' => 'Masquer', // by Claude Fable 5.1
 	'Records per page' => 'Enregistrements par page',
 	'Default number of records displayed in data table.' => 'Nombre d\'enregistrements affichés par défaut dans la table de données.',
 	'Enum as select' => 'Enum comme liste de sélection',
@@ -444,5 +444,5 @@ return [
 	'JSON previews' => 'Aperçus JSON',
 	'Data table' => 'Table de données',
 	'Edit form' => 'Formulaire d\'édition',
-	'Ask %s' => 'Demander à %s', // by Claude Opus 5
+	'Ask %s' => 'Demander à %s', // by Claude Fable 5.1
 ];

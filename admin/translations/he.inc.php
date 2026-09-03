@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s חייב להחזיר מערך', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s ו-%s חייבים להחזיר אובייקט שנוצר על ידי המתודה %s', // by Claude Opus 5
+	'%s must return an array.' => '%s חייב להחזיר מערך', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s ו-%s חייבים להחזיר אובייקט שנוצר על ידי המתודה %s', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'מערכת',
@@ -25,22 +25,22 @@ return [
 	'Login' => 'התחברות',
 	'Logout' => 'התנתק',
 	'Logged as: %s' => 'מחובר כ: %s',
-	'Logout successful.' => 'ההתנתקות הצליחה', // by Claude Opus 5
-	'hostname[:port] or :socket' => 'שם שרת[:פורט] או :סוקט', // by Claude Opus 5
-	'Invalid server or credentials.' => 'שרת או פרטי התחברות שגויים', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'יש רווח בסיסמה שהוזנה, ייתכן שזו הסיבה', // by Claude Opus 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo אינו תומך בגישה למסד נתונים ללא סיסמה, <a href="https://www.adminneo.org/password"%s>מידע נוסף</a>', // by Claude Opus 5
-	'Database does not support password.' => 'מסד הנתונים אינו תומך בסיסמה', // by Claude Opus 5
+	'Logout successful.' => 'ההתנתקות הצליחה', // by Claude Fable 5.1
+	'hostname[:port] or :socket' => 'שם שרת[:פורט] או :סוקט', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'שרת או פרטי התחברות שגויים', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'יש רווח בסיסמה שהוזנה, ייתכן שזו הסיבה', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo אינו תומך בגישה למסד נתונים ללא סיסמה, <a href="https://www.adminneo.org/password"%s>מידע נוסף</a>', // by Claude Fable 5.1
+	'Database does not support password.' => 'מסד הנתונים אינו תומך בסיסמה', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'יותר מידי נסיונות כניסה נכשלו, אנא נסה עוד %d דקות',
-	'Invalid permanent login, please login again.' => 'התחברות לצמיתות שגויה, אנא התחבר שוב', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'התחברות לצמיתות שגויה, אנא התחבר שוב', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'כשל באבטחת נתונים, שלח טופס שוב',
 	'If you did not send this request from AdminNeo then close this page.' => 'אם לא אתה שלחת בקשה ל-AdminNeo הינך יכול לסגור חלון זה',
-	'The action will be performed after successful login with the same credentials.' => 'הפעולה תתבצע לאחר התחברות מוצלחת עם אותם פרטי התחברות', // by Claude Opus 5
+	'The action will be performed after successful login with the same credentials.' => 'הפעולה תתבצע לאחר התחברות מוצלחת עם אותם פרטי התחברות', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'אין תוסף',
 	'None of the supported PHP extensions (%s) are available.' => 'שום תוסף PHP (%s) זמין', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'התחברות לפורטים מוגנים אינה מותרת', // by Claude Opus 5
+	'Connecting to privileged ports is not allowed.' => 'התחברות לפורטים מוגנים אינה מותרת', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'חובה להפעיל תמיכה בסשן',
 	'Session expired, please login again.' => 'תם זמן ההפעלה, אנא התחבר שוב',
 	'%s version: %s through PHP extension %s' => '%s גרסה: %s דרך תוסף PHP %s',
@@ -48,11 +48,11 @@ return [
 	// Settings
 	'Language' => 'שפה',
 
-	'Menu' => 'תפריט', // by Claude Opus 5
-	'Home' => 'דף הבית', // by Claude Opus 5
+	'Menu' => 'תפריט', // by Claude Fable 5.1
+	'Home' => 'דף הבית', // by Claude Fable 5.1
 	'Refresh' => 'רענן',
-	'Info' => 'מידע', // by Claude Opus 5
-	'More information.' => 'מידע נוסף', // by Claude Opus 5
+	'Info' => 'מידע', // by Claude Fable 5.1
+	'More information.' => 'מידע נוסף', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'פריווילגיות',
@@ -71,20 +71,20 @@ return [
 
 	// Structure
 	'Column' => 'עמודה',
-	'Columns' => 'עמודות', // by Claude Opus 5
+	'Columns' => 'עמודות', // by Claude Fable 5.1
 	'Routine' => 'רוטינה',
 	'Grant' => 'הענק',
 	'Revoke' => 'שלול',
 
 	// Queries
 	'SQL command' => 'שאילתת SQL',
-	'HTTP request' => 'בקשת HTTP', // by Claude Opus 5
+	'HTTP request' => 'בקשת HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => '%d שאילתות בוצעו בהצלחה',
 	'Query executed OK, %d row(s) affected.' => 'השאילתה בוצעה כהלכה, %d שורות הושפעו',
 	'No commands to execute.' => 'לא נמצאו פקודות להרצה',
 	'Error in query' => 'שגיאה בשאילתה',
-	'Unknown error.' => 'שגיאה לא ידועה', // by Claude Opus 5
-	'Warnings' => 'אזהרות', // by Claude Opus 5
+	'Unknown error.' => 'שגיאה לא ידועה', // by Claude Fable 5.1
+	'Warnings' => 'אזהרות', // by Claude Fable 5.1
 	'%s queries are not supported.' => 'שאילתת %s אינה נתמכת',
 	'Execute' => 'הרץ',
 	'Stop on error' => 'עצור בעת שגיאה',
@@ -123,8 +123,8 @@ return [
 
 	// Databases
 	'Database' => 'מסד נתונים',
-	'database' => 'מסד נתונים', // by Claude Opus 5
-	'DB' => 'מסד', // by Claude Opus 5
+	'database' => 'מסד נתונים', // by Claude Fable 5.1
+	'DB' => 'מסד', // by Claude Fable 5.1
 	'Use' => 'השתמש',
 	'Invalid database.' => 'מסד נתונים שגוי',
 	'Alter database' => 'שנה מסד נתונים',
@@ -143,10 +143,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'סכמה',
-	'schema' => 'סכמה', // by Claude Opus 5
-	'Schemas' => 'סכמות', // by Claude Opus 5
-	'No schemas.' => 'אין סכמות', // by Claude Opus 5
-	'Show schema' => 'הראה סכמה', // by Claude Opus 5
+	'schema' => 'סכמה', // by Claude Fable 5.1
+	'Schemas' => 'סכמות', // by Claude Fable 5.1
+	'No schemas.' => 'אין סכמות', // by Claude Fable 5.1
+	'Show schema' => 'הראה סכמה', // by Claude Fable 5.1
 	'Alter schema' => 'שנה סכמה',
 	'Create schema' => 'צור סכמה',
 	'Schema has been dropped.' => 'הסכמה הושלכה',
@@ -170,14 +170,14 @@ return [
 	'Check' => 'בדוק',
 	'Repair' => 'תקן',
 	'Truncate' => 'קצר',
-	'Truncate Cascade' => 'קצר מדורג', // by Claude Opus 5
+	'Truncate Cascade' => 'קצר מדורג', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'הטבלה קוצרה',
 	'Move to other database' => 'העבר למסד נתונים אחר',
 	'Move' => 'העבר',
 	'Tables have been moved.' => 'הטבלה הועברה',
 	'Copy' => 'העתק',
 	'Tables have been copied.' => 'הטבלה הועתקה',
-	'overwrite' => 'שכתב', // by Claude Opus 5
+	'overwrite' => 'שכתב', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'טבלאות',
@@ -202,7 +202,7 @@ return [
 	'Comment' => 'הערה',
 	'Default value' => 'ערך ברירת מחדל',
 	'Drop' => 'השלך',
-	'Drop %s?' => 'להשליך את %s?', // by Claude Opus 5
+	'Drop %s?' => 'להשליך את %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'האם אתה בטוח?',
 	'Size' => 'גודל',
 	'Compute' => 'חישוב',
@@ -222,11 +222,11 @@ return [
 
 	// Partitions
 	'Partition by' => 'מחיצות ע"י',
-	'Partition' => 'מחיצה', // by Claude Opus 5
+	'Partition' => 'מחיצה', // by Claude Fable 5.1
 	'Partitions' => 'מחיצות',
 	'Partition name' => 'שם מחיצה',
 	'Values' => 'ערכים',
-	'Inherited tables' => 'טבלאות יורשות', // by Claude Opus 5
+	'Inherited tables' => 'טבלאות יורשות', // by Claude Fable 5.1
 	'Inherited from' => 'טבלאות אב', // by Claude Fable 5.1
 
 	// Indexes
@@ -236,9 +236,9 @@ return [
 	'Add next' => 'הוסף הבא',
 	'Index Type' => 'סוג אינדקס',
 	'length' => 'אורך',
-	'operator class' => 'מחלקת אופרטורים', // by Claude Opus 5
-	'Algorithm' => 'אלגוריתם', // by Claude Opus 5
-	'Condition' => 'תנאי', // by Claude Opus 5
+	'operator class' => 'מחלקת אופרטורים', // by Claude Fable 5.1
+	'Algorithm' => 'אלגוריתם', // by Claude Fable 5.1
+	'Condition' => 'תנאי', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'מפתחות זרים',
@@ -295,7 +295,7 @@ return [
 	'Alter sequence' => 'שנה סדרה',
 
 	// User-defined types (PostgreSQL)
-	'User types' => 'טיפוסים מוגדרי משתמש', // by Claude Fable 5
+	'User types' => 'טיפוסים מוגדרי משתמש', // by Claude Fable 5.1
 	'Create type' => 'צור סוג',
 	'Type has been dropped.' => 'הסוג הושלך',
 	'Type has been created.' => 'הסוג נוצר',
@@ -311,12 +311,12 @@ return [
 	'Create trigger' => 'צור טריגר',
 
 	// Table check constraints
-	'Checks' => 'בדיקות', // by Claude Opus 5
-	'Create check' => 'צור בדיקה', // by Claude Opus 5
-	'Alter check' => 'שנה בדיקה', // by Claude Opus 5
-	'Check has been created.' => 'הבדיקה נוצרה', // by Claude Opus 5
-	'Check has been altered.' => 'הבדיקה שונתה', // by Claude Opus 5
-	'Check has been dropped.' => 'הבדיקה הושלכה', // by Claude Opus 5
+	'Checks' => 'בדיקות', // by Claude Fable 5.1
+	'Create check' => 'צור בדיקה', // by Claude Fable 5.1
+	'Alter check' => 'שנה בדיקה', // by Claude Fable 5.1
+	'Check has been created.' => 'הבדיקה נוצרה', // by Claude Fable 5.1
+	'Check has been altered.' => 'הבדיקה שונתה', // by Claude Fable 5.1
+	'Check has been dropped.' => 'הבדיקה הושלכה', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'בחר נתונים',
@@ -384,38 +384,38 @@ return [
 	'no' => 'לא',
 
 	// Settings
-	'Settings' => 'הגדרות', // by Claude Opus 5
-	'Default' => 'ברירת מחדל', // by Claude Opus 5
-	'Color scheme' => 'ערכת צבעים', // by Claude Opus 5
-	'By system' => 'לפי המערכת', // by Claude Opus 5
-	'Light' => 'בהיר', // by Claude Opus 5
-	'Dark' => 'כהה', // by Claude Opus 5
-	'Navigation mode' => 'מצב ניווט', // by Claude Opus 5
-	'Simple' => 'פשוט', // by Claude Opus 5
-	'Dual' => 'כפול', // by Claude Opus 5
-	'Dual on hover' => 'כפול בריחוף', // by Claude Opus 5
-	'Reversed' => 'הפוך', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'פריסת הניווט הראשי עם קישורי הטבלאות', // by Claude Opus 5
-	'Table links' => 'קישורי הטבלאות', // by Claude Opus 5
-	'Primary action for all table links.' => 'הפעולה הראשית לכל קישורי הטבלאות', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'קישורים לטבלאות המפנות לשורה הנוכחית', // by Claude Opus 5
-	'Display' => 'הצג', // by Claude Opus 5
-	'Hide' => 'הסתר', // by Claude Opus 5
-	'Records per page' => 'רשומות בעמוד', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'מספר הרשומות המוצגות כברירת מחדל בטבלת הנתונים', // by Claude Opus 5
-	'Enum as select' => 'Enum כרשימת בחירה', // by Claude Opus 5
-	'Never' => 'לעולם לא', // by Claude Opus 5
-	'Always' => 'תמיד', // by Claude Opus 5
-	'More values than %d' => 'יותר מ-%d ערכים', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'הסף להצגת רשימת בחירה עבור עמודות enum', // by Claude Opus 5
+	'Settings' => 'הגדרות', // by Claude Fable 5.1
+	'Default' => 'ברירת מחדל', // by Claude Fable 5.1
+	'Color scheme' => 'ערכת צבעים', // by Claude Fable 5.1
+	'By system' => 'לפי המערכת', // by Claude Fable 5.1
+	'Light' => 'בהיר', // by Claude Fable 5.1
+	'Dark' => 'כהה', // by Claude Fable 5.1
+	'Navigation mode' => 'מצב ניווט', // by Claude Fable 5.1
+	'Simple' => 'פשוט', // by Claude Fable 5.1
+	'Dual' => 'כפול', // by Claude Fable 5.1
+	'Dual on hover' => 'כפול בריחוף', // by Claude Fable 5.1
+	'Reversed' => 'הפוך', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'פריסת הניווט הראשי עם קישורי הטבלאות', // by Claude Fable 5.1
+	'Table links' => 'קישורי הטבלאות', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'הפעולה הראשית לכל קישורי הטבלאות', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'קישורים לטבלאות המפנות לשורה הנוכחית', // by Claude Fable 5.1
+	'Display' => 'הצג', // by Claude Fable 5.1
+	'Hide' => 'הסתר', // by Claude Fable 5.1
+	'Records per page' => 'רשומות בעמוד', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'מספר הרשומות המוצגות כברירת מחדל בטבלת הנתונים', // by Claude Fable 5.1
+	'Enum as select' => 'Enum כרשימת בחירה', // by Claude Fable 5.1
+	'Never' => 'לעולם לא', // by Claude Fable 5.1
+	'Always' => 'תמיד', // by Claude Fable 5.1
+	'More values than %d' => 'יותר מ-%d ערכים', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'הסף להצגת רשימת בחירה עבור עמודות enum', // by Claude Fable 5.1
 
 	// Plugins
 	'One Time Password' => 'סיסמה חד-פעמית', // by Claude Fable 5.1
-	'Enter OTP code.' => 'הזן את קוד ה-OTP', // by Claude Opus 5
-	'Invalid OTP code.' => 'קוד OTP שגוי', // by Claude Opus 5
-	'Access denied.' => 'הגישה נדחתה', // by Claude Opus 5
-	'JSON previews' => 'תצוגות מקדימות של JSON', // by Claude Opus 5
-	'Data table' => 'טבלת נתונים', // by Claude Opus 5
-	'Edit form' => 'טופס עריכה', // by Claude Opus 5
-	'Ask %s' => 'שאל את %s', // by Claude Opus 5
+	'Enter OTP code.' => 'הזן את קוד ה-OTP', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'קוד OTP שגוי', // by Claude Fable 5.1
+	'Access denied.' => 'הגישה נדחתה', // by Claude Fable 5.1
+	'JSON previews' => 'תצוגות מקדימות של JSON', // by Claude Fable 5.1
+	'Data table' => 'טבלת נתונים', // by Claude Fable 5.1
+	'Edit form' => 'טופס עריכה', // by Claude Fable 5.1
+	'Ask %s' => 'שאל את %s', // by Claude Fable 5.1
 ];

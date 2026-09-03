@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Idioma',
 
-	'Menu' => 'Menú', // by Claude Opus 5
+	'Menu' => 'Menú', // by Claude Fable 5.1
 	'Home' => 'Inicio',
 	'Refresh' => 'Actualizar',
 	'Info' => 'Info',
@@ -117,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'Importación de archivos deshablilitada.',
 	'Unable to upload a file.' => 'No es posible cargar el archivo.',
 	'Maximum allowed file size is %sB.' => 'El tamaño máximo de archivo es %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'El número máximo de archivos es %d. Seleccione menos archivos o aumente la directiva de configuración %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'El tamaño total máximo de los archivos es %s. Seleccione archivos más pequeños o aumente la directiva de configuración %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'El número máximo de archivos es %d. Seleccione menos archivos o aumente la directiva de configuración %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'El tamaño total máximo de los archivos es %s. Seleccione archivos más pequeños o aumente la directiva de configuración %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POST data demasiado grande. Reduzca el tamaño o aumente la directiva de configuración %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Usted puede cargar un SQL grande mediante FTP e importarlo desde el servidor.',
 	'File must be in UTF-8 encoding.' => 'El archivo tiene que ser codificacion UTF-8.',
@@ -185,7 +185,7 @@ return [
 	'Check' => 'Comprobar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Vaciar',
-	'Truncate Cascade' => 'Vaciar en cascada', // by Claude Fable 5
+	'Truncate Cascade' => 'Vaciar en cascada', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Las tablas han sido vaciadas.',
 	'Move to other database' => 'Mover a otra base de datos',
 	'Move' => 'Mover',
@@ -251,7 +251,7 @@ return [
 	'Add next' => 'Agregar',
 	'Index Type' => 'Tipo de índice',
 	'length' => 'longitud',
-	'operator class' => 'clase de operadores', // by Claude Fable 5
+	'operator class' => 'clase de operadores', // by Claude Fable 5.1
 	'Algorithm' => 'Algoritmo',
 	'Condition' => 'Condición',
 
@@ -420,7 +420,7 @@ return [
 	'Navigation mode' => 'Modo de navegación',
 	'Simple' => 'Simple',
 	'Dual' => 'Dual',
-	'Dual on hover' => 'Dual al pasar el cursor', // by Claude Opus 5
+	'Dual on hover' => 'Dual al pasar el cursor', // by Claude Fable 5.1
 	'Reversed' => 'Invertido',
 	'Layout of main navigation with table links.' => 'Diseño de la navegación principal con enlaces de tabla.',
 	'Table links' => 'Enlaces de tabla',
