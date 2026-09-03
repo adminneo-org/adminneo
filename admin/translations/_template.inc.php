@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Xx',
 
+	'Menu' => 'Xx',
 	'Home' => 'Xx',
 	'Refresh' => 'Xx',
 	'Info' => 'Xx',

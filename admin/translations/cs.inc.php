@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Jazyk',
 
+	'Menu' => 'Menu',
 	'Home' => 'Domů',
 	'Refresh' => 'Obnovit',
 	'Info' => 'Info',

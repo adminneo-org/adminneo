@@ -313,7 +313,7 @@ function page_footer(?string $missing = null): void
 
 	// Main navigation is printed after the page content, because databases and tables can be changed after the query
 	// execution in the 'SQL command' page.
-	echo "<button id='navigation-button' class='button light navigation-button'>", icon_solo("menu"), icon_solo("close"), "</button>";
+	echo "<button id='navigation-button' class='button light navigation-button' title='", lang('Menu'), "'>", icon_solo("menu"), icon_solo("close"), "</button>";
 	echo "<div id='navigation-panel' class='navigation-panel'>\n";
 	Admin::get()->printNavigation($missing);
 
