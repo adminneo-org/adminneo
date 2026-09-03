@@ -24,6 +24,6 @@
 	cursor: inherit;
 }
 
-a[href].jush-custom {
+a[href].jush-custom, .jush-json_key, .jush-json_key .jush-quo {
 	color: var(--identifier-color);
 }
