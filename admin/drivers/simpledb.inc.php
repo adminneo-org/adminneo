@@ -439,7 +439,7 @@ if (isset($_GET["simpledb"])) {
 		return h(Connection::get()->getError());
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}

@@ -934,9 +934,9 @@ ORDER BY ORDINAL_POSITION";
 	}
 
 	/**
-	 * Finds out if database is information_schema.
+	 * Finds out if the database or schema is a read-only system catalog.
 	 */
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return ($db == "information_schema")
 			|| (Connection::get()->isMinVersion("5.5") && $db == "performance_schema");

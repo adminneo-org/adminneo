@@ -655,7 +655,7 @@ if (isset($_GET["mongo"])) {
 		return null;
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}

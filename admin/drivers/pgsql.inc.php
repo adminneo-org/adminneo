@@ -988,9 +988,10 @@ ORDER BY s.ordinal_position";
 		return [];
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
-		return get_schema() == "information_schema";
+		// pg_temp_* holds the session's temporary tables so it is writable.
+		return in_array($schema != "" ? $schema : get_schema(), ["information_schema", "pg_catalog", "pg_toast"]);
 	}
 
 	function error(): string

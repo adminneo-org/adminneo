@@ -274,7 +274,9 @@ if (DB != "" && $_GET["ns"] === "") {
 	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly'>" . lang('Schema') . "</label>" . script("gid('check-schemas').onclick = partial(formCheck, /^schemas\\[/);", "");
 	echo "</thead>\n";
 	foreach (Admin::get()->getSchemas() as $schema) {
-		echo "<tr><td>" . checkbox("schemas[]", $schema, true, $schema, "", "block") . "\n";
+		if (!information_schema(DB, $schema)) {
+			echo "<tr><td>" . checkbox("schemas[]", $schema, true, $schema, "", "block") . "\n";
+		}
 	}
 } elseif (DB != "") {
 	$checked = ($TABLE != "" ? "" : " checked");

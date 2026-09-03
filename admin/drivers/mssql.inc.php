@@ -643,9 +643,9 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return $return;
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
-		return get_schema() == "INFORMATION_SCHEMA";
+		return in_array($schema != "" ? $schema : get_schema(), ["INFORMATION_SCHEMA", "sys"]);
 	}
 
 	function error(): string

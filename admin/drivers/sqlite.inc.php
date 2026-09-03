@@ -531,7 +531,7 @@ if (isset($_GET["sqlite"])) {
 		return (isset($_GET["create"]) ? get_vals("PRAGMA collation_list", 1) : []);
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}

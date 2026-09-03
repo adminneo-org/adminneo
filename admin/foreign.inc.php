@@ -73,7 +73,7 @@ echo "<span id='label-table'>", lang('Target table'), ":</span> ", html_select("
 
 if (support("scheme")) {
 	$schemas = array_filter(Admin::get()->getSchemas(), function ($schema) {
-		return !preg_match('~^information_schema$~i', $schema);
+		return !information_schema(DB, $schema);
 	});
 	echo "<span id='label-schema'>", lang('Schema'), ":</span> ", html_select("ns", $schemas, $row["ns"] != "" ? $row["ns"] : $_GET["ns"], $onchange, "label-schema");
 	if ($row["ns"] != "") {

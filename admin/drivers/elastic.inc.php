@@ -579,7 +579,7 @@ if (isset($_GET["elastic"])) {
 		return h(Connection::get()->getError());
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}
