@@ -65,7 +65,7 @@ if ($row["ns"] != "") {
 	set_schema($row["ns"]);
 }
 $referencable = array_keys(array_filter(table_status('', true), 'AdminNeo\fk_support'));
-$target = array_keys(fields(in_array($row["table"], $referencable) ? $row["table"] : reset($referencable)));
+$target = $referencable ? array_keys(fields(in_array($row["table"], $referencable) ? $row["table"] : reset($referencable))) : [];
 $onchange = "this.form['change-js'].value = '1'; this.form.submit();";
 
 echo "<p>";
