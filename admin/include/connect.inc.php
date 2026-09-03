@@ -9,6 +9,11 @@ if (isset($_GET["import"])) {
 	$_GET["sql"] = $_GET["import"];
 }
 
+// The database selection form in the navigation panel preserves the schema, which leads to this combination.
+if (DB == "" && isset($_GET["ns"])) {
+	redirect(remove_from_uri('ns'));
+}
+
 if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || isset($_GET["dump"]) || isset($_GET["database"]) || isset($_GET["processlist"]) || isset($_GET["privileges"]) || isset($_GET["user"]) || isset($_GET["variables"]) || $_GET["script"] == "connect" || $_GET["script"] == "kill")) {
 	if (DB != "" || $_GET["refresh"]) {
 		restart_session();
@@ -115,7 +120,8 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 if (support("scheme")) {
 	if (DB != "" && $_GET["ns"] !== "") {
 		if (!isset($_GET["ns"])) {
-			redirect(preg_replace('~ns=[^&]*&~', '', ME) . "ns=" . get_schema());
+			// When the user goes to a database, take him to the default schema.
+			redirect(preg_replace('~(?<=[?&])db=[^&]+~', '\\0&ns=' . urlencode(get_schema()), relative_uri()));
 		}
 
 		if (!set_schema($_GET["ns"])) {
