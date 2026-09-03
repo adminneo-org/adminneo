@@ -370,12 +370,14 @@ if (isset($_GET["mongo"])) {
 		return $databases;
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		$return = [];
 		return $return;
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		$cursor = Connection::get()->executeCommand(['listCollections' => 1]);
 		if (!$cursor) {
 			return [];
@@ -389,7 +391,7 @@ if (isset($_GET["mongo"])) {
 		return $collections;
 	}
 
-	function drop_databases($databases): bool
+	function drop_databases(array $databases): bool
 	{
 		return false;
 	}
@@ -421,7 +423,8 @@ if (isset($_GET["mongo"])) {
 		return $indexes;
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$fields = fields_from_edit();
 		if (!$fields) {
 			$result = Driver::get()->select($table, ["*"], [], [], [], 10);
@@ -462,7 +465,8 @@ if (isset($_GET["mongo"])) {
 		return (int)$cursor->toArray()[0]->n;
 	}
 
-	function sql_query_where_parser($queryWhere) {
+	function sql_query_where_parser(string $queryWhere): array
+	{
 		$queryWhere = preg_replace('~^\s*WHERE\s*~', "", $queryWhere);
 		while ($queryWhere[0] == "(") {
 			$queryWhere = preg_replace('~^\((.*)\)$~', "$1", $queryWhere);
@@ -482,7 +486,8 @@ if (isset($_GET["mongo"])) {
 		return where_to_query($where, $wheresOr);
 	}
 
-	function where_to_query($whereAnd = [], $whereOr = []) {
+	function where_to_query(array $whereAnd = [], array $whereOr = []): array
+	{
 		$data = [];
 		foreach (['and' => $whereAnd, 'or' => $whereOr] as $type => $where) {
 			if (is_array($where)) {
@@ -539,15 +544,18 @@ if (isset($_GET["mongo"])) {
 		return $data;
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return $idf;
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return $idf;
 	}
 
-	function table_status($name = "", $fast = false) {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		foreach (($name != "" ? [$name => 1] : tables_list()) as $table => $type) {
 			$return[$table] = ["Name" => $table, "Engine" => ""];
@@ -555,7 +563,7 @@ if (isset($_GET["mongo"])) {
 		return $return;
 	}
 
-	function create_database($db, $collation): bool
+	function create_database(string $db, string $collation): bool
 	{
 		return true;
 	}
@@ -565,15 +573,18 @@ if (isset($_GET["mongo"])) {
 		return 0;
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError());
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return [];
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		$credentials = Admin::get()->getCredentials();
 		return $credentials[1];
 	}
@@ -600,7 +611,7 @@ if (isset($_GET["mongo"])) {
 		return $connection;
 	}
 
-	function alter_indexes($table, $alter): bool
+	function alter_indexes(string $table, array $alter): bool
 	{
 		foreach ($alter as $val) {
 			list($type, $name, $set) = $val;
@@ -634,11 +645,14 @@ if (isset($_GET["mongo"])) {
 		return true;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match("~database|indexes|descidx~", $feature);
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
+		return null;
 	}
 
 	function information_schema(?string $db): bool
@@ -646,7 +660,7 @@ if (isset($_GET["mongo"])) {
 		return false;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return false;
 	}
@@ -661,7 +675,8 @@ if (isset($_GET["mongo"])) {
 		return $return;
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		return [];
 	}
 
@@ -670,7 +685,9 @@ if (isset($_GET["mongo"])) {
 		return [];
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
+		return false;
 	}
 
 	function auto_increment(): string
@@ -678,7 +695,7 @@ if (isset($_GET["mongo"])) {
 		return "";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		if ($table == "") {
 			return (bool)Connection::get()->executeCommand(["create" => $name]);
@@ -687,7 +704,7 @@ if (isset($_GET["mongo"])) {
 		return false;
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		foreach ($tables as $name) {
 			if (!Connection::get()->executeCommand(["drop" => $name])) {
@@ -698,7 +715,7 @@ if (isset($_GET["mongo"])) {
 		return true;
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables(array $tables, bool $cascade = false): bool
 	{
 		foreach ($tables as $name) {
 			$command = [

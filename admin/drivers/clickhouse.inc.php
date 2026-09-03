@@ -86,7 +86,7 @@ if (isset($_GET["clickhouse"])) {
 				return new ClickHouseResult($return['rows'], $return['data'], $return['meta']);
 			}
 
-			private function isQuerySelectLike($query): bool
+			private function isQuerySelectLike(string $query): bool
 			{
 				return (bool)preg_match('~^\s*(select|show|with)~i', $query);
 			}
@@ -280,11 +280,13 @@ if (isset($_GET["clickhouse"])) {
 		return ClickHouseDriver::create($connection, Admin::get());
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return "`" . str_replace("`", "``", $idf) . "`";
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return idf_escape($idf);
 	}
 
@@ -300,7 +302,7 @@ if (isset($_GET["clickhouse"])) {
 		return $rows ? (int)$rows[0] : null;
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		$alter = $order = [];
 		$remove = [];
@@ -343,17 +345,17 @@ if (isset($_GET["clickhouse"])) {
 		return !$alter || queries("ALTER TABLE " . table($table) . "\n" . implode(",\n", $alter));
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables(array $tables, bool $cascade = false): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}
 
-	function drop_views($views): bool
+	function drop_views(array $views): bool
 	{
 		return drop_tables($views);
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		return apply_queries("DROP TABLE", $tables);
 	}
@@ -391,24 +393,30 @@ if (isset($_GET["clickhouse"])) {
 		return $databases;
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return " $query$where" . ($limit ? $separator . "LIMIT " . ($offset ? "$offset, " : "") . $limit : "");
 	}
 
-	function limit1($table, $query, $where, $separator = "\n") {
+	function limit1(string $table, string $query, string $where, string $separator = "\n"): string
+	{
 		return limit($query, $where, 1, 0, $separator);
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
+		return null;
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		$credentials = Admin::get()->getCredentials();
 
 		return $credentials[1];
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		$result = get_rows('SHOW TABLES');
 		$return = [];
 		foreach ($result as $row) {
@@ -418,11 +426,13 @@ if (isset($_GET["clickhouse"])) {
 		return $return;
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		return [];
 	}
 
-	function table_status($name = "", $fast = false) {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		$tables = get_rows("SELECT name, engine FROM system.tables WHERE database = " . q(Connection::get()->getDbName()) . ($name != "" ? " AND name = " . q($name) : ""));
 		foreach ($tables as $table) {
@@ -434,12 +444,13 @@ if (isset($_GET["clickhouse"])) {
 		return $return;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return false;
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
 		return false;
 	}
 
@@ -457,7 +468,8 @@ if (isset($_GET["clickhouse"])) {
 		return $return;
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$return = [];
 		$result = get_rows("SELECT name, type, default_expression FROM system.columns WHERE " . idf_escape('table') . " = " . q($table));
 		foreach ($result as $row) {
@@ -484,7 +496,8 @@ if (isset($_GET["clickhouse"])) {
 		return [];
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		return [];
 	}
 
@@ -493,7 +506,8 @@ if (isset($_GET["clickhouse"])) {
 		return [];
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return [];
 	}
 
@@ -502,7 +516,8 @@ if (isset($_GET["clickhouse"])) {
 		return false;
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError());
 	}
 
@@ -521,7 +536,8 @@ if (isset($_GET["clickhouse"])) {
 		return 0; // ClickHouse doesn't have it
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match("~^(columns|sql|status|table|drop_col)$~", $feature);
 	}
 }

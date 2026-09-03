@@ -281,7 +281,7 @@ if (isset($_GET["elastic"])) {
 			return new ElasticResult($return);
 		}
 
-		private function addQueryCondition($val, &$data)
+		private function addQueryCondition(string $val, array &$data): void
 		{
 			list($col, $op, $val) = explode(" ", $val, 3);
 
@@ -425,11 +425,13 @@ if (isset($_GET["elastic"])) {
 		return $connection;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match("~table|columns~", $feature);
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		$credentials = Admin::get()->getCredentials();
 
 		return $credentials[1];
@@ -440,19 +442,23 @@ if (isset($_GET["elastic"])) {
 		return [ELASTIC_DB_NAME];
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return " $query$where" . ($limit ? $separator . "LIMIT $limit" . ($offset ? " OFFSET $offset" : "") : "");
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return [];
 	}
 
-	function db_collation($db, $collations) {
-		//
+	function db_collation(string $db, array $collations): ?string
+	{
+		return null;
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		$return = Connection::get()->rootQuery('_aliases');
 		if (empty($return)) {
 			return [
@@ -465,7 +471,8 @@ if (isset($_GET["elastic"])) {
 		];
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		$aliases = Connection::get()->rootQuery('_aliases');
 		if (empty($aliases)) {
 			return [];
@@ -488,7 +495,8 @@ if (isset($_GET["elastic"])) {
 		return $tables;
 	}
 
-	function table_status($name = "", $fast = false) {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$stats = Connection::get()->rootQuery('_stats');
 		$aliases = Connection::get()->rootQuery('_aliases');
 
@@ -531,7 +539,8 @@ if (isset($_GET["elastic"])) {
 		return $result;
 	}
 
-	function format_index_status($name, $index) {
+	function format_index_status(string $name, array $index): array
+	{
 		return [
 			"Name" => $name,
 			"Engine" => "Lucene",
@@ -544,7 +553,8 @@ if (isset($_GET["elastic"])) {
 		];
 	}
 
-	function format_alias_status($name, $index) {
+	function format_alias_status(string $name, array $index): array
+	{
 		return [
 			"Name" => $name,
 			"Engine" => "view",
@@ -552,7 +562,7 @@ if (isset($_GET["elastic"])) {
 		];
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return $table_status["Engine"] == "view";
 	}
@@ -564,7 +574,8 @@ if (isset($_GET["elastic"])) {
 		return ["select" => implode("\n", array_keys($return))];
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError());
 	}
 
@@ -580,7 +591,8 @@ if (isset($_GET["elastic"])) {
 		];
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$mapping = Connection::get()->rootQuery("_mapping");
 
 		if (!isset($mapping[$table])) {
@@ -627,7 +639,8 @@ if (isset($_GET["elastic"])) {
 		return $result;
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		return [];
 	}
 
@@ -636,11 +649,13 @@ if (isset($_GET["elastic"])) {
 		return [];
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return $idf;
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return $idf;
 	}
 
@@ -654,8 +669,9 @@ if (isset($_GET["elastic"])) {
 		return $return;
 	}
 
-	function fk_support($table_status) {
-		//
+	function fk_support(array $table_status): bool
+	{
+		return false;
 	}
 
 	function found_rows(array $table_status, array $where): ?int
@@ -668,7 +684,7 @@ if (isset($_GET["elastic"])) {
 		return "";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		$properties = [];
 
@@ -711,7 +727,7 @@ if (isset($_GET["elastic"])) {
 		return $return && !$return['errors'];
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		$return = true;
 		foreach ($tables as $table) { //! convert to bulk api

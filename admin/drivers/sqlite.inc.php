@@ -274,11 +274,13 @@ if (isset($_GET["sqlite"])) {
 		return SqliteDriver::create($connection, Admin::get());
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return '"' . str_replace('"', '""', $idf) . '"';
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return idf_escape($idf);
 	}
 
@@ -303,30 +305,36 @@ if (isset($_GET["sqlite"])) {
 		return [];
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return " $query$where" . ($limit ? $separator . "LIMIT $limit" . ($offset ? " OFFSET $offset" : "") : "");
 	}
 
-	function limit1($table, $query, $where, $separator = "\n") {
+	function limit1(string $table, string $query, string $where, string $separator = "\n"): string
+	{
 		return (preg_match('~^INTO~', $query) || Connection::get()->getValue("SELECT sqlite_compileoption_used('ENABLE_UPDATE_DELETE_LIMIT')")
 			? limit($query, $where, 1, 0, $separator)
 			: " $query WHERE rowid = (SELECT rowid FROM " . table($table) . $where . $separator . "LIMIT 1)" //! use primary key in tables with WITHOUT rowid
 		);
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
 		return Connection::get()->getValue("PRAGMA encoding"); // there is no database list so $db == DB
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		return get_current_user(); // should return effective user
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		return get_key_vals("SELECT name, type FROM sqlite_master WHERE type IN ('table', 'view') ORDER BY (name LIKE 'sqlite_%'), name");
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		return [];
 	}
 
@@ -351,7 +359,8 @@ if (isset($_GET["sqlite"])) {
 		];
 	}
 
-	function table_status($name = "", $fast = false) {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		$rows = [];
 		if (!$fast) {
@@ -387,16 +396,18 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return $table_status["Engine"] == "view";
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
 		return !Connection::get()->getValue("SELECT sqlite_compileoption_used('OMIT_FOREIGN_KEY')");
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$return = [];
 		$sql = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table));
 		$privileges = ["select" => 1, "where" => 1, "order" => 1];
@@ -491,7 +502,8 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		$return = [];
 		foreach (get_rows("PRAGMA foreign_key_list(" . table($table) . ")") as $row) {
 			$foreign_key = &$return[$row["id"]];
@@ -509,11 +521,13 @@ if (isset($_GET["sqlite"])) {
 		return [];
 	}
 
-	function view($name) {
+	function view(string $name): array
+	{
 		return ["select" => preg_replace('~^(?:[^`"[]+|`[^`]*`|"[^"]*")* AS\s+~iU', '', Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'view' AND name = " . q($name)))]; //! identifiers may be inside []
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return (isset($_GET["create"]) ? get_vals("PRAGMA collation_list", 1) : []);
 	}
 
@@ -522,11 +536,13 @@ if (isset($_GET["sqlite"])) {
 		return false;
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError());
 	}
 
-	function check_sqlite_name($name) {
+	function check_sqlite_name(string $name): bool
+	{
 		// avoid creating PHP files on unsecured servers
 		$extensions = "db|sdb|sqlite";
 		if (!preg_match("~^[^\\0]*\\.($extensions)\$~", $name)) {
@@ -536,7 +552,7 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function create_database($db, $collation): bool
+	function create_database(string $db, string $collation): bool
 	{
 		if (file_exists($db)) {
 			Connection::get()->setError(lang('File exists.'));
@@ -558,7 +574,7 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function drop_databases($databases): bool
+	function drop_databases(array $databases): bool
 	{
 		Connection::get()->close(); // to unlock file, doesn't work in PDO on Windows
 		foreach ($databases as $db) {
@@ -573,7 +589,7 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function rename_database($name, $collation): bool
+	function rename_database(string $name, string $collation): bool
 	{
 		if (!check_sqlite_name($name)) {
 			return false;
@@ -588,7 +604,7 @@ if (isset($_GET["sqlite"])) {
 		return " PRIMARY KEY AUTOINCREMENT";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		$use_all_fields = ($table == "" || $foreign || $engine);
 		foreach ($fields as $field) {
@@ -639,19 +655,20 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	/** Recreate table
-	* @param string original name
-	* @param string new name
-	* @param list<list<string>> [process_field()], empty to preserve
-	* @param string[] [$original => idf_escape($new_column)], empty to preserve
-	* @param string [format_foreign_key()], empty to preserve
-	* @param numeric-string|'' set auto_increment to this value, 0 to preserve
-	* @param string[] [[$type, $name, $columns]], empty to preserve
-	* @param string CHECK constraint to drop
-	* @param string CHECK constraint to add
-	* @return bool
-	*/
-	function recreate_table($table, $name, $fields, $originals, $foreign, $auto_increment = "", $indexes = [], $drop_check = "", $add_check = "", string $engine = ""): bool
+	/**
+	 * Recreates table.
+	 *
+	 * @param string $table Original name.
+	 * @param string $name New name.
+	 * @param list<list<string>> $fields [process_field()], empty to preserve.
+	 * @param string[] $originals [$original => idf_escape($new_column)], empty to preserve.
+	 * @param string[] $foreign [format_foreign_key()], empty to preserve.
+	 * @param numeric-string|'' $auto_increment Set auto_increment to this value, 0 to preserve.
+	 * @param string[] $indexes [[$type, $name, $columns]], empty to preserve.
+	 * @param string $drop_check CHECK constraint to drop.
+	 * @param string $add_check CHECK constraint to add.
+	 */
+	function recreate_table(string $table, string $name, array $fields, array $originals, array $foreign, string $auto_increment = "", array $indexes = [], string $drop_check = "", string $add_check = "", string $engine = ""): bool
 	{
 		if ($table != "") {
 			if (!$fields) {
@@ -784,7 +801,8 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function index_sql($table, $type, $name, $columns) {
+	function index_sql(string $table, string $type, string $name, string $columns): string
+	{
 		return "CREATE $type " . ($type != "INDEX" ? "INDEX " : "")
 			. idf_escape($name != "" ? $name : uniqid($table . "_"))
 			. " ON " . table($table)
@@ -792,7 +810,7 @@ if (isset($_GET["sqlite"])) {
 		;
 	}
 
-	function alter_indexes($table, $alter): bool
+	function alter_indexes(string $table, array $alter): bool
 	{
 		foreach ($alter as $index) {
 			if ($index[0] == "PRIMARY" || (preg_match('~^sqlite_~', $index[1]))) {
@@ -812,22 +830,22 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables(array $tables, bool $cascade = false): bool
 	{
 		return apply_queries("DELETE FROM", $tables);
 	}
 
-	function drop_views($views): bool
+	function drop_views(array $views): bool
 	{
 		return apply_queries("DROP VIEW", $views);
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		return apply_queries("DROP TABLE", $tables);
 	}
 
-	function move_tables($tables, $views, $target): bool
+	function move_tables(array $tables, array $views, string $target): bool
 	{
 		return false;
 	}
@@ -857,7 +875,8 @@ if (isset($_GET["sqlite"])) {
 		];
 	}
 
-	function triggers($table) {
+	function triggers(string $table): array
+	{
 		$return = [];
 		$trigger_options = trigger_options();
 		foreach (get_rows("SELECT * FROM sqlite_master WHERE type = 'trigger' AND tbl_name = " . q($table)) as $row) {
@@ -867,7 +886,8 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function trigger_options() {
+	function trigger_options(): array
+	{
 		return [
 			"Timing" => ["BEFORE", "AFTER", "INSTEAD OF"],
 			"Event" => ["INSERT", "UPDATE", "UPDATE OF", "DELETE"],
@@ -899,7 +919,8 @@ if (isset($_GET["sqlite"])) {
 		return [];
 	}
 
-	function create_sql($table, $auto_increment, $style) {
+	function create_sql(string $table, ?bool $auto_increment, string $style): string
+	{
 		$return = Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type IN ('table', 'view') AND name = " . q($table));
 		foreach (indexes($table) as $name => $index) {
 			// Skip primary key and internal indexes.
@@ -913,7 +934,8 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function truncate_sql($table) {
+	function truncate_sql(string $table): string
+	{
 		return "DELETE FROM " . table($table);
 	}
 
@@ -922,7 +944,8 @@ if (isset($_GET["sqlite"])) {
 		return implode(get_vals("SELECT sql || ';;\n' FROM sqlite_master WHERE type = 'trigger' AND tbl_name = " . q($table)));
 	}
 
-	function show_variables() {
+	function show_variables(): array
+	{
 		$return = [];
 		foreach (get_rows("PRAGMA pragma_list") as $row) {
 			$name = $row["name"];
@@ -936,7 +959,8 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function show_status() {
+	function show_status(): array
+	{
 		$return = [];
 		foreach (get_vals("PRAGMA compile_options") as $option) {
 			$return[] = explode("=", $option, 2) + ["", ""];
@@ -954,7 +978,8 @@ if (isset($_GET["sqlite"])) {
 		return $return;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match('~^(check|columns|database|drop_col|dump|indexes|descidx|move_col|sql|status|table|trigger|variables|view|view_trigger)$~', $feature);
 	}
 }

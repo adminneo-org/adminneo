@@ -64,7 +64,8 @@ if (isset($_GET["mssql"])) {
 				return (bool) $this->connection;
 			}
 
-			private function resolveError() {
+			private function resolveError(): void
+			{
 				$this->error = "";
 
 				foreach (sqlsrv_errors() as $error) {
@@ -221,7 +222,8 @@ if (isset($_GET["mssql"])) {
 			}
 		}
 
-		function last_id($result) {
+		function last_id($result)
+		{
 			return Connection::get()->getValue("SELECT SCOPE_IDENTITY()"); // @@IDENTITY can return trigger INSERT
 		}
 
@@ -301,7 +303,8 @@ if (isset($_GET["mssql"])) {
 			}
 		}
 
-		function last_id($result) {
+		function last_id($result)
+		{
 			/** @var MsSqlPdoConnection $connection */
 			$connection = Connection::get();
 
@@ -456,11 +459,13 @@ if (isset($_GET["mssql"])) {
 		return strlen($string) != strlen(utf8_decode($string));
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return "[" . str_replace("]", "]]", $idf) . "]";
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return ($_GET["ns"] != "" ? idf_escape($_GET["ns"]) . "." : "") . idf_escape($idf);
 	}
 
@@ -486,27 +491,33 @@ if (isset($_GET["mssql"])) {
 		return get_vals("SELECT name FROM sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb') ORDER BY name");
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return ($limit ? " TOP (" . ($limit + $offset) . ")" : "") . " $query$where"; // seek later
 	}
 
-	function limit1($table, $query, $where, $separator = "\n") {
+	function limit1(string $table, string $query, string $where, string $separator = "\n"): string
+	{
 		return limit($query, $where, 1, 0, $separator);
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
 		return Connection::get()->getValue("SELECT collation_name FROM sys.databases WHERE name = " . q($db));
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		return Connection::get()->getValue("SELECT SUSER_NAME()");
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		return get_key_vals("SELECT name, type_desc FROM sys.all_objects WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') ORDER BY name");
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		$return = [];
 		foreach ($databases as $db) {
 			Connection::get()->selectDatabase($db);
@@ -515,7 +526,8 @@ if (isset($_GET["mssql"])) {
 		return $return;
 	}
 
-	function table_status($name = "") {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		$sizes = [];
 
@@ -546,16 +558,18 @@ WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V')
 		return $return;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return $table_status["Engine"] == "VIEW";
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
 		return true;
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$comments = get_key_vals("SELECT objname, cast(value as varchar(max)) FROM fn_listextendedproperty('MS_DESCRIPTION', 'schema', " . q(get_schema()) . ", 'table', " . q($table) . ", 'column', NULL)");
 		$return = [];
 		$table_id = Connection::get()->getValue("SELECT object_id FROM sys.all_objects WHERE schema_id = SCHEMA_ID(" . q(get_schema()) . ") AND type IN ('S', 'U', 'V') AND name = " . q($table));
@@ -615,11 +629,13 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return $return;
 	}
 
-	function view($name) {
+	function view(string $name): array
+	{
 		return ["select" => preg_replace('~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU', '', Connection::get()->getValue("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA = SCHEMA_NAME() AND TABLE_NAME = " . q($name)))];
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		$return = [];
 		foreach (get_vals("SELECT name FROM fn_helpcollations()") as $collation) {
 			$return[preg_replace('~_.*~', '', $collation)][] = $collation;
@@ -632,21 +648,22 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return get_schema() == "INFORMATION_SCHEMA";
 	}
 
-	function error() {
+	function error(): string
+	{
 		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', Connection::get()->getError())));
 	}
 
-	function create_database($db, $collation): bool
+	function create_database(string $db, string $collation): bool
 	{
 		return (bool)queries("CREATE DATABASE " . idf_escape($db) . (preg_match('~^[a-z0-9_]+$~i', $collation) ? " COLLATE $collation" : ""));
 	}
 
-	function drop_databases($databases): bool
+	function drop_databases(array $databases): bool
 	{
 		return (bool)queries("DROP DATABASE " . implode(", ", array_map('AdminNeo\idf_escape', $databases)));
 	}
 
-	function rename_database($name, $collation): bool
+	function rename_database(string $name, string $collation): bool
 	{
 		if (preg_match('~^[a-z0-9_]+$~i', $collation)) {
 			queries("ALTER DATABASE " . idf_escape(DB) . " COLLATE $collation");
@@ -660,7 +677,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return " IDENTITY" . ($_POST["Auto_increment"] != "" ? "(" . number($_POST["Auto_increment"]) . ",1)" : "") . " PRIMARY KEY";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		$alter = [];
 		$comments = [];
@@ -721,7 +738,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return true;
 	}
 
-	function alter_indexes($table, $alter): bool
+	function alter_indexes(string $table, array $alter): bool
 	{
 		$index = [];
 		$drop = [];
@@ -749,7 +766,8 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return null;
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		$return = [];
 		$onActions = Driver::get()->getOnActions();
 
@@ -782,22 +800,22 @@ ORDER BY table_schema, table_name";
 		return get_rows($query, null, "");
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables(array $tables, bool $cascade = false): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}
 
-	function drop_views($views): bool
+	function drop_views(array $views): bool
 	{
 		return (bool)queries("DROP VIEW " . implode(", ", array_map('AdminNeo\table', $views)));
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		return (bool)queries("DROP TABLE " . implode(", ", array_map('AdminNeo\table', $tables)));
 	}
 
-	function move_tables($tables, $views, $target): bool
+	function move_tables(array $tables, array $views, string $target): bool
 	{
 		return apply_queries("ALTER SCHEMA " . idf_escape($target) . " TRANSFER", array_merge($tables, $views));
 	}
@@ -826,7 +844,8 @@ WHERE s.xtype = 'TR' AND s.name = " . q($name)
 		return $trigger;
 	}
 
-	function triggers($table) {
+	function triggers(string $table): array
+	{
 		$return = [];
 		foreach (get_rows("SELECT sys1.name,
 CASE WHEN OBJECTPROPERTY(sys1.id, 'ExecIsInsertTrigger') = 1 THEN 'INSERT' WHEN OBJECTPROPERTY(sys1.id, 'ExecIsUpdateTrigger') = 1 THEN 'UPDATE' WHEN OBJECTPROPERTY(sys1.id, 'ExecIsDeleteTrigger') = 1 THEN 'DELETE' END [Event],
@@ -840,7 +859,8 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return $return;
 	}
 
-	function trigger_options() {
+	function trigger_options(): array
+	{
 		return [
 			"Timing" => ["AFTER", "INSTEAD OF"],
 			"Event" => ["INSERT", "UPDATE", "DELETE"],
@@ -868,7 +888,8 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return true; // ALTER USER is permanent
 	}
 
-	function create_sql($table, $auto_increment, $style) {
+	function create_sql(string $table, ?bool $auto_increment, string $style): string
+	{
 		if (is_view(table_status1($table))) {
 			$view = view($table);
 			return "CREATE VIEW " . table($table) . " AS $view[select]";
@@ -898,7 +919,8 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return "CREATE TABLE " . table($table) . " (\n\t" . implode(",\n\t", $fields) . "\n)";
 	}
 
-	function foreign_keys_sql($table) {
+	function foreign_keys_sql(string $table): string
+	{
 		$fields = [];
 		foreach (foreign_keys($table) as $foreign) {
 			$fields[] = ltrim(format_foreign_key($foreign));
@@ -906,7 +928,8 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return ($fields ? "ALTER TABLE " . table($table) . " ADD\n\t" . implode(",\n\t", $fields) . ";\n\n" : "");
 	}
 
-	function truncate_sql($table) {
+	function truncate_sql(string $table): string
+	{
 		return "TRUNCATE TABLE " . table($table);
 	}
 
@@ -915,7 +938,7 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return "";
 	}
 
-	function use_sql(string $database): string
+	function use_sql(string $database, string $style = ""): string
 	{
 		return "USE " . idf_escape($database) . ";\n";
 	}
@@ -940,7 +963,8 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 		return $return;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match('~^(check|comment|columns|database|drop_col|dump|fast_status|indexes|descidx|scheme|sql|table|trigger|view|view_trigger)$~', $feature); //! routine|
 	}
 }

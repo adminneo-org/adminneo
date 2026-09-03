@@ -201,7 +201,8 @@ if (isset($_GET["simpledb"])) {
 			$this->insertFunctions = ["json"];
 		}
 
-		private function chunkRequest($ids, $action, $params, $expand = []) {
+		private function chunkRequest(array $ids, string $action, array $params, array $expand = []): bool
+		{
 			foreach (array_chunk($ids, 25) as $chunk) {
 				$params2 = $params;
 				foreach ($chunk as $i => $id) {
@@ -218,7 +219,8 @@ if (isset($_GET["simpledb"])) {
 			return true;
 		}
 
-		private function extractIds($table, $queryWhere, $limit) {
+		private function extractIds(string $table, string $queryWhere, int $limit): array
+		{
 			$return = [];
 			if (preg_match_all("~itemName\(\) = (('[^']*+')+)~", $queryWhere, $matches)) {
 				$return = array_map('AdminNeo\idf_unescape', $matches[1]);
@@ -361,11 +363,13 @@ if (isset($_GET["simpledb"])) {
 		return $connection;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match('~sql~', $feature);
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		$credentials = Admin::get()->getCredentials();
 		return $credentials[1];
 	}
@@ -375,14 +379,18 @@ if (isset($_GET["simpledb"])) {
 		return ["domain"];
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return [];
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
+		return null;
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		$return = [];
 		foreach (sdb_request_all('ListDomains', 'DomainName') as $table) {
 			$return[(string) $table] = 'table';
@@ -393,7 +401,8 @@ if (isset($_GET["simpledb"])) {
 		return $return;
 	}
 
-	function table_status($name = "", $fast = false) {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		foreach (($name != "" ? [$name => true] : tables_list()) as $table => $type) {
 			$row = ["Name" => $table, "Auto_increment" => ""];
@@ -415,7 +424,7 @@ if (isset($_GET["simpledb"])) {
 		return $return;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return false;
 	}
@@ -425,7 +434,8 @@ if (isset($_GET["simpledb"])) {
 		return false;
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError());
 	}
 
@@ -441,11 +451,13 @@ if (isset($_GET["simpledb"])) {
 		];
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		return fields_from_edit();
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		return [];
 	}
 
@@ -454,15 +466,18 @@ if (isset($_GET["simpledb"])) {
 		return [];
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return idf_escape($idf);
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return "`" . str_replace("`", "``", $idf) . "`";
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return " $query$where" . ($limit ? $separator . "LIMIT $limit" : "");
 	}
 
@@ -471,7 +486,9 @@ if (isset($_GET["simpledb"])) {
 		return $return;
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
+		return false;
 	}
 
 	function auto_increment(): string
@@ -479,12 +496,12 @@ if (isset($_GET["simpledb"])) {
 		return "";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		return $table == "" && sdb_request('CreateDomain', ['DomainName' => $name]);
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		foreach ($tables as $table) {
 			if (!sdb_request('DeleteDomain', ['DomainName' => $table])) {
@@ -494,10 +511,13 @@ if (isset($_GET["simpledb"])) {
 		return true;
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		foreach ($databases as $db) {
 			return [$db => count(tables_list())];
 		}
+
+		return [];
 	}
 
 	function found_rows(array $table_status, array $where): ?int
@@ -510,7 +530,8 @@ if (isset($_GET["simpledb"])) {
 		return 0;
 	}
 
-	function sdb_request($action, $params = [], ?Connection $connection = null) {
+	function sdb_request(string $action, array $params = [], ?Connection $connection = null)
+	{
 		if (!$connection) {
 			$connection = Connection::get();
 		}
@@ -558,7 +579,8 @@ if (isset($_GET["simpledb"])) {
 		return $xml->$tag ?: true;
 	}
 
-	function sdb_request_all($action, $tag, $params = [], $timeout = 0) {
+	function sdb_request_all(string $action, string $tag, array $params = [], int $timeout = 0)
+	{
 		$return = [];
 		$start = ($timeout ? microtime(true) : 0);
 		$limit = (preg_match('~LIMIT\s+(\d+)\s*$~i', $params['SelectExpression'], $match) ? $match[1] : 0);

@@ -311,11 +311,13 @@ if (isset($_GET["oracle"])) {
 		return (bool)preg_match('~^[^/]+(/([^/:]+)?(:[^/:]+)?(/[^/:]+)?)?$~', $hostPath);
 	}
 
-	function idf_escape($idf) {
+	function idf_escape(string $idf): string
+	{
 		return '"' . str_replace('"', '""', $idf) . '"';
 	}
 
-	function table($idf) {
+	function table(string $idf): string
+	{
 		return idf_escape($idf);
 	}
 
@@ -343,38 +345,45 @@ ORDER BY 1"
 		);
 	}
 
-	function limit($query, $where, int $limit, $offset = 0, $separator = " ") {
+	function limit(string $query, string $where, int $limit, int $offset = 0, string $separator = " "): string
+	{
 		return ($offset ? " * FROM (SELECT t.*, rownum AS rnum FROM (SELECT $query$where) t WHERE rownum <= " . ($limit + $offset) . ") WHERE rnum > $offset"
 			: ($limit ? " * FROM (SELECT $query$where) WHERE rownum <= " . ($limit + $offset)
 			: " $query$where"
 		));
 	}
 
-	function limit1($table, $query, $where, $separator = "\n") {
+	function limit1(string $table, string $query, string $where, string $separator = "\n"): string
+	{
 		return " $query$where"; //! limit
 	}
 
-	function db_collation($db, $collations) {
+	function db_collation(string $db, array $collations): ?string
+	{
 		return Connection::get()->getValue("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
 	}
 
-	function logged_user() {
+	function logged_user(): string
+	{
 		return Connection::get()->getValue("SELECT USER FROM DUAL");
 	}
 
-	function where_owner($prefix, $owner = "owner") {
+	function where_owner(string $prefix, string $owner = "owner"): string
+	{
 		if (!$_GET["ns"]) {
 			return '';
 		}
 		return "$prefix$owner = sys_context('USERENV', 'CURRENT_SCHEMA')";
 	}
 
-	function views_table($columns) {
+	function views_table(string $columns): string
+	{
 		$owner = where_owner('');
 		return "(SELECT $columns FROM all_views WHERE " . ($owner ?: "rownum < 0") . ")";
 	}
 
-	function tables_list() {
+	function tables_list(): array
+	{
 		$view = views_table("view_name");
 		$owner = where_owner(" AND ");
 		return get_key_vals("SELECT table_name, 'table' FROM all_tables WHERE tablespace_name = " . q(DB) . "$owner
@@ -383,7 +392,8 @@ ORDER BY 1"
 		); //! views don't have schema
 	}
 
-	function count_tables($databases) {
+	function count_tables(array $databases): array
+	{
 		$return = [];
 		foreach ($databases as $db) {
 			$return[$db] = Connection::get()->getValue("SELECT COUNT(*) FROM all_tables WHERE tablespace_name = " . q($db));
@@ -391,7 +401,8 @@ ORDER BY 1"
 		return $return;
 	}
 
-	function table_status($name = "") {
+	function table_status(string $name = "", bool $fast = false): array
+	{
 		$return = [];
 		$search = q($name);
 		$db = Connection::get()->getAndClearDbName();
@@ -411,16 +422,18 @@ ORDER BY 1"
 		return $return;
 	}
 
-	function is_view(array $table_status):bool
+	function is_view(array $table_status): bool
 	{
 		return $table_status["Engine"] == "view";
 	}
 
-	function fk_support($table_status) {
+	function fk_support(array $table_status): bool
+	{
 		return true;
 	}
 
-	function fields($table) {
+	function fields(string $table): array
+	{
 		$return = [];
 		$owner = where_owner(" AND ");
 		foreach (get_rows("SELECT * FROM all_tab_columns WHERE table_name = " . q($table) . "$owner ORDER BY column_id") as $row) {
@@ -467,13 +480,15 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 		return $return;
 	}
 
-	function view($name) {
+	function view(string $name): array
+	{
 		$view = views_table("view_name, text");
 		$rows = get_rows('SELECT text "select" FROM ' . $view . ' WHERE view_name = ' . q($name));
 		return reset($rows);
 	}
 
-	function collations() {
+	function collations(): array
+	{
 		return []; //!
 	}
 
@@ -482,7 +497,8 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 		return get_schema() == "INFORMATION_SCHEMA";
 	}
 
-	function error() {
+	function error(): string
+	{
 		return h(Connection::get()->getError()); //! highlight sqltext from offset
 	}
 
@@ -503,7 +519,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 		return "";
 	}
 
-	function alter_table($table, $name, $fields, $foreign, $comment, $engine, $collation, $auto_increment, $partitioning): bool
+	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		$alter = $drop = [];
 		$orig_fields = ($table ? fields($table) : []);
@@ -534,7 +550,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 		;
 	}
 
-	function alter_indexes($table, $alter): bool
+	function alter_indexes(string $table, array $alter): bool
 	{
 		$drop = [];
 		$queries = [];
@@ -563,7 +579,8 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 		return true;
 	}
 
-	function foreign_keys($table) {
+	function foreign_keys(string $table): array
+	{
 		$return = [];
 		$query = "SELECT c_list.CONSTRAINT_NAME as NAME,
 c_src.COLUMN_NAME as SRC_COLUMN,
@@ -594,17 +611,17 @@ AND c_src.TABLE_NAME = " . q($table);
 		return [];
 	}
 
-	function truncate_tables($tables): bool
+	function truncate_tables(array $tables, bool $cascade = false): bool
 	{
 		return apply_queries("TRUNCATE TABLE", $tables);
 	}
 
-	function drop_views($views): bool
+	function drop_views(array $views): bool
 	{
 		return apply_queries("DROP VIEW", $views);
 	}
 
-	function drop_tables($tables): bool
+	function drop_tables(array $tables): bool
 	{
 		return apply_queries("DROP TABLE", $tables);
 	}
@@ -635,11 +652,13 @@ AND c_src.TABLE_NAME = " . q($table);
 		return (bool)$connection->query("ALTER SESSION SET CURRENT_SCHEMA = " . idf_escape($schema));
 	}
 
-	function show_variables() {
+	function show_variables(): array
+	{
 		return get_rows('SELECT name, display_value FROM v$parameter');
 	}
 
-	function show_status() {
+	function show_status(): array
+	{
 		$return = [];
 		$rows = get_rows('SELECT * FROM v$instance');
 		foreach (reset($rows) as $key => $val) {
@@ -648,7 +667,8 @@ AND c_src.TABLE_NAME = " . q($table);
 		return $return;
 	}
 
-	function process_list() {
+	function process_list(): array
+	{
 		return get_rows('SELECT sess.process AS "process", sess.username AS "user", sess.schemaname AS "schema", sess.status AS "status", sess.wait_class AS "wait_class", sess.seconds_in_wait AS "seconds_in_wait", sql.sql_text AS "sql_text", sess.machine AS "machine", sess.port AS "port"
 FROM v$session sess LEFT OUTER JOIN v$sql sql
 ON sql.sql_id = sess.sql_id
@@ -667,7 +687,8 @@ ORDER BY PROCESS
 		return $return;
 	}
 
-	function support($feature) {
+	function support(string $feature): bool
+	{
 		return preg_match('~^(columns|database|drop_col|fast_status|indexes|descidx|processlist|scheme|sql|status|table|variables|view)$~', $feature); //!
 	}
 }
