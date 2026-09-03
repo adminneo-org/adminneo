@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Језик',
 
+	'Menu' => 'Мени', // by Claude Opus 5
 	'Home' => 'Почетна', // by Claude Opus 5
 	'Refresh' => 'Освежи',
 	'Info' => 'Подаци', // by Claude Opus 5

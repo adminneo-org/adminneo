@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Valoda',
 
+	'Menu' => 'Izvēlne', // by Claude Opus 5
 	'Home' => 'Sākums', // by Claude Opus 5
 	'Refresh' => 'Atjaunot',
 	'Info' => 'Informācija', // by Claude Opus 5

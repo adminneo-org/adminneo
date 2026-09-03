@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Kalba',
 
+	'Menu' => 'Meniu', // by Claude Opus 5
 	'Home' => 'Pradžia', // by Claude Opus 5
 	'Refresh' => 'Atnaujinti',
 	'Info' => 'Informacija', // by Claude Opus 5

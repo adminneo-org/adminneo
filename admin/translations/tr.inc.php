@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Dil',
 
+	'Menu' => 'Menü', // by Claude Opus 5
 	'Home' => 'Ana sayfa', // by Claude Opus 5
 	'Refresh' => 'Tazele',
 	'Info' => 'Bilgi', // by Claude Opus 5

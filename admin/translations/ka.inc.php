@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'ენა',
 
+	'Menu' => 'მენიუ', // by Claude Opus 5
 	'Home' => 'საწყისი', // by Claude Opus 5
 	'Refresh' => 'განახლება',
 	'Info' => 'ინფორმაცია', // by Claude Opus 5

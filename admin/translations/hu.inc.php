@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Nyelv',
 
+	'Menu' => 'Menü', // by Claude Opus 5
 	'Home' => 'Kezdőlap', // by Claude Opus 5
 	'Refresh' => 'Frissítés',
 	'Info' => 'Infó', // by Claude Opus 5

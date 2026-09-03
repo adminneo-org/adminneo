@@ -51,6 +51,7 @@ return [
 	// Settings
 	'Language' => 'மொழி',
 
+	'Menu' => 'பட்டி', // by Claude Opus 5
 	'Home' => 'முத‌ற் ப‌க்க‌ம்', // by Claude Opus 5
 	'Refresh' => 'புதுப்பி (Refresh)',
 	'Info' => 'த‌க‌வ‌ல்', // by Claude Opus 5

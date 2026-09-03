@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Bahasa',
 
+	'Menu' => 'Menu', // by Claude Opus 5
 	'Home' => 'Utama', // by Claude Opus 5
 	'Refresh' => 'Segar kembali',
 	'Info' => 'Info', // by Claude Opus 5

@@ -51,6 +51,7 @@ return [
 	// Settings
 	'Language' => 'Idioma',
 
+	'Menu' => 'Menu', // by Claude Opus 5
 	'Home' => 'Início', // by Claude Opus 5
 	'Refresh' => 'Atualizar',
 	'Info' => 'Informação', // by Claude Opus 5

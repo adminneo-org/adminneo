@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Ngôn ngữ',
 
+	'Menu' => 'Menu', // by Claude Opus 5
 	'Home' => 'Trang chủ',
 	'Refresh' => 'Làm mới',
 	'Info' => 'Thông tin',

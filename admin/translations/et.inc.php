@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Keel',
 
+	'Menu' => 'Menüü', // by Claude Opus 5
 	'Home' => 'Avaleht', // by Claude Opus 5
 	'Refresh' => 'Uuenda',
 	'Info' => 'Info', // by Claude Opus 5

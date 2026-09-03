@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => '语言',
 
+	'Menu' => '菜单', // by Claude Opus 5
 	'Home' => '首页', // by Claude Opus 5
 	'Refresh' => '刷新',
 	'Info' => '信息', // by Claude Opus 5

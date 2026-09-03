@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => '언어',
 
+	'Menu' => '메뉴', // by Claude Opus 5
 	'Home' => '홈', // by Claude Opus 5
 	'Refresh' => '새로 고침',
 	'Info' => '정보', // by Claude Opus 5

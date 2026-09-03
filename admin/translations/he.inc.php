@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'שפה',
 
+	'Menu' => 'תפריט', // by Claude Opus 5
 	'Home' => 'דף הבית', // by Claude Opus 5
 	'Refresh' => 'רענן',
 	'Info' => 'מידע', // by Claude Opus 5
