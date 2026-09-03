@@ -858,12 +858,13 @@ if (isset($_GET["mysql"])) {
 
 	function backward_keys(string $table): array
 	{
-		$query = "SELECT constraint_name, table_schema, table_name, column_name, referenced_column_name
-FROM information_schema.key_column_usage
-WHERE table_schema = " . q(Admin::get()->getDatabase()) . "
-AND referenced_table_schema = " . q(Admin::get()->getDatabase()) . "
-AND referenced_table_name = " . q($table) . "
-ORDER BY ordinal_position";
+		$query = "SELECT CONSTRAINT_NAME AS constraint_name, TABLE_SCHEMA AS table_schema, TABLE_NAME AS table_name,
+COLUMN_NAME AS column_name, REFERENCED_COLUMN_NAME AS referenced_column_name
+FROM information_schema.KEY_COLUMN_USAGE
+WHERE TABLE_SCHEMA = " . q(Admin::get()->getDatabase()) . "
+AND REFERENCED_TABLE_SCHEMA = " . q(Admin::get()->getDatabase()) . "
+AND REFERENCED_TABLE_NAME = " . q($table) . "
+ORDER BY ORDINAL_POSITION";
 
 		return get_rows($query, null, "");
 	}
