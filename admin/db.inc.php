@@ -186,11 +186,15 @@ if ($_GET["ns"] === "") {
 		// Tables are already sorted by name when no other column is used, so only the descending order needs a parameter.
 		$name_order = ($order == "" || $order == "__table");
 		$table_link = ($name_order && !$descending ? ME . "order=__table-desc" : substr(ME, 0, -1));
-		echo '<th><a href="' . h($table_link) . '">' . lang('Table') . '</a>';
+		// SQLite puts the sqlite_ tables last, so its list is not sorted by name.
+		$name_sorted = ($name_order && DIALECT != "sqlite");
+		echo '<th' . ($name_sorted ? " aria-sort='" . ($descending ? "descending" : "ascending") . "'" : '')
+			. '><a href="' . h($table_link) . '">' . lang('Table') . '</a>';
 		foreach ($columns as $key => $column) {
 			// The sorted column is linked to the opposite direction, so repeated clicks toggle it.
 			$direction = ($key === $order ? !$descending : isset($column["link"]));
-			echo '<td><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
+			echo '<th' . ($key === $order ? " aria-sort='" . ($descending ? "descending" : "ascending") . "'" : '')
+				. '><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
 		}
 		echo "</thead>\n";
 		echo "<tbody>\n";
