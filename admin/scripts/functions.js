@@ -553,7 +553,7 @@ function initTablesListSeparator(tablesList) {
 	// The marker sits at the very top of the list content, so it leaves the visible area as soon as
 	// the list is scrolled. Watching it avoids handling every scroll event.
 	const marker = qs('.scroll-marker', tablesList);
-	if (!marker) {
+	if (!marker || !window.IntersectionObserver) { // IntersectionObserver - unsupported in Safari < 12.1
 		return;
 	}
 
@@ -1391,7 +1391,7 @@ function ajaxForm(form, message, button) {
  */
 function initTableFooter() {
 	const footer = qs(".table-footer");
-	if (!footer) return;
+	if (!footer || !window.IntersectionObserver) return; // IntersectionObserver - unsupported in Safari < 12.1
 
 	const options = {
 		root: qs(".table-footer-parent"),
