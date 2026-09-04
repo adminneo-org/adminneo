@@ -388,6 +388,9 @@ if (isset($_GET["mongo"])) {
 			$collections[$result->name] = 'table';
 		}
 
+		// listCollections has no server-side ordering.
+		ksort($collections);
+
 		return $collections;
 	}
 
