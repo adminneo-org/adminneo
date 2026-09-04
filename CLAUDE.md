@@ -150,7 +150,7 @@ Prefer a pure wrap over a refactoring: don't extract a variable just to shorten 
 
 Wrapping must not change the compiled output apart from reformatted queries, split string literals and added trailing commas.
 
-JavaScript in `admin/scripts/`, `editor/scripts/`, plugins and inline `script()` must not use anything newer than ES6 (ES2015) — no `?.`, `??`, `??=`, `async`/`await` or ES2017+ built-ins like `Object.entries()` and `String.padStart()`. Newer syntax is a parse error, so a single modern token disables all of AdminNeo's JavaScript, not just the feature using it. The bundled syntax highlighter [JUSH](https://github.com/vrana/jush) holds the same baseline.
+JavaScript in `admin/scripts/`, `editor/scripts/`, plugins and inline `script()` must not use anything newer than ES6 (ES2015) — no `?.`, `??`, `??=`, `async`/`await` or ES2017+ built-ins like `Object.entries()` and `String.padStart()`. Newer syntax is a parse error, so a single modern token disables all of AdminNeo's JavaScript, not just the feature using it. The bundled syntax highlighter [JUSH](https://github.com/vrana/jush) holds the same baseline. Browser APIs stay at the same generation (~Safari 10, Chrome 54, Firefox 50); feature-detect anything newer instead of using it outright.
 
 ### Commits
 

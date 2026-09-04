@@ -121,7 +121,8 @@ function page_header(string $title, $breadcrumb = []): void
 
 	body.onkeydown = bodyKeydown;
 	body.onclick = bodyClick;
-	body.classList.replace("nojs", "js");
+	body.classList.add("js");
+	body.classList.remove("nojs"); // not replace() - unsupported in Chrome < 61
 
 	const offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
 	const thousandsSeparator = '<?php echo js_escape(lang(',')); ?>';
