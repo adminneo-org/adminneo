@@ -34,7 +34,7 @@ AdminNeo 5.7.1 (2026-08-27)
 
 ### Bugfixes
 
-- Escape < in strings printed to JavaScript, a name containing <!--<script> broke the page
+- Escape `<` in strings printed to JavaScript, a name containing `<!--<script>` broke the page
 - Alter table: Edit multiline column comments in a textarea (by @vrana)
 - Alter table: Do not rewrite newlines in multiline column and table comments
 - Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
@@ -428,12 +428,12 @@ AdminNeo 5.0.0 (2025-05-29)
 ---------------------------
 
 This is the first release of AdminNeo and EditorNeo as standalone products. It mainly brings the brand new responsive
-theme with dark mode support and color variants, easy to use [configuration](https://www.adminneo.org/configuration), 
-several UX improvements and reviewed [plugins](https://www.adminneo.org/plugins) and 
-[customizations](https://www.adminneo.org/customizations). 
+theme with dark mode support and color variants, easy to use [configuration](https://www.adminneo.org/configuration),
+several UX improvements and reviewed [plugins](https://www.adminneo.org/plugins) and
+[customizations](https://www.adminneo.org/customizations).
 Please consult the [Upgrade guide](https://www.adminneo.org/upgrade) to upgrade your AdminNeo installation.
 
-AdminNeo can be downloaded on the new [adminneo.org/download](https://www.adminneo.org/download) page where you can select 
+AdminNeo can be downloaded on the new [adminneo.org/download](https://www.adminneo.org/download) page where you can select
 the components according to your needs.
 
 ### Changes
@@ -467,7 +467,7 @@ the components according to your needs.
 - Display column comments as a hints in edit form
 - Unify setting NULL value for 'enum' fields in edit form
 - Upgrade encryption of stored login information to AES-256-GCM
-- Editor: Remove displaying comments instead of table and field names  
+- Editor: Remove displaying comments instead of table and field names
 - Editor: Remove password input for fields that end with _md5 and _sha1
 - Editor: Remove support for sending mass e-mails
 - MySQL: Drop support for MySQL 4
