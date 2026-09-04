@@ -38,7 +38,8 @@ if (isset($_GET["pgsql"])) {
 				});
 
 				list($host, $port) = host_port($server);
-				$this->connectionString = ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
+				$this->connectionString = ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") .
+					"user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {
@@ -520,14 +521,22 @@ if (isset($_GET["pgsql"])) {
 
 		public function getInheritedTables(string $table): array
 		{
-			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_inherits JOIN pg_class ON inhrelid = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhparent = " . $this->tableOid($table) .
+			return get_rows("SELECT relname AS \"table\", nspname AS ns
+FROM pg_inherits
+JOIN pg_class ON inhrelid = oid
+JOIN pg_namespace ON relnamespace = pg_namespace.oid
+WHERE inhparent = " . $this->tableOid($table) .
 				(Connection::get()->isMinVersion("10") ? " AND relispartition::int = 0" : "") . // do not return partitions
 				" ORDER BY 2, 1");
 		}
 
 		public function getParentTables(string $table): array
 		{
-			return get_rows("SELECT relname AS \"table\", nspname AS ns FROM pg_class JOIN pg_inherits ON inhparent = oid JOIN pg_namespace ON relnamespace = pg_namespace.oid WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 2, 1");
+			return get_rows("SELECT relname AS \"table\", nspname AS ns
+FROM pg_class
+JOIN pg_inherits ON inhparent = oid
+JOIN pg_namespace ON relnamespace = pg_namespace.oid
+WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 2, 1");
 		}
 
 		public function isPartition(string $table): bool
@@ -555,7 +564,10 @@ if (isset($_GET["pgsql"])) {
 				"partition" => implode(", ", array_map('AdminNeo\idf_escape', $attrs)),
 			];
 
-			$partitions = get_key_vals("SELECT relname, pg_get_expr(c.relpartbound, c.oid) AS bound FROM pg_inherits JOIN pg_class c ON inhrelid = oid WHERE inhparent = " . $this->tableOid($table) . " ORDER BY 1");
+			$partitions = get_key_vals("SELECT relname, pg_get_expr(c.relpartbound, c.oid) AS bound
+FROM pg_inherits
+JOIN pg_class c ON inhrelid = oid
+WHERE inhparent = " . $this->tableOid($table) . " ORDER BY 1");
 			$info["partition_names"] = array_keys($partitions);
 			$info["partition_values"] = array_map(function ($value) { return str_replace("FOR VALUES ", "", $value); }, array_values($partitions));
 
@@ -572,7 +584,8 @@ if (isset($_GET["pgsql"])) {
 			static $methods = [];
 
 			if (!$methods) {
-				$methods = get_vals("SELECT amname FROM pg_am" . ($this->connection->isMinVersion("9.6") ? " WHERE amtype = 'i'" : "") . " ORDER BY amname = '" . ($this->connection->isCockroachDB() ? "prefix" : "btree") . "' DESC, amname");
+				$methods = get_vals("SELECT amname FROM pg_am" . ($this->connection->isMinVersion("9.6") ? " WHERE amtype = 'i'" : "") .
+					" ORDER BY amname = '" . ($this->connection->isCockroachDB() ? "prefix" : "btree") . "' DESC, amname");
 			}
 
 			return $methods;
@@ -903,8 +916,11 @@ ORDER BY a.attnum"
 		$return = [];
 		$table_oid = Driver::get()->tableOid($table);
 		$columns = get_key_vals("SELECT attnum, attname FROM pg_attribute WHERE attrelid = $table_oid AND attnum > 0", $connection);
-		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname, pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr" . ($connection->isCockroachDB() ? "" : ",
-	(SELECT string_agg(CASE WHEN opcdefault THEN '' ELSE opcname END, ' ' ORDER BY s) FROM generate_subscripts(indclass, 1) AS s JOIN pg_catalog.pg_opclass ON pg_opclass.oid = indclass[s]) AS opclasses") . "
+		foreach (get_rows("SELECT relname, indisunique::int, indisprimary::int, indkey, indoption, amname,
+	pg_get_expr(indpred, indrelid, true) AS partial, pg_get_expr(indexprs, indrelid) AS indexpr" . ($connection->isCockroachDB() ? "" : ",
+	(SELECT string_agg(CASE WHEN opcdefault THEN '' ELSE opcname END, ' ' ORDER BY s)
+		FROM generate_subscripts(indclass, 1) AS s
+		JOIN pg_catalog.pg_opclass ON pg_opclass.oid = indclass[s]) AS opclasses") . "
 FROM pg_index
 JOIN pg_class ON indexrelid = oid
 JOIN pg_am ON pg_am.oid = pg_class.relam
@@ -1206,7 +1222,11 @@ ORDER BY s.ordinal_position";
 		}
 
 		$trigger = [];
-		foreach (get_rows('SELECT trigger_name AS "Trigger", action_timing AS "Timing", event_manipulation AS "Event", \'FOR EACH \' || action_orientation AS "Type", action_statement AS "Statement" FROM information_schema.triggers ' . "$where ORDER BY event_manipulation DESC") as $row) {
+		foreach (get_rows(
+			'SELECT trigger_name AS "Trigger", action_timing AS "Timing", event_manipulation AS "Event",
+	\'FOR EACH \' || action_orientation AS "Type", action_statement AS "Statement"
+FROM information_schema.triggers ' . "$where ORDER BY event_manipulation DESC"
+		) as $row) {
 			if ($columns && $row["Event"] == "UPDATE") {
 				$row["Event"] .= " OF";
 			}
@@ -1235,7 +1255,12 @@ ORDER BY s.ordinal_position";
 	{
 		return [
 			"Timing" => ["BEFORE", "AFTER"],
-			"Event" => ["INSERT", "UPDATE", "UPDATE OF", "DELETE", "INSERT OR UPDATE", "INSERT OR UPDATE OF", "DELETE OR INSERT", "DELETE OR UPDATE", "DELETE OR UPDATE OF", "DELETE OR INSERT OR UPDATE", "DELETE OR INSERT OR UPDATE OF"],
+			"Event" => [
+				"INSERT", "UPDATE", "UPDATE OF", "DELETE",
+				"INSERT OR UPDATE", "INSERT OR UPDATE OF",
+				"DELETE OR INSERT", "DELETE OR UPDATE", "DELETE OR UPDATE OF",
+				"DELETE OR INSERT OR UPDATE", "DELETE OR INSERT OR UPDATE OF",
+			],
 			"Type" => ["FOR EACH ROW", "FOR EACH STATEMENT"],
 		];
 	}
@@ -1379,7 +1404,8 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 		ksort($fkeys);
 
 		foreach ($fkeys as $fkey_name => $fkey) {
-			$return .= "ALTER TABLE ONLY $ns." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " " . preg_replace('~( REFERENCES )([^(.]+\()~', "\\1$ns.\\2", $fkey["definition"]) . ";\n";
+			$return .= "ALTER TABLE ONLY $ns." . idf_escape($status['Name']) . " ADD CONSTRAINT " . idf_escape($fkey_name) . " " .
+				preg_replace('~( REFERENCES )([^(.]+\()~', "\\1$ns.\\2", $fkey["definition"]) . ";\n";
 		}
 
 		return ($return ? "$return\n" : $return);
@@ -1503,7 +1529,11 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 			}
 		}
 
-		foreach (get_rows("SELECT indexdef FROM pg_catalog.pg_indexes WHERE schemaname = current_schema() AND tablename = " . q($table) . ($primary ? " AND indexname != " . q($primary) : ""), null, "-- ") as $row) {
+		foreach (get_rows(
+			"SELECT indexdef FROM pg_catalog.pg_indexes WHERE schemaname = current_schema() AND tablename = " . q($table) . ($primary ? " AND indexname != " . q($primary) : ""),
+			null,
+			"-- "
+		) as $row) {
 			$return .= "\n\n$row[indexdef];";
 		}
 
@@ -1522,7 +1552,8 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 		$sql = "";
 		foreach (triggers($table) as $trg_id => $trg) {
 			$trigger = trigger($trg_id, $status['Name']);
-			$sql .= "\nCREATE TRIGGER " . idf_escape($trigger['Trigger']) . " $trigger[Timing] $trigger[Event] ON " . idf_escape($status["nspname"]) . "." . idf_escape($status['Name']) . " $trigger[Type] $trigger[Statement];;\n";
+			$sql .= "\nCREATE TRIGGER " . idf_escape($trigger['Trigger']) . " $trigger[Timing] $trigger[Event] ON " .
+				idf_escape($status["nspname"]) . "." . idf_escape($status['Name']) . " $trigger[Type] $trigger[Statement];;\n";
 		}
 
 		return $sql;
@@ -1579,7 +1610,10 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 			return Connection::get()->isMinVersion("11");
 		}
 
-		return preg_match('~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~', $feature);
+		return preg_match(
+			'~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~',
+			$feature
+		);
 	}
 
 	function kill_process(string $val)

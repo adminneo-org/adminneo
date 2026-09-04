@@ -271,7 +271,8 @@ echo script("qsl('table').onclick = dumpClick;");
 $prefixes = [];
 if (DB != "" && $_GET["ns"] === "") {
 	echo "<thead><tr><th>";
-	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly'>" . lang('Schema') . "</label>" . script("gid('check-schemas').onclick = partial(formCheck, /^schemas\\[/);", "");
+	echo "<label class='block'><input type='checkbox' id='check-schemas' checked class='jsonly'>" . lang('Schema') . "</label>" .
+		script("gid('check-schemas').onclick = partial(formCheck, /^schemas\\[/);", "");
 	echo "</thead>\n";
 	foreach (Admin::get()->getSchemas() as $schema) {
 		if (!information_schema(DB, $schema)) {
@@ -281,8 +282,10 @@ if (DB != "" && $_GET["ns"] === "") {
 } elseif (DB != "") {
 	$checked = ($TABLE != "" ? "" : " checked");
 	echo "<thead><tr>";
-	echo "<th><label class='block'><input type='checkbox' id='check-tables'$checked class='jsonly'>" . lang('Table') . "</label>" . script("gid('check-tables').onclick = partial(formCheck, /^tables\\[/);", "");
-	echo "<th class='right'><label class='block'>" . lang('Data') . "<input type='checkbox' id='check-data'$checked class='jsonly'></label>" . script("gid('check-data').onclick = partial(formCheck, /^data\\[/);", "");
+	echo "<th><label class='block'><input type='checkbox' id='check-tables'$checked class='jsonly'>" . lang('Table') . "</label>" .
+		script("gid('check-tables').onclick = partial(formCheck, /^tables\\[/);", "");
+	echo "<th class='right'><label class='block'>" . lang('Data') . "<input type='checkbox' id='check-data'$checked class='jsonly'></label>" .
+		script("gid('check-data').onclick = partial(formCheck, /^data\\[/);", "");
 	echo "</thead>\n";
 
 	$views = "";
@@ -308,7 +311,8 @@ if (DB != "" && $_GET["ns"] === "") {
 	$databases = Admin::get()->getDatabases();
 	echo "<thead><tr><th>";
 	echo "<label class='block'>"
-		. ($databases ? "<input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . " class='jsonly'>" . script("gid('check-databases').onclick = partial(formCheck, /^databases\\[/);", "") : "")
+		. ($databases ? "<input type='checkbox' id='check-databases'" . ($TABLE == "" ? " checked" : "") . " class='jsonly'>" .
+			script("gid('check-databases').onclick = partial(formCheck, /^databases\\[/);", "") : "")
 		. lang('Database')
 		. "</label>"
 	;

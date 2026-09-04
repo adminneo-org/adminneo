@@ -14,7 +14,12 @@ if (DB == "" && isset($_GET["ns"])) {
 	redirect(remove_from_uri('ns'));
 }
 
-if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || isset($_GET["dump"]) || isset($_GET["database"]) || isset($_GET["processlist"]) || isset($_GET["privileges"]) || isset($_GET["user"]) || isset($_GET["variables"]) || $_GET["script"] == "connect" || $_GET["script"] == "kill")) {
+if (!(DB != "" ?
+	Connection::get()->selectDatabase(DB) :
+	(isset($_GET["sql"]) || isset($_GET["dump"]) || isset($_GET["database"]) || isset($_GET["processlist"]) ||
+		isset($_GET["privileges"]) || isset($_GET["user"]) || isset($_GET["variables"]) ||
+		$_GET["script"] == "connect" || $_GET["script"] == "kill")
+)) {
 	if (DB != "" || $_GET["refresh"]) {
 		restart_session();
 		set_session("dbs", null);
@@ -66,7 +71,8 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 				. "<th aria-sort='ascending'>" . lang('Database') . (get_session("dbs") !== null ? " - <a href='" . h(ME) . "refresh=1'>" . lang('Refresh') . "</a>" : "")
 				. "<td>" . lang('Collation')
 				. "<td>" . lang('Tables')
-				. "<td>" . lang('Size') . " - <a href='" . h(ME) . "dbsize=1'>" . lang('Compute') . "</a>" . script("qsl('a').onclick = partial(ajaxSetHtml, '" . js_escape(ME) . "script=connect');", "")
+				. "<td>" . lang('Size') . " - <a href='" . h(ME) . "dbsize=1'>" . lang('Compute') . "</a>" .
+					script("qsl('a').onclick = partial(ajaxSetHtml, '" . js_escape(ME) . "script=connect');", "")
 				. "</thead>\n"
 			;
 

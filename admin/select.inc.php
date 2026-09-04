@@ -365,7 +365,8 @@ if (!$columns && support("table")) {
 			echo "<thead><tr>";
 
 			if ($group || !$select) {
-				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly' title='" . lang('All rows on this page') . "'>" . script("gid('all-page').onclick = partial(formCheck, /check/);", "");
+				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly' title='" . lang('All rows on this page') . "'>" .
+					script("gid('all-page').onclick = partial(formCheck, /check/);", "");
 				if (Admin::get()->isDataEditAllowed()) {
 					echo " <a href='", h($_GET["modify"] ? remove_from_uri("modify") : $_SERVER["REQUEST_URI"] . "&modify=1") . "' title='", lang('Modify'), "'>", icon_solo("edit-all"), "</a>";
 				}
@@ -489,7 +490,9 @@ if (!$columns && support("table")) {
 									foreach ($foreign_key["source"] as $i => $source) {
 										$link .= where_link($i, $foreign_key["target"][$i], $rows[$n][$source]);
 									}
-									$link = ($foreign_key["db"] != "" ? preg_replace('~([?&]db=)[^&]+~', '\1' . urlencode($foreign_key["db"]), ME) : ME) . 'select=' . urlencode($foreign_key["table"]) . $link; // InnoDB supports non-UNIQUE keys
+									// InnoDB supports non-UNIQUE keys
+									$link = ($foreign_key["db"] != "" ? preg_replace('~([?&]db=)[^&]+~', '\1' . urlencode($foreign_key["db"]), ME) : ME) .
+										'select=' . urlencode($foreign_key["table"]) . $link;
 									if ($foreign_key["ns"]) {
 										$link = preg_replace('~([?&]ns=)[^&]+~', '\1' . urlencode($foreign_key["ns"]), $link);
 									}
@@ -529,7 +532,9 @@ if (!$columns && support("table")) {
 						if (($_GET["modify"] && $editable && !$null_val) || $posted !== null) {
 							$editing_fields = true;
 							$h_value = h($posted !== null ? $posted : $row[$key]);
-							echo " data-editing='true'>" . ($text ? "<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" : "<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
+							echo " data-editing='true'>" . ($text ?
+								"<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" :
+								"<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
 						} else {
 							$long = strpos($html, "<i>…</i>");
 							if ($update) {
@@ -555,7 +560,9 @@ if (!$columns && support("table")) {
 			}
 
 			echo "</tbody>\n";
-			echo script("mixin(qs('#table tbody'), {onclick: event => tableClick(event, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: event => tableClick(event, true), onkeydown: onEditingKeydown});");
+			echo script("mixin(qs('#table tbody'), {onclick: event => tableClick(event, false, " .
+				(Admin::get()->isDataEditAllowed() ? "true" : "false") .
+				"), ondblclick: event => tableClick(event, true), onkeydown: onEditingKeydown});");
 
 			echo "</table>\n";
 			echo script("initToggles(gid('table'));");
@@ -654,7 +661,14 @@ if (!$columns && support("table")) {
 				echo "<fieldset>";
 				echo "<legend>" . lang('Whole result') . "</legend><div class='fieldset-content'>";
 				$display_rows = ($exact_count ? "" : "~ ") . $found_rows;
-				echo checkbox("all", 1, 0, ($found_rows !== false ? ($exact_count ? "" : "~ ") . lang('%d row(s)', $found_rows) : ""), "const checked = formChecked(this, /check/); selectCount('selected', this.checked ? '$display_rows' : checked); selectCount('selected2', this.checked || !checked ? '$display_rows' : checked);") . "\n";
+				echo checkbox(
+					"all",
+					1,
+					0,
+					($found_rows !== false ? ($exact_count ? "" : "~ ") . lang('%d row(s)', $found_rows) : ""),
+					"const checked = formChecked(this, /check/); selectCount('selected', this.checked ? '$display_rows' : checked); " .
+						"selectCount('selected2', this.checked || !checked ? '$display_rows' : checked);"
+				) . "\n";
 				echo "</div></fieldset>\n";
 
 				if (Admin::get()->isDataEditAllowed()) {

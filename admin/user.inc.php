@@ -22,7 +22,8 @@ if ($_POST) {
 }
 $grants = [];
 
-if (isset($_GET["host"]) && ($result = Connection::get()->query("SHOW GRANTS FOR " . q($USER) . "@" . q($_GET["host"])))) { //! use information_schema for MySQL 5 - column names in column privileges are not escaped
+//! use information_schema for MySQL 5 - column names in column privileges are not escaped
+if (isset($_GET["host"]) && ($result = Connection::get()->query("SHOW GRANTS FOR " . q($USER) . "@" . q($_GET["host"])))) {
 	while ($row = $result->fetchRow()) {
 		if (preg_match('~GRANT (.*) ON (.*) TO ~', $row[0], $match) && preg_match_all('~ *([^(,]*[^ ,(])( *\([^)]+\))?~', $match[1], $matches, PREG_SET_ORDER)) { //! escape the part between ON and TO
 			foreach ($matches as $val) {
@@ -146,7 +147,9 @@ echo "</table>\n";
 //! MAX_* limits, REQUIRE
 echo "<div class='scrollable'><table class='checkable'>\n";
 
-echo "<thead><tr><th colspan='2'>" . lang('Privileges') . doc_link(['sql' => "grant.html#priv_level", "mariadb" => "reference/sql-statements/account-management-sql-statements/grant#privilege-levels"]) . "</th>";
+echo "<thead><tr><th colspan='2'>" . lang('Privileges') .
+	doc_link(['sql' => "grant.html#priv_level", "mariadb" => "reference/sql-statements/account-management-sql-statements/grant#privilege-levels"]) .
+	"</th>";
 $i = 0;
 foreach ($grants as $object => $grant) {
 	echo "<th>";

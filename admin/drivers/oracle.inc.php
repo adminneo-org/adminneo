@@ -418,7 +418,10 @@ ORDER BY 1"
 		foreach (get_rows('SELECT t.table_name "Name", \'table\' "Engine", s.bytes "Data_length", i.bytes "Index_length", t.num_rows "Rows"
 FROM all_tables t
 LEFT JOIN (SELECT segment_name, SUM(bytes) bytes FROM user_segments WHERE segment_type LIKE \'TABLE%\' GROUP BY segment_name) s ON s.segment_name = t.table_name
-LEFT JOIN (SELECT i.table_name, SUM(s.bytes) bytes FROM user_indexes i JOIN user_segments s ON s.segment_name = i.index_name AND s.segment_type LIKE \'INDEX%\' GROUP BY i.table_name) i ON i.table_name = t.table_name
+LEFT JOIN (SELECT i.table_name, SUM(s.bytes) bytes
+	FROM user_indexes i
+	JOIN user_segments s ON s.segment_name = i.index_name AND s.segment_type LIKE \'INDEX%\'
+	GROUP BY i.table_name) i ON i.table_name = t.table_name
 WHERE t.tablespace_name = ' . q($db) . $owner . ($name != "" ? " AND t.table_name = $search" : "") . "
 UNION SELECT view_name, 'view', 0, 0, 0 FROM $view" . ($name != "" ? " WHERE view_name = $search" : "") . "
 ORDER BY 1"
@@ -676,7 +679,9 @@ AND c_src.TABLE_NAME = " . q($table);
 
 	function process_list(): array
 	{
-		return get_rows('SELECT sess.process AS "process", sess.username AS "user", sess.schemaname AS "schema", sess.status AS "status", sess.wait_class AS "wait_class", sess.seconds_in_wait AS "seconds_in_wait", sql.sql_text AS "sql_text", sess.machine AS "machine", sess.port AS "port"
+		return get_rows('SELECT sess.process AS "process", sess.username AS "user", sess.schemaname AS "schema",
+	sess.status AS "status", sess.wait_class AS "wait_class", sess.seconds_in_wait AS "seconds_in_wait",
+	sql.sql_text AS "sql_text", sess.machine AS "machine", sess.port AS "port"
 FROM v$session sess LEFT OUTER JOIN v$sql sql
 ON sql.sql_id = sess.sql_id
 WHERE sess.type = \'USER\'

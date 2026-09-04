@@ -31,7 +31,9 @@ while ($row = $result->fetchAssoc()) {
 }
 
 if (!$grant || DB != "") {
-	echo "<tr><td><input class='input' name='user' autocapitalize='off'><td><input class='input' name='host' value='localhost' autocapitalize='off'><td><input type='submit' class='button' value='" . lang('Edit') . "'>\n";
+	echo "<tr><td><input class='input' name='user' autocapitalize='off'>" .
+		"<td><input class='input' name='host' value='localhost' autocapitalize='off'>" .
+		"<td><input type='submit' class='button' value='" . lang('Edit') . "'>\n";
 }
 
 echo "</table>\n";

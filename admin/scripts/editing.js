@@ -24,9 +24,11 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 			}
 
 			// MariaDB page keys are resolved by jush itself from the 'mysql-key maria-key' entries.
-			obj[key] = (vendor === "mariadb" ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
-				.replace('/doc/mysql', '/doc/refman/' + version) // MySQL
-			;
+			obj[key] = (vendor === "mariadb" ?
+				obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : // MariaDB
+				obj[key]
+			).replace('/doc/mysql', '/doc/refman/' + version); // MySQL
+
 			if (vendor !== 'cockroach') {
 				obj[key] = obj[key].replace('/docs/current', '/docs/' + version); // PostgreSQL
 			}

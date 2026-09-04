@@ -463,7 +463,8 @@ if (isset($_GET["mysql"])) {
 				$name = strtolower($name);
 
 				return $maria ?
-					"reference/system-tables/information-schema/information-schema-tables/" . (str_starts_with($name, "innodb_") ? "information-schema-innodb-tables/" : "") . "information-schema-$name-table" :
+					"reference/system-tables/information-schema/information-schema-tables/" .
+						(str_starts_with($name, "innodb_") ? "information-schema-innodb-tables/" : "") . "information-schema-$name-table" :
 					"information-schema-" . str_replace("_", "-", $name). "-table.html";
 			}
 	        if (DB == "performance_schema") {
@@ -701,12 +702,17 @@ if (isset($_GET["mysql"])) {
 	 *
 	 * @param bool $fast Return only "Name", "Engine" and "Comment" fields.
 	 *
-	 * @return array{Name:string, Engine?:?string, Comment?:string, Oid?:numeric-string, Rows?:numeric-string, Collation?:string, Auto_increment?:numeric-string, Data_length?:numeric-string, Index_length?:numeric-string, Data_free?:numeric-string, Create_options?:string, nspname?:string}[]
+	 * @return array{Name:string, Engine?:?string, Comment?:string, Oid?:numeric-string, Rows?:numeric-string,
+	 *     Collation?:string, Auto_increment?:numeric-string, Data_length?:numeric-string, Index_length?:numeric-string,
+	 *     Data_free?:numeric-string, Create_options?:string, nspname?:string}[]
 	 */
 	function table_status(string $name = "", bool $fast = false): array
 	{
 		if ($fast) {
-			$query = "SELECT TABLE_NAME AS Name, ENGINE AS Engine, CREATE_OPTIONS AS Create_options, TABLES.TABLE_COLLATION AS Collation, TABLE_COMMENT AS Comment FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name) : "ORDER BY Name");
+			$query = "SELECT TABLE_NAME AS Name, ENGINE AS Engine, CREATE_OPTIONS AS Create_options,
+	TABLES.TABLE_COLLATION AS Collation, TABLE_COMMENT AS Comment
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name) : "ORDER BY Name");
 		} else {
 			$query = "SHOW TABLE STATUS" . ($name != "" ? " LIKE " . q(addcslashes($name, "%_\\")) : "");
 		}
@@ -754,7 +760,9 @@ if (isset($_GET["mysql"])) {
 	/**
 	 * Returns information about fields.
 	 *
-	 * @return array{field:string, full_type:string, type:string, length:int, unsigned:string, default:string, null:bool, auto_increment:bool, on_update:string, collation:string, privileges:int[], comment:string, primary:bool, generated:string}[]
+	 * @return array{field:string, full_type:string, type:string, length:int, unsigned:string, default:string,
+	 *     null:bool, auto_increment:bool, on_update:string, collation:string, privileges:int[], comment:string,
+	 *     primary:bool, generated:string}[]
 	 */
 	function fields(string $table): array
 	{
@@ -834,7 +842,10 @@ if (isset($_GET["mysql"])) {
 		$return = [];
 		foreach (get_rows("SHOW INDEX FROM " . table($table), $connection) as $row) {
 			$name = $row["Key_name"];
-			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" : ($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" : ($row["Non_unique"] ? (preg_match('~^(SPATIAL|VECTOR)$~', $row["Index_type"]) ? $row["Index_type"] : "INDEX") : "UNIQUE")));
+			$return[$name]["type"] = ($name == "PRIMARY" ? "PRIMARY" :
+				($row["Index_type"] == "FULLTEXT" ? "FULLTEXT" :
+				($row["Non_unique"] ? (preg_match('~^(SPATIAL|VECTOR)$~', $row["Index_type"]) ? $row["Index_type"] : "INDEX") :
+				"UNIQUE")));
 			$return[$name]["columns"][] = $row["Column_name"];
 			$return[$name]["lengths"][] = ($row["Index_type"] == "SPATIAL" ? null : $row["Sub_part"]);
 			$return[$name]["descs"][] = ($row["Collation"] == "D" ? '1' : null);
@@ -855,7 +866,13 @@ if (isset($_GET["mysql"])) {
 		$create_table = Connection::get()->getValue("SHOW CREATE TABLE " . table($table), 1);
 		if ($create_table) {
 			$onActions = implode("|", Driver::get()->getOnActions());
-			preg_match_all("~CONSTRAINT ($pattern) FOREIGN KEY ?\\(((?:$pattern,? ?)+)\\) REFERENCES ($pattern)(?:\\.($pattern))? \\(((?:$pattern,? ?)+)\\)(?: ON DELETE ($onActions))?(?: ON UPDATE ($onActions))?~", $create_table, $matches, PREG_SET_ORDER);
+			preg_match_all(
+				"~CONSTRAINT ($pattern) FOREIGN KEY ?\\(((?:$pattern,? ?)+)\\) REFERENCES ($pattern)(?:\\.($pattern))? " .
+					"\\(((?:$pattern,? ?)+)\\)(?: ON DELETE ($onActions))?(?: ON UPDATE ($onActions))?~",
+				$create_table,
+				$matches,
+				PREG_SET_ORDER
+			);
 			foreach ($matches as $match) {
 				preg_match_all("~$pattern~", $match[2], $source);
 				preg_match_all("~$pattern~", $match[5], $target);
@@ -1055,7 +1072,8 @@ ORDER BY ORDINAL_POSITION";
 			if ($partitioning["partition_by"] == 'RANGE' || $partitioning["partition_by"] == 'LIST') {
 				foreach ($partitioning["partition_names"] as $key => $val) {
 					$value = $partitioning["partition_values"][$key];
-					$partitions[] = "\n  PARTITION " . idf_escape($val) . " VALUES " . ($partitioning["partition_by"] == 'RANGE' ? "LESS THAN" : "IN") . ($value != "" ? " ($value)" : " MAXVALUE"); //! SQL injection
+					//! SQL injection
+					$partitions[] = "\n  PARTITION " . idf_escape($val) . " VALUES " . ($partitioning["partition_by"] == 'RANGE' ? "LESS THAN" : "IN") . ($value != "" ? " ($value)" : " MAXVALUE");
 				}
 			}
 
@@ -1086,7 +1104,8 @@ ORDER BY ORDINAL_POSITION";
 	 * Runs commands to alter indexes.
 	 *
 	 * @param string $table Escaped table name.
-	 * @param list<array{string, string, 'DROP'|list<string>, 3?: string, 4?: string}> $alter Array of ["index type", "name", ["column definition", ...], "algorithm", "condition"] or ["index type", "name", "DROP"].
+	 * @param list<array{string, string, 'DROP'|list<string>, 3?: string, 4?: string}> $alter Array of
+	 *     ["index type", "name", ["column definition", ...], "algorithm", "condition"] or ["index type", "name", "DROP"].
 	 */
 	function alter_indexes(string $table, array $alter): bool
 	{
@@ -1179,7 +1198,9 @@ ORDER BY ORDINAL_POSITION";
 			}
 			foreach (get_rows("SHOW TRIGGERS LIKE " . q(addcslashes($table, "%_\\"))) as $row) {
 				$trigger = $row["Trigger"];
-				if (!queries("CREATE TRIGGER " . ($target == DB ? idf_escape("copy_$trigger") : idf_escape($target) . "." . idf_escape($trigger)) . " $row[Timing] $row[Event] ON $name FOR EACH ROW\n$row[Statement];")) {
+				if (!queries("CREATE TRIGGER " .
+					($target == DB ? idf_escape("copy_$trigger") : idf_escape($target) . "." . idf_escape($trigger)) .
+					" $row[Timing] $row[Event] ON $name FOR EACH ROW\n$row[Statement];")) {
 					return false;
 				}
 			}
@@ -1244,7 +1265,9 @@ ORDER BY ORDINAL_POSITION";
 	 *
 	 * @param 'FUNCTION'|'PROCEDURE' $type
 	 *
-	 * @return array{fields:list<array{field:string, type:string, length:string, unsigned:string, null:bool, full_type:string, inout:string, collation:string}>, comment:string, returns:array, definition:string, language:string}
+	 * @return array{fields:list<array{field:string, type:string, length:string, unsigned:string, null:bool,
+	 *     full_type:string, inout:string, collation:string}>, comment:string, returns:array, definition:string,
+	 *     language:string}
 	 */
 	function routine(string $name, string $type): array
 	{

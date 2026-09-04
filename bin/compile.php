@@ -411,7 +411,10 @@ foreach (glob(__DIR__ . "/../admin/drivers/*.inc.php") as $filename) {
 }
 */
 
-$features = ["check", "call" => "routine", "dump", "event", "privileges", "procedure" => "routine", "processlist", "routine", "scheme", "sequence", "status", "trigger", "type", "user" => "privileges", "variables", "view"];
+$features = [
+	"check", "call" => "routine", "dump", "event", "privileges", "procedure" => "routine", "processlist", "routine",
+	"scheme", "sequence", "status", "trigger", "type", "user" => "privileges", "variables", "view",
+];
 $lang_ids = []; // global variable simplifies usage in a callback functions
 $protected_blobs = []; // compressed data hidden from the code transformations, see protect_blob()
 
@@ -447,7 +450,11 @@ if ($single_driver) {
 		}
 	}
 	if ($project != "editor" && !support("routine")) {
-		$file = replace("if (isset(\$_GET[\"callf\"])) {\n\t\$_GET[\"call\"] = \$_GET[\"callf\"];\n}\nif (isset(\$_GET[\"function\"])) {\n\t\$_GET[\"procedure\"] = \$_GET[\"function\"];\n}\n", "", $file);
+		$file = replace(
+			"if (isset(\$_GET[\"callf\"])) {\n\t\$_GET[\"call\"] = \$_GET[\"callf\"];\n}\nif (isset(\$_GET[\"function\"])) {\n\t\$_GET[\"procedure\"] = \$_GET[\"function\"];\n}\n",
+			"",
+			$file
+		);
 	}
 }
 

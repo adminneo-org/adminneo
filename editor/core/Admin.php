@@ -13,7 +13,8 @@ class Admin extends Origin
 
 	public function getServiceTitle(): string
 	{
-		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='130' height='28'><desc>EditorNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='130' height='28'><desc>EditorNeo</desc>" .
+			"<use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
 	public function getDatabase(): ?string
@@ -54,7 +55,11 @@ class Admin extends Origin
 		echo "<table class='box box-light'>\n";
 		echo $this->admin->getLoginFormRow('driver', '', input_hidden("auth[driver]", $driver));
 		echo $this->admin->getLoginFormRow('server', '', input_hidden("auth[server]", $server));
-		echo $this->admin->getLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
+		echo $this->admin->getLoginFormRow(
+			'username',
+			lang('Username'),
+			'<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">'
+		);
 		echo $this->admin->getLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 		echo "</table>\n";
 
@@ -241,7 +246,8 @@ class Admin extends Origin
 				}
 				$key = $keys[$name];
 				$i--;
-				echo "<div>" . h($desc) . input_hidden("where[$i][col]", $name) . input_hidden("where[$i][op]", "=") . ": <select name='where[$i][val]'>" . optionlist($options, $where[$key]["val"] ?? null, true) . "</select></div>\n";
+				echo "<div>" . h($desc) . input_hidden("where[$i][col]", $name) . input_hidden("where[$i][op]", "=") .
+					": <select name='where[$i][val]'>" . optionlist($options, $where[$key]["val"] ?? null, true) . "</select></div>\n";
 				unset($columns[$name]);
 			}
 		}
@@ -480,8 +486,15 @@ class Admin extends Origin
 		}
 
 		$return = $value;
-		if (preg_match('~date|timestamp~', $field["type"]) && preg_match('(^' . str_replace('\$1', '(?P<p1>\d*)', preg_replace('~(\\\\\\$([2-6]))~', '(?P<p\2>\d{1,2})', preg_quote(lang('$1-$3-$5')))) . '(.*))', $value, $match)) {
-			$return = ($match["p1"] != "" ? $match["p1"] : ($match["p2"] != "" ? ($match["p2"] < 70 ? 20 : 19) . $match["p2"] : gmdate("Y"))) . "-$match[p3]$match[p4]-$match[p5]$match[p6]" . end($match);
+		if (preg_match('~date|timestamp~', $field["type"]) && preg_match(
+			'(^' . str_replace('\$1', '(?P<p1>\d*)', preg_replace('~(\\\\\\$([2-6]))~', '(?P<p\2>\d{1,2})', preg_quote(lang('$1-$3-$5')))) . '(.*))',
+			$value,
+			$match
+		)) {
+			$return = ($match["p1"] != "" ?
+				$match["p1"] :
+				($match["p2"] != "" ? ($match["p2"] < 70 ? 20 : 19) . $match["p2"] : gmdate("Y"))) .
+				"-$match[p3]$match[p4]-$match[p5]$match[p6]" . end($match);
 		}
 
 		$return = q($return);

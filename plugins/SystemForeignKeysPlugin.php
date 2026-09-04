@@ -189,7 +189,10 @@ class SystemForeignKeysPlugin extends Plugin
 			return $_GET["ns"] == "information_schema" ? $this->lowerCase($foreignKeys) : $foreignKeys;
 		} elseif (DRIVER == "pgsql" && $_GET["ns"] == "pg_catalog") {
 			$mapping = [
-				'pg_aggregate' => ['aggtransfn.proc', 'aggfinalfn.proc', 'aggcombinefn.proc', 'aggserialfn.proc', 'aggdeserialfn.proc', 'aggmtransfn.proc', 'aggminvtransfn.proc', 'aggmfinalfn.proc', 'aggsortop.operator', 'aggtranstype.type', 'aggmtranstype.type'],
+				'pg_aggregate' => [
+					'aggtransfn.proc', 'aggfinalfn.proc', 'aggcombinefn.proc', 'aggserialfn.proc', 'aggdeserialfn.proc', 'aggmtransfn.proc', 'aggminvtransfn.proc', 'aggmfinalfn.proc',
+					'aggsortop.operator', 'aggtranstype.type', 'aggmtranstype.type',
+				],
 				'pg_am' => ['amhandler.proc'],
 				'pg_amop' => ['amopfamily.opfamily', 'amoplefttype.type', 'amoprighttype.type', 'amopopr.operator', 'amopmethod.am', 'amopsortfamily.opfamily'],
 				'pg_amproc' => ['amprocfamily.opfamily', 'amproclefttype.type', 'amprocrighttype.type', 'amproc.proc'],
@@ -199,7 +202,10 @@ class SystemForeignKeysPlugin extends Plugin
 				'pg_cast' => ['castsource.type', 'casttarget.type', 'castfunc.proc'],
 				'pg_class' => ['relnamespace.namespace', 'reltype.type', 'reloftype.type', 'relowner.authid', 'relam.am', 'reltablespace.tablespace', 'reltoastrelid.class', 'relrewrite.class'],
 				'pg_collation' => ['collnamespace.namespace', 'collowner.authid'],
-				'pg_constraint' => ['connamespace.namespace', 'conrelid.class', 'contypid.type', 'conindid.class', 'conparentid.constraint', 'confrelid.class', 'conkey.attribute.attnum', 'confkey.attribute.attnum', 'conpfeqop.operator', 'conppeqop.operator', 'conffeqop.operator', 'confdelsetcols.attribute.attnum', 'conexclop.operator'],
+				'pg_constraint' => [
+					'connamespace.namespace', 'conrelid.class', 'contypid.type', 'conindid.class', 'conparentid.constraint', 'confrelid.class', 'conkey.attribute.attnum', 'confkey.attribute.attnum',
+					'conpfeqop.operator', 'conppeqop.operator', 'conffeqop.operator', 'confdelsetcols.attribute.attnum', 'conexclop.operator',
+				],
 				'pg_conversion' => ['connamespace.namespace', 'conowner.authid', 'conproc.proc'],
 				'pg_database' => ['datdba.authid', 'dattablespace.tablespace'],
 				'pg_db_role_setting' => ['setdatabase.database', 'setrole.authid'],
@@ -220,11 +226,17 @@ class SystemForeignKeysPlugin extends Plugin
 				'pg_largeobject_metadata' => ['lomowner.authid'],
 				'pg_namespace' => ['nspowner.authid'],
 				'pg_opclass' => ['opcmethod.am', 'opcnamespace.namespace', 'opcowner.authid', 'opcfamily.opfamily', 'opcintype.type', 'opckeytype.type'],
-				'pg_operator' => ['oprnamespace.namespace', 'oprowner.authid', 'oprleft.type', 'oprright.type', 'oprresult.type', 'oprcom.operator', 'oprnegate.operator', 'oprcode.proc', 'oprrest.proc', 'oprjoin.proc'],
+				'pg_operator' => [
+					'oprnamespace.namespace', 'oprowner.authid', 'oprleft.type', 'oprright.type', 'oprresult.type', 'oprcom.operator', 'oprnegate.operator', 'oprcode.proc', 'oprrest.proc',
+					'oprjoin.proc',
+				],
 				'pg_opfamily' => ['opfmethod.am', 'opfnamespace.namespace', 'opfowner.authid'],
 				'pg_partitioned_table' => ['partrelid.class', 'partdefid.class', 'partattrs.attribute.attnum', 'partclass.opclass', 'partcollation.collation'],
 				'pg_policy' => ['polrelid.class', 'polroles.authid'],
-				'pg_proc' => ['pronamespace.namespace', 'proowner.authid', 'prolang.language', 'provariadic.type', 'prosupport.proc', 'prorettype.type', 'proargtypes.type', 'proallargtypes.type', 'protrftypes.type'],
+				'pg_proc' => [
+					'pronamespace.namespace', 'proowner.authid', 'prolang.language', 'provariadic.type', 'prosupport.proc', 'prorettype.type', 'proargtypes.type', 'proallargtypes.type',
+					'protrftypes.type',
+				],
 				'pg_publication' => ['pubowner.authid'],
 				'pg_publication_namespace' => ['pnpubid.publication', 'pnnspid.namespace'],
 				'pg_publication_rel' => ['prpubid.publication', 'prrelid.class', 'prattrs.attribute.attnum'],
@@ -248,7 +260,10 @@ class SystemForeignKeysPlugin extends Plugin
 				'pg_ts_dict' => ['dictnamespace.namespace', 'dictowner.authid', 'dicttemplate.ts_template'],
 				'pg_ts_parser' => ['prsnamespace.namespace', 'prsstart.proc', 'prstoken.proc', 'prsend.proc', 'prsheadline.proc', 'prslextype.proc'],
 				'pg_ts_template' => ['tmplnamespace.namespace', 'tmplinit.proc', 'tmpllexize.proc'],
-				'pg_type' => ['typnamespace.namespace', 'typowner.authid', 'typrelid.class', 'typsubscript.proc', 'typelem.type', 'typarray.type', 'typinput.proc', 'typoutput.proc', 'typreceive.proc', 'typsend.proc', 'typmodin.proc', 'typmodout.proc', 'typanalyze.proc', 'typbasetype.type', 'typcollation.collation'],
+				'pg_type' => [
+					'typnamespace.namespace', 'typowner.authid', 'typrelid.class', 'typsubscript.proc', 'typelem.type', 'typarray.type', 'typinput.proc', 'typoutput.proc', 'typreceive.proc',
+					'typsend.proc', 'typmodin.proc', 'typmodout.proc', 'typanalyze.proc', 'typbasetype.type', 'typcollation.collation',
+				],
 				'pg_user_mapping' => ['umuser.authid', 'umserver.foreign_server'],
 			];
 

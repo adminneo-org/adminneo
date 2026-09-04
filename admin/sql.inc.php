@@ -79,7 +79,8 @@ if ($_POST) {
 
 		$commands = 0;
 		$errors = [];
-		$parse = '[\'"' . (DIALECT == "sql" ? '`#' : (DIALECT == "sqlite" ? '`[' : (DIALECT == "mssql" ? '[' : ''))) . ']|/\*|' . $line_comment . '|$' . (DIALECT == "pgsql" ? '|\$([a-zA-Z]\w*)?\$' : '');
+		$parse = '[\'"' . (DIALECT == "sql" ? '`#' : (DIALECT == "sqlite" ? '`[' : (DIALECT == "mssql" ? '[' : ''))) .
+			']|/\*|' . $line_comment . '|$' . (DIALECT == "pgsql" ? '|\$([a-zA-Z]\w*)?\$' : '');
 		$total_start = microtime(true);
 		$dump_format = Admin::get()->getDumpFormats();
 		unset($dump_format["sql"]);
@@ -168,7 +169,9 @@ if ($_POST) {
 
 								if (Connection::get()->getError()) {
 									echo ($_POST["only_errors"] ? $print : "");
-									echo "<p class='error'>", lang('Error in query'), (!empty(Connection::get()->getErrno()) ? " (" . Connection::get()->getErrno() . ")" : ""), ": ", error() . "</p>\n";
+									echo "<p class='error'>", lang('Error in query'),
+										(!empty(Connection::get()->getErrno()) ? " (" . Connection::get()->getErrno() . ")" : ""),
+										": ", error() . "</p>\n";
 
 									$errors[] = " <a href='#sql-$commands'>$commands</a>";
 									if ($_POST["error_stops"]) {
@@ -176,7 +179,8 @@ if ($_POST) {
 									}
 								} else {
 									$time = " <span class='time'>(" . format_time($start) . ")</span>";
-									$edit_link = (strlen($q) < 1000 ? " <a href='" . h(ME) . "sql=" . urlencode(trim($q)) . "'>" . icon("edit") . lang('Edit') . "</a>" : ""); // 1000 - maximum length of encoded URL in IE is 2083 characters
+									// 1000 - maximum length of encoded URL in IE is 2083 characters
+									$edit_link = (strlen($q) < 1000 ? " <a href='" . h(ME) . "sql=" . urlencode(trim($q)) . "'>" . icon("edit") . lang('Edit') . "</a>" : "");
 									$query_info = Connection::get()->getQueryInfo();
 									$affected = Connection::get()->getAffectedRows(); // getting warnings overwrites this
 
@@ -305,7 +309,8 @@ if (!isset($_GET["import"])) {
 	}
 	echo "<p>";
 	textarea("query", $q, 20);
-	echo script(($_POST ? "" : "qs('textarea').focus();\n") . "gid('form').onsubmit = partial(sqlSubmit, gid('form'), '" . js_escape(remove_from_uri("sql|limit|error_stops|only_errors|history")) . "');");
+	echo script(($_POST ? "" : "qs('textarea').focus();\n") .
+		"gid('form').onsubmit = partial(sqlSubmit, gid('form'), '" . js_escape(remove_from_uri("sql|limit|error_stops|only_errors|history")) . "');");
 	echo "</p>";
 
 	echo "<p><input type='submit' class='button default' value='" . lang('Execute') . "' title='Ctrl+Enter'>";

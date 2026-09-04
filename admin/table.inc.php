@@ -101,7 +101,10 @@ if (!is_view($table_status)) {
 			foreach ($foreign_keys as $name => $foreign_key) {
 				echo "<tr title='" . h($name) . "'>";
 				echo "<th><i>" . implode("</i>, <i>", array_map('AdminNeo\h', $foreign_key["source"])) . "</i>";
-				echo "<td><a href='" . h($foreign_key["db"] != "" ? preg_replace('~db=[^&]*~', "db=" . urlencode($foreign_key["db"]), ME) : ($foreign_key["ns"] != "" ? preg_replace('~ns=[^&]*~', "ns=" . urlencode($foreign_key["ns"]), ME) : ME)) . "table=" . urlencode($foreign_key["table"]) . "'>"
+				echo "<td><a href='" . h($foreign_key["db"] != "" ?
+					preg_replace('~db=[^&]*~', "db=" . urlencode($foreign_key["db"]), ME) :
+					($foreign_key["ns"] != "" ? preg_replace('~ns=[^&]*~', "ns=" . urlencode($foreign_key["ns"]), ME) : ME)) .
+					"table=" . urlencode($foreign_key["table"]) . "'>"
 					. ($foreign_key["db"] != "" && $foreign_key["db"] != DB ? "<b>" . h($foreign_key["db"]) . "</b>." : "")
 					. ($foreign_key["ns"] != "" && $foreign_key["ns"] != $_GET["ns"] ? "<b>" . h($foreign_key["ns"]) . "</b>." : "")
 					. h($foreign_key["table"])
@@ -141,7 +144,8 @@ if (support(is_view($table_status) ? "view_trigger" : "trigger")) {
 	if ($triggers) {
 		echo "<table>\n";
 		foreach ($triggers as $key => $val) {
-			echo "<tr><td>" . h($val[0]) . "<td>" . h($val[1]) . "<th>" . h($key) . "<td><a href='" . h(ME . 'trigger=' . urlencode($TABLE) . '&name=' . urlencode($key)) . "'>" . lang('Alter') . "</a>\n";
+			echo "<tr><td>" . h($val[0]) . "<td>" . h($val[1]) . "<th>" . h($key) .
+				"<td><a href='" . h(ME . 'trigger=' . urlencode($TABLE) . '&name=' . urlencode($key)) . "'>" . lang('Alter') . "</a>\n";
 		}
 		echo "</table>\n";
 	}

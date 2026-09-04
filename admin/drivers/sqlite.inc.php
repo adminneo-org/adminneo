@@ -155,7 +155,8 @@ if (isset($_GET["sqlite"])) {
 
 			public function selectDatabase(string $name): bool
 			{
-				if (is_readable($name) && $this->query("ATTACH " . $this->quote(preg_match("~(^[/\\\\]|:)~", $name) ? $name : dirname($_SERVER["SCRIPT_FILENAME"]) . "/$name") . " AS a")) { // is_readable - SQLite 3
+				// is_readable - SQLite 3
+				if (is_readable($name) && $this->query("ATTACH " . $this->quote(preg_match("~(^[/\\\\]|:)~", $name) ? $name : dirname($_SERVER["SCRIPT_FILENAME"]) . "/$name") . " AS a")) {
 					return self::open($name, "", "");
 				}
 
@@ -264,7 +265,8 @@ if (isset($_GET["sqlite"])) {
 
 		public function checkConstraints(string $table): array
 		{
-			preg_match_all('~ CHECK *(\( *(((?>[^()]*[^() ])|(?1))*) *\))~', $this->connection->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)), $matches); //! could be inside a comment
+			//! could be inside a comment
+			preg_match_all('~ CHECK *(\( *(((?>[^()]*[^() ])|(?1))*) *\))~', $this->connection->getValue("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = " . q($table)), $matches);
 			return array_combine($matches[2], $matches[2]);
 		}
 
@@ -538,7 +540,8 @@ if (isset($_GET["sqlite"])) {
 
 	function view(string $name): array
 	{
-		return ["select" => preg_replace('~^(?:[^`"[]+|`[^`]*`|"[^"]*")* AS\s+~iU', '', Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'view' AND name = " . q($name)))]; //! identifiers may be inside []
+		//! identifiers may be inside []
+		return ["select" => preg_replace('~^(?:[^`"[]+|`[^`]*`|"[^"]*")* AS\s+~iU', '', Connection::get()->getValue("SELECT sql FROM sqlite_master WHERE type = 'view' AND name = " . q($name)))];
 	}
 
 	function collations(): array
@@ -683,7 +686,18 @@ if (isset($_GET["sqlite"])) {
 	 * @param string $drop_check CHECK constraint to drop.
 	 * @param string $add_check CHECK constraint to add.
 	 */
-	function recreate_table(string $table, string $name, array $fields, array $originals, array $foreign, string $auto_increment = "", array $indexes = [], string $drop_check = "", string $add_check = "", string $engine = ""): bool
+	function recreate_table(
+		string $table,
+		string $name,
+		array $fields,
+		array $originals,
+		array $foreign,
+		string $auto_increment = "",
+		array $indexes = [],
+		string $drop_check = "",
+		string $add_check = "",
+		string $engine = ""
+	): bool
 	{
 		if ($table != "") {
 			if (!$fields) {
@@ -782,7 +796,8 @@ if (isset($_GET["sqlite"])) {
 		}
 
 		if ($table != "") {
-			if ($originals && !queries("INSERT INTO " . table($temp_name) . " (" . implode(", ", $originals) . ") SELECT " . implode(", ", array_map('AdminNeo\idf_escape', array_keys($originals))) . " FROM " . table($table))) {
+			if ($originals && !queries("INSERT INTO " . table($temp_name) . " (" . implode(", ", $originals) . ") SELECT " .
+				implode(", ", array_map('AdminNeo\idf_escape', array_keys($originals))) . " FROM " . table($table))) {
 				return false;
 			}
 
@@ -792,7 +807,8 @@ if (isset($_GET["sqlite"])) {
 				$triggers[] = "CREATE TRIGGER " . idf_escape($trigger_name) . " " . implode(" ", $timing_event) . " ON " . table($name) . "\n$trigger[Statement]";
 			}
 
-			$auto_increment = $auto_increment ? "" : Connection::get()->getValue("SELECT seq FROM sqlite_sequence WHERE name = " . q($table)); // if $auto_increment is set then it will be updated later
+			// if $auto_increment is set then it will be updated later
+			$auto_increment = $auto_increment ? "" : Connection::get()->getValue("SELECT seq FROM sqlite_sequence WHERE name = " . q($table));
 			if (!queries("DROP TABLE " . table($table)) // drop before creating indexes and triggers to allow using old names
 				|| ($table == $name && !queries("ALTER TABLE " . table($temp_name) . " RENAME TO " . table($name)))
 				|| !alter_indexes($name, $indexes)
