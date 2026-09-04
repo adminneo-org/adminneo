@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'Skema tidak sah.',
 
 	// Table list
+	'All' => 'Semua', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Enjin',
 	'engine' => 'enjin',
 	'Collation' => 'Collation',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'Imbasan penuh jadual',
 	'Unable to select the table' => 'Pemilihan jadual tidak berjaya',
 	'Search data in tables' => 'Cari data dalam jadual',
+	'All rows on this page' => 'Semua baris pada halaman ini', // by Claude Fable 5.1
 	'No rows.' => 'Tiada baris.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d baris',

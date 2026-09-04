@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Neispravna shema.',
 
 	// Table list
+	'All' => 'Sve', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Uspoređivanje',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Puno pretraživanje tablice',
 	'Unable to select the table' => 'Nije moguće odabrati tablicu',
 	'Search data in tables' => 'Pretraži podatke u tablicama',
+	'All rows on this page' => 'Svi redci na ovoj stranici', // by Claude Fable 5.1
 	'No rows.' => 'Nema redaka.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

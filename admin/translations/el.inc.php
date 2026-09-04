@@ -170,6 +170,7 @@ return [
 	'Invalid schema.' => 'Άκυρο σχήμα.',
 
 	// Table list
+	'All' => 'Όλα', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Μηχανή',
 	'engine' => 'μηχανή',
 	'Collation' => 'Collation',
@@ -352,6 +353,7 @@ return [
 	'Full table scan' => 'Πλήρης σάρωση πινάκων',
 	'Unable to select the table' => 'Δεν είναι δυνατή η επιλογή πίνακα',
 	'Search data in tables' => 'Αναζήτηση δεδομένων στους πίνακες',
+	'All rows on this page' => 'Όλες οι σειρές αυτής της σελίδας', // by Claude Fable 5.1
 	'No rows.' => 'Χωρίς σειρές.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

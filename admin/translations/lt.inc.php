@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Neteisinga schema.',
 
 	// Table list
+	'All' => 'Visi', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Variklis',
 	'engine' => 'variklis',
 	'Collation' => 'Lyginimas',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Visos lentelės nuskaitymas', // by Claude Fable 5.1
 	'Unable to select the table' => 'Neįmanoma atrinkti lentelės',
 	'Search data in tables' => 'Ieškoti duomenų lentelėse',
+	'All rows on this page' => 'Visi šio puslapio įrašai', // by Claude Fable 5.1
 	'No rows.' => 'Nėra įrašų.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

@@ -180,6 +180,7 @@ return [
 	'Invalid schema.' => 'Neveljavna shema.',
 
 	// Table list
+	'All' => 'Vse', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Pogon',
 	'engine' => 'pogon',
 	'Collation' => 'Zbiranje',
@@ -364,6 +365,7 @@ return [
 	'Full table scan' => 'Pregled celotne tabele', // by Claude Fable 5.1
 	'Unable to select the table' => 'Ne morem izbrati tabele',
 	'Search data in tables' => 'Išče podatke po tabelah',
+	'All rows on this page' => 'Vse vrstice na tej strani', // by Claude Fable 5.1
 	'No rows.' => 'Ni vrstic.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

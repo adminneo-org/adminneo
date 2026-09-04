@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'Érvénytelen séma.',
 
 	// Table list
+	'All' => 'Összes', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Egybevetés',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'Teljes táblaolvasás', // by Claude Fable 5.1
 	'Unable to select the table' => 'Nem tudom kiválasztani a táblát',
 	'Search data in tables' => 'Keresés a táblákban',
+	'All rows on this page' => 'Az oldal összes sora', // by Claude Fable 5.1
 	'No rows.' => 'Nincs megjeleníthető eredmény.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d sor',

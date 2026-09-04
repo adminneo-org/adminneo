@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'Schema không hợp lệ.',
 
 	// Table list
+	'All' => 'Tất cả', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Cơ chế lưu trữ',
 	'engine' => 'cơ chế lưu trữ',
 	'Collation' => 'Bộ mã',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'Quét toàn bộ bảng',
 	'Unable to select the table' => 'Không thể xem dữ liệu',
 	'Search data in tables' => 'Tìm kiếm dữ liệu trong các bảng',
+	'All rows on this page' => 'Tất cả các dòng trên trang này', // by Claude Fable 5.1
 	'No rows.' => 'Không có dòng dữ liệu nào.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d dòng',

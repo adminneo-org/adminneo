@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => '無効なスキーマです。',
 
 	// Table list
+	'All' => 'すべて', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'エンジン',
 	'engine' => 'エンジン',
 	'Collation' => 'コレーション',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'テーブルを全スキャン',
 	'Unable to select the table' => 'テーブルを選択できません',
 	'Search data in tables' => 'データを検索する',
+	'All rows on this page' => 'このページのすべての行', // by Claude Fable 5.1
 	'No rows.' => '行がありません。',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d 行',

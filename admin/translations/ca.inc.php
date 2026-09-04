@@ -170,6 +170,7 @@ return [
 	'Invalid schema.' => 'Esquema invàlid.',
 
 	// Table list
+	'All' => 'Tot', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Compaginació',
@@ -352,6 +353,7 @@ return [
 	'Full table scan' => 'Escaneig complet de la taula', // by Claude Fable 5.1
 	'Unable to select the table' => 'Impossible seleccionar la taula',
 	'Search data in tables' => 'Cerca dades en les taules',
+	'All rows on this page' => 'Totes les files d\'aquesta plana', // by Claude Fable 5.1
 	'No rows.' => 'No hi ha cap registre.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

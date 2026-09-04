@@ -161,6 +161,7 @@ return [
 	'Invalid schema.' => 'مخطط غير صالح.',
 
 	// Table list
+	'All' => 'الكل', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'المحرك',
 	'engine' => 'المحرك',
 	'Collation' => 'ترتيب',
@@ -340,6 +341,7 @@ return [
 	'Full table scan' => 'مسح كامل للجدول', // by Claude Fable 5.1
 	'Unable to select the table' => 'يتعذر اختيار الجدول',
 	'Search data in tables' => 'بحث في الجداول',
+	'All rows on this page' => 'كل الأسطر في هذه الصفحة', // by Claude Fable 5.1
 	'No rows.' => 'لا توجد نتائج.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d أسطر',

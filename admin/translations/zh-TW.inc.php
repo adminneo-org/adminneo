@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => '無效的資料表結構。',
 
 	// Table list
+	'All' => '全部', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => '引擎',
 	'engine' => '引擎',
 	'Collation' => '校對',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => '全資料表掃描',
 	'Unable to select the table' => '無法選擇該資料表',
 	'Search data in tables' => '在資料庫搜尋',
+	'All rows on this page' => '本頁所有行', // by Claude Fable 5.1
 	'No rows.' => '沒有資料行。',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d 行',

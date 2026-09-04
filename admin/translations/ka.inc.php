@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'არასწორი სქემა.',
 
 	// Table list
+	'All' => 'ყველა', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'ძრავი',
 	'engine' => 'სახეობა',
 	'Collation' => 'კოდირება',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'სრული ცხრილის ანალიზი',
 	'Unable to select the table' => 'ცხრილიდან ინფორმაცია ვერ მოვიპოვე',
 	'Search data in tables' => 'ცხრილებში ძებნა',
+	'All rows on this page' => 'ამ გვერდის ყველა რიგი', // by Claude Fable 5.1
 	'No rows.' => 'ჩანაწერი არაა.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d რიგი',

@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Schemă incorectă.',
 
 	// Table list
+	'All' => 'Toate', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Tip',
 	'engine' => 'tip',
 	'Collation' => 'Colaționare',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Scanare completă a tabelului', // by Claude Fable 5.1
 	'Unable to select the table' => 'Nu am putut selecta date din tabel',
 	'Search data in tables' => 'Caută în tabele',
+	'All rows on this page' => 'Toate rândurile de pe această pagină', // by Claude Fable 5.1
 	'No rows.' => 'Nu sunt înscrieri.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

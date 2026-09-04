@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Неправильная схема.',
 
 	// Table list
+	'All' => 'Все', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Тип таблиц',
 	'engine' => 'Тип таблицы',
 	'Collation' => 'Режим сопоставления',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Анализ полной таблицы',
 	'Unable to select the table' => 'Не удалось получить данные из таблицы',
 	'Search data in tables' => 'Поиск в таблицах',
+	'All rows on this page' => 'Все строки на этой странице', // by Claude Fable 5.1
 	'No rows.' => 'Нет записей.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

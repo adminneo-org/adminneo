@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Nederīga shēma.',
 
 	// Table list
+	'All' => 'Visi', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Dzinējs',
 	'engine' => 'Tabulas tips',
 	'Collation' => 'Kolācija',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Pilna tabulas analīze',
 	'Unable to select the table' => 'Tabula nav pieejama',
 	'Search data in tables' => 'Meklēt tabulās',
+	'All rows on this page' => 'Visas šīs lapas rindas', // by Claude Fable 5.1
 	'No rows.' => 'Nav rindu.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

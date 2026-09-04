@@ -175,6 +175,7 @@ return [
 	'Invalid schema.' => 'Nieprawidłowy schemat.',
 
 	// Table list
+	'All' => 'Wszystko', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Składowanie',
 	'engine' => 'składowanie',
 	'Collation' => 'Porównywanie znaków',
@@ -358,6 +359,7 @@ return [
 	'Full table scan' => 'Wymaga pełnego przeskanowania tabeli',
 	'Unable to select the table' => 'Nie udało się pobrać danych z tabeli',
 	'Search data in tables' => 'Wyszukaj we wszystkich tabelach',
+	'All rows on this page' => 'Wszystkie wiersze na tej stronie', // by Claude Fable 5.1
 	'No rows.' => 'Brak rekordów.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

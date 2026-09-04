@@ -167,6 +167,7 @@ return [
 	'Invalid schema.' => 'Ugyldig skjema.', // by Claude Fable 5.1
 
 	// Table list
+	'All' => 'Alle', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor', // by Claude Fable 5.1
 	'Collation' => 'Tekstsortering',
@@ -349,6 +350,7 @@ return [
 	'Full table scan' => 'Full tabell-scan',
 	'Unable to select the table' => 'Kan ikke velge tabellen',
 	'Search data in tables' => 'Søk data i tabeller',
+	'All rows on this page' => 'Alle rader på denne siden', // by Claude Fable 5.1
 	'No rows.' => 'Ingen rader.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

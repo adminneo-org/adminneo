@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'ساختار نامعتبر.',
 
 	// Table list
+	'All' => 'همه', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'موتور',
 	'engine' => 'موتور',
 	'Collation' => 'تطبیق',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'اسکن کامل جدول',
 	'Unable to select the table' => 'قادر به انتخاب جدول نیستید',
 	'Search data in tables' => 'جستجوی داده در جدول',
+	'All rows on this page' => 'همه سطرهای این صفحه', // by Claude Fable 5.1
 	'No rows.' => 'سطری وجود ندارد.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d سطر',

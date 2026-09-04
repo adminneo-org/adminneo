@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'סכמה שגויה',
 
 	// Table list
+	'All' => 'הכל', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'מנוע',
 	'engine' => 'מנוע',
 	'Collation' => 'קולקציה',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'סריקה טבלה מלאה',
 	'Unable to select the table' => 'בחירת הטבלה נכשלה',
 	'Search data in tables' => 'חפש מידע בטבלאות',
+	'All rows on this page' => 'כל השורות בעמוד זה', // by Claude Fable 5.1
 	'No rows.' => 'אין שורות',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d שורות',

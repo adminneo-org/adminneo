@@ -170,6 +170,7 @@ return [
 	'Invalid schema.' => 'Schéma invalide.',
 
 	// Table list
+	'All' => 'Tout', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Moteur',
 	'engine' => 'moteur',
 	'Collation' => 'Interclassement',
@@ -352,6 +353,7 @@ return [
 	'Full table scan' => 'Scan de toute la table',
 	'Unable to select the table' => 'Impossible de sélectionner la table',
 	'Search data in tables' => 'Rechercher dans les tables',
+	'All rows on this page' => 'Toutes les lignes de cette page', // by Claude Fable 5.1
 	'No rows.' => 'Aucun résultat.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

@@ -158,6 +158,7 @@ return [
 	'Invalid schema.' => 'অবৈধ স্কিমা।',
 
 	// Table list
+	'All' => 'সব', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'ইঞ্জিন',
 	'engine' => 'ইন্জিন',
 	'Collation' => 'কলোকেশন',
@@ -337,6 +338,7 @@ return [
 	'Full table scan' => 'সম্পূর্ণ টেবিল স্ক্যান',
 	'Unable to select the table' => 'টেবিল নির্বাচন করতে অক্ষম',
 	'Search data in tables' => 'টেবিলে তথ্য খুঁজুন',
+	'All rows on this page' => 'এই পৃষ্ঠার সব সারি', // by Claude Fable 5.1
 	'No rows.' => 'কোন সারি নাই।',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

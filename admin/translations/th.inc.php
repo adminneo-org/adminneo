@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => 'schema ไม่ถูกต้อง.',
 
 	// Table list
+	'All' => 'ทั้งหมด', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'ชนิดของฐานข้อมูล',
 	'engine' => 'ชนิดของฐานข้อมูล',
 	'Collation' => 'การตรวจทาน',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => 'การสแกนทั้งตาราง', // by Claude Fable 5.1
 	'Unable to select the table' => 'ไม่สามารถเลือกตารางได้',
 	'Search data in tables' => 'ค้นหาในตาราง',
+	'All rows on this page' => 'ทุกแถวในหน้านี้', // by Claude Fable 5.1
 	'No rows.' => 'ไม่มีแถวของตาราง.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d แถว',

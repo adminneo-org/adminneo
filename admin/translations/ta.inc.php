@@ -170,6 +170,7 @@ return [
 	'Invalid schema.' => 'அமைப்புமுறை ச‌ரியான‌த‌ல்ல‌ (Invalid Schema).',
 
 	// Table list
+	'All' => 'அனைத்தும்', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'எஞ்சின் (Engine)',
 	'engine' => 'எஞ்சின்',
 	'Collation' => 'கொலேச‌ன்',
@@ -352,6 +353,7 @@ return [
 	'Full table scan' => 'முழு அட்ட‌வ‌ணை வ‌ருட‌ல்', // by Claude Fable 5.1
 	'Unable to select the table' => 'அட்ட‌வ‌ணையை தேர்வு செய்ய‌ முடிய‌வில்லை',
 	'Search data in tables' => 'த‌க‌வ‌லை அட்ட‌வ‌ணையில் தேடு',
+	'All rows on this page' => 'இந்தப் பக்கத்தின் அனைத்து வரிசைகளும்', // by Claude Fable 5.1
 	'No rows.' => 'வ‌ரிசை இல்லை.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => [

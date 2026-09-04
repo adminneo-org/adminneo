@@ -164,6 +164,7 @@ return [
 	'Invalid schema.' => 'Geçersiz şema.',
 
 	// Table list
+	'All' => 'Tümü', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Karşılaştırma',
@@ -346,6 +347,7 @@ return [
 	'Full table scan' => 'Tam tablo taraması',
 	'Unable to select the table' => 'Tablo seçilemedi',
 	'Search data in tables' => 'Tablolarda veri ara',
+	'All rows on this page' => 'Bu sayfadaki tüm satırlar', // by Claude Fable 5.1
 	'No rows.' => 'Kayıt yok.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

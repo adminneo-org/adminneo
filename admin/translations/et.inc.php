@@ -161,6 +161,7 @@ return [
 	'Invalid schema.' => 'Sobimatu skeema.',
 
 	// Table list
+	'All' => 'Kõik', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Implementatsioon',
 	'engine' => 'andmebaasimootor',
 	'Collation' => 'Tähetabel',
@@ -340,6 +341,7 @@ return [
 	'Full table scan' => 'Kogu tabeli läbivaatus', // by Claude Fable 5.1
 	'Unable to select the table' => 'Tabeli valimine ebaõnnestus',
 	'Search data in tables' => 'Otsi kogu andmebaasist',
+	'All rows on this page' => 'Kõik selle lehekülje read', // by Claude Fable 5.1
 	'No rows.' => 'Sissekanded puuduvad.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d rida',

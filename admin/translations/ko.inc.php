@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => '잘못된 스키마입니다.',
 
 	// Table list
+	'All' => '전체', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => '엔진',
 	'engine' => '엔진',
 	'Collation' => '정렬',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => '전체 테이블 스캔', // by Claude Fable 5.1
 	'Unable to select the table' => '테이블을 선택할 수 없습니다',
 	'Search data in tables' => '테이블 내 데이터 검색',
+	'All rows on this page' => '이 페이지의 모든 행', // by Claude Fable 5.1
 	'No rows.' => '행이 없습니다.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
 	'%d row(s)' => '%d개 행',

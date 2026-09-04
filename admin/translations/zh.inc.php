@@ -155,6 +155,7 @@ return [
 	'Invalid schema.' => '非法模式。',
 
 	// Table list
+	'All' => '全部', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => '引擎',
 	'engine' => '引擎',
 	'Collation' => '校对',
@@ -334,6 +335,7 @@ return [
 	'Full table scan' => '全表扫描',
 	'Unable to select the table' => '不能选择该表',
 	'Search data in tables' => '在表中搜索数据',
+	'All rows on this page' => '本页所有行', // by Claude Fable 5.1
 	'No rows.' => '无数据。',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d 行',

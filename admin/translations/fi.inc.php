@@ -164,6 +164,7 @@ return [
 	'Invalid schema.' => 'Kaava ei kelpaa.',
 
 	// Table list
+	'All' => 'Kaikki', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Moottori',
 	'engine' => 'moottori',
 	'Collation' => 'Kollaatio',
@@ -343,6 +344,7 @@ return [
 	'Full table scan' => 'Koko taulun läpikäynti',
 	'Unable to select the table' => 'Taulua ei voitu valita',
 	'Search data in tables' => 'Hae dataa tauluista',
+	'All rows on this page' => 'Kaikki rivit tällä sivulla', // by Claude Fable 5.1
 	'No rows.' => 'Ei rivejä.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
