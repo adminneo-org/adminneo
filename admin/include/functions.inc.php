@@ -322,10 +322,17 @@ function where($where, $fields = []) {
 	foreach ((array) $where["where"] as $key => $val) {
 		$key = bracket_escape($key, true);
 		$column = escape_key($key);
-		$field_type = $fields[$key]["type"] ?? null;
-		$full_field_type = $fields[$key]["full_type"] ?? null;
+		$field = $fields[$key] ?? null;
+		$field_type = $field["type"] ?? null;
+		$full_field_type = $field["full_type"] ?? null;
 
-		if (DIALECT == "sql" && $field_type == "json") {
+		// is_blob() alone is not enough, it doesn't match binary and varbinary outside MS SQL.
+		$is_binary = $field && (is_blob($field) || preg_match('~binary~', $field_type));
+
+		if ($is_binary && !is_utf8($val)) {
+			// The value is not converted to hexadecimal.
+			$conditions[] = "$column = " . Driver::get()->quoteBinary($val);
+		} elseif (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
 		} elseif (DIALECT == "pgsql" && preg_match('~^jsonb?$~', $full_field_type)) {
 			$conditions[] = "$column::jsonb = " . q($val) . "::jsonb";

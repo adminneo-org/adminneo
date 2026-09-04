@@ -19,9 +19,11 @@ AdminNeo 5.8.0
 ### Bugfixes
 
 - Syntax highlighting: Fix the color of JSON keys
+- Edit: Fix editing rows with binary columns in tables without a unique key
 - Editor: Fix JavaScript error on the select page caused by the import form (regression from 5.5.0)
 - MySQL: Fix displaying backward relation links
 - PostgreSQL: Fix editing a record with a GENERATED ALWAYS AS IDENTITY column (fix #205, regression from 5.5.0)
+- SQLite: Fix working with binary data through PDO
 
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------

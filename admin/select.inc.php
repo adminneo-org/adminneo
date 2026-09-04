@@ -450,10 +450,15 @@ if (!$columns && support("table")) {
 				foreach ($unique_array as $key => $val) {
 					$field = $fields[$key] ?? null;
 
-					if ((DIALECT == "sql" || DIALECT == "pgsql") && $field && preg_match('~char|text|enum|set~', $field["type"]) && strlen($val) > 64) {
+					// Binary and varbinary are converted to hexadecimal so they are not shortened.
+					$is_binary = $field && is_blob($field);
+
+					if ((DIALECT == "sql" || DIALECT == "pgsql") && $field && ($is_binary || preg_match('~char|text|enum|set~', $field["type"])) && strlen($val) > 64) {
 						$key = (strpos($key, '(') ? $key : idf_escape($key)); //! columns looking like functions
-						$key = "MD5(" . (DIALECT != 'sql' || preg_match("~^utf8~", $field["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Connection::get()) . ")") . ")";
-						$val = md5($val);
+						// The CONVERT() wrapper is skipped for binary values because their collation is binary.
+						$key = "MD5(" . ($is_binary || DIALECT != 'sql' || preg_match("~^utf8~", $field["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Connection::get()) . ")") . ")";
+						// formatValue() decodes bytea in PostgreSQL.
+						$val = md5($is_binary ? (string) Connection::get()->formatValue($val, $field) : $val);
 					}
 					$unique_idf .= "&" . ($val !== null ? urlencode("where[" . bracket_escape($key) . "]") . "=" . urlencode($val === false ? "f" : $val) : "null%5B%5D=" . urlencode($key));
 				}

@@ -53,7 +53,7 @@ if (isset($_GET["sqlite"])) {
 				if (is_utf8($string)) {
 					return "'" . $this->sqlite->escapeString($string) . "'";
 				} else {
-					return "x'" . first(unpack('H*', $string)) . "'";
+					return "x'" . bin2hex($string) . "'";
 				}
 			}
 		}
@@ -112,6 +112,16 @@ if (isset($_GET["sqlite"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				return $this->dsn(DRIVER . ":$server", "", "");
+			}
+
+			public function quote(string $string): string
+			{
+				if (is_utf8($string)) {
+					return parent::quote($string);
+				} else {
+					// PDO::quote() mangles binary data.
+					return "x'" . bin2hex($string) . "'";
+				}
 			}
 		}
 	}
@@ -211,6 +221,11 @@ if (isset($_GET["sqlite"])) {
 		public function getStructuredTypes(): array
 		{
 			return parent::getStructuredTypes()[0];
+		}
+
+		public function quoteBinary(string $string): string
+		{
+			return "x" . q(bin2hex($string));
 		}
 
 		public function engines(): array

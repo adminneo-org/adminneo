@@ -291,6 +291,12 @@ if (isset($_GET["oracle"])) {
 			return true;
 		}
 
+		public function quoteBinary(string $string): string
+		{
+			//! The literal is limited to 4000 characters.
+			return "HEXTORAW(" . q(bin2hex($string)) . ")";
+		}
+
 		public function hasCStyleEscapes(): bool
 		{
 			return true;
