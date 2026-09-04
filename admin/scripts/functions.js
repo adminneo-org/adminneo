@@ -1307,7 +1307,12 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 
 	const request = new XMLHttpRequest();
 	request.open((data ? 'POST' : 'GET'), url);
-	request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+	// Cross-origin would be preflighted and is_ajax() is only ours.
+	if (new URL(url, location).origin === location.origin) {
+		request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	}
+
 	if (data) {
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	}
