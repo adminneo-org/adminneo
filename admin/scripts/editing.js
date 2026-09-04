@@ -109,7 +109,9 @@ function dbMouseDown(event) {
 	if (event.target.tagName === "OPTION") return;
 
 	dbCtrl = isCtrl(event);
-	dbPrevious[this.name] ??= this.value;
+	if (dbPrevious[this.name] === undefined) {
+		dbPrevious[this.name] = this.value;
+	}
 }
 
 /**
@@ -835,7 +837,7 @@ function sqlExport(settingsUrl) {
  * @return {string}
  */
 function formatDateTime(date) {
-	const pad = number => String(number).padStart(2, '0');
+	const pad = number => ('0' + number).slice(-2);
 
 	return date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate())
 		+ '-' + pad(date.getHours()) + pad(date.getMinutes()) + pad(date.getSeconds());
@@ -887,7 +889,7 @@ function schemaMousemove(event) {
 		for (const div of qsa('div', that)) {
 			if (div.classList.contains('references')) {
 				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
-				const ref = (tablePos[div.title] ?? [div2.parentNode.offsetTop / em, 0]);
+				const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / em, 0]);
 				let left1 = -1;
 				const id = div.id.replace(/^ref.(.+)-.+/, '$1');
 				if (div.parentNode !== div2.parentNode) {
@@ -928,7 +930,8 @@ function schemaMouseup(event, db) {
 		tablePos[that.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
 		that = undefined;
 		let s = '';
-		for (const [key, [top, left]] of Object.entries(tablePos)) {
+		for (const key in tablePos) {
+			const [top, left] = tablePos[key];
 			s += '_' + key + ':' + Math.round(top) + 'x' + Math.round(left);
 		}
 		s = encodeURIComponent(s.slice(1));

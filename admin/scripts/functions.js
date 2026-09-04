@@ -132,7 +132,7 @@ function selectValue(select) {
 		return select.value;
 	}
 	const selected = select.options[select.selectedIndex];
-	return (selected.attributes.value?.specified ? selected.value : selected.text);
+	return ((selected.attributes.value || {}).specified ? selected.value : selected.text);
 }
 
 /**
@@ -171,7 +171,10 @@ function parentTag(el, tag) {
 function trCheck(el) {
 	const tr = parentTag(el, 'tr');
 	tr.classList.toggle('checked', el.checked);
-	el.form?.['all']?.onclick?.();
+	const all = el.form && el.form['all'];
+	if (all && all.onclick) {
+		all.onclick();
+	}
 }
 
 /**
@@ -288,7 +291,9 @@ function tableClick(event, click, canEdit = true) {
 	el = el.firstChild.firstChild;
 	if (click) {
 		el.checked = !el.checked;
-		el.onclick?.();
+		if (el.onclick) {
+			el.onclick();
+		}
 	}
 	if (el.name === 'check[]') {
 		el.form['all'].checked = false;
@@ -1408,7 +1413,7 @@ function initTableFooter() {
  */
 function updateSaveButton() {
 	const button = gid('modify-save');
-	if (button?.dataset.inlineEdit) {
+	if (button && button.dataset.inlineEdit) {
 		button.disabled = !qs('#table td[data-editing="true"]');
 	}
 }
@@ -1458,7 +1463,7 @@ function selectClick(event, text, warning) {
 		}
 	};
 
-	const dataset = td.firstChild?.dataset ?? {};
+	const dataset = (td.firstChild && td.firstChild.dataset) || {};
 	let value;
 	if (dataset.value !== undefined) {
 		const dom = new DOMParser().parseFromString(dataset.value, "text/html");
@@ -1480,7 +1485,7 @@ function selectClick(event, text, warning) {
 
 	// Firefox: event.rangeOffset is defined, anchorOffset is related to the whole TR not the inner text node.
 	// Chrome/Safari: event.rangeOffset is not defined, anchorOffset is related to the inner text node.
-	const pos = event.rangeOffset ?? getSelection().anchorOffset;
+	const pos = (event.rangeOffset !== undefined ? event.rangeOffset : getSelection().anchorOffset);
 
 	td.dataset.editing = "true";
 	td.innerHTML = '';

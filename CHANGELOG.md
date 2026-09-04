@@ -18,6 +18,7 @@ AdminNeo 5.8.0
 
 ### Bugfixes
 
+- Fix JavaScript in Safari < 14, Firefox < 79 and Chrome < 85 (regression from 5.7.0)
 - Syntax highlighting: Fix the color of JSON keys
 - Edit: Fix editing rows with binary columns in tables without a unique key
 - Editor: Fix JavaScript error on the select page caused by the import form (regression from 5.5.0)
