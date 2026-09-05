@@ -357,21 +357,6 @@ function setHtml(id, html) {
 }
 
 /**
- * Returns the position of the node among its siblings.
- *
- * @param {Node} el
- *
- * @return {number}
- */
-function nodePosition(el) {
-	let pos = 0;
-	while ((el = el.previousSibling)) {
-		pos++;
-	}
-	return pos;
-}
-
-/**
  * Initializes toggling of the navigation panel by the navigation button.
  */
 function initNavigation() {
@@ -1099,25 +1084,31 @@ function onEditingKeydown(event)
 		event.preventDefault();
 
 		const target = event.target;
-		let row = parentTag(target, "tr");
-		if (!row) {
-			return false;
-		}
-
-		row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
-		if (!row || !isTag(row, 'tr')) {
-			return false;
-		}
-
-		const cell = row.childNodes[nodePosition(parentTag(target, "th|td"))];
+		// Not parentNode - the NULL and AI checkboxes are wrapped in a <label>.
+		const cell = parentTag(target, "th|td");
 		if (!cell) {
 			return false;
 		}
 
-		let input = cell.childNodes[nodePosition(target)];
-		if (!input || !isTag(input, "input|select|textarea|pre|button") || input.classList.contains("hidden")) {
-			input = qs("input:not(.hidden), select:not(.hidden), textarea:not(.hidden), pre.jush, button", cell);
+		const position = [...cell.parentNode.children].indexOf(cell);
+		let row = cell.parentNode;
+		do {
+			row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
+		} while (row && row.hidden); // Skip removed columns, focusing their hidden row does nothing.
+
+		const nextCell = (row ? row.children[position] : null);
+		if (!nextCell) {
+			return false;
 		}
+
+		// The element at the same position can be hidden, the cell displays e.g. collation or ON DELETE by the column type.
+		// Look for the same field by the name suffix and fall back to the first displayed element.
+		const field = target.jushTextarea || target;
+		const name = (field.name || '').replace(/.*(\[[^[]+])$/, '$1');
+		const input = [
+			(name ? qs(`[name$='${name}']`, nextCell) : null),
+			...qsa("input, select, textarea, pre.jush, button", nextCell),
+		].find(el => el && el.offsetParent);
 
 		if (input) {
 			input.focus();
