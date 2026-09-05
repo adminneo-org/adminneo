@@ -272,6 +272,8 @@ return [
 	'Target' => 'Цель',
 	'Add column' => 'Добавить поле',
 	'Alter' => 'Изменить',
+	'Alter foreign key' => 'Изменить внешний ключ', // by Claude Fable 5.1
+	'Create foreign key' => 'Создать внешний ключ', // by Claude Fable 5.1
 	'ON DELETE' => 'При стирании',
 	'ON UPDATE' => 'При обновлении',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Поля должны иметь одинаковые типы данных, в результирующем поле должен быть индекс, данные для импорта должны существовать.',

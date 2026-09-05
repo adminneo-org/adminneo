@@ -258,6 +258,8 @@ return [
 	'Target' => 'Sihtkoht',
 	'Add column' => 'Lisa veerg',
 	'Alter' => 'Muuda',
+	'Alter foreign key' => 'Muuda võõrvõtit', // by Claude Fable 5.1
+	'Create foreign key' => 'Loo uus võõrvõti', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lähte- ja sihtveerud peavad eksisteerima ja omama sama andmetüüpi, sihtveergudel peab olema määratud indeks ning viidatud andmed peavad eksisteerima.',

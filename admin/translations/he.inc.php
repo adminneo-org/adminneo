@@ -252,6 +252,8 @@ return [
 	'Target' => 'יעד',
 	'Add column' => 'הוסף עמודה',
 	'Alter' => 'שנה',
+	'Alter foreign key' => 'שנה מפתח זר', // by Claude Fable 5.1
+	'Create foreign key' => 'צור מפתח זר', // by Claude Fable 5.1
 	'ON DELETE' => 'בעת מחיקה',
 	'ON UPDATE' => 'בעת עידכון',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'על עמודות המקור והיעד להיות מאותו טיפוס נתונים, חובה שיהיה אינדקס בעמודת היעד ושהמידע המתאים יהיה קיים',

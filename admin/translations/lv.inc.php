@@ -272,6 +272,8 @@ return [
 	'Target' => 'Mērķis',
 	'Add column' => 'Pievienot lauku',
 	'Alter' => 'Izmainīt',
+	'Alter foreign key' => 'Izmainīt ārējo atslēgu', // by Claude Fable 5.1
+	'Create foreign key' => 'Izveidot ārējo atslēgu', // by Claude Fable 5.1
 	'ON DELETE' => 'Pie dzēšanas',
 	'ON UPDATE' => 'Pie atjaunošanas',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lauku tipiem jābūt vienādiem, rezultējošā laukā jābut indeksa datiem.',

@@ -264,6 +264,8 @@ return [
 	'Target' => 'लक्ष्य',
 	'Add column' => 'कॉलम जोड़ें',
 	'Alter' => 'बदलें',
+	'Alter foreign key' => 'फॉरेन की बदलें', // by Claude Fable 5.1
+	'Create foreign key' => 'फॉरेन की बनाएं', // by Claude Fable 5.1
 	'ON DELETE' => 'ऑन डिलीट',
 	'ON UPDATE' => 'ऑन अपडेट',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'स्रोत और लक्ष्य कॉलम्स का डेटा प्रकार समान होना चाहिए, लक्ष्य कॉलम्स पर एक इंडेक्स होना चाहिए और संदर्भित डेटा मौजूद होना चाहिए।',

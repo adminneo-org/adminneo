@@ -252,6 +252,8 @@ return [
 	'Target' => 'เป้าหมาย',
 	'Add column' => 'เพิ่มคอลัมน์',
 	'Alter' => 'เปลี่ยนแปลง',
+	'Alter foreign key' => 'เปลี่ยนแปลงคีย์นอก', // by Claude Fable 5.1
+	'Create foreign key' => 'สร้างคีย์นอก', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'แหล่งที่มาและเป้าหมายของคอลมัน์ต้องมีชนิดข้อมูลเดียวกัน คือต้องมีดัชนีและข้อมูลอ้างอิงของคอลัมน์เป้าหมาย.',

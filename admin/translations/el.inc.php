@@ -267,6 +267,8 @@ return [
 	'Target' => 'Στόχος',
 	'Add column' => 'Προσθήκη στήλης',
 	'Alter' => 'Τροποποίηση',
+	'Alter foreign key' => 'Τροποποίηση εξαρτημένου κλειδιού', // by Claude Fable 5.1
+	'Create foreign key' => 'Δημιουργία εξαρτημένου κλειδιού', // by Claude Fable 5.1
 	'ON DELETE' => 'ΚΑΤΑ ΤΗ ΔΙΑΓΡΑΦΗ',
 	'ON UPDATE' => 'ΚΑΤΑ ΤΗΝ ΑΛΛΑΓΗ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Οι στήλες στην πηγή και το στόχο πρέπει να έχουν τον ίδιο τύπο, πρέπει να υπάρχει δείκτης στη στήλη στόχο και να υπάρχουν εξαρτημένα δεδομένα.',

@@ -267,6 +267,8 @@ return [
 	'Target' => 'இல‌க்கு',
 	'Add column' => 'நெடு வ‌ரிசையை சேர்க்க‌வும்',
 	'Alter' => 'மாற்று',
+	'Alter foreign key' => 'வேற்று விசையை மாற்று', // by Claude Fable 5.1
+	'Create foreign key' => 'வேற்று விசையை உருவாக்கு', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'இல‌க்கு நெடுவ‌ரிசையில் அக‌வ‌ரிசை (Index) ம‌ற்றும் குறிக்க‌ப்ப‌ட்ட‌ த‌க‌வல் (Referenced DATA) க‌ண்டிப்பாக‌ இருத்த‌ல் வேண்டும். மூல‌ நெடுவ‌ரிசை ம‌ற்றும் இலக்கு நெடுவ‌ரிசையின் த‌க‌வ‌ல் வ‌டிவ‌ம் (DATA TYPE) ஒன்றாக‌ இருக்க‌ வேண்டும்.',

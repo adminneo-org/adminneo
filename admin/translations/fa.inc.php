@@ -252,6 +252,8 @@ return [
 	'Target' => 'هدف',
 	'Add column' => 'افزودن ستون',
 	'Alter' => 'ویرایش',
+	'Alter foreign key' => 'ویرایش کلید خارجی', // by Claude Fable 5.1
+	'Create foreign key' => 'ایجاد کلید خارجی', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'داده مبدا و مقصد ستونها بایستی شبیه هم باشند.',

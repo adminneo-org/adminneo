@@ -267,6 +267,8 @@ return [
 	'Target' => 'Destino',
 	'Add column' => 'Engadir columna',
 	'Alter' => 'Modificar',
+	'Alter foreign key' => 'Modificar chave externa', // by Claude Fable 5.1
+	'Create foreign key' => 'Crear chave externa', // by Claude Fable 5.1
 	'ON DELETE' => 'AO BORRAR (ON DELETE)',
 	'ON UPDATE' => 'AO ACTUALIZAR (ON UPDATE)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'As columnas de orixe e destino deben ser do mesmo tipo, debe existir un índice nas columnas de destino e os datos referenciados deben existir.',

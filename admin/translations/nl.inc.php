@@ -267,6 +267,8 @@ return [
 	'Target' => 'Doel',
 	'Add column' => 'Kolom toevoegen',
 	'Alter' => 'Aanpassen',
+	'Alter foreign key' => 'Foreign key aanpassen', // by Claude Fable 5.1
+	'Create foreign key' => 'Foreign key aanmaken', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Bron- en doelkolommen moeten van hetzelfde data type zijn, er moet een index bestaan op de gekozen kolommen en er moet gerelateerde data bestaan.',

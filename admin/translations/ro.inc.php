@@ -272,6 +272,8 @@ return [
 	'Target' => 'Scop',
 	'Add column' => 'Adaugă coloană',
 	'Alter' => 'Modifică',
+	'Alter foreign key' => 'Modifică cheia externă', // by Claude Fable 5.1
+	'Create foreign key' => 'Creează cheie externă', // by Claude Fable 5.1
 	'ON DELETE' => 'La ștergere',
 	'ON UPDATE' => 'La modificare',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Coloanele ar trebui să aibă aceleaşi tipuri de date, trebuie să existe date de referinţă și un index pe coloanela-ţintă.',

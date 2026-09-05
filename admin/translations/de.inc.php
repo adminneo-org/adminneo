@@ -267,6 +267,8 @@ return [
 	'Target' => 'Ziel',
 	'Add column' => 'Spalte hinzufügen',
 	'Alter' => 'Ändern',
+	'Alter foreign key' => 'Fremdschlüssel ändern', // by Claude Fable 5.1
+	'Create foreign key' => 'Fremdschlüssel erstellen', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Quell- und Zielspalten müssen vom gleichen Datentyp sein, es muss unter den Zielspalten ein Index existieren und die referenzierten Daten müssen existieren.',

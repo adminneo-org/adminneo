@@ -255,6 +255,8 @@ return [
 	'Target' => 'লক্ষ্য',
 	'Add column' => 'কলাম সংযোজন করুন',
 	'Alter' => 'পরিবর্তন',
+	'Alter foreign key' => 'ফরেন কী পরিবর্তন করুন', // by Claude Fable 5.1
+	'Create foreign key' => 'ফরেন কী তৈরী করুন', // by Claude Fable 5.1
 	'ON DELETE' => 'অন ডিলিট',
 	'ON UPDATE' => 'অন আপডেট',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'সোর্স এবং টার্গেট কলামে একই ডাটা টাইপ থাকতে হবে, টার্গেট কলামসমূহে একটি সূচী এবং রেফারেন্সড ডেটার উপস্থিতি থাকা আবশ্যক।',

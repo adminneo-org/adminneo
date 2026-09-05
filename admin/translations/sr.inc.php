@@ -272,6 +272,8 @@ return [
 	'Target' => 'Циљ',
 	'Add column' => 'Додај колону',
 	'Alter' => 'Уреди',
+	'Alter foreign key' => 'Уреди страни кључ', // by Claude Fable 5.1
+	'Create foreign key' => 'Направи страни кључ', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE (приликом брисања)',
 	'ON UPDATE' => 'ON UPDATE (приликом освежавања)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Изворне и циљне колоне морају бити истог типа, циљна колона мора бити индексирана и изворна табела мора садржати податке из циљне.',

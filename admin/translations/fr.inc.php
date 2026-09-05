@@ -267,6 +267,8 @@ return [
 	'Target' => 'Cible',
 	'Add column' => 'Ajouter une colonne',
 	'Alter' => 'Modifier',
+	'Alter foreign key' => 'Modifier la clé étrangère', // by Claude Fable 5.1
+	'Create foreign key' => 'Créer une clé étrangère', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Les colonnes de source et de destination doivent être du même type, il doit y avoir un index sur les colonnes de destination et les données référencées doivent exister.',

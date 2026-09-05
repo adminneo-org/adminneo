@@ -252,6 +252,8 @@ return [
 	'Target' => '目标',
 	'Add column' => '增加列',
 	'Alter' => '修改',
+	'Alter foreign key' => '修改外键', // by Claude Fable 5.1
+	'Create foreign key' => '创建外键', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => '源列和目标列必须具有相同的数据类型，在目标列上必须有一个索引并且引用的数据必须存在。',

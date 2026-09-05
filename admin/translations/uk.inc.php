@@ -272,6 +272,8 @@ return [
 	'Target' => 'Ціль',
 	'Add column' => 'Додати стовпець',
 	'Alter' => 'Змінити',
+	'Alter foreign key' => 'Змінити зовнішній ключ', // by Claude Fable 5.1
+	'Create foreign key' => 'Створити зовнішній ключ', // by Claude Fable 5.1
 	'ON DELETE' => 'ПРИ ВИДАЛЕННІ',
 	'ON UPDATE' => 'ПРИ ЗМІНІ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Стовпці повинні мати той самий тип даних, цільові стовпці повинні бути проіндексовані і дані, на які посилаються повинні існувати.',

@@ -252,6 +252,8 @@ return [
 	'Target' => 'ターゲット',
 	'Add column' => 'カラムを追加',
 	'Alter' => '変更',
+	'Alter foreign key' => '外部キーを変更', // by Claude Fable 5.1
+	'Create foreign key' => '外部キーを作成', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'ソースとターゲットのカラムは同じデータ型でなければなりません。ターゲットカラムにインデックスがあり、データが存在しなければなりません。',

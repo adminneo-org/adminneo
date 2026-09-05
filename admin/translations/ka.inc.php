@@ -252,6 +252,8 @@ return [
 	'Target' => 'სამიზნე',
 	'Add column' => 'ველის დამატება',
 	'Alter' => 'შეცვლა',
+	'Alter foreign key' => 'გარე გასაღების შეცვლა', // by Claude Fable 5.1
+	'Create foreign key' => 'გარე გასაღების შექმნა', // by Claude Fable 5.1
 	'ON DELETE' => 'წაშლისას',
 	'ON UPDATE' => 'განახლებისას',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'საწყისი და მიზნობრივი ველები უნდა იყოს ერთიდაიგივე სახეობის, მიზნობრივ ველზე უნდა იყოს ინდექსი და უნდა არსებობდეს შესაბამისი ინფორმაცია.',

@@ -272,6 +272,8 @@ return [
 	'Target' => 'Tikslas',
 	'Add column' => 'Pridėti stulpelį',
 	'Alter' => 'Redaguoti',
+	'Alter foreign key' => 'Redaguoti išorinį raktą', // by Claude Fable 5.1
+	'Create foreign key' => 'Sukurti išorinį raktą', // by Claude Fable 5.1
 	'ON DELETE' => 'Ištrinant',
 	'ON UPDATE' => 'Atnaujinant',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Šaltinio ir tikslinis stulpelis turi būti to paties tipo, tiksliniame stulpelyje turi būti naudojamas indeksas ir duomenys turi egzistuoti.',

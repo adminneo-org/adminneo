@@ -258,6 +258,8 @@ return [
 	'Target' => 'الهدف',
 	'Add column' => 'إضافة عمودا',
 	'Alter' => 'تعديل',
+	'Alter foreign key' => 'تعديل مفتاح أجنبي', // by Claude Fable 5.1
+	'Create foreign key' => 'إنشاء مفتاح أجنبي', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'أعمدة المصدر و الهدف يجب أن تكون بنفس النوع, يجب أن يكون هناك مؤشر في أعمدة الهدف و البيانات المرجعية يجب ان تكون موجودة.',

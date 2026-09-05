@@ -264,6 +264,8 @@ return [
 	'Target' => 'Mål',
 	'Add column' => 'Legg til kolonne',
 	'Alter' => 'Endre',
+	'Alter foreign key' => 'Endre fremmednøkkel', // by Claude Fable 5.1
+	'Create foreign key' => 'Opprett fremmednøkkel', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kilde- og mål-kolonner må ha samme datatype, det må være en indeks på mål-kolonnen, og dataene som refereres til må eksistere.',

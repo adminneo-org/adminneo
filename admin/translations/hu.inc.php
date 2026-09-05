@@ -252,6 +252,8 @@ return [
 	'Target' => 'Cél',
 	'Add column' => 'Oszlop hozzáadása',
 	'Alter' => 'Módosítás',
+	'Alter foreign key' => 'Idegen kulcs módosítása', // by Claude Fable 5.1
+	'Create foreign key' => 'Idegen kulcs létrehozása', // by Claude Fable 5.1
 	'ON DELETE' => 'törléskor',
 	'ON UPDATE' => 'frissítéskor',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'A forrás és cél oszlopoknak azonos típusúak legyenek, a cél oszlopok indexeltek legyenek, és a hivatkozott adatnak léteznie kell.',

@@ -272,6 +272,8 @@ return [
 	'Target' => 'Cel',
 	'Add column' => 'Dodaj kolumnę',
 	'Alter' => 'Zmień',
+	'Alter foreign key' => 'Zmień klucz obcy', // by Claude Fable 5.1
+	'Create foreign key' => 'Utwórz klucz obcy', // by Claude Fable 5.1
 	'ON DELETE' => 'W przypadku usunięcia',
 	'ON UPDATE' => 'W przypadku zmiany',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Źródłowa i docelowa kolumna muszą być tego samego typu, powinien istnieć indeks na docelowej kolumnie oraz muszą istnieć dane referencyjne.',

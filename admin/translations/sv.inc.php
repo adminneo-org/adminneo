@@ -267,6 +267,8 @@ return [
 	'Target' => 'Mål',
 	'Add column' => 'Lägg till kolumn',
 	'Alter' => 'Ändra',
+	'Alter foreign key' => 'Ändra främmande nyckel', // by Claude Fable 5.1
+	'Create foreign key' => 'Skapa främmande nyckel', // by Claude Fable 5.1
 	'ON DELETE' => 'VID BORTTAGNING',
 	'ON UPDATE' => 'VID UPPDATERING',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Käll- och mål-tabellen måste ha samma datatyp, ett index på målkolumnerna och refererad data måste finnas.',

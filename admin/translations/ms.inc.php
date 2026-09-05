@@ -252,6 +252,8 @@ return [
 	'Target' => 'Sasaran',
 	'Add column' => 'Tambah kolum',
 	'Alter' => 'Ubah',
+	'Alter foreign key' => 'Ubah kunci asing', // by Claude Fable 5.1
+	'Create foreign key' => 'Bina kunci asing', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolum sumber dan sasaran perlu mempunyai jenis data yang sama, indeks diperlukan pada kolum sasaran dan data yang dirujuk wujud.',

@@ -267,6 +267,8 @@ return [
 	'Target' => 'Цел',
 	'Add column' => 'Добавяне на колона',
 	'Alter' => 'Промяна',
+	'Alter foreign key' => 'Промяна на препратка', // by Claude Fable 5.1
+	'Create foreign key' => 'Създаване на препратка', // by Claude Fable 5.1
 	'ON DELETE' => 'При изтриване',
 	'ON UPDATE' => 'При промяна',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Колоните източник и цел трябва да са от еднакъв вид, трябва да има индекс на колоните приемник и да има въведени данни.',

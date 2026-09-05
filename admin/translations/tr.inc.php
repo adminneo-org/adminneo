@@ -261,6 +261,8 @@ return [
 	'Target' => 'Hedef',
 	'Add column' => 'Kolon ekle',
 	'Alter' => 'Değiştir',
+	'Alter foreign key' => 'Dış anahtarı değiştir', // by Claude Fable 5.1
+	'Create foreign key' => 'Dış anahtar oluştur', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE (Hedefteki Kayıt Silinirse)',
 	'ON UPDATE' => 'ON UPDATE (Hedefteki Kayıt Değiştirilirse)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kaynak ve hedef kolonlar aynı veri türünde olmalı, hedef kolonlarda dizin bulunmalı ve başvurulan veri mevcut olmalı.',

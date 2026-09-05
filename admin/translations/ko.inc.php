@@ -252,6 +252,8 @@ return [
 	'Target' => '타겟',
 	'Add column' => '열 추가',
 	'Alter' => '변경',
+	'Alter foreign key' => '외부 키 변경', // by Claude Fable 5.1
+	'Create foreign key' => '외부 키 만들기', // by Claude Fable 5.1
 	'ON DELETE' => '지울 때',
 	'ON UPDATE' => '업데이트할 때',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => '원본과 대상 열은 동일한 데이터 형식이어야만 합니다. 목표 열에 색인과 데이터가 존재해야만 합니다.',

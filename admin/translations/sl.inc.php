@@ -277,6 +277,8 @@ return [
 	'Target' => 'Cilj',
 	'Add column' => 'Dodaj stolpec',
 	'Alter' => 'Spremeni',
+	'Alter foreign key' => 'Spremeni tuj ključ', // by Claude Fable 5.1
+	'Create foreign key' => 'Ustvari tuj ključ', // by Claude Fable 5.1
 	'ON DELETE' => 'pri brisanju',
 	'ON UPDATE' => 'pri posodabljanju',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Izvorni in ciljni stolpec mora imeti isti podatkovni tip. Obstajati mora indeks na ciljnih stolpcih in obstajati morajo referenčni podatki.',
