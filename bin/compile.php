@@ -511,7 +511,7 @@ if ($single_driver) {
 }
 
 // Compile language files.
-$file = preg_replace_callback("~lang\\('((?:[^\\\\']+|\\\\.)*)'([,)])~s", 'AdminNeo\replace_lang', $file);
+$file = preg_replace_callback("~lang\\(\\s*'((?:[^\\\\']+|\\\\.)*)'\\s*([,)])~s", 'AdminNeo\replace_lang', $file);
 $file = replace_pattern('~\$translations = .* // !compile: translations~', 'AdminNeo\put_translations', $file);
 
 $file = str_replace("\r", "", $file);

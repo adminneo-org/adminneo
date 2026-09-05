@@ -74,8 +74,8 @@ $all_texts = [];
 foreach ($file_paths as $file_path) {
 	$source_code = file_get_contents($file_path);
 
-	// lang() always uses apostrophes.
-	if (preg_match_all("~lang\\('([^\\\\']+|\\\\.)*'([),])~", $source_code, $matches)) {
+	// lang() always uses apostrophes, the message can be on its own line.
+	if (preg_match_all("~lang\\(\\s*'([^\\\\']+|\\\\.)*'\\s*([),])~", $source_code, $matches)) {
 		$all_texts += array_combine($matches[1], $matches[2]);
 	}
 }

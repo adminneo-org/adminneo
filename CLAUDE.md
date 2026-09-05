@@ -145,7 +145,7 @@ Wrap at a boundary the expression already has, never at an arbitrary column:
 
 Prefer a pure wrap over a refactoring: don't extract a variable just to shorten a line, because that changes evaluation order. Two constraints come from `bin/compile.php`, which matches source code as text:
 
-- Never split between `lang(` and its closing `'` — the compiler matches `lang('...')` to replace texts with ids.
+- Never split the message of `lang()` into concatenated parts — the compiler matches `lang('...')` to replace texts with ids. The message may sit on its own line.
 - Never wrap a line carrying a `// !compile:` marker, and check `bin/compile.php` for a `replace()` whose search string covers the line you are about to wrap.
 
 Wrapping must not change the compiled output apart from reformatted queries, split string literals and added trailing commas.
