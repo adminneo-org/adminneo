@@ -133,6 +133,8 @@ To validate translations, run `php bin/update-translations.php --clean` – it d
 
 ### Coding style
 
+Classes (`admin/core/`, `editor/core/`, `plugins/`) are camelCase throughout — methods, properties and local variables. Procedural code (`admin/*.inc.php`, `admin/include/`, `admin/drivers/`, `bin/`) is snake_case throughout.
+
 PHP lines are limited to 200 characters (`.editorconfig`); translations, `vendor/` and `externals/` are exempt.
 
 Wrap at a boundary the expression already has, never at an arbitrary column:
@@ -202,6 +204,7 @@ git fetch vrana main --no-tags
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
   - Grep for the changed function/pattern across `admin/`, `editor/`, and `plugins/` — AdminNeo may have more or fewer call sites than upstream for the same code.
   - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
+  - Rename snake_case to camelCase when the ported code lands in a class.
   - Ignore changes of upstream's git submodules.
   - Use `// by AI model name` mark in translations instead of `// AI model name`.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there:
