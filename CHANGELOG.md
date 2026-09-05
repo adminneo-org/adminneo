@@ -886,7 +886,7 @@ AdminNeo 4.8.2 (2024-03-16)
 Adminer 4.8.1 (2021-05-14)
 --------------------------
 
-- Internet Explorer or PDO in ## Adminer 4.7.8-4.8.0: Fix XSS in doc_link (bug SF-797)
+- Internet Explorer or PDO in Adminer 4.7.8-4.8.0: Fix XSS in doc_link (bug SF-797)
 - Fix more PHP 8 warnings (bug SF-781)
 - Avoid PHP warnings with PDO drivers (bug SF-786, regression from 4.7.8)
 - MySQL: Allow moving views to other DB and renaming DB with views (bug SF-783)
@@ -1237,7 +1237,7 @@ Adminer 4.2.0 (2015-02-07)
 - Make master key unreadable to others (bug SF-410)
 - Fix edit by long non-utf8 string
 - Specify encoding for PHP 5.6 with invalid default_charset
-- Fix saving NULL value, bug since ## Adminer 4.0.3
+- Fix saving NULL value, bug since Adminer 4.0.3
 - Send 403 for auth error
 - Report offline and other AJAX errors (bug SF-419)
 - Don't alter table comment if not changed
@@ -1270,7 +1270,7 @@ Adminer 4.1.0 (2014-04-18)
 - MySQL 5.6.5+: Support ON UPDATE on datatime column
 - SQLite: Support UPDATE OF triggers
 - SQLite: Display auto-created unique indexes, bug since Adminer 3.5.0
-- Editor: Fix login() method, bug since ## Adminer 4.0.0
+- Editor: Fix login() method, bug since Adminer 4.0.0
 - Translate numbers in ar, bn, fa
 - Vietnamese translation
 
@@ -1279,8 +1279,8 @@ Adminer 4.0.3 (2014-02-01)
 
 - MongoDB: insert, truncate, indexes
 - SimpleDB, MongoDB: insert more fields at once
-- SQLite: Fix creating table and altering primary key, bug since ## Adminer 4.0.0
-- Don't store invalid credentials to session, bug since ## Adminer 4.0.0
+- SQLite: Fix creating table and altering primary key, bug since Adminer 4.0.0
+- Don't store invalid credentials to session, bug since Adminer 4.0.0
 - Norwegian translation
 
 Adminer 4.0.2 (2014-01-11)
@@ -1297,7 +1297,7 @@ Adminer 4.0.1 (2014-01-11)
 - Don't autofocus SQL textarea in Firefox
 - Don't link NULL foreign key values
 - Fix displaying images in Editor, bug since Adminer 3.6.0
-- Fix uploading files, bug since ## Adminer 4.0.0
+- Fix uploading files, bug since Adminer 4.0.0
 - MongoDB: Count tables, display ObjectIds, sort, limit, offset, count rows
 - Elasticsearch: Fix compiled version, create and drop DB, drop table
 
