@@ -22,7 +22,7 @@ function selectFieldChange() {
 	 *
 	 * @param {HTMLElement} element
 	 * @param {string|function} content
-	 * @param {boolean} side Displays on left side (otherwise on top).
+	 * @param {boolean} [side] Displays on left side (otherwise on top).
 	 */
 	window.initHelpFor = function(element, content, side = false) {
 	};

@@ -215,7 +215,7 @@ function selectFieldChange() {
 	 * Sets up event handlers for one row.
 	 *
 	 * @param {HTMLTableRowElement} row
-	 * @param {boolean} autoAddRow
+	 * @param {boolean} [autoAddRow]
 	 */
 	function initFieldsEditingRow(row, autoAddRow = true) {
 		// Field name. Is null if some row is removed and then new row is added to the beginning (form is posted).
@@ -467,7 +467,7 @@ function selectFieldChange() {
 	 * Adds new table row for the next field.
 	 *
 	 * @param {HTMLInputElement|HTMLButtonElement} button
-	 * @param {boolean} focus
+	 * @param {boolean} [focus]
 	 */
 	function addRow(button, focus = false) {
 		const match = /(\d+)(\.\d+)?/.exec(button.name);
@@ -972,7 +972,7 @@ function schemaMouseup(event, db) {
 	 *
 	 * @param {HTMLElement} element
 	 * @param {string|function} content
-	 * @param {boolean} side Displays on left side (otherwise on top).
+	 * @param {boolean} [side] Displays on left side (otherwise on top).
 	 */
 	window.initHelpFor = function(element, content, side = false) {
 		const withCallback = typeof content === "function";

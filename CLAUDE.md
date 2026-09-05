@@ -152,6 +152,8 @@ Wrapping must not change the compiled output apart from reformatted queries, spl
 
 JavaScript in `admin/scripts/`, `editor/scripts/`, plugins and inline `script()` must not use anything newer than ES6 (ES2015) — no `?.`, `??`, `??=`, `async`/`await` or ES2017+ built-ins like `Object.entries()` and `String.padStart()`. Newer syntax is a parse error, so a single modern token disables all of AdminNeo's JavaScript, not just the feature using it. The bundled syntax highlighter [JUSH](https://github.com/vrana/jush) holds the same baseline. Browser APIs stay at the same generation (~Safari 10, Chrome 54, Firefox 50). Where a newer API has an older equivalent, use the older one — the version check goes through `ajax()`, not `fetch()`. Feature-detect only when there is no alternative, as `initTableFooter()` does with `IntersectionObserver`.
 
+In JavaScript doc comments, an optional parameter — one with a default value in the signature or one callers may omit — has its name in brackets: `@param {ParentNode} [context] Defaults to document.`
+
 ### Commits
 
 Commit one logical change at a time. Split an unrelated bug found along the way into its own commit.

@@ -4,7 +4,7 @@
  * Returns the element found by given identifier.
  *
  * @param {string} id
- * @param {Document} context Defaults to document.
+ * @param {Document} [context] Defaults to document.
  *
  * @return {?HTMLElement}
  */
@@ -16,7 +16,7 @@ function gid(id, context = document) {
  * Returns the first element matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {?HTMLElement}
  */
@@ -28,7 +28,7 @@ function qs(selector, context = document) {
  * Returns the last element matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {HTMLElement|undefined}
  */
@@ -41,7 +41,7 @@ function qsl(selector, context = document) {
  * Returns all elements matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {NodeListOf<HTMLElement>}
  */
@@ -262,7 +262,7 @@ function formChecked(input, name) {
  *
  * @param {MouseEvent} event
  * @param {boolean} [click] Forces the click.
- * @param {boolean} canEdit
+ * @param {boolean} [canEdit]
  */
 function tableClick(event, click, canEdit = true) {
 	const td = parentTag(event.target, 'td');
@@ -1129,7 +1129,7 @@ function onEditingKeydown(event)
  * Disables maxlength for functions and manages value visibility.
  *
  * @param {?Event} event
- * @param {boolean} init True when applying the function selected by the server, so the value must be kept.
+ * @param {boolean} [init] True when applying the function selected by the server, so the value must be kept.
  *
  * @this {HTMLSelectElement}
  */
@@ -1268,10 +1268,10 @@ function fieldChange() {
  * Sends AJAX request.
  *
  * @param {string} url
- * @param {?function(XMLHttpRequest)} onSuccess
- * @param {?string} data POST data.
- * @param {?string} progressMessage
- * @param {boolean} failSilently
+ * @param {?function(XMLHttpRequest)} [onSuccess]
+ * @param {?string} [data] POST data.
+ * @param {?string} [progressMessage]
+ * @param {boolean} [failSilently]
  *
  * @return {XMLHttpRequest}
  *
