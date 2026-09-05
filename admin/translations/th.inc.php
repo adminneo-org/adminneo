@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'คีย์นอก', // by Claude Fable 5.1
-	'Foreign key' => 'คีย์นอก', // by Claude Fable 5.1
 	'Foreign key has been dropped.' => 'คีย์นอกถูกลบแล้ว.', // by Claude Fable 5.1
 	'Foreign key has been altered.' => 'คีย์นอกถูกเปลี่ยนแปลงแล้ว.', // by Claude Fable 5.1
 	'Foreign key has been created.' => 'คีย์นอกถูกสร้างแล้ว.', // by Claude Fable 5.1
@@ -253,7 +252,6 @@ return [
 	'Target' => 'เป้าหมาย',
 	'Add column' => 'เพิ่มคอลัมน์',
 	'Alter' => 'เปลี่ยนแปลง',
-	'Add foreign key' => 'เพิ่มคีย์นอก', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'แหล่งที่มาและเป้าหมายของคอลมัน์ต้องมีชนิดข้อมูลเดียวกัน คือต้องมีดัชนีและข้อมูลอ้างอิงของคอลัมน์เป้าหมาย.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'ทริกเกอร์',
-	'Add trigger' => 'เพิ่ม trigger',
 	'Trigger has been dropped.' => 'Trigger ถูกลบแล้ว.',
 	'Trigger has been altered.' => 'Trigger ถูกเปลี่ยนแปลงแล้ว.',
 	'Trigger has been created.' => 'Trigger ถูกสร้างแล้ว.',

@@ -246,7 +246,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'ফরেন কী',
-	'Foreign key' => 'ফরেন কী ',
 	'Foreign key has been dropped.' => 'ফরেন কী মুছে ফেলা হয়েছে।',
 	'Foreign key has been altered.' => 'ফরেন কী পরিবর্তন করা হয়েছে।',
 	'Foreign key has been created.' => 'ফরেন কী তৈরী করা হয়েছে।',
@@ -256,7 +255,6 @@ return [
 	'Target' => 'লক্ষ্য',
 	'Add column' => 'কলাম সংযোজন করুন',
 	'Alter' => 'পরিবর্তন',
-	'Add foreign key' => 'ফরেন কী সংযোজন করুন',
 	'ON DELETE' => 'অন ডিলিট',
 	'ON UPDATE' => 'অন আপডেট',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'সোর্স এবং টার্গেট কলামে একই ডাটা টাইপ থাকতে হবে, টার্গেট কলামসমূহে একটি সূচী এবং রেফারেন্সড ডেটার উপস্থিতি থাকা আবশ্যক।',
@@ -307,7 +305,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'ট্রিগার',
-	'Add trigger' => 'ট্রিগার সংযোজন করুন',
 	'Trigger has been dropped.' => 'ট্রিগার মুছে ফেলা হয়েছে।',
 	'Trigger has been altered.' => 'ট্রিগার পরিবর্তন করা হয়েছে।',
 	'Trigger has been created.' => 'ট্রিগার তৈরী করা হয়েছে।',

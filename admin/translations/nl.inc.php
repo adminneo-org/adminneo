@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Foreign keys',
-	'Foreign key' => 'Foreign key',
 	'Foreign key has been dropped.' => 'Foreign key verwijderd.',
 	'Foreign key has been altered.' => 'Foreign key aangepast.',
 	'Foreign key has been created.' => 'Foreign key aangemaakt.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Doel',
 	'Add column' => 'Kolom toevoegen',
 	'Alter' => 'Aanpassen',
-	'Add foreign key' => 'Foreign key aanmaken',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Bron- en doelkolommen moeten van hetzelfde data type zijn, er moet een index bestaan op de gekozen kolommen en er moet gerelateerde data bestaan.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggers',
-	'Add trigger' => 'Trigger aanmaken',
 	'Trigger has been dropped.' => 'Trigger verwijderd.',
 	'Trigger has been altered.' => 'Trigger aangepast.',
 	'Trigger has been created.' => 'Trigger aangemaakt.',

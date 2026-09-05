@@ -249,7 +249,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Võõrvõtmed (foreign key)',
-	'Foreign key' => 'Võõrvõti',
 	'Foreign key has been dropped.' => 'Võõrvõti on edukalt kustutatud.',
 	'Foreign key has been altered.' => 'Võõrvõtme andmed on edukalt muudetud.',
 	'Foreign key has been created.' => 'Võõrvõri on edukalt loodud.',
@@ -259,7 +258,6 @@ return [
 	'Target' => 'Sihtkoht',
 	'Add column' => 'Lisa veerg',
 	'Alter' => 'Muuda',
-	'Add foreign key' => 'Lisa võõrvõti',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lähte- ja sihtveerud peavad eksisteerima ja omama sama andmetüüpi, sihtveergudel peab olema määratud indeks ning viidatud andmed peavad eksisteerima.',
@@ -310,7 +308,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Päästikud (trigger)',
-	'Add trigger' => 'Lisa päästik (TRIGGER)',
 	'Trigger has been dropped.' => 'Päästik on edukalt kustutatud.',
 	'Trigger has been altered.' => 'Päästiku andmed on edukalt uuendatud.',
 	'Trigger has been created.' => 'Uus päästik on edukalt loodud.',

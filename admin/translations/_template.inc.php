@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Xx',
-	'Foreign key' => 'Xx',
 	'Foreign key has been dropped.' => 'Xx.',
 	'Foreign key has been altered.' => 'Xx.',
 	'Foreign key has been created.' => 'Xx.',
@@ -253,7 +252,8 @@ return [
 	'Target' => 'Xx',
 	'Add column' => 'Xx',
 	'Alter' => 'Xx',
-	'Add foreign key' => 'Xx',
+	'Alter foreign key' => 'Xx',
+	'Create foreign key' => 'Xx',
 	'ON DELETE' => 'Xx',
 	'ON UPDATE' => 'Xx',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Xx.',
@@ -304,7 +304,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Xx',
-	'Add trigger' => 'Xx',
 	'Trigger has been dropped.' => 'Xx.',
 	'Trigger has been altered.' => 'Xx.',
 	'Trigger has been created.' => 'Xx.',

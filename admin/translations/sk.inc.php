@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Cudzie kľúče',
-	'Foreign key' => 'Cudzí kľúč',
 	'Foreign key has been dropped.' => 'Cudzí kľúč bol odstránený.',
 	'Foreign key has been altered.' => 'Cudzí kľúč bol zmenený.',
 	'Foreign key has been created.' => 'Cudzí kľúč bol vytvorený.',
@@ -273,7 +272,8 @@ return [
 	'Target' => 'Cieľ',
 	'Add column' => 'Pridať stĺpec',
 	'Alter' => 'Zmeniť',
-	'Add foreign key' => 'Pridať cudzí kľúč',
+	'Alter foreign key' => 'Zmeniť cudzí kľúč',
+	'Create foreign key' => 'Vytvoriť cudzí kľúč',
 	'ON DELETE' => 'Pri zmazaní',
 	'ON UPDATE' => 'Pri aktualizácii',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Zdrojové a cieľové stĺpce musia mať rovnaký datový typ, nad cieľovými stĺpcami musí byť definovaný index a odkazované dáta musia existovať.',
@@ -328,7 +328,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggery',
-	'Add trigger' => 'Pridať trigger',
 	'Trigger has been dropped.' => 'Trigger bol odstránený.',
 	'Trigger has been altered.' => 'Trigger bol zmenený.',
 	'Trigger has been created.' => 'Trigger bol vytvorený.',

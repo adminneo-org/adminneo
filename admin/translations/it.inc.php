@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Chiavi esterne',
-	'Foreign key' => 'Foreign key',
 	'Foreign key has been dropped.' => 'Foreign key eliminata.',
 	'Foreign key has been altered.' => 'Foreign key modificata.',
 	'Foreign key has been created.' => 'Foreign key creata.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Obiettivo',
 	'Add column' => 'Aggiungi colonna',
 	'Alter' => 'Modifica',
-	'Add foreign key' => 'Aggiungi foreign key',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Le colonne sorgente e destinazione devono essere dello stesso tipo e ci deve essere un indice sulla colonna di destinazione e sui dati referenziati.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Trigger',
-	'Add trigger' => 'Aggiungi trigger',
 	'Trigger has been dropped.' => 'Trigger eliminato.',
 	'Trigger has been altered.' => 'Trigger modificato.',
 	'Trigger has been created.' => 'Trigger creato.',

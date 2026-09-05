@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Chei externe',
-	'Foreign key' => 'Cheie externă',
 	'Foreign key has been dropped.' => 'Cheia externă a fost ștearsă.',
 	'Foreign key has been altered.' => 'Cheia externă a fost modificată.',
 	'Foreign key has been created.' => 'Cheia externă a fost creată.',
@@ -273,7 +272,6 @@ return [
 	'Target' => 'Scop',
 	'Add column' => 'Adaugă coloană',
 	'Alter' => 'Modifică',
-	'Add foreign key' => 'Adaugă cheie externă',
 	'ON DELETE' => 'La ștergere',
 	'ON UPDATE' => 'La modificare',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Coloanele ar trebui să aibă aceleaşi tipuri de date, trebuie să existe date de referinţă și un index pe coloanela-ţintă.',
@@ -328,7 +326,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Declanșatoare',
-	'Add trigger' => 'Adaugă trigger (declanșator)',
 	'Trigger has been dropped.' => 'Triggerul a fost șters.',
 	'Trigger has been altered.' => 'Triggerul a fost modificat.',
 	'Trigger has been created.' => 'Triggerul a fost creat.',

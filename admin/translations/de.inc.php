@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Fremdschlüssel',
-	'Foreign key' => 'Fremdschlüssel',
 	'Foreign key has been dropped.' => 'Fremdschlüssel wurde entfernt.',
 	'Foreign key has been altered.' => 'Fremdschlüssel wurde geändert.',
 	'Foreign key has been created.' => 'Fremdschlüssel wurde erstellt.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Ziel',
 	'Add column' => 'Spalte hinzufügen',
 	'Alter' => 'Ändern',
-	'Add foreign key' => 'Fremdschlüssel hinzufügen',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Quell- und Zielspalten müssen vom gleichen Datentyp sein, es muss unter den Zielspalten ein Index existieren und die referenzierten Daten müssen existieren.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Trigger',
-	'Add trigger' => 'Trigger hinzufügen',
 	'Trigger has been dropped.' => 'Trigger wurde entfernt.',
 	'Trigger has been altered.' => 'Trigger wurde geändert.',
 	'Trigger has been created.' => 'Trigger wurde erstellt.',

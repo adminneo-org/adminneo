@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => '외부 키',
-	'Foreign key' => '외부 키',
 	'Foreign key has been dropped.' => '외부 키를 제거했습니다.',
 	'Foreign key has been altered.' => '외부 키를 변경했습니다.',
 	'Foreign key has been created.' => '외부 키를 만들었습니다.',
@@ -253,7 +252,6 @@ return [
 	'Target' => '타겟',
 	'Add column' => '열 추가',
 	'Alter' => '변경',
-	'Add foreign key' => '외부 키를 추가',
 	'ON DELETE' => '지울 때',
 	'ON UPDATE' => '업데이트할 때',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => '원본과 대상 열은 동일한 데이터 형식이어야만 합니다. 목표 열에 색인과 데이터가 존재해야만 합니다.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => '트리거',
-	'Add trigger' => '트리거 추가',
 	'Trigger has been dropped.' => '트리거를 제거했습니다.',
 	'Trigger has been altered.' => '트리거를 변경했습니다.',
 	'Trigger has been created.' => '트리거를 추가했습니다.',

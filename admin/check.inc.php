@@ -22,7 +22,11 @@ if ($row) {
 	);
 }
 
-page_header(($name != "" ? lang('Alter check') . ": " . h($name) : lang('Create check')), ["table" => $TABLE]);
+if ($name != "") {
+	page_header(lang('Alter check') . ": " . h($name), ["table" => $TABLE, lang('Alter check')]);
+} else {
+	page_header(lang('Create check') . ": " . h($TABLE), ["table" => $TABLE, lang('Create check')]);
+}
 
 if (!$row) {
 	$checks = Driver::get()->checkConstraints($TABLE);

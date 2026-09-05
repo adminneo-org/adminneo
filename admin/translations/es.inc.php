@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Claves foráneas',
-	'Foreign key' => 'Clave foránea',
 	'Foreign key has been dropped.' => 'Clave foránea eliminada.',
 	'Foreign key has been altered.' => 'Clave foránea modificada.',
 	'Foreign key has been created.' => 'Clave foránea creada.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Destino',
 	'Add column' => 'Agregar columna',
 	'Alter' => 'Modificar',
-	'Add foreign key' => 'Agregar clave foránea',
 	'ON DELETE' => 'AL BORRAR',
 	'ON UPDATE' => 'AL ACTUALIZAR',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Las columnas de origen y destino deben ser del mismo tipo, debe existir un índice entre las columnas del destino y el registro referenciado debe existir también.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Disparadores',
-	'Add trigger' => 'Agregar disparador',
 	'Trigger has been dropped.' => 'Disparador eliminado.',
 	'Trigger has been altered.' => 'Disparador modificado.',
 	'Trigger has been created.' => 'Disparador creado.',

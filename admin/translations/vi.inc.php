@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Các khoá ngoại',
-	'Foreign key' => 'Khoá ngoại',
 	'Foreign key has been dropped.' => 'Khoá ngoại đã bị xoá.',
 	'Foreign key has been altered.' => 'Khoá ngoại đã được sửa.',
 	'Foreign key has been created.' => 'Khoá ngoại đã được tạo.',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'Đích',
 	'Add column' => 'Thêm cột',
 	'Alter' => 'Sửa',
-	'Add foreign key' => 'Thêm khoá ngoại',
 	'ON DELETE' => 'Khi xoá',
 	'ON UPDATE' => 'Khi cập nhật',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Cột gốc và cột đích phải cùng kiểu, phải đặt chỉ mục trong cột đích và dữ liệu tham chiếu phải tồn tại.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Phản xạ',
-	'Add trigger' => 'Thêm phản xạ',
 	'Trigger has been dropped.' => 'Đã xoá phản xạ.',
 	'Trigger has been altered.' => 'Đã sửa phản xạ.',
 	'Trigger has been created.' => 'Đã tạo phản xạ.',

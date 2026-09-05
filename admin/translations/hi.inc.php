@@ -255,7 +255,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'फॉरेन की',
-	'Foreign key' => 'फॉरेन की',
 	'Foreign key has been dropped.' => 'फॉरेन की हटा दी गई है।',
 	'Foreign key has been altered.' => 'फॉरेन की बदल दी गई है।',
 	'Foreign key has been created.' => 'फॉरेन की बनाई गई है।',
@@ -265,7 +264,6 @@ return [
 	'Target' => 'लक्ष्य',
 	'Add column' => 'कॉलम जोड़ें',
 	'Alter' => 'बदलें',
-	'Add foreign key' => 'फॉरेन की जोड़ें',
 	'ON DELETE' => 'ऑन डिलीट',
 	'ON UPDATE' => 'ऑन अपडेट',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'स्रोत और लक्ष्य कॉलम्स का डेटा प्रकार समान होना चाहिए, लक्ष्य कॉलम्स पर एक इंडेक्स होना चाहिए और संदर्भित डेटा मौजूद होना चाहिए।',
@@ -319,7 +317,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'ट्रिगर्स',
-	'Add trigger' => 'ट्रिगर जोड़ें',
 	'Trigger has been dropped.' => 'ट्रिगर हटा दिया गया है।',
 	'Trigger has been altered.' => 'ट्रिगर बदल दिया गया है।',
 	'Trigger has been created.' => 'ट्रिगर बनाया गया है।',

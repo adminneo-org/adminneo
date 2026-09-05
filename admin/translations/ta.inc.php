@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'வேற்று விசைக‌ள்',
-	'Foreign key' => 'வேற்று விசை',
 	'Foreign key has been dropped.' => 'வேற்று விசை நீக்க‌ப்ப‌ட்ட‌து.',
 	'Foreign key has been altered.' => 'வேற்று விசை மாற்ற‌ப்ப‌ட்ட‌து.',
 	'Foreign key has been created.' => 'வேற்று விசை உருவாக்க‌ப்ப‌ட்ட‌து.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'இல‌க்கு',
 	'Add column' => 'நெடு வ‌ரிசையை சேர்க்க‌வும்',
 	'Alter' => 'மாற்று',
-	'Add foreign key' => 'வேற்று விசை சேர்க்க‌வும்',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'இல‌க்கு நெடுவ‌ரிசையில் அக‌வ‌ரிசை (Index) ம‌ற்றும் குறிக்க‌ப்ப‌ட்ட‌ த‌க‌வல் (Referenced DATA) க‌ண்டிப்பாக‌ இருத்த‌ல் வேண்டும். மூல‌ நெடுவ‌ரிசை ம‌ற்றும் இலக்கு நெடுவ‌ரிசையின் த‌க‌வ‌ல் வ‌டிவ‌ம் (DATA TYPE) ஒன்றாக‌ இருக்க‌ வேண்டும்.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'தூண்டுத‌ல்க‌ள்',
-	'Add trigger' => 'தூண்டு விசையை சேர்',
 	'Trigger has been dropped.' => 'தூண்டு விசை நீக்க‌ப்ப‌ட்ட‌து.',
 	'Trigger has been altered.' => 'தூண்டு விசை மாற்ற‌ப்ப‌ட்ட‌து.',
 	'Trigger has been created.' => 'தூண்டு விசை உருவாக்க‌ப்ப‌ட்ட‌து.',

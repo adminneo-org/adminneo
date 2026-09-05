@@ -252,7 +252,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Vieraat avaimet',
-	'Foreign key' => 'Vieras avain',
 	'Foreign key has been dropped.' => 'Vieras avain on poistettu.',
 	'Foreign key has been altered.' => 'Vierasta avainta on muutettu.',
 	'Foreign key has been created.' => 'Vieras avain on luotu.',
@@ -262,7 +261,6 @@ return [
 	'Target' => 'Kohde',
 	'Add column' => 'Lisää sarake',
 	'Alter' => 'Muuta',
-	'Add foreign key' => 'Lisää vieras avain',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lähde- ja kohdesarakkeiden tulee olla samaa tietotyyppiä, kohdesarakkeisiin tulee olla indeksi ja dataa, johon viitataan, täytyy olla.',
@@ -313,7 +311,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Liipaisimet',
-	'Add trigger' => 'Lisää liipaisin',
 	'Trigger has been dropped.' => 'Liipaisin on poistettu.',
 	'Trigger has been altered.' => 'Liipaisinta on muutettu.',
 	'Trigger has been created.' => 'Liipaisin on luotu.',

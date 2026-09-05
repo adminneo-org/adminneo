@@ -118,7 +118,7 @@ if (!is_view($table_status)) {
 			}
 			echo "</table>\n";
 		}
-		echo '<p class="links"><a href="' . h(ME) . 'foreign=' . urlencode($TABLE) . '">' . icon("add") . lang('Add foreign key') . "</a>\n";
+		echo '<p class="links"><a href="' . h(ME) . 'foreign=' . urlencode($TABLE) . '">' . icon("add") . lang('Create foreign key') . "</a>\n";
 	}
 
 	if (support("check")) {
@@ -149,5 +149,5 @@ if (support(is_view($table_status) ? "view_trigger" : "trigger")) {
 		}
 		echo "</table>\n";
 	}
-	echo '<p class="links"><a href="' . h(ME) . 'trigger=' . urlencode($TABLE) . '">' . icon("add") . lang('Add trigger') . "</a>\n";
+	echo '<p class="links"><a href="' . h(ME) . 'trigger=' . urlencode($TABLE) . '">' . icon("add") . lang('Create trigger') . "</a>\n";
 }

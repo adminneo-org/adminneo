@@ -36,7 +36,11 @@ if ($_POST && !$_POST["add"] && !$_POST["change"] && !$_POST["change-js"]) {
 	}
 }
 
-page_header(lang('Foreign key') . ": " . h($TABLE), ["table" => $TABLE, lang('Foreign key')]);
+if ($name != "") {
+	page_header(lang('Alter foreign key') . ": " . h($name), ["table" => $TABLE, lang('Alter foreign key')]);
+} else {
+	page_header(lang('Create foreign key') . ": " . h($TABLE), ["table" => $TABLE, lang('Create foreign key')]);
+}
 
 if ($_POST) {
 	ksort($row["source"]);

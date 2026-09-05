@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
-	'Foreign key' => 'Kunci asing',
 	'Foreign key has been dropped.' => 'Kunci asing telah dijatuhkan.',
 	'Foreign key has been altered.' => 'Kunci asing telah diubah.',
 	'Foreign key has been created.' => 'Kunci asing telah dibuat.',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'Sasaran',
 	'Add column' => 'Tambah kolum',
 	'Alter' => 'Ubah',
-	'Add foreign key' => 'Tambah kunci asing',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolum sumber dan sasaran perlu mempunyai jenis data yang sama, indeks diperlukan pada kolum sasaran dan data yang dirujuk wujud.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Pencetus', // by Claude Fable 5.1
-	'Add trigger' => 'Tambah pencetus',
 	'Trigger has been dropped.' => 'Pencetus telah dijatuhkan.',
 	'Trigger has been altered.' => 'Pencetus telah diubah.',
 	'Trigger has been created.' => 'Pencetus telah dibuat.',

@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Idegen kulcs',
-	'Foreign key' => 'Idegen kulcs',
 	'Foreign key has been dropped.' => 'Idegen kulcs eldobva.',
 	'Foreign key has been altered.' => 'Idegen kulcs módosult.',
 	'Foreign key has been created.' => 'Idegen kulcs létrejött.',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'Cél',
 	'Add column' => 'Oszlop hozzáadása',
 	'Alter' => 'Módosítás',
-	'Add foreign key' => 'Idegen kulcs hozzadása',
 	'ON DELETE' => 'törléskor',
 	'ON UPDATE' => 'frissítéskor',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'A forrás és cél oszlopoknak azonos típusúak legyenek, a cél oszlopok indexeltek legyenek, és a hivatkozott adatnak léteznie kell.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Trigger',
-	'Add trigger' => 'Trigger hozzáadása',
 	'Trigger has been dropped.' => 'A trigger eldobva.',
 	'Trigger has been altered.' => 'A trigger módosult.',
 	'Trigger has been created.' => 'A trigger létrejött.',

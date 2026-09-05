@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Claus foranes',
-	'Foreign key' => 'Clau forana',
 	'Foreign key has been dropped.' => 'S\'ha suprimit la clau forana.',
 	'Foreign key has been altered.' => 'S\'ha modificat la clau forana.',
 	'Foreign key has been created.' => 'S\'ha creat la clau forana.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Destí',
 	'Add column' => 'Afegeix una columna',
 	'Alter' => 'Modifica',
-	'Add foreign key' => 'Afegeix una clau forana',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Les columnes d\'origen i de destinació han de ser del mateix tipus, la columna de destinació ha d\'estar indexada i les dades referenciades han d\'existir.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Activadors',
-	'Add trigger' => 'Afegeix un activador',
 	'Trigger has been dropped.' => 'S\'ha suprimit l\'activador.',
 	'Trigger has been altered.' => 'S\'ha modificat l\'activador.',
 	'Trigger has been created.' => 'S\'ha creat l\'activador.',

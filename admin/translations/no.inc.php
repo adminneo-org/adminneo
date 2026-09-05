@@ -255,7 +255,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Fremmednøkler',
-	'Foreign key' => 'Fremmednøkkel',
 	'Foreign key has been dropped.' => 'Fremmednøkkelen er slettet.',
 	'Foreign key has been altered.' => 'Fremmednøkkelen er endret.',
 	'Foreign key has been created.' => 'Fremmednøkkelen er opprettet.',
@@ -265,7 +264,6 @@ return [
 	'Target' => 'Mål',
 	'Add column' => 'Legg til kolonne',
 	'Alter' => 'Endre',
-	'Add foreign key' => 'Legg til fremmednøkkel',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kilde- og mål-kolonner må ha samme datatype, det må være en indeks på mål-kolonnen, og dataene som refereres til må eksistere.',
@@ -319,7 +317,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggere',
-	'Add trigger' => 'Legg til trigger',
 	'Trigger has been dropped.' => 'Triggeren er slettet.',
 	'Trigger has been altered.' => 'Triggeren er endret.',
 	'Trigger has been created.' => 'Triggeren er opprettet.',

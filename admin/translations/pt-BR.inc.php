@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Chaves estrangeiras',
-	'Foreign key' => 'Chave Estrangeira',
 	'Foreign key has been dropped.' => 'A Chave Estrangeira foi apagada.',
 	'Foreign key has been altered.' => 'A Chave Estrangeira foi alterada.',
 	'Foreign key has been created.' => 'A Chave Estrangeira foi criada.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Destino',
 	'Add column' => 'Adicionar coluna',
 	'Alter' => 'Alterar',
-	'Add foreign key' => 'Adicionar Chave Estrangeira',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'As colunas de origen e destino devem ser do mesmo tipo, deve existir um índice entre as colunas de destino e o registro referenciado deve existir.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggers',
-	'Add trigger' => 'Adicionar trigger',
 	'Trigger has been dropped.' => 'O Trigger foi apagado.',
 	'Trigger has been altered.' => 'O Trigger foi alterado.',
 	'Trigger has been created.' => 'O Trigger foi criado.',

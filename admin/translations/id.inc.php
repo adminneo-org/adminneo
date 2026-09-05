@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
-	'Foreign key' => 'Kunci asing',
 	'Foreign key has been dropped.' => 'Kunci asing berhasil dihapus.',
 	'Foreign key has been altered.' => 'Kunci asing berhasil diubah.',
 	'Foreign key has been created.' => 'Kunci asing berhasil dibuat.',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'Sasaran',
 	'Add column' => 'Tambah kolom',
 	'Alter' => 'Ubah',
-	'Add foreign key' => 'Tambah kunci asing',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolom sumber dan sasaran harus memiliki jenis data yang sama. Kolom sasaran harus memiliki indeks dan data rujukan harus ada.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Pemicu',
-	'Add trigger' => 'Tambah pemicu',
 	'Trigger has been dropped.' => 'Pemicu berhasil dihapus.',
 	'Trigger has been altered.' => 'Pemicu berhasil diubah.',
 	'Trigger has been created.' => 'Pemicu berhasil dibuat.',

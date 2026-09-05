@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => '外部キー',
-	'Foreign key' => '外部キー',
 	'Foreign key has been dropped.' => '外部キーを削除しました。',
 	'Foreign key has been altered.' => '外部キーを変更しました。',
 	'Foreign key has been created.' => '外部キーを作成しました。',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'ターゲット',
 	'Add column' => 'カラムを追加',
 	'Alter' => '変更',
-	'Add foreign key' => '外部キーを追加',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'ソースとターゲットのカラムは同じデータ型でなければなりません。ターゲットカラムにインデックスがあり、データが存在しなければなりません。',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'トリガー',
-	'Add trigger' => 'トリガーを追加',
 	'Trigger has been dropped.' => 'トリガーを削除しました。',
 	'Trigger has been altered.' => 'トリガーを変更しました。',
 	'Trigger has been created.' => 'トリガーを追加しました。',

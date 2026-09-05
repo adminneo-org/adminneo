@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Εξαρτημένα κλειδιά',
-	'Foreign key' => 'Εξαρτημένο κλειδί',
 	'Foreign key has been dropped.' => 'Το εξαρτημένο κλειδί διαγράφηκε.',
 	'Foreign key has been altered.' => 'Το εξαρτημένο κλειδί τροποποιήθηκε.',
 	'Foreign key has been created.' => 'Το εξαρτημένο κλειδί δημιουργήθηκε.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Στόχος',
 	'Add column' => 'Προσθήκη στήλης',
 	'Alter' => 'Τροποποίηση',
-	'Add foreign key' => 'Προσθήκη εξαρτημένου κλειδιού',
 	'ON DELETE' => 'ΚΑΤΑ ΤΗ ΔΙΑΓΡΑΦΗ',
 	'ON UPDATE' => 'ΚΑΤΑ ΤΗΝ ΑΛΛΑΓΗ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Οι στήλες στην πηγή και το στόχο πρέπει να έχουν τον ίδιο τύπο, πρέπει να υπάρχει δείκτης στη στήλη στόχο και να υπάρχουν εξαρτημένα δεδομένα.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Εναύσματα',
-	'Add trigger' => 'Προσθήκη εναύσματος',
 	'Trigger has been dropped.' => 'Το έναυσμα διαγράφηκε.',
 	'Trigger has been altered.' => 'Το έναυσμα τροποποιήθηκε.',
 	'Trigger has been created.' => 'Το έναυσμα δημιουργήθηκε.',

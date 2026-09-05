@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Ārejā atslēgas',
-	'Foreign key' => 'Ārejā atslēga',
 	'Foreign key has been dropped.' => 'Ārejā atslēga dzēsta.',
 	'Foreign key has been altered.' => 'Ārejā atslēga izmainīta.',
 	'Foreign key has been created.' => 'Ārejā atslēga izveidota.',
@@ -273,7 +272,6 @@ return [
 	'Target' => 'Mērķis',
 	'Add column' => 'Pievienot lauku',
 	'Alter' => 'Izmainīt',
-	'Add foreign key' => 'Pievienot ārējo atslēgu',
 	'ON DELETE' => 'Pie dzēšanas',
 	'ON UPDATE' => 'Pie atjaunošanas',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Lauku tipiem jābūt vienādiem, rezultējošā laukā jābut indeksa datiem.',
@@ -328,7 +326,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Trigeri',
-	'Add trigger' => 'Pievienot trigeri',
 	'Trigger has been dropped.' => 'Trigeris dzēsts.',
 	'Trigger has been altered.' => 'Trigeris izmainīts.',
 	'Trigger has been created.' => 'Trigeris izveidots.',

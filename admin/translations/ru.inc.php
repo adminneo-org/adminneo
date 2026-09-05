@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Внешние ключи',
-	'Foreign key' => 'Внешний ключ',
 	'Foreign key has been dropped.' => 'Внешний ключ был удалён.',
 	'Foreign key has been altered.' => 'Внешний ключ был изменён.',
 	'Foreign key has been created.' => 'Внешний ключ был создан.',
@@ -273,7 +272,6 @@ return [
 	'Target' => 'Цель',
 	'Add column' => 'Добавить поле',
 	'Alter' => 'Изменить',
-	'Add foreign key' => 'Добавить внешний ключ',
 	'ON DELETE' => 'При стирании',
 	'ON UPDATE' => 'При обновлении',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Поля должны иметь одинаковые типы данных, в результирующем поле должен быть индекс, данные для импорта должны существовать.',
@@ -328,7 +326,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Триггеры',
-	'Add trigger' => 'Добавить триггер',
 	'Trigger has been dropped.' => 'Триггер был удалён.',
 	'Trigger has been altered.' => 'Триггер был изменён.',
 	'Trigger has been created.' => 'Триггер был создан.',

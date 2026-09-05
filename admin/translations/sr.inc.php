@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Страни кључеви',
-	'Foreign key' => 'Страни кључ',
 	'Foreign key has been dropped.' => 'Страни кључ је избрисан.',
 	'Foreign key has been altered.' => 'Страни кључ је измењен.',
 	'Foreign key has been created.' => 'Страни кључ је креиран.',
@@ -273,7 +272,6 @@ return [
 	'Target' => 'Циљ',
 	'Add column' => 'Додај колону',
 	'Alter' => 'Уреди',
-	'Add foreign key' => 'Додај страни кључ',
 	'ON DELETE' => 'ON DELETE (приликом брисања)',
 	'ON UPDATE' => 'ON UPDATE (приликом освежавања)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Изворне и циљне колоне морају бити истог типа, циљна колона мора бити индексирана и изворна табела мора садржати податке из циљне.',
@@ -328,7 +326,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Окидачи',
-	'Add trigger' => 'Додај окидач',
 	'Trigger has been dropped.' => 'Окидач је избрисан.',
 	'Trigger has been altered.' => 'Окидач је измењен.',
 	'Trigger has been created.' => 'Окидач је креиран.',

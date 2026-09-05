@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Препратки',
-	'Foreign key' => 'Препратка',
 	'Foreign key has been dropped.' => 'Препратката беше премахната.',
 	'Foreign key has been altered.' => 'Препратката беше променена.',
 	'Foreign key has been created.' => 'Препратката беше създадена.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Цел',
 	'Add column' => 'Добавяне на колона',
 	'Alter' => 'Промяна',
-	'Add foreign key' => 'Добавяне на препратка',
 	'ON DELETE' => 'При изтриване',
 	'ON UPDATE' => 'При промяна',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Колоните източник и цел трябва да са от еднакъв вид, трябва да има индекс на колоните приемник и да има въведени данни.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Тригери',
-	'Add trigger' => 'Добавяне на тригер',
 	'Trigger has been dropped.' => 'Тригера беше премахнат.',
 	'Trigger has been altered.' => 'Тригера беше променен.',
 	'Trigger has been created.' => 'Тригера беше създаден.',

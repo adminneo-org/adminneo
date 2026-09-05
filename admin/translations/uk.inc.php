@@ -263,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Зовнішні ключі',
-	'Foreign key' => 'Зовнішній ключ',
 	'Foreign key has been dropped.' => 'Зовнішній ключ було видалено.',
 	'Foreign key has been altered.' => 'Зовнішній ключ було змінено.',
 	'Foreign key has been created.' => 'Зовнішній ключ було створено.',
@@ -273,7 +272,6 @@ return [
 	'Target' => 'Ціль',
 	'Add column' => 'Додати стовпець',
 	'Alter' => 'Змінити',
-	'Add foreign key' => 'Додати зовнішній ключ',
 	'ON DELETE' => 'ПРИ ВИДАЛЕННІ',
 	'ON UPDATE' => 'ПРИ ЗМІНІ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Стовпці повинні мати той самий тип даних, цільові стовпці повинні бути проіндексовані і дані, на які посилаються повинні існувати.',
@@ -328,7 +326,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Тригери',
-	'Add trigger' => 'Додати тригер',
 	'Trigger has been dropped.' => 'Тригер було видалено.',
 	'Trigger has been altered.' => 'Тригер було змінено.',
 	'Trigger has been created.' => 'Тригер було створено.',

@@ -258,7 +258,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Clés étrangères',
-	'Foreign key' => 'Clé étrangère',
 	'Foreign key has been dropped.' => 'La clé étrangère a été effacée.',
 	'Foreign key has been altered.' => 'La clé étrangère a été modifiée.',
 	'Foreign key has been created.' => 'La clé étrangère a été créée.',
@@ -268,7 +267,6 @@ return [
 	'Target' => 'Cible',
 	'Add column' => 'Ajouter une colonne',
 	'Alter' => 'Modifier',
-	'Add foreign key' => 'Ajouter une clé étrangère',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Les colonnes de source et de destination doivent être du même type, il doit y avoir un index sur les colonnes de destination et les données référencées doivent exister.',
@@ -322,7 +320,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Déclencheurs',
-	'Add trigger' => 'Ajouter un déclencheur',
 	'Trigger has been dropped.' => 'Le déclencheur a été supprimé.',
 	'Trigger has been altered.' => 'Le déclencheur a été modifié.',
 	'Trigger has been created.' => 'Le déclencheur a été créé.',

@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'გარე გასაღები',
-	'Foreign key' => 'გარე გასაღები',
 	'Foreign key has been dropped.' => 'გარე გასაღები წაიშალა.',
 	'Foreign key has been altered.' => 'გარე გასაღები შეიცვალა.',
 	'Foreign key has been created.' => 'გარე გასაღები შეიქმნა.',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'სამიზნე',
 	'Add column' => 'ველის დამატება',
 	'Alter' => 'შეცვლა',
-	'Add foreign key' => 'გარე გასაღები დამატება',
 	'ON DELETE' => 'წაშლისას',
 	'ON UPDATE' => 'განახლებისას',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'საწყისი და მიზნობრივი ველები უნდა იყოს ერთიდაიგივე სახეობის, მიზნობრივ ველზე უნდა იყოს ინდექსი და უნდა არსებობდეს შესაბამისი ინფორმაცია.',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'ტრიგერები',
-	'Add trigger' => 'ტრიგერის დამატება',
 	'Trigger has been dropped.' => 'ტრიგერი წაიშალა.',
 	'Trigger has been altered.' => 'ტრიგერი შეიცვალა.',
 	'Trigger has been created.' => 'ტრიგერი შეიქმნა.',

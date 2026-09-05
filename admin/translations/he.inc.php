@@ -243,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'מפתחות זרים',
-	'Foreign key' => 'מפתח זר',
 	'Foreign key has been dropped.' => 'המפתח הזר הושלך',
 	'Foreign key has been altered.' => 'המפתח הזר שונה',
 	'Foreign key has been created.' => 'המפתח הזר נוצר',
@@ -253,7 +252,6 @@ return [
 	'Target' => 'יעד',
 	'Add column' => 'הוסף עמודה',
 	'Alter' => 'שנה',
-	'Add foreign key' => 'הוסף מפתח זר',
 	'ON DELETE' => 'בעת מחיקה',
 	'ON UPDATE' => 'בעת עידכון',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'על עמודות המקור והיעד להיות מאותו טיפוס נתונים, חובה שיהיה אינדקס בעמודת היעד ושהמידע המתאים יהיה קיים',
@@ -304,7 +302,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'מפעילים',
-	'Add trigger' => 'הוסף טריגר',
 	'Trigger has been dropped.' => 'הטריגר הושלך',
 	'Trigger has been altered.' => 'הטריגר שונה',
 	'Trigger has been created.' => 'הטריגר נוצר',
