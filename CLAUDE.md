@@ -185,7 +185,7 @@ in alphabetical order, so importing the dump failed on a foreign key violation.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ```
 
-The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one does).
+The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one carries the upstream author's and yours).
 
 ### Porting changes from Adminer
 
@@ -221,7 +221,12 @@ git fetch vrana main --no-tags
   - Don't add your own `Co-Authored-By` signature, but keep original one if present.
 - If adaptation is more complex, then:
   - Don't commit automatically. Present the change for review and wait for approval; commit only when asked.
-  - Commit the standard way described in [Commits](#commits): don't preserve the original author or author-date, and end the message with your own `Co-Authored-By` line naming the used Claude model. Don't keep the original commit's `Co-Authored-By` line.
+  - Commit the standard way described in [Commits](#commits): don't preserve the original author or author-date. Don't keep the original commit's `Co-Authored-By` line.
+  - End the message with a `Co-Authored-By` line naming the author of the original upstream commit (name and e-mail from its `%an <%ae>`), followed by your own `Co-Authored-By` line naming the used Claude model:
+  ```
+  Co-Authored-By: Jakub Vrana <jakub@vrana.cz>
+  Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+  ```
   - Add reference to the upstream commit to the commit message:
   ```
   Ported from:
