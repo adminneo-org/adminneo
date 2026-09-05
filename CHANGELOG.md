@@ -12,6 +12,7 @@ AdminNeo 5.8.0
 - Select: Remove asking for the page number after clicking the Page legend (by @vrana)
 - Table structure: Shorten long checks (by @vrana)
 - Table structure: Unify wording of links and page titles
+- Edit: Disable Save and continue edit after changing a value identifying the row
 - SQL command: Check the "Stop on error" option by default
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
 - PostgreSQL: Order NULL last (by @vrana)

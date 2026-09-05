@@ -359,6 +359,31 @@ function where($where, $fields = []) {
 	return implode(" AND ", $conditions);
 }
 
+/** Get names of columns used in the WHERE condition
+* @param array parsed query string
+* @param array[]
+* @return bool[] keys are column names
+*/
+function where_columns($where, $fields = []) {
+	$columns = [];
+
+	foreach ((array) $where["null"] as $key) {
+		$columns[$key] = true;
+	}
+
+	foreach ((array) $where["where"] as $key => $val) {
+		$key = bracket_escape($key, true); // true - back
+		foreach ($fields as $name => $field) {
+			// The key is not always the column name, e.g. MD5(`name`) is used for long values.
+			if ($key == $name || strpos($key, idf_escape($name)) !== false) {
+				$columns[$name] = true;
+			}
+		}
+	}
+
+	return $columns;
+}
+
 /** Create SQL condition from query string
 * @param string
 * @param array[]

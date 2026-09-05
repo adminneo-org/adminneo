@@ -659,6 +659,18 @@ function initToggles(parent) {
 }
 
 /**
+ * Disables the Save and continue edit button after changing a value identifying the row.
+ */
+function initWhereChange() {
+	for (const row of qsa('#form tr.where-column')) {
+		row.addEventListener("change", () => {
+			// The WHERE condition in the URL is not updated by the AJAX save, so the next save would not match the row.
+			qs('#form [name="insert"]').disabled = true;
+		});
+	}
+}
+
+/**
  * Initializes auto-submitting of the settings form.
  */
 function initSettingsForm() {
