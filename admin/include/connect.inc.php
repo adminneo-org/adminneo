@@ -102,7 +102,7 @@ if (!(DB != "" ?
 				echo "<div class='table-footer'><div class='field-sets'>\n";
 				echo "<fieldset><legend>", lang('Selected'), " <span id='selected'></span></legend><div class='fieldset-content'>\n";
 				echo input_hidden("all");
-				echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^db/)); };"); // used by trCheck()
+				echo script("qsl('input').onclick = countDbs;"); // used by trCheck()
 				echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>", confirm(), "\n";
 				echo "</div></fieldset>\n";
 				echo "</div></div>\n";

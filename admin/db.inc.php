@@ -327,7 +327,6 @@ if ($_GET["ns"] === "") {
 			. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
 			$databases = (support("scheme") ? Admin::get()->getSchemas() : Admin::get()->getDatabases());
 			echo "</div></fieldset>\n";
-			$script = "";
 			if (count($databases) != 1 && DIALECT != "sqlite") {
 				echo "<fieldset><legend>" . lang('Move to other database') . " <span id='selected3'></span></legend><div>";
 				$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
@@ -335,13 +334,9 @@ if ($_GET["ns"] === "") {
 				echo " <input type='submit' class='button' name='move' value='" . lang('Move') . "'>";
 				echo (support("copy") ? " <input type='submit' class='button' name='copy' value='" . lang('Copy') . "'> " . checkbox("overwrite", 1, $_POST["overwrite"], lang('overwrite')) : "");
 				echo "</div></fieldset>\n";
-				$script = " selectCount('selected3', formChecked(this, /^(tables|views)\[/));";
 			}
 			echo input_hidden("all"); // used by trCheck()
-			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));"
-				. (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "")
-				. "$script }"
-			);
+			echo script("qsl('input').onclick = partial(countTables, $tables);");
 			echo input_token();
 			echo "</div></div>\n";
 

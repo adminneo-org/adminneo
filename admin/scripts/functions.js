@@ -258,6 +258,44 @@ function formChecked(input, name) {
 }
 
 /**
+ * Fills the number of selected databases.
+ *
+ * @this {HTMLInputElement}
+ */
+function countDbs() {
+	selectCount('selected', formChecked(this, /^db/));
+}
+
+/**
+ * Fills the numbers of selected tables.
+ *
+ * @param {number} tables Number of tables in the database.
+ *
+ * @this {HTMLInputElement}
+ */
+function countTables(tables) {
+	const checked = formChecked(this, /^(tables|views)\[/);
+
+	selectCount('selected', checked);
+	selectCount('selected2', formChecked(this, /^tables\[/) || tables); // Search is performed in all tables if none is selected.
+	selectCount('selected3', checked);
+}
+
+/**
+ * Fills the numbers of selected rows.
+ *
+ * @param {string} rows Number of rows in the whole result.
+ *
+ * @this {HTMLInputElement}
+ */
+function countRows(rows) {
+	const checked = formChecked(this, /^check/);
+
+	selectCount('selected', this.checked ? rows : checked);
+	selectCount('selected2', this.checked || !checked ? rows : checked); // The command is performed on the whole result if no row is selected.
+}
+
+/**
  * Selects clicked row.
  *
  * @param {MouseEvent} event
