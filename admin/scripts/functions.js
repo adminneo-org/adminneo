@@ -1341,15 +1341,17 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
  *
  * @param {string} url
  *
- * @return {boolean} False for success.
+ * @return {boolean} Always false.
  */
 function ajaxSetHtml(url) {
-	return !ajax(url, request => {
+	ajax(url, request => {
 		const data = JSON.parse(request.responseText);
 		for (const key in data) {
 			setHtml(key, data[key]);
 		}
 	});
+
+	return false;
 }
 
 /**
@@ -1535,7 +1537,7 @@ function loadNextPage(limit, loadingText) {
 		return true;
 	}
 
-	const failed = !ajax(href, request => {
+	ajax(href, request => {
 		const newBody = document.createElement('tbody');
 		newBody.innerHTML = request.responseText;
 
@@ -1554,13 +1556,11 @@ function loadNextPage(limit, loadingText) {
 		}
 	});
 
-	if (!failed) {
-		// Change the link only after creating the request, returning true lets the browser open it.
-		a.innerHTML = loadingText;
-		a.removeAttribute('href');
-	}
+	// Change the link only after creating the request, so an exception leaves it usable.
+	a.innerHTML = loadingText;
+	a.removeAttribute('href');
 
-	return failed;
+	return false;
 }
 
 
