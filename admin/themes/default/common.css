@@ -188,8 +188,8 @@ ol, ul {
 #schema {
 	margin-left: 100px;
 	position: relative;
-	-moz-user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 #schema .table {

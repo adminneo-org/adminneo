@@ -61,7 +61,6 @@ foreach (table_status('', true) as $table => $table_status) {
 echo "<div id='schema' style='height: {$top}em;'>\n";
 
 echo "<script", nonce(), ">\n";
-echo "gid('schema').onselectstart = () => false;\n";
 echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
 echo "const em = gid('schema').offsetHeight / $top;\n";
 echo "document.onmousemove = schemaMousemove;\n";
