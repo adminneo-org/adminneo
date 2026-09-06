@@ -72,12 +72,6 @@
 	cursor: col-resize;
 }
 
-body.resizing {
-	cursor: col-resize;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
 .navigation-button {
 	display: none;
 	position: fixed;

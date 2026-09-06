@@ -870,7 +870,7 @@ function triggerChange(tableRe, table, form) {
 }
 
 
-let that, x, y; // em and tablePos defined in schema.inc.php
+let that, x, y, startX, startY, dragged; // em and tablePos defined in schema.inc.php
 
 /**
  * Stores the mouse position.
@@ -884,6 +884,14 @@ function schemaMousedown(event) {
 		that = this;
 		x = event.clientX - this.offsetLeft;
 		y = event.clientY - this.offsetTop;
+		startX = event.clientX;
+		startY = event.clientY;
+		dragged = false;
+
+		// The table name is a link and its native dragging would swallow the mouse events until the button is released.
+		if (event.target.closest('a')) {
+			event.preventDefault();
+		}
 	}
 }
 
@@ -894,6 +902,15 @@ function schemaMousedown(event) {
  */
 function schemaMousemove(event) {
 	if (that !== undefined) {
+		if (!dragged) {
+			// A tiny movement is not a drag gesture yet, so a click on the table name link stays functional.
+			if (Math.abs(event.clientX - startX) < 3 && Math.abs(event.clientY - startY) < 3) {
+				return;
+			}
+			dragged = true;
+			document.body.classList.add('moving');
+		}
+
 		const left = (event.clientX - x) / em;
 		const top = (event.clientY - y) / em;
 		const lineSet = {};
@@ -938,8 +955,24 @@ function schemaMousemove(event) {
  */
 function schemaMouseup(event, db) {
 	if (that !== undefined) {
-		tablePos[that.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
+		const box = that;
 		that = undefined;
+
+		if (!dragged) {
+			return;
+		}
+
+		document.body.classList.remove('moving');
+
+		// The mouse up is followed by a click, which must not open the table name link after dragging.
+		const cancelClick = event2 => {
+			event2.preventDefault();
+			event2.stopPropagation();
+		};
+		document.addEventListener('click', cancelClick, true);
+		setTimeout(() => document.removeEventListener('click', cancelClick, true));
+
+		tablePos[box.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
 		let s = '';
 		for (const key in tablePos) {
 			const [top, left] = tablePos[key];
