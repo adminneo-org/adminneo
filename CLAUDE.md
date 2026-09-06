@@ -199,6 +199,7 @@ git remote add vrana git@github.com:vrana/adminer.git
 git fetch vrana main --no-tags
 ```
 - Find the commit (e.g. `git log vrana/main --oneline --grep="<keyword>" -i`) and inspect it with `git show <hash>`.
+- When walking through upstream commits one by one, never port a commit on your own initiative. Present the commit message, say what would apply to AdminNeo, and wait for confirmation — showing a commit is not an instruction to port it. This holds even for a one-line change with an obvious mapping.
 - Don't run a literal `git cherry-pick` — the two code bases have diverged enough (namespaces, driver structure, helper functions) that it will conflict badly. Instead, read the diff and reimplement the same behavior by hand in the current codebase:
   - Map each changed Adminer file to its AdminNeo equivalent; paths aren't always 1:1 (`adminer/` → `admin/`, and a database's code can move between a `plugins/drivers/*.php` optional plugin upstream and a built-in `admin/drivers/*.inc.php` driver here, or vice versa). Skip files for databases AdminNeo doesn't support.
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
