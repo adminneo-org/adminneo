@@ -1,8 +1,10 @@
-JUSH 3.0.1:
+JUSH 3.1.0:
 Require ES6
 Fix highlighting in Safari < 16.4 and Firefox < 78
 Highlight keywords leaving the state (e.g. MySQL DO)
 MySQL: Link the longest matching phrase
+PostgreSQL: Highlight function bodies in DO $$ and AS $$
+MS SQL: Highlight SQL in PHP mssql_query() and sqlsrv_query()
 CSS: Fix links to MDN
 JS: Highlight true, false and null
 JSDoc: Link tags to jsdoc.app, add new tags

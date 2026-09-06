@@ -37,6 +37,7 @@ Each takes a path to a local checkout of its source, e.g. `php update/js.php pat
 They edit the module files in place and report added/removed names on stderr – review that output and `git diff` before committing.
 
 No package.json, Makefile, or lint config exists in this repo – don't invent lint/format commands.
+`modules/*.js` are linted by ESLint from the parent Adminer repo (`conf/eslint.config.mjs`, run by `composer check`), which is why they contain `eslint-disable` comments; the root `jush.js`, `jush-api.js`, `tests.js`, `demo.js`, `jquery.jush.js` and `jush-help.js` are not linted.
 
 ## Architecture
 

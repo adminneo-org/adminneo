@@ -1,7 +1,7 @@
-jush.tr.js = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_obj: /\s*\{/, _1: /}/, js_code: /()/ };
+jush.tr.js = { php: jush.php, js_reg: /\s*\/(?![/*])/, js_obj: /\s*\{/, _1: /}/, js_code: /()/ };
 jush.tr.js_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, js_doc: /\/\*\*/, com: /\/\*/, num: jush.num, js_write: /(\b)(write(?:ln)?)(\()/, js_http: /(\.)(setRequestHeader|getResponseHeader)(\()/, js: /\{/, _3: /(<)(\/script)(>)/i, _2: /}/, _1: /[^.\])}$\w\s]/ };
-jush.tr.js_write = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_write_code: /()/ };
-jush.tr.js_http = { php: jush.php, js_reg: /\s*\/(?![\/*])/, js_http_code: /()/ };
+jush.tr.js_write = { php: jush.php, js_reg: /\s*\/(?![/*])/, js_write_code: /()/ };
+jush.tr.js_http = { php: jush.php, js_reg: /\s*\/(?![/*])/, js_http_code: /()/ };
 jush.tr.js_write_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_write: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
 jush.tr.js_http_code = { php: jush.php, quo: /"/, apo: /'/, js_bac: /`/, js_one: /\/\//, com: /\/\*/, num: jush.num, js_http: /\(/, _2: /\)/, _1: /[^\])}$\w\s]/ };
 jush.tr.js_one = { php: jush.php, _1: /\n/, _3: /(<)(\/script)(>)/i };

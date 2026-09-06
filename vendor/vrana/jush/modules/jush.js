@@ -10,7 +10,8 @@
 unnecessary escaping (e.g. echo "\'" or ='&quot;') is removed
 */
 
-var jush = { // var (not const) - consumers such as Adminer check window.jush
+// eslint-disable-next-line no-var -- var (not const) - consumers such as Adminer check window.jush
+var jush = {
 	create_links: true, // string for extra <a> parameters, e.g. 'target="_blank"'
 	timeout: 1000, // milliseconds
 	custom_links: { }, // { state: { url: regexp } }, for example { php : { 'doc/$&.html': /\b(getData|setData)\b/g } }
@@ -320,6 +321,9 @@ var jush = { // var (not const) - consumers such as Adminer check window.jush
 			} else if (state == 'css_js' || state == 'cnf_http' || state == 'cnf_phpini' || state == 'sql_sqlset' || state == 'sqlite_sqliteset' || state == 'pgsql_pgsqlset') {
 				child_states.unshift(state.replace(/^[^_]+_/, ''));
 				s_states = this.highlight_states(child_states, s, true);
+			} else if (state == 'pgsql_eot2' && this.pgsql_body) {
+				child_states = [ 'pgsql' ]; // the body is self-contained, do not carry states in or out
+				s_states = this.highlight_states(child_states, s, true, escape);
 			} else if ((state == 'php_quo' || state == 'php_apo') && /^(php_php|php_sql|php_sqlite|php_pgsql|php_mssql|php_oracle|php_phpini|php_http|php_mail)$/.test(prev_state)) {
 				child_states.unshift(prev_state.slice(4));
 				s_states = this.highlight_states(child_states, this.stripslashes(s), true, (state == 'php_apo' ? this.addslashes_apo : this.addslashes_quo));
@@ -405,8 +409,9 @@ var jush = { // var (not const) - consumers such as Adminer check window.jush
 					this.tr.php_eot2._2 = new RegExp('(\n)(' + match[2] + ')(?=;?\n)');
 					this.build_regexp('php_eot2', (match[3] == "'" ? { _2: this.tr.php_eot2._2 } : this.tr.php_eot2));
 				} else if (state == 'pgsql_eot') {
-					this.tr.pgsql_eot2._2 = new RegExp('\\$' + match[0].replace(/\$/, '\\$'));
+					this.tr.pgsql_eot2._2 = new RegExp('\\$' + match[0].replace(/\$/, '\\$') + '|$');
 					this.build_regexp('pgsql_eot2', this.tr.pgsql_eot2);
+					this.pgsql_body = /\b(?:AS|DO)\s*\$$/i.test(text.substring(0, match.index)); // function body, not a string literal
 				}
 			} else {
 				if (state == 'php_met' && this.last_class) {
