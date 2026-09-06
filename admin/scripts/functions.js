@@ -419,7 +419,7 @@ function initNavigationResizer(url, token, minWidth, maxWidth) {
 	const handle = gid("navigation-resizer");
 	const panel = gid("navigation-panel");
 	const style = gid("navigation-width");
-	const rtl = document.body.classList.contains("rtl");
+	const rtl = document.documentElement.classList.contains("rtl");
 
 	let hoverTimeout = null;
 	let dragging = false;
@@ -1656,3 +1656,12 @@ function updateMaxLengthMark(input) {
 }
 
 oninput = event => updateMaxLengthMark(event.target);
+
+// documentElement - this file is loaded in <head> where document.body does not exist yet.
+document.documentElement.classList.add('js');
+document.documentElement.classList.remove('nojs'); // Two calls, not classList.replace() - unsupported in Chrome < 61.
+
+mixin(document, {
+	onclick: bodyClick,
+	onkeydown: bodyKeydown,
+});

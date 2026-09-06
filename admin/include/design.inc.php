@@ -33,7 +33,7 @@ function page_header(string $title, $breadcrumb = []): void
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
 	?>
 <!DOCTYPE html>
-<html lang='<?= Locale::get()->getLanguage(); ?>' dir='<?= lang('ltr'); ?>'>
+<html lang='<?= Locale::get()->getLanguage(); ?>' dir='<?= lang('ltr'); ?>' class='<?= lang('ltr'); ?> nojs'>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="robots" content="noindex, nofollow">
@@ -115,15 +115,9 @@ function page_header(string $title, $breadcrumb = []): void
 	Admin::get()->printToHead();
 	?>
 </head>
-<body class='<?php echo lang('ltr'); ?> nojs'>
+<body>
 <script<?php echo nonce(); ?>>
-	const body = document.body;
-
-	body.onkeydown = bodyKeydown;
-	body.onclick = bodyClick;
-	body.classList.add("js");
-	body.classList.remove("nojs"); // not replace() - unsupported in Chrome < 61
-
+	// The event handlers and the <html> classes are registered by functions.js.
 	const offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
 	const thousandsSeparator = '<?php echo js_escape(lang(',')); ?>';
 </script>
