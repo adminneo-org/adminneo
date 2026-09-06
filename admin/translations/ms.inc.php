@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s mesti memulangkan array.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s dan %s mesti memulangkan objek yang dibina oleh kaedah %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s mesti memulangkan array.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s dan %s mesti memulangkan objek yang dibina oleh kaedah %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Sistem',
@@ -26,16 +26,16 @@ return [
 	'Logout' => 'Log keluar',
 	'Logged as: %s' => 'Log masuk sebagai: %s',
 	'Logout successful.' => 'Log keluar berjaya.',
-	'hostname[:port] or :socket' => 'nama hos[:port] atau :soket', // by Claude Opus 5
-	'Invalid server or credentials.' => 'Pelayan atau kelayakan tidak sah.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Terdapat ruang kosong dalam kata laluan yang dimasukkan, mungkin itu puncanya.', // by Claude Opus 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tidak menyokong capaian ke pangkalan data tanpa kata laluan, <a href="https://www.adminneo.org/password"%s>maklumat lanjut</a>.', // by Claude Opus 5
-	'Database does not support password.' => 'Pangkalan data tidak menyokong kata laluan.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'nama hos[:port] atau :soket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Pelayan atau kelayakan tidak sah.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Terdapat ruang kosong dalam kata laluan yang dimasukkan, mungkin itu puncanya.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tidak menyokong capaian ke pangkalan data tanpa kata laluan, <a href="https://www.adminneo.org/password"%s>maklumat lanjut</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Pangkalan data tidak menyokong kata laluan.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'Terlalu banyak percubaan log masuk yang gagal, sila cuba lagi dalam masa %d minit.',
-	'Invalid permanent login, please login again.' => 'Log masuk kekal tidak sah, sila log masuk kembali.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Log masuk kekal tidak sah, sila log masuk kembali.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF tidak sah. Sila hantar borang sekali lagi.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Jika anda tidak menghantar permintaan ini dari AdminNeo sila tutup halaman ini.',
-	'The action will be performed after successful login with the same credentials.' => 'Tindakan ini akan dilaksanakan selepas log masuk berjaya dengan kelayakan yang sama.', // by Claude Opus 5
+	'The action will be performed after successful login with the same credentials.' => 'Tindakan ini akan dilaksanakan selepas log masuk berjaya dengan kelayakan yang sama.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'Tiada sambungan',
@@ -48,10 +48,11 @@ return [
 	// Settings
 	'Language' => 'Bahasa',
 
-	'Home' => 'Utama', // by Claude Opus 5
+	'Menu' => 'Menu', // by Claude Fable 5.1
+	'Home' => 'Utama', // by Claude Fable 5.1
 	'Refresh' => 'Segar kembali',
-	'Info' => 'Info', // by Claude Opus 5
-	'More information.' => 'Maklumat lanjut.', // by Claude Opus 5
+	'Info' => 'Info', // by Claude Fable 5.1
+	'More information.' => 'Maklumat lanjut.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Keistimewaan',
@@ -70,20 +71,20 @@ return [
 
 	// Structure
 	'Column' => 'Kolum',
-	'Columns' => 'Kolum', // by Claude Opus 5
+	'Columns' => 'Kolum', // by Claude Fable 5.1
 	'Routine' => 'Rutin',
 	'Grant' => 'Beri',
 	'Revoke' => 'Batal',
 
 	// Queries
 	'SQL command' => 'Arahan SQL',
-	'HTTP request' => 'Permintaan HTTP', // by Claude Opus 5
+	'HTTP request' => 'Permintaan HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => '%d query berjaya dilaksanakan.',
 	'Query executed OK, %d row(s) affected.' => 'Query berjaya dilaksanakan, %d baris terjejas.',
 	'No commands to execute.' => 'Tiada arahan untuk dilaksanakan.',
 	'Error in query' => 'Ralat pada query',
-	'Unknown error.' => 'Ralat tidak diketahui.', // by Claude Opus 5
-	'Warnings' => 'Amaran', // by Claude Opus 5
+	'Unknown error.' => 'Ralat tidak diketahui.', // by Claude Fable 5.1
+	'Warnings' => 'Amaran', // by Claude Fable 5.1
 	'%s queries are not supported.' => 'Query %s tidak disokong.',
 	'Execute' => 'Laksana',
 	'Stop on error' => 'Berhenti jika ralat',
@@ -104,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'Muat naik fail dihalang.',
 	'Unable to upload a file.' => 'Muat naik fail gagal.',
 	'Maximum allowed file size is %sB.' => 'Saiz fail maksimum yang dibenarkan adalah %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Bilangan fail maksimum adalah %d. Pilih fail yang lebih sedikit atau tingkatkan tetapan %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Jumlah saiz fail maksimum adalah %s. Pilih fail yang lebih kecil atau tingkatkan tetapan %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Bilangan fail maksimum adalah %d. Pilih fail yang lebih sedikit atau tingkatkan tetapan %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Jumlah saiz fail maksimum adalah %s. Pilih fail yang lebih kecil atau tingkatkan tetapan %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Data POST terlalu besar. Kecilkan data atau tingkatkan tetapan %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Anda boleh muat naik fail SQL yang besar melalui FTP dan import melalui pelayan.',
 	'File must be in UTF-8 encoding.' => 'Fail mesti dalam pengekodan UTF-8.',
@@ -122,8 +123,8 @@ return [
 
 	// Databases
 	'Database' => 'Pangkalan data',
-	'database' => 'pangkalan data', // by Claude Opus 5
-	'DB' => 'PD', // by Claude Opus 5
+	'database' => 'pangkalan data', // by Claude Fable 5.1
+	'DB' => 'PD', // by Claude Fable 5.1
 	'Use' => 'Guna',
 	'Invalid database.' => 'Pangkalan data tidak sah.',
 	'Alter database' => 'Ubah pangkalan data',
@@ -142,10 +143,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Skema',
-	'schema' => 'skema', // by Claude Opus 5
-	'Schemas' => 'Skema', // by Claude Opus 5
-	'No schemas.' => 'Tiada skema.', // by Claude Opus 5
-	'Show schema' => 'Paparkan skema', // by Claude Opus 5
+	'schema' => 'skema', // by Claude Fable 5.1
+	'Schemas' => 'Skema', // by Claude Fable 5.1
+	'No schemas.' => 'Tiada skema.', // by Claude Fable 5.1
+	'Show schema' => 'Paparkan skema', // by Claude Fable 5.1
 	'Alter schema' => 'Ubah skema',
 	'Create schema' => 'Buat skema',
 	'Schema has been dropped.' => 'Skema telah dijatuhkan.',
@@ -154,6 +155,7 @@ return [
 	'Invalid schema.' => 'Skema tidak sah.',
 
 	// Table list
+	'All' => 'Semua', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Enjin',
 	'engine' => 'enjin',
 	'Collation' => 'Collation',
@@ -169,14 +171,14 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Baiki',
 	'Truncate' => 'Memangkas',
-	'Truncate Cascade' => 'Memangkas secara berperingkat', // by Claude Opus 5
+	'Truncate Cascade' => 'Memangkas secara lata', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Jadual telah dimangkaskan.',
 	'Move to other database' => 'Pindahkan ke pangkalan data yang lain',
 	'Move' => 'Pindah',
 	'Tables have been moved.' => 'Jadual telah dipindahkan.',
 	'Copy' => 'Salin',
 	'Tables have been copied.' => 'Jadual telah disalin.',
-	'overwrite' => 'tulis ganti', // by Claude Opus 5
+	'overwrite' => 'tulis ganti', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Jadual',
@@ -212,7 +214,7 @@ return [
 
 	// Views
 	'View' => 'Papar',
-	'Materialized view' => 'Paparan termaterialisasi', // by Claude Opus 5
+	'Materialized view' => 'Paparan termaterialisasi', // by Claude Fable 5.1
 	'View has been dropped.' => 'Paparan telah dijatuhkan.',
 	'View has been altered.' => 'Paparan telah diubah.',
 	'View has been created.' => 'Paparan telah dibuat.',
@@ -221,12 +223,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Partition mengikut',
-	'Partition' => 'Partition', // by Claude Opus 5
+	'Partition' => 'Partition', // by Claude Fable 5.1
 	'Partitions' => 'Partition',
 	'Partition name' => 'Nama partition',
 	'Values' => 'Nilai',
-	'Inherited tables' => 'Jadual warisan', // by Claude Opus 5
-	'Inherited from' => 'Diwarisi daripada', // by Claude Opus 5
+	'Inherited tables' => 'Jadual terbitan', // by Claude Fable 5.1
+	'Inherited from' => 'Diwarisi daripada', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Indeks',
@@ -235,13 +237,12 @@ return [
 	'Add next' => 'Tambah yang seterusnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'kepanjangan',
-	'operator class' => 'kelas operator', // by Claude Opus 5
-	'Algorithm' => 'Algoritma', // by Claude Opus 5
-	'Condition' => 'Syarat', // by Claude Opus 5
+	'operator class' => 'kelas operator', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritma', // by Claude Fable 5.1
+	'Condition' => 'Syarat', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
-	'Foreign key' => 'Kunci asing',
 	'Foreign key has been dropped.' => 'Kunci asing telah dijatuhkan.',
 	'Foreign key has been altered.' => 'Kunci asing telah diubah.',
 	'Foreign key has been created.' => 'Kunci asing telah dibuat.',
@@ -251,7 +252,8 @@ return [
 	'Target' => 'Sasaran',
 	'Add column' => 'Tambah kolum',
 	'Alter' => 'Ubah',
-	'Add foreign key' => 'Tambah kunci asing',
+	'Alter foreign key' => 'Ubah kunci asing', // by Claude Fable 5.1
+	'Create foreign key' => 'Bina kunci asing', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolum sumber dan sasaran perlu mempunyai jenis data yang sama, indeks diperlukan pada kolum sasaran dan data yang dirujuk wujud.',
@@ -301,8 +303,7 @@ return [
 	'Alter type' => 'Ubah jenis',
 
 	// Triggers
-	'Triggers' => 'Pencetus', // by Claude Opus 5
-	'Add trigger' => 'Tambah pencetus',
+	'Triggers' => 'Pencetus', // by Claude Fable 5.1
 	'Trigger has been dropped.' => 'Pencetus telah dijatuhkan.',
 	'Trigger has been altered.' => 'Pencetus telah diubah.',
 	'Trigger has been created.' => 'Pencetus telah dibuat.',
@@ -310,12 +311,12 @@ return [
 	'Create trigger' => 'Buat pencetus',
 
 	// Table check constraints
-	'Checks' => 'Pemeriksaan', // by Claude Opus 5
-	'Create check' => 'Bina pemeriksaan', // by Claude Opus 5
-	'Alter check' => 'Ubah pemeriksaan', // by Claude Opus 5
-	'Check has been created.' => 'Pemeriksaan telah dibina.', // by Claude Opus 5
-	'Check has been altered.' => 'Pemeriksaan telah diubah.', // by Claude Opus 5
-	'Check has been dropped.' => 'Pemeriksaan telah dijatuhkan.', // by Claude Opus 5
+	'Checks' => 'Pemeriksaan', // by Claude Fable 5.1
+	'Create check' => 'Bina pemeriksaan', // by Claude Fable 5.1
+	'Alter check' => 'Ubah pemeriksaan', // by Claude Fable 5.1
+	'Check has been created.' => 'Pemeriksaan telah dibina.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Pemeriksaan telah diubah.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Pemeriksaan telah dijatuhkan.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Pilih data',
@@ -333,13 +334,14 @@ return [
 	'Full table scan' => 'Imbasan penuh jadual',
 	'Unable to select the table' => 'Pemilihan jadual tidak berjaya',
 	'Search data in tables' => 'Cari data dalam jadual',
+	'All rows on this page' => 'Semua baris pada halaman ini', // by Claude Fable 5.1
 	'No rows.' => 'Tiada baris.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d baris',
 	'Page' => 'Halaman',
 	'last' => 'akhir',
 	'Load more data' => 'Load lebih data',
-	'Loading' => 'Loading',
+	'Loading…' => 'Loading…',
 	'Whole result' => 'Keputusan keseluruhan',
 	'%d byte(s)' => [
 		'%d byte',
@@ -360,7 +362,7 @@ return [
 	'Save' => 'Simpan',
 	'Save and continue edit' => 'Simpan dan sambung ubah',
 	'Save and insert next' => 'Simpan dan masukkan seterusnya',
-	'Saving' => 'Menyimpan',
+	'Saving…' => 'Menyimpan…',
 	'Selected' => 'Terpilih',
 	'Clone' => 'Klon',
 	'Delete' => 'Padam',
@@ -386,38 +388,38 @@ return [
 	'no' => 'tidak',
 
 	// Settings
-	'Settings' => 'Tetapan', // by Claude Opus 5
-	'Default' => 'Lalai', // by Claude Opus 5
-	'Color scheme' => 'Skema warna', // by Claude Opus 5
-	'By system' => 'Mengikut sistem', // by Claude Opus 5
-	'Light' => 'Cerah', // by Claude Opus 5
-	'Dark' => 'Gelap', // by Claude Opus 5
-	'Navigation mode' => 'Mod navigasi', // by Claude Opus 5
-	'Simple' => 'Ringkas', // by Claude Opus 5
-	'Dual' => 'Ganda', // by Claude Opus 5
-	'Dual on hover' => 'Ganda semasa tuding tetikus', // by Claude Opus 5
-	'Reversed' => 'Terbalik', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Susun atur navigasi utama dengan pautan jadual.', // by Claude Opus 5
-	'Table links' => 'Pautan jadual', // by Claude Opus 5
-	'Primary action for all table links.' => 'Tindakan utama untuk semua pautan jadual.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Pautan ke jadual yang merujuk baris semasa.', // by Claude Opus 5
-	'Display' => 'Paparkan', // by Claude Opus 5
-	'Hide' => 'Sembunyikan', // by Claude Opus 5
-	'Records per page' => 'Rekod setiap halaman', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Bilangan lalai rekod yang dipaparkan dalam jadual data.', // by Claude Opus 5
-	'Enum as select' => 'Enum sebagai senarai pilihan', // by Claude Opus 5
-	'Never' => 'Tidak sesekali', // by Claude Opus 5
-	'Always' => 'Sentiasa', // by Claude Opus 5
-	'More values than %d' => 'Lebih daripada %d nilai', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Ambang untuk memaparkan senarai pilihan bagi kolum enum.', // by Claude Opus 5
+	'Settings' => 'Tetapan', // by Claude Fable 5.1
+	'Default' => 'Lalai', // by Claude Fable 5.1
+	'Color scheme' => 'Skema warna', // by Claude Fable 5.1
+	'By system' => 'Mengikut sistem', // by Claude Fable 5.1
+	'Light' => 'Cerah', // by Claude Fable 5.1
+	'Dark' => 'Gelap', // by Claude Fable 5.1
+	'Navigation mode' => 'Mod navigasi', // by Claude Fable 5.1
+	'Simple' => 'Ringkas', // by Claude Fable 5.1
+	'Dual' => 'Ganda', // by Claude Fable 5.1
+	'Dual on hover' => 'Ganda semasa tuding tetikus', // by Claude Fable 5.1
+	'Reversed' => 'Terbalik', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Susun atur navigasi utama dengan pautan jadual.', // by Claude Fable 5.1
+	'Table links' => 'Pautan jadual', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Tindakan utama untuk semua pautan jadual.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Pautan ke jadual yang merujuk baris semasa.', // by Claude Fable 5.1
+	'Display' => 'Paparkan', // by Claude Fable 5.1
+	'Hide' => 'Sembunyikan', // by Claude Fable 5.1
+	'Records per page' => 'Rekod setiap halaman', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Bilangan lalai rekod yang dipaparkan dalam jadual data.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum sebagai senarai pilihan', // by Claude Fable 5.1
+	'Never' => 'Tidak pernah', // by Claude Fable 5.1
+	'Always' => 'Sentiasa', // by Claude Fable 5.1
+	'More values than %d' => 'Lebih daripada %d nilai', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Ambang untuk memaparkan senarai pilihan bagi kolum enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Kata Laluan Sekali Guna', // by Claude Opus 5
-	'Enter OTP code.' => 'Masukkan kod OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Kod OTP tidak sah.', // by Claude Opus 5
-	'Access denied.' => 'Capaian dihalang.', // by Claude Opus 5
-	'JSON previews' => 'Pratonton JSON', // by Claude Opus 5
-	'Data table' => 'Jadual data', // by Claude Opus 5
-	'Edit form' => 'Borang ubah', // by Claude Opus 5
-	'Ask %s' => 'Tanya %s', // by Claude Opus 5
+	'One Time Password' => 'Kata Laluan Sekali Guna', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Masukkan kod OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Kod OTP tidak sah.', // by Claude Fable 5.1
+	'Access denied.' => 'Capaian dihalang.', // by Claude Fable 5.1
+	'JSON previews' => 'Pratonton JSON', // by Claude Fable 5.1
+	'Data table' => 'Jadual data', // by Claude Fable 5.1
+	'Edit form' => 'Borang ubah', // by Claude Fable 5.1
+	'Ask %s' => 'Tanya %s', // by Claude Fable 5.1
 ];

@@ -388,6 +388,9 @@ if (isset($_GET["mongo"])) {
 			$collections[$result->name] = 'table';
 		}
 
+		// listCollections has no server-side ordering.
+		ksort($collections);
+
 		return $collections;
 	}
 
@@ -655,7 +658,7 @@ if (isset($_GET["mongo"])) {
 		return null;
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}

@@ -24,9 +24,11 @@ function initSyntaxHighlighting(version, vendor, autocompletion) {
 			}
 
 			// MariaDB page keys are resolved by jush itself from the 'mysql-key maria-key' entries.
-			obj[key] = (vendor === "mariadb" ? obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : obj[key]) // MariaDB
-				.replace('/doc/mysql', '/doc/refman/' + version) // MySQL
-			;
+			obj[key] = (vendor === "mariadb" ?
+				obj[key].replace('dev.mysql.com/doc/mysql', 'mariadb.com/kb') : // MariaDB
+				obj[key]
+			).replace('/doc/mysql', '/doc/refman/' + version); // MySQL
+
 			if (vendor !== 'cockroach') {
 				obj[key] = obj[key].replace('/docs/current', '/docs/' + version); // PostgreSQL
 			}
@@ -76,7 +78,7 @@ function typePassword(el, disable) {
  */
 function initLoginDriver(driverSelect) {
 	driverSelect.onchange = () => {
-		const trs = parentTag(driverSelect, 'table').rows;
+		const trs = driverSelect.closest('table').rows;
 		const disabled = /sqlite/.test(selectValue(driverSelect));
 
 		// 1 - row with server
@@ -107,7 +109,9 @@ function dbMouseDown(event) {
 	if (event.target.tagName === "OPTION") return;
 
 	dbCtrl = isCtrl(event);
-	dbPrevious[this.name] ??= this.value;
+	if (dbPrevious[this.name] === undefined) {
+		dbPrevious[this.name] = this.value;
+	}
 }
 
 /**
@@ -211,7 +215,7 @@ function selectFieldChange() {
 	 * Sets up event handlers for one row.
 	 *
 	 * @param {HTMLTableRowElement} row
-	 * @param {boolean} autoAddRow
+	 * @param {boolean} [autoAddRow]
 	 */
 	function initFieldsEditingRow(row, autoAddRow = true) {
 		// Field name. Is null if some row is removed and then new row is added to the beginning (form is posted).
@@ -440,21 +444,9 @@ function selectFieldChange() {
 				el.selectedIndex = 0;
 			}
 
-			if (el.name === name + '[collation]') {
-				el.classList.toggle('hidden', !/(char|text|enum|set)$/.test(text));
-			}
-
-			if (el.name === name + '[unsigned]') {
-				el.classList.toggle('hidden', !/(^|[^o])int(?!er)|numeric|real|float|double|decimal|money/.test(text));
-			}
-
-			if (el.name === name + '[on_update]') {
-				// MySQL supports datetime since 5.6.5.
-				el.classList.toggle('hidden', !/timestamp|datetime/.test(text));
-			}
-
-			if (el.name === name + '[on_delete]') {
-				el.classList.toggle('hidden', !/`/.test(text));
+			// The expressions come from option_types(), the options of the other columns start with another name.
+			if (el.dataset.types && el.name.startsWith(name + '[')) {
+				el.classList.toggle('hidden', !new RegExp(el.dataset.types).test(text));
 			}
 		}
 	}
@@ -463,12 +455,12 @@ function selectFieldChange() {
 	 * Adds new table row for the next field.
 	 *
 	 * @param {HTMLInputElement|HTMLButtonElement} button
-	 * @param {boolean} focus
+	 * @param {boolean} [focus]
 	 */
 	function addRow(button, focus = false) {
 		const match = /(\d+)(\.\d+)?/.exec(button.name);
 		const newIndex = match[0] + (match[2] ? added.slice(match[2].length) : added) + '1';
-		const row = parentTag(button, 'tr');
+		const row = button.closest('tr');
 		const newRow = cloneNode(row);
 
 		let inputs = qsa('select, input, button', row);
@@ -502,7 +494,7 @@ function selectFieldChange() {
 
 		initFieldsEditingRow(newRow, !focus);
 
-		const parent = parentTag(button, "tbody");
+		const parent = button.closest("tbody");
 		if (parent.classList.contains("sortable")) {
 			initSortableRow(newRow);
 		}
@@ -514,6 +506,27 @@ function selectFieldChange() {
 		}
 
 		added += '0';
+
+		maxFieldsCheck();
+	}
+
+	/**
+	 * Displays the error about the number of fields if the form has too many columns.
+	 */
+	function maxFieldsCheck() {
+		// Only in table creating and altering, only if max_input_vars is set and only if the message is hidden.
+		const message = qs('#max-fields');
+		if (!message) {
+			return;
+		}
+
+		// [orig] is printed for every column and removeTableRow() keeps it, so the removed columns are counted too.
+		if (qsa('#edit-fields [name$="[orig]"]').length > +message.dataset.columns) {
+			message.classList.remove('hidden');
+
+			// The top of the page is not visible after adding columns.
+			gid('edit-fields').parentNode.after(message);
+		}
 	}
 
 	/**
@@ -557,7 +570,7 @@ function onRemoveIndexRowClick() {
  * @return {boolean} Always false.
  */
 function removeTableRow(button, columnName) {
-	const row = parentTag(button, "tr");
+	const row = button.closest("tr");
 	const input = qs(`[name$='[${columnName}]']`, row);
 
 	input.remove();
@@ -607,7 +620,7 @@ function partitionByChange() {
  * @this {HTMLInputElement}
  */
 function partitionNameChange() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	row.firstChild.firstChild.value = '';
 	tr.parentNode.append(row);
@@ -639,7 +652,7 @@ function editingCommentsClick(el, columnIndex) {
  * @this {HTMLTableElement}
  */
 function dumpClick(event) {
-	let el = parentTag(event.target, 'label');
+	let el = event.target.closest('label');
 	if (!el) return;
 
 	el = qs('input', el);
@@ -658,7 +671,7 @@ function dumpClick(event) {
  * @this {HTMLSelectElement}
  */
 function foreignAddRow() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const select of qsa('select', row)) {
@@ -676,14 +689,14 @@ function foreignAddRow() {
  * @this {HTMLSelectElement}
  */
 function indexesAddRow() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	this.onchange = () => { };
 	for (const tag of qsa('select, input, button', row)) {
 		tag.name = tag.name.replace(/\[\d+/, '$&1'); // indexes[$j] and drop_col[$j]
-		if (isTag(tag, 'select')) {
+		if (tag.matches('select')) {
 			tag.selectedIndex = 0;
-		} else if (isTag(tag, 'input')) {
+		} else if (tag.matches('input')) {
 			if (tag.type === 'checkbox') {
 				tag.checked = false;
 			} else {
@@ -695,55 +708,52 @@ function indexesAddRow() {
 }
 
 /**
- * Changes column in index.
+ * Changes column in index. The last column also adds the next one.
  *
  * @param {string} prefix Name prefix.
  *
  * @this {HTMLSelectElement|HTMLInputElement}
  */
 function indexesChangeColumn(prefix) {
-	const names = [];
-	for (const column of qsa('select, input', parentTag(this, 'td'))) {
-		if (/\[columns]/.test(column.name)) {
-			const value = selectValue(column);
-			if (value) {
-				names.push(value);
+	const field = this;
+	const td = field.closest('td');
+	const columns = [...qsa('select, input', td)].filter(column => /\[columns]/.test(column.name));
+
+	// The appended column becomes the last one, so it adds the next.
+	if (columns[columns.length - 1] === field) {
+		const type = field.form[field.name.replace(/].*/, '][type]')];
+		if (!type.selectedIndex) {
+			while (selectValue(type) !== "INDEX" && type.selectedIndex < type.options.length) {
+				type.selectedIndex++;
+			}
+			type.onchange();
+		}
+
+		// The clone keeps the handlers, so it adds the next column.
+		const column = cloneNode(field.parentElement);
+		for (const select of qsa('select', column)) {
+			select.name = select.name.replace(/]\[\d+/, '$&1');
+			select.selectedIndex = 0;
+		}
+		for (const input of qsa('input', column)) {
+			input.name = input.name.replace(/]\[\d+/, '$&1');
+			if (input.type !== 'checkbox') {
+				input.value = '';
 			}
 		}
+		td.append(column);
 	}
-	this.form[this.name.replace(/].*/, '][name]')].value = prefix + names.join('_');
-}
 
-/**
- * Adds column for index.
- *
- * @param {string} prefix Name prefix.
- *
- * @this {HTMLSelectElement|HTMLInputElement}
- */
-function indexesAddColumn(prefix) {
-	const field = this;
-	const select = field.form[field.name.replace(/].*/, '][type]')];
-	if (!select.selectedIndex) {
-		while (selectValue(select) !== "INDEX" && select.selectedIndex < select.options.length) {
-			select.selectedIndex++;
-		}
-		select.onchange();
-	}
-	const column = cloneNode(field.parentElement);
-	for (const select of qsa('select', column)) {
-		select.name = select.name.replace(/]\[\d+/, '$&1');
-		select.selectedIndex = 0;
-	}
-	field.onchange = partial(indexesChangeColumn, prefix);
-	for (const input of qsa('input', column)) {
-		input.name = input.name.replace(/]\[\d+/, '$&1');
-		if (input.type !== 'checkbox') {
-			input.value = '';
+	const names = [];
+	// The appended column is empty, so it doesn't matter that it's not in the list.
+	for (const column of columns) {
+		const value = selectValue(column);
+		if (value) {
+			names.push(value);
 		}
 	}
-	parentTag(field, 'td').append(column);
-	field.onchange();
+
+	field.form[field.name.replace(/].*/, '][name]')].value = prefix + names.join('_');
 }
 
 /**
@@ -769,13 +779,14 @@ function sqlSubmit(form, root) {
 /**
  * Exports the result table by JS without re-running the query.
  *
+ * @param {MouseEvent} event
  * @param {string} settingsUrl Address storing the selected format and output.
  *
  * @this {HTMLInputElement}
  *
  * @return {boolean} False when the export is handled by JS.
  */
-function sqlExport(settingsUrl) {
+function sqlExport(event, settingsUrl) {
 	const form = this.form;
 	const format = form['format'].value;
 	const output = form['output'].value;
@@ -818,6 +829,10 @@ function sqlExport(settingsUrl) {
 		a.click();
 		a.remove();
 		setTimeout(() => URL.revokeObjectURL(url));
+	} else if (isCtrl(event) || event.shiftKey) {
+		// The same modifiers open the server-side export in a new window in bodyClick(). Submit the form if the pop-up is blocked.
+		// The URL is not revoked to not break the load of the new window.
+		return !open(url);
 	} else {
 		location.href = url;
 	}
@@ -833,7 +848,7 @@ function sqlExport(settingsUrl) {
  * @return {string}
  */
 function formatDateTime(date) {
-	const pad = number => String(number).padStart(2, '0');
+	const pad = number => ('0' + number).slice(-2);
 
 	return date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate())
 		+ '-' + pad(date.getHours()) + pad(date.getMinutes()) + pad(date.getSeconds());
@@ -885,7 +900,7 @@ function schemaMousemove(event) {
 		for (const div of qsa('div', that)) {
 			if (div.classList.contains('references')) {
 				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
-				const ref = (tablePos[div.title] ?? [div2.parentNode.offsetTop / em, 0]);
+				const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / em, 0]);
 				let left1 = -1;
 				const id = div.id.replace(/^ref.(.+)-.+/, '$1');
 				if (div.parentNode !== div2.parentNode) {
@@ -926,7 +941,8 @@ function schemaMouseup(event, db) {
 		tablePos[that.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
 		that = undefined;
 		let s = '';
-		for (const [key, [top, left]] of Object.entries(tablePos)) {
+		for (const key in tablePos) {
+			const [top, left] = tablePos[key];
 			s += '_' + key + ':' + Math.round(top) + 'x' + Math.round(left);
 		}
 		s = encodeURIComponent(s.slice(1));
@@ -962,7 +978,7 @@ function schemaMouseup(event, db) {
 	 *
 	 * @param {HTMLElement} element
 	 * @param {string|function} content
-	 * @param {boolean} side Displays on left side (otherwise on top).
+	 * @param {boolean} [side] Displays on left side (otherwise on top).
 	 */
 	window.initHelpFor = function(element, content, side = false) {
 		const withCallback = typeof content === "function";

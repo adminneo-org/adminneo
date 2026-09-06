@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Jazyk',
 
+	'Menu' => 'Menu',
 	'Home' => 'Domů',
 	'Refresh' => 'Obnovit',
 	'Info' => 'Info',
@@ -174,6 +175,7 @@ return [
 	'Invalid schema.' => 'Nesprávné schéma.',
 
 	// Table list
+	'All' => 'Vše', // checkbox selecting all tables and views
 	'Engine' => 'Úložiště',
 	'engine' => 'úložiště',
 	'Collation' => 'Porovnávání',
@@ -261,7 +263,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Cizí klíče',
-	'Foreign key' => 'Cizí klíč',
 	'Foreign key has been dropped.' => 'Cizí klíč byl odstraněn.',
 	'Foreign key has been altered.' => 'Cizí klíč byl změněn.',
 	'Foreign key has been created.' => 'Cizí klíč byl vytvořen.',
@@ -271,7 +272,8 @@ return [
 	'Target' => 'Cíl',
 	'Add column' => 'Přidat sloupec',
 	'Alter' => 'Změnit',
-	'Add foreign key' => 'Přidat cizí klíč',
+	'Alter foreign key' => 'Změnit cizí klíč',
+	'Create foreign key' => 'Vytvořit cizí klíč',
 	'ON DELETE' => 'Při smazání',
 	'ON UPDATE' => 'Při změně',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Zdrojové a cílové sloupce musí mít stejný datový typ, nad cílovými sloupci musí být definován index a odkazovaná data musí existovat.',
@@ -326,7 +328,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggery',
-	'Add trigger' => 'Přidat trigger',
 	'Trigger has been dropped.' => 'Trigger byl odstraněn.',
 	'Trigger has been altered.' => 'Trigger byl změněn.',
 	'Trigger has been created.' => 'Trigger byl vytvořen.',
@@ -357,6 +358,7 @@ return [
 	'Full table scan' => 'Průchod celé tabulky',
 	'Unable to select the table' => 'Nepodařilo se vypsat tabulku',
 	'Search data in tables' => 'Vyhledat data v tabulkách',
+	'All rows on this page' => 'Všechny řádky na této stránce',
 	'No rows.' => 'Žádné řádky.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -367,7 +369,7 @@ return [
 	'Page' => 'Stránka',
 	'last' => 'poslední',
 	'Load more data' => 'Načíst další data',
-	'Loading' => 'Načítá se',
+	'Loading…' => 'Načítá se…',
 	'Whole result' => 'Celý výsledek',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -389,7 +391,7 @@ return [
 	'Save' => 'Uložit',
 	'Save and continue edit' => 'Uložit a pokračovat v editaci',
 	'Save and insert next' => 'Uložit a vložit další',
-	'Saving' => 'Ukládá se',
+	'Saving…' => 'Ukládá se…',
 	'Selected' => 'Označené',
 	'Clone' => 'Klonovat',
 	'Delete' => 'Smazat',

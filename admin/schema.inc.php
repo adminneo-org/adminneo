@@ -61,7 +61,6 @@ foreach (table_status('', true) as $table => $table_status) {
 echo "<div id='schema' style='height: {$top}em;'>\n";
 
 echo "<script", nonce(), ">\n";
-echo "gid('schema').onselectstart = () => false;\n";
 echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
 echo "const em = gid('schema').offsetHeight / $top;\n";
 echo "document.onmousemove = schemaMousemove;\n";
@@ -74,7 +73,9 @@ foreach ($schema as $name => $table) {
 	echo script("qsl('div').onmousedown = schemaMousedown;");
 
 	foreach ($table["fields"] as $field) {
-		$val = '<span ' . type_class($field["type"]) . ' title="' . h($field["type"] . ($field["length"] ? "($field[length])" : "") . ($field["null"] ? " NULL" : '')) . '">' . h($field["field"]) . '</span>';
+		$val = '<span ' . type_class($field["type"]) . ' title="' .
+			h($field["type"] . ($field["length"] ? "($field[length])" : "") . ($field["null"] ? " NULL" : '')) .
+			'">' . h($field["field"]) . '</span>';
 		echo "<br>" . ($field["primary"] ? "<i>$val</i>" : $val);
 	}
 
@@ -120,7 +121,8 @@ foreach ($schema as $name => $table) {
 					$min_pos = min($min_pos, $pos1, $pos2);
 					$max_pos = max($max_pos, $pos1, $pos2);
 				}
-				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: .5em 0;'><div style='border-right: 1px solid Gray; margin-top: 1px; height: " . ($max_pos - $min_pos) . "em;'></div></div>\n";
+				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: .5em 0;'>" .
+					"<div style='border-right: 1px solid Gray; margin-top: 1px; height: " . ($max_pos - $min_pos) . "em;'></div></div>\n";
 			}
 		}
 	}

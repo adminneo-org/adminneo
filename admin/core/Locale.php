@@ -129,7 +129,9 @@ class Locale
 				: ($language == 'lt' ? ($number % 10 == 1 && $number % 100 != 11 ? 0 : ($number % 10 > 1 && $number / 10 % 10 != 1 ? 1 : 2)) // different forms for 1, 12-19, other
 				: ($language == 'lv' ? ($number % 10 == 1 && $number % 100 != 11 ? 0 : ($number ? 1 : 2)) // different forms for 1 except 11, other, 0
 				: ($language == 'ro' ? (!$number || ($number % 100 > 0 && $number % 100 < 20) ? 1 : 2) // different forms for 1, 0 and 2-19, other
-				: ($language == 'bs' || $language == 'hr' || $language == 'ru' || $language == 'sr' || $language == 'uk' ? ($number % 10 == 1 && $number % 100 != 11 ? 0 : ($number % 10 > 1 && $number % 10 < 5 && $number / 10 % 10 != 1 ? 1 : 2)) // different forms for 1 except 11, 2-4 except 12-14, other
+				// different forms for 1 except 11, 2-4 except 12-14, other
+				: ($language == 'bs' || $language == 'hr' || $language == 'ru' || $language == 'sr' || $language == 'uk' ?
+					($number % 10 == 1 && $number % 100 != 11 ? 0 : ($number % 10 > 1 && $number % 10 < 5 && $number / 10 % 10 != 1 ? 1 : 2))
 				: 1 // different forms for 1, other
 			)))))))));
 			$translation = $translation[$pos];

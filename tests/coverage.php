@@ -26,7 +26,7 @@
 		}
 
 		th {
-			text-align: right;
+			text-align: end;
 		}
 
 		th.low, .untested {

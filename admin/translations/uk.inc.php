@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'ГГ:ХХ:СС', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s повинен повертати масив.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s і %s повинні повертати об\'єкт, створений методом %s.', // by Claude Opus 5
+	'%s must return an array.' => '%s повинен повертати масив.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s і %s повинні повертати об\'єкт, створений методом %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Система Бази Даних',
@@ -26,8 +26,8 @@ return [
 	'Logout' => 'Вийти',
 	'Logged as: %s' => 'Ви увійшли як: %s',
 	'Logout successful.' => 'Ви вдало вийшли з системи.',
-	'hostname[:port] or :socket' => 'hostname[:port] або :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Невірний сервер або дані для входу.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'hostname[:port] або :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Невірний сервер або дані для входу.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'У вхідному паролі є пробіл, який може бути причиною.',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не підтримує доступ до бази даних без пароля, <a href="https://www.adminneo.org/password"%s>більше інформації</a>.',
 	'Database does not support password.' => 'База даних не підтримує пароль.',
@@ -36,7 +36,7 @@ return [
 		'Занадто багато невдалих спроб входу. Спробуйте знову через %d хвилини.',
 		'Занадто багато невдалих спроб входу. Спробуйте знову через %d хвилин.',
 	],
-	'Invalid permanent login, please login again.' => 'Недійсна запам\'ятована сесія, будь ласка, увійдіть в систему знову.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Недійсна запам\'ятована сесія, будь ласка, увійдіть в систему знову.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Недійсний CSRF токен. Надішліть форму ще раз.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Якщо ви не посилали цей запит з AdminNeo, закрийте цю сторінку.',
 	'The action will be performed after successful login with the same credentials.' => 'Дія буде виконуватися після успішного входу в систему з тими ж обліковими даними.',
@@ -52,10 +52,11 @@ return [
 	// Settings
 	'Language' => 'Мова',
 
-	'Home' => 'Головна', // by Claude Opus 5
+	'Menu' => 'Меню', // by Claude Fable 5.1
+	'Home' => 'Головна', // by Claude Fable 5.1
 	'Refresh' => 'Оновити',
-	'Info' => 'Інформація', // by Claude Opus 5
-	'More information.' => 'Детальніше.', // by Claude Opus 5
+	'Info' => 'Інформація', // by Claude Fable 5.1
+	'More information.' => 'Детальніше.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Привілеї',
@@ -78,14 +79,14 @@ return [
 
 	// Structure
 	'Column' => 'Колонка',
-	'Columns' => 'Колонки', // by Claude Fable 5
+	'Columns' => 'Колонки', // by Claude Fable 5.1
 	'Routine' => 'Процедура',
 	'Grant' => 'Дозволити',
 	'Revoke' => 'Заборонити',
 
 	// Queries
 	'SQL command' => 'SQL запит',
-	'HTTP request' => 'HTTP запит', // by Claude Opus 5
+	'HTTP request' => 'HTTP запит', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d запит виконано успішно.',
 		'%d запити виконано успішно.',
@@ -120,8 +121,8 @@ return [
 	'File uploads are disabled.' => 'Завантаження файлів заборонене.',
 	'Unable to upload a file.' => 'Неможливо завантажити файл.',
 	'Maximum allowed file size is %sB.' => 'Максимально допустимий розмір файлу %sБ.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальна кількість файлів %d. Виберіть менше файлів або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальний загальний розмір файлів %s. Виберіть менші файли або збільшіть параметр директиви %s конфигурації.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Максимальна кількість файлів — %d. Виберіть менше файлів або збільшіть значення директиви конфігурації %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Максимальний загальний розмір файлів — %s. Виберіть менші файли або збільшіть значення директиви конфігурації %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Занадто великий об\'єм POST-даних. Зменшіть об\'єм або збільшіть параметр директиви %s конфигурації.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Ви можете завантажити великий файл SQL через FTP та імпортувати його з сервера.',
 	'File must be in UTF-8 encoding.' => 'Файл повинен бути в кодуванні UTF-8.',
@@ -142,7 +143,7 @@ return [
 
 	// Databases
 	'Database' => 'База даних',
-	'database' => 'база даних', // by Claude Opus 5
+	'database' => 'база даних', // by Claude Fable 5.1
 	'DB' => 'DB',
 	'Use' => 'Обрати',
 	'Invalid database.' => 'Погана база даних.',
@@ -162,10 +163,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Схема',
-	'schema' => 'схема', // by Claude Opus 5
-	'Schemas' => 'Схеми', // by Claude Opus 5
-	'No schemas.' => 'Нема схем.', // by Claude Opus 5
-	'Show schema' => 'Показати схему', // by Claude Opus 5
+	'schema' => 'схема', // by Claude Fable 5.1
+	'Schemas' => 'Схеми', // by Claude Fable 5.1
+	'No schemas.' => 'Нема схем.', // by Claude Fable 5.1
+	'Show schema' => 'Показати схему', // by Claude Fable 5.1
 	'Alter schema' => 'Змінити схему',
 	'Create schema' => 'Створити схему',
 	'Schema has been dropped.' => 'Схему було видалено.',
@@ -174,6 +175,7 @@ return [
 	'Invalid schema.' => 'Невірна схема.',
 
 	// Table list
+	'All' => 'Усі', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Рушій',
 	'engine' => 'рушій',
 	'Collation' => 'Співставлення',
@@ -189,7 +191,7 @@ return [
 	'Check' => 'Перевірити',
 	'Repair' => 'Виправити',
 	'Truncate' => 'Очистити',
-	'Truncate Cascade' => 'Очистити каскадно', // by Claude Fable 5
+	'Truncate Cascade' => 'Очистити каскадно', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Таблиці було очищено.',
 	'Move to other database' => 'Перенести до іншої бази даних',
 	'Move' => 'Перенести',
@@ -241,12 +243,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Розділити по',
-	'Partition' => 'Розділ', // by Claude Opus 5
+	'Partition' => 'Розділ', // by Claude Fable 5.1
 	'Partitions' => 'Розділи',
 	'Partition name' => 'Назва розділу',
 	'Values' => 'Значення',
-	'Inherited tables' => 'Успадковані таблиці', // by Claude Opus 5
-	'Inherited from' => 'Успадкована від', // by Claude Opus 5
+	'Inherited tables' => 'Успадковані таблиці', // by Claude Fable 5.1
+	'Inherited from' => 'Успадкована від', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Індекси',
@@ -255,13 +257,12 @@ return [
 	'Add next' => 'Додати ще',
 	'Index Type' => 'Тип індексу',
 	'length' => 'довжина',
-	'operator class' => 'клас операторів', // by Claude Fable 5
-	'Algorithm' => 'Алгоритм', // by Claude Fable 5
-	'Condition' => 'Умова', // by Claude Fable 5
+	'operator class' => 'клас операторів', // by Claude Fable 5.1
+	'Algorithm' => 'Алгоритм', // by Claude Fable 5.1
+	'Condition' => 'Умова', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Зовнішні ключі',
-	'Foreign key' => 'Зовнішній ключ',
 	'Foreign key has been dropped.' => 'Зовнішній ключ було видалено.',
 	'Foreign key has been altered.' => 'Зовнішній ключ було змінено.',
 	'Foreign key has been created.' => 'Зовнішній ключ було створено.',
@@ -271,7 +272,8 @@ return [
 	'Target' => 'Ціль',
 	'Add column' => 'Додати стовпець',
 	'Alter' => 'Змінити',
-	'Add foreign key' => 'Додати зовнішній ключ',
+	'Alter foreign key' => 'Змінити зовнішній ключ', // by Claude Fable 5.1
+	'Create foreign key' => 'Створити зовнішній ключ', // by Claude Fable 5.1
 	'ON DELETE' => 'ПРИ ВИДАЛЕННІ',
 	'ON UPDATE' => 'ПРИ ЗМІНІ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Стовпці повинні мати той самий тип даних, цільові стовпці повинні бути проіндексовані і дані, на які посилаються повинні існувати.',
@@ -318,7 +320,7 @@ return [
 	'Alter sequence' => 'Змінити послідовність',
 
 	// User-defined types (PostgreSQL)
-	'User types' => 'Користувацькі типи', // by Claude Fable 5
+	'User types' => 'Користувацькі типи', // by Claude Fable 5.1
 	'Create type' => 'Створити тип',
 	'Type has been dropped.' => 'Тип було видалено.',
 	'Type has been created.' => 'Тип було створено.',
@@ -326,7 +328,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Тригери',
-	'Add trigger' => 'Додати тригер',
 	'Trigger has been dropped.' => 'Тригер було видалено.',
 	'Trigger has been altered.' => 'Тригер було змінено.',
 	'Trigger has been created.' => 'Тригер було створено.',
@@ -357,6 +358,7 @@ return [
 	'Full table scan' => 'Повне сканування таблиці',
 	'Unable to select the table' => 'Неможливо вибрати таблицю',
 	'Search data in tables' => 'Шукати дані в таблицях',
+	'All rows on this page' => 'Усі рядки на цій сторінці', // by Claude Fable 5.1
 	'No rows.' => 'Нема рядків.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -367,7 +369,7 @@ return [
 	'Page' => 'Сторінка',
 	'last' => 'остання',
 	'Load more data' => 'Завантажити ще дані',
-	'Loading' => 'Завантаження',
+	'Loading…' => 'Завантаження…',
 	'Whole result' => 'Весь результат',
 	'%d byte(s)' => [
 		'%d байт',
@@ -389,7 +391,7 @@ return [
 	'Save' => 'Зберегти',
 	'Save and continue edit' => 'Зберегти і продовжити редагування',
 	'Save and insert next' => 'Зберегти і вставити знову',
-	'Saving' => 'Збереження',
+	'Saving…' => 'Збереження…',
 	'Selected' => 'Вибрані',
 	'Clone' => 'Клонувати',
 	'Delete' => 'Видалити',
@@ -419,38 +421,38 @@ return [
 	'no' => 'ні',
 
 	// Settings
-	'Settings' => 'Налаштування', // by Claude Opus 5
-	'Default' => 'За замовчуванням', // by Claude Opus 5
-	'Color scheme' => 'Кольорова схема', // by Claude Opus 5
-	'By system' => 'Як у системі', // by Claude Opus 5
-	'Light' => 'Світла', // by Claude Opus 5
-	'Dark' => 'Темна', // by Claude Opus 5
-	'Navigation mode' => 'Режим навігації', // by Claude Opus 5
-	'Simple' => 'Простий', // by Claude Opus 5
-	'Dual' => 'Подвійний', // by Claude Opus 5
-	'Dual on hover' => 'Подвійний при наведенні', // by Claude Opus 5
-	'Reversed' => 'Зворотний', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями таблиць.', // by Claude Opus 5
-	'Table links' => 'Посилання таблиць', // by Claude Opus 5
-	'Primary action for all table links.' => 'Основна дія для всіх посилань таблиць.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Посилання на таблиці, що посилаються на поточний рядок.', // by Claude Opus 5
-	'Display' => 'Показувати', // by Claude Opus 5
-	'Hide' => 'Приховати', // by Claude Opus 5
-	'Records per page' => 'Записів на сторінці', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Кількість записів, що показуються в таблиці даних за замовчуванням.', // by Claude Opus 5
-	'Enum as select' => 'Enum як список', // by Claude Opus 5
-	'Never' => 'Ніколи', // by Claude Opus 5
-	'Always' => 'Завжди', // by Claude Opus 5
-	'More values than %d' => 'Більше %d значень', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Поріг для показу списку вибору для полів типу enum.', // by Claude Opus 5
+	'Settings' => 'Налаштування', // by Claude Fable 5.1
+	'Default' => 'За замовчуванням', // by Claude Fable 5.1
+	'Color scheme' => 'Кольорова схема', // by Claude Fable 5.1
+	'By system' => 'Як у системі', // by Claude Fable 5.1
+	'Light' => 'Світла', // by Claude Fable 5.1
+	'Dark' => 'Темна', // by Claude Fable 5.1
+	'Navigation mode' => 'Режим навігації', // by Claude Fable 5.1
+	'Simple' => 'Простий', // by Claude Fable 5.1
+	'Dual' => 'Подвійний', // by Claude Fable 5.1
+	'Dual on hover' => 'Подвійний при наведенні', // by Claude Fable 5.1
+	'Reversed' => 'Зворотний', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Розташування головної навігації з посиланнями на таблиці.', // by Claude Fable 5.1
+	'Table links' => 'Посилання на таблиці', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Основна дія для всіх посилань на таблиці.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Посилання на таблиці, що посилаються на поточний рядок.', // by Claude Fable 5.1
+	'Display' => 'Показувати', // by Claude Fable 5.1
+	'Hide' => 'Приховати', // by Claude Fable 5.1
+	'Records per page' => 'Записів на сторінці', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Кількість записів, що показуються в таблиці даних за замовчуванням.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum як список', // by Claude Fable 5.1
+	'Never' => 'Ніколи', // by Claude Fable 5.1
+	'Always' => 'Завжди', // by Claude Fable 5.1
+	'More values than %d' => 'Більше %d значень', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Поріг для показу списку вибору для полів типу enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Одноразовий пароль', // by Claude Opus 5
-	'Enter OTP code.' => 'Введіть код OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Невірний код OTP.', // by Claude Opus 5
-	'Access denied.' => 'Доступ заборонено.', // by Claude Opus 5
-	'JSON previews' => 'Попередній перегляд JSON', // by Claude Opus 5
-	'Data table' => 'Таблиця даних', // by Claude Opus 5
-	'Edit form' => 'Форма редагування', // by Claude Opus 5
-	'Ask %s' => 'Запитати %s', // by Claude Opus 5
+	'One Time Password' => 'Одноразовий пароль', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Введіть код OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Невірний код OTP.', // by Claude Fable 5.1
+	'Access denied.' => 'Доступ заборонено.', // by Claude Fable 5.1
+	'JSON previews' => 'Попередній перегляд JSON', // by Claude Fable 5.1
+	'Data table' => 'Таблиця даних', // by Claude Fable 5.1
+	'Edit form' => 'Форма редагування', // by Claude Fable 5.1
+	'Ask %s' => 'Запитати %s', // by Claude Fable 5.1
 ];

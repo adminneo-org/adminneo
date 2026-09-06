@@ -43,7 +43,9 @@ foreach (process_list() as $i => $row) {
 			(DIALECT == "sql" && $key == "Info" && preg_match("~Query|Killed~", $row["Command"])) ||
 			(DIALECT == "pgsql" && $key == "query") ||
 			(DIALECT == "oracle" && $key == "sql_text"))
-			? "<code class='jush-" . DIALECT . "'>" . truncate_utf8($val, 100) . '</code> <a href="' . h(ME . ($row["db"] != "" ? "db=" . urlencode($row["db"]) . "&" : "") . "sql=" . urlencode($val)) . '">' . icon("edit") . lang('Clone') . '</a>'
+			? "<code class='jush-" . DIALECT . "'>" . truncate_utf8($val, 100) . '</code> <a href="' .
+				h(ME . ($row["db"] != "" ? "db=" . urlencode($row["db"]) . "&" : "") . "sql=" . urlencode($val)) .
+				'">' . icon("edit") . lang('Clone') . '</a>'
 			: h($val)
 		);
 	}

@@ -7,7 +7,8 @@ page_header(lang('Server'), false);
 Admin::get()->printDatabaseMenu();
 
 echo "<form action='' method='post'>\n";
-echo "<p>" . lang('Search data in tables') . ": <input type='search' class='input' name='query' value='" . h($_POST["query"]) . "'> <input type='submit' class='button' value='" . lang('Search') . "'>\n";
+echo "<p>" . lang('Search data in tables') . ": <input type='search' class='input' name='query' value='" . h($_POST["query"]) . "'> " .
+	"<input type='submit' class='button' value='" . lang('Search') . "'>\n";
 echo input_token();
 if ($_POST["query"] != "") {
 	search_tables();
@@ -19,7 +20,7 @@ echo "<table class='nowrap checkable'>\n";
 echo "<thead>\n";
 echo "<tr class='wrap'>";
 echo "<td class='actions'>";
-echo "<input id='check-all' type='checkbox' class='input jsonly'>";
+echo "<input id='check-all' type='checkbox' class='input jsonly' title='" . lang('All') . "'>";
 echo script("gid('check-all').onclick = partial(formCheck, /^tables\[/);", "");
 echo "</td>";
 echo "<th>", lang('Table'), "</th>";

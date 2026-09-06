@@ -24,7 +24,7 @@ td:has(textarea:first-child) {
 
 th {
 	background: var(--panel-bg);
-	text-align: left;
+	text-align: start;
 	font-weight: normal;
 }
 
@@ -86,7 +86,7 @@ table.box {
 
 table.box > tbody > tr > th {
 	background: var(--table-header-bg);
-	text-align: right;
+	text-align: end;
 }
 
 table.box > tbody > tr > td {
@@ -282,7 +282,7 @@ th:hover .column {
 	table.box > tbody > tr > th, table.box > tbody > tr > td {
 		border: none;
 		height: auto;
-		text-align: left;
+		text-align: start;
 	}
 
 	table.box > tbody > tr > th {

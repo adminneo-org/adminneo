@@ -108,7 +108,7 @@ class GeminiSqlPlugin extends Plugin
 
 	public function printAfterSqlCommand(): ?bool
 	{
-		$waitingText = lang('Loading') . "…";
+		$waitingText = lang('Loading…');
 
 		$script = <<<JS
 (function() {

@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'HH:MM:SS', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s অবশ্যই একটি অ্যারে ফেরত দিতে হবে।', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরী একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Opus 5
+	'%s must return an array.' => '%s অবশ্যই একটি অ্যারে ফেরত দিতে হবে।', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরি একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'সিস্টেম',
@@ -26,13 +26,13 @@ return [
 	'Logout' => 'লগআউট',
 	'Logged as: %s' => '%s হিসাবে লগড',
 	'Logout successful.' => 'সফলভাবে লগআউট হয়েছে।',
-	'hostname[:port] or :socket' => 'হোস্টনাম[:পোর্ট] অথবা :সকেট', // by Claude Opus 5
-	'Invalid server or credentials.' => 'অবৈধ সার্ভার অথবা লগইন তথ্য।', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'হোস্টনাম[:পোর্ট] অথবা :সকেট', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'অবৈধ সার্ভার অথবা লগইন তথ্য।', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'ইনপুট পাসওয়ার্ডে একটি স্পেস রয়েছে যা এর কারণ হতে পারে।',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo পাসওয়ার্ড ছাড়া ডাটাবেস অ্যাক্সেস সমর্থন করে না, <a href="https://www.adminneo.org/password"%s>আরও তথ্য</a>।',
 	'Database does not support password.' => 'ডাটাবেস পাসওয়ার্ড সমর্থন করে না।',
 	'Too many unsuccessful logins, try again in %d minute(s).' => 'অনেকগুলি ব্যর্থ লগইন প্রচেষ্টা, %d মিনিট পরে আবার চেষ্টা করুন।',
-	'Invalid permanent login, please login again.' => 'অবৈধ স্থায়ী লগইন, আবার লগইন করুন।', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'অবৈধ স্থায়ী লগইন, আবার লগইন করুন।', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'অবৈধ CSRF টোকেন। ফর্মটি আবার পাঠান।',
 	'If you did not send this request from AdminNeo then close this page.' => 'আপনি যদি AdminNeo থেকে এই অনুরোধ না করে থাকেন তবে এই পৃষ্ঠাটি বন্ধ করুন।',
 	'The action will be performed after successful login with the same credentials.' => 'একই ক্রেডেনশিয়ালস দিয়ে সফলভাবে লগইন করার পরে এই কর্মটি সম্পাদন করা হবে।',
@@ -48,10 +48,11 @@ return [
 	// Settings
 	'Language' => 'ভাষা',
 
-	'Home' => 'প্রথম পাতা', // by Claude Opus 5
+	'Menu' => 'মেনু', // by Claude Fable 5.1
+	'Home' => 'প্রথম পাতা', // by Claude Fable 5.1
 	'Refresh' => 'রিফ্রেশ',
-	'Info' => 'তথ্য', // by Claude Opus 5
-	'More information.' => 'আরও তথ্য।', // by Claude Opus 5
+	'Info' => 'তথ্য', // by Claude Fable 5.1
+	'More information.' => 'আরও তথ্য।', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'প্রিভিলেজেস',
@@ -70,14 +71,14 @@ return [
 
 	// Structure
 	'Column' => 'কলাম',
-	'Columns' => 'কলামসমূহ', // by Claude Opus 5
+	'Columns' => 'কলামসমূহ', // by Claude Fable 5.1
 	'Routine' => 'রুটিন',
 	'Grant' => 'অনুমতি',
 	'Revoke' => 'প্রত্যাহার',
 
 	// Queries
 	'SQL command' => 'SQL-কমান্ড',
-	'HTTP request' => 'HTTP অনুরোধ', // by Claude Opus 5
+	'HTTP request' => 'HTTP অনুরোধ', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d SQL-অনুসন্ধান সফলভাবে সম্পন্ন হয়েছে।',
 		'%d SQL-অনুসন্ধানসমূহ সফলভাবে সম্পন্ন হয়েছে।',
@@ -107,8 +108,8 @@ return [
 	'File uploads are disabled.' => 'ফাইল আপলোড নিষ্ক্রিয় করা আছে।',
 	'Unable to upload a file.' => 'ফাইল আপলোড করা সম্ভব হচ্ছে না।',
 	'Maximum allowed file size is %sB.' => 'সর্বাধিক অনুমোদিত ফাইল সাইজ %sB।',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক সংখ্যা %d। কম ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক মোট সাইজ %s। ছোট ফাইল নির্বাচন করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক সংখ্যা %d। কম ফাইল নির্বাচন করুন অথবা %s কনফিগারেশন নির্দেশের মান বাড়ান।', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ফাইলের সর্বাধিক মোট সাইজ %s। ছোট ফাইল নির্বাচন করুন অথবা %s কনফিগারেশন নির্দেশের মান বাড়ান।', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'খুব বড় POST ডাটা। ডাটা সংক্ষিপ্ত করো অথবা %s কনফিগারেশন নির্দেশ বৃদ্ধি করো।',
 	'You can upload a big SQL file via FTP and import it from server.' => 'আপনি FTP এর মাধ্যমে একটি বড় SQL ফাইল আপলোড করতে পারেন এবং সার্ভার থেকে এটি ইম্পোর্ট করতে পারেন।',
 	'File must be in UTF-8 encoding.' => 'ফাইলটি UTF-8 এনকোডিংয়ে হতে হবে।',
@@ -125,7 +126,7 @@ return [
 
 	// Databases
 	'Database' => 'ডাটাবেজ',
-	'database' => 'ডাটাবেজ', // by Claude Opus 5
+	'database' => 'ডাটাবেজ', // by Claude Fable 5.1
 	'DB' => 'ডিবি',
 	'Use' => 'ব্যবহার',
 	'Invalid database.' => 'অকার্যকর ডাটাবেজ।',
@@ -145,10 +146,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'স্কিমা',
-	'schema' => 'স্কিমা', // by Claude Opus 5
-	'Schemas' => 'স্কিমাসমূহ', // by Claude Opus 5
-	'No schemas.' => 'কোন স্কিমা নাই।', // by Claude Opus 5
-	'Show schema' => 'স্কিমা দেখান', // by Claude Opus 5
+	'schema' => 'স্কিমা', // by Claude Fable 5.1
+	'Schemas' => 'স্কিমাসমূহ', // by Claude Fable 5.1
+	'No schemas.' => 'কোন স্কিমা নাই।', // by Claude Fable 5.1
+	'Show schema' => 'স্কিমা দেখান', // by Claude Fable 5.1
 	'Alter schema' => 'স্কিমা পরিবর্তন করো',
 	'Create schema' => 'স্কিমা তৈরী করো',
 	'Schema has been dropped.' => 'স্কিমা মুছে ফেলা হয়েছে।',
@@ -157,6 +158,7 @@ return [
 	'Invalid schema.' => 'অবৈধ স্কিমা।',
 
 	// Table list
+	'All' => 'সব', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'ইঞ্জিন',
 	'engine' => 'ইন্জিন',
 	'Collation' => 'কলোকেশন',
@@ -172,7 +174,7 @@ return [
 	'Check' => 'পরীক্ষা',
 	'Repair' => 'মেরামত',
 	'Truncate' => 'ছাঁটাই',
-	'Truncate Cascade' => 'ক্যাসকেড ছাঁটাই', // by Claude Opus 5
+	'Truncate Cascade' => 'ক্যাসকেড ছাঁটাই', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'টেবিল ছাঁটাই করা হয়েছে।',
 	'Move to other database' => 'অন্য ডাটাবেজে স্থানান্তর করুন',
 	'Move' => 'স্থানান্তর করুন',
@@ -224,12 +226,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'পার্টিশন যার মাধ্যমে',
-	'Partition' => 'পার্টিশন', // by Claude Opus 5
+	'Partition' => 'পার্টিশন', // by Claude Fable 5.1
 	'Partitions' => 'পার্টিশন',
 	'Partition name' => 'পার্টিশনের নাম',
 	'Values' => 'মানসমূহ',
-	'Inherited tables' => 'উত্তরাধিকারসূত্রে পাওয়া টেবিলসমূহ', // by Claude Opus 5
-	'Inherited from' => 'উত্তরাধিকারসূত্রে পাওয়া', // by Claude Opus 5
+	'Inherited tables' => 'উত্তরাধিকারসূত্রে পাওয়া টেবিলসমূহ', // by Claude Fable 5.1
+	'Inherited from' => 'উত্তরাধিকারের উৎস', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'সূচীসমূহ',
@@ -238,13 +240,12 @@ return [
 	'Add next' => 'পরবর্তী সংযোজন করুন',
 	'Index Type' => 'সূচী-ধরণ',
 	'length' => 'দৈর্ঘ্য',
-	'operator class' => 'অপারেটর ক্লাস', // by Claude Opus 5
-	'Algorithm' => 'অ্যালগরিদম', // by Claude Opus 5
-	'Condition' => 'শর্ত', // by Claude Opus 5
+	'operator class' => 'অপারেটর ক্লাস', // by Claude Fable 5.1
+	'Algorithm' => 'অ্যালগরিদম', // by Claude Fable 5.1
+	'Condition' => 'শর্ত', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'ফরেন কী',
-	'Foreign key' => 'ফরেন কী ',
 	'Foreign key has been dropped.' => 'ফরেন কী মুছে ফেলা হয়েছে।',
 	'Foreign key has been altered.' => 'ফরেন কী পরিবর্তন করা হয়েছে।',
 	'Foreign key has been created.' => 'ফরেন কী তৈরী করা হয়েছে।',
@@ -254,7 +255,8 @@ return [
 	'Target' => 'লক্ষ্য',
 	'Add column' => 'কলাম সংযোজন করুন',
 	'Alter' => 'পরিবর্তন',
-	'Add foreign key' => 'ফরেন কী সংযোজন করুন',
+	'Alter foreign key' => 'ফরেন কী পরিবর্তন করুন', // by Claude Fable 5.1
+	'Create foreign key' => 'ফরেন কী তৈরী করুন', // by Claude Fable 5.1
 	'ON DELETE' => 'অন ডিলিট',
 	'ON UPDATE' => 'অন আপডেট',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'সোর্স এবং টার্গেট কলামে একই ডাটা টাইপ থাকতে হবে, টার্গেট কলামসমূহে একটি সূচী এবং রেফারেন্সড ডেটার উপস্থিতি থাকা আবশ্যক।',
@@ -305,7 +307,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'ট্রিগার',
-	'Add trigger' => 'ট্রিগার সংযোজন করুন',
 	'Trigger has been dropped.' => 'ট্রিগার মুছে ফেলা হয়েছে।',
 	'Trigger has been altered.' => 'ট্রিগার পরিবর্তন করা হয়েছে।',
 	'Trigger has been created.' => 'ট্রিগার তৈরী করা হয়েছে।',
@@ -336,6 +337,7 @@ return [
 	'Full table scan' => 'সম্পূর্ণ টেবিল স্ক্যান',
 	'Unable to select the table' => 'টেবিল নির্বাচন করতে অক্ষম',
 	'Search data in tables' => 'টেবিলে তথ্য খুঁজুন',
+	'All rows on this page' => 'এই পৃষ্ঠার সব সারি', // by Claude Fable 5.1
 	'No rows.' => 'কোন সারি নাই।',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -345,7 +347,7 @@ return [
 	'Page' => 'পৃষ্ঠা',
 	'last' => 'সর্বশেষ',
 	'Load more data' => 'আরও ডেটা লোড করুন',
-	'Loading' => 'লোড হচ্ছে',
+	'Loading…' => 'লোড হচ্ছে…',
 	'Whole result' => 'সম্পূর্ণ ফলাফল',
 	'%d byte(s)' => [
 		'%d বাইট',
@@ -366,7 +368,7 @@ return [
 	'Save' => 'সংরক্ষণ করুন',
 	'Save and continue edit' => 'সংরক্ষণ করুন এবং সম্পাদনা চালিয়ে যান',
 	'Save and insert next' => 'সংরক্ষন ও পরবর্তী সংযোজন করুন',
-	'Saving' => 'সংরক্ষণ করা হচ্ছে',
+	'Saving…' => 'সংরক্ষণ করা হচ্ছে…',
 	'Selected' => 'নির্বাচিত',
 	'Clone' => 'ক্লোন',
 	'Delete' => 'মুছে ফেলুন',
@@ -392,38 +394,38 @@ return [
 	'no' => 'না',
 
 	// Settings
-	'Settings' => 'সেটিংস', // by Claude Opus 5
-	'Default' => 'ডিফল্ট', // by Claude Opus 5
-	'Color scheme' => 'রঙের বিন্যাস', // by Claude Opus 5
-	'By system' => 'সিস্টেম অনুযায়ী', // by Claude Opus 5
-	'Light' => 'হালকা', // by Claude Opus 5
-	'Dark' => 'গাঢ়', // by Claude Opus 5
-	'Navigation mode' => 'নেভিগেশন মোড', // by Claude Opus 5
-	'Simple' => 'সরল', // by Claude Opus 5
-	'Dual' => 'দ্বৈত', // by Claude Opus 5
-	'Dual on hover' => 'হোভারে দ্বৈত', // by Claude Opus 5
-	'Reversed' => 'বিপরীত', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'টেবিল লিংকসহ প্রধান নেভিগেশনের বিন্যাস।', // by Claude Opus 5
-	'Table links' => 'টেবিল লিংকসমূহ', // by Claude Opus 5
-	'Primary action for all table links.' => 'সকল টেবিল লিংকের প্রধান ক্রিয়া।', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'বর্তমান সারিকে নির্দেশ করা টেবিলসমূহের লিংক।', // by Claude Opus 5
-	'Display' => 'দেখান', // by Claude Opus 5
-	'Hide' => 'লুকান', // by Claude Opus 5
-	'Records per page' => 'প্রতি পৃষ্ঠায় রেকর্ড', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'ডাটা টেবিলে দেখানো রেকর্ডের ডিফল্ট সংখ্যা।', // by Claude Opus 5
-	'Enum as select' => 'Enum নির্বাচন তালিকা হিসাবে', // by Claude Opus 5
-	'Never' => 'কখনো নয়', // by Claude Opus 5
-	'Always' => 'সর্বদা', // by Claude Opus 5
-	'More values than %d' => '%d এর বেশি মান', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'enum কলামের জন্য নির্বাচন তালিকা দেখানোর সীমা।', // by Claude Opus 5
+	'Settings' => 'সেটিংস', // by Claude Fable 5.1
+	'Default' => 'ডিফল্ট', // by Claude Fable 5.1
+	'Color scheme' => 'রঙের বিন্যাস', // by Claude Fable 5.1
+	'By system' => 'সিস্টেম অনুযায়ী', // by Claude Fable 5.1
+	'Light' => 'হালকা', // by Claude Fable 5.1
+	'Dark' => 'গাঢ়', // by Claude Fable 5.1
+	'Navigation mode' => 'নেভিগেশন মোড', // by Claude Fable 5.1
+	'Simple' => 'সরল', // by Claude Fable 5.1
+	'Dual' => 'দ্বৈত', // by Claude Fable 5.1
+	'Dual on hover' => 'হোভারে দ্বৈত', // by Claude Fable 5.1
+	'Reversed' => 'বিপরীত', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'টেবিল লিংকসহ প্রধান নেভিগেশনের বিন্যাস।', // by Claude Fable 5.1
+	'Table links' => 'টেবিল লিংকসমূহ', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'সকল টেবিল লিংকের প্রধান ক্রিয়া।', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'বর্তমান সারিকে নির্দেশ করা টেবিলসমূহের লিংক।', // by Claude Fable 5.1
+	'Display' => 'দেখান', // by Claude Fable 5.1
+	'Hide' => 'লুকান', // by Claude Fable 5.1
+	'Records per page' => 'প্রতি পৃষ্ঠায় রেকর্ড', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'ডাটা টেবিলে দেখানো রেকর্ডের ডিফল্ট সংখ্যা।', // by Claude Fable 5.1
+	'Enum as select' => 'Enum নির্বাচন তালিকা হিসাবে', // by Claude Fable 5.1
+	'Never' => 'কখনো নয়', // by Claude Fable 5.1
+	'Always' => 'সর্বদা', // by Claude Fable 5.1
+	'More values than %d' => '%d এর বেশি মান', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'enum কলামের জন্য নির্বাচন তালিকা দেখানোর সীমা।', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'এককালীন পাসওয়ার্ড', // by Claude Opus 5
-	'Enter OTP code.' => 'OTP কোড লিখুন।', // by Claude Opus 5
-	'Invalid OTP code.' => 'অবৈধ OTP কোড।', // by Claude Opus 5
-	'Access denied.' => 'প্রবেশাধিকার নাই।', // by Claude Opus 5
-	'JSON previews' => 'JSON প্রাকদর্শন', // by Claude Opus 5
-	'Data table' => 'ডাটা টেবিল', // by Claude Opus 5
-	'Edit form' => 'সম্পাদনা ফর্ম', // by Claude Opus 5
-	'Ask %s' => '%s কে জিজ্ঞাসা করুন', // by Claude Opus 5
+	'One Time Password' => 'এককালীন পাসওয়ার্ড', // by Claude Fable 5.1
+	'Enter OTP code.' => 'OTP কোড লিখুন।', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'অবৈধ OTP কোড।', // by Claude Fable 5.1
+	'Access denied.' => 'প্রবেশাধিকার নাই।', // by Claude Fable 5.1
+	'JSON previews' => 'JSON প্রাকদর্শন', // by Claude Fable 5.1
+	'Data table' => 'ডাটা টেবিল', // by Claude Fable 5.1
+	'Edit form' => 'সম্পাদনা ফর্ম', // by Claude Fable 5.1
+	'Ask %s' => '%s-কে জিজ্ঞাসা করুন', // by Claude Fable 5.1
 ];

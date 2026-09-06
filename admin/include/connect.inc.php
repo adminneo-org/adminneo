@@ -9,7 +9,17 @@ if (isset($_GET["import"])) {
 	$_GET["sql"] = $_GET["import"];
 }
 
-if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || isset($_GET["dump"]) || isset($_GET["database"]) || isset($_GET["processlist"]) || isset($_GET["privileges"]) || isset($_GET["user"]) || isset($_GET["variables"]) || $_GET["script"] == "connect" || $_GET["script"] == "kill")) {
+// The database selection form in the navigation panel preserves the schema, which leads to this combination.
+if (DB == "" && isset($_GET["ns"])) {
+	redirect(remove_from_uri('ns'));
+}
+
+if (!(DB != "" ?
+	Connection::get()->selectDatabase(DB) :
+	(isset($_GET["sql"]) || isset($_GET["dump"]) || isset($_GET["database"]) || isset($_GET["processlist"]) ||
+		isset($_GET["privileges"]) || isset($_GET["user"]) || isset($_GET["variables"]) ||
+		$_GET["script"] == "connect" || $_GET["script"] == "kill")
+)) {
 	if (DB != "" || $_GET["refresh"]) {
 		restart_session();
 		set_session("dbs", null);
@@ -57,10 +67,12 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 
 			echo "<thead><tr>"
 				. (support("database") ? "<td>" : "")
-				. "<th>" . lang('Database') . (get_session("dbs") !== null ? " - <a href='" . h(ME) . "refresh=1'>" . lang('Refresh') . "</a>" : "")
+				// The databases are sorted by name by all drivers.
+				. "<th aria-sort='ascending'>" . lang('Database') . (get_session("dbs") !== null ? " - <a href='" . h(ME) . "refresh=1'>" . lang('Refresh') . "</a>" : "")
 				. "<td>" . lang('Collation')
 				. "<td>" . lang('Tables')
-				. "<td>" . lang('Size') . " - <a href='" . h(ME) . "dbsize=1'>" . lang('Compute') . "</a>" . script("qsl('a').onclick = partial(ajaxSetHtml, '" . js_escape(ME) . "script=connect');", "")
+				. "<td>" . lang('Size') . " - <a href='" . h(ME) . "dbsize=1'>" . lang('Compute') . "</a>" .
+					script("qsl('a').onclick = partial(ajaxSetHtml, '" . js_escape(ME) . "script=connect');", "")
 				. "</thead>\n"
 			;
 
@@ -90,7 +102,7 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 				echo "<div class='table-footer'><div class='field-sets'>\n";
 				echo "<fieldset><legend>", lang('Selected'), " <span id='selected'></span></legend><div class='fieldset-content'>\n";
 				echo input_hidden("all");
-				echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^db/)); };"); // used by trCheck()
+				echo script("qsl('input').onclick = countDbs;"); // used by trCheck()
 				echo "<input type='submit' class='button' name='drop' value='", lang('Drop'), "'>", confirm(), "\n";
 				echo "</div></fieldset>\n";
 				echo "</div></div>\n";
@@ -115,7 +127,8 @@ if (!(DB != "" ? Connection::get()->selectDatabase(DB) : isset($_GET["sql"]) || 
 if (support("scheme")) {
 	if (DB != "" && $_GET["ns"] !== "") {
 		if (!isset($_GET["ns"])) {
-			redirect(preg_replace('~ns=[^&]*&~', '', ME) . "ns=" . get_schema());
+			// When the user goes to a database, take him to the default schema.
+			redirect(preg_replace('~(?<=[?&])db=[^&]+~', '\\0&ns=' . urlencode(get_schema()), relative_uri()));
 		}
 
 		if (!set_schema($_GET["ns"])) {

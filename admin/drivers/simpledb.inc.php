@@ -398,6 +398,10 @@ if (isset($_GET["simpledb"])) {
 		if (Connection::get()->getError() && defined("AdminNeo\PAGE_HEADER")) {
 			echo "<p class='error'>" . error() . "\n";
 		}
+
+		// ListDomains has no server-side ordering.
+		ksort($return);
+
 		return $return;
 	}
 
@@ -439,7 +443,7 @@ if (isset($_GET["simpledb"])) {
 		return h(Connection::get()->getError());
 	}
 
-	function information_schema(?string $db): bool
+	function information_schema(?string $db, string $schema = ""): bool
 	{
 		return false;
 	}

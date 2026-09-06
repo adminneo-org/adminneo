@@ -16,7 +16,8 @@ class Admin extends Origin
 	 */
 	public function getServiceTitle(): string
 	{
-		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc><use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc>" .
+			"<use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
 	}
 
 	/**
@@ -92,10 +93,18 @@ class Admin extends Origin
 				echo $this->admin->getLoginFormRow('driver', '', input_hidden("auth[driver]", $driver));
 			}
 
-			echo $this->admin->getLoginFormRow('server', lang('Server'), "<input class='input' name='auth[server]' value='" . h($server) . "' title='" . lang('hostname[:port] or :socket') . "' placeholder='localhost' autocapitalize='off'>");
+			echo $this->admin->getLoginFormRow(
+				'server',
+				lang('Server'),
+				"<input class='input' name='auth[server]' value='" . h($server) . "' title='" . lang('hostname[:port] or :socket') . "' placeholder='localhost' autocapitalize='off'>"
+			);
 		}
 
-		echo $this->admin->getLoginFormRow('username', lang('Username'), '<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">');
+		echo $this->admin->getLoginFormRow(
+			'username',
+			lang('Username'),
+			'<input class="input" name="auth[username]" id="username" value="' . h($_GET["username"]) . '" autocomplete="username" autocapitalize="off">'
+		);
 		echo $this->admin->getLoginFormRow('password', lang('Password'), '<input type="password" class="input" name="auth[password]" autocomplete="current-password">');
 
 		if (!$serverPairs) {
@@ -270,7 +279,9 @@ class Admin extends Origin
 
 		$return .= "<p class='links'>";
 		if ($supportSql) {
-			$return .= "<a href='" . h(str_replace("db=" . urlencode(DB), "db=" . urlencode($_GET["db"]), ME) . 'sql=&history=' . (count($history[$_GET["db"]]) - 1)) . "'>" . icon("edit") . lang('Edit') . "</a>";
+			$return .= "<a href='" .
+				h(str_replace("db=" . urlencode(DB), "db=" . urlencode($_GET["db"]), ME) . 'sql=&history=' . (count($history[$_GET["db"]]) - 1)) .
+				"'>" . icon("edit") . lang('Edit') . "</a>";
 		}
 		if ($time) {
 			$return .= " <span class='time'>($time)</span>";
@@ -562,7 +573,11 @@ class Admin extends Origin
 			echo icon("handle", "handle jsonly");
 
 			if (Driver::get()->getFunctions() || Driver::get()->getGrouping()) {
-				echo html_select("columns[$i][fun]", [-1 => ""] + array_filter([lang('Functions') => Driver::get()->getFunctions(), lang('Aggregation') => Driver::get()->getGrouping()]), $val["fun"] ?? null);
+				echo html_select(
+					"columns[$i][fun]",
+					[-1 => ""] + array_filter([lang('Functions') => Driver::get()->getFunctions(), lang('Aggregation') => Driver::get()->getGrouping()]),
+					$val["fun"] ?? null
+				);
 				echo help_script_command("value && value.replace(/ |\$/, '(') + ')'", true);
 				echo script("qsl('select').onchange = (event) => { " . ($key !== "" ? "" : " qsl('select, input:not(.remove)', event.target.parentNode).onchange();") . " };", "");
 				echo "($column)";
@@ -747,7 +762,8 @@ class Admin extends Origin
 
 		foreach ($indexes as $i => $index) {
 			if ($index["type"] == "FULLTEXT" && isset($_GET["fulltext"]) && $_GET["fulltext"][$i] != "") {
-				$return[] = "MATCH (" . implode(", ", array_map('AdminNeo\idf_escape', $index["columns"])) . ") AGAINST (" . q($_GET["fulltext"][$i]) . (isset($_GET["boolean"][$i]) ? " IN BOOLEAN MODE" : "") . ")";
+				$return[] = "MATCH (" . implode(", ", array_map('AdminNeo\idf_escape', $index["columns"])) . ") AGAINST (" .
+					q($_GET["fulltext"][$i]) . (isset($_GET["boolean"][$i]) ? " IN BOOLEAN MODE" : "") . ")";
 			}
 		}
 
@@ -786,8 +802,10 @@ class Admin extends Origin
 						&& (preg_match('~^[-\d.' . (preg_match('~IN$~', $op) ? ',' : '') . ']+$~', $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
 						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set~', $field["type"]))
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
-						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val)) // Elasticsearch needs boolean value properly formatted.
-						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"])) // Elasticsearch can use regexp only on text and keyword fields.
+						// Elasticsearch needs boolean value properly formatted.
+						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
+						// Elasticsearch can use regexp only on text and keyword fields.
+						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"]))
 					)) {
 						if ($oidColumn) {
 							$conditions[] = $prefix . idf_escape($name) . $cond;
@@ -824,7 +842,10 @@ class Admin extends Origin
 		foreach ((array)$_GET["order"] as $key => $val) {
 			if ($val != "") {
 				$return[] = (preg_match('~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`]|``)+`|"(?:[^"]|"")+")\)|COUNT\(\*\))$~', $val) ? $val : idf_escape($val)) //! MS SQL uses []
-					. (isset($_GET["desc"][$key]) ? " DESC" : "");
+					. (isset($_GET["desc"][$key])
+						? " DESC" . (DIALECT == "pgsql" && ($fields[$val]["null"] ?? null) ? " NULLS LAST" : "")
+						: ""
+					);
 			}
 		}
 
@@ -1260,7 +1281,10 @@ class Admin extends Origin
 					echo "window.jushLinks = { " . DIALECT . ": {\n";
 					// $ is used in PostgreSQL as part of name.
 					echo js_escape_key(ME . $tableParam . '=$&'), ': /\b(?<!\$)(' . implode('|', $links) . ')(?!\$)\b/g';
-					if (support('routine')) {
+					// routines() is slow, so it is called only on the pages printing SQL where a routine name can appear.
+					// ?function= sets ?procedure=.
+					$sqlPages = ["sql", "check", "event", "procedure", "trigger", "view", "type", "table", "processlist"];
+					if (support('routine') && array_intersect_key($_GET, array_flip($sqlPages))) {
 						foreach (routines() as $row) {
 							echo ",\n", js_escape_key(ME . 'function=' . urlencode($row["SPECIFIC_NAME"]) . '&name=$&'), ': /\b' . js_escape_re($row["ROUTINE_NAME"]) . '(?=["`\]]?\()/g';
 						}
@@ -1283,7 +1307,8 @@ class Admin extends Origin
 						}
 					}
 
-					echo "window.addEventListener('DOMContentLoaded', () => { autocompletion = jush.autocompleteSql('" . idf_escape("") . "', " . json_encode($tablesColumns, JSON_HEX_TAG) . "); });\n";
+					echo "window.addEventListener('DOMContentLoaded', () => { autocompletion = jush.autocompleteSql('" .
+						idf_escape("") . "', " . json_encode($tablesColumns, JSON_HEX_TAG) . "); });\n";
 				}
 
 				echo "</script>\n";

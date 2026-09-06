@@ -51,6 +51,7 @@ return [
 	// Settings
 	'Language' => 'Sprache',
 
+	'Menu' => 'Menü', // by Claude Fable 5.1
 	'Home' => 'Startseite',
 	'Refresh' => 'Aktualisieren',
 	'Info' => 'Info',
@@ -169,6 +170,7 @@ return [
 	'Invalid schema.' => 'Schema nicht gültig.',
 
 	// Table list
+	'All' => 'Alle', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Speicher-Engine',
 	'engine' => 'Speicher-Engine',
 	'Collation' => 'Kollation',
@@ -184,7 +186,7 @@ return [
 	'Check' => 'Prüfen',
 	'Repair' => 'Reparieren',
 	'Truncate' => 'Leeren (truncate)',
-	'Truncate Cascade' => 'Leeren (truncate cascade)', // by Claude Fable 5
+	'Truncate Cascade' => 'Leeren (truncate cascade)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellen wurden geleert (truncate).',
 	'Move to other database' => 'In andere Datenbank verschieben',
 	'Move' => 'Verschieben',
@@ -227,7 +229,7 @@ return [
 
 	// Views
 	'View' => 'View',
-	'Materialized view' => 'Materialisierte View', // by Claude Fable 5
+	'Materialized view' => 'Materialisierte View', // by Claude Fable 5.1
 	'View has been dropped.' => 'View wurde entfernt.',
 	'View has been altered.' => 'View wurde geändert.',
 	'View has been created.' => 'View wurde erstellt.',
@@ -250,13 +252,12 @@ return [
 	'Add next' => 'Hinzufügen',
 	'Index Type' => 'Index-Typ',
 	'length' => 'Länge',
-	'operator class' => 'Operatorklasse', // by Claude Fable 5
+	'operator class' => 'Operatorklasse', // by Claude Fable 5.1
 	'Algorithm' => 'Algorithmus',
 	'Condition' => 'Bedingung',
 
 	// Foreign keys
 	'Foreign keys' => 'Fremdschlüssel',
-	'Foreign key' => 'Fremdschlüssel',
 	'Foreign key has been dropped.' => 'Fremdschlüssel wurde entfernt.',
 	'Foreign key has been altered.' => 'Fremdschlüssel wurde geändert.',
 	'Foreign key has been created.' => 'Fremdschlüssel wurde erstellt.',
@@ -266,7 +267,8 @@ return [
 	'Target' => 'Ziel',
 	'Add column' => 'Spalte hinzufügen',
 	'Alter' => 'Ändern',
-	'Add foreign key' => 'Fremdschlüssel hinzufügen',
+	'Alter foreign key' => 'Fremdschlüssel ändern', // by Claude Fable 5.1
+	'Create foreign key' => 'Fremdschlüssel erstellen', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Quell- und Zielspalten müssen vom gleichen Datentyp sein, es muss unter den Zielspalten ein Index existieren und die referenzierten Daten müssen existieren.',
@@ -320,7 +322,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Trigger',
-	'Add trigger' => 'Trigger hinzufügen',
 	'Trigger has been dropped.' => 'Trigger wurde entfernt.',
 	'Trigger has been altered.' => 'Trigger wurde geändert.',
 	'Trigger has been created.' => 'Trigger wurde erstellt.',
@@ -333,7 +334,7 @@ return [
 	'Alter check' => 'Check ändern',
 	'Check has been created.' => 'Check wurde erstellt.',
 	'Check has been altered.' => 'Check wurde geändert.',
-	'Check has been dropped.' => 'Check wurde entfernt.', // by Claude Fable 5
+	'Check has been dropped.' => 'Check wurde entfernt.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Daten auswählen',
@@ -351,6 +352,7 @@ return [
 	'Full table scan' => 'Vollständige Überprüfung der Tabelle',
 	'Unable to select the table' => 'Auswahl der Tabelle fehlgeschlagen',
 	'Search data in tables' => 'Suche in Tabellen',
+	'All rows on this page' => 'Alle Zeilen auf dieser Seite', // by Claude Fable 5.1
 	'No rows.' => 'Keine Datensätze.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -360,7 +362,7 @@ return [
 	'Page' => 'Seite',
 	'last' => 'letzte',
 	'Load more data' => 'Mehr Daten laden',
-	'Loading' => 'Lade',
+	'Loading…' => 'Lade…',
 	'Whole result' => 'Gesamtergebnis',
 	'%d byte(s)' => [
 		'%d Byte',
@@ -381,7 +383,7 @@ return [
 	'Save' => 'Speichern',
 	'Save and continue edit' => 'Speichern und weiter bearbeiten',
 	'Save and insert next' => 'Speichern und nächsten einfügen',
-	'Saving' => 'Speichere',
+	'Saving…' => 'Speichere…',
 	'Selected' => 'Ausgewählte',
 	'Clone' => 'Klonen',
 	'Delete' => 'Entfernen',
@@ -416,7 +418,7 @@ return [
 	'Navigation mode' => 'Navigationsmodus',
 	'Simple' => 'Einfach',
 	'Dual' => 'Dual',
-	'Dual on hover' => 'Dual beim Überfahren mit der Maus', // by Claude Opus 5
+	'Dual on hover' => 'Dual beim Überfahren mit der Maus', // by Claude Fable 5.1
 	'Reversed' => 'Umgekehrt',
 	'Layout of main navigation with table links.' => 'Layout der Hauptnavigation mit Tabellenlinks.',
 	'Table links' => 'Tabellenlinks',

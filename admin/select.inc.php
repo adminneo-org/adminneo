@@ -336,8 +336,6 @@ if (!$columns && support("table")) {
 		if (DIALECT == "mssql" && $page) {
 			$result->seek($limit * $page);
 		}
-		echo "<form id='selection_form' action='' method='post' enctype='multipart/form-data'>\n";
-		echo "<div class='table-footer-parent'>\n";
 		$rows = [];
 		while ($row = $result->fetchAssoc()) {
 			if ($page && DIALECT == "oracle") {
@@ -345,6 +343,15 @@ if (!$columns && support("table")) {
 			}
 			$rows[] = $row;
 		}
+
+		// Without the modify mode, the values are printed as links, only the checked checkboxes are sent.
+		if ($_GET["modify"] && $rows) {
+			$max_rows = max_input_vars(count($rows[0]) + 1, 20); // 1 - the checkbox of each row, 20 - the other inputs
+			echo ($max_rows && count($rows) > $max_rows ? "<p class='error'>" . max_input_vars_error() . "\n" : "");
+		}
+
+		echo "<form id='selection_form' action='' method='post' enctype='multipart/form-data'>\n";
+		echo "<div class='table-footer-parent'>\n";
 
 		// use count($rows) without LIMIT, COUNT(*) without grouping, FOUND_ROWS otherwise (slowest)
 		if ($_GET["page"] != "last" && $limit && $group && $is_group && DIALECT == "sql") {
@@ -365,7 +372,8 @@ if (!$columns && support("table")) {
 			echo "<thead><tr>";
 
 			if ($group || !$select) {
-				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly'>" . script("gid('all-page').onclick = partial(formCheck, /check/);", "");
+				echo "<th class='actions'><input type='checkbox' id='all-page' class='jsonly' title='" . lang('All rows on this page') . "'>" .
+					script("gid('all-page').onclick = partial(formCheck, /^check/);", "");
 				if (Admin::get()->isDataEditAllowed()) {
 					echo " <a href='", h($_GET["modify"] ? remove_from_uri("modify") : $_SERVER["REQUEST_URI"] . "&modify=1") . "' title='", lang('Modify'), "'>", icon_solo("edit-all"), "</a>";
 				}
@@ -388,11 +396,15 @@ if (!$columns && support("table")) {
 						$column = idf_escape($key);
 						$href = remove_from_uri('(order|desc)[^=]*|page') . '&order%5B0%5D=' . urlencode($key);
 						$desc = "&desc%5B0%5D=1";
-						echo "<th id='th[" . h(bracket_escape($key)) . "]'>";
+						$order_column = $order[0] ?? "";
+						$sort_column = preg_replace('~ DESC( NULLS LAST)?$~', '', $order_column);
+						$sorted = ($sort_column == $column || $sort_column == $key); // $sort_column == $key - COUNT(*)
+						echo "<th id='th[" . h(bracket_escape($key)) . "]'"
+							. ($sorted ? " aria-sort='" . ($sort_column == $order_column ? "ascending" : "descending") . "'" : "") . ">";
 						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
-							echo '<a href="', h($href . ($order[0] == $column || $order[0] == $key ? $desc : '')), '">', "$fun</a>"; // $order[0] == $key - COUNT(*)
+							echo '<a href="', h($href . ($sorted && $sort_column == $order_column ? $desc : '')), '">', "$fun</a>";
 						} else {
 							echo $fun;
 						}
@@ -446,10 +458,15 @@ if (!$columns && support("table")) {
 				foreach ($unique_array as $key => $val) {
 					$field = $fields[$key] ?? null;
 
-					if ((DIALECT == "sql" || DIALECT == "pgsql") && $field && preg_match('~char|text|enum|set~', $field["type"]) && strlen($val) > 64) {
+					// Binary and varbinary are converted to hexadecimal so they are not shortened.
+					$is_binary = $field && is_blob($field);
+
+					if ((DIALECT == "sql" || DIALECT == "pgsql") && $field && ($is_binary || preg_match('~char|text|enum|set~', $field["type"])) && strlen($val) > 64) {
 						$key = (strpos($key, '(') ? $key : idf_escape($key)); //! columns looking like functions
-						$key = "MD5(" . (DIALECT != 'sql' || preg_match("~^utf8~", $field["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Connection::get()) . ")") . ")";
-						$val = md5($val);
+						// The CONVERT() wrapper is skipped for binary values because their collation is binary.
+						$key = "MD5(" . ($is_binary || DIALECT != 'sql' || preg_match("~^utf8~", $field["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Connection::get()) . ")") . ")";
+						// formatValue() decodes bytea in PostgreSQL.
+						$val = md5($is_binary ? (string) Connection::get()->formatValue($val, $field) : $val);
 					}
 					$unique_idf .= "&" . ($val !== null ? urlencode("where[" . bracket_escape($key) . "]") . "=" . urlencode($val === false ? "f" : $val) : "null%5B%5D=" . urlencode($key));
 				}
@@ -480,7 +497,9 @@ if (!$columns && support("table")) {
 									foreach ($foreign_key["source"] as $i => $source) {
 										$link .= where_link($i, $foreign_key["target"][$i], $rows[$n][$source]);
 									}
-									$link = ($foreign_key["db"] != "" ? preg_replace('~([?&]db=)[^&]+~', '\1' . urlencode($foreign_key["db"]), ME) : ME) . 'select=' . urlencode($foreign_key["table"]) . $link; // InnoDB supports non-UNIQUE keys
+									// InnoDB supports non-UNIQUE keys
+									$link = ($foreign_key["db"] != "" ? preg_replace('~([?&]db=)[^&]+~', '\1' . urlencode($foreign_key["db"]), ME) : ME) .
+										'select=' . urlencode($foreign_key["table"]) . $link;
 									if ($foreign_key["ns"]) {
 										$link = preg_replace('~([?&]ns=)[^&]+~', '\1' . urlencode($foreign_key["ns"]), $link);
 									}
@@ -509,7 +528,7 @@ if (!$columns && support("table")) {
 						$id = h("val[$unique_idf][$escaped_key]");
 						$posted = $_POST["val"][$unique_idf][$escaped_key] ?? null;
 						$update = $field["privileges"]["update"] ?? false;
-						$editable = !is_array($row[$key]) && is_utf8($html) && $rows[$n][$key] == $row[$key] && !$functions[$key] && !($field["generated"] ?? false);
+						$editable = !is_array($val) && !($field && is_blob($field)) && is_utf8((string) $val) && $rows[$n][$key] == $val && !$functions[$key] && !($field["generated"] ?? false);
 						$type = ($column && preg_match('~^(AVG|MIN|MAX)\((.+)\)~', $column, $matches) ? $fields[idf_unescape($matches[2])]["type"] : ($field["type"] ?? null));
 						$money = $type == "money" || ($column && preg_match('~^SUM\((.+)\)~', $column, $matches) && $fields[idf_unescape($matches[1])]["type"]) == "money";
 						$text = $type && preg_match('~text|json|lob~', $type);
@@ -519,8 +538,10 @@ if (!$columns && support("table")) {
 						echo "<td id='$id' $class";
 						if (($_GET["modify"] && $editable && !$null_val) || $posted !== null) {
 							$editing_fields = true;
-							$h_value = h($posted !== null ? $posted : $row[$key]);
-							echo " data-editing='true'>" . ($text ? "<textarea name='$id' cols='30' rows='" . (substr_count($row[$key], "\n") + 1) . "'>$h_value</textarea>" : "<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
+							$h_value = h($posted !== null ? $posted : $val);
+							echo " data-editing='true'>" . ($text ?
+								"<textarea name='$id' cols='30' rows='" . (substr_count($val, "\n") + 1) . "'>$h_value</textarea>" :
+								"<input class='input' name='$id' value='$h_value' size='$lengths[$key]'>");
 						} else {
 							$long = strpos($html, "<i>…</i>");
 							if ($update) {
@@ -546,7 +567,9 @@ if (!$columns && support("table")) {
 			}
 
 			echo "</tbody>\n";
-			echo script("mixin(qs('#table tbody'), {onclick: event => tableClick(event, false, " . (Admin::get()->isDataEditAllowed() ? "true" : "false") . "), ondblclick: event => tableClick(event, true), onkeydown: onEditingKeydown});");
+			echo script("mixin(qs('#table tbody'), {onclick: event => tableClick(event, false, " .
+				(Admin::get()->isDataEditAllowed() ? "true" : "false") .
+				"), ondblclick: event => tableClick(event, true), onkeydown: onEditingKeydown});");
 
 			echo "</table>\n";
 			echo script("initToggles(gid('table'));");
@@ -576,7 +599,7 @@ if (!$columns && support("table")) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',
 							'<a href="', h(remove_from_uri("page") . "&page=" . ($page + 1)), '" class="loadmore">', icon("expand"), lang('Load more data'), '</a>',
-							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading')) . "…');", "");
+							script("qsl('a').onclick = partial(loadNextPage, $limit, '" . js_escape(lang('Loading…')) . "');", "");
 					}
 					echo "\n";
 				}
@@ -591,11 +614,9 @@ if (!$columns && support("table")) {
 					);
 					$dots = "<li>…</li>";
 
-					echo "<fieldset>";
+					echo "<fieldset><legend>" . lang('Page') . "</legend>";
 
 					if (DIALECT != "simpledb") {
-						echo "<legend><a href='" . h(remove_from_uri("page")) . "'>" . lang('Page') . "</a></legend>";
-						echo script("qsl('a').onclick = function () { pageClick(this.href, +prompt('" . js_escape(lang('Page')) . "', '" . ($page + 1) . "')); return false; };");
 						echo "<div id='fieldset-pagination' class='fieldset-content'><ul class='pagination'>";
 
 						echo pagination(0, $page);
@@ -619,7 +640,6 @@ if (!$columns && support("table")) {
 
 						echo "</ul></div>";
 					} else {
-						echo "<legend>" . lang('Page') . "</legend>";
 						echo "<div id='fieldset-pagination'><ul class='pagination'>";
 
 						echo pagination(0, $page);
@@ -645,7 +665,7 @@ if (!$columns && support("table")) {
 				echo "<fieldset>";
 				echo "<legend>" . lang('Whole result') . "</legend><div class='fieldset-content'>";
 				$display_rows = ($exact_count ? "" : "~ ") . $found_rows;
-				echo checkbox("all", 1, 0, ($found_rows !== false ? ($exact_count ? "" : "~ ") . lang('%d row(s)', $found_rows) : ""), "const checked = formChecked(this, /check/); selectCount('selected', this.checked ? '$display_rows' : checked); selectCount('selected2', this.checked || !checked ? '$display_rows' : checked);") . "\n";
+				echo checkbox("all", 1, 0, ($found_rows !== false ? ($exact_count ? "" : "~ ") . lang('%d row(s)', $found_rows) : ""), "countRows.call(this, '$display_rows');") . "\n";
 				echo "</div></fieldset>\n";
 
 				if (Admin::get()->isDataEditAllowed()) {

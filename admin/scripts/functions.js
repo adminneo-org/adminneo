@@ -4,7 +4,7 @@
  * Returns the element found by given identifier.
  *
  * @param {string} id
- * @param {Document} context Defaults to document.
+ * @param {Document} [context] Defaults to document.
  *
  * @return {?HTMLElement}
  */
@@ -16,7 +16,7 @@ function gid(id, context = document) {
  * Returns the first element matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {?HTMLElement}
  */
@@ -28,7 +28,7 @@ function qs(selector, context = document) {
  * Returns the last element matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {HTMLElement|undefined}
  */
@@ -41,7 +41,7 @@ function qsl(selector, context = document) {
  * Returns all elements matching the selector.
  *
  * @param {string} selector
- * @param {ParentNode} context Defaults to document.
+ * @param {ParentNode} [context] Defaults to document.
  *
  * @return {NodeListOf<HTMLElement>}
  */
@@ -71,9 +71,8 @@ function partial(fn, ...args) {
  * @param {Object} source
  */
 function mixin(target, source) {
-	for (const key in source) {
-		target[key] = source[key];
-	}
+	// A shortcut for Object.assign() saving bytes in the inline scripts, used also by external plugins.
+	Object.assign(target, source);
 }
 
 /**
@@ -132,35 +131,7 @@ function selectValue(select) {
 		return select.value;
 	}
 	const selected = select.options[select.selectedIndex];
-	return (selected.attributes.value?.specified ? selected.value : selected.text);
-}
-
-/**
- * Checks whether the element has a specified tag name.
- *
- * @param {?Node} el
- * @param {string} tag Regular expression.
- *
- * @return {boolean}
- */
-function isTag(el, tag) {
-	const re = new RegExp('^(' + tag + ')$', 'i');
-	return el && re.test(el.tagName);
-}
-
-/**
- * Returns the closest parent node with a specified tag name.
- *
- * @param {?Node} el
- * @param {string} tag Regular expression.
- *
- * @return {?HTMLElement}
- */
-function parentTag(el, tag) {
-	while (el && !isTag(el, tag)) {
-		el = el.parentNode;
-	}
-	return el;
+	return ((selected.attributes.value || {}).specified ? selected.value : selected.text);
 }
 
 /**
@@ -169,9 +140,12 @@ function parentTag(el, tag) {
  * @param {HTMLInputElement} el
  */
 function trCheck(el) {
-	const tr = parentTag(el, 'tr');
+	const tr = el.closest('tr');
 	tr.classList.toggle('checked', el.checked);
-	el.form?.['all']?.onclick?.();
+	const all = el.form && el.form['all'];
+	if (all && all.onclick) {
+		all.onclick();
+	}
 }
 
 /**
@@ -213,12 +187,13 @@ function formCheck(name) {
 }
 
 /**
- * Checks all rows in <table class="checkable"> once the browser restores the checkboxes.
+ * Checks all rows in <table class="checkable">.
  */
 function tableCheck() {
-	window.addEventListener('pageshow', () => {
-		qsa('table.checkable td:first-child input').forEach(trCheck);
-	});
+	qsa('table.checkable td:first-child input').forEach(trCheck);
+
+	// Once the browser restores the checkboxes while browsing history.
+	window.addEventListener('pageshow', tableCheck);
 }
 
 /**
@@ -255,14 +230,52 @@ function formChecked(input, name) {
 }
 
 /**
+ * Fills the number of selected databases.
+ *
+ * @this {HTMLInputElement}
+ */
+function countDbs() {
+	selectCount('selected', formChecked(this, /^db/));
+}
+
+/**
+ * Fills the numbers of selected tables.
+ *
+ * @param {number} tables Number of tables in the database.
+ *
+ * @this {HTMLInputElement}
+ */
+function countTables(tables) {
+	const checked = formChecked(this, /^(tables|views)\[/);
+
+	selectCount('selected', checked);
+	selectCount('selected2', formChecked(this, /^tables\[/) || tables); // Search is performed in all tables if none is selected.
+	selectCount('selected3', checked);
+}
+
+/**
+ * Fills the numbers of selected rows.
+ *
+ * @param {string} rows Number of rows in the whole result.
+ *
+ * @this {HTMLInputElement}
+ */
+function countRows(rows) {
+	const checked = formChecked(this, /^check/);
+
+	selectCount('selected', this.checked ? rows : checked);
+	selectCount('selected2', this.checked || !checked ? rows : checked); // The command is performed on the whole result if no row is selected.
+}
+
+/**
  * Selects clicked row.
  *
  * @param {MouseEvent} event
  * @param {boolean} [click] Forces the click.
- * @param {boolean} canEdit
+ * @param {boolean} [canEdit]
  */
 function tableClick(event, click, canEdit = true) {
-	const td = parentTag(event.target, 'td');
+	const td = event.target.closest('td');
 	let text;
 	if (canEdit && td && (text = td.dataset.text)) {
 		if (selectClick.call(td, event, +text, td.dataset.warning)) {
@@ -270,25 +283,36 @@ function tableClick(event, click, canEdit = true) {
 		}
 	}
 	click = (click || getSelection().isCollapsed);
-	let el = event.target;
-	while (!isTag(el, 'tr')) {
-		if (isTag(el, 'table|a|input|textarea')) {
-			if (el.type !== 'checkbox') {
-				return;
-			}
-			checkboxClick.call(el, event);
-			click = false;
-		}
-		el = el.parentNode;
-		if (!el) { // Ctrl+click on text fields hides the element
+
+	// The other elements handle the click themselves.
+	let el = event.target.closest('tr, table, a, input, textarea');
+	if (el && !el.matches('tr')) {
+		if (el.type !== 'checkbox') {
 			return;
 		}
+		checkboxClick.call(el, event);
+		click = false;
+		el = el.closest('tr');
 	}
-	el = el.firstChild.firstChild;
+	if (!el) {
+		// Ctrl+click on text fields hides the element
+		return;
+	}
+
+	// Not the first child - the cell can also contain the edit link.
+	el = qs('input[type=checkbox]', el.firstElementChild);
+	if (!el) {
+		// The first cell has no checkbox, e.g. in the process list of a driver which cannot kill.
+		return;
+	}
+
 	if (click) {
 		el.checked = !el.checked;
-		el.onclick?.();
+		if (el.onclick) {
+			el.onclick();
+		}
 	}
+
 	if (el.name === 'check[]') {
 		el.form['all'].checked = false;
 		formUncheck('all-page');
@@ -296,6 +320,7 @@ function tableClick(event, click, canEdit = true) {
 	if (/^(tables|views)\[]$/.test(el.name)) {
 		formUncheck('check-all');
 	}
+
 	trCheck(el);
 }
 
@@ -315,7 +340,7 @@ function checkboxClick(event) {
 	if (event.shiftKey && (!lastChecked || lastChecked.name === this.name)) {
 		const checked = (lastChecked ? lastChecked.checked : true);
 		let checking = !lastChecked;
-		for (const input of qsa('input', parentTag(this, 'table'))) {
+		for (const input of qsa('input', this.closest('table'))) {
 			if (input.name === this.name) {
 				if (checking) {
 					input.checked = checked;
@@ -352,33 +377,6 @@ function setHtml(id, html) {
 }
 
 /**
- * Returns the position of the node among its siblings.
- *
- * @param {Node} el
- *
- * @return {number}
- */
-function nodePosition(el) {
-	let pos = 0;
-	while ((el = el.previousSibling)) {
-		pos++;
-	}
-	return pos;
-}
-
-/**
- * Goes to the specified page.
- *
- * @param {string} href
- * @param {number} page
- */
-function pageClick(href, page) {
-	if (!isNaN(page) && page) {
-		location.href = href + (page !== 1 ? '&page=' + (page - 1) : '');
-	}
-}
-
-/**
  * Initializes toggling of the navigation panel by the navigation button.
  */
 function initNavigation() {
@@ -403,7 +401,7 @@ function initNavigationResizer(url, token, minWidth, maxWidth) {
 	const handle = gid("navigation-resizer");
 	const panel = gid("navigation-panel");
 	const style = gid("navigation-width");
-	const rtl = document.body.classList.contains("rtl");
+	const rtl = document.documentElement.classList.contains("rtl");
 
 	let hoverTimeout = null;
 	let dragging = false;
@@ -547,7 +545,7 @@ function initTablesListSeparator(tablesList) {
 	// The marker sits at the very top of the list content, so it leaves the visible area as soon as
 	// the list is scrolled. Watching it avoids handling every scroll event.
 	const marker = qs('.scroll-marker', tablesList);
-	if (!marker) {
+	if (!marker || !window.IntersectionObserver) { // IntersectionObserver - unsupported in Safari < 12.1
 		return;
 	}
 
@@ -676,6 +674,18 @@ function initToggles(parent) {
 
 			event.preventDefault();
 			event.stopPropagation();
+		});
+	}
+}
+
+/**
+ * Disables the Save and continue edit button after changing a value identifying the row.
+ */
+function initWhereChange() {
+	for (const row of qsa('#form tr.where-column')) {
+		row.addEventListener("change", () => {
+			// The WHERE condition in the URL is not updated by the AJAX save, so the next save would not match the row.
+			qs('#form [name="insert"]').disabled = true;
 		});
 	}
 }
@@ -1056,12 +1066,12 @@ function isCtrl(event) {
  * @return {boolean}
  */
 function bodyKeydown(event, button) {
-	eventStop(event);
+	event.stopPropagation();
 	let target = event.target;
 	if (target.jushTextarea) {
 		target = target.jushTextarea;
 	}
-	if (isCtrl(event) && event.key === 'Enter' && isTag(target, 'select|textarea|input')) {
+	if (isCtrl(event) && event.key === 'Enter' && target.matches('select, textarea, input')) {
 		target.blur();
 		if (target.form[button]) {
 			target.form[button].click();
@@ -1082,7 +1092,9 @@ function bodyKeydown(event, button) {
  */
 function bodyClick(event) {
 	const target = event.target;
-	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && isTag(target, 'input')) {
+
+	// type - the target can be a text node without matches()
+	if ((isCtrl(event) || event.shiftKey) && target.type === 'submit' && target.matches('input')) {
 		target.form.target = '_blank';
 		setTimeout(() => {
 			// if (isCtrl(event)) { focus(); } doesn't work
@@ -1106,25 +1118,31 @@ function onEditingKeydown(event)
 		event.preventDefault();
 
 		const target = event.target;
-		let row = parentTag(target, "tr");
-		if (!row) {
-			return false;
-		}
-
-		row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
-		if (!row || !isTag(row, 'tr')) {
-			return false;
-		}
-
-		const cell = row.childNodes[nodePosition(parentTag(target, "th|td"))];
+		// Not parentNode - the NULL and AI checkboxes are wrapped in a <label>.
+		const cell = target.closest("th, td");
 		if (!cell) {
 			return false;
 		}
 
-		let input = cell.childNodes[nodePosition(target)];
-		if (!input || !isTag(input, "input|select|textarea|pre|button") || input.classList.contains("hidden")) {
-			input = qs("input:not(.hidden), select:not(.hidden), textarea:not(.hidden), pre.jush, button", cell);
+		const position = [...cell.parentNode.children].indexOf(cell);
+		let row = cell.parentNode;
+		do {
+			row = event.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
+		} while (row && row.hidden); // Skip removed columns, focusing their hidden row does nothing.
+
+		const nextCell = (row ? row.children[position] : null);
+		if (!nextCell) {
+			return false;
 		}
+
+		// The element at the same position can be hidden, the cell displays e.g. collation or ON DELETE by the column type.
+		// Look for the same field by the name suffix and fall back to the first displayed element.
+		const field = target.jushTextarea || target;
+		const name = (field.name || '').replace(/.*(\[[^[]+])$/, '$1');
+		const input = [
+			(name ? qs(`[name$='${name}']`, nextCell) : null),
+			...qsa("input, select, textarea, pre.jush, button", nextCell),
+		].find(el => el && el.offsetParent);
 
 		if (input) {
 			input.focus();
@@ -1145,7 +1163,7 @@ function onEditingKeydown(event)
  * Disables maxlength for functions and manages value visibility.
  *
  * @param {?Event} event
- * @param {boolean} init True when applying the function selected by the server, so the value must be kept.
+ * @param {boolean} [init] True when applying the function selected by the server, so the value must be kept.
  *
  * @this {HTMLSelectElement}
  */
@@ -1268,7 +1286,7 @@ function skipOriginal(first) {
  * @this {HTMLInputElement}
  */
 function fieldChange() {
-	const tr = parentTag(this, 'tr');
+	const tr = this.closest('tr');
 	const row = cloneNode(tr);
 	for (const input of qsa('input', row)) {
 		input.value = '';
@@ -1284,10 +1302,10 @@ function fieldChange() {
  * Sends AJAX request.
  *
  * @param {string} url
- * @param {?function(XMLHttpRequest)} onSuccess
- * @param {?string} data POST data.
- * @param {?string} progressMessage
- * @param {boolean} failSilently
+ * @param {?function(XMLHttpRequest)} [onSuccess]
+ * @param {?string} [data] POST data.
+ * @param {?string} [progressMessage]
+ * @param {boolean} [failSilently]
  *
  * @return {XMLHttpRequest}
  *
@@ -1296,16 +1314,17 @@ function fieldChange() {
 function ajax(url, onSuccess = null, data = null, progressMessage = null, failSilently = false) {
 	const ajaxStatus = gid('ajaxstatus');
 
-	if (progressMessage) {
-		ajaxStatus.innerHTML = '<div class="message">' + progressMessage + '</div>';
-		ajaxStatus.classList.remove("hidden");
-	} else {
-		ajaxStatus.classList.add("hidden");
-	}
+	// Empty the live region instead of hiding it, display: none would remove it from the accessibility tree.
+	ajaxStatus.innerHTML = (progressMessage ? '<div class="message">' + progressMessage + '</div>' : '');
 
 	const request = new XMLHttpRequest();
 	request.open((data ? 'POST' : 'GET'), url);
-	request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+	// Cross-origin would be preflighted and is_ajax() is only ours.
+	if (new URL(url, location).origin === location.origin) {
+		request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	}
+
 	if (data) {
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	}
@@ -1320,7 +1339,6 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
 				console.error(request.status ? request.responseText : "No internet connection");
 			} else {
 				ajaxStatus.innerHTML = (request.status ? request.responseText : '<div class="error">' + offlineMessage + '</div>');
-				ajaxStatus.classList.remove("hidden");
 			}
 		}
 	};
@@ -1335,15 +1353,17 @@ function ajax(url, onSuccess = null, data = null, progressMessage = null, failSi
  *
  * @param {string} url
  *
- * @return {boolean} False for success.
+ * @return {boolean} Always false.
  */
 function ajaxSetHtml(url) {
-	return !ajax(url, request => {
+	ajax(url, request => {
 		const data = JSON.parse(request.responseText);
 		for (const key in data) {
 			setHtml(key, data[key]);
 		}
 	});
+
+	return false;
 }
 
 /**
@@ -1363,7 +1383,7 @@ function ajaxForm(form, message, button) {
 				return false;
 			}
 			if (!/^(checkbox|radio|submit|file)$/i.test(el.type) || el.checked || el === button) {
-				const value = (isTag(el, 'select') ? selectValue(/** @type {HTMLSelectElement} */ (el)) : el.value);
+				const value = (el.matches('select') ? selectValue(/** @type {HTMLSelectElement} */ (el)) : el.value);
 
 				data.push(encodeURIComponent(el.name) + '=' + encodeURIComponent(value));
 			}
@@ -1390,7 +1410,7 @@ function ajaxForm(form, message, button) {
  */
 function initTableFooter() {
 	const footer = qs(".table-footer");
-	if (!footer) return;
+	if (!footer || !window.IntersectionObserver) return; // IntersectionObserver - unsupported in Safari < 12.1
 
 	const options = {
 		root: qs(".table-footer-parent"),
@@ -1412,7 +1432,7 @@ function initTableFooter() {
  */
 function updateSaveButton() {
 	const button = gid('modify-save');
-	if (button?.dataset.inlineEdit) {
+	if (button && button.dataset.inlineEdit) {
 		button.disabled = !qs('#table td[data-editing="true"]');
 	}
 }
@@ -1433,7 +1453,7 @@ function selectClick(event, text, warning) {
 	const target = event.target;
 
 	// Note: Shift key forces the editing when clicking on a link.
-	if (!isCtrl(event) || td.dataset.editing || (!event.shiftKey && parentTag(target, 'a'))) {
+	if (!isCtrl(event) || td.dataset.editing || (!event.shiftKey && target.closest('a'))) {
 		return false;
 	}
 
@@ -1462,7 +1482,7 @@ function selectClick(event, text, warning) {
 		}
 	};
 
-	const dataset = td.firstChild?.dataset ?? {};
+	const dataset = (td.firstChild && td.firstChild.dataset) || {};
 	let value;
 	if (dataset.value !== undefined) {
 		const dom = new DOMParser().parseFromString(dataset.value, "text/html");
@@ -1484,7 +1504,7 @@ function selectClick(event, text, warning) {
 
 	// Firefox: event.rangeOffset is defined, anchorOffset is related to the whole TR not the inner text node.
 	// Chrome/Safari: event.rangeOffset is not defined, anchorOffset is related to the inner text node.
-	const pos = event.rangeOffset ?? getSelection().anchorOffset;
+	const pos = (event.rangeOffset !== undefined ? event.rangeOffset : getSelection().anchorOffset);
 
 	td.dataset.editing = "true";
 	td.innerHTML = '';
@@ -1529,10 +1549,7 @@ function loadNextPage(limit, loadingText) {
 		return true;
 	}
 
-	a.innerHTML = loadingText;
-	a.removeAttribute('href');
-
-	return !ajax(href, request => {
+	ajax(href, request => {
 		const newBody = document.createElement('tbody');
 		newBody.innerHTML = request.responseText;
 
@@ -1550,17 +1567,12 @@ function loadNextPage(limit, loadingText) {
 			a.innerHTML = title;
 		}
 	});
-}
 
+	// Change the link only after creating the request, so an exception leaves it usable.
+	a.innerHTML = loadingText;
+	a.removeAttribute('href');
 
-
-/**
- * Stops event propagation.
- *
- * @param {Event} event
- */
-function eventStop(event) {
-	event.stopPropagation();
+	return false;
 }
 
 
@@ -1628,3 +1640,12 @@ function updateMaxLengthMark(input) {
 }
 
 oninput = event => updateMaxLengthMark(event.target);
+
+// documentElement - this file is loaded in <head> where document.body does not exist yet.
+document.documentElement.classList.add('js');
+document.documentElement.classList.remove('nojs'); // Two calls, not classList.replace() - unsupported in Chrome < 61.
+
+mixin(document, {
+	onclick: bodyClick,
+	onkeydown: bodyKeydown,
+});

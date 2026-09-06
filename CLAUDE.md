@@ -43,7 +43,7 @@ php bin/compile.php admin mysql,pgsql en,cs,de
 php bin/update-translations.php [language]   # e.g. php bin/update-translations.php de
 ```
 
-**Tests:** 
+**Tests:**
 Katalon Automation Recorder (browser-based) test suites are in `tests/katalon/`. Run via Katalon browser extension against a live server.
 
 Unit tests in `tests/unit/` are standalone scripts:
@@ -131,6 +131,31 @@ To validate translations, run `php bin/update-translations.php --clean` – it d
 - **Sentence-final punctuation** — must match whether the English text ends with a period: none for `he`, `।` for `bn`/`hi`, `。` for `ja`/`zh*`, `.` elsewhere.
 - **Plural forms** — 4 for `sl`, 3 for `cs sk pl lt lv ro bs hr ru sr uk`, 2 otherwise. Languages with no numeral-driven agreement (ja, zh, ko, vi, tr, th, et) use a plain string instead of an array; identical plural forms are reported as an error.
 
+### Coding style
+
+Classes (`admin/core/`, `editor/core/`, `plugins/`) are camelCase throughout — methods, properties and local variables. Procedural code (`admin/*.inc.php`, `admin/include/`, `admin/drivers/`, `bin/`) is snake_case throughout.
+
+PHP lines are limited to 200 characters (`.editorconfig`); translations, `vendor/` and `externals/` are exempt.
+
+Wrap at a boundary the expression already has, never at an arbitrary column:
+
+- After a `.` or `?` operator — the continuation is indented by one more tab.
+- After a `&&`, `||` or `:` operator — the continuation is not indented by one more tab.
+- Or by putting each argument or array element on its own line.
+- A trailing comment that makes the line too long moves above the statement.
+- Long queries are wrapped inside the string, with the continuation of a clause indented by one tab.
+
+Prefer a pure wrap over a refactoring: don't extract a variable just to shorten a line, because that changes evaluation order. Two constraints come from `bin/compile.php`, which matches source code as text:
+
+- Never split the message of `lang()` into concatenated parts — the compiler matches `lang('...')` to replace texts with ids. The message may sit on its own line.
+- Never wrap a line carrying a `// !compile:` marker, and check `bin/compile.php` for a `replace()` whose search string covers the line you are about to wrap.
+
+Wrapping must not change the compiled output apart from reformatted queries, split string literals and added trailing commas.
+
+JavaScript in `admin/scripts/`, `editor/scripts/`, plugins and inline `script()` must not use anything newer than ES6 (ES2015) — no `?.`, `??`, `??=`, `async`/`await` or ES2017+ built-ins like `Object.entries()` and `String.padStart()`. Newer syntax is a parse error, so a single modern token disables all of AdminNeo's JavaScript, not just the feature using it. The bundled syntax highlighter [JUSH](https://github.com/vrana/jush) holds the same baseline. Browser APIs stay at the same generation (~Safari 10, Chrome 54, Firefox 50). Where a newer API has an older equivalent, use the older one — the version check goes through `ajax()`, not `fetch()`. Feature-detect only when there is no alternative, as `initTableFooter()` does with `IntersectionObserver`.
+
+In JavaScript doc comments, an optional parameter — one with a default value in the signature or one callers may omit — has its name in brackets: `@param {ParentNode} [context] Defaults to document.`
+
 ### Commits
 
 Commit one logical change at a time. Split an unrelated bug found along the way into its own commit.
@@ -162,7 +187,7 @@ in alphabetical order, so importing the dump failed on a foreign key violation.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ```
 
-The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one does).
+The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one carries the upstream author's and yours).
 
 ### Porting changes from Adminer
 
@@ -174,11 +199,13 @@ git remote add vrana git@github.com:vrana/adminer.git
 git fetch vrana main --no-tags
 ```
 - Find the commit (e.g. `git log vrana/main --oneline --grep="<keyword>" -i`) and inspect it with `git show <hash>`.
+- When walking through upstream commits one by one, never port a commit on your own initiative. Present the commit message, say what would apply to AdminNeo, and wait for confirmation — showing a commit is not an instruction to port it. This holds even for a one-line change with an obvious mapping.
 - Don't run a literal `git cherry-pick` — the two code bases have diverged enough (namespaces, driver structure, helper functions) that it will conflict badly. Instead, read the diff and reimplement the same behavior by hand in the current codebase:
   - Map each changed Adminer file to its AdminNeo equivalent; paths aren't always 1:1 (`adminer/` → `admin/`, and a database's code can move between a `plugins/drivers/*.php` optional plugin upstream and a built-in `admin/drivers/*.inc.php` driver here, or vice versa). Skip files for databases AdminNeo doesn't support.
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
   - Grep for the changed function/pattern across `admin/`, `editor/`, and `plugins/` — AdminNeo may have more or fewer call sites than upstream for the same code.
   - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
+  - Rename snake_case to camelCase when the ported code lands in a class.
   - Ignore changes of upstream's git submodules.
   - Use `// by AI model name` mark in translations instead of `// AI model name`.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there:
@@ -198,7 +225,12 @@ git fetch vrana main --no-tags
   - Don't add your own `Co-Authored-By` signature, but keep original one if present.
 - If adaptation is more complex, then:
   - Don't commit automatically. Present the change for review and wait for approval; commit only when asked.
-  - Commit the standard way described in [Commits](#commits): don't preserve the original author or author-date, and end the message with your own `Co-Authored-By` line naming the used Claude model. Don't keep the original commit's `Co-Authored-By` line.
+  - Commit the standard way described in [Commits](#commits): don't preserve the original author or author-date. Don't keep the original commit's `Co-Authored-By` line.
+  - End the message with a `Co-Authored-By` line naming the author of the original upstream commit (name and e-mail from its `%an <%ae>`), followed by your own `Co-Authored-By` line naming the used Claude model:
+  ```
+  Co-Authored-By: Jakub Vrana <jakub@vrana.cz>
+  Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+  ```
   - Add reference to the upstream commit to the commit message:
   ```
   Ported from:
@@ -207,7 +239,7 @@ git fetch vrana main --no-tags
   - Remove the bug/issue reference from the commit message subject, add a message line instead:
   ```
   Issue: https://github.com/vrana/adminer/issues/<issue_id>
-  ``` 
+  ```
 - Verify: `php -l` every changed file, then run a real `php bin/compile.php admin <affected-drivers> en` (or `editor`) build to confirm the change compiles cleanly into the single-file output. For behavior-changing (not purely cosmetic) ports, prefer also verifying against a live test database (see Databases section) when one's available for the affected driver — start the dev server, log in, and drive the actual affected request/feature rather than trusting static review alone.
 
 To understand the historical changes in public interface, look at Migration guide for AdminNeo 5.0.0: https://www.adminneo.org/upgrade#v5.0.0

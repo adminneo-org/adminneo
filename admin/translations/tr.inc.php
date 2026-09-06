@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'SS:DD:ss', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => '%s bir dizi döndürmelidir.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => '%s ve %s, %s yöntemiyle oluşturulmuş bir nesne döndürmelidir.', // by Claude Opus 5
+	'%s must return an array.' => '%s bir dizi döndürmelidir.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => '%s ve %s, %s yöntemiyle oluşturulmuş bir nesne döndürmelidir.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Sistem',
@@ -26,13 +26,13 @@ return [
 	'Logout' => 'Çıkış',
 	'Logged as: %s' => '%s olarak giriş yapıldı',
 	'Logout successful.' => 'Oturum başarıyla sonlandı.',
-	'hostname[:port] or :socket' => 'hostname[:port] veya :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Geçersiz sunucu veya kimlik bilgileri.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Girilen parolada boşluk var, sorunun nedeni bu olabilir.', // by Claude Fable 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo parolasız bir veri tabanına erişimi desteklemez, <a href="https://www.adminneo.org/password"%s>daha fazla bilgi</a>.', // by Claude Fable 5
-	'Database does not support password.' => 'Veri tabanı parolayı desteklemez.', // by Claude Fable 5
-	'Too many unsuccessful logins, try again in %d minute(s).' => 'Çok fazla başarısız giriş denemesi, %d dakika sonra tekrar deneyin.', // by Claude Opus 5
-	'Invalid permanent login, please login again.' => 'Geçersiz kalıcı oturum, lütfen tekrar giriş yapın.', // by Claude Opus 5
+	'hostname[:port] or :socket' => 'hostname[:port] veya :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Geçersiz sunucu veya kimlik bilgileri.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Girilen parolada boşluk var, sorunun nedeni bu olabilir.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo parolasız bir veri tabanına erişimi desteklemez, <a href="https://www.adminneo.org/password"%s>daha fazla bilgi</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Veri tabanı parolayı desteklemez.', // by Claude Fable 5.1
+	'Too many unsuccessful logins, try again in %d minute(s).' => 'Çok fazla başarısız giriş denemesi, %d dakika sonra tekrar deneyin.', // by Claude Fable 5.1
+	'Invalid permanent login, please login again.' => 'Geçersiz kalıcı oturum, lütfen tekrar giriş yapın.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Geçersiz (CSRF) jetonu. Formu tekrar yolla.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Bu isteği AdminNeo\'den göndermediyseniz bu sayfayı kapatın.',
 	'The action will be performed after successful login with the same credentials.' => 'İşlem, aynı kimlik bilgileriyle başarıyla oturum açıldıktan sonra gerçekleştirilecektir.',
@@ -48,10 +48,11 @@ return [
 	// Settings
 	'Language' => 'Dil',
 
-	'Home' => 'Ana sayfa', // by Claude Opus 5
+	'Menu' => 'Menü', // by Claude Fable 5.1
+	'Home' => 'Ana sayfa', // by Claude Fable 5.1
 	'Refresh' => 'Tazele',
-	'Info' => 'Bilgi', // by Claude Opus 5
-	'More information.' => 'Daha fazla bilgi.', // by Claude Opus 5
+	'Info' => 'Bilgi', // by Claude Fable 5.1
+	'More information.' => 'Daha fazla bilgi.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'İzinler',
@@ -73,14 +74,14 @@ return [
 
 	// Structure
 	'Column' => 'Kolon',
-	'Columns' => 'Kolonlar', // by Claude Fable 5
+	'Columns' => 'Kolonlar', // by Claude Fable 5.1
 	'Routine' => 'Yordam',
 	'Grant' => 'Yetki Ver',
 	'Revoke' => 'Yetki Kaldır',
 
 	// Queries
 	'SQL command' => 'SQL komutu',
-	'HTTP request' => 'HTTP isteği', // by Claude Opus 5
+	'HTTP request' => 'HTTP isteği', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'%d sorgu başarıyla çalıştırıldı.',
 		'%d adet sorgu başarıyla çalıştırıldı.',
@@ -88,7 +89,7 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'Sorgu başarıyla çalıştırıldı, %d adet kayıt etkilendi.',
 	'No commands to execute.' => 'Çalıştırılacak komut yok.',
 	'Error in query' => 'Sorguda hata',
-	'Unknown error.' => 'Bilinmeyen hata.', // by Claude Fable 5
+	'Unknown error.' => 'Bilinmeyen hata.', // by Claude Fable 5.1
 	'Warnings' => 'Uyarılar',
 	'%s queries are not supported.' => '%s sorguları desteklenmiyor.',
 	'Execute' => 'Çalıştır',
@@ -110,8 +111,8 @@ return [
 	'File uploads are disabled.' => 'Dosya gönderimi etkin değil.',
 	'Unable to upload a file.' => 'Dosya gönderilemiyor.',
 	'Maximum allowed file size is %sB.' => 'İzin verilen dosya boyutu sınırı %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'En fazla dosya sayısı %d. Daha az dosya seçin ya da %s ayar yönergesini artırın.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Dosyaların toplam boyut sınırı %s. Daha küçük dosyalar seçin ya da %s ayar yönergesini artırın.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'En fazla dosya sayısı %d. Daha az dosya seçin ya da %s ayar yönergesini artırın.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Dosyaların toplam boyut sınırı %s. Daha küçük dosyalar seçin ya da %s ayar yönergesini artırın.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Çok büyük POST verisi, veriyi azaltın ya da %s ayar yönergesini uygun olarak yapılandırın.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'FTP yoluyla büyük bir SQL dosyası yükleyebilir ve sunucudan içe aktarabilirsiniz.',
 	'File must be in UTF-8 encoding.' => 'Dosya UTF-8 kodlamasında olmalıdır.',
@@ -131,7 +132,7 @@ return [
 
 	// Databases
 	'Database' => 'Veri Tabanı',
-	'database' => 'veri tabanı', // by Claude Opus 5
+	'database' => 'veri tabanı', // by Claude Fable 5.1
 	'DB' => 'DB',
 	'Use' => 'Kullan',
 	'Invalid database.' => 'Geçersiz veri tabanı.',
@@ -151,10 +152,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Şema',
-	'schema' => 'şema', // by Claude Opus 5
-	'Schemas' => 'Şemalar', // by Claude Opus 5
-	'No schemas.' => 'Şema yok.', // by Claude Opus 5
-	'Show schema' => 'Şemayı göster', // by Claude Opus 5
+	'schema' => 'şema', // by Claude Fable 5.1
+	'Schemas' => 'Şemalar', // by Claude Fable 5.1
+	'No schemas.' => 'Şema yok.', // by Claude Fable 5.1
+	'Show schema' => 'Şemayı göster', // by Claude Fable 5.1
 	'Alter schema' => 'Şemayı değiştir',
 	'Create schema' => 'Şema oluştur',
 	'Schema has been dropped.' => 'Şema silindi.',
@@ -163,6 +164,7 @@ return [
 	'Invalid schema.' => 'Geçersiz şema.',
 
 	// Table list
+	'All' => 'Tümü', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Motor',
 	'engine' => 'motor',
 	'Collation' => 'Karşılaştırma',
@@ -178,14 +180,14 @@ return [
 	'Check' => 'Denetle',
 	'Repair' => 'Tamir Et',
 	'Truncate' => 'Boşalt',
-	'Truncate Cascade' => 'Kademeli boşalt', // by Claude Fable 5
+	'Truncate Cascade' => 'Kademeli boşalt', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tablolar boşaltıldı.',
 	'Move to other database' => 'Başka veri tabanına taşı',
 	'Move' => 'Taşı',
 	'Tables have been moved.' => 'Tablolar taşındı.',
 	'Copy' => 'Kopyala',
 	'Tables have been copied.' => 'Tablolar kopyalandı.',
-	'overwrite' => 'üzerine yaz', // by Claude Fable 5
+	'overwrite' => 'üzerine yaz', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Tablolar',
@@ -230,12 +232,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Bununla bölümle',
-	'Partition' => 'Bölüm', // by Claude Opus 5
+	'Partition' => 'Bölüm', // by Claude Fable 5.1
 	'Partitions' => 'Bölümler',
 	'Partition name' => 'Bölüm adı',
 	'Values' => 'Değerler',
-	'Inherited tables' => 'Miras alınan tablolar', // by Claude Opus 5
-	'Inherited from' => 'Miras alındığı tablo', // by Claude Opus 5
+	'Inherited tables' => 'Miras alınan tablolar', // by Claude Fable 5.1
+	'Inherited from' => 'Miras alındığı tablo', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'İndeksler',
@@ -244,13 +246,12 @@ return [
 	'Add next' => 'Bundan sonra ekle',
 	'Index Type' => 'İndex Türü',
 	'length' => 'uzunluğu',
-	'operator class' => 'operatör sınıfı', // by Claude Fable 5
-	'Algorithm' => 'Algoritma', // by Claude Fable 5
-	'Condition' => 'Koşul', // by Claude Fable 5
+	'operator class' => 'operatör sınıfı', // by Claude Fable 5.1
+	'Algorithm' => 'Algoritma', // by Claude Fable 5.1
+	'Condition' => 'Koşul', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Dış anahtarlar',
-	'Foreign key' => 'Dış anahtar',
 	'Foreign key has been dropped.' => 'Dış anahtar silindi.',
 	'Foreign key has been altered.' => 'Dış anahtar değiştirildi.',
 	'Foreign key has been created.' => 'Dış anahtar oluşturuldu.',
@@ -260,7 +261,8 @@ return [
 	'Target' => 'Hedef',
 	'Add column' => 'Kolon ekle',
 	'Alter' => 'Değiştir',
-	'Add foreign key' => 'Dış anahtar ekle',
+	'Alter foreign key' => 'Dış anahtarı değiştir', // by Claude Fable 5.1
+	'Create foreign key' => 'Dış anahtar oluştur', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE (Hedefteki Kayıt Silinirse)',
 	'ON UPDATE' => 'ON UPDATE (Hedefteki Kayıt Değiştirilirse)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kaynak ve hedef kolonlar aynı veri türünde olmalı, hedef kolonlarda dizin bulunmalı ve başvurulan veri mevcut olmalı.',
@@ -314,7 +316,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Tetikler',
-	'Add trigger' => 'Tetik ekle',
 	'Trigger has been dropped.' => 'Tetik silindi.',
 	'Trigger has been altered.' => 'Tetik değiştirildi.',
 	'Trigger has been created.' => 'Tetik oluşturuldu.',
@@ -322,12 +323,12 @@ return [
 	'Create trigger' => 'Tetik oluştur',
 
 	// Table check constraints
-	'Checks' => 'Kontroller', // by Claude Fable 5
-	'Create check' => 'Kontrol oluştur', // by Claude Fable 5
-	'Alter check' => 'Kontrolü değiştir', // by Claude Fable 5
-	'Check has been created.' => 'Kontrol oluşturuldu.', // by Claude Fable 5
-	'Check has been altered.' => 'Kontrol değiştirildi.', // by Claude Fable 5
-	'Check has been dropped.' => 'Kontrol silindi.', // by Claude Fable 5
+	'Checks' => 'Kontroller', // by Claude Fable 5.1
+	'Create check' => 'Kontrol oluştur', // by Claude Fable 5.1
+	'Alter check' => 'Kontrolü değiştir', // by Claude Fable 5.1
+	'Check has been created.' => 'Kontrol oluşturuldu.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Kontrol değiştirildi.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Kontrol silindi.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Veri seç',
@@ -335,7 +336,7 @@ return [
 	'Functions' => 'Fonksiyonlar',
 	'Aggregation' => 'Kümeleme',
 	'Search' => 'Ara',
-	'anywhere' => 'herhangi bir yerde', // by Claude Opus 5
+	'anywhere' => 'herhangi bir yerde', // by Claude Fable 5.1
 	'Sort' => 'Sırala',
 	'descending' => 'Azalan',
 	'Limit' => 'Limit',
@@ -345,6 +346,7 @@ return [
 	'Full table scan' => 'Tam tablo taraması',
 	'Unable to select the table' => 'Tablo seçilemedi',
 	'Search data in tables' => 'Tablolarda veri ara',
+	'All rows on this page' => 'Bu sayfadaki tüm satırlar', // by Claude Fable 5.1
 	'No rows.' => 'Kayıt yok.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -354,7 +356,7 @@ return [
 	'Page' => 'Sayfa',
 	'last' => 'son',
 	'Load more data' => 'Daha fazla veri yükle',
-	'Loading' => 'Yükleniyor',
+	'Loading…' => 'Yükleniyor…',
 	'Whole result' => 'Tüm sonuç',
 	'%d byte(s)' => '%d bayt',
 
@@ -372,7 +374,7 @@ return [
 	'Save' => 'Kaydet',
 	'Save and continue edit' => 'Kaydet ve düzenlemeye devam et',
 	'Save and insert next' => 'Kaydet ve sonrakini ekle',
-	'Saving' => 'Saydediliyor',
+	'Saving…' => 'Saydediliyor…',
 	'Selected' => 'Seçildi',
 	'Clone' => 'Kopyala',
 	'Delete' => 'Sil',
@@ -401,38 +403,38 @@ return [
 	'no' => 'hayır',
 
 	// Settings
-	'Settings' => 'Ayarlar', // by Claude Opus 5
-	'Default' => 'Varsayılan', // by Claude Opus 5
-	'Color scheme' => 'Renk şeması', // by Claude Opus 5
-	'By system' => 'Sisteme göre', // by Claude Opus 5
-	'Light' => 'Açık', // by Claude Opus 5
-	'Dark' => 'Koyu', // by Claude Opus 5
-	'Navigation mode' => 'Gezinme kipi', // by Claude Opus 5
-	'Simple' => 'Basit', // by Claude Opus 5
-	'Dual' => 'İkili', // by Claude Opus 5
-	'Dual on hover' => 'İkili (üzerine gelince)', // by Claude Opus 5
-	'Reversed' => 'Ters', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Tablo bağlantılarını içeren ana gezinme yerleşimi.', // by Claude Opus 5
-	'Table links' => 'Tablo bağlantıları', // by Claude Opus 5
-	'Primary action for all table links.' => 'Tüm tablo bağlantıları için birincil işlem.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Geçerli kaydı referans alan tablolara bağlantılar.', // by Claude Opus 5
-	'Display' => 'Göster', // by Claude Opus 5
-	'Hide' => 'Gizle', // by Claude Opus 5
-	'Records per page' => 'Sayfa başına kayıt', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Veri tablosunda gösterilen varsayılan kayıt sayısı.', // by Claude Opus 5
-	'Enum as select' => 'Enum seçim listesi olarak', // by Claude Opus 5
-	'Never' => 'Asla', // by Claude Opus 5
-	'Always' => 'Her zaman', // by Claude Opus 5
-	'More values than %d' => '%d değerden fazlaysa', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Enum kolonları için seçim listesi gösterme eşiği.', // by Claude Opus 5
+	'Settings' => 'Ayarlar', // by Claude Fable 5.1
+	'Default' => 'Varsayılan', // by Claude Fable 5.1
+	'Color scheme' => 'Renk şeması', // by Claude Fable 5.1
+	'By system' => 'Sisteme göre', // by Claude Fable 5.1
+	'Light' => 'Açık', // by Claude Fable 5.1
+	'Dark' => 'Koyu', // by Claude Fable 5.1
+	'Navigation mode' => 'Gezinme kipi', // by Claude Fable 5.1
+	'Simple' => 'Basit', // by Claude Fable 5.1
+	'Dual' => 'İkili', // by Claude Fable 5.1
+	'Dual on hover' => 'İkili (üzerine gelince)', // by Claude Fable 5.1
+	'Reversed' => 'Ters', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Tablo bağlantılarını içeren ana gezinme yerleşimi.', // by Claude Fable 5.1
+	'Table links' => 'Tablo bağlantıları', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Tüm tablo bağlantıları için birincil işlem.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Geçerli kaydı referans alan tablolara bağlantılar.', // by Claude Fable 5.1
+	'Display' => 'Göster', // by Claude Fable 5.1
+	'Hide' => 'Gizle', // by Claude Fable 5.1
+	'Records per page' => 'Sayfa başına kayıt', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Veri tablosunda gösterilen varsayılan kayıt sayısı.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum seçim listesi olarak', // by Claude Fable 5.1
+	'Never' => 'Asla', // by Claude Fable 5.1
+	'Always' => 'Her zaman', // by Claude Fable 5.1
+	'More values than %d' => '%d değerden fazlaysa', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Enum kolonları için seçim listesi gösterme eşiği.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Tek Kullanımlık Parola', // by Claude Opus 5
-	'Enter OTP code.' => 'OTP kodunu girin.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Geçersiz OTP kodu.', // by Claude Opus 5
-	'Access denied.' => 'Erişim reddedildi.', // by Claude Opus 5
-	'JSON previews' => 'JSON önizlemeleri', // by Claude Opus 5
-	'Data table' => 'Veri tablosu', // by Claude Opus 5
-	'Edit form' => 'Düzenleme formu', // by Claude Opus 5
-	'Ask %s' => '%s uygulamasına sor', // by Claude Opus 5
+	'One Time Password' => 'Tek Kullanımlık Parola', // by Claude Fable 5.1
+	'Enter OTP code.' => 'OTP kodunu girin.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Geçersiz OTP kodu.', // by Claude Fable 5.1
+	'Access denied.' => 'Erişim reddedildi.', // by Claude Fable 5.1
+	'JSON previews' => 'JSON önizlemeleri', // by Claude Fable 5.1
+	'Data table' => 'Veri tablosu', // by Claude Fable 5.1
+	'Edit form' => 'Düzenleme formu', // by Claude Fable 5.1
+	'Ask %s' => '%s uygulamasına sor', // by Claude Fable 5.1
 ];

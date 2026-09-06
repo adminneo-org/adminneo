@@ -97,7 +97,7 @@ if ($_POST && !$_POST["add"] && !$_POST["drop_col"]) {
 	queries_redirect(ME . "table=" . urlencode($TABLE), lang('Indexes have been altered.'), alter_indexes($TABLE, $alter));
 }
 
-page_header(lang('Alter indexes'), ["table" => $TABLE, lang('Alter indexes')], h($TABLE));
+page_header(lang('Alter indexes') . ": " . h($TABLE), ["table" => $TABLE, lang('Alter indexes')]);
 
 $fields_keys = array_keys($fields);
 if ($_POST["add"]) {
@@ -176,7 +176,7 @@ echo "</tr></thead>\n";
 if ($primary) {
 	echo "<tr><td>PRIMARY<td>";
 	foreach ($primary["columns"] as $column) {
-		echo select_input(" disabled", $fields_keys, $column);
+		echo select_input(" disabled", array_combine($fields_keys, $fields_keys), $column);
 		echo "<label><input type='checkbox' disabled>" . lang('descending') . "</label> ";
 	}
 	echo "<td><td>\n";
@@ -202,7 +202,7 @@ foreach ($row["indexes"] as $index) {
 				" name='indexes[$j][columns][$i]' title='" . lang('Column') . "'",
 				($fields && ($column == "" || $fields[$column]) ? array_combine($fields_keys, $fields_keys) : []),
 				$column,
-				"partial(" . ($i == count($index["columns"]) ? "indexesAddColumn" : "indexesChangeColumn") . ", '" . js_escape(DIALECT == "sql" ? "" : $_GET["indexes"] . "_") . "')"
+				"partial(indexesChangeColumn, '" . js_escape(DIALECT == "sql" ? "" : $_GET["indexes"] . "_") . "')"
 			);
 
 			echo "<span $options_class>";

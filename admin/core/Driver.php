@@ -555,7 +555,8 @@ abstract class Driver
 		// MariaDB contains CHECK_CONSTRAINTS.TABLE_NAME, MySQL and PostgreSQL not.
 		return get_key_vals("SELECT c.CONSTRAINT_NAME, CHECK_CLAUSE
 FROM INFORMATION_SCHEMA.CHECK_CONSTRAINTS c
-JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS t ON c.CONSTRAINT_SCHEMA = t.CONSTRAINT_SCHEMA AND c.CONSTRAINT_NAME = t.CONSTRAINT_NAME" . ($this->connection->isMariaDB() ? " AND c.TABLE_NAME = " . q($table) : "") . "
+JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS t ON c.CONSTRAINT_SCHEMA = t.CONSTRAINT_SCHEMA
+	AND c.CONSTRAINT_NAME = t.CONSTRAINT_NAME" . ($this->connection->isMariaDB() ? " AND c.TABLE_NAME = " . q($table) : "") . "
 WHERE c.CONSTRAINT_SCHEMA = " . q($_GET["ns"] != "" ? $_GET["ns"] : DB) . "
 AND t.TABLE_NAME = " . q($table) . (DIALECT == "pgsql" ? "
 AND CHECK_CLAUSE NOT LIKE '% IS NOT NULL'" : ""), $this->connection); // ignore default IS NOT NULL checks in PostgreSQL
@@ -564,7 +565,7 @@ AND CHECK_CLAUSE NOT LIKE '% IS NOT NULL'" : ""), $this->connection); // ignore 
 	/**
 	 * Returns all fields in the current schema.
 	 *
-	 * @return array<list<array{field:string, null:bool, type:string, length:?numeric-string, primary?:numeric-string}>>
+	 * @return array<list<array{field:string, null:bool, type:string, length:?numeric-string, primary?:?string}>>
 	 */
 	function getAllFields(): array
 	{
@@ -574,10 +575,27 @@ AND CHECK_CLAUSE NOT LIKE '% IS NOT NULL'" : ""), $this->connection); // ignore 
 
 		$allFields = [];
 
-		$rows = get_rows("SELECT TABLE_NAME AS tab, COLUMN_NAME AS field, IS_NULLABLE AS nullable, DATA_TYPE AS type, CHARACTER_MAXIMUM_LENGTH AS length" . (DIALECT == 'sql' ? ", COLUMN_KEY = 'PRI' AS `primary`" : "") . "
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = " . q($_GET["ns"] != "" ? $_GET["ns"] : DB) . "
-ORDER BY TABLE_NAME, ORDINAL_POSITION", $this->connection);
+		// ClickHouse and Oracle don't have TABLE_CONSTRAINTS, so the primary key is not read there.
+		$joinConstraints = (DIALECT == "pgsql" || DIALECT == "mssql");
+
+		// The primary key is selected as the column name, not as a boolean, because PostgreSQL returns 't' and
+		// 'f' (both truthy) and MS SQL doesn't support booleans in SELECT.
+		$primary = (DIALECT == "sql" ? "c.COLUMN_KEY = 'PRI'" : ($joinConstraints ? "k.COLUMN_NAME" : ""));
+
+		// Joining TABLE_CONSTRAINTS first keeps one row per column: a table has at most one primary key, so
+		// KEY_COLUMN_USAGE, pinned to that constraint and to the column, matches at most once. Comparing also
+		// TABLE_SCHEMA lets PostgreSQL filter KEY_COLUMN_USAGE by schema instead of materializing the whole view.
+		$rows = get_rows("SELECT c.TABLE_NAME AS tab, c.COLUMN_NAME AS field, c.IS_NULLABLE AS nullable,
+	c.DATA_TYPE AS type, c.CHARACTER_MAXIMUM_LENGTH AS length" . ($primary ? ",
+	$primary AS " . idf_escape("primary") : "") . "
+FROM INFORMATION_SCHEMA.COLUMNS c" . ($joinConstraints ? "
+LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS t
+	ON c.TABLE_SCHEMA = t.TABLE_SCHEMA AND c.TABLE_NAME = t.TABLE_NAME AND t.CONSTRAINT_TYPE = 'PRIMARY KEY'
+LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k
+	ON t.CONSTRAINT_SCHEMA = k.CONSTRAINT_SCHEMA AND t.CONSTRAINT_NAME = k.CONSTRAINT_NAME
+		AND c.TABLE_SCHEMA = k.TABLE_SCHEMA AND c.TABLE_NAME = k.TABLE_NAME AND c.COLUMN_NAME = k.COLUMN_NAME" : "") . "
+WHERE c.TABLE_SCHEMA = " . q($_GET["ns"] != "" ? $_GET["ns"] : DB) . "
+ORDER BY c.TABLE_NAME, c.ORDINAL_POSITION", $this->connection);
 
 		foreach ($rows as $row) {
 			$row["null"] = ($row["nullable"] == "YES");

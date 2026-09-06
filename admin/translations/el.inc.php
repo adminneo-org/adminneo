@@ -13,8 +13,8 @@ return [
 	'HH:MM:SS' => 'ΩΩ:ΛΛ:ΔΔ', // hint for time format - use language equivalents for hour, minute and second shortcuts
 
 	// Bootstrap
-	'%s must return an array.' => 'Η %s πρέπει να επιστρέφει πίνακα.', // by Claude Opus 5
-	'%s and %s must return an object created by %s method.' => 'Οι %s και %s πρέπει να επιστρέφουν αντικείμενο που δημιουργήθηκε από τη μέθοδο %s.', // by Claude Opus 5
+	'%s must return an array.' => 'Η %s πρέπει να επιστρέφει πίνακα.', // by Claude Fable 5.1
+	'%s and %s must return an object created by %s method.' => 'Οι %s και %s πρέπει να επιστρέφουν αντικείμενο που δημιουργήθηκε από τη μέθοδο %s.', // by Claude Fable 5.1
 
 	// Login
 	'System' => 'Σύστημα',
@@ -26,24 +26,24 @@ return [
 	'Logout' => 'Αποσύνδεση',
 	'Logged as: %s' => 'Συνδεθήκατε ως %s',
 	'Logout successful.' => 'Αποσυνδεθήκατε με επιτυχία.',
-	'hostname[:port] or :socket' => 'hostname[:port] ή :socket', // by Claude Fable 5
-	'Invalid server or credentials.' => 'Λανθασμένος διακομιστής ή στοιχεία σύνδεσης.', // by Claude Opus 5
-	'There is a space in the input password which might be the cause.' => 'Υπάρχει ένα κενό στον κωδικό που εισαγάγατε, το οποίο μπορεί να είναι η αιτία.', // by Claude Fable 5
-	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Το AdminNeo δεν υποστηρίζει πρόσβαση σε βάση δεδομένων χωρίς κωδικό, <a href="https://www.adminneo.org/password"%s>περισσότερες πληροφορίες</a>.', // by Claude Fable 5
-	'Database does not support password.' => 'Η βάση δεδομένων δεν υποστηρίζει κωδικό.', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] ή :socket', // by Claude Fable 5.1
+	'Invalid server or credentials.' => 'Λανθασμένος διακομιστής ή στοιχεία σύνδεσης.', // by Claude Fable 5.1
+	'There is a space in the input password which might be the cause.' => 'Υπάρχει ένα κενό στον κωδικό που εισαγάγατε, το οποίο μπορεί να είναι η αιτία.', // by Claude Fable 5.1
+	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'Το AdminNeo δεν υποστηρίζει πρόσβαση σε βάση δεδομένων χωρίς κωδικό, <a href="https://www.adminneo.org/password"%s>περισσότερες πληροφορίες</a>.', // by Claude Fable 5.1
+	'Database does not support password.' => 'Η βάση δεδομένων δεν υποστηρίζει κωδικό.', // by Claude Fable 5.1
 	'Too many unsuccessful logins, try again in %d minute(s).' => [
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %d λεπτό.',
 		'Επανειλημμένες ανεπιτυχείς προσπάθειες σύνδεσης, δοκιμάστε ξανά σε %d λεπτά.',
 	],
-	'Invalid permanent login, please login again.' => 'Άκυρη μόνιμη σύνδεση, παρακαλώ συνδεθείτε ξανά.', // by Claude Opus 5
+	'Invalid permanent login, please login again.' => 'Άκυρη μόνιμη σύνδεση, παρακαλώ συνδεθείτε ξανά.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Άκυρο κουπόνι CSRF. Στείλτε τη φόρμα ξανά.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Αν δε στείλατε αυτό το αίτημα από το AdminNeo, τότε κλείστε αυτή τη σελίδα.',
-	'The action will be performed after successful login with the same credentials.' => 'Η ενέργεια θα εκτελεστεί μετά από επιτυχή σύνδεση με τα ίδια διαπιστευτήρια.', // by Claude Fable 5
+	'The action will be performed after successful login with the same credentials.' => 'Η ενέργεια θα εκτελεστεί μετά από επιτυχή σύνδεση με τα ίδια διαπιστευτήρια.', // by Claude Fable 5.1
 
 	// Connection
 	'No extension' => 'Καμία Επέκταση',
 	'None of the supported PHP extensions (%s) are available.' => 'Καμία από τις υποστηριζόμενες επεκτάσεις PHP (%s) δεν είναι διαθέσιμη.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Η σύνδεση σε προνομιούχες θύρες δεν επιτρέπεται.', // by Claude Fable 5
+	'Connecting to privileged ports is not allowed.' => 'Η σύνδεση σε προνομιούχες θύρες δεν επιτρέπεται.', // by Claude Fable 5.1
 	'Session support must be enabled.' => 'Πρέπει να είναι ενεργοποιημένη η υποστήριξη συνεδριών.',
 	'Session expired, please login again.' => 'Η συνεδρία έληξε, παρακαλώ συνδεθείτε ξανά.',
 	'%s version: %s through PHP extension %s' => '%s έκδοση: %s μέσω επέκτασης PHP %s',
@@ -51,10 +51,11 @@ return [
 	// Settings
 	'Language' => 'Γλώσσα',
 
-	'Home' => 'Αρχική', // by Claude Opus 5
+	'Menu' => 'Μενού', // by Claude Fable 5.1
+	'Home' => 'Αρχική', // by Claude Fable 5.1
 	'Refresh' => 'Ανανέωση',
-	'Info' => 'Πληροφορίες', // by Claude Opus 5
-	'More information.' => 'Περισσότερες πληροφορίες.', // by Claude Opus 5
+	'Info' => 'Πληροφορίες', // by Claude Fable 5.1
+	'More information.' => 'Περισσότερες πληροφορίες.', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Δικαιώματα',
@@ -76,14 +77,14 @@ return [
 
 	// Structure
 	'Column' => 'Στήλη',
-	'Columns' => 'Στήλες', // by Claude Fable 5
+	'Columns' => 'Στήλες', // by Claude Fable 5.1
 	'Routine' => 'Ρουτίνα',
 	'Grant' => 'Παραχώρηση',
 	'Revoke' => 'Ανάκληση',
 
 	// Queries
 	'SQL command' => 'Εντολή SQL',
-	'HTTP request' => 'Αίτημα HTTP', // by Claude Opus 5
+	'HTTP request' => 'Αίτημα HTTP', // by Claude Fable 5.1
 	'%d query(s) executed OK.' => [
 		'Το ερώτημα %d εκτελέστηκε ΟΚ.',
 		'Τα ερώτηματα %d εκτελέστηκαν ΟΚ.',
@@ -94,9 +95,9 @@ return [
 	],
 	'No commands to execute.' => 'Δεν υπάρχουν εντολές να εκτελεστούν.',
 	'Error in query' => 'Σφάλμα στο ερώτημα',
-	'Unknown error.' => 'Άγνωστο σφάλμα.', // by Claude Fable 5
-	'Warnings' => 'Προειδοποιήσεις', // by Claude Fable 5
-	'%s queries are not supported.' => 'Τα ερωτήματα %s δεν υποστηρίζονται.', // by Claude Fable 5
+	'Unknown error.' => 'Άγνωστο σφάλμα.', // by Claude Fable 5.1
+	'Warnings' => 'Προειδοποιήσεις', // by Claude Fable 5.1
+	'%s queries are not supported.' => 'Τα ερωτήματα %s δεν υποστηρίζονται.', // by Claude Fable 5.1
 	'Execute' => 'Εκτέλεση',
 	'Stop on error' => 'Διακοπή όταν υπάρχει σφάλμα',
 	'Show only errors' => 'Να εμφανίζονται μόνο τα σφάλματα',
@@ -116,8 +117,8 @@ return [
 	'File uploads are disabled.' => 'Έχει απενεργοποιηθεί η μεταφόρτωση αρχείων.',
 	'Unable to upload a file.' => 'Αδυναμία μεταφόρτωσης αρχείου.',
 	'Maximum allowed file size is %sB.' => 'Το μέγιστο επιτρεπόμενο μέγεθος αρχείου είναι %sB.',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Ο μέγιστος αριθμός αρχείων είναι %d. Επιλέξτε λιγότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Το μέγιστο συνολικό μέγεθος των αρχείων είναι %s. Επιλέξτε μικρότερα αρχεία ή αυξήστε την σχετική ρύθμιση %s.', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'Ο μέγιστος αριθμός αρχείων είναι %d. Επιλέξτε λιγότερα αρχεία ή αυξήστε τη σχετική ρύθμιση %s.', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Το μέγιστο συνολικό μέγεθος των αρχείων είναι %s. Επιλέξτε μικρότερα αρχεία ή αυξήστε τη σχετική ρύθμιση %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Πολλά δεδομένα POST. Μείωστε τα περιεχόμενα ή αυξήστε την σχετική ρύθμιση %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Μπορείτε να μεταφορτώσετε ένα μεγάλο αρχείο SQL μέσω FTP και να το εισάγετε από το διακομιστή.',
 	'File must be in UTF-8 encoding.' => 'Το αρχείο πρέπει να έχει κωδικοποίηση UTF-8.',
@@ -136,9 +137,9 @@ return [
 	'Data' => 'Δεδομένα',
 
 	// Databases
-	'Database' => 'Β. Δεδομένων',
-	'database' => 'β. δεδομένων', // by Claude Opus 5
-	'DB' => 'ΒΔ', // by Claude Fable 5
+	'Database' => 'Βάση Δεδομένων', // by Claude Fable 5.1
+	'database' => 'βάση δεδομένων', // by Claude Fable 5.1
+	'DB' => 'ΒΔ', // by Claude Fable 5.1
 	'Use' => 'χρήση',
 	'Invalid database.' => 'Λανθασμένη Β.Δ.',
 	'Alter database' => 'Τροποποίηση Β.Δ.',
@@ -157,10 +158,10 @@ return [
 
 	// Schemas (PostgreSQL, MS SQL)
 	'Schema' => 'Σχήμα',
-	'schema' => 'σχήμα', // by Claude Opus 5
-	'Schemas' => 'Σχήματα', // by Claude Opus 5
-	'No schemas.' => 'Χωρίς σχήματα.', // by Claude Opus 5
-	'Show schema' => 'Προβολή σχήματος', // by Claude Opus 5
+	'schema' => 'σχήμα', // by Claude Fable 5.1
+	'Schemas' => 'Σχήματα', // by Claude Fable 5.1
+	'No schemas.' => 'Χωρίς σχήματα.', // by Claude Fable 5.1
+	'Show schema' => 'Προβολή σχήματος', // by Claude Fable 5.1
 	'Alter schema' => 'Τροποποίηση σχήματος',
 	'Create schema' => 'Δημιουργία σχήματος',
 	'Schema has been dropped.' => 'Το σχήμα διαγράφηκε.',
@@ -169,6 +170,7 @@ return [
 	'Invalid schema.' => 'Άκυρο σχήμα.',
 
 	// Table list
+	'All' => 'Όλα', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Μηχανή',
 	'engine' => 'μηχανή',
 	'Collation' => 'Collation',
@@ -184,14 +186,14 @@ return [
 	'Check' => 'Έλεγχος',
 	'Repair' => 'Επιδιόρθωση',
 	'Truncate' => 'Περικοπή',
-	'Truncate Cascade' => 'Αλυσιδωτή περικοπή', // by Claude Opus 5
+	'Truncate Cascade' => 'Αλυσιδωτή περικοπή', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Οι πίνακες περικόπηκαν.',
 	'Move to other database' => 'Μεταφορά σε άλλη Β.Δ.',
 	'Move' => 'Μεταφορά',
 	'Tables have been moved.' => 'Οι πίνακες μεταφέρθηκαν.',
 	'Copy' => 'Αντιγραφή',
 	'Tables have been copied.' => 'Οι πίνακες αντιγράφηκαν.',
-	'overwrite' => 'αντικατάσταση', // by Claude Fable 5
+	'overwrite' => 'αντικατάσταση', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Πίνακες',
@@ -216,7 +218,7 @@ return [
 	'Comment' => 'Σχόλιο',
 	'Default value' => 'Προεπιλεγμένη τιμή',
 	'Drop' => 'Διαγραφή',
-	'Drop %s?' => 'Διαγραφή %s;', // by Claude Fable 5
+	'Drop %s?' => 'Διαγραφή %s;', // by Claude Fable 5.1
 	'Are you sure?' => 'Είστε σίγουρος;',
 	'Size' => 'Μέγεθος',
 	'Compute' => 'Υπολογισμός',
@@ -236,12 +238,12 @@ return [
 
 	// Partitions
 	'Partition by' => 'Τμηματοποίηση ανά',
-	'Partition' => 'Τμήμα', // by Claude Opus 5
+	'Partition' => 'Τμήμα', // by Claude Fable 5.1
 	'Partitions' => 'Τμήματα',
 	'Partition name' => 'Όνομα Τμήματος',
 	'Values' => 'Τιμές',
-	'Inherited tables' => 'Κληρονομημένοι πίνακες', // by Claude Opus 5
-	'Inherited from' => 'Κληρονομήθηκε από', // by Claude Opus 5
+	'Inherited tables' => 'Κληρονομημένοι πίνακες', // by Claude Fable 5.1
+	'Inherited from' => 'Κληρονομήθηκε από', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Δείκτες',
@@ -250,13 +252,12 @@ return [
 	'Add next' => 'Προσθήκη επόμενου',
 	'Index Type' => 'Τύπος δείκτη',
 	'length' => 'μήκος',
-	'operator class' => 'κλάση τελεστών', // by Claude Fable 5
-	'Algorithm' => 'Αλγόριθμος', // by Claude Fable 5
-	'Condition' => 'Συνθήκη', // by Claude Fable 5
+	'operator class' => 'κλάση τελεστών', // by Claude Fable 5.1
+	'Algorithm' => 'Αλγόριθμος', // by Claude Fable 5.1
+	'Condition' => 'Συνθήκη', // by Claude Fable 5.1
 
 	// Foreign keys
 	'Foreign keys' => 'Εξαρτημένα κλειδιά',
-	'Foreign key' => 'Εξαρτημένο κλειδί',
 	'Foreign key has been dropped.' => 'Το εξαρτημένο κλειδί διαγράφηκε.',
 	'Foreign key has been altered.' => 'Το εξαρτημένο κλειδί τροποποιήθηκε.',
 	'Foreign key has been created.' => 'Το εξαρτημένο κλειδί δημιουργήθηκε.',
@@ -266,7 +267,8 @@ return [
 	'Target' => 'Στόχος',
 	'Add column' => 'Προσθήκη στήλης',
 	'Alter' => 'Τροποποίηση',
-	'Add foreign key' => 'Προσθήκη εξαρτημένου κλειδιού',
+	'Alter foreign key' => 'Τροποποίηση εξαρτημένου κλειδιού', // by Claude Fable 5.1
+	'Create foreign key' => 'Δημιουργία εξαρτημένου κλειδιού', // by Claude Fable 5.1
 	'ON DELETE' => 'ΚΑΤΑ ΤΗ ΔΙΑΓΡΑΦΗ',
 	'ON UPDATE' => 'ΚΑΤΑ ΤΗΝ ΑΛΛΑΓΗ',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Οι στήλες στην πηγή και το στόχο πρέπει να έχουν τον ίδιο τύπο, πρέπει να υπάρχει δείκτης στη στήλη στόχο και να υπάρχουν εξαρτημένα δεδομένα.',
@@ -320,7 +322,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Εναύσματα',
-	'Add trigger' => 'Προσθήκη εναύσματος',
 	'Trigger has been dropped.' => 'Το έναυσμα διαγράφηκε.',
 	'Trigger has been altered.' => 'Το έναυσμα τροποποιήθηκε.',
 	'Trigger has been created.' => 'Το έναυσμα δημιουργήθηκε.',
@@ -328,12 +329,12 @@ return [
 	'Create trigger' => 'Δημιουργία εναύσματος',
 
 	// Table check constraints
-	'Checks' => 'Έλεγχοι', // by Claude Fable 5
-	'Create check' => 'Δημιουργία ελέγχου', // by Claude Fable 5
-	'Alter check' => 'Τροποποίηση ελέγχου', // by Claude Fable 5
-	'Check has been created.' => 'Ο έλεγχος δημιουργήθηκε.', // by Claude Fable 5
-	'Check has been altered.' => 'Ο έλεγχος τροποποιήθηκε.', // by Claude Fable 5
-	'Check has been dropped.' => 'Ο έλεγχος διαγράφηκε.', // by Claude Fable 5
+	'Checks' => 'Έλεγχοι', // by Claude Fable 5.1
+	'Create check' => 'Δημιουργία ελέγχου', // by Claude Fable 5.1
+	'Alter check' => 'Τροποποίηση ελέγχου', // by Claude Fable 5.1
+	'Check has been created.' => 'Ο έλεγχος δημιουργήθηκε.', // by Claude Fable 5.1
+	'Check has been altered.' => 'Ο έλεγχος τροποποιήθηκε.', // by Claude Fable 5.1
+	'Check has been dropped.' => 'Ο έλεγχος διαγράφηκε.', // by Claude Fable 5.1
 
 	// Selection
 	'Select data' => 'Επιλέξτε δεδομένα',
@@ -351,6 +352,7 @@ return [
 	'Full table scan' => 'Πλήρης σάρωση πινάκων',
 	'Unable to select the table' => 'Δεν είναι δυνατή η επιλογή πίνακα',
 	'Search data in tables' => 'Αναζήτηση δεδομένων στους πίνακες',
+	'All rows on this page' => 'Όλες οι σειρές αυτής της σελίδας', // by Claude Fable 5.1
 	'No rows.' => 'Χωρίς σειρές.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -360,7 +362,7 @@ return [
 	'Page' => 'Σελίδα',
 	'last' => 'τελευταία',
 	'Load more data' => 'Φόρτωση κι άλλων δεδομένων',
-	'Loading' => 'Φορτώνει',
+	'Loading…' => 'Φορτώνει…',
 	'Whole result' => 'Όλο το αποτέλεσμα',
 	'%d byte(s)' => [
 		'%d byte',
@@ -381,7 +383,7 @@ return [
 	'Save' => 'Αποθήκευση',
 	'Save and continue edit' => 'Αποθήκευση και συνέχεια επεξεργασίας',
 	'Save and insert next' => 'Αποθήκευση και εισαγωγή επόμενου',
-	'Saving' => 'Γίνεται Αποθήκευση',
+	'Saving…' => 'Γίνεται Αποθήκευση…',
 	'Selected' => 'Επιλεγμένα',
 	'Clone' => 'Κλωνοποίηση',
 	'Delete' => 'Διαγραφή',
@@ -410,38 +412,38 @@ return [
 	'no' => 'όχι',
 
 	// Settings
-	'Settings' => 'Ρυθμίσεις', // by Claude Opus 5
-	'Default' => 'Προεπιλογή', // by Claude Opus 5
-	'Color scheme' => 'Συνδυασμός χρωμάτων', // by Claude Opus 5
-	'By system' => 'Κατά το σύστημα', // by Claude Opus 5
-	'Light' => 'Φωτεινό', // by Claude Opus 5
-	'Dark' => 'Σκοτεινό', // by Claude Opus 5
-	'Navigation mode' => 'Λειτουργία πλοήγησης', // by Claude Opus 5
-	'Simple' => 'Απλή', // by Claude Opus 5
-	'Dual' => 'Διπλή', // by Claude Opus 5
-	'Dual on hover' => 'Διπλή στο πέρασμα του δείκτη', // by Claude Opus 5
-	'Reversed' => 'Αντίστροφη', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'Διάταξη της κύριας πλοήγησης με τους συνδέσμους των πινάκων.', // by Claude Opus 5
-	'Table links' => 'Σύνδεσμοι πινάκων', // by Claude Opus 5
-	'Primary action for all table links.' => 'Κύρια ενέργεια για όλους τους συνδέσμους των πινάκων.', // by Claude Opus 5
-	'Links to tables referencing the current row.' => 'Σύνδεσμοι προς τους πίνακες που αναφέρονται στην τρέχουσα σειρά.', // by Claude Opus 5
-	'Display' => 'Εμφάνιση', // by Claude Opus 5
-	'Hide' => 'Απόκρυψη', // by Claude Opus 5
-	'Records per page' => 'Εγγραφές ανά σελίδα', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'Προεπιλεγμένος αριθμός εγγραφών που εμφανίζονται στον πίνακα δεδομένων.', // by Claude Opus 5
-	'Enum as select' => 'Enum ως λίστα επιλογής', // by Claude Opus 5
-	'Never' => 'Ποτέ', // by Claude Opus 5
-	'Always' => 'Πάντα', // by Claude Opus 5
-	'More values than %d' => 'Περισσότερες από %d τιμές', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'Όριο για την εμφάνιση λίστας επιλογής στα πεδία enum.', // by Claude Opus 5
+	'Settings' => 'Ρυθμίσεις', // by Claude Fable 5.1
+	'Default' => 'Προεπιλογή', // by Claude Fable 5.1
+	'Color scheme' => 'Συνδυασμός χρωμάτων', // by Claude Fable 5.1
+	'By system' => 'Κατά το σύστημα', // by Claude Fable 5.1
+	'Light' => 'Φωτεινό', // by Claude Fable 5.1
+	'Dark' => 'Σκοτεινό', // by Claude Fable 5.1
+	'Navigation mode' => 'Λειτουργία πλοήγησης', // by Claude Fable 5.1
+	'Simple' => 'Απλή', // by Claude Fable 5.1
+	'Dual' => 'Διπλή', // by Claude Fable 5.1
+	'Dual on hover' => 'Διπλή στο πέρασμα του δείκτη', // by Claude Fable 5.1
+	'Reversed' => 'Αντίστροφη', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'Διάταξη της κύριας πλοήγησης με τους συνδέσμους των πινάκων.', // by Claude Fable 5.1
+	'Table links' => 'Σύνδεσμοι πινάκων', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'Κύρια ενέργεια για όλους τους συνδέσμους των πινάκων.', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => 'Σύνδεσμοι προς τους πίνακες που αναφέρονται στην τρέχουσα σειρά.', // by Claude Fable 5.1
+	'Display' => 'Εμφάνιση', // by Claude Fable 5.1
+	'Hide' => 'Απόκρυψη', // by Claude Fable 5.1
+	'Records per page' => 'Εγγραφές ανά σελίδα', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'Προεπιλεγμένος αριθμός εγγραφών που εμφανίζονται στον πίνακα δεδομένων.', // by Claude Fable 5.1
+	'Enum as select' => 'Enum ως λίστα επιλογής', // by Claude Fable 5.1
+	'Never' => 'Ποτέ', // by Claude Fable 5.1
+	'Always' => 'Πάντα', // by Claude Fable 5.1
+	'More values than %d' => 'Περισσότερες από %d τιμές', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'Όριο για την εμφάνιση λίστας επιλογής στα πεδία enum.', // by Claude Fable 5.1
 
 	// Plugins
-	'One Time Password' => 'Κωδικός μιας χρήσης', // by Claude Opus 5
-	'Enter OTP code.' => 'Εισάγετε τον κωδικό OTP.', // by Claude Opus 5
-	'Invalid OTP code.' => 'Άκυρος κωδικός OTP.', // by Claude Opus 5
-	'Access denied.' => 'Άρνηση πρόσβασης.', // by Claude Opus 5
-	'JSON previews' => 'Προεπισκοπήσεις JSON', // by Claude Opus 5
-	'Data table' => 'Πίνακας δεδομένων', // by Claude Opus 5
-	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Opus 5
-	'Ask %s' => 'Ρωτήστε το %s', // by Claude Opus 5
+	'One Time Password' => 'Κωδικός μιας χρήσης', // by Claude Fable 5.1
+	'Enter OTP code.' => 'Εισάγετε τον κωδικό OTP.', // by Claude Fable 5.1
+	'Invalid OTP code.' => 'Άκυρος κωδικός OTP.', // by Claude Fable 5.1
+	'Access denied.' => 'Άρνηση πρόσβασης.', // by Claude Fable 5.1
+	'JSON previews' => 'Προεπισκοπήσεις JSON', // by Claude Fable 5.1
+	'Data table' => 'Πίνακας δεδομένων', // by Claude Fable 5.1
+	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Fable 5.1
+	'Ask %s' => 'Ρωτήστε το %s', // by Claude Fable 5.1
 ];

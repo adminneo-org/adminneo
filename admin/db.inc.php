@@ -44,7 +44,9 @@ if ($tables_views && !$_POST["search"]) {
 		$message = lang('Tables have been optimized.');
 	} elseif (!$_POST["tables"]) {
 		$message = lang('No tables.');
-	} elseif ($result = queries(($_POST["optimize"] ? "OPTIMIZE" : ($_POST["check"] ? "CHECK" : ($_POST["repair"] ? "REPAIR" : "ANALYZE"))) . " TABLE " . implode(", ", array_map('AdminNeo\idf_escape', $_POST["tables"])))) {
+	} elseif ($result = queries(
+		($_POST["optimize"] ? "OPTIMIZE" : ($_POST["check"] ? "CHECK" : ($_POST["repair"] ? "REPAIR" : "ANALYZE"))) . " TABLE " . implode(", ", array_map('AdminNeo\idf_escape', $_POST["tables"]))
+	)) {
 		while ($row = $result->fetchAssoc()) {
 			$message .= "<b>" . h($row["Table"]) . "</b>: " . h($row["Msg_text"]) . "<br>";
 		}
@@ -182,15 +184,20 @@ if ($_GET["ns"] === "") {
 		echo "<table class='nowrap checkable'>\n";
 
 		echo '<thead><tr class="wrap">';
-		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly">' . script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
+		echo '<td class="actions"><input id="check-all" type="checkbox" class="input jsonly" title="' . lang('All') . '">' .
+			script("gid('check-all').onclick = partial(formCheck, /^(tables|views)\[/);", "");
 		// Tables are already sorted by name when no other column is used, so only the descending order needs a parameter.
 		$name_order = ($order == "" || $order == "__table");
 		$table_link = ($name_order && !$descending ? ME . "order=__table-desc" : substr(ME, 0, -1));
-		echo '<th><a href="' . h($table_link) . '">' . lang('Table') . '</a>';
+		// SQLite puts the sqlite_ tables last, so its list is not sorted by name.
+		$name_sorted = ($name_order && DIALECT != "sqlite");
+		echo '<th' . ($name_sorted ? " aria-sort='" . ($descending ? "descending" : "ascending") . "'" : '')
+			. '><a href="' . h($table_link) . '">' . lang('Table') . '</a>';
 		foreach ($columns as $key => $column) {
 			// The sorted column is linked to the opposite direction, so repeated clicks toggle it.
 			$direction = ($key === $order ? !$descending : isset($column["link"]));
-			echo '<td><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
+			echo '<th' . ($key === $order ? " aria-sort='" . ($descending ? "descending" : "ascending") . "'" : '')
+				. '><a href="' . h(ME) . "order=$key-" . ($direction ? "desc" : "asc") . '">' . $column["label"] . '</a>' . $column["doc"];
 		}
 		echo "</thead>\n";
 		echo "<tbody>\n";
@@ -314,12 +321,12 @@ if ($_GET["ns"] === "") {
 				. "<input type='submit' class='button' name='check' value='" . lang('Check') . "'> " . help_script("CHECK TABLE")
 				. "<input type='submit' class='button' name='repair' value='" . lang('Repair') . "'> " . help_script("REPAIR TABLE")
 			: "")))
-			. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " . help_script(DIALECT == "sqlite" ? "DELETE" : ("TRUNCATE" . (DIALECT == "pgsql" ? "" : " TABLE"))) . confirm()
+			. "<input type='submit' class='button' name='truncate' value='" . lang('Truncate') . "'> " .
+				help_script(DIALECT == "sqlite" ? "DELETE" : ("TRUNCATE" . (DIALECT == "pgsql" ? "" : " TABLE"))) . confirm()
 			. (DIALECT == "pgsql" ? "<input type='submit' class='button' name='truncate_cascade' value='" . lang('Truncate Cascade') . "'> " . help_script("TRUNCATE CASCADE") . confirm() : "")
 			. "<input type='submit' class='button' name='drop' value='" . lang('Drop') . "'>" . help_script("DROP TABLE") . confirm() . "\n";
 			$databases = (support("scheme") ? Admin::get()->getSchemas() : Admin::get()->getDatabases());
 			echo "</div></fieldset>\n";
-			$script = "";
 			if (count($databases) != 1 && DIALECT != "sqlite") {
 				echo "<fieldset><legend>" . lang('Move to other database') . " <span id='selected3'></span></legend><div>";
 				$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
@@ -327,13 +334,9 @@ if ($_GET["ns"] === "") {
 				echo " <input type='submit' class='button' name='move' value='" . lang('Move') . "'>";
 				echo (support("copy") ? " <input type='submit' class='button' name='copy' value='" . lang('Copy') . "'> " . checkbox("overwrite", 1, $_POST["overwrite"], lang('overwrite')) : "");
 				echo "</div></fieldset>\n";
-				$script = " selectCount('selected3', formChecked(this, /^(tables|views)\[/));";
 			}
 			echo input_hidden("all"); // used by trCheck()
-			echo script("qsl('input').onclick = function () { selectCount('selected', formChecked(this, /^(tables|views)\[/));"
-				. (support("table") ? " selectCount('selected2', formChecked(this, /^tables\[/) || $tables);" : "")
-				. "$script }"
-			);
+			echo script("qsl('input').onclick = partial(countTables, $tables);");
 			echo input_token();
 			echo "</div></div>\n";
 
@@ -438,7 +441,9 @@ if ($_GET["ns"] === "") {
 			foreach ($rows as $row) {
 				echo "<tr>";
 				echo "<th>" . h($row["Name"]);
-				echo "<td>" . ($row["Execute at"] ? lang('At given time') . "<td>" . h($row["Execute at"]) : lang('Every') . " " . h($row["Interval value"]) . " " . h($row["Interval field"]) . "<td>" . h($row["Starts"]));
+				echo "<td>" . ($row["Execute at"] ?
+					lang('At given time') . "<td>" . h($row["Execute at"]) :
+					lang('Every') . " " . h($row["Interval value"]) . " " . h($row["Interval field"]) . "<td>" . h($row["Starts"]));
 				echo "<td>" . h($row["Ends"]);
 				echo '<td><a href="' . h(ME) . 'event=' . urlencode($row["Name"]) . '">' . lang('Alter') . '</a>';
 			}

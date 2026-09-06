@@ -52,6 +52,7 @@ return [
 	// Settings
 	'Language' => 'Język',
 
+	'Menu' => 'Menu', // by Claude Fable 5.1
 	'Home' => 'Strona główna',
 	'Refresh' => 'Odśwież',
 	'Info' => 'Informacje',
@@ -174,6 +175,7 @@ return [
 	'Invalid schema.' => 'Nieprawidłowy schemat.',
 
 	// Table list
+	'All' => 'Wszystko', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Składowanie',
 	'engine' => 'składowanie',
 	'Collation' => 'Porównywanie znaków',
@@ -189,7 +191,7 @@ return [
 	'Check' => 'Sprawdź',
 	'Repair' => 'Napraw',
 	'Truncate' => 'Opróżnij',
-	'Truncate Cascade' => 'Opróżnij kaskadowo', // by Claude Fable 5
+	'Truncate Cascade' => 'Opróżnij kaskadowo', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabele zostały opróżnione.',
 	'Move to other database' => 'Przenieś do innej bazy danych',
 	'Move' => 'Przenieś',
@@ -255,13 +257,12 @@ return [
 	'Add next' => 'Dodaj następny',
 	'Index Type' => 'Typ indeksu',
 	'length' => 'długość',
-	'operator class' => 'klasa operatorów', // by Claude Fable 5
+	'operator class' => 'klasa operatorów', // by Claude Fable 5.1
 	'Algorithm' => 'Algorytm',
 	'Condition' => 'Warunek',
 
 	// Foreign keys
 	'Foreign keys' => 'Klucze obce',
-	'Foreign key' => 'Klucz obcy',
 	'Foreign key has been dropped.' => 'Klucz obcy został usunięty.',
 	'Foreign key has been altered.' => 'Klucz obcy został zmieniony.',
 	'Foreign key has been created.' => 'Klucz obcy został utworzony.',
@@ -271,7 +272,8 @@ return [
 	'Target' => 'Cel',
 	'Add column' => 'Dodaj kolumnę',
 	'Alter' => 'Zmień',
-	'Add foreign key' => 'Dodaj klucz obcy',
+	'Alter foreign key' => 'Zmień klucz obcy', // by Claude Fable 5.1
+	'Create foreign key' => 'Utwórz klucz obcy', // by Claude Fable 5.1
 	'ON DELETE' => 'W przypadku usunięcia',
 	'ON UPDATE' => 'W przypadku zmiany',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Źródłowa i docelowa kolumna muszą być tego samego typu, powinien istnieć indeks na docelowej kolumnie oraz muszą istnieć dane referencyjne.',
@@ -326,7 +328,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Wyzwalacze',
-	'Add trigger' => 'Dodaj wyzwalacz',
 	'Trigger has been dropped.' => 'Wyzwalacz został usunięty.',
 	'Trigger has been altered.' => 'Wyzwalacz został zmieniony.',
 	'Trigger has been created.' => 'Wyzwalacz został utworzony.',
@@ -357,6 +358,7 @@ return [
 	'Full table scan' => 'Wymaga pełnego przeskanowania tabeli',
 	'Unable to select the table' => 'Nie udało się pobrać danych z tabeli',
 	'Search data in tables' => 'Wyszukaj we wszystkich tabelach',
+	'All rows on this page' => 'Wszystkie wiersze na tej stronie', // by Claude Fable 5.1
 	'No rows.' => 'Brak rekordów.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -367,7 +369,7 @@ return [
 	'Page' => 'Strona',
 	'last' => 'ostatni',
 	'Load more data' => 'Wczytaj więcej danych',
-	'Loading' => 'Wczytywanie',
+	'Loading…' => 'Wczytywanie…',
 	'Whole result' => 'Wybierz wszystkie',
 	'%d byte(s)' => [
 		'%d bajt',
@@ -389,7 +391,7 @@ return [
 	'Save' => 'Zapisz zmiany',
 	'Save and continue edit' => 'Zapisz i kontynuuj edycję',
 	'Save and insert next' => 'Zapisz i dodaj następny',
-	'Saving' => 'Zapisywanie',
+	'Saving…' => 'Zapisywanie…',
 	'Selected' => 'Zaznaczone',
 	'Clone' => 'Duplikuj',
 	'Delete' => 'Usuń',
@@ -428,7 +430,7 @@ return [
 	'Navigation mode' => 'Tryb nawigacji',
 	'Simple' => 'Prosty',
 	'Dual' => 'Podwójny',
-	'Dual on hover' => 'Podwójny po najechaniu', // by Claude Opus 5
+	'Dual on hover' => 'Podwójny po najechaniu', // by Claude Fable 5.1
 	'Reversed' => 'Odwrócony',
 	'Layout of main navigation with table links.' => 'Układ głównej nawigacji z odnośnikami do tabel.',
 	'Table links' => 'Odnośniki do tabel',

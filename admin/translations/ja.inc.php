@@ -26,7 +26,7 @@ return [
 	'Logout' => 'ログアウト',
 	'Logged as: %s' => 'ログ：%s',
 	'Logout successful.' => 'ログアウトしました。',
-	'hostname[:port] or :socket' => 'hostname[:port] または :socket', // by Claude Fable 5
+	'hostname[:port] or :socket' => 'hostname[:port] または :socket', // by Claude Fable 5.1
 	'Invalid server or credentials.' => 'サーバーまたは認証情報が無効です。',
 	'There is a space in the input password which might be the cause.' => '入力されたパスワードに空白が含まれているので、それが原因かもしれません。',
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo はパスワードのないデータベースへの接続には対応していません。(<a href="https://www.adminneo.org/password"%s>詳細</a>)',
@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => '言語',
 
+	'Menu' => 'メニュー', // by Claude Fable 5.1
 	'Home' => 'ホーム',
 	'Refresh' => 'リフレッシュ',
 	'Info' => '情報',
@@ -104,8 +105,8 @@ return [
 	'File uploads are disabled.' => 'ファイルのアップロードが無効です。',
 	'Unable to upload a file.' => 'ファイルをアップロードできません。',
 	'Maximum allowed file size is %sB.' => '最大ファイルサイズは %sB です。',
-	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ファイル数の上限は %d です。ファイル数を減らすか %s 設定を大きくしてください。', // by Claude Opus 5
-	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ファイルの合計サイズの上限は %s です。より小さいファイルを選択するか %s 設定を大きくしてください。', // by Claude Opus 5
+	'The maximum number of files is %d. Select fewer files or increase the %s configuration directive.' => 'ファイル数の上限は %d です。ファイル数を減らすか %s 設定を大きくしてください。', // by Claude Fable 5.1
+	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'ファイルの合計サイズの上限は %s です。より小さいファイルを選択するか %s 設定を大きくしてください。', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'POSTデータが大きすぎます。データサイズを小さくするか %s 設定を大きくしてください。',
 	'You can upload a big SQL file via FTP and import it from server.' => '大きなSQLファイルは、FTP経由でアップロードしてサーバからインポートしてください。',
 	'File must be in UTF-8 encoding.' => 'ファイルをUTF-8で保存してください。',
@@ -154,6 +155,7 @@ return [
 	'Invalid schema.' => '無効なスキーマです。',
 
 	// Table list
+	'All' => 'すべて', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'エンジン',
 	'engine' => 'エンジン',
 	'Collation' => 'コレーション',
@@ -169,7 +171,7 @@ return [
 	'Check' => '検査',
 	'Repair' => '修復',
 	'Truncate' => '空にする',
-	'Truncate Cascade' => 'カスケードで空にする', // by Claude Fable 5
+	'Truncate Cascade' => 'カスケードで空にする', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'テーブルを空にしました。',
 	'Move to other database' => '他のデータベースへ移動',
 	'Move' => '移動',
@@ -225,8 +227,8 @@ return [
 	'Partitions' => 'パーティション',
 	'Partition name' => 'パーティション名',
 	'Values' => '値',
-	'Inherited tables' => '継承テーブル', // by Claude Opus 5
-	'Inherited from' => '継承元', // by Claude Opus 5
+	'Inherited tables' => '継承テーブル', // by Claude Fable 5.1
+	'Inherited from' => '継承元', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'インデックス',
@@ -235,13 +237,12 @@ return [
 	'Add next' => '追加',
 	'Index Type' => 'インデックスの型',
 	'length' => '長さ',
-	'operator class' => '演算子クラス', // by Claude Fable 5
+	'operator class' => '演算子クラス', // by Claude Fable 5.1
 	'Algorithm' => 'アルゴリズム',
 	'Condition' => '条件',
 
 	// Foreign keys
 	'Foreign keys' => '外部キー',
-	'Foreign key' => '外部キー',
 	'Foreign key has been dropped.' => '外部キーを削除しました。',
 	'Foreign key has been altered.' => '外部キーを変更しました。',
 	'Foreign key has been created.' => '外部キーを作成しました。',
@@ -251,7 +252,8 @@ return [
 	'Target' => 'ターゲット',
 	'Add column' => 'カラムを追加',
 	'Alter' => '変更',
-	'Add foreign key' => '外部キーを追加',
+	'Alter foreign key' => '外部キーを変更', // by Claude Fable 5.1
+	'Create foreign key' => '外部キーを作成', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'ソースとターゲットのカラムは同じデータ型でなければなりません。ターゲットカラムにインデックスがあり、データが存在しなければなりません。',
@@ -302,7 +304,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'トリガー',
-	'Add trigger' => 'トリガーを追加',
 	'Trigger has been dropped.' => 'トリガーを削除しました。',
 	'Trigger has been altered.' => 'トリガーを変更しました。',
 	'Trigger has been created.' => 'トリガーを追加しました。',
@@ -333,13 +334,14 @@ return [
 	'Full table scan' => 'テーブルを全スキャン',
 	'Unable to select the table' => 'テーブルを選択できません',
 	'Search data in tables' => 'データを検索する',
+	'All rows on this page' => 'このページのすべての行', // by Claude Fable 5.1
 	'No rows.' => '行がありません。',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d 行',
 	'Page' => 'ページ',
 	'last' => '最終',
 	'Load more data' => 'さらにデータを表示',
-	'Loading' => '読み込み中',
+	'Loading…' => '読み込み中…',
 	'Whole result' => '全結果',
 	'%d byte(s)' => '%d バイト',
 
@@ -357,7 +359,7 @@ return [
 	'Save' => '保存',
 	'Save and continue edit' => '保存して継続',
 	'Save and insert next' => '保存／追加',
-	'Saving' => '保存しています',
+	'Saving…' => '保存しています…',
 	'Selected' => '選択対象',
 	'Clone' => 'クローン',
 	'Delete' => '削除',
@@ -383,38 +385,38 @@ return [
 	'no' => 'いいえ',
 
 	// Settings
-	'Settings' => '設定', // by Claude Opus 5
-	'Default' => '既定', // by Claude Opus 5
-	'Color scheme' => '配色', // by Claude Opus 5
-	'By system' => 'システムに従う', // by Claude Opus 5
-	'Light' => 'ライト', // by Claude Opus 5
-	'Dark' => 'ダーク', // by Claude Opus 5
-	'Navigation mode' => 'ナビゲーションモード', // by Claude Opus 5
-	'Simple' => 'シンプル', // by Claude Opus 5
-	'Dual' => 'デュアル', // by Claude Opus 5
-	'Dual on hover' => 'デュアル（ホバー時）', // by Claude Opus 5
-	'Reversed' => '反転', // by Claude Opus 5
-	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Opus 5
-	'Table links' => 'テーブルリンク', // by Claude Opus 5
-	'Primary action for all table links.' => 'すべてのテーブルリンクの主要な動作です。', // by Claude Opus 5
-	'Links to tables referencing the current row.' => '現在の行を参照しているテーブルへのリンクです。', // by Claude Opus 5
-	'Display' => '表示', // by Claude Opus 5
-	'Hide' => '非表示', // by Claude Opus 5
-	'Records per page' => '1ページあたりのレコード数', // by Claude Opus 5
-	'Default number of records displayed in data table.' => 'データテーブルに表示されるレコードの既定数です。', // by Claude Opus 5
-	'Enum as select' => 'ENUMを選択メニューで表示', // by Claude Opus 5
-	'Never' => 'しない', // by Claude Opus 5
-	'Always' => '常に', // by Claude Opus 5
-	'More values than %d' => '値が %d 個より多い場合', // by Claude Opus 5
-	'Threshold for displaying a selection menu for enum fields.' => 'ENUMカラムを選択メニューで表示するしきい値です。', // by Claude Opus 5
+	'Settings' => '設定', // by Claude Fable 5.1
+	'Default' => '既定', // by Claude Fable 5.1
+	'Color scheme' => '配色', // by Claude Fable 5.1
+	'By system' => 'システムに従う', // by Claude Fable 5.1
+	'Light' => 'ライト', // by Claude Fable 5.1
+	'Dark' => 'ダーク', // by Claude Fable 5.1
+	'Navigation mode' => 'ナビゲーションモード', // by Claude Fable 5.1
+	'Simple' => 'シンプル', // by Claude Fable 5.1
+	'Dual' => 'デュアル', // by Claude Fable 5.1
+	'Dual on hover' => 'デュアル（ホバー時）', // by Claude Fable 5.1
+	'Reversed' => '反転', // by Claude Fable 5.1
+	'Layout of main navigation with table links.' => 'テーブルリンクを含むメインナビゲーションのレイアウトです。', // by Claude Fable 5.1
+	'Table links' => 'テーブルリンク', // by Claude Fable 5.1
+	'Primary action for all table links.' => 'すべてのテーブルリンクの主要な動作です。', // by Claude Fable 5.1
+	'Links to tables referencing the current row.' => '現在の行を参照しているテーブルへのリンクです。', // by Claude Fable 5.1
+	'Display' => '表示', // by Claude Fable 5.1
+	'Hide' => '非表示', // by Claude Fable 5.1
+	'Records per page' => '1ページあたりのレコード数', // by Claude Fable 5.1
+	'Default number of records displayed in data table.' => 'データテーブルに表示されるレコードの既定数です。', // by Claude Fable 5.1
+	'Enum as select' => 'ENUMを選択メニューで表示', // by Claude Fable 5.1
+	'Never' => 'しない', // by Claude Fable 5.1
+	'Always' => '常に', // by Claude Fable 5.1
+	'More values than %d' => '値が %d 個より多い場合', // by Claude Fable 5.1
+	'Threshold for displaying a selection menu for enum fields.' => 'ENUMカラムを選択メニューで表示するしきい値です。', // by Claude Fable 5.1
 
 	// Plugins
 	'One Time Password' => 'ワンタイムパスワード(OTP)',
 	'Enter OTP code.' => 'OTPコードを入力してください。',
 	'Invalid OTP code.' => '無効なOTPコードです。',
 	'Access denied.' => 'アクセスが拒否されました。',
-	'JSON previews' => 'JSONプレビュー', // by Claude Opus 5
-	'Data table' => 'データテーブル', // by Claude Opus 5
-	'Edit form' => '編集フォーム', // by Claude Opus 5
+	'JSON previews' => 'JSONプレビュー', // by Claude Fable 5.1
+	'Data table' => 'データテーブル', // by Claude Fable 5.1
+	'Edit form' => '編集フォーム', // by Claude Fable 5.1
 	'Ask %s' => '%s に聞く',
 ];

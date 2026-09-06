@@ -43,7 +43,7 @@ ul.links {
 	border-radius: var(--input-border-radius);
 }
 
-#ajaxstatus.hidden + .top-links,
-#ajaxstatus.hidden + .top-tabs {
+#ajaxstatus:empty + .top-links,
+#ajaxstatus:empty + .top-tabs {
 	margin-top: 20px;
 }

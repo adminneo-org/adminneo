@@ -33,9 +33,9 @@ if ($_POST) {
 }
 
 if ($name != "") {
-	page_header(lang('Alter trigger') . ": " . h($name), ["table" => $TABLE, h($name)]);
+	page_header(lang('Alter trigger') . ": " . h($name), ["table" => $TABLE, lang('Alter trigger')]);
 } else {
-	page_header(lang('Create trigger'), ["table" => $TABLE, lang('Create trigger')]);
+	page_header(lang('Create trigger') . ": " . h($TABLE), ["table" => $TABLE, lang('Create trigger')]);
 }
 
 echo "<form action='' method='post' id='form'>\n";

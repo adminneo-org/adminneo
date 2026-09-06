@@ -22,7 +22,7 @@ function selectFieldChange() {
 	 *
 	 * @param {HTMLElement} element
 	 * @param {string|function} content
-	 * @param {boolean} side Displays on left side (otherwise on top).
+	 * @param {boolean} [side] Displays on left side (otherwise on top).
 	 */
 	window.initHelpFor = function(element, content, side = false) {
 	};
@@ -34,19 +34,17 @@ function selectFieldChange() {
  * @param {string} url
  *
  * @this {HTMLInputElement}
- *
- * @return {XMLHttpRequest}
  */
 function whisper(url) {
 	const field = this;
 	field.orig = field.value;
 	field.previousSibling.value = field.value; // accept number, reject string
-	return ajax(url + encodeURIComponent(field.value), xmlhttp => {
+	ajax(url + encodeURIComponent(field.value), xmlhttp => {
 		if (xmlhttp.status && field.orig === field.value) { // ignore old responses
 			field.nextSibling.innerHTML = xmlhttp.responseText;
 			field.nextSibling.style.display = '';
 			const a = field.nextSibling.firstChild;
-			if (a?.firstChild.data === field.value) {
+			if (a && a.firstChild.data === field.value) {
 				field.previousSibling.value = decodeURIComponent(a.href.replace(/.*=/, ''));
 				a.classList.add('active');
 			}
@@ -66,7 +64,7 @@ function whisper(url) {
 function whisperClick(event) {
 	const field = this.previousSibling;
 	const el = event.target;
-	if (isTag(el, 'a') && !(event.button || event.shiftKey || event.altKey || isCtrl(event))) {
+	if (el.matches('a') && !(event.button || event.shiftKey || event.altKey || isCtrl(event))) {
 		field.value = el.firstChild.data;
 		field.previousSibling.value = decodeURIComponent(el.href.replace(/.*=/, ''));
 		field.nextSibling.style.display = 'none';

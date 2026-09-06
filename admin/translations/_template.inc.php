@@ -48,6 +48,7 @@ return [
 	// Settings
 	'Language' => 'Xx',
 
+	'Menu' => 'Xx',
 	'Home' => 'Xx',
 	'Refresh' => 'Xx',
 	'Info' => 'Xx',
@@ -154,6 +155,7 @@ return [
 	'Invalid schema.' => 'Xx.',
 
 	// Table list
+	'All' => 'Xx', // checkbox selecting all tables and views
 	'Engine' => 'Xx',
 	'engine' => 'xx',
 	'Collation' => 'Xx',
@@ -241,7 +243,6 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Xx',
-	'Foreign key' => 'Xx',
 	'Foreign key has been dropped.' => 'Xx.',
 	'Foreign key has been altered.' => 'Xx.',
 	'Foreign key has been created.' => 'Xx.',
@@ -251,7 +252,8 @@ return [
 	'Target' => 'Xx',
 	'Add column' => 'Xx',
 	'Alter' => 'Xx',
-	'Add foreign key' => 'Xx',
+	'Alter foreign key' => 'Xx',
+	'Create foreign key' => 'Xx',
 	'ON DELETE' => 'Xx',
 	'ON UPDATE' => 'Xx',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Xx.',
@@ -302,7 +304,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Xx',
-	'Add trigger' => 'Xx',
 	'Trigger has been dropped.' => 'Xx.',
 	'Trigger has been altered.' => 'Xx.',
 	'Trigger has been created.' => 'Xx.',
@@ -333,13 +334,14 @@ return [
 	'Full table scan' => 'Xx',
 	'Unable to select the table' => 'Xx',
 	'Search data in tables' => 'Xx',
+	'All rows on this page' => 'Xx',
 	'No rows.' => 'Xx.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => ['%d xx', '%d xx'],
 	'Page' => 'Xx',
 	'last' => 'xx',
 	'Load more data' => 'Xx',
-	'Loading' => 'Xx',
+	'Loading…' => 'Xx…',
 	'Whole result' => 'Xx',
 	'%d byte(s)' => ['%d xx', '%d xx'],
 
@@ -357,7 +359,7 @@ return [
 	'Save' => 'Xx',
 	'Save and continue edit' => 'Xx',
 	'Save and insert next' => 'Xx',
-	'Saving' => 'Xx',
+	'Saving…' => 'Xx…',
 	'Selected' => 'Xx',
 	'Clone' => 'Xx',
 	'Delete' => 'Xx',

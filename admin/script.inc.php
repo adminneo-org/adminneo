@@ -56,7 +56,7 @@ if ($_GET["script"] == "db") {
 
 } else { // connect
 	$data = [];
-	foreach (count_tables(Admin::get()->getDatabases()) as $db => $val) {
+	foreach (count_tables(Admin::get()->getDatabases(false)) as $db => $val) {
 		$data["tables-$db"] = $val;
 		$data["size-$db"] = db_size($db);
 	}

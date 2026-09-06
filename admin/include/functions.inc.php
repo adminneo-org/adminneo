@@ -44,7 +44,8 @@ function number($val) {
 * @return string
 */
 function number_type() {
-	return '((?<!o)int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
+	// (^|[^o]) instead of (?<!o) - the expression is used also by JavaScript, lookbehind is unsupported in Safari < 16.4
+	return '((^|[^o])int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
 }
 
 /** Disable magic_quotes_gpc
@@ -136,6 +137,31 @@ function ini_bytes(string $ini): int
 	}
 
 	return $val;
+}
+
+/**
+ * Returns the maximum number of rows that a form can send.
+ *
+ * @param int $row Number of inputs in one row.
+ * @param int $other Number of the other inputs.
+ *
+ * @return int 0 if the number of fields is not limited.
+ */
+function max_input_vars(int $row, int $other): int
+{
+	$max = (int) ini_get("max_input_vars");
+
+	return ($max ? (int) floor(($max - $other) / $row) : 0);
+}
+
+/**
+ * Returns an error message about exceeding max_input_vars.
+ */
+function max_input_vars_error(): string
+{
+	$ini = "max_input_vars";
+
+	return lang('Maximum number of allowed fields exceeded. Please increase %s.', "$ini = " . (int) ini_get($ini));
 }
 
 /** Check if SID is necessary
@@ -322,10 +348,17 @@ function where($where, $fields = []) {
 	foreach ((array) $where["where"] as $key => $val) {
 		$key = bracket_escape($key, true);
 		$column = escape_key($key);
-		$field_type = $fields[$key]["type"] ?? null;
-		$full_field_type = $fields[$key]["full_type"] ?? null;
+		$field = $fields[$key] ?? null;
+		$field_type = $field["type"] ?? null;
+		$full_field_type = $field["full_type"] ?? null;
 
-		if (DIALECT == "sql" && $field_type == "json") {
+		// is_blob() alone is not enough, it doesn't match binary and varbinary outside MS SQL.
+		$is_binary = $field && (is_blob($field) || preg_match('~binary~', $field_type));
+
+		if ($is_binary && !is_utf8($val)) {
+			// The value is not converted to hexadecimal.
+			$conditions[] = "$column = " . Driver::get()->quoteBinary($val);
+		} elseif (DIALECT == "sql" && $field_type == "json") {
 			$conditions[] = "$column = CAST(" . q($val) . " AS JSON)";
 		} elseif (DIALECT == "pgsql" && preg_match('~^jsonb?$~', $full_field_type)) {
 			$conditions[] = "$column::jsonb = " . q($val) . "::jsonb";
@@ -350,6 +383,31 @@ function where($where, $fields = []) {
 	}
 
 	return implode(" AND ", $conditions);
+}
+
+/** Get names of columns used in the WHERE condition
+* @param array parsed query string
+* @param array[]
+* @return bool[] keys are column names
+*/
+function where_columns($where, $fields = []) {
+	$columns = [];
+
+	foreach ((array) $where["null"] as $key) {
+		$columns[$key] = true;
+	}
+
+	foreach ((array) $where["where"] as $key => $val) {
+		$key = bracket_escape($key, true); // true - back
+		foreach ($fields as $name => $field) {
+			// The key is not always the column name, e.g. MD5(`name`) is used for long values.
+			if ($key == $name || strpos($key, idf_escape($name)) !== false) {
+				$columns[$name] = true;
+			}
+		}
+	}
+
+	return $columns;
 }
 
 /** Create SQL condition from query string
@@ -548,6 +606,8 @@ function is_ajax() {
  * Redirects to location and/or set a message.
  *
  * @param ?string $location null to only set a message.
+ *
+ * @return ($location is null ? void : never)
  */
 function redirect(?string $location, ?string $message = null): void
 {
@@ -680,7 +740,7 @@ function remove_from_uri($param = "") {
 * @param string
 * @param bool
 * @param string
-* @return mixed int for error, string otherwise
+* @return int|string|null null if the file was not sent at all, int for error, string otherwise
 */
 function get_file($key, $decompress = false, $delimiter = "") {
 	$file = $_FILES[$key];
@@ -724,11 +784,11 @@ function get_file($key, $decompress = false, $delimiter = "") {
 	return $return;
 }
 
-/** Determine upload error
-* @param int
-* @return string
-*/
-function upload_error($error) {
+/**
+ * Determines upload error.
+ */
+function upload_error(?int $error): string
+{
 	$max_size = ($error == UPLOAD_ERR_INI_SIZE ? ini_get("upload_max_filesize") : 0); // post_max_size is checked in index.php
 	return ($error ? lang('Unable to upload a file.') . ($max_size ? " " . lang('Maximum allowed file size is %sB.', $max_size) : "") : lang('File does not exist.'));
 }

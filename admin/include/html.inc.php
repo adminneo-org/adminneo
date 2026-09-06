@@ -452,7 +452,7 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		echo $input;
 	} elseif (preg_match('~bool~', $field["type"])) {
 		echo "<input type='hidden'$attrs value='0'>" .
-			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked='checked'" : "") . "$attrs value='1'>";
+			"<input type='checkbox'" . (preg_match('~^(1|t|true|y|yes|on)$~i', $value) ? " checked" : "") . "$attrs value='1'>";
 	} elseif ($field["type"] == "enum") {
 		echo enum_input($attrs, $field, $value);
 	} elseif ($field["type"] == "set") {
@@ -492,7 +492,7 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		}
 		// type='date' and type='time' display localized value which may be confusing, type='datetime' uses 'T' as date and time separator
 		echo "<input class='input'"
-			. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[\]~', $field["full_type"]) ? " type='number'" : "")
+			. ((!$has_function || $function === "") && preg_match('~(?<!o)int(?!er)~', $field["type"]) && !preg_match('~\[]~', $field["full_type"]) ? " type='number'" : "")
 			. ($function != "now" ? " value='" . h($value) . "'" : " data-last-value='" . h($value) . "'")
 			. ($maxlength ? " data-maxlength='$maxlength'" : "")
 			. (preg_match('~char|binary~', $field["type"]) && $maxlength > 20 ? " size='44'" : "")
@@ -656,6 +656,15 @@ function edit_form($table, $fields, $row, $update): void {
 	echo "<form action='' method='post' enctype='multipart/form-data' id='form'>\n";
 	$editable = false;
 
+	// The WHERE condition in the URL is not updated after saving, so changing these values would break Save and continue edit.
+	$where_columns = ($update && !isset($_GET["select"]) ? where_columns($_GET, $fields) : []);
+
+	// Without a unique key the condition uses all columns, so the button would be always disabled.
+	$continue_edit = (count($where_columns) != count($fields));
+	if (!$continue_edit) {
+		$where_columns = [];
+	}
+
 	if (!$fields) {
 		echo "<p class='error'>" . lang('You have no privileges to update this table.') . "\n";
 	} else {
@@ -664,7 +673,7 @@ function edit_form($table, $fields, $row, $update): void {
 		$autofocus = !$_POST;
 
 		foreach ($fields as $name => $field) {
-			echo "<tr><th>" . Admin::get()->getFieldName($field);
+			echo "<tr" . (isset($where_columns[$name]) ? " class='where-column'" : "") . "><th>" . Admin::get()->getFieldName($field);
 			$key = bracket_escape($name);
 			$default = $_GET["preset"][$key] ?? null;
 			if ($default === null) {
@@ -739,17 +748,23 @@ function edit_form($table, $fields, $row, $update): void {
 		}
 		echo "</table>\n";
 		echo script("initToggles(gid('form'));");
+		if ($where_columns) {
+			echo script("initWhereChange();");
+		}
 	}
 
 	echo "<p>";
 	if ($editable) {
 		echo "<input type='submit' class='button default' value='" . lang('Save') . "'>\n";
-		if (!isset($_GET["select"])) {
+		if (!isset($_GET["select"]) && $continue_edit) {
+			// The printed values were not saved, so they can differ from the WHERE condition in the URL and no change event fires for them.
+			$disabled = ($where_columns && Admin::get()->getErrors() ? " disabled" : "");
+
 			echo "<input type='submit' class='button' name='insert' value='" . ($update
 					? lang('Save and continue edit')
 					: lang('Save and insert next')
-				) . "' title='Ctrl+Shift+Enter'>\n";
-			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . js_escape(lang('Saving')) . "…', this); };") : "");
+				) . "' title='Ctrl+Shift+Enter'$disabled>\n";
+			echo ($update ? script("qsl('input').onclick = function () { return !ajaxForm(this.form, '" . js_escape(lang('Saving…')) . "', this); };") : "");
 		}
 	}
 	echo ($update ? "<input type='submit' class='button' name='delete' value='" . lang('Delete') . "'>" . confirm() . "\n" : "");

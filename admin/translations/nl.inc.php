@@ -51,6 +51,7 @@ return [
 	// Settings
 	'Language' => 'Taal',
 
+	'Menu' => 'Menu', // by Claude Fable 5.1
 	'Home' => 'Startpagina',
 	'Refresh' => 'Vernieuwen',
 	'Info' => 'Informatie',
@@ -169,6 +170,7 @@ return [
 	'Invalid schema.' => 'Ongeldig schema.',
 
 	// Table list
+	'All' => 'Alles', // checkbox selecting all tables and views // by Claude Fable 5.1
 	'Engine' => 'Engine',
 	'engine' => 'engine',
 	'Collation' => 'Collatie',
@@ -184,7 +186,7 @@ return [
 	'Check' => 'Controleer',
 	'Repair' => 'Herstel',
 	'Truncate' => 'Legen',
-	'Truncate Cascade' => 'Cascade legen', // by Claude Opus 5
+	'Truncate Cascade' => 'Cascade legen', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabellen werden geleegd.',
 	'Move to other database' => 'Verplaats naar andere database',
 	'Move' => 'Verplaats',
@@ -250,13 +252,12 @@ return [
 	'Add next' => 'Volgende toevoegen',
 	'Index Type' => 'Index type',
 	'length' => 'lengte',
-	'operator class' => 'operatorklasse', // by Claude Fable 5
+	'operator class' => 'operatorklasse', // by Claude Fable 5.1
 	'Algorithm' => 'Algoritme',
 	'Condition' => 'Conditie',
 
 	// Foreign keys
 	'Foreign keys' => 'Foreign keys',
-	'Foreign key' => 'Foreign key',
 	'Foreign key has been dropped.' => 'Foreign key verwijderd.',
 	'Foreign key has been altered.' => 'Foreign key aangepast.',
 	'Foreign key has been created.' => 'Foreign key aangemaakt.',
@@ -266,7 +267,8 @@ return [
 	'Target' => 'Doel',
 	'Add column' => 'Kolom toevoegen',
 	'Alter' => 'Aanpassen',
-	'Add foreign key' => 'Foreign key aanmaken',
+	'Alter foreign key' => 'Foreign key aanpassen', // by Claude Fable 5.1
+	'Create foreign key' => 'Foreign key aanmaken', // by Claude Fable 5.1
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Bron- en doelkolommen moeten van hetzelfde data type zijn, er moet een index bestaan op de gekozen kolommen en er moet gerelateerde data bestaan.',
@@ -320,7 +322,6 @@ return [
 
 	// Triggers
 	'Triggers' => 'Triggers',
-	'Add trigger' => 'Trigger aanmaken',
 	'Trigger has been dropped.' => 'Trigger verwijderd.',
 	'Trigger has been altered.' => 'Trigger aangepast.',
 	'Trigger has been created.' => 'Trigger aangemaakt.',
@@ -351,6 +352,7 @@ return [
 	'Full table scan' => 'Full table scan',
 	'Unable to select the table' => 'Onmogelijk tabel te selecteren',
 	'Search data in tables' => 'Zoeken in database',
+	'All rows on this page' => 'Alle rijen op deze pagina', // by Claude Fable 5.1
 	'No rows.' => 'Geen rijen.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
@@ -360,7 +362,7 @@ return [
 	'Page' => 'Pagina',
 	'last' => 'laatste',
 	'Load more data' => 'Meer data inladen',
-	'Loading' => 'Aan het laden',
+	'Loading…' => 'Aan het laden…',
 	'Whole result' => 'Volledig resultaat',
 	'%d byte(s)' => [
 		'%d byte',
@@ -381,7 +383,7 @@ return [
 	'Save' => 'Opslaan',
 	'Save and continue edit' => 'Opslaan en verder bewerken',
 	'Save and insert next' => 'Opslaan en volgende toevoegen',
-	'Saving' => 'Opslaan',
+	'Saving…' => 'Opslaan…',
 	'Selected' => 'Geselecteerd',
 	'Clone' => 'Dupliceer',
 	'Delete' => 'Verwijderen',
@@ -419,7 +421,7 @@ return [
 	'Navigation mode' => 'Navigatiemodus',
 	'Simple' => 'Eenvoudig',
 	'Dual' => 'Dubbel',
-	'Dual on hover' => 'Dubbel bij aanwijzen', // by Claude Opus 5
+	'Dual on hover' => 'Dubbel bij aanwijzen', // by Claude Fable 5.1
 	'Reversed' => 'Omgekeerd',
 	'Layout of main navigation with table links.' => 'Indeling van hoofdnavigatie met tabelkoppelingen.',
 	'Table links' => 'Tabelkoppelingen',

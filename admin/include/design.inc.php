@@ -33,7 +33,7 @@ function page_header(string $title, $breadcrumb = []): void
 	$title_page = $title . $server_part . " - " . ($service_title != "" ? $service_title : "AdminNeo");
 	?>
 <!DOCTYPE html>
-<html lang='<?= Locale::get()->getLanguage(); ?>' dir='<?= lang('ltr'); ?>'>
+<html lang='<?= Locale::get()->getLanguage(); ?>' dir='<?= lang('ltr'); ?>' class='<?= lang('ltr'); ?> nojs'>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="robots" content="noindex, nofollow">
@@ -115,14 +115,9 @@ function page_header(string $title, $breadcrumb = []): void
 	Admin::get()->printToHead();
 	?>
 </head>
-<body class='<?php echo lang('ltr'); ?> nojs'>
+<body>
 <script<?php echo nonce(); ?>>
-	const body = document.body;
-
-	body.onkeydown = bodyKeydown;
-	body.onclick = bodyClick;
-	body.classList.replace("nojs", "js");
-
+	// The event handlers and the <html> classes are registered by functions.js.
 	const offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
 	const thousandsSeparator = '<?php echo js_escape(lang(',')); ?>';
 </script>
@@ -183,7 +178,7 @@ function page_header(string $title, $breadcrumb = []): void
 	echo "</div>\n"; // header
 
 	echo "<h1>$title</h1>\n";
-	echo "<div id='ajaxstatus' class='jsonly hidden'></div>\n";
+	echo "<div id='ajaxstatus' role='status' class='jsonly'></div>\n";
 
 	restart_session();
 	page_messages();
@@ -193,6 +188,10 @@ function page_header(string $title, $breadcrumb = []): void
 	}
 	stop_session();
 	define("AdminNeo\PAGE_HEADER", 1);
+
+	// Let the browser download the CSS and JS while we are running the queries for the page body.
+	ob_flush();
+	flush();
 }
 
 function validate_color_variant(string $color_variant): string
@@ -313,7 +312,7 @@ function page_footer(?string $missing = null): void
 
 	// Main navigation is printed after the page content, because databases and tables can be changed after the query
 	// execution in the 'SQL command' page.
-	echo "<button id='navigation-button' class='button light navigation-button'>", icon_solo("menu"), icon_solo("close"), "</button>";
+	echo "<button id='navigation-button' class='button light navigation-button' title='", lang('Menu'), "'>", icon_solo("menu"), icon_solo("close"), "</button>";
 	echo "<div id='navigation-panel' class='navigation-panel'>\n";
 	Admin::get()->printNavigation($missing);
 
