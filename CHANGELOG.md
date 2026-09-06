@@ -38,6 +38,8 @@ AdminNeo 5.8.0
 - SQLite: Fix working with binary data through PDO
 - MongoDB: Show the primary key column when altering indexes (regression from 5.5.0) (by @vrana)
 
+(Ported relevant changes from Adminer 6.0.0 • part 3)
+
 AdminNeo 5.7.1 (2026-08-27)
 ---------------------------
 
