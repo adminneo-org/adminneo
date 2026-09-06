@@ -294,16 +294,25 @@ function tableClick(event, click, canEdit = true) {
 		click = false;
 		el = el.closest('tr');
 	}
-	if (!el) { // Ctrl+click on text fields hides the element
+	if (!el) {
+		// Ctrl+click on text fields hides the element
 		return;
 	}
-	el = el.firstChild.firstChild;
+
+	// Not the first child - the cell can also contain the edit link.
+	el = qs('input[type=checkbox]', el.firstElementChild);
+	if (!el) {
+		// The first cell has no checkbox, e.g. in the process list of a driver which cannot kill.
+		return;
+	}
+
 	if (click) {
 		el.checked = !el.checked;
 		if (el.onclick) {
 			el.onclick();
 		}
 	}
+
 	if (el.name === 'check[]') {
 		el.form['all'].checked = false;
 		formUncheck('all-page');
@@ -311,6 +320,7 @@ function tableClick(event, click, canEdit = true) {
 	if (/^(tables|views)\[]$/.test(el.name)) {
 		formUncheck('check-all');
 	}
+
 	trCheck(el);
 }
 
