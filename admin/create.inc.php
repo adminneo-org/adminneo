@@ -189,6 +189,14 @@ foreach ($engines as $engine) {
 	}
 }
 
+// 12 - the maximum number of inputs per column, 20 - the other inputs
+$max_columns = max_input_vars(12, 20);
+if ($max_columns) {
+	// The message is printed also if the number of columns is fine, JavaScript displays it after adding more columns.
+	$hidden = (count($row["fields"]) > $max_columns ? "" : " hidden");
+	echo "<p" . ($hidden ? " id='max-fields' data-columns='$max_columns'" : "") . " class='error$hidden'>" . max_input_vars_error() . "\n";
+}
+
 echo "<form action='' method='post' id='form'>\n";
 
 if (support("columns") || $TABLE == "") {

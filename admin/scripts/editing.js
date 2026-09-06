@@ -518,6 +518,27 @@ function selectFieldChange() {
 		}
 
 		added += '0';
+
+		maxFieldsCheck();
+	}
+
+	/**
+	 * Displays the error about the number of fields if the form has too many columns.
+	 */
+	function maxFieldsCheck() {
+		// Only in table creating and altering, only if max_input_vars is set and only if the message is hidden.
+		const message = qs('#max-fields');
+		if (!message) {
+			return;
+		}
+
+		// [orig] is printed for every column and removeTableRow() keeps it, so the removed columns are counted too.
+		if (qsa('#edit-fields [name$="[orig]"]').length > +message.dataset.columns) {
+			message.classList.remove('hidden');
+
+			// The top of the page is not visible after adding columns.
+			gid('edit-fields').parentNode.after(message);
+		}
 	}
 
 	/**

@@ -336,8 +336,6 @@ if (!$columns && support("table")) {
 		if (DIALECT == "mssql" && $page) {
 			$result->seek($limit * $page);
 		}
-		echo "<form id='selection_form' action='' method='post' enctype='multipart/form-data'>\n";
-		echo "<div class='table-footer-parent'>\n";
 		$rows = [];
 		while ($row = $result->fetchAssoc()) {
 			if ($page && DIALECT == "oracle") {
@@ -345,6 +343,15 @@ if (!$columns && support("table")) {
 			}
 			$rows[] = $row;
 		}
+
+		// Without the modify mode, the values are printed as links, only the checked checkboxes are sent.
+		if ($_GET["modify"] && $rows) {
+			$max_rows = max_input_vars(count($rows[0]) + 1, 20); // 1 - the checkbox of each row, 20 - the other inputs
+			echo ($max_rows && count($rows) > $max_rows ? "<p class='error'>" . max_input_vars_error() . "\n" : "");
+		}
+
+		echo "<form id='selection_form' action='' method='post' enctype='multipart/form-data'>\n";
+		echo "<div class='table-footer-parent'>\n";
 
 		// use count($rows) without LIMIT, COUNT(*) without grouping, FOUND_ROWS otherwise (slowest)
 		if ($_GET["page"] != "last" && $limit && $group && $is_group && DIALECT == "sql") {
