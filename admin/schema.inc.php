@@ -17,14 +17,17 @@ foreach ($matches as $i => $match) {
 	$table_pos_js[] = "\n\t'" . js_escape($match[1]) . "': [ $match[2], $match[3] ]";
 }
 
+$line_height = 1.4;
 $top = 0;
 $base_left = -1;
+
 /** @var array{fields:array[], pos:array{float, float}, references:string[][][]}[] $schema */
 $schema = []; // table => array("fields" => array(name => field), "pos" => array(top, left), "references" => array(table => array(left => array(source, target))))
 $referenced = []; // target_table => array(table => array(left => target_column))
 /** @var array<numeric-string, bool> $lefts */
 $lefts = []; // float => bool
 $all_fields = Driver::get()->getAllFields();
+
 foreach (table_status('', true) as $table => $table_status) {
 	if (is_view($table_status)) {
 		continue;
@@ -32,7 +35,7 @@ foreach (table_status('', true) as $table => $table_status) {
 	$pos = 0;
 	$schema[$table]["fields"] = [];
 	foreach ($all_fields[$table] ?? [] as $field) {
-		$pos += 1.25;
+		$pos = round($pos + $line_height, 2); // Rounding keeps the em values in the output short.
 		$field_pos[$table][$field["field"]] = $pos;
 		$schema[$table]["fields"][$field["field"]] = $field;
 	}
@@ -55,7 +58,9 @@ foreach (table_status('', true) as $table => $table_status) {
 			$lefts[(string) $left] = true;
 		}
 	}
-	$top = max($top, $schema[$table]["pos"][0] + 2.5 + $pos);
+
+	// The table box consists of the header row and one row per field, each 1.4em high. 1em is the gap between boxes.
+	$top = max($top, round($schema[$table]["pos"][0] + $line_height + $pos + 1, 2));
 }
 
 echo "<div id='schema' style='height: {$top}em;'>\n";
@@ -68,7 +73,8 @@ echo "document.onmouseup = event => schemaMouseup(event, '", js_escape(DB), "');
 echo "</script>\n";
 
 foreach ($schema as $name => $table) {
-	echo "<div class='table' style='top: " . $table["pos"][0] . "em; left: " . $table["pos"][1] . "em;'>";
+	$height = round($line_height + count($table["fields"]) * $line_height, 2);
+	echo "<div class='table' style='top: " . $table["pos"][0] . "em; left: " . $table["pos"][1] . "em; height: {$height}em;'>";
 	echo '<a href="' . h(ME) . 'table=' . urlencode($name) . '"><b>' . h($name) . "</b></a>";
 	echo script("qsl('div').onmousedown = schemaMousedown;");
 
@@ -84,7 +90,7 @@ foreach ($schema as $name => $table) {
 			$left1 = $left - ($table_pos[$name][1] ?? 0);
 			$i = 0;
 			foreach ($ref[0] as $source) {
-				echo "\n<div class='references' title='", h($target_name), "' id='refs$left-$i' style='left: {$left1}em; top: ", $field_pos[$name][$source], "em; padding-top: .5em;'>",
+				echo "\n<div class='references' title='", h($target_name), "' id='refs$left-$i' style='left: {$left1}em; top: ", $field_pos[$name][$source], "em; padding-top: " . ($line_height / 2) . "em;'>",
 					"<div style='border-top: 1px solid Gray; width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
@@ -97,9 +103,9 @@ foreach ($schema as $name => $table) {
 			$left1 = $left - ($table_pos[$name][1] ?? 0);
 			$i = 0;
 			foreach ($columns as $target) {
-				echo "\n<div class='references' title='", h($target_name), "' id='refd$left-$i' style='left: {$left1}em; top: " . $field_pos[$name][$target] . "em; height: 1.25em;'>",
-					"<svg style='width: 1em; height: 1em; float: right;' viewBox='0 0 22 22' fill='currentColor'><path d='M11,19l10,-8l-10,-8l0,16Z'/></svg>",
-					"<div style='height: .5em; border-bottom: 1px solid Gray; width: " . (-$left1) . "em;'></div>",
+				echo "\n<div class='references' title='", h($target_name), "' id='refd$left-$i' style='left: {$left1}em; top: " . $field_pos[$name][$target] . "em; height: {$line_height}em;'>",
+					"<svg style='width: 1em; height: 1em; margin-top: " . (($line_height - 1) / 2) . "em; float: right;' viewBox='0 0 22 22' fill='currentColor'><path d='M11,19l10,-8l-10,-8l0,16Z'/></svg>",
+					"<div style='height: " . ($line_height / 2) . "em; border-bottom: 1px solid Gray; width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
 			}
@@ -118,11 +124,11 @@ foreach ($schema as $name => $table) {
 				foreach ($ref[0] as $key => $source) {
 					$pos1 = $table["pos"][0] + $field_pos[$name][$source];
 					$pos2 = $schema[$target_name]["pos"][0] + $field_pos[$target_name][$ref[1][$key]];
-					$min_pos = min($min_pos, $pos1, $pos2);
-					$max_pos = max($max_pos, $pos1, $pos2);
+					$min_pos = round(min($min_pos, $pos1, $pos2), 2);
+					$max_pos = round(max($max_pos, $pos1, $pos2), 2);
 				}
-				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: .5em 0;'>" .
-					"<div style='border-right: 1px solid Gray; margin-top: 1px; height: " . ($max_pos - $min_pos) . "em;'></div></div>\n";
+				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: " . ($line_height / 2) . "em 0;'>" .
+					"<div style='border-right: 1px solid Gray; margin-top: 1px; height: " . round($max_pos - $min_pos, 2) . "em;'></div></div>\n";
 			}
 		}
 	}

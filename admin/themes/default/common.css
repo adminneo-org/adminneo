@@ -195,6 +195,9 @@ ol, ul {
 #schema .table {
 	border: 1px solid var(--table-border);
 	padding: 0 2px;
+	/* The same line height is in schema.inc.php. */
+	line-height: 1.4;
+	box-sizing: border-box;
 	cursor: move;
 	position: absolute;
 }
