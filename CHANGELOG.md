@@ -37,6 +37,7 @@ AdminNeo 5.8.0
 
 ### Bugfixes
 
+- Sanitize the connection id returned by the server (by @vrana, GHSA-qjpp-55x9-q62v, XSS)
 - Fix JavaScript in Safari < 14, Firefox < 79 and Chrome < 85 (regression from 5.7.0)
 - Fix showing and hiding elements in Chrome < 61 and Edge < 17 (regression from 5.2.0)
 - Fix JavaScript error on pages with a sticky table footer in Safari < 12.1 (regression from 5.0.0)

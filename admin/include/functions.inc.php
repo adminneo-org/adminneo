@@ -1302,7 +1302,7 @@ function slow_query($query) {
 	if (!$slow_query && support("kill")) {
 		$connection = connect();
 		if ($connection && ($db == "" || $connection->selectDatabase($db))) {
-			$kill = $connection->getValue(connection_id()); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
+			$kill = number($connection->getValue(connection_id())); // MySQL and MySQLi can use thread_id but it's not in PDO_MySQL
 			?>
 <script<?php echo nonce(); ?>>
 	const timeout = setTimeout(() => {
