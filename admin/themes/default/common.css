@@ -216,6 +216,13 @@ ol, ul {
 	position: absolute;
 }
 
+/* The class is set while a dropped table box moves to its snapped position. */
+#schema.snapping .table,
+#schema.snapping .references,
+#schema.snapping .references div {
+	transition: top .1s ease-out, left .1s ease-out, width .1s ease-out, height .1s ease-out;
+}
+
 #help {
 	position: absolute;
 	border: 1px solid var(--panel-border);

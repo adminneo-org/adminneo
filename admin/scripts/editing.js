@@ -909,42 +909,53 @@ function schemaMousemove(event) {
 			}
 			dragged = true;
 			document.body.classList.add('moving');
+			// A drag started right after the previous one must follow the cursor without the snapping transition.
+			gid('schema').classList.remove('snapping');
 		}
 
-		const left = (event.clientX - x) / em;
-		const top = (event.clientY - y) / em;
-		const lineSet = {};
-		for (const div of qsa('div', that)) {
-			if (div.classList.contains('references')) {
-				const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
-				const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / em, 0]);
-				let left1 = -1;
-				const id = div.id.replace(/^ref.(.+)-.+/, '$1');
+		schemaMoveTable(that, (event.clientX - x) / em, (event.clientY - y) / em);
+	}
+}
+
+/**
+ * Moves the table box together with its reference lines.
+ *
+ * @param {HTMLElement} box
+ * @param {number} left Position in ems.
+ * @param {number} top Position in ems.
+ */
+function schemaMoveTable(box, left, top) {
+	const lineSet = {};
+	for (const div of qsa('div', box)) {
+		if (div.classList.contains('references')) {
+			const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
+			const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / em, 0]);
+			let left1 = -1;
+			const id = div.id.replace(/^ref.(.+)-.+/, '$1');
+			if (div.parentNode !== div2.parentNode) {
+				left1 = Math.min(0, ref[1] - left) - 1;
+				div.style.left = left1 + 'em';
+				div.querySelector('div').style.width = -left1 + 'em';
+				const left2 = Math.min(0, left - ref[1]) - 1;
+				div2.style.left = left2 + 'em';
+				div2.querySelector('div').style.width = -left2 + 'em';
+			}
+			if (!lineSet[id]) {
+				const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
+				const top1 = top + div.offsetTop / em;
+				let top2 = top + div2.offsetTop / em;
 				if (div.parentNode !== div2.parentNode) {
-					left1 = Math.min(0, ref[1] - left) - 1;
-					div.style.left = left1 + 'em';
-					div.querySelector('div').style.width = -left1 + 'em';
-					const left2 = Math.min(0, left - ref[1]) - 1;
-					div2.style.left = left2 + 'em';
-					div2.querySelector('div').style.width = -left2 + 'em';
+					top2 += ref[0] - top;
+					line.querySelector('div').style.height = Math.abs(top1 - top2) + 'em';
 				}
-				if (!lineSet[id]) {
-					const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
-					const top1 = top + div.offsetTop / em;
-					let top2 = top + div2.offsetTop / em;
-					if (div.parentNode !== div2.parentNode) {
-						top2 += ref[0] - top;
-						line.querySelector('div').style.height = Math.abs(top1 - top2) + 'em';
-					}
-					line.style.left = (left + left1) + 'em';
-					line.style.top = Math.min(top1, top2) + 'em';
-					lineSet[id] = true;
-				}
+				line.style.left = (left + left1) + 'em';
+				line.style.top = Math.min(top1, top2) + 'em';
+				lineSet[id] = true;
 			}
 		}
-		that.style.left = left + 'em';
-		that.style.top = top + 'em';
 	}
+	box.style.left = left + 'em';
+	box.style.top = top + 'em';
 }
 
 /**
@@ -972,11 +983,22 @@ function schemaMouseup(event, db) {
 		document.addEventListener('click', cancelClick, true);
 		setTimeout(() => document.removeEventListener('click', cancelClick, true));
 
-		tablePos[box.firstChild.firstChild.firstChild.data] = [ (event.clientY - y) / em, (event.clientX - x) / em ];
+		// The position is stored rounded to whole ems, so the box snaps to the same place the page is rendered with.
+		const left = Math.round((event.clientX - x) / em);
+		const top = Math.round((event.clientY - y) / em);
+		const schema = gid('schema');
+		schema.classList.add('snapping');
+		// Forces a style recalculation, otherwise the transition would start with the class already applied and not run.
+		void schema.offsetHeight;
+
+		schemaMoveTable(box, left, top);
+		setTimeout(() => schema.classList.remove('snapping'), 100); // The same duration is in the stylesheet.
+
+		tablePos[box.firstChild.firstChild.firstChild.data] = [ top, left ];
 		let s = '';
 		for (const key in tablePos) {
-			const [top, left] = tablePos[key];
-			s += '_' + key + ':' + Math.round(top) + 'x' + Math.round(left);
+			const pos = tablePos[key];
+			s += '_' + key + ':' + Math.round(pos[0]) + 'x' + Math.round(pos[1]);
 		}
 		s = encodeURIComponent(s.slice(1));
 		const link = gid('schema-link');
