@@ -57,6 +57,7 @@ function page_header(string $title, $breadcrumb = []): void
 		"../admin/themes/default/dragging.css",
 		"../admin/themes/default/header.css",
 		"../admin/themes/default/navigationPanel.css",
+		"../admin/themes/default/schema.css",
 		"../admin/themes/default/print.css",
 	]), "'>\n";
 

@@ -11,10 +11,11 @@ $table_pos_js = [];
 /** @var float[][] $field_pos */
 $field_pos = []; // table => field => position
 $SCHEMA = ($_GET["schema"] ?: $_COOKIE["neo_schema-" . str_replace(".", "_", DB)]); // $_COOKIE["neo_schema"] was used before 3.2.0 //! ':' in table name
+
 preg_match_all('~([^:]+):([-0-9.]+)x([-0-9.]+)(_|$)~', $SCHEMA, $matches, PREG_SET_ORDER);
-foreach ($matches as $i => $match) {
+foreach ($matches as $match) {
 	$table_pos[$match[1]] = [(float) $match[2], (float) $match[3]];
-	$table_pos_js[] = "\n\t'" . js_escape($match[1]) . "': [ $match[2], $match[3] ]";
+	$table_pos_js[] = "\n'" . js_escape($match[1]) . "': [ $match[2], $match[3] ]";
 }
 
 $line_height = 1.4;
@@ -65,34 +66,32 @@ foreach (table_status('', true) as $table => $table_status) {
 
 echo "<div id='schema' style='height: {$top}em;'>\n";
 
-echo "<script", nonce(), ">\n";
-echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
-echo "const em = gid('schema').offsetHeight / $top;\n";
-echo "document.onmousedown = schemaDocumentMousedown;\n";
-echo "document.onmousemove = schemaMousemove;\n";
-echo "document.onmouseup = event => schemaMouseup(event, '", js_escape(DB), "');\n";
-echo "</script>\n";
-
 foreach ($schema as $name => $table) {
 	$height = round($line_height + count($table["fields"]) * $line_height + 0.4, 2);
 	echo "<div class='table' style='top: " . $table["pos"][0] . "em; left: " . $table["pos"][1] . "em; height: {$height}em;'>";
-	echo '<a href="' . h(ME) . 'table=' . urlencode($name) . '"><b>' . h($name) . "</b></a>";
-	echo script("qsl('div').onmousedown = schemaMousedown;");
 
+	// Only the content is draggable, the reference lines reaching out of the box are not.
+	echo "<div class='content'>";
+	echo '<h4><a href="' . h(ME) . 'table=' . urlencode($name) . '">' . h($name) . "</a></h4>";
+
+	echo "<ul>";
 	foreach ($table["fields"] as $field) {
 		$val = '<span ' . type_class($field["type"]) . ' title="' .
 			h($field["type"] . ($field["length"] ? "($field[length])" : "") . ($field["null"] ? " NULL" : '')) .
 			'">' . h($field["field"]) . '</span>';
-		echo "<br>" . ($field["primary"] ? "<i>$val</i>" : $val);
+		echo "<li>" . ($field["primary"] ? "<i>$val</i>" : $val) . "</li>";
 	}
+	echo "</ul>";
+
+	echo "</div>";
 
 	foreach ((array) $table["references"] as $target_name => $refs) {
 		foreach ($refs as $left => $ref) {
 			$left1 = $left - ($table_pos[$name][1] ?? 0);
 			$i = 0;
 			foreach ($ref[0] as $source) {
-				echo "\n<div class='references' title='", h($target_name), "' id='refs$left-$i' style='left: {$left1}em; top: ", $field_pos[$name][$source], "em; padding-top: " . ($line_height / 2) . "em;'>",
-					"<div style='border-top: 1px solid; width: " . (-$left1) . "em;'></div>",
+				echo "\n<div class='references outgoing' title='", h($target_name), "' id='refs$left-$i' style='left: {$left1}em; top: ", $field_pos[$name][$source], "em;'>",
+					"<div style='width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
 			}
@@ -104,9 +103,9 @@ foreach ($schema as $name => $table) {
 			$left1 = $left - ($table_pos[$name][1] ?? 0);
 			$i = 0;
 			foreach ($columns as $target) {
-				echo "\n<div class='references' title='", h($target_name), "' id='refd$left-$i' style='left: {$left1}em; top: " . $field_pos[$name][$target] . "em; height: {$line_height}em;'>",
+				echo "\n<div class='references incoming' title='", h($target_name), "' id='refd$left-$i' style='left: {$left1}em; top: " . $field_pos[$name][$target] . "em;'>",
 					"<svg viewBox='0 0 22 22' fill='currentColor'><path d='M11,19l10,-8l-10,-8l0,16Z'/></svg>",
-					"<div style='height: " . ($line_height / 2) . "em; border-bottom: 1px solid; width: " . (-$left1) . "em;'></div>",
+					"<div style='width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
 			}
@@ -128,14 +127,15 @@ foreach ($schema as $name => $table) {
 					$min_pos = round(min($min_pos, $pos1, $pos2), 2);
 					$max_pos = round(max($max_pos, $pos1, $pos2), 2);
 				}
-				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: " . ($line_height / 2) . "em 0;'>" .
-					"<div style='border-right: 1px solid; margin-top: 1px; height: " . round($max_pos - $min_pos, 2) . "em;'></div></div>\n";
+				echo "<div class='references vertical' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em;'>" .
+					"<div style='height: " . round($max_pos - $min_pos, 2) . "em;'></div></div>\n";
 			}
 		}
 	}
 }
 
 echo "</div>\n";
+echo script("initSchema('" . js_escape(DB) . "', $top, {" . implode(",", $table_pos_js) . "})");
 
 echo "<p class='links'>";
 echo "<a href='", (ME . "schema=" . urlencode($SCHEMA)), "' id='schema-link'>", lang('Permanent link'), "</a>";

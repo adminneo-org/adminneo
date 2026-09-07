@@ -195,59 +195,6 @@ ol, ul {
 	padding-bottom: 20px;
 }
 
-#schema {
-	margin-left: 100px;
-	position: relative;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
-#schema .table {
-	border: 1px solid var(--panel-border);
-	background: var(--schema-bg);
-	border-radius: var(--box-border-radius);
-	padding: .2em .4em; /* The same in schema.inc.php. */
-	line-height: 1.4; /* The same in schema.inc.php. */
-	box-sizing: border-box;
-	cursor: move;
-	position: absolute;
-	z-index: 1;
-}
-
-#schema .table.selected {
-	border-color: var(--link-text);
-	outline: 1px solid var(--link-text);
-	z-index: 2;
-}
-
-#schema .references {
-	position: absolute;
-}
-
-#schema .references.selected {
-	color: var(--link-text);
-	z-index: 2;
-}
-
-#schema .references.selected div {
-	border-width: 2px !important;
-}
-
-#schema .references svg {
-	position: absolute;
-	right: 0;
-	top: calc(0.2em - 1px);
-	width: 1em;
-	height: 1em;
-}
-
-/* The class is set while a dropped table box moves to its snapped position. */
-#schema.snapping .table,
-#schema.snapping .references,
-#schema.snapping .references div {
-	transition: top .1s ease-out, left .1s ease-out, width .1s ease-out, height .1s ease-out;
-}
-
 #help {
 	position: absolute;
 	border: 1px solid var(--panel-border);

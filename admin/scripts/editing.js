@@ -869,152 +869,200 @@ function triggerChange(tableRe, table, form) {
 	form['Of'].classList.toggle('hidden', !/ OF/.test(formEvent));
 }
 
+// Schema.
+(() => {
+	let schema;
+	let pixPerEm, tablePos;
+	let activeBox = null;
+	let startX, startY, x, y, dragging;
 
-let that, x, y, startX, startY, dragged; // em and tablePos defined in schema.inc.php
+	/**
+	 * Initializes the schema interactions.
+	 *
+	 * @param {string} dbName
+	 * @param {number} topEm
+	 * @param {Object} tablePositions Table name => [top, left] in ems.
+	 */
+	window.initSchema = function(dbName, topEm, tablePositions) {
+		schema = gid('schema');
 
-/**
- * Removes the selection of a table box and its reference lines.
- */
-function schemaDeselectTables() {
-	for (const el of qsa('.selected', gid('schema'))) {
-		el.classList.remove('selected');
-	}
-}
+		pixPerEm = schema.offsetHeight / topEm;
+		tablePos = tablePositions;
 
-/**
- * Selects the table box together with the lines of its outgoing references.
- *
- * @param {HTMLElement} box
- */
-function schemaSelectTable(box) {
-	schemaDeselectTables();
-	box.classList.add('selected');
-
-	for (const div of qsa('.references[id^="refs"]', box)) {
-		// The target end of the reference and the line connecting them.
-		const div2 = qs('[id="refd' + div.id.slice(4) + '"]');
-		const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
-
-		div.classList.add('selected');
-		if (div2) {
-			div2.classList.add('selected');
+		for (const content of qsa(".table > .content", schema)) {
+			content.addEventListener("mousedown", onBoxMouseDown);
 		}
-		if (line) {
-			line.classList.add('selected');
+
+		document.addEventListener("mousedown", onMouseDown);
+		document.addEventListener("mousemove", onMouseMove);
+		document.addEventListener("mouseup", event => onMouseUp(event, dbName));
+	};
+
+	/**
+	 * Selects the table box together with the lines of its outgoing references.
+	 *
+	 * @param {HTMLElement} box
+	 */
+	function selectTable(box) {
+		deselectTables();
+
+		box.classList.add('selected');
+
+		for (const div of qsa('.references[id^="refs"]', box)) {
+			// The target end of the reference and the line connecting them.
+			const div2 = qs('[id="refd' + div.id.slice(4) + '"]');
+			const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
+
+			div.classList.add('selected');
+			if (div2) {
+				div2.classList.add('selected');
+				// The box is a stacking context, so the line inside it can be raised only together with the box.
+				div2.closest('.table').classList.add('related');
+			}
+			if (line) {
+				line.classList.add('selected');
+			}
 		}
 	}
-}
 
-/**
- * Deselects the table box when the mouse is pressed outside of any box.
- *
- * @param {MouseEvent} event
- */
-function schemaDocumentMousedown(event) {
-	if (!event.target.closest('#schema .table')) {
-		schemaDeselectTables();
+	/**
+	 * Removes the selection of a table box and its reference lines.
+	 */
+	function deselectTables() {
+		for (const el of qsa('.selected, .related', schema)) {
+			el.classList.remove('selected');
+			el.classList.remove('related');
+		}
 	}
-}
 
-/**
- * Stores the mouse position.
- *
- * @param {MouseEvent} event
- *
- * @this {HTMLElement}
- */
-function schemaMousedown(event) {
-	if (event.button === 0) { // 0 - left button
-		that = this;
-		schemaSelectTable(this);
-		x = event.clientX - this.offsetLeft;
-		y = event.clientY - this.offsetTop;
+	/**
+	 * Deselects the table box when the mouse is pressed outside the content of any box.
+	 *
+	 * @param {MouseEvent} event
+	 */
+	function onMouseDown(event) {
+		if (!event.target.closest('#schema .content')) {
+			deselectTables();
+		}
+	}
+
+	/**
+	 * Selects the box of the pressed content and stores the mouse position.
+	 *
+	 * @param {MouseEvent} event
+	 *
+	 * @this {HTMLElement} Content of a table box.
+	 */
+	function onBoxMouseDown(event) {
+		if (event.button !== 0) {
+			return;
+		}
+
+		const box = this.parentNode;
+
+		activeBox = box;
+		selectTable(box);
+
+		dragging = false;
 		startX = event.clientX;
 		startY = event.clientY;
-		dragged = false;
+		x = event.clientX - box.offsetLeft;
+		y = event.clientY - box.offsetTop;
 
 		// The table name is a link and its native dragging would swallow the mouse events until the button is released.
 		if (event.target.closest('a')) {
 			event.preventDefault();
 		}
 	}
-}
 
-/**
- * Moves object.
- *
- * @param {MouseEvent} event
- */
-function schemaMousemove(event) {
-	if (that !== undefined) {
-		if (!dragged) {
+	/**
+	 * Moves object.
+	 *
+	 * @param {MouseEvent} event
+	 */
+	function onMouseMove(event) {
+		if (!activeBox) {
+			return;
+		}
+
+		if (!dragging) {
 			// A tiny movement is not a drag gesture yet, so a click on the table name link stays functional.
 			if (Math.abs(event.clientX - startX) < 3 && Math.abs(event.clientY - startY) < 3) {
 				return;
 			}
-			dragged = true;
+
+			dragging = true;
 			document.body.classList.add('moving');
+
 			// A drag started right after the previous one must follow the cursor without the snapping transition.
-			gid('schema').classList.remove('snapping');
+			schema.classList.remove('snapping');
 		}
 
-		schemaMoveTable(that, (event.clientX - x) / em, (event.clientY - y) / em);
+		moveBox(activeBox, (event.clientX - x) / pixPerEm, (event.clientY - y) / pixPerEm);
 	}
-}
 
-/**
- * Moves the table box together with its reference lines.
- *
- * @param {HTMLElement} box
- * @param {number} left Position in ems.
- * @param {number} top Position in ems.
- */
-function schemaMoveTable(box, left, top) {
-	const lineSet = {};
-	for (const div of qsa('div', box)) {
-		if (div.classList.contains('references')) {
+	/**
+	 * Moves the table box together with its reference lines.
+	 *
+	 * @param {HTMLElement} box
+	 * @param {number} left Position in ems.
+	 * @param {number} top Position in ems.
+	 */
+	function moveBox(box, left, top) {
+		const lineSet = {};
+
+		for (const div of qsa('.references', box)) {
 			const div2 = qs('[id="' + (/^refs/.test(div.id) ? 'refd' : 'refs') + div.id.slice(4) + '"]');
-			const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / em, 0]);
+			const ref = (tablePos[div.title] || [div2.parentNode.offsetTop / pixPerEm, 0]);
 			let left1 = -1;
 			const id = div.id.replace(/^ref.(.+)-.+/, '$1');
+
 			if (div.parentNode !== div2.parentNode) {
 				left1 = Math.min(0, ref[1] - left) - 1;
 				div.style.left = left1 + 'em';
 				div.querySelector('div').style.width = -left1 + 'em';
+
 				const left2 = Math.min(0, left - ref[1]) - 1;
 				div2.style.left = left2 + 'em';
 				div2.querySelector('div').style.width = -left2 + 'em';
 			}
+
 			if (!lineSet[id]) {
 				const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
-				const top1 = top + div.offsetTop / em;
-				let top2 = top + div2.offsetTop / em;
+				const top1 = top + div.offsetTop / pixPerEm;
+				let top2 = top + div2.offsetTop / pixPerEm;
+
 				if (div.parentNode !== div2.parentNode) {
 					top2 += ref[0] - top;
 					line.querySelector('div').style.height = Math.abs(top1 - top2) + 'em';
 				}
+
 				line.style.left = (left + left1) + 'em';
 				line.style.top = Math.min(top1, top2) + 'em';
+
 				lineSet[id] = true;
 			}
 		}
+
+		box.style.left = left + 'em';
+		box.style.top = top + 'em';
 	}
-	box.style.left = left + 'em';
-	box.style.top = top + 'em';
-}
 
-/**
- * Finishes move.
- *
- * @param {MouseEvent} event
- * @param {string} db
- */
-function schemaMouseup(event, db) {
-	if (that !== undefined) {
-		const box = that;
-		that = undefined;
+	/**
+	 * Finishes box move.
+	 *
+	 * @param {MouseEvent} event
+	 * @param {string} db
+	 */
+	function onMouseUp(event, db) {
+		if (!activeBox) {
+			return;
+		}
 
-		if (!dragged) {
+		const box = activeBox;
+		activeBox = null;
+
+		if (!dragging) {
 			return;
 		}
 
@@ -1028,30 +1076,32 @@ function schemaMouseup(event, db) {
 		document.addEventListener('click', cancelClick, true);
 		setTimeout(() => document.removeEventListener('click', cancelClick, true));
 
-		// The position is stored rounded to whole ems, so the box snaps to the same place the page is rendered with.
-		const left = Math.round((event.clientX - x) / em);
-		const top = Math.round((event.clientY - y) / em);
-		const schema = gid('schema');
 		schema.classList.add('snapping');
 		// Forces a style recalculation, otherwise the transition would start with the class already applied and not run.
 		void schema.offsetHeight;
 
-		schemaMoveTable(box, left, top);
+		// The position is stored rounded to whole ems, so the box snaps to the same place the page is rendered with.
+		const left = Math.round((event.clientX - x) / pixPerEm);
+		const top = Math.round((event.clientY - y) / pixPerEm);
+
+		moveBox(box, left, top);
 		setTimeout(() => schema.classList.remove('snapping'), 100); // The same duration is in the stylesheet.
 
-		tablePos[box.firstChild.firstChild.firstChild.data] = [ top, left ];
-		let s = '';
+		tablePos[qs('h4', box).textContent] = [top, left];
+
+		let posString = '';
 		for (const key in tablePos) {
 			const pos = tablePos[key];
-			s += '_' + key + ':' + Math.round(pos[0]) + 'x' + Math.round(pos[1]);
+			posString += '_' + key + ':' + Math.round(pos[0]) + 'x' + Math.round(pos[1]);
 		}
-		s = encodeURIComponent(s.slice(1));
-		const link = gid('schema-link');
-		link.href = link.href.replace(/[^=]+$/, '') + s;
-		cookie('neo_schema-' + db + '=' + s, 30); //! special chars in db
-	}
-}
+		posString = encodeURIComponent(posString.slice(1));
 
+		const link = gid('schema-link');
+		link.href = link.href.replace(/[^=]+$/, '') + posString;
+
+		cookie('neo_schema-' + db + '=' + posString, 30); //! special chars in db
+	}
+})();
 
 // Help.
 (() => {
