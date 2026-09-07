@@ -68,12 +68,13 @@ echo "<div id='schema' style='height: {$top}em;'>\n";
 echo "<script", nonce(), ">\n";
 echo "const tablePos = {", implode(",", $table_pos_js), "\n};\n";
 echo "const em = gid('schema').offsetHeight / $top;\n";
+echo "document.onmousedown = schemaDocumentMousedown;\n";
 echo "document.onmousemove = schemaMousemove;\n";
 echo "document.onmouseup = event => schemaMouseup(event, '", js_escape(DB), "');\n";
 echo "</script>\n";
 
 foreach ($schema as $name => $table) {
-	$height = round($line_height + count($table["fields"]) * $line_height, 2);
+	$height = round($line_height + count($table["fields"]) * $line_height + 0.4, 2);
 	echo "<div class='table' style='top: " . $table["pos"][0] . "em; left: " . $table["pos"][1] . "em; height: {$height}em;'>";
 	echo '<a href="' . h(ME) . 'table=' . urlencode($name) . '"><b>' . h($name) . "</b></a>";
 	echo script("qsl('div').onmousedown = schemaMousedown;");
@@ -91,7 +92,7 @@ foreach ($schema as $name => $table) {
 			$i = 0;
 			foreach ($ref[0] as $source) {
 				echo "\n<div class='references' title='", h($target_name), "' id='refs$left-$i' style='left: {$left1}em; top: ", $field_pos[$name][$source], "em; padding-top: " . ($line_height / 2) . "em;'>",
-					"<div style='border-top: 1px solid Gray; width: " . (-$left1) . "em;'></div>",
+					"<div style='border-top: 1px solid; width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
 			}
@@ -104,8 +105,8 @@ foreach ($schema as $name => $table) {
 			$i = 0;
 			foreach ($columns as $target) {
 				echo "\n<div class='references' title='", h($target_name), "' id='refd$left-$i' style='left: {$left1}em; top: " . $field_pos[$name][$target] . "em; height: {$line_height}em;'>",
-					"<svg style='width: 1em; height: 1em; margin-top: " . (($line_height - 1) / 2) . "em; float: right;' viewBox='0 0 22 22' fill='currentColor'><path d='M11,19l10,-8l-10,-8l0,16Z'/></svg>",
-					"<div style='height: " . ($line_height / 2) . "em; border-bottom: 1px solid Gray; width: " . (-$left1) . "em;'></div>",
+					"<svg viewBox='0 0 22 22' fill='currentColor'><path d='M11,19l10,-8l-10,-8l0,16Z'/></svg>",
+					"<div style='height: " . ($line_height / 2) . "em; border-bottom: 1px solid; width: " . (-$left1) . "em;'></div>",
 					"</div>";
 				$i++;
 			}
@@ -128,7 +129,7 @@ foreach ($schema as $name => $table) {
 					$max_pos = round(max($max_pos, $pos1, $pos2), 2);
 				}
 				echo "<div class='references' id='refl$left' style='left: $left" . "em; top: $min_pos" . "em; padding: " . ($line_height / 2) . "em 0;'>" .
-					"<div style='border-right: 1px solid Gray; margin-top: 1px; height: " . round($max_pos - $min_pos, 2) . "em;'></div></div>\n";
+					"<div style='border-right: 1px solid; margin-top: 1px; height: " . round($max_pos - $min_pos, 2) . "em;'></div></div>\n";
 			}
 		}
 	}

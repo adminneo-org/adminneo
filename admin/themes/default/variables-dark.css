@@ -12,6 +12,7 @@
 	--panel-border: #444;
 	--header-text: #eee;
 	--list-hover: hsla(215, 0%, 70%, 15%);
+	--schema-bg: rgba(40, 40, 40, 75%);
 
 	--input-bg: #111;
 	--input-text: #eee;

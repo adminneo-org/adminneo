@@ -873,6 +873,50 @@ function triggerChange(tableRe, table, form) {
 let that, x, y, startX, startY, dragged; // em and tablePos defined in schema.inc.php
 
 /**
+ * Removes the selection of a table box and its reference lines.
+ */
+function schemaDeselectTables() {
+	for (const el of qsa('.selected', gid('schema'))) {
+		el.classList.remove('selected');
+	}
+}
+
+/**
+ * Selects the table box together with the lines of its outgoing references.
+ *
+ * @param {HTMLElement} box
+ */
+function schemaSelectTable(box) {
+	schemaDeselectTables();
+	box.classList.add('selected');
+
+	for (const div of qsa('.references[id^="refs"]', box)) {
+		// The target end of the reference and the line connecting them.
+		const div2 = qs('[id="refd' + div.id.slice(4) + '"]');
+		const line = qs('[id="' + div.id.replace(/^....(.+)-.+$/, 'refl$1') + '"]');
+
+		div.classList.add('selected');
+		if (div2) {
+			div2.classList.add('selected');
+		}
+		if (line) {
+			line.classList.add('selected');
+		}
+	}
+}
+
+/**
+ * Deselects the table box when the mouse is pressed outside of any box.
+ *
+ * @param {MouseEvent} event
+ */
+function schemaDocumentMousedown(event) {
+	if (!event.target.closest('#schema .table')) {
+		schemaDeselectTables();
+	}
+}
+
+/**
  * Stores the mouse position.
  *
  * @param {MouseEvent} event
@@ -882,6 +926,7 @@ let that, x, y, startX, startY, dragged; // em and tablePos defined in schema.in
 function schemaMousedown(event) {
 	if (event.button === 0) { // 0 - left button
 		that = this;
+		schemaSelectTable(this);
 		x = event.clientX - this.offsetLeft;
 		y = event.clientY - this.offsetTop;
 		startX = event.clientX;
