@@ -311,6 +311,7 @@ AdminNeo 5.4.0 (2026-05-27)
 - PostgreSQL: Fix calling functions with name-less parameters (by @vrana)
 - PostgreSQL: Fix calling functions returning table (by @vrana)
 - PostgreSQL PDO: Fix bytea without primary key (by @vrana)
+- Elasticsearch: Verify response origin (GHSA-m4j3-gq7v-wpp8)
 - FileUploadPlugin: Fix searching in *_path columns
 - Editor: Fix missing token in search anywhere form
 
