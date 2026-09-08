@@ -172,7 +172,7 @@ th:hover .column {
 
 .column .button {
 	padding: 6px 6px 4px;
-	line-height: 1.4;
+	line-height: var(--line-height);
 }
 
 /* Required to achieve full with of sticky table footer. */

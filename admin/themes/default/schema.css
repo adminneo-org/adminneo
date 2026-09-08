@@ -1,6 +1,5 @@
 #schema {
-	/* The height of a table row, from which the reference lines are derived. The same in schema.inc.php. */
-	--line-height: 1.4;
+	/* A table row is one text line high, the reference lines are derived from it. The same in schema.inc.php. */
 	--line-height-em: calc(var(--line-height) * 1em);
 	--line-height-em-half: calc(var(--line-height-em) / 2);
 

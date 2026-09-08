@@ -23,7 +23,7 @@ body {
 	background: var(--body-bg);
 	color: var(--body-text);
 	font: calc(var(--font-size) * 100% / 20) var(--font-family);
-	line-height: 1.4;
+	line-height: var(--line-height);
 }
 
 body.resizing {

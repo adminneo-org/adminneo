@@ -76,7 +76,7 @@ textarea {
 	vertical-align: top;
 	margin-top: -5px;
 	font-family: var(--font-family);
-	line-height: 1.4;
+	line-height: var(--line-height);
 }
 
 select {

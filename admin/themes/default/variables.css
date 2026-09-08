@@ -5,6 +5,7 @@
 	--font-family-mono: JetBrains Mono, Menlo, Consolas, Liberation Mono, monospace;
 	--font-size: 14; /* px */
 	--font-size-mono: 13; /* px */
+	--line-height: 1.4;
 	--menu-width: 13rem;
 
 	--body-bg: #fff;
