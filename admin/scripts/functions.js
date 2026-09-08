@@ -1414,14 +1414,15 @@ function initTableFooter() {
 
 	const options = {
 		root: qs(".table-footer-parent"),
-		rootMargin: "0px 0px -1px 0px",
+		rootMargin: "0px 100% -1px 100%",
 		threshold: 1.0,
 	};
 
 	const observer = new IntersectionObserver((entries) => {
 		const entry = entries[0];
 		// Note: entry.isIntersecting does not work well on mobile Safari so we are comparing bottom positions.
-		footer.classList.toggle("sticky", entry.boundingClientRect.bottom < entry.rootBounds.bottom);
+		// On the other hand, bottom positions are not correctly calculated on Firefox.
+		footer.classList.toggle("sticky", entry.isIntersecting || entry.boundingClientRect.bottom < entry.rootBounds.bottom);
 	}, options);
 
 	observer.observe(footer);
