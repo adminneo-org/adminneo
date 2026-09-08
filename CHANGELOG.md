@@ -16,6 +16,7 @@ AdminNeo 5.8.0
 - Edit: Disable Save and continue edit after changing a value identifying the row
 - SQL command: Check the "Stop on error" option by default
 - Database schema: Improve design, highlight a clicked table box
+- Database schema: Move table boxes also on touch screens
 - PostgreSQL: Hide table actions and row editing in pg_catalog and pg_toast
 - PostgreSQL: Order NULL last (by @vrana)
 - MS SQL: Hide table actions and row editing in the sys schema

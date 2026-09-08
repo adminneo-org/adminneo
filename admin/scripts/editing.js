@@ -891,11 +891,17 @@ function triggerChange(tableRe, table, form) {
 
 		for (const content of qsa(".table > .content", schema)) {
 			content.addEventListener("mousedown", onBoxMouseDown);
+			content.addEventListener("touchstart", onBoxTouchStart);
 		}
 
-		document.addEventListener("mousedown", onMouseDown);
+		document.addEventListener("mousedown", onDocumentPress);
+		document.addEventListener("touchstart", onDocumentPress);
 		document.addEventListener("mousemove", onMouseMove);
+		// The listener is not passive, it prevents scrolling the page while dragging a box.
+		document.addEventListener("touchmove", onTouchMove, {passive: false});
 		document.addEventListener("mouseup", event => onMouseUp(event, dbName));
+		document.addEventListener("touchend", event => onTouchEnd(event, dbName));
+		document.addEventListener("touchcancel", event => onTouchEnd(event, dbName));
 	};
 
 	/**
@@ -936,11 +942,11 @@ function triggerChange(tableRe, table, form) {
 	}
 
 	/**
-	 * Deselects the table box when the mouse is pressed outside the content of any box.
+	 * Deselects the table box when pressed outside the content of any box.
 	 *
-	 * @param {MouseEvent} event
+	 * @param {MouseEvent|TouchEvent} event
 	 */
-	function onMouseDown(event) {
+	function onDocumentPress(event) {
 		if (!event.target.closest('#schema .content')) {
 			deselectTables();
 		}
@@ -958,16 +964,7 @@ function triggerChange(tableRe, table, form) {
 			return;
 		}
 
-		const box = this.parentNode;
-
-		activeBox = box;
-		selectTable(box);
-
-		dragging = false;
-		startX = event.clientX;
-		startY = event.clientY;
-		x = event.clientX - box.offsetLeft;
-		y = event.clientY - box.offsetTop;
+		startMove(this, event.clientX, event.clientY);
 
 		// The table name is a link and its native dragging would swallow the mouse events until the button is released.
 		if (event.target.closest('a')) {
@@ -976,19 +973,76 @@ function triggerChange(tableRe, table, form) {
 	}
 
 	/**
+	 * Selects the box of the touched content and stores the touch position.
+	 *
+	 * @param {TouchEvent} event
+	 *
+	 * @this {HTMLElement} Content of a table box.
+	 */
+	function onBoxTouchStart(event) {
+		// A second finger zooms the page, it does not move the box.
+		if (event.touches.length === 1) {
+			startMove(this, event.touches[0].clientX, event.touches[0].clientY);
+		}
+	}
+
+	/**
+	 * Remembers the box to move and the position it is grabbed at.
+	 *
+	 * @param {HTMLElement} content Content of a table box.
+	 * @param {number} clientX
+	 * @param {number} clientY
+	 */
+	function startMove(content, clientX, clientY) {
+		const box = content.parentNode;
+
+		activeBox = box;
+		selectTable(box);
+
+		dragging = false;
+		startX = clientX;
+		startY = clientY;
+		x = clientX - box.offsetLeft;
+		y = clientY - box.offsetTop;
+	}
+
+	/**
 	 * Moves object.
 	 *
 	 * @param {MouseEvent} event
 	 */
 	function onMouseMove(event) {
+		move(event.clientX, event.clientY);
+	}
+
+	/**
+	 * Moves object and keeps the page from scrolling under the finger.
+	 *
+	 * @param {TouchEvent} event
+	 */
+	function onTouchMove(event) {
+		if (event.touches.length === 1 && move(event.touches[0].clientX, event.touches[0].clientY)) {
+			event.preventDefault();
+		}
+	}
+
+	/**
+	 * Moves the active box to the position.
+	 *
+	 * @param {number} clientX
+	 * @param {number} clientY
+	 *
+	 * @return {boolean} True if the box has been moved.
+	 */
+	function move(clientX, clientY) {
 		if (!activeBox) {
-			return;
+			return false;
 		}
 
 		if (!dragging) {
 			// A tiny movement is not a drag gesture yet, so a click on the table name link stays functional.
-			if (Math.abs(event.clientX - startX) < 3 && Math.abs(event.clientY - startY) < 3) {
-				return;
+			if (Math.abs(clientX - startX) < 3 && Math.abs(clientY - startY) < 3) {
+				return false;
 			}
 
 			dragging = true;
@@ -998,7 +1052,9 @@ function triggerChange(tableRe, table, form) {
 			schema.classList.remove('snapping');
 		}
 
-		moveBox(activeBox, (event.clientX - x) / pixPerEm, (event.clientY - y) / pixPerEm);
+		moveBox(activeBox, (clientX - x) / pixPerEm, (clientY - y) / pixPerEm);
+
+		return true;
 	}
 
 	/**
@@ -1055,6 +1111,29 @@ function triggerChange(tableRe, table, form) {
 	 * @param {string} db
 	 */
 	function onMouseUp(event, db) {
+		endMove(event.clientX, event.clientY, db);
+	}
+
+	/**
+	 * Finishes box move by the lifted or cancelled finger.
+	 *
+	 * @param {TouchEvent} event
+	 * @param {string} db
+	 */
+	function onTouchEnd(event, db) {
+		if (event.changedTouches.length) {
+			endMove(event.changedTouches[0].clientX, event.changedTouches[0].clientY, db);
+		}
+	}
+
+	/**
+	 * Snaps the moved box to the grid and stores the new positions.
+	 *
+	 * @param {number} clientX
+	 * @param {number} clientY
+	 * @param {string} db
+	 */
+	function endMove(clientX, clientY, db) {
 		if (!activeBox) {
 			return;
 		}
@@ -1068,7 +1147,7 @@ function triggerChange(tableRe, table, form) {
 
 		document.body.classList.remove('moving');
 
-		// The mouse up is followed by a click, which must not open the table name link after dragging.
+		// The release is followed by a click, which must not open the table name link after dragging.
 		const cancelClick = event2 => {
 			event2.preventDefault();
 			event2.stopPropagation();
@@ -1081,8 +1160,8 @@ function triggerChange(tableRe, table, form) {
 		void schema.offsetHeight;
 
 		// The position is stored rounded to whole ems, so the box snaps to the same place the page is rendered with.
-		const left = Math.round((event.clientX - x) / pixPerEm);
-		const top = Math.round((event.clientY - y) / pixPerEm);
+		const left = Math.round((clientX - x) / pixPerEm);
+		const top = Math.round((clientY - y) / pixPerEm);
 
 		moveBox(box, left, top);
 		setTimeout(() => schema.classList.remove('snapping'), 100); // The same duration is in the stylesheet.
