@@ -66,7 +66,7 @@ if (!(DB != "" ?
 			echo "<table class='checkable'>\n";
 
 			echo "<thead><tr>"
-				. (support("database") ? "<td>" : "")
+				. (support("database") ? "<th>" : "")
 				// The databases are sorted by name by all drivers.
 				. "<th aria-sort='ascending'>" . lang('Database') . (get_session("dbs") !== null ? " - <a href='" . h(ME) . "refresh=1'>" . lang('Refresh') . "</a>" : "")
 				. "<td>" . lang('Collation')
@@ -83,7 +83,7 @@ if (!(DB != "" ?
 			foreach ($databases as $db => $tables) {
 				$root = h(ME) . "db=" . urlencode($db);
 				$id = h("Db-" . $db);
-				echo "<tr>" . (support("database") ? "<td class='actions'>" . checkbox("db[]", $db, in_array($db, (array) $_POST["db"]), "", "", "", $id) : "");
+				echo "<tr>" . (support("database") ? "<th class='actions'>" . checkbox("db[]", $db, in_array($db, (array) $_POST["db"]), "", "", "", $id) : "");
 				echo "<th><a href='$root' id='$id'>" . h($db) . "</a>";
 				$collation = h(db_collation($db, $all_collations));
 				echo "<td>" . (support("database") ? "<a href='$root" . ($scheme ? "&amp;ns=" : "") . "&amp;database=' title='" . lang('Alter database') . "'>$collation</a>" : $collation);

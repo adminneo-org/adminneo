@@ -391,7 +391,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 
 	echo "<thead><tr>\n";
 	if (support("move_col")) {
-		echo "<td class='jsonly'></td>";
+		echo "<th class='jsonly'></th>";
 	}
 	if ($type == "PROCEDURE") {
 		echo "<td></td>";
@@ -437,7 +437,7 @@ function edit_fields(array $fields, array $collations, $type = "TABLE", $foreign
 		echo "<tr", ($display ? "" : " hidden"), ">\n";
 
 		if (support("move_col")) {
-			echo "<td class='handle jsonly'>", icon_solo("handle"), "</td>";
+			echo "<th class='handle jsonly'>", icon_solo("handle"), "</td>";
 		}
 		if ($type == "PROCEDURE") {
 			echo "<td>", html_select("fields[$i][inout]", Driver::get()->getInOut(), $field["inout"]), "</td>\n";
