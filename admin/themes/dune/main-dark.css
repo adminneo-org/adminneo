@@ -1,0 +1,33 @@
+:root {
+	--body-bg: hsl(38 60% 7%);
+	--body-text: hsl(38 20% 85%);
+	--body-icon: hsl(38 20% 80%);
+
+	--logo-text: hsl(38 15% 50%);
+	--panel-bg: hsl(38 40% 12%);
+	--panel-border: hsl(38 40% 22%);
+	--list-hover: hsl(38 60% 70% / 12%);
+	--schema-bg: hsl(38 40% 16% / 75%);
+
+	--input-border: hsl(38 20% 40%);
+
+	--table-header-bg: hsl(38 40% 12%);
+	--table-border: hsl(38 40% 22%);
+	--table-row-border: hsl(38 20% 20%);
+}
+
+h1 {
+	color: hsl(38 22% 78%);
+}
+
+h2 {
+	color: hsl(38 20% 74%);
+}
+
+th {
+	background:hsl(38 50% 9%);
+}
+
+thead th, thead td {
+	color: hsl(38 22% 78%);
+}

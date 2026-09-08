@@ -1,0 +1,53 @@
+:root {
+	--headline-font-family: "Trebuchet MS", "Source Sans 3", "Noto Sans", "DejaVu Sans", sans-serif;
+
+	--content-padding-h: 10px;
+	--content-padding-v: 5px;
+
+	--body-bg: hsl(38 64% 99%);
+	--body-text: #111;
+	--body-icon: #555;
+
+	--logo-text: hsl(38 10% 60%);
+	--panel-bg: hsl(38 50% 96%);
+	--panel-border: hsl(38 30% 87%);
+	--list-hover: hsl(38 60% 40% / 7%);
+	--schema-bg: #fff;
+
+	--input-border: hsl(38 20% 80%);
+
+	--table-header-bg: hsl(38 50% 96%);
+	--table-border: hsl(38 30% 87%);
+	--table-row-border: hsl(38 24% 91%);
+}
+
+h1 {
+	font-family: var(--headline-font-family);
+	font-size-adjust: ex-height from-font;
+	font-weight: bold;
+	color: hsl(38 15% 30%);
+}
+
+h2 {
+	font-family: var(--headline-font-family);
+	font-size-adjust: ex-height from-font;
+	font-weight: bold;
+	color: hsl(38 15% 35%);
+}
+
+th {
+	background: hsl(38 55% 98%);
+}
+
+thead th, thead td {
+	font-family: var(--headline-font-family);
+	font-size-adjust: ex-height from-font;
+	font-weight: bold;
+	color: hsl(38 15% 30%);
+}
+
+@media screen and (min-width: 1024px) {
+	h1 {
+		margin-bottom: 25px;
+	}
+}
