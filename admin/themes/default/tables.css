@@ -192,7 +192,6 @@ th:hover .column {
 	background: var(--body-bg);
 	overflow-x: auto;
 	border-top: 1px solid transparent;
-	transition: border-color .2s ease-in;
 }
 
 .table-footer.sticky {

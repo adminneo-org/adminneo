@@ -153,7 +153,6 @@
 	overflow-y: auto;
 	margin-top: 10px;
 	border-top: 1px solid transparent;
-	transition: border-color .2s ease-in;
 }
 
 #tables.scrolled {

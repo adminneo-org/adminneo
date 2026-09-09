@@ -537,6 +537,27 @@ function scrollToActiveTable(navigationPanel, tablesList) {
 }
 
 /**
+ * Toggles a class changing the border of an element, applying the very first state instantly.
+ *
+ * The initial state is computed after the page has been rendered, so the transition must be enabled
+ * only once the browser has applied that state, otherwise it animates right after the page load.
+ *
+ * @param {HTMLElement} element
+ * @param {string} className Class to toggle.
+ * @param {boolean} state
+ */
+function toggleClassWithAnimatedBorder(element, className, state) {
+	element.classList.toggle(className, state);
+
+	if (!element.classList.contains('animated-border')) {
+		// Forces a style recalculation, otherwise the transition enabled below would run on the state applied above.
+		void element.offsetHeight;
+
+		element.classList.add('animated-border');
+	}
+}
+
+/**
  * Displays a separator line at the top of the tables list while the list is scrolled.
  *
  * @param {HTMLElement} tablesList Tables list element.
@@ -551,7 +572,7 @@ function initTablesListSeparator(tablesList) {
 
 	const observer = new IntersectionObserver(() => {
 		// The observer only triggers the check, the scroll position itself is authoritative.
-		tablesList.classList.toggle('scrolled', tablesList.scrollTop > 1);
+		toggleClassWithAnimatedBorder(tablesList, 'scrolled', tablesList.scrollTop > 1);
 	}, { root: tablesList });
 
 	observer.observe(marker);
@@ -1422,7 +1443,7 @@ function initTableFooter() {
 		const entry = entries[0];
 		// Note: entry.isIntersecting does not work well on mobile Safari so we are comparing bottom positions.
 		// On the other hand, bottom positions are not correctly calculated on Firefox.
-		footer.classList.toggle("sticky", entry.isIntersecting || entry.boundingClientRect.bottom < entry.rootBounds.bottom);
+		toggleClassWithAnimatedBorder(footer, "sticky", entry.isIntersecting || entry.boundingClientRect.bottom < entry.rootBounds.bottom);
 	}, options);
 
 	observer.observe(footer);

@@ -102,6 +102,10 @@ ol, ul {
 	display: block;
 }
 
+.animated-border {
+	transition: border-color .2s ease-in;
+}
+
 .js .hidden, .nojs .jsonly {
 	display: none;
 }
