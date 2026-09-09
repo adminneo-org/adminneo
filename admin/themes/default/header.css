@@ -41,7 +41,8 @@
 }
 
 @media screen and (max-width: 1023px) {
-	.header {
+	#content .header {
+		margin-inline-start: 0;
 		padding-inline-start: 2rem;
 	}
 

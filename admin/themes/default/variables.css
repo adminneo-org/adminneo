@@ -7,6 +7,8 @@
 	--font-size-mono: 13; /* px */
 	--line-height: 1.4;
 	--menu-width: 13rem;
+	--content-padding-h: 0px;
+	--content-padding-v: 0px;
 
 	--body-bg: #fff;
 	--body-text: #333;

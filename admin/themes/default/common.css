@@ -195,8 +195,14 @@ ol, ul {
 #content {
 	position: relative;
 	margin-inline-start: var(--menu-width);
-	padding-top: 2rem;
+	padding-top: calc(2rem + var(--content-padding-v));
 	padding-bottom: 20px;
+	padding-inline-start: var(--content-padding-h);
+}
+
+#content .header, #content .table-footer {
+	margin-inline-start: calc(var(--content-padding-h) * -1);
+	padding-inline-start: var(--content-padding-h);
 }
 
 #help {
@@ -213,7 +219,9 @@ ol, ul {
 
 @media screen and (max-width: 1023px) {
 	#content {
+		padding-top: 2rem;
 		margin-inline-start: 0;
+		padding-inline-start: 0;
 	}
 
 	#help {
