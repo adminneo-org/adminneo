@@ -13,14 +13,14 @@
 	--body-bg: #fff;
 	--body-text: #333;
 	--body-icon: #666;
-	--note-text: rgba(0, 0, 0, 40%);
+	--note-text: rgb(0 0 0 / 40%);
 
 	--logo-text: #a0a0a0;
 	--panel-bg: #fcfcfc;
 	--panel-border: #e0e0e0;
 	--header-text: #000;
-	--list-hover: hsla(220, 0%, 20%, 4%);
-	--schema-bg: rgba(251, 251, 251, 85%);
+	--list-hover: hsl(none 0% 20% / 4%);
+	--schema-bg: hsl(none 0% 98% / 85%);
 
 	--input-bg: #fff;
 	--input-text: #000;
@@ -37,19 +37,19 @@
 	--table-border: #e0e0e0;
 	--table-row-border: #ebebeb;
 
-	--code-bg: hsl(220, 80%, 97%);
-	--code-border: hsl(220, 80%, 92%);
+	--code-bg: hsl(220 80% 97%);
+	--code-border: hsl(220 80% 92%);
 
-	--message-ok-bg: hsl(120, 70%, 95%);
-	--message-ok-border: hsl(120, 40%, 87%);
-	--message-ok-text: hsl(120, 100%, 20%);
+	--message-ok-bg: hsl(120 70% 95%);
+	--message-ok-border: hsl(120 40% 87%);
+	--message-ok-text: hsl(120 100% 20%);
 
-	--message-error-bg: hsl(0, 65%, 95%);
-	--message-error-border: hsl(0, 65%, 90%);
-	--message-error-text: hsl(0, 100%, 30%);
+	--message-error-bg: hsl(0 68% 95%);
+	--message-error-border: hsl(0 65% 90%);
+	--message-error-text: hsl(0 100% 30%);
 
-	--warning-text: hsl(24, 100%, 50%);
-	--version-text: hsl(24, 100%, 50%);
+	--warning-text: hsl(24 100% 50%);
+	--version-text: hsl(24 100% 50%);
 
 	--input-border-radius: 3px;
 	--fieldset-border-radius: 3px;

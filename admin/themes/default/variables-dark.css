@@ -4,15 +4,14 @@
 	--body-bg: #111;
 	--body-text: #ccc;
 	--body-icon: #ccc;
-	--note-text: #666;
-	--note-text: rgba(255, 255, 255, 40%);
+	--note-text: rgb(255 255 255 / 0.4);
 
 	--logo-text: #888;
 	--panel-bg: #222;
 	--panel-border: #444;
 	--header-text: #eee;
-	--list-hover: hsla(215, 0%, 70%, 15%);
-	--schema-bg: rgba(40, 40, 40, 75%);
+	--list-hover: hsl(215 0% 70% / 15%);
+	--schema-bg: rgb(40 40 40 / 75%);
 
 	--input-bg: #111;
 	--input-text: #eee;
@@ -29,19 +28,19 @@
 	--table-border: #444;
 	--table-row-border: #333;
 
-	--code-bg: hsl(215, 40%, 20%);
-	--code-border: hsl(215, 40%, 35%);
+	--code-bg: hsl(215 40% 20%);
+	--code-border: hsl(215 40% 35%);
 
-	--message-ok-bg: hsl(120, 20%, 20%);
-	--message-ok-border: hsl(120, 20%, 32%);
-	--message-ok-text: hsl(120, 55%, 95%);
+	--message-ok-bg: hsl(120 20% 20%);
+	--message-ok-border: hsl(120 20% 32%);
+	--message-ok-text: hsl(120 55% 95%);
 
-	--message-error-bg: hsl(0, 30%, 22%);
-	--message-error-border: hsl(0, 30%, 34%);
-	--message-error-text: hsl(0, 55%, 95%);
+	--message-error-bg: hsl(0 30% 22%);
+	--message-error-border: hsl(0 30% 34%);
+	--message-error-text: hsl(0 55% 95%);
 
-	--warning-text: hsl(24, 70%, 60%);
-	--version-text: hsl(24, 70%, 60%);
+	--warning-text: hsl(24 70% 60%);
+	--version-text: hsl(24 70% 60%);
 }
 
 @media screen and (max-resolution: 1dppx) {
