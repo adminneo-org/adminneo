@@ -419,6 +419,7 @@ return [
 	// Settings
 	'Settings' => 'Nastavenia',
 	'Default' => 'Predvolené',
+	'Theme' => 'Motív',
 	'Color scheme' => 'Farebná schéma',
 	'By system' => 'Podľa systému',
 	'Light' => 'Svetlá',

@@ -70,7 +70,7 @@ function page_header(string $title, $breadcrumb = []): void
 		echo "'>\n";
 	}
 
-	$theme = Admin::get()->getConfig()->getTheme();
+	$theme = Admin::get()->getSettings()->getTheme();
 	[$theme, $color_variant] = validate_theme($theme, $color_variant);
 
 	if ($theme != "default") {
@@ -226,6 +226,23 @@ function validate_theme(string $theme, string $color_variant): array
 function get_available_themes(): array
 {
 	return find_available_themes(); // !compile: available themes
+}
+
+/**
+ * Returns titles of the available themes.
+ *
+ * @return string[]
+ */
+function get_theme_titles(): array
+{
+	$themes = get_available_themes();
+
+	$titles = [];
+	foreach (array_keys($themes) as $theme) {
+		$titles[$theme] = ($theme == "default" ? "Neo" : ucwords(str_replace("-", " ", $theme)));
+	}
+
+	return $titles;
 }
 
 /**

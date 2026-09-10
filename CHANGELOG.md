@@ -7,6 +7,7 @@ AdminNeo 5.8.0
 ### Changes
 
 - CSS: Add new Dune theme
+- Settings: Add a theme selector
 - Scroll the navigation panel to the selected table when it is out of view
 - Indicate a scrolled table list in the navigation panel by a separator line
 - Alter table, Privileges: Do not print a success message if nothing was changed (by @vrana)

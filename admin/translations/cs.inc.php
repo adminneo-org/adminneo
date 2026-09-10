@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Nastavení',
 	'Default' => 'Výchozí',
+	'Theme' => 'Motiv',
 	'Color scheme' => 'Barevné schéma',
 	'By system' => 'Dle systému',
 	'Light' => 'Světlé',

@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'Xx',
 	'Default' => 'Xx',
+	'Theme' => 'Xx',
 	'Color scheme' => 'Xx',
 	'By system' => 'Xx',
 	'Light' => 'Xx',

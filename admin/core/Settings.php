@@ -80,6 +80,11 @@ class Settings
 		cookie(self::CookieName, http_build_query($this->params), 7776000);
 	}
 
+	public function getTheme(): string
+	{
+		return $this->getParameter("theme") ?? $this->config->getTheme();
+	}
+
 	public function getColorScheme(): ?string
 	{
 		return $this->getParameter("colorScheme");
