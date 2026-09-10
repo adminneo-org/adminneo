@@ -12,12 +12,10 @@ function find_available_themes(): array
 	static $themes = [];
 
 	if (!$themes) {
-		$paths = glob(__DIR__ . "/../themes/*");
-
+		$paths = glob(__DIR__ . "/../themes/*/{blue,green,orange,purple,red}", GLOB_BRACE);
 		foreach ($paths as $path) {
-			if (preg_match('~/([^/]+)-(blue|green|orange|purple|red)$~', $path, $matches)) {
-				$themes[$matches[1]][$matches[2]] = true;
-			}
+			preg_match('~/([^/]+)/([^/]+)$~', $path, $matches);
+			$themes[$matches[1]][$matches[2]] = true;
 		}
 	}
 

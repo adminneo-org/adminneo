@@ -46,7 +46,7 @@ function page_header(string $title, $breadcrumb = []): void
 
 	echo "<link rel='stylesheet' href='", link_files("default-$color_variant.css", [
 		"../admin/themes/default/variables.css",
-		"../admin/themes/default-$color_variant/variables.css",
+		"../admin/themes/default/$color_variant/variables.css",
 		"../admin/themes/default/common.css",
 		"../admin/themes/default/forms.css",
 		"../admin/themes/default/code.css",
@@ -65,7 +65,7 @@ function page_header(string $title, $breadcrumb = []): void
 		echo "<link rel='stylesheet' " . (!Admin::get()->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
 		echo link_files("default-$color_variant-dark.css", [
 			"../admin/themes/default/variables-dark.css",
-			"../admin/themes/default-$color_variant/variables-dark.css",
+			"../admin/themes/default/$color_variant/variables-dark.css",
 		]);
 		echo "'>\n";
 	}
@@ -76,14 +76,14 @@ function page_header(string $title, $breadcrumb = []): void
 	if ($theme != "default") {
 		echo "<link rel='stylesheet' href='", link_files("$theme-$color_variant.css", [
 			"../admin/themes/$theme/main.css",
-			"../admin/themes/$theme-$color_variant/variables.css",
+			"../admin/themes/$theme/$color_variant/variables.css",
 		]), "'>\n";
 
 		if (!Admin::get()->isLightModeForced()) {
 			echo "<link rel='stylesheet' " . (!Admin::get()->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
 			echo link_files("$theme-$color_variant-dark.css", [
 				"../admin/themes/$theme/main-dark.css",
-				"../admin/themes/$theme-$color_variant/variables-dark.css",
+				"../admin/themes/$theme/$color_variant/variables-dark.css",
 			]);
 			echo "'>\n";
 		}
