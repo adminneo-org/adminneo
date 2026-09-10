@@ -408,6 +408,7 @@ return [
 	// Settings
 	'Settings' => 'सेटिंग्स', // by Claude Fable 5.1
 	'Default' => 'डिफ़ॉल्ट', // by Claude Fable 5.1
+	'Theme' => 'थीम', // by Claude Fable 5.1
 	'Color scheme' => 'रंग योजना', // by Claude Fable 5.1
 	'By system' => 'सिस्टम के अनुसार', // by Claude Fable 5.1
 	'Light' => 'हल्का', // by Claude Fable 5.1

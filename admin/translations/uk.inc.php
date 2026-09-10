@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Налаштування', // by Claude Fable 5.1
 	'Default' => 'За замовчуванням', // by Claude Fable 5.1
+	'Theme' => 'Тема', // by Claude Fable 5.1
 	'Color scheme' => 'Кольорова схема', // by Claude Fable 5.1
 	'By system' => 'Як у системі', // by Claude Fable 5.1
 	'Light' => 'Світла', // by Claude Fable 5.1

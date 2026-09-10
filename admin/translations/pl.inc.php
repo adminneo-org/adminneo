@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Ustawienia',
 	'Default' => 'Domyślne',
+	'Theme' => 'Motyw', // by Claude Fable 5.1
 	'Color scheme' => 'Motyw kolorów',
 	'By system' => 'Według systemu',
 	'Light' => 'Jasny',

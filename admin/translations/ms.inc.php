@@ -390,6 +390,7 @@ return [
 	// Settings
 	'Settings' => 'Tetapan', // by Claude Fable 5.1
 	'Default' => 'Lalai', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Skema warna', // by Claude Fable 5.1
 	'By system' => 'Mengikut sistem', // by Claude Fable 5.1
 	'Light' => 'Cerah', // by Claude Fable 5.1

@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => '설정', // by Claude Fable 5.1
 	'Default' => '기본값', // by Claude Fable 5.1
+	'Theme' => '테마', // by Claude Fable 5.1
 	'Color scheme' => '색상 테마', // by Claude Fable 5.1
 	'By system' => '시스템 설정에 따름', // by Claude Fable 5.1
 	'Light' => '밝게', // by Claude Fable 5.1

@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Setări', // by Claude Fable 5.1
 	'Default' => 'Implicit', // by Claude Fable 5.1
+	'Theme' => 'Temă', // by Claude Fable 5.1
 	'Color scheme' => 'Schema de culori', // by Claude Fable 5.1
 	'By system' => 'După sistem', // by Claude Fable 5.1
 	'Light' => 'Luminoasă', // by Claude Fable 5.1

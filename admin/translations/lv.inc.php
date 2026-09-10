@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Iestatījumi', // by Claude Fable 5.1
 	'Default' => 'Noklusētais', // by Claude Fable 5.1
+	'Theme' => 'Motīvs', // by Claude Fable 5.1
 	'Color scheme' => 'Krāsu shēma', // by Claude Fable 5.1
 	'By system' => 'Pēc sistēmas', // by Claude Fable 5.1
 	'Light' => 'Gaišā', // by Claude Fable 5.1

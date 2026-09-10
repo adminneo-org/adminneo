@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'Cài đặt',
 	'Default' => 'Mặc định',
+	'Theme' => 'Chủ đề', // by Claude Fable 5.1
 	'Color scheme' => 'Giao diện màu sắc',
 	'By system' => 'Theo hệ thống',
 	'Light' => 'Sáng',

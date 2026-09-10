@@ -393,6 +393,7 @@ return [
 	// Settings
 	'Settings' => 'الإعدادات', // by Claude Fable 5.1
 	'Default' => 'افتراضي', // by Claude Fable 5.1
+	'Theme' => 'السمة', // by Claude Fable 5.1
 	'Color scheme' => 'نظام الألوان', // by Claude Fable 5.1
 	'By system' => 'حسب النظام', // by Claude Fable 5.1
 	'Light' => 'فاتح', // by Claude Fable 5.1

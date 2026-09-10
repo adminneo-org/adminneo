@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => '設定', // by Claude Fable 5.1
 	'Default' => '既定', // by Claude Fable 5.1
+	'Theme' => 'テーマ', // by Claude Fable 5.1
 	'Color scheme' => '配色', // by Claude Fable 5.1
 	'By system' => 'システムに従う', // by Claude Fable 5.1
 	'Light' => 'ライト', // by Claude Fable 5.1

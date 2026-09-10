@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Nustatymai', // by Claude Fable 5.1
 	'Default' => 'Numatytasis', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Spalvų schema', // by Claude Fable 5.1
 	'By system' => 'Pagal sistemą', // by Claude Fable 5.1
 	'Light' => 'Šviesi', // by Claude Fable 5.1

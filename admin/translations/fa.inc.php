@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'تنظیمات', // by Claude Fable 5.1
 	'Default' => 'پیش فرض', // by Claude Fable 5.1
+	'Theme' => 'پوسته', // by Claude Fable 5.1
 	'Color scheme' => 'طرح رنگ', // by Claude Fable 5.1
 	'By system' => 'بر اساس سیستم', // by Claude Fable 5.1
 	'Light' => 'روشن', // by Claude Fable 5.1

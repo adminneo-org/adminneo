@@ -411,6 +411,7 @@ return [
 	// Settings
 	'Settings' => 'Einstellungen',
 	'Default' => 'Standard',
+	'Theme' => 'Design', // by Claude Fable 5.1
 	'Color scheme' => 'Farbschema',
 	'By system' => 'Systembasiert',
 	'Light' => 'Hell',

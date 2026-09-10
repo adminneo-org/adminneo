@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'การตั้งค่า', // by Claude Fable 5.1
 	'Default' => 'ค่าเริ่มต้น', // by Claude Fable 5.1
+	'Theme' => 'ธีม', // by Claude Fable 5.1
 	'Color scheme' => 'ชุดสี', // by Claude Fable 5.1
 	'By system' => 'ตามระบบ', // by Claude Fable 5.1
 	'Light' => 'สว่าง', // by Claude Fable 5.1

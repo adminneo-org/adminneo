@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'Pengaturan', // by Claude Fable 5.1
 	'Default' => 'Bawaan', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Skema warna', // by Claude Fable 5.1
 	'By system' => 'Menurut sistem', // by Claude Fable 5.1
 	'Light' => 'Terang', // by Claude Fable 5.1

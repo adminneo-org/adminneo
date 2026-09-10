@@ -414,6 +414,7 @@ return [
 	// Settings
 	'Settings' => 'Настройки', // by Claude Fable 5.1
 	'Default' => 'По подразбиране', // by Claude Fable 5.1
+	'Theme' => 'Тема', // by Claude Fable 5.1
 	'Color scheme' => 'Цветова схема', // by Claude Fable 5.1
 	'By system' => 'Според системата', // by Claude Fable 5.1
 	'Light' => 'Светла', // by Claude Fable 5.1

@@ -402,6 +402,7 @@ return [
 	// Settings
 	'Settings' => 'Asetukset', // by Claude Fable 5.1
 	'Default' => 'Oletus', // by Claude Fable 5.1
+	'Theme' => 'Teema', // by Claude Fable 5.1
 	'Color scheme' => 'Väriteema', // by Claude Fable 5.1
 	'By system' => 'Järjestelmän mukaan', // by Claude Fable 5.1
 	'Light' => 'Vaalea', // by Claude Fable 5.1

@@ -423,6 +423,7 @@ return [
 	// Settings
 	'Settings' => 'Postavke', // by Claude Fable 5.1
 	'Default' => 'Zadano', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Shema boja', // by Claude Fable 5.1
 	'By system' => 'Prema sustavu', // by Claude Fable 5.1
 	'Light' => 'Svijetla', // by Claude Fable 5.1

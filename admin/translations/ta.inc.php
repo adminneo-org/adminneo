@@ -414,6 +414,7 @@ return [
 	// Settings
 	'Settings' => 'அமைப்புக‌ள்', // by Claude Fable 5.1
 	'Default' => 'இய‌ல்பு', // by Claude Fable 5.1
+	'Theme' => 'தீம்', // by Claude Fable 5.1
 	'Color scheme' => 'வ‌ண்ண‌ அமைப்பு', // by Claude Fable 5.1
 	'By system' => 'சிஸ்ட‌ம் ப‌டி', // by Claude Fable 5.1
 	'Light' => 'வெளிர்', // by Claude Fable 5.1

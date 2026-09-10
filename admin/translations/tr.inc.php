@@ -405,6 +405,7 @@ return [
 	// Settings
 	'Settings' => 'Ayarlar', // by Claude Fable 5.1
 	'Default' => 'Varsayılan', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Renk şeması', // by Claude Fable 5.1
 	'By system' => 'Sisteme göre', // by Claude Fable 5.1
 	'Light' => 'Açık', // by Claude Fable 5.1

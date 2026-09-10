@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'პარამეტრები', // by Claude Fable 5.1
 	'Default' => 'ნაგულისხმევი', // by Claude Fable 5.1
+	'Theme' => 'თემა', // by Claude Fable 5.1
 	'Color scheme' => 'ფერთა სქემა', // by Claude Fable 5.1
 	'By system' => 'სისტემის მიხედვით', // by Claude Fable 5.1
 	'Light' => 'ღია', // by Claude Fable 5.1

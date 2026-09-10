@@ -414,6 +414,7 @@ return [
 	// Settings
 	'Settings' => 'Ρυθμίσεις', // by Claude Fable 5.1
 	'Default' => 'Προεπιλογή', // by Claude Fable 5.1
+	'Theme' => 'Θέμα', // by Claude Fable 5.1
 	'Color scheme' => 'Συνδυασμός χρωμάτων', // by Claude Fable 5.1
 	'By system' => 'Κατά το σύστημα', // by Claude Fable 5.1
 	'Light' => 'Φωτεινό', // by Claude Fable 5.1

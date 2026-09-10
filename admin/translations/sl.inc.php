@@ -432,6 +432,7 @@ return [
 	// Settings
 	'Settings' => 'Nastavitve', // by Claude Fable 5.1
 	'Default' => 'Privzeto', // by Claude Fable 5.1
+	'Theme' => 'Tema', // by Claude Fable 5.1
 	'Color scheme' => 'Barvna shema', // by Claude Fable 5.1
 	'By system' => 'Po sistemu', // by Claude Fable 5.1
 	'Light' => 'Svetla', // by Claude Fable 5.1

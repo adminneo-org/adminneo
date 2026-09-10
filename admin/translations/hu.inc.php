@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => 'Beállítások', // by Claude Fable 5.1
 	'Default' => 'Alapértelmezett', // by Claude Fable 5.1
+	'Theme' => 'Téma', // by Claude Fable 5.1
 	'Color scheme' => 'Színséma', // by Claude Fable 5.1
 	'By system' => 'Rendszer szerint', // by Claude Fable 5.1
 	'Light' => 'Világos', // by Claude Fable 5.1

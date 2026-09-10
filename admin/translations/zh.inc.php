@@ -387,6 +387,7 @@ return [
 	// Settings
 	'Settings' => '设置', // by Claude Fable 5.1
 	'Default' => '默认', // by Claude Fable 5.1
+	'Theme' => '主题', // by Claude Fable 5.1
 	'Color scheme' => '配色方案', // by Claude Fable 5.1
 	'By system' => '跟随系统', // by Claude Fable 5.1
 	'Light' => '浅色', // by Claude Fable 5.1

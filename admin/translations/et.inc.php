@@ -396,6 +396,7 @@ return [
 	// Settings
 	'Settings' => 'Seaded', // by Claude Fable 5.1
 	'Default' => 'Vaikimisi', // by Claude Fable 5.1
+	'Theme' => 'Teema', // by Claude Fable 5.1
 	'Color scheme' => 'Värviskeem', // by Claude Fable 5.1
 	'By system' => 'Süsteemi järgi', // by Claude Fable 5.1
 	'Light' => 'Hele', // by Claude Fable 5.1
