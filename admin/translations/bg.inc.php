@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Изход',
 	'Logged as: %s' => 'Текущ потребител: %s',
 	'Logout successful.' => 'Излизането е успешно.',
-	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5.1
+	'hostname[:port] or :socket' => 'hostname[:port] или :socket',
 	'Invalid server or credentials.' => 'Невалиден сървър или данни за вход.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'Има интервал във въведената парола, което може да е причината.', // by Claude Fable 5.1
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не поддържа достъп до база данни без парола, <a href="https://www.adminneo.org/password"%s>повече информация</a>.', // by Claude Fable 5.1
@@ -38,12 +38,12 @@ return [
 	'Invalid permanent login, please login again.' => 'Невалидно запаметено влизане, моля, влезте отново.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Невалиден шифроващ ключ. Попълнете и изпратете формуляра отново.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ако не сте изпратили тази заявка през AdminNeo, затворете тази страница.',
-	'The action will be performed after successful login with the same credentials.' => 'Действието ще бъде извършено след успешно влизане със същите данни.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Действието ще бъде извършено след успешно влизане със същите данни.',
 
 	// Connection
 	'No extension' => 'Няма разширение',
 	'None of the supported PHP extensions (%s) are available.' => 'Никое от поддържаните PHP разширения (%s) не е налично.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Свързването към привилегировани портове не е разрешено.', // by Claude Fable 5.1
+	'Connecting to privileged ports is not allowed.' => 'Свързването към привилегировани портове не е разрешено.',
 	'Session support must be enabled.' => 'Поддръжката на сесии трябва да е разрешена.',
 	'Session expired, please login again.' => 'Сесията е изтекла; моля, влезте отново.',
 	'%s version: %s through PHP extension %s' => '%s версия: %s през PHP разширение %s',
@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Език',
 
-	'Menu' => 'Меню', // by Claude Fable 5.1
+	'Menu' => 'Меню',
 	'Home' => 'Начало', // by Claude Fable 5.1
 	'Refresh' => 'Обновяване',
 	'Info' => 'Информация', // by Claude Fable 5.1
@@ -77,7 +77,7 @@ return [
 
 	// Structure
 	'Column' => 'Колона',
-	'Columns' => 'Колони', // by Claude Fable 5.1
+	'Columns' => 'Колони',
 	'Routine' => 'Процедура',
 	'Grant' => 'Осигуряване',
 	'Revoke' => 'Отнемане',
@@ -95,9 +95,9 @@ return [
 	],
 	'No commands to execute.' => 'Няма команди за изпълнение.',
 	'Error in query' => 'Грешка в заявката',
-	'Unknown error.' => 'Неизвестна грешка.', // by Claude Fable 5.1
-	'Warnings' => 'Предупреждения', // by Claude Fable 5.1
-	'%s queries are not supported.' => 'Заявките %s не се поддържат.', // by Claude Fable 5.1
+	'Unknown error.' => 'Неизвестна грешка.',
+	'Warnings' => 'Предупреждения',
+	'%s queries are not supported.' => 'Заявките %s не се поддържат.',
 	'Execute' => 'Изпълнение',
 	'Stop on error' => 'Спиране при грешка',
 	'Show only errors' => 'Показване само на грешките',
@@ -139,7 +139,7 @@ return [
 	// Databases
 	'Database' => 'База данни',
 	'database' => 'база данни', // by Claude Fable 5.1
-	'DB' => 'БД', // by Claude Fable 5.1
+	'DB' => 'БД',
 	'Use' => 'Избор',
 	'Invalid database.' => 'Невалидна база данни.',
 	'Alter database' => 'Промяна на база данни',
@@ -170,7 +170,7 @@ return [
 	'Invalid schema.' => 'Невалидна схема.',
 
 	// Table list
-	'All' => 'Всички', // checkbox selecting all tables and views // by Claude Fable 5.1
+	'All' => 'Всички', // checkbox selecting all tables and views
 	'Engine' => 'Система',
 	'engine' => 'система',
 	'Collation' => 'Кодировка',
@@ -193,7 +193,7 @@ return [
 	'Tables have been moved.' => 'Таблиците бяха преместени.',
 	'Copy' => 'Копиране',
 	'Tables have been copied.' => 'Таблиците бяха копирани.',
-	'overwrite' => 'презаписване', // by Claude Fable 5.1
+	'overwrite' => 'презаписване',
 
 	// Tables
 	'Tables' => 'Таблици',
@@ -218,7 +218,7 @@ return [
 	'Comment' => 'Коментар',
 	'Default value' => 'Стойност по подразбиране',
 	'Drop' => 'Премахване',
-	'Drop %s?' => 'Премахване на %s?', // by Claude Fable 5.1
+	'Drop %s?' => 'Премахване на %s?',
 	'Are you sure?' => 'Сигурни ли сте?',
 	'Size' => 'Големина',
 	'Compute' => 'Изчисляване',
@@ -252,9 +252,9 @@ return [
 	'Add next' => 'Добавяне на следващ',
 	'Index Type' => 'Вид на индекса',
 	'length' => 'дължина',
-	'operator class' => 'клас оператори', // by Claude Fable 5.1
-	'Algorithm' => 'Алгоритъм', // by Claude Fable 5.1
-	'Condition' => 'Условие', // by Claude Fable 5.1
+	'operator class' => 'клас оператори',
+	'Algorithm' => 'Алгоритъм',
+	'Condition' => 'Условие',
 
 	// Foreign keys
 	'Foreign keys' => 'Препратки',
@@ -267,8 +267,8 @@ return [
 	'Target' => 'Цел',
 	'Add column' => 'Добавяне на колона',
 	'Alter' => 'Промяна',
-	'Alter foreign key' => 'Промяна на препратка', // by Claude Fable 5.1
-	'Create foreign key' => 'Създаване на препратка', // by Claude Fable 5.1
+	'Alter foreign key' => 'Промяна на препратка',
+	'Create foreign key' => 'Създаване на препратка',
 	'ON DELETE' => 'При изтриване',
 	'ON UPDATE' => 'При промяна',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Колоните източник и цел трябва да са от еднакъв вид, трябва да има индекс на колоните приемник и да има въведени данни.',
@@ -314,7 +314,7 @@ return [
 	'Alter sequence' => 'Промяна на последователност',
 
 	// User-defined types (PostgreSQL)
-	'User types' => 'Потребителски типове', // by Claude Fable 5.1
+	'User types' => 'Потребителски типове',
 	'Create type' => 'Създаване на вид',
 	'Type has been dropped.' => 'Вида беше пермахнат.',
 	'Type has been created.' => 'Вида беше създаден.',
@@ -329,12 +329,12 @@ return [
 	'Create trigger' => 'Създаване на тригер',
 
 	// Table check constraints
-	'Checks' => 'Проверки', // by Claude Fable 5.1
-	'Create check' => 'Създаване на проверка', // by Claude Fable 5.1
-	'Alter check' => 'Промяна на проверка', // by Claude Fable 5.1
-	'Check has been created.' => 'Проверката беше създадена.', // by Claude Fable 5.1
-	'Check has been altered.' => 'Проверката беше променена.', // by Claude Fable 5.1
-	'Check has been dropped.' => 'Проверката беше премахната.', // by Claude Fable 5.1
+	'Checks' => 'Проверки',
+	'Create check' => 'Създаване на проверка',
+	'Alter check' => 'Промяна на проверка',
+	'Check has been created.' => 'Проверката беше създадена.',
+	'Check has been altered.' => 'Проверката беше променена.',
+	'Check has been dropped.' => 'Проверката беше премахната.',
 
 	// Selection
 	'Select data' => 'Показване на данни',
@@ -352,7 +352,7 @@ return [
 	'Full table scan' => 'Пълно сканиране на таблицата',
 	'Unable to select the table' => 'Неуспешно показване на таблицата',
 	'Search data in tables' => 'Търсене на данни в таблиците',
-	'All rows on this page' => 'Всички редове на тази страница', // by Claude Fable 5.1
+	'All rows on this page' => 'Всички редове на тази страница',
 	'No rows.' => 'Няма редове.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
