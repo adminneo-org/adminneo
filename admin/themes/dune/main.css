@@ -9,14 +9,14 @@
 	--body-icon: #555;
 
 	--logo-text: hsl(38 10% 60%);
-	--panel-bg: hsl(38 50% 96%);
+	--panel-bg: hsl(38 50% 97%);
 	--panel-border: hsl(38 30% 87%);
 	--list-hover: hsl(38 60% 40% / 7%);
 	--schema-bg: #fff;
 
 	--input-border: hsl(38 20% 80%);
 
-	--table-header-bg: hsl(38 50% 96%);
+	--table-header-bg: hsl(38 50% 97%);
 	--table-border: hsl(38 30% 87%);
 	--table-row-border: hsl(38 24% 91%);
 }
