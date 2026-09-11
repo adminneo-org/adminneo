@@ -718,7 +718,7 @@ if (isset($_GET["mongo"])) {
 		return true;
 	}
 
-	function truncate_tables(array $tables, bool $cascade = false): bool
+	function truncate_tables(array $tables): bool
 	{
 		foreach ($tables as $name) {
 			$command = [

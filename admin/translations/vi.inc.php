@@ -171,7 +171,6 @@ return [
 	'Check' => 'Kiểm tra',
 	'Repair' => 'Sửa chữa',
 	'Truncate' => 'Làm rỗng',
-	'Truncate Cascade' => 'Làm rỗng theo tầng', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Bảng đã bị làm rỗng.',
 	'Move to other database' => 'Chuyển tới cơ sở dữ liệu khác',
 	'Move' => 'Chuyển đi',

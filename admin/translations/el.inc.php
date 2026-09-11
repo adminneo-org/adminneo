@@ -186,7 +186,6 @@ return [
 	'Check' => 'Έλεγχος',
 	'Repair' => 'Επιδιόρθωση',
 	'Truncate' => 'Περικοπή',
-	'Truncate Cascade' => 'Αλυσιδωτή περικοπή', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Οι πίνακες περικόπηκαν.',
 	'Move to other database' => 'Μεταφορά σε άλλη Β.Δ.',
 	'Move' => 'Μεταφορά',

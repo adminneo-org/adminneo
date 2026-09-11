@@ -191,7 +191,6 @@ return [
 	'Check' => 'Provjeri',
 	'Repair' => 'Popravi',
 	'Truncate' => 'Isprazni',
-	'Truncate Cascade' => 'Isprazni kaskadno', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabele su ispražnjene.',
 	'Move to other database' => 'Premijesti u drugu bazu podataka',
 	'Move' => 'Premijesti',

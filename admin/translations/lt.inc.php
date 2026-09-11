@@ -191,7 +191,6 @@ return [
 	'Check' => 'Patikrinti',
 	'Repair' => 'Pataisyti',
 	'Truncate' => 'Tuštinti',
-	'Truncate Cascade' => 'Tuštinti kaskadiškai', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Lentelės buvo ištuštintos.',
 	'Move to other database' => 'Perkelti į kitą duomenų bazę',
 	'Move' => 'Perkelti',

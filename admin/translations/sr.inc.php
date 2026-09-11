@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Одјава',
 	'Logged as: %s' => 'Пријави се као: %s',
 	'Logout successful.' => 'Успешна одјава.',
-	'hostname[:port] or :socket' => 'hostname[:port] или :socket', // by Claude Fable 5.1
+	'hostname[:port] or :socket' => 'hostname[:port] или :socket',
 	'Invalid server or credentials.' => 'Неисправан сервер или подаци за пријаву.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'У унетој лозинци постоји размак, што би могао бити узрок.', // by Claude Fable 5.1
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo не подржава приступ бази података без лозинке, <a href="https://www.adminneo.org/password"%s>више информација</a>.', // by Claude Fable 5.1
@@ -39,12 +39,12 @@ return [
 	'Invalid permanent login, please login again.' => 'Неисправна трајна пријава, пријавите се поново.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Неважећи CSRF код. Проследите поново форму.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Ако нисте послали овај захтев из AdminNeo-а, затворите ову страницу.', // by Claude Fable 5.1
-	'The action will be performed after successful login with the same credentials.' => 'Радња ће бити извршена након успешне пријаве са истим подацима.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Радња ће бити извршена након успешне пријаве са истим подацима.',
 
 	// Connection
 	'No extension' => 'Без додатака',
 	'None of the supported PHP extensions (%s) are available.' => 'Ниједан од подржаних PHP додатака (%s) није доступан.', // %s contains the list of the extensions, e.g. 'mysqli, PDO_MySQL'
-	'Connecting to privileged ports is not allowed.' => 'Повезивање на привилеговане портове није дозвољено.', // by Claude Fable 5.1
+	'Connecting to privileged ports is not allowed.' => 'Повезивање на привилеговане портове није дозвољено.',
 	'Session support must be enabled.' => 'Морате омогућити подршку за сесије.',
 	'Session expired, please login again.' => 'Ваша сесија је истекла, пријавите се поново.',
 	'%s version: %s through PHP extension %s' => '%s верзија: %s помоћу PHP додатка је %s',
@@ -52,7 +52,7 @@ return [
 	// Settings
 	'Language' => 'Језик',
 
-	'Menu' => 'Мени', // by Claude Fable 5.1
+	'Menu' => 'Мени',
 	'Home' => 'Почетна', // by Claude Fable 5.1
 	'Refresh' => 'Освежи',
 	'Info' => 'Информације', // by Claude Fable 5.1
@@ -79,7 +79,7 @@ return [
 
 	// Structure
 	'Column' => 'Колона',
-	'Columns' => 'Колоне', // by Claude Fable 5.1
+	'Columns' => 'Колоне',
 	'Routine' => 'Рутина',
 	'Grant' => 'Дозволи',
 	'Revoke' => 'Опозови',
@@ -99,9 +99,9 @@ return [
 	],
 	'No commands to execute.' => 'Без команди за извршавање.',
 	'Error in query' => 'Грешка у упиту',
-	'Unknown error.' => 'Непозната грешка.', // by Claude Fable 5.1
-	'Warnings' => 'Упозорења', // by Claude Fable 5.1
-	'%s queries are not supported.' => '%s упити нису подржани.', // by Claude Fable 5.1
+	'Unknown error.' => 'Непозната грешка.',
+	'Warnings' => 'Упозорења',
+	'%s queries are not supported.' => '%s упити нису подржани.',
 	'Execute' => 'Изврши',
 	'Stop on error' => 'Заустави приликом грешке',
 	'Show only errors' => 'Приказуј само грешке',
@@ -125,8 +125,8 @@ return [
 	'The maximum total size of files is %s. Select smaller files or increase the %s configuration directive.' => 'Највећа укупна величина датотека је %s. Изаберите мање датотеке или повећајте вредност конфигурационе директиве %s.', // by Claude Fable 5.1
 	'Too big POST data. Reduce the data or increase the %s configuration directive.' => 'Превелики POST податак. Морате да смањите податак или повећајте вредност конфигурационе директиве %s.',
 	'You can upload a big SQL file via FTP and import it from server.' => 'Велику SQL датотеку можете послати путем FTP-а и увести је са сервера.', // by Claude Fable 5.1
-	'File must be in UTF-8 encoding.' => 'Датотека мора бити у UTF-8 кодирању.', // by Claude Fable 5.1
-	'You are offline.' => 'Ван мреже сте.', // by Claude Fable 5.1
+	'File must be in UTF-8 encoding.' => 'Датотека мора бити у UTF-8 кодирању.',
+	'You are offline.' => 'Ван мреже сте.',
 	'%d row(s) have been imported.' => [
 		'%d ред је увежен.',
 		'%d реда су увежена.',
@@ -144,7 +144,7 @@ return [
 	// Databases
 	'Database' => 'База података',
 	'database' => 'база података', // by Claude Fable 5.1
-	'DB' => 'DB', // by Claude Fable 5.1
+	'DB' => 'DB',
 	'Use' => 'Користи',
 	'Invalid database.' => 'Неисправна база података.',
 	'Alter database' => 'Уреди базу података',
@@ -175,7 +175,7 @@ return [
 	'Invalid schema.' => 'Шема није исправна.',
 
 	// Table list
-	'All' => 'Све', // checkbox selecting all tables and views // by Claude Fable 5.1
+	'All' => 'Све', // checkbox selecting all tables and views
 	'Engine' => 'Механизам',
 	'engine' => 'механизам',
 	'Collation' => 'Сравњивање',
@@ -187,18 +187,17 @@ return [
 	'%d in total' => 'укупно %d',
 	'Analyze' => 'Анализирај',
 	'Optimize' => 'Оптимизуј',
-	'Vacuum' => 'Очисти', // by Claude Fable 5.1
+	'Vacuum' => 'Очисти и оптимизуј',
 	'Check' => 'Провери',
 	'Repair' => 'Поправи',
 	'Truncate' => 'Испразни',
-	'Truncate Cascade' => 'Испразни каскадно', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Табеле су испражњене.',
 	'Move to other database' => 'Премести у другу базу података',
 	'Move' => 'Премести',
 	'Tables have been moved.' => 'Табеле су премешћене.',
 	'Copy' => 'Умножи',
 	'Tables have been copied.' => 'Табеле су умножене.',
-	'overwrite' => 'препиши', // by Claude Fable 5.1
+	'overwrite' => 'препиши',
 
 	// Tables
 	'Tables' => 'Табеле',
@@ -221,12 +220,12 @@ return [
 	'Auto Increment' => 'Ауто-прираштај',
 	'Options' => 'Опције',
 	'Comment' => 'Коментар',
-	'Default value' => 'Подразумевана вредност', // by Claude Fable 5.1
+	'Default value' => 'Подразумевана вредност',
 	'Drop' => 'Избриши',
-	'Drop %s?' => 'Избрисати %s?', // by Claude Fable 5.1
+	'Drop %s?' => 'Избрисати %s?',
 	'Are you sure?' => 'Да ли сте сигурни?',
-	'Size' => 'Величина', // by Claude Fable 5.1
-	'Compute' => 'Израчунај', // by Claude Fable 5.1
+	'Size' => 'Величина',
+	'Compute' => 'Израчунај',
 	'Move up' => 'Помери на горе',
 	'Move down' => 'Помери на доле',
 	'Remove' => 'Уклони',
@@ -234,7 +233,7 @@ return [
 
 	// Views
 	'View' => 'Поглед',
-	'Materialized view' => 'Материјализовани поглед', // by Claude Fable 5.1
+	'Materialized view' => 'Материјализовани поглед',
 	'View has been dropped.' => 'Поглед је избрисан.',
 	'View has been altered.' => 'Поглед је измењен.',
 	'View has been created.' => 'Поглед је креиран.',
@@ -257,9 +256,9 @@ return [
 	'Add next' => 'Додај следећи',
 	'Index Type' => 'Тип индекса',
 	'length' => 'дужина',
-	'operator class' => 'класа оператора', // by Claude Fable 5.1
-	'Algorithm' => 'Алгоритам', // by Claude Fable 5.1
-	'Condition' => 'Услов', // by Claude Fable 5.1
+	'operator class' => 'класа оператора',
+	'Algorithm' => 'Алгоритам',
+	'Condition' => 'Услов',
 
 	// Foreign keys
 	'Foreign keys' => 'Страни кључеви',
@@ -272,8 +271,8 @@ return [
 	'Target' => 'Циљ',
 	'Add column' => 'Додај колону',
 	'Alter' => 'Уреди',
-	'Alter foreign key' => 'Уреди страни кључ', // by Claude Fable 5.1
-	'Create foreign key' => 'Направи страни кључ', // by Claude Fable 5.1
+	'Alter foreign key' => 'Уреди страни кључ',
+	'Create foreign key' => 'Направи страни кључ',
 	'ON DELETE' => 'ON DELETE (приликом брисања)',
 	'ON UPDATE' => 'ON UPDATE (приликом освежавања)',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Изворне и циљне колоне морају бити истог типа, циљна колона мора бити индексирана и изворна табела мора садржати податке из циљне.',
@@ -335,12 +334,12 @@ return [
 	'Create trigger' => 'Формирај окидач',
 
 	// Table check constraints
-	'Checks' => 'Провере', // by Claude Fable 5.1
-	'Create check' => 'Направи проверу', // by Claude Fable 5.1
-	'Alter check' => 'Уреди проверу', // by Claude Fable 5.1
-	'Check has been created.' => 'Провера је креирана.', // by Claude Fable 5.1
-	'Check has been altered.' => 'Провера је измењена.', // by Claude Fable 5.1
-	'Check has been dropped.' => 'Провера је избрисана.', // by Claude Fable 5.1
+	'Checks' => 'Провере',
+	'Create check' => 'Направи проверу',
+	'Alter check' => 'Уреди проверу',
+	'Check has been created.' => 'Провера је креирана.',
+	'Check has been altered.' => 'Провера је измењена.',
+	'Check has been dropped.' => 'Провера је избрисана.',
 
 	// Selection
 	'Select data' => 'Изабери податке',
@@ -352,15 +351,15 @@ return [
 	'Sort' => 'Поређај',
 	'descending' => 'опадајуће',
 	'Limit' => 'Граница',
-	'Limit rows' => 'Ограничи број редова', // by Claude Fable 5.1
+	'Limit rows' => 'Ограничи број редова',
 	'Text length' => 'Дужина текста',
 	'Action' => 'Акција',
 	'Full table scan' => 'Скренирање комплетне табеле',
 	'Unable to select the table' => 'Не могу да изаберем табелу',
 	'Search data in tables' => 'Претражи податке у табелама',
-	'All rows on this page' => 'Сви редови на овој страни', // by Claude Fable 5.1
+	'All rows on this page' => 'Сви редови на овој страници',
 	'No rows.' => 'Без редова.',
-	'%d / ' => '%d / ', // by Claude Fable 5.1
+	'%d / ' => '%d / ',
 	'%d row(s)' => [
 		'%d ред',
 		'%d реда',
@@ -378,7 +377,7 @@ return [
 	],
 
 	// In-place editing in selection
-	'Modify' => 'Измени', // by Claude Fable 5.1
+	'Modify' => 'Измени',
 	'Ctrl+click on a value to modify it.' => 'Ctrl+клик на вредност за измену.',
 	'Use edit link to modify this value.' => 'Користи везу за измену ове вредности.',
 
@@ -391,8 +390,8 @@ return [
 	'Save' => 'Сачувај',
 	'Save and continue edit' => 'Сачувај и настави уређење',
 	'Save and insert next' => 'Сачувај и уметни следеће',
-	'Saving…' => 'Чувам…', // by Claude Fable 5.1
-	'Selected' => 'Изабрано', // by Claude Fable 5.1
+	'Saving…' => 'Уписујем…',
+	'Selected' => 'Изабрано',
 	'Clone' => 'Дуплирај',
 	'Delete' => 'Избриши',
 	'Item%s has been inserted.' => 'Ставка%s је додата.', // %s can contain auto-increment value, e.g. ' 123'
@@ -403,7 +402,7 @@ return [
 		'%d ставке су погођене.',
 		'%d ставки је погођено.',
 	],
-	'You have no privileges to update this table.' => 'Немате привилегије за ажурирање ове табеле.', // by Claude Fable 5.1
+	'You have no privileges to update this table.' => 'Немате привилегије за ажурирање ове табеле.',
 
 	// Data type descriptions
 	'Numbers' => 'Број',

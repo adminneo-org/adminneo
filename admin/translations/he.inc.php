@@ -171,7 +171,6 @@ return [
 	'Check' => 'בדוק',
 	'Repair' => 'תקן',
 	'Truncate' => 'קצר',
-	'Truncate Cascade' => 'קצר מדורג', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'הטבלה קוצרה',
 	'Move to other database' => 'העבר למסד נתונים אחר',
 	'Move' => 'העבר',

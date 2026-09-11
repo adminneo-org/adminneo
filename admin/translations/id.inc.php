@@ -171,7 +171,6 @@ return [
 	'Check' => 'Periksa',
 	'Repair' => 'Perbaiki',
 	'Truncate' => 'Kosongkan',
-	'Truncate Cascade' => 'Kosongkan bertingkat', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabel berhasil dikosongkan.',
 	'Move to other database' => 'Pindahkan ke basis data lain',
 	'Move' => 'Pindahkan',

@@ -52,7 +52,7 @@ return [
 	// Settings
 	'Language' => 'Język',
 
-	'Menu' => 'Menu', // by Claude Fable 5.1
+	'Menu' => 'Menu',
 	'Home' => 'Strona główna',
 	'Refresh' => 'Odśwież',
 	'Info' => 'Informacje',
@@ -175,7 +175,7 @@ return [
 	'Invalid schema.' => 'Nieprawidłowy schemat.',
 
 	// Table list
-	'All' => 'Wszystko', // checkbox selecting all tables and views // by Claude Fable 5.1
+	'All' => 'Wszystko', // checkbox selecting all tables and views
 	'Engine' => 'Składowanie',
 	'engine' => 'składowanie',
 	'Collation' => 'Porównywanie znaków',
@@ -191,7 +191,6 @@ return [
 	'Check' => 'Sprawdź',
 	'Repair' => 'Napraw',
 	'Truncate' => 'Opróżnij',
-	'Truncate Cascade' => 'Opróżnij kaskadowo', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Tabele zostały opróżnione.',
 	'Move to other database' => 'Przenieś do innej bazy danych',
 	'Move' => 'Przenieś',
@@ -257,7 +256,7 @@ return [
 	'Add next' => 'Dodaj następny',
 	'Index Type' => 'Typ indeksu',
 	'length' => 'długość',
-	'operator class' => 'klasa operatorów', // by Claude Fable 5.1
+	'operator class' => 'klasa operatorów',
 	'Algorithm' => 'Algorytm',
 	'Condition' => 'Warunek',
 
@@ -272,8 +271,8 @@ return [
 	'Target' => 'Cel',
 	'Add column' => 'Dodaj kolumnę',
 	'Alter' => 'Zmień',
-	'Alter foreign key' => 'Zmień klucz obcy', // by Claude Fable 5.1
-	'Create foreign key' => 'Utwórz klucz obcy', // by Claude Fable 5.1
+	'Alter foreign key' => 'Zmień klucz obcy',
+	'Create foreign key' => 'Utwórz klucz obcy',
 	'ON DELETE' => 'W przypadku usunięcia',
 	'ON UPDATE' => 'W przypadku zmiany',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Źródłowa i docelowa kolumna muszą być tego samego typu, powinien istnieć indeks na docelowej kolumnie oraz muszą istnieć dane referencyjne.',
@@ -358,7 +357,7 @@ return [
 	'Full table scan' => 'Wymaga pełnego przeskanowania tabeli',
 	'Unable to select the table' => 'Nie udało się pobrać danych z tabeli',
 	'Search data in tables' => 'Wyszukaj we wszystkich tabelach',
-	'All rows on this page' => 'Wszystkie wiersze na tej stronie', // by Claude Fable 5.1
+	'All rows on this page' => 'Wszystkie wiersze na tej stronie',
 	'No rows.' => 'Brak rekordów.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [

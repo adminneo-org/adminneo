@@ -171,7 +171,6 @@ return [
 	'Check' => 'Ellenőrzés',
 	'Repair' => 'Javít',
 	'Truncate' => 'Felszabadít',
-	'Truncate Cascade' => 'Felszabadít (kaszkád)', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'A tábla felszabadítva.',
 	'Move to other database' => 'Áthelyezés másik adatbázisba',
 	'Move' => 'Áthelyez',

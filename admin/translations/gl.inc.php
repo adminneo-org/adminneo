@@ -186,7 +186,6 @@ return [
 	'Check' => 'Comprobar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Baleirar',
-	'Truncate Cascade' => 'Baleirar en cascada', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Baleiráronse as táboas.',
 	'Move to other database' => 'Mover a outra base de datos',
 	'Move' => 'Mover',

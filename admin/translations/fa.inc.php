@@ -171,7 +171,6 @@ return [
 	'Check' => 'بررسی',
 	'Repair' => 'تعمیر',
 	'Truncate' => 'کوتاه کردن',
-	'Truncate Cascade' => 'کوتاه کردن آبشاری', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'جدولها بریده شدند.',
 	'Move to other database' => 'انتقال به یک پایگاه داده دیگر',
 	'Move' => 'انتقال',

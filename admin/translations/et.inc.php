@@ -177,7 +177,6 @@ return [
 	'Check' => 'Kontrolli',
 	'Repair' => 'Paranda',
 	'Truncate' => 'Tühjenda',
-	'Truncate Cascade' => 'Tühjenda kaskaadis', // by Claude Fable 5.1
 	'Tables have been truncated.' => 'Valitud tabelid on edukalt tühjendatud.', // by Claude Fable 5.1
 	'Move to other database' => 'Liiguta teise andmebaasi',
 	'Move' => 'Liiguta',
