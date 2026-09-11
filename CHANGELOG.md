@@ -4,6 +4,10 @@ Changelog
 AdminNeo 5.9.2
 --------------
 
+### Changes
+
+- Plugins: Add method verifyLoginToken() to accept the login form of another website (by @vrana)
+
 ### Bugfixes
 
 - Login: Fix skipping the limit of unsuccessful logins if the login form was not loaded (GHSA-m3hw-88c4-g6gq)

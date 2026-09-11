@@ -216,6 +216,15 @@ abstract class Origin extends Plugin
 	}
 
 	/**
+	 * Returns whether the CSRF token is required when logging in.
+	 * A login form placed on another website doesn't have the token, so it can be accepted here, e.g. only from a list of trusted origins.
+	 */
+	public function verifyLoginToken(): bool
+	{
+		return true;
+	}
+
+	/**
 	 * Returns server name displayed in breadcrumbs.
 	 */
 	public function getServerName(string $server, bool $resolveDefault = true, ?string $fallback = null): string

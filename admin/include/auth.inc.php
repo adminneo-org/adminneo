@@ -230,7 +230,7 @@ Admin::get()->init();
 
 $auth = $_POST["auth"] ?? null;
 // The login is processed before the general check of POST data, so its token is verified here.
-$auth_verified = $auth && verify_token();
+$auth_verified = $auth && (!Admin::get()->verifyLoginToken() || verify_token());
 
 if ($auth_verified) {
 	// Defense against session fixation.
