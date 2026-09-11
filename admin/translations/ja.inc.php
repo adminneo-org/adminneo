@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s は配列を返す必要があります。',
 	'%s and %s must return an object created by %s method.' => '%s と %s は %s メソッドで作成されたオブジェクトを返す必要があります。',
 
+	// Accessibility
+	'Skip to main content' => 'メインコンテンツへスキップ', // by Claude Fable 5.1
+	'Skip to menu' => 'メニューへスキップ', // by Claude Fable 5.1
+	'Skip to table list' => 'テーブル一覧へスキップ', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'データベース種類',
 	'Server' => 'サーバー',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'リフレッシュ',
 	'Info' => '情報',
 	'More information.' => '詳細情報。',
+	'Close' => '閉じる', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => '権限',

@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s بایستی یک آرایه برگرداند.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s و %s بایستی یک شیء ایجاد شده توسط متد %s برگردانند.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'پرش به محتوای اصلی', // by Claude Fable 5.1
+	'Skip to menu' => 'پرش به منو', // by Claude Fable 5.1
+	'Skip to table list' => 'پرش به فهرست جدول‌ها', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'سیستم',
 	'Server' => 'سرور',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'بازیابی',
 	'Info' => 'اطلاعات', // by Claude Fable 5.1
 	'More information.' => 'اطلاعات بیشتر.', // by Claude Fable 5.1
+	'Close' => 'بستن', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'امتیازات',

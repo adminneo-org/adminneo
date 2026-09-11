@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s অবশ্যই একটি অ্যারে ফেরত দিতে হবে।', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s এবং %s অবশ্যই %s মেথড দ্বারা তৈরি একটি অবজেক্ট ফেরত দিতে হবে।', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'মূল বিষয়বস্তুতে যান', // by Claude Fable 5.1
+	'Skip to menu' => 'মেনুতে যান', // by Claude Fable 5.1
+	'Skip to table list' => 'টেবিল তালিকায় যান', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'সিস্টেম',
 	'Server' => 'সার্ভার',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'রিফ্রেশ',
 	'Info' => 'তথ্য', // by Claude Fable 5.1
 	'More information.' => 'আরও তথ্য।', // by Claude Fable 5.1
+	'Close' => 'বন্ধ করুন', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'প্রিভিলেজেস',

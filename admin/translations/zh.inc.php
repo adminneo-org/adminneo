@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s 必须返回一个数组。', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s 和 %s 必须返回由 %s 方法创建的对象。', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => '跳至主要内容', // by Claude Fable 5.1
+	'Skip to menu' => '跳至菜单', // by Claude Fable 5.1
+	'Skip to table list' => '跳至数据表列表', // by Claude Fable 5.1
+
 	// Login
 	'System' => '系统',
 	'Server' => '服务器',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => '刷新',
 	'Info' => '信息', // by Claude Fable 5.1
 	'More information.' => '更多信息。', // by Claude Fable 5.1
+	'Close' => '关闭', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => '权限',

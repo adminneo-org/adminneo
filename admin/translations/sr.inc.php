@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s мора да врати низ.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s и %s морају да врате објекат креиран методом %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Прескочи на главни садржај', // by Claude Fable 5.1
+	'Skip to menu' => 'Прескочи на мени', // by Claude Fable 5.1
+	'Skip to table list' => 'Прескочи на списак табела', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Систем',
 	'Server' => 'Сервер',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Освежи',
 	'Info' => 'Информације', // by Claude Fable 5.1
 	'More information.' => 'Више информација.', // by Claude Fable 5.1
+	'Close' => 'Затвори', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Дозволе',

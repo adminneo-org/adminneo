@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s moet een array retourneren.',
 	'%s and %s must return an object created by %s method.' => '%s en %s moeten een object retourneren dat met de methode %s is gemaakt.',
 
+	// Accessibility
+	'Skip to main content' => 'Ga naar hoofdinhoud', // by Claude Fable 5.1
+	'Skip to menu' => 'Ga naar menu', // by Claude Fable 5.1
+	'Skip to table list' => 'Ga naar tabellenlijst', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Databasesysteem',
 	'Server' => 'Server',
@@ -56,6 +61,7 @@ return [
 	'Refresh' => 'Vernieuwen',
 	'Info' => 'Informatie',
 	'More information.' => 'Meer informatie.',
+	'Close' => 'Sluiten', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Rechten',

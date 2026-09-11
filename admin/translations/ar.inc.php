@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => 'يجب أن يُرجع %s مصفوفة.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => 'يجب أن يُرجع %s و %s كائنا تم إنشاؤه بواسطة الدالة %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'تخطي إلى المحتوى الرئيسي', // by Claude Fable 5.1
+	'Skip to menu' => 'تخطي إلى القائمة', // by Claude Fable 5.1
+	'Skip to table list' => 'تخطي إلى قائمة الجداول', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'النظام',
 	'Server' => 'الخادم',
@@ -56,6 +61,7 @@ return [
 	'Refresh' => 'تحديث',
 	'Info' => 'معلومات', // by Claude Fable 5.1
 	'More information.' => 'مزيد من المعلومات.', // by Claude Fable 5.1
+	'Close' => 'إغلاق', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'الإمتيازات',

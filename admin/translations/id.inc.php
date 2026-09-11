@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s harus mengembalikan larik.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s dan %s harus mengembalikan objek yang dibuat oleh metode %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Lompat ke konten utama', // by Claude Fable 5.1
+	'Skip to menu' => 'Lompat ke menu', // by Claude Fable 5.1
+	'Skip to table list' => 'Lompat ke daftar tabel', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sistem',
 	'Server' => 'Server',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'Segarkan',
 	'Info' => 'Info', // by Claude Fable 5.1
 	'More information.' => 'Informasi selengkapnya.', // by Claude Fable 5.1
+	'Close' => 'Tutup', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilese',

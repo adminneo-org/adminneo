@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s უნდა აბრუნებდეს მასივს.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s და %s უნდა აბრუნებდნენ ობიექტს, რომელიც შექმნილია %s მეთოდით.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'მთავარ შიგთავსზე გადასვლა', // by Claude Fable 5.1
+	'Skip to menu' => 'მენიუზე გადასვლა', // by Claude Fable 5.1
+	'Skip to table list' => 'ცხრილების სიაზე გადასვლა', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'სისტემა',
 	'Server' => 'სერვერი',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'განახლება',
 	'Info' => 'ინფორმაცია', // by Claude Fable 5.1
 	'More information.' => 'მეტი ინფორმაცია.', // by Claude Fable 5.1
+	'Close' => 'დახურვა', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'უფლებამოსილება',

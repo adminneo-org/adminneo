@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s bir dizi döndürmelidir.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s ve %s, %s yöntemiyle oluşturulmuş bir nesne döndürmelidir.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Ana içeriğe atla', // by Claude Fable 5.1
+	'Skip to menu' => 'Menüye atla', // by Claude Fable 5.1
+	'Skip to table list' => 'Tablo listesine atla', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sistem',
 	'Server' => 'Sunucu',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'Tazele',
 	'Info' => 'Bilgi', // by Claude Fable 5.1
 	'More information.' => 'Daha fazla bilgi.', // by Claude Fable 5.1
+	'Close' => 'Kapat', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'İzinler',

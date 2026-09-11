@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s turi grąžinti masyvą.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s ir %s turi grąžinti objektą, sukurtą metodu %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Pereiti į pagrindinį turinį', // by Claude Fable 5.1
+	'Skip to menu' => 'Pereiti į meniu', // by Claude Fable 5.1
+	'Skip to table list' => 'Pereiti į lentelių sąrašą', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sistema',
 	'Server' => 'Serveris',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Atnaujinti',
 	'Info' => 'Informacija', // by Claude Fable 5.1
 	'More information.' => 'Daugiau informacijos.', // by Claude Fable 5.1
+	'Close' => 'Uždaryti', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegijos',

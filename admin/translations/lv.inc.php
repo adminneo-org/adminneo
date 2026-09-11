@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s jāatgriež masīvs.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s un %s jāatgriež objekts, kas izveidots ar metodi %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Pāriet uz galveno saturu', // by Claude Fable 5.1
+	'Skip to menu' => 'Pāriet uz izvēlni', // by Claude Fable 5.1
+	'Skip to table list' => 'Pāriet uz tabulu sarakstu', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sistēma',
 	'Server' => 'Serveris',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Atjaunot',
 	'Info' => 'Informācija', // by Claude Fable 5.1
 	'More information.' => 'Vairāk informācijas.', // by Claude Fable 5.1
+	'Close' => 'Aizvērt', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Tiesības',

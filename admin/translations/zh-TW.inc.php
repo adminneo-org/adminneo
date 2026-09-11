@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s 必須回傳陣列。', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s 和 %s 必須回傳由 %s 方法建立的物件。', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => '跳至主要內容', // by Claude Fable 5.1
+	'Skip to menu' => '跳至選單', // by Claude Fable 5.1
+	'Skip to table list' => '跳至資料表清單', // by Claude Fable 5.1
+
 	// Login
 	'System' => '資料庫系統',
 	'Server' => '伺服器',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => '重新載入',
 	'Info' => '資訊', // by Claude Fable 5.1
 	'More information.' => '更多資訊。', // by Claude Fable 5.1
+	'Close' => '關閉', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => '權限',

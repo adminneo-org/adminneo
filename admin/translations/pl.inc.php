@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s musi zwrócić tablicę.',
 	'%s and %s must return an object created by %s method.' => '%s i %s muszą zwracać obiekt utworzony przez metodę %s.',
 
+	// Accessibility
+	'Skip to main content' => 'Przejdź do głównej treści', // by Claude Fable 5.1
+	'Skip to menu' => 'Przejdź do menu', // by Claude Fable 5.1
+	'Skip to table list' => 'Przejdź do listy tabel', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Rodzaj bazy',
 	'Server' => 'Serwer',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Odśwież',
 	'Info' => 'Informacje',
 	'More information.' => 'Więcej informacji.',
+	'Close' => 'Zamknij', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Uprawnienia użytkowników',

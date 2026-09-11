@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s повинен повертати масив.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s і %s повинні повертати об\'єкт, створений методом %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Перейти до основного вмісту', // by Claude Fable 5.1
+	'Skip to menu' => 'Перейти до меню', // by Claude Fable 5.1
+	'Skip to table list' => 'Перейти до списку таблиць', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Система Бази Даних',
 	'Server' => 'Сервер',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Оновити',
 	'Info' => 'Інформація', // by Claude Fable 5.1
 	'More information.' => 'Детальніше.', // by Claude Fable 5.1
+	'Close' => 'Закрити', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Привілеї',

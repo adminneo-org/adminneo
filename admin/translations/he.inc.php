@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s חייב להחזיר מערך', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s ו-%s חייבים להחזיר אובייקט שנוצר על ידי המתודה %s', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'דלג לתוכן הראשי', // by Claude Fable 5.1
+	'Skip to menu' => 'דלג לתפריט', // by Claude Fable 5.1
+	'Skip to table list' => 'דלג לרשימת הטבלאות', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'מערכת',
 	'Server' => 'שרת',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'רענן',
 	'Info' => 'מידע', // by Claude Fable 5.1
 	'More information.' => 'מידע נוסף', // by Claude Fable 5.1
+	'Close' => 'סגור', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'פריווילגיות',

@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s må returnere et array.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s og %s må returnere et objekt opprettet av metoden %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Hopp til hovedinnhold', // by Claude Fable 5.1
+	'Skip to menu' => 'Hopp til meny', // by Claude Fable 5.1
+	'Skip to table list' => 'Hopp til tabelliste', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'System',
 	'Server' => 'Server',
@@ -56,6 +61,7 @@ return [
 	'Refresh' => 'Gjenoppfrisk',
 	'Info' => 'Info', // by Claude Fable 5.1
 	'More information.' => 'Mer informasjon.', // by Claude Fable 5.1
+	'Close' => 'Lukk', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegier',

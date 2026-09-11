@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s trebuie să returneze un array.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s și %s trebuie să returneze un obiect creat prin metoda %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Sari la conținutul principal', // by Claude Fable 5.1
+	'Skip to menu' => 'Sari la meniu', // by Claude Fable 5.1
+	'Skip to table list' => 'Sari la lista de tabele', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sistem',
 	'Server' => 'Server',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Împrospătează',
 	'Info' => 'Informații', // by Claude Fable 5.1
 	'More information.' => 'Mai multe informații.', // by Claude Fable 5.1
+	'Close' => 'Închide', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Privilegii',

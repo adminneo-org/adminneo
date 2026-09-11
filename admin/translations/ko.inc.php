@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s은(는) 배열을 반환해야 합니다.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s과(와) %s은(는) %s 메서드로 만든 객체를 반환해야 합니다.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => '본문으로 건너뛰기', // by Claude Fable 5.1
+	'Skip to menu' => '메뉴로 건너뛰기', // by Claude Fable 5.1
+	'Skip to table list' => '테이블 목록으로 건너뛰기', // by Claude Fable 5.1
+
 	// Login
 	'System' => '데이터베이스 형식',
 	'Server' => '서버',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => '새로 고침',
 	'Info' => '정보', // by Claude Fable 5.1
 	'More information.' => '자세한 정보.', // by Claude Fable 5.1
+	'Close' => '닫기', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => '권한',

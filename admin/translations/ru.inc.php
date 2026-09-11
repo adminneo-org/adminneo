@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s должен возвращать массив.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s и %s должны возвращать объект, созданный методом %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Перейти к основному содержимому', // by Claude Fable 5.1
+	'Skip to menu' => 'Перейти к меню', // by Claude Fable 5.1
+	'Skip to table list' => 'Перейти к списку таблиц', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Движок',
 	'Server' => 'Сервер',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Обновить',
 	'Info' => 'Сведения', // by Claude Fable 5.1
 	'More information.' => 'Подробнее.', // by Claude Fable 5.1
+	'Close' => 'Закрыть', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Полномочия',

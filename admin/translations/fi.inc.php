@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s:n täytyy palauttaa taulukko.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s:n ja %s:n täytyy palauttaa olio, joka on luotu metodilla %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Siirry pääsisältöön', // by Claude Fable 5.1
+	'Skip to menu' => 'Siirry valikkoon', // by Claude Fable 5.1
+	'Skip to table list' => 'Siirry taululuetteloon', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Järjestelmä',
 	'Server' => 'Palvelin',
@@ -53,6 +58,7 @@ return [
 	'Refresh' => 'Virkistä',
 	'Info' => 'Tiedot', // by Claude Fable 5.1
 	'More information.' => 'Lisätietoja.', // by Claude Fable 5.1
+	'Close' => 'Sulje', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Oikeudet',

@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s mora vratiti polje.', // by Claude Fable 5.1
 	'%s and %s must return an object created by %s method.' => '%s i %s moraju vratiti objekt kreiran metodom %s.', // by Claude Fable 5.1
 
+	// Accessibility
+	'Skip to main content' => 'Preskoči na glavni sadržaj', // by Claude Fable 5.1
+	'Skip to menu' => 'Preskoči na izbornik', // by Claude Fable 5.1
+	'Skip to table list' => 'Preskoči na popis tablica', // by Claude Fable 5.1
+
 	// Login
 	'System' => 'Sustav',
 	'Server' => 'Poslužitelj',
@@ -57,6 +62,7 @@ return [
 	'Refresh' => 'Osvježi',
 	'Info' => 'Informacije', // by Claude Fable 5.1
 	'More information.' => 'Više informacija.', // by Claude Fable 5.1
+	'Close' => 'Zatvori', // by Claude Fable 5.1
 
 	// Privileges
 	'Privileges' => 'Ovlasti',
