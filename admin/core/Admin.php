@@ -1202,8 +1202,6 @@ class Admin extends Origin
 	 */
 	public function printNavigation(?string $missing): void
 	{
-		parent::printNavigation($missing);
-
 		if ($missing == "auth") {
 			$output = "";
 			foreach ((array)$_SESSION["pwds"] as $vendor => $servers) {

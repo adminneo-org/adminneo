@@ -57,6 +57,7 @@ return [
 	'Refresh' => 'Obnovit',
 	'Info' => 'Info',
 	'More information.' => 'Více informací.',
+	'Close' => 'Zavřít',
 
 	// Privileges
 	'Privileges' => 'Oprávnění',

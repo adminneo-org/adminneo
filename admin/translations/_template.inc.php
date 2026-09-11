@@ -53,6 +53,7 @@ return [
 	'Refresh' => 'Xx',
 	'Info' => 'Xx',
 	'More information.' => 'Xx.',
+	'Close' => 'Xx',
 
 	// Privileges
 	'Privileges' => 'Xx',

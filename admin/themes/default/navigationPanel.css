@@ -80,25 +80,13 @@
 	width: 2rem;
 	height: 2rem;
 	padding: 0 !important;
-	z-index: 50;
+	font-size: initial;
 }
 
 .navigation-button .icon {
 	width: 1.2rem;
 	height: 1.2rem;
 	margin: 0 !important;
-}
-
-.navigation-button .ic-close {
-	display: none;
-}
-
-.navigation-button.opened .ic-menu {
-	display: none;
-}
-
-.navigation-button.opened .ic-close {
-	display: inline;
 }
 
 .logo {

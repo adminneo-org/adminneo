@@ -775,30 +775,7 @@ abstract class Origin extends Plugin
 
 	public abstract function printDatabaseMenu(): void;
 
-	public function printNavigation(?string $missing): void
-	{
-		$last_version = $_COOKIE["neo_version"] ?? null;
-
-		echo "<div class='header'>\n";
-		echo $this->admin->getServiceTitle() . "\n";
-
-		if ($missing != "auth") {
-			echo "<span class='version'>";
-			echo h(preg_replace('~\\.0(-|$)~', '$1', VERSION));
-			if ($this->config->isVersionVerificationEnabled() && $last_version && version_compare(VERSION, $last_version) < 0) {
-				echo "<a id='version' class='version-badge' href='https://www.adminneo.org/download' " . target_blank() . " title='" . h($last_version) . "'>";
-				echo icon_solo("asterisk");
-				echo "</a>";
-			}
-			echo "</span>\n";
-
-			if ($this->config->isVersionVerificationEnabled() && !$last_version) {
-				echo script("verifyVersion();");
-			}
-		}
-
-		echo "</div>\n";
-	}
+	public abstract function printNavigation(?string $missing): void;
 
 	public abstract function printDatabaseSwitcher(?string $missing): void;
 

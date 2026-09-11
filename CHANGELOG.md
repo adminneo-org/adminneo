@@ -10,6 +10,7 @@ AdminNeo 5.8.0
 - Settings: Add a theme selector
 - Scroll the navigation panel to the selected table when it is out of view
 - Indicate a scrolled table list in the navigation panel by a separator line
+- Accessibility: Keep focus in floating menu on small screens
 - Alter table, Privileges: Do not print a success message if nothing was changed (by @vrana)
 - Alter table, Select: Warn if the number of fields can exceed max_input_vars (by @vrana)
 - Select: Remove asking for the page number after clicking the Page legend (by @vrana)

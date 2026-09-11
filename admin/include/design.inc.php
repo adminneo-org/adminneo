@@ -106,7 +106,11 @@ function page_header(string $title, $breadcrumb = []): void
 	}
 	echo "</style>\n";
 
-	echo script_src(link_files("main.js", ["../admin/scripts/functions.js", "scripts/editing.js"]));
+	echo script_src(link_files("main.js", [
+		"../admin/scripts/functions.js",
+		"../admin/scripts/focus.js",
+		"scripts/editing.js"
+	]));
 
 	foreach (Admin::get()->getJsUrls() as $url) {
 		echo script_src($url);
@@ -130,6 +134,9 @@ function page_header(string $title, $breadcrumb = []): void
 
     echo "<div id='content'>\n";
 	echo "<div class='header'>\n";
+
+	echo "<button id='open-navigation-button' type='button' class='button light navigation-button' title='", lang('Menu'), "' aria-controls='navigation-panel' aria-expanded='false'>",
+		icon_solo("menu"), "</button>";
 
 	if ($breadcrumb !== null) {
 		echo '<nav class="breadcrumbs"><ul>';
@@ -339,8 +346,32 @@ function page_footer(?string $missing = null): void
 
 	// Main navigation is printed after the page content, because databases and tables can be changed after the query
 	// execution in the 'SQL command' page.
-	echo "<button id='navigation-button' class='button light navigation-button' title='", lang('Menu'), "'>", icon_solo("menu"), icon_solo("close"), "</button>";
 	echo "<div id='navigation-panel' class='navigation-panel'>\n";
+	echo "<div class='focus-trap-begin'></div>\n";
+
+	$last_version = $_COOKIE["neo_version"] ?? null;
+
+	echo "<div class='header'>\n";
+	echo "<button id='close-navigation-button' type='button' class='button light navigation-button' title='", lang('Close'), "' aria-controls='navigation-panel'>", icon_solo("close"), "</button>";
+	echo Admin::get()->getServiceTitle() . "\n";
+
+	if ($missing != "auth") {
+		echo "<span class='version'>";
+		echo h(preg_replace('~\\.0(-|$)~', '$1', VERSION));
+		if (Admin::get()->getConfig()->isVersionVerificationEnabled() && $last_version && version_compare(VERSION, $last_version) < 0) {
+			echo "<a id='version' class='version-badge' href='https://www.adminneo.org/download' " . target_blank() . " title='" . h($last_version) . "'>";
+			echo icon_solo("asterisk");
+			echo "</a>";
+		}
+		echo "</span>\n";
+
+		if (Admin::get()->getConfig()->isVersionVerificationEnabled() && !$last_version) {
+			echo script("verifyVersion();");
+		}
+	}
+
+	echo "</div>\n"; // header
+
 	Admin::get()->printNavigation($missing);
 
 	echo "<div class='footer'>\n";
@@ -360,6 +391,7 @@ function page_footer(?string $missing = null): void
 	echo "</div>\n"; // footer
 
 	echo "<div id='navigation-resizer' class='navigation-resizer'></div>\n";
+	echo "<div class='focus-trap-end'></div>\n";
 	echo "</div>\n"; // navigation-panel
 
 	echo script("initNavigation(); initNavigationResizer('" . js_escape(ME) . "set=navigation-width', '" . get_token() . "', " .

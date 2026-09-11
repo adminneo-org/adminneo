@@ -380,12 +380,40 @@ function setHtml(id, html) {
  * Initializes toggling of the navigation panel by the navigation button.
  */
 function initNavigation() {
-	const button = gid("navigation-button");
+	const openButton = gid("open-navigation-button");
+	const closeButton = gid("close-navigation-button");
 	const panel = gid("navigation-panel");
 
-	button.addEventListener("click", () => {
-		button.classList.toggle("opened");
-		panel.classList.toggle("opened");
+	openButton.addEventListener("click", () => {
+		panel.classList.toggle("opened", true);
+		openButton.setAttribute("aria-expanded", "true");
+		closeButton.focus();
+		enableFocusTrap(panel);
+	});
+
+	const close = () => {
+		disableFocusTrap();
+		panel.classList.toggle("opened", false);
+		openButton.setAttribute("aria-expanded", "false");
+	};
+
+	closeButton.addEventListener("click", () => {
+		close();
+		openButton.focus();
+	});
+
+	panel.addEventListener("keydown", event => {
+		if (event.key === "Escape" && panel.classList.contains("opened")) {
+			closeButton.click();
+		}
+	});
+
+	// Release the trap when the panel turns into the regular sidebar on wide screens.
+	// Note: addListener() is used instead of addEventListener("change") for compatibility with Safari 10.
+	window.matchMedia("(min-width: 1024px)").addListener(event => {
+		if (event.matches && panel.classList.contains("opened")) {
+			close();
+		}
 	});
 }
 
