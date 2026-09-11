@@ -202,20 +202,27 @@ function validate_color_variant(string $color_variant): string
 	return $color_variant;
 }
 
+/**
+ * Checks if theme and color variants are available.
+ *
+ * If not, fallbacks to the default theme and the first available color variant.
+ *
+ * @return string[]
+ */
 function validate_theme(string $theme, string $color_variant): array
 {
 	$themes = get_available_themes();
 
-	if (!isset($themes[$theme])) {
-		$theme = "default";
+	if (isset($themes[$theme][$color_variant])) {
+		return [$theme, $color_variant];
+	}
+	if (isset($themes["default"][$color_variant])) {
+		return ["default", $color_variant];
 	}
 
-	if (!isset($themes[$theme][$color_variant])) {
-		reset($themes[$theme]);
-		$color_variant = key($themes[$theme]);
-	}
+	reset($themes["default"]);
 
-	return [$theme, $color_variant];
+	return ["default",  key($themes["default"])];
 }
 
 /**
@@ -233,13 +240,15 @@ function get_available_themes(): array
  *
  * @return string[]
  */
-function get_theme_titles(): array
+function get_theme_titles(string $color_variant): array
 {
 	$themes = get_available_themes();
 
 	$titles = [];
-	foreach (array_keys($themes) as $theme) {
-		$titles[$theme] = ($theme == "default" ? "Neo" : ucwords(str_replace("-", " ", $theme)));
+	foreach ($themes as $theme => $color_variants) {
+		if ($color_variants[$color_variant] ?? false) {
+			$titles[$theme] = ($theme == "default" ? "Neo" : ucwords(str_replace("-", " ", $theme)));
+		}
 	}
 
 	return $titles;

@@ -837,9 +837,9 @@ abstract class Origin extends Plugin
 			}
 
 			// Theme.
-			$titles = get_theme_titles();
+			$titles = get_theme_titles($this->config->getColorVariant());
 			if (count($titles) > 1) {
-				[$theme] = validate_theme($this->config->getTheme(), "");
+				[$theme] = validate_theme($this->config->getTheme(), $this->config->getColorVariant());
 				$options = ["" => lang('Default') . " ($titles[$theme])"] + $titles;
 
 				$settings["theme"] = "<tr><th id='label-theme'>" . lang('Theme') . "</th>" .
