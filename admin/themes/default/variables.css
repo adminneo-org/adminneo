@@ -21,6 +21,7 @@
 	--header-text: #000;
 	--list-hover: hsl(none 0% 20% / 4%);
 	--schema-bg: hsl(none 0% 98% / 85%);
+	--schema-line-opacity: 0.2;
 
 	--input-bg: #fff;
 	--input-text: #000;

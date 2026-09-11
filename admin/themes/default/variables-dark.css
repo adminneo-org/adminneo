@@ -10,8 +10,9 @@
 	--panel-bg: #222;
 	--panel-border: #444;
 	--header-text: #eee;
-	--list-hover: hsl(215 0% 70% / 15%);
-	--schema-bg: rgb(40 40 40 / 75%);
+	--list-hover: hsl(none 0% 70% / 15%);
+	--schema-bg: hsl(none 0% 16% / 75%);
+	--schema-line-opacity: 0.3;
 
 	--input-bg: #111;
 	--input-text: #eee;

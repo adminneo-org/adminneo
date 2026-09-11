@@ -54,11 +54,13 @@
 
 #schema .references {
 	position: absolute;
+	opacity: var(--schema-line-opacity);
 }
 
 #schema .references.selected {
 	color: var(--link-text);
 	z-index: 2;
+	opacity: 1;
 }
 
 #schema .references.selected div {
