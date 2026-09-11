@@ -272,7 +272,7 @@ menu.hover li:hover .secondary, menu.hover .secondary:focus-visible {
 	line-height: 2.05rem; /* +0.05rem for better alignment on Firefox. */
 	padding: 0 20px;
 	display: flex;
-	gap: 10px 20px;
+	gap: 10px;
 	align-items: baseline;
 	z-index: 10;
 }
@@ -345,8 +345,12 @@ menu.hover li:hover .secondary, menu.hover .secondary:focus-visible {
 	}
 
 	.toolbox, .logout {
-		overflow: hidden;
 		line-height: normal;
 		max-width: 100%;
+	}
+
+	.logout span {
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
