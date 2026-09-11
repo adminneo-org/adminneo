@@ -584,12 +584,16 @@ class Admin extends Origin
 			if ($missing != "db" && $missing != "ns") {
 				$status = table_status('', true);
 
-				if (!$status) {
-					echo "<p class='message'>" . lang('No tables.') . "</p>\n";
-				} else {
+				if ($status) {
 					$this->admin->printTablesFilter();
 					$this->admin->printTableList($status);
+				} else {
+					// ID "tables" to make accessibility skip link always work.
+					echo "<div id='tables'><p>" . lang('No tables.') . "</p></div>\n";
 				}
+			} else {
+				// ID "tables" to make accessibility skip link always work.
+				echo "<div id='tables'></div>\n";
 			}
 		}
 	}

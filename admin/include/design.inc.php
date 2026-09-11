@@ -48,6 +48,7 @@ function page_header(string $title, $breadcrumb = []): void
 		"../admin/themes/default/variables.css",
 		"../admin/themes/default/$color_variant/variables.css",
 		"../admin/themes/default/common.css",
+		"../admin/themes/default/access-menu.css",
 		"../admin/themes/default/forms.css",
 		"../admin/themes/default/code.css",
 		"../admin/themes/default/messages.css",
@@ -130,9 +131,18 @@ function page_header(string $title, $breadcrumb = []): void
 
 <?php
 	echo "<div id='help' class='jush-" . DIALECT . " jsonly hidden'></div>";
-    echo script("initHelpPopup();");
+	echo script("initHelpPopup();");
 
-    echo "<div id='content'>\n";
+	echo '<menu class="access-menu">';
+	echo '<li><a href="#main-content">' . lang('Skip to main content') . '</a></li>';
+	echo '<li><a class="panel-link" href="#navigation-panel">' . lang('Skip to menu') . '</a></li>';
+
+	if ($breadcrumb !== null && DB != "" && $_GET["ns"] !== "") {
+		echo '<li><a class="panel-link" href="#tables">' . lang('Skip to table list') . '</a></li>';
+	}
+	echo '</menu>';
+
+	echo "<div id='content'>\n";
 	echo "<div class='header'>\n";
 
 	echo "<button id='open-navigation-button' type='button' class='button light navigation-button' title='", lang('Menu'), "' aria-controls='navigation-panel' aria-expanded='false'>",
@@ -185,6 +195,7 @@ function page_header(string $title, $breadcrumb = []): void
 
 	echo "</div>\n"; // header
 
+	echo "<div id='main-content'>\n";
 	echo "<h1>$title</h1>\n";
 	echo "<div id='ajaxstatus' role='status' class='jsonly'></div>\n";
 
@@ -342,6 +353,7 @@ function page_messages(): void
  */
 function page_footer(?string $missing = null): void
 {
+	echo "</div>\n"; // main-content
 	echo "</div>\n"; // content
 
 	// Main navigation is printed after the page content, because databases and tables can be changed after the query

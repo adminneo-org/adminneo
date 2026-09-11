@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s musí vraciať pole.',
 	'%s and %s must return an object created by %s method.' => '%s a %s musí vraciať objekt vytvorený pomocou metódy %s.',
 
+	// Accessibility
+	'Skip to main content' => 'Preskočiť na hlavný obsah',
+	'Skip to menu' => 'Preskočiť na menu',
+	'Skip to table list' => 'Preskočiť na zoznam tabuliek',
+
 	// Login
 	'System' => 'Systém',
 	'Server' => 'Server',

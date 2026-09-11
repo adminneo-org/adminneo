@@ -1263,8 +1263,12 @@ class Admin extends Origin
 					$this->admin->printTablesFilter();
 					$this->admin->printTableList($tables);
 				} else {
-					echo "<p class='message'>" . lang('No tables.') . "</p>\n";
+					// ID "tables" to make accessibility skip link always work.
+					echo "<div id='tables'><p>" . lang('No tables.') . "</p></div>\n";
 				}
+			} elseif ($_GET["ns"] !== "" && DB != "") {
+				// ID "tables" to make accessibility skip link always work.
+				echo "<div id='tables'></div>\n";
 			}
 
 			// Syntax highlighting.

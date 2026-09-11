@@ -152,6 +152,10 @@
 	margin-bottom: -1px;
 }
 
+#tables p:first-child {
+	padding-top: 0;
+}
+
 #logins {
 	margin-top: 10px;
 }

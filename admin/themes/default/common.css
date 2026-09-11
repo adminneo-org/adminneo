@@ -205,6 +205,10 @@ ol, ul {
 	padding-inline-start: var(--content-padding-h);
 }
 
+#main-content {
+	scroll-margin-top: 4rem;
+}
+
 #help {
 	position: absolute;
 	border: 1px solid var(--panel-border);

@@ -16,6 +16,11 @@ return [
 	'%s must return an array.' => '%s xx.',
 	'%s and %s must return an object created by %s method.' => '%s xx %s xx %s.',
 
+	// Accessibility
+	'Skip to main content' => 'Xx',
+	'Skip to menu' => 'Xx',
+	'Skip to table list' => 'Xx',
+
 	// Login
 	'System' => 'Xx',
 	'Server' => 'Xx',
