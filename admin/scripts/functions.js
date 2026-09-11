@@ -919,6 +919,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.top = `${top}px`;
 		dragHelper.style.left = `${left}px`;
 		dragHelper.style.width = `${width}px`;
+		dragHelper.style.background = window.getComputedStyle(row.closest("fieldset, table")).backgroundColor;
 		dragHelper.classList.add("dragging");
 		document.body.append(dragHelper);
 
@@ -998,6 +999,7 @@ function selectSearchKeydown(event) {
 		dragHelper.style.top = null;
 		dragHelper.style.left = null;
 		dragHelper.style.width = null;
+		dragHelper.style.background = null;
 
 		dragHelper.remove();
 
