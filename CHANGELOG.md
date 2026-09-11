@@ -25,6 +25,12 @@ AdminNeo 5.8.0
 - MongoDB, SimpleDB: Sort the list of tables by name
 - Drop compatibility with IIS 5 and with IIS 7.0 before its 2008 FastCGI update (by @vrana)
 - Fix mistranslated texts in all languages (AI reviewed)
+- Update Polish translation (by @Matthaiks)
+- Update Dutch translation (by Maarten Balliauw)
+- Update Malay translation (by @pisyek)
+- Update Catalan translation (by Joan Llosas)
+- Update Serbian translation (by Nikola Radovanović)
+- Update Bulgarian translation (by Deyan Delchev)
 
 ### Bugfixes
 
