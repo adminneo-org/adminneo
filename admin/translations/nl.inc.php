@@ -51,7 +51,7 @@ return [
 	// Settings
 	'Language' => 'Taal',
 
-	'Menu' => 'Menu', // by Claude Fable 5.1
+	'Menu' => 'Menu',
 	'Home' => 'Startpagina',
 	'Refresh' => 'Vernieuwen',
 	'Info' => 'Informatie',
@@ -170,7 +170,7 @@ return [
 	'Invalid schema.' => 'Ongeldig schema.',
 
 	// Table list
-	'All' => 'Alles', // checkbox selecting all tables and views // by Claude Fable 5.1
+	'All' => 'Alles', // checkbox selecting all tables and views
 	'Engine' => 'Engine',
 	'engine' => 'engine',
 	'Collation' => 'Collatie',
@@ -252,9 +252,9 @@ return [
 	'Add next' => 'Volgende toevoegen',
 	'Index Type' => 'Index type',
 	'length' => 'lengte',
-	'operator class' => 'operatorklasse', // by Claude Fable 5.1
+	'operator class' => 'operatorklasse',
 	'Algorithm' => 'Algoritme',
-	'Condition' => 'Conditie',
+	'Condition' => 'Voorwaarde',
 
 	// Foreign keys
 	'Foreign keys' => 'Foreign keys',
@@ -267,8 +267,8 @@ return [
 	'Target' => 'Doel',
 	'Add column' => 'Kolom toevoegen',
 	'Alter' => 'Aanpassen',
-	'Alter foreign key' => 'Foreign key aanpassen', // by Claude Fable 5.1
-	'Create foreign key' => 'Foreign key aanmaken', // by Claude Fable 5.1
+	'Alter foreign key' => 'Foreign key aanpassen',
+	'Create foreign key' => 'Foreign key aanmaken',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Bron- en doelkolommen moeten van hetzelfde data type zijn, er moet een index bestaan op de gekozen kolommen en er moet gerelateerde data bestaan.',
@@ -331,10 +331,10 @@ return [
 	// Table check constraints
 	'Checks' => 'Checks',
 	'Create check' => 'Check aanmaken',
-	'Alter check' => 'Check wijzigen',
-	'Check has been created.' => 'Check is aangemaakt.',
-	'Check has been altered.' => 'Check is gewijzigd.',
-	'Check has been dropped.' => 'Check is afgebroken.',
+	'Alter check' => 'Check aanpassen',
+	'Check has been created.' => 'Check aangemaakt.',
+	'Check has been altered.' => 'Check aangepast.',
+	'Check has been dropped.' => 'Check verwijderd.',
 
 	// Selection
 	'Select data' => 'Gegevens selecteren',
@@ -352,7 +352,7 @@ return [
 	'Full table scan' => 'Full table scan',
 	'Unable to select the table' => 'Onmogelijk tabel te selecteren',
 	'Search data in tables' => 'Zoeken in database',
-	'All rows on this page' => 'Alle rijen op deze pagina', // by Claude Fable 5.1
+	'All rows on this page' => 'Alle rijen op deze pagina',
 	'No rows.' => 'Geen rijen.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => [
