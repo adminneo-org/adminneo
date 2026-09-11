@@ -26,7 +26,7 @@ return [
 	'Logout' => 'Log keluar',
 	'Logged as: %s' => 'Log masuk sebagai: %s',
 	'Logout successful.' => 'Log keluar berjaya.',
-	'hostname[:port] or :socket' => 'nama hos[:port] atau :soket', // by Claude Fable 5.1
+	'hostname[:port] or :socket' => 'hostname[:port] atau :socket',
 	'Invalid server or credentials.' => 'Pelayan atau kelayakan tidak sah.', // by Claude Fable 5.1
 	'There is a space in the input password which might be the cause.' => 'Terdapat ruang kosong dalam kata laluan yang dimasukkan, mungkin itu puncanya.', // by Claude Fable 5.1
 	'AdminNeo does not support accessing a database without a password, <a href="https://www.adminneo.org/password"%s>more information</a>.' => 'AdminNeo tidak menyokong capaian ke pangkalan data tanpa kata laluan, <a href="https://www.adminneo.org/password"%s>maklumat lanjut</a>.', // by Claude Fable 5.1
@@ -35,7 +35,7 @@ return [
 	'Invalid permanent login, please login again.' => 'Log masuk kekal tidak sah, sila log masuk kembali.', // by Claude Fable 5.1
 	'Invalid CSRF token. Send the form again.' => 'Token CSRF tidak sah. Sila hantar borang sekali lagi.',
 	'If you did not send this request from AdminNeo then close this page.' => 'Jika anda tidak menghantar permintaan ini dari AdminNeo sila tutup halaman ini.',
-	'The action will be performed after successful login with the same credentials.' => 'Tindakan ini akan dilaksanakan selepas log masuk berjaya dengan kelayakan yang sama.', // by Claude Fable 5.1
+	'The action will be performed after successful login with the same credentials.' => 'Tindakan akan dilaksanakan selepas berjaya log masuk dengan kelayakan yang sama.',
 
 	// Connection
 	'No extension' => 'Tiada sambungan',
@@ -48,7 +48,7 @@ return [
 	// Settings
 	'Language' => 'Bahasa',
 
-	'Menu' => 'Menu', // by Claude Fable 5.1
+	'Menu' => 'Menu',
 	'Home' => 'Utama', // by Claude Fable 5.1
 	'Refresh' => 'Segar kembali',
 	'Info' => 'Info', // by Claude Fable 5.1
@@ -71,7 +71,7 @@ return [
 
 	// Structure
 	'Column' => 'Kolum',
-	'Columns' => 'Kolum', // by Claude Fable 5.1
+	'Columns' => 'Kolum',
 	'Routine' => 'Rutin',
 	'Grant' => 'Beri',
 	'Revoke' => 'Batal',
@@ -83,8 +83,8 @@ return [
 	'Query executed OK, %d row(s) affected.' => 'Query berjaya dilaksanakan, %d baris terjejas.',
 	'No commands to execute.' => 'Tiada arahan untuk dilaksanakan.',
 	'Error in query' => 'Ralat pada query',
-	'Unknown error.' => 'Ralat tidak diketahui.', // by Claude Fable 5.1
-	'Warnings' => 'Amaran', // by Claude Fable 5.1
+	'Unknown error.' => 'Ralat tidak diketahui.',
+	'Warnings' => 'Amaran',
 	'%s queries are not supported.' => 'Query %s tidak disokong.',
 	'Execute' => 'Laksana',
 	'Stop on error' => 'Berhenti jika ralat',
@@ -123,8 +123,8 @@ return [
 
 	// Databases
 	'Database' => 'Pangkalan data',
-	'database' => 'pangkalan data', // by Claude Fable 5.1
-	'DB' => 'PD', // by Claude Fable 5.1
+	'database' => 'pangkalan data',
+	'DB' => 'DB',
 	'Use' => 'Guna',
 	'Invalid database.' => 'Pangkalan data tidak sah.',
 	'Alter database' => 'Ubah pangkalan data',
@@ -155,7 +155,7 @@ return [
 	'Invalid schema.' => 'Skema tidak sah.',
 
 	// Table list
-	'All' => 'Semua', // checkbox selecting all tables and views // by Claude Fable 5.1
+	'All' => 'Semua', // checkbox selecting all tables and views
 	'Engine' => 'Enjin',
 	'engine' => 'enjin',
 	'Collation' => 'Collation',
@@ -178,7 +178,7 @@ return [
 	'Tables have been moved.' => 'Jadual telah dipindahkan.',
 	'Copy' => 'Salin',
 	'Tables have been copied.' => 'Jadual telah disalin.',
-	'overwrite' => 'tulis ganti', // by Claude Fable 5.1
+	'overwrite' => 'tulis ganti',
 
 	// Tables
 	'Tables' => 'Jadual',
@@ -237,9 +237,9 @@ return [
 	'Add next' => 'Tambah yang seterusnya',
 	'Index Type' => 'Jenis Indeks',
 	'length' => 'kepanjangan',
-	'operator class' => 'kelas operator', // by Claude Fable 5.1
-	'Algorithm' => 'Algoritma', // by Claude Fable 5.1
-	'Condition' => 'Syarat', // by Claude Fable 5.1
+	'operator class' => 'kelas operator',
+	'Algorithm' => 'Algoritma',
+	'Condition' => 'Syarat',
 
 	// Foreign keys
 	'Foreign keys' => 'Kunci asing',
@@ -252,8 +252,8 @@ return [
 	'Target' => 'Sasaran',
 	'Add column' => 'Tambah kolum',
 	'Alter' => 'Ubah',
-	'Alter foreign key' => 'Ubah kunci asing', // by Claude Fable 5.1
-	'Create foreign key' => 'Bina kunci asing', // by Claude Fable 5.1
+	'Alter foreign key' => 'Ubah kunci asing',
+	'Create foreign key' => 'Bina kunci asing',
 	'ON DELETE' => 'ON DELETE',
 	'ON UPDATE' => 'ON UPDATE',
 	'Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.' => 'Kolum sumber dan sasaran perlu mempunyai jenis data yang sama, indeks diperlukan pada kolum sasaran dan data yang dirujuk wujud.',
@@ -311,12 +311,12 @@ return [
 	'Create trigger' => 'Buat pencetus',
 
 	// Table check constraints
-	'Checks' => 'Pemeriksaan', // by Claude Fable 5.1
-	'Create check' => 'Bina pemeriksaan', // by Claude Fable 5.1
-	'Alter check' => 'Ubah pemeriksaan', // by Claude Fable 5.1
-	'Check has been created.' => 'Pemeriksaan telah dibina.', // by Claude Fable 5.1
-	'Check has been altered.' => 'Pemeriksaan telah diubah.', // by Claude Fable 5.1
-	'Check has been dropped.' => 'Pemeriksaan telah dijatuhkan.', // by Claude Fable 5.1
+	'Checks' => 'Pemeriksaan',
+	'Create check' => 'Bina pemeriksaan',
+	'Alter check' => 'Ubah pemeriksaan',
+	'Check has been created.' => 'Pemeriksaan telah dibuat.',
+	'Check has been altered.' => 'Pemeriksaan telah diubah.',
+	'Check has been dropped.' => 'Pemeriksaan telah dijatuhkan.',
 
 	// Selection
 	'Select data' => 'Pilih data',
@@ -334,7 +334,7 @@ return [
 	'Full table scan' => 'Imbasan penuh jadual',
 	'Unable to select the table' => 'Pemilihan jadual tidak berjaya',
 	'Search data in tables' => 'Cari data dalam jadual',
-	'All rows on this page' => 'Semua baris pada halaman ini', // by Claude Fable 5.1
+	'All rows on this page' => 'Semua baris di halaman ini',
 	'No rows.' => 'Tiada baris.',
 	'%d / ' => '%d / ',
 	'%d row(s)' => '%d baris',
