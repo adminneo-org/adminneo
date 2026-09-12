@@ -566,7 +566,7 @@ if (isset($_GET["mongo"])) {
 		return $return;
 	}
 
-	function create_database(string $db, string $collation): bool
+	function create_database(string $db, ?string $collation): bool
 	{
 		return true;
 	}

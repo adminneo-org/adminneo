@@ -970,7 +970,7 @@ ORDER BY ORDINAL_POSITION";
 	/**
 	 * Creates database.
 	 */
-	function create_database(string $db, string $collation): bool
+	function create_database(string $db, ?string $collation): bool
 	{
 		return (bool)queries("CREATE DATABASE " . idf_escape($db) . ($collation ? " COLLATE " . q($collation) : ""));
 	}

@@ -570,7 +570,7 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function create_database(string $db, string $collation): bool
+	function create_database(string $db, ?string $collation): bool
 	{
 		if (file_exists($db)) {
 			Connection::get()->setError(lang('File exists.'));

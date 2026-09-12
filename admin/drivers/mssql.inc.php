@@ -662,7 +662,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return nl2br(h(preg_replace('~^(\[[^]]*])+~m', '', Connection::get()->getError())));
 	}
 
-	function create_database(string $db, string $collation): bool
+	function create_database(string $db, ?string $collation): bool
 	{
 		return (bool)queries("CREATE DATABASE " . idf_escape($db) . (preg_match('~^[a-z0-9_]+$~i', $collation) ? " COLLATE $collation" : ""));
 	}

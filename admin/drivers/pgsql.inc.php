@@ -1019,7 +1019,7 @@ ORDER BY s.ordinal_position";
 		return nl2br($return);
 	}
 
-	function create_database(string $db, string $collation): bool
+	function create_database(string $db, ?string $collation): bool
 	{
 		return (bool)queries("CREATE DATABASE " . idf_escape($db) . ($collation ? " ENCODING " . idf_escape($collation) : ""));
 	}
