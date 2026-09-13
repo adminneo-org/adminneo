@@ -279,7 +279,7 @@ Databases for testing:
 | PostgreSQL 18   | 127.0.0.1:5432  | test     | test               | `pgsql=pgsql18`           |
 | MS SQL 18       | 127.0.0.1:1433  | test     | 340$Uuxwp7Mcxo7Khy | `mssql=mssql18`           |
 | Elasticsearch 7 | 127.0.0.1:9200  |          |                    | `elastic=elastic7`        |
-| MongoDB 2       | 127.0.0.1:27017 | test     | test               | `mongo=mongo2`            |
+| MongoDB 7       | 127.0.0.1:27017 | test     | test               | `mongo=mongo7`            |
 | Clickhouse 26   | 127.0.0.1:8123  | default  | default            | `clickhouse=clickhouse26` |
 | SQLite          | —               |          |                    | `sqlite=sqlite`           |
 

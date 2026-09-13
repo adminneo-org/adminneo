@@ -18,7 +18,7 @@ function adminneo_instance()
 		"pgsql18" => ["driver" => "pgsql", "server" => "127.0.0.1:5432", "username" => "test", "password" => "test", "name" => "PostgreSQL 18"],
 		"mssql18" => ["driver" => "mssql", "server" => "127.0.0.1:1433", "username" => "test", "password" => '340$Uuxwp7Mcxo7Khy', "name" => "MS SQL 18"],
 		"elastic7" => ["driver" => "elastic", "server" => "127.0.0.1:9200", "name" => "Elasticsearch 7"],
-		"mongo2" => ["driver" => "mongo", "server" => "127.0.0.1:27017", "username" => "test", "password" => "test", "name" => "Mongo DB 2"],
+		"mongo7" => ["driver" => "mongo", "server" => "127.0.0.1:27017", "username" => "test", "password" => "test", "name" => "Mongo DB 7"],
 		"clickhouse26" => ["driver" => "clickhouse", "server" => "127.0.0.1:8123", "username" => "default", "password" => "default", "name" => "Clickhouse 26"],
 		"sqlite" => ["driver" => "sqlite", "name" => "SQLite"],
 	];
