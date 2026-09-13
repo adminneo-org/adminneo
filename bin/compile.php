@@ -489,6 +489,10 @@ $file = preg_replace_callback('~\binclude (__DIR__ \. )?"([^"]+)";~', function (
 	return put_file($match, "../admin/include");
 }, $file);
 
+// Remove lines intended only for the other project: those carrying a trailing `// !admin` or `// !editor` marker.
+$file = preg_replace('~^.*// !' . ($project == "editor" ? "admin" : "editor") . '\n~m', '', $file);
+$file = preg_replace('~ // !(admin|editor)$~m', '', $file);
+
 if ($single_driver) {
 	// Remove source code for unsupported features.
 	foreach ($features as $feature) {

@@ -1,3 +1,5 @@
+'use strict';
+
 (() => {
 	const focusableSelector = "a, button, input:not([type='hidden']), select, textarea";
 

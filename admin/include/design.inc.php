@@ -110,7 +110,11 @@ function page_header(string $title, $breadcrumb = []): void
 	echo script_src(link_files("main.js", [
 		"../admin/scripts/functions.js",
 		"../admin/scripts/focus.js",
-		"scripts/editing.js"
+		"../admin/scripts/sorting.js",
+		"scripts/editing.js",
+		"scripts/fieldsEditing.js", // !admin
+		"scripts/help.js", // !admin
+		"scripts/schema.js", // !admin
 	]));
 
 	foreach (Admin::get()->getJsUrls() as $url) {
