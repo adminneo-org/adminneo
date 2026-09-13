@@ -27,6 +27,8 @@ In a database `adminneo_test`:
 ```postgresql
 CREATE USER test WITH password 'test';
 GRANT ALL ON SCHEMA public TO test;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO test;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO test;
 ```
 
 ### MS SQL
