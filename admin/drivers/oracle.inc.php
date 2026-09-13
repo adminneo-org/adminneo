@@ -163,7 +163,7 @@ if (isset($_GET["oracle"])) {
 					return false;
 				}
 
-				$type = oci_field_type($this->resource, $column); //! map to MySQL numbers
+				$type = oci_field_type($this->resource, $column); // TODO map to MySQL numbers
 				if ($type === false) {
 					return false;
 				}
@@ -220,7 +220,7 @@ if (isset($_GET["oracle"])) {
 					"number" => 38, "binary_float" => 12, "binary_double" => 21,
 				],
 				lang('Date and time') => [
-					"date" => 10, "timestamp" => 29, "interval year" => 12, "interval day" => 28, //! year(), day() to second()
+					"date" => 10, "timestamp" => 29, "interval year" => 12, "interval day" => 28, // TODO year(), day() to second()
 				],
 				lang('Strings') => [
 					"char" => 2000, "varchar2" => 4000,
@@ -251,7 +251,7 @@ if (isset($_GET["oracle"])) {
 				"count", "count distinct",
 			];
 
-			//! no parentheses
+			// TODO no parentheses
 			$this->insertFunctions = [
 				"date" => "current_date",
 				"timestamp" => "current_timestamp",
@@ -264,7 +264,7 @@ if (isset($_GET["oracle"])) {
 			];
 		}
 
-		//! support empty $set in insert()
+		// TODO support empty $set in insert()
 
 		public function begin(): bool
 		{
@@ -293,7 +293,7 @@ if (isset($_GET["oracle"])) {
 
 		public function quoteBinary(string $string): string
 		{
-			//! The literal is limited to 4000 characters.
+			// TODO The literal is limited to 4000 characters.
 			return "HEXTORAW(" . q(bin2hex($string)) . ")";
 		}
 
@@ -361,12 +361,12 @@ ORDER BY 1"
 
 	function limit1(string $table, string $query, string $where, string $separator = "\n"): string
 	{
-		return " $query$where"; //! limit
+		return " $query$where"; // TODO limit
 	}
 
 	function db_collation(string $db, array $collations): ?string
 	{
-		return Connection::get()->getValue("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); //! respect $db
+		return Connection::get()->getValue("SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'"); // TODO respect $db
 	}
 
 	function logged_user(): string
@@ -395,7 +395,7 @@ ORDER BY 1"
 		return get_key_vals("SELECT table_name, 'table' FROM all_tables WHERE tablespace_name = " . q(DB) . "$owner
 UNION SELECT view_name, 'view' FROM $view
 ORDER BY 1"
-		); //! views don't have schema
+		); // TODO views don't have schema
 	}
 
 	function count_tables(array $databases): array
@@ -450,7 +450,7 @@ ORDER BY 1"
 			$length = "$row[DATA_PRECISION],$row[DATA_SCALE]";
 			if ($length == ",") {
 				$length = $row["CHAR_COL_DECL_LENGTH"];
-			} //! int
+			} // TODO int
 			$return[$row["COLUMN_NAME"]] = [
 				"field" => $row["COLUMN_NAME"],
 				"full_type" => $type . ($length ? "($length)" : ""),
@@ -458,11 +458,11 @@ ORDER BY 1"
 				"length" => $length,
 				"default" => $row["DATA_DEFAULT"],
 				"null" => ($row["NULLABLE"] == "Y"),
-				//! "auto_increment" => false,
-				//! "collation" => $row["CHARACTER_SET_NAME"],
+				// TODO "auto_increment" => false,
+				// TODO "collation" => $row["CHARACTER_SET_NAME"],
 				"privileges" => ["insert" => 1, "select" => 1, "update" => 1, "where" => 1, "order" => 1],
-				//! "comment" => $row["Comment"],
-				//! "primary" => ($row["Key"] == "PRI"),
+				// TODO "comment" => $row["Comment"],
+				// TODO "primary" => ($row["Key"] == "PRI"),
 			];
 		}
 		return $return;
@@ -498,18 +498,18 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 
 	function collations(): array
 	{
-		return []; //!
+		return []; // TODO
 	}
 
 	function information_schema(?string $db, string $schema = ""): bool
 	{
-		//! SYS and SYSTEM are read-only too but get_schema() returns the session user.
+		// TODO SYS and SYSTEM are read-only too but get_schema() returns the session user.
 		return ($schema != "" ? $schema : get_schema()) == "INFORMATION_SCHEMA";
 	}
 
 	function error(): string
 	{
-		return h(Connection::get()->getError()); //! highlight sqltext from offset
+		return h(Connection::get()->getError()); // TODO highlight sqltext from offset
 	}
 
 	function explain(Connection $connection, string $query)
@@ -546,7 +546,7 @@ ORDER BY ac.constraint_type, aic.column_position", $connection) as $row) {
 				}
 			}
 			if ($val) {
-				$alter[] = ($table != "" ? ($field[0] != "" ? "MODIFY (" : "ADD (") : "  ") . implode($val) . ($table != "" ? ")" : ""); //! error with name change only
+				$alter[] = ($table != "" ? ($field[0] != "" ? "MODIFY (" : "ADD (") : "  ") . implode($val) . ($table != "" ? ")" : ""); // TODO error with name change only
 			} else {
 				$drop[] = idf_escape($field[0]);
 			}
@@ -638,7 +638,7 @@ AND c_src.TABLE_NAME = " . q($table);
 
 	function last_id($result)
 	{
-		return 0; //!
+		return 0; // TODO
 	}
 
 	function schemas(): array
@@ -701,6 +701,6 @@ ORDER BY PROCESS
 
 	function support(string $feature): bool
 	{
-		return preg_match('~^(columns|database|drop_col|fast_status|indexes|descidx|processlist|scheme|sql|status|table|variables|view)$~', $feature); //!
+		return preg_match('~^(columns|database|drop_col|fast_status|indexes|descidx|processlist|scheme|sql|status|table|variables|view)$~', $feature); // TODO
 	}
 }

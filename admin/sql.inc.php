@@ -53,10 +53,10 @@ if ($_POST) {
 		}
 
 		if ($query != "" && strlen($query) < 1e6) { // don't add big queries
-			$q = $query . (preg_match("~;[ \t\r\n]*\$~", $query) ? "" : ";"); //! doesn't work with DELIMITER |
+			$q = $query . (preg_match("~;[ \t\r\n]*\$~", $query) ? "" : ";"); // TODO doesn't work with DELIMITER |
 			if (!$history || first(end($history)) != $q) { // no repeated queries
 				restart_session();
-				$history[] = [$q, time()]; //! add elapsed time
+				$history[] = [$q, time()]; // TODO add elapsed time
 				set_session("queries", $history_all); // required because reference is unlinked by stop_session()
 				stop_session();
 			}
@@ -68,7 +68,7 @@ if ($_POST) {
 		$offset = 0;
 		$empty = true;
 
-		// connection for exploring indexes and EXPLAIN (to not replace FOUND_ROWS()) //! PDO - silent error
+		// connection for exploring indexes and EXPLAIN (to not replace FOUND_ROWS()) // TODO PDO - silent error
 		$connection2 = connect();
 		if ($connection2 && DB != "") {
 			$connection2->selectDatabase(DB);
@@ -159,7 +159,7 @@ if ($_POST) {
 								flush(); // can take a long time - show the running query
 							}
 							$start = microtime(true);
-							//! don't allow changing of character_set_results, convert encoding of displayed query
+							// TODO don't allow changing of character_set_results, convert encoding of displayed query
 							if (Connection::get()->multiQuery($q) && is_object($connection2) && preg_match("~^$space*+USE\\b~i", $q)) {
 								$connection2->query($q);
 							}
@@ -289,7 +289,7 @@ if ($_POST) {
 		} elseif ($errors && $commands > 1) {
 			echo "<p class='error'>" . lang('Error in query') . ": " . implode("", $errors) . "\n";
 		}
-		//! MS SQL - SET SHOWPLAN_ALL OFF
+		// TODO MS SQL - SET SHOWPLAN_ALL OFF
 
 	} else {
 		echo "<p class='error'>" . upload_error($query) . "\n";

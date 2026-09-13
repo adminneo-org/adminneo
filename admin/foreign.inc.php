@@ -32,7 +32,7 @@ if ($_POST && !$_POST["add"] && !$_POST["change"] && !$_POST["change-js"]) {
 		(bool)$result
 	);
 	if (!$row["drop"]) {
-		Admin::get()->addError(lang('Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.')); //! no partitioning
+		Admin::get()->addError(lang('Source and target columns must have the same data type, there must be an index on the target columns and referenced data must exist.')); // TODO no partitioning
 	}
 }
 
@@ -60,7 +60,7 @@ if ($_POST) {
 
 echo "<form action='' method='post'>\n";
 
-$source = array_keys(fields($TABLE)); //! no text and blob
+$source = array_keys(fields($TABLE)); // TODO no text and blob
 if ($row["db"] != "") {
 	Connection::get()->selectDatabase($row["db"]);
 }

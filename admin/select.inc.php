@@ -221,7 +221,7 @@ if ($_POST) {
 		$rows = [];
 		foreach ($matches[0] as $key => $val) {
 			preg_match_all("~((?>\"[^\"]*\")+|[^$separator]*)$separator~", $val . $separator, $matches2);
-			if (!$key && !array_diff($matches2[1], $cols)) { //! doesn't work with column names containing ",\n
+			if (!$key && !array_diff($matches2[1], $cols)) { // TODO doesn't work with column names containing ",\n
 				// first row corresponds to column names - use it for table structure
 				$cols = $matches2[1];
 				$affected--;
@@ -401,7 +401,7 @@ if (!$columns && support("table")) {
 						$sorted = ($sort_column == $column || $sort_column == $key); // $sort_column == $key - COUNT(*)
 						echo "<th id='th[" . h(bracket_escape($key)) . "]'"
 							. ($sorted ? " aria-sort='" . ($sort_column == $order_column ? "ascending" : "descending") . "'" : "") . ">";
-						$fun = apply_sql_function($val["fun"] ?? null, $name); //! columns looking like functions
+						$fun = apply_sql_function($val["fun"] ?? null, $name); // TODO columns looking like functions
 						$sortable = isset($field["privileges"]["order"]) || ($val["fun"] ?? null);
 						if ($sortable) {
 							echo '<a href="', h($href . ($sorted && $sort_column == $order_column ? $desc : '')), '">', "$fun</a>";
@@ -462,7 +462,7 @@ if (!$columns && support("table")) {
 					$is_binary = $field && is_blob($field);
 
 					if ((DIALECT == "sql" || DIALECT == "pgsql") && $field && ($is_binary || preg_match('~char|text|enum|set~', $field["type"])) && strlen($val) > 64) {
-						$key = (strpos($key, '(') ? $key : idf_escape($key)); //! columns looking like functions
+						$key = (strpos($key, '(') ? $key : idf_escape($key)); // TODO columns looking like functions
 						// The CONVERT() wrapper is skipped for binary values because their collation is binary.
 						$key = "MD5(" . ($is_binary || DIALECT != 'sql' || preg_match("~^utf8~", $field["collation"] ?? "") ? $key : "CONVERT($key USING " . charset(Connection::get()) . ")") . ")";
 						// formatValue() decodes bytea in PostgreSQL.

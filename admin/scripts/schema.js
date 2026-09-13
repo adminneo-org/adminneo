@@ -308,6 +308,6 @@
 		const link = gid('schema-link');
 		link.href = link.href.replace(/[^=]+$/, '') + posString;
 
-		cookie('neo_schema-' + db + '=' + posString, 30); //! special chars in db
+		cookie('neo_schema-' + db + '=' + posString, 30); // TODO special chars in db
 	}
 })();

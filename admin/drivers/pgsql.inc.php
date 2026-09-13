@@ -255,7 +255,7 @@ if (isset($_GET["pgsql"])) {
 				$db = Admin::get()->getDatabase();
 
 				list($host, $port) = host_port($server);
-				//! client_encoding is supported since 9.1, but we can't yet use minVersion() here
+				// TODO client_encoding is supported since 9.1, but we can't yet use minVersion() here
 				$dsn = "pgsql:" . ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
@@ -355,7 +355,7 @@ if (isset($_GET["pgsql"])) {
 		{
 			parent::__construct($connection, $admin);
 
-			//! arrays
+			// TODO arrays
 			$this->types = [
 				lang('Numbers') => [
 					"smallint" => 5, "integer" => 10, "bigint" => 19,
@@ -435,7 +435,7 @@ if (isset($_GET["pgsql"])) {
 
 			$this->editFunctions = [
 				number_type() => "+/-",
-				"date|time" => "+ interval/- interval", //! escape
+				"date|time" => "+ interval/- interval", // TODO escape
 				"char|text" => "||",
 			];
 
@@ -556,7 +556,7 @@ WHERE inhrelid = " . $this->tableOid($table) . " ORDER BY 2, 1");
 				return [];
 			}
 
-			$attrs = get_vals("SELECT attname FROM pg_attribute WHERE attrelid = {$row["partrelid"]} AND attnum IN (" . str_replace(" ", ", ", $row["partattrs"]) . ")"); //! ordering
+			$attrs = get_vals("SELECT attname FROM pg_attribute WHERE attrelid = {$row["partrelid"]} AND attnum IN (" . str_replace(" ", ", ", $row["partattrs"]) . ")"); // TODO ordering
 			$by = ['h' => 'HASH', 'l' => 'LIST', 'r' => 'RANGE'];
 
 			$info = [
@@ -834,7 +834,7 @@ FROM pg_class c
 WHERE relkind IN ('r', 'm', 'v', 'f', 'p')
 AND relnamespace = " . Driver::get()->getNsOidSql() . "
 " . ($name != "" ? "AND relname = " . q($name) : "ORDER BY relname")
-		) as $row) { //! Auto_increment
+		) as $row) { // TODO Auto_increment
 			$return[$row["Name"]] = $row;
 		}
 
@@ -875,7 +875,7 @@ AND NOT a.attisdropped
 AND a.attnum > 0
 ORDER BY a.attnum"
 		) as $row) {
-			//! collation
+			// TODO collation
 			preg_match('~([^([]+)(\((.*)\))?([a-z ]+)?((\[[0-9]*])*)$~', $row["full_type"], $match);
 			list(, $type, $length, $row["length"], $addon, $array) = $match;
 			$check_type = $type . $addon;
@@ -933,7 +933,7 @@ ORDER BY indisprimary DESC, indisunique DESC", $connection
 			$return[$relname]["descs"] = [];
 			$return[$relname]["algorithm"] = $row["amname"];
 			$return[$relname]["partial"] = $row["partial"];
-			$indexpr = preg_split('~(?<=\)), (?=\()~', $row["indexpr"]); //! '), (' used in expression
+			$indexpr = preg_split('~(?<=\)), (?=\()~', $row["indexpr"]); // TODO '), (' used in expression
 			foreach (explode(" ", $row["indkey"]) as $indkey) {
 				$return[$relname]["columns"][] = ($indkey ? $columns[$indkey] : array_shift($indexpr));
 			}
@@ -1000,7 +1000,7 @@ ORDER BY s.ordinal_position";
 
 	function collations(): array
 	{
-		//! supported in CREATE DATABASE
+		// TODO supported in CREATE DATABASE
 		return [];
 	}
 
@@ -1075,7 +1075,7 @@ ORDER BY s.ordinal_position";
 					$sequence_name = $table . "_" . idf_unescape($val[0]) . "_seq";
 					$alter[] = "ALTER $column " . ($val[3] ? "SET" . preg_replace('~GENERATED ALWAYS(.*) (STORED|VIRTUAL)~', 'EXPRESSION\1', $val[3])
 						: (isset($val[6]) ? "SET DEFAULT nextval(" . q($sequence_name) . ")"
-						: "DROP DEFAULT" //! change to DROP EXPRESSION with generated columns
+						: "DROP DEFAULT" // TODO change to DROP EXPRESSION with generated columns
 					));
 					if (isset($val[6])) {
 						$sequence = "CREATE SEQUENCE IF NOT EXISTS " . idf_escape($sequence_name) . " OWNED BY " . idf_escape($table) . ".$val[0]";
@@ -1130,7 +1130,7 @@ ORDER BY s.ordinal_position";
 			$queries[] = "COMMENT ON TABLE " . table($name) . " IS " . q($comment);
 		}
 		if ($auto_increment != "") {
-			//! $queries[] = "SELECT setval(pg_get_serial_sequence(" . q($name) . ", ), $auto_increment)";
+			// TODO $queries[] = "SELECT setval(pg_get_serial_sequence(" . q($name) . ", ), $auto_increment)";
 		}
 		foreach ($queries as $query) {
 			if (!queries($query)) {
@@ -1147,7 +1147,7 @@ ORDER BY s.ordinal_position";
 		$queries = [];
 		foreach ($alter as $val) {
 			if ($val[0] != "INDEX") {
-				//! descending UNIQUE indexes result in syntax error
+				// TODO descending UNIQUE indexes result in syntax error
 				$create[] = ($val[2] == "DROP"
 					? "\nDROP CONSTRAINT " . idf_escape($val[1])
 					: "\nADD" . ($val[1] != "" ? " CONSTRAINT " . idf_escape($val[1]) : "") . " $val[0] " . ($val[0] == "PRIMARY" ? "KEY " : "") . "(" . implode(", ", $val[2]) . ")"
@@ -1385,7 +1385,7 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 
 		$result = (bool)$connection->query("SET search_path TO " . idf_escape($schema));
 
-		//! get types from current_schemas('t')
+		// TODO get types from current_schemas('t')
 		Driver::get()->setUserTypes(types(true));
 
 		return $result;
@@ -1514,7 +1514,7 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 		if ($partition) {
 			$return .= "\nPARTITION BY {$partition["partition_by"]}({$partition["partition"]})";
 		}
-		//! parse pg_class.relpartbound to create PARTITION OF
+		// TODO parse pg_class.relpartbound to create PARTITION OF
 
 		$return .= "\nWITH (oids = " . ($status['Oid'] ? 'true' : 'false') . ");";
 

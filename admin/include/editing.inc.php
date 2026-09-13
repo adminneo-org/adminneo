@@ -178,7 +178,7 @@ function select_input($attrs, $options, $value = "", $onchange = "", $placeholde
 	return "<$tag $attrs" . ($options
 			? "><option value=''>$placeholder" . optionlist($options, $value, true) . "</select>"
 			: " size='10' value='" . h($value) . "' placeholder='$placeholder'>"
-		) . ($onchange ? script("qsl('$tag').onchange = $onchange;", "") : ""); //! use oninput for input
+		) . ($onchange ? script("qsl('$tag').onchange = $onchange;", "") : ""); // TODO use oninput for input
 }
 
 /** Print one row in JSON object
@@ -222,7 +222,7 @@ if ($foreign_keys) {
 }
 echo optionlist(array_merge($extra_types, $structured_types), $type);
 ?></select><td><input name="<?php echo h($key); ?>[length]" value="<?php echo h($field["length"] ?? null); ?>" size="3"<?php
-	//! type="number" with enabled JavaScript
+	// TODO type="number" with enabled JavaScript
 	echo (!($field["length"] ?? null) && preg_match('~var(char|binary)$~', $type) ? " class='input required'" : " class='input'");
 ?> aria-labelledby="label-length"><td class="options"><?php
 	echo ($collations ?
@@ -680,7 +680,7 @@ function create_routine($routine, $row) {
 * @return string
 */
 function remove_definer($query) {
-	return preg_replace('~^([A-Z =]+) DEFINER=`' . preg_replace('~@(.*)~', '`@`(%|\1)', logged_user()) . '`~', '\1', $query); //! proper escaping of user
+	return preg_replace('~^([A-Z =]+) DEFINER=`' . preg_replace('~@(.*)~', '`@`(%|\1)', logged_user()) . '`~', '\1', $query); // TODO proper escaping of user
 }
 
 /** Format foreign key to use in SQL query
@@ -696,7 +696,7 @@ function format_foreign_key($foreign_key) {
 		. ($db != "" && $db != $_GET["db"] ? idf_escape($db) . "." : "")
 		. ($ns != "" && $ns != $_GET["ns"] ? idf_escape($ns) . "." : "")
 		. idf_escape($foreign_key["table"])
-		. " (" . implode(", ", array_map('AdminNeo\idf_escape', $foreign_key["target"])) . ")" //! reuse $name - check in older MySQL versions
+		. " (" . implode(", ", array_map('AdminNeo\idf_escape', $foreign_key["target"])) . ")" // TODO reuse $name - check in older MySQL versions
 		. (preg_match("~^($onActions)\$~", $foreign_key["on_delete"]) ? " ON DELETE $foreign_key[on_delete]" : "")
 		. (preg_match("~^($onActions)\$~", $foreign_key["on_update"]) ? " ON UPDATE $foreign_key[on_update]" : "")
 		. (isset($foreign_key["deferrable"]) ? " $foreign_key[deferrable]" : "")

@@ -394,9 +394,9 @@ if ($arguments) {
 /* Disabled for now because it reports too many warnings.
 $file = file_get_contents(__DIR__ . "/../admin/drivers/mysql.inc.php");
 $file = preg_replace('~class Min_Driver.*\n\t}~sU', '', $file);
-preg_match_all('~\bfunction ([^(]+)~', $file, $matches); //! respect context (extension, class)
+preg_match_all('~\bfunction ([^(]+)~', $file, $matches); // TODO respect context (extension, class)
 $functions = array_combine($matches[1], $matches[0]);
-//! do not warn about functions without declared support()
+// TODO do not warn about functions without declared support()
 unset($functions["__construct"], $functions["__destruct"], $functions["set_charset"]);
 
 foreach (glob(__DIR__ . "/../admin/drivers/*.inc.php") as $filename) {
@@ -514,7 +514,7 @@ if ($single_driver) {
 		return (trim($links) ? "doc_link([$links])" : "''");
 	}, $file);
 
-	//! strip doc_link() definition
+	// TODO strip doc_link() definition
 }
 
 // Compile language files.

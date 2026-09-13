@@ -545,7 +545,7 @@ function process_input($field) {
 	if (is_blob($field) && ini_bool("file_uploads")) {
 		$file = get_file("fields-$idf");
 		if (!is_string($file)) {
-			return false; //! report errors
+			return false; // TODO report errors
 		}
 		return Driver::get()->quoteBinary($file);
 	}
@@ -564,7 +564,7 @@ function process_input($field) {
 	if ($function == "json") {
 		$value = json_decode($value, true);
 		if (!is_array($value)) {
-			return false; //! report errors
+			return false; // TODO report errors
 		}
 		return $value;
 	}

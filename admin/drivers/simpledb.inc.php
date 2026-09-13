@@ -64,7 +64,7 @@ if (isset($_GET["simpledb"])) {
 					$params['NextToken'] = $this->next;
 				}
 
-				$result = sdb_request_all('Select', 'Item', $params, $this->timeout); //! respect $unbuffered
+				$result = sdb_request_all('Select', 'Item', $params, $this->timeout); // TODO respect $unbuffered
 
 				$this->timeout = 0;
 				if ($result === false) {
@@ -303,7 +303,7 @@ if (isset($_GET["simpledb"])) {
 
 		public function insertUpdate(string $table, array $records, array $primary): bool
 		{
-			//! use one batch request
+			// TODO use one batch request
 			foreach ($records as $record) {
 				if (!$this->update($table, $record, "WHERE `itemName()` = " . q($record["`itemName()`"]))) {
 					return false;

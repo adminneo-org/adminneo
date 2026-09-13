@@ -82,7 +82,7 @@ SET foreign_key_checks = 0;
 						if ($enums) {
 							$out .= ($style != 'DROP+CREATE' ? "DROP TYPE IF EXISTS " . idf_escape($type) . ";;\n" : "") . "CREATE TYPE " . idf_escape($type) . " AS ENUM ($enums);\n\n";
 						} else {
-							//! https://github.com/postgres/postgres/blob/REL_17_4/src/bin/pg_dump/pg_dump.c#L10846
+							// TODO https://github.com/postgres/postgres/blob/REL_17_4/src/bin/pg_dump/pg_dump.c#L10846
 							$out .= "-- Could not export type $type\n\n";
 						}
 					}
@@ -222,7 +222,7 @@ echo "<table class='box'>\n";
 $db_style = ['', 'USE', 'DROP+CREATE', 'CREATE'];
 $table_style = ['', 'DROP+CREATE', 'CREATE'];
 $data_style = ['', 'TRUNCATE+INSERT', 'INSERT'];
-if (DIALECT == "sql") { //! use insertUpdate() in all drivers
+if (DIALECT == "sql") { // TODO use insertUpdate() in all drivers
 	$data_style[] = 'INSERT+UPDATE';
 }
 
@@ -292,7 +292,7 @@ if (DB != "" && $_GET["ns"] === "") {
 	$tables_list = tables_list();
 	foreach ($tables_list as $name => $type) {
 		$prefix = preg_replace('~_.*~', '', $name);
-		$checked = ($TABLE == "" || $TABLE == (substr($TABLE, -1) == "%" ? "$prefix%" : $name)); //! % may be part of table name
+		$checked = ($TABLE == "" || $TABLE == (substr($TABLE, -1) == "%" ? "$prefix%" : $name)); // TODO % may be part of table name
 		$print = "<tr><td>" . checkbox("tables[]", $name, $checked, $name, "", "block");
 		if ($type !== null && !preg_match('~table~i', $type)) {
 			$views .= "$print\n";

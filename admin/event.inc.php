@@ -14,7 +14,7 @@ if ($_POST) {
 		$schedule = "\nON SCHEDULE " . ($row["INTERVAL_VALUE"]
 			? "EVERY " . q($row["INTERVAL_VALUE"]) . " $row[INTERVAL_FIELD]"
 			. ($row["STARTS"] ? " STARTS " . q($row["STARTS"]) : "")
-			. ($row["ENDS"] ? " ENDS " . q($row["ENDS"]) : "") //! ALTER EVENT doesn't drop ENDS - MySQL bug #39173
+			. ($row["ENDS"] ? " ENDS " . q($row["ENDS"]) : "") // TODO ALTER EVENT doesn't drop ENDS - MySQL bug #39173
 			: "AT " . q($row["STARTS"])
 			) . " ON COMPLETION" . ($row["ON_COMPLETION"] ? "" : " NOT") . " PRESERVE"
 		;

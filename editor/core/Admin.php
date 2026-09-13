@@ -226,7 +226,7 @@ class Admin extends Origin
 		$fields = fields($_GET["select"]);
 		foreach ($columns as $name => $desc) {
 			$field = $fields[$name];
-			if (preg_match("~enum~", $field["type"]) || $this->looksLikeBool($field)) { //! set - uses 1 << $i and FIND_IN_SET()
+			if (preg_match("~enum~", $field["type"]) || $this->looksLikeBool($field)) { // TODO set - uses 1 << $i and FIND_IN_SET()
 				$key = $keys[$name];
 				$i--;
 				echo "<div>" . h($desc) . ":" . input_hidden("where[$i][col]", $name);
@@ -276,7 +276,7 @@ class Admin extends Origin
 
 	public function printSelectionOrder(array $order, array $columns, array $indexes): void
 	{
-		//! desc
+		// TODO desc
 		$orders = [];
 		foreach ($indexes as $key => $index) {
 			$order = [];
@@ -413,7 +413,7 @@ class Admin extends Origin
 
 		$return[""] = ($field["null"] || $field["auto_increment"] || $this->looksLikeBool($field) ? "" : "*");
 
-		//! respect driver
+		// TODO respect driver
 		if (preg_match('~date|time~', $field["type"])) {
 			$return["now"] = lang('now');
 		}

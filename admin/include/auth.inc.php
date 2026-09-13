@@ -146,7 +146,7 @@ function check_invalid_login(array &$permanent): void
 	$invalid = ($invalids ? $invalids[Admin::get()->getBruteForceKey()] : []);
 
 	$next_attempt = ($invalid && $invalid[1] > 29 ? $invalid[0] - time() : 0); // allow 30 invalid attempts
-	if ($next_attempt > 0) { //! do the same with permanent login
+	if ($next_attempt > 0) { // TODO do the same with permanent login
 		auth_error($permanent, lang('Too many unsuccessful logins, try again in %d minute(s).', ceil($next_attempt / 60)));
 	}
 }

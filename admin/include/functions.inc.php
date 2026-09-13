@@ -331,8 +331,8 @@ function unique_array(array $row, array $indexes): ?array
 * @return string
 */
 function escape_key($key) {
-	if (preg_match('(^([\w(]+)(' . str_replace("_", ".*", preg_quote(idf_escape("_"))) . ')([ \w)]+)$)', $key, $match)) { //! columns looking like functions
-		return $match[1] . idf_escape(idf_unescape($match[2])) . $match[3]; //! SQL injection
+	if (preg_match('(^([\w(]+)(' . str_replace("_", ".*", preg_quote(idf_escape("_"))) . ')([ \w)]+)$)', $key, $match)) { // TODO columns looking like functions
+		return $match[1] . idf_escape(idf_unescape($match[2])) . $match[3]; // TODO SQL injection
 	}
 	return idf_escape($key);
 }
@@ -760,7 +760,7 @@ function get_file($key, $decompress = false, $delimiter = "") {
 		$content = file_get_contents($decompress && preg_match('~\.gz$~', $name)
 			? "compress.zlib://$tmp_name"
 			: $tmp_name
-		); //! may not be reachable because of open_basedir
+		); // TODO may not be reachable because of open_basedir
 
 		if ($decompress) {
 			$start = substr($content, 0, 3);

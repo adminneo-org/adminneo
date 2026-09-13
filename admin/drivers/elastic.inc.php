@@ -317,7 +317,7 @@ if (isset($_GET["elastic"])) {
 
 		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 		{
-			//! use $limit
+			// TODO use $limit
 			$parts = preg_split('~ *= *~', $queryWhere);
 			if (count($parts) != 2) {
 				return false;
@@ -368,7 +368,7 @@ if (isset($_GET["elastic"])) {
 
 		public function delete(string $table, string $queryWhere, int $limit = 0)
 		{
-			//! use $limit
+			// TODO use $limit
 			$ids = [];
 			if ($_GET["where"]["_id"] ?? null) {
 				$ids[] = $_GET["where"]["_id"];
@@ -730,7 +730,7 @@ if (isset($_GET["elastic"])) {
 	function drop_tables(array $tables): bool
 	{
 		$return = true;
-		foreach ($tables as $table) { //! convert to bulk api
+		foreach ($tables as $table) { // TODO convert to bulk api
 			$table = urlencode($table);
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.

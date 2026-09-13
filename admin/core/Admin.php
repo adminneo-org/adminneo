@@ -252,7 +252,7 @@ class Admin extends Origin
 			$query = preg_replace('~[\x80-\xFF]+$~', '', substr($query, 0, 1e6)) . "\n…"; // [\x80-\xFF] - valid UTF-8, \n - can end by one-line comment
 		}
 
-		$history[$_GET["db"]][] = [$query, time(), $time]; // not DB - $_GET["db"] is changed in database.inc.php //! respect $_GET["ns"]
+		$history[$_GET["db"]][] = [$query, time(), $time]; // not DB - $_GET["db"] is changed in database.inc.php // TODO respect $_GET["ns"]
 
 		$supportSql = support("sql");
 		$warnings = !$failed ? Driver::get()->warnings() : null;
@@ -841,7 +841,7 @@ class Admin extends Origin
 		$return = [];
 		foreach ((array)$_GET["order"] as $key => $val) {
 			if ($val != "") {
-				$return[] = (preg_match('~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`]|``)+`|"(?:[^"]|"")+")\)|COUNT\(\*\))$~', $val) ? $val : idf_escape($val)) //! MS SQL uses []
+				$return[] = (preg_match('~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`]|``)+`|"(?:[^"]|"")+")\)|COUNT\(\*\))$~', $val) ? $val : idf_escape($val)) // TODO MS SQL uses []
 					. (isset($_GET["desc"][$key])
 						? " DESC" . (DIALECT == "pgsql" && ($fields[$val]["null"] ?? null) ? " NULLS LAST" : "")
 						: ""
@@ -921,7 +921,7 @@ class Admin extends Origin
 	public function processFieldInput(array $field, string $value, string $function = "")
 	{
 		if ($function == "SQL") {
-			return $value; //! SQL injection
+			return $value; // TODO SQL injection
 		}
 
 		if (isset($field["full_type"])) {
