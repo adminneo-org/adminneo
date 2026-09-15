@@ -190,7 +190,7 @@ function formCheck(name) {
  * Checks all rows in <table class="checkable">.
  */
 function tableCheck() {
-	qsa('table.checkable td:first-child input').forEach(trCheck);
+	qsa('table.checkable td:first-child input, table.checkable th:first-child input').forEach(trCheck);
 
 	// Once the browser restores the checkboxes while browsing history.
 	window.addEventListener('pageshow', tableCheck);
