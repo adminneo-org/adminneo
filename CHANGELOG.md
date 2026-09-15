@@ -52,7 +52,7 @@ AdminNeo 5.8.0
 - PostgreSQL: Fix editing a record with a GENERATED ALWAYS AS IDENTITY column (fix #205, regression from 5.5.0)
 - PostgreSQL, MS SQL: Highlight primary keys in the database schema (regression from 5.1.0)
 - SQLite: Fix working with binary data through PDO
-- MongoDB: Show the primary key column when altering indexes (regression from 5.5.0) (by @vrana)
+- MongoDB: Show the primary key column when altering indexes (by @vrana, regression from 5.5.0)
 
 (Ported relevant changes from Adminer 6.0.0 • part 3)
 
