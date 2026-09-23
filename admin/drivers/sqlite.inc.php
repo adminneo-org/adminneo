@@ -23,6 +23,9 @@ if (isset($_GET["sqlite"])) {
 			public function open(string $server, string $username, string $password): bool
 			{
 				$this->sqlite = new SQLite3($server);
+				if (method_exists($this->sqlite, "setAuthorizer")) { // PHP 8.0+
+					$this->sqlite->setAuthorizer([$this, "authorize"]);
+				}
 
 				$this->version = $this->sqlite->version()["versionString"];
 
@@ -111,7 +114,15 @@ if (isset($_GET["sqlite"])) {
 		{
 			public function open(string $server, string $username, string $password): bool
 			{
-				return $this->dsn(DRIVER . ":$server", "", "");
+				if (!$this->dsn(DRIVER . ":$server", "", "", [], class_exists('Pdo\Sqlite') ? 'Pdo\Sqlite' : 'PDO')) {
+					return false;
+				}
+
+				if (method_exists($this->pdo, "setAuthorizer")) { // PHP 8.5+
+					$this->pdo->setAuthorizer([$this, "authorize"]);
+				}
+
+				return true;
 			}
 
 			public function quote(string $string): string
@@ -129,6 +140,9 @@ if (isset($_GET["sqlite"])) {
 	if (class_exists('AdminNeo\SqLiteConnectionBase')) {
 		class SqLiteConnection extends SqLiteConnectionBase
 		{
+			/** @var bool */
+			private $attaching = false;
+
 			protected function __construct()
 			{
 				parent::__construct();
@@ -155,12 +169,25 @@ if (isset($_GET["sqlite"])) {
 
 			public function selectDatabase(string $name): bool
 			{
+				$this->attaching = true;
 				// is_readable - SQLite 3
-				if (is_readable($name) && $this->query("ATTACH " . $this->quote(preg_match("~(^[/\\\\]|:)~", $name) ? $name : dirname($_SERVER["SCRIPT_FILENAME"]) . "/$name") . " AS a")) {
+				$attached = is_readable($name) && $this->query("ATTACH " . $this->quote(preg_match("~(^[/\\\\]|:)~", $name) ? $name : dirname($_SERVER["SCRIPT_FILENAME"]) . "/$name") . " AS a");
+				$this->attaching = false;
+
+				if ($attached) {
 					return self::open($name, "", "");
 				}
 
 				return false;
+			}
+
+			/**
+			 * Denies attaching a file, also used by VACUUM INTO.
+			 */
+			public function authorize(int $action, ?string $arg1): int
+			{
+				// 24 - SQLITE_ATTACH, "" is a temporary database used also by VACUUM.
+				return ($action != 24 || $arg1 === "" || $this->attaching ? 0 : 1); // SQLITE_OK, SQLITE_DENY
 			}
 		}
 	}

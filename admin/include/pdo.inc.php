@@ -16,12 +16,12 @@ if (extension_loaded('pdo')) {
 		/** @var PdoResult|false */
 		protected $multiResult;
 
-		protected function dsn(string $dsn, string $username, string $password, array $options = []): bool
+		protected function dsn(string $dsn, string $username, string $password, array $options = [], string $class = "PDO"): bool
 		{
 			$options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
 
 			try {
-				$this->pdo = new PDO($dsn, $username, $password, $options);
+				$this->pdo = new $class($dsn, $username, $password, $options);
 			} catch (Exception $exception) {
 				$this->error = $exception->getMessage();
 				return false;
