@@ -62,7 +62,7 @@ if ($_POST) {
 			}
 		}
 
-		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:$line_comment)[^\n]*\n?|--\r?\n)";
+		$space = "(?:\\s|\xEF\xBB\xBF|/\\*[\s\S]*?\\*/|(?:$line_comment)[^\n]*\n?|--\r?\n)"; // BOM - SQLite skips it
 		$delimiter = ";";
 		$delimiter_length = 1;
 		$offset = 0;

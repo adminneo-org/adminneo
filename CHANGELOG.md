@@ -65,6 +65,7 @@ AdminNeo 5.9
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
+- SQLite: Disallow ATTACH and VACUUM INTO prefixed by BOM (by @vrana, GHSA-ggh8-3chg-48w7)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - MongoDB, SimpleDB: Show a message after creating a table (regression from 5.8.0)
 - TableLoginPlugin: Restrict sending database credentials only to allowed server (GHSA-rgjx-wcgv-pw7g)
