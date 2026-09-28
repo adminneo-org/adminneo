@@ -474,7 +474,10 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		echo "<input type='file' name='fields-$name'>";
 	} elseif ($is_json) {
 		echo "<textarea $attrs cols='50' rows='12' class='jush-json'>" . h($value) . '</textarea>';
-	} elseif (($text = preg_match('~text|lob|memo|json~i', $field["type"])) || preg_match("~\n~", $value)) {
+	} elseif (
+		($text = preg_match('~text|lob|memo|json~i', $field["type"]) || (preg_match('~char|binary~', $field["type"]) && $field["length"] == "max")) ||
+		preg_match("~\n~", $value)
+	) {
 		if ($text && DIALECT != "sqlite") {
 			$attrs .= " cols='50' rows='12'";
 		} else {

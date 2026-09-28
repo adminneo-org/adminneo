@@ -268,6 +268,11 @@ function option_types(?string $type, string $types): string
 * @return string
 */
 function process_length($length) {
+	// MS SQL: varchar(max), nvarchar(max), varbinary(max).
+	if (preg_match('~^\s*\(?\s*max\s*\)?\s*$~i', $length)) {
+		return "(max)";
+	}
+
 	$enumLengthPattern = Driver::EnumLengthPattern;
 
 	return (preg_match("~^\\s*\\(?\\s*$enumLengthPattern(?:\\s*,\\s*$enumLengthPattern)*+\\s*\\)?\\s*\$~", $length) && preg_match_all("~$enumLengthPattern~", $length, $matches)
