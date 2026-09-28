@@ -999,6 +999,11 @@ function functionChange(event, init = false) {
 	const inputName = this.name.replace(/^function/, 'fields');
 	let input = this.form[inputName] || this.form[`${inputName}[]`];
 
+	// File input is named 'fields-*' and there is no value to manage.
+	if (!input) {
+		return;
+	}
+
 	// Switch to the text field if function is selected.
 	if (func === "SQL" || func === "+" || func === "-") {
 		if (!input.origElement) {
