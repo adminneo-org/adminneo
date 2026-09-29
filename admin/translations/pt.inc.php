@@ -234,7 +234,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Quantidade máxima de campos permitidos excedidos. Por favor aumente %s.',
 
 	// Views
-	'View' => 'Visualizar',
+	'View' => 'Vista', // by Claude Opus 5.5
 	'Materialized view' => 'Vista materializada', // by Claude Fable 5.1
 	'View has been dropped.' => 'Vista eliminada.',
 	'View has been altered.' => 'Vista modificada.',

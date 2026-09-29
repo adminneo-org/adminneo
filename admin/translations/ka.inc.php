@@ -219,7 +219,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'მიღწეულია დაშვებული ველების მაქსიმალური რაოდენობა, გაზარდეთ %s.',
 
 	// Views
-	'View' => 'ნახვა',
+	'View' => 'წარმოდგენა', // by Claude Opus 5.5
 	'Materialized view' => 'მატერიალური ხედი',
 	'View has been dropped.' => 'წარმოდგენა წაიშალა.',
 	'View has been altered.' => 'წარმოდგენა შეიცვალა.',

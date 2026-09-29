@@ -219,7 +219,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'הגעת למספר השדות המרבי. בבקשה הגדל את %s',
 
 	// Views
-	'View' => 'הצג',
+	'View' => 'תצוגה', // by Claude Opus 5.5
 	'Materialized view' => 'תצוגה ממומשת', // by Claude Fable 5.1
 	'View has been dropped.' => 'התצוגה הושלכה',
 	'View has been altered.' => 'התצוגה שונתה',

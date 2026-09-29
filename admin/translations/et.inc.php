@@ -225,7 +225,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Maksimaalne väljade arv ületatud. Palun suurendage %s.',
 
 	// Views
-	'View' => 'Vaata',
+	'View' => 'Vaade', // by Claude Opus 5.5
 	'Materialized view' => 'Materialiseeritud vaade', // by Claude Fable 5.1
 	'View has been dropped.' => 'Vaade (VIEW) on edukalt kustutatud.',
 	'View has been altered.' => 'Vaade (VIEW) on edukalt muudetud.',

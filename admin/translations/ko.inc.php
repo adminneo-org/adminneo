@@ -219,7 +219,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => '정의 가능한 최대 필드 수를 초과했습니다. %s(을)를 늘리십시오.',
 
 	// Views
-	'View' => '보기',
+	'View' => '뷰', // by Claude Opus 5.5
 	'Materialized view' => '구체화된 뷰', // by Claude Fable 5.1
 	'View has been dropped.' => '보기를 삭제했습니다.',
 	'View has been altered.' => '보기를 변경했습니다.',

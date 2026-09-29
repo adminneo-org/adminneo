@@ -187,7 +187,7 @@ return [
 
 	// Tables
 	'Tables' => 'Jadual',
-	'Tables and views' => 'Jadual dan pandangan',
+	'Tables and views' => 'Jadual dan paparan', // by Claude Opus 5.5
 	'Table' => 'Jadual',
 	'No tables.' => 'Tiada jadual.',
 	'Alter table' => 'Ubah jadual',
@@ -219,7 +219,7 @@ return [
 	'Maximum number of allowed fields exceeded. Please increase %s.' => 'Bilangan medan telah melebihi had yang dibenarkan. Sila tingkatkan %s.',
 
 	// Views
-	'View' => 'Papar',
+	'View' => 'Paparan', // by Claude Opus 5.5
 	'Materialized view' => 'Paparan termaterialisasi', // by Claude Fable 5.1
 	'View has been dropped.' => 'Paparan telah dijatuhkan.',
 	'View has been altered.' => 'Paparan telah diubah.',
@@ -429,5 +429,5 @@ return [
 	'Data table' => 'Jadual data', // by Claude Fable 5.1
 	'Edit form' => 'Borang ubah', // by Claude Fable 5.1
 	'Ask %s' => 'Tanya %s', // by Claude Fable 5.1
-	'Views' => 'Pandangan', // by Claude Opus 5.5
+	'Views' => 'Paparan', // by Claude Opus 5.5
 ];
