@@ -896,7 +896,7 @@ ORDER BY a.attnum"
 			$options = ["s" => "STORED", "v" => "VIRTUAL"];
 			$row["generated"] = ($options[$row["attgenerated"]] ?? "");
 			$row["null"] = !$row["attnotnull"];
-			$row["auto_increment"] = $row['attidentity'] || preg_match('~^nextval\(~i', $row["default"])
+			$row["auto_increment"] = preg_match('~^nextval\(~i', $row["default"])
 				|| preg_match('~^unique_rowid\(~', $row["default"]); // CockroachDB
 			$row["privileges"] = ["insert" => 1, "select" => 1, "update" => 1, "where" => 1, "order" => 1];
 			// The s modifier - a multiline default value contains newlines.
