@@ -213,6 +213,7 @@ return [
 	'Options' => 'Valikud',
 	'Comment' => 'Kommentaar',
 	'Default value' => 'Vaikeväärtus', // by Claude Fable 5.1
+	'default value' => 'vaikeväärtus', // by Claude Opus 5.5
 	'Drop' => 'Kustuta',
 	'Drop %s?' => 'Kustuta %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Kas oled kindel?',

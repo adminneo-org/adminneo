@@ -222,6 +222,7 @@ return [
 	'Options' => 'வேண்டிய‌வ‌ற்றை ',
 	'Comment' => 'குறிப்பு',
 	'Default value' => 'இய‌ல்பு ம‌திப்பு', // by Claude Fable 5.1
+	'default value' => 'இய‌ல்பு ம‌திப்பு', // by Claude Opus 5.5
 	'Drop' => 'நீக்கு',
 	'Drop %s?' => '%s நீக்க‌வா?', // by Claude Fable 5.1
 	'Are you sure?' => 'நிச்ச‌ய‌மாக‌ ?',

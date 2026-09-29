@@ -227,6 +227,7 @@ return [
 	'Options' => 'Opcije',
 	'Comment' => 'Komentar',
 	'Default value' => 'Zadana vrijednost',
+	'default value' => 'zadana vrijednost',
 	'Drop' => 'Izbriši',
 	'Drop %s?' => 'Izbrisati %s?',
 	'Are you sure?' => 'Jeste li sigurni?',

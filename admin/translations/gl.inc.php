@@ -222,6 +222,7 @@ return [
 	'Options' => 'Opcións',
 	'Comment' => 'Comentario',
 	'Default value' => 'Valor por defecto',
+	'default value' => 'valor por defecto',
 	'Drop' => 'Eliminar',
 	'Drop %s?' => 'Eliminar %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Está seguro?',

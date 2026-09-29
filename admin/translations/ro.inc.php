@@ -227,6 +227,7 @@ return [
 	'Options' => 'Acțiune',
 	'Comment' => 'Comentariu',
 	'Default value' => 'Valoare implicită', // by Claude Fable 5.1
+	'default value' => 'valoare implicită', // by Claude Opus 5.5
 	'Drop' => 'Șterge',
 	'Drop %s?' => 'Ștergeți %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Sunteți sigur(ă)?',

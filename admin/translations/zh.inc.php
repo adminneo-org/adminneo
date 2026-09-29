@@ -207,6 +207,7 @@ return [
 	'Options' => '选项',
 	'Comment' => '注释',
 	'Default value' => '默认值',
+	'default value' => '默认值',
 	'Drop' => '删除',
 	'Drop %s?' => '删除 %s?',
 	'Are you sure?' => '您确定吗？',

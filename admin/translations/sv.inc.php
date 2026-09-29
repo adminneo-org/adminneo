@@ -222,6 +222,7 @@ return [
 	'Options' => 'Inställningar',
 	'Comment' => 'Kommentar',
 	'Default value' => 'Standardvärde',
+	'default value' => 'standardvärde',
 	'Drop' => 'Ta bort',
 	'Drop %s?' => 'Ta bort %s?',
 	'Are you sure?' => 'Är du säker?',

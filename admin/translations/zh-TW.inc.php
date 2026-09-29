@@ -207,6 +207,7 @@ return [
 	'Options' => '選項',
 	'Comment' => '註解',
 	'Default value' => '預設值',
+	'default value' => '預設值',
 	'Drop' => '刪除',
 	'Drop %s?' => '刪除 %s?',
 	'Are you sure?' => '你確定嗎？',

@@ -207,6 +207,7 @@ return [
 	'Options' => 'اختیارات',
 	'Comment' => 'توضیح',
 	'Default value' => 'مقدار پیش فرض',
+	'default value' => 'مقدار پیش فرض',
 	'Drop' => 'حذف',
 	'Drop %s?' => '%s حذف شود؟', // by Claude Fable 5.1
 	'Are you sure?' => 'مطمئن هستید؟',

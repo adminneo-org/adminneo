@@ -227,6 +227,7 @@ return [
 	'Options' => 'Opcje',
 	'Comment' => 'Komentarz',
 	'Default value' => 'Wartość domyślna',
+	'default value' => 'wartość domyślna',
 	'Drop' => 'Usuń',
 	'Drop %s?' => 'Usunąć %s?',
 	'Are you sure?' => 'Czy na pewno?',

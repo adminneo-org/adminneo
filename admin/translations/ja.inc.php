@@ -207,6 +207,7 @@ return [
 	'Options' => '設定',
 	'Comment' => 'コメント',
 	'Default value' => '既定値',
+	'default value' => '既定値',
 	'Drop' => '削除',
 	'Drop %s?' => '%s を削除しますか？',
 	'Are you sure?' => '実行しますか？',

@@ -207,6 +207,7 @@ return [
 	'Options' => 'Pilihan',
 	'Comment' => 'Komen',
 	'Default value' => 'Nilai lalai',
+	'default value' => 'nilai lalai',
 	'Drop' => 'Jatuh',
 	'Drop %s?' => 'Jatuhkan %s?',
 	'Are you sure?' => 'Anda pasti?',

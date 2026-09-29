@@ -213,6 +213,7 @@ return [
 	'Options' => 'خيارات',
 	'Comment' => 'تعليق',
 	'Default value' => 'القيمة الافتراضية', // by Claude Fable 5.1
+	'default value' => 'القيمة الافتراضية', // by Claude Opus 5.5
 	'Drop' => 'حذف',
 	'Drop %s?' => 'حذف %s؟', // by Claude Fable 5.1
 	'Are you sure?' => 'هل أنت متأكد؟',

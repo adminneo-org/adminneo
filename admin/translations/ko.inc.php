@@ -207,6 +207,7 @@ return [
 	'Options' => '설정',
 	'Comment' => '주석',
 	'Default value' => '기본값', // by Claude Fable 5.1
+	'default value' => '기본값', // by Claude Opus 5.5
 	'Drop' => '삭제',
 	'Drop %s?' => '%s을(를) 삭제하시겠습니까?', // by Claude Fable 5.1
 	'Are you sure?' => '실행 하시겠습니까?',

@@ -222,6 +222,7 @@ return [
 	'Options' => 'Επιλογές',
 	'Comment' => 'Σχόλιο',
 	'Default value' => 'Προεπιλεγμένη τιμή',
+	'default value' => 'προεπιλεγμένη τιμή',
 	'Drop' => 'Διαγραφή',
 	'Drop %s?' => 'Διαγραφή %s;', // by Claude Fable 5.1
 	'Are you sure?' => 'Είστε σίγουρος;',

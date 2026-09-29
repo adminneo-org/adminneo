@@ -210,6 +210,7 @@ return [
 	'Options' => 'বিকল্পসমূহ',
 	'Comment' => 'মন্তব্য',
 	'Default value' => 'ডিফল্ট মান',
+	'default value' => 'ডিফল্ট মান',
 	'Drop' => 'মুছে ফেলো',
 	'Drop %s?' => '%s ড্রপ করবেন?',
 	'Are you sure?' => 'আপনি কি নিশ্চিত?',

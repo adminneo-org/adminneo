@@ -207,6 +207,7 @@ return [
 	'Options' => 'ตัวเลือก',
 	'Comment' => 'หมายเหตุ',
 	'Default value' => 'ค่าเริ่มต้น', // by Claude Fable 5.1
+	'default value' => 'ค่าเริ่มต้น', // by Claude Opus 5.5
 	'Drop' => 'ลบ',
 	'Drop %s?' => 'ลบ %s หรือไม่?', // by Claude Fable 5.1
 	'Are you sure?' => 'คุณแน่ใจแล้วหรือ',

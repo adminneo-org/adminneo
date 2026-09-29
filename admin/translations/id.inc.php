@@ -207,6 +207,7 @@ return [
 	'Options' => 'Opsi',
 	'Comment' => 'Komentar',
 	'Default value' => 'Nilai bawaan', // by Claude Fable 5.1
+	'default value' => 'nilai bawaan', // by Claude Opus 5.5
 	'Drop' => 'Hapus',
 	'Drop %s?' => 'Hapus %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Anda yakin?',

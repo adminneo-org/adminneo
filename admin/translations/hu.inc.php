@@ -207,6 +207,7 @@ return [
 	'Options' => 'Opciók',
 	'Comment' => 'Megjegyzés',
 	'Default value' => 'Alapértelmezett érték', // by Claude Fable 5.1
+	'default value' => 'alapértelmezett érték', // by Claude Opus 5.5
 	'Drop' => 'Eldob',
 	'Drop %s?' => 'Eldobja: %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Biztos benne?',

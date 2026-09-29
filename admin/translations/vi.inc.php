@@ -207,6 +207,7 @@ return [
 	'Options' => 'Tuỳ chọn',
 	'Comment' => 'Chú thích',
 	'Default value' => 'Giá trị mặc định',
+	'default value' => 'giá trị mặc định',
 	'Drop' => 'Xoá',
 	'Drop %s?' => 'Xóa %s?',
 	'Are you sure?' => 'Bạn có chắc',

@@ -207,6 +207,7 @@ return [
 	'Options' => 'אפשרויות',
 	'Comment' => 'הערה',
 	'Default value' => 'ערך ברירת מחדל',
+	'default value' => 'ערך ברירת מחדל',
 	'Drop' => 'השלך',
 	'Drop %s?' => 'להשליך את %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'האם אתה בטוח?',

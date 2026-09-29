@@ -227,6 +227,7 @@ return [
 	'Options' => 'Opcijas',
 	'Comment' => 'Komentārs',
 	'Default value' => 'Noklusētā vērtība',
+	'default value' => 'noklusētā vērtība',
 	'Drop' => 'Dzēst',
 	'Drop %s?' => 'Dzēst %s?',
 	'Are you sure?' => 'Vai Tu esi pārliecināts?',

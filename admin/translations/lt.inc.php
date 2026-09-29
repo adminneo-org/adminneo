@@ -227,6 +227,7 @@ return [
 	'Options' => 'Nustatymai',
 	'Comment' => 'Komentaras',
 	'Default value' => 'Numatytoji reikšmė', // by Claude Fable 5.1
+	'default value' => 'numatytoji reikšmė', // by Claude Opus 5.5
 	'Drop' => 'Pašalinti',
 	'Drop %s?' => 'Pašalinti %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Tikrai?',

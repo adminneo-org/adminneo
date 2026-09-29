@@ -216,6 +216,7 @@ return [
 	'Options' => 'Asetukset',
 	'Comment' => 'Kommentit',
 	'Default value' => 'Oletusarvo',
+	'default value' => 'oletusarvo',
 	'Drop' => 'Poista',
 	'Drop %s?' => 'Poistetaanko %s?',
 	'Are you sure?' => 'Oletko varma?',

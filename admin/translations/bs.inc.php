@@ -227,6 +227,7 @@ return [
 	'Options' => 'Opcije',
 	'Comment' => 'Komentar',
 	'Default value' => 'Podrazumijevana vrijednost', // by Claude Fable 5.1
+	'default value' => 'podrazumijevana vrijednost', // by Claude Opus 5.5
 	'Drop' => 'Izbriši',
 	'Drop %s?' => 'Izbrisati %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Da li ste sigurni?',

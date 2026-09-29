@@ -219,6 +219,7 @@ return [
 	'Options' => 'विकल्प',
 	'Comment' => 'टिप्पणी',
 	'Default value' => 'डिफ़ॉल्ट मान',
+	'default value' => 'डिफ़ॉल्ट मान',
 	'Drop' => 'हटाएं',
 	'Drop %s?' => '%s हटाएँ?',
 	'Are you sure?' => 'क्या आप सुनिश्चित हैं?',

@@ -219,6 +219,7 @@ return [
 	'Options' => 'Valg',
 	'Comment' => 'Kommentarer',
 	'Default value' => 'Standardverdi', // by Claude Fable 5.1
+	'default value' => 'standardverdi', // by Claude Opus 5.5
 	'Drop' => 'Dropp',
 	'Drop %s?' => 'Dropp %s?', // by Claude Fable 5.1
 	'Are you sure?' => 'Er du sikker?',

@@ -216,6 +216,7 @@ return [
 	'Options' => 'Seçenekler',
 	'Comment' => 'Yorum',
 	'Default value' => 'Varsayılan değer',
+	'default value' => 'varsayılan değer',
 	'Drop' => 'Sil',
 	'Drop %s?' => 'Sil %s?',
 	'Are you sure?' => 'Emin misiniz?',
