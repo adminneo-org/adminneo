@@ -15,6 +15,7 @@ AdminNeo 5.8.1
 - Select: Align titles of numeric columns to the right
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
+- Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
