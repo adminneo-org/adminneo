@@ -453,4 +453,5 @@ return [
 	'Data table' => 'Πίνακας δεδομένων', // by Claude Fable 5.1
 	'Edit form' => 'Φόρμα επεξεργασίας', // by Claude Fable 5.1
 	'Ask %s' => 'Ρωτήστε το %s', // by Claude Fable 5.1
+	'Views' => 'Προβολές', // by Claude Opus 5.5
 ];

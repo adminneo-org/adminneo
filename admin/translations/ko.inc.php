@@ -426,4 +426,5 @@ return [
 	'Data table' => '데이터 테이블', // by Claude Fable 5.1
 	'Edit form' => '편집 양식', // by Claude Fable 5.1
 	'Ask %s' => '%s에게 질문하기', // by Claude Fable 5.1
+	'Views' => '뷰', // by Claude Opus 5.5
 ];

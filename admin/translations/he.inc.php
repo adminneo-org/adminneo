@@ -426,4 +426,5 @@ return [
 	'Data table' => 'טבלת נתונים', // by Claude Fable 5.1
 	'Edit form' => 'טופס עריכה', // by Claude Fable 5.1
 	'Ask %s' => 'שאל את %s', // by Claude Fable 5.1
+	'Views' => 'תצוגות', // by Claude Opus 5.5
 ];

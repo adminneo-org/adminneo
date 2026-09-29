@@ -453,4 +453,5 @@ return [
 	'Data table' => 'Táboa de datos', // by Claude Fable 5.1
 	'Edit form' => 'Formulario de edición', // by Claude Fable 5.1
 	'Ask %s' => 'Preguntar a %s', // by Claude Fable 5.1
+	'Views' => 'Vistas', // by Claude Opus 5.5
 ];

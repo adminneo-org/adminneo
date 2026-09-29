@@ -462,4 +462,5 @@ return [
 	'Data table' => 'Datu tabula', // by Claude Fable 5.1
 	'Edit form' => 'Rediģēšanas forma', // by Claude Fable 5.1
 	'Ask %s' => 'Jautāt %s', // by Claude Fable 5.1
+	'Views' => 'Skati', // by Claude Opus 5.5
 ];

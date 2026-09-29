@@ -462,4 +462,5 @@ return [
 	'Data table' => 'Tabelul de date', // by Claude Fable 5.1
 	'Edit form' => 'Formular de editare', // by Claude Fable 5.1
 	'Ask %s' => 'Întreabă %s', // by Claude Fable 5.1
+	'Views' => 'Reprezentări', // by Claude Opus 5.5
 ];

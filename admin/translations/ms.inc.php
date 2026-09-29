@@ -429,4 +429,5 @@ return [
 	'Data table' => 'Jadual data', // by Claude Fable 5.1
 	'Edit form' => 'Borang ubah', // by Claude Fable 5.1
 	'Ask %s' => 'Tanya %s', // by Claude Fable 5.1
+	'Views' => 'Pandangan', // by Claude Opus 5.5
 ];

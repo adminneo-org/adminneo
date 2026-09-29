@@ -450,4 +450,5 @@ return [
 	'Data table' => 'Datentabelle',
 	'Edit form' => 'Formular bearbeiten',
 	'Ask %s' => '%s fragen',
+	'Views' => 'Views', // by Claude Opus 5.5
 ];

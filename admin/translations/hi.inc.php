@@ -447,4 +447,5 @@ return [
 	'Data table' => 'डेटा टेबल', // by Claude Fable 5.1
 	'Edit form' => 'संपादन फॉर्म', // by Claude Fable 5.1
 	'Ask %s' => '%s से पूछें', // by Claude Fable 5.1
+	'Views' => 'व्यूज', // by Claude Opus 5.5
 ];

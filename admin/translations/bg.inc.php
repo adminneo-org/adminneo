@@ -453,4 +453,5 @@ return [
 	'Data table' => 'Таблица с данни', // by Claude Fable 5.1
 	'Edit form' => 'Формуляр за редактиране', // by Claude Fable 5.1
 	'Ask %s' => 'Попитай %s', // by Claude Fable 5.1
+	'Views' => 'Изгледи', // by Claude Opus 5.5
 ];

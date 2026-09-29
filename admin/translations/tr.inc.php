@@ -444,4 +444,5 @@ return [
 	'Data table' => 'Veri tablosu', // by Claude Fable 5.1
 	'Edit form' => 'Düzenleme formu', // by Claude Fable 5.1
 	'Ask %s' => '%s uygulamasına sor', // by Claude Fable 5.1
+	'Views' => 'Görünümler', // by Claude Opus 5.5
 ];

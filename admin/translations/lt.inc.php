@@ -462,4 +462,5 @@ return [
 	'Data table' => 'Duomenų lentelė', // by Claude Fable 5.1
 	'Edit form' => 'Redagavimo forma', // by Claude Fable 5.1
 	'Ask %s' => 'Paklausti %s', // by Claude Fable 5.1
+	'Views' => 'Vaizdai', // by Claude Opus 5.5
 ];

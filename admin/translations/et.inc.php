@@ -435,4 +435,5 @@ return [
 	'Data table' => 'Andmetabel', // by Claude Fable 5.1
 	'Edit form' => 'Muutmisvorm', // by Claude Fable 5.1
 	'Ask %s' => 'Küsi %s käest', // by Claude Fable 5.1
+	'Views' => 'Vaated', // by Claude Opus 5.5
 ];

@@ -435,4 +435,5 @@ return [
 	'Data table' => 'ডাটা টেবিল', // by Claude Fable 5.1
 	'Edit form' => 'সম্পাদনা ফর্ম', // by Claude Fable 5.1
 	'Ask %s' => '%s-কে জিজ্ঞাসা করুন', // by Claude Fable 5.1
+	'Views' => 'ভিউ সমূহ', // by Claude Opus 5.5
 ];

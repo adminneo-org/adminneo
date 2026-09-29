@@ -432,4 +432,5 @@ return [
 	'Data table' => 'جدول البيانات', // by Claude Fable 5.1
 	'Edit form' => 'استمارة التعديل', // by Claude Fable 5.1
 	'Ask %s' => 'اسأل %s', // by Claude Fable 5.1
+	'Views' => 'العروض', // by Claude Opus 5.5
 ];

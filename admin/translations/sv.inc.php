@@ -453,4 +453,5 @@ return [
 	'Data table' => 'Datatabell', // by Claude Fable 5.1
 	'Edit form' => 'Redigeringsformulär', // by Claude Fable 5.1
 	'Ask %s' => 'Fråga %s', // by Claude Fable 5.1
+	'Views' => 'Vyer', // by Claude Opus 5.5
 ];

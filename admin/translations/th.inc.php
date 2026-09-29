@@ -426,4 +426,5 @@ return [
 	'Data table' => 'ตารางข้อมูล', // by Claude Fable 5.1
 	'Edit form' => 'ฟอร์มแก้ไข', // by Claude Fable 5.1
 	'Ask %s' => 'ถาม %s', // by Claude Fable 5.1
+	'Views' => 'วิว', // by Claude Opus 5.5
 ];

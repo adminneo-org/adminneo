@@ -426,4 +426,5 @@ return [
 	'Data table' => '数据表', // by Claude Fable 5.1
 	'Edit form' => '编辑表单', // by Claude Fable 5.1
 	'Ask %s' => '询问 %s', // by Claude Fable 5.1
+	'Views' => '视图', // by Claude Opus 5.5
 ];

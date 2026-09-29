@@ -462,4 +462,5 @@ return [
 	'Data table' => 'Tabela danych',
 	'Edit form' => 'Formularz edycji',
 	'Ask %s' => 'Zapytaj %s',
+	'Views' => 'Perspektywy', // by Claude Opus 5.5
 ];

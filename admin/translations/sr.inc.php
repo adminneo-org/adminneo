@@ -462,4 +462,5 @@ return [
 	'Data table' => 'Табела података', // by Claude Fable 5.1
 	'Edit form' => 'Форма за измену', // by Claude Fable 5.1
 	'Ask %s' => 'Питај %s', // by Claude Fable 5.1
+	'Views' => 'Погледи', // by Claude Opus 5.5
 ];

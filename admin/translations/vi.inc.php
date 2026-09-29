@@ -426,4 +426,5 @@ return [
 	'Data table' => 'Bảng dữ liệu',
 	'Edit form' => 'Biểu mẫu chỉnh sửa',
 	'Ask %s' => 'Hỏi %s',
+	'Views' => 'Khung nhìn', // by Claude Opus 5.5
 ];

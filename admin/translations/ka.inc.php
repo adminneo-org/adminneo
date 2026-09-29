@@ -426,4 +426,5 @@ return [
 	'Data table' => 'ინფორმაციის ცხრილი', // by Claude Fable 5.1
 	'Edit form' => 'შეცვლის ფორმა', // by Claude Fable 5.1
 	'Ask %s' => 'ჰკითხეთ %s-ს', // by Claude Fable 5.1
+	'Views' => 'წარმოდგენები', // by Claude Opus 5.5
 ];
