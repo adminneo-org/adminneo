@@ -12,6 +12,7 @@ AdminNeo 5.8.1
 
 ### Bugfixes
 
+- MS SQL: Read complete view definitions from the selected schema
 - Select: Align titles of numeric columns to the right
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
