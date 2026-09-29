@@ -18,6 +18,7 @@ AdminNeo 5.8.1
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
+- PostgreSQL: Do not mark identity columns as Auto increment
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 
