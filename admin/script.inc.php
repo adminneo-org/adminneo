@@ -20,7 +20,7 @@ if ($_GET["script"] == "db") {
 			$collation = $table_status["Collation"] ?? "";
 			if ($collation == "") {
 				if ($db_collation === null) {
-					$db_collation = db_collation(DB, collations()) ?? "";
+					$db_collation = (string) db_collation(DB, collations());
 				}
 				$collation = $db_collation;
 			}

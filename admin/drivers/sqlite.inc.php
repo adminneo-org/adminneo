@@ -799,7 +799,8 @@ if (isset($_GET["sqlite"])) {
 		}
 		$temp_name = ($table != "" && $table == $name ? "adminneo_$name" : $name);
 		if (!$engine && $table != "") {
-			$engine = table_status1($table)["Engine"] ?? null;
+			$table_status = table_status1($table);
+			$engine = $table_status["Engine"] ?? null;
 		}
 		if (!queries("CREATE TABLE " . table($temp_name) . " (\n" . implode(",\n", $changes) . "\n)" . ($engine != "table" && in_array($engine, Driver::get()->engines()) ? " $engine" : ""))) {
 			// implicit ROLLBACK to not overwrite $connection->error
