@@ -1214,6 +1214,34 @@ function is_generated_always(array $field): bool
 }
 
 /**
+ * Encloses the SQL expression in parentheses unless the whole expression is already enclosed.
+ *
+ * Drivers differ in it, e.g. generation expression is enclosed in MySQL but not in MariaDB.
+ */
+function parenthesize_expression(string $expression): string
+{
+	// String literals and quoted identifiers can contain unbalanced parentheses.
+	$stripped = preg_replace('~\'(?:[^\']|\'\')*\'|"(?:[^"]|"")*"|`(?:[^`]|``)*`|\[[^]]*]~', "", $expression);
+
+	if (!preg_match('~^\(.*\)$~s', $stripped)) {
+		return "($expression)";
+	}
+
+	// The first parenthesis must be closed by the last character, not earlier as in "(a) + (b)".
+	$depth = 0;
+	$last = strlen($stripped) - 1;
+	for ($i = 0; $i < $last; $i++) {
+		if ($stripped[$i] == "(") {
+			$depth++;
+		} elseif ($stripped[$i] == ")" && --$depth == 0) {
+			return "($expression)";
+		}
+	}
+
+	return $expression;
+}
+
+/**
  * Checks whether the string is e-mail address.
  *
  * @param mixed $value
