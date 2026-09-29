@@ -645,6 +645,7 @@ $file = preg_replace("~<\\?php\\s*\\?>\n?|\\?>\n?<\\?php~", '', $file);
 
 // PHP 5.6 compatibility.
 $file = downgrade_php($file);
+$php7_operators = find_php7_operators($file);
 
 // Shrink final file.
 $file = phpShrink($file);
@@ -692,6 +693,9 @@ foreach (glob(__DIR__ . "/../plugins/*") as $file_path) {
 	$file = file_get_contents($file_path);
 
 	$file = downgrade_php($file);
+	foreach (find_php7_operators($file) as $snippet) {
+		$php7_operators[] = basename($file_path) . ": $snippet";
+	}
 
 	// Print version.
 	$commit_hash = exec("git rev-list HEAD -1 -- $file_path 2> /dev/null");
@@ -706,4 +710,12 @@ foreach (glob(__DIR__ . "/../plugins/*") as $file_path) {
 
 	$filename = "$output_dir/" . basename($file_path);
 	file_put_contents($filename, $file);
+}
+
+if ($php7_operators) {
+	echo "\n⚠️ PHP 7 operators were left in the compiled code, it can't be parsed in PHP 5:\n";
+	foreach ($php7_operators as $snippet) {
+		echo "  $snippet\n";
+	}
+	exit(1);
 }

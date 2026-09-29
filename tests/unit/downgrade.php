@@ -90,4 +90,29 @@ check('A::class', '\'\AdminNeo\A\'');
 check('\A::class', '\'\A\'');
 check('\A\B::class', '\'\A\B\'');
 
+// PHP 7 operators left after downgrading.
+function check_php7_operators(string $code, int $expected): void
+{
+	global $errors;
+
+	$result = find_php7_operators("<?php " . downgrade_php($code));
+
+	if (count($result) != $expected) {
+		$backtrace = debug_backtrace()[0];
+
+		$file_path = basename($backtrace["file"]);
+		echo "⚠️ $file_path:{$backtrace['line']} => " . implode(" | ", $result) . "\n";
+		$errors++;
+	}
+}
+
+check_php7_operators('$a = $b[1] ?? 1;', 0);
+check_php7_operators('$a = f() ?? 1;', 0);
+check_php7_operators('$a = "??";', 0); // inside string
+check_php7_operators('$a = A ?? 1;', 1);
+check_php7_operators('$a = f(g()) ?? 1;', 1);
+check_php7_operators('$a = f()[1] ?? 1;', 1);
+check_php7_operators('$a = $b <=> $c;', 1);
+check_php7_operators('$a = "<=>";', 0); // inside string
+
 exit($errors ? 1 : 0);
