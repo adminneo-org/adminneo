@@ -7,6 +7,7 @@ AdminNeo 5.8.1
 ### Changes
 
 - Add MarkdownDumpPlugin - export of database structure and data to Markdown format
+- Unify import and export icons
 
 ### Bugfixes
 
