@@ -228,3 +228,29 @@ function downgrade_php(string $code): string
 
 	return $code;
 }
+
+/**
+ * Finds PHP 7 operators ?? and <=> that were left in the code by downgrade_php().
+ *
+ * The development version requires PHP 7.1, so newer syntax can't appear in the code at all.
+ *
+ * @return string[] Code around each occurrence.
+ */
+function find_php7_operators(string $code): array
+{
+	$tokens = token_get_all($code);
+	$count = count($tokens);
+
+	$return = [];
+	foreach ($tokens as $i => $token) {
+		if (is_array($token) && ($token[0] == T_COALESCE || $token[0] == T_SPACESHIP)) {
+			$snippet = "";
+			for ($j = max(0, $i - 10); $j < min($count, $i + 6); $j++) {
+				$snippet .= is_array($tokens[$j]) ? $tokens[$j][1] : $tokens[$j];
+			}
+			$return[] = preg_replace('~\s+~', ' ', trim($snippet));
+		}
+	}
+
+	return $return;
+}
