@@ -227,6 +227,7 @@ return [
 	'Options' => 'Volby',
 	'Comment' => 'Komentář',
 	'Default value' => 'Výchozí hodnota',
+	'default value' => 'výchozí hodnota',
 	'Drop' => 'Odstranit',
 	'Drop %s?' => 'Odstranit %s?',
 	'Are you sure?' => 'Opravdu?',

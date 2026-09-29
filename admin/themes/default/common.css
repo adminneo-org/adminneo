@@ -162,6 +162,10 @@ ol, ul {
 	color: var(--note-text);
 }
 
+.note {
+	color: var(--note-text);
+}
+
 .icon {
 	width: calc(18em / 14);
 	height: calc(18em / 14);

@@ -265,7 +265,7 @@ class MarkdownDumpPlugin extends Plugin
 	{
 		$comments = support("comment");
 
-		$header = [lang('Column'), lang('Type'), lang('Collation')];
+		$header = [lang('Column'), lang('Type') . " [" . lang('default value') . "]", lang('Collation')];
 		if ($comments) {
 			$header[] = lang('Comment');
 		}

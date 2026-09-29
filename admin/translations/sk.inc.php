@@ -227,6 +227,7 @@ return [
 	'Options' => 'Voľby',
 	'Comment' => 'Komentár',
 	'Default value' => 'Predvolená hodnota',
+	'default value' => 'predvolená hodnota',
 	'Drop' => 'Odstrániť',
 	'Drop %s?' => 'Odstrániť %s?',
 	'Are you sure?' => 'Naozaj?',

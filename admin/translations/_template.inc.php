@@ -207,6 +207,7 @@ return [
 	'Options' => 'Xx',
 	'Comment' => 'Xx',
 	'Default value' => 'Xx',
+	'default value' => 'xx',
 	'Drop' => 'Xx',
 	'Drop %s?' => 'Xx %s?',
 	'Are you sure?' => 'Xx?',

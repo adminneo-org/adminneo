@@ -387,7 +387,7 @@ class Admin extends Origin
 
 		echo "<thead><tr>";
 		echo "<th>", lang('Column'), "</th>";
-		echo "<td>", lang('Type'), "</td>";
+		echo "<td>", lang('Type'), " <span class='note'>[" . lang('default value') . "]</span></td>";
 		echo "<td>", lang('Collation'), "</td>";
 		if (support("comment")) {
 			echo "<td>", lang('Comment'), "</td>";
@@ -417,9 +417,9 @@ class Admin extends Origin
 
 			$default = h($field["default"]);
 			if (isset($field["default"])) {
-				echo " <span title='" . lang('Default value') . "'>[<b>";
-				echo $field["generated"] ? "<code class='jush-" . DIALECT . "'>$default</code>" : $default;
-				echo "</b>]</span>";
+				echo " [";
+				echo $field["generated"] ? "<code class='jush-" . DIALECT . "'>$default</code>" : "<strong>$default</strong>";
+				echo "]";
 			}
 
 			echo "</td>";
@@ -508,7 +508,7 @@ class Admin extends Origin
 		echo "<table>\n";
 		echo "<thead><tr>";
 		echo "<th>", lang('Type'), "</th>";
-		echo "<td>", lang('Columns'), " (", lang('length'), ")</td>";
+		echo "<td>", lang('Columns'), " <span class='note'>(", lang('length'), ")</span></td>";
 		if ($partial) {
 			echo "<td>", lang('Condition'), "</td>";
 		}
