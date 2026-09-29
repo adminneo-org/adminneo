@@ -7,10 +7,13 @@ table {
 }
 
 table code {
-	background: none;
-	border: none;
 	padding: 0;
 	line-height: 1.27;
+}
+
+#table code {
+	background: none;
+	border: none;
 }
 
 td, th {

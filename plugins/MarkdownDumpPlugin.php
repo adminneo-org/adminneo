@@ -280,8 +280,11 @@ class MarkdownDumpPlugin extends Plugin
 				$type .= " *" . lang('Auto Increment') . "*";
 			}
 			if (isset($field["default"])) {
-				$default = ($field["generated"] ? $this->code($field["default"]) : $this->bold($field["default"]));
-				$type .= " [$default]";
+				if ($field["generated"]) {
+					$type .= " *AS* " . $this->code(parenthesize_expression($field["default"])) . " *" . $this->escape($field["generated"]) . "*";
+				} else {
+					$type .= " [" . $this->bold($field["default"]) . "]";
+				}
 			}
 
 			$cells = [$this->escape($field["field"]), $type, $this->escape($field["collation"])];

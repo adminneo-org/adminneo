@@ -415,11 +415,13 @@ class Admin extends Origin
 				echo " <i>" . lang('Auto Increment') . "</i>";
 			}
 
-			$default = h($field["default"]);
 			if (isset($field["default"])) {
-				echo " [";
-				echo $field["generated"] ? "<code class='jush-" . DIALECT . "'>$default</code>" : "<strong>$default</strong>";
-				echo "]";
+				if ($field["generated"]) {
+					echo " <i>AS</i> <code class='jush-" . DIALECT . "'>" . h(parenthesize_expression($field["default"])) . "</code>";
+					echo " <i>" . h($field["generated"]) . "</i>";
+				} else {
+					echo " [<strong>" . h($field["default"]) . "</strong>]";
+				}
 			}
 
 			echo "</td>";
