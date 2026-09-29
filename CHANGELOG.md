@@ -18,6 +18,7 @@ AdminNeo 5.8.1
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
+- SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 
 AdminNeo 5.8.0 (2026-09-15)
 ---------------------------

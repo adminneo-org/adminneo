@@ -454,6 +454,23 @@ if (isset($_GET["sqlite"])) {
 			if ($row["pk"] && preg_match('~\bAUTOINCREMENT\b~i', $sql)) {
 				$return[$name]["auto_increment"] = true;
 			}
+
+			// Column hidden flag from table_xinfo: 2 - virtual generated column, 3 - stored generated column.
+			$hidden = $row["hidden"] ?? 0;
+			$generated = ($hidden == 2 ? "VIRTUAL" : ($hidden == 3 ? "STORED" : ""));
+			$return[$name]["generated"] = $generated;
+			if ($generated) {
+				$quoted_name = implode("|", [
+					preg_quote($name, '~'),
+					'"' . preg_quote(str_replace('"', '""', $name), '~') . '"',
+					'`' . preg_quote(str_replace('`', '``', $name), '~') . '`',
+					'\[' . preg_quote($name, '~') . ']',
+				]);
+				// Expression in balanced parentheses after AS, the type can contain parentheses too, e.g. decimal(10,2).
+				if (preg_match('~[(,]\s*(?:' . $quoted_name . ')\s(?:[^,()]|\([^()]*\))*?\bAS\s*(\((?:[^()\'"]++|\'(?:[^\']|\'\')*\'|"(?:[^"]|"")*"|(?1))*\))~i', $sql, $match)) {
+					$return[$name]["default"] = substr($match[1], 1, -1);
+				}
+			}
 		}
 		$idf = '(("[^"]*+")+|[a-z0-9_]+)';
 		preg_match_all('~' . $idf . '\s+text\s+COLLATE\s+(\'[^\']+\'|\S+)~i', $sql, $matches, PREG_SET_ORDER);
@@ -462,12 +479,6 @@ if (isset($_GET["sqlite"])) {
 			if ($return[$name]) {
 				$return[$name]["collation"] = trim($match[3], "'");
 			}
-		}
-		preg_match_all('~' . $idf . '\s.*GENERATED ALWAYS AS \((.+)\) (STORED|VIRTUAL)~i', $sql, $matches, PREG_SET_ORDER);
-		foreach ($matches as $match) {
-			$name = str_replace('""', '"', preg_replace('~^"|"$~', '', $match[1]));
-			$return[$name]["default"] = $match[3];
-			$return[$name]["generated"] = strtoupper($match[4]);
 		}
 		return $return;
 	}
