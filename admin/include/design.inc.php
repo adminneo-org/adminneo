@@ -114,6 +114,7 @@ function page_header(string $title, $breadcrumb = []): void
 		"scripts/editing.js",
 		"scripts/fieldsEditing.js", // !admin
 		"scripts/help.js", // !admin
+		"scripts/dump.js", // !admin
 		"scripts/schema.js", // !admin
 	]));
 

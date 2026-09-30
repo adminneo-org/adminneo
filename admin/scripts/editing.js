@@ -285,27 +285,6 @@ function editingCommentsClick(el, columnIndex) {
 }
 
 /**
- * Unchecks the 'all' checkbox.
- *
- * @param {MouseEvent} event
- *
- * @this {HTMLTableElement}
- */
-function dumpClick(event) {
-	let el = event.target.closest('label');
-	if (!el) return;
-
-	el = qs('input', el);
-	const match = /(.+)\[]$/.exec(el.name);
-	if (match) {
-		checkboxClick.call(el, event);
-		formUncheck('check-' + match[1]);
-	}
-}
-
-
-
-/**
  * Adds row for foreign key.
  *
  * @this {HTMLSelectElement}
