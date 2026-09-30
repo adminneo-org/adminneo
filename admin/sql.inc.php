@@ -82,8 +82,8 @@ if ($_POST) {
 		$parse = '[\'"' . (DIALECT == "sql" ? '`#' : (DIALECT == "sqlite" ? '`[' : (DIALECT == "mssql" ? '[' : ''))) .
 			']|/\*|' . $line_comment . '|$' . (DIALECT == "pgsql" ? '|\$([a-zA-Z]\w*)?\$' : '');
 		$total_start = microtime(true);
-		$dump_format = Admin::get()->getDumpFormats();
-		unset($dump_format["sql"]);
+		$data_formats = Admin::get()->getDataDumpFormats();
+		unset($data_formats["sql"]);
 
 		while ($query != "") {
 			if (!$offset && preg_match("~^$space*+DELIMITER\\s+(\\S+)~i", $query, $match)) {
@@ -252,7 +252,7 @@ if ($_POST) {
 
 									if ($export) {
 										echo "<form id='$export_id' action='' method='post' class='hidden'><p>\n";
-										echo html_select("format", $dump_format, $settings->getParameter("exportFormat"));
+										echo html_select("format", $data_formats, $settings->getParameter("exportFormat"));
 										echo html_select("output", Admin::get()->getDumpOutputs(), $settings->getParameter("exportOutput")) . " ";
 										echo input_hidden("query", $q);
 										echo input_token();

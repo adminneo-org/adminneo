@@ -21,7 +21,10 @@ class XmlDumpPlugin extends Plugin
 
 	public function getDumpFormats(): array
 	{
-		return ['xml' => 'XML'];
+		return ['xml' => [
+			'name' => 'XML',
+			'data' => true,
+		]];
 	}
 
 	public function sendDumpFormatHeaders(string $identifier, bool $multiTable = false): ?string

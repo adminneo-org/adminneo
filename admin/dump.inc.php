@@ -5,9 +5,18 @@ namespace AdminNeo;
 $TABLE = $_GET["dump"];
 
 $settings = Admin::get()->getSettings();
+$structure_formats = Admin::get()->getStructureDumpFormats();
+$data_formats = Admin::get()->getDataDumpFormats();
+
 if ($_POST) {
+	$dump_structure = isset($structure_formats[$_POST["format"]]);
+	$dump_data = isset($data_formats[$_POST["format"]]);
+
+	// Structure and data options are disabled for formats not supporting them, so keep their previous settings.
 	$settings->updateParameters([
 		"dumpFormat" => $_POST["format"],
+		"dumpOutput" => $_POST["output"],
+	] + ($dump_structure ? [
 		"dumpDbStyle" => $_POST["db_style"],
 		"dumpTypes" => $_POST["types"] ?? (support("type") ? "" : null),
 		"dumpRoutines" => $_POST["routines"] ?? (support("routine") ? "" : null),
@@ -15,9 +24,14 @@ if ($_POST) {
 		"dumpTableStyle" => $_POST["table_style"],
 		"dumpAutoIncrement" => $_POST["auto_increment"] ?? "",
 		"dumpTriggers" => $_POST["triggers"] ?? (support("trigger") ? "" : null),
+	] : []) +
+	($dump_data ? [
 		"dumpDataStyle" => $_POST["data_style"],
-		"dumpOutput" => $_POST["output"],
-	]);
+	] : []));
+
+	// Formats without structure always export the header row with column names.
+	$table_style = ($dump_structure ? $_POST["table_style"] : "CREATE");
+	$data_style = ($dump_data ? $_POST["data_style"] : "");
 
 	if (DB != "") {
 		$databases = [DB];
@@ -48,7 +62,7 @@ if ($_POST) {
 	// In a data-only export the foreign keys already exist in the target database, unlike in a full dump where they are
 	// added after inserting all data. So the tables must be inserted in an order respecting their dependencies.
 	// MySQL does not need it, it disables the foreign key checks for the whole dump.
-	$data_only = $is_sql && $_POST["data_style"] && !$_POST["table_style"] && DIALECT != "sql";
+	$data_only = $is_sql && $data_style && !$table_style && DIALECT != "sql";
 
 	if ($is_sql) {
 		echo "-- AdminNeo " . VERSION . " " . Drivers::get(DRIVER) . " " . Connection::get()->getVersion() . " dump\n\n";
@@ -56,7 +70,7 @@ if ($_POST) {
 			echo "SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
-" . ($_POST["data_style"] ? "SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+" . ($data_style ? "SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 " : "") . "
 ";
 			Connection::get()->query("SET time_zone = '+00:00'");
@@ -64,7 +78,7 @@ SET foreign_key_checks = 0;
 		}
 	}
 
-	$style = $_POST["db_style"];
+	$style = ($dump_structure ? $_POST["db_style"] : "");
 
 	foreach ($databases as $db) {
 		if (Connection::get()->selectDatabase($db)) {
@@ -109,7 +123,7 @@ SET foreign_key_checks = 0;
 				echo ($out && DIALECT == 'sql' ? "DELIMITER ;;\n\n$out" . "DELIMITER ;\n\n" : $out);
 			}
 
-			if ($_POST["table_style"] || $_POST["data_style"]) {
+			if ($table_style || $data_style) {
 				foreach (($_GET["ns"] === "" ? (array) $_POST["schemas"] : (DB != "" || !support("scheme") ? [""] : Admin::get()->getSchemas(true))) as $schema) {
 					if ($schema != "") {
 						set_schema($schema);
@@ -154,14 +168,14 @@ SET foreign_key_checks = 0;
 								ob_start([$tmp_file, 'write'], 1e5);
 							}
 
-							$create_style = ($table ? $_POST["table_style"] : "");
+							$create_style = ($table || !$dump_structure ? $table_style : "");
 
 							Admin::get()->dumpTable($name, $create_style, (is_view($table_status) ? 2 : 0));
 							if (is_view($table_status) && $ext != "tar") {
 								$views[] = $name;
 							} elseif ($data) {
 								$fields = fields($name);
-								Admin::get()->dumpData($name, $_POST["data_style"], "SELECT *" . convert_fields($fields, $fields) . " FROM " . table($name));
+								Admin::get()->dumpData($name, $data_style, "SELECT *" . convert_fields($fields, $fields) . " FROM " . table($name));
 
 								// the sequences are not created by this dump, so sync them to the imported data
 								if ($is_sql && !$create_style && $_POST["auto_increment"] && function_exists('AdminNeo\restart_sequences_sql')) {
@@ -186,7 +200,7 @@ SET foreign_key_checks = 0;
 					}
 
 					// add FKs after creating tables (except in MySQL which uses SET FOREIGN_KEY_CHECKS=0)
-					if ($is_sql && $_POST["table_style"] && function_exists('AdminNeo\foreign_keys_sql')) {
+					if ($is_sql && $table_style && function_exists('AdminNeo\foreign_keys_sql')) {
 						foreach ($tables_status as $name => $table_status) {
 							$table = (DB == "" || $_GET["ns"] === "" || in_array($name, (array) $_POST["tables"]));
 							if ($table && !is_view($table_status)) {
@@ -196,7 +210,7 @@ SET foreign_key_checks = 0;
 					}
 
 					foreach ($views as $view) {
-						Admin::get()->dumpTable($view, $_POST["table_style"], 1);
+						Admin::get()->dumpTable($view, $table_style, 1);
 					}
 
 					if ($ext == "tar") {
@@ -216,7 +230,7 @@ SET foreign_key_checks = 0;
 $name = DB != "" ? h(DB) : h(Admin::get()->getServerName(SERVER));
 page_header(lang('Export') . ": $name", ($_GET["export"] != "" ? ["table" => $_GET["export"]] : [lang('Export')]));
 
-echo "<form action='' method='post'>\n";
+echo "<form id='dump-form' action='' method='post'>\n";
 echo "<table class='box'>\n";
 
 $db_style = ['', 'USE', 'DROP+CREATE', 'CREATE'];
@@ -226,7 +240,7 @@ if (DIALECT == "sql") { // TODO use insertUpdate() in all drivers
 	$data_style[] = 'INSERT+UPDATE';
 }
 
-echo "<tr><th>", lang('Format'), "</th><td>", html_radios("format", Admin::get()->getDumpFormats(), $settings->getParameter("dumpFormat", "sql")), "</td></tr>\n";
+echo "<tr><th>", lang('Format'), "</th><td>", html_radios("format", $structure_formats + $data_formats, $settings->getParameter("dumpFormat", "sql")), "</td></tr>\n";
 
 if (DIALECT != "sqlite") {
 	echo "<tr><th id='label-db'>", lang('Database'), "</th>";
@@ -259,6 +273,7 @@ echo "<tr><th id='label-data'>", lang('Data'), "</th><td>", html_select("data_st
 
 echo "<tr><th>", lang('Output'), "</th><td>", html_radios("output", Admin::get()->getDumpOutputs(), $settings->getParameter("dumpOutput", "file")), "</td></tr>\n";
 echo "</table>\n";
+echo script("initDumpFormats(" . json_encode(array_keys($structure_formats)) . ", " . json_encode(array_keys($data_formats)) . ");");
 
 echo "<p>";
 echo "<input type='submit' class='button default' value='", lang('Export'), "'>";

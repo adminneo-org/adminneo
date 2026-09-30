@@ -510,21 +510,16 @@ class Admin extends Origin
 		return unconvert_field($field, $return);
 	}
 
-	public function getDumpOutputs(): array
-	{
-		return [];
-	}
-
-	public function getDumpFormats(): array
-	{
-		return ['csv' => 'CSV,', 'csv;' => 'CSV;', 'tsv' => 'TSV'];
-	}
-
 	public function sendDumpFormatHeaders(string $identifier, bool $multiTable = false): string
 	{
 		header("Content-Type: text/csv; charset=utf-8");
 
 		return "csv";
+	}
+
+	public function getDumpOutputs(): array
+	{
+		return [];
 	}
 
 	public function sendDumpOutputHeaders(string $identifier, string $extension): void

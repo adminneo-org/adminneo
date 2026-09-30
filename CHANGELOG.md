@@ -9,6 +9,7 @@ AdminNeo 5.8.1
 - Add MarkdownDumpPlugin - export of database structure and data to Markdown format
 - Table structure: Show generated columns in SQL syntax
 - Unify import and export icons
+- Export: Disable structure and data options for formats that do not support them
 
 ### Bugfixes
 

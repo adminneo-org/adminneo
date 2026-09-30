@@ -103,7 +103,7 @@ label {
 	line-height: 1.357;
 }
 
-label.disabled {
+label.disabled, select:disabled {
 	opacity: 0.3;
 	filter: saturate(0);
 	pointer-events: none;

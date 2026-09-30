@@ -951,14 +951,9 @@ class Admin extends Origin
 		return unconvert_field($field, $return);
 	}
 
-	/**
-	 * Returns export format options.
-	 *
-	 * @return string[] Empty to disable export.
-	 */
 	public function getDumpFormats(): array
 	{
-		return (support("dump") ? ['sql' => 'SQL'] : []) + ['csv' => 'CSV,', 'csv;' => 'CSV;', 'tsv' => 'TSV'];
+		return (support("dump") ? ['sql' => 'SQL'] : []) + parent::getDumpFormats();
 	}
 
 	/**

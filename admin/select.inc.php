@@ -694,16 +694,16 @@ if (!$columns && support("table")) {
 					echo "</fieldset>\n";
 				}
 
-				$format = Admin::get()->getDumpFormats();
+				$data_formats = Admin::get()->getDataDumpFormats();
 				foreach ((array) $_GET["columns"] as $column) {
 					if ($column["fun"]) {
-						unset($format['sql']);
+						unset($data_formats['sql']);
 						break;
 					}
 				}
-				if ($format) {
+				if ($data_formats) {
 					print_fieldset_start("export", lang('Export') . " <span id='selected2'></span>", "export");
-					echo html_select("format", $format, $settings->getParameter("exportFormat"));
+					echo html_select("format", $data_formats, $settings->getParameter("exportFormat"));
 					$output = Admin::get()->getDumpOutputs();
 					echo ($output ? " " . html_select("output", $output, $settings->getParameter("exportOutput")) : "");
 					echo " <input type='submit' class='button' name='export' value='" . lang('Export') . "'>\n";
