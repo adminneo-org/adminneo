@@ -17,6 +17,7 @@ AdminNeo 5.8.1
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
+- MySQL: Fix lost charset introducers and parameters starting with "_" in routine definitions (issue #197)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment

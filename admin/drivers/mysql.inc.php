@@ -1290,10 +1290,22 @@ ORDER BY ORDINAL_POSITION");
 
 		$return = Connection::get()->query("SELECT
 	ROUTINE_COMMENT comment,
-	CONCAT(IF(IS_DETERMINISTIC = 'YES', 'DETERMINISTIC\\n', ''), IF(SQL_DATA_ACCESS != 'CONTAINS SQL', CONCAT(SQL_DATA_ACCESS, '\\n'), ''), ROUTINE_DEFINITION) definition,
+	CONCAT(IF(IS_DETERMINISTIC = 'YES', 'DETERMINISTIC\\n', ''), IF(SQL_DATA_ACCESS != 'CONTAINS SQL', CONCAT(SQL_DATA_ACCESS, '\\n'), '')) characteristics,
+	ROUTINE_DEFINITION definition,
 	'SQL' language
 FROM information_schema.ROUTINES
 WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = " . q($name))->fetchAssoc();
+
+		// ROUTINE_DEFINITION lacks charset introducers (and identifiers starting with '_' in old MariaDB), take the original body.
+		$create = Connection::get()->getValue("SHOW CREATE $type " . idf_escape($name), 2);
+		$string = "'(?:[^'\\\\]|\\\\.)*'";
+		$token = '`[^`]*`|"(?:[^"\\\]|\\\.)*"|$string|/\*.*?\*/|/';
+		$characteristic = "    (?:[A-Z ]+|COMMENT (?:$string)+)\\n";
+		if ($create && preg_match("~^(?:[^(`\"'/]++|$token)*?(\\((?:[^()`\"'/]++|$token|(?1))*+\\))(?: RETURNS [^\\n]*)?\\n(?:$characteristic)*~s", $create, $match)) {
+			$return['definition'] = substr($create, strlen($match[0]));
+		}
+		$return['definition'] = $return['characteristics'] . $return['definition'];
+		unset($return['characteristics']);
 
 		if ($fields && $fields[0]['field'] == '') {
 			$return['returns'] = array_shift($fields);
