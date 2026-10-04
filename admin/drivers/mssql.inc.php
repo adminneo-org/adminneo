@@ -639,7 +639,7 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		// Use OBJECT_DEFINITION() instead of INFORMATION_SCHEMA.VIEWS.VIEW_DEFINITION, which is
 		// nvarchar(4000) and truncates longer view definitions. OBJECT_ID() also resolves the
 		// view in the selected schema instead of only the current default schema.
-		$sql = "SELECT OBJECT_DEFINITION(OBJECT_ID(" . q((get_schema() ? get_schema() . '.' : '') . $name) . "))";
+		$sql = "SELECT OBJECT_DEFINITION(OBJECT_ID(" . q(idf_escape(get_schema()) . "." . idf_escape($name)) . "))";
 		return ["select" => preg_replace(
 			'~^(?:[^[]|\[[^]]*])*\s+AS\s+~isU',
 			'',
