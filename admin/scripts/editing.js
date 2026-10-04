@@ -223,11 +223,11 @@ function removeTableRow(button, columnName) {
  * Shows or hides selected table column.
  *
  * @param {boolean} checked
- * @param {number} column Column index.
+ * @param {number} column Cell index.
  */
 function columnShow(checked, column) {
 	for (const tr of qsa('tr', gid('edit-fields'))) {
-		qsa('td', tr)[column].classList.toggle('hidden', !checked);
+		tr.cells[column].classList.toggle('hidden', !checked);
 	}
 }
 
@@ -271,12 +271,11 @@ function partitionNameChange() {
  * Toggles comment fields.
  *
  * @param {HTMLInputElement} el
- * @param {number} columnIndex
  */
-function editingCommentsClick(el, columnIndex) {
+function editingCommentsClick(el) {
 	const comment = el.form['Comment'];
 
-	columnShow(el.checked, columnIndex);
+	columnShow(el.checked, gid('label-comment').cellIndex);
 
 	comment.classList.toggle('hidden', !el.checked);
 	if (el.checked) {
