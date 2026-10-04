@@ -21,6 +21,7 @@ AdminNeo 5.8.1
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
+- MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 
 AdminNeo 5.8.0 (2026-09-15)
