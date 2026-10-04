@@ -74,7 +74,7 @@ AdminNeo 5.8.0 (2026-09-15)
 - Database schema: Allow dragging a table box also by its name
 - Database schema: Snap a moved table box to the grid
 - MySQL: Fix displaying backward relation links
-- PostgreSQL: Fix editing a record with a GENERATED ALWAYS AS IDENTITY column (fix #205, regression from 5.5.0)
+- PostgreSQL: Fix editing a record with a GENERATED ALWAYS AS IDENTITY column (issue #205, regression from 5.5.0)
 - PostgreSQL, MS SQL: Highlight primary keys in the database schema (regression from 5.1.0)
 - SQLite: Fix working with binary data through PDO
 - MongoDB: Show the primary key column when altering indexes (by @vrana, regression from 5.5.0)
@@ -93,7 +93,7 @@ AdminNeo 5.7.1 (2026-08-27)
 - Escape `<` in strings printed to JavaScript, a name containing `<!--<script>` broke the page
 - Alter table: Edit multiline column comments in a textarea (by @vrana)
 - Alter table: Do not rewrite newlines in multiline column and table comments
-- Edit: Fix losing the value of nullable enum fields (fix #203, regression from 5.7.0)
+- Edit: Fix losing the value of nullable enum fields (issue #203, regression from 5.7.0)
 - Edit: Fix JavaScript error when changing the function of enum, set and bool fields (regression from 5.7.0)
 - PostgreSQL, SQLite, MS SQL: Fix reading a multiline default value
 
@@ -125,8 +125,8 @@ AdminNeo 5.7.0 (2026-08-24)
 
 - Escape index type, algorithm and length (XSS) (by @vrana)
 - Escape values of table status and event schedule (XSS) (by @vrana)
-- Fix embedding to a page with already started session (fix #199)
-- Fix presetting foreign keys in edit form (fix #200, regression from 5.6.0)
+- Fix embedding to a page with already started session (issue #199)
+- Fix presetting foreign keys in edit form (issue #200, regression from 5.6.0)
 - Editor: Fix displaying relation links (regression from 5.2.0)
 - Select: Fix the number of selected rows after going back in history (by @vrana)
 - Edit: Keep values of columns with special characters in name after error (by @vrana)
@@ -170,7 +170,7 @@ AdminNeo 5.6.0 (2026-08-16)
 - Support disabled set_time_limit() and ini_set() (by @vrana)
 - Do not export foreign key constraints if the table structure is not exported
 - MariaDB: Allow setting password with password validation plugin (by @vrana)
-- PostgreSQL: Fix data-only export failing to import due to foreign key violations (fix #192)
+- PostgreSQL: Fix data-only export failing to import due to foreign key violations (issue #192)
 - PostgreSQL: Restart sequences in a data-only export if auto increment values are exported
 - SQLite: Preserve STRICT and WITHOUT ROWID in alter table (by @vrana)
 - SQLite: Do not treat INTEGER PRIMARY KEY without AUTOINCREMENT as auto increment (by @vrana)
@@ -207,7 +207,7 @@ AdminNeo 5.5.1 (2026-07-20)
 - MySQL: Fix routine fields length (by @vrana, regression from 5.5.0)
 - MySQL: Do not export IN in FUNCTION parameters (by @vrana, regression from 5.5.0)
 - MySQL: Allow connecting to socket without hostname (by @magnusvin, regression from 5.5.0)
-- MySQL: Fix database version in URL links to documentation (fix #194, regression from 5.1.0)
+- MySQL: Fix database version in URL links to documentation (issue #194, regression from 5.1.0)
 - MariaDB: Fix form for changing user password (regression from 5.1.0)
 - MariaDB: Speed up getting checks (by @vrana, regression from 5.4.2)
 - MariaDB, PostgreSQL: Use CREATE OR REPLACE FUNCTION if possible (by @vrana)
@@ -310,7 +310,7 @@ AdminNeo 5.4.1 (2026-06-07)
 - PostgreSQL: Fix exporting whole databases (regression from 5.1.0)
 - MongoDB: Fix displaying selection table (regression from 5.4.0)
   MongoDB: Fix edit form when inserting the first record (regression from 5.0.0)
-- MongoDB: Fix authenticating user restricted to one database (fix #177)
+- MongoDB: Fix authenticating user restricted to one database (issue #177)
 - MongoDB: Fix detecting of JSON values
 - MongoDB: Fix saving NULL and "NULL" values
 
