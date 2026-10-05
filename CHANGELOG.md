@@ -34,6 +34,7 @@ AdminNeo 5.9
 - Select: Fix searching by IN for decimal and negative numbers
 - Select: Do not reformat JSON values in search conditions
 - Select: Do not search in date and timestamp columns for invalid dates or dates followed by other text
+- Select: Report an unknown column in search instead of a fatal error (by @vrana, regression from 4.9.2)
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
 - Edit: Do not save invalid JSON values as null with enabled jsonValuesAutoFormat

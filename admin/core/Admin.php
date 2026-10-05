@@ -792,7 +792,7 @@ class Admin extends Origin
 				// Date with an optional time and time zone, e.g. 2026-01-15 12:30:45+02
 				$datePattern = '~^(\d+)-(\d+)-(\d+)([ T]([01]?\d|2[0-3]):[0-5]\d(:[0-5]\d(\.\d+)?)?(\s*(z|utc|[+-](0?\d|1[0-5])(:?[0-5]\d)?))?)?$~i';
 
-				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
+				foreach (($col != "" ? [$col => $fields[$col] ?? []] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
 					// Arrays are not numbers even if their elements are, e.g. integer[]. PostgreSQL compares bit columns as text.
