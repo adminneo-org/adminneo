@@ -7,6 +7,9 @@ namespace AdminNeo;
  *
  * This plugin can be used to manage users access in EditorNeo and/or if connecting to a password-less SQL database.
  *
+ * Stored database credentials are sent only to a server from the `servers` configuration, or if no servers are
+ * configured, to `defaultServer` with `defaultDriver`. Never to a server chosen by the user in the login form.
+ *
  * Requires the table:
  * <pre>
  * CREATE TABLE users (               -- table name is configurable
@@ -55,11 +58,20 @@ class TableLoginPlugin extends Plugin
 
 	public function getCredentials(): ?array
 	{
-		return array_merge([SERVER], $this->credentials);
+		$server = $this->getAllowedServer();
+		if ($server === null) {
+			return null;
+		}
+
+		return array_merge([$server], $this->credentials);
 	}
 
 	public function authenticate(string $username, string $password): ?bool
 	{
+		if ($this->getAllowedServer() === null) {
+			return false;
+		}
+
 		if (DRIVER == "sqlite") {
 			Connection::get()->selectDatabase($this->database);
 			$dbPrefix = "";
@@ -72,5 +84,30 @@ class TableLoginPlugin extends Plugin
 		);
 
 		return $hash && password_verify($password, $hash);
+	}
+
+	/**
+	 * Returns the server address the stored credentials can be sent to, null for a server chosen by the user.
+	 */
+	private function getAllowedServer(): ?string
+	{
+		$server = $this->config->getServer(SERVER);
+		if ($server) {
+			return $server->getServer();
+		}
+
+		// Without stored credentials, the user connects with their own ones.
+		if (implode("", $this->credentials) === "") {
+			return SERVER;
+		}
+
+		if ($this->config->hasServers() ||
+			DRIVER != $this->config->getDefaultDriver(Drivers::getList()) ||
+			SERVER !== (string)$this->config->getDefaultServer()
+		) {
+			return null;
+		}
+
+		return SERVER;
 	}
 }

@@ -67,6 +67,7 @@ AdminNeo 5.9
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - MongoDB, SimpleDB: Show a message after creating a table (regression from 5.8.0)
+- TableLoginPlugin: Restrict sending database credentials only to allowed server (GHSA-rgjx-wcgv-pw7g)
 - GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
 
 (Ported relevant changes from Adminer 6.0.0 • part 4)
