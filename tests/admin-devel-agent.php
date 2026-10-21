@@ -55,6 +55,7 @@ function adminneo_instance()
 		new \AdminNeo\SlugifyEditPlugin(),
 		new \AdminNeo\FrameSupportPlugin(),
 //		new \AdminNeo\GeminiSqlPlugin(),
+//		new \AdminNeo\ClaudeSqlPlugin(),
 	];
 
 	return AgentAdmin::create($config, $plugins);
