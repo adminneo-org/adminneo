@@ -137,7 +137,7 @@ class GeminiSqlPlugin extends Plugin
 		ajax(
 			'',
 			req => setSqlAreaValue(req.responseText),
-			'gemini=' + encodeURIComponent(textarea.value) + '&token=' + encodeURIComponent(this.form['token'].value),
+			'gemini=' + encodeURIComponent(textarea.value) + '&token=' + encodeURIComponent(this.form['token'].value)
 		);
 	};
 

@@ -26,6 +26,7 @@ AdminNeo 5.8.1
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
+- GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
 
 AdminNeo 5.8.0 (2026-09-15)
 ---------------------------
