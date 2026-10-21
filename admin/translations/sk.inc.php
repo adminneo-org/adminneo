@@ -146,6 +146,7 @@ return [
 	'save' => 'uložiť',
 	'Format' => 'Formát',
 	'Data' => 'Dáta',
+	'Copy as <span>%s</span>' => 'Kopírovať ako <span>%s</span>',
 
 	// Databases
 	'Database' => 'Databáza',

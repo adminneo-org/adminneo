@@ -126,6 +126,7 @@ return [
 	'save' => 'xx',
 	'Format' => 'Xx',
 	'Data' => 'Xx',
+	'Copy as <span>%s</span>' => 'Xx <span>%s</span>',
 
 	// Databases
 	'Database' => 'Xx',

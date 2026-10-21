@@ -91,6 +91,24 @@ select:not([size]) {
 	background-size: 16px;
 }
 
+.select-menu {
+	margin: -10px 20px 0;
+	position: absolute;
+	border: 1px solid var(--input-border);
+	border-radius: var(--input-border-radius);
+	background: var(--input-bg);
+	color: var(--input-text);
+}
+
+.select-menu a {
+	display: block;
+	padding: 4px 6px 2px;
+}
+
+.select-menu a:hover {
+	background: var(--list-hover);
+}
+
 .rtl select:not([size]) {
 	background-position: left center;
 }

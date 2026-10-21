@@ -9,6 +9,7 @@ AdminNeo 5.8.1
 - Add MarkdownDumpPlugin - export of database structure and data to Markdown format
 - Add ClaudeSqlPlugin - AI prompt in SQL command generating the queries with Anthropic Claude
 - Table structure: Show generated columns in SQL syntax
+- Table structure: Copy table structure to clipboard in a selected export format
 - Unify import and export icons
 - Export: Disable structure and data options for formats that do not support them
 

@@ -8,26 +8,50 @@ $settings = Admin::get()->getSettings();
 $structure_formats = Admin::get()->getStructureDumpFormats();
 $data_formats = Admin::get()->getDataDumpFormats();
 
+// Copying the table structure to the clipboard, the dump settings are not changed, only the last used format is saved.
+$copy_table = is_ajax() && $TABLE != "";
+if ($copy_table) {
+	$copy_format = $_GET["format"] ?? null;
+	if (!isset($structure_formats[$copy_format])) {
+		reset($structure_formats);
+		$copy_format = key($structure_formats);
+	}
+
+	$settings->updateParameter("copyFormat", $copy_format);
+
+	$_POST = [
+		"format" => $copy_format,
+		"output" => "text",
+		"db_style" => "",
+		"table_style" => "CREATE",
+		"tables" => [$TABLE],
+		"triggers" => (support("trigger") ? "1" : ""),
+		"data_style" => "",
+	];
+}
+
 if ($_POST) {
 	$dump_structure = isset($structure_formats[$_POST["format"]]);
 	$dump_data = isset($data_formats[$_POST["format"]]);
 
 	// Structure and data options are disabled for formats not supporting them, so keep their previous settings.
-	$settings->updateParameters([
-		"dumpFormat" => $_POST["format"],
-		"dumpOutput" => $_POST["output"],
-	] + ($dump_structure ? [
-		"dumpDbStyle" => $_POST["db_style"],
-		"dumpTypes" => $_POST["types"] ?? (support("type") ? "" : null),
-		"dumpRoutines" => $_POST["routines"] ?? (support("routine") ? "" : null),
-		"dumpEvents" => $_POST["events"] ?? (support("event") ? "" : null),
-		"dumpTableStyle" => $_POST["table_style"],
-		"dumpAutoIncrement" => $_POST["auto_increment"] ?? "",
-		"dumpTriggers" => $_POST["triggers"] ?? (support("trigger") ? "" : null),
-	] : []) +
-	($dump_data ? [
-		"dumpDataStyle" => $_POST["data_style"],
-	] : []));
+	if (!$copy_table) {
+		$settings->updateParameters([
+			"dumpFormat" => $_POST["format"],
+			"dumpOutput" => $_POST["output"],
+		] + ($dump_structure ? [
+			"dumpDbStyle" => $_POST["db_style"],
+			"dumpTypes" => $_POST["types"] ?? (support("type") ? "" : null),
+			"dumpRoutines" => $_POST["routines"] ?? (support("routine") ? "" : null),
+			"dumpEvents" => $_POST["events"] ?? (support("event") ? "" : null),
+			"dumpTableStyle" => $_POST["table_style"],
+			"dumpAutoIncrement" => $_POST["auto_increment"] ?? "",
+			"dumpTriggers" => $_POST["triggers"] ?? (support("trigger") ? "" : null),
+		] : []) +
+		($dump_data ? [
+			"dumpDataStyle" => $_POST["data_style"],
+		] : []));
+	}
 
 	// Formats without structure always export the header row with column names.
 	$table_style = ($dump_structure ? $_POST["table_style"] : "CREATE");
@@ -64,15 +88,20 @@ if ($_POST) {
 	// MySQL does not need it, it disables the foreign key checks for the whole dump.
 	$data_only = $is_sql && $data_style && !$table_style && DIALECT != "sql";
 
+	// The copied table structure contains only the table, without the header of the dump.
 	if ($is_sql) {
-		echo "-- AdminNeo " . VERSION . " " . Drivers::get(DRIVER) . " " . Connection::get()->getVersion() . " dump\n\n";
+		if (!$copy_table) {
+			echo "-- AdminNeo " . VERSION . " " . Drivers::get(DRIVER) . " " . Connection::get()->getVersion() . " dump\n\n";
+		}
 		if (DIALECT == "sql") {
-			echo "SET NAMES utf8;
+			if (!$copy_table) {
+				echo "SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 " . ($data_style ? "SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 " : "") . "
 ";
+			}
 			Connection::get()->query("SET time_zone = '+00:00'");
 			Connection::get()->query("SET sql_mode = ''");
 		}
@@ -221,7 +250,7 @@ SET foreign_key_checks = 0;
 		}
 	}
 
-	if ($is_sql) {
+	if ($is_sql && !$copy_table) {
 		echo "-- " . gmdate("Y-m-d H:i:s e") . "\n";
 	}
 	exit;
