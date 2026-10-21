@@ -169,6 +169,10 @@ class MarkdownDumpPlugin extends Plugin
 			$this->printCode(view($table)["select"]);
 		}
 
+		if (!$isView && Driver::get()->getPartitionBy() && str_contains($tableStatus["Create_options"] ?? "", "partitioned")) {
+			$this->printPartitions(Driver::get()->getPartitionsInfo($table));
+		}
+
 		if (support("indexes") && Driver::get()->supportsIndex($tableStatus)) {
 			$this->printIndexes(indexes($table), $tableStatus);
 		}
@@ -296,6 +300,36 @@ class MarkdownDumpPlugin extends Plugin
 		}
 
 		echo "\n";
+	}
+
+	/**
+	 * @param array $partitionInfo Result of Driver::getPartitionsInfo().
+	 */
+	private function printPartitions(array $partitionInfo): void
+	{
+		if (!$partitionInfo) {
+			return;
+		}
+
+		echo "#### " . lang('Partitions') . "\n\n";
+
+		$showList = isset($partitionInfo["partition_names"]);
+
+		echo $this->code("BY $partitionInfo[partition_by] ($partitionInfo[partition])");
+		if (!$showList && isset($partitionInfo["partitions"])) {
+			echo " " . lang('Partitions') . ": " . $this->escape($partitionInfo["partitions"]);
+		}
+		echo "\n\n";
+
+		if ($showList) {
+			$this->printTableHeader([lang('Partition'), lang('Values')]);
+
+			foreach ($partitionInfo["partition_names"] as $key => $name) {
+				echo "| " . $this->escape($name) . " | " . $this->escape($partitionInfo["partition_values"][$key]) . " |\n";
+			}
+
+			echo "\n";
+		}
 	}
 
 	/**
