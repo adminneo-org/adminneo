@@ -146,6 +146,7 @@ return [
 	'save' => 'spremi',
 	'Format' => 'Format',
 	'Data' => 'Podaci',
+	'Copy as <span>%s</span>' => 'Kopiraj kao <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Baza podataka',

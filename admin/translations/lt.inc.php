@@ -146,6 +146,7 @@ return [
 	'save' => 'išsaugoti',
 	'Format' => 'Formatas',
 	'Data' => 'Duomenys',
+	'Copy as <span>%s</span>' => 'Kopijuoti kaip <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Duomenų bazė',

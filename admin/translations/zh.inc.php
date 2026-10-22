@@ -126,6 +126,7 @@ return [
 	'save' => '保存',
 	'Format' => '格式',
 	'Data' => '数据',
+	'Copy as <span>%s</span>' => '复制为 <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => '数据库',

@@ -141,6 +141,7 @@ return [
 	'save' => 'சேமி',
 	'Format' => 'ஃபார்ம‌ட் (Format)',
 	'Data' => 'த‌க‌வ‌ல்',
+	'Copy as <span>%s</span>' => '<span>%s</span> வடிவில் நகலெடு', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'த‌க‌வ‌ல்த‌ள‌ம்',

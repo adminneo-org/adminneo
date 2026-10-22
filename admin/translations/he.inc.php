@@ -126,6 +126,7 @@ return [
 	'save' => 'שמור',
 	'Format' => 'פורמט',
 	'Data' => 'נתונים',
+	'Copy as <span>%s</span>' => 'העתק בתור <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'מסד נתונים',

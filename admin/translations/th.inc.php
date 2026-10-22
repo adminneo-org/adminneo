@@ -126,6 +126,7 @@ return [
 	'save' => 'บันทึก',
 	'Format' => 'รูปแบบ',
 	'Data' => 'ข้อมูล',
+	'Copy as <span>%s</span>' => 'คัดลอกเป็น <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'ฐานข้อมูล',

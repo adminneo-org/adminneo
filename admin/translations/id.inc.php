@@ -126,6 +126,7 @@ return [
 	'save' => 'simpan',
 	'Format' => 'Format',
 	'Data' => 'Data',
+	'Copy as <span>%s</span>' => 'Salin sebagai <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Basis data',

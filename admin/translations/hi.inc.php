@@ -138,6 +138,7 @@ return [
 	'save' => 'सहेजें',
 	'Format' => 'प्रारूप',
 	'Data' => 'डेटा',
+	'Copy as <span>%s</span>' => '<span>%s</span> के रूप में कॉपी करें', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'डेटाबेस',

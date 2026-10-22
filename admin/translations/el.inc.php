@@ -141,6 +141,7 @@ return [
 	'save' => 'αποθήκευση',
 	'Format' => 'Μορφή',
 	'Data' => 'Δεδομένα',
+	'Copy as <span>%s</span>' => 'Αντιγραφή ως <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Βάση Δεδομένων', // by Claude Fable 5.1

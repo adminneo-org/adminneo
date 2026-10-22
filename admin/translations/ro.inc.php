@@ -146,6 +146,7 @@ return [
 	'save' => 'salvează',
 	'Format' => 'Format',
 	'Data' => 'Date',
+	'Copy as <span>%s</span>' => 'Copiază ca <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Baza de date',

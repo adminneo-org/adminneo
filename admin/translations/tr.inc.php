@@ -135,6 +135,7 @@ return [
 	'save' => 'kaydet',
 	'Format' => 'Biçim',
 	'Data' => 'Veri',
+	'Copy as <span>%s</span>' => '<span>%s</span> olarak kopyala', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Veri Tabanı',

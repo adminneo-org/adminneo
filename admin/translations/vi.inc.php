@@ -126,6 +126,7 @@ return [
 	'save' => 'lưu',
 	'Format' => 'Định dạng',
 	'Data' => 'Dữ liệu',
+	'Copy as <span>%s</span>' => 'Sao chép dưới dạng <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Cơ sở dữ liệu',

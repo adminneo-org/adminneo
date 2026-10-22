@@ -126,6 +126,7 @@ return [
 	'save' => 'შენახვა',
 	'Format' => 'ფორმატი',
 	'Data' => 'ინფორმაცია',
+	'Copy as <span>%s</span>' => 'კოპირება როგორც <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'ბაზა',

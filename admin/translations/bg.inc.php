@@ -141,6 +141,7 @@ return [
 	'save' => 'запис',
 	'Format' => 'Формат',
 	'Data' => 'Данни',
+	'Copy as <span>%s</span>' => 'Копиране като <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'База данни',

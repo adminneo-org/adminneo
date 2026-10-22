@@ -126,6 +126,7 @@ return [
 	'save' => 'ment',
 	'Format' => 'Formátum',
 	'Data' => 'Adat',
+	'Copy as <span>%s</span>' => 'Másolás <span>%s</span> formátumban', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Adatbázis',

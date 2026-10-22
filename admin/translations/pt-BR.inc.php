@@ -141,6 +141,7 @@ return [
 	'save' => 'salvar',
 	'Format' => 'Formato',
 	'Data' => 'Dados',
+	'Copy as <span>%s</span>' => 'Copiar como <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Base de dados',

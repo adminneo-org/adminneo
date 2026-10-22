@@ -132,6 +132,7 @@ return [
 	'save' => 'حفظ',
 	'Format' => 'الصيغة',
 	'Data' => 'معلومات',
+	'Copy as <span>%s</span>' => 'نسخ كـ <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'قاعدة بيانات',

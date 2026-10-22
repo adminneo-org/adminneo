@@ -129,6 +129,7 @@ return [
 	'save' => 'সংরক্ষণ',
 	'Format' => 'বিন্যাস',
 	'Data' => 'ডাটা',
+	'Copy as <span>%s</span>' => '<span>%s</span> হিসাবে কপি করুন', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'ডাটাবেজ',

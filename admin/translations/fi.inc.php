@@ -135,6 +135,7 @@ return [
 	'save' => 'tallenna',
 	'Format' => 'Muoto',
 	'Data' => 'Data',
+	'Copy as <span>%s</span>' => 'Kopioi muodossa <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Tietokanta',

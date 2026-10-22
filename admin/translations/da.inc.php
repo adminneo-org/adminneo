@@ -138,6 +138,7 @@ return [
 	'save' => 'Gem',
 	'Format' => 'Format',
 	'Data' => 'Data',
+	'Copy as <span>%s</span>' => 'Kopier som <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Database',

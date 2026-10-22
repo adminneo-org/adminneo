@@ -126,6 +126,7 @@ return [
 	'save' => 'ذخیره',
 	'Format' => 'قالب', // by Claude Fable 5.1
 	'Data' => 'داده',
+	'Copy as <span>%s</span>' => 'کپی به صورت <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'پایگاه داده',

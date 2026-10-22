@@ -132,6 +132,7 @@ return [
 	'save' => 'salvesta failina',
 	'Format' => 'Formaat',
 	'Data' => 'Andmed',
+	'Copy as <span>%s</span>' => 'Kopeeri kui <span>%s</span>', // by Claude Fable 5.1
 
 	// Databases
 	'Database' => 'Andmebaas',
