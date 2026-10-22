@@ -242,7 +242,8 @@ class MarkdownDumpPlugin extends Plugin
 	}
 
 	/**
-	 * Prints table heading together with the heading of its group if not printed yet.
+	 * Prints table heading together with the heading of its group if not printed yet. The group headings are printed
+	 * only under the database heading.
 	 */
 	private function printTableHeading(string $table, bool $isView): void
 	{
@@ -250,12 +251,14 @@ class MarkdownDumpPlugin extends Plugin
 			return;
 		}
 
-		if ($isView && !$this->viewsHeading) {
-			echo "## " . lang('Views') . "\n\n";
-			$this->viewsHeading = true;
-		} elseif (!$isView && !$this->tablesHeading) {
-			echo "## " . lang('Tables') . "\n\n";
-			$this->tablesHeading = true;
+		if ($_POST["db_style"]) {
+			if ($isView && !$this->viewsHeading) {
+				echo "## " . lang('Views') . "\n\n";
+				$this->viewsHeading = true;
+			} elseif (!$isView && !$this->tablesHeading) {
+				echo "## " . lang('Tables') . "\n\n";
+				$this->tablesHeading = true;
+			}
 		}
 
 		echo "### " . ($isView ? lang('View') : lang('Table')) . " `$table`\n\n";
