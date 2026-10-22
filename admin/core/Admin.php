@@ -1007,10 +1007,20 @@ class Admin extends Origin
 			// Applies to all formats including the ones added by plugins.
 			header("Content-Type: application/x-gzip");
 
-			ob_start(function (string $string): string {
-				// ob_start() callback receives an optional parameter $phase but gzencode() accepts optional parameter $level
-				return gzencode($string);
-			}, 1e6);
+			if (function_exists('deflate_init')) {
+				// A single gzip stream is readable also by decoders that read only the first member, e.g. gzdecode().
+				$context = deflate_init(ZLIB_ENCODING_GZIP);
+
+				ob_start(function (string $string, int $phase) use ($context): string {
+					return deflate_add($context, $string, ($phase & PHP_OUTPUT_HANDLER_END ? ZLIB_FINISH : ZLIB_NO_FLUSH));
+				}, 1e6);
+			} else {
+				// Each chunk is compressed into a separate gzip member, PHP < 7.0.
+				ob_start(function (string $string): string {
+					// ob_start() callback receives an optional parameter $phase but gzencode() accepts optional parameter $level
+					return gzencode($string);
+				}, 1e6);
+			}
 		}
 	}
 

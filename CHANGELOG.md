@@ -12,6 +12,7 @@ AdminNeo 5.8.1
 - Table structure: Copy table structure to clipboard in a selected export format
 - Unify import and export icons
 - Export: Disable structure and data options for formats that do not support them
+- Export: Compress gzip output into a single stream instead of concatenated chunks
 
 ### Bugfixes
 
