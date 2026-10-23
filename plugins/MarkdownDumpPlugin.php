@@ -81,14 +81,17 @@ class MarkdownDumpPlugin extends Plugin
 		}
 
 		echo "## " . lang('User types') . "\n\n";
-		echo "| " . lang('Name') . " | " . lang('Values') . " |\n";
-		echo "| --- | --- |\n";
 
 		foreach ($types as $id => $type) {
-			echo "| " . $this->escape($type) . " | " . $this->escape(type_values($id)) . " |\n";
-		}
+			echo "### " . lang('Type') . " `$type`\n\n";
 
-		echo "\n";
+			// The definition is not read for base types and shell types have none.
+			$definition = type_definition($id);
+			if ($definition["definition"]) {
+				$object = ($definition["kind"] == 'd' ? "DOMAIN" : "TYPE");
+				$this->printCode("CREATE $object " . idf_escape($type) . " $definition[definition]");
+			}
+		}
 	}
 
 	private function dumpRoutines(): void
