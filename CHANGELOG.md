@@ -22,6 +22,7 @@ AdminNeo 5.8.1
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - Alter table: Fix toggling of column comments (regression from 5.8.0)
 - MySQL: Fix lost charset introducers and parameters starting with "_" in routine definitions (issue #197)
+- MySQL: Fix exhausted memory in export of big tables (issue #211, regression from 5.1.0)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment

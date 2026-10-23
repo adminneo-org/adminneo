@@ -117,7 +117,7 @@ if (isset($_GET["mysql"])) {
 
 			public function query(string $query, bool $unbuffered = false)
 			{
-				$result = $this->mysqli->query($query);
+				$result = $this->mysqli->query($query, ($unbuffered ? MYSQLI_USE_RESULT : MYSQLI_STORE_RESULT));
 
 				return is_object($result) ? new MySqlResult($result) : $result;
 			}
