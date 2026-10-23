@@ -13,6 +13,7 @@ AdminNeo 5.8.1
 - Unify import and export icons
 - Export: Disable structure and data options for formats that do not support them
 - Export: Compress gzip output into a single stream instead of concatenated chunks
+- Navigation: Move the focus between the tables filter and the tables list by arrow keys
 
 ### Bugfixes
 

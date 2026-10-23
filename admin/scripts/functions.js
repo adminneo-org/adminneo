@@ -635,6 +635,53 @@ function initTablesFilter(dbName) {
 		tablesFilterTimeout = window.setTimeout(filterTables, 200);
 	});
 
+	filterInput.addEventListener('keydown', event => {
+		if (event.key !== 'ArrowDown' || hasModifierKey(event)) {
+			return;
+		}
+
+		// Applies the pending filter value, otherwise the focus could land on a table that is about to be hidden.
+		window.clearTimeout(tablesFilterTimeout);
+		filterTables();
+
+		const links = getFilteredTableLinks();
+		if (links.length) {
+			links[0].focus();
+		}
+
+		event.preventDefault();
+	});
+
+	// The tables list is printed after the filter.
+	document.addEventListener('DOMContentLoaded', () => {
+		const tablesList = gid('tables');
+		if (!tablesList) {
+			return;
+		}
+
+		tablesList.addEventListener('keydown', event => {
+			if (!/^Arrow(Down|Up)$/.test(event.key) || hasModifierKey(event)) {
+				return;
+			}
+
+			const links = getFilteredTableLinks();
+			const item = event.target.closest('li');
+			let index = links.findIndex(link => link.closest('li') === item);
+			if (index < 0) {
+				return;
+			}
+
+			index += event.key === 'ArrowDown' ? 1 : -1;
+			if (index < 0) {
+				filterInput.focus();
+			} else if (index < links.length) {
+				links[index].focus();
+			}
+
+			event.preventDefault();
+		});
+	});
+
 	document.body.addEventListener('keydown', event => {
 		if (isCtrl(event) && event.shiftKey && event.key.toUpperCase() === 'F') {
 			filterInput.focus();
@@ -643,6 +690,18 @@ function initTablesFilter(dbName) {
 			event.preventDefault();
 		}
 	});
+}
+
+/**
+ * Returns the main link of every table displayed in the tables list.
+ *
+ * @return {HTMLElement[]}
+ */
+function getFilteredTableLinks() {
+	return [...qsa('#tables li:not(.hidden)')]
+		// The primary item is a <span> if the driver doesn't support the table structure.
+		.map(item => qs('a[data-primary="true"]', item) || qs('a', item))
+		.filter(link => link);
 }
 
 /**
@@ -881,6 +940,17 @@ function selectSearch(name) {
  */
 function isCtrl(event) {
 	return (event.ctrlKey || event.metaKey) && !event.altKey; // shiftKey allowed
+}
+
+/**
+ * Checks whether any modifier key is pressed.
+ *
+ * @param {KeyboardEvent} event
+ *
+ * @return {boolean}
+ */
+function hasModifierKey(event) {
+	return event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
 }
 
 /**
