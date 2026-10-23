@@ -30,6 +30,7 @@ AdminNeo 5.8.1
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
+- PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
