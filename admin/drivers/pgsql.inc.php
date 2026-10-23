@@ -1374,7 +1374,13 @@ ORDER BY t.typname"
 			return "";
 		}
 
-		return "'" . implode("', '", array_map('addslashes', $enums)) . "'";
+		// Escaped the same way as the length of MySQL enum, enum_input() unescapes doubled quotes and backslashes.
+		$values = [];
+		foreach ($enums as $enum) {
+			$values[] = "'" . str_replace("'", "''", addcslashes($enum, "\\")) . "'";
+		}
+
+		return implode(", ", $values);
 	}
 
 	/**
