@@ -17,6 +17,9 @@ abstract class Driver
 	/** @var int[][] [$description => [$type => $maximum_unsigned_length, ...], ...] */
 	protected $types = [];
 
+	/** @var int[] [$name => $id, ...] */
+	private $userTypes = [];
+
 	/** @var list<string> List of number variants. */
 	protected $unsigned = [];
 
@@ -109,16 +112,28 @@ abstract class Driver
 		return array_map("array_keys", $this->types);
 	}
 
+	/**
+	 * @param string[] $types [$id => $name, ...]
+	 */
 	public function setUserTypes(array $types): void
 	{
-		$this->types[lang('User types')] = array_flip($types);
+		$this->userTypes = array_flip($types);
+
+		// $this->types holds maximum lengths, user types have none.
+		$this->types[lang('User types')] = array_fill_keys(array_keys($this->userTypes), 0);
 	}
 
+	/**
+	 * @return list<string>
+	 */
 	public function getUserTypes(): array
 	{
-		$key = lang('User types');
+		return array_keys($this->userTypes);
+	}
 
-		return array_keys($this->types[$key] ?? []);
+	public function getUserTypeId(string $name): ?int
+	{
+		return $this->userTypes[$name] ?? null;
 	}
 
 	/**

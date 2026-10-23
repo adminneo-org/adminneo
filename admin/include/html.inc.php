@@ -415,8 +415,9 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		$function = null;
 	}
 
-	if (in_array($field["type"], Driver::get()->getUserTypes())) {
-		$enums = type_values($types[$field["type"]]);
+	$type_id = Driver::get()->getUserTypeId($field["type"]);
+	if ($type_id) {
+		$enums = type_values($type_id);
 		if ($enums) {
 			$field["type"] = "enum";
 			$field["length"] = $enums;

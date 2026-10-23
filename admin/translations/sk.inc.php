@@ -331,6 +331,7 @@ return [
 	'Create type' => 'Vytvoriť typ',
 	'Type has been dropped.' => 'Typ bol odstránený.',
 	'Type has been created.' => 'Typ bol vytvorený.',
+	'Type has been altered.' => 'Typ bol zmenený.',
 	'Alter type' => 'Pozmeniť typ',
 
 	// Triggers
