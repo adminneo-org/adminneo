@@ -158,6 +158,8 @@ In JavaScript doc comments, an optional parameter — one with a default value i
 
 ### Commits
 
+Never commit on your own initiative. Present the changes and commit only when asked. The exception is a simple Adminer port, see [Porting changes from Adminer](#porting-changes-from-adminer).
+
 Commit one logical change at a time. Split an unrelated bug found along the way into its own commit.
 
 Format:
