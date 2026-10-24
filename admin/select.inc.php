@@ -51,7 +51,7 @@ if ($_GET["val"] && is_ajax()) {
 		$select = [$as ?: idf_escape(key($row))];
 		$where[] = where_check($unique_idf, $fields);
 		$return = Driver::get()->select($TABLE, $select, $where, $select);
-		if ($return) {
+		if (is_object($return)) { // A query returning no result set can succeed, e.g. a multi-statement query in PostgreSQL.
 			echo first($return->fetchRow());
 		}
 	}
@@ -330,8 +330,8 @@ if (!$columns && support("table")) {
 	}
 	$result = Driver::get()->select($TABLE, $select2, $where, $group2, $order, $limit, $page, true);
 
-	if (!$result) {
-		echo "<p class='error'>" . error() . "\n";
+	if (!is_object($result)) { // A query returning no result set can succeed, e.g. a multi-statement query in PostgreSQL.
+		echo "<p class='error'>" . (error() ?: lang('Unknown error.')) . "\n";
 	} else {
 		if (DIALECT == "mssql" && $page) {
 			$result->seek($limit * $page);

@@ -257,7 +257,7 @@ abstract class Driver
 	 * @param int $page Index of page starting at zero.
 	 * @param bool $print Whether to print the query.
 	 *
-	 * @return Result|false
+	 * @return Result|bool
 	 */
 	public function select(string $table, array $select, array $where, array $group, array $order = [], int $limit = 1, int $page = 0, bool $print = false)
 	{
