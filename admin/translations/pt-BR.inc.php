@@ -65,10 +65,10 @@ return [
 
 	// Privileges
 	'Privileges' => 'Privilégios',
-	'Create user' => 'Criar Usuário',
-	'User has been dropped.' => 'O Usuário foi apagado.',
-	'User has been altered.' => 'O Usuário foi alterado.',
-	'User has been created.' => 'O Usuário foi criado.',
+	'Create user' => 'Criar usuário',
+	'User has been dropped.' => 'O usuário foi apagado.',
+	'User has been altered.' => 'O usuário foi alterado.',
+	'User has been created.' => 'O usuário foi criado.',
 	'Hashed' => 'Hash',
 
 	// Server
@@ -118,7 +118,7 @@ return [
 	'File upload' => 'Importar arquivo',
 	'From server' => 'A partir do servidor',
 	'Webserver file %s' => 'Arquivo do servidor web %s',
-	'Run file' => 'Executar Arquivo',
+	'Run file' => 'Executar arquivo',
 	'File does not exist.' => 'Arquivo não existe.',
 	'File uploads are disabled.' => 'Importação de arquivos desabilitada.',
 	'Unable to upload a file.' => 'Não é possível enviar o arquivo.',
@@ -149,15 +149,15 @@ return [
 	'DB' => 'BD', // by Claude Fable 5.1
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de dados inválida.',
-	'Alter database' => 'Alterar Base de dados',
-	'Create database' => 'Criar Base de dados',
-	'Database schema' => 'Esquema de Base de dados',
+	'Alter database' => 'Alterar base de dados',
+	'Create database' => 'Criar base de dados',
+	'Database schema' => 'Esquema de base de dados',
 	'Permanent link' => 'Link permanente', // by Claude Fable 5.1
-	'Database has been dropped.' => 'A Base de dados foi apagada.',
-	'Databases have been dropped.' => 'A Base de dados foi apagada.',
-	'Database has been created.' => 'A Base de dados foi criada.',
-	'Database has been renamed.' => 'A Base de dados foi renomeada.',
-	'Database has been altered.' => 'A Base de dados foi alterada.',
+	'Database has been dropped.' => 'A base de dados foi apagada.',
+	'Databases have been dropped.' => 'As bases de dados foram apagadas.',
+	'Database has been created.' => 'A base de dados foi criada.',
+	'Database has been renamed.' => 'A base de dados foi renomeada.',
+	'Database has been altered.' => 'A base de dados foi alterada.',
 
 	// SQLite errors
 	'File exists.' => 'Arquivo já existe.',
@@ -171,9 +171,9 @@ return [
 	'Show schema' => 'Mostrar esquema', // by Claude Fable 5.1
 	'Alter schema' => 'Alterar esquema',
 	'Create schema' => 'Criar esquema',
-	'Schema has been dropped.' => 'O Esquema foi apagado.',
-	'Schema has been created.' => 'O Esquema foi criado.',
-	'Schema has been altered.' => 'O Esquema foi alterado.',
+	'Schema has been dropped.' => 'O esquema foi apagado.',
+	'Schema has been created.' => 'O esquema foi criado.',
+	'Schema has been altered.' => 'O esquema foi alterado.',
 	'Invalid schema.' => 'Esquema inválido.',
 
 	// Table list
@@ -184,7 +184,7 @@ return [
 	'collation' => 'collation',
 	'Data Length' => 'Tamanho de dados',
 	'Index Length' => 'Tamanho de índice',
-	'Data Free' => 'Espaço Livre',
+	'Data Free' => 'Espaço livre',
 	'Rows' => 'Registros',
 	'%d in total' => '%d no total',
 	'Analyze' => 'Analisar',
@@ -193,33 +193,33 @@ return [
 	'Check' => 'Verificar',
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
-	'Tables have been truncated.' => 'As Tabelas foram truncadas.',
-	'Move to other database' => 'Mover para outra Base de dados',
+	'Tables have been truncated.' => 'As tabelas foram truncadas.',
+	'Move to other database' => 'Mover para outra base de dados',
 	'Move' => 'Mover',
-	'Tables have been moved.' => 'As Tabelas foram movidas.',
+	'Tables have been moved.' => 'As tabelas foram movidas.',
 	'Copy' => 'Copiar', // by Claude Fable 5.1
 	'Tables have been copied.' => 'As tabelas foram copiadas.', // by Claude Fable 5.1
 	'overwrite' => 'sobrescrever', // by Claude Fable 5.1
 
 	// Tables
 	'Tables' => 'Tabelas',
-	'Tables and views' => 'Tabelas e Visões',
+	'Tables and views' => 'Tabelas e visões',
 	'Table' => 'Tabela',
 	'No tables.' => 'Não existem tabelas.',
 	'Alter table' => 'Alterar estrutura',
 	'Create table' => 'Criar tabela',
-	'Table has been dropped.' => 'A Tabela foi eliminada.',
-	'Tables have been dropped.' => 'As Tabelas foram eliminadas.',
+	'Table has been dropped.' => 'A tabela foi eliminada.',
+	'Tables have been dropped.' => 'As tabelas foram eliminadas.',
 	'Tables have been optimized.' => 'As tabelas foram otimizadas.', // by Claude Fable 5.1
-	'Table has been altered.' => 'A Tabela foi alterada.',
-	'Table has been created.' => 'A Tabela foi criada.',
+	'Table has been altered.' => 'A tabela foi alterada.',
+	'Table has been created.' => 'A tabela foi criada.',
 	'Table name' => 'Nome da tabela',
 	'Name' => 'Nome',
 	'Show structure' => 'Mostrar estrutura',
 	'Column name' => 'Nome da coluna',
 	'Type' => 'Tipo',
 	'Length' => 'Tamanho',
-	'Auto Increment' => 'Incremento Automático',
+	'Auto Increment' => 'Incremento automático',
 	'Options' => 'Opções',
 	'Comment' => 'Comentário',
 	'Default value' => 'Valor padrão', // by Claude Fable 5.1
@@ -237,9 +237,9 @@ return [
 	// Views
 	'View' => 'Visão',
 	'Materialized view' => 'Visão materializada', // by Claude Fable 5.1
-	'View has been dropped.' => 'A Visão foi apagada.',
-	'View has been altered.' => 'A Visão foi alterada.',
-	'View has been created.' => 'A Visão foi criada.',
+	'View has been dropped.' => 'A visão foi apagada.',
+	'View has been altered.' => 'A visão foi alterada.',
+	'View has been created.' => 'A visão foi criada.',
 	'Alter view' => 'Alterar visão',
 	'Create view' => 'Criar visão',
 
@@ -247,14 +247,14 @@ return [
 	'Partition by' => 'Particionar por',
 	'Partition' => 'Partição', // by Claude Fable 5.1
 	'Partitions' => 'Partições',
-	'Partition name' => 'Nome da Partição',
+	'Partition name' => 'Nome da partição',
 	'Values' => 'Valores',
 	'Inherited tables' => 'Tabelas herdadas', // by Claude Fable 5.1
 	'Inherited from' => 'Herdada de', // by Claude Fable 5.1
 
 	// Indexes
 	'Indexes' => 'Índices',
-	'Indexes have been altered.' => 'Os Índices foram alterados.',
+	'Indexes have been altered.' => 'Os índices foram alterados.',
 	'Alter indexes' => 'Alterar índices',
 	'Add next' => 'Adicionar próximo',
 	'Index Type' => 'Tipo de índice',
@@ -265,9 +265,9 @@ return [
 
 	// Foreign keys
 	'Foreign keys' => 'Chaves estrangeiras',
-	'Foreign key has been dropped.' => 'A Chave Estrangeira foi apagada.',
-	'Foreign key has been altered.' => 'A Chave Estrangeira foi alterada.',
-	'Foreign key has been created.' => 'A Chave Estrangeira foi criada.',
+	'Foreign key has been dropped.' => 'A chave estrangeira foi apagada.',
+	'Foreign key has been altered.' => 'A chave estrangeira foi alterada.',
+	'Foreign key has been created.' => 'A chave estrangeira foi criada.',
 	'Target table' => 'Tabela de destino',
 	'Change' => 'Modificar',
 	'Source' => 'Origem',
@@ -287,12 +287,12 @@ return [
 		'Rotina executada, %d registros afetados.',
 	],
 	'Call' => 'Chamar',
-	'Parameter name' => 'Nome de Parâmetro',
+	'Parameter name' => 'Nome de parâmetro',
 	'Create procedure' => 'Criar procedimento',
 	'Create function' => 'Criar função',
-	'Routine has been dropped.' => 'A Rotina foi apagada.',
-	'Routine has been altered.' => 'A Rotina foi alterada.',
-	'Routine has been created.' => 'A Rotina foi criada.',
+	'Routine has been dropped.' => 'A rotina foi apagada.',
+	'Routine has been altered.' => 'A rotina foi alterada.',
+	'Routine has been created.' => 'A rotina foi criada.',
 	'Alter function' => 'Alterar função',
 	'Alter procedure' => 'Alterar procedimento',
 	'Return type' => 'Tipo de valor de retorno',
@@ -300,11 +300,11 @@ return [
 	// Events
 	'Events' => 'Eventos',
 	'Event' => 'Evento',
-	'Event has been dropped.' => 'O Evento foi apagado.',
-	'Event has been altered.' => 'O Evento foi alterado.',
-	'Event has been created.' => 'O Evento foi criado.',
-	'Alter event' => 'Modificar Evento',
-	'Create event' => 'Criar Evento',
+	'Event has been dropped.' => 'O evento foi apagado.',
+	'Event has been altered.' => 'O evento foi alterado.',
+	'Event has been created.' => 'O evento foi criado.',
+	'Alter event' => 'Modificar evento',
+	'Create event' => 'Criar evento',
 	'At given time' => 'A hora determinada',
 	'Every' => 'Cada',
 	'Schedule' => 'Agenda',
@@ -315,26 +315,26 @@ return [
 	// Sequences (PostgreSQL)
 	'Sequences' => 'Sequências',
 	'Create sequence' => 'Criar sequência',
-	'Sequence has been dropped.' => 'A Sequência foi apagada.',
-	'Sequence has been created.' => 'A Sequência foi criada.',
-	'Sequence has been altered.' => 'A Sequência foi alterada.',
+	'Sequence has been dropped.' => 'A sequência foi apagada.',
+	'Sequence has been created.' => 'A sequência foi criada.',
+	'Sequence has been altered.' => 'A sequência foi alterada.',
 	'Alter sequence' => 'Alterar sequência',
 
 	// User-defined types (PostgreSQL)
 	'User types' => 'Tipos definidos pelo usuário',
 	'Create type' => 'Criar tipo',
-	'Type has been dropped.' => 'O Tipo foi apagado.',
-	'Type has been created.' => 'O Tipo foi criado.',
-	'Type has been altered.' => 'O Tipo foi alterado.', // by Claude Opus 5
+	'Type has been dropped.' => 'O tipo foi apagado.',
+	'Type has been created.' => 'O tipo foi criado.',
+	'Type has been altered.' => 'O tipo foi alterado.', // by Claude Opus 5
 	'Alter type' => 'Alterar tipo',
 
 	// Triggers
 	'Triggers' => 'Triggers',
-	'Trigger has been dropped.' => 'O Trigger foi apagado.',
-	'Trigger has been altered.' => 'O Trigger foi alterado.',
-	'Trigger has been created.' => 'O Trigger foi criado.',
-	'Alter trigger' => 'Alterar Trigger',
-	'Create trigger' => 'Adicionar Trigger',
+	'Trigger has been dropped.' => 'O trigger foi apagado.',
+	'Trigger has been altered.' => 'O trigger foi alterado.',
+	'Trigger has been created.' => 'O trigger foi criado.',
+	'Alter trigger' => 'Alterar trigger',
+	'Create trigger' => 'Adicionar trigger',
 
 	// Table check constraints
 	'Checks' => 'Verificações', // by Claude Fable 5.1
@@ -358,8 +358,8 @@ return [
 	'Text length' => 'Tamanho de texto',
 	'Action' => 'Ação',
 	'Full table scan' => 'Varredura completa da tabela', // by Claude Fable 5.1
-	'Unable to select the table' => 'Não é possível selecionar a Tabela',
-	'Search data in tables' => 'Buscar dados nas Tabelas',
+	'Unable to select the table' => 'Não é possível selecionar a tabela',
+	'Search data in tables' => 'Buscar dados nas tabelas',
 	'All rows on this page' => 'Todas as linhas desta página', // by Claude Fable 5.1
 	'No rows.' => 'Não existem registros.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
@@ -383,7 +383,7 @@ return [
 	'Use edit link to modify this value.' => 'Utilize o link editar para modificar este valor.',
 
 	// Editing
-	'New item' => 'Novo Registro',
+	'New item' => 'Novo registro',
 	'Edit' => 'Editar',
 	'original' => 'original',
 	'empty' => 'vazio', // label for value '' in enum data type
@@ -395,9 +395,9 @@ return [
 	'Selected' => 'Selecionados', // by Claude Fable 5.1
 	'Clone' => 'Clonar',
 	'Delete' => 'Deletar',
-	'Item%s has been inserted.' => 'O Registro%s foi inserido.', // %s can contain auto-increment value, e.g. ' 123'
-	'Item has been deleted.' => 'O Registro foi deletado.',
-	'Item has been updated.' => 'O Registro foi atualizado.',
+	'Item%s has been inserted.' => 'O registro%s foi inserido.', // %s can contain auto-increment value, e.g. ' 123'
+	'Item has been deleted.' => 'O registro foi deletado.',
+	'Item has been updated.' => 'O registro foi atualizado.',
 	'%d item(s) have been affected.' => [
 		'%d item foi afetado.',
 		'%d itens foram afetados.',
