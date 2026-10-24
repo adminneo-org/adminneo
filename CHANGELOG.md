@@ -22,6 +22,7 @@ AdminNeo 5.9
 
 ### Bugfixes
 
+- Select: Disallow modifying data by the SQL operator in PostgreSQL (CSRF) (by @vrana)
 - Select: Align titles of numeric columns to the right
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload

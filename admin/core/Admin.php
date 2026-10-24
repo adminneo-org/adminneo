@@ -775,6 +775,10 @@ class Admin extends Origin
 			$val = $where["val"];
 
 			if ("$col$val" != "" && in_array($op, $this->getOperators())) {
+				if ($op == "SQL" && (!$_POST || !verify_token())) {
+					Connection::get()->setUntrusted(true); // The condition can be sent by GET which is not protected by the CSRF token.
+				}
+
 				$conditions = [];
 
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {

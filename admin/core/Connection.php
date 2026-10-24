@@ -19,6 +19,9 @@ abstract class Connection
 	/** @var string */
 	protected $error = "";
 
+	/** @var bool Queries contain a fragment sent by the user, drivers should not allow multiple commands and modifying data in them. */
+	protected $untrusted = false;
+
 	/** @var Result|false */
 	protected $multiResult;
 
@@ -36,7 +39,11 @@ abstract class Connection
 
 	public static function createSecondary(): Connection
 	{
-		return new static();
+		$connection = new static();
+
+		$connection->setUntrusted(self::exists() && self::get()->isUntrusted());
+
+		return $connection;
 	}
 
 	public static function get(): Connection
@@ -141,6 +148,16 @@ abstract class Connection
 	public function setError(string $error): void
 	{
 		$this->error = $error;
+	}
+
+	public function isUntrusted(): bool
+	{
+		return $this->untrusted;
+	}
+
+	public function setUntrusted(bool $untrusted): void
+	{
+		$this->untrusted = $untrusted;
 	}
 
 	public abstract function selectDatabase(string $name): bool;

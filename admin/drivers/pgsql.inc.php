@@ -112,7 +112,15 @@ if (isset($_GET["pgsql"])) {
 					return false;
 				}
 
-				$result = @pg_query($this->connection, $query);
+				if ($this->untrusted) {
+					// The extended protocol doesn't allow multiple commands, the transaction doesn't allow modifying data.
+					$result = (@pg_query($this->connection, "BEGIN READ ONLY")
+						? @pg_query_params($this->connection, $query, [])
+						: false
+					);
+				} else {
+					$result = @pg_query($this->connection, $query);
+				}
 				$this->error = "";
 
 				if (!$result) {
@@ -123,6 +131,10 @@ if (isset($_GET["pgsql"])) {
 					$return = true;
 				} else {
 					$return = new PgSqlResult($result);
+				}
+
+				if ($this->untrusted) {
+					@pg_query($this->connection, "COMMIT"); // Rollbacks the transaction if the query failed.
 				}
 
 				if ($this->timeout) {
@@ -280,12 +292,43 @@ if (isset($_GET["pgsql"])) {
 
 			public function query(string $query, bool $unbuffered = false)
 			{
-				$return = parent::query($query, $unbuffered);
+				$return = ($this->untrusted ? $this->readOnlyQuery($query) : parent::query($query, $unbuffered));
 
 				if ($this->timeout) {
 					$this->timeout = 0;
 					parent::query("RESET statement_timeout");
 				}
+
+				return $return;
+			}
+
+			/**
+			 * Sends a query which can't modify data.
+			 *
+			 * @return PdoResult|false
+			 */
+			private function readOnlyQuery(string $query)
+			{
+				$this->error = "";
+				if (!$this->pdo->query("BEGIN READ ONLY")) {
+					list(, $this->errno, $this->error) = $this->pdo->errorInfo();
+					return false;
+				}
+
+				$statement = $this->pdo->prepare($query); // A prepared statement doesn't allow multiple commands.
+				$return = false;
+				if ($statement && $statement->execute()) {
+					$return = new PdoResult($statement);
+					$this->storeResult($return);
+				} else {
+					// prepare() succeeds even for an invalid query, the error is reported by execute().
+					list(, $this->errno, $this->error) = ($statement ? $statement->errorInfo() : $this->pdo->errorInfo());
+					if (!$this->error) {
+						$this->error = lang('Unknown error.');
+					}
+				}
+
+				$this->pdo->query("COMMIT"); // Rollbacks the transaction if the query failed.
 
 				return $return;
 			}
