@@ -46,6 +46,14 @@ php bin/update-translations.php [language]   # e.g. php bin/update-translations.
 **Tests:**
 Katalon Automation Recorder (browser-based) test suites are in `tests/katalon/`. Run via Katalon browser extension against a live server.
 
+Only the base suites (`tests/katalon/<driver>.krecorder`) are committed. The `-pdo` and `-dblib` variants and everything in `tests/katalon/compiled/` are gitignored and generated from them — edit the base suite and regenerate:
+```sh
+php tests/bin/generate.php
+```
+The generator rewrites the entry point URLs (`?ext=pdo`, `admin-compiled.php`) and the expected extension names, so keep the URLs in a base suite in the form `/adminneo/tests/admin-devel.php?...`. Upstream Adminer's `tests/<driver>.html` maps to `tests/katalon/<driver>.krecorder`.
+
+The Katalon extension can't be driven by an agent. Verify the steps of a changed suite by replaying them with `curl` against the `*-agent.php` entry points (see [Running test instance](#running-test-instance)).
+
 Unit tests in `tests/unit/` are standalone scripts:
 ```sh
 for t in tests/unit/*.php; do php $t; done
