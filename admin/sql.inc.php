@@ -26,7 +26,7 @@ stop_session();
 
 $title = isset($_GET["import"]) ? lang('Import') : lang('SQL command');
 page_header($title, [$title]);
-$line_comment = "--" . (DIALECT == "sql" ? " " : "");
+$line_comment = Driver::get()->lineComment();
 
 if ($_POST) {
 	$fp = false;
@@ -62,11 +62,12 @@ if ($_POST) {
 			}
 		}
 
-		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:#|$line_comment)[^\n]*\n?|--\r?\n)";
+		$space = "(?:\\s|/\\*[\s\S]*?\\*/|(?:$line_comment)[^\n]*\n?|--\r?\n)";
 		$delimiter = ";";
 		$delimiter_length = 1;
 		$offset = 0;
 		$empty = true;
+		$copy = false; // PostgreSQL COPY ... FROM stdin
 
 		// connection for exploring indexes and EXPLAIN (to not replace FOUND_ROWS()) // TODO PDO - silent error
 		$connection2 = connect();
@@ -79,7 +80,7 @@ if ($_POST) {
 
 		$commands = 0;
 		$errors = [];
-		$parse = '[\'"' . (DIALECT == "sql" ? '`#' : (DIALECT == "sqlite" ? '`[' : (DIALECT == "mssql" ? '[' : ''))) .
+		$parse = '[\'"' . (DIALECT == "sql" ? '`' : (DIALECT == "sqlite" ? '`[' : (DIALECT == "mssql" ? '[' : ''))) .
 			']|/\*|' . $line_comment . '|$' . (DIALECT == "pgsql" ? '|\$([a-zA-Z]\w*)?\$' : '');
 		$total_start = microtime(true);
 		$data_formats = Admin::get()->getDataDumpFormats();
@@ -98,7 +99,8 @@ if ($_POST) {
 				$query = substr($query, strlen($match[0]));
 			} elseif (!$offset && DIALECT == "pgsql" && preg_match("~^($space*+COPY\\s+)[^;]+\\s+FROM\\s+stdin;~i", $query, $match)) {
 				$delimiter = "\n\\\\\\.\r?\n";
-				$delimiter_length = 3;
+				$delimiter_length = 3; // Pass "\n\\." to PostgreSQL COPY.
+				$copy = true;
 				$offset = strlen($match[0]);
 			} else {
 				preg_match("($delimiter\\s*|$parse)", $query, $match, PREG_OFFSET_CAPTURE, $offset); // always matches
@@ -120,7 +122,7 @@ if ($_POST) {
 							$pattern .= '\*/';
 						} elseif ($found == '[') {
 							$pattern .= ']';
-						} elseif (preg_match("~^$line_comment|^#~", $found)) {
+						} elseif (preg_match("~^(?:$line_comment)~", $found)) {
 							$pattern .= "\n";
 						} else {
 							$pattern .= preg_quote($found) . ($c_style_escapes ? "|\\\\." : "");
@@ -274,6 +276,11 @@ if ($_POST) {
 
 						$query = substr($query, $offset);
 						$offset = 0;
+						if ($copy) { // The COPY delimiter is valid only for the single query.
+							$delimiter = ";";
+							$delimiter_length = 1;
+							$copy = false;
+						}
 					}
 
 				}
@@ -359,7 +366,7 @@ if (!isset($_GET["import"]) && $history) {
 		$key = key($history);
 		list($q, $time, $elapsed) = $val;
 
-		echo " <pre><code class='jush-" . DIALECT . "'>", truncate_utf8(preg_replace('~\s+~', ' ', ltrim(preg_replace("~^(#|$line_comment).*~m", '', $q)))), "</code></pre>";
+		echo " <pre><code class='jush-" . DIALECT . "'>", truncate_utf8(preg_replace('~\s+~', ' ', ltrim(preg_replace("~^(?:$line_comment).*~m", '', $q)))), "</code></pre>";
 		echo '<p class="links">';
 		echo "<a href='" . h(ME . "sql=&history=$key") . "'>" . icon("edit") . lang('Edit') . "</a>";
 		echo " <span class='time' title='" . @date('Y-m-d', $time) . "'>" . @date("H:i:s", $time) . // @ - time zone may be not set

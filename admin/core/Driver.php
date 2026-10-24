@@ -539,6 +539,14 @@ abstract class Driver
 	}
 
 	/**
+	 * Returns regular expression matching the start of a line comment. It must not match an empty string.
+	 */
+	public function lineComment(): string
+	{
+		return "--";
+	}
+
+	/**
 	 * Returns supported engines.
 	 *
 	 * @return string[]

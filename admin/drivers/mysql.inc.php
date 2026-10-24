@@ -530,6 +530,11 @@ if (isset($_GET["mysql"])) {
 			return $c_style;
 		}
 
+		public function lineComment(): string
+		{
+			return "#|-- "; // MySQL requires a space after --.
+		}
+
 		public function engines(): array
 		{
 			$engines = [];
