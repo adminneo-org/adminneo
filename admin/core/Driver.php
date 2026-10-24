@@ -362,32 +362,32 @@ abstract class Driver
 
 	/**
 	 * Begins new transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function begin()
+	public function begin(): bool
 	{
-		return queries("BEGIN");
+		remember_query("BEGIN");
+
+		return $this->connection->begin();
 	}
 
 	/**
 	 * Commits transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function commit()
+	public function commit(): bool
 	{
-		return queries("COMMIT");
+		remember_query("COMMIT");
+
+		return $this->connection->commit();
 	}
 
 	/**
 	 * Rollback transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function rollback()
+	public function rollback(): bool
 	{
-		return queries("ROLLBACK");
+		remember_query("ROLLBACK");
+
+		return $this->connection->rollback();
 	}
 
 	/**

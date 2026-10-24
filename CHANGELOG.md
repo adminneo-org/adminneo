@@ -37,6 +37,7 @@ AdminNeo 5.9
 - PostgreSQL: Fix exporting enum values containing an apostrophe
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
+- MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
 

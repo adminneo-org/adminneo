@@ -217,4 +217,28 @@ abstract class Connection
 	{
 		return false;
 	}
+
+	/**
+	 * Begins a transaction. Extensions with a transaction API use it.
+	 */
+	public function begin(): bool
+	{
+		return (bool)$this->query("BEGIN");
+	}
+
+	/**
+	 * Commits the transaction.
+	 */
+	public function commit(): bool
+	{
+		return (bool)$this->query("COMMIT");
+	}
+
+	/**
+	 * Rolls back the transaction. It is called also without a transaction.
+	 */
+	public function rollback(): bool
+	{
+		return (bool)$this->query("ROLLBACK");
+	}
 }

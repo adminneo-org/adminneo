@@ -43,12 +43,7 @@ if (extension_loaded('pdo')) {
 
 			$this->error = "";
 			if (!$statement) {
-				list(, $this->errno, $this->error) = $this->pdo->errorInfo();
-				if (!$this->error) {
-					$this->error = lang('Unknown error.');
-				}
-
-				return false;
+				return $this->storeError(false);
 			}
 
 			$result = new PdoResult($statement);
@@ -78,6 +73,38 @@ if (extension_loaded('pdo')) {
 		function nextResult(): bool
 		{
 			return $this->multiResult && $this->multiResult->nextRowset();
+		}
+
+		public function begin(): bool
+		{
+			// The API works also where a separate BEGIN doesn't, e.g. MS SQL rolls it back at the end of the batch and Oracle commits each command.
+			return $this->storeError($this->pdo->beginTransaction());
+		}
+
+		public function commit(): bool
+		{
+			// PDO throws without a transaction, PDO_MySQL reports none after a DDL command committed it implicitly.
+			return !$this->pdo->inTransaction() || $this->storeError($this->pdo->commit());
+		}
+
+		public function rollback(): bool
+		{
+			return !$this->pdo->inTransaction() || $this->storeError($this->pdo->rollBack());
+		}
+
+		/**
+		 * Stores the last error of the connection if the operation failed.
+		 */
+		private function storeError(bool $return): bool
+		{
+			if (!$return) {
+				list(, $this->errno, $this->error) = $this->pdo->errorInfo();
+				if (!$this->error) {
+					$this->error = lang('Unknown error.');
+				}
+			}
+
+			return $return;
 		}
 	}
 

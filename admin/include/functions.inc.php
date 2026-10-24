@@ -670,6 +670,25 @@ class Queries {
 }
 
 /**
+ * Remembers SQL query to print it by queries_redirect().
+ *
+ * @param string $query Ends with ';' to use DELIMITER.
+ */
+function remember_query(string $query): void
+{
+	if (!Queries::$start) {
+		Queries::$start = microtime(true);
+	}
+
+	if (support("sql")) {
+		Queries::$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
+	} else {
+		// Save the query for later use in a flesh message. TODO: This is so ugly.
+		Queries::$queries[] = $query;
+	}
+}
+
+/**
  * Executes and remembers SQL query.
  *
  * @param string $query Ends with ';' to use DELIMITER.
@@ -678,19 +697,9 @@ class Queries {
  */
 function queries(string $query)
 {
-	if (!Queries::$start) {
-		Queries::$start = microtime(true);
-	}
+	remember_query($query);
 
-	if (support("sql")) {
-		Queries::$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
-
-		return Connection::get()->query($query);
-	} else {
-		// Save the query for later use in a flesh message. TODO: This is so ugly.
-		Queries::$queries[] = $query;
-		return [];
-	}
+	return support("sql") ? Connection::get()->query($query) : [];
 }
 
 /**
