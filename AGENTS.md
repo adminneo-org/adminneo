@@ -220,7 +220,7 @@ git fetch vrana main --no-tags
   - Use `// by AI model name` mark in translations instead of `// AI model name`.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there:
   - When porting a line: keep the original wording but bug/issue references.
-  - Add "(by @author)" where `@author` is the GitHub user who wrote the commit. But only if adaptation is simple and straight forward.
+  - Add "(by @author)" where `@author` is the GitHub user who wrote the commit. Add it if the adaptation is simple and straight forward, and also for a more complex adaptation as long as the upstream author still wrote the key part of the code. Leave it out only if the AdminNeo implementation is substantially your own.
   - Adapt release version in "regression from X" note to AdminNeo's releases.
   - Place it under `### Changes` or `### Bugfixes` to match its nature.
 - If changes adaptation for AdminNeo is simple and straight forward, then:
