@@ -1,8 +1,8 @@
 Changelog
 =========
 
-AdminNeo 5.8.1
---------------
+AdminNeo 5.9
+------------
 
 ### Changes
 
@@ -14,10 +14,10 @@ AdminNeo 5.8.1
 - Export: Disable structure and data options for formats that do not support them
 - Export: Compress gzip output into a single stream instead of concatenated chunks
 - Navigation: Move the focus between the tables filter and the tables list by arrow keys
-- PostgreSQL: Show composite, domain and range types next to enums
-- PostgreSQL: Alter and rename user defined types
+- PostgreSQL: Show composite, domain and range types next to enums (by @vrana)
+- PostgreSQL: Alter and rename user defined types (by @vrana)
 - PostgreSQL: Add values to an enum type without re-creating it (by @vrana)
-- PostgreSQL: Export all user defined types, fix exporting enum values containing an apostrophe
+- PostgreSQL: Export all user defined types (by @vrana)
 
 ### Bugfixes
 
@@ -32,6 +32,7 @@ AdminNeo 5.8.1
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
 - PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
+- PostgreSQL: Fix exporting enum values containing an apostrophe
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
