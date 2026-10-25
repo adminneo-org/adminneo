@@ -42,6 +42,7 @@ AdminNeo 5.9
 - PostgreSQL: Do not mark identity columns as Auto increment
 - PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
 - PostgreSQL: Fix exporting enum values containing an apostrophe
+- PostgreSQL: Fix editing and deleting all rows sharing the value of a partial index (regression from 5.5.0)
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
