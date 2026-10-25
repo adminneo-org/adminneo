@@ -27,6 +27,7 @@ AdminNeo 5.9
 - Select: Align titles of numeric columns to the right
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
+- SQL command: Show error of a later query in a batch
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - Alter table: Fix toggling of column comments (regression from 5.8.0)
 - Alter routine: Fix altering a routine with a name longer than 42 characters (by @vrana)

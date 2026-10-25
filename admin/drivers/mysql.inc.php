@@ -154,7 +154,8 @@ if (isset($_GET["mysql"])) {
 
 			public function nextResult(): bool
 			{
-				return $this->mysqli->more_results() && $this->mysqli->next_result();
+				// The server stops executing the queries after an error, more_results() then returns false.
+				return $this->mysqli->more_results() && ($this->mysqli->next_result() || $this->mysqli->errno);
 			}
 		}
 

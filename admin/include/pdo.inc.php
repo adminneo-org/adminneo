@@ -75,7 +75,24 @@ if (extension_loaded('pdo')) {
 			// Forget the error of a query run between the result sets, e.g. SHOW WARNINGS fails while the next ones are pending.
 			$this->error = "";
 
-			return $this->multiResult && $this->multiResult->nextRowset();
+			if (!$this->multiResult) {
+				return false;
+			}
+			if ($this->multiResult->nextRowset()) {
+				return true;
+			}
+
+			// The error of the next query is stored in the statement. Drivers not supporting rowsets report IM001 without a message.
+			$errorInfo = $this->multiResult->getErrorInfo();
+			$this->multiResult = false;
+
+			if (!isset($errorInfo[2])) {
+				return false;
+			}
+
+			list(, $this->errno, $this->error) = $errorInfo;
+
+			return true;
 		}
 
 		public function begin(): bool
@@ -190,6 +207,11 @@ if (extension_loaded('pdo')) {
 
 			// @ - PDO_PgSQL doesn't support it
 			return @$this->statement->nextRowset();
+		}
+
+		public function getErrorInfo(): array
+		{
+			return $this->statement->errorInfo();
 		}
 	}
 }

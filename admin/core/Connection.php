@@ -246,6 +246,11 @@ abstract class Connection
 		return false;
 	}
 
+	/**
+	 * Moves to the result of the next query sent by multiQuery().
+	 *
+	 * @return bool Returns true also if the next query failed, its error is then returned by getError().
+	 */
 	public function nextResult(): bool
 	{
 		return false;

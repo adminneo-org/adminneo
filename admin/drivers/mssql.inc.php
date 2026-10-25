@@ -137,7 +137,17 @@ if (isset($_GET["mssql"])) {
 
 			public function nextResult(): bool
 			{
-				return $this->multiResult && sqlsrv_next_result($this->multiResult);
+				if (!$this->multiResult) {
+					return false;
+				}
+
+				// Returns false on error and null after the last result.
+				$next = sqlsrv_next_result($this->multiResult);
+				if ($next === false) {
+					$this->resolveError();
+				}
+
+				return $next !== null;
 			}
 
 			public function begin(): bool
