@@ -813,6 +813,8 @@ class Admin extends Origin
 						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
 						// Elasticsearch can use regexp only on text and keyword fields.
 						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"]))
+						// Elasticsearch has integer types not covered by number_type().
+						&& (!preg_match('~^elastic~', DRIVER) || !preg_match('~^((unsigned_)?long|short|byte)$~', $field["type"]) || preg_match('~^-?\d+$~', $val))
 					)) {
 						if ($oidColumn) {
 							$conditions[] = $prefix . idf_escape($name) . $cond;
