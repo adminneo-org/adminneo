@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Session premenné musia byť povolené.',
 	'Session expired, please login again.' => 'Session vypršala, prihláste sa prosím znova.',
 	'%s version: %s through PHP extension %s' => 'Verzia %s: %s cez PHP rozšírenie %s',
+	'%s requires at least %s.' => '%s vyžaduje aspoň %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.'
 
 	// Settings
 	'Language' => 'Jazyk',

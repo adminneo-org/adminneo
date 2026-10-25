@@ -21,6 +21,7 @@ AdminNeo 5.9
 - PostgreSQL: Alter and rename user defined types (by @vrana)
 - PostgreSQL: Add values to an enum type without re-creating it (by @vrana)
 - PostgreSQL: Export all user defined types (by @vrana)
+- Elasticsearch: The driver is no longer beta, it works with Elasticsearch 7, 8 and 9 (by @vrana)
 
 ### Bugfixes
 
@@ -43,6 +44,7 @@ AdminNeo 5.9
 - PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
 - PostgreSQL: Fix exporting enum values containing an apostrophe
 - PostgreSQL: Fix editing and deleting all rows sharing the value of a partial index (regression from 5.5.0)
+- Elasticsearch: Fix searching data in all tables (regression from 5.1.0)
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view

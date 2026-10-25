@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'Xx.',
 	'Session expired, please login again.' => 'Xx.',
 	'%s version: %s through PHP extension %s' => '%s xx: %s xx %s',
+	'%s requires at least %s.' => '%s xx %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.'
 
 	// Settings
 	'Language' => 'Xx',
