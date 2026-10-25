@@ -807,7 +807,7 @@ class Admin extends Origin
 						// find anywhere
 						isset($field["privileges"]["where"])
 						&& (preg_match('~^[-\d.' . (preg_match('~IN$~', $op) ? ',' : '') . ']+$~', $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
-						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set~', $field["type"]))
+						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
 						// Elasticsearch needs boolean value properly formatted.
 						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))

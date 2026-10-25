@@ -47,6 +47,7 @@ AdminNeo 5.9
 - Elasticsearch: Fix searching data in all tables (regression from 5.1.0)
 - Elasticsearch: Fix searching text in all columns of an index with long, short or byte fields
 - Elasticsearch: Fix searching in all columns with the must operators
+- Elasticsearch: Search values with accented letters also in keyword fields
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
