@@ -301,7 +301,7 @@ if (!$columns && support("table")) {
 	$page = $_GET["page"] ?? null;
 	if ($page == "last") {
 		$found_rows = Connection::get()->getValue(count_rows($TABLE, $where, $is_group, $group));
-		$page = (int)floor(max(0, intval($found_rows) - 1) / $limit);
+		$page = $limit ? (int)floor(max(0, intval($found_rows) - 1) / $limit) : 0;
 	} else {
 		$found_rows = false;
 		$page = (int)$page;
@@ -609,7 +609,7 @@ if (!$columns && support("table")) {
 					}
 				}
 
-				$pagination = ($limit !== null && ($found_rows === false || $found_rows > $limit || $page));
+				$pagination = ($limit && ($found_rows === false || $found_rows > $limit || $page));
 				if ($pagination) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',
