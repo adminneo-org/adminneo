@@ -72,6 +72,9 @@ if (extension_loaded('pdo')) {
 
 		function nextResult(): bool
 		{
+			// Forget the error of a query run between the result sets, e.g. SHOW WARNINGS fails while the next ones are pending.
+			$this->error = "";
+
 			return $this->multiResult && $this->multiResult->nextRowset();
 		}
 

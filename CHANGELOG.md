@@ -31,6 +31,7 @@ AdminNeo 5.9
 - Alter routine: Fix altering a routine with a name longer than 42 characters (by @vrana)
 - MySQL: Fix lost charset introducers and parameters starting with "_" in routine definitions (issue #197)
 - MySQL: Fix exhausted memory in export of big tables (issue #211, regression from 5.1.0)
+- MySQL: Fix displaying multiple results of SQL command with the PDO extension
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
