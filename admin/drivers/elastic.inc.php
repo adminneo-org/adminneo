@@ -336,38 +336,50 @@ if (isset($_GET["elastic"])) {
 				if ($val == "1 = 0") { // No field can match the searched value.
 					$query["bool"]["must_not"][] = ["match_all" => new \stdClass()];
 				} elseif (preg_match('~^\((.+ OR .+)\)$~', $val, $matches)) {
-					$parts = explode(" OR ", $matches[1]);
+					// A search in all columns is satisfied by any of them, the parts must not be required one by one.
+					$groups = [];
+					foreach (explode(" OR ", $matches[1]) as $part) {
+						$condition = $this->buildCondition($part);
+						if ($condition) {
+							$groups[$condition[0]][] = $condition[1];
+						}
+					}
 
-					foreach ($parts as $part) {
-						$this->addQueryCondition($part, $query);
+					foreach ($groups as $queryType => $clauses) {
+						$query["bool"][$queryType][] = count($clauses) == 1 ? $clauses[0] : ["bool" => ["should" => $clauses]];
 					}
 				} else {
-					$this->addQueryCondition($val, $query);
+					$condition = $this->buildCondition($val);
+					if ($condition) {
+						$query["bool"][$condition[0]][] = $condition[1];
+					}
 				}
 			}
 
 			return $query;
 		}
 
-		private function addQueryCondition(string $val, array &$query): void
+		/**
+		 * Builds a single search condition.
+		 *
+		 * @return array{0: string, 1: array}|null [$queryType, $clause], null for unsupported condition.
+		 */
+		private function buildCondition(string $val): ?array
 		{
 			list($col, $op, $val) = explode(" ", $val, 3);
 
 			if ($col == "_id" && $op == "=") {
-				$query["bool"]["must"][] = [
-					"term" => [$col => $val]
-				];
-				return;
+				return ["must", ["term" => [$col => $val]]];
 			}
 
 			if (!preg_match('~^([^(]+)\(([^)]+)\)$~', $op, $matches)) {
-				return;
+				return null;
 			}
 			$queryType = $matches[1]; // must, should, must_not
 			$matchType = $matches[2]; // term, match, regexp
 
 			if ($matchType == "regexp") {
-				$query["bool"][$queryType][] = [
+				return [$queryType, [
 					"regexp" => [
 						$col => [
 							"value" => $val,
@@ -375,12 +387,10 @@ if (isset($_GET["elastic"])) {
 							"case_insensitive" => true,
 						]
 					]
-				];
-			} else {
-				$query["bool"][$queryType][] = [
-					$matchType => [$col => $val]
-				];
+				]];
 			}
+
+			return [$queryType, [$matchType => [$col => $val]]];
 		}
 
 		/**
