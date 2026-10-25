@@ -191,6 +191,14 @@ abstract class Connection
 	}
 
 	/**
+	 * Returns the number of warnings of the most recently executed query.
+	 */
+	public function getWarningsCount(): int
+	{
+		return 0;
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function getResult(string $query, int $field = 0)
@@ -228,6 +236,14 @@ abstract class Connection
 	public function storeResult($result = null)
 	{
 		return $this->multiResult;
+	}
+
+	/**
+	 * Returns whether the results of further queries sent by multiQuery() are pending.
+	 */
+	public function hasMoreResults(): bool
+	{
+		return false;
 	}
 
 	public function nextResult(): bool

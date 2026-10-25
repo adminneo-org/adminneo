@@ -127,6 +127,11 @@ if (isset($_GET["mysql"])) {
 				return $this->mysqli->info;
 			}
 
+			public function getWarningsCount(): int
+			{
+				return $this->mysqli->warning_count;
+			}
+
 			public function multiQuery(string $query): bool
 			{
 				return $this->mysqli->multi_query($query);
@@ -140,6 +145,11 @@ if (isset($_GET["mysql"])) {
 				}
 
 				return new MySqlResult($result);
+			}
+
+			public function hasMoreResults(): bool
+			{
+				return $this->mysqli->more_results();
 			}
 
 			public function nextResult(): bool

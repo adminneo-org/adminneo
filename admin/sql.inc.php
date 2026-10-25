@@ -186,9 +186,19 @@ if ($_POST) {
 									$query_info = Connection::get()->getQueryInfo();
 									$affected = Connection::get()->getAffectedRows(); // getting warnings overwrites this
 
-									$warnings = ($_POST["only_errors"] ? null : Driver::get()->warnings());
+									// SHOW WARNINGS can't run while the results of further queries are pending, only the count is known.
+									$more_results = Connection::get()->hasMoreResults();
+									$warnings = ($_POST["only_errors"] || $more_results ? null : Driver::get()->warnings());
+									$warnings_count = ($more_results ? Connection::get()->getWarningsCount() : 0);
 									$warnings_id = "warnings-$commands";
-									$warnings_link = $warnings ? "<a href='#$warnings_id' class='toggle'>" . lang('Warnings') . icon_chevron_down() . "</a>" : null;
+
+									if ($warnings) {
+										$warnings_link = "<a href='#$warnings_id' class='toggle'>" . lang('Warnings') . icon_chevron_down() . "</a>";
+									} elseif ($warnings_count) {
+										$warnings_link = "<span>" . lang('Warnings') . ": $warnings_count</span>";
+									} else {
+										$warnings_link = null;
+									}
 
 									$explain = $orgtables = null;
 									$explain_id = "explain-$commands";
