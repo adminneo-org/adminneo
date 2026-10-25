@@ -15,6 +15,7 @@ AdminNeo 5.9
 - Export: Compress gzip output into a single stream instead of concatenated chunks
 - Navigation: Move the focus between the tables filter and the tables list by arrow keys
 - Alter view, routine and type: Use a transaction instead of a temporary object in PostgreSQL, SQLite, MS SQL (by @vrana)
+- Compiler: Compress translations with the English translation as a dictionary to reduce size (by @vrana)
 - MySQL: Show warnings count of each query in SQL command
 - PostgreSQL: Show composite, domain and range types next to enums (by @vrana)
 - PostgreSQL: Alter and rename user defined types (by @vrana)
