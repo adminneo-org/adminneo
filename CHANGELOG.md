@@ -29,6 +29,7 @@ AdminNeo 5.9
 - Select: Disallow modifying data by the SQL operator (CSRF) (by @vrana)
 - Select: Align titles of numeric columns to the right
 - Select: Fix error with an empty limit (regression from 5.3.0)
+- Select: Do not search in integer and decimal columns for dates and other values that are not numbers
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
 - SQL command: Show error of a later query in a batch

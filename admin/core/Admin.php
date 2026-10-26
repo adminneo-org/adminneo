@@ -782,6 +782,13 @@ class Admin extends Origin
 
 				$conditions = [];
 
+				// Numeric value, or a list of them for IN, e.g. -1.5,2
+				$integer = '-?\d+';
+				$number = '-?(\d+(\.\d*)?|\.\d+)';
+				$isList = preg_match('~IN$~', $op);
+				$integerPattern = "~^$integer" . ($isList ? "(,$integer)*" : "") . "$~";
+				$numberPattern = "~^$number" . ($isList ? "(,$number)*" : "") . "$~";
+
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
@@ -806,7 +813,7 @@ class Admin extends Origin
 					if ($col != "" || (
 						// find anywhere
 						isset($field["privileges"]["where"])
-						&& (preg_match('~^[-\d.' . (preg_match('~IN$~', $op) ? ',' : '') . ']+$~', $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
+						&& (preg_match(preg_match('~^' . int_type() . '$~', $field["type"]) ? $integerPattern : $numberPattern, $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
 						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
 						// Elasticsearch needs boolean value properly formatted.
