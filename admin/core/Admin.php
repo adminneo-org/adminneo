@@ -789,6 +789,9 @@ class Admin extends Origin
 				$integerPattern = "~^$integer" . ($isList ? "(,$integer)*" : "") . "$~";
 				$numberPattern = "~^$number" . ($isList ? "(,$number)*" : "") . "$~";
 
+				// Date with an optional time and time zone, e.g. 2026-01-15 12:30:45+02
+				$datePattern = '~^(\d+)-(\d+)-(\d+)([ T]([01]?\d|2[0-3]):[0-5]\d(:[0-5]\d(\.\d+)?)?(\s*(z|utc|[+-](0?\d|1[0-5])(:?[0-5]\d)?))?)?$~i';
+
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
@@ -821,7 +824,7 @@ class Admin extends Origin
 						isset($field["privileges"]["where"])
 						&& (preg_match(preg_match('~^' . int_type() . '$~', $field["type"]) ? $integerPattern : $numberPattern, $val) || !$isNumber)
 						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
-						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
+						&& (!preg_match('~date|timestamp~', $field["type"]) || (preg_match($datePattern, $val, $match) && checkdate((int) $match[2], (int) $match[3], (int) $match[1])))
 						&& Driver::get()->isSearchable($where, $field)
 						// Elasticsearch needs boolean value properly formatted.
 						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))

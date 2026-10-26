@@ -31,6 +31,7 @@ AdminNeo 5.9
 - Select: Fix error with an empty limit (regression from 5.3.0)
 - Select: Do not search in integer and decimal columns for dates and other values that are not numbers
 - Select: Compare numbers searched by IN with text and other non-numeric columns as strings
+- Select: Do not search in date and timestamp columns for invalid dates or dates followed by other text
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
 - SQL command: Show error of a later query in a batch
