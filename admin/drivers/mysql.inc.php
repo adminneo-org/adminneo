@@ -460,6 +460,14 @@ if (isset($_GET["mysql"])) {
 			);
 		}
 
+		public function isSearchable(array $where, array $field): bool
+		{
+			// Bit columns are compared with a binary literal, e.g. b'101', other values would cause an error. IN compares them with numbers.
+			return $field["type"] != "bit"
+				|| preg_match('~IN$|NULL$|^(FIND_IN_SET|SQL)$~', $where["op"])
+				|| ($where["op"] != "LIKE %%" && preg_match('~^[01]+$~', $where["val"]));
+		}
+
 		public function warnings(): ?string
         {
 			$result = $this->connection->query("SHOW WARNINGS");

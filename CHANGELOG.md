@@ -43,6 +43,7 @@ AdminNeo 5.9
 - MySQL: Fix exhausted memory in export of big tables (issue #211, regression from 5.1.0)
 - MySQL: Fix displaying multiple results of SQL command with the PDO extension
 - MySQL: Fix length of routine parameters with unsigned or zerofill, support MySQL < 8 again (by @vrana, regression from 5.5.0)
+- MySQL: Fix error on searching in all columns of a table with bit columns
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
