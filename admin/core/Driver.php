@@ -413,6 +413,17 @@ abstract class Driver
 	}
 
 	/**
+	 * Checks whether the column can be searched for the value of the condition in search in all columns.
+	 *
+	 * @param array $where ["op" => , "val" => ]
+	 * @param array $field Single field returned from fields().
+	 */
+	public function isSearchable(array $where, array $field): bool
+	{
+		return true;
+	}
+
+	/**
 	 * Returns NULL expression.
 	 */
 	public function getNull(): string

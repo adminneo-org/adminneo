@@ -561,6 +561,48 @@ if (isset($_GET["pgsql"])) {
 			return (preg_match("~$textTypes~", $field["type"]) ? $idf : "CAST($idf AS text)");
 		}
 
+		public function isSearchable(array $where, array $field): bool
+		{
+			// LIKE and regexp operators search in the text, see convertSearch().
+			if (strpos($where["op"], "LIKE") !== false || strpos($where["op"], "~") !== false) {
+				return true;
+			}
+
+			$values = [$where["val"]];
+			if (preg_match('~IN$~', $where["op"])) {
+				// The list as it is searched, e.g. (1,0) or ('t','f').
+				preg_match_all("~" . self::EnumLengthPattern . "|[^,()]+~", process_length($where["val"]), $matches);
+				$values = array_map(function ($value) {
+					return str_replace("''", "'", preg_replace("~^'(.*)'$~s", '\\1', $value));
+				}, $matches[0]);
+			}
+
+			foreach ($values as $value) {
+				if (!$this->isValidValue($field["type"], $value)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
+		 * Checks whether the value is accepted by the column type, so that comparing them does not fail.
+		 */
+		private function isValidValue(string $type, string $value): bool
+		{
+			switch ($type) {
+				case "boolean":
+					// Including unique prefixes, e.g. t, yes, off.
+					return (bool) preg_match('~^\s*(t(r(ue?)?)?|f(a(l(se?)?)?)?|y(es?)?|no?|on|off?|1|0)\s*$~i', $value);
+				case "uuid":
+					// Optionally in braces and with a hyphen after any group of four digits.
+					return (bool) preg_match('~^(\{[0-9a-f]{4}(-?[0-9a-f]{4}){7}\}|[0-9a-f]{4}(-?[0-9a-f]{4}){7})$~i', $value);
+			}
+
+			return true;
+		}
+
 		public function quoteBinary(string $string): string
 		{
 			return "'\\x" . bin2hex($string) . "'"; // available since PostgreSQL 8.1
