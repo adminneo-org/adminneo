@@ -51,7 +51,7 @@ AdminNeo 5.9
 - PostgreSQL: Fix editing and deleting all rows sharing the value of a partial index (regression from 5.5.0)
 - PostgreSQL: Fix errors on searching in all columns of uuid, network, time, array and other types
 - PostgreSQL: Fix searching by regular expression in non-text columns
-- PostgreSQL: Fix searching by IN in bit columns
+- PostgreSQL: Fix searching by IN in bit and money columns
 - Elasticsearch: Fix searching data in all tables (regression from 5.1.0)
 - Elasticsearch: Fix searching text in all columns of an index with long, short or byte fields
 - Elasticsearch: Fix searching in all columns with the must operators
