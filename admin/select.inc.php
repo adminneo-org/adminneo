@@ -267,7 +267,7 @@ if (isset($rights["insert"]) || !support("table")) {
 Admin::get()->printTableMenu($table_status, $insert_params);
 
 if (!$columns && support("table")) {
-	echo "<p class='error'>" . lang('Unable to select the table') . ($fields ? "." : ": " . error()) . "\n";
+	echo "<p class='error'>" . lang('Unable to select the table') . ($fields || error() == "" ? "." : ": " . error()) . "\n";
 } else {
 	echo "<form id='form' action=''>\n";
 	echo "<div hidden>";
