@@ -56,6 +56,8 @@ AdminNeo 5.9
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
 
+(Ported relevant changes from Adminer 6.0.0 • part 4)
+
 AdminNeo 5.8.0 (2026-09-15)
 ---------------------------
 
