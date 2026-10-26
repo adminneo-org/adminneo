@@ -789,6 +789,10 @@ class Admin extends Origin
 				$integerPattern = "~^$integer" . ($isList ? "(,$integer)*" : "") . "$~";
 				$numberPattern = "~^$number" . ($isList ? "(,$number)*" : "") . "$~";
 
+				// PostgreSQL boolean value including unique prefixes, e.g. t, yes, off
+				$boolean = "\\s*'?(t(r(ue?)?)?|f(a(l(se?)?)?)?|y(es?)?|no?|on|off?|1|0)'?\\s*";
+				$booleanPattern = "~^$boolean" . ($isList ? "(,$boolean)*" : "") . "$~i";
+
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
@@ -820,6 +824,8 @@ class Admin extends Origin
 						&& (preg_match(preg_match('~^' . int_type() . '$~', $field["type"]) ? $integerPattern : $numberPattern, $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
 						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
+						// PostgreSQL compares boolean columns with a boolean value, except for LIKE and regexp which work with text.
+						&& (DIALECT != "pgsql" || $field["type"] != "boolean" || preg_match('~LIKE|\~~', $op) || preg_match($booleanPattern, $val))
 						// Elasticsearch needs boolean value properly formatted.
 						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
 						// Elasticsearch can use regexp only on text and keyword fields.
