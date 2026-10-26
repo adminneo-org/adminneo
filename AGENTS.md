@@ -95,6 +95,10 @@ Each driver lives in `admin/drivers/<name>.inc.php`. Drivers:
 3. Implement a `Connection` subclass and a `Driver` subclass.
 4. The abstract `Driver` class defines the interface; methods like `support($feature)` control which UI features are shown for that driver.
 
+### Searching in all columns
+
+Search in all columns adds a condition for every column. A value that is invalid for one column's type would make the whole query fail, so that column must be left out. Check types shared by more databases in `Admin` (numbers, dates), and database-specific ones in `Driver::isSearchable()`.
+
 ### Directory structure
 
 | Path                  | Purpose                                                                                      |
@@ -129,7 +133,7 @@ All PHP code lives under the `AdminNeo\` namespace.
 
 Translations use technical language and terms related to database systems. Czech language (`admin/translations/cs.inc.php`) is considered as correct because it was created by the author. All machine-translated texts are marked with trailing comment naming the AI model, e.g. `'Vacuum' => 'Počisti', // by Claude Fable 5`. In case of multiline translation, mark is placed on the last line.
 
-When implementing a feature that introduces new texts, add only the Czech (`cs.inc.php`) and Slovak (`sk.inc.php`) translations together with the code changes, along with `_template.inc.php`. The remaining languages are translated in a separate commit, e.g. `Translations: Translate 'Dual on hover' text`.
+When implementing a feature that introduces new texts, add only the Czech (`cs.inc.php`) and Slovak (`sk.inc.php`) translations together with the code changes, along with `_template.inc.php`. The author reviews the Slovak texts, so like Czech ones they carry no mark. The remaining languages are translated in a separate commit, e.g. `Translations: Translate 'Dual on hover' text`.
 
 To find missing translations, run `php bin/update-translations.php` — it adds new texts with a `null` value. In `en.inc.php` only plural texts are added, so a new plural shows up there once `_template.inc.php` holds multiple forms for it. Flags must follow the language argument.
 
@@ -184,6 +188,8 @@ Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 - Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
 - Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible. Reference an AdminNeo issue at the end of the line as `(issue #<issue_id>)`, whether the commit closes it or only relates to it.
+- Keep a changelog line short: name the area and the effect, not every case. Sum up a list of types as a category, e.g. "in non-text columns".
+- A fix that extends one already listed under the open version updates that line instead of adding a new one.
 - For a fixed regression, end the changelog line with `(regression from <version>)`, the first release containing the commit that introduced the bug: `git tag --contains <commit> | sort -V | head -1`.
 
 Example:
@@ -199,6 +205,15 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ```
 
 The rules in [Porting changes from Adminer](#porting-changes-from-adminer) replace the ones above, but **only** for changes ported from Adminer: there the issue reference moves to an `Issue:` line, and a simply adapted port carries no `Co-Authored-By` line of yours (a complex one carries the upstream author's and yours).
+
+To change an earlier unpushed commit, commit the change as a fixup and squash it without an editor:
+
+```sh
+git commit --fixup=<commit> <files>
+GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash <commit>~1
+```
+
+Neighbouring changelog lines from later commits often conflict. Set a backup tag first, and when done, check that `git diff <backup> HEAD` shows only the intended change.
 
 ### Porting changes from Adminer
 
@@ -281,6 +296,9 @@ Use `curl` for what is in the server-rendered HTML — it is scriptable, so one 
 Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server. The EditorNeo entry points are the exception, see [EditorNeo](#editorneo).
 
 Check every fetched page for PHP errors (`Fatal error`, `Uncaught`, `Warning`), not only for the element you expect. An error printed later in the page is easy to miss.
+
+- HTML attributes are typically in single quotes, e.g. `name='token' value='…'`.
+- The UI language follows a cookie, so detect errors by `class='error'`, not by message text.
 
 Use the browser when the change touches JavaScript or the visual result.
 
