@@ -29,7 +29,7 @@ if (isset($_GET["clickhouse"])) {
 			 */
 			function rootQuery(string $db, string $query)
 			{
-				[$file, $headers] = get_url("$this->serviceUrl/?database=$db", stream_context_create(['http' => [
+				[$file, $headers, $error] = get_url("$this->serviceUrl/?database=$db", stream_context_create(['http' => [
 					'method' => 'POST',
 					'content' => $query,
 					'header' => [
@@ -42,7 +42,8 @@ if (isset($_GET["clickhouse"])) {
 				]]));
 
 				if ($file === false) {
-					$this->error = lang('Invalid server or credentials.');
+					// The error is created by PHP, the response of the server is never printed.
+					$this->error = $error ?: lang('Invalid server or credentials.');
 
 					return false;
 				}
