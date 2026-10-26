@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'Session support skal være slået til.',
 	'Session expired, please login again.' => 'Sessionen er udløbet - Log venligst ind igen.',
 	'%s version: %s through PHP extension %s' => '%s version: %s via PHP-udvidelse %s',
+	'%s requires at least %s.' => '%s kræver mindst %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Sprog',
@@ -322,6 +323,7 @@ return [
 	'Create type' => 'Opret type',
 	'Type has been dropped.' => 'Typen er slettet.',
 	'Type has been created.' => 'Typen er oprettet.',
+	'Type has been altered.' => 'Typen er ændret.', // by Claude Opus 5
 	'Alter type' => 'Ændre type',
 
 	// Triggers
@@ -408,6 +410,7 @@ return [
 	'Lists' => 'Lister',
 	'Network' => 'Netværk',
 	'Geometry' => 'Geometri',
+	'Ranges' => 'Intervaller', // by Claude Fable 5.1
 	'Relations' => 'Relationer',
 
 	// Editor - data values

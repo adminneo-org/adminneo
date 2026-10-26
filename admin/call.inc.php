@@ -51,16 +51,20 @@ if ($_POST) {
 			$connection2->selectDatabase(DB);
 		}
 
+		$next = false;
 		do {
 			$result = Connection::get()->storeResult();
-			if (is_object($result)) {
+			// The error of the first query was checked above, SHOW WARNINGS run in formatSelectQuery() while the results are pending fails.
+			if ($next && Connection::get()->getError()) {
+				echo "<p class='error'>" . error() . "\n";
+			} elseif (is_object($result)) {
 				print_select_result($result, $connection2);
 			} else {
 				echo "<p class='message'>" . lang('Routine has been called, %d row(s) affected.', $affected)
 					. " <span class='time'>" . @date("H:i:s") . "</span>\n" // @ - time zone may be not set
 				;
 			}
-		} while (Connection::get()->nextResult());
+		} while ($next = Connection::get()->nextResult());
 
 		if ($out) {
 			print_select_result(Connection::get()->query("SELECT " . implode(", ", $out)));

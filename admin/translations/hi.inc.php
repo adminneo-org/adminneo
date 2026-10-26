@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'सेशन सपोर्ट सक्षम होना चाहिए।',
 	'Session expired, please login again.' => 'सेशन समाप्त, कृपया फिर से लॉगिन करें।',
 	'%s version: %s through PHP extension %s' => 'संस्करण %s: %s, PHP एक्सटेंशन %s के माध्यम से',
+	'%s requires at least %s.' => '%s के लिए कम से कम %s आवश्यक है।', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'भाषा',
@@ -322,6 +323,7 @@ return [
 	'Create type' => 'प्रकार बनाएं',
 	'Type has been dropped.' => 'प्रकार हटा दिया गया है।',
 	'Type has been created.' => 'प्रकार बनाया गया है।',
+	'Type has been altered.' => 'प्रकार बदल दिया गया है।', // by Claude Opus 5.5
 	'Alter type' => 'प्रकार बदलें',
 
 	// Triggers
@@ -405,6 +407,7 @@ return [
 	'Lists' => 'सूचियां',
 	'Network' => 'नेटवर्क',
 	'Geometry' => 'ज्यामिति',
+	'Ranges' => 'रेंज', // by Claude Fable 5.1
 	'Relations' => 'संबंध',
 
 	// Editor - data values

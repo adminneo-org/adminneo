@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Sesijų palaikymas turi būti įjungtas.',
 	'Session expired, please login again.' => 'Sesijos galiojimas baigėsi. Prisijunkite iš naujo.',
 	'%s version: %s through PHP extension %s' => '%s versija: %s per PHP plėtinį %s',
+	'%s requires at least %s.' => '%s reikalauja bent %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Kalba',
@@ -331,6 +332,7 @@ return [
 	'Create type' => 'Sukurti tipą',
 	'Type has been dropped.' => 'Tipas pašalintas.',
 	'Type has been created.' => 'Tipas sukurtas.',
+	'Type has been altered.' => 'Tipas pakeistas.', // by Claude Opus 5.5
 	'Alter type' => 'Keisti tipą',
 
 	// Triggers
@@ -420,6 +422,7 @@ return [
 	'Lists' => 'Sąrašai',
 	'Network' => 'Tinklas',
 	'Geometry' => 'Geometrija',
+	'Ranges' => 'Intervalai', // by Claude Fable 5.1
 	'Relations' => 'Ryšiai',
 
 	// Editor - data values

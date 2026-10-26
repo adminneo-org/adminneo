@@ -19,6 +19,9 @@ abstract class Connection
 	/** @var string */
 	protected $error = "";
 
+	/** @var bool Queries contain a fragment sent by the user, drivers should not allow multiple commands and modifying data in them. */
+	protected $untrusted = false;
+
 	/** @var Result|false */
 	protected $multiResult;
 
@@ -36,7 +39,11 @@ abstract class Connection
 
 	public static function createSecondary(): Connection
 	{
-		return new static();
+		$connection = new static();
+
+		$connection->setUntrusted(self::exists() && self::get()->isUntrusted());
+
+		return $connection;
 	}
 
 	public static function get(): Connection
@@ -143,6 +150,16 @@ abstract class Connection
 		$this->error = $error;
 	}
 
+	public function isUntrusted(): bool
+	{
+		return $this->untrusted;
+	}
+
+	public function setUntrusted(bool $untrusted): void
+	{
+		$this->untrusted = $untrusted;
+	}
+
 	public abstract function selectDatabase(string $name): bool;
 
 	public abstract function quote(string $string): string;
@@ -171,6 +188,14 @@ abstract class Connection
 	public function getQueryInfo(): ?string
 	{
 		return null;
+	}
+
+	/**
+	 * Returns the number of warnings of the most recently executed query.
+	 */
+	public function getWarningsCount(): int
+	{
+		return 0;
 	}
 
 	/**
@@ -213,8 +238,53 @@ abstract class Connection
 		return $this->multiResult;
 	}
 
+	/**
+	 * Returns whether the results of further queries sent by multiQuery() are pending.
+	 */
+	public function hasMoreResults(): bool
+	{
+		return false;
+	}
+
+	/**
+	 * Moves to the result of the next query sent by multiQuery().
+	 *
+	 * @return bool Returns true also if the next query failed, its error is then returned by getError().
+	 */
 	public function nextResult(): bool
 	{
 		return false;
+	}
+
+	/**
+	 * Checks if a transaction is in progress, false if the extension can't tell.
+	 */
+	public function inTransaction(): bool
+	{
+		return false;
+	}
+
+	/**
+	 * Begins a transaction. Extensions with a transaction API use it.
+	 */
+	public function begin(): bool
+	{
+		return (bool)$this->query("BEGIN");
+	}
+
+	/**
+	 * Commits the transaction.
+	 */
+	public function commit(): bool
+	{
+		return (bool)$this->query("COMMIT");
+	}
+
+	/**
+	 * Rolls back the transaction. It is called also without a transaction.
+	 */
+	public function rollback(): bool
+	{
+		return (bool)$this->query("ROLLBACK");
 	}
 }

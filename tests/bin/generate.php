@@ -40,6 +40,9 @@ function generate_pdo(string $filename, string $content): void
 	// MS SQL PDO doesn't support EXPLAIN.
 	$content = str_replace("<tr><td>click</td><td>link=Explain</td><td></td></tr>\n<tr><td>verifyTextPresent</td><td>Clustered Index Scan</td><td></td></tr>\n", "", $content);
 
+	// PostgreSQL PDO reports 0 affected rows for COPY ... FROM stdin.
+	$content = str_replace("<tr><td>verifyTextPresent</td><td>Query executed OK, 2 rows affected.</td><td></td></tr>\n<tr><td>verifyTextPresent</td><td>copied 2 a; b</td><td></td></tr>\n", "<tr><td>verifyTextPresent</td><td>copied 2 a; b</td><td></td></tr>\n", $content);
+
 	$filename = preg_replace('~(\.krecorder)$~', "-pdo$1", $filename);
 	file_put_contents($filename, $content);
 

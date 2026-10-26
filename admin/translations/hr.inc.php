@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Podrška za sesije mora biti uključena.',
 	'Session expired, please login again.' => 'Sesija je istekla, molimo prijavite se ponovo.',
 	'%s version: %s through PHP extension %s' => '%s verzija: %s putem PHP proširenja %s',
+	'%s requires at least %s.' => '%s zahtijeva najmanje %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Jezik',
@@ -331,6 +332,7 @@ return [
 	'Create type' => 'Kreiraj tip',
 	'Type has been dropped.' => 'Tip je izbrisan.',
 	'Type has been created.' => 'Tip je kreiran.',
+	'Type has been altered.' => 'Tip je izmijenjen.', // by Claude Opus 5
 	'Alter type' => 'Izmijeni tip',
 
 	// Triggers
@@ -420,6 +422,7 @@ return [
 	'Lists' => 'Liste',
 	'Network' => 'Mreža',
 	'Geometry' => 'Geometrija',
+	'Ranges' => 'Rasponi', // by Claude Fable 5.1
 	'Relations' => 'Odnosi',
 
 	// Editor - data values

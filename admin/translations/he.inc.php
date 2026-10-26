@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'חובה להפעיל תמיכה בסשן',
 	'Session expired, please login again.' => 'תם זמן ההפעלה, אנא התחבר שוב',
 	'%s version: %s through PHP extension %s' => '%s גרסה: %s דרך תוסף PHP %s',
+	'%s requires at least %s.' => '%s דורש לפחות %s', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'שפה',
@@ -307,6 +308,7 @@ return [
 	'Create type' => 'צור סוג',
 	'Type has been dropped.' => 'הסוג הושלך',
 	'Type has been created.' => 'הסוג נוצר',
+	'Type has been altered.' => 'הסוג שונה', // by Claude Opus 5.5
 	'Alter type' => 'שנה סוג',
 
 	// Triggers
@@ -384,6 +386,7 @@ return [
 	'Lists' => 'רשימות',
 	'Network' => 'רשת',
 	'Geometry' => 'גיאומטריה',
+	'Ranges' => 'טווחים', // by Claude Fable 5.1
 	'Relations' => 'הקשרים',
 
 	// Editor - data values

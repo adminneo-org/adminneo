@@ -23,7 +23,7 @@ AdminNeo is based on the [Adminer](https://www.adminer.org/) project by Jakub Vr
 
 - MySQL, MariaDB, PostgreSQL, MS SQL, SQLite, Oracle
 - MongoDB, SimpleDB
-- Elasticsearch (beta), ClickHouse (alpha)
+- Elasticsearch, ClickHouse (alpha)
 
 Installation
 ------------

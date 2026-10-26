@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'Sessioonid peavad olema lubatud.',
 	'Session expired, please login again.' => 'Sessioon on aegunud, palun logige uuesti sisse.',
 	'%s version: %s through PHP extension %s' => '%s versioon: %s, kasutatud PHP moodul: %s',
+	'%s requires at least %s.' => '%s nõuab vähemalt %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Keel',
@@ -313,6 +314,7 @@ return [
 	'Create type' => 'Loo tüüp',
 	'Type has been dropped.' => 'Tüüp on edukalt kustutatud.',
 	'Type has been created.' => 'Tüüp on edukalt loodud.',
+	'Type has been altered.' => 'Tüüp on edukalt muudetud.', // by Claude Opus 5.5
 	'Alter type' => 'Muuda tüüpi',
 
 	// Triggers
@@ -393,6 +395,7 @@ return [
 	'Lists' => 'Listid',
 	'Network' => 'Võrk (network)',
 	'Geometry' => 'Geomeetria',
+	'Ranges' => 'Vahemikud', // by Claude Fable 5.1
 	'Relations' => 'Seosed',
 
 	// Editor - data values

@@ -40,12 +40,21 @@ function number($val) {
 	return preg_replace('~[^0-9]+~', '', $val);
 }
 
+/** Get regular expression to match integer types
+* @return string
+*/
+function int_type() {
+	// int2, int4, int8 are returned by pg_field_type()
+	return '(tiny|small|medium|big)?int(eger|\d)?';
+}
+
 /** Get regular expression to match numeric types
 * @return string
 */
 function number_type() {
-	// (^|[^o]) instead of (?<!o) - the expression is used also by JavaScript, lookbehind is unsupported in Safari < 16.4
-	return '((^|[^o])int(?!er)|numeric|real|float|double|decimal|money)'; // not point, not interval
+	// The type names are listed instead of matching substrings so that e.g. int4range, interval and point are not treated as numbers.
+	// The outer parentheses are the delimiters if the expression is passed to preg_match() alone. The expression is used also by JavaScript.
+	return '(^(' . int_type() . '|decimal|numeric|real|(binary_|half_|scaled_)?float\d?|(binary_)?double( precision)?|(small)?money)$)';
 }
 
 /** Disable magic_quotes_gpc
@@ -308,7 +317,7 @@ function get_rows($query, ?Connection $connection = null, $error = "<p class='er
 function unique_array(array $row, array $indexes): ?array
 {
 	foreach ($indexes as $index) {
-		if (!preg_match("~PRIMARY|UNIQUE~", $index["type"]) && !$index["partial"]) {
+		if (!preg_match("~^(PRIMARY|UNIQUE)$~", $index["type"]) || ($index["partial"] ?? "") != "") {
 			continue;
 		}
 
@@ -486,16 +495,29 @@ function cookie(string $name, string $value, int $lifetime = 2592000): void
  * Returns contents from a URL.
  *
  * @param resource $context
- * @return array{0: string|false, 1: string[]} [$contents, $headers]
+ * @return array{0: string|false, 1: string[], 2: string} [$contents, $headers, $error]
  */
 function get_url(string $url, $context): array
 {
-	$return = @file_get_contents($url, false, $context);
-	if (function_exists('http_get_last_response_headers')) {
-		$http_response_header = http_get_last_response_headers() ?? [];
-	}
+	// Assigning it avoids deprecating the predefined locally scoped variable in PHP 8.4, file_get_contents() overwrites it in older versions.
+	$http_response_header = null;
 
-	return [$return, $http_response_header ?? []];
+	// A failed request emits several warnings and the first one is the most descriptive, error_get_last() would return the last one.
+	$errors = [];
+	set_error_handler(function ($errno, $error) use (&$errors) {
+		$errors[] = preg_replace('~^file_get_contents\([^)]*\):\s*~', '', $error); // The URL can contain a password.
+		return true;
+	});
+	$return = file_get_contents($url, false, $context);
+	restore_error_handler();
+
+	$headers = function_exists('http_get_last_response_headers') ? http_get_last_response_headers() : $http_response_header;
+
+	return [
+		$return,
+		(array)$headers,
+		$return === false ? implode("\n", $errors) : "",
+	];
 }
 
 /**
@@ -587,8 +609,8 @@ function auth_url($vendor, $server, $username, $db = null) {
 	preg_match('~([^?]*)\??(.*)~', $uri, $match);
 	return "$match[1]?"
 		. (sid() ? session_name() . "=" . urlencode(session_id()) . "&" : "")
-		. urlencode($vendor) . "=" . urlencode($server) . "&"
 		. ($_GET["ext"] ? "ext=" . urlencode($_GET["ext"]) . "&" : "")
+		. urlencode($vendor) . "=" . urlencode($server) . "&"
 		. "username=" . urlencode($username)
 		. ($db != "" ? "&db=" . urlencode($db) : "")
 		. ($match[2] ? "&$match[2]" : "")
@@ -670,6 +692,25 @@ class Queries {
 }
 
 /**
+ * Remembers SQL query to print it by queries_redirect().
+ *
+ * @param string $query Ends with ';' to use DELIMITER.
+ */
+function remember_query(string $query): void
+{
+	if (!Queries::$start) {
+		Queries::$start = microtime(true);
+	}
+
+	if (support("sql")) {
+		Queries::$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
+	} else {
+		// Save the query for later use in a flesh message. TODO: This is so ugly.
+		Queries::$queries[] = $query;
+	}
+}
+
+/**
  * Executes and remembers SQL query.
  *
  * @param string $query Ends with ';' to use DELIMITER.
@@ -678,19 +719,9 @@ class Queries {
  */
 function queries(string $query)
 {
-	if (!Queries::$start) {
-		Queries::$start = microtime(true);
-	}
+	remember_query($query);
 
-	if (support("sql")) {
-		Queries::$queries[] = (preg_match('~;$~', $query) ? "DELIMITER ;;\n$query;\nDELIMITER " : $query) . ";";
-
-		return Connection::get()->query($query);
-	} else {
-		// Save the query for later use in a flesh message. TODO: This is so ugly.
-		Queries::$queries[] = $query;
-		return [];
-	}
+	return support("sql") ? Connection::get()->query($query) : [];
 }
 
 /**

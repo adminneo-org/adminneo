@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Sesiju atbalstam jābūt ieslēgtam.',
 	'Session expired, please login again.' => 'Sesijas laiks ir beidzies, piesakies no jauna sistēmā.',
 	'%s version: %s through PHP extension %s' => 'Versija %s: %s ar PHP paplašinājumu %s',
+	'%s requires at least %s.' => '%s nepieciešams vismaz %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Valoda',
@@ -331,6 +332,7 @@ return [
 	'Create type' => 'Izveidot tipu',
 	'Type has been dropped.' => 'Tips dzēsts.',
 	'Type has been created.' => 'Tips izveidots.',
+	'Type has been altered.' => 'Tips izmainīts.', // by Claude Opus 5
 	'Alter type' => 'Izmainīt tipu',
 
 	// Triggers
@@ -420,6 +422,7 @@ return [
 	'Lists' => 'Saraksti',
 	'Network' => 'Tīkls',
 	'Geometry' => 'Ģeometrija',
+	'Ranges' => 'Diapazoni', // by Claude Fable 5.1
 	'Relations' => 'Relācijas',
 
 	// Editor - data values

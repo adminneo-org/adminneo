@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Session proměnné musí být povolené.',
 	'Session expired, please login again.' => 'Session vypršela, přihlaste se prosím znovu.',
 	'%s version: %s through PHP extension %s' => 'Verze %s: %s přes PHP rozšíření %s',
+	'%s requires at least %s.' => '%s vyžaduje alespoň %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.'
 
 	// Settings
 	'Language' => 'Jazyk',
@@ -331,6 +332,7 @@ return [
 	'Create type' => 'Vytvořit typ',
 	'Type has been dropped.' => 'Typ byl odstraněn.',
 	'Type has been created.' => 'Typ byl vytvořen.',
+	'Type has been altered.' => 'Typ byl změněn.',
 	'Alter type' => 'Pozměnit typ',
 
 	// Triggers
@@ -420,6 +422,7 @@ return [
 	'Lists' => 'Seznamy',
 	'Network' => 'Síť',
 	'Geometry' => 'Geometrie',
+	'Ranges' => 'Rozsahy',
 	'Relations' => 'Vztahy',
 
 	// Editor - data values

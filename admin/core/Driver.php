@@ -17,6 +17,9 @@ abstract class Driver
 	/** @var int[][] [$description => [$type => $maximum_unsigned_length, ...], ...] */
 	protected $types = [];
 
+	/** @var int[] [$name => $id, ...] */
+	private $userTypes = [];
+
 	/** @var list<string> List of number variants. */
 	protected $unsigned = [];
 
@@ -109,16 +112,28 @@ abstract class Driver
 		return array_map("array_keys", $this->types);
 	}
 
+	/**
+	 * @param string[] $types [$id => $name, ...]
+	 */
 	public function setUserTypes(array $types): void
 	{
-		$this->types[lang('User types')] = array_flip($types);
+		$this->userTypes = array_flip($types);
+
+		// $this->types holds maximum lengths, user types have none.
+		$this->types[lang('User types')] = array_fill_keys(array_keys($this->userTypes), 0);
 	}
 
+	/**
+	 * @return list<string>
+	 */
 	public function getUserTypes(): array
 	{
-		$key = lang('User types');
+		return array_keys($this->userTypes);
+	}
 
-		return array_keys($this->types[$key] ?? []);
+	public function getUserTypeId(string $name): ?int
+	{
+		return $this->userTypes[$name] ?? null;
 	}
 
 	/**
@@ -242,7 +257,7 @@ abstract class Driver
 	 * @param int $page Index of page starting at zero.
 	 * @param bool $print Whether to print the query.
 	 *
-	 * @return Result|false
+	 * @return Result|bool
 	 */
 	public function select(string $table, array $select, array $where, array $group, array $order = [], int $limit = 1, int $page = 0, bool $print = false)
 	{
@@ -347,32 +362,32 @@ abstract class Driver
 
 	/**
 	 * Begins new transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function begin()
+	public function begin(): bool
 	{
-		return queries("BEGIN");
+		remember_query("BEGIN");
+
+		return $this->connection->begin();
 	}
 
 	/**
 	 * Commits transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function commit()
+	public function commit(): bool
 	{
-		return queries("COMMIT");
+		remember_query("COMMIT");
+
+		return $this->connection->commit();
 	}
 
 	/**
 	 * Rollback transaction.
-	 *
-	 * @return Result|bool
 	 */
-	public function rollback()
+	public function rollback(): bool
 	{
-		return queries("ROLLBACK");
+		remember_query("ROLLBACK");
+
+		return $this->connection->rollback();
 	}
 
 	/**
@@ -458,6 +473,16 @@ abstract class Driver
 	}
 
 	/**
+	 * Checks whether table indexes can be altered.
+	 *
+	 * @param array $tableStatus The result of table_status1().
+	 */
+	public function supportsAlterIndex(array $tableStatus): bool
+	{
+		return true;
+	}
+
+	/**
 	 * Returns list of supported index algorithms, first one is the default.
 	 *
 	 * @return list<string>
@@ -521,6 +546,14 @@ abstract class Driver
 	public function hasCStyleEscapes(): bool
 	{
 		return false;
+	}
+
+	/**
+	 * Returns regular expression matching the start of a line comment. It must not match an empty string.
+	 */
+	public function lineComment(): string
+	{
+		return "--";
 	}
 
 	/**

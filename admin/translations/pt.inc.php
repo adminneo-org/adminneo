@@ -22,7 +22,7 @@ return [
 	'Skip to table list' => 'Saltar para a lista de tabelas', // by Claude Fable 5.1
 
 	// Login
-	'System' => 'Motor de Base de dados',
+	'System' => 'Motor de base de dados',
 	'Server' => 'Servidor',
 	'Username' => 'Nome de utilizador',
 	'Password' => 'Senha',
@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'As sessões devem estar ativas.',
 	'Session expired, please login again.' => 'Sessão expirada, por favor entre de novo.',
 	'%s version: %s through PHP extension %s' => 'Versão %s: %s através da extensão PHP %s',
+	'%s requires at least %s.' => '%s requer pelo menos %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Idioma',
@@ -149,9 +150,9 @@ return [
 	'DB' => 'BD', // by Claude Fable 5.1
 	'Use' => 'Usar',
 	'Invalid database.' => 'Base de dados inválida.',
-	'Alter database' => 'Modificar Base de dados',
-	'Create database' => 'Criar Base de dados',
-	'Database schema' => 'Esquema de Base de dados',
+	'Alter database' => 'Modificar base de dados',
+	'Create database' => 'Criar base de dados',
+	'Database schema' => 'Esquema de base de dados',
 	'Permanent link' => 'Ligação permanente', // by Claude Fable 5.1
 	'Database has been dropped.' => 'Base de dados eliminada.',
 	'Databases have been dropped.' => 'Bases de dados eliminadas.',
@@ -184,7 +185,7 @@ return [
 	'collation' => 'collation',
 	'Data Length' => 'Tamanho de dados',
 	'Index Length' => 'Tamanho de índice',
-	'Data Free' => 'Espaço Livre',
+	'Data Free' => 'Espaço livre',
 	'Rows' => 'Registos',
 	'%d in total' => '%d no total',
 	'Analyze' => 'Analisar',
@@ -194,9 +195,9 @@ return [
 	'Repair' => 'Reparar',
 	'Truncate' => 'Truncar',
 	'Tables have been truncated.' => 'Tabelas truncadas (truncate).',
-	'Move to other database' => 'Mover para outra Base de dados',
+	'Move to other database' => 'Mover para outra base de dados',
 	'Move' => 'Mover',
-	'Tables have been moved.' => 'As Tabelas foram movidas.',
+	'Tables have been moved.' => 'As tabelas foram movidas.',
 	'Copy' => 'Copiar', // by Claude Fable 5.1
 	'Tables have been copied.' => 'As tabelas foram copiadas.', // by Claude Fable 5.1
 	'overwrite' => 'sobrescrever', // by Claude Fable 5.1
@@ -219,7 +220,7 @@ return [
 	'Column name' => 'Nome da coluna',
 	'Type' => 'Tipo',
 	'Length' => 'Tamanho',
-	'Auto Increment' => 'Incremento Automático',
+	'Auto Increment' => 'Incremento automático',
 	'Options' => 'Opções',
 	'Comment' => 'Comentário',
 	'Default value' => 'Valor predefinido', // by Claude Fable 5.1
@@ -247,7 +248,7 @@ return [
 	'Partition by' => 'Particionar por',
 	'Partition' => 'Partição', // by Claude Fable 5.1
 	'Partitions' => 'Partições',
-	'Partition name' => 'Nome da Partição',
+	'Partition name' => 'Nome da partição',
 	'Values' => 'Valores',
 	'Inherited tables' => 'Tabelas herdadas', // by Claude Fable 5.1
 	'Inherited from' => 'Herdada de', // by Claude Fable 5.1
@@ -287,13 +288,13 @@ return [
 		'Consulta executada, %d registos afetados.',
 	],
 	'Call' => 'Chamar',
-	'Parameter name' => 'Nome de Parâmetro',
+	'Parameter name' => 'Nome de parâmetro',
 	'Create procedure' => 'Criar procedimento',
 	'Create function' => 'Criar função',
 	'Routine has been dropped.' => 'Procedimento eliminado.',
 	'Routine has been altered.' => 'Procedimento modificado.',
 	'Routine has been created.' => 'Procedimento criado.',
-	'Alter function' => 'Modificar Função',
+	'Alter function' => 'Modificar função',
 	'Alter procedure' => 'Modificar procedimento',
 	'Return type' => 'Tipo de valor de regresso',
 
@@ -303,8 +304,8 @@ return [
 	'Event has been dropped.' => 'Evento eliminado.',
 	'Event has been altered.' => 'Evento modificado.',
 	'Event has been created.' => 'Evento criado.',
-	'Alter event' => 'Modificar Evento',
-	'Create event' => 'Criar Evento',
+	'Alter event' => 'Modificar evento',
+	'Create event' => 'Criar evento',
 	'At given time' => 'À hora determinada',
 	'Every' => 'Cada',
 	'Schedule' => 'Agenda',
@@ -325,6 +326,7 @@ return [
 	'Create type' => 'Criar tipo',
 	'Type has been dropped.' => 'Tipo eliminado.',
 	'Type has been created.' => 'Tipo criado.',
+	'Type has been altered.' => 'Tipo modificado.', // by Claude Opus 5
 	'Alter type' => 'Modificar tipo',
 
 	// Triggers
@@ -332,8 +334,8 @@ return [
 	'Trigger has been dropped.' => 'Trigger eliminado.',
 	'Trigger has been altered.' => 'Trigger modificado.',
 	'Trigger has been created.' => 'Trigger criado.',
-	'Alter trigger' => 'Modificar Trigger',
-	'Create trigger' => 'Adicionar Trigger',
+	'Alter trigger' => 'Modificar trigger',
+	'Create trigger' => 'Adicionar trigger',
 
 	// Table check constraints
 	'Checks' => 'Verificações', // by Claude Fable 5.1
@@ -357,8 +359,8 @@ return [
 	'Text length' => 'Tamanho do texto',
 	'Action' => 'Ação',
 	'Full table scan' => 'Varrimento completo da tabela', // by Claude Fable 5.1
-	'Unable to select the table' => 'Não é possivel selecionar a Tabela',
-	'Search data in tables' => 'Pesquisar dados nas Tabelas',
+	'Unable to select the table' => 'Não é possivel selecionar a tabela',
+	'Search data in tables' => 'Pesquisar dados nas tabelas',
 	'All rows on this page' => 'Todas as linhas desta página', // by Claude Fable 5.1
 	'No rows.' => 'Não existem registos.',
 	'%d / ' => '%d / ', // by Claude Fable 5.1
@@ -382,7 +384,7 @@ return [
 	'Use edit link to modify this value.' => 'Utilize o link modificar para alterar.',
 
 	// Editing
-	'New item' => 'Novo Registo',
+	'New item' => 'Novo registo',
 	'Edit' => 'Modificar',
 	'original' => 'original',
 	'empty' => 'vazio', // label for value '' in enum data type
@@ -411,6 +413,7 @@ return [
 	'Lists' => 'Listas',
 	'Network' => 'Rede',
 	'Geometry' => 'Geometria',
+	'Ranges' => 'Intervalos', // by Claude Fable 5.1
 	'Relations' => 'Relações',
 
 	// Editor - data values

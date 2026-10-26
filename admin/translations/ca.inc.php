@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'Cal que estigui permès l\'us de sessions.',
 	'Session expired, please login again.' => 'La sessió ha expirat, torna a iniciar-ne una.',
 	'%s version: %s through PHP extension %s' => 'Versió %s: %s amb l\'extensió de PHP %s',
+	'%s requires at least %s.' => '%s requereix com a mínim %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Idioma',
@@ -325,6 +326,7 @@ return [
 	'Create type' => 'Crea un tipus',
 	'Type has been dropped.' => 'S\'ha suprimit el tipus.',
 	'Type has been created.' => 'S\'ha creat el tipus.',
+	'Type has been altered.' => 'S\'ha modificat el tipus.', // by Claude Opus 5
 	'Alter type' => 'Modifica el tipus',
 
 	// Triggers
@@ -411,6 +413,7 @@ return [
 	'Lists' => 'Llistes',
 	'Network' => 'Xarxa',
 	'Geometry' => 'Geometria',
+	'Ranges' => 'Rangs', // by Claude Fable 5.1
 	'Relations' => 'Relacions',
 
 	// Editor - data values

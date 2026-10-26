@@ -112,7 +112,15 @@ if (isset($_GET["pgsql"])) {
 					return false;
 				}
 
-				$result = @pg_query($this->connection, $query);
+				if ($this->untrusted) {
+					// The extended protocol doesn't allow multiple commands, the transaction doesn't allow modifying data.
+					$result = (@pg_query($this->connection, "BEGIN READ ONLY")
+						? @pg_query_params($this->connection, $query, [])
+						: false
+					);
+				} else {
+					$result = @pg_query($this->connection, $query);
+				}
 				$this->error = "";
 
 				if (!$result) {
@@ -123,6 +131,10 @@ if (isset($_GET["pgsql"])) {
 					$return = true;
 				} else {
 					$return = new PgSqlResult($result);
+				}
+
+				if ($this->untrusted) {
+					@pg_query($this->connection, "COMMIT"); // Rollbacks the transaction if the query failed.
 				}
 
 				if ($this->timeout) {
@@ -177,6 +189,14 @@ if (isset($_GET["pgsql"])) {
 				restore_error_handler();
 
 				return $result;
+			}
+
+			public function inTransaction(): bool
+			{
+				$status = pg_transaction_status($this->connection);
+
+				// Not PGSQL_TRANSACTION_UNKNOWN, the connection is bad.
+				return $status == PGSQL_TRANSACTION_INTRANS || $status == PGSQL_TRANSACTION_INERROR;
 			}
 		}
 
@@ -280,12 +300,43 @@ if (isset($_GET["pgsql"])) {
 
 			public function query(string $query, bool $unbuffered = false)
 			{
-				$return = parent::query($query, $unbuffered);
+				$return = ($this->untrusted ? $this->readOnlyQuery($query) : parent::query($query, $unbuffered));
 
 				if ($this->timeout) {
 					$this->timeout = 0;
 					parent::query("RESET statement_timeout");
 				}
+
+				return $return;
+			}
+
+			/**
+			 * Sends a query which can't modify data.
+			 *
+			 * @return PdoResult|false
+			 */
+			private function readOnlyQuery(string $query)
+			{
+				$this->error = "";
+				if (!$this->pdo->query("BEGIN READ ONLY")) {
+					list(, $this->errno, $this->error) = $this->pdo->errorInfo();
+					return false;
+				}
+
+				$statement = $this->pdo->prepare($query); // A prepared statement doesn't allow multiple commands.
+				$return = false;
+				if ($statement && $statement->execute()) {
+					$return = new PdoResult($statement);
+					$this->storeResult($return);
+				} else {
+					// prepare() succeeds even for an invalid query, the error is reported by execute().
+					list(, $this->errno, $this->error) = ($statement ? $statement->errorInfo() : $this->pdo->errorInfo());
+					if (!$this->error) {
+						$this->error = lang('Unknown error.');
+					}
+				}
+
+				$this->pdo->query("COMMIT"); // Rollbacks the transaction if the query failed.
 
 				return $return;
 			}
@@ -388,6 +439,11 @@ if (isset($_GET["pgsql"])) {
 
 			if ($connection->isMinVersion("9.2")) {
 				$this->types[lang('Strings')]["json"] = 4294967295;
+				// TODO multiranges since 14
+				$this->types[lang('Ranges')] = [
+					"int4range" => 0, "int8range" => 0, "numrange" => 0,
+					"daterange" => 0, "tsrange" => 0, "tstzrange" => 0,
+				];
 
 				if ($connection->isMinVersion("9.4")) {
 					$this->types[lang('Strings')]["jsonb"] = 4294967295;
@@ -489,7 +545,7 @@ if (isset($_GET["pgsql"])) {
 		{
 			$textTypes = "char|text";
 			if (strpos($where["op"], "LIKE") === false) {
-				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|" . number_type();
+				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|range|" . number_type();
 			}
 
 			return (preg_match("~$textTypes~", $field["type"]) ? $idf : "CAST($idf AS text)");
@@ -1294,8 +1350,8 @@ ORDER BY ordinal_position");
 		return get_rows('SELECT specific_name AS "SPECIFIC_NAME", routine_name AS "ROUTINE_NAME", routine_type AS "ROUTINE_TYPE", type_udt_name AS "DTD_IDENTIFIER", null AS ROUTINE_COMMENT
 FROM information_schema.routines
 WHERE routine_schema = current_schema()' . (Connection::get()->isCockroachDB() ? '' : "
-AND substring(specific_name, '[0-9]+\$')::oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_proc'::regclass AND deptype = 'e')") . '
-ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions
+AND substring(specific_name, '[0-9]+\$')::oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_proc'::regclass AND deptype IN ('e', 'i'))") . '
+ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions, 'i' - constructors created by CREATE TYPE AS RANGE
 	}
 
 	function routine_languages(): array
@@ -1347,12 +1403,22 @@ ORDER BY SPECIFIC_NAME'); // 'e' - functions created by extensions
 	 */
 	function types(bool $extensions = false): array
 	{
-		return get_key_vals("SELECT oid, typname
-FROM pg_type
-WHERE typnamespace = " . Driver::get()->getNsOidSql() . "
-AND typtype IN ('b','d','e')
-AND typelem = 0" . ($extensions || Connection::get()->isCockroachDB() ? '' : "
-AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'::regclass AND deptype = 'e')") // 'e' - types created by extensions
+		$cockroach = Connection::get()->isCockroachDB();
+		// 'b' - base, 'c' - composite, 'd' - domain, 'e' - enum, 'r' - range; 'p' pseudo-types and 'm' multiranges are not created on their own
+		$kinds = ($cockroach ? "'e'" : "'b','c','d','e'" . (Connection::get()->isMinVersion("9.2") ? ",'r'" : ""));
+
+		return get_key_vals("SELECT t.oid, t.typname
+FROM pg_type t
+WHERE t.typnamespace = " . Driver::get()->getNsOidSql() . "
+AND t.typtype IN ($kinds)" . ($cockroach ? "
+AND t.typelem = 0" : "
+AND (t.typrelid = 0 OR (SELECT c.relkind FROM pg_class c WHERE c.oid = t.typrelid) = 'c')" // pg_type contains also the row type of every table, view and sequence
+			. "
+AND NOT EXISTS (SELECT 1 FROM pg_type e WHERE e.typarray = t.oid)" // types created automatically for arrays
+			. ($extensions ? '' : "
+AND t.oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'::regclass AND deptype = 'e')")) // 'e' - types created by extensions
+			. "
+ORDER BY t.typname"
 		);
 	}
 
@@ -1364,7 +1430,94 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 			return "";
 		}
 
-		return "'" . implode("', '", array_map('addslashes', $enums)) . "'";
+		// Escaped the same way as the length of MySQL enum, enum_input() unescapes doubled quotes and backslashes.
+		$values = [];
+		foreach ($enums as $enum) {
+			$values[] = "'" . str_replace("'", "''", addcslashes($enum, "\\")) . "'";
+		}
+
+		return implode(", ", $values);
+	}
+
+	/**
+	 * Returns SQL expression returning the name of a collation if it's not the one defined by the type.
+	 *
+	 * @param string $oid SQL expression with the collation OID.
+	 */
+	function collation_name(string $oid): string
+	{
+		return (Connection::get()->isMinVersion("9.1") ? "(SELECT collname FROM pg_collation WHERE oid = $oid AND collname != 'default')" : "NULL");
+	}
+
+	/**
+	 * Returns definition of user defined type.
+	 *
+	 * @return array{kind: string, definition: string} The kind is 'b' - base, 'c' - composite, 'd' - domain, 'e' - enum, 'r' - range.
+	 *     The definition is the part of CREATE TYPE or CREATE DOMAIN after the name, empty if the type can't be expressed.
+	 */
+	function type_definition(int $id): array
+	{
+		$type = first(get_rows("SELECT typtype, typisdefined::int AS defined, typrelid FROM pg_type WHERE oid = $id"));
+		$return = ["kind" => ($type ? $type["typtype"] : ""), "definition" => ""];
+		if (!$type || !$type["defined"]) { // shell type created by CREATE TYPE without options
+			return $return;
+		}
+
+		switch ($return["kind"]) {
+			case 'e':
+				$values = get_vals("SELECT enumlabel FROM pg_enum WHERE enumtypid = $id ORDER BY enumsortorder");
+				$return["definition"] = "AS ENUM (" . implode(", ", array_map('AdminNeo\q', $values)) . ")";
+				break;
+
+			case 'c':
+				$columns = [];
+				$rows = get_rows("SELECT attname, format_type(atttypid, atttypmod) AS full_type, " . collation_name("attcollation") . " AS collation
+FROM pg_attribute
+WHERE attrelid = $type[typrelid] AND attnum > 0 AND NOT attisdropped
+ORDER BY attnum");
+				foreach ($rows as $row) {
+					$columns[] = idf_escape($row["attname"]) . " $row[full_type]" . ($row["collation"] ? " COLLATE " . idf_escape($row["collation"]) : "");
+				}
+				$return["definition"] = "AS (\n\t" . implode(",\n\t", $columns) . "\n)";
+				break;
+
+			case 'd':
+				$domain = first(get_rows("SELECT format_type(typbasetype, typtypmod) AS base, typnotnull::int AS notnull, typdefault, " . collation_name("typcollation") . " AS collation
+FROM pg_type
+WHERE oid = $id"));
+				$return["definition"] = "AS $domain[base]"
+					. ($domain["collation"] ? " COLLATE " . idf_escape($domain["collation"]) : "")
+					. ($domain["typdefault"] != "" ? " DEFAULT $domain[typdefault]" : "") // typdefault is an SQL expression
+					. ($domain["notnull"] ? " NOT NULL" : "");
+
+				// 'n' - NOT NULL constraint created since PostgreSQL 17, it's already covered by typnotnull
+				$rows = get_rows("SELECT conname, pg_get_constraintdef(oid) AS definition FROM pg_constraint WHERE contypid = $id AND contype != 'n' ORDER BY conname");
+				foreach ($rows as $row) {
+					$return["definition"] .= " CONSTRAINT " . idf_escape($row["conname"]) . " $row[definition]"; // definition is CHECK (...)
+				}
+				break;
+
+			case 'r':
+				$range = first(get_rows("SELECT format_type(rngsubtype, NULL) AS subtype,
+	(SELECT opcname FROM pg_opclass WHERE oid = rngsubopc) AS subtype_opclass,
+	" . collation_name("rngcollation") . " AS collation,
+	NULLIF(rngcanonical, 0)::regproc::text AS canonical,
+	NULLIF(rngsubdiff, 0)::regproc::text AS subtype_diff" . (Connection::get()->isMinVersion("14") ? ",
+	(SELECT typname FROM pg_type WHERE oid = rngmultitypid) AS multirange_type_name" : "") . "
+FROM pg_range
+WHERE rngtypid = $id"));
+				$options = [];
+				foreach (["subtype" => 0, "subtype_opclass" => 1, "collation" => 1, "canonical" => 0, "subtype_diff" => 0, "multirange_type_name" => 1] as $key => $escape) {
+					if (($range[$key] ?? "") != "") {
+						$options[] = strtoupper($key) . " = " . ($escape ? idf_escape($range[$key]) : $range[$key]);
+					}
+				}
+				$return["definition"] = "AS RANGE (" . implode(", ", $options) . ")";
+				break;
+		}
+
+		// TODO 'b' - base types, they are created only by a superuser so they are usually a part of an extension
+		return $return;
 	}
 
 	function schemas(): array
@@ -1374,7 +1527,7 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 
 	function get_schema(): string
 	{
-		return Connection::get()->getValue("SELECT current_schema()");
+		return (string)Connection::get()->getValue("SELECT current_schema()"); // NULL if no schema in search_path exists or is visible.
 	}
 
 	function set_schema(string $schema, ?Connection $connection = null): bool
@@ -1611,7 +1764,7 @@ AND oid NOT IN (SELECT objid FROM pg_catalog.pg_depend WHERE classid = 'pg_type'
 		}
 
 		return preg_match(
-			'~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|trigger|type|variables|view)$~',
+			'~^(check|columns|comment|database|drop_col|dump|descidx|fast_status|indexes|kill|partial_indexes|routine|scheme|sequence|sql|table|transaction_ddl|trigger|type|variables|view)$~',
 			$feature
 		);
 	}

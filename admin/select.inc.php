@@ -51,7 +51,7 @@ if ($_GET["val"] && is_ajax()) {
 		$select = [$as ?: idf_escape(key($row))];
 		$where[] = where_check($unique_idf, $fields);
 		$return = Driver::get()->select($TABLE, $select, $where, $select);
-		if ($return) {
+		if (is_object($return)) { // A query returning no result set can succeed, e.g. a multi-statement query in PostgreSQL.
 			echo first($return->fetchRow());
 		}
 	}
@@ -288,10 +288,20 @@ if (!$columns && support("table")) {
 	Admin::get()->printSelectionAction($indexes);
 	echo "</div>\n</form>\n";
 
+	foreach ((array)$_GET["where"] as $val) {
+		// The SQL operator passes the value to the database unescaped, GET is not protected by the CSRF token.
+		if ($val["op"] == "SQL" && !in_array($_SERVER["HTTP_SEC_FETCH_SITE"] ?? "", ["", "same-origin"])) {
+			echo "<p class='error'>" . lang('Invalid CSRF token. Send the form again.') . " " .
+				lang('If you did not send this request from AdminNeo then close this page.') . "\n";
+			page_footer();
+			exit;
+		}
+	}
+
 	$page = $_GET["page"] ?? null;
 	if ($page == "last") {
 		$found_rows = Connection::get()->getValue(count_rows($TABLE, $where, $is_group, $group));
-		$page = (int)floor(max(0, intval($found_rows) - 1) / $limit);
+		$page = $limit ? (int)floor(max(0, intval($found_rows) - 1) / $limit) : 0;
 	} else {
 		$found_rows = false;
 		$page = (int)$page;
@@ -330,8 +340,8 @@ if (!$columns && support("table")) {
 	}
 	$result = Driver::get()->select($TABLE, $select2, $where, $group2, $order, $limit, $page, true);
 
-	if (!$result) {
-		echo "<p class='error'>" . error() . "\n";
+	if (!is_object($result)) { // A query returning no result set can succeed, e.g. a multi-statement query in PostgreSQL.
+		echo "<p class='error'>" . (error() ?: lang('Unknown error.')) . "\n";
 	} else {
 		if (DIALECT == "mssql" && $page) {
 			$result->seek($limit * $page);
@@ -599,7 +609,7 @@ if (!$columns && support("table")) {
 					}
 				}
 
-				$pagination = ($limit !== null && ($found_rows === false || $found_rows > $limit || $page));
+				$pagination = ($limit && ($found_rows === false || $found_rows > $limit || $page));
 				if ($pagination) {
 					if (($found_rows === false ? count($rows) + 1 : $found_rows - $page * $limit) > $limit) {
 						echo '<p class="links">',

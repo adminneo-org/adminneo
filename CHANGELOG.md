@@ -1,8 +1,8 @@
 Changelog
 =========
 
-AdminNeo 5.8.1
---------------
+AdminNeo 5.9
+------------
 
 ### Changes
 
@@ -14,23 +14,49 @@ AdminNeo 5.8.1
 - Export: Disable structure and data options for formats that do not support them
 - Export: Compress gzip output into a single stream instead of concatenated chunks
 - Navigation: Move the focus between the tables filter and the tables list by arrow keys
+- Alter view, routine and type: Use a transaction instead of a temporary object in PostgreSQL, SQLite, MS SQL (by @vrana)
+- Compiler: Compress translations with the English translation as a dictionary to reduce size (by @vrana)
+- MySQL: Show warnings count of each query in SQL command
+- PostgreSQL: Support range types (by @vrana)
+- PostgreSQL: Show composite, domain and range types next to enums (by @vrana)
+- PostgreSQL: Alter and rename user defined types (by @vrana)
+- PostgreSQL: Add values to an enum type without re-creating it (by @vrana)
+- PostgreSQL: Export all user defined types (by @vrana)
+- Elasticsearch: The driver is no longer beta, it works with Elasticsearch 7, 8 and 9 (by @vrana)
 
 ### Bugfixes
 
+- Select: Disallow modifying data by the SQL operator (CSRF) (by @vrana)
 - Select: Align titles of numeric columns to the right
+- Select: Fix error with an empty limit (regression from 5.3.0)
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
+- SQL command: Show error of a later query in a batch
+- SQL command: Rollback an unfinished transaction so that it doesn't break the following queries (by @vrana)
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)
 - Alter table: Fix toggling of column comments (regression from 5.8.0)
+- Alter routine: Fix altering a routine with a name longer than 42 characters (by @vrana)
 - MySQL: Fix lost charset introducers and parameters starting with "_" in routine definitions (issue #197)
 - MySQL: Fix exhausted memory in export of big tables (issue #211, regression from 5.1.0)
+- MySQL: Fix displaying multiple results of SQL command with the PDO extension
+- MySQL: Fix length of routine parameters with unsigned or zerofill, support MySQL < 8 again (by @vrana, regression from 5.5.0)
 - PostgreSQL, MS SQL: Fix foreign key statements printed into non-SQL export formats
 - PostgreSQL: Fix missing check constraints in export of all schemas
 - PostgreSQL: Do not mark identity columns as Auto increment
+- PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
+- PostgreSQL: Fix exporting enum values containing an apostrophe
+- PostgreSQL: Fix editing and deleting all rows sharing the value of a partial index (regression from 5.5.0)
+- Elasticsearch: Fix searching data in all tables (regression from 5.1.0)
+- Elasticsearch: Fix searching text in all columns of an index with long, short or byte fields
+- Elasticsearch: Fix searching in all columns with the must operators
+- Elasticsearch: Search values with accented letters also in keyword fields
 - MS SQL: Fix reading and editing of varchar(max) and similar columns
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
+- MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
+
+(Ported relevant changes from Adminer 6.0.0 • part 4)
 
 AdminNeo 5.8.0 (2026-09-15)
 ---------------------------

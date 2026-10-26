@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'Поддръжката на сесии трябва да е разрешена.',
 	'Session expired, please login again.' => 'Сесията е изтекла; моля, влезте отново.',
 	'%s version: %s through PHP extension %s' => '%s версия: %s през PHP разширение %s',
+	'%s requires at least %s.' => '%s изисква поне %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Език',
@@ -66,9 +67,9 @@ return [
 	// Privileges
 	'Privileges' => 'Права',
 	'Create user' => 'Създаване на потребител',
-	'User has been dropped.' => 'Потребителя беше премахнат.',
-	'User has been altered.' => 'Потребителя беше променен.',
-	'User has been created.' => 'Потребителя беше създаден.',
+	'User has been dropped.' => 'Потребителят беше премахнат.',
+	'User has been altered.' => 'Потребителят беше променен.',
+	'User has been created.' => 'Потребителят беше създаден.',
 	'Hashed' => 'Хеширан',
 
 	// Server
@@ -237,9 +238,9 @@ return [
 	// Views
 	'View' => 'Изглед',
 	'Materialized view' => 'Запаметен изглед',
-	'View has been dropped.' => 'Изгледа беше премахнат.',
-	'View has been altered.' => 'Изгледа беше променен.',
-	'View has been created.' => 'Изгледа беше създаден.',
+	'View has been dropped.' => 'Изгледът беше премахнат.',
+	'View has been altered.' => 'Изгледът беше променен.',
+	'View has been created.' => 'Изгледът беше създаден.',
 	'Alter view' => 'Промяна на изглед',
 	'Create view' => 'Създаване на изглед',
 
@@ -323,15 +324,16 @@ return [
 	// User-defined types (PostgreSQL)
 	'User types' => 'Потребителски типове',
 	'Create type' => 'Създаване на вид',
-	'Type has been dropped.' => 'Вида беше пермахнат.',
-	'Type has been created.' => 'Вида беше създаден.',
+	'Type has been dropped.' => 'Видът беше премахнат.',
+	'Type has been created.' => 'Видът беше създаден.',
+	'Type has been altered.' => 'Видът беше променен.', // by Claude Opus 5
 	'Alter type' => 'Промяна на вид',
 
 	// Triggers
 	'Triggers' => 'Тригери',
-	'Trigger has been dropped.' => 'Тригера беше премахнат.',
-	'Trigger has been altered.' => 'Тригера беше променен.',
-	'Trigger has been created.' => 'Тригера беше създаден.',
+	'Trigger has been dropped.' => 'Тригерът беше премахнат.',
+	'Trigger has been altered.' => 'Тригерът беше променен.',
+	'Trigger has been created.' => 'Тригерът беше създаден.',
 	'Alter trigger' => 'Промяна на тригер',
 	'Create trigger' => 'Създаване на тригер',
 
@@ -395,8 +397,8 @@ return [
 	'Clone' => 'Клониране',
 	'Delete' => 'Изтриване',
 	'Item%s has been inserted.' => 'Елементи%s бяха вмъкнати.', // %s can contain auto-increment value, e.g. ' 123'
-	'Item has been deleted.' => 'Елемента беше изтрит.',
-	'Item has been updated.' => 'Елемента беше обновен.',
+	'Item has been deleted.' => 'Елементът беше изтрит.',
+	'Item has been updated.' => 'Елементът беше обновен.',
 	'%d item(s) have been affected.' => [
 		'%d елемент беше засегнат.',
 		'%d елемента бяха засегнати.',
@@ -411,6 +413,7 @@ return [
 	'Lists' => 'Списъци',
 	'Network' => 'Мрежа',
 	'Geometry' => 'Геометрия',
+	'Ranges' => 'Диапазони', // by Claude Fable 5.1
 	'Relations' => 'Зависимости',
 
 	// Editor - data values

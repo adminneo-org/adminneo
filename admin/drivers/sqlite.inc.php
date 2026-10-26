@@ -938,10 +938,6 @@ if (isset($_GET["sqlite"])) {
 		];
 	}
 
-	function begin() {
-		return queries("BEGIN");
-	}
-
 	function last_id($result)
 	{
 		return Connection::get()->getValue("SELECT LAST_INSERT_ROWID()");
@@ -1023,6 +1019,6 @@ if (isset($_GET["sqlite"])) {
 
 	function support(string $feature): bool
 	{
-		return preg_match('~^(check|columns|database|drop_col|dump|indexes|descidx|move_col|sql|status|table|trigger|variables|view|view_trigger)$~', $feature);
+		return preg_match('~^(check|columns|database|drop_col|dump|indexes|descidx|move_col|sql|status|table|transaction_ddl|trigger|variables|view|view_trigger)$~', $feature);
 	}
 }

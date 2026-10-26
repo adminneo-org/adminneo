@@ -46,6 +46,14 @@ php bin/update-translations.php [language]   # e.g. php bin/update-translations.
 **Tests:**
 Katalon Automation Recorder (browser-based) test suites are in `tests/katalon/`. Run via Katalon browser extension against a live server.
 
+Only the base suites (`tests/katalon/<driver>.krecorder`) are committed. The `-pdo` and `-dblib` variants and everything in `tests/katalon/compiled/` are gitignored and generated from them — edit the base suite and regenerate:
+```sh
+php tests/bin/generate.php
+```
+The generator rewrites the entry point URLs (`?ext=pdo`, `admin-compiled.php`) and the expected extension names, so keep the URLs in a base suite in the form `/adminneo/tests/admin-devel.php?...`. Upstream Adminer's `tests/<driver>.html` maps to `tests/katalon/<driver>.krecorder`.
+
+The Katalon extension can't be driven by an agent. Verify the steps of a changed suite by replaying them with `curl` against the `*-agent.php` entry points (see [Running test instance](#running-test-instance)).
+
 Unit tests in `tests/unit/` are standalone scripts:
 ```sh
 for t in tests/unit/*.php; do php $t; done
@@ -158,6 +166,8 @@ In JavaScript doc comments, an optional parameter — one with a default value i
 
 ### Commits
 
+Never commit on your own initiative. Present the changes and commit only when asked. The exception is a simple Adminer port, see [Porting changes from Adminer](#porting-changes-from-adminer).
+
 Commit one logical change at a time. Split an unrelated bug found along the way into its own commit.
 
 Format:
@@ -174,6 +184,7 @@ Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 - Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
 - Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible. Reference an AdminNeo issue at the end of the line as `(issue #<issue_id>)`, whether the commit closes it or only relates to it.
+- For a fixed regression, end the changelog line with `(regression from <version>)`, the first release containing the commit that introduced the bug: `git tag --contains <commit> | sort -V | head -1`.
 
 Example:
 
@@ -204,14 +215,17 @@ git fetch vrana main --no-tags
   - Map each changed Adminer file to its AdminNeo equivalent; paths aren't always 1:1 (`adminer/` → `admin/`, and a database's code can move between a `plugins/drivers/*.php` optional plugin upstream and a built-in `admin/drivers/*.inc.php` driver here, or vice versa). Skip files for databases AdminNeo doesn't support.
   - If the target code isn't where expected, grep for the specific functions/symbols the commit touches (not just the file) before concluding it is inapplicable — sometimes it moved, sometimes it's genuinely gone (e.g. a legacy PHP extension AdminNeo dropped, like old `ext/mysql` support). "Nothing to port" is a valid, complete outcome once you've confirmed the code isn't there under any name.
   - Grep for the changed function/pattern across `admin/`, `editor/`, and `plugins/` — AdminNeo may have more or fewer call sites than upstream for the same code.
-  - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; use `// TODO` instead of `\\!` comment; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
+  - Match AdminNeo's current APIs and idioms rather than copying the old code verbatim (e.g. `$connection->isMinVersion()`, not the deprecated `min_version()`; use `??` instead of `idx()` helper; use `// TODO` instead of `\\!` comment; use `(bool)` cast instead of `!!`; always use short array syntax). If AdminNeo's version already diverged from upstream at the touched spot, preserve that divergence while applying the fix rather than reverting to upstream's simpler version.
   - Rename snake_case to camelCase when the ported code lands in a class.
   - Ignore changes of upstream's git submodules.
   - Use `// by AI model name` mark in translations instead of `// AI model name`.
+  - Replace "Adminer" with "AdminNeo" in ported comments and output, e.g. `ROLLBACK -- AdminNeo`.
+  - No driver is active without its URL parameter, so `DRIVER` and `SERVER` are null on the login page. Unlike Adminer, MySQL is not a default driver — keep it in mind when an upstream commit relies on the default.
 - Update `CHANGELOG.md` only if the original Adminer commit itself added a line there:
   - When porting a line: keep the original wording but bug/issue references.
-  - Add "(by @author)" where `@author` is the GitHub user who wrote the commit. But only if adaptation is simple and straight forward.
-  - Adapt release version in "regression from X" note to AdminNeo's releases.
+  - Replace upstream-specific figures with a general wording, e.g. "it saves 21 kB" with "to reduce size" — AdminNeo's numbers differ.
+  - Add "(by @author)" where `@author` is the GitHub user who wrote the commit. Add it if the adaptation is simple and straight forward, and also for a more complex adaptation as long as the upstream author still wrote the key part of the code. Leave it out only if the AdminNeo implementation is substantially your own.
+  - Adapt release version in "regression from X" note to AdminNeo's releases, found the same way as in [Commits](#commits).
   - Place it under `### Changes` or `### Bugfixes` to match its nature.
 - If changes adaptation for AdminNeo is simple and straight forward, then:
   - Commit with the original author and author-date preserved (committer/date stay as yours), e.g.:
@@ -259,10 +273,14 @@ Always use the `*-agent.php` variants. The counterparts without the suffix (`tes
 
 Cookies set by the application (`neo_settings`, `neo_sid`, …) are `HttpOnly`, so they are not visible in `document.cookie`. Check them in the `Set-Cookie` response header (`curl -si …`). Their path is the entry point script, so every `*-agent.php` file keeps its own settings.
 
+If OPcache is enabled for the built-in server, it revalidates the cached files only every few seconds. After changing files outside an editor, e.g. by `git stash` or `git stash pop`, wait about 3 seconds before the next request, otherwise it still runs the old code.
+
 #### Verifying changes
 
 Use `curl` for what is in the server-rendered HTML — it is scriptable, so one loop covers all drivers. Log in first, the form needs a token.
-Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server.
+Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server. The EditorNeo entry points are the exception, see [EditorNeo](#editorneo).
+
+Check every fetched page for PHP errors (`Fatal error`, `Uncaught`, `Warning`), not only for the element you expect. An error printed later in the page is easy to miss.
 
 Use the browser when the change touches JavaScript or the visual result.
 
@@ -294,9 +312,20 @@ Server keys are static, so deep links can be hand-written once logged in — but
 ```
 http://127.0.0.1:8000/tests/admin-devel-agent.php?mysql=mariadb12&username=test&db=adminneo_test&select=albums
 http://127.0.0.1:8000/tests/admin-devel-agent.php?pgsql=pgsql18&username=test&db=adminneo_test&ns=public&sql=SELECT+version()
+http://127.0.0.1:8000/tests/admin-devel-agent.php?mssql=mssql18&username=test&db=adminneo_test&ns=dbo&sql=
 ```
 
+MS SQL links need `ns=dbo`, like PostgreSQL's `ns=public`. Without it, the request is redirected and a POST loses its data, so curl silently returns an empty page.
+
 Log in per server first; the session is per server key. A `db=` in the URL of the login request itself is dropped by the redirect, so open the deep link after logging in.
+
+#### EditorNeo
+
+The EditorNeo entry points have no configured servers. They connect to MariaDB at the default host with the credentials from `getCredentials()`. Their login form posts `auth[driver]=mysql` with an empty `auth[server]`, so send these hidden fields as they are. Deep links carry an empty `username=`:
+
+```
+http://127.0.0.1:8000/tests/editor-devel-agent.php?mysql=&username=&db=adminneo_test&select=albums
+```
 
 #### SQLite
 

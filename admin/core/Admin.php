@@ -680,7 +680,8 @@ class Admin extends Origin
 	public function printSelectionLimit(int $limit): void
 	{
 		echo "<fieldset><legend>" . lang('Limit') . "</legend><div class='fieldset-content'>";
-		echo "<input type='number' name='limit' class='input size' value='$limit'>";
+		// 0 is printed as an empty value, both mean no limit.
+		echo "<input type='number' name='limit' class='input size' value='" . h($limit ?: "") . "'>";
 		echo script("qsl('input').oninput = selectFieldChange;", "");
 		echo "</div></fieldset>\n";
 	}
@@ -775,6 +776,10 @@ class Admin extends Origin
 			$val = $where["val"];
 
 			if ("$col$val" != "" && in_array($op, $this->getOperators())) {
+				if ($op == "SQL" && (!$_POST || !verify_token())) {
+					Connection::get()->setUntrusted(true); // The condition can be sent by GET which is not protected by the CSRF token.
+				}
+
 				$conditions = [];
 
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
@@ -802,12 +807,14 @@ class Admin extends Origin
 						// find anywhere
 						isset($field["privileges"]["where"])
 						&& (preg_match('~^[-\d.' . (preg_match('~IN$~', $op) ? ',' : '') . ']+$~', $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
-						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set~', $field["type"]))
+						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
 						// Elasticsearch needs boolean value properly formatted.
 						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
 						// Elasticsearch can use regexp only on text and keyword fields.
 						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"]))
+						// Elasticsearch has integer types not covered by number_type().
+						&& (!preg_match('~^elastic~', DRIVER) || !preg_match('~^((unsigned_)?long|short|byte)$~', $field["type"]) || preg_match('~^-?\d+$~', $val))
 					)) {
 						if ($oidColumn) {
 							$conditions[] = $prefix . idf_escape($name) . $cond;

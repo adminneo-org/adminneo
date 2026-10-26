@@ -25,6 +25,9 @@ if (isset($_GET["mssql"])) {
 			/** @var resource|false */
 			protected $multiResult;
 
+			/** @var bool */
+			private $transaction = false;
+
 			public function getDefaultServerName(): string
 			{
 				return "localhost:1433";
@@ -134,7 +137,53 @@ if (isset($_GET["mssql"])) {
 
 			public function nextResult(): bool
 			{
-				return $this->multiResult && sqlsrv_next_result($this->multiResult);
+				if (!$this->multiResult) {
+					return false;
+				}
+
+				// Returns false on error and null after the last result.
+				$next = sqlsrv_next_result($this->multiResult);
+				if ($next === false) {
+					$this->resolveError();
+				}
+
+				return $next !== null;
+			}
+
+			public function begin(): bool
+			{
+				// BEGIN TRANSACTION sent as a separate query is rolled back at the end of its batch under MARS enabled by default.
+				$this->transaction = sqlsrv_begin_transaction($this->connection);
+				if (!$this->transaction) {
+					$this->resolveError();
+				}
+
+				return $this->transaction;
+			}
+
+			public function commit(): bool
+			{
+				// The API refuses to commit a transaction not started by it.
+				if ($this->transaction && !sqlsrv_commit($this->connection)) {
+					$this->resolveError();
+					return false;
+				}
+
+				$this->transaction = false;
+
+				return true;
+			}
+
+			public function rollback(): bool
+			{
+				if ($this->transaction && !sqlsrv_rollback($this->connection)) {
+					$this->resolveError();
+					return false;
+				}
+
+				$this->transaction = false;
+
+				return true;
 			}
 		}
 
@@ -300,6 +349,23 @@ if (isset($_GET["mssql"])) {
 
 					return $result;
 				}
+
+				public function begin(): bool
+				{
+					// PDO_DBLIB crashes in commit() and rollBack() if an error ended the transaction on the server, e.g. a failed SET IDENTITY_INSERT.
+					// It doesn't use MARS, so BEGIN TRANSACTION sent as a separate query is kept.
+					return (bool)$this->query("BEGIN TRANSACTION");
+				}
+
+				public function commit(): bool
+				{
+					return (bool)$this->query("COMMIT");
+				}
+
+				public function rollback(): bool
+				{
+					return (bool)$this->query("IF @@TRANCOUNT > 0 ROLLBACK");
+				}
 			}
 		}
 
@@ -424,9 +490,11 @@ if (isset($_GET["mssql"])) {
 			return "0x" . bin2hex($string);
 		}
 
-		public function begin()
-        {
-			return queries("BEGIN TRANSACTION");
+		public function begin(): bool
+		{
+			remember_query("BEGIN TRANSACTION");
+
+			return $this->connection->begin();
 		}
 
 		public function tableHelp(string $name, bool $isView = false): ?string
@@ -985,6 +1053,6 @@ WHERE sys1.xtype = 'TR' AND sys2.name = " . q($table)
 
 	function support(string $feature): bool
 	{
-		return preg_match('~^(check|comment|columns|database|drop_col|dump|fast_status|indexes|descidx|scheme|sql|table|trigger|view|view_trigger)$~', $feature); // TODO routine|
+		return preg_match('~^(check|comment|columns|database|drop_col|dump|fast_status|indexes|descidx|scheme|sql|table|transaction_ddl|trigger|view|view_trigger)$~', $feature); // TODO routine|
 	}
 }

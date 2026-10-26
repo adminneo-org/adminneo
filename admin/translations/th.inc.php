@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'ต้องเปิดใช้งาน Session.',
 	'Session expired, please login again.' => 'Session หมดอายุแล้ว กรุณาเข้าสู่ระบบใหม่อีกครั้ง.',
 	'%s version: %s through PHP extension %s' => '%s รุ่น: %s ผ่านส่วนขยาย PHP %s',
+	'%s requires at least %s.' => '%s ต้องการ %s เป็นอย่างน้อย.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'ภาษา',
@@ -307,6 +308,7 @@ return [
 	'Create type' => 'สร้างประเภทผู้ใช้งาน',
 	'Type has been dropped.' => 'ประเภทถูกลบแล้ว.',
 	'Type has been created.' => 'ประเภทถูกสร้างแล้ว.',
+	'Type has been altered.' => 'ประเภทถูกเปลี่ยนแปลงแล้ว.', // by Claude Opus 5.5
 	'Alter type' => 'แก้ไขประเภท',
 
 	// Triggers
@@ -384,6 +386,7 @@ return [
 	'Lists' => 'รายการ',
 	'Network' => 'เครือข่าย', // by Claude Fable 5.1
 	'Geometry' => 'เรขาคณิต',
+	'Ranges' => 'ช่วง', // by Claude Fable 5.1
 	'Relations' => 'ความสัมพันธ์', // by Claude Fable 5.1
 
 	// Editor - data values
