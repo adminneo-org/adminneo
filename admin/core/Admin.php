@@ -950,10 +950,6 @@ class Admin extends Origin
 			return $value; // TODO SQL injection
 		}
 
-		if (isset($field["full_type"])) {
-			$this->admin->detectJson($field["full_type"], $value, false);
-		}
-
 		$name = $field["field"];
 		$return = q($value);
 		if (preg_match('~^(now|getdate|uuid)$~', $function)) {

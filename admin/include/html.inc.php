@@ -576,6 +576,11 @@ function process_input($field) {
 		return $value;
 	}
 
+	// Compact formatted JSON values. Values in search conditions are kept as they are.
+	if ($function != "SQL" && isset($field["full_type"])) {
+		Admin::get()->detectJson($field["full_type"], $value, false);
+	}
+
 	return Admin::get()->processFieldInput($field, $value, $function);
 }
 

@@ -189,6 +189,9 @@ if ($_POST) {
 				$set = [];
 				foreach ($row as $key => $val) {
 					$key = bracket_escape($key, true);
+					if (isset($fields[$key]["full_type"])) {
+						Admin::get()->detectJson($fields[$key]["full_type"], $val, false);
+					}
 					$set[idf_escape($key)] = (preg_match('~char|text~', $fields[$key]["type"]) || $val != "" ? Admin::get()->processFieldInput($fields[$key], $val) : "NULL");
 				}
 				$success = (bool)Driver::get()->update(
