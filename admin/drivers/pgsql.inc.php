@@ -543,6 +543,11 @@ if (isset($_GET["pgsql"])) {
 
 		public function convertSearch(string $idf, array $where, array $field): string
 		{
+			// Compare arrays as arrays only with an array literal, e.g. {1,5}. Other values would cause an error, search them in the text.
+			if (preg_match('~\[~', $field["full_type"])) {
+				return ($this->isArrayComparison($where) ? $idf : "CAST($idf AS text)");
+			}
+
 			// Compare ranges as ranges only with a range literal, so that [1,2] finds [1,3). Other values would cause an error
 			// on searching in all columns, search them in the text.
 			if (preg_match('~range$~', $field["type"])) {
@@ -568,6 +573,24 @@ if (isset($_GET["pgsql"])) {
 				return true;
 			}
 
+			if (preg_match('~\[~', $field["full_type"])) {
+				if (!$this->isArrayComparison($where)) {
+					return true;
+				}
+
+				// Check the elements of the array literal, multidimensional arrays and quoted elements are not supported.
+				if (!preg_match('~^\s*\{([^{}"]*)\}\s*$~', $where["val"], $match)) {
+					return false;
+				}
+				foreach (($match[1] != "" ? explode(",", $match[1]) : []) as $element) {
+					if (!preg_match('~^\s*null\s*$~i', $element) && !$this->isValidValue($field["type"], trim($element))) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+
 			$values = [$where["val"]];
 			if (preg_match('~IN$~', $where["op"])) {
 				// The list as it is searched, e.g. (1,0) or ('t','f').
@@ -587,10 +610,25 @@ if (isset($_GET["pgsql"])) {
 		}
 
 		/**
+		 * Checks whether the array column is compared with an array literal, e.g. {1,5}, not with its text.
+		 */
+		private function isArrayComparison(array $where): bool
+		{
+			return preg_match('~^([<>]=?|!?=)$~', $where["op"]) && preg_match('~^\s*\{.*\}\s*$~s', $where["val"]);
+		}
+
+		/**
 		 * Checks whether the value is accepted by the column type, so that comparing them does not fail.
 		 */
 		private function isValidValue(string $type, string $value): bool
 		{
+			if (preg_match('~^' . int_type() . '$~', $type)) {
+				return (bool) preg_match('~^\s*[-+]?\d+\s*$~', $value);
+			}
+			if (preg_match(number_type(), $type)) {
+				return is_numeric(trim($value));
+			}
+
 			switch ($type) {
 				case "boolean":
 					// Including unique prefixes, e.g. t, yes, off.

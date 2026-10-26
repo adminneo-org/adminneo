@@ -792,6 +792,8 @@ class Admin extends Origin
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
+					// Arrays are not numbers even if their elements are, e.g. integer[].
+					$isNumber = preg_match('~' . number_type() . '|bit~', $field["type"]) && !preg_match('~\[~', $field["full_type"]);
 
 					$oidColumn = DIALECT == "pgsql" && $op == "=" && $field["type"] == "oid";
 					if ($oidColumn) {
@@ -799,7 +801,7 @@ class Admin extends Origin
 					} elseif (preg_match('~IN$~', $op)) {
 						$in = process_length($val);
 						// Compare non-numeric columns with strings, e.g. text = integer is an error in PostgreSQL.
-						if (!preg_match('~' . number_type() . '|bit~', $field["type"]) && preg_match('~^\([-+\d,]+\)$~', $in)) {
+						if (!$isNumber && preg_match('~^\([-+\d,]+\)$~', $in)) {
 							$in = "(" . implode(",", array_map('AdminNeo\q', explode(",", substr($in, 1, -1)))) . ")";
 						}
 						$cond .= " " . ($in != "" ? $in : "(NULL)");
@@ -817,7 +819,7 @@ class Admin extends Origin
 					if ($col != "" || (
 						// find anywhere
 						isset($field["privileges"]["where"])
-						&& (preg_match(preg_match('~^' . int_type() . '$~', $field["type"]) ? $integerPattern : $numberPattern, $val) || !preg_match('~' . number_type() . '|bit~', $field["type"]))
+						&& (preg_match(preg_match('~^' . int_type() . '$~', $field["type"]) ? $integerPattern : $numberPattern, $val) || !$isNumber)
 						&& (!preg_match("~[\x80-\xFF]~", $val) || preg_match('~char|text|enum|set|keyword~', $field["type"])) // keyword - Elasticsearch
 						&& (!preg_match('~date|timestamp~', $field["type"]) || preg_match('~^\d+-\d+-\d+~', $val))
 						&& Driver::get()->isSearchable($where, $field)
