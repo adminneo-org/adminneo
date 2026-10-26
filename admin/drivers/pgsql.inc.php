@@ -598,6 +598,36 @@ if (isset($_GET["pgsql"])) {
 				case "uuid":
 					// Optionally in braces and with a hyphen after any group of four digits.
 					return (bool) preg_match('~^(\{[0-9a-f]{4}(-?[0-9a-f]{4}){7}\}|[0-9a-f]{4}(-?[0-9a-f]{4}){7})$~i', $value);
+				case "inet":
+				case "cidr":
+					// IPv4 or IPv6 address with an optional netmask. Abbreviated cidr like 10.1/16 is not supported.
+					if (!preg_match('~^([^/]+)(/(\d+))?$~', $value, $match) || !filter_var($match[1], FILTER_VALIDATE_IP)) {
+						return false;
+					}
+					$address = inet_pton($match[1]);
+					$length = strlen($address) * 8;
+					$mask = isset($match[3]) ? (int) $match[3] : $length;
+					if ($mask > $length) {
+						return false;
+					}
+
+					// Bits to the right of the netmask must not be set in cidr.
+					$bits = implode("", array_map(function ($byte) {
+						return str_pad(decbin(ord($byte)), 8, "0", STR_PAD_LEFT);
+					}, str_split($address)));
+
+					return $type != "cidr" || strpos(substr($bits, $mask), "1") === false;
+				case "macaddr":
+					// E.g. 08:00:2b:01:02:03, 08-00-2b-01-02-03, 08002b:010203, 0800.2b01.0203, 08002b010203.
+					return (bool) preg_match('~^\s*([0-9a-f]{1,2}(:[0-9a-f]{1,2}){5}|[0-9a-f]{1,2}(-[0-9a-f]{1,2}){5}|[0-9a-f]{6}[:-][0-9a-f]{6}|' .
+						'[0-9a-f]{4}([.-])[0-9a-f]{4}\4[0-9a-f]{4}|[0-9a-f]{12})\s*$~i', $value);
+				case "macaddr8":
+					// 6 or 8 bytes, optionally with the same separator after any byte, e.g. 08:00:2b:01:02:03:04:05 or 0800.2b01.0203.0405.
+					$separators = preg_replace('~[\s0-9a-f]~i', '', $value);
+
+					return preg_match('~^\s*[0-9a-f]{2}([:.-]?[0-9a-f]{2})+\s*$~i', $value)
+						&& strlen(count_chars($separators, 3)) <= 1
+						&& in_array(strlen(preg_replace('~[^0-9a-f]~i', '', $value)), [12, 16]);
 			}
 
 			return true;
