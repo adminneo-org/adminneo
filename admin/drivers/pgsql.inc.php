@@ -543,9 +543,18 @@ if (isset($_GET["pgsql"])) {
 
 		public function convertSearch(string $idf, array $where, array $field): string
 		{
+			// Compare ranges as ranges only with a range literal, so that [1,2] finds [1,3). Other values would cause an error
+			// on searching in all columns, search them in the text.
+			if (preg_match('~range$~', $field["type"])) {
+				return (preg_match('~^([<>]=?|!?=)$~', $where["op"]) && preg_match('~^\s*(empty|[[(].*,.*[])])\s*$~i', $where["val"])
+					? $idf
+					: "CAST($idf AS text)"
+				);
+			}
+
 			$textTypes = "char|text";
 			if (strpos($where["op"], "LIKE") === false) {
-				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|range|" . number_type();
+				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|" . number_type();
 			}
 
 			return (preg_match("~$textTypes~", $field["type"]) ? $idf : "CAST($idf AS text)");
