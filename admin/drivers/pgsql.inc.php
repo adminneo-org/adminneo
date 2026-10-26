@@ -552,8 +552,9 @@ if (isset($_GET["pgsql"])) {
 				);
 			}
 
+			// LIKE and regexp operators (~, ~*, !~, !~*) work only with text.
 			$textTypes = "char|text";
-			if (strpos($where["op"], "LIKE") === false) {
+			if (strpos($where["op"], "LIKE") === false && strpos($where["op"], "~") === false) {
 				$textTypes .= "|date|time(stamp)?|boolean|uuid|inet|cidr|macaddr|" . number_type();
 			}
 
