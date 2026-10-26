@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'செஷன் ஆதரவு இயக்கப்பட வேண்டும்.',
 	'Session expired, please login again.' => 'செஷன் காலாவதியாகி விட்டது. மீண்டும் நுழையவும்.',
 	'%s version: %s through PHP extension %s' => '%s பதிப்பு: %s through PHP extension %s',
+	'%s requires at least %s.' => '%s-க்கு குறைந்தது %s தேவை.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'மொழி',
@@ -412,6 +413,7 @@ return [
 	'Lists' => 'பட்டியல்',
 	'Network' => 'நெட்வொர்க்',
 	'Geometry' => 'வடிவவியல் (Geometry)',
+	'Ranges' => 'வரம்புகள் (Ranges)', // by Claude Fable 5.1
 	'Relations' => 'உறவுகள் (Relations)',
 
 	// Editor - data values

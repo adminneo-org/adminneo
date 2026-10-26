@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'Sokongan sesi perlu diaktifkan.',
 	'Session expired, please login again.' => 'Sesi telah luput, sila log masuk kembali.',
 	'%s version: %s through PHP extension %s' => 'Versi %s: %s melalui sambungan PHP %s',
+	'%s requires at least %s.' => '%s memerlukan sekurang-kurangnya %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Bahasa',
@@ -388,6 +389,7 @@ return [
 	'Lists' => 'Senarai',
 	'Network' => 'Rangkaian',
 	'Geometry' => 'Geometri',
+	'Ranges' => 'Julat', // by Claude Fable 5.1
 	'Relations' => 'Hubungan',
 
 	// Editor - data values

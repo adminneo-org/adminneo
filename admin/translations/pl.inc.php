@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Wymagana jest obsługa sesji w PHP.',
 	'Session expired, please login again.' => 'Sesja wygasła, zaloguj się ponownie.',
 	'%s version: %s through PHP extension %s' => 'Wersja %s: %s za pomocą %s',
+	'%s requires at least %s.' => '%s wymaga co najmniej %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Język',
@@ -421,6 +422,7 @@ return [
 	'Lists' => 'Listy',
 	'Network' => 'Sieć',
 	'Geometry' => 'Geometria',
+	'Ranges' => 'Zakresy', // by Claude Fable 5.1
 	'Relations' => 'Relacje',
 
 	// Editor - data values

@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => '必须启用会话支持。',
 	'Session expired, please login again.' => '会话已过期，请重新登录。',
 	'%s version: %s through PHP extension %s' => '%s 版本：%s， 使用PHP扩展 %s',
+	'%s requires at least %s.' => '%s 需要 %s 或更高版本。', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => '语言',
@@ -385,6 +386,7 @@ return [
 	'Lists' => '列表',
 	'Network' => '网络',
 	'Geometry' => '几何图形',
+	'Ranges' => '范围', // by Claude Fable 5.1
 	'Relations' => '关联信息',
 
 	// Editor - data values

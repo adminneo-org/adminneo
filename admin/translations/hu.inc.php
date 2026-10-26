@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'A munkameneteknek (session) engedélyezve kell lennie.',
 	'Session expired, please login again.' => 'Munkamenet lejárt, jelentkezz be újra.',
 	'%s version: %s through PHP extension %s' => '%s verzió: %s, PHP: %s',
+	'%s requires at least %s.' => 'A(z) %s legalább %s verziót igényel.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Nyelv',
@@ -385,6 +386,7 @@ return [
 	'Lists' => 'Lista',
 	'Network' => 'Hálózat',
 	'Geometry' => 'Geometria',
+	'Ranges' => 'Tartományok', // by Claude Fable 5.1
 	'Relations' => 'Reláció',
 
 	// Editor - data values

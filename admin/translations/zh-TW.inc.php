@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'Session 必須被啟用。',
 	'Session expired, please login again.' => 'Session 已過期，請重新登入。',
 	'%s version: %s through PHP extension %s' => '%s 版本：%s 透過 PHP 擴充模組 %s',
+	'%s requires at least %s.' => '%s 需要 %s 或更新版本。', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => '語言',
@@ -385,6 +386,7 @@ return [
 	'Lists' => '列表',
 	'Network' => '網路',
 	'Geometry' => '幾何',
+	'Ranges' => '範圍', // by Claude Fable 5.1
 	'Relations' => '關聯',
 
 	// Editor - data values

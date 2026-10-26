@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'پشتیبانی از نشست بایستی فعال گردد.',
 	'Session expired, please login again.' => 'نشست پایان یافته، لطفا دوباره وارد شوید.',
 	'%s version: %s through PHP extension %s' => 'نسخه %s : %s توسعه پی اچ پی %s',
+	'%s requires at least %s.' => '%s حداقل به %s نیاز دارد.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'زبان',
@@ -385,6 +386,7 @@ return [
 	'Lists' => 'لیستها',
 	'Network' => 'شبکه',
 	'Geometry' => 'هندسه',
+	'Ranges' => 'بازه‌ها', // by Claude Fable 5.1
 	'Relations' => 'رابطه ها',
 
 	// Editor - data values

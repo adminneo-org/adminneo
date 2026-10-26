@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'ჩართული უნდა იყოს სესია.',
 	'Session expired, please login again.' => 'სესიის მოქმედების დრო ამოიწურა, გაიარეთ ხელახალი ავტორიზაცია.',
 	'%s version: %s through PHP extension %s' => 'ვერსია %s: %s PHP-გაფართოება %s',
+	'%s requires at least %s.' => '%s-ს სჭირდება მინიმუმ %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'ენა',
@@ -385,6 +386,7 @@ return [
 	'Lists' => 'სია',
 	'Network' => 'ქსელი',
 	'Geometry' => 'გეომეტრია',
+	'Ranges' => 'დიაპაზონები', // by Claude Fable 5.1
 	'Relations' => 'ურთიერთობა',
 
 	// Editor - data values

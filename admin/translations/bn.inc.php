@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'সেশন সমর্থন সক্রিয় করা আবশ্যক।',
 	'Session expired, please login again.' => 'সেশনের মেয়াদ শেষ হয়েছে, আবার লগইন করুন।',
 	'%s version: %s through PHP extension %s' => 'ভার্সন %s: %s, %s PHP এক্সটেনশনের মধ্য দিয়ে',
+	'%s requires at least %s.' => '%s-এর জন্য কমপক্ষে %s প্রয়োজন।', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'ভাষা',
@@ -394,6 +395,7 @@ return [
 	'Lists' => 'তালিকা',
 	'Network' => 'নেটওয়ার্ক',
 	'Geometry' => 'জ্যামিতি',
+	'Ranges' => 'রেঞ্জ', // by Claude Fable 5.1
 	'Relations' => 'সম্পর্ক',
 
 	// Editor - data values

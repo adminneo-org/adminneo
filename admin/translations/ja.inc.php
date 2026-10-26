@@ -49,6 +49,7 @@ return [
 	'Session support must be enabled.' => 'セッションを有効にしてください。',
 	'Session expired, please login again.' => 'セッションの期限切れ。ログインし直してください。',
 	'%s version: %s through PHP extension %s' => '%sバージョン：%s、 PHP拡張機能 %s',
+	'%s requires at least %s.' => '%s には %s 以上が必要です。', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => '言語',
@@ -385,6 +386,7 @@ return [
 	'Lists' => 'リスト',
 	'Network' => 'ネットワーク型',
 	'Geometry' => 'ジオメトリ型',
+	'Ranges' => '範囲型', // by Claude Fable 5.1
 	'Relations' => '関係',
 
 	// Editor - data values

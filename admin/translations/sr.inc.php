@@ -53,6 +53,7 @@ return [
 	'Session support must be enabled.' => 'Морате омогућити подршку за сесије.',
 	'Session expired, please login again.' => 'Ваша сесија је истекла, пријавите се поново.',
 	'%s version: %s through PHP extension %s' => '%s верзија: %s помоћу PHP додатка је %s',
+	'%s requires at least %s.' => '%s захтева најмање %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Језик',
@@ -421,6 +422,7 @@ return [
 	'Lists' => 'Листе',
 	'Network' => 'Мрежа',
 	'Geometry' => 'Геометрија',
+	'Ranges' => 'Опсези', // by Claude Fable 5.1
 	'Relations' => 'Односи',
 
 	// Editor - data values

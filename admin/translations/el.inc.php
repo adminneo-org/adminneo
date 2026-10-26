@@ -52,6 +52,7 @@ return [
 	'Session support must be enabled.' => 'Πρέπει να είναι ενεργοποιημένη η υποστήριξη συνεδριών.',
 	'Session expired, please login again.' => 'Η συνεδρία έληξε, παρακαλώ συνδεθείτε ξανά.',
 	'%s version: %s through PHP extension %s' => '%s έκδοση: %s μέσω επέκτασης PHP %s',
+	'%s requires at least %s.' => 'Το %s απαιτεί τουλάχιστον %s.', // e.g. 'AdminNeo requires at least Elasticsearch 7.' // by Claude Fable 5.1
 
 	// Settings
 	'Language' => 'Γλώσσα',
@@ -412,6 +413,7 @@ return [
 	'Lists' => 'Λίστες',
 	'Network' => 'Δίκτυο',
 	'Geometry' => 'Γεωμετρία',
+	'Ranges' => 'Εύρη', // by Claude Fable 5.1
 	'Relations' => 'Συσχετήσεις',
 
 	// Editor - data values
