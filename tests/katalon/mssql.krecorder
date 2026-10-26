@@ -148,7 +148,7 @@
 <tr><td>open</td><td>/adminneo/tests/admin-devel.php?mssql=&username=test&db=adminneo_test&ns=dbo&create=invalid</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>No tables.</td><td></td></tr>
 <tr><td>open</td><td>/adminneo/tests/admin-devel.php?mssql=&username=test&db=adminneo_test&ns=dbo&select=invalid</td><td></td></tr>
-<tr><td>verifyTextPresent</td><td>Unable to select the table:</td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>Unable to select the table.</td><td></td></tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>

@@ -344,7 +344,7 @@
 <tr><td>click</td><td>//input[@name='grants[0][CREATE ROUTINE]']</td><td></td></tr>
 <tr><td>clickAndWait</td><td>//input[@value='Save']</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>User has been created.</td><td></td></tr>
-<tr><td>clickAndWait</td><td>//div[@id='content']/form/div/table/tbody/tr[td[1]='adminneo_test']/td[3]/a</td><td></td></tr>
+<tr><td>clickAndWait</td><td>//div[@id='main-content']/form/div/table/tbody/tr[td[1]='adminneo_test']/td[3]/a</td><td></td></tr>
 <tr><td>chooseOkOnNextConfirmation</td><td>Drop adminneo_test@localhost?</td><td></td></tr>
 <tr><td>click</td><td>drop</td><td></td></tr>
 <tr><td>verifyTextPresent</td><td>User has been dropped.</td><td></td></tr>
@@ -475,6 +475,8 @@
 <tbody>
 <tr><td>open</td><td>/adminneo/tests/admin-devel.php?mysql=&username=test&db=adminneo_test&select=albums</td><td></td></tr>
 <tr><td>click</td><td>link=Search</td><td></td></tr>
+<tr><td>select</td><td>name=where[0][col]</td><td>label=id</td></tr>
+<tr><td>select</td><td>name=where[0][op]</td><td>label=&gt;</td></tr>
 <tr><td>type</td><td>name=where[0][val]</td><td>1.2.3</td></tr>
 <tr><td>submit</td><td>id=form</td><td></td></tr>
 <tr><td>click</td><td>link=Warnings</td><td></td></tr>
