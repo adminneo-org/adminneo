@@ -798,6 +798,10 @@ class Admin extends Origin
 						$cond .= " " . $this->admin->processFieldInput($field, $val) . "::regproc";
 					} elseif (preg_match('~IN$~', $op)) {
 						$in = process_length($val);
+						// Compare non-numeric columns with strings, e.g. text = integer is an error in PostgreSQL.
+						if (!preg_match('~' . number_type() . '|bit~', $field["type"]) && preg_match('~^\([-+\d,]+\)$~', $in)) {
+							$in = "(" . implode(",", array_map('AdminNeo\q', explode(",", substr($in, 1, -1)))) . ")";
+						}
 						$cond .= " " . ($in != "" ? $in : "(NULL)");
 					} elseif ($op == "SQL") {
 						$cond = " $val"; // SQL injection
