@@ -34,6 +34,7 @@ AdminNeo 5.9
 - Select: Do not search in date and timestamp columns for invalid dates or dates followed by other text
 - Export: Fix gzip compression for formats added by plugins
 - Edit: Fix JavaScript error for blob fields with file upload
+- Edit: Do not save invalid JSON values as null with enabled jsonValuesAutoFormat
 - SQL command: Show error of a later query in a batch
 - SQL command: Rollback an unfinished transaction so that it doesn't break the following queries (by @vrana)
 - Fix parse error of the compiled file in PHP 5 (regression from 5.6.0)

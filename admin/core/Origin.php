@@ -706,8 +706,9 @@ abstract class Origin extends Plugin
 		$flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ($pretty ? JSON_PRETTY_PRINT : 0);
 
 		if (preg_match('~^jsonb?$~', $fieldType)) {
-			if ($value != null && $pretty !== null && $this->config->isJsonValuesAutoFormat()) {
-				$value = json_encode(json_decode($value), $flags);
+			// Keep invalid JSON as it is, json_decode() returns null for it.
+			if ($value != null && $pretty !== null && $this->config->isJsonValuesAutoFormat() && ($json = json_decode($value)) !== null) {
+				$value = json_encode($json, $flags);
 			}
 
 			return true;
