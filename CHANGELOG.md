@@ -48,7 +48,7 @@ AdminNeo 5.9
 - PostgreSQL: Fix editing values of user defined enums containing an apostrophe or a backslash
 - PostgreSQL: Fix exporting enum values containing an apostrophe
 - PostgreSQL: Fix editing and deleting all rows sharing the value of a partial index (regression from 5.5.0)
-- PostgreSQL: Fix error on searching in all columns of a table with range, uuid, boolean, inet, cidr and macaddr columns
+- PostgreSQL: Fix error on searching in all columns of a table with range, uuid, boolean, inet, cidr, macaddr and time columns
 - PostgreSQL: Fix searching by regular expression in non-text columns
 - Elasticsearch: Fix searching data in all tables (regression from 5.1.0)
 - Elasticsearch: Fix searching text in all columns of an index with long, short or byte fields

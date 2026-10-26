@@ -628,6 +628,12 @@ if (isset($_GET["pgsql"])) {
 					return preg_match('~^\s*[0-9a-f]{2}([:.-]?[0-9a-f]{2})+\s*$~i', $value)
 						&& strlen(count_chars($separators, 3)) <= 1
 						&& in_array(strlen(preg_replace('~[^0-9a-f]~i', '', $value)), [12, 16]);
+				case "time":
+				case "time without time zone":
+				case "time with time zone":
+					// E.g. 12:30, 12:30:45.5, 123045, 24:00, 1:30 PM, optionally with a numeric time zone. Zone names are not supported.
+					return (bool) preg_match('~^\s*(([01]?\d|2[0-3]):[0-5]\d(:[0-5]\d(\.\d+)?)?|([01]\d|2[0-3])[0-5]\d([0-5]\d(\.\d+)?)?|24:00(:00)?|' .
+						'(0?[1-9]|1[0-2]):[0-5]\d(:[0-5]\d(\.\d+)?)?\s*[ap]m)(\s*(z|utc|[+-](0?\d|1[0-5])(:?[0-5]\d)?))?\s*$~i', $value);
 			}
 
 			return true;
