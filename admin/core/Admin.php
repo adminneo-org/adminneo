@@ -795,8 +795,8 @@ class Admin extends Origin
 				foreach (($col != "" ? [$col => $fields[$col]] : $fields) as $name => $field) {
 					$prefix = "";
 					$cond = " $op";
-					// Arrays are not numbers even if their elements are, e.g. integer[].
-					$isNumber = preg_match('~' . number_type() . '|bit~', $field["type"]) && !preg_match('~\[~', $field["full_type"]);
+					// Arrays are not numbers even if their elements are, e.g. integer[]. PostgreSQL compares bit columns as text.
+					$isNumber = preg_match('~' . number_type() . (DIALECT == "pgsql" ? "" : '|bit') . '~', $field["type"]) && !preg_match('~\[~', $field["full_type"]);
 
 					$oidColumn = DIALECT == "pgsql" && $op == "=" && $field["type"] == "oid";
 					if ($oidColumn) {
