@@ -1,9 +1,28 @@
 <?php
 namespace AdminNeo;
 
-$settings = Admin::get()->getSettings();
+/**
+ * Returns the name of an SQLite command which could write a file.
+ *
+ * @param string $space Regular expression matching whitespace and comments.
+ * @return ?string Null if the query is allowed.
+ */
+function get_unsupported_query(string $query, string $space): ?string
+{
+	// PHP doesn't support setting SQLITE_LIMIT_ATTACHED, an error of preg_match() is also denied.
+	if (DIALECT != "sqlite" || preg_match("~^$space*+(ATTACH|VACUUM\\b.*\\bINTO)\\b~is", $query, $match) === 0) {
+		return null;
+	}
 
-if ($_POST["export"]) {
+	return preg_match('~ATTACH~i', $match[1] ?? "") ? 'ATTACH' : 'VACUUM INTO';
+}
+
+$settings = Admin::get()->getSettings();
+$line_comment = Driver::get()->lineComment();
+$space = "(?:\\s|\xEF\xBB\xBF|/\\*[\s\S]*?\\*/|(?:$line_comment)[^\n]*\n?|--\r?\n)"; // BOM - SQLite skips it
+
+// An unsupported query is reported by the SQL command page.
+if ($_POST["export"] && !get_unsupported_query($_POST["query"], $space)) {
 	$settings->updateParameters([
 		"exportFormat" => $_POST["format"],
 		"exportOutput" => $_POST["output"],
@@ -26,7 +45,6 @@ stop_session();
 
 $title = isset($_GET["import"]) ? lang('Import') : lang('SQL command');
 page_header($title, [$title]);
-$line_comment = Driver::get()->lineComment();
 
 if ($_POST) {
 	$fp = false;
@@ -62,7 +80,6 @@ if ($_POST) {
 			}
 		}
 
-		$space = "(?:\\s|\xEF\xBB\xBF|/\\*[\s\S]*?\\*/|(?:$line_comment)[^\n]*\n?|--\r?\n)"; // BOM - SQLite skips it
 		$delimiter = ";";
 		$delimiter_length = 1;
 		$offset = 0;
@@ -146,10 +163,9 @@ if ($_POST) {
 						$q = substr($query, 0, $pos + $delimiter_length);
 						$commands++;
 						$print = "<pre id='sql-$commands'><code class='jush-" . DIALECT . "'>" . Admin::get()->formatSqlCommandQuery(trim($q)) . "</code></pre>\n";
-						if (DIALECT == "sqlite" && preg_match("~^$space*+(ATTACH|VACUUM\\b.*\\bINTO)\\b~is", $q, $match) !== 0) {
-							// PHP doesn't support setting SQLITE_LIMIT_ATTACHED
+						if ($unsupported = get_unsupported_query($q, $space)) {
 							echo $print;
-							echo "<p class='error'>" . lang('%s queries are not supported.', preg_match('~ATTACH~i', $match[1]) ? 'ATTACH' : 'VACUUM INTO') . "\n";
+							echo "<p class='error'>" . lang('%s queries are not supported.', $unsupported) . "\n";
 							$errors[] = " <a href='#sql-$commands'>$commands</a>";
 							if ($_POST["error_stops"]) {
 								break;

@@ -66,6 +66,7 @@ AdminNeo 5.9
 - MS SQL: Read complete view definitions from the selected schema (by @kabachello)
 - MS SQL, Oracle: Fix transactions, e.g. a failed import or renaming a view
 - SQLite: Disallow ATTACH and VACUUM INTO prefixed by BOM (by @vrana, GHSA-ggh8-3chg-48w7)
+- SQLite: Disallow ATTACH and VACUUM INTO in export of SQL command (GHSA-66c7-5wxm-rfgj)
 - SQLite: Deny writing files by an authorizer (PHP 8.0+, PDO PHP 8.5+) (by @vrana)
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - MongoDB, SimpleDB: Show a message after creating a table (regression from 5.8.0)
