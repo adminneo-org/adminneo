@@ -159,6 +159,10 @@ if ($_POST) {
 							}
 						}
 
+					} elseif (DIALECT == "sqlite" && preg_match("~^(?:$space|;)*+\$~", substr($query, 0, $pos + $delimiter_length))) {
+						// SQLite doesn't create any statement from whitespace, comments and semicolons and reports it as an error.
+						$query = substr($query, $offset);
+						$offset = 0;
 					} else { // end of a query
 						$empty = false;
 						$q = substr($query, 0, $pos + $delimiter_length);

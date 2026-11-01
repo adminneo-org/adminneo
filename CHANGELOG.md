@@ -69,6 +69,7 @@ AdminNeo 5.9
 - SQLite: Disallow ATTACH and VACUUM INTO prefixed by a semicolon (GHSA-q5vv-mh5m-fxvm)
 - SQLite: Disallow ATTACH and VACUUM INTO in export of SQL command (GHSA-66c7-5wxm-rfgj)
 - SQLite: Deny writing files by an authorizer (PHP 8.0+, PDO PHP 8.5+) (by @vrana)
+- SQLite: Skip empty queries in SQL command instead of reporting an error
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - MongoDB, SimpleDB: Show a message after creating a table (regression from 5.8.0)
 - TableLoginPlugin: Restrict sending database credentials only to allowed server (GHSA-rgjx-wcgv-pw7g)
