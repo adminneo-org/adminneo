@@ -190,6 +190,7 @@ Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible. Reference an AdminNeo issue at the end of the line as `(issue #<issue_id>)`, whether the commit closes it or only relates to it.
 - Keep a changelog line short: name the area and the effect, not every case. Sum up a list of types as a category, e.g. "in non-text columns".
 - A fix that extends one already listed under the open version updates that line instead of adding a new one.
+- Keep the lines of one driver together, with security fixes first. Lines for shared code such as PDO follow the drivers.
 - For a fixed regression, end the changelog line with `(regression from <version>)`, the first release containing the commit that introduced the bug: `git tag --contains <commit> | sort -V | head -1`.
 
 Example:
