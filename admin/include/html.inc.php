@@ -418,7 +418,8 @@ function input($field, $value, $function, bool $autofocus = false): void {
 		$function = null;
 	}
 
-	$type_id = Driver::get()->getUserTypeId($field["type"]);
+	// Fields of a schemaless table created in edit.inc.php have no type.
+	$type_id = Driver::get()->getUserTypeId($field["type"] ?? "");
 	if ($type_id) {
 		$enums = type_values($type_id);
 		if ($enums) {
