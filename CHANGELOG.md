@@ -72,6 +72,7 @@ AdminNeo 5.9
 - SQLite: Skip empty queries in SQL command instead of reporting an error
 - SQLite: Fix reading of generated columns defined on one line or without GENERATED ALWAYS keywords
 - MongoDB, SimpleDB: Show a message after creating a table (regression from 5.8.0)
+- PDO: Fix fatal error on a database error without an error number (regression from 5.1.0)
 - TableLoginPlugin: Restrict sending database credentials only to allowed server (GHSA-rgjx-wcgv-pw7g)
 - GeminiSqlPlugin: Fix JavaScript syntax error in older browsers
 

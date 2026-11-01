@@ -90,7 +90,7 @@ if (extension_loaded('pdo')) {
 				return false;
 			}
 
-			list(, $this->errno, $this->error) = $errorInfo;
+			$this->storeErrorInfo($errorInfo);
 
 			return true;
 		}
@@ -124,13 +124,22 @@ if (extension_loaded('pdo')) {
 		private function storeError(bool $return): bool
 		{
 			if (!$return) {
-				list(, $this->errno, $this->error) = $this->pdo->errorInfo();
-				if (!$this->error) {
-					$this->error = lang('Unknown error.');
-				}
+				$this->storeErrorInfo($this->pdo->errorInfo());
 			}
 
 			return $return;
+		}
+
+		/**
+		 * Stores the error from errorInfo() of the connection or a statement.
+		 */
+		protected function storeErrorInfo(array $errorInfo): void
+		{
+			list(, $errno, $error) = $errorInfo;
+
+			// Both are null if the driver didn't report the error, e.g. for a query without any statement.
+			$this->errno = (int)$errno;
+			$this->error = $error ?: lang('Unknown error.');
 		}
 	}
 

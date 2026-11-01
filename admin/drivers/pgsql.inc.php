@@ -319,7 +319,7 @@ if (isset($_GET["pgsql"])) {
 			{
 				$this->error = "";
 				if (!$this->pdo->query("BEGIN READ ONLY")) {
-					list(, $this->errno, $this->error) = $this->pdo->errorInfo();
+					$this->storeErrorInfo($this->pdo->errorInfo());
 					return false;
 				}
 
@@ -330,10 +330,7 @@ if (isset($_GET["pgsql"])) {
 					$this->storeResult($return);
 				} else {
 					// prepare() succeeds even for an invalid query, the error is reported by execute().
-					list(, $this->errno, $this->error) = ($statement ? $statement->errorInfo() : $this->pdo->errorInfo());
-					if (!$this->error) {
-						$this->error = lang('Unknown error.');
-					}
+					$this->storeErrorInfo($statement ? $statement->errorInfo() : $this->pdo->errorInfo());
 				}
 
 				$this->pdo->query("COMMIT"); // Rollbacks the transaction if the query failed.
