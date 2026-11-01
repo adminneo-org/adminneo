@@ -502,7 +502,14 @@ if (isset($_GET["simpledb"])) {
 
 	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
-		return $table == "" && sdb_request('CreateDomain', ['DomainName' => $name]);
+		if ($table != "") {
+			return false;
+		}
+
+		// Function queries() would execute the request as a select, the driver supports SQL.
+		remember_query("CreateDomain " . json_encode(['DomainName' => $name]));
+
+		return (bool)sdb_request('CreateDomain', ['DomainName' => $name]);
 	}
 
 	function drop_tables(array $tables): bool

@@ -701,6 +701,9 @@ if (isset($_GET["mongo"])) {
 	function alter_table(string $table, string $name, array $fields, array $foreign, ?string $comment, string $engine, string $collation, string $auto_increment, ?array $partitioning): bool
 	{
 		if ($table == "") {
+			// Save the query for later use in a flesh message. TODO: This is so ugly.
+			queries('createCollection(' . json_encode($name) . ")");
+
 			return (bool)Connection::get()->executeCommand(["create" => $name]);
 		}
 
