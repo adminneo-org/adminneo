@@ -10,7 +10,8 @@ namespace AdminNeo;
 function get_unsupported_query(string $query, string $space): ?string
 {
 	// PHP doesn't support setting SQLITE_LIMIT_ATTACHED, an error of preg_match() is also denied.
-	if (DIALECT != "sqlite" || preg_match("~^$space*+(ATTACH|VACUUM\\b.*\\bINTO)\\b~is", $query, $match) === 0) {
+	// SQLite skips leading semicolons as empty statements, they start the query with a custom DELIMITER.
+	if (DIALECT != "sqlite" || preg_match("~^(?:$space|;)*+(ATTACH|VACUUM\\b.*\\bINTO)\\b~is", $query, $match) === 0) {
 		return null;
 	}
 
