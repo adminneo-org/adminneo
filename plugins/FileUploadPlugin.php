@@ -33,10 +33,12 @@ class FileUploadPlugin extends Plugin
 	 * @param string $uploadPath Path to a writable directory where uploading data will be stored.
 	 *                           It is strongly recommended to disable script execution in this folder.
 	 * @param ?string $linkPath Prefix for displaying data, null stands for $uploadPath.
-	 * @param string $extensions Regular expression with allowed file extensions.
+	 * @param string $extensions Regular expression with allowed file extensions. Allow SVG or HTML files only if the
+	 *                           uploaded files are served from another origin or with `Content-Security-Policy: sandbox`,
+	 *                           otherwise their scripts run with the AdminNeo session of the user who opens them.
 	 */
 	public function __construct(string $uploadPath = "../static/data/", string $linkPath = null,
-		string $extensions = "jpe?g|png|gif|webp|svg|pdf|txt")
+		string $extensions = "jpe?g|png|gif|webp|pdf|txt")
 	{
 		$this->uploadPath = $uploadPath;
 		$this->linkPath = $linkPath ?? $uploadPath;
