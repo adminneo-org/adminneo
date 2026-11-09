@@ -222,6 +222,7 @@ function delete_login(string $driver, string $server, string $username): void
 {
 	unset($_SESSION["pwds"][$driver][$server][$username]);
 	unset($_SESSION["db"][$driver][$server][$username]);
+	unset($_SESSION["permanent"][$driver][$server][$username]);
 }
 
 /**

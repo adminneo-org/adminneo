@@ -1,6 +1,13 @@
 Changelog
 =========
 
+AdminNeo 5.9.1
+--------------
+
+### Changes
+
+- Permanent login: Set after a successful login only, expire on the server after 30 days
+
 AdminNeo 5.9 (2026-11-01)
 -------------------------
 
