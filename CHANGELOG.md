@@ -16,6 +16,7 @@ AdminNeo 5.9.1
 - ClickHouse: Fix ordering by a column with an aggregate function
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
+- OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)
 - JsonDumpPlugin: Fix invalid JSON in export of binary values, export them as a hex number like `0xff00`
 
 AdminNeo 5.9 (2026-11-01)
