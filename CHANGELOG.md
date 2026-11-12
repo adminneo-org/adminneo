@@ -14,6 +14,7 @@ AdminNeo 5.9.1
 - Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
 - ClickHouse: Fix ordering by a column with an aggregate function
+- Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
 - OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)

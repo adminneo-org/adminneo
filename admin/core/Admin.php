@@ -447,7 +447,7 @@ class Admin extends Origin
 		$showList = isset($partitionInfo["partition_names"]);
 
 		echo "<p>";
-		echo "<code class='jush-" . DIALECT . "'>BY {$partitionInfo["partition_by"]} ({$partitionInfo["partition"]})</code>";
+		echo "<code class='jush-" . DIALECT . "'>BY " . h($partitionInfo["partition_by"]) . " (" . h($partitionInfo["partition"]) . ")</code>";
 		if (!$showList && isset($partitionInfo["partitions"])) {
 			echo " " . lang('Partitions') . ": " . h($partitionInfo["partitions"]);
 		}
