@@ -30,7 +30,7 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 			 */
 			function rootQuery(string $db, string $query)
 			{
-				[$file, $headers, $error] = get_url("$this->serviceUrl/?database=$db", stream_context_create(['http' => [
+				[$file, $headers, $error] = get_url("$this->serviceUrl/?database=" . urlencode($db), stream_context_create(['http' => [
 					'method' => 'POST',
 					'content' => $query,
 					'header' => [
