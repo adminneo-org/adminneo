@@ -36,7 +36,10 @@ php bin/compile.php [admin|editor] [drivers] [languages] [themes] [config.json] 
 php bin/compile.php editor
 php bin/compile.php admin mysql en default-green
 php bin/compile.php admin mysql,pgsql en,cs,de
+php bin/compile.php admin pgsql en -o compiled/adminneo.php
 ```
+
+A build limited to a single driver or a single language gets a suffixed name, e.g. `compiled/adminneo-pgsql-en.php`, and leaves `compiled/adminneo.php` untouched. Pass `-o compiled/adminneo.php` (or `-o compiled/editorneo.php`) as the last argument to get the fixed name. Otherwise, `php -l compiled/adminneo.php` checks a stale file and the `*-compiled-agent.php` entry points, which load exactly these two files, run the old code.
 
 **Update translations:**
 ```sh
@@ -270,7 +273,7 @@ git fetch vrana main --no-tags
   ```
   Issue: https://github.com/vrana/adminer/issues/<issue_id>
   ```
-- Verify: `php -l` every changed file, then run a real `php bin/compile.php admin <affected-drivers> en` (or `editor`) build to confirm the change compiles cleanly into the single-file output. For behavior-changing (not purely cosmetic) ports, prefer also verifying against a live test database (see Databases section) when one's available for the affected driver — start the dev server, log in, and drive the actual affected request/feature rather than trusting static review alone.
+- Verify: `php -l` every changed file, then run a real `php bin/compile.php admin <affected-drivers> en -o compiled/adminneo.php` (or `editor … -o compiled/editorneo.php`) build and `php -l` its output to confirm the change compiles cleanly into the single-file output. For behavior-changing (not purely cosmetic) ports, prefer also verifying against a live test database (see Databases section) when one's available for the affected driver — start the dev server, log in, and drive the actual affected request/feature rather than trusting static review alone.
 
 To understand the historical changes in public interface, look at Migration guide for AdminNeo 5.0.0: https://www.adminneo.org/upgrade#v5.0.0
 
