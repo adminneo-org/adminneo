@@ -1437,3 +1437,22 @@ function verify_token() {
 	list($token, $rand) = explode(":", $_POST["token"]);
 	return ($rand ^ $_SESSION["token"]) == $token && in_array($_SERVER["HTTP_SEC_FETCH_SITE"], ["", "same-origin"]);
 }
+
+/**
+ * Returns whether the user is logged in and the POST data were verified by the CSRF token.
+ *
+ * Plugins have to check it before processing a request in a method that is called also on the login page,
+ * e.g. sendHeaders().
+ *
+ * @param bool $authenticated True marks the request as authenticated. Used only by the login process.
+ */
+function is_authenticated(bool $authenticated = false): bool
+{
+	static $result = false;
+
+	if ($authenticated) {
+		$result = true;
+	}
+
+	return $result;
+}

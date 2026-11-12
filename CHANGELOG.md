@@ -19,6 +19,7 @@ AdminNeo 5.9.1
 - OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)
 - FileUploadPlugin: Disallow uploading SVG files by default to prevent XSS (GHSA-rfx6-xxqx-wfgw)
 - SlugifyEditPlugin: Fix XSS via the name of a slug column (GHSA-cwvq-x3wg-574h)
+- ClaudeSqlPlugin, GeminiSqlPlugin, OpenWebUiPlugin: Fix using the API key without login (GHSA-cjvx-f3xp-vg55)
 - JsonDumpPlugin: Fix invalid JSON in export of binary values, export them as a hex number like `0xff00`
 
 AdminNeo 5.9 (2026-11-01)

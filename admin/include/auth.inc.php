@@ -462,3 +462,6 @@ if ($_POST) {
 
 	Admin::get()->addError($error);
 }
+
+// The user is logged in and the POST data are verified from now on.
+is_authenticated(true);

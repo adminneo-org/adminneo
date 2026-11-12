@@ -43,6 +43,11 @@ class GeminiSqlPlugin extends Plugin
 			return null;
 		}
 
+		// The method is called also on the login page, where the request is neither authenticated nor verified.
+		if (!is_authenticated()) {
+			return null;
+		}
+
 		// Build the prompt.
 		$prompt = "I have a " . get_driver_name(DRIVER) . " database";
 		if (DB) {
