@@ -549,6 +549,13 @@ if (isset($_GET["mssql"]) && !defined("AdminNeo\DRIVER")) {
 			$credentials[0] = "localhost:1433";
 		}
 
+		// An empty username means the integrated authentication with the identity of the web server and the password is ignored.
+		// It is treated as a database without a password, so the default password has to be verified.
+		if ($credentials[1] == "" && $credentials[2] != "" && Admin::get()->verifyDefaultPassword($credentials[2]) !== true) {
+			$error = lang('Invalid server or credentials.');
+			return null;
+		}
+
 		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
 			$error = $connection->getError();
 			return null;
