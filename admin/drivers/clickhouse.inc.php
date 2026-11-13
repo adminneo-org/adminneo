@@ -30,7 +30,11 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 			 */
 			function rootQuery(string $db, string $query)
 			{
-				[$file, $headers, $error] = get_url("$this->serviceUrl/?database=" . urlencode($db), stream_context_create(['http' => [
+				// A query with a fragment sent by the user is read-only, which disallows also functions accessing other servers.
+				// The server refuses it for a user limited by readonly = 2, which allows these functions, so the query fails on purpose.
+				$url = "$this->serviceUrl/?database=" . urlencode($db) . ($this->untrusted ? "&readonly=1" : "");
+
+				[$file, $headers, $error] = get_url($url, stream_context_create(['http' => [
 					'method' => 'POST',
 					'content' => $query,
 					'header' => [
