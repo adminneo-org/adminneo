@@ -52,7 +52,14 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 					$options["authSource"] = $authSource;
 				}
 
-				$this->manager = new Manager($server, $options);
+				try {
+					$this->manager = new Manager($server, $options);
+				} catch (\MongoDB\Driver\Exception\Exception $exception) {
+					$this->error = $exception->getMessage();
+
+					return false;
+				}
+
 				$this->dbName = $dbName ?: "default";
 
 				return (bool)$this->executeCommand(['ping' => 1]);

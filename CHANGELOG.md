@@ -18,6 +18,7 @@ AdminNeo 5.9.1
 - ClickHouse: Fix SQL injection via a backslash in the name of a column (GHSA-4xh5-8hm7-7829)
 - ClickHouse: Run queries with the SQL operator in the read-only mode (CSRF)
 - ClickHouse: Fix ordering by a column with an aggregate function
+- MongoDB: Fix fatal error when logging in with a password and an empty username
 - Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
