@@ -23,6 +23,9 @@ if (isset($_GET["mysql"]) && !defined("AdminNeo\DRIVER")) {
 			/** @var mysqli */
 			private $mysqli;
 
+			/** @var bool The session was switched to read-only transactions. */
+			private $readOnly = false;
+
 			protected function __construct()
 			{
 				parent::__construct();
@@ -118,6 +121,14 @@ if (isset($_GET["mysql"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function query(string $query, bool $unbuffered = false)
 			{
+				if ($this->untrusted && !$this->readOnly) {
+					// All following queries run in read-only transactions, which don't allow modifying data. Multiple commands are not allowed by mysqli.
+					$this->readOnly = (bool)$this->mysqli->query("SET SESSION TRANSACTION READ ONLY");
+					if (!$this->readOnly) {
+						return false;
+					}
+				}
+
 				$result = $this->mysqli->query($query, ($unbuffered ? MYSQLI_USE_RESULT : MYSQLI_STORE_RESULT));
 
 				return is_object($result) ? new MySqlResult($result) : $result;
@@ -198,6 +209,9 @@ if (isset($_GET["mysql"]) && !defined("AdminNeo\DRIVER")) {
 
 		class MySqlConnection extends PdoConnection
 		{
+			/** @var bool The session was switched to read-only transactions. */
+			private $readOnly = false;
+
 			public function getDefaultServerName(): string
 			{
 				return "localhost";
@@ -259,6 +273,14 @@ if (isset($_GET["mysql"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function query(string $query, bool $unbuffered = false)
 			{
+				if ($this->untrusted && !$this->readOnly) {
+					// All following queries run in read-only transactions, which don't allow modifying data.
+					$this->readOnly = (bool)parent::query("SET SESSION TRANSACTION READ ONLY");
+					if (!$this->readOnly) {
+						return false;
+					}
+				}
+
 				$this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, !$unbuffered);
 
 				return parent::query($query, $unbuffered);
