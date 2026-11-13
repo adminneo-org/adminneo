@@ -21,7 +21,10 @@ function idf_unescape($idf) {
 		return $idf;
 	}
 	$last = substr($idf, -1);
-	return str_replace($last . $last, $last, substr($idf, 1, -1));
+	$return = str_replace($last . $last, $last, substr($idf, 1, -1));
+
+	// ClickHouse escapes also a backslash, see its idf_escape().
+	return (DIALECT == "clickhouse" ? str_replace("\\\\", "\\", $return) : $return);
 }
 
 /** Shortcut for Database::get()->quote($string)

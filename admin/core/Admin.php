@@ -870,9 +870,13 @@ class Admin extends Origin
 	public function processSelectionOrder(array $fields, array $indexes): array
 	{
 		$return = [];
+		// ClickHouse uses backslash as an escape character in identifiers, so it could hide the closing quote.
+		$escape = (DIALECT == "clickhouse" ? '\\\\' : '');
+		// TODO MS SQL uses []
+		$function = '~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`' . $escape . ']|``)+`|"(?:[^"' . $escape . ']|"")+")\)|COUNT\(\*\))$~';
 		foreach ((array)$_GET["order"] as $key => $val) {
 			if ($val != "") {
-				$return[] = (preg_match('~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`]|``)+`|"(?:[^"]|"")+")\)|COUNT\(\*\))$~', $val) ? $val : idf_escape($val)) // TODO MS SQL uses []
+				$return[] = (preg_match($function, $val) ? $val : idf_escape($val))
 					. (isset($_GET["desc"][$key])
 						? " DESC" . (DIALECT == "pgsql" && ($fields[$val]["null"] ?? null) ? " NULLS LAST" : "")
 						: ""

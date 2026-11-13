@@ -284,7 +284,8 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 	function idf_escape(string $idf): string
 	{
-		return "`" . str_replace("`", "``", $idf) . "`";
+		// Backslash is an escape character also in identifiers.
+		return "`" . str_replace(["\\", "`"], ["\\\\", "``"], $idf) . "`";
 	}
 
 	function table(string $idf): string
