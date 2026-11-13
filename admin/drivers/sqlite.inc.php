@@ -153,6 +153,11 @@ if (isset($_GET["sqlite"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function open(string $server, string $username, string $password): bool
 			{
+				// SQLite can handle a name starting with "file:" as a URI, the opened file would differ from the checked name.
+				if (stripos($server, "file:") === 0) {
+					$server = "./$server";
+				}
+
 				if (!parent::open($server, $username, $password)) {
 					return false;
 				}
