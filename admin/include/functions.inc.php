@@ -1442,6 +1442,24 @@ function verify_token() {
 }
 
 /**
+ * Returns whether the request was sent by a page of the same origin.
+ *
+ * Verifies GET requests, which are not protected by the CSRF token. A request without any proof of its origin is refused.
+ */
+function is_same_origin(): bool
+{
+	// Browsers send the header only to secure origins (HTTPS, localhost), old browsers don't send it at all.
+	if (isset($_SERVER["HTTP_SEC_FETCH_SITE"])) {
+		return $_SERVER["HTTP_SEC_FETCH_SITE"] == "same-origin";
+	}
+
+	// Another origin can remove the referrer, but it can't forge it.
+	return isset($_SERVER["HTTP_HOST"], $_SERVER["HTTP_REFERER"])
+		&& preg_match('~^https?://([^/?#]*)~i', $_SERVER["HTTP_REFERER"], $match)
+		&& !strcasecmp($match[1], $_SERVER["HTTP_HOST"]);
+}
+
+/**
  * Returns whether the user is logged in and the POST data were verified by the CSRF token.
  *
  * Plugins have to check it before processing a request in a method that is called also on the login page,

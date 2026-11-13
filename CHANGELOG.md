@@ -10,6 +10,7 @@ AdminNeo 5.9.1
 
 ### Bugfixes
 
+- Select: Reject the SQL operator sent without a proof of the same origin (GHSA-8g9x-wx4c-x88j)
 - Select: Fix fatal error on malformed search conditions in the URL
 - Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
