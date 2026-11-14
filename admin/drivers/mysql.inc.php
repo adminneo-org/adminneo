@@ -891,6 +891,8 @@ WHERE TABLE_SCHEMA = DATABASE() " . ($name != "" ? "AND TABLE_NAME = " . q($name
 				"comment" => $row["COLUMN_COMMENT"],
 				"primary" => ($row["COLUMN_KEY"] == "PRI"),
 				"generated" => ($generated[1] == "PERSISTENT" ? "STORED" : $generated[1]),
+				// SRID required by a geometry column, available since MySQL 8.
+				"srid" => $row["SRS_ID"] ?? null,
 			];
 		}
 		return $return;
@@ -1574,7 +1576,11 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 			return (Connection::get()->isMariaDB() ? "VEC_ToText" : "VECTOR_TO_STRING") . "(" . idf_escape($field["field"]) . ")";
 		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
-			return (Connection::get()->isMinVersion("8") ? "ST_" : "") . "AsWKT(" . idf_escape($field["field"]) . ")";
+			// Non-zero SRID is prepended to the value like in EWKT, so that unconvert_field() doesn't need the stored value.
+			$prefix = (Connection::get()->isMinVersion("8") ? "ST_" : "");
+			$column = idf_escape($field["field"]);
+
+			return "CONCAT(IF($prefix" . "SRID($column), CONCAT('SRID=', $prefix" . "SRID($column), ';'), ''), $prefix" . "AsWKT($column))";
 		}
 
 		return null;
@@ -1597,8 +1603,14 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 			$return = (Connection::get()->isMariaDB() ? "VEC_FromText" : "STRING_TO_VECTOR") . "($return)";
 		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
-			$prefix = (Connection::get()->isMinVersion("8") ? "ST_" : "");
-			$return = $prefix . "GeomFromText($return, $prefix" . "SRID(" . idf_escape($field["field"]) . "))";
+			// SRID can't be taken from the column, its reference is evaluated to the default value in INSERT.
+			$srid = $field["srid"] ?? 0;
+			if (preg_match("~^'SRID=(\\d+);~i", $return, $match)) {
+				$srid = $match[1];
+				$return = "'" . substr($return, strlen($match[0]));
+			}
+
+			$return = (Connection::get()->isMinVersion("8") ? "ST_" : "") . "GeomFromText($return, $srid)";
 		}
 
 		return $return;
