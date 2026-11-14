@@ -621,7 +621,8 @@ class Admin extends Origin
 		}
 
 		$change_next = "this.parentNode.firstChild.onchange();";
-		foreach (array_merge((array)$_GET["where"], [[]]) as $i => $val) {
+		// Keys are not preserved, they come from the URL and are printed to the name attributes.
+		foreach (array_merge(array_values((array)$_GET["where"]), [[]]) as $i => $val) {
 			if (!$val || ("$val[col]$val[val]" != "" && in_array($val["op"], $this->getOperators()))) {
 				echo "<div>";
 				echo select_input(

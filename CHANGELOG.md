@@ -11,6 +11,7 @@ AdminNeo 5.9.1
 ### Bugfixes
 
 - Select: Reject the SQL operator sent without a proof of the same origin (GHSA-8g9x-wx4c-x88j)
+- Select: Fix HTML injection via the keys of search conditions (GHSA-h6gv-2whh-8c86)
 - Select: Fix fatal error on malformed search conditions in the URL
 - Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
 - MySQL: Run queries with the SQL operator in the read-only mode (GHSA-8g9x-wx4c-x88j)
