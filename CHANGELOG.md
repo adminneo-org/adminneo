@@ -25,6 +25,7 @@ AdminNeo 5.9.1
 - MongoDB: Fix fatal error when logging in with a password and an empty username
 - SQLite PDO: Fix creating a database file with a disallowed extension (GHSA-r6xv-mvwg-hfrw)
 - Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
+- Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
 - OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)

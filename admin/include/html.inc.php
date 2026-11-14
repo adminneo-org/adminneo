@@ -636,7 +636,7 @@ function search_tables(): void
  */
 function help_script(string $text, bool $side = false): string
 {
-	return script("initHelpFor(qsl('select, input'), '" . h($text) . "', $side);", "");
+	return script("initHelpFor(qsl('select, input'), '" . js_escape($text) . "', $side);", "");
 }
 
 /**
