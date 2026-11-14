@@ -451,7 +451,7 @@ class Admin extends Origin
 					. "<input value='" . h($options) . "' class='input jsonly'>"
 					. "<div></div>"
 					. script("
-						qsl('input').oninput = partial(whisper, '" . ME . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
+						qsl('input').oninput = partial(whisper, '" . js_escape(ME) . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
 						qsl('div').onclick = whisperClick;
 					", "");
 			}
