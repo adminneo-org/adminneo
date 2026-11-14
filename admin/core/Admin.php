@@ -807,13 +807,15 @@ class Admin extends Origin
 					$oidColumn = DIALECT == "pgsql" && $op == "=" && $field["type"] == "oid";
 					if ($oidColumn) {
 						$cond .= " " . $this->admin->processFieldInput($field, $val) . "::regproc";
-					} elseif (preg_match('~IN$~', $op)) {
-						$in = process_length($val);
+					} elseif ($isList) {
 						// Compare non-numeric columns with strings, e.g. text = integer is an error in PostgreSQL. So is money = integer.
-						if ((!$isNumber || (DIALECT == "pgsql" && $field["type"] == "money")) && preg_match('~^\([-+.\d,]+\)$~', $in)) {
-							$in = "(" . implode(",", array_map('AdminNeo\q', explode(",", substr($in, 1, -1)))) . ")";
+						$isNumberList = $isNumber && !(DIALECT == "pgsql" && $field["type"] == "money");
+						$in = [];
+						foreach (parse_search_list($val) as $value) {
+							// Every other value is quoted, it must never get into the query as it was sent.
+							$in[] = $isNumberList && preg_match("~^$number$~", $value) ? $value : q($value);
 						}
-						$cond .= " " . ($in != "" ? $in : "(NULL)");
+						$cond .= " (" . ($in ? implode(", ", $in) : "NULL") . ")";
 					} elseif ($op == "SQL") {
 						$cond = " $val"; // SQL injection
 					} elseif (preg_match('~^(I?LIKE) %%$~', $op, $match)) {

@@ -468,6 +468,37 @@ function validate_search_conditions($conditions, array $list_columns = []): arra
 	return $return;
 }
 
+/**
+ * Parses the list of values searched by the IN operator, e.g. 1, 2 or ('a', 'it''s').
+ *
+ * A value containing a comma or surrounding spaces is enclosed in apostrophes, where an apostrophe is doubled. This syntax doesn't depend on
+ * the database, e.g. a backslash has no special meaning. The values are returned decoded, so the caller has to quote them for the query.
+ * Anything that is not a well-formed quoted value is taken as it is.
+ *
+ * @return list<string>
+ */
+function parse_search_list(string $list): array
+{
+	// Parentheses around the list are optional.
+	if (preg_match('~^\s*\((.*)\)\s*$~s', $list, $match)) {
+		$list = $match[1];
+	}
+
+	// The second branch matches at any position, so no part of the list is skipped.
+	preg_match_all("~\\G\\s*+(?:'((?:''|[^'])*+)'\\s*+|([^,]*+))(?:,|\$)~s", $list, $matches, PREG_SET_ORDER);
+
+	$return = [];
+	foreach ($matches as $match) {
+		if (!isset($match[2])) {
+			$return[] = str_replace("''", "'", $match[1]);
+		} elseif (trim($match[2]) != "") {
+			$return[] = trim($match[2]);
+		}
+	}
+
+	return $return;
+}
+
 /** Create query string where condition from value
 * @param int condition order
 * @param string column identifier

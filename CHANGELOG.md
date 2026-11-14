@@ -11,6 +11,7 @@ AdminNeo 5.9.1
 ### Bugfixes
 
 - Select: Reject the SQL operator sent without a proof of the same origin (GHSA-8g9x-wx4c-x88j)
+- Select: Fix SQL injection via the values searched by IN and NOT IN (GHSA-r6wc-chqc-5wq3)
 - Select: Fix HTML injection via the keys of search conditions (GHSA-h6gv-2whh-8c86)
 - Select: Fix HTML injection via the name of a fulltext index (GHSA-qc3x-52c6-p5ff)
 - Select: Fix fatal error on malformed search conditions in the URL

@@ -591,11 +591,7 @@ if (isset($_GET["pgsql"]) && !defined("AdminNeo\DRIVER")) {
 
 			$values = [$where["val"]];
 			if (preg_match('~IN$~', $where["op"])) {
-				// The list as it is searched, e.g. (1,0) or ('t','f').
-				preg_match_all("~" . self::EnumLengthPattern . "|[^,()]+~", process_length($where["val"]), $matches);
-				$values = array_map(function ($value) {
-					return str_replace("''", "'", preg_replace("~^'(.*)'$~s", '\\1', $value));
-				}, $matches[0]);
+				$values = parse_search_list($where["val"]);
 			}
 
 			foreach ($values as $value) {
