@@ -1454,8 +1454,16 @@ function is_same_origin(): bool
 	}
 
 	// Another origin can remove the referrer, but it can't forge it.
-	return isset($_SERVER["HTTP_HOST"], $_SERVER["HTTP_REFERER"])
-		&& preg_match('~^https?://([^/?#]*)~i', $_SERVER["HTTP_REFERER"], $match)
+	return isset($_SERVER["HTTP_REFERER"]) && is_same_host($_SERVER["HTTP_REFERER"]);
+}
+
+/**
+ * Returns whether the absolute URL points to the host of the current request.
+ */
+function is_same_host(string $url): bool
+{
+	return isset($_SERVER["HTTP_HOST"])
+		&& preg_match('~^https?://([^/?#]*)~i', $url, $match)
 		&& !strcasecmp($match[1], $_SERVER["HTTP_HOST"]);
 }
 

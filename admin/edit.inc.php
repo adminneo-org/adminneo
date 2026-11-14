@@ -17,7 +17,8 @@ if ($_POST && !isset($_GET["select"])) {
 	if ($_POST["insert"]) { // continue edit or insert
 		// TODO it should redirect to Select if the values in ?where changed (handled only in JS)
 		$location = ($update ? null : $_SERVER["REQUEST_URI"]);
-	} elseif (!preg_match('~^.+&select=.+$~', $location)) {
+	} elseif (!preg_match('~^.+&select=.+$~', $location) || !is_same_host($location)) {
+		// The referrer is sent by the browser and returned in the form, so it can point to any site.
 		$location = ME . "select=" . urlencode($TABLE);
 	}
 
