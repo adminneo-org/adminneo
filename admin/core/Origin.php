@@ -368,9 +368,9 @@ abstract class Origin extends Plugin
 
 		// https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
 		// Converting PNG to ICO: https://redketchup.io/icon-converter
-		echo "<link rel='icon' type='image/x-icon' href='", link_files("favicon-$colorVariant.ico", ["../admin/images/variants/favicon-$colorVariant.ico"]), "' sizes='32x32'>\n";
-		echo "<link rel='icon' type='image/svg+xml' href='", link_files("favicon-$colorVariant.svg", ["../admin/images/variants/favicon-$colorVariant.svg"]), "'>\n";
-		echo "<link rel='apple-touch-icon' href='", link_files("apple-touch-icon-$colorVariant.png", ["../admin/images/variants/apple-touch-icon-$colorVariant.png"]), "'>\n";
+		echo "<link rel='icon' type='image/x-icon' href='", h(link_files("favicon-$colorVariant.ico", ["../admin/images/variants/favicon-$colorVariant.ico"])), "' sizes='32x32'>\n";
+		echo "<link rel='icon' type='image/svg+xml' href='", h(link_files("favicon-$colorVariant.svg", ["../admin/images/variants/favicon-$colorVariant.svg"])), "'>\n";
+		echo "<link rel='apple-touch-icon' href='", h(link_files("apple-touch-icon-$colorVariant.png", ["../admin/images/variants/apple-touch-icon-$colorVariant.png"])), "'>\n";
 	}
 
 	public abstract function printToHead(): void;

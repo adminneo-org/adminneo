@@ -30,6 +30,7 @@ AdminNeo 5.9.1
 - EditorNeo: Fix XSS via the request path in the autocomplete of a foreign key (GHSA-fr24-68fv-4whc)
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
+- Fix HTML injection via the request path in the links to static files
 - OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)
 - FileUploadPlugin: Disallow uploading SVG files by default to prevent XSS (GHSA-rfx6-xxqx-wfgw)
 - SlugifyEditPlugin: Fix XSS via the name of a slug column (GHSA-cwvq-x3wg-574h)

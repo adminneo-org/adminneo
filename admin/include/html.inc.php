@@ -124,7 +124,7 @@ function icon(string $id, ?string $class = null): string
 {
 	$id = h($id);
 
-	return "<svg class='icon ic-$id $class'><use href='" . link_files("icons.svg", ["images/icons.svg"]) . "#$id'/></svg>";
+	return "<svg class='icon ic-$id $class'><use href='" . h(link_files("icons.svg", ["images/icons.svg"])) . "#$id'/></svg>";
 }
 
 /** Generate HTML checkbox

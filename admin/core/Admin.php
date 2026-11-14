@@ -17,7 +17,7 @@ class Admin extends Origin
 	public function getServiceTitle(): string
 	{
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc>" .
-			"<use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+			"<use href='" . h(link_files("logo.svg", ["images/logo.svg"])) . "#logo'/></svg></a>";
 	}
 
 	/**
@@ -45,16 +45,16 @@ class Admin extends Origin
 	 */
 	public function printToHead(): void
 	{
-		echo "<link rel='stylesheet' href='", link_files("jush.css", [
+		echo "<link rel='stylesheet' href='", h(link_files("jush.css", [
 			"../vendor/vrana/jush/jush.css",
 			"themes/default/jush.css",
-		]), "'>";
+		])), "'>";
 
 		if (!$this->admin->isLightModeForced()) {
 			echo "<link rel='stylesheet' " . (!$this->admin->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
-			echo link_files("jush-dark.css", [
+			echo h(link_files("jush-dark.css", [
 				"themes/default/jush-dark.css",
-			]);
+			]));
 			echo "'>\n";
 		}
 
