@@ -138,5 +138,5 @@ echo "</div>\n";
 echo script("initSchema('" . js_escape(DB) . "', $top, {" . implode(",", $table_pos_js) . "})");
 
 echo "<p class='links'>";
-echo "<a href='", (ME . "schema=" . urlencode($SCHEMA)), "' id='schema-link'>", lang('Permanent link'), "</a>";
+echo "<a href='", h(ME . "schema=" . urlencode($SCHEMA)), "' id='schema-link'>", lang('Permanent link'), "</a>";
 echo "</p>\n";
