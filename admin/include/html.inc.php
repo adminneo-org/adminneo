@@ -138,7 +138,7 @@ function icon(string $id, ?string $class = null): string
 * @return string
 */
 function checkbox($name, $value, $checked, $label = "", $onclick = "", $class = "", $labelled_by = "") {
-	$return = "<input type='checkbox' name='$name' value='" . h($value) . "'"
+	$return = "<input type='checkbox' name='" . h($name) . "' value='" . h($value) . "'"
 		. ($checked ? " checked" : "")
 		. ($labelled_by ? " aria-labelledby='$labelled_by'" : "")
 		. ">"
