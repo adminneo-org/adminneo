@@ -326,6 +326,14 @@ class Admin extends Origin
 
 	public function processSelectionSearch(array $fields, array $indexes): array
 	{
+		if (isset($_GET["where"])) {
+			// Malformed conditions are removed here also for the code that reads them later. Enum values are sent as a list.
+			$enumColumns = array_keys(array_filter($fields, function ($field) {
+				return $field["type"] == "enum";
+			}));
+			$_GET["where"] = validate_search_conditions($_GET["where"], $enumColumns);
+		}
+
 		$return = [];
 
 		foreach ((array)$_GET["where"] as $key => $where) {
@@ -341,7 +349,7 @@ class Admin extends Origin
 						$name = idf_escape($name);
 
 						if ($col != "" && $field["type"] == "enum") {
-							$conds[] = (in_array(0, $val) ? "$name IS NULL OR " : "") . "$name IN (" . implode(", ", array_map('AdminNeo\q', $val)) . ")";
+							$conds[] = (in_array(0, (array)$val) ? "$name IS NULL OR " : "") . "$name IN (" . implode(", ", array_map('AdminNeo\q', (array)$val)) . ")";
 						} else {
 							$text_type = preg_match('~char|text|enum|set~', $field["type"]);
 							$value = $this->admin->processFieldInput($field, (!$op && $text_type && preg_match('~^[^%]+$~', $val) ? "%$val%" : $val));

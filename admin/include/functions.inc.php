@@ -431,6 +431,40 @@ function where_check($val, $fields = []) {
 	return where($check, $fields);
 }
 
+/**
+ * Returns the search conditions without the malformed ones, which would cause an error when processed or printed.
+ *
+ * @param mixed $conditions The value of $_GET["where"]: a list of arrays with the keys "col", "op" and "val".
+ * @param string[] $list_columns Columns that accept a list of values in "val".
+ *
+ * @return array[] Keys are preserved.
+ */
+function validate_search_conditions($conditions, array $list_columns = []): array
+{
+	$return = [];
+
+	foreach ((is_array($conditions) ? $conditions : []) as $key => $condition) {
+		if (!is_array($condition)) {
+			continue;
+		}
+
+		$col = $condition["col"] ?? "";
+		$op = $condition["op"] ?? "";
+		$val = $condition["val"] ?? "";
+
+		if (!is_string($col) || !is_string($op)) {
+			continue;
+		}
+
+		$is_list = is_array($val) && in_array($col, array_map('strval', $list_columns), true) && array_filter($val, 'is_string') === $val;
+		if (is_string($val) || $is_list) {
+			$return[$key] = $condition;
+		}
+	}
+
+	return $return;
+}
+
 /** Create query string where condition from value
 * @param int condition order
 * @param string column identifier

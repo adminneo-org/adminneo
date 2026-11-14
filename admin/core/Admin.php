@@ -761,6 +761,11 @@ class Admin extends Origin
 	 */
 	public function processSelectionSearch(array $fields, array $indexes): array
 	{
+		if (isset($_GET["where"])) {
+			// Malformed conditions are removed here also for the code that reads them later.
+			$_GET["where"] = validate_search_conditions($_GET["where"]);
+		}
+
 		$return = [];
 
 		foreach ($indexes as $i => $index) {

@@ -8,6 +8,10 @@ AdminNeo 5.9.1
 
 - Permanent login: Set after a successful login only, expire on the server after 30 days
 
+### Bugfixes
+
+- Select: Fix fatal error on malformed search conditions in the URL
+
 AdminNeo 5.9 (2026-11-01)
 -------------------------
 
