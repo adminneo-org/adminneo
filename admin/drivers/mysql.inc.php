@@ -1598,7 +1598,7 @@ WHERE ROUTINE_SCHEMA = DATABASE() AND ROUTINE_TYPE = '$type' AND ROUTINE_NAME = 
 		}
 		if (preg_match("~geometry|point|linestring|polygon~", $field["type"])) {
 			$prefix = (Connection::get()->isMinVersion("8") ? "ST_" : "");
-			$return = $prefix . "GeomFromText($return, $prefix" . "SRID($field[field]))";
+			$return = $prefix . "GeomFromText($return, $prefix" . "SRID(" . idf_escape($field["field"]) . "))";
 		}
 
 		return $return;

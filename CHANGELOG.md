@@ -18,6 +18,7 @@ AdminNeo 5.9.1
 - Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
 - Edit: Fix open redirect via the referrer after saving or deleting a record (GHSA-q9rj-wgm8-fg59)
 - MySQL: Run queries with the SQL operator in the read-only mode (GHSA-8g9x-wx4c-x88j)
+- MySQL: Fix SQL injection via the name of a geometry column (GHSA-2rwm-w499-38rq)
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
 - MS SQL: Fix logging in with an empty username and any password (GHSA-w8j4-8pww-wm83)
 - ClickHouse: Fix injecting HTTP query parameters via the database name (GHSA-gj7f-g8j2-wxxr)
