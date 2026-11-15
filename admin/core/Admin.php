@@ -1160,14 +1160,16 @@ class Admin extends Origin
 								continue;
 							}
 
-							$field = $fields[$key];
+							// A column with a function, e.g. MAX(id), is not a field of the table, so its type is not known.
+							$field = $fields[$key] ?? null;
 							$row[$key] = ($val === null ? "NULL"
 								: ($val === false ? 0
+								: (!$field ? (is_utf8($val) ? q($val) : Driver::get()->quoteBinary($val))
 								: unconvert_field($field, preg_match(number_type(), $field["type"]) && !preg_match('~\[~', $field["full_type"]) && is_numeric($val)
 									? $val
 									: (!is_blob($field) || is_utf8($val) ? q($val) : Driver::get()->quoteBinary($val))
 								)
-							));
+							)));
 						}
 
 						$s = ($max_packet ? "\n" : " ") . "(" . implode(",\t", $row) . ")";
