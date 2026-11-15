@@ -977,7 +977,7 @@ class Admin extends Origin
 		} elseif (preg_match('~^(md5|sha1|password|encrypt)$~', $function)) {
 			$return = "$function($return)";
 		} elseif ($field["type"] == "boolean" && DIALECT == "elastic") {
-			$return = $return == "0" ? "false" : "true";
+			$return = $value == "0" ? "false" : "true";
 		}
 
 		return unconvert_field($field, $return);

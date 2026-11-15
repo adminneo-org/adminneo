@@ -28,6 +28,7 @@ AdminNeo 5.9.1
 - ClickHouse: Fix ordering by a column with an aggregate function
 - MongoDB: Fix updating and deleting other documents via a crafted `_id` or AND, OR in a searched value (GHSA-rxw7-qqf5-2pv8)
 - MongoDB: Fix fatal error when logging in with a password and an empty username
+- Elasticsearch: Fix editing and deleting another document via special characters in an `_id`
 - SQLite PDO: Fix creating a database file with a disallowed extension (GHSA-r6xv-mvwg-hfrw)
 - Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
 - Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
