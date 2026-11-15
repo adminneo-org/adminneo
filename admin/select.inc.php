@@ -40,6 +40,17 @@ $where = Admin::get()->processSelectionSearch($fields, $indexes);
 $order = Admin::get()->processSelectionOrder($fields, $indexes);
 $limit = Admin::get()->processSelectionLimit();
 
+// Select expressions with aliases, used by the queries of both the page and the export.
+$aliased_select = $select;
+if (DIALECT == "pgsql" || DIALECT == "mssql") {
+	// Alias functions so that e.g. COUNT(DISTINCT a) and COUNT(*) don't collapse into a single 'count' column in fetchAssoc().
+	foreach ((array)$_GET["columns"] as $key => $val) {
+		if (isset($aliased_select[$key]) && $val["fun"]) {
+			$aliased_select[$key] .= " AS " . idf_escape(apply_sql_function($val["fun"], ($val["col"] != "" ? $val["col"] : "*")));
+		}
+	}
+}
+
 if ($_GET["modify"] && !Admin::get()->isDataEditAllowed()) {
 	redirect(ME . "select=" . urlencode($TABLE));
 }
@@ -96,7 +107,7 @@ if ($_POST) {
 
 		dump_headers($TABLE);
 		Admin::get()->dumpTable($TABLE, "");
-		$from = ($select ? implode(", ", $select) : "*")
+		$from = ($select ? implode(", ", $aliased_select) : "*")
 			. convert_fields($columns, $fields, $select)
 			. "\nFROM " . table($TABLE);
 		$group_by = ($group && $is_group ? "\nGROUP BY " . implode(", ", $group) : "") . ($order ? "\nORDER BY " . implode(", ", $order) : "");
@@ -310,7 +321,7 @@ if (!$columns && support("table")) {
 		$page = (int)$page;
 	}
 
-	$select2 = $select;
+	$select2 = $aliased_select;
 	$group2 = $group;
 	if (!$select2) {
 		$select2[] = "*";
@@ -323,14 +334,6 @@ if (!$columns && support("table")) {
 		$field = $fields[idf_unescape($val)];
 		if ($field && ($as = convert_field($field))) {
 			$select2[$key] = "$as AS $val";
-		}
-	}
-	if (DIALECT == "pgsql" || DIALECT == "mssql") {
-		// Alias functions so that e.g. COUNT(DISTINCT a) and COUNT(*) don't collapse into a single 'count' column in fetchAssoc().
-		foreach ((array)$_GET["columns"] as $key => $val) {
-			if (isset($select2[$key]) && $val["fun"]) {
-				$select2[$key] .= " AS " . idf_escape(apply_sql_function($val["fun"], ($val["col"] != "" ? $val["col"] : "*")));
-			}
 		}
 	}
 	if (!$is_group && $unselected) {

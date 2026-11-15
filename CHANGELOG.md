@@ -11,6 +11,7 @@ AdminNeo 5.9.1
 ### Bugfixes
 
 - Select: Fix fatal error on malformed search conditions in the URL
+- PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
 
 AdminNeo 5.9 (2026-11-01)
 -------------------------
