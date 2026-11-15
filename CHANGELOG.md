@@ -30,7 +30,7 @@ AdminNeo 5.9.1
 - MongoDB: Fix fatal error when logging in with a password and an empty username
 - Elasticsearch: Fix editing and deleting another document via special characters in an `_id`
 - Elasticsearch: Fix searching and inline editing of the false value in boolean fields (regression from 5.0.0)
-- SQLite PDO: Fix creating a database file with a disallowed extension (GHSA-r6xv-mvwg-hfrw)
+- SQLite: Fix creating a database file with a disallowed extension via a file: URI (GHSA-r6xv-mvwg-hfrw, GHSA-2gwx-67mg-hfr3)
 - Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
 - Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
 - EditorNeo: Fix XSS via the request path in the autocomplete of a foreign key (GHSA-fr24-68fv-4whc)
