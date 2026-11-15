@@ -149,14 +149,16 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 						if (is_a($val, 'MongoDB\BSON\Binary')) {
 							$this->charset[$key] = 63;
 						}
+						// A string in _id that looks like the printed ObjectID is marked by a backslash, otherwise it would identify another document.
 						$row[$key] =
 							(is_a($val, 'MongoDB\BSON\ObjectID') ? 'MongoDB\BSON\ObjectID("' . "$val\")" :
+							($key === "_id" && is_string($val) && preg_match(MongoDriver::ObjectIdPattern, $val) ? "\\$val" :
 							(is_a($val, 'MongoDB\BSON\UTCDatetime') ? $val->toDateTime()->format('Y-m-d H:i:s') :
 							(is_a($val, 'MongoDB\BSON\Binary') ? $val->getData() : // TODO allow downloading
 							(is_a($val, 'MongoDB\BSON\Regex') ? "$val" :
 							(is_object($val) || is_array($val) ? json_encode($val, JSON_UNESCAPED_UNICODE) :
 							$val // MongoMinKey, MongoMaxKey
-						)))));
+						))))));
 					}
 
 					$this->rows[] = $row;
@@ -218,6 +220,10 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 	class MongoDriver extends Driver
 	{
 		public const NULL = "\0";
+
+		/** ObjectID as it is printed by MongoResult. The leading backslashes mark a string that only looks like it. */
+		public const ObjectIdPattern = '~^(\\\\*)MongoDB\\\\BSON\\\\ObjectID\("([\da-f]{24})"\)$~i';
+
 		public $primary = "_id";
 
 		protected function __construct(Connection $connection, $admin)
@@ -348,8 +354,10 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 
 				if ($value != self::NULL) {
 					$value = unquote($value);
-					if ($key != '_id' || $value != '') {
+					if ($key != '_id') {
 						$document[$key] = $value;
+					} elseif ($value != '') {
+						$document[$key] = (is_string($value) ? parse_id($value) : $value);
 					}
 				}
 			}
@@ -509,6 +517,21 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 	}
 
 	/**
+	 * Converts the value of _id from the text printed by MongoResult.
+	 *
+	 * @return BSON\ObjectId|string
+	 */
+	function parse_id(string $value)
+	{
+		if (!preg_match(MongoDriver::ObjectIdPattern, $value, $match)) {
+			return $value;
+		}
+
+		// The backslash marks a string that only looks like ObjectID.
+		return ($match[1] != "" ? substr($value, 1) : new BSON\ObjectId($match[2]));
+	}
+
+	/**
 	 * Converts the condition of an update or a delete to the filter.
 	 *
 	 * @param string $queryWhere Empty string or " WHERE ...".
@@ -624,8 +647,8 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 		$op = $match[2];
 		$val = str_replace("''", "'", $match[3]);
 
-		if ($col == "_id" && preg_match('~^MongoDB\\\\BSON\\\\ObjectID\("([\da-f]{24})"\)$~i', $val, $match)) {
-			$val = new BSON\ObjectId($match[1]);
+		if ($col == "_id") {
+			$val = parse_id($val);
 		}
 
 		if (preg_match('~^\(f\)(.+)~', $op, $match)) {
