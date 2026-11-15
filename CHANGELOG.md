@@ -12,6 +12,7 @@ AdminNeo 5.9.1
 
 - Select: Fix fatal error on malformed search conditions in the URL
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
+- ClickHouse: Fix ordering by a column with an aggregate function
 
 AdminNeo 5.9 (2026-11-01)
 -------------------------

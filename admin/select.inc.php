@@ -42,8 +42,9 @@ $limit = Admin::get()->processSelectionLimit();
 
 // Select expressions with aliases, used by the queries of both the page and the export.
 $aliased_select = $select;
-if (DIALECT == "pgsql" || DIALECT == "mssql") {
+if (DIALECT == "pgsql" || DIALECT == "mssql" || DIALECT == "clickhouse") {
 	// Alias functions so that e.g. COUNT(DISTINCT a) and COUNT(*) don't collapse into a single 'count' column in fetchAssoc().
+	// ClickHouse names the column MAX(id) on its own, but the result can be ordered by that name only if it is an alias.
 	foreach ((array)$_GET["columns"] as $key => $val) {
 		if (isset($aliased_select[$key]) && $val["fun"]) {
 			$aliased_select[$key] .= " AS " . idf_escape(apply_sql_function($val["fun"], ($val["col"] != "" ? $val["col"] : "*")));
