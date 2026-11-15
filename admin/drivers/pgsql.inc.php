@@ -1210,7 +1210,7 @@ ORDER BY s.ordinal_position";
 		return apply_queries("DROP DATABASE", $databases, 'AdminNeo\idf_escape');
 	}
 
-	function rename_database(string $name, string $collation): bool
+	function rename_database(string $name, ?string $collation): bool
 	{
 		Connection::get()->close();
 

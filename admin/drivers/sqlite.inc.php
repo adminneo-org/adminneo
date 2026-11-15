@@ -645,7 +645,7 @@ if (isset($_GET["sqlite"])) {
 		return true;
 	}
 
-	function rename_database(string $name, string $collation): bool
+	function rename_database(string $name, ?string $collation): bool
 	{
 		if (!check_sqlite_name($name)) {
 			return false;

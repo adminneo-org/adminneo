@@ -1034,7 +1034,7 @@ ORDER BY ORDINAL_POSITION";
 	 *
 	 * @param string $name New name.
 	 */
-	function rename_database(string $name, string $collation): bool
+	function rename_database(string $name, ?string $collation): bool
 	{
 		$return = false;
 		if (create_database($name, $collation)) {

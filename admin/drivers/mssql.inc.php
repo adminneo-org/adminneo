@@ -744,9 +744,9 @@ WHERE OBJECT_NAME(i.object_id) = " . q($table)
 		return (bool)queries("DROP DATABASE " . implode(", ", array_map('AdminNeo\idf_escape', $databases)));
 	}
 
-	function rename_database(string $name, string $collation): bool
+	function rename_database(string $name, ?string $collation): bool
 	{
-		if (preg_match('~^[a-z0-9_]+$~i', $collation)) {
+		if ($collation && preg_match('~^[a-z0-9_]+$~i', $collation)) {
 			queries("ALTER DATABASE " . idf_escape(DB) . " COLLATE $collation");
 		}
 		queries("ALTER DATABASE " . idf_escape(DB) . " MODIFY NAME = " . idf_escape($name));
