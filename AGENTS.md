@@ -76,6 +76,8 @@ The code in compiled file is downgraded to support PHP 5.4 and above by calling 
 php bin/compile.php && php -l compiled/adminneo.php
 ```
 
+The downgrade removes scalar and nullable parameter types, property types and return types, so a `TypeError` caused by one of them occurs only in the dev version. Reproduce a fatal error on the `*-compiled-agent.php` entry point before calling it a bug or a regression of a release.
+
 ### Plugin system
 
 The plugin architecture is the primary extension mechanism:
@@ -191,6 +193,7 @@ Co-Authored-By: Claude <model name> <noreply@anthropic.com>
 - Reference an AdminNeo issue **in the subject**: `(fix #<issue_id>)` when the commit closes it, `(issue #<issue_id>)` when it only relates to it — e.g. a follow-up to an already closed issue, or one part of a larger one. Never add an `Issue:` line — that is porting-only.
 - Always end with the `Co-Authored-By` line naming the used Claude model, e.g. `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - Add a `CHANGELOG.md` entry under the open version section for anything user-visible. Reference an AdminNeo issue at the end of the line as `(issue #<issue_id>)`, whether the commit closes it or only relates to it.
+- A fix of a bug that occurs only in the dev version, e.g. a `TypeError` from a type declaration removed by the compiler, gets no changelog entry.
 - Keep a changelog line short: name the area and the effect, not every case. Sum up a list of types as a category, e.g. "in non-text columns".
 - A fix that extends one already listed under the open version updates that line instead of adding a new one.
 - Keep the lines of one driver together, with security fixes first. Lines for shared code such as PDO follow the drivers.
