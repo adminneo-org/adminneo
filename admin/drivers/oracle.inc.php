@@ -351,7 +351,7 @@ if (isset($_GET["oracle"]) && !defined("AdminNeo\DRIVER")) {
 	function is_server_host_valid(string $hostPath): bool
 	{
 		// EasyConnect host+path format: host[/[service_name][:server_type][/instance_name]]
-		return (bool)preg_match('~^[^/]+(/([^/:]+)?(:[^/:]+)?(/[^/:]+)?)?$~', $hostPath);
+		return preg_match('~^([^/]+)(/([-\w.$]+)?(:[-\w.$]+)?(/[-\w.$]+)?)?$~Du', $hostPath, $match) && is_host_valid($match[1]);
 	}
 
 	function idf_escape(string $idf): string

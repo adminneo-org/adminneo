@@ -1407,6 +1407,21 @@ function host_port(string $server): array
 	);
 }
 
+/**
+ * Checks whether the host is a hostname, IPv4 address or IPv6 address in brackets.
+ *
+ * Any other character could be interpreted by a driver as a part of its connection string, e.g. as a port or
+ * an additional parameter.
+ */
+function is_host_valid(string $host): bool
+{
+	if (preg_match('~^\[(.+)]$~D', $host, $match)) {
+		return (bool)filter_var($match[1], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+	}
+
+	return (bool)preg_match('~^[-\w.]+$~Du', $host);
+}
+
 /** Get query to compute number of found rows
 * @param string
 * @param list<string>

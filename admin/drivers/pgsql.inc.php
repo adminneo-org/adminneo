@@ -39,7 +39,7 @@ if (isset($_GET["pgsql"]) && !defined("AdminNeo\DRIVER")) {
 				});
 
 				list($host, $port) = host_port($server);
-				$this->connectionString = ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") .
+				$this->connectionString = ($host != "" ? "host='" . addcslashes($host, "'\\") . "' " : "") . ($port ? "port=$port " : "") .
 					"user='" . addcslashes($username, "'\\") . "' password='" . addcslashes($password, "'\\") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
@@ -277,7 +277,8 @@ if (isset($_GET["pgsql"]) && !defined("AdminNeo\DRIVER")) {
 
 				list($host, $port) = host_port($server);
 				// TODO client_encoding is supported since 9.1, but we can't yet use minVersion() here
-				$dsn = "pgsql:" . ($host != "" ? "host=$host " : "") . ($port ? "port=$port " : "") . "client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
+				$dsn = "pgsql:" . ($host != "" ? "host='" . addcslashes($host, "'\\") . "' " : "") . ($port ? "port=$port " : "") .
+					"client_encoding=utf8 dbname='" . ($db != "" ? addcslashes($db, "'\\") : "postgres") . "'";
 
 				$ssl_mode = Admin::get()->getConfig()->getSslMode();
 				if ($ssl_mode) {

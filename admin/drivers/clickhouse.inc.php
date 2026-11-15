@@ -369,7 +369,7 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 	function is_server_host_valid(string $hostPath): bool
 	{
-		return strpos(rtrim($hostPath, '/'), '/') === false;
+		return is_host_valid(rtrim($hostPath, '/'));
 	}
 
 	function connect(bool $primary = false, ?string &$error = null): ?Connection

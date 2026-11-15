@@ -521,6 +521,12 @@ if (isset($_GET["mssql"]) && !defined("AdminNeo\DRIVER")) {
 		return MsSqlDriver::create($connection, Admin::get());
 	}
 
+	function is_server_host_valid(string $hostPath): bool
+	{
+		// Host with an optional named instance: host[\instance]
+		return preg_match('~^([^\\\\]+)(\\\\[-\w$]+)?$~Du', $hostPath, $match) && is_host_valid($match[1]);
+	}
+
 	/**
 	 * @param string $string
 	 * @return bool

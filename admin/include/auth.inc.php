@@ -17,6 +17,11 @@ if ($_COOKIE["neo_permanent"]) {
  */
 function validate_server_input(array &$permanent): void
 {
+	// The key of a configured server is not a host, the server itself comes from the configuration.
+	if (Admin::get()->getConfig()->getServer(SERVER)) {
+		return;
+	}
+
 	// Remove socket. E.g:
 	// :/var/www/mysql.sock
 	// 127.0.0.1:/var/www/mysql.sock
@@ -25,6 +30,11 @@ function validate_server_input(array &$permanent): void
 	$server = preg_replace('~:/[-\w.][-\w.:/]*$~D', "", SERVER);
 	if ($server == "") {
 		return;
+	}
+
+	// Reject control characters and whitespaces, parse_url() replaces them with an underscore.
+	if (preg_match('~[[:cntrl:][:space:]]~', $server)) {
+		auth_error($permanent);
 	}
 
 	// Add dummy https scheme for correct parsing.
@@ -67,11 +77,12 @@ if (!function_exists('AdminNeo\is_server_host_valid')) {
 	 * Validates server host+path.
 	 *
 	 * Every driver can validate URL host and path by its own rules. Path is forbidden by default, HTTP-based drivers
-	 * allow only '/' as path and Oracle driver validates path according to the EasyConnect URL format.
+	 * allow only '/' as path, Oracle driver validates path according to the EasyConnect URL format and MS SQL driver
+	 * allows a named instance. The host itself has to be always checked by is_host_valid().
 	 */
 	function is_server_host_valid(string $hostPath): bool
 	{
-		return strpos($hostPath, '/') === false;
+		return is_host_valid($hostPath);
 	}
 }
 
