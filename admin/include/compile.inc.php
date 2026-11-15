@@ -229,8 +229,9 @@ function downgrade_php(string $code): string
 		}
 	}
 
-	// Arrays unpacking.
-	$code = preg_replace('~(^|\s|\()\[(.+?)]\s*=~', '\1list(\2) =', $code);
+	// Arrays unpacking. The brackets inside must be balanced, so that the match can't start at an unrelated bracket.
+	// Operators == and => are skipped, they follow an array literal or an array element used as a key.
+	$code = preg_replace('~(^|\s|\()\[((?:[^][\n]++|\[(?2)?])+)]\s*=(?![=>])~', '\1list(\2) =', $code);
 
 	// Class names.
 	$code = preg_replace('~\\\\([\w\\\\]+)::class\b~', '\'\\\\$1\'', $code);

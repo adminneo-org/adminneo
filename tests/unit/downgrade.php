@@ -84,6 +84,13 @@ check('private const A = []; $a = self::A[1]; $a = self::A;', 'private static $A
 // Arrays unpacking.
 check('[$a, $b] = $c', 'list($a, $b) = $c');
 check('([$a, $b] = $c)', '(list($a, $b) = $c)');
+check('[$a[1], $b[]] = $c', 'list($a[1], $b[]) = $c');
+
+// Array literals are not changed.
+check('return (isset($a[$b]) ? [$c => [$a[$b] => $d]] : null);', 'return (isset($a[$b]) ? [$c => [$a[$b] => $d]] : null);');
+check('[$a[$b] == $c]', '[$a[$b] == $c]');
+check('[$a[$b] === $c]', '[$a[$b] === $c]');
+check('f([1], $a[2] = 3)', 'f([1], $a[2] = 3)');
 
 // Class names.
 check('A::class', '\'\AdminNeo\A\'');
