@@ -120,7 +120,8 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function quote(string $string): string
 			{
-				return $string;
+				// There is no query language to quote the value for. It is quoted so that it can be told apart from the syntax of a condition.
+				return "'" . str_replace("'", "''", $string) . "'";
 			}
 		}
 
@@ -243,10 +244,13 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 		public function select(string $table, array $select, array $where, array $group, array $order = [], int $limit = 1, int $page = 0, bool $print = false)
 		{
 			$filter = where_to_query($where);
+			if ($filter === null) {
+				return false;
+			}
 
 			$select = ($select == ["*"]
 				? []
-				: array_fill_keys($select, 1)
+				: array_fill_keys(array_map('AdminNeo\idf_unescape', $select), 1)
 			);
 			if (count($select) && !isset($select['_id'])) {
 				$select['_id'] = 0;
@@ -257,7 +261,7 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 			$sort = [];
 			foreach ($order as $val) {
 				$val = preg_replace('~ DESC$~', '', $val, 1, $count);
-				$sort[$val] = ($count ? -1 : 1);
+				$sort[idf_unescape($val)] = ($count ? -1 : 1);
 			}
 			if ($sort) {
 				$options['sort'] = $sort;
@@ -287,19 +291,22 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 		{
 			$filter = sql_query_where_parser($queryWhere);
-
-			if (isset($record['_id'])) {
-				unset($record['_id']);
+			if ($filter === null) {
+				return false;
 			}
-			$removeFields = [];
+
+			$set = $removeFields = [];
 			foreach ($record as $key => $value) {
+				$key = idf_unescape($key);
+
 				if ($value == self::NULL) {
 					$removeFields[$key] = 1;
-					unset($record[$key]);
+				} elseif ($key != '_id') {
+					$set[$key] = unquote($value);
 				}
 			}
 
-			$object = ['$set' => $record];
+			$object = ['$set' => $set];
 			if (count($removeFields)) {
 				$object['$unset'] = $removeFields;
 			}
@@ -318,6 +325,10 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 		public function delete(string $table, string $queryWhere, int $limit = 0)
 		{
 			$filter = sql_query_where_parser($queryWhere);
+			if ($filter === null) {
+				return false;
+			}
+
 			$options = $limit ? ['limit' => $limit] : [];
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
@@ -331,21 +342,23 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 
 		public function insert(string $table, array $record)
 		{
-			if ($record['_id'] == '') {
-				unset($record['_id']);
-			}
-
+			$document = [];
 			foreach ($record as $key => $value) {
-				if ($value == self::NULL) {
-					unset($record[$key]);
+				$key = idf_unescape($key);
+
+				if ($value != self::NULL) {
+					$value = unquote($value);
+					if ($key != '_id' || $value != '') {
+						$document[$key] = $value;
+					}
 				}
 			}
 
 			// Save the query for later use in a flesh message. TODO: This is so ugly.
-			queries('insert(' . json_encode($record) . ")");
+			queries('insert(' . json_encode($document) . ")");
 
 			$bulk = new BulkWrite();
-			$bulk->insert($record);
+			$bulk->insert($document);
 
 			return Connection::get()->executeBulkWrite(Connection::get()->getDbName() . ".$table", $bulk, 'getInsertedCount');
 		}
@@ -467,6 +480,9 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 	function found_rows(array $table_status, array $where): ?int
 	{
 		$where = where_to_query($where);
+		if ($where === null) {
+			return null;
+		}
 
 		$cursor = Connection::get()->executeCommand(['count' => $table_status['Name'], 'query' => $where]);
 		if (!$cursor) {
@@ -476,83 +492,171 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 		return (int)$cursor->toArray()[0]->n;
 	}
 
-	function sql_query_where_parser(string $queryWhere): array
+	/**
+	 * Decodes a value quoted by Connection::quote().
+	 *
+	 * @param mixed $value Other values are returned as they are, e.g. a document entered as JSON.
+	 *
+	 * @return mixed
+	 */
+	function unquote($value)
 	{
-		$queryWhere = preg_replace('~^\s*WHERE\s*~', "", $queryWhere);
-		while ($queryWhere[0] == "(") {
-			$queryWhere = preg_replace('~^\((.*)\)$~', "$1", $queryWhere);
+		if (is_string($value) && strlen($value) > 1 && $value[0] == "'" && substr($value, -1) == "'") {
+			return str_replace("''", "'", substr($value, 1, -1));
 		}
 
-		$wheres = explode(' AND ', $queryWhere);
-		$wheresOr = explode(') OR (', $queryWhere);
-		$where = [];
-		foreach ($wheres as $whereStr) {
-			$where[] = trim($whereStr);
-		}
-		if (count($wheresOr) == 1) {
-			$wheresOr = [];
-		} elseif (count($wheresOr) > 1) {
-			$where = [];
-		}
-		return where_to_query($where, $wheresOr);
+		return $value;
 	}
 
-	function where_to_query(array $whereAnd = [], array $whereOr = []): array
+	/**
+	 * Converts the condition of an update or a delete to the filter.
+	 *
+	 * @param string $queryWhere Empty string or " WHERE ...".
+	 *
+	 * @return ?array Null if the condition is not understood.
+	 */
+	function sql_query_where_parser(string $queryWhere): ?array
 	{
-		$data = [];
-		foreach (['and' => $whereAnd, 'or' => $whereOr] as $type => $where) {
-			if (is_array($where)) {
-				foreach ($where as $expression) {
-					list($col, $op, $val) = explode(" ", $expression, 3);
-					if ($col == "_id" && preg_match('~^(MongoDB\\\\BSON\\\\ObjectID)\("(.+)"\)$~', $val, $match)) {
-						list(, $class, $val) = $match;
-						$val = new $class($val);
-					}
-					if (!in_array($op, Admin::get()->getOperators())) {
-						continue;
-					}
-					if (preg_match('~^\(f\)(.+)~', $op, $match)) {
-						$val = (float) $val;
-						$op = $match[1];
-					} elseif (preg_match('~^\(date\)(.+)~', $op, $match)) {
-						$dateTime = new DateTime($val);
-						$val = new BSON\UTCDatetime($dateTime->getTimestamp() * 1000);
-						$op = $match[1];
-					}
-					switch ($op) {
-						case '=':
-							$op = '$eq';
-							break;
-						case '!=':
-							$op = '$ne';
-							break;
-						case '>':
-							$op = '$gt';
-							break;
-						case '<':
-							$op = '$lt';
-							break;
-						case '>=':
-							$op = '$gte';
-							break;
-						case '<=':
-							$op = '$lte';
-							break;
-						case 'regex':
-							$op = '$regex';
-							break;
-						default:
-							continue 2;
-					}
-					if ($type == 'and') {
-						$data['$and'][] = [$col => [$op => $val]];
-					} elseif ($type == 'or') {
-						$data['$or'][] = [$col => [$op => $val]];
-					}
-				}
+		// WHERE without a condition is not accepted, it would match all documents.
+		return where_to_query($queryWhere != "" ? [preg_replace('~^\s*WHERE\s~', "", $queryWhere)] : []);
+	}
+
+	/**
+	 * Converts the conditions generated by AdminNeo to the filter.
+	 *
+	 * Names and values are quoted by idf_escape() and Connection::quote(), so the text inside them is never taken as a part of the condition.
+	 * A condition that is not understood must not be skipped, because the filter would match more documents then.
+	 *
+	 * @param string[] $where Conditions to join by AND, e.g. "`_id` = 'x'" or "((`_id` = 'x') OR (`_id` = 'y'))".
+	 *
+	 * @return ?array Null if a condition is not understood, the error is set to the connection.
+	 */
+	function where_to_query(array $where): ?array
+	{
+		$filters = [];
+
+		foreach ($where as $expression) {
+			$offset = 0;
+			$filter = parse_where($expression, $offset);
+
+			if ($filter === null || !preg_match('~\G\s*$~', $expression, $match, 0, $offset)) {
+				Connection::get()->setError("Unsupported condition: " . trim($expression));
+
+				return null;
 			}
+
+			$filters[] = $filter;
 		}
-		return $data;
+
+		return (count($filters) > 1 ? ['$and' => $filters] : ($filters ? $filters[0] : []));
+	}
+
+	/**
+	 * Parses the conditions joined by AND and OR, where AND takes precedence.
+	 *
+	 * @param int $offset Position in the expression, moved behind the parsed part.
+	 *
+	 * @return ?array Null if a condition is not understood.
+	 */
+	function parse_where(string $expression, int &$offset): ?array
+	{
+		$or = [];
+		$and = [];
+
+		do {
+			$filter = parse_where_condition($expression, $offset);
+			if ($filter === null) {
+				return null;
+			}
+			$and[] = $filter;
+
+			$operator = (preg_match('~\G\s+(AND|OR)\s+~', $expression, $match, 0, $offset) ? $match[1] : "");
+			$offset += strlen($match[0] ?? "");
+
+			if ($operator != "AND") {
+				$or[] = (count($and) > 1 ? ['$and' => $and] : $and[0]);
+				$and = [];
+			}
+		} while ($operator);
+
+		return (count($or) > 1 ? ['$or' => $or] : $or[0]);
+	}
+
+	/**
+	 * Parses a single condition or conditions in parentheses.
+	 *
+	 * @param int $offset Position in the expression, moved behind the parsed part.
+	 *
+	 * @return ?array Null if the condition is not understood.
+	 */
+	function parse_where_condition(string $expression, int &$offset): ?array
+	{
+		if (preg_match('~\G\s*\(~', $expression, $match, 0, $offset)) {
+			$offset += strlen($match[0]);
+			$filter = parse_where($expression, $offset);
+			if ($filter === null || !preg_match('~\G\s*\)~', $expression, $match, 0, $offset)) {
+				return null;
+			}
+			$offset += strlen($match[0]);
+
+			return $filter;
+		}
+
+		// Searching anywhere without a column that could hold the value.
+		if (preg_match('~\G\s*1 = 0~', $expression, $match, 0, $offset)) {
+			$offset += strlen($match[0]);
+
+			return ['_id' => ['$in' => []]];
+		}
+
+		$pattern = implode("|", array_map('preg_quote', Admin::get()->getOperators()));
+		if (!preg_match("~\\G\\s*`((?:[^`]++|``)*+)` (?:IS NULL|($pattern) '((?:[^']++|'')*+)')~", $expression, $match, 0, $offset)) {
+			return null;
+		}
+		$offset += strlen($match[0]);
+
+		$col = str_replace("``", "`", $match[1]);
+		if (!isset($match[2])) {
+			// It matches also a document without the field.
+			return [$col => null];
+		}
+
+		$op = $match[2];
+		$val = str_replace("''", "'", $match[3]);
+
+		if ($col == "_id" && preg_match('~^MongoDB\\\\BSON\\\\ObjectID\("([\da-f]{24})"\)$~i', $val, $match)) {
+			$val = new BSON\ObjectId($match[1]);
+		}
+
+		if (preg_match('~^\(f\)(.+)~', $op, $match)) {
+			$val = (float) $val;
+			$op = $match[1];
+		} elseif (preg_match('~^\(date\)(.+)~', $op, $match)) {
+			try {
+				$dateTime = new DateTime($val);
+			} catch (Exception $exception) {
+				return null;
+			}
+			$val = new BSON\UTCDatetime($dateTime->getTimestamp() * 1000);
+			$op = $match[1];
+		}
+
+		$operators = [
+			'=' => '$eq',
+			'!=' => '$ne',
+			'>' => '$gt',
+			'<' => '$lt',
+			'>=' => '$gte',
+			'<=' => '$lte',
+			'regex' => '$regex',
+		];
+
+		if (!isset($operators[$op])) {
+			return null;
+		}
+		$op = $operators[$op];
+
+		return [$col => [$op => $val]];
 	}
 
 	function table(string $idf): string
@@ -562,7 +666,8 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 
 	function idf_escape(string $idf): string
 	{
-		return $idf;
+		// There is no query language to escape the name for. It is quoted so that it can be told apart from the syntax of a condition.
+		return "`" . str_replace("`", "``", $idf) . "`";
 	}
 
 	function table_status(string $name = "", bool $fast = false): array
@@ -633,7 +738,7 @@ if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 				$columns = [];
 				foreach ($set as $column) {
 					$column = preg_replace('~ DESC$~', '', $column, 1, $count);
-					$columns[$column] = $count ? -1 : 1;
+					$columns[idf_unescape($column)] = $count ? -1 : 1;
 				}
 
 				$command = [
