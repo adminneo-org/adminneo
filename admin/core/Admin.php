@@ -835,7 +835,7 @@ class Admin extends Origin
 						&& (!preg_match('~date|timestamp~', $field["type"]) || (preg_match($datePattern, $val, $match) && checkdate((int) $match[2], (int) $match[3], (int) $match[1])))
 						&& Driver::get()->isSearchable($where, $field)
 						// Elasticsearch needs boolean value properly formatted.
-						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
+						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~^(true|false)$~i', $val))
 						// Elasticsearch can use regexp only on text and keyword fields.
 						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"]))
 						// Elasticsearch has integer types not covered by number_type().
@@ -977,7 +977,8 @@ class Admin extends Origin
 		} elseif (preg_match('~^(md5|sha1|password|encrypt)$~', $function)) {
 			$return = "$function($return)";
 		} elseif ($field["type"] == "boolean" && DIALECT == "elastic") {
-			$return = $value == "0" ? "false" : "true";
+			// The checkbox sends 1 or 0, the text comes from a search or from the inline edit.
+			$return = preg_match('~^(0|false)$~i', $value) ? "false" : "true";
 		}
 
 		return unconvert_field($field, $return);
