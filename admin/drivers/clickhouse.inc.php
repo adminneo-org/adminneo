@@ -378,7 +378,7 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 		$credentials = Admin::get()->getCredentials();
 
-		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->openPasswordless($credentials[0], $credentials[1], $credentials[2], false)) {
 			$error = $connection->getError();
 			return null;
 		}

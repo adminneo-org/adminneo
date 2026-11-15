@@ -24,6 +24,7 @@ AdminNeo 5.9.1
 - MS SQL: Fix logging in with an empty username and any password (GHSA-w8j4-8pww-wm83)
 - ClickHouse: Fix injecting HTTP query parameters via the database name (GHSA-gj7f-g8j2-wxxr)
 - ClickHouse: Fix SQL injection via a backslash in the name of a column (GHSA-4xh5-8hm7-7829)
+- ClickHouse: Fix logging in to an account without a password by any password if `defaultPasswordHash` is set (GHSA-h9x9-p972-28q9)
 - ClickHouse: Run queries with the SQL operator in the read-only mode (CSRF)
 - ClickHouse: Fix ordering by a column with an aggregate function
 - MongoDB: Fix updating and deleting other documents via a crafted `_id` or AND, OR in a searched value (GHSA-rxw7-qqf5-2pv8)
