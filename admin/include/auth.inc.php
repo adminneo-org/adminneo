@@ -72,6 +72,23 @@ function validate_server_input(array &$permanent): void
 	}
 }
 
+/**
+ * Rejects NUL bytes in the username and password.
+ *
+ * Database extensions read them as C strings, which end at the first NUL byte. A username or password starting with
+ * a NUL byte would be empty for them, but not for the checks done before connecting.
+ *
+ * @throws Exception
+ */
+function validate_credentials_input(array &$permanent): void
+{
+	$password = get_password();
+
+	if (strpos($_GET["username"], "\0") !== false || (is_string($password) && strpos($password, "\0") !== false)) {
+		auth_error($permanent);
+	}
+}
+
 if (!function_exists('AdminNeo\is_server_host_valid')) {
 	/**
 	 * Validates server host+path.
@@ -427,6 +444,7 @@ if (!isset($_GET["username"]) || get_password() === null) {
 }
 
 validate_server_input($permanent);
+validate_credentials_input($permanent);
 check_invalid_login($permanent);
 
 Admin::get()->getConfig()->applyServer(SERVER);

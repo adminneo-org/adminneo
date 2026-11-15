@@ -36,6 +36,7 @@ AdminNeo 5.9.1
 - Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
 - EditorNeo: Fix XSS via the request path in the autocomplete of a foreign key (GHSA-fr24-68fv-4whc)
 - Login: Fix connecting to privileged ports via special characters in the server (GHSA-v65x-fj5j-4m4g)
+- Login: Fix bypassing the checks of an empty username and password via a NUL byte
 - Fix fatal error on the server, username or database sent as an array in the URL
 - Fix fatal error on the parameters of two drivers in the URL
 - Fix HTML injection via the request path in the links to static files
