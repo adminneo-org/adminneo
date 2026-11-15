@@ -74,6 +74,13 @@ class JsonDumpPlugin extends Plugin
 					echo ",\n";
 				}
 
+				foreach ($row as $key => $val) {
+					// Binary data can't be encoded to JSON, json_encode() fails on a text that is not valid UTF-8.
+					if (is_string($val) && !preg_match('~~u', $val)) {
+						$row[$key] = "0x" . bin2hex($val);
+					}
+				}
+
 				echo preg_replace('~\n\s+~', "\n\t", json_encode($row, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 				$first = false;
