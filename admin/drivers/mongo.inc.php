@@ -13,7 +13,8 @@ use MongoDB\Driver\Query;
 
 Drivers::add("mongo", "MongoDB (alpha)", ["mongodb"]);
 
-if (isset($_GET["mongo"])) {
+// Only one driver can be active.
+if (isset($_GET["mongo"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "mongo");
 	define("AdminNeo\DIALECT", "mongo");
 

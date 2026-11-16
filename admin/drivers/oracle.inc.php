@@ -4,7 +4,8 @@ namespace AdminNeo;
 
 Drivers::add("oracle", "Oracle (beta)", ["OCI8", "PDO_OCI"]);
 
-if (isset($_GET["oracle"])) {
+// Only one driver can be active.
+if (isset($_GET["oracle"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "oracle");
 	define("AdminNeo\DIALECT", "oracle");
 

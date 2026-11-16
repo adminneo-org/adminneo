@@ -4,7 +4,8 @@ namespace AdminNeo;
 
 Drivers::add("clickhouse", "ClickHouse (alpha)", ["allow_url_fopen"]);
 
-if (isset($_GET["clickhouse"])) {
+// Only one driver can be active.
+if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "clickhouse");
 	define("AdminNeo\DIALECT", "clickhouse");
 

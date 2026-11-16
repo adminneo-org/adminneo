@@ -4,7 +4,8 @@ namespace AdminNeo;
 
 Drivers::add("elastic", "Elasticsearch", ["json + allow_url_fopen"]);
 
-if (isset($_GET["elastic"])) {
+// Only one driver can be active.
+if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "elastic");
 	define("AdminNeo\DIALECT", "elastic");
 

@@ -10,7 +10,8 @@ namespace AdminNeo;
 
 Drivers::add("mssql", "MS SQL", ["SQLSRV", "PDO_SQLSRV", "PDO_DBLIB"]);
 
-if (isset($_GET["mssql"])) {
+// Only one driver can be active.
+if (isset($_GET["mssql"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "mssql");
 	define("AdminNeo\DIALECT", "mssql");
 

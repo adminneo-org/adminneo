@@ -8,7 +8,8 @@ use SQLite3Result;
 
 Drivers::add("sqlite", "SQLite", ["SQLite3", "PDO_SQLite"]);
 
-if (isset($_GET["sqlite"])) {
+// Only one driver can be active.
+if (isset($_GET["sqlite"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "sqlite");
 	define("AdminNeo\DIALECT", "sqlite");
 

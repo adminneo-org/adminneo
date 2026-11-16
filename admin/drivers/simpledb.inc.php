@@ -4,7 +4,8 @@ namespace AdminNeo;
 
 Drivers::add("simpledb", "SimpleDB", ["SimpleXML + allow_url_fopen"]);
 
-if (isset($_GET["simpledb"])) {
+// Only one driver can be active.
+if (isset($_GET["simpledb"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "simpledb");
 	define("AdminNeo\DIALECT", "simpledb");
 

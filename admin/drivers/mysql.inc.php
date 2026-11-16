@@ -9,7 +9,8 @@ use stdClass;
 
 Drivers::add("mysql", "MySQL", ["MySQLi", "PDO_MySQL"]);
 
-if (isset($_GET["mysql"])) {
+// Only one driver can be active.
+if (isset($_GET["mysql"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "mysql");
 	define("AdminNeo\DIALECT", "sql");
 

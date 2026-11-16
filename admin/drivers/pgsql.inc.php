@@ -4,7 +4,8 @@ namespace AdminNeo;
 
 Drivers::add("pgsql", "PostgreSQL", ["PgSQL", "PDO_PgSQL"]);
 
-if (isset($_GET["pgsql"])) {
+// Only one driver can be active.
+if (isset($_GET["pgsql"]) && !defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", "pgsql");
 	define("AdminNeo\DIALECT", "pgsql");
 
