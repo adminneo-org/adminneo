@@ -14,6 +14,7 @@ AdminNeo 5.9.1
 - Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
 - ClickHouse: Fix ordering by a column with an aggregate function
+- Fix fatal error on the server, username or database sent as an array in the URL
 - JsonDumpPlugin: Fix invalid JSON in export of binary values, export them as a hex number like `0xff00`
 
 AdminNeo 5.9 (2026-11-01)

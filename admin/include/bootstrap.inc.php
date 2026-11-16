@@ -23,6 +23,14 @@ if ($filter || ini_get("filter.default_flags")) {
 	}
 }
 
+// Parameters used in every request have to be strings, an array sent instead of them is rejected.
+foreach (["file", "ext", "username", "db", "ns"] as $key) {
+	if (isset($_GET[$key]) && !is_string($_GET[$key])) {
+		http_response_code(400);
+		exit;
+	}
+}
+
 if (function_exists("mb_internal_encoding")) {
 	mb_internal_encoding("8bit");
 }
@@ -141,6 +149,12 @@ if ($posted_language !== null && !isset($_GET["settings"])) {
 if (!defined("AdminNeo\DRIVER")) {
 	define("AdminNeo\DRIVER", null);
 	define("AdminNeo\DIALECT", null);
+}
+
+// A server sent as an array is rejected like the other parameters used in every request.
+if (DRIVER && !is_string($_GET[DRIVER])) {
+	http_response_code(400);
+	exit;
 }
 
 define("AdminNeo\SERVER", DRIVER ? $_GET[DRIVER] : null); // read from pgsql=localhost
