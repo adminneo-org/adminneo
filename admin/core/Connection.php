@@ -95,6 +95,9 @@ abstract class Connection
 			return true;
 		}
 
+		// Forget the error of the attempt with an empty password.
+		$this->error = "";
+
 		return $this->open($server, $username, $password);
 	}
 

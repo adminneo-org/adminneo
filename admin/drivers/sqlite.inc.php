@@ -153,6 +153,11 @@ if (isset($_GET["sqlite"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function open(string $server, string $username, string $password): bool
 			{
+				// SQLite can handle a name starting with "file:" as a URI, the opened file would differ from the checked name.
+				if (stripos($server, "file:") === 0) {
+					$server = "./$server";
+				}
+
 				if (!parent::open($server, $username, $password)) {
 					return false;
 				}
@@ -170,6 +175,12 @@ if (isset($_GET["sqlite"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function selectDatabase(string $name): bool
 			{
+				// SQLite handles a name starting with "file:" as a URI, so ATTACH would open a file
+				// differing from the checked name. Neutralize it, like open() does.
+				if (stripos($name, "file:") === 0) {
+					$name = "./$name";
+				}
+
 				$this->attaching = true;
 				// is_readable - SQLite 3
 				$attached = is_readable($name) && $this->query("ATTACH " . $this->quote(preg_match("~(^[/\\\\]|:)~", $name) ? $name : dirname($_SERVER["SCRIPT_FILENAME"]) . "/$name") . " AS a");
@@ -600,6 +611,13 @@ if (isset($_GET["sqlite"]) && !defined("AdminNeo\DRIVER")) {
 
 	function check_sqlite_name(string $name): bool
 	{
+		// SQLite handles a name starting with "file:" as a URI, where the part after "?" or "#" is not a part of the file name,
+		// so the opened file would differ from the checked name - reject such names.
+		if (stripos($name, "file:") === 0) {
+			Connection::get()->setError(lang('Invalid database.'));
+			return false;
+		}
+
 		// avoid creating PHP files on unsecured servers
 		$extensions = "db|sdb|sqlite";
 		if (!preg_match("~^[^\\0]*\\.($extensions)\$~", $name)) {

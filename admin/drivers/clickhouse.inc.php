@@ -30,7 +30,11 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 			 */
 			function rootQuery(string $db, string $query)
 			{
-				[$file, $headers, $error] = get_url("$this->serviceUrl/?database=$db", stream_context_create(['http' => [
+				// A query with a fragment sent by the user is read-only, which disallows also functions accessing other servers.
+				// The server refuses it for a user limited by readonly = 2, which allows these functions, so the query fails on purpose.
+				$url = "$this->serviceUrl/?database=" . urlencode($db) . ($this->untrusted ? "&readonly=1" : "");
+
+				[$file, $headers, $error] = get_url($url, stream_context_create(['http' => [
 					'method' => 'POST',
 					'content' => $query,
 					'header' => [
@@ -284,7 +288,8 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 	function idf_escape(string $idf): string
 	{
-		return "`" . str_replace("`", "``", $idf) . "`";
+		// Backslash is an escape character also in identifiers.
+		return "`" . str_replace(["\\", "`"], ["\\\\", "``"], $idf) . "`";
 	}
 
 	function table(string $idf): string
@@ -364,7 +369,7 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 	function is_server_host_valid(string $hostPath): bool
 	{
-		return strpos(rtrim($hostPath, '/'), '/') === false;
+		return is_host_valid(rtrim($hostPath, '/'));
 	}
 
 	function connect(bool $primary = false, ?string &$error = null): ?Connection
@@ -373,7 +378,7 @@ if (isset($_GET["clickhouse"]) && !defined("AdminNeo\DRIVER")) {
 
 		$credentials = Admin::get()->getCredentials();
 
-		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {
+		if (!$connection->openPasswordless($credentials[0], $credentials[1], $credentials[2], false)) {
 			$error = $connection->getError();
 			return null;
 		}

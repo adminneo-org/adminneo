@@ -521,6 +521,12 @@ if (isset($_GET["mssql"]) && !defined("AdminNeo\DRIVER")) {
 		return MsSqlDriver::create($connection, Admin::get());
 	}
 
+	function is_server_host_valid(string $hostPath): bool
+	{
+		// Host with an optional named instance: host[\instance]
+		return preg_match('~^([^\\\\]+)(\\\\[-\w$]+)?$~Du', $hostPath, $match) && is_host_valid($match[1]);
+	}
+
 	/**
 	 * @param string $string
 	 * @return bool
@@ -547,6 +553,13 @@ if (isset($_GET["mssql"]) && !defined("AdminNeo\DRIVER")) {
 		$credentials = Admin::get()->getCredentials();
 		if ($credentials[0] == "") {
 			$credentials[0] = "localhost:1433";
+		}
+
+		// An empty username means the integrated authentication with the identity of the web server and the password is ignored.
+		// It is treated as a database without a password, so the default password has to be verified.
+		if ($credentials[1] == "" && $credentials[2] != "" && Admin::get()->verifyDefaultPassword($credentials[2]) !== true) {
+			$error = lang('Invalid server or credentials.');
+			return null;
 		}
 
 		if (!$connection->open($credentials[0], $credentials[1], $credentials[2])) {

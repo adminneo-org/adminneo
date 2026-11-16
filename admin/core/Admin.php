@@ -17,7 +17,7 @@ class Admin extends Origin
 	public function getServiceTitle(): string
 	{
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='133' height='28'><desc>AdminNeo</desc>" .
-			"<use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+			"<use href='" . h(link_files("logo.svg", ["images/logo.svg"])) . "#logo'/></svg></a>";
 	}
 
 	/**
@@ -45,16 +45,16 @@ class Admin extends Origin
 	 */
 	public function printToHead(): void
 	{
-		echo "<link rel='stylesheet' href='", link_files("jush.css", [
+		echo "<link rel='stylesheet' href='", h(link_files("jush.css", [
 			"../vendor/vrana/jush/jush.css",
 			"themes/default/jush.css",
-		]), "'>";
+		])), "'>";
 
 		if (!$this->admin->isLightModeForced()) {
 			echo "<link rel='stylesheet' " . (!$this->admin->isDarkModeForced() ? "media='(prefers-color-scheme: dark)' " : "") . "href='";
-			echo link_files("jush-dark.css", [
+			echo h(link_files("jush-dark.css", [
 				"themes/default/jush-dark.css",
-			]);
+			]));
 			echo "'>\n";
 		}
 
@@ -447,7 +447,7 @@ class Admin extends Origin
 		$showList = isset($partitionInfo["partition_names"]);
 
 		echo "<p>";
-		echo "<code class='jush-" . DIALECT . "'>BY {$partitionInfo["partition_by"]} ({$partitionInfo["partition"]})</code>";
+		echo "<code class='jush-" . DIALECT . "'>BY " . h($partitionInfo["partition_by"]) . " (" . h($partitionInfo["partition"]) . ")</code>";
 		if (!$showList && isset($partitionInfo["partitions"])) {
 			echo " " . lang('Partitions') . ": " . h($partitionInfo["partitions"]);
 		}
@@ -611,7 +611,7 @@ class Admin extends Origin
 		foreach ($indexes as $i => $index) {
 			if ($index["type"] == "FULLTEXT") {
 				echo "<div>(<i>" . implode("</i>, <i>", array_map('AdminNeo\h', $index["columns"])) . "</i>) AGAINST";
-				echo "<input type='text' class='input' name='fulltext[$i]' value='" . h($_GET["fulltext"][$i] ?? null) . "'>";
+				echo "<input type='text' class='input' name='fulltext[" . h($i) . "]' value='" . h($_GET["fulltext"][$i] ?? null) . "'>";
 				echo script("qsl('input').oninput = selectFieldChange;", "");
 				if (DIALECT == 'sql') {
 					echo checkbox("boolean[$i]", 1, isset($_GET["boolean"][$i]), "BOOL");
@@ -621,7 +621,8 @@ class Admin extends Origin
 		}
 
 		$change_next = "this.parentNode.firstChild.onchange();";
-		foreach (array_merge((array)$_GET["where"], [[]]) as $i => $val) {
+		// Keys are not preserved, they come from the URL and are printed to the name attributes.
+		foreach (array_merge(array_values((array)$_GET["where"]), [[]]) as $i => $val) {
 			if (!$val || ("$val[col]$val[val]" != "" && in_array($val["op"], $this->getOperators()))) {
 				echo "<div>";
 				echo select_input(
@@ -806,13 +807,15 @@ class Admin extends Origin
 					$oidColumn = DIALECT == "pgsql" && $op == "=" && $field["type"] == "oid";
 					if ($oidColumn) {
 						$cond .= " " . $this->admin->processFieldInput($field, $val) . "::regproc";
-					} elseif (preg_match('~IN$~', $op)) {
-						$in = process_length($val);
+					} elseif ($isList) {
 						// Compare non-numeric columns with strings, e.g. text = integer is an error in PostgreSQL. So is money = integer.
-						if ((!$isNumber || (DIALECT == "pgsql" && $field["type"] == "money")) && preg_match('~^\([-+.\d,]+\)$~', $in)) {
-							$in = "(" . implode(",", array_map('AdminNeo\q', explode(",", substr($in, 1, -1)))) . ")";
+						$isNumberList = $isNumber && !(DIALECT == "pgsql" && $field["type"] == "money");
+						$in = [];
+						foreach (parse_search_list($val) as $value) {
+							// Every other value is quoted, it must never get into the query as it was sent.
+							$in[] = $isNumberList && preg_match("~^$number$~", $value) ? $value : q($value);
 						}
-						$cond .= " " . ($in != "" ? $in : "(NULL)");
+						$cond .= " (" . ($in ? implode(", ", $in) : "NULL") . ")";
 					} elseif ($op == "SQL") {
 						$cond = " $val"; // SQL injection
 					} elseif (preg_match('~^(I?LIKE) %%$~', $op, $match)) {
@@ -832,7 +835,7 @@ class Admin extends Origin
 						&& (!preg_match('~date|timestamp~', $field["type"]) || (preg_match($datePattern, $val, $match) && checkdate((int) $match[2], (int) $match[3], (int) $match[1])))
 						&& Driver::get()->isSearchable($where, $field)
 						// Elasticsearch needs boolean value properly formatted.
-						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~true|false~', $val))
+						&& (!preg_match('~^elastic~', DRIVER) || $field["type"] != "boolean" || preg_match('~^(true|false)$~i', $val))
 						// Elasticsearch can use regexp only on text and keyword fields.
 						&& (!preg_match('~^elastic~', DRIVER) || strpos($op, "regexp") === false || preg_match('~text|keyword~', $field["type"]))
 						// Elasticsearch has integer types not covered by number_type().
@@ -870,9 +873,13 @@ class Admin extends Origin
 	public function processSelectionOrder(array $fields, array $indexes): array
 	{
 		$return = [];
+		// ClickHouse uses backslash as an escape character in identifiers, so it could hide the closing quote.
+		$escape = (DIALECT == "clickhouse" ? '\\\\' : '');
+		// TODO MS SQL uses []
+		$function = '~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`' . $escape . ']|``)+`|"(?:[^"' . $escape . ']|"")+")\)|COUNT\(\*\))$~';
 		foreach ((array)$_GET["order"] as $key => $val) {
 			if ($val != "") {
-				$return[] = (preg_match('~^((COUNT\(DISTINCT |[A-Z0-9_]+\()(`(?:[^`]|``)+`|"(?:[^"]|"")+")\)|COUNT\(\*\))$~', $val) ? $val : idf_escape($val)) // TODO MS SQL uses []
+				$return[] = (preg_match($function, $val) ? $val : idf_escape($val))
 					. (isset($_GET["desc"][$key])
 						? " DESC" . (DIALECT == "pgsql" && ($fields[$val]["null"] ?? null) ? " NULLS LAST" : "")
 						: ""
@@ -970,7 +977,8 @@ class Admin extends Origin
 		} elseif (preg_match('~^(md5|sha1|password|encrypt)$~', $function)) {
 			$return = "$function($return)";
 		} elseif ($field["type"] == "boolean" && DIALECT == "elastic") {
-			$return = $return == "0" ? "false" : "true";
+			// The checkbox sends 1 or 0, the text comes from a search or from the inline edit.
+			$return = preg_match('~^(0|false)$~i', $value) ? "false" : "true";
 		}
 
 		return unconvert_field($field, $return);

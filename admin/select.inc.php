@@ -305,7 +305,7 @@ if (!$columns && support("table")) {
 
 	foreach ((array)$_GET["where"] as $val) {
 		// The SQL operator passes the value to the database unescaped, GET is not protected by the CSRF token.
-		if ($val["op"] == "SQL" && !in_array($_SERVER["HTTP_SEC_FETCH_SITE"] ?? "", ["", "same-origin"])) {
+		if ($val["op"] == "SQL" && !is_same_origin()) {
 			echo "<p class='error'>" . lang('Invalid CSRF token. Send the form again.') . " " .
 				lang('If you did not send this request from AdminNeo then close this page.') . "\n";
 			page_footer();

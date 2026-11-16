@@ -86,6 +86,6 @@ class SlugifyEditPlugin extends Plugin
 		$maxLength = preg_match('~^\d+$~', $field["length"] ?? "") ? $field["length"] : null;
 
 		return "<input class='input' value='" . h($value) . "'" . ($maxLength ? " data-maxlength='$maxLength'" : "") . " size='40' $attrs>"
-			. script("initSlugField(qsl('input'), '$slug'" . ($maxLength ? ", $maxLength" : "") . ");");
+			. script("initSlugField(qsl('input'), '" . js_escape(bracket_escape($slug)) . "'" . ($maxLength ? ", $maxLength" : "") . ");");
 	}
 }

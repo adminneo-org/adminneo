@@ -42,6 +42,11 @@ class ClaudeSqlPlugin extends Plugin
 			return null;
 		}
 
+		// The method is called also on the login page, where the request is neither authenticated nor verified.
+		if (!is_authenticated()) {
+			return null;
+		}
+
 		// Build the system prompt. The database structure stays the same between questions, so it is cached.
 		$system = "I have a " . get_driver_name(DRIVER) . " database";
 		if (DB) {

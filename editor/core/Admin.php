@@ -14,7 +14,7 @@ class Admin extends Origin
 	public function getServiceTitle(): string
 	{
 		return "<a href='" . h(HOME_URL) . "'><svg role='img' class='logo' width='130' height='28'><desc>EditorNeo</desc>" .
-			"<use href='" . link_files("logo.svg", ["images/logo.svg"]) . "#logo'/></svg></a>";
+			"<use href='" . h(link_files("logo.svg", ["images/logo.svg"])) . "#logo'/></svg></a>";
 	}
 
 	public function getDatabase(): ?string
@@ -451,7 +451,7 @@ class Admin extends Origin
 					. "<input value='" . h($options) . "' class='input jsonly'>"
 					. "<div></div>"
 					. script("
-						qsl('input').oninput = partial(whisper, '" . ME . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
+						qsl('input').oninput = partial(whisper, '" . js_escape(ME) . "script=complete&source=" . urlencode($table) . "&field=" . urlencode($field["field"]) . "&value=');
 						qsl('div').onclick = whisperClick;
 					", "");
 			}

@@ -124,7 +124,7 @@ function icon(string $id, ?string $class = null): string
 {
 	$id = h($id);
 
-	return "<svg class='icon ic-$id $class'><use href='" . link_files("icons.svg", ["images/icons.svg"]) . "#$id'/></svg>";
+	return "<svg class='icon ic-$id $class'><use href='" . h(link_files("icons.svg", ["images/icons.svg"])) . "#$id'/></svg>";
 }
 
 /** Generate HTML checkbox
@@ -138,7 +138,7 @@ function icon(string $id, ?string $class = null): string
 * @return string
 */
 function checkbox($name, $value, $checked, $label = "", $onclick = "", $class = "", $labelled_by = "") {
-	$return = "<input type='checkbox' name='$name' value='" . h($value) . "'"
+	$return = "<input type='checkbox' name='" . h($name) . "' value='" . h($value) . "'"
 		. ($checked ? " checked" : "")
 		. ($labelled_by ? " aria-labelledby='$labelled_by'" : "")
 		. ">"
@@ -636,7 +636,7 @@ function search_tables(): void
  */
 function help_script(string $text, bool $side = false): string
 {
-	return script("initHelpFor(qsl('select, input'), '" . h($text) . "', $side);", "");
+	return script("initHelpFor(qsl('select, input'), '" . js_escape($text) . "', $side);", "");
 }
 
 /**

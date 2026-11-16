@@ -130,12 +130,12 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 			{
 				// Global search through all tables, built by search_tables().
 				if (preg_match('~^SELECT 1 FROM (\S+) WHERE (.+) LIMIT (\d+)$~s', $query, $matches)) {
-					return Driver::get()->select($matches[1], ["*"], explode(" AND ", $matches[2]), [], [], (int)$matches[3]);
+					return Driver::get()->select($matches[1], ["*"], split_conditions($matches[2], "AND"), [], [], (int)$matches[3]);
 				}
 
 				// Number of rows in select, built by count_rows().
 				if (preg_match('~^SELECT COUNT\(\*\) FROM (\S+)( WHERE (.+))?$~s', $query, $matches)) {
-					$count = Driver::get()->countRows($matches[1], isset($matches[3]) ? explode(" AND ", $matches[3]) : []);
+					$count = Driver::get()->countRows($matches[1], isset($matches[3]) ? split_conditions($matches[3], "AND") : []);
 
 					return $count === false ? false : new ElasticResult([[$count]]);
 				}
@@ -178,7 +178,8 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 
 			public function quote(string $string): string
 			{
-				return $string;
+				// The values are parsed back from the conditions, they must be distinguishable from the rest of them.
+				return "'" . str_replace("'", "''", $string) . "'";
 			}
 		}
 
@@ -220,6 +221,9 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 
 	class ElasticDriver extends Driver
 	{
+		/** Value quoted by ElasticConnection::quote(). */
+		public const QuotedPattern = "'(?:[^']++|'')*+'";
+
 		protected function __construct(Connection $connection, $admin)
 		{
 			parent::__construct($connection, $admin);
@@ -336,10 +340,10 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 			foreach ($where as $val) {
 				if ($val == "1 = 0") { // No field can match the searched value.
 					$query["bool"]["must_not"][] = ["match_all" => new \stdClass()];
-				} elseif (preg_match('~^\((.+ OR .+)\)$~', $val, $matches)) {
+				} elseif (preg_match('~^\((.+ OR .+)\)$~s', $val, $matches)) {
 					// A search in all columns is satisfied by any of them, the parts must not be required one by one.
 					$groups = [];
-					foreach (explode(" OR ", $matches[1]) as $part) {
+					foreach (split_conditions($matches[1], "OR") as $part) {
 						$condition = $this->buildCondition($part);
 						if ($condition) {
 							$groups[$condition[0]][] = $condition[1];
@@ -365,9 +369,18 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 		 *
 		 * @return array{0: string, 1: array}|null [$queryType, $clause], null for unsupported condition.
 		 */
-		private function buildCondition(string $val): ?array
+		private function buildCondition(string $condition): ?array
 		{
-			list($col, $op, $val) = explode(" ", $val, 3);
+			$operators = implode("|", array_map('preg_quote', $this->operators));
+
+			// Boolean values are not quoted.
+			if (!preg_match("~^(.+?) (=|$operators) (" . self::QuotedPattern . "|true|false)\$~s", $condition, $match)) {
+				return null;
+			}
+
+			$col = $match[1];
+			$op = $match[2];
+			$val = unquote($match[3]);
 
 			if ($col == "_id" && $op == "=") {
 				return ["must", ["term" => [$col => $val]]];
@@ -407,7 +420,11 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 			foreach ($record as $key => $val) {
 				$type = $fields[$key]["type"] ?? null;
 
-				if ($val === "NULL") {
+				// A quoted value is always a string, e.g. the text NULL.
+				$isNull = ($val === "NULL");
+				$val = unquote($val);
+
+				if ($isNull) {
 					$val = null;
 				} elseif ($type == "boolean") {
 					$val = ($val && $val !== "false"); // The checkbox sends 1 or 0.
@@ -430,33 +447,43 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 		public function update(string $table, array $record, string $queryWhere, int $limit = 0, string $separator = "\n")
 		{
 			// TODO use $limit
-			$parts = preg_split('~ *= *~', $queryWhere);
-			if (count($parts) != 2) {
+			$ids = where_to_ids($queryWhere);
+			if ($ids === null) {
 				return false;
 			}
 
-			$id = trim($parts[1]);
-			$query = urlencode($table) . "/_update/" . urlencode($id);
 			// A partial update keeps the fields missing in the form, e.g. the nested ones.
 			$content = ["doc" => $this->castRecord($table, $record)];
+			$affectedRows = 0;
 
-			// Save the query for later use in a flesh message. TODO: This is so ugly.
-			queries("\"POST $query\": " . json_encode($content));
+			foreach ($ids as $id) {
+				$query = urlencode($table) . "/_update/" . rawurlencode($id);
 
-			$response = $this->connection->rootQuery($query, $content, 'POST');
-			if ($response) {
-				$this->connection->rootQuery(urlencode($table) . "/_refresh");
+				// Save the query for later use in a flesh message. TODO: This is so ugly.
+				queries("\"POST $query\": " . json_encode($content));
+
+				$response = $this->connection->rootQuery($query, $content, 'POST');
+				if (!$response) {
+					return false;
+				}
+				if (($response['result'] ?? null) == 'updated') {
+					$affectedRows++;
+				}
 			}
 
-			return $response;
+			$this->connection->rootQuery(urlencode($table) . "/_refresh");
+			$this->connection->setAffectedRows($affectedRows);
+
+			return true;
 		}
 
 		public function insert(string $table, array $record)
 		{
 			$query = urlencode($table) . "/_doc/";
 
-			if (isset($record["_id"]) && $record["_id"] != "NULL") {
-				$query .= urlencode($record["_id"]);
+			$id = $record["_id"] ?? "NULL";
+			if (is_string($id) && $id != "NULL") {
+				$query .= rawurlencode(unquote($id));
 			}
 			unset($record["_id"]);
 
@@ -484,41 +511,83 @@ if (isset($_GET["elastic"]) && !defined("AdminNeo\DRIVER")) {
 		public function delete(string $table, string $queryWhere, int $limit = 0)
 		{
 			// TODO use $limit
-			$ids = [];
-			if ($_GET["where"]["_id"] ?? null) {
-				$ids[] = $_GET["where"]["_id"];
-			}
-			if (isset($_POST['check'])) {
-				foreach ($_POST['check'] as $check) {
-					$parts = preg_split('~ *= *~', $check);
-					if (count($parts) == 2) {
-						$ids[] = trim($parts[1]);
-					}
-				}
+			$ids = where_to_ids($queryWhere);
+			if ($ids === null) {
+				return false;
 			}
 
-			$affected_rows = 0;
+			$affectedRows = 0;
 
 			foreach ($ids as $id) {
-				$query = urlencode($table) . "/_doc/" . urlencode($id);
+				$query = urlencode($table) . "/_doc/" . rawurlencode($id);
 
 				// Save the query for later use in a flesh message. TODO: This is so ugly.
 				queries("\"DELETE $query\"");
 
 				$response = $this->connection->rootQuery($query, null, 'DELETE');
 				if (isset($response['result']) && $response['result'] == 'deleted') {
-					$affected_rows++;
+					$affectedRows++;
 				}
 			}
 
 			$this->connection->rootQuery(urlencode($table) . "/_refresh");
 
-			$this->connection->setAffectedRows($affected_rows);
+			$this->connection->setAffectedRows($affectedRows);
 
-			return $affected_rows;
+			return $affectedRows;
 		}
 	}
 
+	/**
+	 * Decodes a value quoted by ElasticConnection::quote().
+	 *
+	 * @param mixed $value Other values are returned as they are, e.g. a document entered as JSON.
+	 *
+	 * @return mixed
+	 */
+	function unquote($value)
+	{
+		if (is_string($value) && strlen($value) > 1 && $value[0] == "'" && substr($value, -1) == "'") {
+			return str_replace("''", "'", substr($value, 1, -1));
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Splits the conditions joined by an operator. The operator inside a quoted value doesn't split them.
+	 *
+	 * @param string $operator AND, OR.
+	 *
+	 * @return string[]
+	 */
+	function split_conditions(string $conditions, string $operator): array
+	{
+		return preg_split("~" . ElasticDriver::QuotedPattern . "(*SKIP)(*FAIL)| $operator ~", $conditions);
+	}
+
+	/**
+	 * Returns IDs of the documents addressed by the condition of an update or a delete.
+	 *
+	 * @param string $queryWhere " WHERE ..." ending with the condition built by where() for one or more documents.
+	 *
+	 * @return ?string[] Null if the condition doesn't address the documents by their IDs.
+	 */
+	function where_to_ids(string $queryWhere): ?array
+	{
+		$id = "_id = " . ElasticDriver::QuotedPattern;
+
+		// The conditions before the IDs come from the search, the documents are identified by the IDs alone.
+		if (!preg_match("~^\\s*WHERE (?:.* AND )?($id|\\(\\($id\\)(?: OR \\($id\\))*+\\))\$~s", $queryWhere, $match)) {
+			Connection::get()->setError("Unsupported condition: " . trim($queryWhere));
+
+			return null;
+		}
+
+		preg_match_all("~_id = (" . ElasticDriver::QuotedPattern . ")~", $match[1], $matches);
+
+		return array_map('AdminNeo\unquote', $matches[1]);
+	}
 
 
 	function create_driver(Connection $connection): Driver

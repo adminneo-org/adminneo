@@ -64,7 +64,7 @@
 		closeTimeout = null;
 
 		const help = gid("help");
-		help.innerHTML = text;
+		help.textContent = text;
 		jush.highlight_tag([help]);
 
 		// Display help briefly to calculate position properly.

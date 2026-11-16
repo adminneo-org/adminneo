@@ -2,10 +2,15 @@
 
 namespace AdminNeo;
 
+use Exception;
+
 /**
  * Adds time-based one-time password authentication to the login form.
  *
  * The implementation uses standard SHA1 algorithm, 30s time interval and 6-digits code.
+ *
+ * Permanent login works as a trusted device: it is issued after the code is verified and the code is not required
+ * as long as it is valid. Changing the secret invalidates all permanent logins.
  *
  * Last changed in release: !compile: version
  *
@@ -33,7 +38,7 @@ class OtpLoginPlugin extends Plugin
 	public function init(): ?bool
 	{
 		if (isset($_POST["auth"])) {
-			$_SESSION["otp"] = (string)$_POST["auth"]["otp"];
+			$_SESSION["otp"] = (string)($_POST["auth"]["otp"] ?? "");
 		}
 
 		return null;
@@ -43,27 +48,35 @@ class OtpLoginPlugin extends Plugin
 	{
 		if ($fieldName != "password") return null;
 
+		$otp = $_SESSION["otp"] ?? "";
+
 		return "<tr><th>$label</th><td>$field</td></tr>\n" .
 			"<tr><th><abbr title='" . lang('One Time Password') . "'>OTP</abbr></th>" .
-			"<td><input class='input' name='auth[otp]' value='" . h($_SESSION["otp"]) . "' " .
+			"<td><input class='input' name='auth[otp]' value='" . h(is_string($otp) ? $otp : "") . "' " .
 			"size='6' autocomplete='one-time-code' inputmode='numeric' maxlength='6' pattern='\d{6}'/></td>" .
 			"</tr>\n";
 	}
 
 	public function authenticate(string $username, string $password): ?string
 	{
-		if (!isset($_SESSION["otp"])) return null;
+		$otp = $_SESSION["otp"] ?? null;
 
-		if ($_SESSION["otp"] == "") {
+		// The code was already verified in this session.
+		if ($otp === true) return null;
+
+		// Without a submitted code, only the login restored from a valid permanent login is trusted.
+		if ($otp === null && get_session("permanent") === true) return null;
+
+		if ((string)$otp == "") {
 			return lang('Enter OTP code.');
 		}
 
 		$timeSlot = floor(time() / 30);
 
 		foreach ([0, -1, 1] as $skew) {
-			if ($_SESSION["otp"] == $this->getOtp($timeSlot + $skew)) {
+			if ($otp == $this->getOtp($timeSlot + $skew)) {
 				restart_session();
-				unset($_SESSION["otp"]);
+				$_SESSION["otp"] = true;
 				stop_session();
 
 				return null;
@@ -71,6 +84,20 @@ class OtpLoginPlugin extends Plugin
 		}
 
 		return lang('Invalid OTP code.');
+	}
+
+	/**
+	 * Binds permanent logins to the secret, so they can't be issued by another instance sharing the private key.
+	 *
+	 * @return string|false
+	 *
+	 * @throws Exception
+	 */
+	public function getPrivateKey(bool $create = false)
+	{
+		$key = get_private_key($create);
+
+		return $key ? bin2hex(Hash::hmacSha1($key, $this->secret)) : false;
 	}
 
 	private function getOtp(int $timeSlot): int
