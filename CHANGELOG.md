@@ -10,18 +10,27 @@ AdminNeo 5.9.1
 
 ### Bugfixes
 
+- Login: Fix connecting to privileged ports via special characters in the server (GHSA-v65x-fj5j-4m4g)
+- Login: Fix bypassing the checks of an empty username and password via a NUL byte
 - Select: Reject the SQL operator sent without a proof of the same origin (GHSA-8g9x-wx4c-x88j)
 - Select: Fix SQL injection via the values searched by IN and NOT IN (GHSA-r6wc-chqc-5wq3)
 - Select: Fix HTML injection via the keys of search conditions (GHSA-h6gv-2whh-8c86)
 - Select: Fix HTML injection via the name of a fulltext index (GHSA-qc3x-52c6-p5ff)
 - Select: Fix fatal error on malformed search conditions in the URL
-- Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
+- Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
+- Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
 - Edit: Fix open redirect via the referrer after saving or deleting a record (GHSA-q9rj-wgm8-fg59)
+- Export: Fix fatal error in SQL export of a select with function columns (regression from 5.0.0)
+- Fix HTML injection via the request path in the links to static files
+- Fix fatal error on the server, username or database sent as an array in the URL
+- Fix fatal error on the parameters of two drivers in the URL
+- EditorNeo: Fix XSS via the request path in the autocomplete of a foreign key (GHSA-fr24-68fv-4whc)
 - MySQL: Run queries with the SQL operator in the read-only mode (GHSA-8g9x-wx4c-x88j)
 - MySQL: Fix SQL injection via the name of a geometry column (GHSA-2rwm-w499-38rq)
 - MySQL: Fix export and insert of geometry values, keep their SRID as the `SRID=4326;` prefix of a value
 - PostgreSQL, MS SQL: Fix empty export of a select ordered by a column with a function (regression from 5.7.0)
 - MS SQL: Fix logging in with an empty username and any password (GHSA-w8j4-8pww-wm83)
+- SQLite: Fix creating a database file with a disallowed extension via a file: URI (GHSA-r6xv-mvwg-hfrw, GHSA-2gwx-67mg-hfr3)
 - ClickHouse: Fix injecting HTTP query parameters via the database name (GHSA-gj7f-g8j2-wxxr)
 - ClickHouse: Fix SQL injection via a backslash in the name of a column (GHSA-4xh5-8hm7-7829)
 - ClickHouse: Fix logging in to an account without a password by any password if `defaultPasswordHash` is set (GHSA-h9x9-p972-28q9)
@@ -31,15 +40,6 @@ AdminNeo 5.9.1
 - MongoDB: Fix fatal error when logging in with a password and an empty username
 - Elasticsearch: Fix editing and deleting another document via special characters in an `_id`
 - Elasticsearch: Fix searching and inline editing of the false value in boolean fields (regression from 5.0.0)
-- SQLite: Fix creating a database file with a disallowed extension via a file: URI (GHSA-r6xv-mvwg-hfrw, GHSA-2gwx-67mg-hfr3)
-- Table structure: Fix HTML injection via a column name in the partition definition (GHSA-4f2v-6gqh-mrrr)
-- Create table: Fix HTML injection via the name of a column type in the help popup (GHSA-379j-gvff-q6mw)
-- EditorNeo: Fix XSS via the request path in the autocomplete of a foreign key (GHSA-fr24-68fv-4whc)
-- Login: Fix connecting to privileged ports via special characters in the server (GHSA-v65x-fj5j-4m4g)
-- Login: Fix bypassing the checks of an empty username and password via a NUL byte
-- Fix fatal error on the server, username or database sent as an array in the URL
-- Fix fatal error on the parameters of two drivers in the URL
-- Fix HTML injection via the request path in the links to static files
 - OtpLoginPlugin: Fix bypassing the OTP code by permanent login (GHSA-xwpg-q47q-pg26)
 - FileUploadPlugin: Disallow uploading SVG files by default to prevent XSS (GHSA-rfx6-xxqx-wfgw)
 - SlugifyEditPlugin: Fix XSS via the name of a slug column (GHSA-cwvq-x3wg-574h)
