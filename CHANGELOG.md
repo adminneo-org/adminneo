@@ -11,6 +11,7 @@ AdminNeo 5.9.2
 ### Bugfixes
 
 - Login: Fix skipping the limit of unsuccessful logins if the login form was not loaded (GHSA-m3hw-88c4-g6gq)
+- Login: Do not log out and count the requests sent when the logins are blocked (by @vrana)
 - Login: Verify the CSRF token also when logging in (by @vrana)
 - Login: Send the session cookie with SameSite=lax (by @vrana)
 - Login: Fix missing message about an expired session (regression from 5.1.0)

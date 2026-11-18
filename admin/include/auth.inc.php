@@ -175,7 +175,8 @@ function check_invalid_login(array &$permanent): void
 
 	$next_attempt = ($invalid && $invalid[1] > 29 ? $invalid[0] - time() : 0); // allow 30 invalid attempts
 	if ($next_attempt > 0) { // TODO do the same with permanent login
-		auth_error($permanent, lang('Too many unsuccessful logins, try again in %d minute(s).', ceil($next_attempt / 60)));
+		// The credentials are not verified at all when the attempts are exhausted.
+		auth_error($permanent, lang('Too many unsuccessful logins, try again in %d minute(s).', ceil($next_attempt / 60)), false);
 	}
 }
 
@@ -364,30 +365,33 @@ function unset_permanent(array &$permanent): void
  * Renders an error message and a login form.
  *
  * @param ?string $error HTML-formatted error message, null for the default error.
+ * @param bool $invalid_login Whether the credentials were verified, so the login is counted and removed.
  *
  * @throws Exception
  */
-function auth_error(array &$permanent, ?string $error = null): void
+function auth_error(array &$permanent, ?string $error = null, bool $invalid_login = true): void
 {
 	$session_name = session_name();
 
 	if (isset($_GET["username"])) {
 		header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
 
-		// The credentials were verified, so the login is counted whatever the state of the session is.
+		// A verified login is counted whatever the state of the session is.
 		// A request without a password ends on the login page before and never gets here.
-		restart_session();
-		add_invalid_login();
+		if ($invalid_login) {
+			restart_session();
+			add_invalid_login();
 
-		$password = get_password();
-		if ($password !== null) {
-			if ($password === false) {
-				$error = lang('Invalid permanent login, please login again.');
+			$password = get_password();
+			if ($password !== null) {
+				if ($password === false) {
+					$error = lang('Invalid permanent login, please login again.');
+				}
+				delete_login(DRIVER, SERVER, $_GET["username"]);
 			}
-			delete_login(DRIVER, SERVER, $_GET["username"]);
-		}
 
-		unset_permanent($permanent);
+			unset_permanent($permanent);
+		}
 	}
 
 	if (!$_COOKIE[$session_name] && $_GET[$session_name] && ini_bool("session.use_only_cookies")) {
