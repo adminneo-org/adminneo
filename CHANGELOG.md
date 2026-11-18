@@ -12,6 +12,7 @@ AdminNeo 5.9.2
 ### Bugfixes
 
 - Login: Fix skipping the limit of unsuccessful logins if the login form was not loaded (GHSA-m3hw-88c4-g6gq)
+- Login: Do not perform the action posted from another site after logging in (GHSA-rpjh-hmqc-58j4)
 - Login: Do not log out and count the requests sent when the logins are blocked (by @vrana)
 - Login: Verify the CSRF token also when logging in (by @vrana)
 - Login: Send the session cookie with SameSite=lax (by @vrana)

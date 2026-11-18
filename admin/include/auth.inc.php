@@ -420,7 +420,7 @@ function print_login_page(): void
 	page_header(lang('Login'), null);
 	echo "<form action='' method='post'>\n";
 	echo "<div>";
-	if (print_hidden_fields($_POST, ["auth", "token"])) { // expired session
+	if (is_same_origin() && print_hidden_fields($_POST, ["auth", "token"])) {
 		echo "<p class='message'>" . lang('The action will be performed after successful login with the same credentials.') . "\n";
 	}
 	// The token of the expired session is replaced by the current one.
