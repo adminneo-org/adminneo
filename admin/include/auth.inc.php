@@ -370,22 +370,20 @@ function auth_error(array &$permanent, ?string $error = null): void
 	if (isset($_GET["username"])) {
 		header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
 
-		if (($_COOKIE[$session_name] || $_GET[$session_name]) && !$_SESSION["token"]) {
-			$error = lang('Session expired, please login again.');
-		} else {
-			restart_session();
-			add_invalid_login();
+		// The credentials were verified, so the login is counted whatever the state of the session is.
+		// A request without a password ends on the login page before and never gets here.
+		restart_session();
+		add_invalid_login();
 
-			$password = get_password();
-			if ($password !== null) {
-				if ($password === false) {
-					$error = lang('Invalid permanent login, please login again.');
-				}
-				delete_login(DRIVER, SERVER, $_GET["username"]);
+		$password = get_password();
+		if ($password !== null) {
+			if ($password === false) {
+				$error = lang('Invalid permanent login, please login again.');
 			}
-
-			unset_permanent($permanent);
+			delete_login(DRIVER, SERVER, $_GET["username"]);
 		}
+
+		unset_permanent($permanent);
 	}
 
 	if (!$_COOKIE[$session_name] && $_GET[$session_name] && ini_bool("session.use_only_cookies")) {

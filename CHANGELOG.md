@@ -1,6 +1,13 @@
 Changelog
 =========
 
+AdminNeo 5.9.2
+--------------
+
+### Bugfixes
+
+- Login: Fix skipping the limit of unsuccessful logins if the login form was not loaded (GHSA-m3hw-88c4-g6gq)
+
 AdminNeo 5.9.1 (2026-11-16)
 ---------------------------
 
