@@ -6,6 +6,10 @@ namespace AdminNeo;
  * Allows using AdminNeo or EditorNeo inside a frame by modifying `X-Frame-Options` and `Content-Security-Policy`
  * HTTP headers.
  *
+ * Every loaded page sends its URL and title to the parent page by `postMessage()` with the `adminneo-loading` event,
+ * so the parent page can update its own address and title. The URL can contain searched values or an SQL query,
+ * so allow only the ancestors that are trusted to read them.
+ *
  * Last changed in release: !compile: version
  *
  * @link https://www.adminneo.org/plugins/#usage
