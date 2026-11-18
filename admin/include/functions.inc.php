@@ -1479,12 +1479,20 @@ function get_token() {
 	return ($rand ^ $_SESSION["token"]) . ":$rand";
 }
 
-/** Verify if supplied CSRF token is valid
-* @return bool
-*/
-function verify_token() {
-	list($token, $rand) = explode(":", $_POST["token"]);
-	return ($rand ^ $_SESSION["token"]) == $token && in_array($_SERVER["HTTP_SEC_FETCH_SITE"], ["", "same-origin"]);
+/**
+ * Verifies if supplied CSRF token is valid.
+ *
+ * A session without the token verifies nothing, the missing token would be used as zero and any "x:x" would pass.
+ */
+function verify_token(): bool
+{
+	$token = $_POST["token"] ?? null;
+
+	if (!$_SESSION["token"] || !is_string($token) || !preg_match('~^(\d{1,7}):(\d{1,7})$~D', $token, $matches)) {
+		return false;
+	}
+
+	return ($matches[2] ^ $_SESSION["token"]) == $matches[1] && in_array($_SERVER["HTTP_SEC_FETCH_SITE"], ["", "same-origin"]);
 }
 
 /**

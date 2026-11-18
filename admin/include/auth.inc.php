@@ -229,7 +229,10 @@ function connection_error(string $error, array &$permanent): void
 Admin::get()->init();
 
 $auth = $_POST["auth"] ?? null;
-if ($auth) {
+// The login is processed before the general check of POST data, so its token is verified here.
+$auth_verified = $auth && verify_token();
+
+if ($auth_verified) {
 	// Defense against session fixation.
 	session_regenerate_id();
 
@@ -254,7 +257,8 @@ if ($auth) {
 	// Permanent login is issued after successful authentication.
 	$_SESSION["permanent_request"] = $auth["permanent"] ? permanent_key($driver, $server, $username, $db) : null;
 
-	if (count($_POST) == 1 // 1 - auth
+	// Nothing else was posted, so there is no action to perform after the login.
+	if (!array_diff(array_keys($_POST), ["auth", "token"])
 		|| DRIVER != $driver
 		|| SERVER != $server
 		|| $_GET["username"] !== $username // "0" == "00"
@@ -412,9 +416,11 @@ function print_login_page(): void
 	page_header(lang('Login'), null);
 	echo "<form action='' method='post'>\n";
 	echo "<div>";
-	if (print_hidden_fields($_POST, ["auth"])) { // expired session
+	if (print_hidden_fields($_POST, ["auth", "token"])) { // expired session
 		echo "<p class='message'>" . lang('The action will be performed after successful login with the same credentials.') . "\n";
 	}
+	// The token of the expired session is replaced by the current one.
+	echo input_token();
 	echo "</div>\n";
 	Admin::get()->printLoginForm();
 	echo "</form>\n";
@@ -438,6 +444,10 @@ if (isset($_GET["username"]) && !defined('AdminNeo\DRIVER_EXTENSION')) {
 }
 
 if (!isset($_GET["username"]) || get_password() === null) {
+	if ($auth && !$auth_verified) {
+		Admin::get()->addError(lang('Invalid CSRF token. Send the form again.'));
+	}
+
 	print_login_page();
 }
 
@@ -465,11 +475,6 @@ if (!$_SESSION["token"]) {
 	$_SESSION["token"] = rand(1, 1e6);
 }
 stop_session(true);
-
-// Reset token after explicit login.
-if ($auth && $_POST["token"]) {
-	$_POST["token"] = get_token();
-}
 
 if ($_POST) {
 	if (!verify_token()) {
