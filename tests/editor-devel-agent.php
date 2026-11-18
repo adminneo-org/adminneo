@@ -25,6 +25,12 @@ function adminneo_instance()
 		{
 			return [SERVER, "test", "test"];
 		}
+
+		// A login sent by curl doesn't have to load the login form to get the CSRF token.
+		public function verifyLoginToken(): bool
+		{
+			return false;
+		}
 	}
 
 	$config = [

@@ -299,8 +299,24 @@ If OPcache is enabled for the built-in server, it revalidates the cached files o
 
 #### Verifying changes
 
-Use `curl` for what is in the server-rendered HTML — it is scriptable, so one loop covers all drivers. Log in first, the form needs a token.
+Use `curl` for what is in the server-rendered HTML — it is scriptable, so one loop covers all drivers.
+
+Log in first. The login requires the CSRF token, but the `*-agent.php` entry points turn the check off by `verifyLoginToken()`, so one request with a cookie jar is enough:
+
+```sh
+url=http://127.0.0.1:8000/tests/admin-devel-agent.php
+curl -s -L -c jar -b jar --data-urlencode "auth[server]=mariadb12" "$url"
+```
+
 Send `auth[server]` with the server key, never `auth[driver]` — it overrides the configured server. The EditorNeo entry points are the exception, see [EditorNeo](#editorneo).
+
+Every other POST still needs the token. Take it from any page of the same session, it stays valid until the session ends:
+
+```sh
+token=$(curl -s -b jar "$url?mysql=mariadb12&username=test" | grep -o "name='token' value='[^']*'" | head -1 | cut -d"'" -f4)
+```
+
+To test the login itself, remove `verifyLoginToken()` from the entry point temporarily. The login then needs the token of the login form loaded with the same cookie jar, otherwise it ends with `Invalid CSRF token` before the credentials are tried.
 
 Check every fetched page for PHP errors (`Fatal error`, `Uncaught`, `Warning`), not only for the element you expect. An error printed later in the page is easy to miss.
 
