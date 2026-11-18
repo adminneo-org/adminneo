@@ -17,6 +17,7 @@ AdminNeo 5.9.2
 - Login: Verify the CSRF token also when logging in (by @vrana)
 - Login: Send the session cookie with SameSite=lax (by @vrana)
 - Login: Fix missing message about an expired session (regression from 5.1.0)
+- Login: Fix losing the database and the action of an expired session with configured servers
 
 AdminNeo 5.9.1 (2026-11-16)
 ---------------------------

@@ -250,7 +250,15 @@ if ($auth_verified) {
 		$password = $server_obj->getPassword();
 	}
 
-	$db = $server_obj ? $server_obj->getDatabase() : ($auth["db"] ?? "");
+	// The login form of a configured server has no database field, so the database of the current page is kept.
+	// Without the configured servers, the field pre-filled from the URL does the same.
+	if (!$server_obj) {
+		$db = $auth["db"] ?? "";
+	} elseif (DB != "" && DRIVER == $driver && SERVER == $server) {
+		$db = DB;
+	} else {
+		$db = $server_obj->getDatabase();
+	}
 
 	save_login($driver, $server, $username, $password, $db);
 	unset($_SESSION["permanent"][$driver][$server][$username]);
