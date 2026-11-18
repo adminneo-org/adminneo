@@ -444,7 +444,15 @@ if (isset($_GET["username"]) && !defined('AdminNeo\DRIVER_EXTENSION')) {
 }
 
 if (!isset($_GET["username"]) || get_password() === null) {
-	if ($auth && !$auth_verified) {
+	$session_name = session_name();
+
+	if (($_COOKIE[$session_name] || $_GET[$session_name]) && !$_SESSION["token"] && (isset($_GET["username"]) || $auth)) {
+		// The session cookie belongs to a session that doesn't exist anymore.
+		if (isset($_GET["username"])) {
+			header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
+		}
+		Admin::get()->addError(lang('Session expired, please login again.'));
+	} elseif ($auth && !$auth_verified) {
 		Admin::get()->addError(lang('Invalid CSRF token. Send the form again.'));
 	}
 
