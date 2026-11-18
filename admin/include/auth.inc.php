@@ -452,11 +452,10 @@ if (!isset($_GET["username"]) || get_password() === null) {
 
 	if (($_COOKIE[$session_name] || $_GET[$session_name]) && !$_SESSION["token"] && (isset($_GET["username"]) || $auth)) {
 		// The session cookie belongs to a session that doesn't exist anymore.
-		if (isset($_GET["username"])) {
-			header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
-		}
+		header("HTTP/1.1 403 Forbidden"); // 401 requires sending WWW-Authenticate header
 		Admin::get()->addError(lang('Session expired, please login again.'));
 	} elseif ($auth && !$auth_verified) {
+		header("HTTP/1.1 403 Forbidden");
 		Admin::get()->addError(lang('Invalid CSRF token. Send the form again.'));
 	}
 
