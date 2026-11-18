@@ -37,7 +37,8 @@ class OtpLoginPlugin extends Plugin
 
 	public function init(): ?bool
 	{
-		if (isset($_POST["auth"])) {
+		// The code of a refused login is not stored, it would replace the verified state of the session.
+		if (is_login_verified()) {
 			$_SESSION["otp"] = (string)($_POST["auth"]["otp"] ?? "");
 		}
 

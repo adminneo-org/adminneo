@@ -1496,6 +1496,16 @@ function verify_token(): bool
 }
 
 /**
+ * Returns whether the posted login is going to be processed: its CSRF token is valid or not required.
+ *
+ * A plugin reading the login data in init() has to check it, a refused login must not change the session.
+ */
+function is_login_verified(): bool
+{
+	return !empty($_POST["auth"]) && (!Admin::get()->verifyLoginToken() || verify_token());
+}
+
+/**
  * Returns whether the request was sent by a page of the same origin.
  *
  * Verifies GET requests, which are not protected by the CSRF token. A request without any proof of its origin is refused.
